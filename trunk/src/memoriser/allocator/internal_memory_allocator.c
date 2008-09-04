@@ -19,17 +19,17 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: internal_memory_allocator.c,v $ $Revision: 1.18 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: internal_memory_allocator.c,v $ $Revision: 1.19 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERNAL_MEMORY_ALLOCATOR_SOURCE
 #define INTERNAL_MEMORY_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -44,7 +44,7 @@ void allocate_internal_memory(void* p0, void* p1) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate internal memory.");
 
     // Allocate internal memory.
-    allocate_array(p0, p1, (void*) POINTER_ARRAY);
+    allocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -76,7 +76,7 @@ void deallocate_internal_memory(void* p0, void* p1) {
     // because the internal memory is already freed below.
 
     // Deallocate internal memory.
-    deallocate_array(p0, p1, (void*) POINTER_ARRAY);
+    deallocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /* INTERNAL_MEMORY_ALLOCATOR_SOURCE */

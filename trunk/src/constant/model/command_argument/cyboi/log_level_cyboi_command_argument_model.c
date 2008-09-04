@@ -19,39 +19,39 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: log_level_cyboi_command_argument_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: log_level_cyboi_command_argument_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL_SOURCE
 #define LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The "off" log level cyboi command argument model. */
 static wchar_t OFF_LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY[] = {L'o', L'f', L'f'};
 static wchar_t* OFF_LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL = OFF_LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY;
-static int* OFF_LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+static int* OFF_LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "error" log level cyboi command argument model. */
 static wchar_t ERROR_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY[] = {L'e', L'r', L'r', L'o', L'r'};
 static wchar_t* ERROR_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL = ERROR_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY;
-static int* ERROR_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* ERROR_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "warning" log level cyboi command argument model. */
 static wchar_t WARNING_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY[] = {L'w', L'a', L'r', L'n', L'i', L'n', L'g'};
 static wchar_t* WARNING_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL = WARNING_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY;
-static int* WARNING_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* WARNING_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "information" log level cyboi command argument model. */
 static wchar_t INFORMATION_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY[] = {L'i', L'n', L'f', L'o', L'r', L'm', L'a', L't', L'i', L'o', L'n'};
 static wchar_t* INFORMATION_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL = INFORMATION_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY;
-static int* INFORMATION_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* INFORMATION_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "debug" log level cyboi command argument model. */
 static wchar_t DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY[] = {L'd', L'e', L'b', L'u', L'g'};
 static wchar_t* DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL = DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_ARRAY;
-static int* DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL_SOURCE */
 #endif

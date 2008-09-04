@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: boolean_converter.c,v $ $Revision: 1.20 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: boolean_converter.c,v $ $Revision: 1.21 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,9 +28,9 @@
 
 #include "../../globals/constants/boolean/boolean_constants.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/allocator.c"
@@ -71,10 +71,10 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Set boolean value to "true", in other words the integer value to "one".
-                        set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+                        set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                         // Increment destination count.
-                        *dc = *dc + *NUMBER_1_INTEGER;
+                        *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
                 }
 
@@ -85,10 +85,10 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Set boolean value to "false", in other words the integer value to "zero".
-                        set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+                        set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                         // Increment destination count.
-                        *dc = *dc + *NUMBER_1_INTEGER;
+                        *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
                 }
 
@@ -98,10 +98,10 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // the boolean (integer) value to "false" here, by default.
 
                     // Set boolean value to "false", in other words the integer value to "zero".
-                    set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) NUMBER_1_INTEGER, (void*) INTEGER_ARRAY);
+                    set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Increment destination count.
-                    *dc = *dc + *NUMBER_1_INTEGER;
+                    *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
 
             } else {
@@ -155,7 +155,7 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            if (*s == *NUMBER_1_INTEGER) {
+                            if (*s == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                                 // Set destination character vector.
                                 *ds = *dc + *TRUE_MODEL_COUNT;

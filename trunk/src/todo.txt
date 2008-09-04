@@ -7,9 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.58 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
+# @version $Revision: 1.59 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * Add a mapper translating cybol- into memory abstractions and vice-versa
+            (currently, the cybol abstractions are used directly to allocate/ access memory structures)
 
         * Rename several things in CYBOL files and CYBOI:
             --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the

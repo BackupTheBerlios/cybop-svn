@@ -19,16 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_handler.c,v $ $Revision: 1.25 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: compound_handler.c,v $ $Revision: 1.26 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPOUND_HANDLER_SOURCE
 #define COMPOUND_HANDLER_SOURCE
 
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
@@ -73,20 +73,20 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
     };
 
     // The abstractions, models, details.
-    void** pa = NULL_POINTER;
-    void** pac = NULL_POINTER;
-    void** pm = NULL_POINTER;
-    void** pmc = NULL_POINTER;
-    void** pd = NULL_POINTER;
-    void** pdc = NULL_POINTER;
+    void** pa = NULL_POINTER_MEMORY_MODEL;
+    void** pac = NULL_POINTER_MEMORY_MODEL;
+    void** pm = NULL_POINTER_MEMORY_MODEL;
+    void** pmc = NULL_POINTER_MEMORY_MODEL;
+    void** pd = NULL_POINTER_MEMORY_MODEL;
+    void** pdc = NULL_POINTER_MEMORY_MODEL;
 
     // Get abstractions, models, details.
-    get_array_elements(p10, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY);
-    get_array_elements(p10, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY);
-    get_array_elements(p10, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY);
-    get_array_elements(p10, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY);
-    get_array_elements(p10, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY);
-    get_array_elements(p10, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY);
+    get_array_elements(p10, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
     if (*pa != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -103,20 +103,20 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
                             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle compound part.");
 
                             // The abstraction, model, details.
-                            void** a = NULL_POINTER;
-                            void** ac = NULL_POINTER;
-                            void** m = NULL_POINTER;
-                            void** mc = NULL_POINTER;
-                            void** d = NULL_POINTER;
-                            void** dc = NULL_POINTER;
+                            void** a = NULL_POINTER_MEMORY_MODEL;
+                            void** ac = NULL_POINTER_MEMORY_MODEL;
+                            void** m = NULL_POINTER_MEMORY_MODEL;
+                            void** mc = NULL_POINTER_MEMORY_MODEL;
+                            void** d = NULL_POINTER_MEMORY_MODEL;
+                            void** dc = NULL_POINTER_MEMORY_MODEL;
 
                             // Get abstraction, model, details.
-                            get_array_elements(*pa, p15, (void*) &a, (void*) POINTER_ARRAY);
-                            get_array_elements(*pac, p15, (void*) &ac, (void*) INTEGER_ARRAY);
-                            get_array_elements(*pm, p15, (void*) &m, (void*) POINTER_ARRAY);
-                            get_array_elements(*pmc, p15, (void*) &mc, (void*) INTEGER_ARRAY);
-                            get_array_elements(*pd, p15, (void*) &d, (void*) POINTER_ARRAY);
-                            get_array_elements(*pdc, p15, (void*) &dc, (void*) INTEGER_ARRAY);
+                            get_array_elements(*pa, p15, (void*) &a, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+                            get_array_elements(*pac, p15, (void*) &ac, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                            get_array_elements(*pm, p15, (void*) &m, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+                            get_array_elements(*pmc, p15, (void*) &mc, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                            get_array_elements(*pd, p15, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+                            get_array_elements(*pdc, p15, (void*) &dc, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                             // Add part model (signal) to memory, using the whole signal's priority.
                             // (Each signal has a priority. A signal may consist of part
@@ -141,7 +141,7 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                                 // Set interrupt request flag, in order to notify the signal checker
                                 // that a new signal has been placed in the signal memory.
-                                **irq = *NUMBER_1_INTEGER;
+                                **irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                 // Unlock signal memory mutex.
                                 pthread_mutex_unlock(*mt);
@@ -211,7 +211,7 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         // The loop variable.
         int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (j >= *sc) {
 

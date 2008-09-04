@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.29 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.30 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,10 +27,10 @@
 #define XDT_CONVERTER_SOURCE
 
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/character/code/wide_character_code_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../globals/constants/xdt/xdt_field_constants.c"
 #include "../../globals/constants/xdt/xdt_field_name_constants.c"
@@ -170,7 +170,7 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                             if (rem >= (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
 
                                 // Decode xdt field size.
-                                decode_integer(p0, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_SIZE_COUNT);
+                                decode_integer(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *s, (void*) XDT_FIELD_SIZE_COUNT);
 
                                 // Increment source xdt byte array index.
                                 *s = *s + (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
@@ -180,7 +180,7 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                             if (rem >= (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
 
                                 // Decode xdt field identification.
-                                decode_integer(p1, *NULL_POINTER, *NULL_POINTER, *s, (void*) XDT_FIELD_IDENTIFICATION_COUNT);
+                                decode_integer(p1, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *s, (void*) XDT_FIELD_IDENTIFICATION_COUNT);
 
                                 // Increment source xdt byte array index.
                                 *s = *s + (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
@@ -235,7 +235,7 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                                         // Set verification flag indicating that
                                         // the xdt field was decoded correctly.
-                                        *v = *NUMBER_1_INTEGER;
+                                        *v = *NUMBER_1_INTEGER_MEMORY_MODEL;
                                     }
                                 }
                             }
@@ -297,7 +297,7 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
                 // The loop variable.
                 int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                while (*NUMBER_1_INTEGER) {
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                     if (j >= *ac) {
 
@@ -403,7 +403,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                         //     record, which demarcates the end of this record
                         int m = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                        while (*NUMBER_1_INTEGER) {
+                        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                             if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -420,7 +420,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                             fwprintf(stderr, L"Test: Decode xdt record. Field content count fcc: %i\n", fcc);
 */
 
-                            if (v == *NUMBER_1_INTEGER) {
+                            if (v == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                                 // The verification flag is set, which means that
                                 // the xdt field was decoded correctly and the carriage
@@ -440,10 +440,10 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                                         // Set decode/parse mode to "1".
                                         // This is the begin of a record.
-                                        m = *NUMBER_1_INTEGER;
+                                        m = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                         // Decode xdt record identification.
-                                        decode_integer(p1, *NULL_POINTER, *NULL_POINTER, fc, (void*) &fcc);
+                                        decode_integer(p1, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, fc, (void*) &fcc);
 
                                     } else {
 
@@ -486,7 +486,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                     // Decode xdt record size.
                                     //
                                     // CAUTION! Do NOT use the following line:
-                                    // decode_integer(p0, *NULL_POINTER, *NULL_POINTER, fc, (void*) &fcc);
+                                    // decode_integer(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, fc, (void*) &fcc);
                                     //
                                     // This is because the record content size is
                                     // counted using the loop variable j.
@@ -528,10 +528,10 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                                 rem = rem - nc;
 
                                 // Increment record size.
-                                *rs = *rs + *NUMBER_1_INTEGER;
+                                *rs = *rs + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                 // Increment record content count.
-                                *rcc = *rcc + *NUMBER_1_INTEGER;
+                                *rcc = *rcc + *NUMBER_1_INTEGER_MEMORY_MODEL;
                             }
                         }
 
@@ -627,7 +627,7 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                                         // The loop variable.
                                         int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                                        while (*NUMBER_1_INTEGER) {
+                                        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                                             if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -729,14 +729,14 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                                                 // increment the source xdt byte array index by one,
                                                 // in order to ensure that this loop will finally
                                                 // find an end.
-                                                *s = *s + *NUMBER_1_INTEGER;
-                                                rem = rem - *NUMBER_1_INTEGER;
+                                                *s = *s + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                                                rem = rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                                 // Increment package size.
-                                                *ps = *ps + *NUMBER_1_INTEGER;
+                                                *ps = *ps + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                                 // Increment loop variable.
-                                                j = j + *NUMBER_1_INTEGER;
+                                                j = j + *NUMBER_1_INTEGER_MEMORY_MODEL;
                                             }
                                         }
 
@@ -847,9 +847,9 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
                                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode model.");
 
                                     // Allocate knowledge model name.
-                                    allocate(p1, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p2, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **ns = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p0, (void*) *ns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
@@ -857,23 +857,23 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
                                     // since that is only needed temporarily for model loading.
 
                                     // Allocate knowledge model abstraction.
-                                    allocate(p4, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **ac = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p5, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p5, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **as = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p3, (void*) *as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                                     // Allocate knowledge model model.
-                                    allocate(p7, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p7, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p8, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p8, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p6, (void*) *ms, p14, p15);
 
                                     // Allocate knowledge model details.
-                                    allocate(p10, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p10, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p11, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                                    allocate(p11, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                                     **ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
                                     allocate(p9, (void*) *ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
@@ -882,7 +882,7 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
                                     // Decode abstraction.
                                     decode_ascii_character_vector(p3, (void*) *ac, (void*) *as, p14, p15);
                                     // Decode model.
-                                    decode(p6, (void*) *mc, (void*) *ms, p9, (void*) *dc, (void*) *ds, p12, p13, *NULL_POINTER, *NULL_POINTER, p14, p15);
+                                    decode(p6, (void*) *mc, (void*) *ms, p9, (void*) *dc, (void*) *ds, p12, p13, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p14, p15);
 
                                 } else {
 
@@ -4250,25 +4250,25 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             // Deallocate knowledge model details.
             deallocate((void*) &d, ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-            deallocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &dc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Deallocate knowledge model model.
             deallocate((void*) &m, ms, a, ac);
-            deallocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &mc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Deallocate knowledge model abstraction.
             deallocate((void*) &a, as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // A knowledge model channel was not allocated.
 
             // Deallocate knowledge model name.
             deallocate((void*) &n, ns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &nc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ns, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         }
 
     } else {
@@ -4312,7 +4312,7 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
             // The next field count.
             int nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER) {
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -4329,7 +4329,7 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
                 fwprintf(stderr, L"Test: Process xdt record. Field content count fcc: %i\n", fcc);
 */
 
-                if (v == *NUMBER_1_INTEGER) {
+                if (v == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                     // The verification flag is set, which means that
                     // the xdt field was decoded correctly and the carriage
@@ -4423,7 +4423,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME, (void*) MEDICAL_PRACTICE_DATA_XDT_RECORD_NAME_COUNT);
 
@@ -4444,7 +4444,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PACKAGE_HEADER_XDT_RECORD_NAME, (void*) PACKAGE_HEADER_XDT_RECORD_NAME_COUNT);
 
@@ -4457,7 +4457,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PACKAGE_FOOTER_XDT_RECORD_NAME, (void*) PACKAGE_FOOTER_XDT_RECORD_NAME_COUNT);
 
@@ -4469,7 +4469,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_XDT_RECORD_NAME, (void*) MEDICAL_TREATMENT_XDT_RECORD_NAME_COUNT);
 
@@ -4481,7 +4481,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) REFERRAL_CASE_XDT_RECORD_NAME, (void*) REFERRAL_CASE_XDT_RECORD_NAME_COUNT);
 
@@ -4493,7 +4493,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_WITH_COTTAGE_HOSPITAL_AFFILIATION_XDT_RECORD_NAME, (void*) MEDICAL_TREATMENT_WITH_COTTAGE_HOSPITAL_AFFILIATION_XDT_RECORD_NAME_COUNT);
 
@@ -4505,7 +4505,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_EMERGENCY_SERVICE_XDT_RECORD_NAME, (void*) MEDICAL_EMERGENCY_SERVICE_XDT_RECORD_NAME_COUNT);
 
@@ -4517,7 +4517,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PRIVATE_BILLING_XDT_RECORD_NAME, (void*) PRIVATE_BILLING_XDT_RECORD_NAME_COUNT);
 
@@ -4529,7 +4529,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_BILLING_XDT_RECORD_NAME, (void*) EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_BILLING_XDT_RECORD_NAME_COUNT);
 
@@ -4541,7 +4541,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) UNSTRUCTURED_CASES_XDT_RECORD_NAME, (void*) UNSTRUCTURED_CASES_XDT_RECORD_NAME_COUNT);
 
@@ -4553,7 +4553,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PATIENT_MASTER_DATA_XDT_RECORD_NAME, (void*) PATIENT_MASTER_DATA_XDT_RECORD_NAME_COUNT);
 
@@ -4565,7 +4565,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME, (void*) MEDICAL_TREATMENT_DATA_XDT_RECORD_NAME_COUNT);
 
@@ -4577,7 +4577,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PATIENT_MASTER_DATA_REQUEST_XDT_RECORD_NAME, (void*) PATIENT_MASTER_DATA_REQUEST_XDT_RECORD_NAME_COUNT);
 
@@ -4589,7 +4589,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) PATIENT_MASTER_DATA_TRANSFER_XDT_RECORD_NAME, (void*) PATIENT_MASTER_DATA_TRANSFER_XDT_RECORD_NAME_COUNT);
 
@@ -4601,7 +4601,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) EXAMINATION_REQUEST_XDT_RECORD_NAME, (void*) EXAMINATION_REQUEST_XDT_RECORD_NAME_COUNT);
 
@@ -4613,7 +4613,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) EXAMINATION_DATA_TRANSFER_XDT_RECORD_NAME, (void*) EXAMINATION_DATA_TRANSFER_XDT_RECORD_NAME_COUNT);
 
@@ -4625,7 +4625,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // but a byte stream which gets processed further below.
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                *NULL_POINTER, *NULL_POINTER,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
                 (void*) EXAMINATION_DATA_DISPLAY_XDT_RECORD_NAME, (void*) EXAMINATION_DATA_DISPLAY_XDT_RECORD_NAME_COUNT);
         }
@@ -4651,25 +4651,25 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Deallocate knowledge model details.
             deallocate((void*) &d, ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-            deallocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &dc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Deallocate knowledge model model.
             deallocate((void*) &m, ms, a, ac);
-            deallocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &mc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Deallocate knowledge model abstraction.
             deallocate((void*) &a, as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // A knowledge model channel was not allocated.
 
             // Deallocate knowledge model name.
             deallocate((void*) &n, ns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &nc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) &ns, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         }
 
     } else {
@@ -4709,7 +4709,7 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
             void* rc = *NULL_POINTER_MEMORY_MODEL;
             int rcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER) {
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -4741,8 +4741,8 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
                     // If the xdt record size is zero or smaller, then
                     // increment the source xdt byte array index by one,
                     // in order to ensure that this loop will find an end.
-                    s = s + *NUMBER_1_INTEGER;
-                    rem = rem - *NUMBER_1_INTEGER;
+                    s = s + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    rem = rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
             }
 
@@ -4802,7 +4802,7 @@ void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4,
     // but a byte stream which gets processed further below.
     decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        *NULL_POINTER, *NULL_POINTER,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT,
         (void*) STANDARD_XDT_PACKAGE_NAME, (void*) STANDARD_XDT_PACKAGE_NAME_COUNT);
 
@@ -4831,25 +4831,25 @@ void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         // Deallocate knowledge model details.
         deallocate((void*) &d, ds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
-        deallocate((void*) &dc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) &ds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &dc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &ds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Deallocate knowledge model model.
         deallocate((void*) &m, ms, a, ac);
-        deallocate((void*) &mc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) &ms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &mc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &ms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Deallocate knowledge model abstraction.
         deallocate((void*) &a, as, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) &ac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &ac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // A knowledge model channel was not allocated.
 
         // Deallocate knowledge model name.
         deallocate((void*) &n, ns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) &nc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) &ns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &nc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &ns, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     }
 }
 
@@ -4904,7 +4904,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                     fwprintf(stderr, L"TEST xdt file source count: %i\n\n", *sc);
 */
 
-                    while (*NUMBER_1_INTEGER) {
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -4947,8 +4947,8 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                             // increment the source xdt byte array index by one,
                             // in order to ensure that this loop will finally
                             // find an end.
-                            s = s + *NUMBER_1_INTEGER;
-                            rem = rem - *NUMBER_1_INTEGER;
+                            s = s + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            rem = rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
                         }
 
                         // Reset xdt package size.

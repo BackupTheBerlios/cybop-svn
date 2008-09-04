@@ -19,24 +19,24 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: protocol_version_http_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: protocol_version_http_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PROTOCOL_VERSION_HTTP_MODEL_SOURCE
 #define PROTOCOL_VERSION_HTTP_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The 1.0 protocol version http model. */
 static wchar_t NUMBER_1_0_PROTOCOL_VERSION_HTTP_MODEL_ARRAY[] = {L'H', L'T', L'T', L'P', L'/', L'1', L'.', L'0'};
 static wchar_t* NUMBER_1_0_PROTOCOL_VERSION_HTTP_MODEL = NUMBER_1_0_PROTOCOL_VERSION_HTTP_MODEL_ARRAY;
-static int* NUMBER_1_0_PROTOCOL_VERSION_HTTP_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* NUMBER_1_0_PROTOCOL_VERSION_HTTP_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The 1.1 protocol version http model. */
 static wchar_t NUMBER_1_1_PROTOCOL_VERSION_HTTP_MODEL_ARRAY[] = {L'H', L'T', L'T', L'P', L'/', L'1', L'.', L'1'};
 static wchar_t* NUMBER_1_1_PROTOCOL_VERSION_HTTP_MODEL = NUMBER_1_1_PROTOCOL_VERSION_HTTP_MODEL_ARRAY;
-static int* NUMBER_1_1_PROTOCOL_VERSION_HTTP_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* NUMBER_1_1_PROTOCOL_VERSION_HTTP_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* PROTOCOL_VERSION_HTTP_MODEL_SOURCE */
 #endif

@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: operation_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: operation_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOL_OPERATION_LANGUAGE_CONSTANTS_SOURCE
 #define CYBOL_OPERATION_LANGUAGE_CONSTANTS_SOURCE
 
-#include "../../../../globals/constants/integer/integer_constants.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -61,7 +61,7 @@
  */
 static wchar_t PLAIN_OPERATION_CYBOL_ABSTRACTION_ARRAY[] = {L'o', L'p', L'e', L'r', L'a', L't', L'i', L'o', L'n', L'/', L'p', L'l', L'a', L'i', L'n'};
 static wchar_t* PLAIN_OPERATION_CYBOL_ABSTRACTION = PLAIN_OPERATION_CYBOL_ABSTRACTION_ARRAY;
-static int* PLAIN_OPERATION_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
+static int* PLAIN_OPERATION_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* CYBOL_OPERATION_LANGUAGE_CONSTANTS_SOURCE */
 #endif

@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: date_time_allocator.c,v $ $Revision: 1.7 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: date_time_allocator.c,v $ $Revision: 1.8 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DATE_TIME_ALLOCATOR_SOURCE
 #define DATE_TIME_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
@@ -50,7 +50,7 @@ void allocate_date_time(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate date time.");
 
-    allocate_array(p0, p1, (void*) INTEGER_ARRAY);
+    allocate_array(p0, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -63,7 +63,7 @@ void deallocate_date_time(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate date time.");
 
-    deallocate_array(p0, p1, (void*) INTEGER_ARRAY);
+    deallocate_array(p0, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /* DATE_TIME_ALLOCATOR_SOURCE */

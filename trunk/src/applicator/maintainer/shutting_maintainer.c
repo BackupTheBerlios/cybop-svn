@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: shutting_maintainer.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: shutting_maintainer.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,15 +29,15 @@
 #include "../applicator/shutter/gnu_linux_console_shutter.c"
 #include "../applicator/shutter/socket_shutter.c"
 #include "../applicator/shutter/x_window_system_shutter.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
-#include "../globals/variables/service_interrupt_variables.c"
-#include "../globals/variables/thread_identification_variables.c"
+#include "../variable/service_interrupt.c"
+#include "../variable/thread_identification.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
 
@@ -59,18 +59,18 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Shutdown service.");
 
     // The service name, abstraction, model, details.
-    void** sn = NULL_POINTER;
-    void** snc = NULL_POINTER;
-    void** sns = NULL_POINTER;
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sn = NULL_POINTER_MEMORY_MODEL;
+    void** snc = NULL_POINTER_MEMORY_MODEL;
+    void** sns = NULL_POINTER_MEMORY_MODEL;
+    void** sa = NULL_POINTER_MEMORY_MODEL;
+    void** sac = NULL_POINTER_MEMORY_MODEL;
+    void** sas = NULL_POINTER_MEMORY_MODEL;
+    void** sm = NULL_POINTER_MEMORY_MODEL;
+    void** smc = NULL_POINTER_MEMORY_MODEL;
+    void** sms = NULL_POINTER_MEMORY_MODEL;
+    void** sd = NULL_POINTER_MEMORY_MODEL;
+    void** sdc = NULL_POINTER_MEMORY_MODEL;
+    void** sds = NULL_POINTER_MEMORY_MODEL;
 
     // Get service.
     get_universal_compound_element_by_name(p0, p1,

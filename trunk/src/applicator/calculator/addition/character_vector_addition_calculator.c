@@ -19,15 +19,15 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: character_vector_addition_calculator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: character_vector_addition_calculator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_VECTOR_ADDER_SOURCE
 #define CHARACTER_VECTOR_ADDER_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
@@ -90,8 +90,8 @@ void add_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void
                         allocate_array((void*) &summand2, (void*) &summand2c, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                         // Set temporary input operand arrays.
-                        set_array_elements(summand1, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                        set_array_elements(summand2, (void*) NUMBER_0_INTEGER, p5, p6, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(summand1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(summand2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, p6, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size

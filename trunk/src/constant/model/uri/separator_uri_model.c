@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: separator_uri_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: separator_uri_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,7 +27,7 @@
 #define SEPARATOR_URI_MODEL_SOURCE
 
 #include "../../../globals/constants/character/code/character_code_constants.c"
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The following constants were defined in accordance with:
@@ -42,24 +42,24 @@
 
 /** The scheme separator ("colon") uri model. */
 static wchar_t* SCHEME_SEPARATOR_URI_MODEL = COLON_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
-static int* SCHEME_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* SCHEME_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The authority separator (twice "solidus") uri model. */
 static wchar_t AUTHORITY_SEPARATOR_URI_MODEL_ARRAY[] = {0x002F, 0x002F};
 static wchar_t* AUTHORITY_SEPARATOR_URI_MODEL = AUTHORITY_SEPARATOR_URI_MODEL_ARRAY;
-static int* AUTHORITY_SEPARATOR_URI_MODEL_COUNT = NUMBER_2_INTEGER_ARRAY;
+static int* AUTHORITY_SEPARATOR_URI_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The path separator ("solidus") uri model. */
 static wchar_t* PATH_SEPARATOR_URI_MODEL = SOLIDUS_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
-static int* PATH_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* PATH_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The query separator ("question mark") uri model. */
 static wchar_t* QUERY_SEPARATOR_URI_MODEL = QUESTION_MARK_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
-static int* QUERY_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* QUERY_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The fragment separator ("number sign") uri model. */
 static wchar_t* FRAGMENT_SEPARATOR_URI_MODEL = NUMBER_SIGN_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
-static int* FRAGMENT_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* FRAGMENT_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Path parts.
@@ -72,7 +72,7 @@ static int* FRAGMENT_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
  * but commonly used in the internet.
  */
 static wchar_t* PARAMETER_SEPARATOR_URI_MODEL = AMPERSAND_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
-static int* PARAMETER_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* PARAMETER_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The parameter alternative separator ("semicolon") uri model.
@@ -81,7 +81,7 @@ static int* PARAMETER_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
  * but commonly used in the internet.
  */
 static wchar_t* PARAMETER_ALTERNATIVE_SEPARATOR_URI_MODEL = SEMICOLON_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
-static int* PARAMETER_ALTERNATIVE_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* PARAMETER_ALTERNATIVE_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The value separator ("equals") uri model.
@@ -90,7 +90,7 @@ static int* PARAMETER_ALTERNATIVE_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_A
  * but commonly used in the internet.
  */
 static wchar_t* VALUE_SEPARATOR_URI_MODEL = EQUALS_SIGN_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
-static int* VALUE_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* VALUE_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Authority parts.
@@ -98,11 +98,11 @@ static int* VALUE_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
 
 /** The host separator ("commercial at") uri model. */
 static wchar_t* HOST_SEPARATOR_URI_MODEL = COMMERCIAL_AT_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
-static int* HOST_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* HOST_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The port separator ("colon") uri model. */
 static wchar_t* PORT_SEPARATOR_URI_MODEL = COLON_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
-static int* PORT_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* PORT_SEPARATOR_URI_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SEPARATOR_URI_MODEL_SOURCE */
 #endif

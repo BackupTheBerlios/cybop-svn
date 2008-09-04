@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: character_set_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: character_set_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_SET_MODEL_SOURCE
 #define CHARACTER_SET_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // A "Character Set" consists of three parts:
@@ -44,7 +44,7 @@
  */
 static wchar_t ASCII_CHARACTER_SET_MODEL_ARRAY[] = {L'a', L's', L'c', L'i', L'i'};
 static wchar_t* ASCII_CHARACTER_SET_MODEL = ASCII_CHARACTER_SET_MODEL_ARRAY;
-static int* ASCII_CHARACTER_SET_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* ASCII_CHARACTER_SET_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*
  * The ebcdic character set model.
@@ -53,7 +53,7 @@ static int* ASCII_CHARACTER_SET_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
  */
 static wchar_t EBCDIC_CHARACTER_SET_MODEL_ARRAY[] = {L'e', L'b', L'c', L'd', L'i', L'c'};
 static wchar_t* EBCDIC_CHARACTER_SET_MODEL = EBCDIC_CHARACTER_SET_MODEL_ARRAY;
-static int* EBCDIC_CHARACTER_SET_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* EBCDIC_CHARACTER_SET_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*
  * The gb character set model.
@@ -62,7 +62,7 @@ static int* EBCDIC_CHARACTER_SET_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
  */
 static wchar_t GB_CHARACTER_SET_MODEL_ARRAY[] = {L'g', L'b'};
 static wchar_t* GB_CHARACTER_SET_MODEL = GB_CHARACTER_SET_MODEL_ARRAY;
-static int* GB_CHARACTER_SET_MODEL_COUNT = NUMBER_2_INTEGER_ARRAY;
+static int* GB_CHARACTER_SET_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*
  * The big-5 character set model.
@@ -71,7 +71,7 @@ static int* GB_CHARACTER_SET_MODEL_COUNT = NUMBER_2_INTEGER_ARRAY;
  */
 static wchar_t BIG_5_CHARACTER_SET_MODEL_ARRAY[] = {L'b', L'i', L'g', L'-', L'5'};
 static wchar_t* BIG_5_CHARACTER_SET_MODEL = BIG_5_CHARACTER_SET_MODEL_ARRAY;
-static int* BIG_5_CHARACTER_SET_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* BIG_5_CHARACTER_SET_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*
  * The shift-jis character set model.
@@ -80,7 +80,7 @@ static int* BIG_5_CHARACTER_SET_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
  */
 static wchar_t SHIFT_JIS_CHARACTER_SET_MODEL_ARRAY[] = {L's', L'h', L'i', L'f', L't', L'-', L'j', L'i', L's'};
 static wchar_t* SHIFT_JIS_CHARACTER_SET_MODEL = SHIFT_JIS_CHARACTER_SET_MODEL_ARRAY;
-static int* SHIFT_JIS_CHARACTER_SET_MODEL_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* SHIFT_JIS_CHARACTER_SET_MODEL_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*
  * The unicode universal character set model.
@@ -96,13 +96,13 @@ static int* SHIFT_JIS_CHARACTER_SET_MODEL_COUNT = NUMBER_9_INTEGER_ARRAY;
  */
 static wchar_t UNIVERSAL_CHARACTER_SET_MODEL_ARRAY[] = {L'u', L'n', L'i', L'v', L'e', L'r', L's', L'a', L'l'};
 static wchar_t* UNIVERSAL_CHARACTER_SET_MODEL = UNIVERSAL_CHARACTER_SET_MODEL_ARRAY;
-static int* UNIVERSAL_CHARACTER_SET_MODEL_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* UNIVERSAL_CHARACTER_SET_MODEL_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The html coded character set model. */
 /*??
 static wchar_t HTML_CODED_CHARACTER_SET_MODEL_ARRAY[] = {L'h', L't', L'm', L'l', L' ', L'c', L'o', L'd', L'e', L'd'};
 static wchar_t* HTML_CODED_CHARACTER_SET_MODEL = HTML_CODED_CHARACTER_SET_MODEL_ARRAY;
-static int* HTML_CODED_CHARACTER_SET_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* HTML_CODED_CHARACTER_SET_MODEL_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 */
 
 /* CHARACTER_SET_MODEL_SOURCE */

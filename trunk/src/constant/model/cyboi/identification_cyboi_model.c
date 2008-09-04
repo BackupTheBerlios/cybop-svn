@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: identification_cyboi_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: identification_cyboi_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef IDENTIFICATION_CYBOI_MODEL_SOURCE
 #define IDENTIFICATION_CYBOI_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The name identification cyboi model. */
 static wchar_t NAME_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'C', L'y', L'b', L'e', L'r', L'n', L'e', L't', L'i', L'c', L's', L' ', L'O', L'r', L'i', L'e', L'n', L't', L'e', L'd', L' ', L'I', L'n', L't', L'e', L'r', L'p', L'r', L'e', L't', L'e', L'r', L' ', L'(', L'C', L'Y', L'B', L'O', L'I', L')'};
 static wchar_t* NAME_IDENTIFICATION_CYBOI_MODEL = NAME_IDENTIFICATION_CYBOI_MODEL_ARRAY;
-static int* NAME_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_40_INTEGER_ARRAY;
+static int* NAME_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_40_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The version identification cyboi model. */
 static wchar_t VERSION_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'0', L'.', L'9', L'.', L'0'};
 static wchar_t* VERSION_IDENTIFICATION_CYBOI_MODEL = VERSION_IDENTIFICATION_CYBOI_MODEL_ARRAY;
-static int* VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The copyright identification cyboi model. */
 static wchar_t COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'C', L'o', L'p', L'y', L'r', L'i', L'g', L'h', L't', L' ', L'(', L'C', L')', L' ', L'1', L'9', L'9', L'9', L'-', L'2', L'0', L'0', L'8', L'.', L' ', L'C', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L' ', L'H', L'e', L'l', L'l', L'e', L'r', L'.'};
 static wchar_t* COPYRIGHT_IDENTIFICATION_CYBOI_MODEL = COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY;
-static int* COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_42_INTEGER_ARRAY;
+static int* COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_42_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The licence identification cyboi model. */
 static wchar_t LICENCE_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'C', L'Y', L'B', L'O', L'I', L' ', L'c', L'o', L'm', L'e', L's', L' ', L'w', L'i', L't', L'h', L' ', L'N', L'O', L' ', L'W', L'A', L'R', L'R', L'A', L'N', L'T', L'Y', L',', L'\n',
@@ -51,7 +51,7 @@ static wchar_t LICENCE_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'C', L'Y', L'B', L
     'F', L'o', L'r', L' ', L'm', L'o', L'r', L'e', L' ', L'i', L'n', L'f', L'o', L'r', L'm', L'a', L't', L'i', L'o', L'n', L' ', L'a', L'b', L'o', L'u', L't', L' ', L't', L'h', L'e', L's', L'e', L' ', L'm', L'a', L't', L't', L'e', L'r', L's', L',', L'\n',
     's', L'e', L'e', L' ', L't', L'h', L'e', L' ', L'f', L'i', L'l', L'e', L's', L' ', L'n', L'a', L'm', L'e', L'd', L' ', L'C', L'O', L'P', L'Y', L'I', L'N', L'G', L'.'};
 static wchar_t* LICENCE_IDENTIFICATION_CYBOI_MODEL = LICENCE_IDENTIFICATION_CYBOI_MODEL_ARRAY;
-static int* LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_220_INTEGER_ARRAY;
+static int* LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_220_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The help identification cyboi model. */
 static wchar_t HELP_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {
@@ -68,7 +68,7 @@ static wchar_t HELP_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {
     '<', L'c', L'y', L'b', L'o', L'p', L'-', L'd', L'e', L'v', L'e', L'l', L'o', L'p', L'e', L'r', L's', L'@', L'l', L'i', L's', L't', L's', L'.', L'b', L'e', L'r', L'l', L'i', L'o', L's', L'.', L'd', L'e', L'>', L' ',
     'o', L'r', L' ', L'<', L'c', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L'.', L'h', L'e', L'l', L'l', L'e', L'r', L'@', L't', L'u', L'x', L't', L'a', L'x', L'.', L'd', L'e', L'>', L'.'};
 static wchar_t* HELP_IDENTIFICATION_CYBOI_MODEL = HELP_IDENTIFICATION_CYBOI_MODEL_ARRAY;
-static int* HELP_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_715_INTEGER_ARRAY;
+static int* HELP_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_715_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* IDENTIFICATION_CYBOI_MODEL_SOURCE */
 #endif

@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: number_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: number_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef NUMBER_CYBOL_ABSTRACTION_SOURCE
 #define NUMBER_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -72,7 +72,7 @@
  */
 static wchar_t CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'c', L'o', L'm', L'p', L'l', L'e', L'x', L'-', L'c', L'a', L'r', L't', L'e', L's', L'i', L'a', L'n'};
 static wchar_t* CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION = CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_ARRAY;
-static int* CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_24_INTEGER_ARRAY;
+static int* CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_24_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The number/complex-polar cybol abstraction.
@@ -92,7 +92,7 @@ static int* CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_24_INTEGER
  */
 static wchar_t POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'c', L'o', L'm', L'p', L'l', L'e', L'x', L'-', L'p', L'o', L'l', L'a', L'r'};
 static wchar_t* POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION = POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION_ARRAY;
-static int* POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_20_INTEGER_ARRAY;
+static int* POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_20_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The number/fraction-decimal cybol abstraction.
@@ -106,7 +106,7 @@ static int* POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_20_INTEGER_ARR
  */
 static wchar_t DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'f', L'r', L'a', L'c', L't', L'i', L'o', L'n', L'-', L'd', L'e', L'c', L'i', L'm', L'a', L'l'};
 static wchar_t* DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION = DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY;
-static int* DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_ARRAY;
+static int* DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The number/fraction-vulgar cybol abstraction.
@@ -123,7 +123,7 @@ static int* DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_
  */
 static wchar_t VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'f', L'r', L'a', L'c', L't', L'i', L'o', L'n', L'-', L'v', L'u', L'l', L'g', L'a', L'r'};
 static wchar_t* VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION = VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY;
-static int* VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_22_INTEGER_ARRAY;
+static int* VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_22_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The number/integer cybol abstraction.
@@ -134,7 +134,7 @@ static int* VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_22_INTEGER_A
  */
 static wchar_t INTEGER_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'i', L'n', L't', L'e', L'g', L'e', L'r'};
 static wchar_t* INTEGER_NUMBER_CYBOL_ABSTRACTION = INTEGER_NUMBER_CYBOL_ABSTRACTION_ARRAY;
-static int* INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
+static int* INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* NUMBER_CYBOL_ABSTRACTION_SOURCE */
 #endif

@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: rule_xdt_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: rule_xdt_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RULE_XDT_ABSTRACTION_SOURCE
 #define RULE_XDT_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // Format checking rules.
@@ -40,7 +40,7 @@
  *
  * Possible values: 0000-2359
  */
-static int* HHMM_RULE_XDT_ABSTRACTION = NUMBER_5_INTEGER_ARRAY;
+static int* HHMM_RULE_XDT_ABSTRACTION = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The hhmmhhmm rule xdt abstraction.
@@ -48,7 +48,7 @@ static int* HHMM_RULE_XDT_ABSTRACTION = NUMBER_5_INTEGER_ARRAY;
  * HH: Stunde
  * MM: Minute
  */
-static int* HHMMHHMM_RULE_XDT_ABSTRACTION = NUMBER_6_INTEGER_ARRAY;
+static int* HHMMHHMM_RULE_XDT_ABSTRACTION = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The jjmmnnn rule xdt abstraction.
@@ -57,7 +57,7 @@ static int* HHMMHHMM_RULE_XDT_ABSTRACTION = NUMBER_6_INTEGER_ARRAY;
  * MM: Monat
  * NNN: laufende Nummer
  */
-static int* JJMMNNN_RULE_XDT_ABSTRACTION = NUMBER_7_INTEGER_ARRAY;
+static int* JJMMNNN_RULE_XDT_ABSTRACTION = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The ttmmjjjj rule xdt abstraction.
@@ -66,7 +66,7 @@ static int* JJMMNNN_RULE_XDT_ABSTRACTION = NUMBER_7_INTEGER_ARRAY;
  * MM: Monat
  * JJJJ: Jahr
  */
-static int* TTMMJJJJ_RULE_XDT_ABSTRACTION = NUMBER_8_INTEGER_ARRAY;
+static int* TTMMJJJJ_RULE_XDT_ABSTRACTION = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The mmjj rule xdt abstraction.
@@ -74,14 +74,14 @@ static int* TTMMJJJJ_RULE_XDT_ABSTRACTION = NUMBER_8_INTEGER_ARRAY;
  * MM: Monat
  * JJ: Jahr
  */
-static int* MMJJ_RULE_XDT_ABSTRACTION = NUMBER_14_INTEGER_ARRAY;
+static int* MMJJ_RULE_XDT_ABSTRACTION = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The arztname zuordnungszeichen rule xdt abstraction.
  *
  * Possible values: 0-9, A-Z, #, $, <, >, *
  */
-static int* ARZTNAME_ZUORDNUNGSZEICHEN_RULE_XDT_ABSTRACTION = NUMBER_15_INTEGER_ARRAY;
+static int* ARZTNAME_ZUORDNUNGSZEICHEN_RULE_XDT_ABSTRACTION = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The qjjjj rule xdt abstraction.
@@ -89,21 +89,21 @@ static int* ARZTNAME_ZUORDNUNGSZEICHEN_RULE_XDT_ABSTRACTION = NUMBER_15_INTEGER_
  * Q: Quartal
  * JJJJ: Jahr
  */
-static int* QJJJJ_RULE_XDT_ABSTRACTION = NUMBER_16_INTEGER_ARRAY;
+static int* QJJJJ_RULE_XDT_ABSTRACTION = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The vknr rule xdt abstraction.
  *
  * Format: nnnnn
  */
-static int* VKNR_RULE_XDT_ABSTRACTION = NUMBER_17_INTEGER_ARRAY;
+static int* VKNR_RULE_XDT_ABSTRACTION = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The krankenkassennummer rule xdt abstraction.
  *
  * Format: nnnnnnn
  */
-static int* KRANKENKASSENNUMMER_RULE_XDT_ABSTRACTION = NUMBER_18_INTEGER_ARRAY;
+static int* KRANKENKASSENNUMMER_RULE_XDT_ABSTRACTION = NUMBER_18_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The ttmmjjjjttmmjjjj rule xdt abstraction.
@@ -112,7 +112,7 @@ static int* KRANKENKASSENNUMMER_RULE_XDT_ABSTRACTION = NUMBER_18_INTEGER_ARRAY;
  * MM: Monat
  * JJJJ: Jahr
  */
-static int* TTMMJJJJTTMMJJJJ_RULE_XDT_ABSTRACTION = NUMBER_19_INTEGER_ARRAY;
+static int* TTMMJJJJTTMMJJJJ_RULE_XDT_ABSTRACTION = NUMBER_19_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The ttmmjjjj rule xdt abstraction.
@@ -126,7 +126,7 @@ static int* TTMMJJJJTTMMJJJJ_RULE_XDT_ABSTRACTION = NUMBER_19_INTEGER_ARRAY;
  * MM=00-12
  * JJJJ=0000-9999
  */
-static int* TTMMJJJJ_BESCHRAENKT_RULE_XDT_ABSTRACTION = NUMBER_20_INTEGER_ARRAY;
+static int* TTMMJJJJ_BESCHRAENKT_RULE_XDT_ABSTRACTION = NUMBER_20_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Content checking rules.
@@ -140,7 +140,7 @@ static int* TTMMJJJJ_BESCHRAENKT_RULE_XDT_ABSTRACTION = NUMBER_20_INTEGER_ARRAY;
  * Description:
  * 1: Feld angekreuzt/ vorhanden
  */
-static int* FELD_ANGEKREUZT_RULE_XDT_ABSTRACTION = NUMBER_101_INTEGER_ARRAY;
+static int* FELD_ANGEKREUZT_RULE_XDT_ABSTRACTION = NUMBER_101_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Existence checking rules.
@@ -151,7 +151,7 @@ static int* FELD_ANGEKREUZT_RULE_XDT_ABSTRACTION = NUMBER_101_INTEGER_ARRAY;
  *
  * VKNR vorhanden und 5-stellig
  */
-static int* KASSENDATEI_VKNR_VORHANDEN_RULE_XDT_ABSTRACTION = NUMBER_201_INTEGER_ARRAY;
+static int* KASSENDATEI_VKNR_VORHANDEN_RULE_XDT_ABSTRACTION = NUMBER_201_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Context checking rules.
@@ -160,7 +160,7 @@ static int* KASSENDATEI_VKNR_VORHANDEN_RULE_XDT_ABSTRACTION = NUMBER_201_INTEGER
 /**
  * The datum kleiner oder gleich maschinendatum rule xdt abstraction.
  */
-static int* DATUM_KLEINER_ODER_GLEICH_MASCHINENDATUM_RULE_XDT_ABSTRACTION = NUMBER_304_INTEGER_ARRAY;
+static int* DATUM_KLEINER_ODER_GLEICH_MASCHINENDATUM_RULE_XDT_ABSTRACTION = NUMBER_304_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* RULE_XDT_ABSTRACTION_SOURCE */
 #endif

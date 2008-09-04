@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +30,9 @@
 #include <errno.h>
 #include <stdio.h>
 #include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
@@ -365,7 +365,7 @@ void write_stream_socket_server_mode(void* p0, void* p1, void* p2) {
         // The "sent" operation therefore has to be
         // CALLED AGAIN AND AGAIN, in a loop, until
         // the complete message has been transmitted!
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (*sc <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

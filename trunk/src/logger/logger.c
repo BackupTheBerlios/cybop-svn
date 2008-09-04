@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: logger.c,v $ $Revision: 1.20 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: logger.c,v $ $Revision: 1.21 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,6 +47,7 @@
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
+#include "../constant/model/memory_model.c"
 #include "../variable/log_setting.c"
 
 //
@@ -111,11 +112,11 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4);
  */
 void log_write_terminated_message(void* p0, void* p1) {
 
-    if (p1 != *NULL_POINTER) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         wchar_t* m = (wchar_t*) p1;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             FILE* s = (FILE*) p0;
 
@@ -145,37 +146,37 @@ void log_write_terminated_message(void* p0, void* p1) {
  */
 void log_get_level_name(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* l = (int*) p2;
 
-        if (p1 != *NULL_POINTER) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* lnc = (int*) p1;
 
-            if (p0 != *NULL_POINTER) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 void** ln = (void**) p0;
 
-                if (*l == *DEBUG_LOG_LEVEL) {
+                if (*l == *DEBUG_LEVEL_LOG_MODEL) {
 
-                    *ln = DEBUG_LOG_LEVEL_NAME;
-                    *lnc = *DEBUG_LOG_LEVEL_NAME_COUNT;
+                    *ln = DEBUG_LEVEL_NAME_LOG_MODEL;
+                    *lnc = *DEBUG_LEVEL_NAME_LOG_MODEL_COUNT;
 
-                } else if (*l == *INFORMATION_LOG_LEVEL) {
+                } else if (*l == *INFORMATION_LEVEL_LOG_MODEL) {
 
-                    *ln = INFORMATION_LOG_LEVEL_NAME;
-                    *lnc = *INFORMATION_LOG_LEVEL_NAME_COUNT;
+                    *ln = INFORMATION_LEVEL_NAME_LOG_MODEL;
+                    *lnc = *INFORMATION_LEVEL_NAME_LOG_MODEL_COUNT;
 
-                } else if (*l == *WARNING_LOG_LEVEL) {
+                } else if (*l == *WARNING_LEVEL_LOG_MODEL) {
 
-                    *ln = WARNING_LOG_LEVEL_NAME;
-                    *lnc = *WARNING_LOG_LEVEL_NAME_COUNT;
+                    *ln = WARNING_LEVEL_NAME_LOG_MODEL;
+                    *lnc = *WARNING_LEVEL_NAME_LOG_MODEL_COUNT;
 
-                } else if (*l == *ERROR_LOG_LEVEL) {
+                } else if (*l == *ERROR_LEVEL_LOG_MODEL) {
 
-                    *ln = ERROR_LOG_LEVEL_NAME;
-                    *lnc = *ERROR_LOG_LEVEL_NAME_COUNT;
+                    *ln = ERROR_LEVEL_NAME_LOG_MODEL;
+                    *lnc = *ERROR_LEVEL_NAME_LOG_MODEL_COUNT;
                 }
 
             } else {
@@ -215,11 +216,11 @@ void log_get_level_name(void* p0, void* p1, void* p2) {
  */
 void log_message(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* mc = (int*) p2;
 
-        if (p0 != *NULL_POINTER) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
             int* l = (int*) p0;
 
@@ -227,13 +228,13 @@ void log_message(void* p0, void* p1, void* p2) {
             if (*l <= *LOG_LEVEL) {
 
                 // The log level name.
-                void* ln = *NULL_POINTER;
-                int lnc = *NUMBER_0_INTEGER;
+                void* ln = *NULL_POINTER_MEMORY_MODEL;
+                int lnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Add name of the given log level to log entry.
                 log_get_level_name((void*) &ln, (void*) &lnc, p0);
 
-                if (LOG_OUTPUT != *NULL_POINTER) {
+                if (LOG_OUTPUT != *NULL_POINTER_MEMORY_MODEL) {
 
                     //
                     // CAUTION! Do NOT allocate/ reallocate/ deallocate an array here, because:
@@ -256,9 +257,9 @@ void log_message(void* p0, void* p1, void* p2) {
                     //
 
                     // The index.
-                    int i = *NUMBER_0_INTEGER;
+                    int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The maximum message count.
-                    int mmc = lnc + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT + *mc + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT;
+                    int mmc = lnc + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *mc + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                     if (mmc <= *LOG_MESSAGE_COUNT) {
 
@@ -273,39 +274,39 @@ void log_message(void* p0, void* p1, void* p2) {
                         // to have place to copy them to the log message array further below!
                         // But do NOT subtract "*mc", as it was the reason for a too big message
                         // and would result in a negative value!
-                        mmc = *LOG_MESSAGE_COUNT - (lnc + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT);
+                        mmc = *LOG_MESSAGE_COUNT - (lnc + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT);
                     }
 
                     // CAUTION! Further checks are not built in here!
                     //
                     // This logger source code assumes that the global variable LOG_MESSAGE_COUNT has
                     // at least a size of about 15, calculated as follows:
-                    // lnc + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT + *PRIMITIVE_COUNT
+                    // lnc + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
                     // The variable "lnc" may hereby be a value from 5 to 11.
                     // See module "log_level_name_constants.c"!
 
                     // Copy log level.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, ln, (void*) &lnc, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, ln, (void*) &lnc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     // Increment index.
                     i = i + lnc;
                     // Copy colon.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) COLON_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) COLON_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     // Increment index.
-                    i = i + *PRIMITIVE_COUNT;
+                    i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
                     // Copy space.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) SPACE_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     // Increment index.
-                    i = i + *PRIMITIVE_COUNT;
+                    i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
                     // Copy log message.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, p1, (void*) &mmc, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, p1, (void*) &mmc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     // Increment index.
                     i = i + mmc;
                     // Copy line feed control wide character.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) LINE_FEED_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     // Increment index.
-                    i = i + *PRIMITIVE_COUNT;
+                    i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
                     // Copy null termination wide character.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) NULL_CONTROL_WIDE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY);
+                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Log message.
                     log_write_terminated_message((void*) stdout, (void*) LOG_MESSAGE);

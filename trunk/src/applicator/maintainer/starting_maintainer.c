@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: starting_maintainer.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: starting_maintainer.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,14 +29,14 @@
 #include "../applicator/starter/gnu_linux_console_starter.c"
 #include "../applicator/starter/socket_starter.c"
 #include "../applicator/starter/x_window_system_starter.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../constant/channel/cybol_channel.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../globals/constants/service_port_constants.c"
-#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -64,57 +64,57 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup service.");
 
     // The service name, abstraction, model, details.
-    void** sn = NULL_POINTER;
-    void** snc = NULL_POINTER;
-    void** sns = NULL_POINTER;
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sn = NULL_POINTER_MEMORY_MODEL;
+    void** snc = NULL_POINTER_MEMORY_MODEL;
+    void** sns = NULL_POINTER_MEMORY_MODEL;
+    void** sa = NULL_POINTER_MEMORY_MODEL;
+    void** sac = NULL_POINTER_MEMORY_MODEL;
+    void** sas = NULL_POINTER_MEMORY_MODEL;
+    void** sm = NULL_POINTER_MEMORY_MODEL;
+    void** smc = NULL_POINTER_MEMORY_MODEL;
+    void** sms = NULL_POINTER_MEMORY_MODEL;
+    void** sd = NULL_POINTER_MEMORY_MODEL;
+    void** sdc = NULL_POINTER_MEMORY_MODEL;
+    void** sds = NULL_POINTER_MEMORY_MODEL;
     // The socket namespace name, abstraction, model, details.
-    void** nn = NULL_POINTER;
-    void** nnc = NULL_POINTER;
-    void** nns = NULL_POINTER;
-    void** na = NULL_POINTER;
-    void** nac = NULL_POINTER;
-    void** nas = NULL_POINTER;
-    void** nm = NULL_POINTER;
-    void** nmc = NULL_POINTER;
-    void** nms = NULL_POINTER;
-    void** nd = NULL_POINTER;
-    void** ndc = NULL_POINTER;
-    void** nds = NULL_POINTER;
+    void** nn = NULL_POINTER_MEMORY_MODEL;
+    void** nnc = NULL_POINTER_MEMORY_MODEL;
+    void** nns = NULL_POINTER_MEMORY_MODEL;
+    void** na = NULL_POINTER_MEMORY_MODEL;
+    void** nac = NULL_POINTER_MEMORY_MODEL;
+    void** nas = NULL_POINTER_MEMORY_MODEL;
+    void** nm = NULL_POINTER_MEMORY_MODEL;
+    void** nmc = NULL_POINTER_MEMORY_MODEL;
+    void** nms = NULL_POINTER_MEMORY_MODEL;
+    void** nd = NULL_POINTER_MEMORY_MODEL;
+    void** ndc = NULL_POINTER_MEMORY_MODEL;
+    void** nds = NULL_POINTER_MEMORY_MODEL;
     // The communication style name, abstraction, model, details.
-    void** stn = NULL_POINTER;
-    void** stnc = NULL_POINTER;
-    void** stns = NULL_POINTER;
-    void** sta = NULL_POINTER;
-    void** stac = NULL_POINTER;
-    void** stas = NULL_POINTER;
-    void** stm = NULL_POINTER;
-    void** stmc = NULL_POINTER;
-    void** stms = NULL_POINTER;
-    void** std = NULL_POINTER;
-    void** stdc = NULL_POINTER;
-    void** stds = NULL_POINTER;
+    void** stn = NULL_POINTER_MEMORY_MODEL;
+    void** stnc = NULL_POINTER_MEMORY_MODEL;
+    void** stns = NULL_POINTER_MEMORY_MODEL;
+    void** sta = NULL_POINTER_MEMORY_MODEL;
+    void** stac = NULL_POINTER_MEMORY_MODEL;
+    void** stas = NULL_POINTER_MEMORY_MODEL;
+    void** stm = NULL_POINTER_MEMORY_MODEL;
+    void** stmc = NULL_POINTER_MEMORY_MODEL;
+    void** stms = NULL_POINTER_MEMORY_MODEL;
+    void** std = NULL_POINTER_MEMORY_MODEL;
+    void** stdc = NULL_POINTER_MEMORY_MODEL;
+    void** stds = NULL_POINTER_MEMORY_MODEL;
     // The host address name, abstraction, model, details.
-    void** an = NULL_POINTER;
-    void** anc = NULL_POINTER;
-    void** ans = NULL_POINTER;
-    void** aa = NULL_POINTER;
-    void** aac = NULL_POINTER;
-    void** aas = NULL_POINTER;
-    void** am = NULL_POINTER;
-    void** amc = NULL_POINTER;
-    void** ams = NULL_POINTER;
-    void** ad = NULL_POINTER;
-    void** adc = NULL_POINTER;
-    void** ads = NULL_POINTER;
+    void** an = NULL_POINTER_MEMORY_MODEL;
+    void** anc = NULL_POINTER_MEMORY_MODEL;
+    void** ans = NULL_POINTER_MEMORY_MODEL;
+    void** aa = NULL_POINTER_MEMORY_MODEL;
+    void** aac = NULL_POINTER_MEMORY_MODEL;
+    void** aas = NULL_POINTER_MEMORY_MODEL;
+    void** am = NULL_POINTER_MEMORY_MODEL;
+    void** amc = NULL_POINTER_MEMORY_MODEL;
+    void** ams = NULL_POINTER_MEMORY_MODEL;
+    void** ad = NULL_POINTER_MEMORY_MODEL;
+    void** adc = NULL_POINTER_MEMORY_MODEL;
+    void** ads = NULL_POINTER_MEMORY_MODEL;
 
     // Get service.
     get_universal_compound_element_by_name(p0, p1,
@@ -155,9 +155,9 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The internal memory index.
-    int i = *NUMBER_MINUS_1_INTEGER;
+    int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // The server socket internal.
-    int** s = (int**) NULL_POINTER;
+    int** s = (int**) NULL_POINTER_MEMORY_MODEL;
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

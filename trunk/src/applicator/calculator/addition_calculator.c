@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: addition_calculator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: addition_calculator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,9 +28,9 @@
 
 #include "../applicator/adder/character_vector_adder.c"
 #include "../applicator/adder/integer_vector_adder.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
@@ -57,57 +57,57 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Add two primitive summands resulting in the sum.");
 
     // The abstraction name, abstraction, model, details.
-    void** an = NULL_POINTER;
-    void** anc = NULL_POINTER;
-    void** ans = NULL_POINTER;
-    void** aa = NULL_POINTER;
-    void** aac = NULL_POINTER;
-    void** aas = NULL_POINTER;
-    void** am = NULL_POINTER;
-    void** amc = NULL_POINTER;
-    void** ams = NULL_POINTER;
-    void** ad = NULL_POINTER;
-    void** adc = NULL_POINTER;
-    void** ads = NULL_POINTER;
+    void** an = NULL_POINTER_MEMORY_MODEL;
+    void** anc = NULL_POINTER_MEMORY_MODEL;
+    void** ans = NULL_POINTER_MEMORY_MODEL;
+    void** aa = NULL_POINTER_MEMORY_MODEL;
+    void** aac = NULL_POINTER_MEMORY_MODEL;
+    void** aas = NULL_POINTER_MEMORY_MODEL;
+    void** am = NULL_POINTER_MEMORY_MODEL;
+    void** amc = NULL_POINTER_MEMORY_MODEL;
+    void** ams = NULL_POINTER_MEMORY_MODEL;
+    void** ad = NULL_POINTER_MEMORY_MODEL;
+    void** adc = NULL_POINTER_MEMORY_MODEL;
+    void** ads = NULL_POINTER_MEMORY_MODEL;
     // The summand 1 name, abstraction, model, details.
-    void** s1n = NULL_POINTER;
-    void** s1nc = NULL_POINTER;
-    void** s1ns = NULL_POINTER;
-    void** s1a = NULL_POINTER;
-    void** s1ac = NULL_POINTER;
-    void** s1as = NULL_POINTER;
-    void** s1m = NULL_POINTER;
-    void** s1mc = NULL_POINTER;
-    void** s1ms = NULL_POINTER;
-    void** s1d = NULL_POINTER;
-    void** s1dc = NULL_POINTER;
-    void** s1ds = NULL_POINTER;
+    void** s1n = NULL_POINTER_MEMORY_MODEL;
+    void** s1nc = NULL_POINTER_MEMORY_MODEL;
+    void** s1ns = NULL_POINTER_MEMORY_MODEL;
+    void** s1a = NULL_POINTER_MEMORY_MODEL;
+    void** s1ac = NULL_POINTER_MEMORY_MODEL;
+    void** s1as = NULL_POINTER_MEMORY_MODEL;
+    void** s1m = NULL_POINTER_MEMORY_MODEL;
+    void** s1mc = NULL_POINTER_MEMORY_MODEL;
+    void** s1ms = NULL_POINTER_MEMORY_MODEL;
+    void** s1d = NULL_POINTER_MEMORY_MODEL;
+    void** s1dc = NULL_POINTER_MEMORY_MODEL;
+    void** s1ds = NULL_POINTER_MEMORY_MODEL;
     // The summand 2 name, abstraction, model, details.
-    void** s2n = NULL_POINTER;
-    void** s2nc = NULL_POINTER;
-    void** s2ns = NULL_POINTER;
-    void** s2a = NULL_POINTER;
-    void** s2ac = NULL_POINTER;
-    void** s2as = NULL_POINTER;
-    void** s2m = NULL_POINTER;
-    void** s2mc = NULL_POINTER;
-    void** s2ms = NULL_POINTER;
-    void** s2d = NULL_POINTER;
-    void** s2dc = NULL_POINTER;
-    void** s2ds = NULL_POINTER;
+    void** s2n = NULL_POINTER_MEMORY_MODEL;
+    void** s2nc = NULL_POINTER_MEMORY_MODEL;
+    void** s2ns = NULL_POINTER_MEMORY_MODEL;
+    void** s2a = NULL_POINTER_MEMORY_MODEL;
+    void** s2ac = NULL_POINTER_MEMORY_MODEL;
+    void** s2as = NULL_POINTER_MEMORY_MODEL;
+    void** s2m = NULL_POINTER_MEMORY_MODEL;
+    void** s2mc = NULL_POINTER_MEMORY_MODEL;
+    void** s2ms = NULL_POINTER_MEMORY_MODEL;
+    void** s2d = NULL_POINTER_MEMORY_MODEL;
+    void** s2dc = NULL_POINTER_MEMORY_MODEL;
+    void** s2ds = NULL_POINTER_MEMORY_MODEL;
     // The sum name, abstraction, model, details.
-    void** sn = NULL_POINTER;
-    void** snc = NULL_POINTER;
-    void** sns = NULL_POINTER;
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sn = NULL_POINTER_MEMORY_MODEL;
+    void** snc = NULL_POINTER_MEMORY_MODEL;
+    void** sns = NULL_POINTER_MEMORY_MODEL;
+    void** sa = NULL_POINTER_MEMORY_MODEL;
+    void** sac = NULL_POINTER_MEMORY_MODEL;
+    void** sas = NULL_POINTER_MEMORY_MODEL;
+    void** sm = NULL_POINTER_MEMORY_MODEL;
+    void** smc = NULL_POINTER_MEMORY_MODEL;
+    void** sms = NULL_POINTER_MEMORY_MODEL;
+    void** sd = NULL_POINTER_MEMORY_MODEL;
+    void** sdc = NULL_POINTER_MEMORY_MODEL;
+    void** sds = NULL_POINTER_MEMORY_MODEL;
 
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,

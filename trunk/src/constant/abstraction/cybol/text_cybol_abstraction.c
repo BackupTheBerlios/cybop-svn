@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: text_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: text_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOL_TEXT_LANGUAGE_CONSTANTS_SOURCE
 #define CYBOL_TEXT_LANGUAGE_CONSTANTS_SOURCE
 
-#include "../../../../globals/constants/integer/integer_constants.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -59,7 +59,7 @@
  */
 static wchar_t CSS_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'c', L's', L's'};
 static wchar_t* CSS_TEXT_CYBOL_ABSTRACTION = CSS_TEXT_CYBOL_ABSTRACTION_ARRAY;
-static int* CSS_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* CSS_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The text/cybol cybol abstraction.
@@ -71,7 +71,7 @@ static int* CSS_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
  */
 static wchar_t CYBOL_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'c', L'y', L'b', L'o', L'l'};
 static wchar_t* CYBOL_TEXT_CYBOL_ABSTRACTION = CYBOL_TEXT_CYBOL_ABSTRACTION_ARRAY;
-static int* CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The text/cybol cybol abstraction as ascii character string.
@@ -94,7 +94,7 @@ static char* ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION = ASCII_CYBOL_TEXT_CYBOL_ABSTRAC
  */
 static wchar_t HTML_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'h', L't', L'm', L'l'};
 static wchar_t* HTML_TEXT_CYBOL_ABSTRACTION = HTML_TEXT_CYBOL_ABSTRACTION_ARRAY;
-static int* HTML_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* HTML_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The text/hxp cybol abstraction.
@@ -108,7 +108,7 @@ static int* HTML_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
  */
 static wchar_t HXP_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'h', L'x', L'p'};
 static wchar_t* HXP_TEXT_CYBOL_ABSTRACTION = HXP_TEXT_CYBOL_ABSTRACTION_ARRAY;
-static int* HXP_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* HXP_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The text/model-diagram cybol abstraction.
@@ -119,7 +119,7 @@ static int* HXP_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
  */
 static wchar_t MODEL_DIAGRAM_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'm', L'o', L'd', L'e', L'l', L'-', L'd', L'i', L'a', L'g', L'r', L'a', L'm'};
 static wchar_t* MODEL_DIAGRAM_TEXT_CYBOL_ABSTRACTION = MODEL_DIAGRAM_TEXT_CYBOL_ABSTRACTION_ARRAY;
-static int* MODEL_DIAGRAM_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_18_INTEGER_ARRAY;
+static int* MODEL_DIAGRAM_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_18_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The text/plain cybol abstraction.
@@ -132,7 +132,7 @@ static int* MODEL_DIAGRAM_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_18_INTEGER_ARRAY
  */
 static wchar_t PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'p', L'l', L'a', L'i', L'n'};
 static wchar_t* PLAIN_TEXT_CYBOL_ABSTRACTION = PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY;
-static int* PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The text/xdt cybol abstraction.
@@ -146,7 +146,7 @@ static int* PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
  */
 static wchar_t XDT_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'x', L'd', L't'};
 static wchar_t* XDT_TEXT_CYBOL_ABSTRACTION = XDT_TEXT_CYBOL_ABSTRACTION_ARRAY;
-static int* XDT_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* XDT_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The text/xml cybol abstraction.
@@ -157,7 +157,7 @@ static int* XDT_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
  */
 static wchar_t XML_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'x', L'm', L'l'};
 static wchar_t* XML_TEXT_CYBOL_ABSTRACTION = XML_TEXT_CYBOL_ABSTRACTION_ARRAY;
-static int* XML_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* XML_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* CYBOL_TEXT_LANGUAGE_CONSTANTS_SOURCE */
 #endif

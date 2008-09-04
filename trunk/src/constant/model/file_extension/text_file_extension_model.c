@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: text_file_extension_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: text_file_extension_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TEXT_FILE_EXTENSION_MODEL_SOURCE
 #define TEXT_FILE_EXTENSION_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The html text file extension model. */
 static wchar_t HTML_TEXT_FILE_EXTENSION_MODEL_ARRAY[] = {L'h', L't', L'm', L'l'};
 static wchar_t* HTML_TEXT_FILE_EXTENSION_MODEL = HTML_TEXT_FILE_EXTENSION_MODEL_ARRAY;
-static int* HTML_TEXT_FILE_EXTENSION_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* HTML_TEXT_FILE_EXTENSION_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The htm text file extension model. */
 static wchar_t HTM_TEXT_FILE_EXTENSION_MODEL_ARRAY[] = {L'h', L't', L'm'};
 static wchar_t* HTM_TEXT_FILE_EXTENSION_MODEL = HTM_TEXT_FILE_EXTENSION_MODEL_ARRAY;
-static int* HTM_TEXT_FILE_EXTENSION_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+static int* HTM_TEXT_FILE_EXTENSION_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The shtml text file extension model. */
 static wchar_t SHTML_TEXT_FILE_EXTENSION_MODEL_ARRAY[] = {L's', L'h', L't', L'm', L'l'};
 static wchar_t* SHTML_TEXT_FILE_EXTENSION_MODEL = SHTML_TEXT_FILE_EXTENSION_MODEL_ARRAY;
-static int* SHTML_TEXT_FILE_EXTENSION_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* SHTML_TEXT_FILE_EXTENSION_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* TEXT_FILE_EXTENSION_MODEL_SOURCE */
 #endif

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.34 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.35 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,15 +35,15 @@
 #include <string.h>
 #include <wchar.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/primitive_type_size_variables.c"
-#include "../../globals/variables/reallocation_factor_variables.c"
+#include "../../variable/primitive_type_size.c"
+#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/converter/integer_converter.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
@@ -86,7 +86,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // The comma index.
-                        int i = *NUMBER_MINUS_1_INTEGER;
+                        int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
                         // The first element count.
                         int fec = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The integer value.
@@ -96,7 +96,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Find comma character index.
-                        get_array_elements_index(p3, p4, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) &i, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        get_array_elements_index(p3, p4, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                         if (i > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -124,7 +124,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // Index of first comma: 3
                         // Handed over as first element source count fec: index i
                         // (which is 3, as needed for the length)
-                        decode_integer((void*) &v, *NULL_POINTER, *NULL_POINTER, p3, (void*) &fec);
+                        decode_integer((void*) &v, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, (void*) &fec);
 
                         // Check vector size.
                         if (*dc >= *ds) {
@@ -133,7 +133,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             //
                             // CAUTION! Add number one as summand at the end to
                             // avoid a zero result, since the initial size is zero!
-                            *ds = (*dc * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
+                            *ds = (*dc * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Reallocate vector.
                             reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
@@ -157,8 +157,8 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             // Index of first comma: 3
                             // Next vector element starts at index: 4
                             // (which is the comma index plus 1)
-                            e = p3 + (i * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *NUMBER_1_INTEGER;
-                            ec = *sc - (i * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *NUMBER_1_INTEGER;
+                            e = p3 + (i * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            ec = *sc - (i * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Recursively call this function.
                             decode_integer_vector(p0, p1, p2, e, (void*) &ec);
@@ -234,18 +234,18 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                         if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             // Get first integer from vector.
-                            get_element(p3, (void*) NUMBER_0_INTEGER, &i, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                            get_element(p3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, &i, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
                             // Encode first integer.
-                            encode_integer((void*) &c, (void*) &cc, (void*) &cs, i, (void*) PRIMITIVE_COUNT);
+                            encode_integer((void*) &c, (void*) &cc, (void*) &cs, i, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                             // CAUTION! Add one for the comma character added further below!
-                            if ((*dc + *NUMBER_1_INTEGER + cc) >= *ds) {
+                            if ((*dc + *NUMBER_1_INTEGER_MEMORY_MODEL + cc) >= *ds) {
 
                                 // The new destination integer vector size.
                                 // CAUTION! Add one for the comma character added further below!
                                 // CAUTION! Add constant in case *dc is zero!
-                                *ds = (*dc * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER + cc;
+                                *ds = (*dc * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL + cc;
 
                                 // Reallocate destination character array.
                                 reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -258,7 +258,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                                 // in order to separate from already existing elements.
 
                                 // Set comma character.
-                                set_array_elements(*d, p1, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                set_array_elements(*d, p1, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                 *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
                             }
 
@@ -271,8 +271,8 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                             // CAUTION! The source count has to be greater than zero!
                             // However, this does not have to be checked here,
                             // as it is already checked further above.
-                            void* e = p3 + (*NUMBER_1_INTEGER * *INTEGER_PRIMITIVE_SIZE);
-                            int ec = *sc - *NUMBER_1_INTEGER;
+                            void* e = p3 + (*NUMBER_1_INTEGER_MEMORY_MODEL * *INTEGER_PRIMITIVE_SIZE);
+                            int ec = *sc - *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Increment iteration count.
                             (*it)++;

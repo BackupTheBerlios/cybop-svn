@@ -19,15 +19,15 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_vector_addition_calculator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: integer_vector_addition_calculator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTEGER_VECTOR_ADDER_SOURCE
 #define INTEGER_VECTOR_ADDER_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
@@ -86,12 +86,12 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                         int summand2c = *s2c;
 
                         // Allocate temporary input operand arrays.
-                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_ARRAY);
-                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_ARRAY);
+                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                         // Set temporary input operand arrays.
-                        set_array_elements(summand1, (void*) NUMBER_0_INTEGER, p3, p4, (void*) INTEGER_ARRAY);
-                        set_array_elements(summand2, (void*) NUMBER_0_INTEGER, p5, p6, (void*) INTEGER_ARRAY);
+                        set_array_elements(summand1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(summand2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, p6, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size
@@ -111,7 +111,7 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                         *sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Reallocate output operand array.
-                        reallocate_array(p0, p1, p2, (void*) INTEGER_ARRAY);
+                        reallocate_array(p0, p1, p2, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                         // The temporary summand 1 vector element.
                         int* tmps1 = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -120,7 +120,7 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                         // The temporary sum vector element.
                         int tmps = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                        while (*NUMBER_1_INTEGER) {
+                        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                             if (*sc >= *ss) {
 
@@ -129,21 +129,21 @@ void add_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                             // The parameter p1 is the sum count, which serves as
                             // index that gets incremented in every loop cycle.
-                            get_array_elements(summand1, p1, (void*) &tmps1, (void*) INTEGER_ARRAY);
-                            get_array_elements(summand2, p1, (void*) &tmps2, (void*) INTEGER_ARRAY);
+                            get_array_elements(summand1, p1, (void*) &tmps1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                            get_array_elements(summand2, p1, (void*) &tmps2, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                             // Calculate temporary sum.
                             tmps = *tmps1 + *tmps2;
 
                             // Set output operand array.
-                            set_array_elements(*s, p1, (void*) &tmps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_ARRAY);
+                            set_array_elements(*s, p1, (void*) &tmps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                             (*sc)++;
                         }
 
                         // Deallocate temporary operand arrays.
-                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_ARRAY);
-                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_ARRAY);
+                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                     } else {
 

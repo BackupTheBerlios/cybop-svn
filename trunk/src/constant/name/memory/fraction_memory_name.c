@@ -19,20 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: fraction_memory_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: fraction_memory_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FRACTION_MEMORY_NAME_SOURCE
 #define FRACTION_MEMORY_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The numerator fraction memory name. */
-static int* NUMERATOR_FRACTION_MEMORY_NAME = NUMBER_0_INTEGER_ARRAY;
+static int* NUMERATOR_FRACTION_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The denominator fraction memory name. */
-static int* DENOMINATOR_FRACTION_MEMORY_NAME = NUMBER_1_INTEGER_ARRAY;
+static int* DENOMINATOR_FRACTION_MEMORY_NAME = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* FRACTION_MEMORY_NAME_SOURCE */
 #endif

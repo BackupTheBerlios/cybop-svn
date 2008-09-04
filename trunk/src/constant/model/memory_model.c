@@ -19,35 +19,35 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: memory_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: memory_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MEMORY_MODEL_SOURCE
 #define MEMORY_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 
 /** The complex memory model count. */
-static int* COMPLEX_MEMORY_MODEL_COUNT = NUMBER_2_INTEGER_ARRAY;
+static int* COMPLEX_MEMORY_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The compound memory model count. */
-static int* COMPOUND_MEMORY_MODEL_COUNT = NUMBER_12_INTEGER_ARRAY;
+static int* COMPOUND_MEMORY_MODEL_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The datetime memory model count. */
-static int* DATETIME_MEMORY_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* DATETIME_MEMORY_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The fraction memory model count. */
-static int* FRACTION_MEMORY_MODEL_COUNT = NUMBER_2_INTEGER_ARRAY;
+static int* FRACTION_MEMORY_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The internal memory memory model count. */
-static int* INTERNAL_MEMORY_MEMORY_MODEL_COUNT = NUMBER_1000_INTEGER_ARRAY;
+static int* INTERNAL_MEMORY_MEMORY_MODEL_COUNT = NUMBER_1000_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The primitive memory model count. */
-static int* PRIMITIVE_MEMORY_MODEL_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* PRIMITIVE_MEMORY_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The signal memory memory model count. */
-static int* SIGNAL_MEMORY_MEMORY_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* SIGNAL_MEMORY_MEMORY_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 // CAUTION! The vector count is not fixed here, since the vector size is undetermined.
 // Vectors get allocated at runtime, using a size that depends on the context.

@@ -19,16 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: destructing_memoriser.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: destructing_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DESTRUCTOR_SOURCE
 #define DESTRUCTOR_SOURCE
 
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
@@ -63,7 +63,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 
         int* p = (int*) p0;
 
-        if (*p != *NUMBER_1_INTEGER) {
+        if (*p != *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             compare_arrays(p1, p2, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
         }
@@ -105,23 +105,23 @@ void destroy_compound_model(void** model, void* model_count, void* model_size,
     int compound_counter = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // The element name.
-    void** en = NULL_POINTER;
-    void** enc = NULL_POINTER;
-    void** ens = NULL_POINTER;
+    void** en = NULL_POINTER_MEMORY_MODEL;
+    void** enc = NULL_POINTER_MEMORY_MODEL;
+    void** ens = NULL_POINTER_MEMORY_MODEL;
     // The element abstraction.
-    void** ea = NULL_POINTER;
-    void** eac = NULL_POINTER;
-    void** eas = NULL_POINTER;
+    void** ea = NULL_POINTER_MEMORY_MODEL;
+    void** eac = NULL_POINTER_MEMORY_MODEL;
+    void** eas = NULL_POINTER_MEMORY_MODEL;
     // The element model.
-    void** em = NULL_POINTER;
-    void** emc = NULL_POINTER;
-    void** ems = NULL_POINTER;
+    void** em = NULL_POINTER_MEMORY_MODEL;
+    void** emc = NULL_POINTER_MEMORY_MODEL;
+    void** ems = NULL_POINTER_MEMORY_MODEL;
     // The element details.
-    void** ed = NULL_POINTER;
-    void** edc = NULL_POINTER;
-    void** eds = NULL_POINTER;
+    void** ed = NULL_POINTER_MEMORY_MODEL;
+    void** edc = NULL_POINTER_MEMORY_MODEL;
+    void** eds = NULL_POINTER_MEMORY_MODEL;
 
-    while (*NUMBER_1_INTEGER) {
+    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
         if (compound_counter >= *((int*) model_count)) {
 
@@ -137,7 +137,7 @@ void destroy_compound_model(void** model, void* model_count, void* model_size,
 
         destroy_model(em, *emc, *ems, *ea, *eac);
 
-        compound_counter = compound_counter + *NUMBER_1_INTEGER;
+        compound_counter = compound_counter + *NUMBER_1_INTEGER_MEMORY_MODEL;
     }
 }
 
@@ -198,18 +198,18 @@ void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Destroy knowledge model.");
 
     // The knowledge model name name, abstraction, model, details.
-    void** nn = NULL_POINTER;
-    void** nnc = NULL_POINTER;
-    void** nns = NULL_POINTER;
-    void** na = NULL_POINTER;
-    void** nac = NULL_POINTER;
-    void** nas = NULL_POINTER;
-    void** nm = NULL_POINTER;
-    void** nmc = NULL_POINTER;
-    void** nms = NULL_POINTER;
-    void** nd = NULL_POINTER;
-    void** ndc = NULL_POINTER;
-    void** nds = NULL_POINTER;
+    void** nn = NULL_POINTER_MEMORY_MODEL;
+    void** nnc = NULL_POINTER_MEMORY_MODEL;
+    void** nns = NULL_POINTER_MEMORY_MODEL;
+    void** na = NULL_POINTER_MEMORY_MODEL;
+    void** nac = NULL_POINTER_MEMORY_MODEL;
+    void** nas = NULL_POINTER_MEMORY_MODEL;
+    void** nm = NULL_POINTER_MEMORY_MODEL;
+    void** nmc = NULL_POINTER_MEMORY_MODEL;
+    void** nms = NULL_POINTER_MEMORY_MODEL;
+    void** nd = NULL_POINTER_MEMORY_MODEL;
+    void** ndc = NULL_POINTER_MEMORY_MODEL;
+    void** nds = NULL_POINTER_MEMORY_MODEL;
 
     // Get knowledge model name.
     get_universal_compound_element_by_name(p0, p1,
@@ -221,18 +221,18 @@ void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
 
     // The knowledge model name, abstraction, model, details.
-    void** en = NULL_POINTER;
-    void** enc = NULL_POINTER;
-    void** ens = NULL_POINTER;
-    void** ea = NULL_POINTER;
-    void** eac = NULL_POINTER;
-    void** eas = NULL_POINTER;
-    void** em = NULL_POINTER;
-    void** emc = NULL_POINTER;
-    void** ems = NULL_POINTER;
-    void** ed = NULL_POINTER;
-    void** edc = NULL_POINTER;
-    void** eds = NULL_POINTER;
+    void** en = NULL_POINTER_MEMORY_MODEL;
+    void** enc = NULL_POINTER_MEMORY_MODEL;
+    void** ens = NULL_POINTER_MEMORY_MODEL;
+    void** ea = NULL_POINTER_MEMORY_MODEL;
+    void** eac = NULL_POINTER_MEMORY_MODEL;
+    void** eas = NULL_POINTER_MEMORY_MODEL;
+    void** em = NULL_POINTER_MEMORY_MODEL;
+    void** emc = NULL_POINTER_MEMORY_MODEL;
+    void** ems = NULL_POINTER_MEMORY_MODEL;
+    void** ed = NULL_POINTER_MEMORY_MODEL;
+    void** edc = NULL_POINTER_MEMORY_MODEL;
+    void** eds = NULL_POINTER_MEMORY_MODEL;
 
     // Get knowledge model.
     get_universal_compound_element_by_name(p2, p3,
@@ -247,7 +247,7 @@ void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
     destroy_model(em, *emc, *ems , *ea, *eac);
 
     // Remove knowledge model from given whole model.
-    remove_compound_element_by_name(p2, p3, p4, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) *nm, (void*) *nmc);
+    remove_compound_element_by_name(p2, p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) *nm, (void*) *nmc);
 }
 
 /* DESTRUCTOR_SOURCE */

@@ -19,16 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_node_allocator.c,v $ $Revision: 1.13 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: xml_node_allocator.c,v $ $Revision: 1.14 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef XML_NODE_ALLOCATOR_SOURCE
 #define XML_NODE_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
@@ -44,15 +44,15 @@ void allocate_xml_node(void* p0, void* p1) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate xml node.");
 
     // Create xml node.
-    allocate_array(p0, p1, (void*) POINTER_ARRAY);
+    allocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Initialise xml node name, attributes, value.
     void* nav = *NULL_POINTER_MEMORY_MODEL;
     void* c = *NULL_POINTER_MEMORY_MODEL;
 
     // Create xml tag name, attributes, value.
-    allocate_array((void*) &nav, p1, (void*) POINTER_ARRAY);
-    allocate_array((void*) &c, p1, (void*) INTEGER_ARRAY);
+    allocate_array((void*) &nav, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &c, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
     //
     // Use ascending order.
@@ -90,11 +90,11 @@ void deallocate_xml_node(void* p0, void* p1) {
 //??    remove_array_elements(p0, (void*) POINTER_ARRAY, (void*) &XML_TAG_COUNT, (void*) &XML_TAG_NAME_ATTRIBUTE_VALUE_INDEX);
 
     // Destroy xml tag name, attributes, value.
-    deallocate_array((void*) &nav, p1, (void*) POINTER_ARRAY);
-    deallocate_array((void*) &c, p1, (void*) INTEGER_ARRAY);
+    deallocate_array((void*) &nav, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &c, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
     // Destroy xml tag.
-    deallocate_array(p0, p1, (void*) POINTER_ARRAY);
+    deallocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /* XML_NODE_ALLOCATOR_SOURCE */

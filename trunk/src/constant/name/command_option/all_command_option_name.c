@@ -19,17 +19,17 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: all_command_option_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: all_command_option_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ALL_COMMAND_OPTION_NAME_SOURCE
 #define ALL_COMMAND_OPTION_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The all command option name. */
-static int* ALL_COMMAND_OPTION_NAME = NUMBER_0_INTEGER_ARRAY;
+static int* ALL_COMMAND_OPTION_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* ALL_COMMAND_OPTION_NAME_SOURCE */
 #endif

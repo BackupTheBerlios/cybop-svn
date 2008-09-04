@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: shell_unix_command_option_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: shell_unix_command_option_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SHELL_UNIX_COMMAND_OPTION_NAME_SOURCE
 #define SHELL_UNIX_COMMAND_OPTION_NAME_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The character shell unix command option name. */
 static wchar_t CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'c'};
 static wchar_t* CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME = CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME_ARRAY;
-static int* CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_2_INTEGER_ARRAY;
+static int* CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SHELL_UNIX_COMMAND_OPTION_NAME_SOURCE */
 #endif

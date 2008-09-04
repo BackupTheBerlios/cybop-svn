@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.20 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.21 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,7 +28,7 @@
 
 #include <X11/Xlib.h>
 #include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
@@ -214,53 +214,53 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                     int* wmc = (int*) p13;
 
                     // The graphical part name, abstraction, model, details.
-                    void** n = NULL_POINTER;
-                    void** nc = NULL_POINTER;
-                    void** ns = NULL_POINTER;
-                    void** a = NULL_POINTER;
-                    void** ac = NULL_POINTER;
-                    void** as = NULL_POINTER;
-                    void** m = NULL_POINTER;
-                    void** mc = NULL_POINTER;
-                    void** ms = NULL_POINTER;
-                    void** d = NULL_POINTER;
-                    void** dc = NULL_POINTER;
-                    void** ds = NULL_POINTER;
+                    void** n = NULL_POINTER_MEMORY_MODEL;
+                    void** nc = NULL_POINTER_MEMORY_MODEL;
+                    void** ns = NULL_POINTER_MEMORY_MODEL;
+                    void** a = NULL_POINTER_MEMORY_MODEL;
+                    void** ac = NULL_POINTER_MEMORY_MODEL;
+                    void** as = NULL_POINTER_MEMORY_MODEL;
+                    void** m = NULL_POINTER_MEMORY_MODEL;
+                    void** mc = NULL_POINTER_MEMORY_MODEL;
+                    void** ms = NULL_POINTER_MEMORY_MODEL;
+                    void** d = NULL_POINTER_MEMORY_MODEL;
+                    void** dc = NULL_POINTER_MEMORY_MODEL;
+                    void** ds = NULL_POINTER_MEMORY_MODEL;
                     // The graphical part position name, abstraction, model, details.
-                    void** pn = NULL_POINTER;
-                    void** pnc = NULL_POINTER;
-                    void** pns = NULL_POINTER;
-                    void** pa = NULL_POINTER;
-                    void** pac = NULL_POINTER;
-                    void** pas = NULL_POINTER;
-                    void** pm = NULL_POINTER;
-                    void** pmc = NULL_POINTER;
-                    void** pms = NULL_POINTER;
-                    void** pd = NULL_POINTER;
-                    void** pdc = NULL_POINTER;
-                    void** pds = NULL_POINTER;
+                    void** pn = NULL_POINTER_MEMORY_MODEL;
+                    void** pnc = NULL_POINTER_MEMORY_MODEL;
+                    void** pns = NULL_POINTER_MEMORY_MODEL;
+                    void** pa = NULL_POINTER_MEMORY_MODEL;
+                    void** pac = NULL_POINTER_MEMORY_MODEL;
+                    void** pas = NULL_POINTER_MEMORY_MODEL;
+                    void** pm = NULL_POINTER_MEMORY_MODEL;
+                    void** pmc = NULL_POINTER_MEMORY_MODEL;
+                    void** pms = NULL_POINTER_MEMORY_MODEL;
+                    void** pd = NULL_POINTER_MEMORY_MODEL;
+                    void** pdc = NULL_POINTER_MEMORY_MODEL;
+                    void** pds = NULL_POINTER_MEMORY_MODEL;
                     // The graphical part size name, abstraction, model, details.
-                    void** sn = NULL_POINTER;
-                    void** snc = NULL_POINTER;
-                    void** sns = NULL_POINTER;
-                    void** sa = NULL_POINTER;
-                    void** sac = NULL_POINTER;
-                    void** sas = NULL_POINTER;
-                    void** sm = NULL_POINTER;
-                    void** smc = NULL_POINTER;
-                    void** sms = NULL_POINTER;
-                    void** sd = NULL_POINTER;
-                    void** sdc = NULL_POINTER;
-                    void** sds = NULL_POINTER;
+                    void** sn = NULL_POINTER_MEMORY_MODEL;
+                    void** snc = NULL_POINTER_MEMORY_MODEL;
+                    void** sns = NULL_POINTER_MEMORY_MODEL;
+                    void** sa = NULL_POINTER_MEMORY_MODEL;
+                    void** sac = NULL_POINTER_MEMORY_MODEL;
+                    void** sas = NULL_POINTER_MEMORY_MODEL;
+                    void** sm = NULL_POINTER_MEMORY_MODEL;
+                    void** smc = NULL_POINTER_MEMORY_MODEL;
+                    void** sms = NULL_POINTER_MEMORY_MODEL;
+                    void** sd = NULL_POINTER_MEMORY_MODEL;
+                    void** sdc = NULL_POINTER_MEMORY_MODEL;
+                    void** sds = NULL_POINTER_MEMORY_MODEL;
 
                     // The graphical part position coordinates.
-                    int** pmx = (int**) NULL_POINTER;
-                    int** pmy = (int**) NULL_POINTER;
-                    int** pmz = (int**) NULL_POINTER;
+                    int** pmx = (int**) NULL_POINTER_MEMORY_MODEL;
+                    int** pmy = (int**) NULL_POINTER_MEMORY_MODEL;
+                    int** pmz = (int**) NULL_POINTER_MEMORY_MODEL;
                     // The graphical part size coordinates.
-                    int** smx = (int**) NULL_POINTER;
-                    int** smy = (int**) NULL_POINTER;
-                    int** smz = (int**) NULL_POINTER;
+                    int** smx = (int**) NULL_POINTER_MEMORY_MODEL;
+                    int** smy = (int**) NULL_POINTER_MEMORY_MODEL;
+                    int** smz = (int**) NULL_POINTER_MEMORY_MODEL;
 
                     // The new mouse coordinates.
                     int nx = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -272,7 +272,7 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                     // The comparison result.
                     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    while (*NUMBER_1_INTEGER) {
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         if (j >= *wmc) {
 
@@ -304,13 +304,13 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                             p19, p20);
 
                         // Determine graphical part position coordinates.
-                        get_element(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        get_element(*pm, (void*) NUMBER_1_INTEGER, (void*) &pmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        get_element(*pm, (void*) NUMBER_2_INTEGER, (void*) &pmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
                         // Determine source part size coordinates.
-                        get_element(*sm, (void*) NUMBER_0_INTEGER, (void*) &smx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        get_element(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-                        get_element(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+                        get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
                         if ((*mx >= **pmx) && (*my >= **pmy) && (*mz >= **pmz)
                             && (*mx < (**pmx + **smx)) && (*my < (**pmy + **smy)) && (*mz < (**pmz + **smz))) {
@@ -337,53 +337,53 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                         }
 
                         // Reset graphical part name, abstraction, model, details.
-                        n = NULL_POINTER;
-                        nc = NULL_POINTER;
-                        ns = NULL_POINTER;
-                        a = NULL_POINTER;
-                        ac = NULL_POINTER;
-                        as = NULL_POINTER;
-                        m = NULL_POINTER;
-                        mc = NULL_POINTER;
-                        ms = NULL_POINTER;
-                        d = NULL_POINTER;
-                        dc = NULL_POINTER;
-                        ds = NULL_POINTER;
+                        n = NULL_POINTER_MEMORY_MODEL;
+                        nc = NULL_POINTER_MEMORY_MODEL;
+                        ns = NULL_POINTER_MEMORY_MODEL;
+                        a = NULL_POINTER_MEMORY_MODEL;
+                        ac = NULL_POINTER_MEMORY_MODEL;
+                        as = NULL_POINTER_MEMORY_MODEL;
+                        m = NULL_POINTER_MEMORY_MODEL;
+                        mc = NULL_POINTER_MEMORY_MODEL;
+                        ms = NULL_POINTER_MEMORY_MODEL;
+                        d = NULL_POINTER_MEMORY_MODEL;
+                        dc = NULL_POINTER_MEMORY_MODEL;
+                        ds = NULL_POINTER_MEMORY_MODEL;
                         // Reset graphical part position name, abstraction, model, details.
-                        pn = NULL_POINTER;
-                        pnc = NULL_POINTER;
-                        pns = NULL_POINTER;
-                        pa = NULL_POINTER;
-                        pac = NULL_POINTER;
-                        pas = NULL_POINTER;
-                        pm = NULL_POINTER;
-                        pmc = NULL_POINTER;
-                        pms = NULL_POINTER;
-                        pd = NULL_POINTER;
-                        pdc = NULL_POINTER;
-                        pds = NULL_POINTER;
+                        pn = NULL_POINTER_MEMORY_MODEL;
+                        pnc = NULL_POINTER_MEMORY_MODEL;
+                        pns = NULL_POINTER_MEMORY_MODEL;
+                        pa = NULL_POINTER_MEMORY_MODEL;
+                        pac = NULL_POINTER_MEMORY_MODEL;
+                        pas = NULL_POINTER_MEMORY_MODEL;
+                        pm = NULL_POINTER_MEMORY_MODEL;
+                        pmc = NULL_POINTER_MEMORY_MODEL;
+                        pms = NULL_POINTER_MEMORY_MODEL;
+                        pd = NULL_POINTER_MEMORY_MODEL;
+                        pdc = NULL_POINTER_MEMORY_MODEL;
+                        pds = NULL_POINTER_MEMORY_MODEL;
                         // Reset graphical part size name, abstraction, model, details.
-                        sn = NULL_POINTER;
-                        snc = NULL_POINTER;
-                        sns = NULL_POINTER;
-                        sa = NULL_POINTER;
-                        sac = NULL_POINTER;
-                        sas = NULL_POINTER;
-                        sm = NULL_POINTER;
-                        smc = NULL_POINTER;
-                        sms = NULL_POINTER;
-                        sd = NULL_POINTER;
-                        sdc = NULL_POINTER;
-                        sds = NULL_POINTER;
+                        sn = NULL_POINTER_MEMORY_MODEL;
+                        snc = NULL_POINTER_MEMORY_MODEL;
+                        sns = NULL_POINTER_MEMORY_MODEL;
+                        sa = NULL_POINTER_MEMORY_MODEL;
+                        sac = NULL_POINTER_MEMORY_MODEL;
+                        sas = NULL_POINTER_MEMORY_MODEL;
+                        sm = NULL_POINTER_MEMORY_MODEL;
+                        smc = NULL_POINTER_MEMORY_MODEL;
+                        sms = NULL_POINTER_MEMORY_MODEL;
+                        sd = NULL_POINTER_MEMORY_MODEL;
+                        sdc = NULL_POINTER_MEMORY_MODEL;
+                        sds = NULL_POINTER_MEMORY_MODEL;
 
                         // Reset graphical part position coordinates.
-                        pmx = (int**) NULL_POINTER;
-                        pmy = (int**) NULL_POINTER;
-                        pmz = (int**) NULL_POINTER;
+                        pmx = (int**) NULL_POINTER_MEMORY_MODEL;
+                        pmy = (int**) NULL_POINTER_MEMORY_MODEL;
+                        pmz = (int**) NULL_POINTER_MEMORY_MODEL;
                         // Reset graphical part size coordinates.
-                        smx = (int**) NULL_POINTER;
-                        smy = (int**) NULL_POINTER;
-                        smz = (int**) NULL_POINTER;
+                        smx = (int**) NULL_POINTER_MEMORY_MODEL;
+                        smy = (int**) NULL_POINTER_MEMORY_MODEL;
+                        smz = (int**) NULL_POINTER_MEMORY_MODEL;
 
                         // Reset new mouse coordinates.
                         nx = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -430,32 +430,32 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
 void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // The knowledge memory.
-    void** k = NULL_POINTER;
-    void** kc = NULL_POINTER;
-    void** ks = NULL_POINTER;
+    void** k = NULL_POINTER_MEMORY_MODEL;
+    void** kc = NULL_POINTER_MEMORY_MODEL;
+    void** ks = NULL_POINTER_MEMORY_MODEL;
     // The signal memory.
-    void** s = NULL_POINTER;
-    void** sc = NULL_POINTER;
-    void** ss = NULL_POINTER;
+    void** s = NULL_POINTER_MEMORY_MODEL;
+    void** sc = NULL_POINTER_MEMORY_MODEL;
+    void** ss = NULL_POINTER_MEMORY_MODEL;
     // The signal memory mutex.
-    pthread_mutex_t** smt = (pthread_mutex_t**) NULL_POINTER;
+    pthread_mutex_t** smt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
     // The x window system mutex.
-    pthread_mutex_t** xmt = (pthread_mutex_t**) NULL_POINTER;
+    pthread_mutex_t** xmt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
     // The signal memory interrupt request flag.
-    sig_atomic_t** sirq = (sig_atomic_t**) NULL_POINTER;
+    sig_atomic_t** sirq = (sig_atomic_t**) NULL_POINTER_MEMORY_MODEL;
     // The user interface root.
-    void** r = NULL_POINTER;
-    void** rc = NULL_POINTER;
-    void** rs = NULL_POINTER;
+    void** r = NULL_POINTER_MEMORY_MODEL;
+    void** rc = NULL_POINTER_MEMORY_MODEL;
+    void** rs = NULL_POINTER_MEMORY_MODEL;
     // The user interface commands.
-    void** c = NULL_POINTER;
-    void** cc = NULL_POINTER;
-    void** cs = NULL_POINTER;
+    void** c = NULL_POINTER_MEMORY_MODEL;
+    void** cc = NULL_POINTER_MEMORY_MODEL;
+    void** cs = NULL_POINTER_MEMORY_MODEL;
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).
-    struct _XDisplay** d = (struct _XDisplay**) NULL_POINTER;
+    struct _XDisplay** d = (struct _XDisplay**) NULL_POINTER_MEMORY_MODEL;
     // The window.
-    int** w = (int**) NULL_POINTER;
+    int** w = (int**) NULL_POINTER_MEMORY_MODEL;
 
     // Get knowledge memory internal.
     get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, (void*) &k, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -463,7 +463,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     get_element(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL, (void*) &ks, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get signal memory internal.
     get_element(p0, (void*) SIGNAL_MEMORY_INTERNAL, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    get_element(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    get_element(p0, (void*) SIGNAL_MEMORY_MEMORY_MODEL_COUNT_INTERNAL, (void*) &sc, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     get_element(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, (void*) &ss, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     // Get signal memory mutex.
     get_element(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &smt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -484,39 +484,39 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     get_element(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // The command name, abstraction, model, details.
-    void** cn = NULL_POINTER;
-    void** cnc = NULL_POINTER;
-    void** cns = NULL_POINTER;
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cn = NULL_POINTER_MEMORY_MODEL;
+    void** cnc = NULL_POINTER_MEMORY_MODEL;
+    void** cns = NULL_POINTER_MEMORY_MODEL;
+    void** ca = NULL_POINTER_MEMORY_MODEL;
+    void** cac = NULL_POINTER_MEMORY_MODEL;
+    void** cas = NULL_POINTER_MEMORY_MODEL;
+    void** cm = NULL_POINTER_MEMORY_MODEL;
+    void** cmc = NULL_POINTER_MEMORY_MODEL;
+    void** cms = NULL_POINTER_MEMORY_MODEL;
+    void** cd = NULL_POINTER_MEMORY_MODEL;
+    void** cdc = NULL_POINTER_MEMORY_MODEL;
+    void** cds = NULL_POINTER_MEMORY_MODEL;
 
     //?? TODO: The temporary graphical part name, abstraction, model, details.
-    void** tmpn = NULL_POINTER;
-    void** tmpnc = NULL_POINTER;
-    void** tmpns = NULL_POINTER;
-    void** tmpa = NULL_POINTER;
-    void** tmpac = NULL_POINTER;
-    void** tmpas = NULL_POINTER;
-    void** tmpm = NULL_POINTER;
-    void** tmpmc = NULL_POINTER;
-    void** tmpms = NULL_POINTER;
-    void** tmpd = NULL_POINTER;
-    void** tmpdc = NULL_POINTER;
-    void** tmpds = NULL_POINTER;
+    void** tmpn = NULL_POINTER_MEMORY_MODEL;
+    void** tmpnc = NULL_POINTER_MEMORY_MODEL;
+    void** tmpns = NULL_POINTER_MEMORY_MODEL;
+    void** tmpa = NULL_POINTER_MEMORY_MODEL;
+    void** tmpac = NULL_POINTER_MEMORY_MODEL;
+    void** tmpas = NULL_POINTER_MEMORY_MODEL;
+    void** tmpm = NULL_POINTER_MEMORY_MODEL;
+    void** tmpmc = NULL_POINTER_MEMORY_MODEL;
+    void** tmpms = NULL_POINTER_MEMORY_MODEL;
+    void** tmpd = NULL_POINTER_MEMORY_MODEL;
+    void** tmpdc = NULL_POINTER_MEMORY_MODEL;
+    void** tmpds = NULL_POINTER_MEMORY_MODEL;
 
     // The event.
     XEvent e;
     // The event type.
-    int t = *NUMBER_MINUS_1_INTEGER;
+    int t = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // The signal identification.
-    void** id = NULL_POINTER;
+    void** id = NULL_POINTER_MEMORY_MODEL;
 
     pthread_mutex_lock(*xmt);
 
@@ -562,7 +562,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // Set interrupt request flag, in order to notify the signal checker
             // that a new signal has been placed in the signal memory.
-            **sirq = *NUMBER_1_INTEGER;
+            **sirq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
             // Unlock signal memory mutex.
             pthread_mutex_unlock(*smt);
@@ -701,7 +701,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         // Set interrupt request flag, in order to notify the signal checker
         // that a new signal has been placed in the signal memory.
-        **sirq = *NUMBER_1_INTEGER;
+        **sirq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
         // Unlock signal memory mutex.
         pthread_mutex_unlock(*smt);
@@ -758,7 +758,7 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to x window system display.");
 
         // The window.
-        int** w = (int**) NULL_POINTER;
+        int** w = (int**) NULL_POINTER_MEMORY_MODEL;
 
         // Get x window system internals.
         get_element(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);

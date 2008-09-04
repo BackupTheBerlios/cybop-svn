@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_converter.c,v $ $Revision: 1.24 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: compound_converter.c,v $ $Revision: 1.25 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,11 +31,11 @@
 #include <libxml/tree.h>
 #include <string.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/cybol/cybol_channel_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/channel/cybol_channel.c"
 #include "../../globals/constants/cybol/cybol_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
@@ -138,9 +138,9 @@ void decode_compound_comment_tag(void* p0, void* p1) {
         // The remaining bytes count.
         int bc = *sc;
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-            if ((l == *NUMBER_1_INTEGER) || (bc <= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+            if ((l == *NUMBER_1_INTEGER_MEMORY_MODEL) || (bc <= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                 break;
             }
@@ -149,7 +149,7 @@ void decode_compound_comment_tag(void* p0, void* p1) {
 
                 if (bc >= *END_COMMENT_TAG_COUNT) {
 
-                    compare_array_elements((void*) b, (void*) END_COMMENT_TAG, (void*) END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_array_elements((void*) b, (void*) END_COMMENT_TAG, (void*) END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -159,7 +159,7 @@ void decode_compound_comment_tag(void* p0, void* p1) {
                         bc = bc - *END_COMMENT_TAG_COUNT;
 
                         // Set leave flag.
-                        l = *NUMBER_1_INTEGER;
+                        l = *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
                 }
             }
@@ -168,7 +168,7 @@ void decode_compound_comment_tag(void* p0, void* p1) {
 
                 if (bc >= *SHORT_END_COMMENT_TAG_COUNT) {
 
-                    compare_array_elements((void*) b, (void*) SHORT_END_COMMENT_TAG, (void*) SHORT_END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_array_elements((void*) b, (void*) SHORT_END_COMMENT_TAG, (void*) SHORT_END_COMMENT_TAG_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -178,7 +178,7 @@ void decode_compound_comment_tag(void* p0, void* p1) {
                         bc = bc - *SHORT_END_COMMENT_TAG_COUNT;
 
                         // Set leave flag.
-                        l = *NUMBER_1_INTEGER;
+                        l = *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
                 }
             }
@@ -186,7 +186,7 @@ void decode_compound_comment_tag(void* p0, void* p1) {
             // If this block is reached, then no known term was found before.
             // The current byte pointer will just be incremented by one so
             // that new characters are read and compared in the next loop cycle.
-            if (r != *NUMBER_1_INTEGER) {
+            if (r != *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 // Increment current byte within persistent model.
                 b++;
@@ -230,9 +230,9 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // The remaining bytes count.
         int bc = *sc;
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-            if ((l == *NUMBER_1_INTEGER) || (bc <= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+            if ((l == *NUMBER_1_INTEGER_MEMORY_MODEL) || (bc <= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                 break;
             }
@@ -241,7 +241,7 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (bc >= *EMPTY_TAG_END_COUNT) {
 
-                    compare_array_elements((void*) b, (void*) EMPTY_TAG_END, (void*) EMPTY_TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_array_elements((void*) b, (void*) EMPTY_TAG_END, (void*) EMPTY_TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -251,7 +251,7 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         bc = bc - *EMPTY_TAG_END_COUNT;
 
                         // Set leave flag.
-                        l = *NUMBER_1_INTEGER;
+                        l = *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
                 }
             }
@@ -260,7 +260,7 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (bc >= *TAG_END_COUNT) {
 
-                    compare_array_elements((void*) b, (void*) TAG_END, (void*) TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                    compare_array_elements((void*) b, (void*) TAG_END, (void*) TAG_END_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -330,7 +330,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
 
     fwprintf(stderr, L"TEST decode compound cybol property 0: %i\n", r);
 
-                compare_arrays(p13, p14, (void*) NAME_ATTRIBUTE_AS_CHAR, (void*) NAME_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p13, p14, (void*) NAME_ATTRIBUTE_AS_CHAR, (void*) NAME_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST decode compound cybol property 1: %i\n", r);
 
@@ -358,7 +358,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p13, p14, (void*) CHANNEL_ATTRIBUTE_AS_CHAR, (void*) CHANNEL_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p13, p14, (void*) CHANNEL_ATTRIBUTE_AS_CHAR, (void*) CHANNEL_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -377,7 +377,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p13, p14, (void*) ABSTRACTION_ATTRIBUTE_AS_CHAR, (void*) ABSTRACTION_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p13, p14, (void*) ABSTRACTION_ATTRIBUTE_AS_CHAR, (void*) ABSTRACTION_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -396,7 +396,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p13, p14, (void*) MODEL_ATTRIBUTE_AS_CHAR, (void*) MODEL_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(p13, p14, (void*) MODEL_ATTRIBUTE_AS_CHAR, (void*) MODEL_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -457,7 +457,7 @@ void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, vo
             void* pn = *NULL_POINTER_MEMORY_MODEL;
             int pnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER) {
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (p == *NULL_POINTER_MEMORY_MODEL) {
 
@@ -554,14 +554,14 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             //
 
             // Allocate destination name.
-            allocate((void*) &dnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            allocate((void*) &dnc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *dnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            allocate((void*) &dns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            allocate((void*) &dns, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *dns = *NUMBER_0_INTEGER_MEMORY_MODEL;
             allocate((void*) &dn, (void*) dns, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Decode destination name.
-            decode((void*) &dn, (void*) dnc, (void*) dns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sn, (void*) &snc, *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode((void*) &dn, (void*) dnc, (void*) dns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sn, (void*) &snc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"TEST decode compound cybol node dn: %ls\n", (wchar_t*) dn);
     fwprintf(stderr, L"TEST decode compound cybol node dnc: %i\n", *dnc);
@@ -578,14 +578,14 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             //
 
             // Allocate destination abstraction.
-            allocate((void*) &dac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            allocate((void*) &dac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *dac = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            allocate((void*) &das, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            allocate((void*) &das, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *das = *NUMBER_0_INTEGER_MEMORY_MODEL;
             allocate((void*) &da, (void*) das, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
             // Decode destination abstraction.
-            decode((void*) &da, (void*) dac, (void*) das, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac, *NULL_POINTER, *NULL_POINTER, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+            decode((void*) &da, (void*) dac, (void*) das, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sa, (void*) &sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"TEST decode compound cybol node da: %ls\n", (wchar_t*) da);
     fwprintf(stderr, L"TEST decode compound cybol node dac: %i\n", *dac);
@@ -608,16 +608,16 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             if ((w1 != *NUMBER_0_INTEGER_MEMORY_MODEL) && (w2 != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                 // Allocate destination model.
-                allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                allocate((void*) &dmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 *dmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                allocate((void*) &dms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 *dms = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 allocate((void*) &dm, (void*) dms, sa, (void*) &sac);
 
                 // CAUTION! If a cybol file is to be read, then the libxml2 parser is used.
                 // This is just a workaround, until cyboi posesses its own cybol parsing functions.
                 // This source code block can then be deleted completely.
-                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sm, (void*) &smc, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac);
+                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sm, (void*) &smc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sa, (void*) &sac);
 
             } else {
 
@@ -628,7 +628,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 // Decode source abstraction into runtime abstraction, since a decoded
                 // message does not always have the same runtime abstraction.
                 // For example, an "xdt" file is converted into a compound.
-                decode_abstraction((void*) &ra, (void*) &rac, *NULL_POINTER, sa, (void*) &sac);
+                decode_abstraction((void*) &ra, (void*) &rac, *NULL_POINTER_MEMORY_MODEL, sa, (void*) &sac);
 
     fwprintf(stderr, L"TEST decode compound cybol node ra: %ls\n", (wchar_t*) ra);
     fwprintf(stderr, L"TEST decode compound cybol node rac: %i\n", rac);
@@ -642,15 +642,15 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // Read read model as persistent byte stream over channel.
-                read_data((void*) &rm, (void*) &rmc, (void*) &rms, sm, (void*) &smc, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, sc, (void*) &scc);
+                read_data((void*) &rm, (void*) &rmc, (void*) &rms, sm, (void*) &smc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sc, (void*) &scc);
 
     fwprintf(stderr, L"TEST decode compound cybol node rm: %ls\n", (wchar_t*) rm);
     fwprintf(stderr, L"TEST decode compound cybol node rmc: %i\n", rmc);
 
                 // Allocate destination model.
-                allocate((void*) &dmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                allocate((void*) &dmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 *dmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                allocate((void*) &dms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                allocate((void*) &dms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
                 *dms = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 allocate((void*) &dm, (void*) dms, ra, (void*) &rac);
 
@@ -658,7 +658,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 //
                 // CAUTION! Use the original source abstraction and NOT the mapped runtime memory abstraction here!
                 // This is necessary so that the correct parsing function is called.
-                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, rm, (void*) &rmc, *NULL_POINTER, *NULL_POINTER, sa, (void*) &sac);
+                decode((void*) &dm, (void*) dmc, (void*) dms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sa, (void*) &sac);
 
                 // Deallocate read model.
                 deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -676,9 +676,9 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             // CAUTION! Do ALWAYS allocate the details, even if it has no entries!
             // This is because at runtime, properties may be assigned to the details.
             // So, it MUST NOT be null.
-            allocate((void*) &ddc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            allocate((void*) &ddc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *ddc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            allocate((void*) &dds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            allocate((void*) &dds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             *dds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             allocate((void*) &dd, (void*) dds, (void*) COMPOUND_ABSTRACTION, (void*) COMPOUND_ABSTRACTION_COUNT);
 
@@ -741,7 +741,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
         // The child count.
         int cc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (c == *NULL_POINTER_MEMORY_MODEL) {
 
@@ -807,7 +807,7 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
                     int tmps = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Create temporary null-terminated file name.
-                    allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+                    allocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Encode wide character name into multibyte character array.
                     encode_utf_8_unicode_character_vector((void*) &tmp, (void*) &tmpc, (void*) &tmps, p3, p4);
@@ -815,14 +815,14 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
                     if (tmps <= tmpc) {
 
                         // Increase character array size to have place for the termination character.
-                        tmps = tmpc + *NUMBER_1_INTEGER;
+                        tmps = tmpc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                         // Reallocate terminated file name as multibyte character array.
-                        reallocate_array((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) CHARACTER_ARRAY);
+                        reallocate_array((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     }
 
                     // Add null termination character to terminated file name.
-                    set_array_elements(tmp, (void*) &tmpc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(tmp, (void*) &tmpc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST decode tmp: %s\n", (char*) tmp);
     fwprintf(stderr, L"TEST decode tmpc: %i\n", tmpc);
@@ -837,7 +837,7 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
                     xmlDoc* doc = (void*) xmlParseFile((char*) tmp);
 
                     // Destroy temporary null-terminated file name.
-                    deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY);
+                    deallocate_array((void*) &tmp, (void*) &tmps, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Free global variables that may have been allocated by the parser.
                     xmlCleanupParser();
@@ -901,14 +901,14 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 /*??
     // The comparison result.
     int* r = (int*) *NULL_POINTER_MEMORY_MODEL;
-    allocate((void*) &r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
     *r = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The current byte within the stream.
     void* b = *s;
     // The remaining bytes count.
     int bc = *sc;
 
-    while (*NUMBER_1_INTEGER) {
+    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
         if (bc <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

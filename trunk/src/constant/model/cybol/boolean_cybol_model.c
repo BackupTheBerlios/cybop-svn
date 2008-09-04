@@ -19,24 +19,24 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: boolean_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: boolean_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_CYBOL_MODEL_SOURCE
 #define BOOLEAN_CYBOL_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The false boolean cybol model. */
 static wchar_t FALSE_BOOLEAN_CYBOL_MODEL_ARRAY[] = {L'f', L'a', L'l', L's', L'e'};
 static wchar_t* FALSE_BOOLEAN_CYBOL_MODEL = FALSE_BOOLEAN_CYBOL_MODEL_ARRAY;
-static int* FALSE_BOOLEAN_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* FALSE_BOOLEAN_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The true boolean cybol model. */
 static wchar_t TRUE_BOOLEAN_CYBOL_MODEL_ARRAY[] = {L't', L'r', L'u', L'e'};
 static wchar_t* TRUE_BOOLEAN_CYBOL_MODEL = TRUE_BOOLEAN_CYBOL_MODEL_ARRAY;
-static int* TRUE_BOOLEAN_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* TRUE_BOOLEAN_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* BOOLEAN_CYBOL_MODEL_SOURCE */
 #endif

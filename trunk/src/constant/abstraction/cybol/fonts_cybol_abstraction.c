@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: fonts_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: fonts_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FONTS_CYBOL_ABSTRACTION_SOURCE
 #define FONTS_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // This MIME type was taken from/ inspired by the KDE desktop.
@@ -38,7 +38,7 @@
  */
 static wchar_t PACKAGE_FONTS_CYBOL_ABSTRACTION_ARRAY[] = {L'f', L'o', L'n', L't', L's', L'/', L'p', L'a', L'c', L'k', L'a', L'g', L'e'};
 static wchar_t* PACKAGE_FONTS_CYBOL_ABSTRACTION = PACKAGE_FONTS_CYBOL_ABSTRACTION_ARRAY;
-static int* PACKAGE_FONTS_CYBOL_ABSTRACTION_COUNT = NUMBER_13_INTEGER_ARRAY;
+static int* PACKAGE_FONTS_CYBOL_ABSTRACTION_COUNT = NUMBER_13_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* FONTS_CYBOL_ABSTRACTION_SOURCE */
 #endif

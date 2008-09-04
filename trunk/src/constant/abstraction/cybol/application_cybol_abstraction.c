@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: application_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: application_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef APPLICATION_CYBOL_ABSTRACTION_SOURCE
 #define APPLICATION_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -64,7 +64,7 @@ application/ogg: Ogg, a multimedia bitstream container format; Defined in RFC 35
  */
 static wchar_t PDF_APPLICATION_CYBOL_ABSTRACTION_ARRAY[] = {L'a', L'p', L'p', L'l', L'i', L'c', L'a', L't', L'i', L'o', L'n', L'/', L'p', L'd', L'f'};
 static wchar_t* PDF_APPLICATION_CYBOL_ABSTRACTION = PDF_APPLICATION_CYBOL_ABSTRACTION_ARRAY;
-static int* PDF_APPLICATION_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
+static int* PDF_APPLICATION_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The application/zip cybol abstraction.
@@ -75,7 +75,7 @@ static int* PDF_APPLICATION_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
  */
 static wchar_t ZIP_APPLICATION_CYBOL_ABSTRACTION_ARRAY[] = {L'a', L'p', L'p', L'l', L'i', L'c', L'a', L't', L'i', L'o', L'n', L'/', L'z', L'i', L'p'};
 static wchar_t* ZIP_APPLICATION_CYBOL_ABSTRACTION = ZIP_APPLICATION_CYBOL_ABSTRACTION_ARRAY;
-static int* ZIP_APPLICATION_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
+static int* ZIP_APPLICATION_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*??
 application/xhtml+xml: XHTML; Defined by RFC 3236

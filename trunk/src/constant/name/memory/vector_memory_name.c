@@ -19,23 +19,23 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: vector_memory_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: vector_memory_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VECTOR_MEMORY_NAME_SOURCE
 #define VECTOR_MEMORY_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The dimension 0 vector memory name. In a (spatial) vector, this is the x coordinate. */
-static int* DIMENSION_0_VECTOR_MEMORY_NAME = NUMBER_0_INTEGER_ARRAY;
+static int* DIMENSION_0_VECTOR_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The dimension 1 vector memory name. In a (spatial) vector, this is the y coordinate. */
-static int* DIMENSION_1_VECTOR_MEMORY_NAME = NUMBER_1_INTEGER_ARRAY;
+static int* DIMENSION_1_VECTOR_MEMORY_NAME = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The dimension 2 vector memory name. In a (spatial) vector, this is the z coordinate. */
-static int* DIMENSION_2_VECTOR_MEMORY_NAME = NUMBER_2_INTEGER_ARRAY;
+static int* DIMENSION_2_VECTOR_MEMORY_NAME = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* VECTOR_MEMORY_NAME_SOURCE */
 #endif

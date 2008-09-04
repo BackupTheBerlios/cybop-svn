@@ -19,15 +19,15 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: double_vector_accessor.c,v $ $Revision: 1.11 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: double_vector_accessor.c,v $ $Revision: 1.12 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DOUBLE_VECTOR_ACCESSOR_SOURCE
 #define DOUBLE_VECTOR_ACCESSOR_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
@@ -44,7 +44,7 @@ void set_double_vector_element(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set double vector element.");
 
-    set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) DOUBLE_ARRAY);
+    set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -58,7 +58,7 @@ void remove_double_vector_element(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Remove double vector element.");
 
-    remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER, (void*) DOUBLE_ARRAY);
+    remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -72,7 +72,7 @@ void get_double_vector_element(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get double vector element.");
 
-    get_array_elements(p0, p1, p2, (void*) DOUBLE_ARRAY);
+    get_array_elements(p0, p1, p2, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /* DOUBLE_VECTOR_ACCESSOR_SOURCE */

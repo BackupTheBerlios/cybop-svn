@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: archive_run_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: archive_run_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ARCHIVE_RUN_OPERATION_CYBOL_NAME_SOURCE
 #define ARCHIVE_RUN_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The create archive run operation cybol name. */
 static wchar_t CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L'c', L'r', L'e', L'a', L't', L'e'};
 static wchar_t* CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME = CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_ARRAY;
-static int* CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The update archive run operation cybol name. */
 static wchar_t UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L'u', L'p', L'd', L'a', L't', L'e'};
 static wchar_t* UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME = UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_ARRAY;
-static int* UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The bzip2 archive run operation cybol name. */
 static wchar_t BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L'b', L'z', L'i', L'p', L'2'};
 static wchar_t* BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME = BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_ARRAY;
-static int* BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* ARCHIVE_RUN_OPERATION_CYBOL_NAME_SOURCE */
 #endif

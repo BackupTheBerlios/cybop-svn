@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: archiving_runner.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: archiving_runner.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,17 +29,17 @@
 #include <unistd.h>
 #include "../../applicator/run/run_execute.c"
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../globals/constants/shell_command/unix_shell_command_constants.c"
 #include "../../globals/constants/system/system_executable_constants.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/reallocation_factor_variables.c"
+#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
 #include "../../memoriser/allocator/pointer_vector_allocator.c"
@@ -57,44 +57,44 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run archive command.");
 
     // The create name, abstraction, model, details.
-    void** createn = NULL_POINTER;
-    void** createnc = NULL_POINTER;
-    void** createns = NULL_POINTER;
-    void** createa = NULL_POINTER;
-    void** createac = NULL_POINTER;
-    void** createas = NULL_POINTER;
-    int** createm = (int**) NULL_POINTER;
-    void** createmc = NULL_POINTER;
-    void** createms = NULL_POINTER;
-    void** created = NULL_POINTER;
-    void** createdc = NULL_POINTER;
-    void** createds = NULL_POINTER;
+    void** createn = NULL_POINTER_MEMORY_MODEL;
+    void** createnc = NULL_POINTER_MEMORY_MODEL;
+    void** createns = NULL_POINTER_MEMORY_MODEL;
+    void** createa = NULL_POINTER_MEMORY_MODEL;
+    void** createac = NULL_POINTER_MEMORY_MODEL;
+    void** createas = NULL_POINTER_MEMORY_MODEL;
+    int** createm = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** createmc = NULL_POINTER_MEMORY_MODEL;
+    void** createms = NULL_POINTER_MEMORY_MODEL;
+    void** created = NULL_POINTER_MEMORY_MODEL;
+    void** createdc = NULL_POINTER_MEMORY_MODEL;
+    void** createds = NULL_POINTER_MEMORY_MODEL;
     // The update name, abstraction, model, details.
-    void** updaten = NULL_POINTER;
-    void** updatenc = NULL_POINTER;
-    void** updatens = NULL_POINTER;
-    void** updatea = NULL_POINTER;
-    void** updateac = NULL_POINTER;
-    void** updateas = NULL_POINTER;
-    int** updatem = (int**) NULL_POINTER;
-    void** updatemc = NULL_POINTER;
-    void** updatems = NULL_POINTER;
-    void** updated = NULL_POINTER;
-    void** updatedc = NULL_POINTER;
-    void** updateds = NULL_POINTER;
+    void** updaten = NULL_POINTER_MEMORY_MODEL;
+    void** updatenc = NULL_POINTER_MEMORY_MODEL;
+    void** updatens = NULL_POINTER_MEMORY_MODEL;
+    void** updatea = NULL_POINTER_MEMORY_MODEL;
+    void** updateac = NULL_POINTER_MEMORY_MODEL;
+    void** updateas = NULL_POINTER_MEMORY_MODEL;
+    int** updatem = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** updatemc = NULL_POINTER_MEMORY_MODEL;
+    void** updatems = NULL_POINTER_MEMORY_MODEL;
+    void** updated = NULL_POINTER_MEMORY_MODEL;
+    void** updatedc = NULL_POINTER_MEMORY_MODEL;
+    void** updateds = NULL_POINTER_MEMORY_MODEL;
     // The bzip2 name, abstraction, model, details.
-    void** bzip2n = NULL_POINTER;
-    void** bzip2nc = NULL_POINTER;
-    void** bzip2ns = NULL_POINTER;
-    void** bzip2a = NULL_POINTER;
-    void** bzip2ac = NULL_POINTER;
-    void** bzip2as = NULL_POINTER;
-    int** bzip2m = (int**) NULL_POINTER;
-    void** bzip2mc = NULL_POINTER;
-    void** bzip2ms = NULL_POINTER;
-    void** bzip2d = NULL_POINTER;
-    void** bzip2dc = NULL_POINTER;
-    void** bzip2ds = NULL_POINTER;
+    void** bzip2n = NULL_POINTER_MEMORY_MODEL;
+    void** bzip2nc = NULL_POINTER_MEMORY_MODEL;
+    void** bzip2ns = NULL_POINTER_MEMORY_MODEL;
+    void** bzip2a = NULL_POINTER_MEMORY_MODEL;
+    void** bzip2ac = NULL_POINTER_MEMORY_MODEL;
+    void** bzip2as = NULL_POINTER_MEMORY_MODEL;
+    int** bzip2m = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** bzip2mc = NULL_POINTER_MEMORY_MODEL;
+    void** bzip2ms = NULL_POINTER_MEMORY_MODEL;
+    void** bzip2d = NULL_POINTER_MEMORY_MODEL;
+    void** bzip2dc = NULL_POINTER_MEMORY_MODEL;
+    void** bzip2ds = NULL_POINTER_MEMORY_MODEL;
 
     // Get create option.
     get_universal_compound_element_by_name(p0, p1,
@@ -145,7 +145,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*createm != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**createm == *NUMBER_1_INTEGER) {
+        if (**createm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
@@ -159,7 +159,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
@@ -172,7 +172,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*updatem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**updatem == *NUMBER_1_INTEGER) {
+        if (**updatem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
@@ -186,7 +186,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
@@ -199,7 +199,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*bzip2m != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**bzip2m == *NUMBER_1_INTEGER) {
+        if (**bzip2m == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
@@ -213,7 +213,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
@@ -235,7 +235,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble arguments by adding the null termination character.
-    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Execute arguments as process.
@@ -285,7 +285,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(shell, (void*) &shellc, (void*) SHELL_SYSTEM_EXECUTABLE, (void*) SHELL_SYSTEM_EXECUTABLE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     shellc = shellc + *SHELL_SYSTEM_EXECUTABLE_COUNT;
-    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     shellc = shellc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Increase arguments vector size for shell argument.
@@ -305,7 +305,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(character, (void*) &characterc, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     characterc = characterc + *SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT;
-    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     characterc = characterc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Increase arguments vector size for shell character argument.
@@ -335,7 +335,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*createm != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**createm == *NUMBER_1_INTEGER) {
+        if (**createm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -349,7 +349,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
@@ -362,7 +362,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*updatem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**updatem == *NUMBER_1_INTEGER) {
+        if (**updatem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -376,7 +376,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
@@ -389,7 +389,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     if (*bzip2m != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**bzip2m == *NUMBER_1_INTEGER) {
+        if (**bzip2m == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -403,7 +403,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
@@ -425,7 +425,7 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble command by adding the null termination character.
-    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     //

@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: uri_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: uri_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef URI_MIME_TYPE_CONSTANTS_SOURCE
 #define URI_MIME_TYPE_CONSTANTS_SOURCE
 
-#include "../../../globals/constants/integer/integer_constants.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // This MIME type was taken from/ inspired by the KDE desktop.
@@ -38,7 +38,7 @@
  */
 static wchar_t MMS_URI_CYBOL_ABSTRACTION_ARRAY[] = {L'u', L'r', L'i', L'/', L'm', L'm', L's'};
 static wchar_t* MMS_URI_CYBOL_ABSTRACTION = MMS_URI_CYBOL_ABSTRACTION_ARRAY;
-static int* MMS_URI_CYBOL_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* MMS_URI_CYBOL_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* URI_MIME_TYPE_CONSTANTS_SOURCE */
 #endif

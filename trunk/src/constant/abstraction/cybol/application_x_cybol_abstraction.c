@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: application_x_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: application_x_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef APPLICATION_X_CYBOL_ABSTRACTION_SOURCE
 #define APPLICATION_X_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -68,7 +68,7 @@ application/x-rar-compressed: RAR archive files
  */
 static wchar_t TAR_APPLICATION_X_CYBOL_ABSTRACTION_ARRAY[] = {L'a', L'p', L'p', L'l', L'i', L'c', L'a', L't', L'i', L'o', L'n', L'/', L'x', L'-', L't', L'a', L'r'};
 static wchar_t* TAR_APPLICATION_X_CYBOL_ABSTRACTION = TAR_APPLICATION_X_CYBOL_ABSTRACTION_ARRAY;
-static int* TAR_APPLICATION_X_CYBOL_ABSTRACTION_COUNT = NUMBER_17_INTEGER_ARRAY;
+static int* TAR_APPLICATION_X_CYBOL_ABSTRACTION_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* APPLICATION_X_CYBOL_ABSTRACTION_SOURCE */
 #endif

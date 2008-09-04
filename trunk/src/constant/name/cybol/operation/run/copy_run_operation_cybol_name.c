@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: copy_run_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: copy_run_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COPY_RUN_OPERATION_CYBOL_NAME_SOURCE
 #define COPY_RUN_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The recursive copy run operation cybol name. */
 static wchar_t RECURSIVE_COPY_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L'r', L'e', L'c', L'u', L'r', L's', L'i', L'v', L'e'};
 static wchar_t* RECURSIVE_COPY_RUN_OPERATION_CYBOL_NAME = RECURSIVE_COPY_RUN_OPERATION_CYBOL_NAME_ARRAY;
-static int* RECURSIVE_COPY_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* RECURSIVE_COPY_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The source copy run operation cybol name. */
 static wchar_t SOURCE_COPY_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L's', L'o', L'u', L'r', L'c', L'e'};
 static wchar_t* SOURCE_COPY_RUN_OPERATION_CYBOL_NAME = SOURCE_COPY_RUN_OPERATION_CYBOL_NAME_ARRAY;
-static int* SOURCE_COPY_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* SOURCE_COPY_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The destination copy run operation cybol name. */
 static wchar_t DESTINATION_COPY_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L'd', L'e', L's', L't', L'i', L'n', L'a', L't', L'i', L'o', L'n'};
 static wchar_t* DESTINATION_COPY_RUN_OPERATION_CYBOL_NAME = DESTINATION_COPY_RUN_OPERATION_CYBOL_NAME_ARRAY;
-static int* DESTINATION_COPY_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* DESTINATION_COPY_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COPY_RUN_OPERATION_CYBOL_NAME_SOURCE */
 #endif

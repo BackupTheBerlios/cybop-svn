@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: handler.c,v $ $Revision: 1.29 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: handler.c,v $ $Revision: 1.30 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,8 +28,8 @@
 
 #include "../controller/handler/compound_handler.c"
 #include "../controller/handler/operation_handler.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
@@ -68,31 +68,31 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Handle signal.");
 
     // The logic name, abstraction, model, details.
-    void** ln = NULL_POINTER;
-    void** lnc = NULL_POINTER;
-    void** lns = NULL_POINTER;
-    void** la = NULL_POINTER;
-    void** lac = NULL_POINTER;
-    void** las = NULL_POINTER;
-    void** lm = NULL_POINTER;
-    void** lmc = NULL_POINTER;
-    void** lms = NULL_POINTER;
-    void** ld = NULL_POINTER;
-    void** ldc = NULL_POINTER;
-    void** lds = NULL_POINTER;
+    void** ln = NULL_POINTER_MEMORY_MODEL;
+    void** lnc = NULL_POINTER_MEMORY_MODEL;
+    void** lns = NULL_POINTER_MEMORY_MODEL;
+    void** la = NULL_POINTER_MEMORY_MODEL;
+    void** lac = NULL_POINTER_MEMORY_MODEL;
+    void** las = NULL_POINTER_MEMORY_MODEL;
+    void** lm = NULL_POINTER_MEMORY_MODEL;
+    void** lmc = NULL_POINTER_MEMORY_MODEL;
+    void** lms = NULL_POINTER_MEMORY_MODEL;
+    void** ld = NULL_POINTER_MEMORY_MODEL;
+    void** ldc = NULL_POINTER_MEMORY_MODEL;
+    void** lds = NULL_POINTER_MEMORY_MODEL;
     // The encapsulated logic name, abstraction, model, details.
-    void** eln = NULL_POINTER;
-    void** elnc = NULL_POINTER;
-    void** elns = NULL_POINTER;
-    void** ela = NULL_POINTER;
-    void** elac = NULL_POINTER;
-    void** elas = NULL_POINTER;
-    void** elm = NULL_POINTER;
-    void** elmc = NULL_POINTER;
-    void** elms = NULL_POINTER;
-    void** eld = NULL_POINTER;
-    void** eldc = NULL_POINTER;
-    void** elds = NULL_POINTER;
+    void** eln = NULL_POINTER_MEMORY_MODEL;
+    void** elnc = NULL_POINTER_MEMORY_MODEL;
+    void** elns = NULL_POINTER_MEMORY_MODEL;
+    void** ela = NULL_POINTER_MEMORY_MODEL;
+    void** elac = NULL_POINTER_MEMORY_MODEL;
+    void** elas = NULL_POINTER_MEMORY_MODEL;
+    void** elm = NULL_POINTER_MEMORY_MODEL;
+    void** elmc = NULL_POINTER_MEMORY_MODEL;
+    void** elms = NULL_POINTER_MEMORY_MODEL;
+    void** eld = NULL_POINTER_MEMORY_MODEL;
+    void** eldc = NULL_POINTER_MEMORY_MODEL;
+    void** elds = NULL_POINTER_MEMORY_MODEL;
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -137,7 +137,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             //
             // Compare also with procedure "get_universal_compound_element_by_name"
             // in source file "memoriser/accessor/compound_accessor.c"!
-            get_compound_element_by_name(p1, p2, *NULL_POINTER, *NULL_POINTER,
+            get_compound_element_by_name(p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 p12, p13,
                 (void*) &eln, (void*) &elnc, (void*) &elns,
                 (void*) &ela, (void*) &elac, (void*) &elas,
@@ -146,7 +146,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
             // The knowledge root does not have a details container with meta
             // information, which is why a null pointer is handed over here twice.
-            get_compound_element_by_name(p1, p2, *NULL_POINTER, *NULL_POINTER,
+            get_compound_element_by_name(p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 *elm, *elmc,
                 (void*) &ln, (void*) &lnc, (void*) &lns,
                 (void*) &la, (void*) &lac, (void*) &las,
@@ -180,7 +180,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             //
             // Compare also with procedure "get_universal_compound_element_by_name"
             // in source file "memoriser/accessor/compound_accessor.c"!
-            get_compound_element_by_name(p1, p2, *NULL_POINTER, *NULL_POINTER,
+            get_compound_element_by_name(p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 p12, p13,
                 (void*) &ln, (void*) &lnc, (void*) &lns,
                 (void*) &la, (void*) &lac, (void*) &las,

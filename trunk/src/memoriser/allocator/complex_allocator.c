@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: complex_allocator.c,v $ $Revision: 1.13 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: complex_allocator.c,v $ $Revision: 1.14 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPLEX_ALLOCATOR_SOURCE
 #define COMPLEX_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
@@ -43,7 +43,7 @@ void allocate_complex(void* p0, void* p1) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate complex.");
 
     // Create complex.
-    allocate_array(p0, p1, (void*) DOUBLE_ARRAY);
+    allocate_array(p0, p1, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -57,7 +57,7 @@ void deallocate_complex(void* p0, void* p1) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate complex.");
 
     // Destroy complex.
-    deallocate_array(p0, p1, (void*) DOUBLE_ARRAY);
+    deallocate_array(p0, p1, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /* COMPLEX_ALLOCATOR_SOURCE */

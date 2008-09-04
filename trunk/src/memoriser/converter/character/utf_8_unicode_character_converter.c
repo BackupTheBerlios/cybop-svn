@@ -19,15 +19,15 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.5 $ $Date: 2008-09-03 22:04:03 $ $Author: christian $
+ * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.6 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef UTF_8_UNICODE_CHARACTER_CONVERTER_SOURCE
 #define UTF_8_UNICODE_CHARACTER_CONVERTER_SOURCE
 
-#include "../../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../../globals/constants/integer/integer_constants.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
@@ -112,12 +112,12 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                         // than the destination size that was set before.
                         // In this case, the destination size will be too big, but can be reduced
                         // to the actual destination count below, if so wanted.
-                        *ds = *dc + (*sc * *NUMBER_1_INTEGER);
+                        *ds = *dc + (*sc * *NUMBER_1_INTEGER_MEMORY_MODEL);
 
                         // Reallocate destination wide character vector.
                         reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                        if (*dc <= (*ds - (*sc * *NUMBER_1_INTEGER))) {
+                        if (*dc <= (*ds - (*sc * *NUMBER_1_INTEGER_MEMORY_MODEL))) {
 
                             // The state of the conversion.
                             //
@@ -229,12 +229,12 @@ void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                     // than the destination size that was set before.
                     // In this case, the destination size will be too big, but can be reduced
                     // to the actual destination count below, if so wanted.
-                    *ds = (*dc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + (*sc * *NUMBER_4_INTEGER);
+                    *ds = (*dc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + (*sc * *NUMBER_4_INTEGER_MEMORY_MODEL);
 
                     // Reallocate destination character vector.
-                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (*dc <= (*ds - (*sc * *NUMBER_4_INTEGER))) {
+                    if (*dc <= (*ds - (*sc * *NUMBER_4_INTEGER_MEMORY_MODEL))) {
 
                         // The state of the conversion.
                         //

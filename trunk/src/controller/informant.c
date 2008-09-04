@@ -19,16 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: informant.c,v $ $Revision: 1.4 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: informant.c,v $ $Revision: 1.5 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INFORMANT_SOURCE
 #define INFORMANT_SOURCE
 
-#include "../globals/constants/character/code/wide_character_code_constants.c"
-#include "../globals/constants/cyboi/cyboi_identification_constants.c"
-#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../constant/model/cyboi/identification_cyboi_model.c"
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../memoriser/array.c"
 
@@ -42,7 +42,7 @@ void inform(void* p0) {
     // The message.
     void* m = *NULL_POINTER_MEMORY_MODEL;
     // The cyboi name + space + version + line feed + copyright + line feed + licence + line feed + termination.
-    int ms = *CYBOI_NAME_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *CYBOI_VERSION_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *CYBOI_COPYRIGHT_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *CYBOI_LICENCE_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
+    int ms = *NAME_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // The index.
     int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -50,39 +50,39 @@ void inform(void* p0) {
     allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Copy name.
-    set_array_elements(m, (void*) &i, (void*) CYBOI_NAME, (void*) CYBOI_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) NAME_IDENTIFICATION_CYBOI_MODEL, (void*) NAME_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     // Increment index.
-    i = i + *CYBOI_NAME_COUNT;
+    i = i + *NAME_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy space wide character.
-    set_array_elements(m, (void*) &i, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy version.
-    set_array_elements(m, (void*) &i, (void*) CYBOI_VERSION, (void*) CYBOI_VERSION_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) VERSION_IDENTIFICATION_CYBOI_MODEL, (void*) VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     // Increment index.
-    i = i + *CYBOI_VERSION_COUNT;
+    i = i + *VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy copyright.
-    set_array_elements(m, (void*) &i, (void*) CYBOI_COPYRIGHT, (void*) CYBOI_COPYRIGHT_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) COPYRIGHT_IDENTIFICATION_CYBOI_MODEL, (void*) COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     // Increment index.
-    i = i + *CYBOI_COPYRIGHT_COUNT;
+    i = i + *COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy licence.
-    set_array_elements(m, (void*) &i, (void*) CYBOI_LICENCE, (void*) CYBOI_LICENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) LICENCE_IDENTIFICATION_CYBOI_MODEL, (void*) LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     // Increment index.
-    i = i + *CYBOI_LICENCE_COUNT;
+    i = i + *LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy null termination wide character.
-    set_array_elements(m, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Log message.
     log_write_terminated_message(p0, m);

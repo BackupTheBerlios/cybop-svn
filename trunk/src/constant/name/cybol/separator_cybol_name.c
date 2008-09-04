@@ -19,34 +19,34 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: separator_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: separator_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SEPARATOR_CYBOL_NAME_SOURCE
 #define SEPARATOR_CYBOL_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The compound part separator cybol name. */
 static wchar_t PART_SEPARATOR_CYBOL_NAME_ARRAY[] = {L'.'};
 static wchar_t* PART_SEPARATOR_CYBOL_NAME = PART_SEPARATOR_CYBOL_NAME_ARRAY;
-static int* PART_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* PART_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The compound meta separator cybol name. */
 static wchar_t META_SEPARATOR_CYBOL_NAME_ARRAY[] = {L'#'};
 static wchar_t* META_SEPARATOR_CYBOL_NAME = META_SEPARATOR_CYBOL_NAME_ARRAY;
-static int* META_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* META_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The operation parameter separator cybol name. */
 static wchar_t PARAMETER_SEPARATOR_CYBOL_NAME_ARRAY[] = {L','};
 static wchar_t* PARAMETER_SEPARATOR_CYBOL_NAME = PARAMETER_SEPARATOR_CYBOL_NAME_ARRAY;
-static int* PARAMETER_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_1_INTEGER_ARRAY;
+static int* PARAMETER_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The list separator (between base name and index) cybol name. */
 static wchar_t LIST_SEPARATOR_CYBOL_NAME_ARRAY[] = {L'_', L'$'};
 static wchar_t* LIST_SEPARATOR_CYBOL_NAME = LIST_SEPARATOR_CYBOL_NAME_ARRAY;
-static int* LIST_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_2_INTEGER_ARRAY;
+static int* LIST_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SEPARATOR_CYBOL_NAME_SOURCE */
 #endif

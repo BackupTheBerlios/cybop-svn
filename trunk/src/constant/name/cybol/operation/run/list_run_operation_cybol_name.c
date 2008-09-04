@@ -19,24 +19,24 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: list_run_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: list_run_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LIST_RUN_OPERATION_CYBOL_NAME_SOURCE
 #define LIST_RUN_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The all list directory contents run operation cybol name. */
 static wchar_t ALL_LIST_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L'a', L'l', L'l'};
 static wchar_t* ALL_LIST_RUN_OPERATION_CYBOL_NAME = ALL_LIST_RUN_OPERATION_CYBOL_NAME_ARRAY;
-static int* ALL_LIST_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+static int* ALL_LIST_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The long listing list directory contents run operation cybol name. */
 static wchar_t LONG_LISTING_LIST_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L'l', L'o', L'n', L'g', L'_', L'l', L'i', L's', L't', L'i', L'n', L'g'};
 static wchar_t* LONG_LISTING_LIST_RUN_OPERATION_CYBOL_NAME = LONG_LISTING_LIST_RUN_OPERATION_CYBOL_NAME_ARRAY;
-static int* LONG_LISTING_LIST_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_12_INTEGER_ARRAY;
+static int* LONG_LISTING_LIST_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* LIST_RUN_OPERATION_CYBOL_NAME_SOURCE */
 #endif

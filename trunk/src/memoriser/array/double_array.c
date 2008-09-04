@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: double_array.c,v $ $Revision: 1.19 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: double_array.c,v $ $Revision: 1.20 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,11 +28,11 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/primitive_type_size_variables.c"
+#include "../../variable/primitive_type_size.c"
 
 /**
  * Allocates the double array.
@@ -50,7 +50,7 @@ void allocate_double_array(void* p0, void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) CREATE_DOUBLE_ARRAY_MESSAGE, (void*) CREATE_DOUBLE_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) CREATE_DOUBLE_ARRAY_MESSAGE_LOG_MODEL, (void*) CREATE_DOUBLE_ARRAY_MESSAGE_LOG_MODEL_COUNT);
 
             // Determine the memory area to be allocated.
             // It is the product of the given size and the type size.
@@ -62,16 +62,16 @@ void allocate_double_array(void* p0, void* p1) {
             *a = (void*) malloc(m);
 
             // Initialise array elements with null pointer.
-            memset(*a, *NUMBER_0_INTEGER, m);
+            memset(*a, *NUMBER_0_INTEGER_MEMORY_MODEL, m);
 
         } else {
 
-            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_CREATE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -91,18 +91,18 @@ void deallocate_double_array(void* p0, void* p1) {
 
             void** a = (void**) p0;
 
-            log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) DESTROY_DOUBLE_ARRAY_MESSAGE, (void*) DESTROY_DOUBLE_ARRAY_MESSAGE_COUNT);
+            log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) DESTROY_DOUBLE_ARRAY_MESSAGE_LOG_MODEL, (void*) DESTROY_DOUBLE_ARRAY_MESSAGE_LOG_MODEL_COUNT);
 
             free(*a);
 
         } else {
 
-            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_DESTROY_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -127,7 +127,7 @@ void reallocate_double_array(void* p0, void* p1, void* p2) {
 
                 void** a = (void**) p0;
 
-                log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) RESIZE_DOUBLE_ARRAY_MESSAGE, (void*) RESIZE_DOUBLE_ARRAY_MESSAGE_COUNT);
+                log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) RESIZE_DOUBLE_ARRAY_MESSAGE_LOG_MODEL, (void*) RESIZE_DOUBLE_ARRAY_MESSAGE_LOG_MODEL_COUNT);
 
                 // Determine the memory area to be allocated.
                 // It is the product of the given size and the type size.
@@ -146,11 +146,11 @@ void reallocate_double_array(void* p0, void* p1, void* p2) {
 
                 // Initialise ONLY NEW array elements with null pointer.
                 // Leave existing elements untouched.
-                memset(e, *NUMBER_0_INTEGER, n);
+                memset(e, *NUMBER_0_INTEGER_MEMORY_MODEL, n);
 
             } else {
 
-                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
             }
 
         } else {
@@ -160,7 +160,7 @@ void reallocate_double_array(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_RESIZE_DOUBLE_ARRAY_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -198,12 +198,12 @@ void compare_double_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The size.
                     int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    while (*NUMBER_1_INTEGER) {
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         if (j >= *c) {
 
                             // All elements have been compared and are equal.
-                            *r = *NUMBER_1_INTEGER;
+                            *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             break;
                         }
@@ -226,22 +226,22 @@ void compare_double_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_FIRST_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_SECOND_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_COMPARE_DOUBLE_ARRAY_ELEMENTS_THE_RESULT_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -278,7 +278,7 @@ void set_double_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // The size.
                     int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    while (*NUMBER_1_INTEGER) {
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         if (j >= *c) {
 
@@ -300,22 +300,22 @@ void set_double_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_SET_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -365,7 +365,7 @@ void remove_double_array_elements(void* p0, void* p1, void* p2, void* p3) {
                     // index = 4 (remove "..")
                     // count = 2
                     // rest = 11 - (4 + 2) = 11 - 6 = 5
-                    while (*NUMBER_1_INTEGER) {
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         if (j >= r) {
 
@@ -393,22 +393,22 @@ void remove_double_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_SIZE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_REMOVE_DOUBLE_ARRAY_ELEMENTS_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -436,17 +436,17 @@ void get_double_array_elements(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_SOURCE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_INDEX_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENTS_THE_DESTINATION_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -480,7 +480,7 @@ void get_double_array_elements_index(void* p0, void* p1, void* p2, void* p3, voi
                 if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     // The iteration limit.
-                    int l = *ac - *ec + *NUMBER_1_INTEGER;
+                    int l = *ac - *ec + *NUMBER_1_INTEGER_MEMORY_MODEL;
                     // The element.
                     void* e = *NULL_POINTER_MEMORY_MODEL;
                     // The loop variable.
@@ -488,7 +488,7 @@ void get_double_array_elements_index(void* p0, void* p1, void* p2, void* p3, voi
                     // The comparison result.
                     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    while (*NUMBER_1_INTEGER) {
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         if (j >= l) {
 
@@ -499,7 +499,7 @@ void get_double_array_elements_index(void* p0, void* p1, void* p2, void* p3, voi
                         get_double_array_elements(p0, (void*) &j, (void*) &e);
                         compare_double_array_elements(e, p2, p3, (void*) &r);
 
-                        if (r == *NUMBER_1_INTEGER) {
+                        if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                             // The element has been found.
                             *i = j;
@@ -512,22 +512,22 @@ void get_double_array_elements_index(void* p0, void* p1, void* p2, void* p3, voi
 
                 } else {
 
-                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_COUNT);
+                    log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_ARRAY_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
                 }
 
             } else {
 
-                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_COUNT);
+                log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_SIZE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
             }
 
         } else {
 
-            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE_COUNT);
+            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_COUNT_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_DOUBLE_ARRAY_ELEMENT_INDEX_THE_INDEX_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.15 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.16 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,7 +32,7 @@
 #include "../../globals/constants/http/http_separator_constants.c"
 #include "../../globals/constants/http/uri_separator_constants.c"
 #include "../../globals/constants/http/webdav_request_method_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
@@ -109,18 +109,18 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
     fwprintf(stderr, L"TEST http request parameter destc: %i \n", *((int*) p1));
 
         // The parameter name, abstraction, model, details.
-        void** n = NULL_POINTER;
-        void** nc = NULL_POINTER;
-        void** ns = NULL_POINTER;
-        void** a = NULL_POINTER;
-        void** ac = NULL_POINTER;
-        void** as = NULL_POINTER;
-        void** m = NULL_POINTER;
-        void** mc = NULL_POINTER;
-        void** ms = NULL_POINTER;
-        void** d = NULL_POINTER;
-        void** dc = NULL_POINTER;
-        void** ds = NULL_POINTER;
+        void** n = NULL_POINTER_MEMORY_MODEL;
+        void** nc = NULL_POINTER_MEMORY_MODEL;
+        void** ns = NULL_POINTER_MEMORY_MODEL;
+        void** a = NULL_POINTER_MEMORY_MODEL;
+        void** ac = NULL_POINTER_MEMORY_MODEL;
+        void** as = NULL_POINTER_MEMORY_MODEL;
+        void** m = NULL_POINTER_MEMORY_MODEL;
+        void** mc = NULL_POINTER_MEMORY_MODEL;
+        void** ms = NULL_POINTER_MEMORY_MODEL;
+        void** d = NULL_POINTER_MEMORY_MODEL;
+        void** dc = NULL_POINTER_MEMORY_MODEL;
+        void** ds = NULL_POINTER_MEMORY_MODEL;
 
     fwprintf(stderr, L"TEST http request parameter pn: %ls \n", (wchar_t*) p3);
     fwprintf(stderr, L"TEST http request parameter pnc: %i \n", *((int*) p4));
@@ -183,7 +183,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
         void* i = p3;
         int ic = *sc;
         // The separator index.
-        int sep = *NUMBER_MINUS_1_INTEGER;
+        int sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         //
         // Key.
@@ -193,7 +193,7 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
         void* k = i;
         int kc = ic;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) URI_VALUE_SEPARATOR, (void*) URI_VALUE_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -272,19 +272,19 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
         void* i = p3;
         int ic = *sc;
         // The separator index.
-        int sep = *NUMBER_MINUS_1_INTEGER;
+        int sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The parameter, initialised with current source index.
         void* p = i;
         int pc = ic;
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Set parameter.
             p = i;
             pc = ic;
 
             // Reset separator index.
-            sep = *NUMBER_MINUS_1_INTEGER;
+            sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
             // Get separator index.
             get_array_elements_index(i, (void*) &ic, (void*) URI_PARAMETER_SEPARATOR, (void*) URI_PARAMETER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -580,7 +580,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
         void* i = p3;
         int ic = *sc;
         // The separator index.
-        int sep = *NUMBER_MINUS_1_INTEGER;
+        int sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         //
         // Argument.
@@ -590,7 +590,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
         void* a = i;
         int ac = ic;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -664,19 +664,19 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
         void* i = p3;
         int ic = *sc;
         // The separator index.
-        int sep = *NUMBER_MINUS_1_INTEGER;
+        int sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The header, initialised with current source index.
         void* h = i;
         int hc = ic;
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Set header.
             h = i;
             hc = ic;
 
             // Reset separator index.
-            sep = *NUMBER_MINUS_1_INTEGER;
+            sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
             // Get separator index.
             get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADER_SEPARATOR, (void*) HTTP_HEADER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -809,7 +809,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         void* i = p3;
         int ic = *sc;
         // The separator index.
-        int sep = *NUMBER_MINUS_1_INTEGER;
+        int sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         //
         // Scheme.
@@ -819,7 +819,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         void* sch = i;
         int schc = ic;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) URI_SCHEME_SEPARATOR, (void*) URI_SCHEME_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -858,7 +858,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         void* a = *NULL_POINTER_MEMORY_MODEL;
         int ac = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) URI_AUTHORITY_SEPARATOR, (void*) URI_AUTHORITY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -961,7 +961,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         void* p = *NULL_POINTER_MEMORY_MODEL;
         int pc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) URI_PATH_SEPARATOR, (void*) URI_PATH_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1042,7 +1042,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         void* q = *NULL_POINTER_MEMORY_MODEL;
         int qc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
     fwprintf(stderr, L"TEST http request uri qc 0: %i \n", qc);
 
@@ -1065,7 +1065,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             ic = ic - sep - *URI_QUERY_SEPARATOR_COUNT;
 
             // Reset separator index.
-            sep = *NUMBER_MINUS_1_INTEGER;
+            sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
             // Get separator index.
             get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1112,7 +1112,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         void* f = *NULL_POINTER_MEMORY_MODEL;
         int fc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) URI_FRAGMENT_SEPARATOR, (void*) URI_FRAGMENT_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1188,7 +1188,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         void* i = p10;
         int ic = *sc;
         // The separator index.
-        int sep = *NUMBER_MINUS_1_INTEGER;
+        int sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         //
         // Request method.
@@ -1198,7 +1198,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         void* rm = i;
         int rmc = ic;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_METHOD_SEPARATOR, (void*) HTTP_REQUEST_METHOD_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1233,7 +1233,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         void* uri = i;
         int uric = ic;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR, (void*) HTTP_UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1374,7 +1374,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         void* i = p6;
         int ic = *sc;
         // The separator index.
-        int sep = *NUMBER_MINUS_1_INTEGER;
+        int sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         //
         // Request line.
@@ -1384,7 +1384,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         void* rl = i;
         int rlc = ic;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) HTTP_REQUEST_LINE_SEPARATOR, (void*) HTTP_REQUEST_LINE_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1419,7 +1419,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         void* h = i;
         int hc = ic;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1454,7 +1454,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         void* b = i;
         int bc = ic;
         // Reset separator index.
-        sep = *NUMBER_MINUS_1_INTEGER;
+        sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) HTTP_BODY_SEPARATOR, (void*) HTTP_BODY_SEPARATOR_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);

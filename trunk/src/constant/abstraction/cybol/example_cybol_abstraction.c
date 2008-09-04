@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: example_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: example_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef EXAMPLE_CYBOL_ABSTRACTION_SOURCE
 #define EXAMPLE_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -57,7 +57,7 @@
  */
 static wchar_t EXAMPLE_CYBOL_ABSTRACTION_ARRAY[] = {L'e', L'x', L'a', L'm', L'p', L'l', L'e'};
 static wchar_t* EXAMPLE_CYBOL_ABSTRACTION = EXAMPLE_CYBOL_ABSTRACTION_ARRAY;
-static int* EXAMPLE_CYBOL_ABSTRACTION_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* EXAMPLE_CYBOL_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* EXAMPLE_CYBOL_ABSTRACTION_SOURCE */
 #endif

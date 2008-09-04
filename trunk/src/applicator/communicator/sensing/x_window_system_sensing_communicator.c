@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_sensing_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: x_window_system_sensing_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,12 +33,12 @@
 #include <pthread.h>
 #include <signal.h>
 #include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../globals/variables/thread_identification_variables.c"
+#include "../../variable/thread_identification.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
 
@@ -160,12 +160,12 @@ void sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3) {
                     // Set x window system interrupt request to indicate
                     // that a message has been received via x window system,
                     // which may now be processed in the main thread of this system.
-                    *irq = *NUMBER_1_INTEGER;
+                    *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Unlock x window system mutex.
                     pthread_mutex_unlock(mt);
 
-                    while (*irq == *NUMBER_1_INTEGER) {
+                    while (*irq == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         // Sleep as long as the x window system interrupt is not handled and reset yet.
                         // This is to give the central processing unit (cpu) some
@@ -204,13 +204,13 @@ void sense_x_window_system(void* p0) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense x window system.");
 
     // The interrupt.
-    void** irq = NULL_POINTER;
+    void** irq = NULL_POINTER_MEMORY_MODEL;
     // The mutex.
-    void** mt = NULL_POINTER;
+    void** mt = NULL_POINTER_MEMORY_MODEL;
     // The sleep time.
-    void** st = NULL_POINTER;
+    void** st = NULL_POINTER_MEMORY_MODEL;
     // The display.
-    void** d = NULL_POINTER;
+    void** d = NULL_POINTER_MEMORY_MODEL;
 
     // Get interrupt.
     get_element(p0, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -221,7 +221,7 @@ void sense_x_window_system(void* p0) {
     // Get display.
     get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    while (*NUMBER_1_INTEGER) {
+    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
         // A break condition does not exist here because the loop
         // is running neverendingly while sensing messages.

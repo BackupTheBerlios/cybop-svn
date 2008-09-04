@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: boolean_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: boolean_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_OPERATION_CYBOL_NAME_SOURCE
 #define BOOLEAN_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The input 1 boolean operation cybol name. */
 static wchar_t INPUT_1_BOOLEAN_OPERATION_CYBOL_NAME_ARRAY[] = {L'i', L'n', L'p', L'u', L't', L'_', L'1'};
 static wchar_t* INPUT_1_BOOLEAN_OPERATION_CYBOL_NAME = INPUT_1_BOOLEAN_OPERATION_CYBOL_NAME_ARRAY;
-static int* INPUT_1_BOOLEAN_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* INPUT_1_BOOLEAN_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The input 2 boolean operation cybol name. */
 static wchar_t INPUT_2_BOOLEAN_OPERATION_CYBOL_NAME_ARRAY[] = {L'i', L'n', L'p', L'u', L't', L'_', L'2'};
 static wchar_t* INPUT_2_BOOLEAN_OPERATION_CYBOL_NAME = INPUT_2_BOOLEAN_OPERATION_CYBOL_NAME_ARRAY;
-static int* INPUT_2_BOOLEAN_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* INPUT_2_BOOLEAN_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The output boolean operation cybol name. */
 static wchar_t OUTPUT_BOOLEAN_OPERATION_CYBOL_NAME_ARRAY[] = {L'o', L'u', L't', L'p', L'u', L't'};
 static wchar_t* OUTPUT_BOOLEAN_OPERATION_CYBOL_NAME = OUTPUT_BOOLEAN_OPERATION_CYBOL_NAME_ARRAY;
-static int* OUTPUT_BOOLEAN_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* OUTPUT_BOOLEAN_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* BOOLEAN_OPERATION_CYBOL_NAME_SOURCE */
 #endif

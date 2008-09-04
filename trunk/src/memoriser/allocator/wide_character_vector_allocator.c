@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: wide_character_vector_allocator.c,v $ $Revision: 1.9 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: wide_character_vector_allocator.c,v $ $Revision: 1.10 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef WIDE_CHARACTER_VECTOR_ALLOCATOR_SOURCE
 #define WIDE_CHARACTER_VECTOR_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"

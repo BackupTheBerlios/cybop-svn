@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_communicator.c,v $ $Revision: 1.34 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: file_communicator.c,v $ $Revision: 1.35 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,13 +28,13 @@
 
 #include <stdio.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../globals/constants/system/system_file_name_constants.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/reallocation_factor_variables.c"
+#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../../memoriser/array.c"
 
@@ -67,7 +67,7 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
                     // Read first character.
                     char c = fgetc(p3);
 
-                    while (*NUMBER_1_INTEGER) {
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         if (c == EOF) {
 
@@ -77,17 +77,17 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
                         if (*dc == *ds) {
 
                             // Increase size.
-                            *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
+                            *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Reallocate array.
-                            reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                            reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         }
 
                         if (*dc < *ds) {
 
                             // Set character in destination array.
                             // The array count serves as index for setting the character.
-                            set_array_elements(*d, p1, (void*) &c, (void*) NUMBER_1_INTEGER, (void*) CHARACTER_ARRAY);
+                            set_array_elements(*d, p1, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                             // Increase array count.
                             (*dc)++;
@@ -167,7 +167,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int tns = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Allocate terminated file name.
-            allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // Encode wide character name into multibyte character array.
             encode_utf_8_unicode_character_vector((void*) &tn, (void*) &tnc, (void*) &tns, p3, p4);
@@ -175,14 +175,14 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             if (tns <= tnc) {
 
                 // Increase character array size to have place for the termination character.
-                tns = tnc + *NUMBER_1_INTEGER;
+                tns = tnc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 // Reallocate terminated file name as multibyte character array.
-                reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_ARRAY);
+                reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             }
 
             // Add null termination character to terminated file name.
-            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // Open file.
             // CAUTION! The file name cannot be handed over as is.
@@ -205,7 +205,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             }
 
             // Deallocate terminated file name.
-            deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+            deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
         }
 
     } else {
@@ -238,7 +238,7 @@ void write_file_stream(void* p0, void* p1, void* p2) {
             // The error value.
             char e = EOF;
 
-            while (*NUMBER_1_INTEGER) {
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (j >= *sc) {
 
@@ -246,7 +246,7 @@ void write_file_stream(void* p0, void* p1, void* p2) {
                 }
 
                 // Read character from source array.
-                get_array_elements(p1, (void*) &j, (void*) &c, (void*) CHARACTER_ARRAY);
+                get_array_elements(p1, (void*) &j, (void*) &c, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Write character to file.
                 e = fputc(*c, (FILE*) p0);
@@ -301,7 +301,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(*d, p1, (void*) OUTPUT_SYSTEM_FILE_NAME, (void*) OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*d, p1, (void*) OUTPUT_SYSTEM_FILE_NAME, (void*) OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -325,7 +325,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(*d, p1, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY);
+                compare_arrays(*d, p1, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -358,7 +358,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 int tns = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Allocate terminated file name.
-                allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+                allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Encode wide character option into multibyte character array.
                 encode_utf_8_unicode_character_vector((void*) &tn, (void*) &tnc, (void*) &tns, *d, p1);
@@ -366,14 +366,14 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 if (tns <= tnc) {
 
                     // Increase character array size to have place for the termination character.
-                    tns = tnc + *NUMBER_1_INTEGER;
+                    tns = tnc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate terminated file name as multibyte character array.
-                    reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_ARRAY);
+                    reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 }
 
                 // Add null termination character to terminated file name.
-                set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.
@@ -407,7 +407,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
 
                 // Deallocate terminated file name.
-                deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY);
+                deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             }
 
         } else {

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,10 +27,10 @@
 #define CREATOR_SOURCE
 
 #include <libxml/tree.h>
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../constant/channel/cybol_channel.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
@@ -78,14 +78,14 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     int* kmds = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate knowledge model name, abstraction, model, details count and size.
-    allocate((void*) &kmnc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &kmns, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &kmac, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &kmas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &kmmc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &kmms, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &kmdc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-    allocate((void*) &kmds, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kmnc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kmns, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kmac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kmas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kmmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kmms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kmdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+    allocate((void*) &kmds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     // Initialise knowledge model name, abstraction, model, details count and size.
     *kmnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -107,8 +107,8 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     allocate((void*) &kmd, (void*) kmds, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT);
 
     // Decode knowledge model name, abstraction.
-    decode((void*) &kmn, (void*) kmnc, (void*) kmns, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p5, p6, *NULL_POINTER, *NULL_POINTER, p3, p4);
-    decode((void*) &kma, (void*) kmac, (void*) kmas, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p9, p10, *NULL_POINTER, *NULL_POINTER, p7, p8);
+    decode((void*) &kmn, (void*) kmnc, (void*) kmns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4);
+    decode((void*) &kma, (void*) kmac, (void*) kmas, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8);
 
     //
     // CAUTION! Do NOT decode knowledge model model here!
@@ -156,57 +156,57 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Create knowledge model.");
 
     // The name name, abstraction, model, details.
-    void** nn = NULL_POINTER;
-    void** nnc = NULL_POINTER;
-    void** nns = NULL_POINTER;
-    void** na = NULL_POINTER;
-    void** nac = NULL_POINTER;
-    void** nas = NULL_POINTER;
-    void** nm = NULL_POINTER;
-    void** nmc = NULL_POINTER;
-    void** nms = NULL_POINTER;
-    void** nd = NULL_POINTER;
-    void** ndc = NULL_POINTER;
-    void** nds = NULL_POINTER;
+    void** nn = NULL_POINTER_MEMORY_MODEL;
+    void** nnc = NULL_POINTER_MEMORY_MODEL;
+    void** nns = NULL_POINTER_MEMORY_MODEL;
+    void** na = NULL_POINTER_MEMORY_MODEL;
+    void** nac = NULL_POINTER_MEMORY_MODEL;
+    void** nas = NULL_POINTER_MEMORY_MODEL;
+    void** nm = NULL_POINTER_MEMORY_MODEL;
+    void** nmc = NULL_POINTER_MEMORY_MODEL;
+    void** nms = NULL_POINTER_MEMORY_MODEL;
+    void** nd = NULL_POINTER_MEMORY_MODEL;
+    void** ndc = NULL_POINTER_MEMORY_MODEL;
+    void** nds = NULL_POINTER_MEMORY_MODEL;
     // The abstraction name, abstraction, model, details.
-    void** an = NULL_POINTER;
-    void** anc = NULL_POINTER;
-    void** ans = NULL_POINTER;
-    void** aa = NULL_POINTER;
-    void** aac = NULL_POINTER;
-    void** aas = NULL_POINTER;
-    void** am = NULL_POINTER;
-    void** amc = NULL_POINTER;
-    void** ams = NULL_POINTER;
-    void** ad = NULL_POINTER;
-    void** adc = NULL_POINTER;
-    void** ads = NULL_POINTER;
+    void** an = NULL_POINTER_MEMORY_MODEL;
+    void** anc = NULL_POINTER_MEMORY_MODEL;
+    void** ans = NULL_POINTER_MEMORY_MODEL;
+    void** aa = NULL_POINTER_MEMORY_MODEL;
+    void** aac = NULL_POINTER_MEMORY_MODEL;
+    void** aas = NULL_POINTER_MEMORY_MODEL;
+    void** am = NULL_POINTER_MEMORY_MODEL;
+    void** amc = NULL_POINTER_MEMORY_MODEL;
+    void** ams = NULL_POINTER_MEMORY_MODEL;
+    void** ad = NULL_POINTER_MEMORY_MODEL;
+    void** adc = NULL_POINTER_MEMORY_MODEL;
+    void** ads = NULL_POINTER_MEMORY_MODEL;
     // The element name, abstraction, model, details.
-    void** en = NULL_POINTER;
-    void** enc = NULL_POINTER;
-    void** ens = NULL_POINTER;
-    void** ea = NULL_POINTER;
-    void** eac = NULL_POINTER;
-    void** eas = NULL_POINTER;
-    void** em = NULL_POINTER;
-    void** emc = NULL_POINTER;
-    void** ems = NULL_POINTER;
-    void** ed = NULL_POINTER;
-    void** edc = NULL_POINTER;
-    void** eds = NULL_POINTER;
+    void** en = NULL_POINTER_MEMORY_MODEL;
+    void** enc = NULL_POINTER_MEMORY_MODEL;
+    void** ens = NULL_POINTER_MEMORY_MODEL;
+    void** ea = NULL_POINTER_MEMORY_MODEL;
+    void** eac = NULL_POINTER_MEMORY_MODEL;
+    void** eas = NULL_POINTER_MEMORY_MODEL;
+    void** em = NULL_POINTER_MEMORY_MODEL;
+    void** emc = NULL_POINTER_MEMORY_MODEL;
+    void** ems = NULL_POINTER_MEMORY_MODEL;
+    void** ed = NULL_POINTER_MEMORY_MODEL;
+    void** edc = NULL_POINTER_MEMORY_MODEL;
+    void** eds = NULL_POINTER_MEMORY_MODEL;
     // The whole name, abstraction, model, details.
-    void** wn = NULL_POINTER;
-    void** wnc = NULL_POINTER;
-    void** wns = NULL_POINTER;
-    void** wa = NULL_POINTER;
-    void** wac = NULL_POINTER;
-    void** was = NULL_POINTER;
-    void** wm = NULL_POINTER;
-    void** wmc = NULL_POINTER;
-    void** wms = NULL_POINTER;
-    void** wd = NULL_POINTER;
-    void** wdc = NULL_POINTER;
-    void** wds = NULL_POINTER;
+    void** wn = NULL_POINTER_MEMORY_MODEL;
+    void** wnc = NULL_POINTER_MEMORY_MODEL;
+    void** wns = NULL_POINTER_MEMORY_MODEL;
+    void** wa = NULL_POINTER_MEMORY_MODEL;
+    void** wac = NULL_POINTER_MEMORY_MODEL;
+    void** was = NULL_POINTER_MEMORY_MODEL;
+    void** wm = NULL_POINTER_MEMORY_MODEL;
+    void** wmc = NULL_POINTER_MEMORY_MODEL;
+    void** wms = NULL_POINTER_MEMORY_MODEL;
+    void** wd = NULL_POINTER_MEMORY_MODEL;
+    void** wdc = NULL_POINTER_MEMORY_MODEL;
+    void** wds = NULL_POINTER_MEMORY_MODEL;
 
     // Get name.
     get_universal_compound_element_by_name(p0, p1,

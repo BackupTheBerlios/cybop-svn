@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: dos_character_set_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: dos_character_set_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DOS_CHARACTER_SET_MODEL_SOURCE
 #define DOS_CHARACTER_SET_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // A "Character Set" consists of three parts:
@@ -44,7 +44,7 @@
  */
 static wchar_t DOS_850_CHARACTER_SET_MODEL_ARRAY[] = {L'd', L'o', L's', L'-', L'8', L'5', L'0'};
 static wchar_t* DOS_850_CHARACTER_SET_MODEL = DOS_850_CHARACTER_SET_MODEL_ARRAY;
-static int* DOS_850_CHARACTER_SET_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* DOS_850_CHARACTER_SET_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* DOS_CHARACTER_SET_MODEL_SOURCE */
 #endif

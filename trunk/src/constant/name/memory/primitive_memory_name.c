@@ -19,17 +19,17 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: primitive_memory_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: primitive_memory_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PRIMITIVE_MEMORY_NAME_SOURCE
 #define PRIMITIVE_MEMORY_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The value primitive memory name. */
-static int* VALUE_PRIMITIVE_MEMORY_NAME = NUMBER_0_INTEGER_ARRAY;
+static int* VALUE_PRIMITIVE_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* PRIMITIVE_MEMORY_NAME_SOURCE */
 #endif

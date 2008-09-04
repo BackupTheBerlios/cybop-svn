@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: lifecycle_operation_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: lifecycle_operation_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LIFECYCLE_OPERATION_CYBOL_MODEL_SOURCE
 #define LIFECYCLE_OPERATION_CYBOL_MODEL_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The startup lifecycle operation cybol model. */
 static wchar_t STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L't', L'a', L'r', L't', L'u', L'p'};
 static wchar_t* STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL = STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY;
-static int* STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The shutdown lifecycle operation cybol model. */
 static wchar_t SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L'h', L'u', L't', L'd', L'o', L'w', L'n'};
 static wchar_t* SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL = SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY;
-static int* SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The exit lifecycle operation cybol model. */
 static wchar_t EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY[] = {L'e', L'x', L'i', L't'};
 static wchar_t* EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL = EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY;
-static int* EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* LIFECYCLE_OPERATION_CYBOL_MODEL_SOURCE */
 #endif

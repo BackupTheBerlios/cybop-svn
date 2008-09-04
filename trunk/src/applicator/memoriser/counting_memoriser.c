@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: counting_memoriser.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: counting_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,9 +29,9 @@
 #include "../applicator/counter/all_counter.c"
 #include "../applicator/counter/prefix_counter.c"
 #include "../applicator/counter/suffix_counter.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
@@ -62,57 +62,57 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Count compound parts.");
 
     // The compound name, abstraction, model, details.
-    void** cn = NULL_POINTER;
-    void** cnc = NULL_POINTER;
-    void** cns = NULL_POINTER;
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cn = NULL_POINTER_MEMORY_MODEL;
+    void** cnc = NULL_POINTER_MEMORY_MODEL;
+    void** cns = NULL_POINTER_MEMORY_MODEL;
+    void** ca = NULL_POINTER_MEMORY_MODEL;
+    void** cac = NULL_POINTER_MEMORY_MODEL;
+    void** cas = NULL_POINTER_MEMORY_MODEL;
+    void** cm = NULL_POINTER_MEMORY_MODEL;
+    void** cmc = NULL_POINTER_MEMORY_MODEL;
+    void** cms = NULL_POINTER_MEMORY_MODEL;
+    void** cd = NULL_POINTER_MEMORY_MODEL;
+    void** cdc = NULL_POINTER_MEMORY_MODEL;
+    void** cds = NULL_POINTER_MEMORY_MODEL;
     // The selection name, abstraction, model, details.
-    void** sn = NULL_POINTER;
-    void** snc = NULL_POINTER;
-    void** sns = NULL_POINTER;
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sn = NULL_POINTER_MEMORY_MODEL;
+    void** snc = NULL_POINTER_MEMORY_MODEL;
+    void** sns = NULL_POINTER_MEMORY_MODEL;
+    void** sa = NULL_POINTER_MEMORY_MODEL;
+    void** sac = NULL_POINTER_MEMORY_MODEL;
+    void** sas = NULL_POINTER_MEMORY_MODEL;
+    void** sm = NULL_POINTER_MEMORY_MODEL;
+    void** smc = NULL_POINTER_MEMORY_MODEL;
+    void** sms = NULL_POINTER_MEMORY_MODEL;
+    void** sd = NULL_POINTER_MEMORY_MODEL;
+    void** sdc = NULL_POINTER_MEMORY_MODEL;
+    void** sds = NULL_POINTER_MEMORY_MODEL;
     // The filter name, abstraction, model, details.
-    void** fn = NULL_POINTER;
-    void** fnc = NULL_POINTER;
-    void** fns = NULL_POINTER;
-    void** fa = NULL_POINTER;
-    void** fac = NULL_POINTER;
-    void** fas = NULL_POINTER;
-    void** fm = NULL_POINTER;
-    void** fmc = NULL_POINTER;
-    void** fms = NULL_POINTER;
-    void** fd = NULL_POINTER;
-    void** fdc = NULL_POINTER;
-    void** fds = NULL_POINTER;
+    void** fn = NULL_POINTER_MEMORY_MODEL;
+    void** fnc = NULL_POINTER_MEMORY_MODEL;
+    void** fns = NULL_POINTER_MEMORY_MODEL;
+    void** fa = NULL_POINTER_MEMORY_MODEL;
+    void** fac = NULL_POINTER_MEMORY_MODEL;
+    void** fas = NULL_POINTER_MEMORY_MODEL;
+    void** fm = NULL_POINTER_MEMORY_MODEL;
+    void** fmc = NULL_POINTER_MEMORY_MODEL;
+    void** fms = NULL_POINTER_MEMORY_MODEL;
+    void** fd = NULL_POINTER_MEMORY_MODEL;
+    void** fdc = NULL_POINTER_MEMORY_MODEL;
+    void** fds = NULL_POINTER_MEMORY_MODEL;
     // The result name, abstraction, model, details.
-    void** rn = NULL_POINTER;
-    void** rnc = NULL_POINTER;
-    void** rns = NULL_POINTER;
-    void** ra = NULL_POINTER;
-    void** rac = NULL_POINTER;
-    void** ras = NULL_POINTER;
-    void** rm = NULL_POINTER;
-    void** rmc = NULL_POINTER;
-    void** rms = NULL_POINTER;
-    void** rd = NULL_POINTER;
-    void** rdc = NULL_POINTER;
-    void** rds = NULL_POINTER;
+    void** rn = NULL_POINTER_MEMORY_MODEL;
+    void** rnc = NULL_POINTER_MEMORY_MODEL;
+    void** rns = NULL_POINTER_MEMORY_MODEL;
+    void** ra = NULL_POINTER_MEMORY_MODEL;
+    void** rac = NULL_POINTER_MEMORY_MODEL;
+    void** ras = NULL_POINTER_MEMORY_MODEL;
+    void** rm = NULL_POINTER_MEMORY_MODEL;
+    void** rmc = NULL_POINTER_MEMORY_MODEL;
+    void** rms = NULL_POINTER_MEMORY_MODEL;
+    void** rd = NULL_POINTER_MEMORY_MODEL;
+    void** rdc = NULL_POINTER_MEMORY_MODEL;
+    void** rds = NULL_POINTER_MEMORY_MODEL;
 
     // Get compound.
     get_universal_compound_element_by_name(p0, p1,

@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: image_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: image_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef IMAGE_CYBOL_ABSTRACTION_SOURCE
 #define IMAGE_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -59,7 +59,7 @@
  */
 static wchar_t GIF_IMAGE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'm', L'a', L'g', L'e', L'/', L'g', L'i', L'f'};
 static wchar_t* GIF_IMAGE_CYBOL_ABSTRACTION = GIF_IMAGE_CYBOL_ABSTRACTION_ARRAY;
-static int* GIF_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* GIF_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The image/jpeg cybol abstraction.
@@ -70,7 +70,7 @@ static int* GIF_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
  */
 static wchar_t JPEG_IMAGE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'm', L'a', L'g', L'e', L'/', L'j', L'p', L'e', L'g'};
 static wchar_t* JPEG_IMAGE_CYBOL_ABSTRACTION = JPEG_IMAGE_CYBOL_ABSTRACTION_ARRAY;
-static int* JPEG_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* JPEG_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The image/png cybol abstraction.
@@ -81,7 +81,7 @@ static int* JPEG_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
  */
 static wchar_t PNG_IMAGE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'm', L'a', L'g', L'e', L'/', L'p', L'n', L'g'};
 static wchar_t* PNG_IMAGE_CYBOL_ABSTRACTION = PNG_IMAGE_CYBOL_ABSTRACTION_ARRAY;
-static int* PNG_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* PNG_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The image/tiff cybol abstraction.
@@ -92,7 +92,7 @@ static int* PNG_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
  */
 static wchar_t TIFF_IMAGE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'm', L'a', L'g', L'e', L'/', L't', L'i', L'f', L'f'};
 static wchar_t* TIFF_IMAGE_CYBOL_ABSTRACTION = TIFF_IMAGE_CYBOL_ABSTRACTION_ARRAY;
-static int* TIFF_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* TIFF_IMAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*??
 The image/vnd.microsoft.icon language.

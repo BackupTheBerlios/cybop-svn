@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: branch_guider.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: branch_guider.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,11 +27,11 @@
 #define BRANCHER_SOURCE
 
 #include "../globals/constants/boolean/boolean_constants.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
-#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -75,44 +75,44 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Branch program flow.");
 
     // The criterion name, abstraction, model, details.
-    void** cn = NULL_POINTER;
-    void** cnc = NULL_POINTER;
-    void** cns = NULL_POINTER;
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cn = NULL_POINTER_MEMORY_MODEL;
+    void** cnc = NULL_POINTER_MEMORY_MODEL;
+    void** cns = NULL_POINTER_MEMORY_MODEL;
+    void** ca = NULL_POINTER_MEMORY_MODEL;
+    void** cac = NULL_POINTER_MEMORY_MODEL;
+    void** cas = NULL_POINTER_MEMORY_MODEL;
+    void** cm = NULL_POINTER_MEMORY_MODEL;
+    void** cmc = NULL_POINTER_MEMORY_MODEL;
+    void** cms = NULL_POINTER_MEMORY_MODEL;
+    void** cd = NULL_POINTER_MEMORY_MODEL;
+    void** cdc = NULL_POINTER_MEMORY_MODEL;
+    void** cds = NULL_POINTER_MEMORY_MODEL;
     // The true model name, abstraction, model, details.
-    void** tn = NULL_POINTER;
-    void** tnc = NULL_POINTER;
-    void** tns = NULL_POINTER;
-    void** ta = NULL_POINTER;
-    void** tac = NULL_POINTER;
-    void** tas = NULL_POINTER;
-    void** tm = NULL_POINTER;
-    void** tmc = NULL_POINTER;
-    void** tms = NULL_POINTER;
-    void** td = NULL_POINTER;
-    void** tdc = NULL_POINTER;
-    void** tds = NULL_POINTER;
+    void** tn = NULL_POINTER_MEMORY_MODEL;
+    void** tnc = NULL_POINTER_MEMORY_MODEL;
+    void** tns = NULL_POINTER_MEMORY_MODEL;
+    void** ta = NULL_POINTER_MEMORY_MODEL;
+    void** tac = NULL_POINTER_MEMORY_MODEL;
+    void** tas = NULL_POINTER_MEMORY_MODEL;
+    void** tm = NULL_POINTER_MEMORY_MODEL;
+    void** tmc = NULL_POINTER_MEMORY_MODEL;
+    void** tms = NULL_POINTER_MEMORY_MODEL;
+    void** td = NULL_POINTER_MEMORY_MODEL;
+    void** tdc = NULL_POINTER_MEMORY_MODEL;
+    void** tds = NULL_POINTER_MEMORY_MODEL;
     // The false model name, abstraction, model, details.
-    void** fn = NULL_POINTER;
-    void** fnc = NULL_POINTER;
-    void** fns = NULL_POINTER;
-    void** fa = NULL_POINTER;
-    void** fac = NULL_POINTER;
-    void** fas = NULL_POINTER;
-    void** fm = NULL_POINTER;
-    void** fmc = NULL_POINTER;
-    void** fms = NULL_POINTER;
-    void** fd = NULL_POINTER;
-    void** fdc = NULL_POINTER;
-    void** fds = NULL_POINTER;
+    void** fn = NULL_POINTER_MEMORY_MODEL;
+    void** fnc = NULL_POINTER_MEMORY_MODEL;
+    void** fns = NULL_POINTER_MEMORY_MODEL;
+    void** fa = NULL_POINTER_MEMORY_MODEL;
+    void** fac = NULL_POINTER_MEMORY_MODEL;
+    void** fas = NULL_POINTER_MEMORY_MODEL;
+    void** fm = NULL_POINTER_MEMORY_MODEL;
+    void** fmc = NULL_POINTER_MEMORY_MODEL;
+    void** fms = NULL_POINTER_MEMORY_MODEL;
+    void** fd = NULL_POINTER_MEMORY_MODEL;
+    void** fdc = NULL_POINTER_MEMORY_MODEL;
+    void** fds = NULL_POINTER_MEMORY_MODEL;
 
     // Get criterion.
     get_universal_compound_element_by_name(p10, p11,
@@ -144,7 +144,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_arrays(*cm, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, &r, (void*) INTEGER_ARRAY);
+    compare_arrays(*cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
     // The direct execution flag.
     int x = *NUMBER_0_INTEGER_MEMORY_MODEL;

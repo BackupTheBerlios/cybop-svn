@@ -19,34 +19,34 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: lifecycle_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: lifecycle_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LIFECYCLE_OPERATION_CYBOL_NAME_SOURCE
 #define LIFECYCLE_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The service lifecycle operation cybol name. */
 static wchar_t SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_ARRAY[] = {L's', L'e', L'r', L'v', L'i', L'c', L'e'};
 static wchar_t* SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME = SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_ARRAY;
-static int* SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The namespace lifecycle operation cybol name. */
 static wchar_t NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME_ARRAY[] = {L'n', L'a', L'm', L'e', L's', L'p', L'a', L'c', L'e'};
 static wchar_t* NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME = NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME_ARRAY;
-static int* NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The style lifecycle operation cybol name. */
 static wchar_t STYLE_LIFECYCLE_OPERATION_CYBOL_NAME_ARRAY[] = {L's', L't', L'y', L'l', L'e'};
 static wchar_t* STYLE_LIFECYCLE_OPERATION_CYBOL_NAME = STYLE_LIFECYCLE_OPERATION_CYBOL_NAME_ARRAY;
-static int* STYLE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* STYLE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The address lifecycle operation cybol name. */
 static wchar_t ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME_ARRAY[] = {L'a', L'd', L'd', L'r', L'e', L's', L's'};
 static wchar_t* ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME = ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME_ARRAY;
-static int* ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* LIFECYCLE_OPERATION_CYBOL_NAME_SOURCE */
 #endif

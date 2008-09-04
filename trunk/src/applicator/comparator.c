@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: comparator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: comparator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,10 +31,10 @@
 #include "../applicator/comparator/greaterness_or_equality_comparator.c"
 #include "../applicator/comparator/smallerness_comparator.c"
 #include "../applicator/comparator/smallerness_or_equality_comparator.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
@@ -62,70 +62,70 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Compare two parameters.");
 
     // The comparison name, abstraction, model, details.
-    void** cn = NULL_POINTER;
-    void** cnc = NULL_POINTER;
-    void** cns = NULL_POINTER;
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cn = NULL_POINTER_MEMORY_MODEL;
+    void** cnc = NULL_POINTER_MEMORY_MODEL;
+    void** cns = NULL_POINTER_MEMORY_MODEL;
+    void** ca = NULL_POINTER_MEMORY_MODEL;
+    void** cac = NULL_POINTER_MEMORY_MODEL;
+    void** cas = NULL_POINTER_MEMORY_MODEL;
+    void** cm = NULL_POINTER_MEMORY_MODEL;
+    void** cmc = NULL_POINTER_MEMORY_MODEL;
+    void** cms = NULL_POINTER_MEMORY_MODEL;
+    void** cd = NULL_POINTER_MEMORY_MODEL;
+    void** cdc = NULL_POINTER_MEMORY_MODEL;
+    void** cds = NULL_POINTER_MEMORY_MODEL;
     // The left side name, abstraction, model, details.
-    void** lsn = NULL_POINTER;
-    void** lsnc = NULL_POINTER;
-    void** lsns = NULL_POINTER;
-    void** lsa = NULL_POINTER;
-    void** lsac = NULL_POINTER;
-    void** lsas = NULL_POINTER;
-    void** lsm = NULL_POINTER;
-    void** lsmc = NULL_POINTER;
-    void** lsms = NULL_POINTER;
-    void** lsd = NULL_POINTER;
-    void** lsdc = NULL_POINTER;
-    void** lsds = NULL_POINTER;
+    void** lsn = NULL_POINTER_MEMORY_MODEL;
+    void** lsnc = NULL_POINTER_MEMORY_MODEL;
+    void** lsns = NULL_POINTER_MEMORY_MODEL;
+    void** lsa = NULL_POINTER_MEMORY_MODEL;
+    void** lsac = NULL_POINTER_MEMORY_MODEL;
+    void** lsas = NULL_POINTER_MEMORY_MODEL;
+    void** lsm = NULL_POINTER_MEMORY_MODEL;
+    void** lsmc = NULL_POINTER_MEMORY_MODEL;
+    void** lsms = NULL_POINTER_MEMORY_MODEL;
+    void** lsd = NULL_POINTER_MEMORY_MODEL;
+    void** lsdc = NULL_POINTER_MEMORY_MODEL;
+    void** lsds = NULL_POINTER_MEMORY_MODEL;
     // The right side name, abstraction, model, details.
-    void** rsn = NULL_POINTER;
-    void** rsnc = NULL_POINTER;
-    void** rsns = NULL_POINTER;
-    void** rsa = NULL_POINTER;
-    void** rsac = NULL_POINTER;
-    void** rsas = NULL_POINTER;
-    void** rsm = NULL_POINTER;
-    void** rsmc = NULL_POINTER;
-    void** rsms = NULL_POINTER;
-    void** rsd = NULL_POINTER;
-    void** rsdc = NULL_POINTER;
-    void** rsds = NULL_POINTER;
+    void** rsn = NULL_POINTER_MEMORY_MODEL;
+    void** rsnc = NULL_POINTER_MEMORY_MODEL;
+    void** rsns = NULL_POINTER_MEMORY_MODEL;
+    void** rsa = NULL_POINTER_MEMORY_MODEL;
+    void** rsac = NULL_POINTER_MEMORY_MODEL;
+    void** rsas = NULL_POINTER_MEMORY_MODEL;
+    void** rsm = NULL_POINTER_MEMORY_MODEL;
+    void** rsmc = NULL_POINTER_MEMORY_MODEL;
+    void** rsms = NULL_POINTER_MEMORY_MODEL;
+    void** rsd = NULL_POINTER_MEMORY_MODEL;
+    void** rsdc = NULL_POINTER_MEMORY_MODEL;
+    void** rsds = NULL_POINTER_MEMORY_MODEL;
     // The result name, abstraction, model, details.
-    void** rn = NULL_POINTER;
-    void** rnc = NULL_POINTER;
-    void** rns = NULL_POINTER;
-    void** ra = NULL_POINTER;
-    void** rac = NULL_POINTER;
-    void** ras = NULL_POINTER;
-    void** rm = NULL_POINTER;
-    void** rmc = NULL_POINTER;
-    void** rms = NULL_POINTER;
-    void** rd = NULL_POINTER;
-    void** rdc = NULL_POINTER;
-    void** rds = NULL_POINTER;
+    void** rn = NULL_POINTER_MEMORY_MODEL;
+    void** rnc = NULL_POINTER_MEMORY_MODEL;
+    void** rns = NULL_POINTER_MEMORY_MODEL;
+    void** ra = NULL_POINTER_MEMORY_MODEL;
+    void** rac = NULL_POINTER_MEMORY_MODEL;
+    void** ras = NULL_POINTER_MEMORY_MODEL;
+    void** rm = NULL_POINTER_MEMORY_MODEL;
+    void** rmc = NULL_POINTER_MEMORY_MODEL;
+    void** rms = NULL_POINTER_MEMORY_MODEL;
+    void** rd = NULL_POINTER_MEMORY_MODEL;
+    void** rdc = NULL_POINTER_MEMORY_MODEL;
+    void** rds = NULL_POINTER_MEMORY_MODEL;
     // The selection name, abstraction, model, details.
-    void** sn = NULL_POINTER;
-    void** snc = NULL_POINTER;
-    void** sns = NULL_POINTER;
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sn = NULL_POINTER_MEMORY_MODEL;
+    void** snc = NULL_POINTER_MEMORY_MODEL;
+    void** sns = NULL_POINTER_MEMORY_MODEL;
+    void** sa = NULL_POINTER_MEMORY_MODEL;
+    void** sac = NULL_POINTER_MEMORY_MODEL;
+    void** sas = NULL_POINTER_MEMORY_MODEL;
+    void** sm = NULL_POINTER_MEMORY_MODEL;
+    void** smc = NULL_POINTER_MEMORY_MODEL;
+    void** sms = NULL_POINTER_MEMORY_MODEL;
+    void** sd = NULL_POINTER_MEMORY_MODEL;
+    void** sdc = NULL_POINTER_MEMORY_MODEL;
+    void** sds = NULL_POINTER_MEMORY_MODEL;
 
     // Get comparison.
     get_universal_compound_element_by_name(p0, p1,

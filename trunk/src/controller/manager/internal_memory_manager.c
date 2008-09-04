@@ -19,17 +19,17 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: internal_memory_manager.c,v $ $Revision: 1.21 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: internal_memory_manager.c,v $ $Revision: 1.22 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERNAL_MEMORY_MANAGER_SOURCE
 #define INTERNAL_MEMORY_MANAGER_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
@@ -46,7 +46,7 @@
  * would be arbitrary pointers, the program would follow a wrong path,
  * because it would guess that an instance was properly allocated,
  * while in reality the value was just an arbitrary initial one.
- * Therefore, such values are initialised with the well-defined *NULL_POINTER.
+ * Therefore, such values are initialised with the well-defined *NULL_POINTER_MEMORY_MODEL.
  *
  * CAUTION! ONLY ONE parameter can be handed over to threads!
  * For example, the tcp socket is running in an own thread.
@@ -91,7 +91,7 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     // The loop variable.
     int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    while (*NUMBER_1_INTEGER) {
+    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
         if (j >= *INTERNAL_MEMORY_ELEMENTS_COUNT) {
 
@@ -114,7 +114,7 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
     //
 
     // The internal memory index.
-    int i = *NUMBER_MINUS_1_INTEGER;
+    int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
     // Set knowledge memory internals.
     set_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL, p1, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -123,7 +123,7 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     // Set signal memory internals.
     set_element(p0, (void*) SIGNAL_MEMORY_INTERNAL, p4, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
-    set_element(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+    set_element(p0, (void*) SIGNAL_MEMORY_MEMORY_MODEL_COUNT_INTERNAL, p5, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
     set_element(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL, p6, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
     // Set signal memory interrupt request flag.

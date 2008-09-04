@@ -19,44 +19,44 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi_command_option_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: cyboi_command_option_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOI_COMMAND_OPTION_NAME_SOURCE
 #define CYBOI_COMMAND_OPTION_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The "--version" cyboi command option name. */
 static wchar_t VERSION_CYBOI_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'-', L'v', L'e', L'r', L's', L'i', L'o', L'n'};
 static wchar_t* VERSION_CYBOI_COMMAND_OPTION_NAME = VERSION_CYBOI_COMMAND_OPTION_NAME_ARRAY;
-static int* VERSION_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* VERSION_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "--help" cyboi command option name. */
 static wchar_t HELP_CYBOI_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'-', L'h', L'e', L'l', L'p'};
 static wchar_t* HELP_CYBOI_COMMAND_OPTION_NAME = HELP_CYBOI_COMMAND_OPTION_NAME_ARRAY;
-static int* HELP_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* HELP_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "--test" cyboi command option name. */
 static wchar_t TEST_CYBOI_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'-', L't', L'e', L's', L't'};
 static wchar_t* TEST_CYBOI_COMMAND_OPTION_NAME = TEST_CYBOI_COMMAND_OPTION_NAME_ARRAY;
-static int* TEST_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* TEST_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "--loglevel" cyboi command option name. */
 static wchar_t LOG_LEVEL_CYBOI_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'-', L'l', L'o', L'g', L'l', L'e', L'v', L'e', L'l'};
 static wchar_t* LOG_LEVEL_CYBOI_COMMAND_OPTION_NAME = LOG_LEVEL_CYBOI_COMMAND_OPTION_NAME_ARRAY;
-static int* LOG_LEVEL_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* LOG_LEVEL_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "--logfile" cyboi command option name. */
 static wchar_t LOG_FILE_CYBOI_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'-', L'l', L'o', L'g', L'f', L'i', L'l', L'e'};
 static wchar_t* LOG_FILE_CYBOI_COMMAND_OPTION_NAME = LOG_FILE_CYBOI_COMMAND_OPTION_NAME_ARRAY;
-static int* LOG_FILE_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* LOG_FILE_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "--knowledge" cyboi command option name. */
 static wchar_t KNOWLEDGE_CYBOI_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'-', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e'};
 static wchar_t* KNOWLEDGE_CYBOI_COMMAND_OPTION_NAME = KNOWLEDGE_CYBOI_COMMAND_OPTION_NAME_ARRAY;
-static int* KNOWLEDGE_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* KNOWLEDGE_CYBOI_COMMAND_OPTION_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* CYBOI_COMMAND_OPTION_NAME_SOURCE */
 #endif

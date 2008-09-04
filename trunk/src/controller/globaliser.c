@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: globaliser.c,v $ $Revision: 1.11 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: globaliser.c,v $ $Revision: 1.12 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,15 +32,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "../globals/constants/float/double_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/double_memory_model.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../globals/constants/log/log_level_constants.c"
-#include "../globals/variables/log_variables.c"
-#include "../globals/variables/primitive_type_size_variables.c"
-#include "../globals/variables/reallocation_factor_variables.c"
-#include "../globals/variables/service_interrupt_variables.c"
-#include "../globals/variables/thread_identification_variables.c"
+#include "../constant/model/log/level_log_model.c"
+#include "../variable/log_setting.c"
+#include "../variable/primitive_type_size.c"
+#include "../variable/reallocation_factor.c"
+#include "../variable/service_interrupt.c"
+#include "../variable/thread_identification.c"
 
 /**
  * Allocates and initialises global variables.
@@ -93,11 +93,11 @@ void globalise() {
 
     // Allocate and initialise log level.
     LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *LOG_LEVEL = *OFF_LOG_LEVEL;
+    *LOG_LEVEL = *OFF_LEVEL_LOG_MODEL;
 
     // Allocate and initialise log level.
     LOG_MESSAGE_COUNT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *LOG_MESSAGE_COUNT = *NUMBER_10000_INTEGER;
+    *LOG_MESSAGE_COUNT = *NUMBER_10000_INTEGER_MEMORY_MODEL;
 
     // Allocate log message.
     LOG_MESSAGE = (wchar_t*) malloc(*LOG_MESSAGE_COUNT);
@@ -121,16 +121,16 @@ void globalise() {
 
     // Allocate and initialise gnu/linux console thread.
     GNU_LINUX_CONSOLE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *GNU_LINUX_CONSOLE_THREAD = *NUMBER_MINUS_1_INTEGER;
+    *GNU_LINUX_CONSOLE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // Allocate x window system thread.
     X_WINDOW_SYSTEM_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER;
+    *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // Allocate www service thread.
     WWW_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
+    *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // Allocate cyboi service thread.
     CYBOI_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER;
+    *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
     //
     // Service exit variables.
@@ -189,31 +189,31 @@ void globalise() {
 
     // Allocate and initialise cybol file reallocation factor.
     CYBOL_FILE_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *CYBOL_FILE_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    *CYBOL_FILE_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise character vector reallocation factor.
     CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    *CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise wide character vector reallocation factor.
     WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise integer vector reallocation factor.
     INTEGER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *INTEGER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    *INTEGER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise unsigned long vector reallocation factor.
     UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    *UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise double vector reallocation factor.
     DOUBLE_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *DOUBLE_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    *DOUBLE_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise pointer vector reallocation factor.
     POINTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *POINTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    *POINTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise compound reallocation factor.
     COMPOUND_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *COMPOUND_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    *COMPOUND_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise signal memory reallocation factor.
     SIGNAL_MEMORY_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *SIGNAL_MEMORY_REALLOCATION_FACTOR = *NUMBER_2_INTEGER;
+    *SIGNAL_MEMORY_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
 }
 
 /**

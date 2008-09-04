@@ -19,17 +19,17 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communicator.c,v $ $Revision: 1.25 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: communicator.c,v $ $Revision: 1.26 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMMUNICATOR_SOURCE
 #define COMMUNICATOR_SOURCE
 
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../constant/channel/cybol_channel.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../globals/constants/system/system_file_name_constants.c"
 #include "../memoriser/communicator/datagram_socket_communicator.c"

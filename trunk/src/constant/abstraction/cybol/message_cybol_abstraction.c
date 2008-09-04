@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: message_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: message_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MESSAGE_CYBOL_ABSTRACTION_SOURCE
 #define MESSAGE_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -57,7 +57,7 @@
  */
 static wchar_t HTTP_MESSAGE_CYBOL_ABSTRACTION_ARRAY[] = {L'm', L'e', L's', L's', L'a', L'g', L'e', L'/', L'h', L't', L't', L'p'};
 static wchar_t* HTTP_MESSAGE_CYBOL_ABSTRACTION = HTTP_MESSAGE_CYBOL_ABSTRACTION_ARRAY;
-static int* HTTP_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_12_INTEGER_ARRAY;
+static int* HTTP_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The message/http-request cybol abstraction.
@@ -67,7 +67,7 @@ static int* HTTP_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_12_INTEGER_ARRAY;
  */
 static wchar_t HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_ARRAY[] = {L'm', L'e', L's', L's', L'a', L'g', L'e', L'/', L'h', L't', L't', L'p', L'-', L'r', L'e', L'q', L'u', L'e', L's', L't'};
 static wchar_t* HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION = HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_ARRAY;
-static int* HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_20_INTEGER_ARRAY;
+static int* HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_20_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The message/http-response cybol abstraction.
@@ -77,14 +77,14 @@ static int* HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_20_INTEGER_ARR
  */
 static wchar_t HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION_ARRAY[] = {L'm', L'e', L's', L's', L'a', L'g', L'e', L'/', L'h', L't', L't', L'p', L'-', L'r', L'e', L's', L'p', L'o', L'n', L's', L'e'};
 static wchar_t* HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION = HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION_ARRAY;
-static int* HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_21_INTEGER_ARRAY;
+static int* HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_21_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The message/news cybol abstraction.
  */
 static wchar_t NEWS_MESSAGE_CYBOL_ABSTRACTION_ARRAY[] = {L'm', L'e', L's', L's', L'a', L'g', L'e', L'/', L'n', L'e', L'w', L's'};
 static wchar_t* NEWS_MESSAGE_CYBOL_ABSTRACTION = NEWS_MESSAGE_CYBOL_ABSTRACTION_ARRAY;
-static int* NEWS_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_12_INTEGER_ARRAY;
+static int* NEWS_MESSAGE_CYBOL_ABSTRACTION_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* MESSAGE_CYBOL_ABSTRACTION_SOURCE */
 #endif

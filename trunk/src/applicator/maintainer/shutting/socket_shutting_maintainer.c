@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_shutting_maintainer.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: socket_shutting_maintainer.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,7 +28,7 @@
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
@@ -54,9 +54,9 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Shutdown socket.");
 
         // The internal memory index.
-        int i = *NUMBER_MINUS_1_INTEGER;
+        int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The socket internal of this system.
-        int** si = (int**) NULL_POINTER;
+        int** si = (int**) NULL_POINTER_MEMORY_MODEL;
 
         // Get socket internal of this system.
         i = *base + *SOCKET_INTERNAL;
@@ -68,27 +68,27 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
             interrupt_thread(p2, p3);
 
             // The socket address (local, ipv4, ipv6) of this system.
-            void** a = NULL_POINTER;
+            void** a = NULL_POINTER_MEMORY_MODEL;
             // The communication partner socket address (local, ipv4, ipv6).
-            void** pa = NULL_POINTER;
+            void** pa = NULL_POINTER_MEMORY_MODEL;
             // The socket address size of this system.
-            void** as = NULL_POINTER;
+            void** as = NULL_POINTER_MEMORY_MODEL;
             // The communication partner socket address size.
-            void** pas = NULL_POINTER;
+            void** pas = NULL_POINTER_MEMORY_MODEL;
             // The socket of this system.
-            int** s = (int**) NULL_POINTER;
+            int** s = (int**) NULL_POINTER_MEMORY_MODEL;
             // The communication partner socket.
-            int** ps = (int**) NULL_POINTER;
+            int** ps = (int**) NULL_POINTER_MEMORY_MODEL;
 /*??
             // The signal ids.
-            void** id = NULL_POINTER;
-            void** idc = NULL_POINTER;
-            void** ids = NULL_POINTER;
+            void** id = NULL_POINTER_MEMORY_MODEL;
+            void** idc = NULL_POINTER_MEMORY_MODEL;
+            void** ids = NULL_POINTER_MEMORY_MODEL;
 */
             // The character buffer being used in the thread procedure receiving messages via socket.
-            void** b = NULL_POINTER;
-            void** bc = NULL_POINTER;
-            void** bs = NULL_POINTER;
+            void** b = NULL_POINTER_MEMORY_MODEL;
+            void** bc = NULL_POINTER_MEMORY_MODEL;
+            void** bs = NULL_POINTER_MEMORY_MODEL;
 
             // Get socket address of this system.
             i = *base + *SOCKET_ADDRESS_INTERNAL;
@@ -129,26 +129,26 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
 
 /*??
             // Destroy signal ids.
-            deallocate_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY);
-            deallocate(idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate(ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+            deallocate(idc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate(ids, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 */
             // Deallocate character buffer.
             deallocate((void*) b, *bs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            deallocate((void*) bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             // Deallocate socket of this system.
-            deallocate((void*) s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             // Deallocate communication partner socket.
-            deallocate((void*) ps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             // Deallocate socket address of this system.
             free(*a);
             // Deallocate communication partner socket address.
             free(*pa);
             // Deallocate socket address size of this system.
-            deallocate((void*) as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             // Deallocate communication partner socket address size.
-            deallocate((void*) pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            deallocate((void*) pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         } else {
 

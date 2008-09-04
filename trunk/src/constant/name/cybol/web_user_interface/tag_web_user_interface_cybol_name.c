@@ -19,24 +19,24 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: tag_web_user_interface_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: tag_web_user_interface_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TAG_WEB_USER_INTERFACE_CYBOL_NAME_SOURCE
 #define TAG_WEB_USER_INTERFACE_CYBOL_NAME_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The tag web user interface cybol name. */
 static wchar_t TAG_WEB_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L't', L'a', L'g'};
 static wchar_t* TAG_WEB_USER_INTERFACE_CYBOL_NAME = TAG_WEB_USER_INTERFACE_CYBOL_NAME_ARRAY;
-static int* TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_3_INTEGER_ARRAY;
+static int* TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The property web user interface cybol name. */
 static wchar_t PROPERTY_WEB_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'p', L'r', L'o', L'p', L'e', L'r', L't', L'y'};
 static wchar_t* PROPERTY_WEB_USER_INTERFACE_CYBOL_NAME = PROPERTY_WEB_USER_INTERFACE_CYBOL_NAME_ARRAY;
-static int* PROPERTY_WEB_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* PROPERTY_WEB_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* TAG_WEB_USER_INTERFACE_CYBOL_NAME_SOURCE */
 #endif

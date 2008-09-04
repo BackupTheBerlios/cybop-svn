@@ -19,24 +19,24 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: list_unix_command_option_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: list_unix_command_option_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LIST_UNIX_COMMAND_OPTION_NAME_SOURCE
 #define LIST_UNIX_COMMAND_OPTION_NAME_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The all list unix command option name. */
 static wchar_t ALL_LIST_UNIX_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'-', L'a', L'l', L'l'};
 static wchar_t* ALL_LIST_UNIX_COMMAND_OPTION_NAME = ALL_LIST_UNIX_COMMAND_OPTION_NAME_ARRAY;
-static int* ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The long listing list unix command option name. */
 static wchar_t LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'l'};
 static wchar_t* LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME = LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_ARRAY;
-static int* LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_2_INTEGER_ARRAY;
+static int* LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* LIST_UNIX_COMMAND_OPTION_NAME_SOURCE */
 #endif

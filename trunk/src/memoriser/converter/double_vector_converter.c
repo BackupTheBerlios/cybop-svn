@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: double_vector_converter.c,v $ $Revision: 1.20 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: double_vector_converter.c,v $ $Revision: 1.21 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,9 +28,9 @@
 
 #include <string.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
@@ -58,7 +58,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The temporary null-terminated string.
             wchar_t* tmp = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
-            int tmps = *sc + *NUMBER_1_INTEGER;
+            int tmps = *sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
             // Create temporary null-terminated string.
             allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -73,7 +73,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -100,7 +100,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             //?? to be able to take the double value?
 
             // Set double value.
-            set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) NUMBER_1_INTEGER, (void*) DOUBLE_ARRAY);
+            set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 
             // Destroy temporary null-terminated string.
             deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -145,13 +145,13 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 double* v = (double*) *NULL_POINTER_MEMORY_MODEL;
 
                 // Get double value.
-                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) DOUBLE_ARRAY);
+                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 
                 // Initialise destination count to -1.
                 // CAUTION! It must be negative for the loop to run.
-                *dc = *NUMBER_MINUS_1_INTEGER;
+                *dc = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                while (*NUMBER_1_INTEGER) {
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                     if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -166,7 +166,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Set destination string size one greater than the count
                     // to have space for the terminating null character and
                     // to avoid a zero value in case destination string size is zero.
-                    *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
+                    *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate destination string.
                     reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -231,20 +231,20 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // The loop count.
                 int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 // The comma index.
-                int i = *NUMBER_MINUS_1_INTEGER;
+                int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
                 // The double vector element count.
                 void* c = *NULL_POINTER_MEMORY_MODEL;
                 // The double number.
                 int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                while (*NUMBER_1_INTEGER) {
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                     if (j >= *sc) {
 
                         break;
                     }
 
-                    get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) &i);
+                    get_character_array_elements_index(p3, p4, (void*) COMMA_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i);
 
                     if (i > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -289,16 +289,16 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 /*??
                 int i1 = s.indexOf(",");
 
-                if (i1 != *NUMBER_MINUS_1_INTEGER) {
+                if (i1 != *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
 
-                    char[] x = s.substring(*NUMBER_0_INTEGER, i1);
-                    char[] yz = s.substring(i1 + *NUMBER_1_INTEGER);
+                    char[] x = s.substring(*NUMBER_0_INTEGER_MEMORY_MODEL, i1);
+                    char[] yz = s.substring(i1 + *NUMBER_1_INTEGER_MEMORY_MODEL);
                     int i2 = yz.indexOf(",");
 
-                    if (i2 != *NUMBER_MINUS_1_INTEGER) {
+                    if (i2 != *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
 
-                        char[] y = yz.substring(*NUMBER_0_INTEGER, i2);
-                        char[] z = yz.substring(i2 + *NUMBER_1_INTEGER);
+                        char[] y = yz.substring(*NUMBER_0_INTEGER_MEMORY_MODEL, i2);
+                        char[] z = yz.substring(i2 + *NUMBER_1_INTEGER_MEMORY_MODEL);
 
                         p.x = java.lang.Integer.parseInt(x);
                         p.y = java.lang.Integer.parseInt(y);

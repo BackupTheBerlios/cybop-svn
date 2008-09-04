@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: directory_contents_listing_runner.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: directory_contents_listing_runner.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,17 +30,17 @@
 #include "../../applicator/run/run_execute.c"
 #include "../../globals/constants/boolean/boolean_constants.c"
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../globals/constants/shell_command/unix_shell_command_constants.c"
 #include "../../globals/constants/system/system_executable_constants.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/reallocation_factor_variables.c"
+#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
 
 /**
@@ -56,32 +56,32 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run list directory contents command.");
 
     // The all name, abstraction, model, details.
-    void** alln = NULL_POINTER;
-    void** allnc = NULL_POINTER;
-    void** allns = NULL_POINTER;
-    void** alla = NULL_POINTER;
-    void** allac = NULL_POINTER;
-    void** allas = NULL_POINTER;
-    int** allm = (int**) NULL_POINTER;
-    void** allmc = NULL_POINTER;
-    void** allms = NULL_POINTER;
-    void** alld = NULL_POINTER;
-    void** alldc = NULL_POINTER;
-    void** allds = NULL_POINTER;
+    void** alln = NULL_POINTER_MEMORY_MODEL;
+    void** allnc = NULL_POINTER_MEMORY_MODEL;
+    void** allns = NULL_POINTER_MEMORY_MODEL;
+    void** alla = NULL_POINTER_MEMORY_MODEL;
+    void** allac = NULL_POINTER_MEMORY_MODEL;
+    void** allas = NULL_POINTER_MEMORY_MODEL;
+    int** allm = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** allmc = NULL_POINTER_MEMORY_MODEL;
+    void** allms = NULL_POINTER_MEMORY_MODEL;
+    void** alld = NULL_POINTER_MEMORY_MODEL;
+    void** alldc = NULL_POINTER_MEMORY_MODEL;
+    void** allds = NULL_POINTER_MEMORY_MODEL;
 
     // The long listing name, abstraction, model, details.
-    void** longlistingn = NULL_POINTER;
-    void** longlistingnc = NULL_POINTER;
-    void** longlistingns = NULL_POINTER;
-    void** longlistinga = NULL_POINTER;
-    void** longlistingac = NULL_POINTER;
-    void** longlistingas = NULL_POINTER;
-    int** longlistingm = (int**) NULL_POINTER;
-    void** longlistingmc = NULL_POINTER;
-    void** longlistingms = NULL_POINTER;
-    void** longlistingd = NULL_POINTER;
-    void** longlistingdc = NULL_POINTER;
-    void** longlistingds = NULL_POINTER;
+    void** longlistingn = NULL_POINTER_MEMORY_MODEL;
+    void** longlistingnc = NULL_POINTER_MEMORY_MODEL;
+    void** longlistingns = NULL_POINTER_MEMORY_MODEL;
+    void** longlistinga = NULL_POINTER_MEMORY_MODEL;
+    void** longlistingac = NULL_POINTER_MEMORY_MODEL;
+    void** longlistingas = NULL_POINTER_MEMORY_MODEL;
+    int** longlistingm = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** longlistingmc = NULL_POINTER_MEMORY_MODEL;
+    void** longlistingms = NULL_POINTER_MEMORY_MODEL;
+    void** longlistingd = NULL_POINTER_MEMORY_MODEL;
+    void** longlistingdc = NULL_POINTER_MEMORY_MODEL;
+    void** longlistingds = NULL_POINTER_MEMORY_MODEL;
 
     // Get all option.
     get_universal_compound_element_by_name(p0, p1,
@@ -137,7 +137,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
@@ -164,7 +164,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
@@ -186,7 +186,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble arguments by adding the null termination character.
-    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Execute arguments as process.
@@ -237,7 +237,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(shell, (void*) &shellc, (void*) SHELL_SYSTEM_EXECUTABLE, (void*) SHELL_SYSTEM_EXECUTABLE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     shellc = shellc + *SHELL_SYSTEM_EXECUTABLE_COUNT;
-    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     shellc = shellc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Increase arguments vector size for shell argument.
@@ -257,7 +257,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(character, (void*) &characterc, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     characterc = characterc + *SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT;
-    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     characterc = characterc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Increase arguments vector size for shell character argument.
@@ -301,7 +301,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_ALL_COUNT;
@@ -328,7 +328,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING, (void*) LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_SHELL_COMMAND_LONG_LISTING_COUNT;
@@ -350,7 +350,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble command by adding the null termination character.
-    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     //

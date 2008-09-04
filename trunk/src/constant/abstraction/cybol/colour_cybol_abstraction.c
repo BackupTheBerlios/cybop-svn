@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: colour_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: colour_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COLOUR_CYBOL_ABSTRACTION_SOURCE
 #define COLOUR_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -62,7 +62,7 @@
  */
 static wchar_t CMYK_COLOUR_CYBOL_ABSTRACTION_ARRAY[] = {L'c', L'o', L'l', L'o', L'u', L'r', L'/', L'c', L'm', L'y', L'k'};
 static wchar_t* CMYK_COLOUR_CYBOL_ABSTRACTION = CMYK_COLOUR_CYBOL_ABSTRACTION_ARRAY;
-static int* CMYK_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* CMYK_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The colour/rgb cybol abstraction.
@@ -73,7 +73,7 @@ static int* CMYK_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_11_INTEGER_ARRAY;
  */
 static wchar_t RGB_COLOUR_CYBOL_ABSTRACTION_ARRAY[] = {L'c', L'o', L'l', L'o', L'u', L'r', L'/', L'r', L'g', L'b'};
 static wchar_t* RGB_COLOUR_CYBOL_ABSTRACTION = RGB_COLOUR_CYBOL_ABSTRACTION_ARRAY;
-static int* RGB_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* RGB_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The colour/terminal-background cybol abstraction.
@@ -84,7 +84,7 @@ static int* RGB_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
  */
 static wchar_t TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION_ARRAY[] = {L'c', L'o', L'l', L'o', L'u', L'r', L'/', L't', L'e', L'r', L'm', L'i', L'n', L'a', L'l', L'-', L'b', L'a', L'c', L'k', L'g', L'r', L'o', L'u', L'n', L'd'};
 static wchar_t* TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION = TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION_ARRAY;
-static int* TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_26_INTEGER_ARRAY;
+static int* TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_26_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The colour/terminal-foreground cybol abstraction.
@@ -95,7 +95,7 @@ static int* TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_26_INTEG
  */
 static wchar_t TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION_ARRAY[] = {L'c', L'o', L'l', L'o', L'u', L'r', L'/', L't', L'e', L'r', L'm', L'i', L'n', L'a', L'l', L'-', L'f', L'o', L'r', L'e', L'g', L'r', L'o', L'u', L'n', L'd'};
 static wchar_t* TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION = TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION_ARRAY;
-static int* TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_26_INTEGER_ARRAY;
+static int* TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT = NUMBER_26_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COLOUR_CYBOL_ABSTRACTION_SOURCE */
 #endif

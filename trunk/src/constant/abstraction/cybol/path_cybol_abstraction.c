@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: path_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: path_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOL_PATH_LANGUAGE_CONSTANTS_SOURCE
 #define CYBOL_PATH_LANGUAGE_CONSTANTS_SOURCE
 
-#include "../../../../globals/constants/integer/integer_constants.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -69,7 +69,7 @@
  */
 static wchar_t KNOWLEDGE_PATH_CYBOL_ABSTRACTION_ARRAY[] = {L'p', L'a', L't', L'h', L'/', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e'};
 static wchar_t* KNOWLEDGE_PATH_CYBOL_ABSTRACTION = KNOWLEDGE_PATH_CYBOL_ABSTRACTION_ARRAY;
-static int* KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
+static int* KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The path/encapsulated cybol abstraction.
@@ -86,7 +86,7 @@ static int* KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
  */
 static wchar_t ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_ARRAY[] = {L'p', L'a', L't', L'h', L'/', L'e', L'n', L'c', L'a', L'p', L's', L'u', L'l', L'a', L't', L'e', L'd'};
 static wchar_t* ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION = ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_ARRAY;
-static int* ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT = NUMBER_17_INTEGER_ARRAY;
+static int* ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* CYBOL_PATH_LANGUAGE_CONSTANTS_SOURCE */
 #endif

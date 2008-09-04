@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: shape_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: shape_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SHAPE_CYBOL_MODEL_SOURCE
 #define SHAPE_CYBOL_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The rectangle shape cybol model. */
 static wchar_t RECTANGLE_SHAPE_CYBOL_MODEL_ARRAY[] = {L'r', L'e', L'c', L't', L'a', L'n', L'g', L'l', L'e'};
 static wchar_t* RECTANGLE_SHAPE_CYBOL_MODEL = RECTANGLE_SHAPE_CYBOL_MODEL_ARRAY;
-static int* RECTANGLE_SHAPE_CYBOL_MODEL_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* RECTANGLE_SHAPE_CYBOL_MODEL_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The circle shape cybol model. */
 static wchar_t CIRCLE_SHAPE_CYBOL_MODEL_ARRAY[] = {L'c', L'i', L'r', L'c', L'l', L'e'};
 static wchar_t* CIRCLE_SHAPE_CYBOL_MODEL = CIRCLE_SHAPE_CYBOL_MODEL_ARRAY;
-static int* CIRCLE_SHAPE_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* CIRCLE_SHAPE_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The polygon shape cybol model. */
 static wchar_t POLYGON_SHAPE_CYBOL_MODEL_ARRAY[] = {L'p', L'o', L'l', L'y', L'g', L'o', L'n'};
 static wchar_t* POLYGON_SHAPE_CYBOL_MODEL = POLYGON_SHAPE_CYBOL_MODEL_ARRAY;
-static int* POLYGON_SHAPE_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* POLYGON_SHAPE_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SHAPE_CYBOL_MODEL_SOURCE */
 #endif

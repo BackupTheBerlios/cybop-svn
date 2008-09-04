@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: name_getting_memoriser.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: name_getting_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef NAME_GETTER_SOURCE
 #define NAME_GETTER_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
@@ -51,9 +51,9 @@
 void get_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The temporary result.
-    void** r = NULL_POINTER;
-    void** rc = NULL_POINTER;
-    void** rs = NULL_POINTER;
+    void** r = NULL_POINTER_MEMORY_MODEL;
+    void** rc = NULL_POINTER_MEMORY_MODEL;
+    void** rs = NULL_POINTER_MEMORY_MODEL;
 
     // Get temporary result.
     get_compound_element_name_by_index(p3, p4, p5, (void*) &r, (void*) &rc, (void*) &rs);

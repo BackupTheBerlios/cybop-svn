@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,13 +34,13 @@
 #include <sys/socket.h>
 #include "../../applicator/starter/socket_starter.c"
 #include "../../globals/constants/character/set/character_set_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/http/http_header_constants.c"
 #include "../../globals/constants/http/http_header_variable_constants.c"
 #include "../../globals/constants/http/http_protocol_version_constants.c"
 #include "../../globals/constants/http/http_status_code_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/mime_type/text_mime_type_constants.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
@@ -68,9 +68,9 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get socket for server mode.");
 
         // The internal memory index.
-        int i = *NUMBER_MINUS_1_INTEGER;
+        int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The socket mutex.
-        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
+        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
 
 /*??
         ONLY necessary when writing or deleting a socket from internal memory.
@@ -254,7 +254,7 @@ void send_socket_set_nonblocking_mode(void* p0) {
         // Get file status flags.
         int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER);
 
-        if (fl != *NUMBER_MINUS_1_INTEGER) {
+        if (fl != *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
 
             // Set non-blocking flag (bit).
             fl |= O_NONBLOCK;
@@ -484,13 +484,13 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send message via socket.");
 
     // The communication style.
-    int st = *NUMBER_MINUS_1_INTEGER;
+    int st = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // The socket namespace.
-    int sn = *NUMBER_MINUS_1_INTEGER;
+    int sn = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // The address namespace.
-    int an = *NUMBER_MINUS_1_INTEGER;
+    int an = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // The socket of this system.
-    int** s = (int**) NULL_POINTER;
+    int** s = (int**) NULL_POINTER_MEMORY_MODEL;
     // The host address of the communication partner.
     void* ha = *NULL_POINTER_MEMORY_MODEL;
     // The socket address of the communication partner.
@@ -542,12 +542,12 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // Encode http body.
     //
     // The compound model is encoded depending on the given language, e.g. into xhtml format.
-    encode((void*) &b, (void*) &bc, (void*) &bs, *NULL_POINTER, *NULL_POINTER, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
+    encode((void*) &b, (void*) &bc, (void*) &bs, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
 
     // Encode http response.
-    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER,
-        b, (void*) &bc, *NULL_POINTER, *NULL_POINTER,
-        *NULL_POINTER, *NULL_POINTER, (void*) HTTP_RESPONSE_ABSTRACTION, (void*) HTTP_RESPONSE_ABSTRACTION_COUNT);
+    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        b, (void*) &bc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) HTTP_RESPONSE_ABSTRACTION, (void*) HTTP_RESPONSE_ABSTRACTION_COUNT);
 
     log_write_terminated_message(stdout, L"SUCCESS! Generated http message with xhtml file as body.\n");
 
@@ -562,10 +562,10 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     if (f >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         // The file owner.
-        int o = *NUMBER_MINUS_1_INTEGER;
+        int o = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // The file group.
-        int g = *NUMBER_MINUS_1_INTEGER;
+        int g = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Set file owner.
         chown(n, o, g);
@@ -607,7 +607,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
 /*??
     // Send message via socket in server mode.
     //?? TEST: For testing reasons, the internal memory parameter p0 is misused as client socket here!
-    write_socket(p0, m, (void*) &mc, *NULL_POINTER, *NULL_POINTER, p9, p10, (void*) &st);
+    write_socket(p0, m, (void*) &mc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, (void*) &st);
 */
 
     // Send message via socket in client mode.

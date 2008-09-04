@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: opcode_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: opcode_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef OPCODE_MODEL_SOURCE
 #define OPCODE_MODEL_SOURCE
 
-#include "../../constant/model/memory/integer_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 
 //
 // Opcodes.

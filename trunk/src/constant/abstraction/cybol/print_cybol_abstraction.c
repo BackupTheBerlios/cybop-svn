@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: print_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: print_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PRINT_MIME_TYPE_CONSTANTS_SOURCE
 #define PRINT_MIME_TYPE_CONSTANTS_SOURCE
 
-#include "../../../globals/constants/integer/integer_constants.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // This MIME type was taken from/ inspired by the KDE desktop.
@@ -38,7 +38,7 @@
  */
 static wchar_t JOBS_PRINT_CYBOL_ABSTRACTION_ARRAY[] = {L'p', L'r', L'i', L'n', L't', L'/', L'j', L'o', L'b', L's'};
 static wchar_t* JOBS_PRINT_CYBOL_ABSTRACTION = JOBS_PRINT_CYBOL_ABSTRACTION_ARRAY;
-static int* JOBS_PRINT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* JOBS_PRINT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* PRINT_MIME_TYPE_CONSTANTS_SOURCE */
 #endif

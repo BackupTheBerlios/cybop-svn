@@ -19,38 +19,38 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: signal_memory_memory_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: signal_memory_memory_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SIGNAL_MEMORY_MEMORY_NAME_SOURCE
 #define SIGNAL_MEMORY_MEMORY_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The abstractions signal memory memory name. */
-static int* ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_0_INTEGER_ARRAY;
+static int* ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The abstractions counts signal memory memory name. */
-static int* ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_1_INTEGER_ARRAY;
+static int* ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The models signal memory memory name. */
-static int* MODELS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_2_INTEGER_ARRAY;
+static int* MODELS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The models counts signal memory memory name. */
-static int* MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_3_INTEGER_ARRAY;
+static int* MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The details signal memory memory name. */
-static int* DETAILS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_4_INTEGER_ARRAY;
+static int* DETAILS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The details counts signal memory memory name. */
-static int* DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_5_INTEGER_ARRAY;
+static int* DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The priorities signal memory memory name. */
-static int* PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_6_INTEGER_ARRAY;
+static int* PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The identifications signal memory memory name. */
-static int* IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_7_INTEGER_ARRAY;
+static int* IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SIGNAL_MEMORY_MEMORY_NAME_SOURCE */
 #endif

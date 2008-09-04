@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,8 +28,8 @@
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
@@ -69,7 +69,7 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     if (w != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        decode(p0, p1, p2, p3, p4, p5, p6, p7, *NULL_POINTER, *NULL_POINTER, p8, p9);
+        decode(p0, p1, p2, p3, p4, p5, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
     } else {
 
@@ -86,14 +86,14 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
         // Read persistent byte stream over channel.
-        read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
+        read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
 
         //
         // Decode.
         //
 
         // Decode byte stream according to given document type.
-        decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER, *NULL_POINTER, p8, p9);
+        decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
         // Deallocate read model.
         deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);

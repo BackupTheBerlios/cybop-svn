@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: operation_handler.c,v $ $Revision: 1.43 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: operation_handler.c,v $ $Revision: 1.44 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,9 +43,9 @@
 #include "../../applicator/sense.c"
 #include "../../applicator/shutdown.c"
 #include "../../applicator/startup.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
@@ -236,7 +236,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE, (void*) SET_SHUTDOWN_FLAG_MESSAGE_COUNT);
 
             int* f = (int*) p7;
-            *f = *NUMBER_1_INTEGER;
+            *f = *NUMBER_1_INTEGER_MEMORY_MODEL;
         }
     }
 

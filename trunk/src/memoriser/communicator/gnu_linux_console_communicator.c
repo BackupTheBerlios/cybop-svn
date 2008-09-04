@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.17 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.18 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,12 +29,12 @@
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
-#include "../../globals/constants/character/code/wide_character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
@@ -66,9 +66,9 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // The escape control sequence mode.
         int csi = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-            if (f == *NUMBER_1_INTEGER) {
+            if (f == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 break;
             }
@@ -89,7 +89,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     fwprintf(stderr, L"TEST read gnu/linux console c: %c\n", c);
 
-            if (csi == *NUMBER_1_INTEGER) {
+            if (csi == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 // Reset escape control sequence flag.
                 csi = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -100,9 +100,9 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 // An escape character followed by a left square bracket character
                 // were read before. So this is an escape control sequence.
                 // Since all values have been read, the loop can be left now.
-                f = *NUMBER_1_INTEGER;
+                f = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-            } else if (esc == *NUMBER_1_INTEGER) {
+            } else if (esc == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 // Reset escape character flag.
                 esc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -117,7 +117,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                     // This is the start of an escape control sequence.
 
                     // Set escape control sequence flag.
-                    csi = *NUMBER_1_INTEGER;
+                    csi = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Copy source character to destination character array.
                     decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
@@ -131,13 +131,13 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                     ungetwc(c, s);
 
                     // Set loop exit flag.
-                    f = *NUMBER_1_INTEGER;
+                    f = *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
 
             } else if (c == *((wint_t*) ESCAPE_CONTROL_UNICODE_CHARACTER_CODE_MODEL)) {
 
                 // Set escape character flag.
-                esc = *NUMBER_1_INTEGER;
+                esc = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 // Copy source character to destination character array.
                 decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
@@ -145,7 +145,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             } else if (c == WEOF) {
 
                 // Set loop exit flag.
-                f = *NUMBER_1_INTEGER;
+                f = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
             } else {
 
@@ -153,7 +153,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER);
 
                 // Set loop exit flag.
-                f = *NUMBER_1_INTEGER;
+                f = *NUMBER_1_INTEGER_MEMORY_MODEL;
             }
         }
 
@@ -191,15 +191,15 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // The terminated control sequences string.
             wchar_t* ts = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
             // Increase control sequences count by one, for termination character.
-            int tss = *sc + *NUMBER_1_INTEGER;
+            int tss = *sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
             // Create terminated control sequences string.
             allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // Set terminated control sequences string by first copying the actual
             // control sequences and then adding the null termination character.
-            set_array_elements((void*) ts, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            set_array_elements((void*) ts, p4, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements((void*) ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements((void*) ts, p4, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (*d != *NULL_POINTER_MEMORY_MODEL) {
 

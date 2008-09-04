@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,14 +40,14 @@
 #include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../globals/constants/console/console_escape_code_constants.c"
 #include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/cybol/cybol_channel_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/channel/cybol_channel.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_level_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/log/level_log_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -122,12 +122,12 @@ void sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void
                         // Set socket interrupt request to indicate
                         // that a message has been received via socket,
                         // which may now be processed in the main thread of this system.
-                        *irq = *NUMBER_1_INTEGER;
+                        *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                         // Unlock socket mutex.
                         pthread_mutex_unlock(mt);
 
-                        while (*irq == *NUMBER_1_INTEGER) {
+                        while (*irq == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                             // Sleep as long as the socket interrupt is not handled and reset yet.
                             // This is to give the central processing unit (cpu) some
@@ -203,22 +203,22 @@ void sense_socket(void* p0, void* p1) {
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense socket.");
 
         // The internal memory index.
-        int i = *NUMBER_MINUS_1_INTEGER;
+        int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The interrupt.
-        void** irq = NULL_POINTER;
+        void** irq = NULL_POINTER_MEMORY_MODEL;
         // The mutex.
-        void** mt = NULL_POINTER;
+        void** mt = NULL_POINTER_MEMORY_MODEL;
         // The sleep time.
-        void** st = NULL_POINTER;
+        void** st = NULL_POINTER_MEMORY_MODEL;
         // The display.
-        void** d = NULL_POINTER;
+        void** d = NULL_POINTER_MEMORY_MODEL;
         // The communication partner-connected socket of this system.
-        void** ps = NULL_POINTER;
+        void** ps = NULL_POINTER_MEMORY_MODEL;
         // The communication partner-connected socket address of this system.
-        void** pa = NULL_POINTER;
-        void** pas = NULL_POINTER;
+        void** pa = NULL_POINTER_MEMORY_MODEL;
+        void** pas = NULL_POINTER_MEMORY_MODEL;
         // The original socket of this system.
-        void** os = NULL_POINTER;
+        void** os = NULL_POINTER_MEMORY_MODEL;
 
         // Get interrupt.
         i = *base + *SOCKET_INTERRUPT_REQUEST_INTERNAL;
@@ -241,7 +241,7 @@ void sense_socket(void* p0, void* p1) {
         i = *base + *SOCKET_INTERNAL;
         get_element(p0, (void*) &i, (void*) &os, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // A break condition does not exist here because the loop
             // is running neverendingly while sensing messages.

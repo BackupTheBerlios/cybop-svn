@@ -19,20 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.18 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.19 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MODEL_DIAGRAM_CONVERTER_SOURCE
 #define MODEL_DIAGRAM_CONVERTER_SOURCE
 
-#include "../../globals/constants/character/code/wide_character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 
@@ -100,7 +100,7 @@ void encode_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, vo
             // The loop variable.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER) {
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (j >= *l) {
 
@@ -108,16 +108,16 @@ void encode_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, vo
                 }
 
                 // Check if the last of many indentations has been reached.
-                if ((j + *NUMBER_1_INTEGER) < *l) {
+                if ((j + *NUMBER_1_INTEGER_MEMORY_MODEL) < *l) {
 
                     // This is one of many indentations before the actual part appears.
                     // Therefore, use a pipe- and space character.
 
                     // Add pipe character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add space character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                 } else {
 
@@ -128,20 +128,20 @@ void encode_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, vo
                         // This is the part model, so that a plus- and minus character are used.
 
                         // Add plus character to destination array.
-                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) PLUS_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) PLUS_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                         // Add minus character to destination array.
-                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     } else {
 
                         // This is the part details, so that a number sign- and minus character are used.
 
                         // Add plus character to destination array.
-                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) NUMBER_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) NUMBER_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                         // Add minus character to destination array.
-                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                        encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) HYPHEN_MINUS_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                     }
                 }
 
@@ -187,18 +187,18 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // The part name, abstraction, model, details.
-            void** n = NULL_POINTER;
-            void** nc = NULL_POINTER;
-            void** ns = NULL_POINTER;
-            void** a = NULL_POINTER;
-            void** ac = NULL_POINTER;
-            void** as = NULL_POINTER;
-            void** m = NULL_POINTER;
-            void** mc = NULL_POINTER;
-            void** ms = NULL_POINTER;
-            void** d = NULL_POINTER;
-            void** dc = NULL_POINTER;
-            void** ds = NULL_POINTER;
+            void** n = NULL_POINTER_MEMORY_MODEL;
+            void** nc = NULL_POINTER_MEMORY_MODEL;
+            void** ns = NULL_POINTER_MEMORY_MODEL;
+            void** a = NULL_POINTER_MEMORY_MODEL;
+            void** ac = NULL_POINTER_MEMORY_MODEL;
+            void** as = NULL_POINTER_MEMORY_MODEL;
+            void** m = NULL_POINTER_MEMORY_MODEL;
+            void** mc = NULL_POINTER_MEMORY_MODEL;
+            void** ms = NULL_POINTER_MEMORY_MODEL;
+            void** d = NULL_POINTER_MEMORY_MODEL;
+            void** dc = NULL_POINTER_MEMORY_MODEL;
+            void** ds = NULL_POINTER_MEMORY_MODEL;
 
             // The new tree level.
             //
@@ -206,9 +206,9 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
             //
             // CAUTION! Do NOT manipulate the original tree level that was handed over as parameter!
             // Otherwise, it would never be decremented anymore leading to wrong indentation.
-            int nl = *l + *NUMBER_1_INTEGER;
+            int nl = *l + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER) {
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (j >= *sc) {
 
@@ -223,7 +223,7 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
                     (void*) &d, (void*) &dc, (void*) &ds);
 
                 // Add line feed character to destination array.
-                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                 // Encode part.
                 encode_model_diagram_node(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, (void*) &nl, p6);
@@ -279,13 +279,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             encode_utf_8_unicode_character_vector(p0, p1, p2, p3, p4);
 
             // Add space character to destination array.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
             // Add pipe character to destination array.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
             // Add space character to destination array.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
             // Add part abstraction to destination array.
             encode_utf_8_unicode_character_vector(p0, p1, p2, p5, p6);
@@ -332,13 +332,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Add space character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add pipe character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add space character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add part model to destination array.
                     encode_utf_8_unicode_character_vector(p0, p1, p2, p7, p8);
@@ -352,13 +352,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Add space character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add pipe character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add space character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add part model to destination array.
                     encode_integer_vector(p0, p1, p2, p7, p8);
@@ -372,13 +372,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Add space character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add pipe character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add space character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add part model to destination array.
                     encode_boolean(p0, p1, p2, p7, p8);
@@ -392,13 +392,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Add space character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add pipe character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add space character to destination array.
-                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Add part model to destination array.
                     encode_double_vector(p0, p1, p2, p7, p8);

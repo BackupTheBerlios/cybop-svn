@@ -19,39 +19,39 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compass_layout_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: compass_layout_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPASS_LAYOUT_CYBOL_MODEL_SOURCE
 #define COMPASS_LAYOUT_CYBOL_MODEL_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The north compass layout cybol model. */
 static wchar_t NORTH_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY[] = {L'n', L'o', L'r', L't', L'h'};
 static wchar_t* NORTH_COMPASS_LAYOUT_CYBOL_MODEL = NORTH_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY;
-static int* NORTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* NORTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The south compass layout cybol model. */
 static wchar_t SOUTH_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY[] = {L's', L'o', L'u', L't', L'h'};
 static wchar_t* SOUTH_COMPASS_LAYOUT_CYBOL_MODEL = SOUTH_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY;
-static int* SOUTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* SOUTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The west compass layout cybol model. */
 static wchar_t WEST_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY[] = {L'w', L'e', L's', L't'};
 static wchar_t* WEST_COMPASS_LAYOUT_CYBOL_MODEL = WEST_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY;
-static int* WEST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* WEST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The east compass layout cybol model. */
 static wchar_t EAST_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY[] = {L'e', L'a', L's', L't'};
 static wchar_t* EAST_COMPASS_LAYOUT_CYBOL_MODEL = EAST_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY;
-static int* EAST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* EAST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The centre compass layout cybol model. */
 static wchar_t CENTRE_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY[] = {L'c', L'e', L'n', L't', L'r', L'e'};
 static wchar_t* CENTRE_COMPASS_LAYOUT_CYBOL_MODEL = CENTRE_COMPASS_LAYOUT_CYBOL_MODEL_ARRAY;
-static int* CENTRE_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* CENTRE_COMPASS_LAYOUT_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COMPASS_LAYOUT_CYBOL_MODEL_SOURCE */
 #endif

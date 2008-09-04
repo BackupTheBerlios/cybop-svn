@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: interface_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: interface_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERFACE_CYBOL_ABSTRACTION_SOURCE
 #define INTERFACE_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // This MIME type was taken from/ inspired by the KDE desktop.
@@ -38,7 +38,7 @@
  */
 static wchar_t X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'f', L'a', L'c', L'e', L'/', L'x', L'-', L'w', L'i', L'n', L'a', L'm', L'p', L'-', L's', L'k', L'i', L'n'};
 static wchar_t* X_WINAMP_INTERFACE_CYBOL_ABSTRACTION = X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_ARRAY;
-static int* X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_ARRAY;
+static int* X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* INTERFACE_CYBOL_ABSTRACTION_SOURCE */
 #endif

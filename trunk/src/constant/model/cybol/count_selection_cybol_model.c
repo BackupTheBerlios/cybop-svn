@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: count_selection_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: count_selection_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COUNT_SELECTION_CYBOL_MODEL_SOURCE
 #define COUNT_SELECTION_CYBOL_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The all count selection cybol model. */
 static wchar_t ALL_COUNT_SELECTION_CYBOL_MODEL_ARRAY[] = {L'a', L'l', L'l'};
 static wchar_t* ALL_COUNT_SELECTION_CYBOL_MODEL = ALL_COUNT_SELECTION_CYBOL_MODEL_ARRAY;
-static int* ALL_COUNT_SELECTION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+static int* ALL_COUNT_SELECTION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The prefix count selection cybol model. */
 static wchar_t PREFIX_COUNT_SELECTION_CYBOL_MODEL_ARRAY[] = {L'p', L'r', L'e', L'f', L'i', L'x'};
 static wchar_t* PREFIX_COUNT_SELECTION_CYBOL_MODEL = PREFIX_COUNT_SELECTION_CYBOL_MODEL_ARRAY;
-static int* PREFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* PREFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The suffix count selection cybol model. */
 static wchar_t SUFFIX_COUNT_SELECTION_CYBOL_MODEL_ARRAY[] = {L's', L'u', L'f', L'f', L'i', L'x'};
 static wchar_t* SUFFIX_COUNT_SELECTION_CYBOL_MODEL = SUFFIX_COUNT_SELECTION_CYBOL_MODEL_ARRAY;
-static int* SUFFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* SUFFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COUNT_SELECTION_CYBOL_MODEL_SOURCE */
 #endif

@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: super_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: super_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SUPER_CYBOL_NAME_SOURCE
 #define SUPER_CYBOL_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The super cybol name. */
 static wchar_t SUPER_CYBOL_NAME_ARRAY[] = {L's', L'u', L'p', L'e', L'r'};
 static wchar_t* SUPER_CYBOL_NAME = SUPER_CYBOL_NAME_ARRAY;
-static int* SUPER_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* SUPER_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SUPER_CYBOL_NAME_SOURCE */
 #endif

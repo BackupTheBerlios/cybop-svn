@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: build_flow_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: build_flow_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BUILD_FLOW_OPERATION_CYBOL_NAME_SOURCE
 #define BUILD_FLOW_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The base build flow operation cybol name. */
 static wchar_t BASE_BUILD_FLOW_OPERATION_CYBOL_NAME_ARRAY[] = {L'b', L'a', L's', L'e'};
 static wchar_t* BASE_BUILD_FLOW_OPERATION_CYBOL_NAME = BASE_BUILD_FLOW_OPERATION_CYBOL_NAME_ARRAY;
-static int* BASE_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* BASE_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The index build flow operation cybol name. */
 static wchar_t INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME_ARRAY[] = {L'i', L'n', L'd', L'e', L'x'};
 static wchar_t* INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME = INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME_ARRAY;
-static int* INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The composed build flow operation cybol name. */
 static wchar_t COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME_ARRAY[] = {L'c', L'o', L'm', L'p', L'o', L's', L'i', L't', L'i', L'o', L'n'};
 static wchar_t* COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME = COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME_ARRAY;
-static int* COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* BUILD_FLOW_OPERATION_CYBOL_NAME_SOURCE */
 #endif

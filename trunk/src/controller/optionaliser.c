@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: optionaliser.c,v $ $Revision: 1.16 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: optionaliser.c,v $ $Revision: 1.17 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,11 +33,11 @@
 #include "../globals/constants/character/code/character_code_constants.c"
 #include "../globals/constants/command_line/command_line_constants.c"
 #include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/log/log_level_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../constant/model/memory/integer_memory_model.c"
+#include "../constant/model/log/level_log_model.c"
 #include "../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../memoriser/accessor/wide_character_vector_accessor.c"
 
@@ -69,7 +69,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set log level.
-                *l = *OFF_LOG_LEVEL;
+                *l = *OFF_LEVEL_LOG_MODEL;
             }
         }
 
@@ -166,7 +166,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             //
 
             // Allocate terminated file name as multibyte character array.
-            allocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY);
+            allocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST 0 ts: %i\n", ts);
     fwprintf(stderr, L"TEST 0 tc: %i\n", tc);
@@ -186,19 +186,19 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
     fwprintf(stderr, L"TEST 2 ts: %i\n", ts);
 
                 // Increase character array size to have place for the termination character.
-                ts = tc + *NUMBER_1_INTEGER;
+                ts = tc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
     fwprintf(stderr, L"TEST 3 ts: %i\n", ts);
 
                 // Reallocate terminated file name as multibyte character array.
-                reallocate_array((void*) &t, (void*) &tc, (void*) &ts, (void*) CHARACTER_ARRAY);
+                reallocate_array((void*) &t, (void*) &tc, (void*) &ts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             }
 
     fwprintf(stderr, L"TEST 4 ts: %i\n", ts);
     fwprintf(stderr, L"TEST 4 tc: %i\n", tc);
 
             // Add null termination character to terminated file name.
-            set_array_elements(t, (void*) &tc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+            set_array_elements(t, (void*) &tc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST 5 ts: %i\n", ts);
     fwprintf(stderr, L"TEST 5 tc: %i\n", tc);
@@ -219,9 +219,9 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             if (*f != *NULL_POINTER_MEMORY_MODEL) {
 
                 // The file owner.
-                int o = *NUMBER_MINUS_1_INTEGER;
+                int o = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
                 // The file group.
-                int g = *NUMBER_MINUS_1_INTEGER;
+                int g = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
                 // Set file owner.
                 chown((char*) t, o, g);
@@ -249,7 +249,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
     fwprintf(stderr, L"TEST ts: %i\n", ts);
 
             // Deallocate terminated file name as multibyte character array.
-            deallocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY);
+            deallocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST 1: %i\n", *f);
 
@@ -453,14 +453,14 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
             // Therefore, a new local variable i is introduced.
             int i = *ac;
             // The command line argument option as multibyte character array.
-            void** o = NULL_POINTER;
+            void** o = NULL_POINTER_MEMORY_MODEL;
             int oc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The option as wide character array.
             void* ow = *NULL_POINTER_MEMORY_MODEL;
             int owc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int ows = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The command line argument value as multibyte character array.
-            void** v = NULL_POINTER;
+            void** v = NULL_POINTER_MEMORY_MODEL;
             int vc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // The value as wide character array.
             void* vw = *NULL_POINTER_MEMORY_MODEL;
@@ -476,7 +476,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
 
             // Get command line argument option.
             // Example: "--loglevel"
-            get_array_elements(p6, (void*) j, (void*) &o, (void*) POINTER_ARRAY);
+            get_array_elements(p6, (void*) j, (void*) &o, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (*o != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -507,7 +507,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
             }
 
             // Calculate value index.
-            i = *j + *NUMBER_1_INTEGER;
+            i = *j + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
     fwprintf(stderr, L"TEST i: %i\n", i);
 
@@ -518,7 +518,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
 
                 // Get command line argument value, standing after the option.
                 // Example: "debug"
-                get_array_elements(p6, (void*) &i, (void*) &v, (void*) POINTER_ARRAY);
+                get_array_elements(p6, (void*) &i, (void*) &v, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (*v != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -616,9 +616,9 @@ void optionalise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
         //
         // CAUTION! Do NOT initialise it with 0, as the first command line
         // argument is the command itself, and not an option!
-        int j = *NUMBER_1_INTEGER;
+        int j = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (j >= *ac) {
 

@@ -19,54 +19,54 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: terminal_colour_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: terminal_colour_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TERMINAL_COLOUR_CYBOL_MODEL_SOURCE
 #define TERMINAL_COLOUR_CYBOL_MODEL_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The black terminal colour cybol model. */
 static wchar_t BLACK_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY[] = {L'b', L'l', L'a', L'c', L'k'};
 static wchar_t* BLACK_TERMINAL_COLOUR_CYBOL_MODEL = BLACK_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY;
-static int* BLACK_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* BLACK_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The red terminal colour cybol model. */
 static wchar_t RED_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY[] = {L'r', L'e', L'd'};
 static wchar_t* RED_TERMINAL_COLOUR_CYBOL_MODEL = RED_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY;
-static int* RED_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+static int* RED_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The green terminal colour cybol model. */
 static wchar_t GREEN_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY[] = {L'g', L'r', L'e', L'e', L'n'};
 static wchar_t* GREEN_TERMINAL_COLOUR_CYBOL_MODEL = GREEN_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY;
-static int* GREEN_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* GREEN_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The yellow terminal colour cybol model. */
 static wchar_t YELLOW_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY[] = {L'y', L'e', L'l', L'l', L'o', L'w'};
 static wchar_t* YELLOW_TERMINAL_COLOUR_CYBOL_MODEL = YELLOW_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY;
-static int* YELLOW_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* YELLOW_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The blue terminal colour cybol model. */
 static wchar_t BLUE_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY[] = {L'b', L'l', L'u', L'e'};
 static wchar_t* BLUE_TERMINAL_COLOUR_CYBOL_MODEL = BLUE_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY;
-static int* BLUE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* BLUE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The magenta (violet, purple, mauve) terminal colour cybol model. */
 static wchar_t MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY[] = {L'm', L'a', L'g', L'e', L'n', L't', L'a'};
 static wchar_t* MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL = MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY;
-static int* MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The cobalt blue (china blue) terminal colour cybol model. */
 static wchar_t COBALT_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY[] = {L'c', L'o', L'b', L'a', L'l', L't'};
 static wchar_t* COBALT_TERMINAL_COLOUR_CYBOL_MODEL = COBALT_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY;
-static int* COBALT_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* COBALT_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The white terminal colour cybol model. */
 static wchar_t WHITE_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY[] = {L'w', L'h', L'i', L't', L'e'};
 static wchar_t* WHITE_TERMINAL_COLOUR_CYBOL_MODEL = WHITE_TERMINAL_COLOUR_CYBOL_MODEL_ARRAY;
-static int* WHITE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* WHITE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* TERMINAL_COLOUR_CYBOL_MODEL_SOURCE */
 #endif

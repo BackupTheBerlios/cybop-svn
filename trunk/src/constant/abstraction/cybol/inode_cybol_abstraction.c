@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: inode_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: inode_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INODE_CYBOL_ABSTRACTION_SOURCE
 #define INODE_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // This MIME type was taken from/ inspired by the KDE desktop.
@@ -38,7 +38,7 @@
  */
 static wchar_t SOCKET_INODE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'n', L'o', L'd', L'e', L'/', L's', L'o', L'c', L'k', L'e', L't'};
 static wchar_t* SOCKET_INODE_CYBOL_ABSTRACTION = SOCKET_INODE_CYBOL_ABSTRACTION_ARRAY;
-static int* SOCKET_INODE_CYBOL_ABSTRACTION_COUNT = NUMBER_12_INTEGER_ARRAY;
+static int* SOCKET_INODE_CYBOL_ABSTRACTION_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* INODE_CYBOL_ABSTRACTION_SOURCE */
 #endif

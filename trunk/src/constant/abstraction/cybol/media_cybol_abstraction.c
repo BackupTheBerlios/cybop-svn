@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: media_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: media_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MEDIA_CYBOL_ABSTRACTION_SOURCE
 #define MEDIA_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // This MIME type was taken from/ inspired by the KDE desktop.
@@ -38,7 +38,7 @@
  */
 static wchar_t VCD_MEDIA_CYBOL_ABSTRACTION_ARRAY[] = {L'm', L'e', L'd', L'i', L'a', L'/', L'v', L'c', L'd'};
 static wchar_t* VCD_MEDIA_CYBOL_ABSTRACTION = VCD_MEDIA_CYBOL_ABSTRACTION_ARRAY;
-static int* VCD_MEDIA_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* VCD_MEDIA_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* MEDIA_CYBOL_ABSTRACTION_SOURCE */
 #endif

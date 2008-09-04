@@ -19,34 +19,34 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: arithmetic_operation_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: arithmetic_operation_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ARITHMETIC_OPERATION_CYBOL_MODEL_SOURCE
 #define ARITHMETIC_OPERATION_CYBOL_MODEL_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The add arithmetic operation cybol model. */
 static wchar_t ADD_ARITHMETIC_OPERATION_CYBOL_MODEL_ARRAY[] = {L'a', L'd', L'd'};
 static wchar_t* ADD_ARITHMETIC_OPERATION_CYBOL_MODEL = ADD_ARITHMETIC_OPERATION_CYBOL_MODEL_ARRAY;
-static int* ADD_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+static int* ADD_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The subtract arithmetic operation cybol model. */
 static wchar_t SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L'u', L'b', L't', L'r', L'a', L'c', L't'};
 static wchar_t* SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL = SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL_ARRAY;
-static int* SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The multiply arithmetic operation cybol model. */
 static wchar_t MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL_ARRAY[] = {L'm', L'u', L'l', L't', L'i', L'p', L'l', L'y'};
 static wchar_t* MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL = MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL_ARRAY;
-static int* MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The divide arithmetic operation cybol model. */
 static wchar_t DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL_ARRAY[] = {L'd', L'i', L'v', L'i', L'd', L'e'};
 static wchar_t* DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL = DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL_ARRAY;
-static int* DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* ARITHMETIC_OPERATION_CYBOL_MODEL_SOURCE */
 #endif

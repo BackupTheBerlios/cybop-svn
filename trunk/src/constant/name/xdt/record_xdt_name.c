@@ -19,78 +19,78 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: record_xdt_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: record_xdt_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RECORD_XDT_NAME_SOURCE
 #define RECORD_XDT_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /**
  * The xdt record identification count.
  *
  * All xdt record identifications have the same length: 4 ASCII characters (bytes).
  */
-static int* XDT_RECORD_IDENTIFICATION_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* XDT_RECORD_IDENTIFICATION_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The medical practice data record xdt name. */
-static int* MEDICAL_PRACTICE_DATA_RECORD_XDT_NAME = NUMBER_10_INTEGER_ARRAY;
+static int* MEDICAL_PRACTICE_DATA_RECORD_XDT_NAME = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The data medium header record xdt name. */
-static int* DATA_MEDIUM_HEADER_RECORD_XDT_NAME = NUMBER_20_INTEGER_ARRAY;
+static int* DATA_MEDIUM_HEADER_RECORD_XDT_NAME = NUMBER_20_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The data medium footer record xdt name. */
-static int* DATA_MEDIUM_FOOTER_RECORD_XDT_NAME = NUMBER_21_INTEGER_ARRAY;
+static int* DATA_MEDIUM_FOOTER_RECORD_XDT_NAME = NUMBER_21_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The data package header record xdt name. */
-static int* DATA_PACKAGE_HEADER_RECORD_XDT_NAME = NUMBER_22_INTEGER_ARRAY;
+static int* DATA_PACKAGE_HEADER_RECORD_XDT_NAME = NUMBER_22_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The data package footer record xdt name. */
-static int* DATA_PACKAGE_FOOTER_RECORD_XDT_NAME = NUMBER_23_INTEGER_ARRAY;
+static int* DATA_PACKAGE_FOOTER_RECORD_XDT_NAME = NUMBER_23_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The medical treatment record xdt name. */
-static int* MEDICAL_TREATMENT_RECORD_XDT_NAME = NUMBER_101_INTEGER_ARRAY;
+static int* MEDICAL_TREATMENT_RECORD_XDT_NAME = NUMBER_101_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The referral case record xdt name. */
-static int* REFERRAL_CASE_RECORD_XDT_NAME = NUMBER_102_INTEGER_ARRAY;
+static int* REFERRAL_CASE_RECORD_XDT_NAME = NUMBER_102_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The medical treatment with cottage hospital affiliation record xdt name. */
-static int* MEDICAL_TREATMENT_WITH_COTTAGE_HOSPITAL_AFFILIATION_RECORD_XDT_NAME = NUMBER_103_INTEGER_ARRAY;
+static int* MEDICAL_TREATMENT_WITH_COTTAGE_HOSPITAL_AFFILIATION_RECORD_XDT_NAME = NUMBER_103_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The medical emergency service record xdt name. */
-static int* MEDICAL_EMERGENCY_SERVICE_RECORD_XDT_NAME = NUMBER_104_INTEGER_ARRAY;
+static int* MEDICAL_EMERGENCY_SERVICE_RECORD_XDT_NAME = NUMBER_104_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The private billing record xdt name. */
-static int* PRIVATE_BILLING_RECORD_XDT_NAME = NUMBER_190_INTEGER_ARRAY;
+static int* PRIVATE_BILLING_RECORD_XDT_NAME = NUMBER_190_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The employers' liability insurance association billing record xdt name. */
-static int* EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_BILLING_RECORD_XDT_NAME = NUMBER_191_INTEGER_ARRAY;
+static int* EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_BILLING_RECORD_XDT_NAME = NUMBER_191_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The unstructured cases record xdt name. */
-static int* UNSTRUCTURED_CASES_RECORD_XDT_NAME = NUMBER_199_INTEGER_ARRAY;
+static int* UNSTRUCTURED_CASES_RECORD_XDT_NAME = NUMBER_199_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The patient master data record xdt name. */
-static int* PATIENT_MASTER_DATA_RECORD_XDT_NAME = NUMBER_6100_INTEGER_ARRAY;
+static int* PATIENT_MASTER_DATA_RECORD_XDT_NAME = NUMBER_6100_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The medical treatment data record xdt name. */
-static int* MEDICAL_TREATMENT_DATA_RECORD_XDT_NAME = NUMBER_6200_INTEGER_ARRAY;
+static int* MEDICAL_TREATMENT_DATA_RECORD_XDT_NAME = NUMBER_6200_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The patient master data request record xdt name. */
-static int* PATIENT_MASTER_DATA_REQUEST_RECORD_XDT_NAME = NUMBER_6300_INTEGER_ARRAY;
+static int* PATIENT_MASTER_DATA_REQUEST_RECORD_XDT_NAME = NUMBER_6300_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The patient master data transfer record xdt name. */
-static int* PATIENT_MASTER_DATA_TRANSFER_RECORD_XDT_NAME = NUMBER_6301_INTEGER_ARRAY;
+static int* PATIENT_MASTER_DATA_TRANSFER_RECORD_XDT_NAME = NUMBER_6301_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The examination request record xdt name. */
-static int* EXAMINATION_REQUEST_RECORD_XDT_NAME = NUMBER_6302_INTEGER_ARRAY;
+static int* EXAMINATION_REQUEST_RECORD_XDT_NAME = NUMBER_6302_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The examination data transfer record xdt name. */
-static int* EXAMINATION_DATA_TRANSFER_RECORD_XDT_NAME = NUMBER_6310_INTEGER_ARRAY;
+static int* EXAMINATION_DATA_TRANSFER_RECORD_XDT_NAME = NUMBER_6310_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The examination data display record xdt name. */
-static int* EXAMINATION_DATA_DISPLAY_RECORD_XDT_NAME = NUMBER_6311_INTEGER_ARRAY;
+static int* EXAMINATION_DATA_DISPLAY_RECORD_XDT_NAME = NUMBER_6311_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* RECORD_XDT_NAME_SOURCE */
 #endif

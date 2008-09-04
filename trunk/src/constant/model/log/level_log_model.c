@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: level_log_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: level_log_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LEVEL_LOG_MODEL_SOURCE
 #define LEVEL_LOG_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The off level log model. */
-static int* OFF_LEVEL_LOG_MODEL = NUMBER_0_INTEGER_ARRAY;
+static int* OFF_LEVEL_LOG_MODEL = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The error level log model. */
-static int* ERROR_LEVEL_LOG_MODEL = NUMBER_1_INTEGER_ARRAY;
+static int* ERROR_LEVEL_LOG_MODEL = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The warning level log model. */
-static int* WARNING_LEVEL_LOG_MODEL = NUMBER_2_INTEGER_ARRAY;
+static int* WARNING_LEVEL_LOG_MODEL = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The info level log model. */
-static int* INFORMATION_LEVEL_LOG_MODEL = NUMBER_3_INTEGER_ARRAY;
+static int* INFORMATION_LEVEL_LOG_MODEL = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The debug level log model. */
-static int* DEBUG_LEVEL_LOG_MODEL = NUMBER_4_INTEGER_ARRAY;
+static int* DEBUG_LEVEL_LOG_MODEL = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* LEVEL_LOG_MODEL_SOURCE */
 #endif

@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: video_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: video_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VIDEO_CYBOL_ABSTRACTION_SOURCE
 #define VIDEO_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -55,7 +55,7 @@
  */
 static wchar_t AVI_VIDEO_CYBOL_ABSTRACTION_ARRAY[] = {L'v', L'i', L'd', L'e', L'o', L'/', L'a', L'v', L'i'};
 static wchar_t* AVI_VIDEO_CYBOL_ABSTRACTION = AVI_VIDEO_CYBOL_ABSTRACTION_ARRAY;
-static int* AVI_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* AVI_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The video/mp4 cybol abstraction.
@@ -66,7 +66,7 @@ static int* AVI_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
  */
 static wchar_t MP4_VIDEO_CYBOL_ABSTRACTION_ARRAY[] = {L'v', L'i', L'd', L'e', L'o', L'/', L'm', L'p', L'4'};
 static wchar_t* MP4_VIDEO_CYBOL_ABSTRACTION = MP4_VIDEO_CYBOL_ABSTRACTION_ARRAY;
-static int* MP4_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* MP4_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The video/mpeg cybol abstraction.
@@ -77,7 +77,7 @@ static int* MP4_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_9_INTEGER_ARRAY;
  */
 static wchar_t MPEG_VIDEO_CYBOL_ABSTRACTION_ARRAY[] = {L'v', L'i', L'd', L'e', L'o', L'/', L'm', L'p', L'e', L'g'};
 static wchar_t* MPEG_VIDEO_CYBOL_ABSTRACTION = MPEG_VIDEO_CYBOL_ABSTRACTION_ARRAY;
-static int* MPEG_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* MPEG_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The video/quicktime cybol abstraction.
@@ -88,7 +88,7 @@ static int* MPEG_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
  */
 static wchar_t QUICKTIME_VIDEO_CYBOL_ABSTRACTION_ARRAY[] = {L'v', L'i', L'd', L'e', L'o', L'/', L'q', L'u', L'i', L'c', L'k', L't', L'i', L'm', L'e'};
 static wchar_t* QUICKTIME_VIDEO_CYBOL_ABSTRACTION = QUICKTIME_VIDEO_CYBOL_ABSTRACTION_ARRAY;
-static int* QUICKTIME_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
+static int* QUICKTIME_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The video/x-ms-wmv cybol abstraction.
@@ -99,7 +99,7 @@ static int* QUICKTIME_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
  */
 static wchar_t X_MS_WMV_VIDEO_CYBOL_ABSTRACTION_ARRAY[] = {L'v', L'i', L'd', L'e', L'o', L'/', L'x', L'-', L'm', L's', L'-', L'w', L'm', L'v'};
 static wchar_t* X_MS_WMV_VIDEO_CYBOL_ABSTRACTION = X_MS_WMV_VIDEO_CYBOL_ABSTRACTION_ARRAY;
-static int* X_MS_WMV_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_ARRAY;
+static int* X_MS_WMV_VIDEO_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* VIDEO_CYBOL_ABSTRACTION_SOURCE */
 #endif

@@ -19,17 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: array.c,v $ $Revision: 1.20 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: array.c,v $ $Revision: 1.21 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ARRAY_SOURCE
 #define ARRAY_SOURCE
 
-#include "../constant/cybol/cybol_abstraction_constants.c"
-#include "../constant/log/log_message_constants.c"
-#include "../constant/memory_structure/array_constants.c"
-#include "../constant/pointer/pointer_constants.c"
+#include "../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
 #include "../memoriser/array/character_array.c"
 #include "../memoriser/array/double_array.c"
@@ -58,23 +57,23 @@ void allocate_array(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate array.");
 
-        if (*t == *POINTER_ARRAY) {
+        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
             allocate_pointer_array(p0, p1);
 
-        } else if (*t == *INTEGER_ARRAY) {
+        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             allocate_integer_array(p0, p1);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
             allocate_unsigned_long_array(p0, p1);
 
-        } else if (*t == *DOUBLE_ARRAY) {
+        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
             allocate_double_array(p0, p1);
 
-        } else if (*t == *CHARACTER_ARRAY) {
+        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
             allocate_character_array(p0, p1);
 
@@ -85,7 +84,7 @@ void allocate_array(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -109,23 +108,23 @@ void deallocate_array(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate array.");
 
-        if (*t == *POINTER_ARRAY) {
+        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
             deallocate_pointer_array(p0, p1);
 
-        } else if (*t == *INTEGER_ARRAY) {
+        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             deallocate_integer_array(p0, p1);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
             deallocate_unsigned_long_array(p0, p1);
 
-        } else if (*t == *DOUBLE_ARRAY) {
+        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
             deallocate_double_array(p0, p1);
 
-        } else if (*t == *CHARACTER_ARRAY) {
+        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
             deallocate_character_array(p0, p1);
 
@@ -136,7 +135,7 @@ void deallocate_array(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -161,23 +160,23 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Reallocate array.");
 
-        if (*t == *POINTER_ARRAY) {
+        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
             reallocate_pointer_array(p0, p1, p2);
 
-        } else if (*t == *INTEGER_ARRAY) {
+        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             reallocate_integer_array(p0, p1, p2);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
             reallocate_unsigned_long_array(p0, p1, p2);
 
-        } else if (*t == *DOUBLE_ARRAY) {
+        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
             reallocate_double_array(p0, p1, p2);
 
-        } else if (*t == *CHARACTER_ARRAY) {
+        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
             reallocate_character_array(p0, p1, p2);
 
@@ -188,7 +187,7 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -212,23 +211,23 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare array elements.");
 
-        if (*t == *POINTER_ARRAY) {
+        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
             compare_pointer_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *INTEGER_ARRAY) {
+        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             compare_integer_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
             compare_unsigned_long_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *DOUBLE_ARRAY) {
+        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
             compare_double_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *CHARACTER_ARRAY) {
+        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
             compare_character_array_elements(p0, p1, p2, p3);
 
@@ -239,7 +238,7 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -275,12 +274,12 @@ void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
 
         } else {
 
-//??            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+//??            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_COUNT);
+//??        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -300,23 +299,23 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get array elements.");
 
-        if (*t == *POINTER_ARRAY) {
+        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
             get_pointer_array_elements(p0, p1, p2);
 
-        } else if (*t == *INTEGER_ARRAY) {
+        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             get_integer_array_elements(p0, p1, p2);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
             get_unsigned_long_array_elements(p0, p1, p2);
 
-        } else if (*t == *DOUBLE_ARRAY) {
+        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
             get_double_array_elements(p0, p1, p2);
 
-        } else if (*t == *CHARACTER_ARRAY) {
+        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
             get_character_array_elements(p0, p1, p2);
 
@@ -327,7 +326,7 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -348,23 +347,23 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set array elements.");
 
-        if (*t == *POINTER_ARRAY) {
+        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
             set_pointer_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *INTEGER_ARRAY) {
+        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             set_integer_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
             set_unsigned_long_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *DOUBLE_ARRAY) {
+        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
             set_double_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *CHARACTER_ARRAY) {
+        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
             set_character_array_elements(p0, p1, p2, p3);
 
@@ -375,7 +374,7 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -396,23 +395,23 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Remove array elements.");
 
-        if (*t == *POINTER_ARRAY) {
+        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
             remove_pointer_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *INTEGER_ARRAY) {
+        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             remove_integer_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
             remove_unsigned_long_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *DOUBLE_ARRAY) {
+        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
             remove_double_array_elements(p0, p1, p2, p3);
 
-        } else if (*t == *CHARACTER_ARRAY) {
+        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
             remove_character_array_elements(p0, p1, p2, p3);
 
@@ -423,7 +422,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 
@@ -449,23 +448,23 @@ void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get array elements index.");
 
-        if (*t == *POINTER_ARRAY) {
+        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
             get_pointer_array_elements_index(p0, p1, p2, p3, p4);
 
-        } else if (*t == *INTEGER_ARRAY) {
+        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             get_integer_array_elements_index(p0, p1, p2, p3, p4);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY) {
+        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
             get_unsigned_long_array_elements_index(p0, p1, p2, p3, p4);
 
-        } else if (*t == *DOUBLE_ARRAY) {
+        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
             get_double_array_elements_index(p0, p1, p2, p3, p4);
 
-        } else if (*t == *CHARACTER_ARRAY) {
+        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
             get_character_array_elements_index(p0, p1, p2, p3, p4);
 
@@ -476,7 +475,7 @@ void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_COUNT);
+        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
     }
 }
 

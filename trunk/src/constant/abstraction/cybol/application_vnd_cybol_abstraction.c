@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: application_vnd_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: application_vnd_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef APPLICATION_VND_CYBOL_ABSTRACTION_SOURCE
 #define APPLICATION_VND_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -58,7 +58,7 @@
  */
 static wchar_t MS_EXCEL_APPLICATION_VND_CYBOL_ABSTRACTION_ARRAY[] = {L'a', L'p', L'p', L'l', L'i', L'c', L'a', L't', L'i', L'o', L'n', L'/', L'v', L'n', L'd', L'.', L'm', L's', L'-', L'e', L'x', L'c', L'e', L'l'};
 static wchar_t* MS_EXCEL_APPLICATION_VND_CYBOL_ABSTRACTION = MS_EXCEL_APPLICATION_VND_CYBOL_ABSTRACTION_ARRAY;
-static int* MS_EXCEL_APPLICATION_VND_CYBOL_ABSTRACTION_COUNT = NUMBER_24_INTEGER_ARRAY;
+static int* MS_EXCEL_APPLICATION_VND_CYBOL_ABSTRACTION_COUNT = NUMBER_24_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*??
 application/vnd.ms-powerpoint: Microsoft Powerpoint files

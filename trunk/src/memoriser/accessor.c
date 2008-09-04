@@ -19,17 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: accessor.c,v $ $Revision: 1.17 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: accessor.c,v $ $Revision: 1.18 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ACCESSOR_SOURCE
 #define ACCESSOR_SOURCE
 
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../globals/constants/memory_structure/memory_abstraction_constants.c"
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../memoriser/accessor/character_vector_accessor.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/accessor/double_vector_accessor.c"

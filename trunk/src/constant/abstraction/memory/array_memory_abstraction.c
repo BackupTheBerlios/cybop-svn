@@ -19,32 +19,32 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: array_memory_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: array_memory_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ARRAY_MEMORY_ABSTRACTION_SOURCE
 #define ARRAY_MEMORY_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The character array memory abstraction. */
-static int* CHARACTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_0_INTEGER_ARRAY;
+static int* CHARACTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The wide character array memory abstraction. */
-static int* WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_1_INTEGER_ARRAY;
+static int* WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The integer array memory abstraction. */
-static int* INTEGER_ARRAY_MEMORY_ABSTRACTION = NUMBER_2_INTEGER_ARRAY;
+static int* INTEGER_ARRAY_MEMORY_ABSTRACTION = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The pointer array memory abstraction. */
-static int* POINTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_3_INTEGER_ARRAY;
+static int* POINTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The double array memory abstraction. */
-static int* DOUBLE_ARRAY_MEMORY_ABSTRACTION = NUMBER_4_INTEGER_ARRAY;
+static int* DOUBLE_ARRAY_MEMORY_ABSTRACTION = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The unsigned long array memory abstraction. */
-static int* UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION = NUMBER_5_INTEGER_ARRAY;
+static int* UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* ARRAY_MEMORY_ABSTRACTION_SOURCE */
 #endif

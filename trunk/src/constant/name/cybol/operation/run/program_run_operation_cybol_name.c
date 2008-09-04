@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: program_run_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: program_run_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PROGRAM_RUN_OPERATION_CYBOL_NAME_SOURCE
 #define PROGRAM_RUN_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The program run operation cybol name. */
 static wchar_t PROGRAM_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L'p', L'r', L'o', L'g', L'r', L'a', L'm'};
 static wchar_t* PROGRAM_RUN_OPERATION_CYBOL_NAME = PROGRAM_RUN_OPERATION_CYBOL_NAME_ARRAY;
-static int* PROGRAM_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* PROGRAM_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* PROGRAM_RUN_OPERATION_CYBOL_NAME_SOURCE */
 #endif

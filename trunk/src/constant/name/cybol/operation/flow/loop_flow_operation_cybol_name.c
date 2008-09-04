@@ -19,24 +19,24 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: loop_flow_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: loop_flow_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LOOP_FLOW_OPERATION_CYBOL_NAME_SOURCE
 #define LOOP_FLOW_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The break loop flow operation cybol name. */
 static wchar_t BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME_ARRAY[] = {L'b', L'r', L'e', L'a', L'k'};
 static wchar_t* BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME = BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME_ARRAY;
-static int* BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The model loop flow operation cybol name. */
 static wchar_t MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME_ARRAY[] = {L'm', L'o', L'd', L'e', L'l'};
 static wchar_t* MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME = MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME_ARRAY;
-static int* MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* LOOP_FLOW_OPERATION_CYBOL_NAME_SOURCE */
 #endif

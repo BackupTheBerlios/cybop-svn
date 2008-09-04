@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.18 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.19 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,18 +34,18 @@
 #include <stdio.h>
 #include <wchar.h>
 #include "../../globals/constants/boolean/boolean_constants.c"
-#include "../../globals/constants/character/code/wide_character_code_constants.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../globals/constants/console/console_control_sequence_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/reallocation_factor_variables.c"
+#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor.c"
 
@@ -163,7 +163,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p3, p4, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -173,7 +173,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p3, p4, (void*) ESCAPE_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -332,9 +332,9 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     // Therefore, the coordinates handed over need to be corrected.
 
                                     // The corrected y.
-                                    int cy = *sy + *NUMBER_1_INTEGER;
+                                    int cy = *sy + *NUMBER_1_INTEGER_MEMORY_MODEL;
                                     // The corrected x.
-                                    int cx = *sx + *NUMBER_1_INTEGER;
+                                    int cx = *sx + *NUMBER_1_INTEGER_MEMORY_MODEL;
                                     // The y coordinate.
                                     void* y = *NULL_POINTER_MEMORY_MODEL;
                                     int yc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -363,18 +363,18 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     allocate((void*) &y, (void*) &ys, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
                                     allocate((void*) &x, (void*) &xs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
-                                    encode_integer((void*) &y, (void*) &yc, (void*) &ys, (void*) &cy, (void*) PRIMITIVE_COUNT);
-                                    encode_integer((void*) &x, (void*) &xc, (void*) &xs, (void*) &cx, (void*) PRIMITIVE_COUNT);
+                                    encode_integer((void*) &y, (void*) &yc, (void*) &ys, (void*) &cy, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+                                    encode_integer((void*) &x, (void*) &xc, (void*) &xs, (void*) &cx, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                                     if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT
-                                        + yc + *PRIMITIVE_COUNT
+                                        + yc + *PRIMITIVE_MEMORY_MODEL_COUNT
                                         + xc + *PRIMITIVE_MEMORY_MODEL_COUNT) >= *ds) {
 
                                         // Set destination character array size.
                                         // CAUTION! Add constant in case *dc is zero!
                                         *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR
                                             + *ESCAPE_CONTROL_SEQUENCE_COUNT
-                                            + yc + *PRIMITIVE_COUNT
+                                            + yc + *PRIMITIVE_MEMORY_MODEL_COUNT
                                             + xc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                                         // Reallocate destination character array.
@@ -385,11 +385,11 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
                                     set_array_elements(*d, p1, y, (void*) &yc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + yc;
-                                    set_array_elements(*d, p1, (void*) SEMICOLON_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    set_array_elements(*d, p1, (void*) SEMICOLON_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
                                     set_array_elements(*d, p1, x, (void*) &xc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + xc;
-                                    set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    set_array_elements(*d, p1, (void*) LATIN_CAPITAL_LETTER_H_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                                     // Add attribute off control sequence.
@@ -420,9 +420,9 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     //
 
                                     // Encode background colour integer into character array.
-        //??                            encode_integer((void*) &b, (void*) &bc, (void*) &bs, p6, (void*) PRIMITIVE_COUNT);
+        //??                            encode_integer((void*) &b, (void*) &bc, (void*) &bs, p6, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                                     // Encode foreground colour integer into character array.
-        //??                            encode_integer((void*) &f, (void*) &fc, (void*) &fs, p7, (void*) PRIMITIVE_COUNT);
+        //??                            encode_integer((void*) &f, (void*) &fc, (void*) &fs, p7, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                                     if ((*dc
                                         + *ESCAPE_CONTROL_SEQUENCE_COUNT + *bc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT
@@ -486,7 +486,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare hidden property.
-                                    compare_arrays(p10, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                                    compare_arrays(p10, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -501,7 +501,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare inverse property.
-                                    compare_arrays(p11, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                                    compare_arrays(p11, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -516,7 +516,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare blink property.
-                                    compare_arrays(p12, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                                    compare_arrays(p12, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -531,7 +531,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare underline property.
-                                    compare_arrays(p13, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                                    compare_arrays(p13, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -546,7 +546,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                     // Compare bold property.
-                                    compare_arrays(p14, (void*) PRIMITIVE_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_COUNT, (void*) &r, (void*) INTEGER_ARRAY);
+                                    compare_arrays(p14, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -558,7 +558,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     }
 
                                     // Set character.
-                                    set_array_elements(*d, p1, p15, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    set_array_elements(*d, p1, p15, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                                 } else {
@@ -815,21 +815,21 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                             // The character.
                             wchar_t* c = SPACE_UNICODE_CHARACTER_CODE_MODEL;
 
-                            while (*NUMBER_1_INTEGER) {
+                            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                                 if (z >= zl) {
 
                                     break;
                                 }
 
-                                while (*NUMBER_1_INTEGER) {
+                                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                                     if (y >= yl) {
 
                                         break;
                                     }
 
-                                    while (*NUMBER_1_INTEGER) {
+                                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                                         if (x >= xl) {
 
@@ -870,7 +870,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                     // Encode left top border character using escape codes.
                                                     encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &ltc);
 
-                                                } else if (x == (xl - *NUMBER_1_INTEGER)) {
+                                                } else if (x == (xl - *NUMBER_1_INTEGER_MEMORY_MODEL)) {
 
                                                     // Encode right top border character using escape codes.
                                                     encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &rtc);
@@ -881,14 +881,14 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                     encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &hc);
                                                 }
 
-                                            } else if (y == (yl - *NUMBER_1_INTEGER)) {
+                                            } else if (y == (yl - *NUMBER_1_INTEGER_MEMORY_MODEL)) {
 
                                                 if (x == *px) {
 
                                                     // Encode left bottom border character using escape codes.
                                                     encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &lbc);
 
-                                                } else if (x == (xl - *NUMBER_1_INTEGER)) {
+                                                } else if (x == (xl - *NUMBER_1_INTEGER_MEMORY_MODEL)) {
 
                                                     // Encode right bottom border character using escape codes.
                                                     encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &rbc);
@@ -906,7 +906,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                     // Encode left bottom border character using escape codes.
                                                     encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
 
-                                                } else if (x == (xl - *NUMBER_1_INTEGER)) {
+                                                } else if (x == (xl - *NUMBER_1_INTEGER_MEMORY_MODEL)) {
 
                                                     // Encode right bottom border character using escape codes.
                                                     encode_gnu_linux_console_character(p0, p1, p2, &x, &y, &z, p10, p11, p12, p13, p5, p6, p7, p8, p9, &vc);
@@ -917,7 +917,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                                                         // Calculate character index.
                                                         // CAUTION! Subtract one because of the border.
-                                                        ci = x - *px - *NUMBER_1_INTEGER;
+                                                        ci = x - *px - *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                                         if (ci < *cc) {
 
@@ -1072,7 +1072,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
             *cpy = *fapy;
             *cpz = *fapz;
             *csx = *fasx;
-//??            *csy = *NUMBER_20_INTEGER;
+//??            *csy = *NUMBER_20_INTEGER_MEMORY_MODEL;
             *csz = *fasz;
             // Set free area coordinates.
             *fapy = *fapy + *csy;
@@ -1091,7 +1091,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
             *cpy = *fapy + (*fasy - *csy);
             *cpz = *fapz;
             *csx = *fasx;
-//??            *csy = *NUMBER_20_INTEGER;
+//??            *csy = *NUMBER_20_INTEGER_MEMORY_MODEL;
             *csz = *fasz;
             // Set free area coordinates.
             *fasy = *fasy - *csy;
@@ -1108,7 +1108,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
             *cpx = *fapx;
             *cpy = *fapy;
             *cpz = *fapz;
-//??            *csx = *NUMBER_20_INTEGER;
+//??            *csx = *NUMBER_20_INTEGER_MEMORY_MODEL;
             *csy = *fasy;
             *csz = *fasz;
             // Set free area coordinates.
@@ -1127,7 +1127,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
             *cpx = *fapx + (*fasx - *csx);
             *cpy = *fapy;
             *cpz = *fapz;
-//??            *csx = *NUMBER_20_INTEGER;
+//??            *csx = *NUMBER_20_INTEGER_MEMORY_MODEL;
             *csy = *fasy;
             *csz = *fasz;
             // Set free area coordinates.
@@ -1440,10 +1440,10 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
         set_element(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         set_element(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Map colour names to control sequences.
-        encode((void*) &bg, (void*) &bgc, (void*) &bgs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p17, p18,
-            *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
-        encode((void*) &fg, (void*) &fgc, (void*) &fgs, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, p19, p20,
-            *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, *NULL_POINTER, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
+        encode((void*) &bg, (void*) &bgc, (void*) &bgs, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p17, p18,
+            *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
+        encode((void*) &fg, (void*) &fgc, (void*) &fgs, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p19, p20,
+            *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1468,19 +1468,19 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
                 // The temporary character array.
                 void* tmp = *NULL_POINTER_MEMORY_MODEL;
-                int tmps = *sc + *NUMBER_1_INTEGER;
+                int tmps = *sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 // Allocate temporary character array.
                 allocate((void*) &tmp, (void*) &tmps, (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT);
 
                 // Set temporary character array by first copying the
                 // given array and then adding the null termination character.
-                set_array_elements(tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(tmp, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Initialise temporary wide character string size.
                 // CAUTION! One extra place is added for the null termination character.
-                cs = *sc + *NUMBER_100_INTEGER;
+                cs = *sc + *NUMBER_100_INTEGER_MEMORY_MODEL;
 
                 // Allocate temporary wide character string.
                 allocate((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
@@ -1593,226 +1593,226 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console.");
 
     // The source part name, abstraction, model, details.
-    void** n = NULL_POINTER;
-    void** nc = NULL_POINTER;
-    void** ns = NULL_POINTER;
-    void** a = NULL_POINTER;
-    void** ac = NULL_POINTER;
-    void** as = NULL_POINTER;
-    void** m = NULL_POINTER;
-    void** mc = NULL_POINTER;
-    void** ms = NULL_POINTER;
-    void** d = NULL_POINTER;
-    void** dc = NULL_POINTER;
-    void** ds = NULL_POINTER;
+    void** n = NULL_POINTER_MEMORY_MODEL;
+    void** nc = NULL_POINTER_MEMORY_MODEL;
+    void** ns = NULL_POINTER_MEMORY_MODEL;
+    void** a = NULL_POINTER_MEMORY_MODEL;
+    void** ac = NULL_POINTER_MEMORY_MODEL;
+    void** as = NULL_POINTER_MEMORY_MODEL;
+    void** m = NULL_POINTER_MEMORY_MODEL;
+    void** mc = NULL_POINTER_MEMORY_MODEL;
+    void** ms = NULL_POINTER_MEMORY_MODEL;
+    void** d = NULL_POINTER_MEMORY_MODEL;
+    void** dc = NULL_POINTER_MEMORY_MODEL;
+    void** ds = NULL_POINTER_MEMORY_MODEL;
     // The source part super properties name, abstraction, model, details.
-    void** supern = NULL_POINTER;
-    void** supernc = NULL_POINTER;
-    void** superns = NULL_POINTER;
-    void** supera = NULL_POINTER;
-    void** superac = NULL_POINTER;
-    void** superas = NULL_POINTER;
-    void** superm = NULL_POINTER;
-    void** supermc = NULL_POINTER;
-    void** superms = NULL_POINTER;
-    void** superd = NULL_POINTER;
-    void** superdc = NULL_POINTER;
-    void** superds = NULL_POINTER;
+    void** supern = NULL_POINTER_MEMORY_MODEL;
+    void** supernc = NULL_POINTER_MEMORY_MODEL;
+    void** superns = NULL_POINTER_MEMORY_MODEL;
+    void** supera = NULL_POINTER_MEMORY_MODEL;
+    void** superac = NULL_POINTER_MEMORY_MODEL;
+    void** superas = NULL_POINTER_MEMORY_MODEL;
+    void** superm = NULL_POINTER_MEMORY_MODEL;
+    void** supermc = NULL_POINTER_MEMORY_MODEL;
+    void** superms = NULL_POINTER_MEMORY_MODEL;
+    void** superd = NULL_POINTER_MEMORY_MODEL;
+    void** superdc = NULL_POINTER_MEMORY_MODEL;
+    void** superds = NULL_POINTER_MEMORY_MODEL;
     // The source part shape name, abstraction, model, details.
-    void** shn = NULL_POINTER;
-    void** shnc = NULL_POINTER;
-    void** shns = NULL_POINTER;
-    void** sha = NULL_POINTER;
-    void** shac = NULL_POINTER;
-    void** shas = NULL_POINTER;
-    void** shm = NULL_POINTER;
-    void** shmc = NULL_POINTER;
-    void** shms = NULL_POINTER;
-    void** shd = NULL_POINTER;
-    void** shdc = NULL_POINTER;
-    void** shds = NULL_POINTER;
+    void** shn = NULL_POINTER_MEMORY_MODEL;
+    void** shnc = NULL_POINTER_MEMORY_MODEL;
+    void** shns = NULL_POINTER_MEMORY_MODEL;
+    void** sha = NULL_POINTER_MEMORY_MODEL;
+    void** shac = NULL_POINTER_MEMORY_MODEL;
+    void** shas = NULL_POINTER_MEMORY_MODEL;
+    void** shm = NULL_POINTER_MEMORY_MODEL;
+    void** shmc = NULL_POINTER_MEMORY_MODEL;
+    void** shms = NULL_POINTER_MEMORY_MODEL;
+    void** shd = NULL_POINTER_MEMORY_MODEL;
+    void** shdc = NULL_POINTER_MEMORY_MODEL;
+    void** shds = NULL_POINTER_MEMORY_MODEL;
     // The source part layout name, abstraction, model, details.
-    void** ln = NULL_POINTER;
-    void** lnc = NULL_POINTER;
-    void** lns = NULL_POINTER;
-    void** la = NULL_POINTER;
-    void** lac = NULL_POINTER;
-    void** las = NULL_POINTER;
-    void** lm = NULL_POINTER;
-    void** lmc = NULL_POINTER;
-    void** lms = NULL_POINTER;
-    void** ld = NULL_POINTER;
-    void** ldc = NULL_POINTER;
-    void** lds = NULL_POINTER;
+    void** ln = NULL_POINTER_MEMORY_MODEL;
+    void** lnc = NULL_POINTER_MEMORY_MODEL;
+    void** lns = NULL_POINTER_MEMORY_MODEL;
+    void** la = NULL_POINTER_MEMORY_MODEL;
+    void** lac = NULL_POINTER_MEMORY_MODEL;
+    void** las = NULL_POINTER_MEMORY_MODEL;
+    void** lm = NULL_POINTER_MEMORY_MODEL;
+    void** lmc = NULL_POINTER_MEMORY_MODEL;
+    void** lms = NULL_POINTER_MEMORY_MODEL;
+    void** ld = NULL_POINTER_MEMORY_MODEL;
+    void** ldc = NULL_POINTER_MEMORY_MODEL;
+    void** lds = NULL_POINTER_MEMORY_MODEL;
     // The source part cell name, abstraction, model, details.
-    void** cn = NULL_POINTER;
-    void** cnc = NULL_POINTER;
-    void** cns = NULL_POINTER;
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cn = NULL_POINTER_MEMORY_MODEL;
+    void** cnc = NULL_POINTER_MEMORY_MODEL;
+    void** cns = NULL_POINTER_MEMORY_MODEL;
+    void** ca = NULL_POINTER_MEMORY_MODEL;
+    void** cac = NULL_POINTER_MEMORY_MODEL;
+    void** cas = NULL_POINTER_MEMORY_MODEL;
+    void** cm = NULL_POINTER_MEMORY_MODEL;
+    void** cmc = NULL_POINTER_MEMORY_MODEL;
+    void** cms = NULL_POINTER_MEMORY_MODEL;
+    void** cd = NULL_POINTER_MEMORY_MODEL;
+    void** cdc = NULL_POINTER_MEMORY_MODEL;
+    void** cds = NULL_POINTER_MEMORY_MODEL;
     // The source part position name, abstraction, model, details.
-    void** pn = NULL_POINTER;
-    void** pnc = NULL_POINTER;
-    void** pns = NULL_POINTER;
-    void** pa = NULL_POINTER;
-    void** pac = NULL_POINTER;
-    void** pas = NULL_POINTER;
-    void** pm = NULL_POINTER;
-    void** pmc = NULL_POINTER;
-    void** pms = NULL_POINTER;
-    void** pd = NULL_POINTER;
-    void** pdc = NULL_POINTER;
-    void** pds = NULL_POINTER;
+    void** pn = NULL_POINTER_MEMORY_MODEL;
+    void** pnc = NULL_POINTER_MEMORY_MODEL;
+    void** pns = NULL_POINTER_MEMORY_MODEL;
+    void** pa = NULL_POINTER_MEMORY_MODEL;
+    void** pac = NULL_POINTER_MEMORY_MODEL;
+    void** pas = NULL_POINTER_MEMORY_MODEL;
+    void** pm = NULL_POINTER_MEMORY_MODEL;
+    void** pmc = NULL_POINTER_MEMORY_MODEL;
+    void** pms = NULL_POINTER_MEMORY_MODEL;
+    void** pd = NULL_POINTER_MEMORY_MODEL;
+    void** pdc = NULL_POINTER_MEMORY_MODEL;
+    void** pds = NULL_POINTER_MEMORY_MODEL;
     // The source part size name, abstraction, model, details.
-    void** sn = NULL_POINTER;
-    void** snc = NULL_POINTER;
-    void** sns = NULL_POINTER;
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sn = NULL_POINTER_MEMORY_MODEL;
+    void** snc = NULL_POINTER_MEMORY_MODEL;
+    void** sns = NULL_POINTER_MEMORY_MODEL;
+    void** sa = NULL_POINTER_MEMORY_MODEL;
+    void** sac = NULL_POINTER_MEMORY_MODEL;
+    void** sas = NULL_POINTER_MEMORY_MODEL;
+    void** sm = NULL_POINTER_MEMORY_MODEL;
+    void** smc = NULL_POINTER_MEMORY_MODEL;
+    void** sms = NULL_POINTER_MEMORY_MODEL;
+    void** sd = NULL_POINTER_MEMORY_MODEL;
+    void** sdc = NULL_POINTER_MEMORY_MODEL;
+    void** sds = NULL_POINTER_MEMORY_MODEL;
     // The source part background colour name, abstraction, model, details.
-    void** bgn = NULL_POINTER;
-    void** bgnc = NULL_POINTER;
-    void** bgns = NULL_POINTER;
-    void** bga = NULL_POINTER;
-    void** bgac = NULL_POINTER;
-    void** bgas = NULL_POINTER;
-    void** bgm = NULL_POINTER;
-    void** bgmc = NULL_POINTER;
-    void** bgms = NULL_POINTER;
-    void** bgd = NULL_POINTER;
-    void** bgdc = NULL_POINTER;
-    void** bgds = NULL_POINTER;
+    void** bgn = NULL_POINTER_MEMORY_MODEL;
+    void** bgnc = NULL_POINTER_MEMORY_MODEL;
+    void** bgns = NULL_POINTER_MEMORY_MODEL;
+    void** bga = NULL_POINTER_MEMORY_MODEL;
+    void** bgac = NULL_POINTER_MEMORY_MODEL;
+    void** bgas = NULL_POINTER_MEMORY_MODEL;
+    void** bgm = NULL_POINTER_MEMORY_MODEL;
+    void** bgmc = NULL_POINTER_MEMORY_MODEL;
+    void** bgms = NULL_POINTER_MEMORY_MODEL;
+    void** bgd = NULL_POINTER_MEMORY_MODEL;
+    void** bgdc = NULL_POINTER_MEMORY_MODEL;
+    void** bgds = NULL_POINTER_MEMORY_MODEL;
     // The source part foreground colour name, abstraction, model, details.
-    void** fgn = NULL_POINTER;
-    void** fgnc = NULL_POINTER;
-    void** fgns = NULL_POINTER;
-    void** fga = NULL_POINTER;
-    void** fgac = NULL_POINTER;
-    void** fgas = NULL_POINTER;
-    void** fgm = NULL_POINTER;
-    void** fgmc = NULL_POINTER;
-    void** fgms = NULL_POINTER;
-    void** fgd = NULL_POINTER;
-    void** fgdc = NULL_POINTER;
-    void** fgds = NULL_POINTER;
+    void** fgn = NULL_POINTER_MEMORY_MODEL;
+    void** fgnc = NULL_POINTER_MEMORY_MODEL;
+    void** fgns = NULL_POINTER_MEMORY_MODEL;
+    void** fga = NULL_POINTER_MEMORY_MODEL;
+    void** fgac = NULL_POINTER_MEMORY_MODEL;
+    void** fgas = NULL_POINTER_MEMORY_MODEL;
+    void** fgm = NULL_POINTER_MEMORY_MODEL;
+    void** fgmc = NULL_POINTER_MEMORY_MODEL;
+    void** fgms = NULL_POINTER_MEMORY_MODEL;
+    void** fgd = NULL_POINTER_MEMORY_MODEL;
+    void** fgdc = NULL_POINTER_MEMORY_MODEL;
+    void** fgds = NULL_POINTER_MEMORY_MODEL;
     // The source part border name, abstraction, model, details.
-    void** bon = NULL_POINTER;
-    void** bonc = NULL_POINTER;
-    void** bons = NULL_POINTER;
-    void** boa = NULL_POINTER;
-    void** boac = NULL_POINTER;
-    void** boas = NULL_POINTER;
-    void** bom = NULL_POINTER;
-    void** bomc = NULL_POINTER;
-    void** boms = NULL_POINTER;
-    void** bod = NULL_POINTER;
-    void** bodc = NULL_POINTER;
-    void** bods = NULL_POINTER;
+    void** bon = NULL_POINTER_MEMORY_MODEL;
+    void** bonc = NULL_POINTER_MEMORY_MODEL;
+    void** bons = NULL_POINTER_MEMORY_MODEL;
+    void** boa = NULL_POINTER_MEMORY_MODEL;
+    void** boac = NULL_POINTER_MEMORY_MODEL;
+    void** boas = NULL_POINTER_MEMORY_MODEL;
+    void** bom = NULL_POINTER_MEMORY_MODEL;
+    void** bomc = NULL_POINTER_MEMORY_MODEL;
+    void** boms = NULL_POINTER_MEMORY_MODEL;
+    void** bod = NULL_POINTER_MEMORY_MODEL;
+    void** bodc = NULL_POINTER_MEMORY_MODEL;
+    void** bods = NULL_POINTER_MEMORY_MODEL;
     // The source part hidden property name, abstraction, model, details.
-    void** hn = NULL_POINTER;
-    void** hnc = NULL_POINTER;
-    void** hns = NULL_POINTER;
-    void** ha = NULL_POINTER;
-    void** hac = NULL_POINTER;
-    void** has = NULL_POINTER;
-    void** hm = NULL_POINTER;
-    void** hmc = NULL_POINTER;
-    void** hms = NULL_POINTER;
-    void** hd = NULL_POINTER;
-    void** hdc = NULL_POINTER;
-    void** hds = NULL_POINTER;
+    void** hn = NULL_POINTER_MEMORY_MODEL;
+    void** hnc = NULL_POINTER_MEMORY_MODEL;
+    void** hns = NULL_POINTER_MEMORY_MODEL;
+    void** ha = NULL_POINTER_MEMORY_MODEL;
+    void** hac = NULL_POINTER_MEMORY_MODEL;
+    void** has = NULL_POINTER_MEMORY_MODEL;
+    void** hm = NULL_POINTER_MEMORY_MODEL;
+    void** hmc = NULL_POINTER_MEMORY_MODEL;
+    void** hms = NULL_POINTER_MEMORY_MODEL;
+    void** hd = NULL_POINTER_MEMORY_MODEL;
+    void** hdc = NULL_POINTER_MEMORY_MODEL;
+    void** hds = NULL_POINTER_MEMORY_MODEL;
     // The source part inverse property name, abstraction, model, details.
-    void** in = NULL_POINTER;
-    void** inc = NULL_POINTER;
-    void** ins = NULL_POINTER;
-    void** ia = NULL_POINTER;
-    void** iac = NULL_POINTER;
-    void** ias = NULL_POINTER;
-    void** im = NULL_POINTER;
-    void** imc = NULL_POINTER;
-    void** ims = NULL_POINTER;
-    void** id = NULL_POINTER;
-    void** idc = NULL_POINTER;
-    void** ids = NULL_POINTER;
+    void** in = NULL_POINTER_MEMORY_MODEL;
+    void** inc = NULL_POINTER_MEMORY_MODEL;
+    void** ins = NULL_POINTER_MEMORY_MODEL;
+    void** ia = NULL_POINTER_MEMORY_MODEL;
+    void** iac = NULL_POINTER_MEMORY_MODEL;
+    void** ias = NULL_POINTER_MEMORY_MODEL;
+    void** im = NULL_POINTER_MEMORY_MODEL;
+    void** imc = NULL_POINTER_MEMORY_MODEL;
+    void** ims = NULL_POINTER_MEMORY_MODEL;
+    void** id = NULL_POINTER_MEMORY_MODEL;
+    void** idc = NULL_POINTER_MEMORY_MODEL;
+    void** ids = NULL_POINTER_MEMORY_MODEL;
     // The source part blink property name, abstraction, model, details.
-    void** bln = NULL_POINTER;
-    void** blnc = NULL_POINTER;
-    void** blns = NULL_POINTER;
-    void** bla = NULL_POINTER;
-    void** blac = NULL_POINTER;
-    void** blas = NULL_POINTER;
-    void** blm = NULL_POINTER;
-    void** blmc = NULL_POINTER;
-    void** blms = NULL_POINTER;
-    void** bld = NULL_POINTER;
-    void** bldc = NULL_POINTER;
-    void** blds = NULL_POINTER;
+    void** bln = NULL_POINTER_MEMORY_MODEL;
+    void** blnc = NULL_POINTER_MEMORY_MODEL;
+    void** blns = NULL_POINTER_MEMORY_MODEL;
+    void** bla = NULL_POINTER_MEMORY_MODEL;
+    void** blac = NULL_POINTER_MEMORY_MODEL;
+    void** blas = NULL_POINTER_MEMORY_MODEL;
+    void** blm = NULL_POINTER_MEMORY_MODEL;
+    void** blmc = NULL_POINTER_MEMORY_MODEL;
+    void** blms = NULL_POINTER_MEMORY_MODEL;
+    void** bld = NULL_POINTER_MEMORY_MODEL;
+    void** bldc = NULL_POINTER_MEMORY_MODEL;
+    void** blds = NULL_POINTER_MEMORY_MODEL;
     // The source part underline property name, abstraction, model, details.
-    void** un = NULL_POINTER;
-    void** unc = NULL_POINTER;
-    void** uns = NULL_POINTER;
-    void** ua = NULL_POINTER;
-    void** uac = NULL_POINTER;
-    void** uas = NULL_POINTER;
-    void** um = NULL_POINTER;
-    void** umc = NULL_POINTER;
-    void** ums = NULL_POINTER;
-    void** ud = NULL_POINTER;
-    void** udc = NULL_POINTER;
-    void** uds = NULL_POINTER;
+    void** un = NULL_POINTER_MEMORY_MODEL;
+    void** unc = NULL_POINTER_MEMORY_MODEL;
+    void** uns = NULL_POINTER_MEMORY_MODEL;
+    void** ua = NULL_POINTER_MEMORY_MODEL;
+    void** uac = NULL_POINTER_MEMORY_MODEL;
+    void** uas = NULL_POINTER_MEMORY_MODEL;
+    void** um = NULL_POINTER_MEMORY_MODEL;
+    void** umc = NULL_POINTER_MEMORY_MODEL;
+    void** ums = NULL_POINTER_MEMORY_MODEL;
+    void** ud = NULL_POINTER_MEMORY_MODEL;
+    void** udc = NULL_POINTER_MEMORY_MODEL;
+    void** uds = NULL_POINTER_MEMORY_MODEL;
     // The source part bold property name, abstraction, model, details.
-    void** bn = NULL_POINTER;
-    void** bnc = NULL_POINTER;
-    void** bns = NULL_POINTER;
-    void** ba = NULL_POINTER;
-    void** bac = NULL_POINTER;
-    void** bas = NULL_POINTER;
-    void** bm = NULL_POINTER;
-    void** bmc = NULL_POINTER;
-    void** bms = NULL_POINTER;
-    void** bd = NULL_POINTER;
-    void** bdc = NULL_POINTER;
-    void** bds = NULL_POINTER;
+    void** bn = NULL_POINTER_MEMORY_MODEL;
+    void** bnc = NULL_POINTER_MEMORY_MODEL;
+    void** bns = NULL_POINTER_MEMORY_MODEL;
+    void** ba = NULL_POINTER_MEMORY_MODEL;
+    void** bac = NULL_POINTER_MEMORY_MODEL;
+    void** bas = NULL_POINTER_MEMORY_MODEL;
+    void** bm = NULL_POINTER_MEMORY_MODEL;
+    void** bmc = NULL_POINTER_MEMORY_MODEL;
+    void** bms = NULL_POINTER_MEMORY_MODEL;
+    void** bd = NULL_POINTER_MEMORY_MODEL;
+    void** bdc = NULL_POINTER_MEMORY_MODEL;
+    void** bds = NULL_POINTER_MEMORY_MODEL;
     // The source whole position name, abstraction, model, details.
-    void** wpn = NULL_POINTER;
-    void** wpnc = NULL_POINTER;
-    void** wpns = NULL_POINTER;
-    void** wpa = NULL_POINTER;
-    void** wpac = NULL_POINTER;
-    void** wpas = NULL_POINTER;
-    void** wpm = NULL_POINTER;
-    void** wpmc = NULL_POINTER;
-    void** wpms = NULL_POINTER;
-    void** wpd = NULL_POINTER;
-    void** wpdc = NULL_POINTER;
-    void** wpds = NULL_POINTER;
+    void** wpn = NULL_POINTER_MEMORY_MODEL;
+    void** wpnc = NULL_POINTER_MEMORY_MODEL;
+    void** wpns = NULL_POINTER_MEMORY_MODEL;
+    void** wpa = NULL_POINTER_MEMORY_MODEL;
+    void** wpac = NULL_POINTER_MEMORY_MODEL;
+    void** wpas = NULL_POINTER_MEMORY_MODEL;
+    void** wpm = NULL_POINTER_MEMORY_MODEL;
+    void** wpmc = NULL_POINTER_MEMORY_MODEL;
+    void** wpms = NULL_POINTER_MEMORY_MODEL;
+    void** wpd = NULL_POINTER_MEMORY_MODEL;
+    void** wpdc = NULL_POINTER_MEMORY_MODEL;
+    void** wpds = NULL_POINTER_MEMORY_MODEL;
     // The source whole size name, abstraction, model, details.
-    void** wsn = NULL_POINTER;
-    void** wsnc = NULL_POINTER;
-    void** wsns = NULL_POINTER;
-    void** wsa = NULL_POINTER;
-    void** wsac = NULL_POINTER;
-    void** wsas = NULL_POINTER;
-    void** wsm = NULL_POINTER;
-    void** wsmc = NULL_POINTER;
-    void** wsms = NULL_POINTER;
-    void** wsd = NULL_POINTER;
-    void** wsdc = NULL_POINTER;
-    void** wsds = NULL_POINTER;
+    void** wsn = NULL_POINTER_MEMORY_MODEL;
+    void** wsnc = NULL_POINTER_MEMORY_MODEL;
+    void** wsns = NULL_POINTER_MEMORY_MODEL;
+    void** wsa = NULL_POINTER_MEMORY_MODEL;
+    void** wsac = NULL_POINTER_MEMORY_MODEL;
+    void** wsas = NULL_POINTER_MEMORY_MODEL;
+    void** wsm = NULL_POINTER_MEMORY_MODEL;
+    void** wsmc = NULL_POINTER_MEMORY_MODEL;
+    void** wsms = NULL_POINTER_MEMORY_MODEL;
+    void** wsd = NULL_POINTER_MEMORY_MODEL;
+    void** wsdc = NULL_POINTER_MEMORY_MODEL;
+    void** wsds = NULL_POINTER_MEMORY_MODEL;
 
     // The element name.
     void* en = *NULL_POINTER_MEMORY_MODEL;
@@ -1824,7 +1824,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
     // -1: not a compound knowledge hierarchy
     // 0: part hierarchy
     // 1: meta hierarchy
-    int f = *NUMBER_MINUS_1_INTEGER;
+    int f = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // The loop count.
     int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The name comparison result.
@@ -2176,7 +2176,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 int* sc = (int*) p6;
 
                 // Iterate through compound parts.
-                while (*NUMBER_1_INTEGER) {
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                     if (j >= *sc) {
 
@@ -2209,18 +2209,18 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
                     // Reset source part name, abstraction, model, details
                     // (parameters of the current compound part element).
-                    n = NULL_POINTER;
-                    nc = NULL_POINTER;
-                    ns = NULL_POINTER;
-                    a = NULL_POINTER;
-                    ac = NULL_POINTER;
-                    as = NULL_POINTER;
-                    m = NULL_POINTER;
-                    mc = NULL_POINTER;
-                    ms = NULL_POINTER;
-                    d = NULL_POINTER;
-                    dc = NULL_POINTER;
-                    ds = NULL_POINTER;
+                    n = NULL_POINTER_MEMORY_MODEL;
+                    nc = NULL_POINTER_MEMORY_MODEL;
+                    ns = NULL_POINTER_MEMORY_MODEL;
+                    a = NULL_POINTER_MEMORY_MODEL;
+                    ac = NULL_POINTER_MEMORY_MODEL;
+                    as = NULL_POINTER_MEMORY_MODEL;
+                    m = NULL_POINTER_MEMORY_MODEL;
+                    mc = NULL_POINTER_MEMORY_MODEL;
+                    ms = NULL_POINTER_MEMORY_MODEL;
+                    d = NULL_POINTER_MEMORY_MODEL;
+                    dc = NULL_POINTER_MEMORY_MODEL;
+                    ds = NULL_POINTER_MEMORY_MODEL;
 
                     // Reset name comparison result.
                     nr = *NUMBER_0_INTEGER_MEMORY_MODEL;

@@ -19,34 +19,34 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: create_memory_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: create_memory_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATE_MEMORY_OPERATION_CYBOL_NAME_SOURCE
 #define CREATE_MEMORY_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The name create memory operation cybol name. */
 static wchar_t NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME_ARRAY[] = {L'n', L'a', L'm', L'e'};
 static wchar_t* NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME = NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME_ARRAY;
-static int* NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The abstraction create memory operation cybol name. */
 static wchar_t ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME_ARRAY[] = {L'a', L'b', L's', L't', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
 static wchar_t* ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME = ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME_ARRAY;
-static int* ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The element create memory operation cybol name. */
 static wchar_t ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME_ARRAY[] = {L'e', L'l', L'e', L'm', L'e', L'n', L't'};
 static wchar_t* ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME = ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME_ARRAY;
-static int* ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The whole create memory operation cybol name. */
 static wchar_t WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME_ARRAY[] = {L'w', L'h', L'o', L'l', L'e'};
 static wchar_t* WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME = WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME_ARRAY;
-static int* WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* CREATE_MEMORY_OPERATION_CYBOL_NAME_SOURCE */
 #endif

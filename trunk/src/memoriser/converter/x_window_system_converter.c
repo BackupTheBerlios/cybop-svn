@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.26 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.27 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,12 +29,12 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../memoriser/accessor.c"
 
@@ -73,11 +73,11 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         // The display, which is a subsumption of
         // xserver, screens, hardware (input devices etc.).
-        struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER;
+        struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER_MEMORY_MODEL;
         // The window.
-        int** w = (int**) NULL_POINTER;
+        int** w = (int**) NULL_POINTER_MEMORY_MODEL;
         // The graphic context.
-        struct _XGC** gc = (struct _XGC**) NULL_POINTER;
+        struct _XGC** gc = (struct _XGC**) NULL_POINTER_MEMORY_MODEL;
         // The window attributes.
         XWindowAttributes wa;
 
@@ -90,18 +90,18 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         XGetWindowAttributes(*di, **w, &wa);
 
         // The source whole size.
-        void** wsn = NULL_POINTER;
-        void** wsnc = NULL_POINTER;
-        void** wsns = NULL_POINTER;
-        void** wsa = NULL_POINTER;
-        void** wsac = NULL_POINTER;
-        void** wsas = NULL_POINTER;
-        void** wsm = NULL_POINTER;
-        void** wsmc = NULL_POINTER;
-        void** wsms = NULL_POINTER;
-        void** wsd = NULL_POINTER;
-        void** wsdc = NULL_POINTER;
-        void** wsds = NULL_POINTER;
+        void** wsn = NULL_POINTER_MEMORY_MODEL;
+        void** wsnc = NULL_POINTER_MEMORY_MODEL;
+        void** wsns = NULL_POINTER_MEMORY_MODEL;
+        void** wsa = NULL_POINTER_MEMORY_MODEL;
+        void** wsac = NULL_POINTER_MEMORY_MODEL;
+        void** wsas = NULL_POINTER_MEMORY_MODEL;
+        void** wsm = NULL_POINTER_MEMORY_MODEL;
+        void** wsmc = NULL_POINTER_MEMORY_MODEL;
+        void** wsms = NULL_POINTER_MEMORY_MODEL;
+        void** wsd = NULL_POINTER_MEMORY_MODEL;
+        void** wsdc = NULL_POINTER_MEMORY_MODEL;
+        void** wsds = NULL_POINTER_MEMORY_MODEL;
 
         // The source whole size coordinates.
         int* wsmx = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -138,9 +138,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Determine source whole size coordinates.
-            get_element(*wsm, (void*) NUMBER_0_INTEGER, (void*) &wsmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get_element(*wsm, (void*) NUMBER_1_INTEGER, (void*) &wsmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get_element(*wsm, (void*) NUMBER_2_INTEGER, (void*) &wsmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &wsmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &wsmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &wsmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
             // Set original area position coordinates, set to the zero origo.
             oapx = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -162,118 +162,118 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         }
 
         // The source part name, abstraction, model, details.
-        void** n = NULL_POINTER;
-        void** nc = NULL_POINTER;
-        void** ns = NULL_POINTER;
-        void** a = NULL_POINTER;
-        void** ac = NULL_POINTER;
-        void** as = NULL_POINTER;
-        void** m = NULL_POINTER;
-        void** mc = NULL_POINTER;
-        void** ms = NULL_POINTER;
-        void** d = NULL_POINTER;
-        void** dc = NULL_POINTER;
-        void** ds = NULL_POINTER;
+        void** n = NULL_POINTER_MEMORY_MODEL;
+        void** nc = NULL_POINTER_MEMORY_MODEL;
+        void** ns = NULL_POINTER_MEMORY_MODEL;
+        void** a = NULL_POINTER_MEMORY_MODEL;
+        void** ac = NULL_POINTER_MEMORY_MODEL;
+        void** as = NULL_POINTER_MEMORY_MODEL;
+        void** m = NULL_POINTER_MEMORY_MODEL;
+        void** mc = NULL_POINTER_MEMORY_MODEL;
+        void** ms = NULL_POINTER_MEMORY_MODEL;
+        void** d = NULL_POINTER_MEMORY_MODEL;
+        void** dc = NULL_POINTER_MEMORY_MODEL;
+        void** ds = NULL_POINTER_MEMORY_MODEL;
         // The source part layout name, abstraction, model, details.
-        void** ln = NULL_POINTER;
-        void** lnc = NULL_POINTER;
-        void** lns = NULL_POINTER;
-        void** la = NULL_POINTER;
-        void** lac = NULL_POINTER;
-        void** las = NULL_POINTER;
-        void** lm = NULL_POINTER;
-        void** lmc = NULL_POINTER;
-        void** lms = NULL_POINTER;
-        void** ld = NULL_POINTER;
-        void** ldc = NULL_POINTER;
-        void** lds = NULL_POINTER;
+        void** ln = NULL_POINTER_MEMORY_MODEL;
+        void** lnc = NULL_POINTER_MEMORY_MODEL;
+        void** lns = NULL_POINTER_MEMORY_MODEL;
+        void** la = NULL_POINTER_MEMORY_MODEL;
+        void** lac = NULL_POINTER_MEMORY_MODEL;
+        void** las = NULL_POINTER_MEMORY_MODEL;
+        void** lm = NULL_POINTER_MEMORY_MODEL;
+        void** lmc = NULL_POINTER_MEMORY_MODEL;
+        void** lms = NULL_POINTER_MEMORY_MODEL;
+        void** ld = NULL_POINTER_MEMORY_MODEL;
+        void** ldc = NULL_POINTER_MEMORY_MODEL;
+        void** lds = NULL_POINTER_MEMORY_MODEL;
         // The source part cell name, abstraction, model, details.
-        void** cn = NULL_POINTER;
-        void** cnc = NULL_POINTER;
-        void** cns = NULL_POINTER;
-        void** ca = NULL_POINTER;
-        void** cac = NULL_POINTER;
-        void** cas = NULL_POINTER;
-        void** cm = NULL_POINTER;
-        void** cmc = NULL_POINTER;
-        void** cms = NULL_POINTER;
-        void** cd = NULL_POINTER;
-        void** cdc = NULL_POINTER;
-        void** cds = NULL_POINTER;
+        void** cn = NULL_POINTER_MEMORY_MODEL;
+        void** cnc = NULL_POINTER_MEMORY_MODEL;
+        void** cns = NULL_POINTER_MEMORY_MODEL;
+        void** ca = NULL_POINTER_MEMORY_MODEL;
+        void** cac = NULL_POINTER_MEMORY_MODEL;
+        void** cas = NULL_POINTER_MEMORY_MODEL;
+        void** cm = NULL_POINTER_MEMORY_MODEL;
+        void** cmc = NULL_POINTER_MEMORY_MODEL;
+        void** cms = NULL_POINTER_MEMORY_MODEL;
+        void** cd = NULL_POINTER_MEMORY_MODEL;
+        void** cdc = NULL_POINTER_MEMORY_MODEL;
+        void** cds = NULL_POINTER_MEMORY_MODEL;
         // The source part position name, abstraction, model, details.
-        void** pn = NULL_POINTER;
-        void** pnc = NULL_POINTER;
-        void** pns = NULL_POINTER;
-        void** pa = NULL_POINTER;
-        void** pac = NULL_POINTER;
-        void** pas = NULL_POINTER;
-        void** pm = NULL_POINTER;
-        void** pmc = NULL_POINTER;
-        void** pms = NULL_POINTER;
-        void** pd = NULL_POINTER;
-        void** pdc = NULL_POINTER;
-        void** pds = NULL_POINTER;
+        void** pn = NULL_POINTER_MEMORY_MODEL;
+        void** pnc = NULL_POINTER_MEMORY_MODEL;
+        void** pns = NULL_POINTER_MEMORY_MODEL;
+        void** pa = NULL_POINTER_MEMORY_MODEL;
+        void** pac = NULL_POINTER_MEMORY_MODEL;
+        void** pas = NULL_POINTER_MEMORY_MODEL;
+        void** pm = NULL_POINTER_MEMORY_MODEL;
+        void** pmc = NULL_POINTER_MEMORY_MODEL;
+        void** pms = NULL_POINTER_MEMORY_MODEL;
+        void** pd = NULL_POINTER_MEMORY_MODEL;
+        void** pdc = NULL_POINTER_MEMORY_MODEL;
+        void** pds = NULL_POINTER_MEMORY_MODEL;
         // The source part shape name, abstraction, model, details.
-        void** shn = NULL_POINTER;
-        void** shnc = NULL_POINTER;
-        void** shns = NULL_POINTER;
-        void** sha = NULL_POINTER;
-        void** shac = NULL_POINTER;
-        void** shas = NULL_POINTER;
-        void** shm = NULL_POINTER;
-        void** shmc = NULL_POINTER;
-        void** shms = NULL_POINTER;
-        void** shd = NULL_POINTER;
-        void** shdc = NULL_POINTER;
-        void** shds = NULL_POINTER;
+        void** shn = NULL_POINTER_MEMORY_MODEL;
+        void** shnc = NULL_POINTER_MEMORY_MODEL;
+        void** shns = NULL_POINTER_MEMORY_MODEL;
+        void** sha = NULL_POINTER_MEMORY_MODEL;
+        void** shac = NULL_POINTER_MEMORY_MODEL;
+        void** shas = NULL_POINTER_MEMORY_MODEL;
+        void** shm = NULL_POINTER_MEMORY_MODEL;
+        void** shmc = NULL_POINTER_MEMORY_MODEL;
+        void** shms = NULL_POINTER_MEMORY_MODEL;
+        void** shd = NULL_POINTER_MEMORY_MODEL;
+        void** shdc = NULL_POINTER_MEMORY_MODEL;
+        void** shds = NULL_POINTER_MEMORY_MODEL;
         // The source part size name, abstraction, model, details.
-        void** sn = NULL_POINTER;
-        void** snc = NULL_POINTER;
-        void** sns = NULL_POINTER;
-        void** sa = NULL_POINTER;
-        void** sac = NULL_POINTER;
-        void** sas = NULL_POINTER;
-        void** sm = NULL_POINTER;
-        void** smc = NULL_POINTER;
-        void** sms = NULL_POINTER;
-        void** sd = NULL_POINTER;
-        void** sdc = NULL_POINTER;
-        void** sds = NULL_POINTER;
+        void** sn = NULL_POINTER_MEMORY_MODEL;
+        void** snc = NULL_POINTER_MEMORY_MODEL;
+        void** sns = NULL_POINTER_MEMORY_MODEL;
+        void** sa = NULL_POINTER_MEMORY_MODEL;
+        void** sac = NULL_POINTER_MEMORY_MODEL;
+        void** sas = NULL_POINTER_MEMORY_MODEL;
+        void** sm = NULL_POINTER_MEMORY_MODEL;
+        void** smc = NULL_POINTER_MEMORY_MODEL;
+        void** sms = NULL_POINTER_MEMORY_MODEL;
+        void** sd = NULL_POINTER_MEMORY_MODEL;
+        void** sdc = NULL_POINTER_MEMORY_MODEL;
+        void** sds = NULL_POINTER_MEMORY_MODEL;
         // The source part title name, abstraction, model, details.
-        void** tn = NULL_POINTER;
-        void** tnc = NULL_POINTER;
-        void** tns = NULL_POINTER;
-        void** ta = NULL_POINTER;
-        void** tac = NULL_POINTER;
-        void** tas = NULL_POINTER;
-        void** tm = NULL_POINTER;
-        void** tmc = NULL_POINTER;
-        void** tms = NULL_POINTER;
-        void** td = NULL_POINTER;
-        void** tdc = NULL_POINTER;
-        void** tds = NULL_POINTER;
+        void** tn = NULL_POINTER_MEMORY_MODEL;
+        void** tnc = NULL_POINTER_MEMORY_MODEL;
+        void** tns = NULL_POINTER_MEMORY_MODEL;
+        void** ta = NULL_POINTER_MEMORY_MODEL;
+        void** tac = NULL_POINTER_MEMORY_MODEL;
+        void** tas = NULL_POINTER_MEMORY_MODEL;
+        void** tm = NULL_POINTER_MEMORY_MODEL;
+        void** tmc = NULL_POINTER_MEMORY_MODEL;
+        void** tms = NULL_POINTER_MEMORY_MODEL;
+        void** td = NULL_POINTER_MEMORY_MODEL;
+        void** tdc = NULL_POINTER_MEMORY_MODEL;
+        void** tds = NULL_POINTER_MEMORY_MODEL;
         // The source part icon name, abstraction, model, details.
-        void** in = NULL_POINTER;
-        void** inc = NULL_POINTER;
-        void** ins = NULL_POINTER;
-        void** ia = NULL_POINTER;
-        void** iac = NULL_POINTER;
-        void** ias = NULL_POINTER;
-        void** im = NULL_POINTER;
-        void** imc = NULL_POINTER;
-        void** ims = NULL_POINTER;
-        void** id = NULL_POINTER;
-        void** idc = NULL_POINTER;
-        void** ids = NULL_POINTER;
+        void** in = NULL_POINTER_MEMORY_MODEL;
+        void** inc = NULL_POINTER_MEMORY_MODEL;
+        void** ins = NULL_POINTER_MEMORY_MODEL;
+        void** ia = NULL_POINTER_MEMORY_MODEL;
+        void** iac = NULL_POINTER_MEMORY_MODEL;
+        void** ias = NULL_POINTER_MEMORY_MODEL;
+        void** im = NULL_POINTER_MEMORY_MODEL;
+        void** imc = NULL_POINTER_MEMORY_MODEL;
+        void** ims = NULL_POINTER_MEMORY_MODEL;
+        void** id = NULL_POINTER_MEMORY_MODEL;
+        void** idc = NULL_POINTER_MEMORY_MODEL;
+        void** ids = NULL_POINTER_MEMORY_MODEL;
 
         // The terminated title.
         void* tt = *NULL_POINTER_MEMORY_MODEL;
-        int ttc = *NUMBER_MINUS_1_INTEGER;
-        int tts = *NUMBER_MINUS_1_INTEGER;
+        int ttc = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+        int tts = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The terminated icon name.
         void* ti = *NULL_POINTER_MEMORY_MODEL;
-        int tic = *NUMBER_MINUS_1_INTEGER;
-        int tis = *NUMBER_MINUS_1_INTEGER;
+        int tic = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+        int tis = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // The source part position coordinates.
         int* pmx = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -290,7 +290,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Iterate through compound parts.
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (j >= *sc) {
 
@@ -338,13 +338,13 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Get source part position coordinates.
-            get_element(*pm, (void*) NUMBER_0_INTEGER, (void*) &pmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get_element(*pm, (void*) NUMBER_1_INTEGER, (void*) &pmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get_element(*pm, (void*) NUMBER_2_INTEGER, (void*) &pmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
             // Get source part size coordinates.
-            get_element(*sm, (void*) NUMBER_0_INTEGER, (void*) &smx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get_element(*sm, (void*) NUMBER_1_INTEGER, (void*) &smy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-            get_element(*sm, (void*) NUMBER_2_INTEGER, (void*) &smz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"layout: %s\n", *lm);
     fwprintf(stderr, L"layout count: %i\n", *((int*) *lmc));
@@ -365,7 +365,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 */
 
                 // Draw graphical element using given coordinates.
-                XDrawRectangle(*di, **w, *gc, *pmx, *pmy, *smx - *NUMBER_1_INTEGER, *smy - *NUMBER_1_INTEGER);
+                XDrawRectangle(*di, **w, *gc, *pmx, *pmy, *smx - *NUMBER_1_INTEGER_MEMORY_MODEL, *smy - *NUMBER_1_INTEGER_MEMORY_MODEL);
 
                 // Reset comparison result.
                 r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -380,7 +380,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     int texts = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Create terminated text.
-                    allocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
+                    allocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Encode wide character name into text, which is a multibyte character array.
                     encode_utf_8_unicode_character_vector((void*) &text, (void*) &textc, (void*) &texts, *m, *mc);
@@ -388,14 +388,14 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     if (texts <= textc) {
 
                         // Increase character array size to have place for the termination character.
-                        texts = textc + *NUMBER_1_INTEGER;
+                        texts = textc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                         // Reallocate terminated file name as multibyte character array.
-                        reallocate_array((void*) &text, (void*) &textc, (void*) &texts, (void*) CHARACTER_ARRAY);
+                        reallocate_array((void*) &text, (void*) &textc, (void*) &texts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     }
 
                     // Add null termination character to text.
-                    set_array_elements(text, (void*) &textc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(text, (void*) &textc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     //?? TODO: Create "text" as 2byte character array,
                     //?? since the xlib C library expects it that way.
@@ -406,10 +406,10 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     // CAUTION! The Xlib C Library offers a function "XDrawString16"
                     // to draw 2byte characters in a given drawable.
                     // However, standard utf-8 encoded characters are used here.
-                    XDrawString(*di, **w, *gc, *pmx, *pmy + *NUMBER_20_INTEGER, text, textc);
+                    XDrawString(*di, **w, *gc, *pmx, *pmy + *NUMBER_20_INTEGER_MEMORY_MODEL, text, textc);
 
                     // Destroy terminated text.
-                    deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY);
+                    deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     /*
                     In the conventional 'XFontStruct' model, an X client opens
@@ -567,9 +567,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 tis = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Create terminated title.
-                allocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_ARRAY);
+                allocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 // Create terminated icon name.
-                allocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_ARRAY);
+                allocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Encode wide character name into title, which is a multibyte character array.
                 encode_utf_8_unicode_character_vector((void*) &tt, (void*) &ttc, (void*) &tts, *tm, *tmc);
@@ -579,25 +579,25 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 if (tts <= ttc) {
 
                     // Increase character array size to have place for the termination character.
-                    tts = ttc + *NUMBER_1_INTEGER;
+                    tts = ttc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate title as multibyte character array.
-                    reallocate_array((void*) &tt, (void*) &ttc, (void*) &tts, (void*) CHARACTER_ARRAY);
+                    reallocate_array((void*) &tt, (void*) &ttc, (void*) &tts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 }
 
                 if (tis <= tic) {
 
                     // Increase character array size to have place for the termination character.
-                    tis = tic + *NUMBER_1_INTEGER;
+                    tis = tic + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate icon name as multibyte character array.
-                    reallocate_array((void*) &ti, (void*) &tic, (void*) &tis, (void*) CHARACTER_ARRAY);
+                    reallocate_array((void*) &ti, (void*) &tic, (void*) &tis, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 }
 
                 // Add null termination character to title.
-                set_array_elements(tt, (void*) &ttc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(tt, (void*) &ttc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 // Add null termination character to icon name.
-                set_array_elements(ti, (void*) &tic, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                set_array_elements(ti, (void*) &tic, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Set terminated window title.
                 //
@@ -608,9 +608,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 XSetIconName(*di, **w, (char*) ti);
 
                 // Destroy terminated title.
-                deallocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_ARRAY);
+                deallocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 // Destroy terminated icon name.
-                deallocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_ARRAY);
+                deallocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             }
 
             // Reset comparison result.
@@ -628,58 +628,58 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             }
 
             // Reset source part name, abstraction, model, details.
-            n = NULL_POINTER;
-            nc = NULL_POINTER;
-            ns = NULL_POINTER;
-            a = NULL_POINTER;
-            ac = NULL_POINTER;
-            as = NULL_POINTER;
-            m = NULL_POINTER;
-            mc = NULL_POINTER;
-            ms = NULL_POINTER;
-            d = NULL_POINTER;
-            dc = NULL_POINTER;
-            ds = NULL_POINTER;
+            n = NULL_POINTER_MEMORY_MODEL;
+            nc = NULL_POINTER_MEMORY_MODEL;
+            ns = NULL_POINTER_MEMORY_MODEL;
+            a = NULL_POINTER_MEMORY_MODEL;
+            ac = NULL_POINTER_MEMORY_MODEL;
+            as = NULL_POINTER_MEMORY_MODEL;
+            m = NULL_POINTER_MEMORY_MODEL;
+            mc = NULL_POINTER_MEMORY_MODEL;
+            ms = NULL_POINTER_MEMORY_MODEL;
+            d = NULL_POINTER_MEMORY_MODEL;
+            dc = NULL_POINTER_MEMORY_MODEL;
+            ds = NULL_POINTER_MEMORY_MODEL;
             // Reset source part layout.
-            la = NULL_POINTER;
-            lac = NULL_POINTER;
-            las = NULL_POINTER;
-            lm = NULL_POINTER;
-            lmc = NULL_POINTER;
-            lms = NULL_POINTER;
-            ld = NULL_POINTER;
-            ldc = NULL_POINTER;
-            lds = NULL_POINTER;
+            la = NULL_POINTER_MEMORY_MODEL;
+            lac = NULL_POINTER_MEMORY_MODEL;
+            las = NULL_POINTER_MEMORY_MODEL;
+            lm = NULL_POINTER_MEMORY_MODEL;
+            lmc = NULL_POINTER_MEMORY_MODEL;
+            lms = NULL_POINTER_MEMORY_MODEL;
+            ld = NULL_POINTER_MEMORY_MODEL;
+            ldc = NULL_POINTER_MEMORY_MODEL;
+            lds = NULL_POINTER_MEMORY_MODEL;
             // Reset source part cell.
-            ca = NULL_POINTER;
-            cac = NULL_POINTER;
-            cas = NULL_POINTER;
-            cm = NULL_POINTER;
-            cmc = NULL_POINTER;
-            cms = NULL_POINTER;
-            cd = NULL_POINTER;
-            cdc = NULL_POINTER;
-            cds = NULL_POINTER;
+            ca = NULL_POINTER_MEMORY_MODEL;
+            cac = NULL_POINTER_MEMORY_MODEL;
+            cas = NULL_POINTER_MEMORY_MODEL;
+            cm = NULL_POINTER_MEMORY_MODEL;
+            cmc = NULL_POINTER_MEMORY_MODEL;
+            cms = NULL_POINTER_MEMORY_MODEL;
+            cd = NULL_POINTER_MEMORY_MODEL;
+            cdc = NULL_POINTER_MEMORY_MODEL;
+            cds = NULL_POINTER_MEMORY_MODEL;
             // Reset source part position.
-            pa = NULL_POINTER;
-            pac = NULL_POINTER;
-            pas = NULL_POINTER;
-            pm = NULL_POINTER;
-            pmc = NULL_POINTER;
-            pms = NULL_POINTER;
-            pd = NULL_POINTER;
-            pdc = NULL_POINTER;
-            pds = NULL_POINTER;
+            pa = NULL_POINTER_MEMORY_MODEL;
+            pac = NULL_POINTER_MEMORY_MODEL;
+            pas = NULL_POINTER_MEMORY_MODEL;
+            pm = NULL_POINTER_MEMORY_MODEL;
+            pmc = NULL_POINTER_MEMORY_MODEL;
+            pms = NULL_POINTER_MEMORY_MODEL;
+            pd = NULL_POINTER_MEMORY_MODEL;
+            pdc = NULL_POINTER_MEMORY_MODEL;
+            pds = NULL_POINTER_MEMORY_MODEL;
             // Reset source part size.
-            sa = NULL_POINTER;
-            sac = NULL_POINTER;
-            sas = NULL_POINTER;
-            sm = NULL_POINTER;
-            smc = NULL_POINTER;
-            sms = NULL_POINTER;
-            sd = NULL_POINTER;
-            sdc = NULL_POINTER;
-            sds = NULL_POINTER;
+            sa = NULL_POINTER_MEMORY_MODEL;
+            sac = NULL_POINTER_MEMORY_MODEL;
+            sas = NULL_POINTER_MEMORY_MODEL;
+            sm = NULL_POINTER_MEMORY_MODEL;
+            smc = NULL_POINTER_MEMORY_MODEL;
+            sms = NULL_POINTER_MEMORY_MODEL;
+            sd = NULL_POINTER_MEMORY_MODEL;
+            sdc = NULL_POINTER_MEMORY_MODEL;
+            sds = NULL_POINTER_MEMORY_MODEL;
             // The source part title and icon are not reset,
             // since only one window may be the root of all graphical parts
             // and further windows must not occur as part.
@@ -695,10 +695,10 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
             // Reset terminated title.
             tt = *NULL_POINTER_MEMORY_MODEL;
-            tts = *NUMBER_MINUS_1_INTEGER;
+            tts = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
             // Reset terminated icon name.
             ti = *NULL_POINTER_MEMORY_MODEL;
-            tis = *NUMBER_MINUS_1_INTEGER;
+            tis = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
             // Reset comparison result.
             r = *NUMBER_0_INTEGER_MEMORY_MODEL;

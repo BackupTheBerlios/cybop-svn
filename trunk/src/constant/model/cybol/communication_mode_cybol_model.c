@@ -19,24 +19,24 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communication_mode_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: communication_mode_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMMUNICATION_MODE_CYBOL_MODEL_SOURCE
 #define COMMUNICATION_MODE_CYBOL_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The client communication mode cybol model. */
 static wchar_t CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_ARRAY[] = {L'c', L'l', L'i', L'e', L'n', L't'};
 static wchar_t* CLIENT_COMMUNICATION_MODE_CYBOL_MODEL = CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_ARRAY;
-static int* CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The server communication mode cybol model. */
 static wchar_t SERVER_COMMUNICATION_MODE_CYBOL_MODEL_ARRAY[] = {L's', L'e', L'r', L'v', L'e', L'r'};
 static wchar_t* SERVER_COMMUNICATION_MODE_CYBOL_MODEL = SERVER_COMMUNICATION_MODE_CYBOL_MODEL_ARRAY;
-static int* SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COMMUNICATION_MODE_CYBOL_MODEL_SOURCE */
 #endif

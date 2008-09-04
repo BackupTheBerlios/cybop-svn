@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: empty_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: empty_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef EMPTY_CYBOL_MODEL_SOURCE
 #define EMPTY_CYBOL_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The empty cybol model. */
 static wchar_t EMPTY_CYBOL_MODEL_ARRAY[] = {};
 static wchar_t* EMPTY_CYBOL_MODEL = EMPTY_CYBOL_MODEL_ARRAY;
-static int* EMPTY_CYBOL_MODEL_COUNT = NUMBER_0_INTEGER_ARRAY;
+static int* EMPTY_CYBOL_MODEL_COUNT = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* EMPTY_CYBOL_MODEL_SOURCE */
 #endif

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: copying_runner.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: copying_runner.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,17 +29,17 @@
 #include <unistd.h>
 #include "../../applicator/run/run_execute.c"
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../globals/constants/shell_command/unix_shell_command_constants.c"
 #include "../../globals/constants/system/system_executable_constants.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/reallocation_factor_variables.c"
+#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
 
 /**
@@ -55,44 +55,44 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run copy command.");
 
     // The recursive name, abstraction, model, details.
-    void** recursiven = NULL_POINTER;
-    void** recursivenc = NULL_POINTER;
-    void** recursivens = NULL_POINTER;
-    void** recursivea = NULL_POINTER;
-    void** recursiveac = NULL_POINTER;
-    void** recursiveas = NULL_POINTER;
-    int** recursivem = (int**) NULL_POINTER;
-    void** recursivemc = NULL_POINTER;
-    void** recursivems = NULL_POINTER;
-    void** recursived = NULL_POINTER;
-    void** recursivedc = NULL_POINTER;
-    void** recursiveds = NULL_POINTER;
+    void** recursiven = NULL_POINTER_MEMORY_MODEL;
+    void** recursivenc = NULL_POINTER_MEMORY_MODEL;
+    void** recursivens = NULL_POINTER_MEMORY_MODEL;
+    void** recursivea = NULL_POINTER_MEMORY_MODEL;
+    void** recursiveac = NULL_POINTER_MEMORY_MODEL;
+    void** recursiveas = NULL_POINTER_MEMORY_MODEL;
+    int** recursivem = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** recursivemc = NULL_POINTER_MEMORY_MODEL;
+    void** recursivems = NULL_POINTER_MEMORY_MODEL;
+    void** recursived = NULL_POINTER_MEMORY_MODEL;
+    void** recursivedc = NULL_POINTER_MEMORY_MODEL;
+    void** recursiveds = NULL_POINTER_MEMORY_MODEL;
     // The source name, abstraction, model, details.
-    void** sourcen = NULL_POINTER;
-    void** sourcenc = NULL_POINTER;
-    void** sourcens = NULL_POINTER;
-    void** sourcea = NULL_POINTER;
-    void** sourceac = NULL_POINTER;
-    void** sourceas = NULL_POINTER;
-    int** sourcem = (int**) NULL_POINTER;
-    void** sourcemc = NULL_POINTER;
-    void** sourcems = NULL_POINTER;
-    void** sourced = NULL_POINTER;
-    void** sourcedc = NULL_POINTER;
-    void** sourceds = NULL_POINTER;
+    void** sourcen = NULL_POINTER_MEMORY_MODEL;
+    void** sourcenc = NULL_POINTER_MEMORY_MODEL;
+    void** sourcens = NULL_POINTER_MEMORY_MODEL;
+    void** sourcea = NULL_POINTER_MEMORY_MODEL;
+    void** sourceac = NULL_POINTER_MEMORY_MODEL;
+    void** sourceas = NULL_POINTER_MEMORY_MODEL;
+    int** sourcem = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** sourcemc = NULL_POINTER_MEMORY_MODEL;
+    void** sourcems = NULL_POINTER_MEMORY_MODEL;
+    void** sourced = NULL_POINTER_MEMORY_MODEL;
+    void** sourcedc = NULL_POINTER_MEMORY_MODEL;
+    void** sourceds = NULL_POINTER_MEMORY_MODEL;
     // The destination name, abstraction, model, details.
-    void** destinationn = NULL_POINTER;
-    void** destinationnc = NULL_POINTER;
-    void** destinationns = NULL_POINTER;
-    void** destinationa = NULL_POINTER;
-    void** destinationac = NULL_POINTER;
-    void** destinationas = NULL_POINTER;
-    int** destinationm = (int**) NULL_POINTER;
-    void** destinationmc = NULL_POINTER;
-    void** destinationms = NULL_POINTER;
-    void** destinationd = NULL_POINTER;
-    void** destinationdc = NULL_POINTER;
-    void** destinationds = NULL_POINTER;
+    void** destinationn = NULL_POINTER_MEMORY_MODEL;
+    void** destinationnc = NULL_POINTER_MEMORY_MODEL;
+    void** destinationns = NULL_POINTER_MEMORY_MODEL;
+    void** destinationa = NULL_POINTER_MEMORY_MODEL;
+    void** destinationac = NULL_POINTER_MEMORY_MODEL;
+    void** destinationas = NULL_POINTER_MEMORY_MODEL;
+    int** destinationm = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** destinationmc = NULL_POINTER_MEMORY_MODEL;
+    void** destinationms = NULL_POINTER_MEMORY_MODEL;
+    void** destinationd = NULL_POINTER_MEMORY_MODEL;
+    void** destinationdc = NULL_POINTER_MEMORY_MODEL;
+    void** destinationds = NULL_POINTER_MEMORY_MODEL;
 
     // Get recursive option.
     get_universal_compound_element_by_name(p0, p1,
@@ -143,7 +143,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     if (*recursivem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**recursivem == *NUMBER_1_INTEGER) {
+        if (**recursivem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
@@ -157,7 +157,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
@@ -170,7 +170,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     if (*sourcem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**sourcem == *NUMBER_1_INTEGER) {
+        if (**sourcem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
@@ -184,7 +184,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
@@ -197,7 +197,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     if (*destinationm != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**destinationm == *NUMBER_1_INTEGER) {
+        if (**destinationm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
@@ -211,7 +211,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
@@ -233,7 +233,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble arguments by adding the null termination character.
-    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Execute arguments as process.
@@ -284,7 +284,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(shell, (void*) &shellc, (void*) SHELL_SYSTEM_EXECUTABLE, (void*) SHELL_SYSTEM_EXECUTABLE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     shellc = shellc + *SHELL_SYSTEM_EXECUTABLE_COUNT;
-    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     shellc = shellc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Increase arguments vector size for shell argument.
@@ -304,7 +304,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(character, (void*) &characterc, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     characterc = characterc + *SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT;
-    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     characterc = characterc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Increase arguments vector size for shell character argument.
@@ -334,7 +334,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     if (*recursivem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**recursivem == *NUMBER_1_INTEGER) {
+        if (**recursivem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -348,7 +348,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
@@ -361,7 +361,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     if (*sourcem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**sourcem == *NUMBER_1_INTEGER) {
+        if (**sourcem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -375,7 +375,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
@@ -388,7 +388,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     if (*destinationm != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**destinationm == *NUMBER_1_INTEGER) {
+        if (**destinationm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize command, if necessary.
             // One extra place for space character.
@@ -402,7 +402,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
             set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
@@ -424,7 +424,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble command by adding the null termination character.
-    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     //

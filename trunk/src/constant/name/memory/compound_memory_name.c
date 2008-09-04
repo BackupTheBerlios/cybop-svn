@@ -19,50 +19,50 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_memory_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: compound_memory_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPOUND_MEMORY_NAME_SOURCE
 #define COMPOUND_MEMORY_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The names compound memory name. */
-static int* NAMES_COMPOUND_MEMORY_NAME = NUMBER_0_INTEGER_ARRAY;
+static int* NAMES_COMPOUND_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The names counts compound memory name. */
-static int* NAMES_COUNTS_COMPOUND_MEMORY_NAME = NUMBER_1_INTEGER_ARRAY;
+static int* NAMES_COUNTS_COMPOUND_MEMORY_NAME = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The names sizes compound memory name. */
-static int* NAMES_SIZES_COMPOUND_MEMORY_NAME = NUMBER_2_INTEGER_ARRAY;
+static int* NAMES_SIZES_COMPOUND_MEMORY_NAME = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The abstractions compound memory name. */
-static int* ABSTRACTIONS_COMPOUND_MEMORY_NAME = NUMBER_3_INTEGER_ARRAY;
+static int* ABSTRACTIONS_COMPOUND_MEMORY_NAME = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The abstractions counts compound memory name. */
-static int* ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME = NUMBER_4_INTEGER_ARRAY;
+static int* ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The abstractions sizes compound memory name. */
-static int* ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME = NUMBER_5_INTEGER_ARRAY;
+static int* ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The models compound memory name. */
-static int* MODELS_COMPOUND_MEMORY_NAME = NUMBER_6_INTEGER_ARRAY;
+static int* MODELS_COMPOUND_MEMORY_NAME = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The models counts compound memory name. */
-static int* MODELS_COUNTS_COMPOUND_MEMORY_NAME = NUMBER_7_INTEGER_ARRAY;
+static int* MODELS_COUNTS_COMPOUND_MEMORY_NAME = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The models sizes compound memory name. */
-static int* MODELS_SIZES_COMPOUND_MEMORY_NAME = NUMBER_8_INTEGER_ARRAY;
+static int* MODELS_SIZES_COMPOUND_MEMORY_NAME = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The details compound memory name. */
-static int* DETAILS_COMPOUND_MEMORY_NAME = NUMBER_9_INTEGER_ARRAY;
+static int* DETAILS_COMPOUND_MEMORY_NAME = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The details counts compound memory name. */
-static int* DETAILS_COUNTS_COMPOUND_MEMORY_NAME = NUMBER_10_INTEGER_ARRAY;
+static int* DETAILS_COUNTS_COMPOUND_MEMORY_NAME = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The details sizes compound memory name. */
-static int* DETAILS_SIZES_COMPOUND_MEMORY_NAME = NUMBER_11_INTEGER_ARRAY;
+static int* DETAILS_SIZES_COMPOUND_MEMORY_NAME = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COMPOUND_MEMORY_NAME_SOURCE */
 #endif

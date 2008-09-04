@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,7 +28,7 @@
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
-#include "../../globals/constants/log/log_level_constants.c"
+#include "../../constant/model/log/level_log_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
 /*??
@@ -44,12 +44,12 @@
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/console/console_escape_code_constants.c"
 #include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/cybol/cybol_channel_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/channel/cybol_channel.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/internal_memory_accessor.c"
@@ -99,18 +99,18 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
 /*??
     // The action name, abstraction, model, details.
-    void** an = NULL_POINTER;
-    void** anc = NULL_POINTER;
-    void** ans = NULL_POINTER;
-    void** aa = NULL_POINTER;
-    void** aac = NULL_POINTER;
-    void** aas = NULL_POINTER;
-    void** am = NULL_POINTER;
-    void** amc = NULL_POINTER;
-    void** ams = NULL_POINTER;
-    void** ad = NULL_POINTER;
-    void** adc = NULL_POINTER;
-    void** ads = NULL_POINTER;
+    void** an = NULL_POINTER_MEMORY_MODEL;
+    void** anc = NULL_POINTER_MEMORY_MODEL;
+    void** ans = NULL_POINTER_MEMORY_MODEL;
+    void** aa = NULL_POINTER_MEMORY_MODEL;
+    void** aac = NULL_POINTER_MEMORY_MODEL;
+    void** aas = NULL_POINTER_MEMORY_MODEL;
+    void** am = NULL_POINTER_MEMORY_MODEL;
+    void** amc = NULL_POINTER_MEMORY_MODEL;
+    void** ams = NULL_POINTER_MEMORY_MODEL;
+    void** ad = NULL_POINTER_MEMORY_MODEL;
+    void** adc = NULL_POINTER_MEMORY_MODEL;
+    void** ads = NULL_POINTER_MEMORY_MODEL;
 */
 
 /*??
@@ -151,21 +151,21 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     /** The index parameter. */
     static wchar_t INDEX_PARAMETER_ARRAY[] = {L'i', L'n', L'd', L'e', L'x'};
     static wchar_t* INDEX_PARAMETER = INDEX_PARAMETER_ARRAY;
-    static int* INDEX_PARAMETER_COUNT = NUMBER_5_INTEGER_ARRAY;
+    static int* INDEX_PARAMETER_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
     // The command name, abstraction, model, details.
-    void** n = NULL_POINTER;
-    void** nc = NULL_POINTER;
-    void** ns = NULL_POINTER;
-    void** a = NULL_POINTER;
-    void** ac = NULL_POINTER;
-    void** as = NULL_POINTER;
-    void** m = NULL_POINTER;
-    void** mc = NULL_POINTER;
-    void** ms = NULL_POINTER;
-    void** d = NULL_POINTER;
-    void** dc = NULL_POINTER;
-    void** ds = NULL_POINTER;
+    void** n = NULL_POINTER_MEMORY_MODEL;
+    void** nc = NULL_POINTER_MEMORY_MODEL;
+    void** ns = NULL_POINTER_MEMORY_MODEL;
+    void** a = NULL_POINTER_MEMORY_MODEL;
+    void** ac = NULL_POINTER_MEMORY_MODEL;
+    void** as = NULL_POINTER_MEMORY_MODEL;
+    void** m = NULL_POINTER_MEMORY_MODEL;
+    void** mc = NULL_POINTER_MEMORY_MODEL;
+    void** ms = NULL_POINTER_MEMORY_MODEL;
+    void** d = NULL_POINTER_MEMORY_MODEL;
+    void** dc = NULL_POINTER_MEMORY_MODEL;
+    void** ds = NULL_POINTER_MEMORY_MODEL;
 
 /*??
     if (p16 != *NULL_POINTER_MEMORY_MODEL) {
@@ -208,7 +208,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     // The communication partner-connected socket of this system
     // (the client socket to accept, receive data from and attach as parameter to the
     // cyboi signal generated later, so that this server may reply to the correct client)
-    void** s = NULL_POINTER;
+    void** s = NULL_POINTER_MEMORY_MODEL;
 
     // Get integer number reference for client socket.
     //
@@ -243,8 +243,8 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     // The firefox web browser makes a second request
     // to determine the favicon.
     char firefox_request[] = "favicon.ico";
-    wchar_t* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER];
-    int firefox_request_count = *NUMBER_11_INTEGER;
+    wchar_t* p_firefox_request = &firefox_request[*NUMBER_0_INTEGER_MEMORY_MODEL];
+    int firefox_request_count = *NUMBER_11_INTEGER_MEMORY_MODEL;
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;

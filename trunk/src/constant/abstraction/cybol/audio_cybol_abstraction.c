@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: audio_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: audio_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef AUDIO_CYBOL_ABSTRACTION_SOURCE
 #define AUDIO_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -59,7 +59,7 @@
  */
 static wchar_t MPEG_AUDIO_CYBOL_ABSTRACTION_ARRAY[] = {L'a', L'u', L'd', L'i', L'o', L'/', L'm', L'p', L'e', L'g'};
 static wchar_t* MPEG_AUDIO_CYBOL_ABSTRACTION = MPEG_AUDIO_CYBOL_ABSTRACTION_ARRAY;
-static int* MPEG_AUDIO_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* MPEG_AUDIO_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*??
 audio/x-ms-wma: Windows Media Audio; Documented in Microsoft KB 288102
@@ -72,7 +72,7 @@ audio/x-wav: WAV audio
  */
 static wchar_t VORBIS_AUDIO_CYBOL_ABSTRACTION_ARRAY[] = {L'a', L'u', L'd', L'i', L'o', L'/', L'v', L'o', L'r', L'b', L'i', L's'};
 static wchar_t* VORBIS_AUDIO_CYBOL_ABSTRACTION = VORBIS_AUDIO_CYBOL_ABSTRACTION_ARRAY;
-static int* VORBIS_AUDIO_CYBOL_ABSTRACTION_COUNT = NUMBER_12_INTEGER_ARRAY;
+static int* VORBIS_AUDIO_CYBOL_ABSTRACTION_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* AUDIO_CYBOL_ABSTRACTION_SOURCE */
 #endif

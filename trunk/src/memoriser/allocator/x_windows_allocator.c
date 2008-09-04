@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_windows_allocator.c,v $ $Revision: 1.10 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: x_windows_allocator.c,v $ $Revision: 1.11 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
 #define X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 
 /**

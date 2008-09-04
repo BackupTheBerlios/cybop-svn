@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: fraction_allocator.c,v $ $Revision: 1.15 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: fraction_allocator.c,v $ $Revision: 1.16 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FRACTION_ALLOCATOR_SOURCE
 #define FRACTION_ALLOCATOR_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
@@ -42,7 +42,7 @@ void allocate_fraction(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate fraction.");
 
-    allocate_array(p0, p1, (void*) DOUBLE_ARRAY);
+    allocate_array(p0, p1, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -55,7 +55,7 @@ void deallocate_fraction(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate fraction.");
 
-    deallocate_array(p0, p1, (void*) DOUBLE_ARRAY);
+    deallocate_array(p0, p1, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 }
 
 /* FRACTION_ALLOCATOR_SOURCE */

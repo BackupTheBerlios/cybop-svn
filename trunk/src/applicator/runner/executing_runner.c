@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: executing_runner.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: executing_runner.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,7 +30,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../globals/constants/system/system_executable_constants.c"
@@ -62,7 +62,7 @@ void run_execute(void* p0) {
     // and otherwise is the status of the shell process.
     int r = system(p0);
 
-    if (r == *NUMBER_MINUS_1_INTEGER) {
+    if (r == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
 
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not execute command/ program as process. A negative value was returned.");
 
@@ -201,7 +201,7 @@ void run_execute(void* p0) {
     fwprintf(stdout, L"TEST post-exec e: %i\n", e);
 
         // A value of -1 is returned in the event of a failure.
-        if (e == *NUMBER_MINUS_1_INTEGER) {
+        if (e == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stdout, L"TEST e == -1 errno: %i\n", errno);
 
@@ -320,7 +320,7 @@ void run_execute(void* p0) {
             // buffers and perform aditional clean-up before calling _exit() internally.
             //
             // Set return value to 1, indicating that an error occured in the child process.
-            _exit(*NUMBER_1_INTEGER);
+            _exit(*NUMBER_1_INTEGER_MEMORY_MODEL);
         }
 
     fwprintf(stdout, L"TEST post-exit errno: %i\n", errno);
@@ -348,7 +348,7 @@ void run_execute(void* p0) {
 
         // Request status information from child process.
         // In the GNU C library, pid_t corresponds to the int type.
-        waitpid(pid, (int*) *NULL_POINTER, *NUMBER_0_INTEGER_MEMORY_MODEL);
+        waitpid(pid, (int*) *NULL_POINTER_MEMORY_MODEL, *NUMBER_0_INTEGER_MEMORY_MODEL);
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"The child process exited. Continue executing parent process.");
 

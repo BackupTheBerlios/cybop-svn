@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: fraction_converter.c,v $ $Revision: 1.12 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: fraction_converter.c,v $ $Revision: 1.13 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FRACTION_CONVERTER_SOURCE
 #define FRACTION_CONVERTER_SOURCE
 
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
@@ -114,8 +114,8 @@ void encode_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
     get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
 
     // Remove elements.
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &DENOMINATOR_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_COUNT, (void*) &NUMERATOR_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_MEMORY_MODEL_COUNT, (void*) &DENOMINATOR_INDEX);
+    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_MEMORY_MODEL_COUNT, (void*) &NUMERATOR_INDEX);
 
 //??    sprintf(p1, %l, (void*) &(m->value));
 */

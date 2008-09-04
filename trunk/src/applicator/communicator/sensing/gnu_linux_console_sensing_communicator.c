@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,17 +33,17 @@
 #include <stdio.h>
 //?? #include <wchar.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/character/code/wide_character_code_constants.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/log/log_level_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/log/level_log_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/thread_identification_variables.c"
+#include "../../variable/thread_identification.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
 #include "../../memoriser/accessor.c"
@@ -140,14 +140,14 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
                     // Set gnu/linux console interrupt request to indicate
                     // that a message has been received via gnu/linux console,
                     // which may now be processed in the main thread of this system.
-                    *irq = *NUMBER_1_INTEGER;
+                    *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
     fwprintf(stderr, L"TEST sense gnu/linux console irq value: %i\n", *irq);
 
                     // Unlock gnu/linux console mutex.
                     pthread_mutex_unlock(mt);
 
-                    while (*irq == *NUMBER_1_INTEGER) {
+                    while (*irq == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         // Sleep as long as the gnu/linux console interrupt is not handled and reset yet.
                         // This is to give the central processing unit (cpu) some
@@ -186,13 +186,13 @@ void sense_gnu_linux_console(void* p0) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense gnu/linux console.");
 
     // The interrupt.
-    void** irq = NULL_POINTER;
+    void** irq = NULL_POINTER_MEMORY_MODEL;
     // The mutex.
-    void** mt = NULL_POINTER;
+    void** mt = NULL_POINTER_MEMORY_MODEL;
     // The sleep time.
-    void** st = NULL_POINTER;
+    void** st = NULL_POINTER_MEMORY_MODEL;
     // The input stream.
-    void** is = NULL_POINTER;
+    void** is = NULL_POINTER_MEMORY_MODEL;
 
     // Get interrupt.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL, (void*) &irq, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -203,7 +203,7 @@ void sense_gnu_linux_console(void* p0) {
     // Get input stream.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &is, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
 
-    while (*NUMBER_1_INTEGER) {
+    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
         // A break condition does not exist here because the loop
         // is running neverendingly while sensing messages.

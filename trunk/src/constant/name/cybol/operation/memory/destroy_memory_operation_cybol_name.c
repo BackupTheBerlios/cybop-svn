@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: destroy_memory_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: destroy_memory_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DESTROY_MEMORY_OPERATION_CYBOL_NAME_SOURCE
 #define DESTROY_MEMORY_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The model destroy memory operation cybol name. */
 static wchar_t MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME_ARRAY[] = {L'm', L'o', L'd', L'e', L'l'};
 static wchar_t* MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME = MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME_ARRAY;
-static int* MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* DESTROY_MEMORY_OPERATION_CYBOL_NAME_SOURCE */
 #endif

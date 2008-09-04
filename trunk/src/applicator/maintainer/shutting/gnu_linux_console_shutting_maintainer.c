@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_shutting_maintainer.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_shutting_maintainer.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,10 +30,10 @@
 
 #include <termios.h>
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/thread_identification_variables.c"
+#include "../../variable/thread_identification.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
 
@@ -51,8 +51,8 @@ void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Shutdown gnu/linux console.");
 
     // The gnu/linux console input- and output stream internal.
-    FILE** ipi = (FILE**) NULL_POINTER;
-    FILE** opi = (FILE**) NULL_POINTER;
+    FILE** ipi = (FILE**) NULL_POINTER_MEMORY_MODEL;
+    FILE** opi = (FILE**) NULL_POINTER_MEMORY_MODEL;
 
     // Get gnu/linux console internals.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ipi, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -66,16 +66,16 @@ void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
         interrupt_thread(p1, p2);
 
         // The gnu/linux console input- and output stream.
-        FILE** ip = (FILE**) NULL_POINTER;
-        FILE** op = (FILE**) NULL_POINTER;
+        FILE** ip = (FILE**) NULL_POINTER_MEMORY_MODEL;
+        FILE** op = (FILE**) NULL_POINTER_MEMORY_MODEL;
         // The original termios interface.
-        struct termios** to = (struct termios**) NULL_POINTER;
+        struct termios** to = (struct termios**) NULL_POINTER_MEMORY_MODEL;
         // The working termios interface.
-        struct termios** tw = (struct termios**) NULL_POINTER;
+        struct termios** tw = (struct termios**) NULL_POINTER_MEMORY_MODEL;
         // The character buffer that was used in the thread procedure.
-        void** b = NULL_POINTER;
-        void** bc = NULL_POINTER;
-        void** bs = NULL_POINTER;
+        void** b = NULL_POINTER_MEMORY_MODEL;
+        void** bc = NULL_POINTER_MEMORY_MODEL;
+        void** bs = NULL_POINTER_MEMORY_MODEL;
 
         // Get gnu/linux console internals.
         get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &ip, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -98,15 +98,15 @@ void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
         // CAUTION! Do NOT use references &, because variables are **
         // and *&variable equals the variable alone.
         //?? DO NOT deallocate t because it refers to stdout of the system for testing!
-        //?? deallocate((void*) t, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        //?? deallocate((void*) t, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         free(*tw);
         free(*to);
 
         // Deallocate character buffer.
         deallocate((void*) b, *bs, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
         // Deallocate character buffer count, size.
-        deallocate((void*) bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        deallocate((void*) bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
     } else {
 

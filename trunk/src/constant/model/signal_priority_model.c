@@ -19,17 +19,17 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: signal_priority_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: signal_priority_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SIGNAL_PRIORITY_MODEL_SOURCE
 #define SIGNAL_PRIORITY_MODEL_SOURCE
 
-#include "../../constant/model/memory/integer_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 
 /** The normal signal priority model. */
-static int* NORMAL_SIGNAL_PRIORITY_MODEL = NUMBER_0_INTEGER_ARRAY;
+static int* NORMAL_SIGNAL_PRIORITY_MODEL = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SIGNAL_PRIORITY_MODEL_SOURCE */
 #endif

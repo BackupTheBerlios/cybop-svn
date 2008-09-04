@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: package_xdt_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: package_xdt_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PACKAGE_XDT_NAME_SOURCE
 #define PACKAGE_XDT_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The standard package xdt name. */
 static wchar_t STANDARD_PACKAGE_XDT_NAME_ARRAY[] = {L's', L't', L'a', L'n', L'd', L'a', L'r', L'd'};
 static wchar_t* STANDARD_PACKAGE_XDT_NAME = STANDARD_PACKAGE_XDT_NAME_ARRAY;
-static int* STANDARD_PACKAGE_XDT_NAME_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* STANDARD_PACKAGE_XDT_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* PACKAGE_XDT_NAME_SOURCE */
 #endif

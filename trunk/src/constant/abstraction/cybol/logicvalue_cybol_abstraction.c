@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: logicvalue_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: logicvalue_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LOGICVALUE_CYBOL_ABSTRACTION_SOURCE
 #define LOGICVALUE_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -61,7 +61,7 @@
  */
 static wchar_t BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_ARRAY[] = {L'l', L'o', L'g', L'i', L'c', L'v', L'a', L'l', L'u', L'e', L'/', L'b', L'o', L'o', L'l', L'e', L'a', L'n'};
 static wchar_t* BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION = BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_ARRAY;
-static int* BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT = NUMBER_18_INTEGER_ARRAY;
+static int* BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT = NUMBER_18_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*??
 three-valued logic

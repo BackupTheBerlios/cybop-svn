@@ -19,26 +19,26 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: operation_mode_cyboi_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: operation_mode_cyboi_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef OPERATION_MODE_CYBOI_MODEL_SOURCE
 #define OPERATION_MODE_CYBOI_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The version operation mode cyboi model. */
-static int* VERSION_OPERATION_MODE_CYBOI_MODEL = NUMBER_0_INTEGER_ARRAY;
+static int* VERSION_OPERATION_MODE_CYBOI_MODEL = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The help operation mode cyboi model. */
-static int* HELP_OPERATION_MODE_CYBOI_MODEL = NUMBER_1_INTEGER_ARRAY;
+static int* HELP_OPERATION_MODE_CYBOI_MODEL = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The test operation mode cyboi model. */
-static int* TEST_OPERATION_MODE_CYBOI_MODEL = NUMBER_2_INTEGER_ARRAY;
+static int* TEST_OPERATION_MODE_CYBOI_MODEL = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The knowledge operation mode cyboi model. */
-static int* KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL = NUMBER_3_INTEGER_ARRAY;
+static int* KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* OPERATION_MODE_CYBOI_MODEL_SOURCE */
 #endif

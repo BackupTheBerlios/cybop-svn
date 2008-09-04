@@ -19,32 +19,32 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: datetime_memory_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: datetime_memory_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DATETIME_MEMORY_NAME_SOURCE
 #define DATETIME_MEMORY_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The year (y) datetime memory name. */
-static int* YEAR_DATETIME_MEMORY_NAME = NUMBER_0_INTEGER_ARRAY;
+static int* YEAR_DATETIME_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The month (m) datetime memory name. */
-static int* MONTH_DATETIME_MEMORY_NAME = NUMBER_1_INTEGER_ARRAY;
+static int* MONTH_DATETIME_MEMORY_NAME = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The day (d) datetime memory name. */
-static int* DAY_DATETIME_MEMORY_NAME = NUMBER_2_INTEGER_ARRAY;
+static int* DAY_DATETIME_MEMORY_NAME = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The hour (h) datetime memory name. */
-static int* HOUR_DATETIME_MEMORY_NAME = NUMBER_3_INTEGER_ARRAY;
+static int* HOUR_DATETIME_MEMORY_NAME = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The minute (m) datetime memory name. */
-static int* MINUTE_DATETIME_MEMORY_NAME = NUMBER_4_INTEGER_ARRAY;
+static int* MINUTE_DATETIME_MEMORY_NAME = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The second (s) datetime memory name. */
-static int* SECOND_DATETIME_MEMORY_NAME = NUMBER_5_INTEGER_ARRAY;
+static int* SECOND_DATETIME_MEMORY_NAME = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* DATETIME_MEMORY_NAME_SOURCE */
 #endif

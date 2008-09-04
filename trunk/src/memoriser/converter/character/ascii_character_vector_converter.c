@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: ascii_character_vector_converter.c,v $ $Revision: 1.2 $ $Date: 2008-09-03 22:04:03 $ $Author: christian $
+ * @version $RCSfile: ascii_character_vector_converter.c,v $ $Revision: 1.3 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ASCII_CHARACTER_VECTOR_CONVERTER_SOURCE
 #define ASCII_CHARACTER_VECTOR_CONVERTER_SOURCE
 
-#include "../../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../../globals/constants/integer/integer_constants.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
-#include "../../../globals/variables/reallocation_factor_variables.c"
+#include "../../../variable/reallocation_factor.c"
 #include "../../../memoriser/array.c"
 
 /**
@@ -71,12 +71,12 @@ void decode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void*
                         *ds = *dc + *sc;
 
                         // Reallocate destination character vector.
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                         if (*dc <= (*ds - *sc)) {
 
                             // Set source into destination character vector.
-                            set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY);
+                            set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                             // Increment count.
                             // Example:
@@ -155,11 +155,11 @@ void encode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void*
                         *ds = (*dc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *sc;
 
                         // Reallocate destination character vector.
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY);
+                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     }
 
                     // Set source into destination character vector.
-                    set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY);
+                    set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Increment destination count.
                     *dc = *dc + *sc;

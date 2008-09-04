@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_starting_maintainer.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: socket_starting_maintainer.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,10 +37,10 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
@@ -249,7 +249,7 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                     int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Allocate terminated address model.
-                    allocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY);
+                    allocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Encode wide character name into multibyte character array.
                     encode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, p1, p2);
@@ -257,21 +257,21 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
                     if (ss <= sc) {
 
                         // Increase character array size to have place for the termination character.
-                        ss = sc + *NUMBER_1_INTEGER;
+                        ss = sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                         // Reallocate terminated file name as multibyte character array.
-                        reallocate_array((void*) &s, (void*) &sc, (void*) &ss, (void*) CHARACTER_ARRAY);
+                        reallocate_array((void*) &s, (void*) &sc, (void*) &ss, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     }
 
                     // Add null termination character to terminated file name.
-                    set_array_elements(s, (void*) &sc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) CHARACTER_ARRAY);
+                    set_array_elements(s, (void*) &sc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Convert uint16_t integer hostshort from host byte order
                     // to network byte order.
                     inet_pton(*an, s, p0);
 
                     // Deallocate terminated address model.
-                    deallocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY);
+                    deallocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 }
 
             } else {
@@ -340,7 +340,7 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
                 if (*fc < *NUMBER_108_INTEGER) {
 
                     // CAUTION! Do NOT reallocate the file name array with:
-                    // int nc = *fc + *NUMBER_1_INTEGER;
+                    // int nc = *fc + *NUMBER_1_INTEGER_MEMORY_MODEL;
                     // reallocate_array((void*) &((*a)->sun_path), p2, (void*) &nc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                     //
                     // The reason is that the size of the "sun_path" field of
@@ -365,8 +365,8 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
 
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
-                    set_array_elements(path, (void*) NUMBER_0_INTEGER, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                    set_array_elements(path, p2, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(path, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(path, p2, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 } else {
 
@@ -545,11 +545,11 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup socket.");
 
         // The socket namespace.
-        int sn = *NUMBER_MINUS_1_INTEGER;
+        int sn = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The address namespace.
-        int an = *NUMBER_MINUS_1_INTEGER;
+        int an = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The communication style.
-        int st = *NUMBER_MINUS_1_INTEGER;
+        int st = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The ipv4 host address of this system.
         struct in_addr ha4;
         // The ipv6 host address of this system.
@@ -588,9 +588,9 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int* bc = (int*) *NULL_POINTER_MEMORY_MODEL;
         int* bs = (int*) *NULL_POINTER_MEMORY_MODEL;
         // The internal memory index.
-        int i = *NUMBER_MINUS_1_INTEGER;
+        int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The result.
-        int r = *NUMBER_MINUS_1_INTEGER;
+        int r = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get socket- and address namespace.
         startup_socket_get_namespace((void*) &sn, (void*) &an, p1, p2);
@@ -608,18 +608,18 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         }
 
         // Allocate socket address size of this system.
-        allocate((void*) &as, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Allocate communication partner socket address size.
-        allocate((void*) &pas, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Allocate socket of this system.
-        allocate((void*) &s, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
         // Allocate communication partner socket.
-        allocate((void*) &ps, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 /*??
         // Allocate signal ids.
-        allocate((void*) &idc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &ids, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY);
+        allocate((void*) &idc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &ids, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 */
 
         // Initialise socket address size of this system.
@@ -697,8 +697,8 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 */
 
         // Allocate character buffer count and size.
-        allocate((void*) &bc, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &bs, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
 
         // Initialise character buffer count, size.
         // A possible initial size is 2048, which should
@@ -804,7 +804,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             // Get file status flags.
             int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER);
 
-            if (fl != *NUMBER_MINUS_1_INTEGER) {
+            if (fl != *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
 
                 // Set non-blocking flag (bit).
                 fl |= O_NONBLOCK;
@@ -848,7 +848,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
                 if (st == SOCK_STREAM) {
 
                     // Reset result.
-                    r = *NUMBER_MINUS_1_INTEGER;
+                    r = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
                     // Initialise error number.
                     // It is a global variable/ function and other operations
@@ -865,7 +865,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
                     // Enable socket to accept connections, thus making it a server socket.
                     // The second parameter determines the number of possible
                     // pending client connection requests.
-                    r = listen(*s, *NUMBER_1_INTEGER);
+                    r = listen(*s, *NUMBER_1_INTEGER_MEMORY_MODEL);
 
     fwprintf(stderr, L"TEST: startup socket listen s: %i \n", *s);
     sleep(2);

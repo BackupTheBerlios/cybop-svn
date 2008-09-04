@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sensing_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: sensing_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,14 +29,14 @@
 #include "../applicator/sensor/gnu_linux_console_sensor.c"
 #include "../applicator/sensor/socket_sensor.c"
 #include "../applicator/sensor/x_window_system_sensor.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/log/log_level_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
+#include "../constant/model/log/level_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
-#include "../globals/variables/thread_identification_variables.c"
+#include "../variable/thread_identification.c"
 #include "../memoriser/accessor/compound_accessor.c"
 
 /**
@@ -56,7 +56,7 @@ void sense_message(void* p0, void* p1, void* p2) {
 
         // Only create thread, if not existent.
         // CAUTION! The "pthread_t" type is an integer, so both can be compared.
-        if (*t == *NUMBER_MINUS_1_INTEGER) {
+        if (*t == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Create sense message thread.");
 
@@ -77,7 +77,7 @@ void sense_message(void* p0, void* p1, void* p2) {
             // - deallocated at service shutdown
             //
             // The third parameter is the procedure to be called.
-            pthread_create((pthread_t*) p1, *NULL_POINTER, p2, p0);
+            pthread_create((pthread_t*) p1, *NULL_POINTER_MEMORY_MODEL, p2, p0);
         }
 
     } else {
@@ -131,136 +131,136 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense interrupt request.");
 
     // The channel name, abstraction, model, details.
-    void** cn = NULL_POINTER;
-    void** cnc = NULL_POINTER;
-    void** cns = NULL_POINTER;
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cn = NULL_POINTER_MEMORY_MODEL;
+    void** cnc = NULL_POINTER_MEMORY_MODEL;
+    void** cns = NULL_POINTER_MEMORY_MODEL;
+    void** ca = NULL_POINTER_MEMORY_MODEL;
+    void** cac = NULL_POINTER_MEMORY_MODEL;
+    void** cas = NULL_POINTER_MEMORY_MODEL;
+    void** cm = NULL_POINTER_MEMORY_MODEL;
+    void** cmc = NULL_POINTER_MEMORY_MODEL;
+    void** cms = NULL_POINTER_MEMORY_MODEL;
+    void** cd = NULL_POINTER_MEMORY_MODEL;
+    void** cdc = NULL_POINTER_MEMORY_MODEL;
+    void** cds = NULL_POINTER_MEMORY_MODEL;
     // The handler name, abstraction, model, details.
-    void** hn = NULL_POINTER;
-    void** hnc = NULL_POINTER;
-    void** hns = NULL_POINTER;
-    void** ha = NULL_POINTER;
-    void** hac = NULL_POINTER;
-    void** has = NULL_POINTER;
-    void** hm = NULL_POINTER;
-    void** hmc = NULL_POINTER;
-    void** hms = NULL_POINTER;
-    void** hd = NULL_POINTER;
-    void** hdc = NULL_POINTER;
-    void** hds = NULL_POINTER;
+    void** hn = NULL_POINTER_MEMORY_MODEL;
+    void** hnc = NULL_POINTER_MEMORY_MODEL;
+    void** hns = NULL_POINTER_MEMORY_MODEL;
+    void** ha = NULL_POINTER_MEMORY_MODEL;
+    void** hac = NULL_POINTER_MEMORY_MODEL;
+    void** has = NULL_POINTER_MEMORY_MODEL;
+    void** hm = NULL_POINTER_MEMORY_MODEL;
+    void** hmc = NULL_POINTER_MEMORY_MODEL;
+    void** hms = NULL_POINTER_MEMORY_MODEL;
+    void** hd = NULL_POINTER_MEMORY_MODEL;
+    void** hdc = NULL_POINTER_MEMORY_MODEL;
+    void** hds = NULL_POINTER_MEMORY_MODEL;
 /*??
     // The language name, abstraction, model, details.
-    void** ln = NULL_POINTER;
-    void** lnc = NULL_POINTER;
-    void** lns = NULL_POINTER;
-    void** la = NULL_POINTER;
-    void** lac = NULL_POINTER;
-    void** las = NULL_POINTER;
-    void** lm = NULL_POINTER;
-    void** lmc = NULL_POINTER;
-    void** lms = NULL_POINTER;
-    void** ld = NULL_POINTER;
-    void** ldc = NULL_POINTER;
-    void** lds = NULL_POINTER;
+    void** ln = NULL_POINTER_MEMORY_MODEL;
+    void** lnc = NULL_POINTER_MEMORY_MODEL;
+    void** lns = NULL_POINTER_MEMORY_MODEL;
+    void** la = NULL_POINTER_MEMORY_MODEL;
+    void** lac = NULL_POINTER_MEMORY_MODEL;
+    void** las = NULL_POINTER_MEMORY_MODEL;
+    void** lm = NULL_POINTER_MEMORY_MODEL;
+    void** lmc = NULL_POINTER_MEMORY_MODEL;
+    void** lms = NULL_POINTER_MEMORY_MODEL;
+    void** ld = NULL_POINTER_MEMORY_MODEL;
+    void** ldc = NULL_POINTER_MEMORY_MODEL;
+    void** lds = NULL_POINTER_MEMORY_MODEL;
     // The message name, abstraction, model, details.
-    void** mn = NULL_POINTER;
-    void** mnc = NULL_POINTER;
-    void** mns = NULL_POINTER;
-    void** ma = NULL_POINTER;
-    void** mac = NULL_POINTER;
-    void** mas = NULL_POINTER;
-    void** mm = NULL_POINTER;
-    void** mmc = NULL_POINTER;
-    void** mms = NULL_POINTER;
-    void** md = NULL_POINTER;
-    void** mdc = NULL_POINTER;
-    void** mds = NULL_POINTER;
+    void** mn = NULL_POINTER_MEMORY_MODEL;
+    void** mnc = NULL_POINTER_MEMORY_MODEL;
+    void** mns = NULL_POINTER_MEMORY_MODEL;
+    void** ma = NULL_POINTER_MEMORY_MODEL;
+    void** mac = NULL_POINTER_MEMORY_MODEL;
+    void** mas = NULL_POINTER_MEMORY_MODEL;
+    void** mm = NULL_POINTER_MEMORY_MODEL;
+    void** mmc = NULL_POINTER_MEMORY_MODEL;
+    void** mms = NULL_POINTER_MEMORY_MODEL;
+    void** md = NULL_POINTER_MEMORY_MODEL;
+    void** mdc = NULL_POINTER_MEMORY_MODEL;
+    void** mds = NULL_POINTER_MEMORY_MODEL;
     // The meta message name, abstraction, model, details.
-    void** men = NULL_POINTER;
-    void** menc = NULL_POINTER;
-    void** mens = NULL_POINTER;
-    void** mea = NULL_POINTER;
-    void** meac = NULL_POINTER;
-    void** meas = NULL_POINTER;
-    void** mem = NULL_POINTER;
-    void** memc = NULL_POINTER;
-    void** mems = NULL_POINTER;
-    void** med = NULL_POINTER;
-    void** medc = NULL_POINTER;
-    void** meds = NULL_POINTER;
+    void** men = NULL_POINTER_MEMORY_MODEL;
+    void** menc = NULL_POINTER_MEMORY_MODEL;
+    void** mens = NULL_POINTER_MEMORY_MODEL;
+    void** mea = NULL_POINTER_MEMORY_MODEL;
+    void** meac = NULL_POINTER_MEMORY_MODEL;
+    void** meas = NULL_POINTER_MEMORY_MODEL;
+    void** mem = NULL_POINTER_MEMORY_MODEL;
+    void** memc = NULL_POINTER_MEMORY_MODEL;
+    void** mems = NULL_POINTER_MEMORY_MODEL;
+    void** med = NULL_POINTER_MEMORY_MODEL;
+    void** medc = NULL_POINTER_MEMORY_MODEL;
+    void** meds = NULL_POINTER_MEMORY_MODEL;
     // The model name, abstraction, model, details.
-    void** mon = NULL_POINTER;
-    void** monc = NULL_POINTER;
-    void** mons = NULL_POINTER;
-    void** moa = NULL_POINTER;
-    void** moac = NULL_POINTER;
-    void** moas = NULL_POINTER;
-    void** mom = NULL_POINTER;
-    void** momc = NULL_POINTER;
-    void** moms = NULL_POINTER;
-    void** mod = NULL_POINTER;
-    void** modc = NULL_POINTER;
-    void** mods = NULL_POINTER;
+    void** mon = NULL_POINTER_MEMORY_MODEL;
+    void** monc = NULL_POINTER_MEMORY_MODEL;
+    void** mons = NULL_POINTER_MEMORY_MODEL;
+    void** moa = NULL_POINTER_MEMORY_MODEL;
+    void** moac = NULL_POINTER_MEMORY_MODEL;
+    void** moas = NULL_POINTER_MEMORY_MODEL;
+    void** mom = NULL_POINTER_MEMORY_MODEL;
+    void** momc = NULL_POINTER_MEMORY_MODEL;
+    void** moms = NULL_POINTER_MEMORY_MODEL;
+    void** mod = NULL_POINTER_MEMORY_MODEL;
+    void** modc = NULL_POINTER_MEMORY_MODEL;
+    void** mods = NULL_POINTER_MEMORY_MODEL;
     // The root name, abstraction, model, details.
-    void** rn = NULL_POINTER;
-    void** rnc = NULL_POINTER;
-    void** rns = NULL_POINTER;
-    void** ra = NULL_POINTER;
-    void** rac = NULL_POINTER;
-    void** ras = NULL_POINTER;
-    void** rm = NULL_POINTER;
-    void** rmc = NULL_POINTER;
-    void** rms = NULL_POINTER;
-    void** rd = NULL_POINTER;
-    void** rdc = NULL_POINTER;
-    void** rds = NULL_POINTER;
+    void** rn = NULL_POINTER_MEMORY_MODEL;
+    void** rnc = NULL_POINTER_MEMORY_MODEL;
+    void** rns = NULL_POINTER_MEMORY_MODEL;
+    void** ra = NULL_POINTER_MEMORY_MODEL;
+    void** rac = NULL_POINTER_MEMORY_MODEL;
+    void** ras = NULL_POINTER_MEMORY_MODEL;
+    void** rm = NULL_POINTER_MEMORY_MODEL;
+    void** rmc = NULL_POINTER_MEMORY_MODEL;
+    void** rms = NULL_POINTER_MEMORY_MODEL;
+    void** rd = NULL_POINTER_MEMORY_MODEL;
+    void** rdc = NULL_POINTER_MEMORY_MODEL;
+    void** rds = NULL_POINTER_MEMORY_MODEL;
     // The socket communication style name, abstraction, model, details.
-    void** stn = NULL_POINTER;
-    void** stnc = NULL_POINTER;
-    void** stns = NULL_POINTER;
-    void** sta = NULL_POINTER;
-    void** stac = NULL_POINTER;
-    void** stas = NULL_POINTER;
-    void** stm = NULL_POINTER;
-    void** stmc = NULL_POINTER;
-    void** stms = NULL_POINTER;
-    void** std = NULL_POINTER;
-    void** stdc = NULL_POINTER;
-    void** stds = NULL_POINTER;
+    void** stn = NULL_POINTER_MEMORY_MODEL;
+    void** stnc = NULL_POINTER_MEMORY_MODEL;
+    void** stns = NULL_POINTER_MEMORY_MODEL;
+    void** sta = NULL_POINTER_MEMORY_MODEL;
+    void** stac = NULL_POINTER_MEMORY_MODEL;
+    void** stas = NULL_POINTER_MEMORY_MODEL;
+    void** stm = NULL_POINTER_MEMORY_MODEL;
+    void** stmc = NULL_POINTER_MEMORY_MODEL;
+    void** stms = NULL_POINTER_MEMORY_MODEL;
+    void** std = NULL_POINTER_MEMORY_MODEL;
+    void** stdc = NULL_POINTER_MEMORY_MODEL;
+    void** stds = NULL_POINTER_MEMORY_MODEL;
     // The commands name, abstraction, model, details.
-    void** con = NULL_POINTER;
-    void** conc = NULL_POINTER;
-    void** cons = NULL_POINTER;
-    void** coa = NULL_POINTER;
-    void** coac = NULL_POINTER;
-    void** coas = NULL_POINTER;
-    void** com = NULL_POINTER;
-    void** comc = NULL_POINTER;
-    void** coms = NULL_POINTER;
-    void** cod = NULL_POINTER;
-    void** codc = NULL_POINTER;
-    void** cods = NULL_POINTER;
+    void** con = NULL_POINTER_MEMORY_MODEL;
+    void** conc = NULL_POINTER_MEMORY_MODEL;
+    void** cons = NULL_POINTER_MEMORY_MODEL;
+    void** coa = NULL_POINTER_MEMORY_MODEL;
+    void** coac = NULL_POINTER_MEMORY_MODEL;
+    void** coas = NULL_POINTER_MEMORY_MODEL;
+    void** com = NULL_POINTER_MEMORY_MODEL;
+    void** comc = NULL_POINTER_MEMORY_MODEL;
+    void** coms = NULL_POINTER_MEMORY_MODEL;
+    void** cod = NULL_POINTER_MEMORY_MODEL;
+    void** codc = NULL_POINTER_MEMORY_MODEL;
+    void** cods = NULL_POINTER_MEMORY_MODEL;
     // The blocking name, abstraction, model, details.
-    void** bn = NULL_POINTER;
-    void** bnc = NULL_POINTER;
-    void** bns = NULL_POINTER;
-    void** ba = NULL_POINTER;
-    void** bac = NULL_POINTER;
-    void** bas = NULL_POINTER;
-    void** bm = NULL_POINTER;
-    void** bmc = NULL_POINTER;
-    void** bms = NULL_POINTER;
-    void** bd = NULL_POINTER;
-    void** bdc = NULL_POINTER;
-    void** bds = NULL_POINTER;
+    void** bn = NULL_POINTER_MEMORY_MODEL;
+    void** bnc = NULL_POINTER_MEMORY_MODEL;
+    void** bns = NULL_POINTER_MEMORY_MODEL;
+    void** ba = NULL_POINTER_MEMORY_MODEL;
+    void** bac = NULL_POINTER_MEMORY_MODEL;
+    void** bas = NULL_POINTER_MEMORY_MODEL;
+    void** bm = NULL_POINTER_MEMORY_MODEL;
+    void** bmc = NULL_POINTER_MEMORY_MODEL;
+    void** bms = NULL_POINTER_MEMORY_MODEL;
+    void** bd = NULL_POINTER_MEMORY_MODEL;
+    void** bdc = NULL_POINTER_MEMORY_MODEL;
+    void** bds = NULL_POINTER_MEMORY_MODEL;
 */
 
     // Get channel.

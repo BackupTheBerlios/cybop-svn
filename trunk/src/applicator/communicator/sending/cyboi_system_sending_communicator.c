@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi_system_sending_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: cyboi_system_sending_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,10 +27,10 @@
 #define CYBOI_SYSTEM_SENDER_SOURCE
 
 #include <signal.h>
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/signal_memory_accessor.c"
@@ -57,9 +57,9 @@ void send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send message to cyboi system.");
 
     // The signal memory mutex.
-    pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER;
+    pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
     // The interrupt request flag.
-    sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER;
+    sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER_MEMORY_MODEL;
 
     // Get signal memory mutex.
     get_element(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL, (void*) &mt, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -73,7 +73,7 @@ void send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
     // Set interrupt request flag, in order to notify the signal checker
     // that a new signal has been placed in the signal memory.
-    **irq = *NUMBER_1_INTEGER;
+    **irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
     // Unlock signal memory mutex.
     pthread_mutex_unlock(*mt);

@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: copy_transfer_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: copy_transfer_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COPY_TRANSFER_OPERATION_CYBOL_NAME_SOURCE
 #define COPY_TRANSFER_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The source copy transfer operation cybol name. */
 static wchar_t SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME_ARRAY[] = {L's', L'o', L'u', L'r', L'c', L'e'};
 static wchar_t* SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME = SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME_ARRAY;
-static int* SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The destination copy transfer operation cybol name. */
 static wchar_t DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME_ARRAY[] = {L'd', L'e', L's', L't', L'i', L'n', L'a', L't', L'i', L'o', L'n'};
 static wchar_t* DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME = DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME_ARRAY;
-static int* DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The abstraction copy transfer operation cybol name. */
 static wchar_t ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME_ARRAY[] = {L'a', L'b', L's', L't', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
 static wchar_t* ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME = ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME_ARRAY;
-static int* ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COPY_TRANSFER_OPERATION_CYBOL_NAME_SOURCE */
 #endif

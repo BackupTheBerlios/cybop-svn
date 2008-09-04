@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: bluetooth_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: bluetooth_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BLUETOOTH_CYBOL_ABSTRACTION_SOURCE
 #define BLUETOOTH_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // This MIME type was taken from/ inspired by the KDE desktop.
@@ -38,7 +38,7 @@
  */
 static wchar_t SYNCHRONISATION_PROFILE_BLUETOOTH_CYBOL_ABSTRACTION_ARRAY[] = {L'b', L'l', L'u', L'e', L't', L'o', L'o', L't', L'h', L'/', L's', L'y', L'n', L'c', L'h', L'r', L'o', L'n', L'i', L'z', L'a', L't', L'i', L'o', L'n', L'-', L'p', L'r', L'o', L'f', L'i', L'l', L'e'};
 static wchar_t* SYNCHRONISATION_PROFILE_BLUETOOTH_CYBOL_ABSTRACTION = SYNCHRONISATION_PROFILE_BLUETOOTH_CYBOL_ABSTRACTION_ARRAY;
-static int* SYNCHRONISATION_PROFILE_BLUETOOTH_CYBOL_ABSTRACTION_COUNT = NUMBER_33_INTEGER_ARRAY;
+static int* SYNCHRONISATION_PROFILE_BLUETOOTH_CYBOL_ABSTRACTION_COUNT = NUMBER_33_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* BLUETOOTH_CYBOL_ABSTRACTION_SOURCE */
 #endif

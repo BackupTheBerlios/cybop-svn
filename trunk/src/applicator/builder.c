@@ -19,16 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: builder.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: builder.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BUILDER_SOURCE
 #define BUILDER_SOURCE
 
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
@@ -55,44 +55,44 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Build list name.");
 
     // The basisname name, abstraction, model, details.
-    void** bnn = NULL_POINTER;
-    void** bnnc = NULL_POINTER;
-    void** bnns = NULL_POINTER;
-    void** bna = NULL_POINTER;
-    void** bnac = NULL_POINTER;
-    void** bnas = NULL_POINTER;
-    void** bnm = NULL_POINTER;
-    void** bnmc = NULL_POINTER;
-    void** bnms = NULL_POINTER;
-    void** bnd = NULL_POINTER;
-    void** bndc = NULL_POINTER;
-    void** bnds = NULL_POINTER;
+    void** bnn = NULL_POINTER_MEMORY_MODEL;
+    void** bnnc = NULL_POINTER_MEMORY_MODEL;
+    void** bnns = NULL_POINTER_MEMORY_MODEL;
+    void** bna = NULL_POINTER_MEMORY_MODEL;
+    void** bnac = NULL_POINTER_MEMORY_MODEL;
+    void** bnas = NULL_POINTER_MEMORY_MODEL;
+    void** bnm = NULL_POINTER_MEMORY_MODEL;
+    void** bnmc = NULL_POINTER_MEMORY_MODEL;
+    void** bnms = NULL_POINTER_MEMORY_MODEL;
+    void** bnd = NULL_POINTER_MEMORY_MODEL;
+    void** bndc = NULL_POINTER_MEMORY_MODEL;
+    void** bnds = NULL_POINTER_MEMORY_MODEL;
     // The index name, abstraction, model, details.
-    void** idxn = NULL_POINTER;
-    void** idxnc = NULL_POINTER;
-    void** idxns = NULL_POINTER;
-    void** idxa = NULL_POINTER;
-    void** idxac = NULL_POINTER;
-    void** idxas = NULL_POINTER;
-    void** idxm = NULL_POINTER;
-    void** idxmc = NULL_POINTER;
-    void** idxms = NULL_POINTER;
-    void** idxd = NULL_POINTER;
-    void** idxdc = NULL_POINTER;
-    void** idxds = NULL_POINTER;
+    void** idxn = NULL_POINTER_MEMORY_MODEL;
+    void** idxnc = NULL_POINTER_MEMORY_MODEL;
+    void** idxns = NULL_POINTER_MEMORY_MODEL;
+    void** idxa = NULL_POINTER_MEMORY_MODEL;
+    void** idxac = NULL_POINTER_MEMORY_MODEL;
+    void** idxas = NULL_POINTER_MEMORY_MODEL;
+    void** idxm = NULL_POINTER_MEMORY_MODEL;
+    void** idxmc = NULL_POINTER_MEMORY_MODEL;
+    void** idxms = NULL_POINTER_MEMORY_MODEL;
+    void** idxd = NULL_POINTER_MEMORY_MODEL;
+    void** idxdc = NULL_POINTER_MEMORY_MODEL;
+    void** idxds = NULL_POINTER_MEMORY_MODEL;
     // The result name, abstraction, model, details.
-    void** resn = NULL_POINTER;
-    void** resnc = NULL_POINTER;
-    void** resns = NULL_POINTER;
-    void** resa = NULL_POINTER;
-    void** resac = NULL_POINTER;
-    void** resas = NULL_POINTER;
-    void** resm = NULL_POINTER;
-    void** resmc = NULL_POINTER;
-    void** resms = NULL_POINTER;
-    void** resd = NULL_POINTER;
-    void** resdc = NULL_POINTER;
-    void** resds = NULL_POINTER;
+    void** resn = NULL_POINTER_MEMORY_MODEL;
+    void** resnc = NULL_POINTER_MEMORY_MODEL;
+    void** resns = NULL_POINTER_MEMORY_MODEL;
+    void** resa = NULL_POINTER_MEMORY_MODEL;
+    void** resac = NULL_POINTER_MEMORY_MODEL;
+    void** resas = NULL_POINTER_MEMORY_MODEL;
+    void** resm = NULL_POINTER_MEMORY_MODEL;
+    void** resmc = NULL_POINTER_MEMORY_MODEL;
+    void** resms = NULL_POINTER_MEMORY_MODEL;
+    void** resd = NULL_POINTER_MEMORY_MODEL;
+    void** resdc = NULL_POINTER_MEMORY_MODEL;
+    void** resds = NULL_POINTER_MEMORY_MODEL;
 
     // get the basisname
     get_universal_compound_element_by_name(p0, p1,
@@ -130,7 +130,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     wchar_t* int_string = *NULL_POINTER_MEMORY_MODEL;
     // todo Konstante noch definieren
     int int_string_count = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int int_string_size = *NUMBER_10_INTEGER;
+    int int_string_size = *NUMBER_10_INTEGER_MEMORY_MODEL;
 
     allocate_array((void*) &int_string, (void*) &int_string_size, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
@@ -144,7 +144,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     reallocate_array(resm, *resms, *resms, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // set the result array
-    set_array_elements(*resm, (void*) NUMBER_0_INTEGER, *bnm, *bnmc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(*resm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, *bnm, *bnmc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     set_array_elements(*resm, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     int temp_index = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;

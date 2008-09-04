@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: lcid_language_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: lcid_language_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LCID_LANGUAGE_MODEL_SOURCE
 #define LCID_LANGUAGE_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // A locale is a set of parameters that defines the user's language, country
@@ -294,7 +294,7 @@ HID (Human Interface Device)            04ff            1279
 */
 
 /** The english united kingdom lcid language model. */
-static int* ENGLISH_UNITED_KINGDOM_LCID_LANGUAGE_MODEL = NUMBER_0_INTEGER_ARRAY;
+static int* ENGLISH_UNITED_KINGDOM_LCID_LANGUAGE_MODEL = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*??
 ENGLISH_UNITED_KINGDOM_COUNTRY_STRING = 'English - United Kingdom';

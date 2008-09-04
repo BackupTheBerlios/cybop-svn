@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: datagram_socket_communicator.c,v $ $Revision: 1.3 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: datagram_socket_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +30,9 @@
 #include <errno.h>
 #include <stdio.h>
 #include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
@@ -82,7 +82,7 @@ void read_datagram_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void
                     // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
                     //
                     // CAUTION! A message MUST NOT be longer than the given buffer size!
-                    *bc = recvfrom(*os, *b, *bs, *NUMBER_0_INTEGER, (struct sockaddr*) p3, (socklen_t*) p4);
+                    *bc = recvfrom(*os, *b, *bs, *NUMBER_0_INTEGER_MEMORY_MODEL, (struct sockaddr*) p3, (socklen_t*) p4);
 
                     if (*bc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -183,7 +183,7 @@ void write_datagram_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to datagram socket.");
 
                     // Send to socket and return result.
-                    int r = sendto(*s, p3, *sc, *NUMBER_0_INTEGER, *a, *as);
+                    int r = sendto(*s, p3, *sc, *NUMBER_0_INTEGER_MEMORY_MODEL, *a, *as);
 
                     if (r < *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

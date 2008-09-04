@@ -19,44 +19,44 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: text_user_interface_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: text_user_interface_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TEXT_USER_INTERFACE_CYBOL_NAME_SOURCE
 #define TEXT_USER_INTERFACE_CYBOL_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The border text user interface cybol name. */
 static wchar_t BORDER_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'b', L'o', L'r', L'd', L'e', L'r'};
 static wchar_t* BORDER_TEXT_USER_INTERFACE_CYBOL_NAME = BORDER_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
-static int* BORDER_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* BORDER_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The hidden text user interface cybol name. */
 static wchar_t HIDDEN_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'h', L'i', L'd', L'd', L'e', L'n'};
 static wchar_t* HIDDEN_TEXT_USER_INTERFACE_CYBOL_NAME = HIDDEN_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
-static int* HIDDEN_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* HIDDEN_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The inverse text user interface cybol name. */
 static wchar_t INVERSE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'i', L'n', L'v', L'e', L'r', L's', L'e'};
 static wchar_t* INVERSE_TEXT_USER_INTERFACE_CYBOL_NAME = INVERSE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
-static int* INVERSE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* INVERSE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The blink text user interface cybol name. */
 static wchar_t BLINK_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'b', L'l', L'i', L'n', L'k'};
 static wchar_t* BLINK_TEXT_USER_INTERFACE_CYBOL_NAME = BLINK_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
-static int* BLINK_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* BLINK_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The underline text user interface cybol name. */
 static wchar_t UNDERLINE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'u', L'n', L'd', L'e', L'r', L'l', L'i', L'n', L'e'};
 static wchar_t* UNDERLINE_TEXT_USER_INTERFACE_CYBOL_NAME = UNDERLINE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
-static int* UNDERLINE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* UNDERLINE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The bold text user interface cybol name. */
 static wchar_t BOLD_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'b', L'o', L'l', L'd'};
 static wchar_t* BOLD_TEXT_USER_INTERFACE_CYBOL_NAME = BOLD_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
-static int* BOLD_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* BOLD_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* TEXT_USER_INTERFACE_CYBOL_NAME_SOURCE */
 #endif

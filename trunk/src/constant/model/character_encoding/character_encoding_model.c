@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: character_encoding_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: character_encoding_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CHARACTER_ENCODING_MODEL_SOURCE
 #define CHARACTER_ENCODING_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // A "Character Set" consists of three parts:
@@ -48,7 +48,7 @@
  */
 static wchar_t UTF_7_CHARACTER_ENCODING_MODEL_ARRAY[] = {L'u', L't', L'f', L'-', L'7'};
 static wchar_t* UTF_7_CHARACTER_ENCODING_MODEL = UTF_7_CHARACTER_ENCODING_MODEL_ARRAY;
-static int* UTF_7_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* UTF_7_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The utf-8 character encoding model.
@@ -66,7 +66,7 @@ static int* UTF_7_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
  */
 static wchar_t UTF_8_CHARACTER_ENCODING_MODEL_ARRAY[] = {L'u', L't', L'f', L'-', L'8'};
 static wchar_t* UTF_8_CHARACTER_ENCODING_MODEL = UTF_8_CHARACTER_ENCODING_MODEL_ARRAY;
-static int* UTF_8_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* UTF_8_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The cesu-8 character encoding model.
@@ -83,7 +83,7 @@ static int* UTF_8_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_5_INTEGER_ARRAY;
  */
 static wchar_t CESU_8_CHARACTER_ENCODING_MODEL_ARRAY[] = {L'c', L'e', L's', L'u', L'-', L'8'};
 static wchar_t* CESU_8_CHARACTER_ENCODING_MODEL = CESU_8_CHARACTER_ENCODING_MODEL_ARRAY;
-static int* CESU_8_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* CESU_8_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The utf-16 character encoding model.
@@ -106,7 +106,7 @@ static int* CESU_8_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
  */
 static wchar_t UTF_16_CHARACTER_ENCODING_MODEL_ARRAY[] = {L'u', L't', L'f', L'-', L'1', L'6'};
 static wchar_t* UTF_16_CHARACTER_ENCODING_MODEL = UTF_16_CHARACTER_ENCODING_MODEL_ARRAY;
-static int* UTF_16_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* UTF_16_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The utf-32 character encoding model.
@@ -129,7 +129,7 @@ static int* UTF_16_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
  */
 static wchar_t UTF_32_CHARACTER_ENCODING_MODEL_ARRAY[] = {L'u', L't', L'f', L'-', L'3', L'2'};
 static wchar_t* UTF_32_CHARACTER_ENCODING_MODEL = UTF_32_CHARACTER_ENCODING_MODEL_ARRAY;
-static int* UTF_32_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* UTF_32_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The utf-ebcdic character encoding model.
@@ -148,7 +148,7 @@ static int* UTF_32_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_6_INTEGER_ARRAY;
  */
 static wchar_t UTF_EBCDIC_CHARACTER_ENCODING_MODEL_ARRAY[] = {L'u', L't', L'f', L'-', L'e', L'b', L'c', L'd', L'i', L'c'};
 static wchar_t* UTF_EBCDIC_CHARACTER_ENCODING_MODEL = UTF_EBCDIC_CHARACTER_ENCODING_MODEL_ARRAY;
-static int* UTF_EBCDIC_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
+static int* UTF_EBCDIC_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The utf-scsu character encoding model.
@@ -189,7 +189,7 @@ static int* UTF_EBCDIC_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_10_INTEGER_ARRAY;
  */
 static wchar_t UTF_SCSU_CHARACTER_ENCODING_MODEL_ARRAY[] = {L'u', L't', L'f', L'-', L's', L'c', L's', L'u'};
 static wchar_t* UTF_SCSU_CHARACTER_ENCODING_MODEL = UTF_SCSU_CHARACTER_ENCODING_MODEL_ARRAY;
-static int* UTF_SCSU_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* UTF_SCSU_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The punycode character encoding model.
@@ -202,7 +202,7 @@ static int* UTF_SCSU_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
  */
 static wchar_t PUNYCODE_CHARACTER_ENCODING_MODEL_ARRAY[] = {L'p', L'u', L'n', L'y', L'c', L'o', L'd', L'e'};
 static wchar_t* PUNYCODE_CHARACTER_ENCODING_MODEL = PUNYCODE_CHARACTER_ENCODING_MODEL_ARRAY;
-static int* PUNYCODE_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* PUNYCODE_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The gb18030 character encoding model.
@@ -212,7 +212,7 @@ static int* PUNYCODE_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
  */
 static wchar_t GB18030_CHARACTER_ENCODING_MODEL_ARRAY[] = {L'g', L'b', L'1', L'8', L'0', L'3', L'0'};
 static wchar_t* GB18030_CHARACTER_ENCODING_MODEL = GB18030_CHARACTER_ENCODING_MODEL_ARRAY;
-static int* GB18030_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* GB18030_CHARACTER_ENCODING_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* CHARACTER_ENCODING_MODEL_SOURCE */
 #endif

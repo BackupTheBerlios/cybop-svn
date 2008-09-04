@@ -19,34 +19,34 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: unix_command_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: unix_command_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef UNIX_COMMAND_MODEL_SOURCE
 #define UNIX_COMMAND_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The shell unix command model. */
 static wchar_t SHELL_UNIX_COMMAND_MODEL_ARRAY[] = {L'/', L'b', L'i', L'n', L'/', L's', L'h'};
 static wchar_t* SHELL_UNIX_COMMAND_MODEL = SHELL_UNIX_COMMAND_MODEL_ARRAY;
-static int* SHELL_UNIX_COMMAND_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* SHELL_UNIX_COMMAND_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The archive unix command model. */
 static wchar_t ARCHIVE_UNIX_COMMAND_MODEL_ARRAY[] = {L'a', L'r', L'c', L'h', L'i', L'v', L'e'};
 static wchar_t* ARCHIVE_UNIX_COMMAND_MODEL = ARCHIVE_UNIX_COMMAND_MODEL_ARRAY;
-static int* ARCHIVE_UNIX_COMMAND_MODEL_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* ARCHIVE_UNIX_COMMAND_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The copy unix command model. */
 static wchar_t COPY_UNIX_COMMAND_MODEL_ARRAY[] = {L'c', L'o', L'p', L'y'};
 static wchar_t* COPY_UNIX_COMMAND_MODEL = COPY_UNIX_COMMAND_MODEL_ARRAY;
-static int* COPY_UNIX_COMMAND_MODEL_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* COPY_UNIX_COMMAND_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The list directory contents unix command model. */
 static wchar_t LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ARRAY[] = {L'l', L's'};
 static wchar_t* LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL = LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ARRAY;
-static int* LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT = NUMBER_2_INTEGER_ARRAY;
+static int* LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* UNIX_COMMAND_MODEL_SOURCE */
 #endif

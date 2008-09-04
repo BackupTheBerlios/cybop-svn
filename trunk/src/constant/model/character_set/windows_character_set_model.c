@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: windows_character_set_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: windows_character_set_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef WINDOWS_CHARACTER_SET_MODEL_SOURCE
 #define WINDOWS_CHARACTER_SET_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // A "Character Set" consists of three parts:
@@ -44,7 +44,7 @@
  */
 static wchar_t WINDOWS_1250_CHARACTER_SET_MODEL_ARRAY[] = {L'w', L'i', L'n', L'd', L'o', L'w', L's', L'-', L'1', L'2', L'5', L'0'};
 static wchar_t* WINDOWS_1250_CHARACTER_SET_MODEL = WINDOWS_1250_CHARACTER_SET_MODEL_ARRAY;
-static int* WINDOWS_1250_CHARACTER_SET_MODEL_COUNT = NUMBER_12_INTEGER_ARRAY;
+static int* WINDOWS_1250_CHARACTER_SET_MODEL_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* WINDOWS_CHARACTER_SET_MODEL_SOURCE */
 #endif

@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: copy_unix_command_option_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: copy_unix_command_option_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COPY_UNIX_COMMAND_OPTION_NAME_SOURCE
 #define COPY_UNIX_COMMAND_OPTION_NAME_SOURCE
 
-#include "../../../../constant/model/memory/integer_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The recursive copy unix command option name. */
 static wchar_t RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_ARRAY[] = {L'-', L'R'};
 static wchar_t* RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME = RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_ARRAY;
-static int* RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_2_INTEGER_ARRAY;
+static int* RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The source copy unix command option name. */
 static wchar_t SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_ARRAY[] = {L's', L'o', L'u', L'r', L'c', L'e'};
 static wchar_t* SOURCE_COPY_UNIX_COMMAND_OPTION_NAME = SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_ARRAY;
-static int* SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_6_INTEGER_ARRAY;
+static int* SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The destination copy unix command option name. */
 static wchar_t DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_ARRAY[] = {L'd', L'e', L's', L't', L'i', L'n', L'a', L't', L'i', L'o', L'n'};
 static wchar_t* DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME = DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_ARRAY;
-static int* DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COPY_UNIX_COMMAND_OPTION_NAME_SOURCE */
 #endif

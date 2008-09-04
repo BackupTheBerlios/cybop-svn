@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_converter.c,v $ $Revision: 1.27 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: integer_converter.c,v $ $Revision: 1.28 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,14 +35,14 @@
 #include <string.h>
 #include <wchar.h>
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../globals/variables/reallocation_factor_variables.c"
+#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/allocator.c"
 
 /**
@@ -74,16 +74,16 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The temporary null-terminated string.
             wchar_t* tmp = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
-            int tmps = *sc + *NUMBER_1_INTEGER;
+            int tmps = *sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
             // Create temporary null-terminated string.
             allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // Copy original string to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) NUMBER_0_INTEGER, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements((void*) tmp, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             // Add string termination to temporary null-terminated string.
             // The source count is used as index for the termination character.
-            set_array_elements((void*) tmp, p4, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements((void*) tmp, p4, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -100,7 +100,7 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // 8 - octal
             // 10 - decimal
             // 16 - hexadecimal
-            *d = wcstol(tmp, &tail, *NUMBER_10_INTEGER);
+            *d = wcstol(tmp, &tail, *NUMBER_10_INTEGER_MEMORY_MODEL);
 
             // Destroy temporary null-terminated string.
             deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -145,13 +145,13 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 int* v = (int*) *NULL_POINTER_MEMORY_MODEL;
 
                 // Get integer value.
-                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY);
+                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Initialise destination count to -1.
                 // CAUTION! It must be negative for the loop to run.
-                *dc = *NUMBER_MINUS_1_INTEGER;
+                *dc = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                while (*NUMBER_1_INTEGER) {
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                     if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -166,7 +166,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Set destination string size one greater than the count
                     // to have space for the terminating null character and
                     // to avoid a zero value in case destination string size is zero.
-                    *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER;
+                    *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate destination string.
                     reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);

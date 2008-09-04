@@ -19,16 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: prefix_counting_memoriser.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: prefix_counting_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PREFIX_COUNTER_SOURCE
 #define PREFIX_COUNTER_SOURCE
 
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
@@ -65,7 +65,7 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // Set result to compound count value.
             // A loop is not needed here, since the compound count already contains
             // the number of parts within that compound.
-            set_element(*r, NUMBER_0_INTEGER, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+            set_element(*r, NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"TEST r: %i\n", **r);
     fwprintf(stderr, L"TEST rc: %i\n", *((int*) rc));
@@ -84,9 +84,9 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
 /*??
             // The compund element name.
-            void** cen = NULL_POINTER;
-            void** cenc = NULL_POINTER;
-            void** cens = NULL_POINTER;
+            void** cen = NULL_POINTER_MEMORY_MODEL;
+            void** cenc = NULL_POINTER_MEMORY_MODEL;
+            void** cens = NULL_POINTER_MEMORY_MODEL;
 
             //init the counter
             int* list_counter = (int*) *resm;
@@ -100,7 +100,7 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
             // Set the compare string
             // this is the basisname and the list separat
-            set_array_elements(compstring, (void*) NUMBER_0_INTEGER, *bnm, *bnmc,  (void*) CHARACTER_ARRAY);
+            set_array_elements(compstring, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, *bnm, *bnmc,  (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             set_array_elements(compstring, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // The loop count.
@@ -108,7 +108,7 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // The comparison result.
             int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER) {
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (j >= *((int*) *mdlmc)) {
 
@@ -127,13 +127,13 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
                             r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                            compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_ARRAY);
+                            compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                             //if teh begiining of the two arrays ident, then
                             //the compound element is a part of the list
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                *list_counter = *list_counter + *NUMBER_1_INTEGER;
+                                *list_counter = *list_counter + *NUMBER_1_INTEGER_MEMORY_MODEL;
                             }
                         }
                     }
@@ -148,44 +148,44 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
 /*??
     // The basisname name, abstraction, model, details.
-    void** bnn = NULL_POINTER;
-    void** bnnc = NULL_POINTER;
-    void** bnns = NULL_POINTER;
-    void** bna = NULL_POINTER;
-    void** bnac = NULL_POINTER;
-    void** bnas = NULL_POINTER;
-    void** bnm = NULL_POINTER;
-    void** bnmc = NULL_POINTER;
-    void** bnms = NULL_POINTER;
-    void** bnd = NULL_POINTER;
-    void** bndc = NULL_POINTER;
-    void** bnds = NULL_POINTER;
+    void** bnn = NULL_POINTER_MEMORY_MODEL;
+    void** bnnc = NULL_POINTER_MEMORY_MODEL;
+    void** bnns = NULL_POINTER_MEMORY_MODEL;
+    void** bna = NULL_POINTER_MEMORY_MODEL;
+    void** bnac = NULL_POINTER_MEMORY_MODEL;
+    void** bnas = NULL_POINTER_MEMORY_MODEL;
+    void** bnm = NULL_POINTER_MEMORY_MODEL;
+    void** bnmc = NULL_POINTER_MEMORY_MODEL;
+    void** bnms = NULL_POINTER_MEMORY_MODEL;
+    void** bnd = NULL_POINTER_MEMORY_MODEL;
+    void** bndc = NULL_POINTER_MEMORY_MODEL;
+    void** bnds = NULL_POINTER_MEMORY_MODEL;
     // The index name, abstraction, model, details.
-    void** mdln = NULL_POINTER;
-    void** mdlnc = NULL_POINTER;
-    void** mdlns = NULL_POINTER;
-    void** mdla = NULL_POINTER;
-    void** mdlac = NULL_POINTER;
-    void** mdlas = NULL_POINTER;
-    void** mdlm = NULL_POINTER;
-    void** mdlmc = NULL_POINTER;
-    void** mdlms = NULL_POINTER;
-    void** mdld = NULL_POINTER;
-    void** mdldc = NULL_POINTER;
-    void** mdlds = NULL_POINTER;
+    void** mdln = NULL_POINTER_MEMORY_MODEL;
+    void** mdlnc = NULL_POINTER_MEMORY_MODEL;
+    void** mdlns = NULL_POINTER_MEMORY_MODEL;
+    void** mdla = NULL_POINTER_MEMORY_MODEL;
+    void** mdlac = NULL_POINTER_MEMORY_MODEL;
+    void** mdlas = NULL_POINTER_MEMORY_MODEL;
+    void** mdlm = NULL_POINTER_MEMORY_MODEL;
+    void** mdlmc = NULL_POINTER_MEMORY_MODEL;
+    void** mdlms = NULL_POINTER_MEMORY_MODEL;
+    void** mdld = NULL_POINTER_MEMORY_MODEL;
+    void** mdldc = NULL_POINTER_MEMORY_MODEL;
+    void** mdlds = NULL_POINTER_MEMORY_MODEL;
     // The result name, abstraction, model, details.
-    void** resn = NULL_POINTER;
-    void** resnc = NULL_POINTER;
-    void** resns = NULL_POINTER;
-    void** resa = NULL_POINTER;
-    void** resac = NULL_POINTER;
-    void** resas = NULL_POINTER;
-    void** resm = NULL_POINTER;
-    void** resmc = NULL_POINTER;
-    void** resms = NULL_POINTER;
-    void** resd = NULL_POINTER;
-    void** resdc = NULL_POINTER;
-    void** resds = NULL_POINTER;
+    void** resn = NULL_POINTER_MEMORY_MODEL;
+    void** resnc = NULL_POINTER_MEMORY_MODEL;
+    void** resns = NULL_POINTER_MEMORY_MODEL;
+    void** resa = NULL_POINTER_MEMORY_MODEL;
+    void** resac = NULL_POINTER_MEMORY_MODEL;
+    void** resas = NULL_POINTER_MEMORY_MODEL;
+    void** resm = NULL_POINTER_MEMORY_MODEL;
+    void** resmc = NULL_POINTER_MEMORY_MODEL;
+    void** resms = NULL_POINTER_MEMORY_MODEL;
+    void** resd = NULL_POINTER_MEMORY_MODEL;
+    void** resdc = NULL_POINTER_MEMORY_MODEL;
+    void** resds = NULL_POINTER_MEMORY_MODEL;
 */
 }
 

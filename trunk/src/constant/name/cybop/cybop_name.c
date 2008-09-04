@@ -19,34 +19,34 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybop_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: cybop_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOP_NAME_SOURCE
 #define CYBOP_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The name cybop name. */
 static wchar_t NAME_CYBOP_NAME_ARRAY[] = {L'n', L'a', L'm', L'e'};
 static wchar_t* NAME_CYBOP_NAME = NAME_CYBOP_NAME_ARRAY;
-static int* NAME_CYBOP_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* NAME_CYBOP_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The channel cybop name. */
 static wchar_t CHANNEL_CYBOP_NAME_ARRAY[] = {L'c', L'h', L'a', L'n', L'n', L'e', L'l'};
 static wchar_t* CHANNEL_CYBOP_NAME = CHANNEL_CYBOP_NAME_ARRAY;
-static int* CHANNEL_CYBOP_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* CHANNEL_CYBOP_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The abstraction cybop name. */
 static wchar_t ABSTRACTION_CYBOP_NAME_ARRAY[] = {L'a', L'b', L's', L't', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
 static wchar_t* ABSTRACTION_CYBOP_NAME = ABSTRACTION_CYBOP_NAME_ARRAY;
-static int* ABSTRACTION_CYBOP_NAME_COUNT = NUMBER_11_INTEGER_ARRAY;
+static int* ABSTRACTION_CYBOP_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The model cybop name. */
 static wchar_t MODEL_CYBOP_NAME_ARRAY[] = {L'm', L'o', L'd', L'e', L'l'};
 static wchar_t* MODEL_CYBOP_NAME = MODEL_CYBOP_NAME_ARRAY;
-static int* MODEL_CYBOP_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* MODEL_CYBOP_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Cybol tag attributes as char.

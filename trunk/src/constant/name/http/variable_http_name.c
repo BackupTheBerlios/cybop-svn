@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: variable_http_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: variable_http_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef VARIABLE_HTTP_NAME_SOURCE
 #define VARIABLE_HTTP_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The charset variable http name. */
 static wchar_t CHARSET_VARIABLE_HTTP_NAME_ARRAY[] = {L'c', L'h', L'a', L'r', L's', L'e', L't'};
 static wchar_t* CHARSET_VARIABLE_HTTP_NAME = CHARSET_VARIABLE_HTTP_NAME_ARRAY;
-static int* CHARSET_VARIABLE_HTTP_NAME_COUNT = NUMBER_7_INTEGER_ARRAY;
+static int* CHARSET_VARIABLE_HTTP_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* VARIABLE_HTTP_NAME_SOURCE */
 #endif

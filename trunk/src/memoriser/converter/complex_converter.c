@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: complex_converter.c,v $ $Revision: 1.12 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: complex_converter.c,v $ $Revision: 1.13 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPLEX_CONVERTER_SOURCE
 #define COMPLEX_CONVERTER_SOURCE
 
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
@@ -111,8 +111,8 @@ void encode_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
     get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
 
     // Remove elements.
-    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &IMAGINARY_INDEX);
-    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_COUNT, (void*) &REAL_INDEX);
+    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_MEMORY_MODEL_COUNT, (void*) &IMAGINARY_INDEX);
+    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_MEMORY_MODEL_COUNT, (void*) &REAL_INDEX);
 
     //??    fwprintf(p1, %d, (void*) &(t->real));
     //??    fwprintf(p1, %d, (void*) &(t->imaginary));

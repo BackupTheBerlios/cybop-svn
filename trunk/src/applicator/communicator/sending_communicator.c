@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:03:59 $ $Author: christian $
+ * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,12 +34,12 @@
 #include "../applicator/sender/socket_sender.c"
 #include "../applicator/sender/x_window_system_sender.c"
 #include "../globals/constants/cyboi/cyboi_signal_priority_constants.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../globals/constants/cybol/cybol_channel_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../constant/channel/cybol_channel.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../globals/constants/service_port_constants.c"
 #include "../logger/logger.c"
@@ -81,148 +81,148 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send message.");
 
     // The channel name, abstraction, model, details.
-    void** cn = NULL_POINTER;
-    void** cnc = NULL_POINTER;
-    void** cns = NULL_POINTER;
-    void** ca = NULL_POINTER;
-    void** cac = NULL_POINTER;
-    void** cas = NULL_POINTER;
-    void** cm = NULL_POINTER;
-    void** cmc = NULL_POINTER;
-    void** cms = NULL_POINTER;
-    void** cd = NULL_POINTER;
-    void** cdc = NULL_POINTER;
-    void** cds = NULL_POINTER;
+    void** cn = NULL_POINTER_MEMORY_MODEL;
+    void** cnc = NULL_POINTER_MEMORY_MODEL;
+    void** cns = NULL_POINTER_MEMORY_MODEL;
+    void** ca = NULL_POINTER_MEMORY_MODEL;
+    void** cac = NULL_POINTER_MEMORY_MODEL;
+    void** cas = NULL_POINTER_MEMORY_MODEL;
+    void** cm = NULL_POINTER_MEMORY_MODEL;
+    void** cmc = NULL_POINTER_MEMORY_MODEL;
+    void** cms = NULL_POINTER_MEMORY_MODEL;
+    void** cd = NULL_POINTER_MEMORY_MODEL;
+    void** cdc = NULL_POINTER_MEMORY_MODEL;
+    void** cds = NULL_POINTER_MEMORY_MODEL;
     // The language name, abstraction, model, details.
-    void** ln = NULL_POINTER;
-    void** lnc = NULL_POINTER;
-    void** lns = NULL_POINTER;
-    void** la = NULL_POINTER;
-    void** lac = NULL_POINTER;
-    void** las = NULL_POINTER;
-    void** lm = NULL_POINTER;
-    void** lmc = NULL_POINTER;
-    void** lms = NULL_POINTER;
-    void** ld = NULL_POINTER;
-    void** ldc = NULL_POINTER;
-    void** lds = NULL_POINTER;
+    void** ln = NULL_POINTER_MEMORY_MODEL;
+    void** lnc = NULL_POINTER_MEMORY_MODEL;
+    void** lns = NULL_POINTER_MEMORY_MODEL;
+    void** la = NULL_POINTER_MEMORY_MODEL;
+    void** lac = NULL_POINTER_MEMORY_MODEL;
+    void** las = NULL_POINTER_MEMORY_MODEL;
+    void** lm = NULL_POINTER_MEMORY_MODEL;
+    void** lmc = NULL_POINTER_MEMORY_MODEL;
+    void** lms = NULL_POINTER_MEMORY_MODEL;
+    void** ld = NULL_POINTER_MEMORY_MODEL;
+    void** ldc = NULL_POINTER_MEMORY_MODEL;
+    void** lds = NULL_POINTER_MEMORY_MODEL;
     // The communication mode name, abstraction, model, details.
-    void** mon = NULL_POINTER;
-    void** monc = NULL_POINTER;
-    void** mons = NULL_POINTER;
-    void** moa = NULL_POINTER;
-    void** moac = NULL_POINTER;
-    void** moas = NULL_POINTER;
-    void** mom = NULL_POINTER;
-    void** momc = NULL_POINTER;
-    void** moms = NULL_POINTER;
-    void** mod = NULL_POINTER;
-    void** modc = NULL_POINTER;
-    void** mods = NULL_POINTER;
+    void** mon = NULL_POINTER_MEMORY_MODEL;
+    void** monc = NULL_POINTER_MEMORY_MODEL;
+    void** mons = NULL_POINTER_MEMORY_MODEL;
+    void** moa = NULL_POINTER_MEMORY_MODEL;
+    void** moac = NULL_POINTER_MEMORY_MODEL;
+    void** moas = NULL_POINTER_MEMORY_MODEL;
+    void** mom = NULL_POINTER_MEMORY_MODEL;
+    void** momc = NULL_POINTER_MEMORY_MODEL;
+    void** moms = NULL_POINTER_MEMORY_MODEL;
+    void** mod = NULL_POINTER_MEMORY_MODEL;
+    void** modc = NULL_POINTER_MEMORY_MODEL;
+    void** mods = NULL_POINTER_MEMORY_MODEL;
     // The socket namespace name, abstraction, model, details.
-    void** nn = NULL_POINTER;
-    void** nnc = NULL_POINTER;
-    void** nns = NULL_POINTER;
-    void** na = NULL_POINTER;
-    void** nac = NULL_POINTER;
-    void** nas = NULL_POINTER;
-    void** nm = NULL_POINTER;
-    void** nmc = NULL_POINTER;
-    void** nms = NULL_POINTER;
-    void** nd = NULL_POINTER;
-    void** ndc = NULL_POINTER;
-    void** nds = NULL_POINTER;
+    void** nn = NULL_POINTER_MEMORY_MODEL;
+    void** nnc = NULL_POINTER_MEMORY_MODEL;
+    void** nns = NULL_POINTER_MEMORY_MODEL;
+    void** na = NULL_POINTER_MEMORY_MODEL;
+    void** nac = NULL_POINTER_MEMORY_MODEL;
+    void** nas = NULL_POINTER_MEMORY_MODEL;
+    void** nm = NULL_POINTER_MEMORY_MODEL;
+    void** nmc = NULL_POINTER_MEMORY_MODEL;
+    void** nms = NULL_POINTER_MEMORY_MODEL;
+    void** nd = NULL_POINTER_MEMORY_MODEL;
+    void** ndc = NULL_POINTER_MEMORY_MODEL;
+    void** nds = NULL_POINTER_MEMORY_MODEL;
     // The communication style name, abstraction, model, details.
-    void** stn = NULL_POINTER;
-    void** stnc = NULL_POINTER;
-    void** stns = NULL_POINTER;
-    void** sta = NULL_POINTER;
-    void** stac = NULL_POINTER;
-    void** stas = NULL_POINTER;
-    void** stm = NULL_POINTER;
-    void** stmc = NULL_POINTER;
-    void** stms = NULL_POINTER;
-    void** std = NULL_POINTER;
-    void** stdc = NULL_POINTER;
-    void** stds = NULL_POINTER;
+    void** stn = NULL_POINTER_MEMORY_MODEL;
+    void** stnc = NULL_POINTER_MEMORY_MODEL;
+    void** stns = NULL_POINTER_MEMORY_MODEL;
+    void** sta = NULL_POINTER_MEMORY_MODEL;
+    void** stac = NULL_POINTER_MEMORY_MODEL;
+    void** stas = NULL_POINTER_MEMORY_MODEL;
+    void** stm = NULL_POINTER_MEMORY_MODEL;
+    void** stmc = NULL_POINTER_MEMORY_MODEL;
+    void** stms = NULL_POINTER_MEMORY_MODEL;
+    void** std = NULL_POINTER_MEMORY_MODEL;
+    void** stdc = NULL_POINTER_MEMORY_MODEL;
+    void** stds = NULL_POINTER_MEMORY_MODEL;
     // The sender name, abstraction, model, details.
-    void** sn = NULL_POINTER;
-    void** snc = NULL_POINTER;
-    void** sns = NULL_POINTER;
-    void** sa = NULL_POINTER;
-    void** sac = NULL_POINTER;
-    void** sas = NULL_POINTER;
-    void** sm = NULL_POINTER;
-    void** smc = NULL_POINTER;
-    void** sms = NULL_POINTER;
-    void** sd = NULL_POINTER;
-    void** sdc = NULL_POINTER;
-    void** sds = NULL_POINTER;
+    void** sn = NULL_POINTER_MEMORY_MODEL;
+    void** snc = NULL_POINTER_MEMORY_MODEL;
+    void** sns = NULL_POINTER_MEMORY_MODEL;
+    void** sa = NULL_POINTER_MEMORY_MODEL;
+    void** sac = NULL_POINTER_MEMORY_MODEL;
+    void** sas = NULL_POINTER_MEMORY_MODEL;
+    void** sm = NULL_POINTER_MEMORY_MODEL;
+    void** smc = NULL_POINTER_MEMORY_MODEL;
+    void** sms = NULL_POINTER_MEMORY_MODEL;
+    void** sd = NULL_POINTER_MEMORY_MODEL;
+    void** sdc = NULL_POINTER_MEMORY_MODEL;
+    void** sds = NULL_POINTER_MEMORY_MODEL;
     // The receiver name, abstraction, model, details.
-    void** rn = NULL_POINTER;
-    void** rnc = NULL_POINTER;
-    void** rns = NULL_POINTER;
-    void** ra = NULL_POINTER;
-    void** rac = NULL_POINTER;
-    void** ras = NULL_POINTER;
-    void** rm = NULL_POINTER;
-    void** rmc = NULL_POINTER;
-    void** rms = NULL_POINTER;
-    void** rd = NULL_POINTER;
-    void** rdc = NULL_POINTER;
-    void** rds = NULL_POINTER;
+    void** rn = NULL_POINTER_MEMORY_MODEL;
+    void** rnc = NULL_POINTER_MEMORY_MODEL;
+    void** rns = NULL_POINTER_MEMORY_MODEL;
+    void** ra = NULL_POINTER_MEMORY_MODEL;
+    void** rac = NULL_POINTER_MEMORY_MODEL;
+    void** ras = NULL_POINTER_MEMORY_MODEL;
+    void** rm = NULL_POINTER_MEMORY_MODEL;
+    void** rmc = NULL_POINTER_MEMORY_MODEL;
+    void** rms = NULL_POINTER_MEMORY_MODEL;
+    void** rd = NULL_POINTER_MEMORY_MODEL;
+    void** rdc = NULL_POINTER_MEMORY_MODEL;
+    void** rds = NULL_POINTER_MEMORY_MODEL;
     // The message name, abstraction, model, details.
-    void** mn = NULL_POINTER;
-    void** mnc = NULL_POINTER;
-    void** mns = NULL_POINTER;
-    void** ma = NULL_POINTER;
-    void** mac = NULL_POINTER;
-    void** mas = NULL_POINTER;
-    void** mm = NULL_POINTER;
-    void** mmc = NULL_POINTER;
-    void** mms = NULL_POINTER;
-    void** md = NULL_POINTER;
-    void** mdc = NULL_POINTER;
-    void** mds = NULL_POINTER;
+    void** mn = NULL_POINTER_MEMORY_MODEL;
+    void** mnc = NULL_POINTER_MEMORY_MODEL;
+    void** mns = NULL_POINTER_MEMORY_MODEL;
+    void** ma = NULL_POINTER_MEMORY_MODEL;
+    void** mac = NULL_POINTER_MEMORY_MODEL;
+    void** mas = NULL_POINTER_MEMORY_MODEL;
+    void** mm = NULL_POINTER_MEMORY_MODEL;
+    void** mmc = NULL_POINTER_MEMORY_MODEL;
+    void** mms = NULL_POINTER_MEMORY_MODEL;
+    void** md = NULL_POINTER_MEMORY_MODEL;
+    void** mdc = NULL_POINTER_MEMORY_MODEL;
+    void** mds = NULL_POINTER_MEMORY_MODEL;
     // The area name, abstraction, model, details.
-    void** an = NULL_POINTER;
-    void** anc = NULL_POINTER;
-    void** ans = NULL_POINTER;
-    void** aa = NULL_POINTER;
-    void** aac = NULL_POINTER;
-    void** aas = NULL_POINTER;
-    void** am = NULL_POINTER;
-    void** amc = NULL_POINTER;
-    void** ams = NULL_POINTER;
-    void** ad = NULL_POINTER;
-    void** adc = NULL_POINTER;
-    void** ads = NULL_POINTER;
+    void** an = NULL_POINTER_MEMORY_MODEL;
+    void** anc = NULL_POINTER_MEMORY_MODEL;
+    void** ans = NULL_POINTER_MEMORY_MODEL;
+    void** aa = NULL_POINTER_MEMORY_MODEL;
+    void** aac = NULL_POINTER_MEMORY_MODEL;
+    void** aas = NULL_POINTER_MEMORY_MODEL;
+    void** am = NULL_POINTER_MEMORY_MODEL;
+    void** amc = NULL_POINTER_MEMORY_MODEL;
+    void** ams = NULL_POINTER_MEMORY_MODEL;
+    void** ad = NULL_POINTER_MEMORY_MODEL;
+    void** adc = NULL_POINTER_MEMORY_MODEL;
+    void** ads = NULL_POINTER_MEMORY_MODEL;
     // The clean name, abstraction, model, details.
-    void** cln = NULL_POINTER;
-    void** clnc = NULL_POINTER;
-    void** clns = NULL_POINTER;
-    void** cla = NULL_POINTER;
-    void** clac = NULL_POINTER;
-    void** clas = NULL_POINTER;
-    void** clm = NULL_POINTER;
-    void** clmc = NULL_POINTER;
-    void** clms = NULL_POINTER;
-    void** cld = NULL_POINTER;
-    void** cldc = NULL_POINTER;
-    void** clds = NULL_POINTER;
+    void** cln = NULL_POINTER_MEMORY_MODEL;
+    void** clnc = NULL_POINTER_MEMORY_MODEL;
+    void** clns = NULL_POINTER_MEMORY_MODEL;
+    void** cla = NULL_POINTER_MEMORY_MODEL;
+    void** clac = NULL_POINTER_MEMORY_MODEL;
+    void** clas = NULL_POINTER_MEMORY_MODEL;
+    void** clm = NULL_POINTER_MEMORY_MODEL;
+    void** clmc = NULL_POINTER_MEMORY_MODEL;
+    void** clms = NULL_POINTER_MEMORY_MODEL;
+    void** cld = NULL_POINTER_MEMORY_MODEL;
+    void** cldc = NULL_POINTER_MEMORY_MODEL;
+    void** clds = NULL_POINTER_MEMORY_MODEL;
     // The new line name, abstraction, model, details.
-    void** nln = NULL_POINTER;
-    void** nlnc = NULL_POINTER;
-    void** nlns = NULL_POINTER;
-    void** nla = NULL_POINTER;
-    void** nlac = NULL_POINTER;
-    void** nlas = NULL_POINTER;
-    void** nlm = NULL_POINTER;
-    void** nlmc = NULL_POINTER;
-    void** nlms = NULL_POINTER;
-    void** nld = NULL_POINTER;
-    void** nldc = NULL_POINTER;
-    void** nlds = NULL_POINTER;
+    void** nln = NULL_POINTER_MEMORY_MODEL;
+    void** nlnc = NULL_POINTER_MEMORY_MODEL;
+    void** nlns = NULL_POINTER_MEMORY_MODEL;
+    void** nla = NULL_POINTER_MEMORY_MODEL;
+    void** nlac = NULL_POINTER_MEMORY_MODEL;
+    void** nlas = NULL_POINTER_MEMORY_MODEL;
+    void** nlm = NULL_POINTER_MEMORY_MODEL;
+    void** nlmc = NULL_POINTER_MEMORY_MODEL;
+    void** nlms = NULL_POINTER_MEMORY_MODEL;
+    void** nld = NULL_POINTER_MEMORY_MODEL;
+    void** nldc = NULL_POINTER_MEMORY_MODEL;
+    void** nlds = NULL_POINTER_MEMORY_MODEL;
 
     // Get channel.
     get_universal_compound_element_by_name(p0, p1,

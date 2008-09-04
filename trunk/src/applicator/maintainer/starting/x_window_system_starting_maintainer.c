@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_starting_maintainer.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: x_window_system_starting_maintainer.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +30,9 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
@@ -60,7 +60,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup x window system.");
 
     // The display internal.
-    struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER;
+    struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER_MEMORY_MODEL;
 
     // Get display internal.
     get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
@@ -130,13 +130,13 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         struct _XGC* gc = (struct _XGC*) *NULL_POINTER_MEMORY_MODEL;
 
         // Allocate x window system internals.
-        allocate((void*) &sn, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &cm, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &bg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &fg, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &r, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &w, (void*) PRIMITIVE_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
-        allocate((void*) &vm, (void*) PRIMITIVE_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &sn, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &bg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &fg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &w, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &vm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION, (void*) UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT);
 //??        v = (struct XGCValues*) malloc(sizeof(struct XGCValues));
 
         // Initialise x window system internals.
@@ -164,7 +164,7 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         sh.width = *NUMBER_800_INTEGER;
         sh.height = *NUMBER_600_INTEGER;
         sh.flags = PPosition | PSize;
-        *w = XCreateSimpleWindow(d, *r, sh.x, sh.y, sh.width, sh.height, *NUMBER_5_INTEGER, *fg, *bg);
+        *w = XCreateSimpleWindow(d, *r, sh.x, sh.y, sh.width, sh.height, *NUMBER_5_INTEGER_MEMORY_MODEL, *fg, *bg);
         *vm = *NUMBER_0_INTEGER_MEMORY_MODEL;
 //??        *vm = GCCapStyle | GCJoinStyle;
 //??        *v = CapButt | JoinBevel;
@@ -182,14 +182,14 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         dark_gray.green = 32768;
         dark_gray.blue = 32768;
 /*??
-        gc_menu = XCreateGC(d, *w, *NUMBER_0_INTEGER, *NUMBER_0_INTEGER_MEMORY_MODEL);
-        gc_menu_border_top = XCreateGC(d, *w, *NUMBER_0_INTEGER, *NUMBER_0_INTEGER_MEMORY_MODEL);
-        gc_menu_border_bottom = XCreateGC(d, *w, *NUMBER_0_INTEGER, *NUMBER_0_INTEGER_MEMORY_MODEL);
-        gc_menu_font = XCreateGC(d, *w, *NUMBER_0_INTEGER, *NUMBER_0_INTEGER_MEMORY_MODEL);
+        gc_menu = XCreateGC(d, *w, *NUMBER_0_INTEGER_MEMORY_MODEL, *NUMBER_0_INTEGER_MEMORY_MODEL);
+        gc_menu_border_top = XCreateGC(d, *w, *NUMBER_0_INTEGER_MEMORY_MODEL, *NUMBER_0_INTEGER_MEMORY_MODEL);
+        gc_menu_border_bottom = XCreateGC(d, *w, *NUMBER_0_INTEGER_MEMORY_MODEL, *NUMBER_0_INTEGER_MEMORY_MODEL);
+        gc_menu_font = XCreateGC(d, *w, *NUMBER_0_INTEGER_MEMORY_MODEL, *NUMBER_0_INTEGER_MEMORY_MODEL);
 */
 
         // Assign x window system internals.
-        XSetStandardProperties(d, *w, "Application", "Icon", None, *NULL_POINTER, *NUMBER_0_INTEGER, (void*) &sh);
+        XSetStandardProperties(d, *w, "Application", "Icon", None, *NULL_POINTER_MEMORY_MODEL, *NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &sh);
         XAllocColor(d, *cm, &gray);
         XAllocColor(d, *cm, &light_gray);
         XAllocColor(d, *cm, &vlight_gray);

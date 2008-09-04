@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.37 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.38 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,10 +35,10 @@
 #include "../controller/orienter.c"
 #include "../controller/tester.c"
 #include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../globals/variables/log_variables.c"
+#include "../variable/log_setting.c"
 
 //
 // This is the main file of the Cybernetics Oriented Interpreter (CYBOI).
@@ -72,7 +72,7 @@ int main(int p0, char** p1) {
     // Are they killed automatically when a process is shut down?
 
     // Return 1 to indicate an error, by default.
-    int r = *NUMBER_1_INTEGER;
+    int r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 

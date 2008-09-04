@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xhtml_converter.c,v $ $Revision: 1.20 $ $Date: 2008-09-03 22:04:03 $ $Author: christian $
+ * @version $RCSfile: xhtml_converter.c,v $ $Revision: 1.21 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,14 +27,14 @@
 #define XHTML_CONVERTER_SOURCE
 
 #include "../../globals/constants/character/code/character_code_constants.c"
-#include "../../globals/constants/cybol/cybol_abstraction_constants.c"
-#include "../../globals/constants/cybol/cybol_channel_constants.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/channel/cybol_channel.c"
 #include "../../globals/constants/cybol/cybol_model_constants.c"
 #include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../globals/constants/integer/integer_constants.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/memory_structure/memory_abstraction_constants.c"
-#include "../../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -70,7 +70,7 @@ void encode_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
         // The loop variable.
         int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (j >= *l) {
 
@@ -78,16 +78,16 @@ void encode_xhtml_indentation(void* p0, void* p1, void* p2, void* p3) {
             }
 
             // Encode character tabulation character.
-//??            encode_character_vector(p0, p1, p2, (void*) CHARACTER_TABULATION_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_COUNT);
+//??            encode_character_vector(p0, p1, p2, (void*) CHARACTER_TABULATION_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
             // Encode space character.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
             // Encode space character.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
             // Encode space character.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
             // Encode space character.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
             // Increment loop count.
             j++;
@@ -119,18 +119,18 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode xhtml attributes.");
 
         // The source part details name, abstraction, model, details.
-        void** n = NULL_POINTER;
-        void** nc = NULL_POINTER;
-        void** ns = NULL_POINTER;
-        void** a = NULL_POINTER;
-        void** ac = NULL_POINTER;
-        void** as = NULL_POINTER;
-        void** m = NULL_POINTER;
-        void** mc = NULL_POINTER;
-        void** ms = NULL_POINTER;
-        void** d = NULL_POINTER;
-        void** dc = NULL_POINTER;
-        void** ds = NULL_POINTER;
+        void** n = NULL_POINTER_MEMORY_MODEL;
+        void** nc = NULL_POINTER_MEMORY_MODEL;
+        void** ns = NULL_POINTER_MEMORY_MODEL;
+        void** a = NULL_POINTER_MEMORY_MODEL;
+        void** ac = NULL_POINTER_MEMORY_MODEL;
+        void** as = NULL_POINTER_MEMORY_MODEL;
+        void** m = NULL_POINTER_MEMORY_MODEL;
+        void** mc = NULL_POINTER_MEMORY_MODEL;
+        void** ms = NULL_POINTER_MEMORY_MODEL;
+        void** d = NULL_POINTER_MEMORY_MODEL;
+        void** dc = NULL_POINTER_MEMORY_MODEL;
+        void** ds = NULL_POINTER_MEMORY_MODEL;
 
         // The loop variable.
         int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -138,7 +138,7 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Iterate through details parts.
-        while (*NUMBER_1_INTEGER) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (j >= *sc) {
 
@@ -159,32 +159,32 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 // Only add attribute, if the details part name is NOT "tag"!
 
                 // Encode space character.
-                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                 // Encode attribute name.
                 encode_utf_8_unicode_character_vector(p0, p1, p2, *n, *nc);
                 // Encode equals sign character.
-                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) EQUALS_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) EQUALS_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                 // Encode quotation mark character.
-                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                 // Encode space character.
                 encode_utf_8_unicode_character_vector(p0, p1, p2, *m, *mc);
                 // Encode quotation mark character.
-                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+                encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
             }
 
             // Reset source part name, abstraction, model, details.
-            n = NULL_POINTER;
-            nc = NULL_POINTER;
-            ns = NULL_POINTER;
-            a = NULL_POINTER;
-            ac = NULL_POINTER;
-            as = NULL_POINTER;
-            m = NULL_POINTER;
-            mc = NULL_POINTER;
-            ms = NULL_POINTER;
-            d = NULL_POINTER;
-            dc = NULL_POINTER;
-            ds = NULL_POINTER;
+            n = NULL_POINTER_MEMORY_MODEL;
+            nc = NULL_POINTER_MEMORY_MODEL;
+            ns = NULL_POINTER_MEMORY_MODEL;
+            a = NULL_POINTER_MEMORY_MODEL;
+            ac = NULL_POINTER_MEMORY_MODEL;
+            as = NULL_POINTER_MEMORY_MODEL;
+            m = NULL_POINTER_MEMORY_MODEL;
+            mc = NULL_POINTER_MEMORY_MODEL;
+            ms = NULL_POINTER_MEMORY_MODEL;
+            d = NULL_POINTER_MEMORY_MODEL;
+            dc = NULL_POINTER_MEMORY_MODEL;
+            ds = NULL_POINTER_MEMORY_MODEL;
 
             // Reset comparison result.
             r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -221,15 +221,15 @@ void encode_xhtml_begin_tag(void* p0, void* p1, void* p2,
     // Encode indentation.
     encode_xhtml_indentation(p0, p1, p2, p9);
     // Encode less than character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
     // Encode xhtml tag.
     encode_utf_8_unicode_character_vector(p0, p1, p2, p3, p4);
     // Encode html tag properties.
     encode_xhtml_attributes(p0, p1, p2, p5, p6, p7, p8);
     // Encode greater than character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
     // Encode line feed character, for better source reading.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 }
 
 /**
@@ -249,15 +249,15 @@ void encode_xhtml_end_tag(void* p0, void* p1, void* p2, void* p3, void* p4, void
     // Encode indentation.
     encode_xhtml_indentation(p0, p1, p2, p5);
     // Encode less than character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LESS_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
     // Encode solidus character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SOLIDUS_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) SOLIDUS_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
     // Encode xhtml tag.
     encode_utf_8_unicode_character_vector(p0, p1, p2, p3, p4);
     // Encode greater than character.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) GREATER_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
     // Encode line feed character, for better source reading.
-    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+    encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 }
 
 /**
@@ -286,7 +286,7 @@ void encode_xhtml_tag_content(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // Encode source part model.
             encode_utf_8_unicode_character_vector(p0, p1, p2, p3, p4);
             // Encode line feed character, for better source reading.
-            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_COUNT);
+            encode_utf_8_unicode_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
         }
 
     } else {
@@ -325,32 +325,32 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode xhtml node.");
 
             // The source part name, abstraction, model, details.
-            void** n = NULL_POINTER;
-            void** nc = NULL_POINTER;
-            void** ns = NULL_POINTER;
-            void** a = NULL_POINTER;
-            void** ac = NULL_POINTER;
-            void** as = NULL_POINTER;
-            void** m = NULL_POINTER;
-            void** mc = NULL_POINTER;
-            void** ms = NULL_POINTER;
-            void** d = NULL_POINTER;
-            void** dc = NULL_POINTER;
-            void** ds = NULL_POINTER;
+            void** n = NULL_POINTER_MEMORY_MODEL;
+            void** nc = NULL_POINTER_MEMORY_MODEL;
+            void** ns = NULL_POINTER_MEMORY_MODEL;
+            void** a = NULL_POINTER_MEMORY_MODEL;
+            void** ac = NULL_POINTER_MEMORY_MODEL;
+            void** as = NULL_POINTER_MEMORY_MODEL;
+            void** m = NULL_POINTER_MEMORY_MODEL;
+            void** mc = NULL_POINTER_MEMORY_MODEL;
+            void** ms = NULL_POINTER_MEMORY_MODEL;
+            void** d = NULL_POINTER_MEMORY_MODEL;
+            void** dc = NULL_POINTER_MEMORY_MODEL;
+            void** ds = NULL_POINTER_MEMORY_MODEL;
 
             // The source part tag name, abstraction, model, details.
-            void** tn = NULL_POINTER;
-            void** tnc = NULL_POINTER;
-            void** tns = NULL_POINTER;
-            void** ta = NULL_POINTER;
-            void** tac = NULL_POINTER;
-            void** tas = NULL_POINTER;
-            void** tm = NULL_POINTER;
-            void** tmc = NULL_POINTER;
-            void** tms = NULL_POINTER;
-            void** td = NULL_POINTER;
-            void** tdc = NULL_POINTER;
-            void** tds = NULL_POINTER;
+            void** tn = NULL_POINTER_MEMORY_MODEL;
+            void** tnc = NULL_POINTER_MEMORY_MODEL;
+            void** tns = NULL_POINTER_MEMORY_MODEL;
+            void** ta = NULL_POINTER_MEMORY_MODEL;
+            void** tac = NULL_POINTER_MEMORY_MODEL;
+            void** tas = NULL_POINTER_MEMORY_MODEL;
+            void** tm = NULL_POINTER_MEMORY_MODEL;
+            void** tmc = NULL_POINTER_MEMORY_MODEL;
+            void** tms = NULL_POINTER_MEMORY_MODEL;
+            void** td = NULL_POINTER_MEMORY_MODEL;
+            void** tdc = NULL_POINTER_MEMORY_MODEL;
+            void** tds = NULL_POINTER_MEMORY_MODEL;
 
             // Get source part tag from details.
             get_universal_compound_element_by_name(p7, p8,
@@ -365,7 +365,7 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             encode_xhtml_begin_tag(p0, p1, p2, *tm, *tmc, p7, p8, p9, p10, p11);
 
             // The new indentation level, which is the old incremented by one.
-            int nl = *l + *NUMBER_1_INTEGER;
+            int nl = *l + *NUMBER_1_INTEGER_MEMORY_MODEL;
             // The comparison result.
             int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -381,7 +381,7 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                     int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Iterate through compound parts.
-                    while (*NUMBER_1_INTEGER) {
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         if (j >= *sc) {
 
@@ -399,18 +399,18 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                         encode_xhtml_node(p0, p1, p2, *a, *ac, *m, *mc, *d, *dc, p9, p10, (void*) &nl);
 
                         // Reset source part name, abstraction, model, details.
-                        n = NULL_POINTER;
-                        nc = NULL_POINTER;
-                        ns = NULL_POINTER;
-                        a = NULL_POINTER;
-                        ac = NULL_POINTER;
-                        as = NULL_POINTER;
-                        m = NULL_POINTER;
-                        mc = NULL_POINTER;
-                        ms = NULL_POINTER;
-                        d = NULL_POINTER;
-                        dc = NULL_POINTER;
-                        ds = NULL_POINTER;
+                        n = NULL_POINTER_MEMORY_MODEL;
+                        nc = NULL_POINTER_MEMORY_MODEL;
+                        ns = NULL_POINTER_MEMORY_MODEL;
+                        a = NULL_POINTER_MEMORY_MODEL;
+                        ac = NULL_POINTER_MEMORY_MODEL;
+                        as = NULL_POINTER_MEMORY_MODEL;
+                        m = NULL_POINTER_MEMORY_MODEL;
+                        mc = NULL_POINTER_MEMORY_MODEL;
+                        ms = NULL_POINTER_MEMORY_MODEL;
+                        d = NULL_POINTER_MEMORY_MODEL;
+                        dc = NULL_POINTER_MEMORY_MODEL;
+                        ds = NULL_POINTER_MEMORY_MODEL;
 
                         // Increment loop variable.
                         j++;

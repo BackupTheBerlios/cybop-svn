@@ -19,24 +19,24 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: address_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: address_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ADDRESS_CYBOL_MODEL_SOURCE
 #define ADDRESS_CYBOL_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The loopback address cybol model. */
 static wchar_t LOOPBACK_ADDRESS_CYBOL_MODEL_ARRAY[] = {L'l', L'o', L'o', L'p', L'b', L'a', L'c', L'k'};
 static wchar_t* LOOPBACK_ADDRESS_CYBOL_MODEL = LOOPBACK_ADDRESS_CYBOL_MODEL_ARRAY;
-static int* LOOPBACK_ADDRESS_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_ARRAY;
+static int* LOOPBACK_ADDRESS_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The any address cybol model. */
 static wchar_t ANY_ADDRESS_CYBOL_MODEL_ARRAY[] = {L'a', L'n', L'y'};
 static wchar_t* ANY_ADDRESS_CYBOL_MODEL = ANY_ADDRESS_CYBOL_MODEL_ARRAY;
-static int* ANY_ADDRESS_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_ARRAY;
+static int* ANY_ADDRESS_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* ADDRESS_CYBOL_MODEL_SOURCE */
 #endif

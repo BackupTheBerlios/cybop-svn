@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: loop_guider.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: loop_guider.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,11 +27,11 @@
 #define LOOPER_SOURCE
 
 #include "../globals/constants/boolean/boolean_constants.c"
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
-#include "../globals/constants/memory_structure/memory_structure_constants.c"
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
@@ -73,32 +73,32 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Loop program flow.");
 
     // The model name, abstraction, model, details.
-    void** mn = NULL_POINTER;
-    void** mnc = NULL_POINTER;
-    void** mns = NULL_POINTER;
-    void** ma = NULL_POINTER;
-    void** mac = NULL_POINTER;
-    void** mas = NULL_POINTER;
-    void** mm = NULL_POINTER;
-    void** mmc = NULL_POINTER;
-    void** mms = NULL_POINTER;
-    void** md = NULL_POINTER;
-    void** mdc = NULL_POINTER;
-    void** mds = NULL_POINTER;
+    void** mn = NULL_POINTER_MEMORY_MODEL;
+    void** mnc = NULL_POINTER_MEMORY_MODEL;
+    void** mns = NULL_POINTER_MEMORY_MODEL;
+    void** ma = NULL_POINTER_MEMORY_MODEL;
+    void** mac = NULL_POINTER_MEMORY_MODEL;
+    void** mas = NULL_POINTER_MEMORY_MODEL;
+    void** mm = NULL_POINTER_MEMORY_MODEL;
+    void** mmc = NULL_POINTER_MEMORY_MODEL;
+    void** mms = NULL_POINTER_MEMORY_MODEL;
+    void** md = NULL_POINTER_MEMORY_MODEL;
+    void** mdc = NULL_POINTER_MEMORY_MODEL;
+    void** mds = NULL_POINTER_MEMORY_MODEL;
     // The break flag name, abstraction, model, details.
-    void** bn = NULL_POINTER;
-    void** bnc = NULL_POINTER;
-    void** bns = NULL_POINTER;
-    void** ba = NULL_POINTER;
-    void** bac = NULL_POINTER;
-    void** bas = NULL_POINTER;
+    void** bn = NULL_POINTER_MEMORY_MODEL;
+    void** bnc = NULL_POINTER_MEMORY_MODEL;
+    void** bns = NULL_POINTER_MEMORY_MODEL;
+    void** ba = NULL_POINTER_MEMORY_MODEL;
+    void** bac = NULL_POINTER_MEMORY_MODEL;
+    void** bas = NULL_POINTER_MEMORY_MODEL;
     // This value is used as integer below.
-    int** bm = (int**) NULL_POINTER;
-    void** bmc = NULL_POINTER;
-    void** bms = NULL_POINTER;
-    void** bd = NULL_POINTER;
-    void** bdc = NULL_POINTER;
-    void** bds = NULL_POINTER;
+    int** bm = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** bmc = NULL_POINTER_MEMORY_MODEL;
+    void** bms = NULL_POINTER_MEMORY_MODEL;
+    void** bd = NULL_POINTER_MEMORY_MODEL;
+    void** bdc = NULL_POINTER_MEMORY_MODEL;
+    void** bds = NULL_POINTER_MEMORY_MODEL;
 
     // Get model.
     get_universal_compound_element_by_name(p10, p11,
@@ -125,7 +125,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     // loop may rely on its full execution, including all cycles.
     int x = *TRUE_BOOLEAN;
 
-    while (*NUMBER_1_INTEGER) {
+    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
         // Check if break flag is set to true.
         if (**bm != *FALSE_BOOLEAN) {

@@ -19,29 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: branch_flow_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: branch_flow_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BRANCH_FLOW_OPERATION_CYBOL_NAME_SOURCE
 #define BRANCH_FLOW_OPERATION_CYBOL_NAME_SOURCE
 
-#include "../../../../../constant/model/memory/integer_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The criterion branch flow operation cybol name. */
 static wchar_t CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME_ARRAY[] = {L'c', L'r', L'i', L't', L'e', L'r', L'i', L'o', L'n'};
 static wchar_t* CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME = CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME_ARRAY;
-static int* CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_9_INTEGER_ARRAY;
+static int* CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The true branch flow operation cybol name. */
 static wchar_t TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME_ARRAY[] = {L't', L'r', L'u', L'e'};
 static wchar_t* TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME = TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME_ARRAY;
-static int* TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_ARRAY;
+static int* TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The false branch flow operation cybol name. */
 static wchar_t FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME_ARRAY[] = {L'f', L'a', L'l', L's', L'e'};
 static wchar_t* FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME = FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME_ARRAY;
-static int* FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_ARRAY;
+static int* FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* BRANCH_FLOW_OPERATION_CYBOL_NAME_SOURCE */
 #endif

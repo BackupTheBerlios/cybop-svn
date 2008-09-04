@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: multipart_cybol_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: multipart_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MULTIPART_CYBOL_ABSTRACTION_SOURCE
 #define MULTIPART_CYBOL_ABSTRACTION_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 //
 // The CYBOL abstraction constants' names and values have been adapted to follow
@@ -57,7 +57,7 @@
  */
 static wchar_t MIXED_MULTIPART_CYBOL_ABSTRACTION_ARRAY[] = {L'm', L'u', L'l', L't', L'i', L'p', L'a', L'r', L't', L'/', L'm', L'i', L'x', L'e', L'd'};
 static wchar_t* MIXED_MULTIPART_CYBOL_ABSTRACTION = MIXED_MULTIPART_CYBOL_ABSTRACTION_ARRAY;
-static int* MIXED_MULTIPART_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_ARRAY;
+static int* MIXED_MULTIPART_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
 /*??
 multipart/alternative: MIME E-mail; Defined in RFC 2045 and RFC 2046

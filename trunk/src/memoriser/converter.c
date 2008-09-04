@@ -19,17 +19,17 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.49 $ $Date: 2008-09-03 22:04:02 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.50 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CONVERTER_SOURCE
 #define CONVERTER_SOURCE
 
-#include "../globals/constants/cybol/cybol_abstraction_constants.c"
+#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../globals/constants/cybol/cybol_model_constants.c"
-#include "../globals/constants/integer/integer_constants.c"
-#include "../globals/constants/memory_structure/memory_abstraction_constants.c"
+#include "../constant/model/memory/integer_memory_model.c"
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../memoriser/converter/character/ascii_character_vector_converter.c"
 #include "../memoriser/converter/character/utf_16_unicode_character_converter.c"
@@ -500,7 +500,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            encode_gnu_linux_console(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p13, p14);
+//??            encode_gnu_linux_console(p0, p1, p2, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p13, p14);
         }
     }
 
@@ -510,7 +510,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            encode_x_window_system(p0, p1, p2, p7, p8, *NULL_POINTER, *NULL_POINTER, p11, p12);
+            encode_x_window_system(p0, p1, p2, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p11, p12);
         }
     }
 

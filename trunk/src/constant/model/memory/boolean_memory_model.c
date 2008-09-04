@@ -19,20 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: boolean_memory_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: boolean_memory_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_MEMORY_MODEL_SOURCE
 #define BOOLEAN_MEMORY_MODEL_SOURCE
 
-#include "../../../constant/model/memory/integer_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The false boolean memory model. */
-static int* FALSE_BOOLEAN_MEMORY_MODEL = NUMBER_0_INTEGER_ARRAY;
+static int* FALSE_BOOLEAN_MEMORY_MODEL = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The true boolean memory model. */
-static int* TRUE_BOOLEAN_MEMORY_MODEL = NUMBER_1_INTEGER_ARRAY;
+static int* TRUE_BOOLEAN_MEMORY_MODEL = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* BOOLEAN_MEMORY_MODEL_SOURCE */
 #endif

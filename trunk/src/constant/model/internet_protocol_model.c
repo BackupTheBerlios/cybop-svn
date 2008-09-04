@@ -19,45 +19,45 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: internet_protocol_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-03 22:04:00 $ $Author: christian $
+ * @version $RCSfile: internet_protocol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERNET_PROTOCOL_MODEL_SOURCE
 #define INTERNET_PROTOCOL_MODEL_SOURCE
 
-#include "../../constant/model/memory/integer_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 
 /**
  * The internet protocol (ip) model.
  *
  * This is a pseudo protocol number.
  */
-static int* IP_PROTOCOL_MODEL = NUMBER_0_INTEGER_ARRAY;
+static int* IP_PROTOCOL_MODEL = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The transmission control protocol (tcp) model. */
-static int* TCP_PROTOCOL_MODEL = NUMBER_6_INTEGER_ARRAY;
+static int* TCP_PROTOCOL_MODEL = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The user datagram protocol (udp) model. */
-static int* UDP_PROTOCOL_MODEL = NUMBER_17_INTEGER_ARRAY;
+static int* UDP_PROTOCOL_MODEL = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The internet protocol version 6 (ipv6) model. */
-static int* IPV6_PROTOCOL_MODEL = NUMBER_41_INTEGER_ARRAY;
+static int* IPV6_PROTOCOL_MODEL = NUMBER_41_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The routing header for ipv6 model. */
-static int* IPV6_ROUTE_PROTOCOL_MODEL = NUMBER_43_INTEGER_ARRAY;
+static int* IPV6_ROUTE_PROTOCOL_MODEL = NUMBER_43_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The fragment header for ipv6 model. */
-static int* IPV6_FRAG_PROTOCOL_MODEL = NUMBER_44_INTEGER_ARRAY;
+static int* IPV6_FRAG_PROTOCOL_MODEL = NUMBER_44_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The icmp for ipv6 model. */
-static int* IPV6_ICMP_PROTOCOL_MODEL = NUMBER_58_INTEGER_ARRAY;
+static int* IPV6_ICMP_PROTOCOL_MODEL = NUMBER_58_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The no next header for ipv6 model. */
-static int* IPV6_NONXT_PROTOCOL_MODEL = NUMBER_59_INTEGER_ARRAY;
+static int* IPV6_NONXT_PROTOCOL_MODEL = NUMBER_59_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The destination options for ipv6 model. */
-static int* IPV6_OPTS_PROTOCOL_MODEL = NUMBER_60_INTEGER_ARRAY;
+static int* IPV6_OPTS_PROTOCOL_MODEL = NUMBER_60_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* INTERNET_PROTOCOL_MODEL_SOURCE */
 #endif
