@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: signal_memory_accessor.c,v $ $Revision: 1.27 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: signal_memory_accessor.c,v $ $Revision: 1.28 $ $Date: 2008-09-06 23:17:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -606,7 +606,7 @@ void set_new_signal_identification(void* p0, void* p1) {
             //
             // CAUTION! The following advices on pointer assignment are IMPORTANT.
             // If not followed, the whole CYBOI system might get mixed up,
-            // with NULL_POINTER having the same address as some NUMBER_X_INTEGER
+            // with NULL_POINTER_MEMORY_MODEL having the same address as some NUMBER_X_INTEGER
             // constants etc., resulting in unpredictable, strange errors!
             // Here are the advices:
             // - Do NOT assign the pointers directly, for example:

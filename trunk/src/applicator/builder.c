@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: builder.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
+ * @version $RCSfile: builder.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -137,17 +137,17 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     int_string_count = swprintf(int_string, int_string_size, L"%i", *((int*) *idxm));
 
     // destination size
-    *(int*)*resms = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
-    *(int*)*resmc = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT + int_string_count;
+    *(int*)*resms = *((int*) *bnmc) + *LIST_SEPARATOR_CYBOL_NAME_COUNT + int_string_count;
+    *(int*)*resmc = *((int*) *bnmc) + *LIST_SEPARATOR_CYBOL_NAME_COUNT + int_string_count;
 
     // Reallocate result array.
     reallocate_array(resm, *resms, *resms, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // set the result array
     set_array_elements(*resm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, *bnm, *bnmc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-    set_array_elements(*resm, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(*resm, *bnmc, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    int temp_index = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;
+    int temp_index = *((int*) *bnmc) + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
     set_array_elements(*resm, &temp_index, int_string, &int_string_count, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 

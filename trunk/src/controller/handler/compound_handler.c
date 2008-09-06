@@ -19,16 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_handler.c,v $ $Revision: 1.26 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: compound_handler.c,v $ $Revision: 1.27 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPOUND_HANDLER_SOURCE
 #define COMPOUND_HANDLER_SOURCE
 
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
@@ -81,12 +81,12 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
     void** pdc = NULL_POINTER_MEMORY_MODEL;
 
     // Get abstractions, models, details.
-    get_array_elements(p10, (void*) ABSTRACTIONS_INDEX, (void*) &pa, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) ABSTRACTIONS_COUNTS_INDEX, (void*) &pac, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) MODELS_INDEX, (void*) &pm, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) MODELS_COUNTS_INDEX, (void*) &pmc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) DETAILS_INDEX, (void*) &pd, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) DETAILS_COUNTS_INDEX, (void*) &pdc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &pa, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &pac, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &pm, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &pmc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &pd, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p10, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &pdc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
     if (*pa != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -206,7 +206,7 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         int* sc = (int*) p11;
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
-        log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) HANDLE_COMPOUND_MESSAGE, (void*) HANDLE_COMPOUND_MESSAGE_COUNT);
+        log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) HANDLE_COMPOUND_MESSAGE_LOG_MODEL, (void*) HANDLE_COMPOUND_MESSAGE_LOG_MODEL_COUNT);
 
         // The loop variable.
         int j = *NUMBER_0_INTEGER_MEMORY_MODEL;

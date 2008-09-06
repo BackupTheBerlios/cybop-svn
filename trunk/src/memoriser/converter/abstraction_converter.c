@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.6 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.7 $ $Date: 2008-09-06 23:17:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,34 +58,34 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, COMPOUND_ABSTRACTION, COMPOUND_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, COMPOUND_MEMORY_ABSTRACTION, COMPOUND_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = COMPOUND_ABSTRACTION_ARRAY;
-                    *dc = *COMPOUND_ABSTRACTION_COUNT;
+                    *d = COMPOUND_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *COMPOUND_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, KNOWLEDGE_ABSTRACTION, KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, KNOWLEDGE_PATH_CYBOL_ABSTRACTION, KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY;
-                    *dc = *WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT;
+                    *d = WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, ENCAPSULATED_KNOWLEDGE_ABSTRACTION, ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION, ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY;
-                    *dc = *WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT;
+                    *d = WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
@@ -95,8 +95,8 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY;
-                    *dc = *WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT;
+                    *d = WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
@@ -106,118 +106,118 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = INTEGER_VECTOR_ABSTRACTION_ARRAY;
-                    *dc = *INTEGER_VECTOR_ABSTRACTION_COUNT;
+                    *d = INTEGER_VECTOR_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, CHARACTER_VECTOR_MEMORY_ABSTRACTION, CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = WIDE_CHARACTER_VECTOR_ABSTRACTION;
-                    *dc = *WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT;
+                    *d = WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION;
+                    *dc = *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, COMPLEX_ABSTRACTION, COMPLEX_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, COMPLEX_MEMORY_ABSTRACTION, COMPLEX_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = COMPLEX_ABSTRACTION_ARRAY;
-                    *dc = *COMPLEX_ABSTRACTION_COUNT;
+                    *d = COMPLEX_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *COMPLEX_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, DOUBLE_VECTOR_ABSTRACTION, DOUBLE_VECTOR_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, DOUBLE_VECTOR_MEMORY_ABSTRACTION, DOUBLE_VECTOR_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = DOUBLE_VECTOR_ABSTRACTION_ARRAY;
-                    *dc = *DOUBLE_VECTOR_ABSTRACTION_COUNT;
+                    *d = DOUBLE_VECTOR_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *DOUBLE_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, FRACTION_ABSTRACTION, FRACTION_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, FRACTION_MEMORY_ABSTRACTION, FRACTION_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = FRACTION_ABSTRACTION_ARRAY;
-                    *dc = *FRACTION_ABSTRACTION_COUNT;
+                    *d = FRACTION_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *FRACTION_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, INTEGER_VECTOR_ABSTRACTION, INTEGER_VECTOR_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, INTEGER_VECTOR_MEMORY_ABSTRACTION, INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = INTEGER_VECTOR_ABSTRACTION_ARRAY;
-                    *dc = *INTEGER_VECTOR_ABSTRACTION_COUNT;
+                    *d = INTEGER_VECTOR_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, POINTER_VECTOR_ABSTRACTION, POINTER_VECTOR_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, POINTER_VECTOR_MEMORY_ABSTRACTION, POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = POINTER_VECTOR_ABSTRACTION_ARRAY;
-                    *dc = *POINTER_VECTOR_ABSTRACTION_COUNT;
+                    *d = POINTER_VECTOR_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, DATE_TIME_ABSTRACTION, DATE_TIME_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, DATETIME_MEMORY_ABSTRACTION, DATETIME_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = DATE_TIME_ABSTRACTION_ARRAY;
-                    *dc = *DATE_TIME_ABSTRACTION_COUNT;
+                    *d = DATETIME_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *DATETIME_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, DDMMYYYY_DATE_TIME_ABSTRACTION, DDMMYYYY_DATE_TIME_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, DDMMYYYY_DATETIME_MEMORY_ABSTRACTION, DDMMYYYY_DATETIME_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = DATE_TIME_ABSTRACTION_ARRAY;
-                    *dc = *DATE_TIME_ABSTRACTION_COUNT;
+                    *d = DATETIME_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *DATETIME_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, UNSIGNED_LONG_VECTOR_ABSTRACTION, UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION, UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = UNSIGNED_LONG_VECTOR_ABSTRACTION_ARRAY;
-                    *dc = *UNSIGNED_LONG_VECTOR_ABSTRACTION_COUNT;
+                    *d = UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, WIDE_CHARACTER_VECTOR_ABSTRACTION, WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = WIDE_CHARACTER_VECTOR_ABSTRACTION_ARRAY;
-                    *dc = *WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT;
+                    *d = WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 
@@ -227,8 +227,8 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = COMPOUND_ABSTRACTION_ARRAY;
-                    *dc = *COMPOUND_ABSTRACTION_COUNT;
+                    *d = COMPOUND_MEMORY_ABSTRACTION_ARRAY;
+                    *dc = *COMPOUND_MEMORY_ABSTRACTION_COUNT;
                 }
             }
 

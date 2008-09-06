@@ -19,18 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.49 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.50 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPOUND_ACCESSOR_SOURCE
 #define COMPOUND_ACCESSOR_SOURCE
 
+#include "../../constant/abstraction/cybol/path_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/separator_cybol_name.c"
 #include "../../constant/name/memory/compound_memory_name.c"
 #include "../../logger/logger.c"
 #include "../../variable/reallocation_factor.c"
@@ -163,8 +165,8 @@ void get_compound_element_name_length(void* p0, void* p1, void* p2) {
             // The meta separator index.
             int m = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-            get_array_elements_index(p0, p1, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &p, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            get_array_elements_index(p0, p1, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_META_SEPARATOR_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            get_array_elements_index(p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) &p, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            get_array_elements_index(p0, p1, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if ((p >= *NUMBER_0_INTEGER_MEMORY_MODEL) && (m == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL)) {
 
@@ -280,9 +282,9 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                 int m = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
                                 // Get position of part separator.
-                                get_array_elements_index(p0, p1, (void*) COMPOUND_PART_SEPARATOR, (void*) COMPOUND_PART_SEPARATOR_COUNT, (void*) &p, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                get_array_elements_index(p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) &p, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                 // Get position of meta separator.
-                                get_array_elements_index(p0, p1, (void*) COMPOUND_META_SEPARATOR, (void*) COMPOUND_META_SEPARATOR_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                get_array_elements_index(p0, p1, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 // The name without prefix.
                                 void* n = *NULL_POINTER_MEMORY_MODEL;
@@ -301,7 +303,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // is now only:
                                     // resmedicinae.tui.menu.entry#background
                                     // CAUTION! Only call this procedure if a prefix was found!
-                                    get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) COMPOUND_PART_SEPARATOR_COUNT);
+                                    get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT);
 
 //??    fwprintf(stderr, L"TEST part f %i\n", *f);
 
@@ -318,7 +320,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // is now only:
                                     // resmedicinae.tui.menu.entry#background
                                     // CAUTION! Only call this procedure if a prefix was found!
-                                    get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) COMPOUND_META_SEPARATOR_COUNT);
+                                    get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) META_SEPARATOR_CYBOL_NAME_COUNT);
 
 //??    fwprintf(stderr, L"TEST meta f %i\n", *f);
                                 }
@@ -1132,14 +1134,14 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                 // Use compound count as index to create the element name suffix,
                 // because the element is added at the end of the compound container.
                 encode((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT,
-                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_VECTOR_ABSTRACTION, (void*) INTEGER_VECTOR_ABSTRACTION_COUNT);
+                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                 // Resize name.
-                if ((*nc + *LIST_SEPARATOR_COUNT + sc) >= *ns) {
+                if ((*nc + *LIST_SEPARATOR_CYBOL_NAME_COUNT + sc) >= *ns) {
 
                     // The new name character vector size.
                     // CAUTION! Add constant in case *nc is zero!
-                    *ns = (*nc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *LIST_SEPARATOR_COUNT + sc;
+                    *ns = (*nc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *LIST_SEPARATOR_CYBOL_NAME_COUNT + sc;
 
                     // Reallocate name character vector.
                     reallocate_array(p3, p4, p5, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1149,8 +1151,8 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 
                 // Add list element separator characters "_$" to element name.
                 // Use name count as index to add the new characters.
-                set_array_elements(*n, p4, (void*) LIST_SEPARATOR, (void*) LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                *nc = *nc + *LIST_SEPARATOR_COUNT;
+                set_array_elements(*n, p4, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                *nc = *nc + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
                 // Set new element name by adding the index determined above.
                 // Use name count as index to add the new characters.
@@ -1461,14 +1463,14 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
 
         // The prefix equal to all parts of the compound representing a list.
         char* p = (char*) *NULL_POINTER_MEMORY_MODEL;
-        int pc = *((int*) p3) + *LIST_SEPARATOR_COUNT;
+        int pc = *((int*) p3) + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
         // Allocate prefix.
         allocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         // Set prefix as concatenation of base name and list separator.
         set_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, p3, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(p, p3, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        set_array_elements(p, p3, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         //create integer model for the index
         void* indexstr = *NULL_POINTER_MEMORY_MODEL;
@@ -1506,14 +1508,14 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                         *((int*) *nc) = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Decode the basisname
-                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p2, p3, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p2, p3, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION, CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                         // Decode the list separator
-                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION, CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                         // Decode the index
                         indexstr_count = snprintf(indexstr, indexstr_size, "%i", ic);
-                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, indexstr, &indexstr_count, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_ABSTRACTION, CHARACTER_VECTOR_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, indexstr, &indexstr_count, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION, CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                         ic = ic + *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
@@ -1619,7 +1621,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                get_array_elements_index(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                get_array_elements_index(p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, &s, WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 remove_compound_element_by_index(p0, p1, p2, (void*) &i);
 
@@ -1671,7 +1673,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                get_array_elements_index(p6, p7, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, &s, WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                get_array_elements_index(p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, &s, WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 remove_compound_element_by_index(p3, p4, p5, (void*) &i);
 
@@ -2124,7 +2126,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -2159,7 +2161,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*a, *ac, (void*) KNOWLEDGE_ABSTRACTION, (void*) KNOWLEDGE_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*a, *ac, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

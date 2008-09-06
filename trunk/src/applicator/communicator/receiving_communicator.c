@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,7 +126,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
     fwprintf(stderr, L"TEST receive pre mc: %i\n", p4);
     fwprintf(stderr, L"TEST receive pre mc: %i\n", *((int*) p4));
 
-            receive_gnu_linux_console(NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, NULL_POINTER, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2);
+            receive_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2);
 
     fwprintf(stderr, L"TEST receive post m: %i\n", p3);
     fwprintf(stderr, L"TEST receive post m: %i\n", *((void**) p3));
@@ -155,7 +155,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-//??            receive_socket(p0, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+//??            receive_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
         }
     }
 
@@ -169,7 +169,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-//??            receive_socket(p0, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+//??            receive_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
         }
     }
 

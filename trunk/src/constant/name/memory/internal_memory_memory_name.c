@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: internal_memory_memory_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: internal_memory_memory_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,7 +35,7 @@ static int* KNOWLEDGE_MEMORY_SIZE_INTERNAL_MEMORY_MEMORY_NAME = NUMBER_2_INTEGER
 
 /** The signal memory. */
 static int* SIGNAL_MEMORY_INTERNAL_MEMORY_MEMORY_NAME = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
-static int* SIGNAL_MEMORY_MEMORY_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+static int* SIGNAL_MEMORY_COUNT_INTERNAL_MEMORY_MEMORY_NAME = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 static int* SIGNAL_MEMORY_SIZE_INTERNAL_MEMORY_MEMORY_NAME = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 static int* SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 static int* SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;

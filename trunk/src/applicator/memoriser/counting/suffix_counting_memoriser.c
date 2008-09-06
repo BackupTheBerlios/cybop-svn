@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: suffix_counting_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: suffix_counting_memoriser.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -94,14 +94,14 @@ void count_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
             // Create compare string.
             wchar_t* compstring = *NULL_POINTER_MEMORY_MODEL;
-            int compstring_count = *((int*) *bnmc) + *LIST_SEPARATOR_COUNT;
+            int compstring_count = *((int*) *bnmc) + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
             allocate_array((void*) &compstring, (void*) &compstring_count, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // Set the compare string
             // this is the basisname and the list separat
             set_array_elements(compstring, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, *bnm, *bnmc,  (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            set_array_elements(compstring, *bnmc, LIST_SEPARATOR, LIST_SEPARATOR_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(compstring, *bnmc, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // The loop count.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -117,7 +117,7 @@ void count_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
                 get_compound_element_name_by_index(*mdlm, *mdlmc, &j, &cen, &cenc, &cens);
 
-//??                if ((cen != NULL_POINTER) && (cenc != NULL_POINTER) && (cens != NULL_POINTER)) {
+//??                if ((cen != NULL_POINTER_MEMORY_MODEL) && (cenc != NULL_POINTER_MEMORY_MODEL) && (cens != NULL_POINTER_MEMORY_MODEL)) {
 
                     if ((*cen != *NULL_POINTER_MEMORY_MODEL) && (*cenc != *NULL_POINTER_MEMORY_MODEL) && (*cens != *NULL_POINTER_MEMORY_MODEL)) {
 

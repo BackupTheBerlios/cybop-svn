@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: shutting_maintainer.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: shutting_maintainer.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -110,7 +110,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_socket(p5, (void*) WWW_BASE_INTERNAL, (void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
+            shutdown_socket(p5, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
         }
     }
 
@@ -120,7 +120,7 @@ void shutdown_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_socket(p5, (void*) CYBOI_BASE_INTERNAL, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
+            shutdown_socket(p5, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
         }
     }
 

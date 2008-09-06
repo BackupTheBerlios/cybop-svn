@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: separator_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: separator_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,6 +27,11 @@
 #define SEPARATOR_CYBOL_NAME_SOURCE
 
 #include "../../../constant/model/memory/integer_memory_model.c"
+
+/** The list separator (between base name and index) cybol name. */
+static wchar_t LIST_SEPARATOR_CYBOL_NAME_ARRAY[] = {L'_', L'$'};
+static wchar_t* LIST_SEPARATOR_CYBOL_NAME = LIST_SEPARATOR_CYBOL_NAME_ARRAY;
+static int* LIST_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The compound part separator cybol name. */
 static wchar_t PART_SEPARATOR_CYBOL_NAME_ARRAY[] = {L'.'};
@@ -42,11 +47,6 @@ static int* META_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRA
 static wchar_t PARAMETER_SEPARATOR_CYBOL_NAME_ARRAY[] = {L','};
 static wchar_t* PARAMETER_SEPARATOR_CYBOL_NAME = PARAMETER_SEPARATOR_CYBOL_NAME_ARRAY;
 static int* PARAMETER_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The list separator (between base name and index) cybol name. */
-static wchar_t LIST_SEPARATOR_CYBOL_NAME_ARRAY[] = {L'_', L'$'};
-static wchar_t* LIST_SEPARATOR_CYBOL_NAME = LIST_SEPARATOR_CYBOL_NAME_ARRAY;
-static int* LIST_SEPARATOR_CYBOL_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SEPARATOR_CYBOL_NAME_SOURCE */
 #endif

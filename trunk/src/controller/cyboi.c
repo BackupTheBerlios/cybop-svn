@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.38 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.39 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -132,9 +132,9 @@ int main(int p0, char** p1) {
         // because command line parameters will be expected to be multibyte characters,
         // read from the standard input stream in function "optionalise" further below.
         // They will also get converted into wide characters of type "wchar_t" there.
-        orient((void*) stdin, (void*) NUMBER_1_INTEGER);
-        orient((void*) stdout, (void*) NUMBER_1_INTEGER);
-        orient((void*) stderr, (void*) NUMBER_1_INTEGER);
+        orient((void*) stdin, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+        orient((void*) stdout, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+        orient((void*) stderr, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
         // The operation mode.
         //
@@ -149,7 +149,7 @@ int main(int p0, char** p1) {
         int ks = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Allocate cybol knowledge file path.
-        allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"TEST pre k: %ls\n", k);
     fwprintf(stderr, L"TEST pre kc: %i\n", kc);
@@ -164,7 +164,7 @@ int main(int p0, char** p1) {
         //
         // CAUTION! This can only be done AFTER having read the command line options,
         // since one of the options determines the log output file name.
-        orient((void*) LOG_OUTPUT, (void*) NUMBER_1_INTEGER);
+        orient((void*) LOG_OUTPUT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run cyboi.");
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Globalised global variables already.");
@@ -206,7 +206,7 @@ int main(int p0, char** p1) {
         deoptionalise((void*) LOG_OUTPUT);
 
         // Deallocate cybol knowledge file path.
-        deallocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_ABSTRACTION_COUNT);
+        deallocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
         // Shutdown global variables.
         unglobalise();

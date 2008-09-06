@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: starting_maintainer.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: starting_maintainer.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -186,13 +186,13 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Get server socket internal.
-            i = *WWW_BASE_INTERNAL + *SOCKET_INTERNAL;
-            get_element(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERNAL;
+            get_element(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_PORT, (void*) WWW_BASE_INTERNAL, p2, p3, p4);
+                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_PORT, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
 
             } else {
 
@@ -208,13 +208,13 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Get server socket internal.
-            i = *CYBOI_BASE_INTERNAL + *SOCKET_INTERNAL;
-            get_element(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_ABSTRACTION, (void*) POINTER_VECTOR_ABSTRACTION_COUNT);
+            i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERNAL;
+            get_element(p5, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_PORT, (void*) CYBOI_BASE_INTERNAL, p2, p3, p4);
+                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_PORT, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
 
             } else {
 
