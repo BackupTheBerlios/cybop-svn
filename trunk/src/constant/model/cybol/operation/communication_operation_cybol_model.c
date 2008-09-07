@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communication_operation_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: communication_operation_cybol_model.c,v $ $Revision: 1.3 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,11 +27,6 @@
 #define COMMUNICATION_OPERATION_CYBOL_MODEL_SOURCE
 
 #include "../../../../constant/model/memory/integer_memory_model.c"
-
-/** The sense communication operation cybol model. */
-static wchar_t SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L'e', L'n', L's', L'e'};
-static wchar_t* SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL = SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY;
-static int* SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The interrupt communication operation cybol model. */
 static wchar_t INTERRUPT_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'r', L'u', L'p', L't'};
@@ -47,6 +42,11 @@ static int* RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER
 static wchar_t SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L'e', L'n', L'd'};
 static wchar_t* SEND_COMMUNICATION_OPERATION_CYBOL_MODEL = SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY;
 static int* SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The sense communication operation cybol model. */
+static wchar_t SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L'e', L'n', L's', L'e'};
+static wchar_t* SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL = SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY;
+static int* SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COMMUNICATION_OPERATION_CYBOL_MODEL_SOURCE */
 #endif

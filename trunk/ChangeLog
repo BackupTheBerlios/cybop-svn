@@ -14,9 +14,16 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.69 $ $Date: 2008-09-06 23:17:19 $ $Author: christian $
+# @version $Revision: 1.70 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-09-07  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+        * Move file "builder.c" as "building_memoriser.c" to directory "applicator/memoriser/"
+        * Remove directory "controller/handler/operation" and merge
+            its files' functionality into those in directory "applicator/";
+            adapt file "controller/handler/operation_handler.c"
 
 2008-09-06  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt source code to match new constants

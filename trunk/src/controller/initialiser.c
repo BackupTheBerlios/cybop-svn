@@ -19,22 +19,22 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: initialiser.c,v $ $Revision: 1.20 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
+ * @version $RCSfile: initialiser.c,v $ $Revision: 1.21 $ $Date: 2008-09-07 23:01:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INITIALISER_SOURCE
 #define INITIALISER_SOURCE
 
-#include "../applicator/receive/receive_file_system.c"
+#include "../applicator/communicator/receiving/file_system_receiving_communicator.c"
 #include "../controller/checker.c"
-#include "../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../constant/channel/cybol_channel.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/log/message_log_model.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
+#include "../constant/channel/cybol_channel.c"
+#include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
+#include "../constant/model/signal_priority_model.c"
 #include "../logger/logger.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
 #include "../memoriser/allocator.c"
@@ -112,7 +112,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION_ASCII, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 */
-    decode_utf_8_unicode_character_vector((void*) &ma, (void*) mac, (void*) mas, (void*) TEXT_CYBOL_LANGUAGE_ASCII, (void*) TEXT_CYBOL_LANGUAGE_COUNT);
+    decode_utf_8_unicode_character_vector((void*) &ma, (void*) mac, (void*) mas, (void*) ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"TEST initialiser ma: %ls\n", (wchar_t*) ma);
     fwprintf(stderr, L"TEST initialiser mac: %i\n", *mac);
@@ -121,8 +121,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     fwprintf(stderr, L"TEST initialiser p5: %i\n", *((int*) p5));
 
     // Receive startup model model and details (read from file and decode).
-    receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds,
-        p4, p5, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    receive_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds, p4, p5, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add initial signal to signal memory.");
@@ -134,7 +133,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     get_new_signal_identification(p1, p2, (void*) &id);
 
     // Add startup signal to signal memory.
-    set_signal(p1, p2, p3, (void*) &ma, (void*) &mac, (void*) &mm, (void*) &mmc, (void*) &md, (void*) &mdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+    set_signal(p1, p2, p3, (void*) &ma, (void*) &mac, (void*) &mm, (void*) &mmc, (void*) &md, (void*) &mdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)

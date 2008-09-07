@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: runner.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
+ * @version $RCSfile: runner.c,v $ $Revision: 1.3 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,41 +39,43 @@
 #include "../memoriser/accessor/compound_accessor.c"
 
 /**
- * Runs a command as a shell command.
+ * Runs command on shell.
  *
  * Expected parameters:
- * - command (required): the name of the command to be executed (archive, list_directory_contents etc.)
+ * - type (required): the type of the operation
+ * - ... (depending on the type, further parameters may have to be given)
  *
  * @param p0 the parameters
  * @param p1 the parameters count
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
  */
-void run(void* p0, void* p1, void* p2, void* p3) {
+void run(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run a command.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run command.");
 
-    // The command name, abstraction, model, details.
-    void** cn = NULL_POINTER_MEMORY_MODEL;
-    void** cnc = NULL_POINTER_MEMORY_MODEL;
-    void** cns = NULL_POINTER_MEMORY_MODEL;
-    void** ca = NULL_POINTER_MEMORY_MODEL;
-    void** cac = NULL_POINTER_MEMORY_MODEL;
-    void** cas = NULL_POINTER_MEMORY_MODEL;
-    void** cm = NULL_POINTER_MEMORY_MODEL;
-    void** cmc = NULL_POINTER_MEMORY_MODEL;
-    void** cms = NULL_POINTER_MEMORY_MODEL;
-    void** cd = NULL_POINTER_MEMORY_MODEL;
-    void** cdc = NULL_POINTER_MEMORY_MODEL;
-    void** cds = NULL_POINTER_MEMORY_MODEL;
+    // The operation type name, abstraction, model, details.
+    void** tn = NULL_POINTER_MEMORY_MODEL;
+    void** tnc = NULL_POINTER_MEMORY_MODEL;
+    void** tns = NULL_POINTER_MEMORY_MODEL;
+    void** ta = NULL_POINTER_MEMORY_MODEL;
+    void** tac = NULL_POINTER_MEMORY_MODEL;
+    void** tas = NULL_POINTER_MEMORY_MODEL;
+    void** tm = NULL_POINTER_MEMORY_MODEL;
+    void** tmc = NULL_POINTER_MEMORY_MODEL;
+    void** tms = NULL_POINTER_MEMORY_MODEL;
+    void** td = NULL_POINTER_MEMORY_MODEL;
+    void** tdc = NULL_POINTER_MEMORY_MODEL;
+    void** tds = NULL_POINTER_MEMORY_MODEL;
 
-    // Get command.
+    // Get operation type.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RUN_COMMAND_NAME, (void*) RUN_COMMAND_NAME_COUNT,
-        (void*) &cn, (void*) &cnc, (void*) &cns,
-        (void*) &ca, (void*) &cac, (void*) &cas,
-        (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds,
+        (void*) TYPE_ABSTRACTION_NAME, (void*) TYPE_ABSTRACTION_NAME_COUNT,
+        (void*) &tn, (void*) &tnc, (void*) &tns,
+        (void*) &ta, (void*) &tac, (void*) &tas,
+        (void*) &tm, (void*) &tmc, (void*) &tms,
+        (void*) &td, (void*) &tdc, (void*) &tds,
         p2, p3);
 
     // The comparison result.
@@ -81,37 +83,7 @@ void run(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*cm, *cmc, (void*) RUN_PROGRAM_MODEL, (void*) RUN_PROGRAM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            run_program(p0, p1, p2, p3);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(*cm, *cmc, (void*) RUN_LIST_DIRECTORY_CONTENTS_MODEL, (void*) RUN_LIST_DIRECTORY_CONTENTS_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            run_list_directory_contents(p0, p1, p2, p3);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(*cm, *cmc, (void*) RUN_COPY_MODEL, (void*) RUN_COPY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            run_copy(p0, p1, p2, p3);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(*cm, *cmc, (void*) RUN_ARCHIVE_MODEL, (void*) RUN_ARCHIVE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*cm, *cmc, (void*) ARCHIVE_RUN_OPERATION_CYBOL_MODEL, (void*) ARCHIVE_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -121,7 +93,37 @@ void run(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not run command. The command model is unknown.");
+        compare_arrays(*cm, *cmc, (void*) COPY_RUN_OPERATION_CYBOL_MODEL, (void*) COPY_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            run_copy(p0, p1, p2, p3);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(*cm, *cmc, (void*) LIST_DIRECTORY_CONTENTS_RUN_OPERATION_CYBOL_MODEL, (void*) LIST_DIRECTORY_CONTENTS_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            run_list_directory_contents(p0, p1, p2, p3);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(*cm, *cmc, (void*) PROGRAM_RUN_OPERATION_CYBOL_MODEL, (void*) PROGRAM_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            run_program(p0, p1, p2, p3);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not run command. The operation type is unknown.");
     }
 }
 

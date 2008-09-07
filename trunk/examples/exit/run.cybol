@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <model>
-    <part name="startup" channel="inline" abstraction="operation/plain" model="send">
+    <part name="startup" channel="inline" abstraction="operation/plain" model="communicate">
+        <property name="type" channel="inline" abstraction="text/plain" model="sending"/>
         <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
         <property name="message" channel="inline" abstraction="operation/plain" model="exit"/>
     </part>
@@ -35,6 +36,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.10 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
+    @version $Revision: 1.11 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

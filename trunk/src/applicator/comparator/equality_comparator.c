@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: equality_comparator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
+ * @version $RCSfile: equality_comparator.c,v $ $Revision: 1.3 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,6 +43,12 @@
 /**
  * Compares if the left parameter is equal to the right parameter.
  *
+ * Expected parameters:
+ * - left_side (required): the left side value of the comparison
+ * - right_side (required): the right side value of the comparison
+ * - result (required): the knowledge model in which the comparison result is stored
+ * - selection (optional, only for values of abstraction "character"): the part of two string values to be compared (full, prefix, suffix, part)
+ *
  * The result parameter's abstraction must be BOOLEAN.
  * The left side- and right side parameters' abstractions have to be equal.
  * They can be one of:
@@ -50,48 +56,101 @@
  * - INTEGER
  * - DOUBLE
  *
- * @param p0 the left side parameter abstraction
- * @param p1 the left side parameter abstraction count
- * @param p2 the left side parameter abstraction size
- * @param p3 the left side parameter model
- * @param p4 the left side parameter model count
- * @param p5 the left side parameter model size
- * @param p6 the left side parameter details
- * @param p7 the left side parameter details count
- * @param p8 the left side parameter details size
- * @param p9 the right side parameter abstraction
- * @param p10 the right side parameter abstraction count
- * @param p11 the right side parameter abstraction size
- * @param p12 the right side parameter model
- * @param p13 the right side parameter model count
- * @param p14 the right side parameter model size
- * @param p15 the right side parameter details
- * @param p16 the right side parameter details count
- * @param p17 the right side parameter details size
- * @param p18 the result parameter abstraction
- * @param p19 the result parameter abstraction count
- * @param p20 the result parameter abstraction size
- * @param p21 the result parameter model
- * @param p22 the result parameter model count
- * @param p23 the result parameter model size
- * @param p24 the result parameter details
- * @param p25 the result parameter details count
- * @param p26 the result parameter details size
- * @param p27 the selection parameter model
- * @param p28 the selection parameter model count
+ * @param p0 the parameters
+ * @param p1 the parameters count
+ * @param p2 the knowledge memory
+ * @param p3 the knowledge memory count
+ * @param p4 the knowledge memory size
  */
-void compare_equal(void* p0, void* p1, void* p2,
-    void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8,
-    void* p9, void* p10, void* p11,
-    void* p12, void* p13, void* p14,
-    void* p15, void* p16, void* p17,
-    void* p18, void* p19, void* p20,
-    void* p21, void* p22, void* p23,
-    void* p24, void* p25, void* p26,
-    void* p27, void* p28) {
+void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Compare if left parameter is equal to right parameter.");
+
+    // The left side name, abstraction, model, details.
+    void** lsn = NULL_POINTER_MEMORY_MODEL;
+    void** lsnc = NULL_POINTER_MEMORY_MODEL;
+    void** lsns = NULL_POINTER_MEMORY_MODEL;
+    void** lsa = NULL_POINTER_MEMORY_MODEL;
+    void** lsac = NULL_POINTER_MEMORY_MODEL;
+    void** lsas = NULL_POINTER_MEMORY_MODEL;
+    void** lsm = NULL_POINTER_MEMORY_MODEL;
+    void** lsmc = NULL_POINTER_MEMORY_MODEL;
+    void** lsms = NULL_POINTER_MEMORY_MODEL;
+    void** lsd = NULL_POINTER_MEMORY_MODEL;
+    void** lsdc = NULL_POINTER_MEMORY_MODEL;
+    void** lsds = NULL_POINTER_MEMORY_MODEL;
+    // The right side name, abstraction, model, details.
+    void** rsn = NULL_POINTER_MEMORY_MODEL;
+    void** rsnc = NULL_POINTER_MEMORY_MODEL;
+    void** rsns = NULL_POINTER_MEMORY_MODEL;
+    void** rsa = NULL_POINTER_MEMORY_MODEL;
+    void** rsac = NULL_POINTER_MEMORY_MODEL;
+    void** rsas = NULL_POINTER_MEMORY_MODEL;
+    void** rsm = NULL_POINTER_MEMORY_MODEL;
+    void** rsmc = NULL_POINTER_MEMORY_MODEL;
+    void** rsms = NULL_POINTER_MEMORY_MODEL;
+    void** rsd = NULL_POINTER_MEMORY_MODEL;
+    void** rsdc = NULL_POINTER_MEMORY_MODEL;
+    void** rsds = NULL_POINTER_MEMORY_MODEL;
+    // The result name, abstraction, model, details.
+    void** rn = NULL_POINTER_MEMORY_MODEL;
+    void** rnc = NULL_POINTER_MEMORY_MODEL;
+    void** rns = NULL_POINTER_MEMORY_MODEL;
+    void** ra = NULL_POINTER_MEMORY_MODEL;
+    void** rac = NULL_POINTER_MEMORY_MODEL;
+    void** ras = NULL_POINTER_MEMORY_MODEL;
+    void** rm = NULL_POINTER_MEMORY_MODEL;
+    void** rmc = NULL_POINTER_MEMORY_MODEL;
+    void** rms = NULL_POINTER_MEMORY_MODEL;
+    void** rd = NULL_POINTER_MEMORY_MODEL;
+    void** rdc = NULL_POINTER_MEMORY_MODEL;
+    void** rds = NULL_POINTER_MEMORY_MODEL;
+    // The selection name, abstraction, model, details.
+    void** sn = NULL_POINTER_MEMORY_MODEL;
+    void** snc = NULL_POINTER_MEMORY_MODEL;
+    void** sns = NULL_POINTER_MEMORY_MODEL;
+    void** sa = NULL_POINTER_MEMORY_MODEL;
+    void** sac = NULL_POINTER_MEMORY_MODEL;
+    void** sas = NULL_POINTER_MEMORY_MODEL;
+    void** sm = NULL_POINTER_MEMORY_MODEL;
+    void** smc = NULL_POINTER_MEMORY_MODEL;
+    void** sms = NULL_POINTER_MEMORY_MODEL;
+    void** sd = NULL_POINTER_MEMORY_MODEL;
+    void** sdc = NULL_POINTER_MEMORY_MODEL;
+    void** sds = NULL_POINTER_MEMORY_MODEL;
+
+    // Get left side.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) LEFT_SIDE_NAME, (void*) LEFT_SIDE_NAME_COUNT,
+        (void*) &lsn, (void*) &lsnc, (void*) &lsns,
+        (void*) &lsa, (void*) &lsac, (void*) &lsas,
+        (void*) &lsm, (void*) &lsmc, (void*) &lsms,
+        (void*) &lsd, (void*) &lsdc, (void*) &lsds,
+        p2, p3);
+    // Get right side.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) RIGHT_SIDE_NAME, (void*) RIGHT_SIDE_NAME_COUNT,
+        (void*) &rsn, (void*) &rsnc, (void*) &rsns,
+        (void*) &rsa, (void*) &rsac, (void*) &rsas,
+        (void*) &rsm, (void*) &rsmc, (void*) &rsms,
+        (void*) &rsd, (void*) &rsdc, (void*) &rsds,
+        p2, p3);
+    // Get result.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) RESULT_NAME, (void*) RESULT_NAME_COUNT,
+        (void*) &rn, (void*) &rnc, (void*) &rns,
+        (void*) &ra, (void*) &rac, (void*) &ras,
+        (void*) &rm, (void*) &rmc, (void*) &rms,
+        (void*) &rd, (void*) &rdc, (void*) &rds,
+        p2, p3);
+    // Get selection.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) COUNT_SELECTION_NAME, (void*) COUNT_SELECTION_NAME_COUNT,
+        (void*) &sn, (void*) &snc, (void*) &sns,
+        (void*) &sa, (void*) &sac, (void*) &sas,
+        (void*) &sm, (void*) &smc, (void*) &sms,
+        (void*) &sd, (void*) &sdc, (void*) &sds,
+        p2, p3);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;

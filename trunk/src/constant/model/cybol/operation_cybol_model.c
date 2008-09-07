@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: operation_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: operation_cybol_model.c,v $ $Revision: 1.3 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef OPERATION_CYBOL_MODEL_SOURCE
 #define OPERATION_CYBOL_MODEL_SOURCE
 
-#include "../../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The arithmetic operation cybol model. */
 static wchar_t ARITHMETIC_OPERATION_CYBOL_MODEL_ARRAY[] = {L'a', L'r', L'i', L't', L'h', L'm', L'e', L't', L'i', L'c'};
@@ -72,11 +72,6 @@ static int* MEMORY_OPERATION_CYBOL_MODEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_A
 static wchar_t RUN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'r', L'u', L'n'};
 static wchar_t* RUN_OPERATION_CYBOL_MODEL = RUN_OPERATION_CYBOL_MODEL_ARRAY;
 static int* RUN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The transfer operation cybol model. */
-static wchar_t TRANSFER_OPERATION_CYBOL_MODEL_ARRAY[] = {L't', L'r', L'a', L'n', L's', L'f', L'e', L'r'};
-static wchar_t* TRANSFER_OPERATION_CYBOL_MODEL = TRANSFER_OPERATION_CYBOL_MODEL_ARRAY;
-static int* TRANSFER_OPERATION_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* OPERATION_CYBOL_MODEL_SOURCE */
 #endif

@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communicator.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:19 $ $Author: christian $
+ * @version $RCSfile: communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ADDER_SOURCE
-#define ADDER_SOURCE
+#ifndef COMMUNICATOR_SOURCE
+#define COMMUNICATOR_SOURCE
 
 #include "../applicator/adder/character_vector_adder.c"
 #include "../applicator/adder/integer_vector_adder.c"
@@ -38,108 +38,44 @@
 #include "../memoriser/array.c"
 
 /**
- * Adds two primitive summands resulting in the sum.
+ * Communicates between partners.
  *
  * Expected parameters:
- * - abstraction (required): the abstraction of the summand 1, summand 2 and sum parameters
- * - summand_1 (required): the first summand for the addition
- * - summand_2 (required): the second summand for the addition
- * - sum (required): the sum resulting from the addition
+ * - type (required): the type of the operation
+ * - ... (depending on the type, further parameters may have to be given)
  *
  * @param p0 the parameters
  * @param p1 the parameters count
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
+ * @param p5 the internal memory
  */
-void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
+void communicate(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Add two primitive summands resulting in the sum.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Communicate between partners.");
 
-    // The abstraction name, abstraction, model, details.
-    void** an = NULL_POINTER_MEMORY_MODEL;
-    void** anc = NULL_POINTER_MEMORY_MODEL;
-    void** ans = NULL_POINTER_MEMORY_MODEL;
-    void** aa = NULL_POINTER_MEMORY_MODEL;
-    void** aac = NULL_POINTER_MEMORY_MODEL;
-    void** aas = NULL_POINTER_MEMORY_MODEL;
-    void** am = NULL_POINTER_MEMORY_MODEL;
-    void** amc = NULL_POINTER_MEMORY_MODEL;
-    void** ams = NULL_POINTER_MEMORY_MODEL;
-    void** ad = NULL_POINTER_MEMORY_MODEL;
-    void** adc = NULL_POINTER_MEMORY_MODEL;
-    void** ads = NULL_POINTER_MEMORY_MODEL;
-    // The summand 1 name, abstraction, model, details.
-    void** s1n = NULL_POINTER_MEMORY_MODEL;
-    void** s1nc = NULL_POINTER_MEMORY_MODEL;
-    void** s1ns = NULL_POINTER_MEMORY_MODEL;
-    void** s1a = NULL_POINTER_MEMORY_MODEL;
-    void** s1ac = NULL_POINTER_MEMORY_MODEL;
-    void** s1as = NULL_POINTER_MEMORY_MODEL;
-    void** s1m = NULL_POINTER_MEMORY_MODEL;
-    void** s1mc = NULL_POINTER_MEMORY_MODEL;
-    void** s1ms = NULL_POINTER_MEMORY_MODEL;
-    void** s1d = NULL_POINTER_MEMORY_MODEL;
-    void** s1dc = NULL_POINTER_MEMORY_MODEL;
-    void** s1ds = NULL_POINTER_MEMORY_MODEL;
-    // The summand 2 name, abstraction, model, details.
-    void** s2n = NULL_POINTER_MEMORY_MODEL;
-    void** s2nc = NULL_POINTER_MEMORY_MODEL;
-    void** s2ns = NULL_POINTER_MEMORY_MODEL;
-    void** s2a = NULL_POINTER_MEMORY_MODEL;
-    void** s2ac = NULL_POINTER_MEMORY_MODEL;
-    void** s2as = NULL_POINTER_MEMORY_MODEL;
-    void** s2m = NULL_POINTER_MEMORY_MODEL;
-    void** s2mc = NULL_POINTER_MEMORY_MODEL;
-    void** s2ms = NULL_POINTER_MEMORY_MODEL;
-    void** s2d = NULL_POINTER_MEMORY_MODEL;
-    void** s2dc = NULL_POINTER_MEMORY_MODEL;
-    void** s2ds = NULL_POINTER_MEMORY_MODEL;
-    // The sum name, abstraction, model, details.
-    void** sn = NULL_POINTER_MEMORY_MODEL;
-    void** snc = NULL_POINTER_MEMORY_MODEL;
-    void** sns = NULL_POINTER_MEMORY_MODEL;
-    void** sa = NULL_POINTER_MEMORY_MODEL;
-    void** sac = NULL_POINTER_MEMORY_MODEL;
-    void** sas = NULL_POINTER_MEMORY_MODEL;
-    void** sm = NULL_POINTER_MEMORY_MODEL;
-    void** smc = NULL_POINTER_MEMORY_MODEL;
-    void** sms = NULL_POINTER_MEMORY_MODEL;
-    void** sd = NULL_POINTER_MEMORY_MODEL;
-    void** sdc = NULL_POINTER_MEMORY_MODEL;
-    void** sds = NULL_POINTER_MEMORY_MODEL;
+    // The operation type name, abstraction, model, details.
+    void** tn = NULL_POINTER_MEMORY_MODEL;
+    void** tnc = NULL_POINTER_MEMORY_MODEL;
+    void** tns = NULL_POINTER_MEMORY_MODEL;
+    void** ta = NULL_POINTER_MEMORY_MODEL;
+    void** tac = NULL_POINTER_MEMORY_MODEL;
+    void** tas = NULL_POINTER_MEMORY_MODEL;
+    void** tm = NULL_POINTER_MEMORY_MODEL;
+    void** tmc = NULL_POINTER_MEMORY_MODEL;
+    void** tms = NULL_POINTER_MEMORY_MODEL;
+    void** td = NULL_POINTER_MEMORY_MODEL;
+    void** tdc = NULL_POINTER_MEMORY_MODEL;
+    void** tds = NULL_POINTER_MEMORY_MODEL;
 
-    // Get abstraction.
+    // Get operation type.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COPY_ABSTRACTION_NAME, (void*) COPY_ABSTRACTION_NAME_COUNT,
-        (void*) &an, (void*) &anc, (void*) &ans,
-        (void*) &aa, (void*) &aac, (void*) &aas,
-        (void*) &am, (void*) &amc, (void*) &ams,
-        (void*) &ad, (void*) &adc, (void*) &ads,
-        p2, p3);
-    // Get summand 1.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ADD_SUMMAND_1_NAME, (void*) ADD_SUMMAND_1_NAME_COUNT,
-        (void*) &s1n, (void*) &s1nc, (void*) &s1ns,
-        (void*) &s1a, (void*) &s1ac, (void*) &s1as,
-        (void*) &s1m, (void*) &s1mc, (void*) &s1ms,
-        (void*) &s1d, (void*) &s1dc, (void*) &s1ds,
-        p2, p3);
-    // Get summand 2.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ADD_SUMMAND_2_NAME, (void*) ADD_SUMMAND_2_NAME_COUNT,
-        (void*) &s2n, (void*) &s2nc, (void*) &s2ns,
-        (void*) &s2a, (void*) &s2ac, (void*) &s2as,
-        (void*) &s2m, (void*) &s2mc, (void*) &s2ms,
-        (void*) &s2d, (void*) &s2dc, (void*) &s2ds,
-        p2, p3);
-    // Get sum.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ADD_SUM_NAME, (void*) ADD_SUM_NAME_COUNT,
-        (void*) &sn, (void*) &snc, (void*) &sns,
-        (void*) &sa, (void*) &sac, (void*) &sas,
-        (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds,
+        (void*) TYPE_ABSTRACTION_NAME, (void*) TYPE_ABSTRACTION_NAME_COUNT,
+        (void*) &tn, (void*) &tnc, (void*) &tns,
+        (void*) &ta, (void*) &tac, (void*) &tas,
+        (void*) &tm, (void*) &tmc, (void*) &tms,
+        (void*) &td, (void*) &tdc, (void*) &tds,
         p2, p3);
 
     // The comparison result.
@@ -147,29 +83,54 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*am, *amc, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) INTERRUPT_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) INTERRUPT_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            add_character_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
+            communicate_interrupting(p0, p1, p2, p3, p4, p5);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*am, *amc, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            add_integer_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
+            communicate_receiving(p0, p1, p2, p3, p4, p5);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not add two primitive summands. The abstraction is unknown.");
+        compare_arrays(*tm, *tmc, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            communicate_sending(p0, p1, p2, p3, p4, p5);
+
+            //?? OLD STUFF!
+            //?? TEST: For testing reasons, the p15 was replaced with *((int**) p15) here!
+            //?? The signal id serves as client socket to which this cyboi system has to reply.
+            //?? send_message(p12, p13, p0, p1, p2, p3, p4, p5, p6, *((int**) p15));
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(*tm, *tmc, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            communicate_sensing(p0, p1, p2, p3, p4, p5);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not communicate between partners. The operation type is unknown.");
     }
 }
 
-/* ADDER_SOURCE */
+/* COMMUNICATOR_SOURCE */
 #endif

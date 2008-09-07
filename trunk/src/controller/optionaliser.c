@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: optionaliser.c,v $ $Revision: 1.18 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
+ * @version $RCSfile: optionaliser.c,v $ $Revision: 1.19 $ $Date: 2008-09-07 23:01:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +30,9 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
-#include "../globals/constants/character/code/character_code_constants.c"
-#include "../globals/constants/command_line/command_line_constants.c"
-#include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
+#include "../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../constant/model/command_argument/cyboi/log_level_cyboi_command_argument_model.c"
+#include "../constant/model/cyboi/operation_mode_cyboi_model.c"
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/level_log_model.c"
@@ -198,7 +198,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
     fwprintf(stderr, L"TEST 4 tc: %i\n", tc);
 
             // Add null termination character to terminated file name.
-            set_array_elements(t, (void*) &tc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(t, (void*) &tc, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST 5 ts: %i\n", ts);
     fwprintf(stderr, L"TEST 5 tc: %i\n", tc);

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: text_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: text_cybol_abstraction.c,v $ $Revision: 1.3 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -133,6 +133,9 @@ static int* MODEL_DIAGRAM_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_18_INTEGER_MEMOR
 static wchar_t PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'p', L'l', L'a', L'i', L'n'};
 static wchar_t* PLAIN_TEXT_CYBOL_ABSTRACTION = PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY;
 static int* PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
+
+static char ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {'t', 'e', 'x', 't', '/', 'p', 'l', 'a', 'i', 'n'};
+static char* ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION = ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY;
 
 /**
  * The text/xdt cybol abstraction.

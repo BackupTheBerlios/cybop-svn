@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: comparator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
+ * @version $RCSfile: comparator.c,v $ $Revision: 1.3 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,14 +42,11 @@
 #include "../memoriser/array.c"
 
 /**
- * Compares two parameters.
+ * Compares parameters.
  *
  * Expected parameters:
- * - comparison (required): the kind of comparison to be applied (equal, smaller_or_equal, ...)
- * - left_side (required): the left side value of the comparison
- * - right_side (required): the right side value of the comparison
- * - result (required): the knowledge model in which the comparison result is stored
- * - selection (optional, only for values of abstraction "character"): the part of two string values to be compared (full, prefix, suffix, part)
+ * - type (required): the type of the operation
+ * - ... (depending on the type, further parameters may have to be given)
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -59,113 +56,29 @@
  */
 void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Compare two parameters.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Compare parameters.");
 
-    // The comparison name, abstraction, model, details.
-    void** cn = NULL_POINTER_MEMORY_MODEL;
-    void** cnc = NULL_POINTER_MEMORY_MODEL;
-    void** cns = NULL_POINTER_MEMORY_MODEL;
-    void** ca = NULL_POINTER_MEMORY_MODEL;
-    void** cac = NULL_POINTER_MEMORY_MODEL;
-    void** cas = NULL_POINTER_MEMORY_MODEL;
-    void** cm = NULL_POINTER_MEMORY_MODEL;
-    void** cmc = NULL_POINTER_MEMORY_MODEL;
-    void** cms = NULL_POINTER_MEMORY_MODEL;
-    void** cd = NULL_POINTER_MEMORY_MODEL;
-    void** cdc = NULL_POINTER_MEMORY_MODEL;
-    void** cds = NULL_POINTER_MEMORY_MODEL;
-    // The left side name, abstraction, model, details.
-    void** lsn = NULL_POINTER_MEMORY_MODEL;
-    void** lsnc = NULL_POINTER_MEMORY_MODEL;
-    void** lsns = NULL_POINTER_MEMORY_MODEL;
-    void** lsa = NULL_POINTER_MEMORY_MODEL;
-    void** lsac = NULL_POINTER_MEMORY_MODEL;
-    void** lsas = NULL_POINTER_MEMORY_MODEL;
-    void** lsm = NULL_POINTER_MEMORY_MODEL;
-    void** lsmc = NULL_POINTER_MEMORY_MODEL;
-    void** lsms = NULL_POINTER_MEMORY_MODEL;
-    void** lsd = NULL_POINTER_MEMORY_MODEL;
-    void** lsdc = NULL_POINTER_MEMORY_MODEL;
-    void** lsds = NULL_POINTER_MEMORY_MODEL;
-    // The right side name, abstraction, model, details.
-    void** rsn = NULL_POINTER_MEMORY_MODEL;
-    void** rsnc = NULL_POINTER_MEMORY_MODEL;
-    void** rsns = NULL_POINTER_MEMORY_MODEL;
-    void** rsa = NULL_POINTER_MEMORY_MODEL;
-    void** rsac = NULL_POINTER_MEMORY_MODEL;
-    void** rsas = NULL_POINTER_MEMORY_MODEL;
-    void** rsm = NULL_POINTER_MEMORY_MODEL;
-    void** rsmc = NULL_POINTER_MEMORY_MODEL;
-    void** rsms = NULL_POINTER_MEMORY_MODEL;
-    void** rsd = NULL_POINTER_MEMORY_MODEL;
-    void** rsdc = NULL_POINTER_MEMORY_MODEL;
-    void** rsds = NULL_POINTER_MEMORY_MODEL;
-    // The result name, abstraction, model, details.
-    void** rn = NULL_POINTER_MEMORY_MODEL;
-    void** rnc = NULL_POINTER_MEMORY_MODEL;
-    void** rns = NULL_POINTER_MEMORY_MODEL;
-    void** ra = NULL_POINTER_MEMORY_MODEL;
-    void** rac = NULL_POINTER_MEMORY_MODEL;
-    void** ras = NULL_POINTER_MEMORY_MODEL;
-    void** rm = NULL_POINTER_MEMORY_MODEL;
-    void** rmc = NULL_POINTER_MEMORY_MODEL;
-    void** rms = NULL_POINTER_MEMORY_MODEL;
-    void** rd = NULL_POINTER_MEMORY_MODEL;
-    void** rdc = NULL_POINTER_MEMORY_MODEL;
-    void** rds = NULL_POINTER_MEMORY_MODEL;
-    // The selection name, abstraction, model, details.
-    void** sn = NULL_POINTER_MEMORY_MODEL;
-    void** snc = NULL_POINTER_MEMORY_MODEL;
-    void** sns = NULL_POINTER_MEMORY_MODEL;
-    void** sa = NULL_POINTER_MEMORY_MODEL;
-    void** sac = NULL_POINTER_MEMORY_MODEL;
-    void** sas = NULL_POINTER_MEMORY_MODEL;
-    void** sm = NULL_POINTER_MEMORY_MODEL;
-    void** smc = NULL_POINTER_MEMORY_MODEL;
-    void** sms = NULL_POINTER_MEMORY_MODEL;
-    void** sd = NULL_POINTER_MEMORY_MODEL;
-    void** sdc = NULL_POINTER_MEMORY_MODEL;
-    void** sds = NULL_POINTER_MEMORY_MODEL;
+    // The operation type name, abstraction, model, details.
+    void** tn = NULL_POINTER_MEMORY_MODEL;
+    void** tnc = NULL_POINTER_MEMORY_MODEL;
+    void** tns = NULL_POINTER_MEMORY_MODEL;
+    void** ta = NULL_POINTER_MEMORY_MODEL;
+    void** tac = NULL_POINTER_MEMORY_MODEL;
+    void** tas = NULL_POINTER_MEMORY_MODEL;
+    void** tm = NULL_POINTER_MEMORY_MODEL;
+    void** tmc = NULL_POINTER_MEMORY_MODEL;
+    void** tms = NULL_POINTER_MEMORY_MODEL;
+    void** td = NULL_POINTER_MEMORY_MODEL;
+    void** tdc = NULL_POINTER_MEMORY_MODEL;
+    void** tds = NULL_POINTER_MEMORY_MODEL;
 
-    // Get comparison.
+    // Get operation type.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COMPARISON_NAME, (void*) COMPARISON_NAME_COUNT,
-        (void*) &cn, (void*) &cnc, (void*) &cns,
-        (void*) &ca, (void*) &cac, (void*) &cas,
-        (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds,
-        p2, p3);
-    // Get left side.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) LEFT_SIDE_NAME, (void*) LEFT_SIDE_NAME_COUNT,
-        (void*) &lsn, (void*) &lsnc, (void*) &lsns,
-        (void*) &lsa, (void*) &lsac, (void*) &lsas,
-        (void*) &lsm, (void*) &lsmc, (void*) &lsms,
-        (void*) &lsd, (void*) &lsdc, (void*) &lsds,
-        p2, p3);
-    // Get right side.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RIGHT_SIDE_NAME, (void*) RIGHT_SIDE_NAME_COUNT,
-        (void*) &rsn, (void*) &rsnc, (void*) &rsns,
-        (void*) &rsa, (void*) &rsac, (void*) &rsas,
-        (void*) &rsm, (void*) &rsmc, (void*) &rsms,
-        (void*) &rsd, (void*) &rsdc, (void*) &rsds,
-        p2, p3);
-    // Get result.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RESULT_NAME, (void*) RESULT_NAME_COUNT,
-        (void*) &rn, (void*) &rnc, (void*) &rns,
-        (void*) &ra, (void*) &rac, (void*) &ras,
-        (void*) &rm, (void*) &rmc, (void*) &rms,
-        (void*) &rd, (void*) &rdc, (void*) &rds,
-        p2, p3);
-    // Get selection.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNT_SELECTION_NAME, (void*) COUNT_SELECTION_NAME_COUNT,
-        (void*) &sn, (void*) &snc, (void*) &sns,
-        (void*) &sa, (void*) &sac, (void*) &sas,
-        (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds,
+        (void*) TYPE_ABSTRACTION_NAME, (void*) TYPE_ABSTRACTION_NAME_COUNT,
+        (void*) &tn, (void*) &tnc, (void*) &tns,
+        (void*) &ta, (void*) &tac, (void*) &tas,
+        (void*) &tm, (void*) &tmc, (void*) &tms,
+        (void*) &td, (void*) &tdc, (void*) &tds,
         p2, p3);
 
     // The comparison result.
@@ -173,62 +86,51 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) EQUAL_MODEL, (void*) EQUAL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) EQUAL_MODEL, (void*) EQUAL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
-                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds,
-                *sm, *smc);
+            compare_equality(p0, p1, p2, p3, p4);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) SMALLER_MODEL, (void*) SMALLER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) SMALLER_MODEL, (void*) SMALLER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_smaller(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
-                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
+            compare_smallerness(p0, p1, p2, p3, p4);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) GREATER_MODEL, (void*) GREATER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) GREATER_MODEL, (void*) GREATER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_greater(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
-                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
+            compare_greaterness(p0, p1, p2, p3, p4);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) SMALLER_OR_EQUAL_MODEL, (void*) SMALLER_OR_EQUAL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) SMALLER_OR_EQUAL_MODEL, (void*) SMALLER_OR_EQUAL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_smaller_or_equal(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
-                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
+            compare_smallerness_or_equality(p0, p1, p2, p3, p4);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *cm, (void*) *cmc, (void*) GREATER_OR_EQUAL_MODEL, (void*) GREATER_OR_EQUAL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) GREATER_OR_EQUAL_MODEL, (void*) GREATER_OR_EQUAL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_greater_or_equal(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
-                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
+            compare_greaterness_or_equality(p0, p1, p2, p3, p4);
         }
     }
 

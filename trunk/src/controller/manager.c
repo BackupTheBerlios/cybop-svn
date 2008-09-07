@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: manager.c,v $ $Revision: 1.50 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
+ * @version $RCSfile: manager.c,v $ $Revision: 1.51 $ $Date: 2008-09-07 23:01:39 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -238,15 +238,15 @@ void manage(void* p0, void* p1) {
     pthread_mutex_init(cyboi_service_mutex, *NULL_POINTER_MEMORY_MODEL);
 
     // Initialise signal memory sleep time.
-    *signal_memory_sleep_time = *NUMBER_0_1_DOUBLE;
+    *signal_memory_sleep_time = *NUMBER_0_1_DOUBLE_MEMORY_MODEL;
     // Initialise gnu linux console sleep time.
-    *gnu_linux_console_sleep_time = *NUMBER_0_1_DOUBLE;
+    *gnu_linux_console_sleep_time = *NUMBER_0_1_DOUBLE_MEMORY_MODEL;
     // Initialise x window system sleep time.
-    *x_window_system_sleep_time = *NUMBER_0_1_DOUBLE;
+    *x_window_system_sleep_time = *NUMBER_0_1_DOUBLE_MEMORY_MODEL;
     // Initialise www service sleep time.
-    *www_service_sleep_time = *NUMBER_0_1_DOUBLE;
+    *www_service_sleep_time = *NUMBER_0_1_DOUBLE_MEMORY_MODEL;
     // Initialise cyboi service sleep time.
-    *cyboi_service_sleep_time = *NUMBER_0_1_DOUBLE;
+    *cyboi_service_sleep_time = *NUMBER_0_1_DOUBLE_MEMORY_MODEL;
 
     //
     // CAUTION! As an exception, the following allocations have to be done AFTER the sizes

@@ -19,20 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: addition_calculator.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:19 $ $Author: christian $
+ * @version $RCSfile: addition_calculator.c,v $ $Revision: 1.4 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ADDER_SOURCE
-#define ADDER_SOURCE
+#ifndef ADDITION_CALCULATOR_SOURCE
+#define ADDITION_CALCULATOR_SOURCE
 
-#include "../applicator/adder/character_vector_adder.c"
-#include "../applicator/adder/integer_vector_adder.c"
+#include "../applicator/calculator/addition/character_vector_addition_calculator.c"
+#include "../applicator/calculator/addition/integer_vector_addition_calculator.c"
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
+#include "../constant/name/cybol/operation/arithmetic/addition_arithmetic_operation_cybol_name.c"
 #include "../logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -52,7 +52,7 @@
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  */
-void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
+void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Add two primitive summands resulting in the sum.");
 
@@ -171,5 +171,5 @@ void add(void* p0, int* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* ADDER_SOURCE */
+/* ADDITION_CALCULATOR_SOURCE */
 #endif
