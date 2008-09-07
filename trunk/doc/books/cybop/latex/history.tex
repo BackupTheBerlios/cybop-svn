@@ -16,7 +16,7 @@
 % http://www.resmedicinae.org
 % - Information in Medicine -
 %
-% Version: $Revision: 1.1 $ $Date: 2008-08-19 18:34:10 $ $Author: christian $
+% Version: $Revision: 1.2 $ $Date: 2008-09-07 15:36:07 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -311,8 +311,15 @@ on the architecture and implementation of the \emph{CYBOI Interpreter}.
         whenever data arrive.
     \item[2008] All CYBOI source code gets adapted to using wide characters/ Unicode.
     \item[2008] CYBOL abstraction constants now follow the MIME type schema.
-    \item[2008] All constants, no matter for which kind of model or format,
+        All constants, no matter for which kind of model or format,
         get categorised into "abstraction", "channel", "model", "name".
+        This was not easy to figure out, since at the beginning,
+        it was not obvious to me that all kinds of formats (xdt, html etc.)
+        and even composed primitive structures (fraction, complex etc.):
+        use some kind of name/ index/ key/ identification to identify the parts;
+        know about the abstraction/ type of their parts (even a file system knows
+        about whether it deals with a directory or file, and which kind of file);
+        contain the actual model/ data/ value.
     \item[2008] Open issues yet to be implemented are, for example:
         compiling CYBOI under \emph{Windows} OS and making use of their GUI
         functionality; improving the GUI layout and providing a GUI theme
