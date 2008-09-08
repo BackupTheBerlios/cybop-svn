@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:19 $ $Author: christian $
+ * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,17 +58,17 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Encode compound model into x window system window.
     encode(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
+        p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4, (void*) X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION, (void*) X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION_COUNT);
 
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).
     void** d = NULL_POINTER_MEMORY_MODEL;
 
     // Get display.
-    get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Show window on display.
-    write_data(d, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p0, *NULL_POINTER_MEMORY_MODEL, (void*) X_WINDOW_SYSTEM_MODEL, (void*) X_WINDOW_SYSTEM_MODEL_COUNT);
+    write_data(d, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p0, *NULL_POINTER_MEMORY_MODEL, (void*) X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION, (void*) X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION_COUNT);
 
     pthread_mutex_unlock(*xmt);
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: greaterness_or_equality_comparator.c.c,v $ $Revision: 1.4 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
+ * @version $RCSfile: greaterness_or_equality_comparator.c.c,v $ $Revision: 1.5 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -151,7 +151,7 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Compare result parameter abstraction. It must be a boolean.
-    compare_arrays(p18, p19, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    compare_arrays(p18, p19, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -195,8 +195,8 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Compare parameter abstractions.
-        compare_arrays(p0, p1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-        compare_arrays(p9, p10, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p0, p1, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p9, p10, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
@@ -221,8 +221,8 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Compare parameter abstractions.
-        compare_arrays(p0, p1, (void*) DOUBLE_VECTOR_MEMORY_ABSTRACTION, (void*) DOUBLE_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-        compare_arrays(p9, p10, (void*) DOUBLE_VECTOR_MEMORY_ABSTRACTION, (void*) DOUBLE_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p0, p1, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p9, p10, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 

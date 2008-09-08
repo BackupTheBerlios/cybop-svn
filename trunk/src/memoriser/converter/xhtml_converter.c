@@ -19,23 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xhtml_converter.c,v $ $Revision: 1.22 $ $Date: 2008-09-06 23:17:22 $ $Author: christian $
+ * @version $RCSfile: xhtml_converter.c,v $ $Revision: 1.23 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef XHTML_CONVERTER_SOURCE
 #define XHTML_CONVERTER_SOURCE
 
-#include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor.c"
@@ -152,7 +149,7 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 (void*) &m, (void*) &mc, (void*) &ms,
                 (void*) &d, (void*) &dc, (void*) &ds);
 
-            compare_arrays(*n, *nc, (void*) WUI_TAG_NAME, (void*) WUI_TAG_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(*n, *nc, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -354,7 +351,7 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             // Get source part tag from details.
             get_universal_compound_element_by_name(p7, p8,
-                (void*) WUI_TAG_NAME, (void*) WUI_TAG_NAME_COUNT,
+                (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &tn, (void*) &tnc, (void*) &tns,
                 (void*) &ta, (void*) &tac, (void*) &tas,
                 (void*) &tm, (void*) &tmc, (void*) &tms,

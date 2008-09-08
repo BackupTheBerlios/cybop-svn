@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.28 $ $Date: 2008-09-06 23:17:22 $ $Author: christian $
+ * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.29 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,14 +28,14 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/character_code/ascii/ascii_character_code_model.c"
+#include "../../constant/model/cybol/layout_cybol_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/graphical_user_interface_cybol_name.c"
+#include "../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../memoriser/accessor.c"
 
 /**
@@ -82,9 +82,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         XWindowAttributes wa;
 
         // Get x window system internals.
-        get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &di, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL, (void*) &gc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &di, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
         // Get window attributes.
         XGetWindowAttributes(*di, **w, &wa);
@@ -130,7 +130,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
             // Get source whole size from details.
             get_universal_compound_element_by_name(p5, p6,
-                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &wsn, (void*) &wsnc, (void*) &wsns,
                 (void*) &wsa, (void*) &wsac, (void*) &wsas,
                 (void*) &wsm, (void*) &wsmc, (void*) &wsms,
@@ -138,9 +138,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Determine source whole size coordinates.
-            get_element(*wsm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &wsmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*wsm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &wsmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*wsm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &wsmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &wsmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &wsmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &wsmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
             // Set original area position coordinates, set to the zero origo.
             oapx = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -306,7 +306,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
             // Get source part layout from details.
             get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
+                (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &ln, (void*) &lnc, (void*) &lns,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
@@ -314,7 +314,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
             // Get source part cell from details.
             get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+                (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &cn, (void*) &cnc, (void*) &cns,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -322,7 +322,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
             // Get source part position from details.
             get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &pn, (void*) &pnc, (void*) &pns,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
@@ -330,7 +330,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
             // Get source part size from details.
             get_universal_compound_element_by_name(*d, *dc,
-                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &sn, (void*) &snc, (void*) &sns,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
@@ -338,18 +338,18 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Get source part position coordinates.
-            get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
             // Get source part size coordinates.
-            get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"layout: %s\n", *lm);
     fwprintf(stderr, L"layout count: %i\n", *((int*) *lmc));
 
-            compare_arrays(*lm, *lmc, (void*) UI_ROOT_LAYOUT_MODEL, (void*) UI_ROOT_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(*lm, *lmc, (void*) ROOT_LAYOUT_CYBOL_MODEL, (void*) ROOT_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -395,7 +395,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     }
 
                     // Add null termination character to text.
-                    set_array_elements(text, (void*) &textc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(text, (void*) &textc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     //?? TODO: Create "text" as 2byte character array,
                     //?? since the xlib C library expects it that way.
@@ -542,7 +542,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 // Get source part title from details.
                 get_universal_compound_element_by_name(*d, *dc,
-                    (void*) GUI_TITLE_NAME, (void*) GUI_TITLE_NAME_COUNT,
+                    (void*) TITLE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) TITLE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                     (void*) &tn, (void*) &tnc, (void*) &tns,
                     (void*) &ta, (void*) &tac, (void*) &tas,
                     (void*) &tm, (void*) &tmc, (void*) &tms,
@@ -550,7 +550,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     p7, p8);
                 // Get source part icon from details.
                 get_universal_compound_element_by_name(*d, *dc,
-                    (void*) GUI_ICON_NAME, (void*) GUI_ICON_NAME_COUNT,
+                    (void*) ICON_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) ICON_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                     (void*) &in, (void*) &inc, (void*) &ins,
                     (void*) &ia, (void*) &iac, (void*) &ias,
                     (void*) &im, (void*) &imc, (void*) &ims,
@@ -595,9 +595,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 }
 
                 // Add null termination character to title.
-                set_array_elements(tt, (void*) &ttc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(tt, (void*) &ttc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 // Add null termination character to icon name.
-                set_array_elements(ti, (void*) &tic, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(ti, (void*) &tic, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Set terminated window title.
                 //

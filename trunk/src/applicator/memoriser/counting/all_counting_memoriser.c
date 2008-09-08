@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: all_counting_memoriser.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
+ * @version $RCSfile: all_counting_memoriser.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,7 +58,7 @@ void count_all(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // Set result to compound count value.
         // A loop is not needed here, since the compound count already contains
         // the number of parts within that compound.
-        set_element(*r, NUMBER_0_INTEGER_MEMORY_MODEL, p4, INTEGER_VECTOR_MEMORY_ABSTRACTION, INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        set_element(*r, NUMBER_0_INTEGER_MEMORY_MODEL, p4, INTEGER_NUMBER_CYBOL_ABSTRACTION, INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
     } else {
 

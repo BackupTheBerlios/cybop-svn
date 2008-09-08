@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_communicator.c,v $ $Revision: 1.35 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: file_communicator.c,v $ $Revision: 1.36 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -182,7 +182,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             }
 
             // Add null termination character to terminated file name.
-            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             // Open file.
             // CAUTION! The file name cannot be handed over as is.
@@ -373,7 +373,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
 
                 // Add null termination character to terminated file name.
-                set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.

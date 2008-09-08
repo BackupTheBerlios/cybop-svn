@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: directory_contents_listing_runner.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
+ * @version $RCSfile: directory_contents_listing_runner.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -186,7 +186,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble arguments by adding the null termination character.
-    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(arg, (void*) &argc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Execute arguments as process.
@@ -237,7 +237,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(shell, (void*) &shellc, (void*) SHELL_SYSTEM_EXECUTABLE, (void*) SHELL_SYSTEM_EXECUTABLE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     shellc = shellc + *SHELL_SYSTEM_EXECUTABLE_COUNT;
-    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(shell, (void*) &shellc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     shellc = shellc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Increase arguments vector size for shell argument.
@@ -257,7 +257,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     // and then adding the null termination character.
     set_array_elements(character, (void*) &characterc, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT, (void*) SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     characterc = characterc + *SHELL_SYSTEM_EXECUTABLE_CHARACTER_ARGUMENT_COUNT;
-    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(character, (void*) &characterc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     characterc = characterc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Increase arguments vector size for shell character argument.
@@ -350,7 +350,7 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
     }
 
     // Assemble command by adding the null termination character.
-    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(command, (void*) &commandc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
     commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     //

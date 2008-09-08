@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.19 $ $Date: 2008-09-06 23:17:21 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.20 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,8 +59,8 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
         // The loop exit flag.
         int f = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The input character.
-        wint_t c = *((wint_t*) NULL_CONTROL_CHARACTER_CODE);
-//??        int c = *((int*) NULL_CONTROL_CHARACTER_CODE);
+        wint_t c = *((wint_t*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL);
+//??        int c = *((int*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL);
         // The escape character mode.
         int esc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The escape control sequence mode.

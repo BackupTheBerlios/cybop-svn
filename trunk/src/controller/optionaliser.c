@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: optionaliser.c,v $ $Revision: 1.19 $ $Date: 2008-09-07 23:01:39 $ $Author: christian $
+ * @version $RCSfile: optionaliser.c,v $ $Revision: 1.20 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -334,7 +334,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set version operation mode.
-                *m = *VERSION_CYBOI_OPERATION_MODE;
+                *m = *VERSION_OPERATION_MODE_CYBOI_MODEL;
             }
         }
 
@@ -345,7 +345,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set help operation mode.
-                *m = *HELP_CYBOI_OPERATION_MODE;
+                *m = *HELP_OPERATION_MODE_CYBOI_MODEL;
             }
         }
 
@@ -356,7 +356,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set test operation mode.
-                *m = *TEST_CYBOI_OPERATION_MODE;
+                *m = *TEST_OPERATION_MODE_CYBOI_MODEL;
             }
         }
 
@@ -370,7 +370,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 set_wide_character(p1, p2, p3, p6, p7);
 
                 // Set knowledge operation mode.
-                *m = *KNOWLEDGE_CYBOI_OPERATION_MODE;
+                *m = *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL;
             }
         }
 

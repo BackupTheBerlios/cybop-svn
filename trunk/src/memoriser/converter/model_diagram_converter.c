@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.20 $ $Date: 2008-09-06 23:17:21 $ $Author: christian $
+ * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.21 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -304,14 +304,14 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                         // Only process the following code, if the model compound contains at least one part.
 
                         // Add part model to destination array.
-                        encode_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER);
+                        encode_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
                     }
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) XDT_ABSTRACTION, (void*) XDT_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p5, p6, (void*) XDT_TEXT_CYBOL_ABSTRACTION, (void*) XDT_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -320,7 +320,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                         // Only process the following code, if the model compound contains at least one part.
 
                         // Add part model to destination array.
-                        encode_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER);
+                        encode_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
                     }
                 }
             }
@@ -347,7 +347,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p5, p6, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -367,7 +367,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) BOOLEAN_ABSTRACTION, (void*) BOOLEAN_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p5, p6, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -387,7 +387,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) DOUBLE_VECTOR_MEMORY_ABSTRACTION, (void*) DOUBLE_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p5, p6, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -450,7 +450,7 @@ void encode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void
     int l = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Encode model diagram root node.
-    encode_model_diagram_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l, (void*) NUMBER_0_INTEGER);
+    encode_model_diagram_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 }
 
 /* MODEL_DIAGRAM_CONVERTER_SOURCE */

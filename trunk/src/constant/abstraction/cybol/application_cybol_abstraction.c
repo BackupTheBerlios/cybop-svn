@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: application_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: application_cybol_abstraction.c,v $ $Revision: 1.3 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,8 +77,18 @@ static wchar_t ZIP_APPLICATION_CYBOL_ABSTRACTION_ARRAY[] = {L'a', L'p', L'p', L'
 static wchar_t* ZIP_APPLICATION_CYBOL_ABSTRACTION = ZIP_APPLICATION_CYBOL_ABSTRACTION_ARRAY;
 static int* ZIP_APPLICATION_CYBOL_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
+/**
+ * The application/xhtml+xml cybol abstraction.
+ *
+ * XHTML archive files. Defined by RFC 3236.
+ * Registered.
+ * Suffixes: xhtml
+ */
+static wchar_t XHTML_APPLICATION_CYBOL_ABSTRACTION_ARRAY[] = {L'a', L'p', L'p', L'l', L'i', L'c', L'a', L't', L'i', L'o', L'n', L'/', L'x', L'h', L't', L'm', L'l'};
+static wchar_t* XHTML_APPLICATION_CYBOL_ABSTRACTION = XHTML_APPLICATION_CYBOL_ABSTRACTION_ARRAY;
+static int* XHTML_APPLICATION_CYBOL_ABSTRACTION_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
+
 /*??
-application/xhtml+xml: XHTML; Defined by RFC 3236
 application/xml-dtd: DTD files; Defined by RFC 3023
 */
 

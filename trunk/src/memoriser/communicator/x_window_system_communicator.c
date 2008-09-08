@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.22 $ $Date: 2008-09-06 23:17:21 $ $Author: christian $
+ * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.23 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -288,7 +288,7 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
 
                         // Get graphical part position from details.
                         get_universal_compound_element_by_name(*d, *dc,
-                            (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                            (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                             (void*) &pn, (void*) &pnc, (void*) &pns,
                             (void*) &pa, (void*) &pac, (void*) &pas,
                             (void*) &pm, (void*) &pmc, (void*) &pms,
@@ -296,7 +296,7 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                             p19, p20);
                         // Get graphical part size from details.
                         get_universal_compound_element_by_name(*d, *dc,
-                            (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                            (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                             (void*) &sn, (void*) &snc, (void*) &sns,
                             (void*) &sa, (void*) &sac, (void*) &sas,
                             (void*) &sm, (void*) &smc, (void*) &sms,
@@ -480,8 +480,8 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get x window system internals.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL, (void*) &d, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     // The command name, abstraction, model, details.
     void** cn = NULL_POINTER_MEMORY_MODEL;
@@ -761,7 +761,7 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int** w = (int**) NULL_POINTER_MEMORY_MODEL;
 
         // Get x window system internals.
-        get_element(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL, (void*) &w, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
         // Request input events (signals) to be put into event queue.
         XSelectInput(*d, **w, ExposureMask

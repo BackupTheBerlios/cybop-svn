@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: interface_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: interface_cybol_abstraction.c,v $ $Revision: 1.3 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,15 @@
 
 //
 // This MIME type was taken from/ inspired by the KDE desktop.
-// It is not sure yet, whether it will be useful in the context of CYBOI.
+// It is used for text- and graphical user interfaces in CYBOI.
 //
+
+/**
+ * The interface/gnu-linux-console cybol abstraction.
+ */
+static wchar_t GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'f', L'a', L'c', L'e', L'/', L'g', L'n', L'u', L'-', L'l', L'i', L'n', L'u', L'x', L'-', L'c', L'o', L'n', L's', L'o', L'l', L'e'};
+static wchar_t* GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION = GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION_ARRAY;
+static int* GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION_COUNT = NUMBER_27_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The interface/x-winamp-skin cybol abstraction.
@@ -39,6 +46,13 @@
 static wchar_t X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'f', L'a', L'c', L'e', L'/', L'x', L'-', L'w', L'i', L'n', L'a', L'm', L'p', L'-', L's', L'k', L'i', L'n'};
 static wchar_t* X_WINAMP_INTERFACE_CYBOL_ABSTRACTION = X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_ARRAY;
 static int* X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_MEMORY_MODEL_ARRAY;
+
+/**
+ * The interface/x-window-system cybol abstraction.
+ */
+static wchar_t X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'f', L'a', L'c', L'e', L'/', L'x', L'-', L'w', L'i', L'n', L'd', L'o', L'w', L'-', L's', L'y', L's', L't', L'e', L'm'};
+static wchar_t* X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION = X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION_ARRAY;
+static int* X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION_COUNT = NUMBER_25_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* INTERFACE_CYBOL_ABSTRACTION_SOURCE */
 #endif

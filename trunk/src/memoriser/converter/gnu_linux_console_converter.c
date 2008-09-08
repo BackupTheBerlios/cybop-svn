@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.20 $ $Date: 2008-09-06 23:17:21 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.21 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1299,13 +1299,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     int fasz = oasz;
 
     // Get part position x, y, z.
-    get_element(p14, (void*) UI_POSITION_X_INDEX, (void*) &px, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p14, (void*) UI_POSITION_Y_INDEX, (void*) &py, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p14, (void*) UI_POSITION_Z_INDEX, (void*) &pz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p14, (void*) UI_POSITION_X_INDEX, (void*) &px, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p14, (void*) UI_POSITION_Y_INDEX, (void*) &py, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p14, (void*) UI_POSITION_Z_INDEX, (void*) &pz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
     // Get part size x, y, z.
-    get_element(p16, (void*) UI_SIZE_X_INDEX, (void*) &sx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p16, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p16, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p16, (void*) UI_SIZE_X_INDEX, (void*) &sx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p16, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p16, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
     // Set current position coordinates, initialised with part position.
     cpx = *px;
@@ -1319,13 +1319,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     if (p20 != *NULL_POINTER_MEMORY_MODEL) {
 
         // Determine source whole position coordinates.
-        get_element(p18, (void*) UI_POSITION_X_INDEX, (void*) &wpmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p18, (void*) UI_POSITION_Y_INDEX, (void*) &wpmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p18, (void*) UI_POSITION_Z_INDEX, (void*) &wpmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p18, (void*) UI_POSITION_X_INDEX, (void*) &wpmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p18, (void*) UI_POSITION_Y_INDEX, (void*) &wpmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p18, (void*) UI_POSITION_Z_INDEX, (void*) &wpmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
         // Determine source whole size coordinates.
-        get_element(p20, (void*) UI_SIZE_X_INDEX, (void*) &wsmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p20, (void*) UI_SIZE_Y_INDEX, (void*) &wsmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p20, (void*) UI_SIZE_Z_INDEX, (void*) &wsmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p20, (void*) UI_SIZE_X_INDEX, (void*) &wsmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p20, (void*) UI_SIZE_Y_INDEX, (void*) &wsmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p20, (void*) UI_SIZE_Z_INDEX, (void*) &wsmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
         // Set original area position coordinates, initialised with whole position.
         oapx = *wpmx;
@@ -1434,16 +1434,16 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
         //?? TODO: These values should later be given as boolean "true" or "false".
         //?? Currently, they have to be given as "0" or "1" in CYBOL.
         //?? Change this later by transforming boolean into integer values!
-        set_element(&h, (void*) PRIMITIVE_VALUE_INDEX, p7, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        set_element(&i, (void*) PRIMITIVE_VALUE_INDEX, p9, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        set_element(&bl, (void*) PRIMITIVE_VALUE_INDEX, p11, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        set_element(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        set_element(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        set_element(&h, (void*) PRIMITIVE_VALUE_INDEX, p7, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        set_element(&i, (void*) PRIMITIVE_VALUE_INDEX, p9, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        set_element(&bl, (void*) PRIMITIVE_VALUE_INDEX, p11, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        set_element(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        set_element(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
         // Map colour names to control sequences.
         encode((void*) &bg, (void*) &bgc, (void*) &bgs, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p17, p18,
-            *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TERMINAL_BACKGROUND_ABSTRACTION, (void*) TERMINAL_BACKGROUND_ABSTRACTION_COUNT);
+            *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION, (void*) TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT);
         encode((void*) &fg, (void*) &fgc, (void*) &fgs, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p19, p20,
-            *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TERMINAL_FOREGROUND_ABSTRACTION, (void*) TERMINAL_FOREGROUND_ABSTRACTION_COUNT);
+            *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION, (void*) TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1476,7 +1476,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
                 // Set temporary character array by first copying the
                 // given array and then adding the null termination character.
                 set_array_elements(tmp, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                set_array_elements(tmp, p4, (void*) NULL_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(tmp, p4, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Initialise temporary wide character string size.
                 // CAUTION! One extra place is added for the null termination character.
@@ -1865,7 +1865,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get source part layout from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
+            (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &ln, (void*) &lnc, (void*) &lns,
             (void*) &la, (void*) &lac, (void*) &las,
             (void*) &lm, (void*) &lmc, (void*) &lms,
@@ -1873,7 +1873,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get source part cell from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+            (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &cn, (void*) &cnc, (void*) &cns,
             (void*) &ca, (void*) &cac, (void*) &cas,
             (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -1881,7 +1881,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part position from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+            (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &pn, (void*) &pnc, (void*) &pns,
             (void*) &pa, (void*) &pac, (void*) &pas,
             (void*) &pm, (void*) &pmc, (void*) &pms,
@@ -1889,7 +1889,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part size from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+            (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &sn, (void*) &snc, (void*) &sns,
             (void*) &sa, (void*) &sac, (void*) &sas,
             (void*) &sm, (void*) &smc, (void*) &sms,
@@ -1985,7 +1985,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get source part layout from details.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) UI_LAYOUT_NAME, (void*) UI_LAYOUT_NAME_COUNT,
+                (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &ln, (void*) &lnc, (void*) &lns,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
@@ -1997,7 +1997,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get source part cell from details.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) UI_CELL_NAME, (void*) UI_CELL_NAME_COUNT,
+                (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &cn, (void*) &cnc, (void*) &cns,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -2009,7 +2009,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part position from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+                (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &pn, (void*) &pnc, (void*) &pns,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
@@ -2021,7 +2021,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part size from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+                (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &sn, (void*) &snc, (void*) &sns,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
@@ -2127,7 +2127,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         // Get source whole position from details.
         get_universal_compound_element_by_name(p9, p10,
-            (void*) UI_POSITION_NAME, (void*) UI_POSITION_NAME_COUNT,
+            (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &wpn, (void*) &wpnc, (void*) &wpns,
             (void*) &wpa, (void*) &wpac, (void*) &wpas,
             (void*) &wpm, (void*) &wpmc, (void*) &wpms,
@@ -2136,7 +2136,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         // Get source whole size from details.
         get_universal_compound_element_by_name(p9, p10,
-            (void*) UI_SIZE_NAME, (void*) UI_SIZE_NAME_COUNT,
+            (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &wsn, (void*) &wsnc, (void*) &wsns,
             (void*) &wsa, (void*) &wsac, (void*) &wsas,
             (void*) &wsm, (void*) &wsmc, (void*) &wsms,

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.39 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.40 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,9 +34,9 @@
 #include "../controller/optionaliser.c"
 #include "../controller/orienter.c"
 #include "../controller/tester.c"
-#include "../globals/constants/cyboi/cyboi_operation_mode_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
+#include "../constant/model/cyboi/operation_mode_cyboi_model.c"
 #include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../variable/log_setting.c"
 
@@ -141,7 +141,7 @@ int main(int p0, char** p1) {
         // CAUTION! It is initialised with the help operation mode,
         // in order to display the help message by default,
         // if no command line argument is given by the user.
-        int m = *HELP_CYBOI_OPERATION_MODE;
+        int m = *HELP_OPERATION_MODE_CYBOI_MODEL;
 
         // The cybol knowledge file path.
         void* k = *NULL_POINTER_MEMORY_MODEL;
@@ -170,20 +170,20 @@ int main(int p0, char** p1) {
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Globalised global variables already.");
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Optionalised log file already.");
 
-        if (m == *VERSION_CYBOI_OPERATION_MODE) {
+        if (m == *VERSION_OPERATION_MODE_CYBOI_MODEL) {
 
             inform((void*) stdout);
 
-        } else if (m == *HELP_CYBOI_OPERATION_MODE) {
+        } else if (m == *HELP_OPERATION_MODE_CYBOI_MODEL) {
 
             help((void*) stdout);
 
-        } else if (m == *TEST_CYBOI_OPERATION_MODE) {
+        } else if (m == *TEST_OPERATION_MODE_CYBOI_MODEL) {
 
             // Call test function.
             test();
 
-        } else if (m == *KNOWLEDGE_CYBOI_OPERATION_MODE) {
+        } else if (m == *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL) {
 
             if ((k != *NULL_POINTER_MEMORY_MODEL) && (kc >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 

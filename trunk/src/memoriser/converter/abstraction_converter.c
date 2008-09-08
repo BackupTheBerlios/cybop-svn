@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.8 $ $Date: 2008-09-07 23:01:39 $ $Author: christian $
+ * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.9 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -102,12 +102,12 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, BOOLEAN_ABSTRACTION, BOOLEAN_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = INTEGER_VECTOR_MEMORY_ABSTRACTION_ARRAY;
-                    *dc = *INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT;
+                    *d = INTEGER_NUMBER_CYBOL_ABSTRACTION_ARRAY;
+                    *dc = *INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT;
                 }
             }
 
@@ -124,45 +124,45 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, COMPLEX_MEMORY_ABSTRACTION, COMPLEX_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION, CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = COMPLEX_MEMORY_ABSTRACTION_ARRAY;
-                    *dc = *COMPLEX_MEMORY_ABSTRACTION_COUNT;
+                    *d = CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_ARRAY;
+                    *dc = *CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, DOUBLE_VECTOR_MEMORY_ABSTRACTION, DOUBLE_VECTOR_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = DOUBLE_VECTOR_MEMORY_ABSTRACTION_ARRAY;
-                    *dc = *DOUBLE_VECTOR_MEMORY_ABSTRACTION_COUNT;
+                    *d = DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY;
+                    *dc = *DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, FRACTION_MEMORY_ABSTRACTION, FRACTION_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION, VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = FRACTION_MEMORY_ABSTRACTION_ARRAY;
-                    *dc = *FRACTION_MEMORY_ABSTRACTION_COUNT;
+                    *d = VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY;
+                    *dc = *VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, INTEGER_VECTOR_MEMORY_ABSTRACTION, INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, INTEGER_NUMBER_CYBOL_ABSTRACTION, INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = INTEGER_VECTOR_MEMORY_ABSTRACTION_ARRAY;
-                    *dc = *INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT;
+                    *d = INTEGER_NUMBER_CYBOL_ABSTRACTION_ARRAY;
+                    *dc = *INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT;
                 }
             }
 
@@ -179,23 +179,23 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, DATETIME_MEMORY_ABSTRACTION, DATETIME_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, HH_MM_SS_DATETIME_CYBOL_ABSTRACTION, HH_MM_SS_DATETIME_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = DATETIME_MEMORY_ABSTRACTION_ARRAY;
-                    *dc = *DATETIME_MEMORY_ABSTRACTION_COUNT;
+                    *d = HH_MM_SS_DATETIME_CYBOL_ABSTRACTION_ARRAY;
+                    *dc = *HH_MM_SS_DATETIME_CYBOL_ABSTRACTION_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, DDMMYYYY_DATETIME_MEMORY_ABSTRACTION, DDMMYYYY_DATETIME_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, YYYY_MM_DD_DATETIME_CYBOL_ABSTRACTION, YYYY_MM_DD_DATETIME_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = DATETIME_MEMORY_ABSTRACTION_ARRAY;
-                    *dc = *DATETIME_MEMORY_ABSTRACTION_COUNT;
+                    *d = HH_MM_SS_DATETIME_CYBOL_ABSTRACTION_ARRAY;
+                    *dc = *HH_MM_SS_DATETIME_CYBOL_ABSTRACTION_COUNT;
                 }
             }
 
@@ -223,7 +223,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, XDT_ABSTRACTION, XDT_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, XDT_TEXT_CYBOL_ABSTRACTION, XDT_TEXT_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

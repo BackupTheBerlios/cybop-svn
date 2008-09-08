@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: application_x_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: application_x_cybol_abstraction.c,v $ $Revision: 1.3 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,7 +54,19 @@
 application/x-dvi: Digital Videfiles in DVI format
 application/x-httpd-php: PHP files
 application/x-httpd-php-source: PHP source files
-application/x-latex: LATEX files
+*/
+
+/**
+ * The application/x-latex cybol abstraction.
+ *
+ * LaTeX files.
+ * Suffixes: tex
+ */
+static wchar_t LATEX_APPLICATION_X_CYBOL_ABSTRACTION_ARRAY[] = {L'a', L'p', L'p', L'l', L'i', L'c', L'a', L't', L'i', L'o', L'n', L'/', L'x', L'-', L'l', L'a', L't', L'e', L'x'};
+static wchar_t* LATEX_APPLICATION_X_CYBOL_ABSTRACTION = LATEX_APPLICATION_X_CYBOL_ABSTRACTION_ARRAY;
+static int* LATEX_APPLICATION_X_CYBOL_ABSTRACTION_COUNT = NUMBER_19_INTEGER_MEMORY_MODEL_ARRAY;
+
+/*??
 application/x-shockwave-flash: Adobe Flash files; Documented in Adobe TechNote tn_4151 and Adobe TechNote tn_16509
 application/x-stuffit: StuffIt archive files
 application/x-rar-compressed: RAR archive files

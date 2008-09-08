@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: terminal_background_converter.c,v $ $Revision: 1.6 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
+ * @version $RCSfile: terminal_background_converter.c,v $ $Revision: 1.7 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef TERMINAL_BACKGROUND_CONVERTER_SOURCE
 #define TERMINAL_BACKGROUND_CONVERTER_SOURCE
 
-#include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/cybol/colour/terminal_colour_cybol_model.c"
+#include "../../constant/model/linux_console/escape_control_sequence_linux_console_model.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
@@ -73,89 +73,89 @@ void encode_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_BLACK_MODEL, TERMINAL_COLOUR_BLACK_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, BLACK_TERMINAL_COLOUR_CYBOL_MODEL, BLACK_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = BLACK_BACKGROUND_CONTROL_SEQUENCE;
-                    *dc = *BLACK_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                    *d = BLACK_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
+                    *dc = *BLACK_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_RED_MODEL, TERMINAL_COLOUR_RED_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, RED_TERMINAL_COLOUR_CYBOL_MODEL, RED_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = RED_BACKGROUND_CONTROL_SEQUENCE;
-                    *dc = *RED_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                    *d = RED_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
+                    *dc = *RED_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_GREEN_MODEL, TERMINAL_COLOUR_GREEN_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, GREEN_TERMINAL_COLOUR_CYBOL_MODEL, GREEN_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = GREEN_BACKGROUND_CONTROL_SEQUENCE;
-                    *dc = *GREEN_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                    *d = GREEN_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
+                    *dc = *GREEN_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_YELLOW_MODEL, TERMINAL_COLOUR_YELLOW_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, YELLOW_TERMINAL_COLOUR_CYBOL_MODEL, YELLOW_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = YELLOW_BACKGROUND_CONTROL_SEQUENCE;
-                    *dc = *YELLOW_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                    *d = YELLOW_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
+                    *dc = *YELLOW_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_BLUE_MODEL, TERMINAL_COLOUR_BLUE_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, BLUE_TERMINAL_COLOUR_CYBOL_MODEL, BLUE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = BLUE_BACKGROUND_CONTROL_SEQUENCE;
-                    *dc = *BLUE_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                    *d = BLUE_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
+                    *dc = *BLUE_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_MAGENTA_MODEL, TERMINAL_COLOUR_MAGENTA_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL, MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = MAGENTA_BACKGROUND_CONTROL_SEQUENCE;
-                    *dc = *MAGENTA_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                    *d = MAGENTA_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
+                    *dc = *MAGENTA_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_COBALT_MODEL, TERMINAL_COLOUR_COBALT_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, COBALT_TERMINAL_COLOUR_CYBOL_MODEL, COBALT_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = COBALT_BACKGROUND_CONTROL_SEQUENCE;
-                    *dc = *COBALT_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                    *d = COBALT_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
+                    *dc = *COBALT_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p3, p4, TERMINAL_COLOUR_WHITE_MODEL, TERMINAL_COLOUR_WHITE_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, p4, WHITE_TERMINAL_COLOUR_CYBOL_MODEL, WHITE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = WHITE_BACKGROUND_CONTROL_SEQUENCE;
-                    *dc = *WHITE_BACKGROUND_CONTROL_SEQUENCE_COUNT;
+                    *d = WHITE_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
+                    *dc = *WHITE_BACKGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
