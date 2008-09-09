@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_receiving_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
+ * @version $RCSfile: x_window_system_receiving_communicator.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,13 +33,13 @@
 #include "../constant/model/log/level_log_model.c"
 #include "../logger/logger.c"
 /*??
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../memoriser/accessor.c"
-#include "../../memoriser/allocator.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../memoriser/accessor.c"
+#include "../../../memoriser/allocator.c"
 */
 
 /**

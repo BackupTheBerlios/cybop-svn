@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: archiving_runner.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: archiving_runner.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,22 +27,18 @@
 #define ARCHIVE_RUNNER_SOURCE
 
 #include <unistd.h>
-#include "../../applicator/run/run_execute.c"
-#include "../../globals/constants/character/code/character_code_constants.c"
+#include "../../applicator/runner/executing_runner.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../globals/constants/shell_command/unix_shell_command_constants.c"
-#include "../../globals/constants/system/system_executable_constants.c"
+#include "../../constant/name/cybol/operation/run/archive_run_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
 #include "../../memoriser/allocator/pointer_vector_allocator.c"
+#include "../../variable/reallocation_factor.c"
 
 /**
  * Runs the archive command.
@@ -96,9 +92,18 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     void** bzip2dc = NULL_POINTER_MEMORY_MODEL;
     void** bzip2ds = NULL_POINTER_MEMORY_MODEL;
 
+    // Get bzip2 option.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME, (void*) BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT,
+        (void*) &bzip2n, (void*) &bzip2nc, (void*) &bzip2ns,
+        (void*) &bzip2a, (void*) &bzip2ac, (void*) &bzip2as,
+        (void*) &bzip2m, (void*) &bzip2mc, (void*) &bzip2ms,
+        (void*) &bzip2d, (void*) &bzip2dc, (void*) &bzip2ds,
+        p2, p3);
+
     // Get create option.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RUN_ARCHIVE_CREATE_NAME, (void*) RUN_ARCHIVE_CREATE_NAME_COUNT,
+        (void*) CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME, (void*) CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT,
         (void*) &createn, (void*) &createnc, (void*) &createns,
         (void*) &createa, (void*) &createac, (void*) &createas,
         (void*) &createm, (void*) &createmc, (void*) &createms,
@@ -107,20 +112,11 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
     // Get update option.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RUN_ARCHIVE_UPDATE_NAME, (void*) RUN_ARCHIVE_UPDATE_NAME_COUNT,
+        (void*) UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME, (void*) UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT,
         (void*) &updaten, (void*) &updatenc, (void*) &updatens,
         (void*) &updatea, (void*) &updateac, (void*) &updateas,
         (void*) &updatem, (void*) &updatemc, (void*) &updatems,
         (void*) &updated, (void*) &updatedc, (void*) &updateds,
-        p2, p3);
-
-    // Get bzip2 option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RUN_ARCHIVE_BZIP2_NAME, (void*) RUN_ARCHIVE_BZIP2_NAME_COUNT,
-        (void*) &bzip2n, (void*) &bzip2nc, (void*) &bzip2ns,
-        (void*) &bzip2a, (void*) &bzip2ac, (void*) &bzip2as,
-        (void*) &bzip2m, (void*) &bzip2mc, (void*) &bzip2ms,
-        (void*) &bzip2d, (void*) &bzip2dc, (void*) &bzip2ds,
         p2, p3);
 
     // The arguments vector.
@@ -129,15 +125,15 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Determine arguments size.
-    args = *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
+    args = *ARCHIVE_UNIX_COMMAND_MODEL_COUNT;
 
     // Allocate arguments vector.
     allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     // Assemble arguments by copying the actual command.
     // A null termination character is added behind the last argument, see below!
-    set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND, (void*) ARCHIVE_UNIX_SHELL_COMMAND_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-    argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
+    set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_COMMAND_MODEL, (void*) ARCHIVE_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    argc = argc + *ARCHIVE_UNIX_COMMAND_MODEL_COUNT;
 
     //
     // Create option.
@@ -149,20 +145,20 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_CREATE, (void*) ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT;
         }
     }
 
@@ -176,20 +172,20 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_UPDATE, (void*) ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT;
         }
     }
 
@@ -203,20 +199,20 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_BZIP2, (void*) ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT;
         }
     }
 
@@ -316,15 +312,15 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
     //
 
     // Determine command size.
-    commands = *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
+    commands = *ARCHIVE_UNIX_COMMAND_MODEL_COUNT;
 
     // Allocate command.
     allocate_array((void*) &command, (void*) &commands, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Assemble command by copying the actual command.
     // A null termination character is added behind the last argument, see below!
-    set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND, (void*) ARCHIVE_UNIX_SHELL_COMMAND_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-    commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_COUNT;
+    set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_COMMAND_MODEL, (void*) ARCHIVE_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    commandc = commandc + *ARCHIVE_UNIX_COMMAND_MODEL_COUNT;
 
     // Increase arguments vector size for command argument.
     args++;
@@ -339,20 +335,20 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_CREATE_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_CREATE, (void*) ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT;
         }
     }
 
@@ -366,20 +362,20 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE, (void*) ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_UPDATE_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_UPDATE, (void*) ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT;
         }
     }
 
@@ -393,20 +389,20 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2, (void*) ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *ARCHIVE_UNIX_SHELL_COMMAND_BZIP2_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_BZIP2, (void*) ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT;
         }
     }
 

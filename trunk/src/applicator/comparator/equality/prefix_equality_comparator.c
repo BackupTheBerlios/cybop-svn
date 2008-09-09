@@ -19,18 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: prefix_equality_comparator.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: prefix_equality_comparator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef PREFIX_EQUALITY_COMPARATOR_SOURCE
 #define PREFIX_EQUALITY_COMPARATOR_SOURCE
 
-#include "../../../globals/constants/boolean/boolean_constants.c"
+#include "../../../constant/abstraction/cybol/logicvalue_cybol_abstraction.c"
+#include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
 #include "../../../memoriser/array.c"
@@ -140,7 +142,7 @@ void compare_equal_prefix(void* p0, void* p1, void* p2,
 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                        *rm = *TRUE_BOOLEAN;
+                                        *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
                                     }
                                 }
                             }

@@ -19,33 +19,29 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SENDER_SOURCE
 #define SENDER_SOURCE
 
-#include "../applicator/sender/cyboi_system_sender.c"
-#include "../applicator/sender/file_system_sender.c"
-#include "../applicator/sender/latex_sender.c"
-#include "../applicator/sender/gnu_linux_console_sender.c"
-#include "../applicator/sender/shell_sender.c"
-#include "../applicator/sender/socket_sender.c"
-#include "../applicator/sender/x_window_system_sender.c"
-#include "../globals/constants/cyboi/cyboi_signal_priority_constants.c"
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../constant/channel/cybol_channel.c"
-#include "../globals/constants/cybol/cybol_model_constants.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../globals/constants/service_port_constants.c"
-#include "../logger/logger.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/accessor/internal_memory_accessor.c"
-#include "../memoriser/allocator.c"
+#include "../../applicator/communicator/sending/cyboi_system_sending_communicator.c"
+#include "../../applicator/communicator/sending/file_system_sending_communicator.c"
+#include "../../applicator/communicator/sending/gnu_linux_console_sending_communicator.c"
+#include "../../applicator/communicator/sending/latex_system_sending_communicator.c"
+#include "../../applicator/communicator/sending/shell_system_sending_communicator.c"
+#include "../../applicator/communicator/sending/socket_sending_communicator.c"
+#include "../../applicator/communicator/sending/x_window_system_sending_communicator.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/channel/cybol_channel.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/accessor/internal_memory_accessor.c"
+#include "../../memoriser/allocator.c"
 
 /**
  * Sends a message in a special language.

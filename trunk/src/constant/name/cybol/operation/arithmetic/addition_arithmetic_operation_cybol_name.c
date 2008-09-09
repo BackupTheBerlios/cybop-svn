@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: addition_arithmetic_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: addition_arithmetic_operation_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,6 +27,11 @@
 #define ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_SOURCE
 
 #include "../../../../../constant/model/memory/integer_memory_model.c"
+
+/** The abstraction addition arithmetic operation cybol name. */
+static wchar_t ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_ARRAY[] = {L'a', L'b', L's', L't', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
+static wchar_t* ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME = ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_ARRAY;
+static int* ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The summand 1 addition arithmetic operation cybol name. */
 static wchar_t SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_ARRAY[] = {L's', L'u', L'm', L'm', L'a', L'n', L'd', L'_', L'1'};

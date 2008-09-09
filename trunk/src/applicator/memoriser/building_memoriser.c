@@ -19,24 +19,23 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: building_memoriser.c,v $ $Revision: 1.1 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
+ * @version $RCSfile: building_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BUILDER_SOURCE
 #define BUILDER_SOURCE
 
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/array.c"
-#include "../memoriser/communicator.c"
-#include "../memoriser/converter.c"
-#include "../memoriser/allocator.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/array.c"
+#include "../../memoriser/communicator.c"
+#include "../../memoriser/converter.c"
+#include "../../memoriser/allocator.c"
 
 /**
  * Builds a list name.

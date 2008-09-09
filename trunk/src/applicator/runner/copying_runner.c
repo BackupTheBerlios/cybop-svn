@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: copying_runner.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: copying_runner.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,20 +27,16 @@
 #define COPY_RUNNER_SOURCE
 
 #include <unistd.h>
-#include "../../applicator/run/run_execute.c"
-#include "../../globals/constants/character/code/character_code_constants.c"
+#include "../../applicator/runner/executing_runner.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../globals/constants/shell_command/unix_shell_command_constants.c"
-#include "../../globals/constants/system/system_executable_constants.c"
+#include "../../constant/name/cybol/operation/run/copy_run_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
+#include "../../variable/reallocation_factor.c"
 
 /**
  * Runs the copy command.
@@ -96,7 +92,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     // Get recursive option.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RUN_COPY_RECURSIVE_NAME, (void*) RUN_COPY_RECURSIVE_NAME_COUNT,
+        (void*) RECURSIVE_COPY_RUN_OPERATION_CYBOL_NAME, (void*) RECURSIVE_COPY_RUN_OPERATION_CYBOL_NAME_COUNT,
         (void*) &recursiven, (void*) &recursivenc, (void*) &recursivens,
         (void*) &recursivea, (void*) &recursiveac, (void*) &recursiveas,
         (void*) &recursivem, (void*) &recursivemc, (void*) &recursivems,
@@ -105,7 +101,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     // Get source option.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COPY_RUNNER_SOURCE_NAME, (void*) COPY_RUNNER_SOURCE_NAME_COUNT,
+        (void*) SOURCE_COPY_RUN_OPERATION_CYBOL_NAME, (void*) SOURCE_COPY_RUN_OPERATION_CYBOL_NAME_COUNT,
         (void*) &sourcen, (void*) &sourcenc, (void*) &sourcens,
         (void*) &sourcea, (void*) &sourceac, (void*) &sourceas,
         (void*) &sourcem, (void*) &sourcemc, (void*) &sourcems,
@@ -114,7 +110,7 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
     // Get destination option.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RUN_COPY_DESTINATION_NAME, (void*) RUN_COPY_DESTINATION_NAME_COUNT,
+        (void*) DESTINATION_COPY_RUN_OPERATION_CYBOL_NAME, (void*) DESTINATION_COPY_RUN_OPERATION_CYBOL_NAME_COUNT,
         (void*) &destinationn, (void*) &destinationnc, (void*) &destinationns,
         (void*) &destinationa, (void*) &destinationac, (void*) &destinationas,
         (void*) &destinationm, (void*) &destinationmc, (void*) &destinationms,
@@ -127,15 +123,15 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Determine arguments size.
-    args = *COPY_UNIX_SHELL_COMMAND_COUNT;
+    args = *COPY_UNIX_COMMAND_MODEL_COUNT;
 
     // Allocate arguments vector.
     allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     // Assemble arguments by copying the actual command.
     // A null termination character is added behind the last argument, see below!
-    set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND, (void*) COPY_UNIX_SHELL_COMMAND_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-    argc = argc + *COPY_UNIX_SHELL_COMMAND_COUNT;
+    set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_COMMAND_MODEL, (void*) COPY_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    argc = argc + *COPY_UNIX_COMMAND_MODEL_COUNT;
 
     //
     // Recursive option.
@@ -147,20 +143,20 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_RECURSIVE_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_RECURSIVE_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_COMMAND_MODEL_RECURSIVE, (void*) COPY_UNIX_COMMAND_MODEL_RECURSIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *COPY_UNIX_COMMAND_MODEL_RECURSIVE_COUNT;
         }
     }
 
@@ -174,20 +170,20 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_SOURCE_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_SOURCE_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_COMMAND_MODEL_SOURCE, (void*) COPY_UNIX_COMMAND_MODEL_SOURCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *COPY_UNIX_COMMAND_MODEL_SOURCE_COUNT;
         }
     }
 
@@ -201,20 +197,20 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_DESTINATION_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_DESTINATION_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(arg, (void*) &argc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) COPY_UNIX_COMMAND_MODEL_DESTINATION, (void*) COPY_UNIX_COMMAND_MODEL_DESTINATION_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *COPY_UNIX_COMMAND_MODEL_DESTINATION_COUNT;
         }
     }
 
@@ -315,15 +311,15 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
     //
 
     // Determine command size.
-    commands = *COPY_UNIX_SHELL_COMMAND_COUNT;
+    commands = *COPY_UNIX_COMMAND_MODEL_COUNT;
 
     // Allocate command.
     allocate_array((void*) &command, (void*) &commands, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Assemble command by copying the actual command.
     // A null termination character is added behind the last argument, see below!
-    set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND, (void*) COPY_UNIX_SHELL_COMMAND_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-    commandc = commandc + *COPY_UNIX_SHELL_COMMAND_COUNT;
+    set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_COMMAND_MODEL, (void*) COPY_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    commandc = commandc + *COPY_UNIX_COMMAND_MODEL_COUNT;
 
     // Increase arguments vector size for command argument.
     args++;
@@ -338,20 +334,20 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_RECURSIVE_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_RECURSIVE_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE, (void*) COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *COPY_UNIX_SHELL_COMMAND_RECURSIVE_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_COMMAND_MODEL_RECURSIVE, (void*) COPY_UNIX_COMMAND_MODEL_RECURSIVE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *COPY_UNIX_COMMAND_MODEL_RECURSIVE_COUNT;
         }
     }
 
@@ -365,20 +361,20 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_SOURCE_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_SOURCE_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE, (void*) COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *COPY_UNIX_SHELL_COMMAND_SOURCE_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_COMMAND_MODEL_SOURCE, (void*) COPY_UNIX_COMMAND_MODEL_SOURCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *COPY_UNIX_COMMAND_MODEL_SOURCE_COUNT;
         }
     }
 
@@ -392,20 +388,20 @@ void run_copy(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_DESTINATION_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPY_UNIX_COMMAND_MODEL_DESTINATION_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
 
             // Assemble option by copying the actual argument.
             // A null termination character is added behind the last argument, see below!
-            set_array_elements(command, (void*) &commandc, (void*) SPACE_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION, (void*) COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *COPY_UNIX_SHELL_COMMAND_DESTINATION_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) COPY_UNIX_COMMAND_MODEL_DESTINATION, (void*) COPY_UNIX_COMMAND_MODEL_DESTINATION_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *COPY_UNIX_COMMAND_MODEL_DESTINATION_COUNT;
         }
     }
 

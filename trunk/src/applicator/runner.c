@@ -19,22 +19,22 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: runner.c,v $ $Revision: 1.3 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
+ * @version $RCSfile: runner.c,v $ $Revision: 1.4 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RUNNER_SOURCE
 #define RUNNER_SOURCE
 
-#include "../applicator/runner/archive_runner.c"
-#include "../applicator/runner/copy_runner.c"
-#include "../applicator/runner/list_directory_contents_runner.c"
+#include "../applicator/runner/archiving_runner.c"
+#include "../applicator/runner/copying_runner.c"
+#include "../applicator/runner/directory_contents_listing_runner.c"
 #include "../applicator/runner/program_runner.c"
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../globals/constants/cybol/cybol_model_constants.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
+#include "../constant/model/cybol/operation/run_operation_cybol_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
+#include "../constant/name/cybol/operation_cybol_name.c"
 #include "../logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 
@@ -71,7 +71,7 @@ void run(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Get operation type.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) TYPE_ABSTRACTION_NAME, (void*) TYPE_ABSTRACTION_NAME_COUNT,
+        (void*) TYPE_OPERATION_CYBOL_NAME, (void*) TYPE_OPERATION_CYBOL_NAME_COUNT,
         (void*) &tn, (void*) &tnc, (void*) &tns,
         (void*) &ta, (void*) &tac, (void*) &tas,
         (void*) &tm, (void*) &tmc, (void*) &tms,
@@ -83,7 +83,7 @@ void run(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*cm, *cmc, (void*) ARCHIVE_RUN_OPERATION_CYBOL_MODEL, (void*) ARCHIVE_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) ARCHIVE_RUN_OPERATION_CYBOL_MODEL, (void*) ARCHIVE_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -93,7 +93,7 @@ void run(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*cm, *cmc, (void*) COPY_RUN_OPERATION_CYBOL_MODEL, (void*) COPY_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) COPY_RUN_OPERATION_CYBOL_MODEL, (void*) COPY_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -103,7 +103,7 @@ void run(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*cm, *cmc, (void*) LIST_DIRECTORY_CONTENTS_RUN_OPERATION_CYBOL_MODEL, (void*) LIST_DIRECTORY_CONTENTS_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) LIST_DIRECTORY_CONTENTS_RUN_OPERATION_CYBOL_MODEL, (void*) LIST_DIRECTORY_CONTENTS_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -113,7 +113,7 @@ void run(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*cm, *cmc, (void*) PROGRAM_RUN_OPERATION_CYBOL_MODEL, (void*) PROGRAM_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*tm, *tmc, (void*) PROGRAM_RUN_OPERATION_CYBOL_MODEL, (void*) PROGRAM_RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

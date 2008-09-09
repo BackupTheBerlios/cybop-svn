@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: program_runner.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: program_runner.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,20 +27,16 @@
 #define PROGRAM_RUNNER_SOURCE
 
 #include <unistd.h>
-#include "../../applicator/run/run_execute.c"
-#include "../../globals/constants/character/code/character_code_constants.c"
+#include "../../applicator/runner/executing_runner.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../globals/constants/shell_command/unix_shell_command_constants.c"
-#include "../../globals/constants/system/system_executable_constants.c"
+#include "../../constant/name/cybol/operation/run/program_run_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
+#include "../../variable/reallocation_factor.c"
 
 /**
  * Runs a program.
@@ -70,7 +66,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
 
     // Get program option.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RUN_PROGRAM_PROGRAM_NAME, (void*) RUN_PROGRAM_PROGRAM_NAME_COUNT,
+        (void*) PROGRAM_RUN_OPERATION_CYBOL_NAME, (void*) PROGRAM_RUN_OPERATION_CYBOL_NAME_COUNT,
         (void*) &programn, (void*) &programnc, (void*) &programns,
         (void*) &programa, (void*) &programac, (void*) &programas,
         (void*) &programm, (void*) &programmc, (void*) &programms,

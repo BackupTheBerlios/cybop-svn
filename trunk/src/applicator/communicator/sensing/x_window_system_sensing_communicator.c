@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_sensing_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: x_window_system_sensing_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,15 +32,15 @@
 //?? #include <X11/Xutil.h>
 #include <pthread.h>
 #include <signal.h>
-#include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../variable/thread_identification.c"
-#include "../../memoriser/accessor.c"
-#include "../../memoriser/allocator.c"
+#include "../../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../variable/thread_identification.c"
+#include "../../../memoriser/accessor.c"
+#include "../../../memoriser/allocator.c"
 
 /**
  * Checks for x window system messages (events).

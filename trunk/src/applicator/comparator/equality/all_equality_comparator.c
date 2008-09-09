@@ -19,18 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: all_equality_comparator.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: all_equality_comparator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ALL_EQUALITY_COMPARATOR_SOURCE
 #define ALL_EQUALITY_COMPARATOR_SOURCE
 
-#include "../../../globals/constants/boolean/boolean_constants.c"
+#include "../../../constant/abstraction/cybol/logicvalue_cybol_abstraction.c"
+#include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
 #include "../../../memoriser/array.c"
@@ -112,8 +114,8 @@ void compare_equal_all(void* p0, void* p1, void* p2,
                     rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                    compare_arrays(p9, p10, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p0, p1, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p9, p10, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
@@ -126,7 +128,7 @@ void compare_equal_all(void* p0, void* p1, void* p2,
 
                         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            *rm = *TRUE_BOOLEAN;
+                            *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
                         }
                     }
 
@@ -148,7 +150,7 @@ void compare_equal_all(void* p0, void* p1, void* p2,
 
                         if (*((int*) p3) == *((int*) p12)) {
 
-                            *rm = *TRUE_BOOLEAN;
+                            *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
                         }
                     }
 
@@ -170,7 +172,7 @@ void compare_equal_all(void* p0, void* p1, void* p2,
 
                         if (*((double*) p3) == *((double*) p12)) {
 
-                            *rm = *TRUE_BOOLEAN;
+                            *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
                         }
                     }
 

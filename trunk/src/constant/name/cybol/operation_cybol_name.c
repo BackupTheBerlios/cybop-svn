@@ -19,30 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: latex_sending_communicator.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef LATEX_SENDER_SOURCE
-#define LATEX_SENDER_SOURCE
+#ifndef OPERATION_CYBOL_NAME_SOURCE
+#define OPERATION_CYBOL_NAME_SOURCE
 
 #include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/log/message_log_model.c"
-#include "../../../logger/logger.c"
 
-/**
- * Sends a knowledge model in latex format.
- *
- * @param p0 the internal memory
- * @param p1 the source compound model
- * @param p2 the source count
- * @param p3 the knowledge memory
- * @param p4 the knowledge memory count
- */
-void send_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
+/** The type operation cybol name. */
+static wchar_t TYPE_OPERATION_CYBOL_NAME_ARRAY[] = {L't', L'y', L'p', L'e'};
+static wchar_t* TYPE_OPERATION_CYBOL_NAME = TYPE_OPERATION_CYBOL_NAME_ARRAY;
+static int* TYPE_OPERATION_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send latex message.");
-}
-
-/* LATEX_SENDER_SOURCE */
+/* OPERATION_CYBOL_NAME_SOURCE */
 #endif

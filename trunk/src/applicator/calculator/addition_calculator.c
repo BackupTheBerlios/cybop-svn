@@ -19,23 +19,23 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: addition_calculator.c,v $ $Revision: 1.5 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: addition_calculator.c,v $ $Revision: 1.6 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ADDITION_CALCULATOR_SOURCE
 #define ADDITION_CALCULATOR_SOURCE
 
-#include "../applicator/calculator/addition/character_vector_addition_calculator.c"
-#include "../applicator/calculator/addition/integer_vector_addition_calculator.c"
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../constant/name/cybol/operation/arithmetic/addition_arithmetic_operation_cybol_name.c"
-#include "../logger/logger.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/array.c"
+#include "../../applicator/calculator/addition/character_vector_addition_calculator.c"
+#include "../../applicator/calculator/addition/integer_vector_addition_calculator.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/arithmetic/addition_arithmetic_operation_cybol_name.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/array.c"
 
 /**
  * Adds two primitive summands resulting in the sum.
@@ -111,7 +111,7 @@ void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COPY_ABSTRACTION_NAME, (void*) COPY_ABSTRACTION_NAME_COUNT,
+        (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
@@ -119,7 +119,7 @@ void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get summand 1.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) ADD_SUMMAND_1_NAME, (void*) ADD_SUMMAND_1_NAME_COUNT,
+        (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
         (void*) &s1n, (void*) &s1nc, (void*) &s1ns,
         (void*) &s1a, (void*) &s1ac, (void*) &s1as,
         (void*) &s1m, (void*) &s1mc, (void*) &s1ms,
@@ -127,7 +127,7 @@ void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get summand 2.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) ADD_SUMMAND_2_NAME, (void*) ADD_SUMMAND_2_NAME_COUNT,
+        (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
         (void*) &s2n, (void*) &s2nc, (void*) &s2ns,
         (void*) &s2a, (void*) &s2ac, (void*) &s2as,
         (void*) &s2m, (void*) &s2mc, (void*) &s2ms,
@@ -135,7 +135,7 @@ void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get sum.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) ADD_SUM_NAME, (void*) ADD_SUM_NAME_COUNT,
+        (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,

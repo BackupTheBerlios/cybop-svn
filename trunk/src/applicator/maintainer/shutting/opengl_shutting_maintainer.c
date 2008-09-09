@@ -19,17 +19,17 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: opengl_shutting_maintainer.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: opengl_shutting_maintainer.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef OPENGL_SHUTTER_SOURCE
 #define OPENGL_SHUTTER_SOURCE
 
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../memoriser/accessor.c"
-#include "../../memoriser/allocator.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../memoriser/accessor.c"
+#include "../../../memoriser/allocator.c"
 
 /**
  * Shuts down the opengl system.

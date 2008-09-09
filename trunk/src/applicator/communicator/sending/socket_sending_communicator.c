@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,22 +32,22 @@
 
 #include <netinet/in.h>
 #include <sys/socket.h>
-#include "../../applicator/starter/socket_starter.c"
-#include "../../globals/constants/character/set/character_set_constants.c"
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/http/http_header_constants.c"
-#include "../../globals/constants/http/http_header_variable_constants.c"
-#include "../../globals/constants/http/http_protocol_version_constants.c"
-#include "../../globals/constants/http/http_status_code_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../globals/constants/mime_type/text_mime_type_constants.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
-#include "../../memoriser/communicator/datagram_socket_communicator.c"
-#include "../../memoriser/communicator/raw_socket_communicator.c"
-#include "../../memoriser/communicator/stream_socket_communicator.c"
+#include "../../../applicator/starter/socket_starter.c"
+#include "../../../globals/constants/character/set/character_set_constants.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../globals/constants/cybol/cybol_model_constants.c"
+#include "../../../globals/constants/http/http_header_constants.c"
+#include "../../../globals/constants/http/http_header_variable_constants.c"
+#include "../../../globals/constants/http/http_protocol_version_constants.c"
+#include "../../../globals/constants/http/http_status_code_constants.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../globals/constants/mime_type/text_mime_type_constants.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
+#include "../../../memoriser/communicator/datagram_socket_communicator.c"
+#include "../../../memoriser/communicator/raw_socket_communicator.c"
+#include "../../../memoriser/communicator/stream_socket_communicator.c"
 
 /**
  * Gets the socket for server mode.

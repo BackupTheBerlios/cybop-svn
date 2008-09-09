@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.54 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.55 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,7 +30,6 @@
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../constant/name/cybol/message_log_model.c"
 #include "../logger/logger.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
 

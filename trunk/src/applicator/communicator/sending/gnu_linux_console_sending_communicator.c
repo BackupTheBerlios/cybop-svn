@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,19 +28,19 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "../../globals/constants/boolean/boolean_constants.c"
-#include "../../globals/constants/console/console_control_sequence_constants.c"
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/channel/cybol_channel.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../variable/reallocation_factor.c"
-#include "../../memoriser/accessor.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
-#include "../../memoriser/communicator.c"
-#include "../../memoriser/converter.c"
+#include "../../../globals/constants/boolean/boolean_constants.c"
+#include "../../../globals/constants/console/console_control_sequence_constants.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/channel/cybol_channel.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../variable/reallocation_factor.c"
+#include "../../../memoriser/accessor.c"
+#include "../../../memoriser/allocator.c"
+#include "../../../memoriser/array.c"
+#include "../../../memoriser/communicator.c"
+#include "../../../memoriser/converter.c"
 
 /**
  * Sends a textual user interface (tui) via gnu/linux console.

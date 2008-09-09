@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: initialiser.c,v $ $Revision: 1.22 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: initialiser.c,v $ $Revision: 1.23 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -108,11 +108,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // and NOT "COMPOUND_MEMORY_ABSTRACTION", because a multibyte character string
     // is expected, for conversion into a wide character string,
     // just as would be done with strings read from a CYBOL file.
-/*??
-    decode((void*) &ma, (void*) mac, (void*) mas, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION_ASCII, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
-        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-*/
-    decode_utf_8_unicode_character_vector((void*) &ma, (void*) mac, (void*) mas, (void*) ASCII_WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) ASCII_WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    decode_utf_8_unicode_character_vector((void*) &ma, (void*) mac, (void*) mas, (void*) ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"TEST initialiser ma: %ls\n", (wchar_t*) ma);
     fwprintf(stderr, L"TEST initialiser mac: %i\n", *mac);

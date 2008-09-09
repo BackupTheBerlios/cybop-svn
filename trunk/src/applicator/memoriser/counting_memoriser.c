@@ -19,27 +19,26 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: counting_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: counting_memoriser.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COUNTER_SOURCE
 #define COUNTER_SOURCE
 
-#include "../applicator/counter/all_counter.c"
-#include "../applicator/counter/prefix_counter.c"
-#include "../applicator/counter/suffix_counter.c"
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/allocator.c"
-#include "../memoriser/array.c"
-#include "../memoriser/communicator.c"
-#include "../memoriser/converter.c"
+#include "../../applicator/counter/all_counter.c"
+#include "../../applicator/counter/prefix_counter.c"
+#include "../../applicator/counter/suffix_counter.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/allocator.c"
+#include "../../memoriser/array.c"
+#include "../../memoriser/communicator.c"
+#include "../../memoriser/converter.c"
 
 /**
  * Counts compound parts.
@@ -124,7 +123,7 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get selection.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNT_SELECTION_NAME, (void*) COUNT_SELECTION_NAME_COUNT,
+        (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME, (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
@@ -140,7 +139,7 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get result.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNT_RESULT_NAME, (void*) COUNT_RESULT_NAME_COUNT,
+        (void*) COUNT_RESULT_COMPARISON_OPERATION_CYBOL_NAME, (void*) COUNT_RESULT_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,

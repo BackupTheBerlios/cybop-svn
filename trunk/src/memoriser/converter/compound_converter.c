@@ -19,24 +19,17 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_converter.c,v $ $Revision: 1.28 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: compound_converter.c,v $ $Revision: 1.29 $ $Date: 2008-09-09 21:17:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPOUND_CONVERTER_SOURCE
 #define COMPOUND_CONVERTER_SOURCE
 
-//?? Use libxml2 parser as temporary workaround. Later, self-written parsing functions should be used.
-#include <libxml/parser.h>
-#include <libxml/tree.h>
-#include <string.h>
-#include "../../globals/constants/character/code/character_code_constants.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
-#include "../../globals/constants/cybol/cybol_constants.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/allocator/xml_node_allocator.c"

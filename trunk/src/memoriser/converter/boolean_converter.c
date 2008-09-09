@@ -19,19 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: boolean_converter.c,v $ $Revision: 1.21 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: boolean_converter.c,v $ $Revision: 1.22 $ $Date: 2008-09-09 21:17:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BOOLEAN_CONVERTER_SOURCE
 #define BOOLEAN_CONVERTER_SOURCE
 
-#include "../../globals/constants/boolean/boolean_constants.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/cybol/boolean_cybol_model.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/boolean_memory_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/memory/primitive_memory_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
@@ -66,12 +67,12 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_elements(p3, (void*) TRUE_MODEL, (void*) TRUE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_array_elements(p3, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Set boolean value to "true", in other words the integer value to "one".
-                        set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) TRUE_BOOLEAN, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                         // Increment destination count.
                         *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -80,12 +81,12 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_elements(p3, (void*) FALSE_MODEL, (void*) FALSE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_array_elements(p3, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) FALSE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Set boolean value to "false", in other words the integer value to "zero".
-                        set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) FALSE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                         // Increment destination count.
                         *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -98,7 +99,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // the boolean (integer) value to "false" here, by default.
 
                     // Set boolean value to "false", in other words the integer value to "zero".
-                    set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) FALSE_BOOLEAN, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(*d, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) FALSE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Increment destination count.
                     *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -158,30 +159,30 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             if (*s == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                                 // Set destination character vector.
-                                *ds = *dc + *TRUE_MODEL_COUNT;
+                                *ds = *dc + *TRUE_BOOLEAN_CYBOL_MODEL_COUNT;
 
                                 // Reallocate destination character vector.
                                 reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 // Set source into destination character vector.
-                                set_array_elements(*d, p1, TRUE_MODEL, TRUE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                set_array_elements(*d, p1, TRUE_BOOLEAN_CYBOL_MODEL, TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 // Increment destination count.
-                                *dc = *dc + *TRUE_MODEL_COUNT;
+                                *dc = *dc + *TRUE_BOOLEAN_CYBOL_MODEL_COUNT;
 
                             } else {
 
                                 // Set destination character vector.
-                                *ds = *dc + *FALSE_MODEL_COUNT;
+                                *ds = *dc + *FALSE_BOOLEAN_CYBOL_MODEL_COUNT;
 
                                 // Reallocate destination character vector.
                                 reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 // Set source into destination character vector.
-                                set_array_elements(*d, p1, FALSE_MODEL, FALSE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                set_array_elements(*d, p1, FALSE_BOOLEAN_CYBOL_MODEL, FALSE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 // Increment destination count.
-                                *dc = *dc + *FALSE_MODEL_COUNT;
+                                *dc = *dc + *FALSE_BOOLEAN_CYBOL_MODEL_COUNT;
                             }
 
                         } else {

@@ -19,25 +19,23 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sensing_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: sensing_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SENSOR_SOURCE
 #define SENSOR_SOURCE
 
-#include "../applicator/sensor/gnu_linux_console_sensor.c"
-#include "../applicator/sensor/socket_sensor.c"
-#include "../applicator/sensor/x_window_system_sensor.c"
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../globals/constants/cybol/cybol_model_constants.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/log/level_log_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../variable/thread_identification.c"
-#include "../memoriser/accessor/compound_accessor.c"
+#include "../../applicator/communicator/sensing/gnu_linux_console_sensing_communicator.c"
+#include "../../applicator/communicator/sensing/socket_sensing_communicator.c"
+#include "../../applicator/communicator/sensing/x_window_system_sensing_communicator.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/log/level_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../variable/thread_identification.c"
 
 /**
  * Senses message.

@@ -19,27 +19,25 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: shutting_maintainer.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: shutting_maintainer.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SHUTTER_SOURCE
 #define SHUTTER_SOURCE
 
-#include "../applicator/shutter/gnu_linux_console_shutter.c"
-#include "../applicator/shutter/socket_shutter.c"
-#include "../applicator/shutter/x_window_system_shutter.c"
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../globals/constants/cybol/cybol_model_constants.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../variable/service_interrupt.c"
-#include "../variable/thread_identification.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/array.c"
+#include "../../applicator/shutter/gnu_linux_console_shutter.c"
+#include "../../applicator/shutter/socket_shutter.c"
+#include "../../applicator/shutter/x_window_system_shutter.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/array.c"
+#include "../../variable/service_interrupt.c"
+#include "../../variable/thread_identification.c"
 
 /**
  * Shuts down a service.

@@ -19,23 +19,21 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: loop_guider.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
+ * @version $RCSfile: loop_guider.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LOOPER_SOURCE
 #define LOOPER_SOURCE
 
-#include "../globals/constants/boolean/boolean_constants.c"
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/array.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/array.c"
 
 //
 // Forward declarations.
@@ -123,7 +121,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     // these would only be processed with a delay.
     // But this is not desirable, since follow-up signals of this
     // loop may rely on its full execution, including all cycles.
-    int x = *TRUE_BOOLEAN;
+    int x = *TRUE_BOOLEAN_MEMORY_MODEL;
 
     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 

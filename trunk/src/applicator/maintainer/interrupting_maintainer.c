@@ -19,25 +19,23 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: interrupting_maintainer.c,v $ $Revision: 1.3 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: interrupting_maintainer.c,v $ $Revision: 1.4 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INTERRUPTER_SOURCE
 #define INTERRUPTER_SOURCE
 
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../constant/channel/cybol_channel.c"
-#include "../globals/constants/cybol/cybol_model_constants.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../variable/service_interrupt.c"
-#include "../variable/thread_identification.c"
-#include "../memoriser/accessor/compound_accessor.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/channel/cybol_channel.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../variable/service_interrupt.c"
+#include "../../variable/thread_identification.c"
 
 /**
  * Interrupts the thread.

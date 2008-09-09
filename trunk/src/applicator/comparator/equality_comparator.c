@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: equality_comparator.c,v $ $Revision: 1.3 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
+ * @version $RCSfile: equality_comparator.c,v $ $Revision: 1.4 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,13 +30,12 @@
 #include "../../applicator/comparator/equality/part_equality_comparator.c"
 #include "../../applicator/comparator/equality/prefix_equality_comparator.c"
 #include "../../applicator/comparator/equality/suffix_equality_comparator.c"
-#include "../../globals/constants/boolean/boolean_constants.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/comparison_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -52,9 +51,9 @@
  * The result parameter's abstraction must be BOOLEAN.
  * The left side- and right side parameters' abstractions have to be equal.
  * They can be one of:
- * - CHARACTER
- * - INTEGER
- * - DOUBLE
+ * - character
+ * - integer
+ * - double
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -157,49 +156,49 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p27, p28, (void*) COMPARE_ALL_SELECTION_MODEL, (void*) COMPARE_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*sm, *smc, (void*) COMPARE_ALL_SELECTION_MODEL, (void*) COMPARE_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_all(p0, p1, p2, p3, p4, p5, p6, p7, p8,
-                p9, p10, p11, p12, p13, p14, p15, p16, p17,
-                p18, p19, p20, p21, p22, p23, p24, p25, p26);
+            compare_equal_all(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
+                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
+                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p27, p28, (void*) COMPARE_PREFIX_SELECTION_MODEL, (void*) COMPARE_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*sm, *smc, (void*) COMPARE_PREFIX_SELECTION_MODEL, (void*) COMPARE_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_prefix(p0, p1, p2, p3, p4, p5, p6, p7, p8,
-                p9, p10, p11, p12, p13, p14, p15, p16, p17,
-                p18, p19, p20, p21, p22, p23, p24, p25, p26);
+            compare_equal_prefix(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
+                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
+                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p27, p28, (void*) COMPARE_SUFFIX_SELECTION_MODEL, (void*) COMPARE_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*sm, *smc, (void*) COMPARE_SUFFIX_SELECTION_MODEL, (void*) COMPARE_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_suffix(p0, p1, p2, p3, p4, p5, p6, p7, p8,
-                p9, p10, p11, p12, p13, p14, p15, p16, p17,
-                p18, p19, p20, p21, p22, p23, p24, p25, p26);
+            compare_equal_suffix(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
+                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
+                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p27, p28, (void*) COMPARE_PART_SELECTION_MODEL, (void*) COMPARE_PART_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*sm, *smc, (void*) COMPARE_PART_SELECTION_MODEL, (void*) COMPARE_PART_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_part(p0, p1, p2, p3, p4, p5, p6, p7, p8,
-                p9, p10, p11, p12, p13, p14, p15, p16, p17,
-                p18, p19, p20, p21, p22, p23, p24, p25, p26);
+            compare_equal_part(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
+                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
+                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
         }
     }
 

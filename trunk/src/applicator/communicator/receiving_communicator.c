@@ -19,28 +19,26 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RECEIVER_SOURCE
 #define RECEIVER_SOURCE
 
-#include "../applicator/receiver/file_system_receiver.c"
-#include "../applicator/receiver/latex_receiver.c"
-#include "../applicator/receiver/gnu_linux_console_receiver.c"
-#include "../applicator/receiver/socket_receiver.c"
-#include "../applicator/receiver/x_window_system_receiver.c"
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../constant/channel/cybol_channel.c"
-#include "../globals/constants/cybol/cybol_model_constants.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../variable/thread_identification.c"
-#include "../memoriser/accessor/compound_accessor.c"
+#include "../../applicator/communicator/receiving/file_system_receiving_communicator.c"
+#include "../../applicator/communicator/receiving/gnu_linux_console_receiver.c"
+#include "../../applicator/communicator/receiving/latex_receiver.c"
+#include "../../applicator/communicator/receiving/socket_receiver.c"
+#include "../../applicator/communicator/receiving/x_window_system_receiver.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/channel/cybol_channel.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../variable/thread_identification.c"
 
 /**
  * Receives a message via the given channel.

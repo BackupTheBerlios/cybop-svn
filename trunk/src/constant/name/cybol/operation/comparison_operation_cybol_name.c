@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: comparison_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: comparison_operation_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,6 +42,11 @@ static int* RIGHT_SIDE_COMPARISON_OPERATION_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_
 static wchar_t RESULT_COMPARISON_OPERATION_CYBOL_NAME_ARRAY[] = {L'r', L'e', L's', L'u', L'l', L't'};
 static wchar_t* RESULT_COMPARISON_OPERATION_CYBOL_NAME = RESULT_COMPARISON_OPERATION_CYBOL_NAME_ARRAY;
 static int* RESULT_COMPARISON_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The selection comparison operation cybol name. */
+static wchar_t SELECTION_COMPARISON_OPERATION_CYBOL_NAME_ARRAY[] = {L's', L'e', L'l', L'e', L'c', L't', L'i', L'o', L'n'};
+static wchar_t* SELECTION_COMPARISON_OPERATION_CYBOL_NAME = SELECTION_COMPARISON_OPERATION_CYBOL_NAME_ARRAY;
+static int* SELECTION_COMPARISON_OPERATION_CYBOL_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* COMPARISON_OPERATION_CYBOL_NAME_SOURCE */
 #endif

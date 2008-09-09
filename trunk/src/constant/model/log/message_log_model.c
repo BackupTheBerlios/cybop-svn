@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: message_log_model.c,v $ $Revision: 1.4 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
+ * @version $RCSfile: message_log_model.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -886,9 +886,9 @@ static wchar_t* HANDLE_COMPOUND_MESSAGE_LOG_MODEL = HANDLE_COMPOUND_MESSAGE_LOG_
 static int* HANDLE_COMPOUND_MESSAGE_LOG_MODEL_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "Handle operation." message log model. */
-static wchar_t HANDLE_OPERATION_MESSAGE_LOG_MODEL_LOG_MODEL_LOG_MODEL_ARRAY[] = {L'H', L'a', L'n', L'd', L'l', L'e', L' ', L'o', L'p', L'e', L'r', L'a', L't', L'i', L'o', L'n', L'.'};
-static wchar_t* HANDLE_OPERATION_MESSAGE_LOG_MODEL_LOG_MODEL_LOG_MODEL = HANDLE_OPERATION_MESSAGE_LOG_MODEL_LOG_MODEL_LOG_MODEL_ARRAY;
-static int* HANDLE_OPERATION_MESSAGE_LOG_MODEL_LOG_MODEL_LOG_MODEL_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t HANDLE_OPERATION_MESSAGE_LOG_MODEL_ARRAY[] = {L'H', L'a', L'n', L'd', L'l', L'e', L' ', L'o', L'p', L'e', L'r', L'a', L't', L'i', L'o', L'n', L'.'};
+static wchar_t* HANDLE_OPERATION_MESSAGE_LOG_MODEL = HANDLE_OPERATION_MESSAGE_LOG_MODEL_ARRAY;
+static int* HANDLE_OPERATION_MESSAGE_LOG_MODEL_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "Set shutdown flag." message log model. */
 static wchar_t SET_SHUTDOWN_FLAG_MESSAGE_LOG_MODEL_ARRAY[] = {L'S', L'e', L't', L' ', L's', L'h', L'u', L't', L'd', L'o', L'w', L'n', L' ', L'f', L'l', L'a', L'g', L'.'};

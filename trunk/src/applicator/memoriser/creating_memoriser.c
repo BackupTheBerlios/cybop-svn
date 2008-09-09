@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.4 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,19 +27,18 @@
 #define CREATOR_SOURCE
 
 #include <libxml/tree.h>
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../constant/channel/cybol_channel.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/array.c"
-#include "../memoriser/communicator.c"
-#include "../memoriser/converter/compound_converter.c"
-#include "../memoriser/converter.c"
-#include "../memoriser/allocator.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/channel/cybol_channel.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/array.c"
+#include "../../memoriser/communicator.c"
+#include "../../memoriser/converter/compound_converter.c"
+#include "../../memoriser/converter.c"
+#include "../../memoriser/allocator.c"
 
 /**
  * Creates a knowledge model and adds it to the given compound element.

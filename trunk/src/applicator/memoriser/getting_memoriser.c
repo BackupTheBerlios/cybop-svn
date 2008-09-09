@@ -19,23 +19,22 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: getting_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: getting_memoriser.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef GETTER_SOURCE
 #define GETTER_SOURCE
 
-#include "../applicator/getter/abstraction_getter.c"
-#include "../applicator/getter/name_getter.c"
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/array.c"
+#include "../../applicator/getter/abstraction_getter.c"
+#include "../../applicator/getter/name_getter.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../memoriser/array.c"
 
 /**
  * Gets a description (meta information) of the part at the given index.
@@ -135,7 +134,7 @@ void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get result.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) GET_RESULT_NAME, (void*) GET_RESULT_NAME_COUNT,
+        (void*) GET_RESULT_COMPARISON_OPERATION_CYBOL_NAME, (void*) GET_RESULT_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,

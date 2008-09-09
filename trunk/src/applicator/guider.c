@@ -19,20 +19,21 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: guider.c,v $ $Revision: 1.4 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
+ * @version $RCSfile: guider.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef GUIDER_SOURCE
 #define GUIDER_SOURCE
 
-#include "../applicator/adder/character_vector_adder.c"
-#include "../applicator/adder/integer_vector_adder.c"
+#include "../applicator/guider/branch_guider.c"
+#include "../applicator/guider/loop_guider.c"
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../globals/constants/cybol/cybol_name_constants.c"
-#include "../constant/model/memory/integer_memory_model.c"
+#include "../constant/model/cybol/operation/flow_operation_cybol_model.c"
 #include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
+#include "../constant/name/cybol/operation_cybol_name.c"
 #include "../logger/logger.c"
 #include "../memoriser/accessor/compound_accessor.c"
 #include "../memoriser/array.c"
@@ -71,7 +72,7 @@ void guide(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5) {
 
     // Get operation type.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) TYPE_ABSTRACTION_NAME, (void*) TYPE_ABSTRACTION_NAME_COUNT,
+        (void*) TYPE_OPERATION_CYBOL_NAME, (void*) TYPE_OPERATION_CYBOL_NAME_COUNT,
         (void*) &tn, (void*) &tnc, (void*) &tns,
         (void*) &ta, (void*) &tac, (void*) &tas,
         (void*) &tm, (void*) &tmc, (void*) &tms,

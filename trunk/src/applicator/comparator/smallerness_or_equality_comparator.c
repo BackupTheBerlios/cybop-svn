@@ -19,19 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: smallerness_or_equality_comparator.c,v $ $Revision: 1.5 $ $Date: 2008-09-08 21:28:35 $ $Author: christian $
+ * @version $RCSfile: smallerness_or_equality_comparator.c,v $ $Revision: 1.6 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SMALLERNESS_OR_EQUALITY_COMPARATOR_SOURCE
 #define SMALLERNESS_OR_EQUALITY_COMPARATOR_SOURCE
 
-#include "../../globals/constants/boolean/boolean_constants.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/comparison_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -47,9 +47,9 @@
  * The result parameter's abstraction must be BOOLEAN.
  * The left side- and right side parameters' abstractions have to be equal.
  * They can be one of:
- * - CHARACTER
- * - INTEGER
- * - DOUBLE
+ * - character
+ * - integer
+ * - double
  *
  * @param p0 the parameters
  * @param p1 the parameters count
@@ -114,7 +114,7 @@ void compare_smallerness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
 
     // Get left side.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) LEFT_SIDE_NAME, (void*) LEFT_SIDE_NAME_COUNT,
+        (void*) LEFT_SIDE_COMPARISON_OPERATION_CYBOL_NAME, (void*) LEFT_SIDE_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &lsn, (void*) &lsnc, (void*) &lsns,
         (void*) &lsa, (void*) &lsac, (void*) &lsas,
         (void*) &lsm, (void*) &lsmc, (void*) &lsms,
@@ -122,7 +122,7 @@ void compare_smallerness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         p2, p3);
     // Get right side.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RIGHT_SIDE_NAME, (void*) RIGHT_SIDE_NAME_COUNT,
+        (void*) RIGHT_SIDE_COMPARISON_OPERATION_CYBOL_NAME, (void*) RIGHT_SIDE_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &rsn, (void*) &rsnc, (void*) &rsns,
         (void*) &rsa, (void*) &rsac, (void*) &rsas,
         (void*) &rsm, (void*) &rsmc, (void*) &rsms,
@@ -130,7 +130,7 @@ void compare_smallerness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         p2, p3);
     // Get result.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RESULT_NAME, (void*) RESULT_NAME_COUNT,
+        (void*) RESULT_COMPARISON_OPERATION_CYBOL_NAME, (void*) RESULT_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
@@ -138,7 +138,7 @@ void compare_smallerness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         p2, p3);
     // Get selection.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNT_SELECTION_NAME, (void*) COUNT_SELECTION_NAME_COUNT,
+        (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME, (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
@@ -151,7 +151,7 @@ void compare_smallerness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Compare result parameter abstraction. It must be a boolean.
-    compare_arrays(p18, p19, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    compare_arrays(*ra, *rac, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -169,16 +169,16 @@ void compare_smallerness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Compare parameter abstractions.
-        compare_arrays(p0, p1, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-        compare_arrays(p9, p10, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*lsa, *lsac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*rsa, *rsac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Use character parameters.");
 
-            if (*((wchar_t*) p3) == *((wchar_t*) p12)) {
+            if (*((wchar_t*) *lsm) == *((wchar_t*) *rsm)) {
 
-                *rm = *TRUE_BOOLEAN;
+                *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
 
             } else {
 
@@ -195,16 +195,16 @@ void compare_smallerness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Compare parameter abstractions.
-        compare_arrays(p0, p1, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-        compare_arrays(p9, p10, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*lsa, *lsac, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*rsa, *rsac, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Use integer parameters.");
 
-            if (*((int*) p3) == *((int*) p12)) {
+            if (*((int*) *lsm) == *((int*) *rsm)) {
 
-                *rm = *TRUE_BOOLEAN;
+                *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
 
             } else {
 
@@ -221,16 +221,16 @@ void compare_smallerness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Compare parameter abstractions.
-        compare_arrays(p0, p1, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-        compare_arrays(p9, p10, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*lsa, *lsac, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*rsa, *rsac, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Use double parameters.");
 
-            if (*((double*) p3) == *((double*) p12)) {
+            if (*((double*) *lsm) == *((double*) *rsm)) {
 
-                *rm = *TRUE_BOOLEAN;
+                *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
 
             } else {
 
