@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.51 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.52 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPOUND_ACCESSOR_SOURCE
 #define COMPOUND_ACCESSOR_SOURCE
 
+#include "../../constant/abstraction/cybol/number_cybol_abstraction.c"
 #include "../../constant/abstraction/cybol/path_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"

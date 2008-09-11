@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.53 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.54 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@
 #include "../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../memoriser/converter/boolean_converter.c"
 #include "../memoriser/converter/complex_converter.c"
-#include "../memoriser/converter/compound_converter.c"
+#include "../memoriser/converter/cybol_converter.c"
 #include "../memoriser/converter/date_time_converter.c"
 #include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
@@ -90,7 +90,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            decode_compound(p0, p1, p2, p6, p7);
+            decode_cybol(p0, p1, p2, p6, p7);
         }
     }
 
@@ -394,7 +394,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            encode_compound(p0, p1, p2, p7, p8);
+            encode_cybol(p0, p1, p2, p7, p8);
         }
     }
 

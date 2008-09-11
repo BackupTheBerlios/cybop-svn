@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,8 +46,8 @@
 #include "../../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
-#include "../../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../..//home/cybop/src/constant/model/cybol/http_request_cybol_model.c"
+#include "../../..//home/cybop/src/constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"

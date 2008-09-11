@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.37 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.38 $ $Date: 2008-09-11 23:02:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>
-#include "../../globals/constants/character/code/character_code_constants.c"
+#include "../..//home/cybop/src/constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"

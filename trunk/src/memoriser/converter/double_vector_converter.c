@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: double_vector_converter.c,v $ $Revision: 1.21 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
+ * @version $RCSfile: double_vector_converter.c,v $ $Revision: 1.22 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,7 +27,7 @@
 #define DOUBLE_VECTOR_CONVERTER_SOURCE
 
 #include <string.h>
-#include "../../globals/constants/character/code/character_code_constants.c"
+#include "../..//home/cybop/src/constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -100,7 +100,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             //?? to be able to take the double value?
 
             // Set double value.
-            set_array_elements(*d, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(*d, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 
             // Destroy temporary null-terminated string.
             deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -145,7 +145,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 double* v = (double*) *NULL_POINTER_MEMORY_MODEL;
 
                 // Get double value.
-                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
+                get_array_elements(p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
 
                 // Initialise destination count to -1.
                 // CAUTION! It must be negative for the loop to run.

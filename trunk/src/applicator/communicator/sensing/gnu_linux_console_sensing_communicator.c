@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,12 +32,12 @@
 #include <signal.h>
 #include <stdio.h>
 //?? #include <wchar.h>
-#include "../../../globals/constants/character/code/character_code_constants.c"
+#include "../../..//home/cybop/src/constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../globals/constants/cybol/cybol_name_constants.c"
+#include "../../..//home/cybop/src/constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/level_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"

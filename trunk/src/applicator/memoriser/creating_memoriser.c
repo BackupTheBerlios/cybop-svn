@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.6 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,7 +36,7 @@
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
 #include "../../memoriser/communicator.c"
-#include "../../memoriser/converter/compound_converter.c"
+#include "../../memoriser/converter/cybol_converter.c"
 #include "../../memoriser/converter.c"
 #include "../../memoriser/allocator.c"
 

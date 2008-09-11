@@ -19,22 +19,22 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: date_time_converter.c,v $ $Revision: 1.16 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: date_time_converter.c,v $ $Revision: 1.17 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DATE_TIME_CONVERTER_SOURCE
 #define DATE_TIME_CONVERTER_SOURCE
 
-#include "../../globals/constants/character/code/character_code_constants.c"
+#include "../..//home/cybop/src/constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/allocator.c"
+#include "../../variable/reallocation_factor.c"
 
 /**
  * Decodes the byte stream and creates a date time model from it.
@@ -217,12 +217,12 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         }
 
                         // Set date time integer values.
-                        set_array_elements(*d, (void*) DATE_TIME_YEAR_INDEX, (void*) &yv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) DATE_TIME_MONTH_INDEX, (void*) &mv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) DATE_TIME_DAY_INDEX, (void*) &dv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) DATE_TIME_HOUR_INDEX, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) DATE_TIME_MINUTE_INDEX, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) DATE_TIME_SECOND_INDEX, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) YEAR_DATETIME_MEMORY_NAME, (void*) &yv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) MONTH_DATETIME_MEMORY_NAME, (void*) &mv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) DAY_DATETIME_MEMORY_NAME, (void*) &dv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) HOUR_DATETIME_MEMORY_NAME, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) MINUTE_DATETIME_MEMORY_NAME, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) SECOND_DATETIME_MEMORY_NAME, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                         // Increase date time count by one, because of new element.
                         (*dc)++;

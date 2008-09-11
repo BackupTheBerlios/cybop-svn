@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.72 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+# @version $Revision: 1.73 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-09-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
 
 2008-09-09  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt source code to match new constants

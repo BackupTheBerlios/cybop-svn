@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_converter.c,v $ $Revision: 1.28 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
+ * @version $RCSfile: integer_converter.c,v $ $Revision: 1.29 $ $Date: 2008-09-11 23:02:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>
-#include "../../globals/constants/character/code/character_code_constants.c"
+#include "../..//home/cybop/src/constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
@@ -145,7 +145,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 int* v = (int*) *NULL_POINTER_MEMORY_MODEL;
 
                 // Get integer value.
-                get_array_elements(p3, (void*) PRIMITIVE_VALUE_INDEX, (void*) &v, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                get_array_elements(p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Initialise destination count to -1.
                 // CAUTION! It must be negative for the loop to run.

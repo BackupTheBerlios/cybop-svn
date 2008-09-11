@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.21 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.22 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,8 +37,8 @@
 #include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../globals/constants/cybol/cybol_model_constants.c"
-#include "../../globals/constants/cybol/cybol_name_constants.c"
+#include "../..//home/cybop/src/constant/model/cybol/http_request_cybol_model.c"
+#include "../..//home/cybop/src/constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -1434,11 +1434,11 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
         //?? TODO: These values should later be given as boolean "true" or "false".
         //?? Currently, they have to be given as "0" or "1" in CYBOL.
         //?? Change this later by transforming boolean into integer values!
-        set_element(&h, (void*) PRIMITIVE_VALUE_INDEX, p7, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-        set_element(&i, (void*) PRIMITIVE_VALUE_INDEX, p9, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-        set_element(&bl, (void*) PRIMITIVE_VALUE_INDEX, p11, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-        set_element(&u, (void*) PRIMITIVE_VALUE_INDEX, p13, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-        set_element(&b, (void*) PRIMITIVE_VALUE_INDEX, p15, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        set_element(&h, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p7, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        set_element(&i, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p9, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        set_element(&bl, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p11, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        set_element(&u, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p13, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        set_element(&b, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p15, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
         // Map colour names to control sequences.
         encode((void*) &bg, (void*) &bgc, (void*) &bgs, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p17, p18,
             *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION, (void*) TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT);

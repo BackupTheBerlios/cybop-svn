@@ -19,17 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.9 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.10 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ABSTRACTION_CONVERTER_SOURCE
 #define ABSTRACTION_CONVERTER_SOURCE
 
+#include "../../constant/abstraction/cybol/datetime_cybol_abstraction.c"
+#include "../../constant/abstraction/cybol/logicvalue_cybol_abstraction.c"
+#include "../../constant/abstraction/cybol/operation_cybol_abstraction.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"

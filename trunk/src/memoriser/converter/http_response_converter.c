@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_response_converter.c,v $ $Revision: 1.14 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: http_response_converter.c,v $ $Revision: 1.15 $ $Date: 2008-09-11 23:02:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,7 +31,7 @@
 #include "../../globals/constants/http/http_header_constants.c"
 #include "../../globals/constants/http/http_header_variable_constants.c"
 #include "../../globals/constants/http/http_protocol_version_constants.c"
-#include "../../globals/constants/http/http_separator_constants.c"
+#include "../..//home/cybop/src/constant/model/http/separator_http_model.c"
 #include "../../globals/constants/http/http_status_code_constants.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../globals/constants/mime_type/text_mime_type_constants.c"
@@ -139,7 +139,7 @@ void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* 
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Encode http header argument separator.
     encode(p0, p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_MODEL, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Encode content type as mime type.
     encode(p0, p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
@@ -163,7 +163,7 @@ void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* 
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Encode http header separator.
     encode(p0, p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        (void*) HTTP_HEADER_SEPARATOR, (void*) HTTP_HEADER_SEPARATOR_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        (void*) HEADER_SEPARATOR_HTTP_MODEL, (void*) HEADER_SEPARATOR_HTTP_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Encode content length http header.
     encode(p0, p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
@@ -171,7 +171,7 @@ void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* 
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Encode http header argument separator.
     encode(p0, p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        (void*) HTTP_HEADER_ARGUMENT_SEPARATOR, (void*) HTTP_HEADER_ARGUMENT_SEPARATOR_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_MODEL, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Encode content length as http body's length.
     // CAUTION! The source is an integer value!
@@ -252,7 +252,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
                 encode_http_response_headers(p0, p1, p2, p5, p6, (void*) &bc);
                 // Encode http headers separator.
                 encode(p0, p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                    (void*) HTTP_HEADERS_SEPARATOR, (void*) HTTP_HEADERS_SEPARATOR_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+                    (void*) HEADERS_SEPARATOR_HTTP_MODEL, (void*) HEADERS_SEPARATOR_HTTP_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                     *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                 if ((*dc + bc) > *ds) {

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communicator.c,v $ $Revision: 1.27 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: communicator.c,v $ $Revision: 1.28 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,7 +28,7 @@
 
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../constant/channel/cybol_channel.c"
-#include "../globals/constants/cybol/cybol_model_constants.c"
+#include "..//home/cybop/src/constant/model/cybol/http_request_cybol_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../globals/constants/system/system_file_name_constants.c"

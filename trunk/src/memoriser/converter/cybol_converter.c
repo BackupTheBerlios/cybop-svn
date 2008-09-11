@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_converter.c,v $ $Revision: 1.29 $ $Date: 2008-09-09 21:17:23 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.1 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPOUND_CONVERTER_SOURCE
-#define COMPOUND_CONVERTER_SOURCE
+#ifndef CYBOL_CONVERTER_SOURCE
+#define CYBOL_CONVERTER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
@@ -444,6 +444,7 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
+/*??
     if (p12 != *NULL_POINTER_MEMORY_MODEL) {
 
         xmlNode* pv = (xmlNode*) p12;
@@ -489,6 +490,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
                     *n = pv->content;
                     *nc = strlen((char*) *n);
                     */
+/*??
                 }
             }
 
@@ -508,6 +510,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
                     *c = pv->content;
                     *cc = strlen((char*) *c);
                     */
+/*??
                 }
             }
 
@@ -527,6 +530,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
                     *a = pv->content;
                     *ac = strlen((char*) *a);
                     */
+/*??
                 }
             }
 
@@ -546,6 +550,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
                     *m = pv->content;
                     *mc = strlen((char*) *m);
                     */
+/*??
                 }
             }
 
@@ -558,6 +563,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode compound cybol property. The property value is null.");
     }
+*/
 }
 
 /**
@@ -579,6 +585,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
  */
 void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
+/*??
     if (p12 != *NULL_POINTER_MEMORY_MODEL) {
 
         xmlNode* cn = (xmlNode*) p12;
@@ -620,6 +627,7 @@ void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, vo
 
 //??        log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &"Could not translate xml node. The source parameter count is null.");
     }
+*/
 }
 
 /**
@@ -633,6 +641,7 @@ void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, vo
  */
 void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
+/*??
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         xmlNode* s = (xmlNode*) p3;
@@ -853,6 +862,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode compound cybol node. The source xml node is null.");
     }
+*/
 }
 
 /**
@@ -866,6 +876,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
  */
 void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
+/*??
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         xmlNode* s = (xmlNode*) p3;
@@ -898,6 +909,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode compound cybol nodes. The source xml node is null.");
     }
+*/
 }
 
 /**
@@ -918,6 +930,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
  */
 void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
+/*??
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
@@ -1017,6 +1030,7 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode xml. The source count is null.");
     }
+*/
 }
 
 /**
@@ -1151,5 +1165,5 @@ void encode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode compound.");
 }
 
-/* COMPOUND_CONVERTER_SOURCE */
+/* CYBOL_CONVERTER_SOURCE */
 #endif
