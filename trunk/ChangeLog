@@ -14,9 +14,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.73 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
+# @version $Revision: 1.74 $ $Date: 2008-09-12 15:40:09 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-09-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt automake files to new directory structure
+        * Remove xml declaration (first line) from all CYBOL example files;
+            when no such declaration exists, a Unicode encoding is assumed,
+            as defined by a Unicode Byte Order Mark before the document's first character;
+            if the mark does not exist, UTF-8 encoding is assumed;
+            CYBOL files are UTF-8 encoded, so the declaration is not needed
+        * Start implementing a CYBOL parser in file "cybol_converter.c"
 
 2008-09-11  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt source code to match new constants

@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.61)
 AC_INIT([cybop], [0.9.0], [christian.heller@tuxtax.de])
-AC_CONFIG_SRCDIR([src/applicator/add.c])
+AC_CONFIG_SRCDIR([src/controller/cyboi.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([gnu dist-bzip2 tar-ustar])
 #AC_CONFIG_HEADER([config.h])

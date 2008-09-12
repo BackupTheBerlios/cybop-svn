@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
 <model>
     <part name="exit_program" channel="file" abstraction="png" model="ui_control/gui/main_frame/exit_button.png">
         <property name="layout" channel="inline" abstraction="character" model="compass"/>
@@ -39,6 +37,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.3 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
+    @version $Revision: 1.4 $ $Date: 2008-09-12 15:40:10 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

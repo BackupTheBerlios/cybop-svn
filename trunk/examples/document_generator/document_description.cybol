@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
 <model>
     <part name="document" channel="file" abstraction="cybol" model="document_generator/document.cybol">
         <property name="font_size" channel="file" abstraction="cybol" model="document_generator/document/meta/font_size.cybol"/>
@@ -31,6 +29,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.5 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
+    @version $Revision: 1.6 $ $Date: 2008-09-12 15:40:10 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

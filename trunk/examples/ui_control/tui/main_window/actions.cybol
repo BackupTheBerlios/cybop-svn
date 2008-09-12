@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
 <model>
     <part name="arrow_down" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.select_next_part"/>
     <part name="arrow_up" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.select_previous_part"/>
@@ -40,6 +38,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.5 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
+    @version $Revision: 1.6 $ $Date: 2008-09-12 15:40:10 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

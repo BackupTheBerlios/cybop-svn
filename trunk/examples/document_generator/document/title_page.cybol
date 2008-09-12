@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
 <model>
     <part name="title" channel="inline" abstraction="string" model="CYBOP Document Generation">
         <property name="type" channel="inline" abstraction="knowledge" model="document_generator.styles.title"/>
@@ -37,6 +35,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.5 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
+    @version $Revision: 1.6 $ $Date: 2008-09-12 15:40:10 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

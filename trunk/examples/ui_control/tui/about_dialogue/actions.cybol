@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
 <model>
     <part name="enter" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.hide_about_information"/>
     <part name="escape" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.hide_about_information"/>
@@ -28,6 +26,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.3 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
+    @version $Revision: 1.4 $ $Date: 2008-09-12 15:40:10 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

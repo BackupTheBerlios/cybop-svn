@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
 <!--
     This example creates a small, hierarchical domain model consisting
     of a compound called "domain" and its part called "greeting".
@@ -38,6 +36,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.11 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
+    @version $Revision: 1.12 $ $Date: 2008-09-12 15:40:10 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

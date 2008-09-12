@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.1 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.2 $ $Date: 2008-09-12 15:40:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,7 +91,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p13 the details count
  * @param p14 the details size
  */
-void set_compound_element_by_name(void* p0, void* p1, void* p2,
+void set_cybol_element_by_name(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14);
 
@@ -104,7 +104,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
  * @param p3 the source (xmlNode*)
  * @param p4 the source count (for this function not relevant void*)
  */
-void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4);
+void decode_cybol_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4);
 
 /**
  * Allocates the model.
@@ -115,7 +115,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
  * @param p3 the abstraction count
  */
 /*??
-void decode_compound_allocate_model(void* p0, void* p1, void* p2, void* p3) {
+void decode_cybol_allocate_model(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate model.");
 
@@ -148,7 +148,7 @@ void decode_compound_allocate_model(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            allocate_compound(p0, p1);
+            allocate_cybol(p0, p1);
         }
     }
 
@@ -250,16 +250,16 @@ void decode_compound_allocate_model(void* p0, void* p1, void* p2, void* p3) {
 */
 
 /**
- * Decodes the xml stream until an xml comment end tag is reached.
+ * Decodes the xml array until an xml comment end tag is reached.
  *
- * This procedure only counts up the stream pointer and
+ * This procedure only counts up the array pointer and
  * changes nothing in the xml model.
  *
- * @param p0 the xml stream
- * @param p1 the xml stream count
+ * @param p0 the xml array
+ * @param p1 the xml array count
  */
 /*??
-void decode_compound_comment_tag(void* p0, void* p1) {
+void decode_cybol_comment_tag(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -269,7 +269,7 @@ void decode_compound_comment_tag(void* p0, void* p1) {
         int l = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The current byte within the stream.
+        // The current byte within the array.
         void* b = p0;
         // The remaining bytes count.
         int bc = *sc;
@@ -342,16 +342,16 @@ void decode_compound_comment_tag(void* p0, void* p1) {
 */
 
 /**
- * Decodes the xml stream into an xml tag.
+ * Decodes the xml array into an xml tag.
  *
  * @param p0 the xml model
  * @param p1 the xml model count
  * @param p2 the xml model size
- * @param p3 the xml stream
- * @param p4 the xml stream count
+ * @param p3 the xml array
+ * @param p4 the xml array count
  */
 /*??
-void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_cybol_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -361,7 +361,7 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int l = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The current byte within the stream.
+        // The current byte within the array.
         void* b = (void*) p3;
         // The remaining bytes count.
         int bc = *sc;
@@ -441,7 +441,7 @@ void decode_compound_tag(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p13 the name
  * @param p14 the name count
  */
-void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void decode_cybol_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
 /*??
@@ -583,7 +583,7 @@ void decode_compound_cybol_property(void* p0, void* p1, void* p2, void* p3, void
  * @param p11 the model size
  * @param p12 the child node
  */
-void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
+void decode_cybol_cybol_properties(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
 /*??
     if (p12 != *NULL_POINTER_MEMORY_MODEL) {
@@ -612,7 +612,7 @@ void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, vo
                 pnc = strlen(pn);
 
                 // Decode property.
-                decode_compound_cybol_property(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, (void*) p->children, pn, (void*) &pnc);
+                decode_cybol_cybol_property(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, (void*) p->children, pn, (void*) &pnc);
 
                 // Get next child node property.
                 p = p->next;
@@ -639,7 +639,7 @@ void decode_compound_cybol_properties(void* p0, void* p1, void* p2, void* p3, vo
  * @param p3 the source (xmlNode*)
  * @param p4 the source count (for this function not relevant void*)
  */
-void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
@@ -682,7 +682,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             int* dds = (int*) *NULL_POINTER_MEMORY_MODEL;
 
             // Decode child node properties.
-            decode_compound_cybol_properties((void*) &sn, (void*) &snc, (void*) &sns, (void*) &sc, (void*) &scc, (void*) &scs,
+            decode_cybol_cybol_properties((void*) &sn, (void*) &snc, (void*) &sns, (void*) &sc, (void*) &scc, (void*) &scs,
                 (void*) &sa, (void*) &sac, (void*) &sas, (void*) &sm, (void*) &smc, (void*) &sms, p3);
 
     fwprintf(stderr, L"TEST decode compound cybol node sn: %ls\n", (wchar_t*) sn);
@@ -786,7 +786,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
                 // Allocate read model of type character, to read single bytes.
                 allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                // Read read model as persistent byte stream over channel.
+                // Read read model as persistent byte array over channel.
                 read_data((void*) &rm, (void*) &rmc, (void*) &rms, sm, (void*) &smc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sc, (void*) &scc);
 
     fwprintf(stderr, L"TEST decode compound cybol node rm: %ls\n", (wchar_t*) rm);
@@ -831,14 +831,14 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
             if (s->children != *NULL_POINTER_MEMORY_MODEL) {
 
                 // Decode destination details child node children.
-                decode_compound_cybol_nodes((void*) &dd, (void*) ddc, (void*) dds, p3, p4);
+                decode_cybol_cybol_nodes((void*) &dd, (void*) ddc, (void*) dds, p3, p4);
 
     fwprintf(stderr, L"TEST decode compound cybol node dd: %i\n", dd);
     fwprintf(stderr, L"TEST decode compound cybol node ddc: %i\n", *ddc);
             }
 
             // Add model to compound.
-            set_compound_element_by_name(*d, p1, p2,
+            set_cybol_element_by_name(*d, p1, p2,
                 dn, (void*) dnc, (void*) dns,
                 da, (void*) dac, (void*) das,
                 dm, (void*) dmc, (void*) dms,
@@ -874,7 +874,7 @@ void decode_compound_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4
  * @param p3 the source (xmlNode*)
  * @param p4 the source count (for this function not relevant void*)
  */
-void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_cybol_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
@@ -899,7 +899,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
 
             if (c->type == XML_ELEMENT_NODE) {
 
-                decode_compound_cybol_node(p0, p1, p2, (void*) c, (void*) &cc);
+                decode_cybol_cybol_node(p0, p1, p2, (void*) c, (void*) &cc);
             }
 
             c = c->next;
@@ -913,7 +913,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
 }
 
 /**
- * Decodes the byte stream and creates an xml model from it.
+ * Decodes the byte array and creates an xml model from it.
  *
  * CAUTION! This function is a temporary WORKAROUND, to be used until CYBOL-specific
  * parsing functions are written! CYBOL is completely XML-conform, with one exception:
@@ -928,7 +928,7 @@ void decode_compound_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p
  * @param p3 the source xml file name
  * @param p4 the source count
  */
-void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_cybol_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
 /*??
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
@@ -995,7 +995,7 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
                     xmlNode* r = xmlDocGetRootElement(doc);
 
                     // Decode cybol.
-                    decode_compound_cybol_nodes(p0, p1, p2, (void*) r, *NULL_POINTER_MEMORY_MODEL);
+                    decode_cybol_cybol_nodes(p0, p1, p2, (void*) r, *NULL_POINTER_MEMORY_MODEL);
 
                     if (doc != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -1034,125 +1034,198 @@ void decode_compound_libxml2_parser_workaround(void* p0, void* p1, void* p2, voi
 }
 
 /**
- * Decodes the byte stream message and creates a compound from it.
+ * Decodes the cybol declaration content.
+ *
+ * @param p0 the current byte (Hand over as reference!)
+ * @param p1 the remaining bytes count
+ */
+void decode_cybol_declaration_content(void* p0, void* p1) {
+
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** b = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol declaration content.");
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_arrays(*b, p1, (void*) DECLARATION_END_XML_NAME, (void*) DECLARATION_END_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // Set "declaration" mode flag.
+                dec = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            }
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode cybol declaration content. The current byte is null.");
+    }
+}
+
+/**
+ * Decodes the cybol declaration.
+ *
+ * @param p0 the current byte (Hand over as reference!)
+ * @param p1 the remaining bytes count
+ */
+void decode_cybol_declaration(void* p0, void* p1) {
+
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* rem = (int*) p1;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol declaration.");
+
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+            if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+
+            decode_cybol_declaration_content(p0, p1);
+
+            // Decrement remaining bytes count.
+            rem--;
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode cybol declaration. The remaining bytes count is null.");
+    }
+}
+
+/**
+ * Decodes the cybol byte array into a compound.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count
  * @param p2 the destination compound size
- * @param p3 the source message
- * @param p4 the source message count
+ * @param p3 the source byte array
+ * @param p4 the source byte array count
  */
-void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode compound.");
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-    decode_compound_libxml2_parser_workaround(p0, p1, p2, p3, p4);
+        int* sc = (int*) p4;
 
-/*??
-    // The comparison result.
-    int* r = (int*) *NULL_POINTER_MEMORY_MODEL;
-    allocate((void*) &r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    *r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    // The current byte within the stream.
-    void* b = *s;
-    // The remaining bytes count.
-    int bc = *sc;
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
 
-    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        // The declaration mode flag.
+        int dec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The definition mode flag.
+        int def = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The comment mode flag.
+        int com = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The element mode flag.
+        int ele = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The remaining bytes in the source array.
+        int rem = *sc;
+        // The current byte.
+        void* b = *NULL_POINTER_MEMORY_MODEL;
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        if (bc <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (dec != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            break;
-        }
+            // The decoder is in "declaration" mode.
 
-        //
-        // Zero decode/parse mode.
-        //
-        // CAUTION!
-        // The order of comparisons is important.
-        // Comment tags have to be found before other tags.
-        // Otherwise, a comment tag is treated wrongly as normal tag.
-        //
+            decode_cybol_declaration((void*) &b, (void*) &rem);
 
-        if (d == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            // Reset "declaration" mode flag.
+            dec = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            if (bc >= BEGIN_COMMENT_TAG_COUNT) {
+        } else if (def != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_array_elements((void*) &b, (void*) &BEGIN_COMMENT_TAG, (void*) &CHARACTER_ARRAY, (void*) &BEGIN_COMMENT_TAG_COUNT, (void*) &r);
+            // The decoder is in "definition" mode.
+
+            decode_cybol_definition((void*) &c, b, (void*) &rem);
+
+            // Reset "definition" mode flag.
+            def = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        } else if (com != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // The decoder is in "comment" mode.
+
+            decode_cybol_comment((void*) &c, b, (void*) &rem);
+
+            // Reset "comment" mode flag.
+            com = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        } else if (ele != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // The decoder is in "element" mode.
+
+            decode_cybol_element((void*) &c, b, (void*) &rem);
+
+            // Reset "element" mode flag.
+            ele = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        } else {
+
+            // The decoder is in no (or neutral) mode.
+            // This means, that the next meaningful character sequence may be searched below.
+
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                compare_arrays(b, (void*) &rem, (void*) DECLARATION_BEGIN_XML_NAME, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Move current byte pointer
-                    // and remaining bytes count.
-                    b = b + BEGIN_COMMENT_TAG_COUNT;
-                    bc = bc - BEGIN_COMMENT_TAG_COUNT;
+                    // Set "declaration" mode flag.
+                    dec = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                }
+            }
 
-                    // Decode xml comment tag.
-                    decode_xml_comment_tag((void*) &b, (void*) &bc);
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                compare_arrays(b, (void*) &rem, (void*) DEFINITION_BEGIN_XML_NAME, (void*) DEFINITION_BEGIN_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // Set "definition" mode flag.
+                    def = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                compare_arrays(b, (void*) &rem, (void*) COMMENT_BEGIN_XML_NAME, (void*) COMMENT_BEGIN_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // Set "comment" mode flag.
+                    com = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                compare_arrays(b, (void*) &rem, (void*) START_TAG_BEGIN_XML_NAME, (void*) START_TAG_BEGIN_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // Set "element" mode flag.
+                    ele = *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
             }
         }
 
-        if (d == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    } else {
 
-            if (bc >= BEGIN_TAG_BEGIN_COUNT) {
-
-                compare_array_elements((void*) &b, (void*) &BEGIN_TAG_BEGIN, (void*) &CHARACTER_ARRAY, (void*) &BEGIN_TAG_BEGIN_COUNT, (void*) &r);
-
-                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    // Move current byte pointer
-                    // and remaining bytes count.
-                    b = b + BEGIN_TAG_BEGIN_COUNT;
-                    bc = bc - BEGIN_TAG_BEGIN_COUNT;
-
-                    // Initialise xml tag.
-                    void* t = *NULL_POINTER_MEMORY_MODEL;
-                    int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                    int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                    // Exceptionally do NOT create and add a new xml tag.
-                    // The first tag of an xml file is the root tag.
-                    // The corresponding transient xml root tag model
-                    // to be used was already handed over to this procedure.
-                    // So, use this model instead of creating a new one!
-                    // For any other part tags of root, however,
-                    // new transient xml tag models have to be created!
-
-                    // Create xml tag.
-//??                    allocate_xml_tag((void*) &t, (void*) &ts);
-
-                    // Decode xml tag.
-                    decode_xml_tag((void*) &t, (void*) &tc, (void*) &ts,
-                        (void*) &b, (void*) &bc);
-
-                    //?? Exit sub procedure above when end tag is reached!
-
-                    // Add xml tag.
-//??                    add_xml_tag();
-                }
-            }
-        }
-
-        // If this block is reached, then no known term was found before.
-        // The current byte pointer will just be incremented by one so
-        // that new characters are read and compared in the next loop cycle.
-        if (d == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            // Increment current byte within persistent model.
-            b++;
-            // Decrement remaining bytes count.
-            bc--;
-        }
-
-        // Reset comparison result.
-        *r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode cybol. The source byte array count is null.");
     }
-*/
 }
 
 /**
- * Encodes the compound into a byte stream message.
+ * Encodes the compound into a cybol byte array.
  *
  * @param p0 the destination message (Hand over as reference!)
  * @param p1 the destination message count
@@ -1160,9 +1233,9 @@ void decode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source compound
  * @param p4 the source compound count
  */
-void encode_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode compound.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode cybol.");
 }
 
 /* CYBOL_CONVERTER_SOURCE */
