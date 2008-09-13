@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.2 $ $Date: 2008-09-12 15:40:10 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.3 $ $Date: 2008-09-13 21:45:38 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1034,18 +1034,18 @@ void decode_cybol_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* 
 }
 
 /**
- * Decodes the cybol declaration content.
+ * Processes the cybol declaration content.
  *
  * @param p0 the current byte (Hand over as reference!)
  * @param p1 the remaining bytes count
  */
-void decode_cybol_declaration_content(void* p0, void* p1) {
+void decode_cybol_process_declaration_content(void* p0, void* p1) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** b = (void**) p0;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol declaration content.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process cybol declaration content.");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1063,23 +1063,23 @@ void decode_cybol_declaration_content(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode cybol declaration content. The current byte is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process cybol declaration content. The current byte is null.");
     }
 }
 
 /**
- * Decodes the cybol declaration.
+ * Processes the cybol declaration.
  *
  * @param p0 the current byte (Hand over as reference!)
  * @param p1 the remaining bytes count
  */
-void decode_cybol_declaration(void* p0, void* p1) {
+void decode_cybol_process_declaration(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* rem = (int*) p1;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol declaration.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process cybol declaration.");
 
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
@@ -1096,7 +1096,7 @@ void decode_cybol_declaration(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode cybol declaration. The remaining bytes count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process cybol declaration. The remaining bytes count is null.");
     }
 }
 
@@ -1109,26 +1109,39 @@ void decode_cybol_declaration(void* p0, void* p1) {
  * @param p3 the source byte array
  * @param p4 the source byte array count
  */
-void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
-
-        // The declaration mode flag.
-        int dec = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The definition mode flag.
-        int def = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The comment mode flag.
-        int com = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The element mode flag.
-        int ele = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The remaining bytes in the source array.
         int rem = *sc;
         // The current byte.
         void* b = *NULL_POINTER_MEMORY_MODEL;
+
+        // The declaration mode flag.
+        int cf = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The definition mode flag.
+        int ff = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The comment mode flag.
+        int cf = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The element mode flag.
+        int ef = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        // The declaration.
+        void* c = *NULL_POINTER_MEMORY_MODEL;
+        int cc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The definition.
+        void* f = *NULL_POINTER_MEMORY_MODEL;
+        int fc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The comment.
+        void* c = *NULL_POINTER_MEMORY_MODEL;
+        int cc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The element.
+        void* e = *NULL_POINTER_MEMORY_MODEL;
+        int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -1136,7 +1149,7 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The decoder is in "declaration" mode.
 
-            decode_cybol_declaration((void*) &b, (void*) &rem);
+            decode_cybol_declaration((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
 
             // Reset "declaration" mode flag.
             dec = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1220,8 +1233,24 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode cybol. The source byte array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select cybol section. The source byte array count is null.");
     }
+}
+
+/**
+ * Decodes the cybol byte array into a compound.
+ *
+ * @param p0 the destination compound (Hand over as reference!)
+ * @param p1 the destination compound count
+ * @param p2 the destination compound size
+ * @param p3 the source byte array
+ * @param p4 the source byte array count
+ */
+void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
+
+    decode_cybol_select(p0, p1, p2, p3, p4);
 }
 
 /**
