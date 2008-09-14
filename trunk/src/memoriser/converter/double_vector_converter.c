@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: double_vector_converter.c,v $ $Revision: 1.22 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
+ * @version $RCSfile: double_vector_converter.c,v $ $Revision: 1.23 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,7 +27,7 @@
 #define DOUBLE_VECTOR_CONVERTER_SOURCE
 
 #include <string.h>
-#include "../..//home/cybop/src/constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"

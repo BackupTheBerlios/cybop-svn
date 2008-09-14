@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,10 +27,10 @@
 #define RECEIVER_SOURCE
 
 #include "../../applicator/communicator/receiving/file_system_receiving_communicator.c"
-#include "../../applicator/communicator/receiving/gnu_linux_console_receiver.c"
-#include "../../applicator/communicator/receiving/latex_receiver.c"
-#include "../../applicator/communicator/receiving/socket_receiver.c"
-#include "../../applicator/communicator/receiving/x_window_system_receiver.c"
+#include "../../applicator/communicator/receiving/gnu_linux_console_receiving_communicator.c"
+#include "../../applicator/communicator/receiving/latex_receiving_communicator.c"
+#include "../../applicator/communicator/receiving/socket_receiving_communicator.c"
+#include "../../applicator/communicator/receiving/x_window_system_receiving_communicator.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
@@ -79,7 +79,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p22, p23, (void*) FILE_SYSTEM_MODEL, (void*) FILE_SYSTEM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p22, p23, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -109,7 +109,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p22, p23, (void*) GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION, (void*) GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p22, p23, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -135,7 +135,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p22, p23, (void*) X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION, (void*) X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p22, p23, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -145,7 +145,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p22, p23, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p22, p23, (void*) WWW_CYBOL_CHANNEL, (void*) WWW_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -159,7 +159,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p22, p23, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p22, p23, (void*) CYBOI_CYBOL_CHANNEL, (void*) CYBOI_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -173,7 +173,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p22, p23, (void*) LATEX_MODEL, (void*) LATEX_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p22, p23, (void*) LATEX_CYBOL_CHANNEL, (void*) LATEX_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -369,7 +369,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get channel.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_CHANNEL_NAME, (void*) RECEIVE_CHANNEL_NAME_COUNT,
+        (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -378,7 +378,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get language.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_LANGUAGE_NAME, (void*) RECEIVE_LANGUAGE_NAME_COUNT,
+        (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         (void*) &ln, (void*) &lnc, (void*) &lns,
         (void*) &la, (void*) &lac, (void*) &las,
         (void*) &lm, (void*) &lmc, (void*) &lms,
@@ -387,7 +387,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get message.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_MESSAGE_NAME, (void*) RECEIVE_MESSAGE_NAME_COUNT,
+        (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         (void*) &mn, (void*) &mnc, (void*) &mns,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
@@ -396,7 +396,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get meta message.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_META_NAME, (void*) RECEIVE_META_NAME_COUNT,
+        (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         (void*) &men, (void*) &menc, (void*) &mens,
         (void*) &mea, (void*) &meac, (void*) &meas,
         (void*) &mem, (void*) &memc, (void*) &mems,
@@ -405,7 +405,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get model.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_MODEL_NAME, (void*) RECEIVE_MODEL_NAME_COUNT,
+        (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         (void*) &mon, (void*) &monc, (void*) &mons,
         (void*) &moa, (void*) &moac, (void*) &moas,
         (void*) &mom, (void*) &momc, (void*) &moms,
@@ -414,7 +414,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get root.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_ROOT_NAME, (void*) RECEIVE_ROOT_NAME_COUNT,
+        (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
@@ -423,7 +423,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get socket communication style.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_STYLE_NAME, (void*) RECEIVE_STYLE_NAME_COUNT,
+        (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         (void*) &stn, (void*) &stnc, (void*) &stns,
         (void*) &sta, (void*) &stac, (void*) &stas,
         (void*) &stm, (void*) &stmc, (void*) &stms,
@@ -432,7 +432,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get commands.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_COMMANDS_NAME, (void*) RECEIVE_COMMANDS_NAME_COUNT,
+        (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         (void*) &con, (void*) &conc, (void*) &cons,
         (void*) &coa, (void*) &coac, (void*) &coas,
         (void*) &com, (void*) &comc, (void*) &coms,
@@ -441,7 +441,7 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get blocking.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_BLOCKING_NAME, (void*) RECEIVE_BLOCKING_NAME_COUNT,
+        (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         (void*) &bn, (void*) &bnc, (void*) &bns,
         (void*) &ba, (void*) &bac, (void*) &bas,
         (void*) &bm, (void*) &bmc, (void*) &bms,

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: suffix_counting_memoriser.c,v $ $Revision: 1.5 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
+ * @version $RCSfile: suffix_counting_memoriser.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,7 +27,7 @@
 #define SUFFIX_COUNTER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../..//home/cybop/src/constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
+#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"

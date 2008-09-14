@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: raw_socket_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
+ * @version $RCSfile: raw_socket_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,7 +29,7 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include <stdio.h>
-#include "../..//home/cybop/src/constant/model/cybol/http_request_cybol_model.c"
+#include "../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"

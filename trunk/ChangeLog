@@ -14,9 +14,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.74 $ $Date: 2008-09-12 15:40:09 $ $Author: christian $
+# @version $Revision: 1.75 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-09-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+        * Add files with MIME type constants in directory "constant/abstraction/mime/";
+            their values are partly redundant to the CYBOL abstraction constants
+            in directory "constant/abstraction/cybol/", but have been introduced
+            to allow source code files (e.g. converters) to reference MIME constants
+            independently of CYBOL constants
+        * Rename files and directory "linux_console" into "gnu_linux_console"
 
 2008-09-12  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt automake files to new directory structure

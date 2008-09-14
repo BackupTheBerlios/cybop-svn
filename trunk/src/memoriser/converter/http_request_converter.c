@@ -19,22 +19,23 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.17 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
+ * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.18 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef HTTP_REQUEST_CONVERTER_SOURCE
 #define HTTP_REQUEST_CONVERTER_SOURCE
 
-#include "../..//home/cybop/src/constant/model/cybol/http_request_cybol_model.c"
-#include "../..//home/cybop/src/constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
-#include "../..//home/cybop/src/constant/model/http/request_method_http_model.c"
-#include "../..//home/cybop/src/constant/model/http/separator_http_model.c"
-#include "../..//home/cybop/src/constant/model/uri/separator_uri_model.c"
-#include "../..//home/cybop/src/constant/model/http/webdav_request_method_http_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../constant/model/cybol/http_request_cybol_model.c"
+#include "../../constant/model/http/request_method_http_model.c"
+#include "../../constant/model/http/separator_http_model.c"
+#include "../../constant/model/http/webdav_request_method_http_model.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/uri/separator_uri_model.c"
+#include "../../constant/name/cybol/operation/communication/sense_communication_operation_cybol_name.c"
+#include "../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../logger/logger.c"
 
 //

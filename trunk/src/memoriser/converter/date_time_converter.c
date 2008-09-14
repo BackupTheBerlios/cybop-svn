@@ -19,19 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: date_time_converter.c,v $ $Revision: 1.17 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
+ * @version $RCSfile: date_time_converter.c,v $ $Revision: 1.18 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef DATE_TIME_CONVERTER_SOURCE
 #define DATE_TIME_CONVERTER_SOURCE
 
-#include "../..//home/cybop/src/constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/memory/datetime_memory_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/allocator.c"
 #include "../../variable/reallocation_factor.c"

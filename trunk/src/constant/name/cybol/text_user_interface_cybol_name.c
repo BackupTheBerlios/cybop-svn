@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: text_user_interface_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: text_user_interface_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,6 +27,66 @@
 #define TEXT_USER_INTERFACE_CYBOL_NAME_SOURCE
 
 #include "../../../constant/model/memory/integer_memory_model.c"
+
+/** The shape user interface cybol name. */
+static wchar_t SHAPE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L's', L'h', L'a', L'p', L'e'};
+static wchar_t* SHAPE_TEXT_USER_INTERFACE_CYBOL_NAME = SHAPE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* SHAPE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The layout user interface cybol name. */
+static wchar_t LAYOUT_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'l', L'a', L'y', L'o', L'u', L't'};
+static wchar_t* LAYOUT_TEXT_USER_INTERFACE_CYBOL_NAME = LAYOUT_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* LAYOUT_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The cell user interface cybol name. */
+static wchar_t CELL_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'c', L'e', L'l', L'l'};
+static wchar_t* CELL_TEXT_USER_INTERFACE_CYBOL_NAME = CELL_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* CELL_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The position user interface cybol name. */
+static wchar_t POSITION_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'p', L'o', L's', L'i', L't', L'i', L'o', L'n'};
+static wchar_t* POSITION_TEXT_USER_INTERFACE_CYBOL_NAME = POSITION_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* POSITION_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The size user interface cybol name. */
+static wchar_t SIZE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L's', L'i', L'z', L'e'};
+static wchar_t* SIZE_TEXT_USER_INTERFACE_CYBOL_NAME = SIZE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* SIZE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The background colour user interface cybol name. */
+static wchar_t BACKGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'b', L'a', L'c', L'k', L'g', L'r', L'o', L'u', L'n', L'd'};
+static wchar_t* BACKGROUND_TEXT_USER_INTERFACE_CYBOL_NAME = BACKGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* BACKGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The foreground colour user interface cybol name. */
+static wchar_t FOREGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'f', L'o', L'r', L'e', L'g', L'r', L'o', L'u', L'n', L'd'};
+static wchar_t* FOREGROUND_TEXT_USER_INTERFACE_CYBOL_NAME = FOREGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* FOREGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The title user interface cybol name. */
+static wchar_t TITLE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L't', L'i', L't', L'l', L'e'};
+static wchar_t* TITLE_TEXT_USER_INTERFACE_CYBOL_NAME = TITLE_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* TITLE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The icon user interface cybol name. */
+static wchar_t ICON_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'i', L'c', L'o', L'n'};
+static wchar_t* ICON_TEXT_USER_INTERFACE_CYBOL_NAME = ICON_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* ICON_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The expose command user interface cybol name. */
+static wchar_t EXPOSE_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'e', L'x', L'p', L'o', L's', L'e'};
+static wchar_t* EXPOSE_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME = EXPOSE_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* EXPOSE_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The left mouse button press command user interface cybol name. */
+static wchar_t LEFT_PRESS_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'l', L'e', L'f', L't', L'_', L'p', L'r', L'e', L's', L's'};
+static wchar_t* LEFT_PRESS_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME = LEFT_PRESS_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* LEFT_PRESS_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The left mouse button release command user interface cybol name. */
+static wchar_t LEFT_RELEASE_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'l', L'e', L'f', L't', L'_', L'r', L'e', L'l', L'e', L'a', L's', L'e'};
+static wchar_t* LEFT_RELEASE_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME = LEFT_RELEASE_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY;
+static int* LEFT_RELEASE_COMMAND_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The border text user interface cybol name. */
 static wchar_t BORDER_TEXT_USER_INTERFACE_CYBOL_NAME_ARRAY[] = {L'b', L'o', L'r', L'd', L'e', L'r'};

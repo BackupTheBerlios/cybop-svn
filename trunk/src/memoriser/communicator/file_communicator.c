@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_communicator.c,v $ $Revision: 1.37 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
+ * @version $RCSfile: file_communicator.c,v $ $Revision: 1.38 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,7 +27,7 @@
 #define FILE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../..//home/cybop/src/constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"

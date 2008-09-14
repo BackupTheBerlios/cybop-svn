@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_channel.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: cybol_channel.c,v $ $Revision: 1.3 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,35 +28,65 @@
 
 #include "../../constant/model/memory/integer_memory_model.c"
 
-/** The inline channel. */
-static wchar_t INLINE_CHANNEL_ARRAY[] = {L'i', L'n', L'l', L'i', L'n', L'e'};
-static wchar_t* INLINE_CHANNEL = INLINE_CHANNEL_ARRAY;
-static int* INLINE_CHANNEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+/** The cyboi cybol channel. */
+static wchar_t CYBOI_CYBOL_CHANNEL_ARRAY[] = {L'c', L'y', L'b', L'o', L'i'};
+static wchar_t* CYBOI_CYBOL_CHANNEL = CYBOI_CYBOL_CHANNEL_ARRAY;
+static int* CYBOI_CYBOL_CHANNEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The file channel. */
-static wchar_t FILE_CHANNEL_ARRAY[] = {L'f', L'i', L'l', L'e'};
-static wchar_t* FILE_CHANNEL = FILE_CHANNEL_ARRAY;
-static int* FILE_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+/** The file cybol channel. */
+static wchar_t FILE_CYBOL_CHANNEL_ARRAY[] = {L'f', L'i', L'l', L'e'};
+static wchar_t* FILE_CYBOL_CHANNEL = FILE_CYBOL_CHANNEL_ARRAY;
+static int* FILE_CYBOL_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The shell channel. */
-static wchar_t SHELL_CHANNEL_ARRAY[] = {L's', L'h', L'e', L'l', L'l'};
-static wchar_t* SHELL_CHANNEL = SHELL_CHANNEL_ARRAY;
-static int* SHELL_CHANNEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
+/** The file transfer protocol (ftp) cybol channel. */
+static wchar_t FTP_CYBOL_CHANNEL_ARRAY[] = {L'f', L't', L'p'};
+static wchar_t* FTP_CYBOL_CHANNEL = FTP_CYBOL_CHANNEL_ARRAY;
+static int* FTP_CYBOL_CHANNEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The http location. */
-static wchar_t HTTP_CHANNEL_ARRAY[] = {L'h', L't', L't', L'p'};
-static wchar_t* HTTP_CHANNEL = HTTP_CHANNEL_ARRAY;
-static int* HTTP_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+/** The gnu linux console cybol channel. */
+static wchar_t GNU_LINUX_CONSOLE_CYBOL_CHANNEL_ARRAY[] = {L'g', L'n', L'u', L'-', L'l', L'i', L'n', L'u', L'x', L'-', L'c', L'o', L'n', L's', L'o', L'l', L'e'};
+static wchar_t* GNU_LINUX_CONSOLE_CYBOL_CHANNEL = GNU_LINUX_CONSOLE_CYBOL_CHANNEL_ARRAY;
+static int* GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The ftp channel. */
-static wchar_t FTP_CHANNEL_ARRAY[] = {L'f', L't', L'p'};
-static wchar_t* FTP_CHANNEL = FTP_CHANNEL_ARRAY;
-static int* FTP_CHANNEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+/** The hypertext transfer protocol (http) location. */
+static wchar_t HTTP_CYBOL_CHANNEL_ARRAY[] = {L'h', L't', L't', L'p'};
+static wchar_t* HTTP_CYBOL_CHANNEL = HTTP_CYBOL_CHANNEL_ARRAY;
+static int* HTTP_CYBOL_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The sftp channel. */
-static wchar_t SFTP_CHANNEL_ARRAY[] = {L's', L'f', L't', L'p'};
-static wchar_t* SFTP_CHANNEL = SFTP_CHANNEL_ARRAY;
-static int* SFTP_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+/** The inline cybol channel. */
+static wchar_t INLINE_CYBOL_CHANNEL_ARRAY[] = {L'i', L'n', L'l', L'i', L'n', L'e'};
+static wchar_t* INLINE_CYBOL_CHANNEL = INLINE_CYBOL_CHANNEL_ARRAY;
+static int* INLINE_CYBOL_CHANNEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The lamport tex (latex) cybol channel. */
+static wchar_t LATEX_CYBOL_CHANNEL_ARRAY[] = {L'i', L'n', L'l', L'i', L'n', L'e'};
+static wchar_t* LATEX_CYBOL_CHANNEL = LATEX_CYBOL_CHANNEL_ARRAY;
+static int* LATEX_CYBOL_CHANNEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The secure file transfer protocol (sftp) cybol channel. */
+static wchar_t SFTP_CYBOL_CHANNEL_ARRAY[] = {L's', L'f', L't', L'p'};
+static wchar_t* SFTP_CYBOL_CHANNEL = SFTP_CYBOL_CHANNEL_ARRAY;
+static int* SFTP_CYBOL_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The shell cybol channel. */
+static wchar_t SHELL_CYBOL_CHANNEL_ARRAY[] = {L's', L'h', L'e', L'l', L'l'};
+static wchar_t* SHELL_CYBOL_CHANNEL = SHELL_CYBOL_CHANNEL_ARRAY;
+static int* SHELL_CYBOL_CHANNEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The socket cybol channel. */
+static wchar_t SOCKET_CYBOL_CHANNEL_ARRAY[] = {L's', L'o', L'c', L'k', L'e', L't'};
+static wchar_t* SOCKET_CYBOL_CHANNEL = SOCKET_CYBOL_CHANNEL_ARRAY;
+static int* SOCKET_CYBOL_CHANNEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The world wide web (www) cybol channel. */
+static wchar_t WWW_CYBOL_CHANNEL_ARRAY[] = {L'w', L'w', L'w'};
+static wchar_t* WWW_CYBOL_CHANNEL = WWW_CYBOL_CHANNEL_ARRAY;
+static int* WWW_CYBOL_CHANNEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The x window system cybol channel. */
+static wchar_t X_WINDOW_SYSTEM_CYBOL_CHANNEL_ARRAY[] = {L'x', L'-', L'w', L'i', L'n', L'd', L'o', L'w', L'-', L's', L'y', L's', L't', L'e', L'm'};
+static wchar_t* X_WINDOW_SYSTEM_CYBOL_CHANNEL = X_WINDOW_SYSTEM_CYBOL_CHANNEL_ARRAY;
+static int* X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* CYBOL_CHANNEL_SOURCE */
 #endif

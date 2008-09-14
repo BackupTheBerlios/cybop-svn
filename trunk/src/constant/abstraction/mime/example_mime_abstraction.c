@@ -19,26 +19,37 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: interface_cybol_abstraction.c,v $ $Revision: 1.4 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: example_mime_abstraction.c,v $ $Revision: 1.1 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTERFACE_CYBOL_ABSTRACTION_SOURCE
-#define INTERFACE_CYBOL_ABSTRACTION_SOURCE
+#ifndef EXAMPLE_MIME_ABSTRACTION_SOURCE
+#define EXAMPLE_MIME_ABSTRACTION_SOURCE
 
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 //
-// This MIME type was taken from/ inspired by the KDE desktop.
-// It is used for text- and graphical user interfaces in CYBOI.
+// The Internet media type / content type that is also
+// known under the name Multipurpose Internet Mail Extensions (MIME).
+// These types are managed by the Internet Assigned Numbers Authority (IANA).
+// See document "Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types":
+// http://tools.ietf.org/html/rfc2046
+//
+
+//
+// Example.
+//
+// IANA media type: example
 //
 
 /**
- * The interface/x-winamp-skin cybol abstraction.
+ * The example cybol abstraction.
+ *
+ * This is just offered by IANA for testing reasons.
  */
-static wchar_t X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'f', L'a', L'c', L'e', L'/', L'x', L'-', L'w', L'i', L'n', L'a', L'm', L'p', L'-', L's', L'k', L'i', L'n'};
-static wchar_t* X_WINAMP_INTERFACE_CYBOL_ABSTRACTION = X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_ARRAY;
-static int* X_WINAMP_INTERFACE_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t EXAMPLE_MIME_ABSTRACTION_ARRAY[] = {L'e', L'x', L'a', L'm', L'p', L'l', L'e'};
+static wchar_t* EXAMPLE_MIME_ABSTRACTION = EXAMPLE_MIME_ABSTRACTION_ARRAY;
+static int* EXAMPLE_MIME_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
-/* INTERFACE_CYBOL_ABSTRACTION_SOURCE */
+/* EXAMPLE_MIME_ABSTRACTION_SOURCE */
 #endif

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.22 $ $Date: 2008-09-11 23:02:46 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.23 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,21 +33,19 @@
 
 #include <stdio.h>
 #include <wchar.h>
-#include "../../globals/constants/boolean/boolean_constants.c"
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../..//home/cybop/src/constant/model/cybol/http_request_cybol_model.c"
-#include "../..//home/cybop/src/constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
-#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/super_cybol_name.c"
+#include "../../constant/name/cybol/text_user_interface_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor.c"
+#include "../../variable/reallocation_factor.c"
 
 //
 // Forward declarations.
@@ -79,7 +77,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * Decodes a gnu/linux console escape control sequence into a command.
  *
  * This function changes the escape control sequences into real names as defined by CYBOL.
- * Example: The ARROW_UP_CONTROL_SEQUENCE (ESC[A sequence) gets converted into the
+ * Example: The ARROW_UP_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL (ESC[A sequence) gets converted into the
  * constant UI_ARROW_UP_NAME with the value "arrow_up", which is used so in CYBOL files.
  *
  * @param p0 the destination command (Hand over as reference!)
@@ -97,7 +95,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ARROW_UP_CONTROL_SEQUENCE, (void*) ARROW_UP_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p3, p4, (void*) ARROW_UP_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL, (void*) ARROW_UP_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -107,7 +105,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ARROW_DOWN_CONTROL_SEQUENCE, (void*) ARROW_DOWN_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p3, p4, (void*) ARROW_DOWN_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL, (void*) ARROW_DOWN_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -117,7 +115,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ARROW_LEFT_CONTROL_SEQUENCE, (void*) ARROW_LEFT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p3, p4, (void*) ARROW_LEFT_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL, (void*) ARROW_LEFT_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -127,7 +125,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) ARROW_RIGHT_CONTROL_SEQUENCE, (void*) ARROW_RIGHT_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p3, p4, (void*) ARROW_RIGHT_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL, (void*) ARROW_RIGHT_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -218,15 +216,15 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
     fwprintf(stderr, L"TEST a1: %i\n", p3);
 
-            if (*sc > *ESCAPE_CONTROL_SEQUENCE_COUNT) {
+            if (*sc > *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT) {
 
                 // Only do the following comparison if the source array
                 // is greater than the escape control sequence prefix,
                 // since a value has to follow after the escape control sequence prefix.
 
-                // CAUTION! Use the "ESCAPE_CONTROL_SEQUENCE_COUNT" for both comparison values,
+                // CAUTION! Use the "ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT" for both comparison values,
                 // since they would not be equal if their size differed.
-                compare_arrays(p3, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p3, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) ESCAPE_ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST a2: %i\n", p3);
 
@@ -236,8 +234,8 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
                     // Initialise temporary character sequence with pointer to the
                     // first character AFTER the escape control sequence prefix.
-                    void* t = p3 + (*ESCAPE_CONTROL_SEQUENCE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
-                    int tc = *sc - *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                    void* t = p3 + (*ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                    int tc = *sc - *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
 
     fwprintf(stderr, L"TEST a4: %i\n", p3);
 
@@ -366,14 +364,14 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     encode_integer((void*) &y, (void*) &yc, (void*) &ys, (void*) &cy, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                                     encode_integer((void*) &x, (void*) &xc, (void*) &xs, (void*) &cx, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-                                    if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT
+                                    if ((*dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
                                         + yc + *PRIMITIVE_MEMORY_MODEL_COUNT
                                         + xc + *PRIMITIVE_MEMORY_MODEL_COUNT) >= *ds) {
 
                                         // Set destination character array size.
                                         // CAUTION! Add constant in case *dc is zero!
                                         *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR
-                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT
+                                            + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
                                             + yc + *PRIMITIVE_MEMORY_MODEL_COUNT
                                             + xc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
@@ -381,8 +379,8 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                         reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     }
 
-                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                                     set_array_elements(*d, p1, y, (void*) &yc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + yc;
                                     set_array_elements(*d, p1, (void*) SEMICOLON_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -393,20 +391,20 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                                     // Add attribute off control sequence.
-                                    if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT) >= *ds) {
+                                    if ((*dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *ATTRIBUTE_OFF_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT) >= *ds) {
 
                                         // Set destination character array size.
                                         // CAUTION! Add constant in case *dc is zero!
-                                        *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
+                                        *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *ATTRIBUTE_OFF_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
 
                                         // Reallocate destination character array.
                                         reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     }
 
-                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE, (void*) ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                    *dc = *dc + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
+                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_OFF_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ATTRIBUTE_OFF_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *ATTRIBUTE_OFF_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
 
                                     // Deallocate arrays.
                                     deallocate((void*) &y, (void*) &ys, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -425,31 +423,31 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
         //??                            encode_integer((void*) &f, (void*) &fc, (void*) &fs, p7, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                                     if ((*dc
-                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *bc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT
-                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *fc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT) >= *ds) {
+                                        + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *bc + *ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                        + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *fc + *ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT) >= *ds) {
 
                                         // Set destination character array size.
                                         // CAUTION! Add constant in case *dc is zero!
                                         *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR
-                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *bc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT
-                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *fc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
+                                            + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *bc + *ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                            + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *fc + *ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
 
                                         // Reallocate destination character array.
                                         reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     }
 
-                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                                     set_array_elements(*d, p1, p6, p7, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *bc;
-                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                    *dc = *dc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
-                                    set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                    *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
+                                    set_array_elements(*d, p1, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                                     set_array_elements(*d, p1, p8, p9, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                                     *dc = *dc + *fc;
-                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE, (void*) ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                    *dc = *dc + *ATTRIBUTE_SUFFIX_CONTROL_SEQUENCE_COUNT;
+                                    set_array_elements(*d, p1, (void*) ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                    *dc = *dc + *ATTRIBUTE_SUFFIX_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
 
                                     //
                                     // Set character properties.
@@ -460,22 +458,22 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
                                     // Reallocate array to have capacity for all of the
                                     // following properties, even if some of them are not used.
-                                    if ((*dc + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ATTRIBUTE_OFF_CONTROL_SEQUENCE_COUNT
-                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *HIDDEN_CONTROL_SEQUENCE_COUNT
-                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *INVERSE_CONTROL_SEQUENCE_COUNT
-                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
-                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
-                                        + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
+                                    if ((*dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *ATTRIBUTE_OFF_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                        + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *HIDDEN_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                        + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *INVERSE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                        + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *BLINK_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                        + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *UNDERLINE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                        + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *BOLD_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
                                         + *PRIMITIVE_MEMORY_MODEL_COUNT) >= *ds) {
 
                                         // Set destination character array size.
                                         // CAUTION! Add constant in case *dc is zero!
                                         *ds = *dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR
-                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *HIDDEN_CONTROL_SEQUENCE_COUNT
-                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *INVERSE_CONTROL_SEQUENCE_COUNT
-                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BLINK_CONTROL_SEQUENCE_COUNT
-                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *UNDERLINE_CONTROL_SEQUENCE_COUNT
-                                            + *ESCAPE_CONTROL_SEQUENCE_COUNT + *BOLD_CONTROL_SEQUENCE_COUNT
+                                            + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *HIDDEN_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                            + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *INVERSE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                            + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *BLINK_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                            + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *UNDERLINE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                                            + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *BOLD_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
                                             + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                                         // Reallocate destination character array.
@@ -491,10 +489,10 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set hidden property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) HIDDEN_CONTROL_SEQUENCE, (void*) HIDDEN_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *HIDDEN_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
+                                        set_array_elements(*d, p1, (void*) HIDDEN_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) HIDDEN_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *HIDDEN_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                                     }
 
                                     // Reset comparison result.
@@ -506,10 +504,10 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set inverse property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) INVERSE_CONTROL_SEQUENCE, (void*) INVERSE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *INVERSE_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
+                                        set_array_elements(*d, p1, (void*) INVERSE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) INVERSE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *INVERSE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                                     }
 
                                     // Reset comparison result.
@@ -521,10 +519,10 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set blink property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) BLINK_CONTROL_SEQUENCE, (void*) BLINK_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *BLINK_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
+                                        set_array_elements(*d, p1, (void*) BLINK_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) BLINK_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *BLINK_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                                     }
 
                                     // Reset comparison result.
@@ -536,10 +534,10 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set underline property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) UNDERLINE_CONTROL_SEQUENCE, (void*) UNDERLINE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *UNDERLINE_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
+                                        set_array_elements(*d, p1, (void*) UNDERLINE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) UNDERLINE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *UNDERLINE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                                     }
 
                                     // Reset comparison result.
@@ -551,10 +549,10 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                         // Set bold property.
-                                        set_array_elements(*d, p1, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-                                        set_array_elements(*d, p1, (void*) BOLD_CONTROL_SEQUENCE, (void*) BOLD_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                        *dc = *dc + *BOLD_CONTROL_SEQUENCE_COUNT;
+                                        set_array_elements(*d, p1, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
+                                        set_array_elements(*d, p1, (void*) BOLD_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) BOLD_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                        *dc = *dc + *BOLD_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                                     }
 
                                     // Set character.
@@ -648,7 +646,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) TUI_LINE_BORDER_MODEL, (void*) TUI_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                compare_arrays(p6, p7, (void*) LINE_BORDER_CYBOL_MODEL, (void*) LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -663,7 +661,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) TUI_ROUND_LINE_BORDER_MODEL, (void*) TUI_ROUND_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                compare_arrays(p6, p7, (void*) ROUND_LINE_BORDER_CYBOL_MODEL, (void*) ROUND_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -678,7 +676,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) TUI_DOUBLE_LINE_BORDER_MODEL, (void*) TUI_DOUBLE_LINE_BORDER_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                compare_arrays(p6, p7, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1063,7 +1061,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_NORTH_CELL_MODEL, (void*) UI_NORTH_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) NORTH_COMPASS_LAYOUT_CYBOL_MODEL, (void*) NORTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1082,7 +1080,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_SOUTH_CELL_MODEL, (void*) UI_SOUTH_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) SOUTH_COMPASS_LAYOUT_CYBOL_MODEL, (void*) SOUTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1100,7 +1098,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_WEST_CELL_MODEL, (void*) UI_WEST_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) WEST_COMPASS_LAYOUT_CYBOL_MODEL, (void*) WEST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1119,7 +1117,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_EAST_CELL_MODEL, (void*) UI_EAST_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) EAST_COMPASS_LAYOUT_CYBOL_MODEL, (void*) EAST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1137,7 +1135,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) UI_CENTRE_CELL_MODEL, (void*) UI_CENTRE_CELL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) CENTRE_COMPASS_LAYOUT_CYBOL_MODEL, (void*) CENTRE_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1194,7 +1192,7 @@ void encode_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, voi
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p20, p21, (void*) UI_COORDINATES_LAYOUT_MODEL, (void*) UI_COORDINATES_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p20, p21, (void*) COORDINATES_LAYOUT_CYBOL_MODEL, (void*) COORDINATES_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1205,7 +1203,7 @@ void encode_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, voi
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p20, p21, (void*) UI_COMPASS_LAYOUT_MODEL, (void*) UI_COMPASS_LAYOUT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p20, p21, (void*) COMPASS_LAYOUT_CYBOL_MODEL, (void*) COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1299,13 +1297,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     int fasz = oasz;
 
     // Get part position x, y, z.
-    get_element(p14, (void*) UI_POSITION_X_INDEX, (void*) &px, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    get_element(p14, (void*) UI_POSITION_Y_INDEX, (void*) &py, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    get_element(p14, (void*) UI_POSITION_Z_INDEX, (void*) &pz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p14, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &px, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p14, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &py, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p14, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &pz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
     // Get part size x, y, z.
-    get_element(p16, (void*) UI_SIZE_X_INDEX, (void*) &sx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    get_element(p16, (void*) UI_SIZE_Y_INDEX, (void*) &sy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    get_element(p16, (void*) UI_SIZE_Z_INDEX, (void*) &sz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p16, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &sx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p16, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &sy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    get_element(p16, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &sz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
     // Set current position coordinates, initialised with part position.
     cpx = *px;
@@ -1319,13 +1317,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     if (p20 != *NULL_POINTER_MEMORY_MODEL) {
 
         // Determine source whole position coordinates.
-        get_element(p18, (void*) UI_POSITION_X_INDEX, (void*) &wpmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-        get_element(p18, (void*) UI_POSITION_Y_INDEX, (void*) &wpmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-        get_element(p18, (void*) UI_POSITION_Z_INDEX, (void*) &wpmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p18, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wpmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p18, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wpmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p18, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wpmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
         // Determine source whole size coordinates.
-        get_element(p20, (void*) UI_SIZE_X_INDEX, (void*) &wsmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-        get_element(p20, (void*) UI_SIZE_Y_INDEX, (void*) &wsmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-        get_element(p20, (void*) UI_SIZE_Z_INDEX, (void*) &wsmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p20, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wsmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p20, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wsmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        get_element(p20, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wsmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
         // Set original area position coordinates, initialised with whole position.
         oapx = *wpmx;
@@ -1509,7 +1507,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p35, p36, (void*) UI_RECTANGLE_SHAPE_MODEL, (void*) UI_RECTANGLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p35, p36, (void*) RECTANGLE_SHAPE_CYBOL_MODEL, (void*) RECTANGLE_SHAPE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1522,7 +1520,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p35, p36, (void*) UI_CIRCLE_SHAPE_MODEL, (void*) UI_CIRCLE_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p35, p36, (void*) CIRCLE_SHAPE_CYBOL_MODEL, (void*) CIRCLE_SHAPE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1536,7 +1534,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p35, p36, (void*) UI_POLYGON_SHAPE_MODEL, (void*) UI_POLYGON_SHAPE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p35, p36, (void*) POLYGON_SHAPE_CYBOL_MODEL, (void*) POLYGON_SHAPE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1849,7 +1847,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         // Get part super properties from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) SUPER_PROPERTIES_NAME, (void*) SUPER_PROPERTIES_NAME_COUNT,
+            (void*) SUPER_CYBOL_NAME, (void*) SUPER_CYBOL_NAME_COUNT,
             (void*) &supern, (void*) &supernc, (void*) &superns,
             (void*) &supera, (void*) &superac, (void*) &superas,
             (void*) &superm, (void*) &supermc, (void*) &superms,
@@ -1857,7 +1855,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part shape from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
+            (void*) SHAPE_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) SHAPE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &shn, (void*) &shnc, (void*) &shns,
             (void*) &sha, (void*) &shac, (void*) &shas,
             (void*) &shm, (void*) &shmc, (void*) &shms,
@@ -1865,7 +1863,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get source part layout from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            (void*) LAYOUT_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) LAYOUT_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &ln, (void*) &lnc, (void*) &lns,
             (void*) &la, (void*) &lac, (void*) &las,
             (void*) &lm, (void*) &lmc, (void*) &lms,
@@ -1873,7 +1871,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get source part cell from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            (void*) CELL_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) CELL_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &cn, (void*) &cnc, (void*) &cns,
             (void*) &ca, (void*) &cac, (void*) &cas,
             (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -1881,7 +1879,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part position from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            (void*) POSITION_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &pn, (void*) &pnc, (void*) &pns,
             (void*) &pa, (void*) &pac, (void*) &pas,
             (void*) &pm, (void*) &pmc, (void*) &pms,
@@ -1889,7 +1887,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part size from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            (void*) SIZE_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &sn, (void*) &snc, (void*) &sns,
             (void*) &sa, (void*) &sac, (void*) &sas,
             (void*) &sm, (void*) &smc, (void*) &sms,
@@ -1897,7 +1895,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part background colour from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
+            (void*) BACKGROUND_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) BACKGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &bgn, (void*) &bgnc, (void*) &bgns,
             (void*) &bga, (void*) &bgac, (void*) &bgas,
             (void*) &bgm, (void*) &bgmc, (void*) &bgms,
@@ -1905,7 +1903,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part foreground colour from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
+            (void*) FOREGROUND_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) FOREGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &fgn, (void*) &fgnc, (void*) &fgns,
             (void*) &fga, (void*) &fgac, (void*) &fgas,
             (void*) &fgm, (void*) &fgmc, (void*) &fgms,
@@ -1913,7 +1911,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part border from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
+            (void*) BORDER_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) BORDER_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &bon, (void*) &bonc, (void*) &bons,
             (void*) &boa, (void*) &boac, (void*) &boas,
             (void*) &bom, (void*) &bomc, (void*) &boms,
@@ -1921,7 +1919,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part hidden property from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+            (void*) HIDDEN_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) HIDDEN_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &hn, (void*) &hnc, (void*) &hns,
             (void*) &ha, (void*) &hac, (void*) &has,
             (void*) &hm, (void*) &hmc, (void*) &hms,
@@ -1929,7 +1927,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part inverse property from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+            (void*) INVERSE_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) INVERSE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &in, (void*) &inc, (void*) &ins,
             (void*) &ia, (void*) &iac, (void*) &ias,
             (void*) &im, (void*) &imc, (void*) &ims,
@@ -1937,7 +1935,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part blink property from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+            (void*) BLINK_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) BLINK_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &bln, (void*) &blnc, (void*) &blns,
             (void*) &bla, (void*) &blac, (void*) &blas,
             (void*) &blm, (void*) &blmc, (void*) &blms,
@@ -1945,7 +1943,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part underline property from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+            (void*) UNDERLINE_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) UNDERLINE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &un, (void*) &unc, (void*) &uns,
             (void*) &ua, (void*) &uac, (void*) &uas,
             (void*) &um, (void*) &umc, (void*) &ums,
@@ -1953,7 +1951,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             p13, p14);
         // Get part bold property from details.
         get_universal_compound_element_by_name(p7, p8,
-            (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+            (void*) BOLD_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) BOLD_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &bn, (void*) &bnc, (void*) &bns,
             (void*) &ba, (void*) &bac, (void*) &bas,
             (void*) &bm, (void*) &bmc, (void*) &bms,
@@ -1973,7 +1971,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part shape from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) UI_SHAPE_NAME, (void*) UI_SHAPE_NAME_COUNT,
+                (void*) SHAPE_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) SHAPE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &shn, (void*) &shnc, (void*) &shns,
                 (void*) &sha, (void*) &shac, (void*) &shas,
                 (void*) &shm, (void*) &shmc, (void*) &shms,
@@ -1985,7 +1983,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get source part layout from details.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+                (void*) LAYOUT_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) LAYOUT_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &ln, (void*) &lnc, (void*) &lns,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
@@ -1997,7 +1995,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get source part cell from details.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+                (void*) CELL_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) CELL_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &cn, (void*) &cnc, (void*) &cns,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -2009,7 +2007,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part position from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+                (void*) POSITION_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &pn, (void*) &pnc, (void*) &pns,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
@@ -2021,7 +2019,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part size from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+                (void*) SIZE_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &sn, (void*) &snc, (void*) &sns,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
@@ -2033,7 +2031,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part background colour from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) UI_BACKGROUND_NAME, (void*) UI_BACKGROUND_NAME_COUNT,
+                (void*) BACKGROUND_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) BACKGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &bgn, (void*) &bgnc, (void*) &bgns,
                 (void*) &bga, (void*) &bgac, (void*) &bgas,
                 (void*) &bgm, (void*) &bgmc, (void*) &bgms,
@@ -2045,7 +2043,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part foreground colour from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) UI_FOREGROUND_NAME, (void*) UI_FOREGROUND_NAME_COUNT,
+                (void*) FOREGROUND_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) FOREGROUND_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &fgn, (void*) &fgnc, (void*) &fgns,
                 (void*) &fga, (void*) &fgac, (void*) &fgas,
                 (void*) &fgm, (void*) &fgmc, (void*) &fgms,
@@ -2057,7 +2055,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part border from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_BORDER_NAME, (void*) TUI_BORDER_NAME_COUNT,
+                (void*) BORDER_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) BORDER_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &bon, (void*) &bonc, (void*) &bons,
                 (void*) &boa, (void*) &boac, (void*) &boas,
                 (void*) &bom, (void*) &bomc, (void*) &boms,
@@ -2069,7 +2067,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part hidden property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_HIDDEN_NAME, (void*) TUI_HIDDEN_NAME_COUNT,
+                (void*) HIDDEN_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) HIDDEN_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &hn, (void*) &hnc, (void*) &hns,
                 (void*) &ha, (void*) &hac, (void*) &has,
                 (void*) &hm, (void*) &hmc, (void*) &hms,
@@ -2081,7 +2079,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part inverse property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_INVERSE_NAME, (void*) TUI_INVERSE_NAME_COUNT,
+                (void*) INVERSE_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) INVERSE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &in, (void*) &inc, (void*) &ins,
                 (void*) &ia, (void*) &iac, (void*) &ias,
                 (void*) &im, (void*) &imc, (void*) &ims,
@@ -2093,7 +2091,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part blink property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_BLINK_NAME, (void*) TUI_BLINK_NAME_COUNT,
+                (void*) BLINK_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) BLINK_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &bln, (void*) &blnc, (void*) &blns,
                 (void*) &bla, (void*) &blac, (void*) &blas,
                 (void*) &blm, (void*) &blmc, (void*) &blms,
@@ -2105,7 +2103,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part underline property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_UNDERLINE_NAME, (void*) TUI_UNDERLINE_NAME_COUNT,
+                (void*) UNDERLINE_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) UNDERLINE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &un, (void*) &unc, (void*) &uns,
                 (void*) &ua, (void*) &uac, (void*) &uas,
                 (void*) &um, (void*) &umc, (void*) &ums,
@@ -2117,7 +2115,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Get part bold property from super part.
             get_universal_compound_element_by_name(*superm, *supermc,
-                (void*) TUI_BOLD_NAME, (void*) TUI_BOLD_NAME_COUNT,
+                (void*) BOLD_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) BOLD_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &bn, (void*) &bnc, (void*) &bns,
                 (void*) &ba, (void*) &bac, (void*) &bas,
                 (void*) &bm, (void*) &bmc, (void*) &bms,
@@ -2127,7 +2125,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         // Get source whole position from details.
         get_universal_compound_element_by_name(p9, p10,
-            (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            (void*) POSITION_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &wpn, (void*) &wpnc, (void*) &wpns,
             (void*) &wpa, (void*) &wpac, (void*) &wpas,
             (void*) &wpm, (void*) &wpmc, (void*) &wpms,
@@ -2136,7 +2134,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         // Get source whole size from details.
         get_universal_compound_element_by_name(p9, p10,
-            (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            (void*) SIZE_TEXT_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_TEXT_USER_INTERFACE_CYBOL_NAME_COUNT,
             (void*) &wsn, (void*) &wsnc, (void*) &wsns,
             (void*) &wsa, (void*) &wsac, (void*) &wsas,
             (void*) &wsm, (void*) &wsmc, (void*) &wsms,

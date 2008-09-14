@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.3 $ $Date: 2008-09-13 21:45:38 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.4 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../src/constant/name/xml_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/allocator/xml_node_allocator.c"
 #include "../../memoriser/allocator/xml_property_allocator.c"
@@ -1041,6 +1042,7 @@ void decode_cybol_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* 
  */
 void decode_cybol_process_declaration_content(void* p0, void* p1) {
 
+/*??
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** b = (void**) p0;
@@ -1065,6 +1067,7 @@ void decode_cybol_process_declaration_content(void* p0, void* p1) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process cybol declaration content. The current byte is null.");
     }
+*/
 }
 
 /**
@@ -1075,6 +1078,7 @@ void decode_cybol_process_declaration_content(void* p0, void* p1) {
  */
 void decode_cybol_process_declaration(void* p0, void* p1) {
 
+/*??
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* rem = (int*) p1;
@@ -1098,6 +1102,7 @@ void decode_cybol_process_declaration(void* p0, void* p1) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process cybol declaration. The remaining bytes count is null.");
     }
+*/
 }
 
 /**
@@ -1111,6 +1116,7 @@ void decode_cybol_process_declaration(void* p0, void* p1) {
  */
 void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
+/*??
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
@@ -1235,6 +1241,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select cybol section. The source byte array count is null.");
     }
+*/
 }
 
 /**
