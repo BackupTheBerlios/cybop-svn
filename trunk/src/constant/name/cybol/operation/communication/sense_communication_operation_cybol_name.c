@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sense_communication_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: sense_communication_operation_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,6 +27,16 @@
 #define SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_SOURCE
 
 #include "../../../../../constant/model/memory/integer_memory_model.c"
+
+/** The channel sense communication operation cybol name. */
+static wchar_t CHANNEL_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_ARRAY[] = {L'm', L'e', L't', L'h', L'o', L'd'};
+static wchar_t* CHANNEL_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME = CHANNEL_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_ARRAY;
+static int* CHANNEL_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The handler sense communication operation cybol name. */
+static wchar_t HANDLER_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_ARRAY[] = {L'm', L'e', L't', L'h', L'o', L'd'};
+static wchar_t* HANDLER_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME = HANDLER_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_ARRAY;
+static int* HANDLER_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The method sense communication operation cybol name. */
 static wchar_t METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_ARRAY[] = {L'm', L'e', L't', L'h', L'o', L'd'};

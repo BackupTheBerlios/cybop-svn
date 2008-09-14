@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,23 +32,21 @@
 #include <signal.h>
 #include <stdio.h>
 //?? #include <wchar.h>
-#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../../globals/constants/console/console_control_sequence_constants.c"
-#include "../../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/log/level_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/model/log/level_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
+#include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../logger/logger.c"
-#include "../../../variable/thread_identification.c"
 #include "../../../memoriser/accessor/compound_accessor.c"
 #include "../../../memoriser/accessor/signal_memory_accessor.c"
 #include "../../../memoriser/accessor.c"
 #include "../../../memoriser/allocator.c"
 #include "../../../memoriser/array.c"
+#include "../../../variable/thread_identification.c"
 
 /**
  * Senses gnu/linux console message.
@@ -201,7 +199,7 @@ void sense_gnu_linux_console(void* p0) {
     // Get sleep time.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME, (void*) &st, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get input stream.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &is, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &is, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: separator_http_model.c,v $ $Revision: 1.4 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: separator_http_model.c,v $ $Revision: 1.5 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@ static int* REQUEST_LINE_SEPARATOR_HTTP_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MO
 
 /** The response line separator ("carriage return" and "line feed") http model. */
 static wchar_t RESPONSE_LINE_SEPARATOR_HTTP_MODEL_ARRAY[] = {0x000D, 0x000A};
-static wchar_t* RESPONSE_LINE_SEPARATOR_HTTP_MODEL = HTTP_RESPONSE_LINE_SEPARATOR_HTTP_MODEL_ARRAY;
+static wchar_t* RESPONSE_LINE_SEPARATOR_HTTP_MODEL = RESPONSE_LINE_SEPARATOR_HTTP_MODEL_ARRAY;
 static int* RESPONSE_LINE_SEPARATOR_HTTP_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The headers separator (twice "carriage return" and "line feed", in other words: an empty line) http model. */
@@ -87,7 +87,7 @@ static int* HEADER_ARGUMENT_SEPARATOR_HTTP_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY
 
 /** The header value separator ("semicolon" and "space") http model. */
 static wchar_t HEADER_VALUE_SEPARATOR_HTTP_MODEL_ARRAY[] = {0x003B, 0x0020};
-static wchar_t* HEADER_VALUE_SEPARATOR_HTTP_MODEL = HTTP_HEADER_VALUE_SEPARATOR_HTTP_MODEL_ARRAY;
+static wchar_t* HEADER_VALUE_SEPARATOR_HTTP_MODEL = HEADER_VALUE_SEPARATOR_HTTP_MODEL_ARRAY;
 static int* HEADER_VALUE_SEPARATOR_HTTP_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The header value assignment separator ("equals sign") http model. */

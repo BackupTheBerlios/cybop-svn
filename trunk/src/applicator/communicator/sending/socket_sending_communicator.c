@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,17 +32,12 @@
 
 #include <netinet/in.h>
 #include <sys/socket.h>
-#include "../../../applicator/starter/socket_starter.c"
-#include "../../../globals/constants/character/set/character_set_constants.c"
+#include "../../../applicator/maintainer/starting/socket_starting_maintainer.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/cybol/communication_mode_cybol_model.c"
 #include "../../../constant/model/cybol/http_request_cybol_model.c"
-#include "../../../globals/constants/http/http_header_constants.c"
-#include "../../../globals/constants/http/http_header_variable_constants.c"
-#include "../../../globals/constants/http/http_protocol_version_constants.c"
-#include "../../../globals/constants/http/http_status_code_constants.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../globals/constants/mime_type/text_mime_type_constants.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
 #include "../../../memoriser/communicator/datagram_socket_communicator.c"
@@ -204,7 +199,7 @@ void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) SERVER_COMMUNICATION_MODE_MODEL, (void*) SERVER_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p5, p6, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -214,7 +209,7 @@ void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p5, p6, (void*) CLIENT_COMMUNICATION_MODE_MODEL, (void*) CLIENT_COMMUNICATION_MODE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p5, p6, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -252,7 +247,7 @@ void send_socket_set_nonblocking_mode(void* p0) {
         // clean solution here.
 
         // Get file status flags.
-        int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER);
+        int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER_MEMORY_MODEL);
 
         if (fl != *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
 
@@ -357,7 +352,7 @@ void send_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
                     // With the known type "short int" of the "sun_family" field and
                     // a fixed size "108" of the "sun_path" field, the overall size of
                     // the "sockaddr_un" structure can be calculated as sum.
-                    *as = sizeof(short int) + *NUMBER_108_INTEGER;
+                    *as = sizeof(short int) + *NUMBER_108_INTEGER_MEMORY_MODEL;
 
                     // Allocate socket address.
                     *a = malloc(*as);

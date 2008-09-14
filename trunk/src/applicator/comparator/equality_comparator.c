@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: equality_comparator.c,v $ $Revision: 1.4 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: equality_comparator.c,v $ $Revision: 1.5 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -32,6 +32,7 @@
 #include "../../applicator/comparator/equality/suffix_equality_comparator.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/cybol/comparison_selection_cybol_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
@@ -120,7 +121,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Get left side.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) LEFT_SIDE_NAME, (void*) LEFT_SIDE_NAME_COUNT,
+        (void*) LEFT_SIDE_COMPARISON_OPERATION_CYBOL_NAME, (void*) LEFT_SIDE_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &lsn, (void*) &lsnc, (void*) &lsns,
         (void*) &lsa, (void*) &lsac, (void*) &lsas,
         (void*) &lsm, (void*) &lsmc, (void*) &lsms,
@@ -128,7 +129,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get right side.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RIGHT_SIDE_NAME, (void*) RIGHT_SIDE_NAME_COUNT,
+        (void*) RIGHT_SIDE_COMPARISON_OPERATION_CYBOL_NAME, (void*) RIGHT_SIDE_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &rsn, (void*) &rsnc, (void*) &rsns,
         (void*) &rsa, (void*) &rsac, (void*) &rsas,
         (void*) &rsm, (void*) &rsmc, (void*) &rsms,
@@ -136,7 +137,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get result.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) RESULT_NAME, (void*) RESULT_NAME_COUNT,
+        (void*) RESULT_COMPARISON_OPERATION_CYBOL_NAME, (void*) RESULT_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
@@ -144,7 +145,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get selection.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNT_SELECTION_NAME, (void*) COUNT_SELECTION_NAME_COUNT,
+        (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME, (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
@@ -156,7 +157,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*sm, *smc, (void*) COMPARE_ALL_SELECTION_MODEL, (void*) COMPARE_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*sm, *smc, (void*) ALL_COMPARISON_SELECTION_CYBOL_MODEL, (void*) ALL_COMPARISON_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -168,7 +169,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*sm, *smc, (void*) COMPARE_PREFIX_SELECTION_MODEL, (void*) COMPARE_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*sm, *smc, (void*) PREFIX_COMPARISON_SELECTION_CYBOL_MODEL, (void*) PREFIX_COMPARISON_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -180,7 +181,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*sm, *smc, (void*) COMPARE_SUFFIX_SELECTION_MODEL, (void*) COMPARE_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*sm, *smc, (void*) SUFFIX_COMPARISON_SELECTION_CYBOL_MODEL, (void*) SUFFIX_COMPARISON_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -192,7 +193,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*sm, *smc, (void*) COMPARE_PART_SELECTION_MODEL, (void*) COMPARE_PART_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*sm, *smc, (void*) PART_COMPARISON_SELECTION_CYBOL_MODEL, (void*) PART_COMPARISON_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

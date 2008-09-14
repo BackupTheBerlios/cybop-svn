@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_response_converter.c,v $ $Revision: 1.16 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
+ * @version $RCSfile: http_response_converter.c,v $ $Revision: 1.17 $ $Date: 2008-09-14 21:29:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,6 +27,8 @@
 #define HTTP_RESPONSE_CONVERTER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/mime/text_mime_abstraction.c"
+#include "../../constant/model/character_set/iso_8859_character_set_model.c"
 #include "../../constant/model/http/protocol_version_http_model.c"
 #include "../../constant/model/http/request_method_http_model.c"
 #include "../../constant/model/http/separator_http_model.c"

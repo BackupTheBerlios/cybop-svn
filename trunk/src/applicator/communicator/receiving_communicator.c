@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,6 +36,8 @@
 #include "../../constant/channel/cybol_channel.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/communication/receive_communication_operation_cybol_name.c"
+#include "../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../variable/thread_identification.c"
@@ -117,7 +119,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             void** is = NULL_POINTER_MEMORY_MODEL;
 
             // Get gnu/linux console input stream.
-            get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &is, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+            get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &is, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST receive pre m: %i\n", p3);
     fwprintf(stderr, L"TEST receive pre m: %i\n", *((void**) p3));

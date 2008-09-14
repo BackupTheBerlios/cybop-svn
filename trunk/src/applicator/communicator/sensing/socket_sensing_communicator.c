@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,24 +37,23 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../../globals/constants/console/console_escape_code_constants.c"
-#include "../../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/cybol/http_request_cybol_model.c"
-#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/level_log_model.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
+#include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../logger/logger.c"
 #include "../../../memoriser/accessor/compound_accessor.c"
 #include "../../../memoriser/accessor/internal_memory_accessor.c"
 #include "../../../memoriser/accessor/signal_memory_accessor.c"
-#include "../../../memoriser/array.c"
 #include "../../../memoriser/allocator.c"
+#include "../../../memoriser/array.c"
 
 /**
  * Senses socket message.
@@ -230,12 +229,12 @@ void sense_socket(void* p0, void* p1) {
         i = *base + *SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Get communication partner socket.
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Get communication partner socket address.
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &pa, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Get original socket of this system.
         i = *base + *SOCKET_INTERNAL;

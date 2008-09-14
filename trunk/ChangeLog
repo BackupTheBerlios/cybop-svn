@@ -14,7 +14,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.75 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+# @version $Revision: 1.76 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -26,6 +26,9 @@
             to allow source code files (e.g. converters) to reference MIME constants
             independently of CYBOL constants
         * Rename files and directory "linux_console" into "gnu_linux_console"
+        * Move files "xdt_field_cyboi_name.c" and "xdt_record_cyboi_name.c"
+            from directory "constant/name/xdt/" into directory "constant/name/cybol/xdt/"
+        * Rename file "keyboard_cybol_name.c" into "keyboard_key_cybol_name.c"
 
 2008-09-12  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt automake files to new directory structure

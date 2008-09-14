@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: terminal_foreground_converter.c,v $ $Revision: 1.7 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: terminal_foreground_converter.c,v $ $Revision: 1.8 $ $Date: 2008-09-14 21:29:47 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,7 +29,7 @@
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/cybol/colour/terminal_colour_cybol_model.c"
-#include "../../constant/model/linux_console/escape_control_sequence_linux_console_model.c"
+#include "../../constant/model/gnu_linux_console/escape_control_sequence_gnu_linux_console_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
@@ -77,8 +77,8 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = BLACK_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
-                    *dc = *BLACK_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
+                    *d = BLACK_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL;
+                    *dc = *BLACK_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
@@ -88,8 +88,8 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = RED_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
-                    *dc = *RED_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
+                    *d = RED_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL;
+                    *dc = *RED_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
@@ -99,8 +99,8 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = GREEN_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
-                    *dc = *GREEN_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
+                    *d = GREEN_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL;
+                    *dc = *GREEN_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
@@ -110,8 +110,8 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = YELLOW_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
-                    *dc = *YELLOW_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
+                    *d = YELLOW_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL;
+                    *dc = *YELLOW_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
@@ -121,8 +121,8 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = BLUE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
-                    *dc = *BLUE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
+                    *d = BLUE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL;
+                    *dc = *BLUE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
@@ -132,8 +132,8 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = MAGENTA_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
-                    *dc = *MAGENTA_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
+                    *d = MAGENTA_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL;
+                    *dc = *MAGENTA_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
@@ -143,8 +143,8 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = COBALT_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
-                    *dc = *COBALT_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
+                    *d = COBALT_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL;
+                    *dc = *COBALT_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 
@@ -154,8 +154,8 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    *d = WHITE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL;
-                    *dc = *WHITE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_LINUX_CONSOLE_MODEL_COUNT;
+                    *d = WHITE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL;
+                    *dc = *WHITE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
                 }
             }
 

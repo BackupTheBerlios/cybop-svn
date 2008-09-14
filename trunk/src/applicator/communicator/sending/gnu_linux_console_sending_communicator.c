@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,19 +28,19 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "../../../globals/constants/boolean/boolean_constants.c"
-#include "../../../globals/constants/console/console_control_sequence_constants.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/channel/cybol_channel.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/channel/cybol_channel.c"
+#include "../../../constant/model/gnu_linux_console/escape_control_sequence_gnu_linux_console_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../variable/reallocation_factor.c"
+#include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../memoriser/accessor.c"
 #include "../../../memoriser/allocator.c"
 #include "../../../memoriser/array.c"
 #include "../../../memoriser/communicator.c"
 #include "../../../memoriser/converter.c"
+#include "../../../variable/reallocation_factor.c"
 
 /**
  * Sends a textual user interface (tui) via gnu/linux console.
@@ -79,23 +79,23 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (*f != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Resize destination character array for erase display control sequence.
-            if ((ac + *ESCAPE_CONTROL_SEQUENCE_COUNT + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT) >= as) {
+            if ((ac + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT) >= as) {
 
                 // Set destination character array size.
                 // CAUTION! Add constant in case ac is zero!
                 as = ac * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR
-                    + *ESCAPE_CONTROL_SEQUENCE_COUNT
-                    + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT;
+                    + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
+                    + *ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
 
                 // Reallocate destination character array.
                 reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             }
 
             // Set erase display control sequence.
-            set_array_elements(a, (void*) &ac, (void*) ESCAPE_CONTROL_SEQUENCE, (void*) ESCAPE_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            ac = ac + *ESCAPE_CONTROL_SEQUENCE_COUNT;
-            set_array_elements(a, (void*) &ac, (void*) ERASE_DISPLAY_CONTROL_SEQUENCE, (void*) ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            ac = ac + *ERASE_DISPLAY_CONTROL_SEQUENCE_COUNT;
+            set_array_elements(a, (void*) &ac, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            ac = ac + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
+            set_array_elements(a, (void*) &ac, (void*) ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            ac = ac + *ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
         }
     }
 
@@ -106,10 +106,10 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     void** op = NULL_POINTER_MEMORY_MODEL;
 
     // Get gnu/linux console output stream.
-    get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL, (void*) &op, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &op, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Write encoded array as message to gnu/linux console.
-    write_data((void*) op, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, (void*) GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION, (void*) GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION_COUNT);
+    write_data((void*) op, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
 
     // Deallocate array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);

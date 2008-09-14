@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../../../constant/model/log/level_log_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
+#include "../../../memoriser/communicator/stream_socket_communicator.c"
 /*??
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -41,9 +42,6 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../../../globals/constants/character/character_constants.c"
-#include "../../../globals/constants/console/console_escape_code_constants.c"
-#include "../../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
 #include "../../../constant/model/cybol/http_request_cybol_model.c"
