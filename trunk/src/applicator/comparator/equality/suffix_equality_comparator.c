@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: suffix_equality_comparator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: suffix_equality_comparator.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +72,7 @@
  * @param p25 the result parameter details count
  * @param p26 the result parameter details size
  */
-void compare_equal_suffix(void* p0, void* p1, void* p2,
+void compare_equality_suffix(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11,

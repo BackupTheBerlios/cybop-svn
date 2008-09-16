@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_SENDER_SOURCE
-#define X_WINDOW_SYSTEM_SENDER_SOURCE
+#ifndef X_WINDOW_SYSTEM_SENDING_COMMUNICATOR_SOURCE
+#define X_WINDOW_SYSTEM_SENDING_COMMUNICATOR_SOURCE
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -45,7 +45,7 @@
  * @param p3 the knowledge memory
  * @param p4 the knowledge memory count
  */
-void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send x window system message.");
 
@@ -76,5 +76,5 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // TODO?? Destroy here ALL other things that were created in encode_x_window_system!!
 }
 
-/* X_WINDOW_SYSTEM_SENDER_SOURCE */
+/* X_WINDOW_SYSTEM_SENDING_COMMUNICATOR_SOURCE */
 #endif

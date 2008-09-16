@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.33 $ $Date: 2008-09-14 21:29:47 $ $Author: christian $
+ * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.34 $ $Date: 2008-09-16 22:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -2892,21 +2892,21 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT,
                 (void*) SERVICE_POINT_VALUE_FIELD_XDT_CYBOL_NAME, (void*) SERVICE_POINT_VALUE_FIELD_XDT_CYBOL_NAME_COUNT);
 
-        } else if (*id == *SERVICE_NAME_OF_FEE_FIELD_XDT_NAME) {
+        } else if (*id == *SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_FEE_FIELD_XDT_NAME) {
 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
                 (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT,
-                (void*) SERVICE_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME, (void*) SERVICE_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME_COUNT);
+                (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME_COUNT);
 
-        } else if (*id == *SERVICE_NAME_OF_CERTIFICATE_FIELD_XDT_NAME) {
+        } else if (*id == *SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_CERTIFICATE_FIELD_XDT_NAME) {
 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 p3, p4,
                 (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT,
-                (void*) SERVICE_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME, (void*) SERVICE_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME_COUNT);
+                (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME_COUNT);
 
         } else if (*id == *BILLING_DIAGNOSIS_FIELD_XDT_NAME) {
 

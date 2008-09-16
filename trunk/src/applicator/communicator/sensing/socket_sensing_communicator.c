@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_SENSOR_SOURCE
-#define SOCKET_SENSOR_SOURCE
+#ifndef SOCKET_SENSING_COMMUNICATOR_SOURCE
+#define SOCKET_SENSING_COMMUNICATOR_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -66,7 +66,7 @@
  * @param p5 the communication partner-connected socket address size
  * @param p6 the original socket of this system
  */
-void sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -193,7 +193,7 @@ void sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void
  * @param p0 the internal memory
  * @param p1 the base internal
  */
-void sense_socket(void* p0, void* p1) {
+void communicate_sensing_socket(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -232,7 +232,7 @@ void sense_socket(void* p0, void* p1) {
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Get communication partner socket address.
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME_MEMORY_MEMORY_NAME;
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &pa, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -251,7 +251,7 @@ void sense_socket(void* p0, void* p1) {
             // and processed in the system signal handler procedure
             // (situated in the controller/checker.c module).
 
-            sense_socket_message(*irq, *mt, *st, *ps, *pa, *pas, *os);
+            communicate_sensing_message(*irq, *mt, *st, *ps, *pa, *pas, *os);
         }
 
     } else {
@@ -272,11 +272,11 @@ void sense_socket(void* p0, void* p1) {
  *
  * @param p0 the internal memory
  */
-void sense_www_socket(void* p0) {
+void communicate_sensing_www_socket(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense www socket.");
 
-    sense_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    communicate_sensing(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }
 
 /**
@@ -284,15 +284,15 @@ void sense_www_socket(void* p0) {
  *
  * @param p0 the internal memory
  */
-void sense_cyboi_socket(void* p0) {
+void communicate_sensing_cyboi_socket(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense cyboi socket.");
 
-    sense_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    communicate_sensing(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_SENSOR_SOURCE */
+/* SOCKET_SENSING_COMMUNICATOR_SOURCE */
 #endif

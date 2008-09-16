@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: shell_sending_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: shell_sending_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SHELL_SENDER_SOURCE
-#define SHELL_SENDER_SOURCE
+#ifndef SHELL_SENDING_COMMUNICATOR_SOURCE
+#define SHELL_SENDING_COMMUNICATOR_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
@@ -59,7 +59,7 @@
  * @param p13 the source new line flag
  * @param p14 the source new line flag count
  */
-void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+void communicate_sending_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send shell message.");
 
@@ -104,5 +104,5 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
-/* SHELL_SENDER_SOURCE */
+/* SHELL_SENDING_COMMUNICATOR_SOURCE */
 #endif

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:55 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -112,7 +112,7 @@ void communicate(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            communicate_sending(p0, p1, p2, p3, p4, p5);
+//??            communicate_sending(p0, p1, p2, p3, p4, p5);
 
             //?? OLD STUFF!
             //?? TEST: For testing reasons, the p15 was replaced with *((int**) p15) here!
@@ -127,7 +127,7 @@ void communicate(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            communicate_sensing(p0, p1, p2, p3, p4, p5);
+//??            communicate_sensing(p0, p1, p2, p3, p4, p5);
         }
     }
 

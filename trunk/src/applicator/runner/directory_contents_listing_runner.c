@@ -19,21 +19,23 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: directory_contents_listing_runner.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: directory_contents_listing_runner.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef LIST_DIRECTORY_CONTENTS_RUNNER_SOURCE
-#define LIST_DIRECTORY_CONTENTS_RUNNER_SOURCE
+#ifndef DIRECTORY_CONTENTS_LISTING_RUNNER_SOURCE
+#define DIRECTORY_CONTENTS_LISTING_RUNNER_SOURCE
 
 #include <unistd.h>
 #include "../../applicator/runner/executing_runner.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/command/unix_command_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/run/list_run_operation_cybol_name.c"
+#include "../../constant/name/command_option/unix/list_unix_command_option_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
 #include "../../variable/reallocation_factor.c"
@@ -46,7 +48,7 @@
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
  */
-void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
+void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run list directory contents command.");
 
@@ -122,10 +124,10 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
@@ -134,8 +136,8 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
         }
     }
 
@@ -149,10 +151,10 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
@@ -161,8 +163,8 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
         }
     }
 
@@ -286,10 +288,10 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
@@ -298,8 +300,8 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_ALL_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
         }
     }
 
@@ -313,10 +315,10 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
@@ -325,8 +327,8 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_LONG_LISTING_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
         }
     }
 
@@ -406,5 +408,5 @@ void run_list_directory_contents(void* p0, void* p1, void* p2, void* p3) {
 */
 }
 
-/* LIST_DIRECTORY_CONTENTS_RUNNER_SOURCE */
+/* DIRECTORY_CONTENTS_LISTING_RUNNER_SOURCE */
 #endif

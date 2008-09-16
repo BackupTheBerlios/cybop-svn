@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RECEIVER_SOURCE
-#define RECEIVER_SOURCE
+#ifndef RECEIVING_COMMUNICATOR_SOURCE
+#define RECEIVING_COMMUNICATOR_SOURCE
 
 #include "../../applicator/communicator/receiving/file_system_receiving_communicator.c"
 #include "../../applicator/communicator/receiving/gnu_linux_console_receiving_communicator.c"
@@ -70,7 +70,7 @@
  * @param p22 the channel
  * @param p23 the channel count
  */
-void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
     void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23) {
 
@@ -90,7 +90,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // CAUTION! The details are handed over as well, since sometimes,
             // they are read from the message together with the model, for
             // example when converting from a file in xdt format.
-            receive_file_system(p3, p4, p5, p6, p7, p8, p14, p15, p18, p19);
+            communicate_receiving_file_system(p3, p4, p5, p6, p7, p8, p14, p15, p18, p19);
 
             // Receive details by reading meta message data.
             //
@@ -105,7 +105,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
             //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
             // </part>
-            receive_file_system(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p16, p17, p18, p19);
+            communicate_receiving_file_system(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p16, p17, p18, p19);
         }
     }
 
@@ -126,7 +126,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
     fwprintf(stderr, L"TEST receive pre mc: %i\n", p4);
     fwprintf(stderr, L"TEST receive pre mc: %i\n", *((int*) p4));
 
-            receive_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2);
+            communicate_receiving_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2);
 
     fwprintf(stderr, L"TEST receive post m: %i\n", p3);
     fwprintf(stderr, L"TEST receive post m: %i\n", *((void**) p3));
@@ -141,7 +141,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            receive_x_window_system(p0, p7, p8, p9, p10, p11, p12);
+//??            communicate_receiving_x_window_system(p0, p7, p8, p9, p10, p11, p12);
         }
     }
 
@@ -155,7 +155,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-//??            receive_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+//??            communicate_receiving_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
         }
     }
 
@@ -169,7 +169,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-//??            receive_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+//??            communicate_receiving_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
         }
     }
 
@@ -179,7 +179,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            receive_latex(p0, p13, p14);
+//??            communicate_receiving_latex(p0, p13, p14);
         }
     }
 
@@ -247,7 +247,7 @@ void receive_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, v
  * @param p4 the knowledge memory count
  * @param p5 the knowledge memory size
  */
-void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message.");
 
@@ -451,9 +451,9 @@ void receive_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
         p3, p4);
 
     // Receive data using the parameters determined above.
-    receive_with_parameters(p2, p3, p4, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods,
+    communicate_receiving_with_parameters(p2, p3, p4, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods,
         *rm, *rmc, *rms, *com, *comc, *mm, *mmc, *mem, *memc, *lm, *lmc, (void*) stm, (void*) stmc, *cm, *cmc);
 }
 
-/* RECEIVER_SOURCE */
+/* RECEIVING_COMMUNICATOR_SOURCE */
 #endif

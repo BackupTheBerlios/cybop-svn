@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_receiving_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: x_window_system_receiving_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_RECEIVER_SOURCE
-#define X_WINDOW_SYSTEM_RECEIVER_SOURCE
+#ifndef X_WINDOW_SYSTEM_RECEIVING_COMMUNICATOR_SOURCE
+#define X_WINDOW_SYSTEM_RECEIVING_COMMUNICATOR_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -53,7 +53,7 @@
  * @param p5 the temporary user interface commands count internal
  * @param p6 the temporary user interface commands size internal
  */
-void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void communicate_receiving_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive x window system message.");
 
@@ -63,5 +63,5 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, v
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* X_WINDOW_SYSTEM_RECEIVER_SOURCE */
+/* X_WINDOW_SYSTEM_RECEIVING_COMMUNICATOR_SOURCE */
 #endif

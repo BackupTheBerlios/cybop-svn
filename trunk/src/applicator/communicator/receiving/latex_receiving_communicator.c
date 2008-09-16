@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: latex_receiving_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: latex_receiving_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef LATEX_RECEIVER_SOURCE
-#define LATEX_RECEIVER_SOURCE
+#ifndef LATEX_RECEIVING_COMMUNICATOR_SOURCE
+#define LATEX_RECEIVING_COMMUNICATOR_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -38,10 +38,10 @@
  * @param p1 the source latex format
  * @param p2 the source count
  */
-void receive_latex(void* p0, void* p1, void* p2) {
+void communicate_receiving_latex(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive latex.");
 }
 
-/* LATEX_RECEIVER_SOURCE */
+/* LATEX_RECEIVING_COMMUNICATOR_SOURCE */
 #endif

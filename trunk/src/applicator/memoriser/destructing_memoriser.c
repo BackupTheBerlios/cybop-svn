@@ -19,17 +19,18 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: destructing_memoriser.c,v $ $Revision: 1.4 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: destructing_memoriser.c,v $ $Revision: 1.5 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DESTRUCTOR_SOURCE
-#define DESTRUCTOR_SOURCE
+#ifndef DESTRUCTING_MEMORISER_SOURCE
+#define DESTRUCTING_MEMORISER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/memory/destroy_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
@@ -192,7 +193,7 @@ void destroy_model(void** model, void* model_count, void* model_size, void* mode
  * @param p3 the knowledge count
  * @param p4 the knowledge size
  */
-void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void memorise_destructing(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Destroy knowledge model.");
 
@@ -212,7 +213,7 @@ void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Get knowledge model name.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) DESTROY_MODEL_NAME, (void*) DESTROY_MODEL_NAME_COUNT,
+        (void*) MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME, (void*) MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
@@ -249,5 +250,5 @@ void destroy(void* p0, void* p1, void* p2, void* p3, void* p4) {
     remove_compound_element_by_name(p2, p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) *nm, (void*) *nmc);
 }
 
-/* DESTRUCTOR_SOURCE */
+/* DESTRUCTING_MEMORISER_SOURCE */
 #endif

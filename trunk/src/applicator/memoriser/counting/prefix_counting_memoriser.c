@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: prefix_counting_memoriser.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: prefix_counting_memoriser.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PREFIX_COUNTER_SOURCE
-#define PREFIX_COUNTER_SOURCE
+#ifndef PREFIX_COUNTING_MEMORISER_SOURCE
+#define PREFIX_COUNTING_MEMORISER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
@@ -49,7 +49,7 @@
  * @param p5 the filter (prefix)
  * @param p6 the filter count
  */
-void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void memorise_counting_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
 /*??
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
@@ -189,5 +189,5 @@ void count_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 */
 }
 
-/* PREFIX_COUNTER_SOURCE */
+/* PREFIX_COUNTING_MEMORISER_SOURCE */
 #endif

@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: character_vector_addition_calculator.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: character_vector_addition_calculator.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_VECTOR_ADDER_SOURCE
-#define CHARACTER_VECTOR_ADDER_SOURCE
+#ifndef CHARACTER_VECTOR_ADDITION_CALCULATOR_SOURCE
+#define CHARACTER_VECTOR_ADDITION_CALCULATOR_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -44,7 +44,7 @@
  * @param p5 the summand 2
  * @param p6 the summand 2 count
  */
-void add_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void calculate_addition_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -141,5 +141,5 @@ void add_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void
     }
 }
 
-/* CHARACTER_VECTOR_ADDER_SOURCE */
+/* CHARACTER_VECTOR_ADDITION_CALCULATOR_SOURCE */
 #endif

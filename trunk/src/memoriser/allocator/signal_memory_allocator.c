@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: signal_memory_allocator.c,v $ $Revision: 1.19 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: signal_memory_allocator.c,v $ $Revision: 1.20 $ $Date: 2008-09-16 22:47:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -128,7 +128,7 @@ void deallocate_signal_memory(void* p0, void* p1) {
         while (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             s = (void*) get_signal(p0, (void*) &i);
-            a = (void*) get_abstraction(p0, (void*) &i);
+            a = (void*) memorise_getting_abstraction(p0, (void*) &i);
             // Priority is not needed to destroy the signal.
 
             // Abstraction and priority are removed internally,

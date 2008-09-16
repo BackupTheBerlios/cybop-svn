@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: name_getting_memoriser.c,v $ $Revision: 1.5 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: name_getting_memoriser.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef NAME_GETTER_SOURCE
-#define NAME_GETTER_SOURCE
+#ifndef NAME_GETTING_MEMORISER_SOURCE
+#define NAME_GETTING_MEMORISER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
@@ -48,7 +48,7 @@
  * @param p5 the index
  * @param p6 the index count
  */
-void get_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void memorise_getting_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     // The temporary result.
     void** r = NULL_POINTER_MEMORY_MODEL;
@@ -59,8 +59,8 @@ void get_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* 
     get_compound_element_name_by_index(p3, p4, p5, (void*) &r, (void*) &rc, (void*) &rs);
 
     // Copy temporary result to actual result variable.
-    copy_character_vector(p0, p1, p2, *r, *rc);
+    memorise_copying_character_vector(p0, p1, p2, *r, *rc);
 }
 
-/* NAME_GETTER_SOURCE */
+/* NAME_GETTING_MEMORISER_SOURCE */
 #endif

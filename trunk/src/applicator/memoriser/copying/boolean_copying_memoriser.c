@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: boolean_copying_memoriser.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: boolean_copying_memoriser.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BOOLEAN_COPIER_SOURCE
-#define BOOLEAN_COPIER_SOURCE
+#ifndef BOOLEAN_COPYING_MEMORISER_SOURCE
+#define BOOLEAN_COPYING_MEMORISER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -42,7 +42,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void copy_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void memorise_copying_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -110,5 +110,5 @@ void copy_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* BOOLEAN_COPIER_SOURCE */
+/* BOOLEAN_COPYING_MEMORISER_SOURCE */
 #endif

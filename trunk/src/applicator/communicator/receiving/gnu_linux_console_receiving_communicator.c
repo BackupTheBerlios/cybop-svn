@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GNU_LINUX_CONSOLE_RECEIVER_SOURCE
-#define GNU_LINUX_CONSOLE_RECEIVER_SOURCE
+#ifndef GNU_LINUX_CONSOLE_RECEIVING_COMMUNICATOR_SOURCE
+#define GNU_LINUX_CONSOLE_RECEIVING_COMMUNICATOR_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -53,7 +53,7 @@
  * @param p15 the knowledge memory
  * @param p16 the knowledge memory count
  */
-void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive gnu/linux console message.");
@@ -89,5 +89,5 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* GNU_LINUX_CONSOLE_RECEIVER_SOURCE */
+/* GNU_LINUX_CONSOLE_RECEIVING_COMMUNICATOR_SOURCE */
 #endif

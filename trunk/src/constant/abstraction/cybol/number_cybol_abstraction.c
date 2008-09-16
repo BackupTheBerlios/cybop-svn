@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: number_cybol_abstraction.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: number_cybol_abstraction.c,v $ $Revision: 1.3 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,6 +75,31 @@ static wchar_t* CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION = CARTESIAN_COMPLEX_N
 static int* CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_24_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
+ * The number/fraction-decimal cybol abstraction.
+ *
+ * Decimal fraction number written as floating-point number.
+ *
+ * This is a CYBOL extension.
+ *
+ * Example:
+ * 345.678038409
+ */
+static wchar_t DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'f', L'r', L'a', L'c', L't', L'i', L'o', L'n', L'-', L'd', L'e', L'c', L'i', L'm', L'a', L'l'};
+static wchar_t* DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION = DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY;
+static int* DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_MEMORY_MODEL_ARRAY;
+
+/**
+ * The number/integer cybol abstraction.
+ *
+ * Integer number (integral data type).
+ *
+ * This is a CYBOL extension.
+ */
+static wchar_t INTEGER_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'i', L'n', L't', L'e', L'g', L'e', L'r'};
+static wchar_t* INTEGER_NUMBER_CYBOL_ABSTRACTION = INTEGER_NUMBER_CYBOL_ABSTRACTION_ARRAY;
+static int* INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
+
+/**
  * The number/complex-polar cybol abstraction.
  *
  * Complex number written in polar form, that is as
@@ -95,20 +120,6 @@ static wchar_t* POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION = POLAR_COMPLEX_NUMBER_CY
 static int* POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_20_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
- * The number/fraction-decimal cybol abstraction.
- *
- * Decimal fraction number written as floating-point number.
- *
- * This is a CYBOL extension.
- *
- * Example:
- * 345.678038409
- */
-static wchar_t DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'f', L'r', L'a', L'c', L't', L'i', L'o', L'n', L'-', L'd', L'e', L'c', L'i', L'm', L'a', L'l'};
-static wchar_t* DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION = DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY;
-static int* DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_MEMORY_MODEL_ARRAY;
-
-/**
  * The number/fraction-vulgar cybol abstraction.
  *
  * Vulgar fraction number written as comma-separated numerator and denominator.
@@ -124,17 +135,6 @@ static int* DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_23_INTEGER_
 static wchar_t VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'f', L'r', L'a', L'c', L't', L'i', L'o', L'n', L'-', L'v', L'u', L'l', L'g', L'a', L'r'};
 static wchar_t* VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION = VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_ARRAY;
 static int* VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_22_INTEGER_MEMORY_MODEL_ARRAY;
-
-/**
- * The number/integer cybol abstraction.
- *
- * Integer number (integral data type).
- *
- * This is a CYBOL extension.
- */
-static wchar_t INTEGER_NUMBER_CYBOL_ABSTRACTION_ARRAY[] = {L'n', L'u', L'm', L'b', L'e', L'r', L'/', L'i', L'n', L't', L'e', L'g', L'e', L'r'};
-static wchar_t* INTEGER_NUMBER_CYBOL_ABSTRACTION = INTEGER_NUMBER_CYBOL_ABSTRACTION_ARRAY;
-static int* INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* NUMBER_CYBOL_ABSTRACTION_SOURCE */
 #endif

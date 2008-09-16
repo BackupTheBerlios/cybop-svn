@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: comparator.c,v $ $Revision: 1.4 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: comparator.c,v $ $Revision: 1.5 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,8 +27,8 @@
 #define COMPARATOR_SOURCE
 
 #include "../applicator/comparator/equality_comparator.c"
-#include "../applicator/comparator/greaterness_comparator.c"
-#include "../applicator/comparator/greaterness_or_equality_comparator.c"
+//?? #include "../applicator/comparator/greaterness_comparator.c"
+//?? #include "../applicator/comparator/greaterness_or_equality_comparator.c"
 #include "../applicator/comparator/smallerness_comparator.c"
 #include "../applicator/comparator/smallerness_or_equality_comparator.c"
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: field_xdt_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: field_xdt_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -2709,7 +2709,7 @@ static int* SERVICE_POINT_VALUE_FIELD_XDT_NAME = NUMBER_5065_INTEGER_MEMORY_MODE
  * Rule: -
  * Example: 18
  */
-static int* SERVICE_NAME_OF_FEE_FIELD_XDT_NAME = NUMBER_5090_INTEGER_MEMORY_MODEL_ARRAY;
+static int* SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_FEE_FIELD_XDT_NAME = NUMBER_5090_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The service name of certificate field xdt name.
@@ -2720,7 +2720,7 @@ static int* SERVICE_NAME_OF_FEE_FIELD_XDT_NAME = NUMBER_5090_INTEGER_MEMORY_MODE
  * Rule: -
  * Example: 18
  */
-static int* SERVICE_NAME_OF_CERTIFICATE_FIELD_XDT_NAME = NUMBER_5091_INTEGER_MEMORY_MODEL_ARRAY;
+static int* SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_CERTIFICATE_FIELD_XDT_NAME = NUMBER_5091_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The billing diagnosis field xdt name.

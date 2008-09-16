@@ -19,19 +19,21 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.6 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
+ * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CREATOR_SOURCE
-#define CREATOR_SOURCE
+#ifndef CREATING_MEMORISER_SOURCE
+#define CREATING_MEMORISER_SOURCE
 
 #include <libxml/tree.h>
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
+#include "../../constant/model/cybol/compound_element_cybol_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/memory/create_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
@@ -150,7 +152,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  */
-void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Create knowledge model.");
 
@@ -209,7 +211,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Get name.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_NAME_NAME, (void*) CREATE_NAME_NAME_COUNT,
+        (void*) NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
@@ -217,7 +219,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_ABSTRACTION_NAME, (void*) CREATE_ABSTRACTION_NAME_COUNT,
+        (void*) ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
@@ -225,7 +227,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get element.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_ELEMENT_NAME, (void*) CREATE_ELEMENT_NAME_COUNT,
+        (void*) ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         (void*) &en, (void*) &enc, (void*) &ens,
         (void*) &ea, (void*) &eac, (void*) &eas,
         (void*) &em, (void*) &emc, (void*) &ems,
@@ -233,7 +235,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get whole.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_WHOLE_NAME, (void*) CREATE_WHOLE_NAME_COUNT,
+        (void*) WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         (void*) &wn, (void*) &wnc, (void*) &wns,
         (void*) &wa, (void*) &wac, (void*) &was,
         (void*) &wm, (void*) &wmc, (void*) &wms,
@@ -245,7 +247,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*em, *emc, (void*) CREATE_PART_ELEMENT_MODEL, (void*) CREATE_PART_ELEMENT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*em, *emc, (void*) PART_COMPOUND_ELEMENT_CYBOL_MODEL, (void*) PART_COMPOUND_ELEMENT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -279,7 +281,7 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*em, *emc, (void*) CREATE_META_ELEMENT_MODEL, (void*) CREATE_META_ELEMENT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*em, *emc, (void*) META_COMPOUND_ELEMENT_CYBOL_MODEL, (void*) META_COMPOUND_ELEMENT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -295,5 +297,5 @@ void create(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* CREATOR_SOURCE */
+/* CREATING_MEMORISER_SOURCE */
 #endif

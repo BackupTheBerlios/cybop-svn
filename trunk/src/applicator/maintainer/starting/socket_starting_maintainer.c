@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_starting_maintainer.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: socket_starting_maintainer.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_STARTER_SOURCE
-#define SOCKET_STARTER_SOURCE
+#ifndef SOCKET_STARTING_MAINTAINER_SOURCE
+#define SOCKET_STARTING_MAINTAINER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -58,7 +58,7 @@
  * @param p2 the namespace model
  * @param p3 the namespace model count
  */
-void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
+void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, void* p2, void* p3) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -75,7 +75,7 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p2, p3, (void*) LOCAL_NAMESPACE_MODEL, (void*) LOCAL_NAMESPACE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p2, p3, (void*) LOCAL_NAMESPACE_CYBOL_MODEL, (void*) LOCAL_NAMESPACE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -86,7 +86,7 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p2, p3, (void*) INET_NAMESPACE_MODEL, (void*) INET_NAMESPACE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p2, p3, (void*) INET_NAMESPACE_CYBOL_MODEL, (void*) INET_NAMESPACE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -97,7 +97,7 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p2, p3, (void*) INET6_NAMESPACE_MODEL, (void*) INET6_NAMESPACE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p2, p3, (void*) INET6_NAMESPACE_CYBOL_MODEL, (void*) INET6_NAMESPACE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -124,7 +124,7 @@ void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
  * @param p1 the communication style model
  * @param p2 the communication style model count
  */
-void startup_socket_get_style(void* p0, void* p1, void* p2) {
+void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -179,7 +179,7 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
  * @param p2 the address model count
  * @param p3 the address namespace
  */
-void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
+void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -301,7 +301,7 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
  * @param p1 the file name
  * @param p2 the file name count
  */
-void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2) {
+void maintain_starting_socket_initialise_local_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -400,7 +400,7 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
  * @param p1 the host address (in network byte order)
  * @param p2 the socket port (in host byte order)
  */
-void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2) {
+void maintain_starting_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -462,7 +462,7 @@ void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2)
  * @param p1 the host address (in network byte order)
  * @param p2 the socket port (in host byte order)
  */
-void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2) {
+void maintain_starting_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -539,7 +539,7 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
  * @param p10 the knowledge memory count
  * @param p11 the knowledge memory size
  */
-void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
+void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     if (p8 != *NULL_POINTER_MEMORY_MODEL) {
@@ -597,18 +597,18 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int r = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get socket- and address namespace.
-        startup_socket_get_namespace((void*) &sn, (void*) &an, p1, p2);
+        maintain_starting_socket_memorise_getting_namespace((void*) &sn, (void*) &an, p1, p2);
         // Get socket communication style.
-        startup_socket_get_style((void*) &st, p3, p4);
+        maintain_starting_socket_get_style((void*) &st, p3, p4);
 
         // Get host address constant.
         if (an == AF_INET) {
 
-            startup_socket_get_host_address((void*) &ha4, p5, p6, (void*) &an);
+            maintain_starting_socket_get_host_address((void*) &ha4, p5, p6, (void*) &an);
 
         } else if (an == AF_INET6) {
 
-            startup_socket_get_host_address((void*) &ha6, p5, p6, (void*) &an);
+            maintain_starting_socket_get_host_address((void*) &ha6, p5, p6, (void*) &an);
         }
 
         // Allocate socket address size of this system.
@@ -683,15 +683,15 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // It gets initialised only before sending, or at reception of a message.
         if (an == AF_LOCAL) {
 
-            startup_socket_initialise_local_socket_address((void*) &la, p5, p6);
+            maintain_starting_socket_initialise_local_socket_address((void*) &la, p5, p6);
 
         } else if (an == AF_INET) {
 
-            startup_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
+            maintain_starting_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
 
         } else if (an == AF_INET6) {
 
-            startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
+            maintain_starting_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
         }
 
 /*??
@@ -742,10 +742,10 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         }
 
         // Set socket address size of this system.
-        i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
+        i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
         set_element(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Set communication partner socket address size.
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
         set_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Set socket of this system.
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
@@ -964,5 +964,5 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_STARTER_SOURCE */
+/* SOCKET_STARTING_MAINTAINER_SOURCE */
 #endif

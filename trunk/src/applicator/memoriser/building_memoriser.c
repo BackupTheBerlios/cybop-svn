@@ -19,17 +19,18 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: building_memoriser.c,v $ $Revision: 1.2 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: building_memoriser.c,v $ $Revision: 1.3 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BUILDER_SOURCE
-#define BUILDER_SOURCE
+#ifndef BUILDING_MEMORISER_SOURCE
+#define BUILDING_MEMORISER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/memory/build_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
@@ -49,7 +50,7 @@
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  */
-void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void memorise_building(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Build list name.");
 
@@ -95,7 +96,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // get the basisname
     get_universal_compound_element_by_name(p0, p1,
-        (void*) BASE_NAME_NAME, (void*) BASE_NAME_NAME_COUNT,
+        (void*) BASE_BUILD_FLOW_OPERATION_CYBOL_NAME, (void*) BASE_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &bnn, (void*) &bnnc, (void*) &bnns,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
@@ -104,7 +105,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // get the index
     get_universal_compound_element_by_name(p0, p1,
-        (void*) INDEX_NAME_NAME, (void*) INDEX_NAME_NAME_COUNT,
+        (void*) INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME, (void*) INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &idxn, (void*) &idxnc, (void*) &idxns,
         (void*) &idxa, (void*) &idxac, (void*) &idxas,
         (void*) &idxm, (void*) &idxmc, (void*) &idxms,
@@ -113,7 +114,7 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // get the result
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COMPOSED_NAME_NAME, (void*) COMPOSED_NAME_NAME_COUNT,
+        (void*) COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME, (void*) COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &resn, (void*) &resnc, (void*) &resns,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
@@ -154,5 +155,5 @@ void build_listname(void* p0, void* p1, void* p2, void* p3, void* p4) {
     deallocate_array((void*) &int_string, (void*) &int_string_size, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/* BUILDER_SOURCE */
+/* BUILDING_MEMORISER_SOURCE */
 #endif

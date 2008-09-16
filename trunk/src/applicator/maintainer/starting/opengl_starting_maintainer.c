@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: opengl_starting_maintainer.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: opengl_starting_maintainer.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef OPENGL_STARTER_SOURCE
-#define OPENGL_STARTER_SOURCE
+#ifndef OPENGL_STARTING_MAINTAINER_SOURCE
+#define OPENGL_STARTING_MAINTAINER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
@@ -41,7 +41,7 @@
  * @param p2 the knowledge count
  * @param p3 the knowledge size
  */
-void startup_opengl(void* p0, void* p1, void* p2, void* p3) {
+void maintain_starting_opengl(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup opengl.");
 
@@ -49,11 +49,11 @@ void startup_opengl(void* p0, void* p1, void* p2, void* p3) {
 
     // Startup x window system AT FIRST.
     // The opengl environment needs its windows to have something to paint on.
-    startup_x_window_system(p0, p1, p2, p3);
+    maintain_starting_x_window_system(p0, p1, p2, p3);
 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 }
 
-/* OPENGL_STARTER_SOURCE */
+/* OPENGL_STARTING_MAINTAINER_SOURCE */
 #endif

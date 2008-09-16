@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SENDER_SOURCE
-#define SENDER_SOURCE
+#ifndef SENDING_COMMUNICATOR_SOURCE
+#define SENDING_COMMUNICATOR_SOURCE
 
 #include "../../applicator/communicator/sending/cyboi_system_sending_communicator.c"
 #include "../../applicator/communicator/sending/file_system_sending_communicator.c"
@@ -76,7 +76,7 @@
  * @param p8 the signal memory size
  * @param p9 the signal identification (Hand over as reference!)
  */
-void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send message.");
 
@@ -332,7 +332,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_cyboi_system(p2, p6, p7, p8, ma, mac, mm, mmc, md, mdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, p9);
+            communicate_sending_cyboi_system(p2, p6, p7, p8, ma, mac, mm, mmc, md, mdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, p9);
         }
     }
 
@@ -342,11 +342,11 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            send_socket(p2, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+//??            communicate_sending_socket(p2, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
 
             //?? TEST: For testing reasons, the p2 was replaced with p9 here!
             //?? The signal id serves as client socket to which this cyboi system has to reply.
-            send_socket(p9, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+            communicate_sending_socket(p9, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 
@@ -356,7 +356,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_file_system(p2, *mn, *mnc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *rm, *rmc);
+            communicate_sending_file_system(p2, *mn, *mnc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *rm, *rmc);
         }
     }
 
@@ -366,7 +366,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *nlm, *nlmc);
+            communicate_sending_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *nlm, *nlmc);
         }
     }
 
@@ -376,7 +376,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_gnu_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
+            communicate_sending_gnu_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
 
@@ -386,7 +386,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_x_window_system(p2, *mm, *mmc, p3, p4);
+            communicate_sending_x_window_system(p2, *mm, *mmc, p3, p4);
         }
     }
 
@@ -396,7 +396,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_socket(p2, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) WWW_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+            communicate_sending_socket(p2, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) WWW_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 
@@ -406,7 +406,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_latex(p2, *mm, *mmc, p3, p4);
+            communicate_sending_latex(p2, *mm, *mmc, p3, p4);
         }
     }
 
@@ -416,5 +416,5 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     }
 }
 
-/* SENDER_SOURCE */
+/* SENDING_COMMUNICATOR_SOURCE */
 #endif

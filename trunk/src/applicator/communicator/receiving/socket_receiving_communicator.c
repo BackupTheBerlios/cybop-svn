@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_RECEIVER_SOURCE
-#define SOCKET_RECEIVER_SOURCE
+#ifndef SOCKET_RECEIVING_COMMUNICATOR_SOURCE
+#define SOCKET_RECEIVING_COMMUNICATOR_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -74,7 +74,7 @@
  * @param p12 the knowledge memory
  * @param p13 the knowledge memory count
  */
-void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
+void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
     void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message via socket.");
@@ -273,5 +273,5 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_RECEIVER_SOURCE */
+/* SOCKET_RECEIVING_COMMUNICATOR_SOURCE */
 #endif

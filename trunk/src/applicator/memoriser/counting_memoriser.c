@@ -19,20 +19,22 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: counting_memoriser.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: counting_memoriser.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COUNTER_SOURCE
-#define COUNTER_SOURCE
+#ifndef COUNTING_MEMORISER_SOURCE
+#define COUNTING_MEMORISER_SOURCE
 
-#include "../../applicator/counter/all_counter.c"
-#include "../../applicator/counter/prefix_counter.c"
-#include "../../applicator/counter/suffix_counter.c"
+#include "../../applicator/memoriser/counting/all_counting_memoriser.c"
+#include "../../applicator/memoriser/counting/prefix_counting_memoriser.c"
+#include "../../applicator/memoriser/counting/suffix_counting_memoriser.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/cybol/count_selection_cybol_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/memory/count_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/allocator.c"
@@ -56,7 +58,7 @@
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  */
-void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void memorise_counting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Count compound parts.");
 
@@ -115,7 +117,7 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Get compound.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNT_COMPOUND_NAME, (void*) COUNT_COMPOUND_NAME_COUNT,
+        (void*) COMPOUND_MEMORY_MODEL_COUNT_FLOW_OPERATION_CYBOL_NAME, (void*) COMPOUND_MEMORY_MODEL_COUNT_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -123,7 +125,7 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get selection.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME, (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
+        (void*) SELECTION_COUNT_FLOW_OPERATION_CYBOL_NAME, (void*) SELECTION_COUNT_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
@@ -131,7 +133,7 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get filter.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNT_FILTER_NAME, (void*) COUNT_FILTER_NAME_COUNT,
+        (void*) FILTER_COUNT_FLOW_OPERATION_CYBOL_NAME, (void*) FILTER_COUNT_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &fn, (void*) &fnc, (void*) &fns,
         (void*) &fa, (void*) &fac, (void*) &fas,
         (void*) &fm, (void*) &fmc, (void*) &fms,
@@ -139,7 +141,7 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get result.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COUNT_RESULT_COMPARISON_OPERATION_CYBOL_NAME, (void*) COUNT_RESULT_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
+        (void*) RESULT_COUNT_FLOW_OPERATION_CYBOL_NAME, (void*) RESULT_COUNT_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
@@ -151,31 +153,31 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_ALL_SELECTION_MODEL, (void*) COUNT_ALL_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            count_all(rm, *rmc, *rms, *cm, *cmc);
+            memorise_counting_all(rm, *rmc, *rms, *cm, *cmc);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_PREFIX_SELECTION_MODEL, (void*) COUNT_PREFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            count_prefix(rm, *rmc, *rms, *cm, *cmc, *fm, *fmc);
+            memorise_counting_prefix(rm, *rmc, *rms, *cm, *cmc, *fm, *fmc);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) COUNT_SUFFIX_SELECTION_MODEL, (void*) COUNT_SUFFIX_SELECTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            count_suffix(rm, *rmc, *rms, *cm, *cmc, *fm, *fmc);
+            memorise_counting_suffix(rm, *rmc, *rms, *cm, *cmc, *fm, *fmc);
         }
     }
 
@@ -185,5 +187,5 @@ void count(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* COUNTER_SOURCE */
+/* COUNTING_MEMORISER_SOURCE */
 #endif

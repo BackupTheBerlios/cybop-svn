@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FILE_SYSTEM_RECEIVER_SOURCE
-#define FILE_SYSTEM_RECEIVER_SOURCE
+#ifndef FILE_SYSTEM_RECEIVING_COMMUNICATOR_SOURCE
+#define FILE_SYSTEM_RECEIVING_COMMUNICATOR_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -55,7 +55,7 @@
  * @param p8 the language
  * @param p9 the language count
  */
-void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive file system message.");
 
@@ -104,5 +104,5 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* FILE_SYSTEM_RECEIVER_SOURCE */
+/* FILE_SYSTEM_RECEIVING_COMMUNICATOR_SOURCE */
 #endif

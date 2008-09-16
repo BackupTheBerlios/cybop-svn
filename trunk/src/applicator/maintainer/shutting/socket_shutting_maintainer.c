@@ -19,17 +19,18 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_shutting_maintainer.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: socket_shutting_maintainer.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_SHUTTER_SOURCE
-#define SOCKET_SHUTTER_SOURCE
+#ifndef SOCKET_SHUTTING_MAINTAINER_SOURCE
+#define SOCKET_SHUTTING_MAINTAINER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../logger/logger.c"
 #include "../../../memoriser/accessor.c"
 #include "../../../memoriser/allocator.c"
@@ -45,7 +46,7 @@
  * @param p2 the socket service thread
  * @param p3 the socket service thread interrupt
  */
-void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
+void maintain_shutting_socket(void* p0, void* p1, void* p2, void* p3) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -97,10 +98,10 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &pa, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get socket address size of this system.
-            i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
+            i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &as, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get communication partner socket address size.
-            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get socket of this system.
             i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
@@ -164,5 +165,5 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_SHUTTER_SOURCE */
+/* SOCKET_SHUTTING_MAINTAINER_SOURCE */
 #endif

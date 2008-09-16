@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_SENDER_SOURCE
-#define SOCKET_SENDER_SOURCE
+#ifndef SOCKET_SENDING_COMMUNICATOR_SOURCE
+#define SOCKET_SENDING_COMMUNICATOR_SOURCE
 
 //?? TEST for test file; DELETE later!
 #include <fcntl.h>
@@ -54,7 +54,7 @@
  * @param p1 the internal memory
  * @param p2 the base internal
  */
-void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
+void communicate_sending_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -97,7 +97,7 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
  * @param p1 the socket namespace
  * @param p2 the communication style
  */
-void send_socket_get_socket_client_mode(void* p0, void* p1, void* p2) {
+void communicate_sending_socket_get_socket_client_mode(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -190,7 +190,7 @@ void send_socket_get_socket_client_mode(void* p0, void* p1, void* p2) {
  * @param p5 the communication mode
  * @param p6 the communication mode count
  */
-void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get socket.");
 
@@ -203,7 +203,7 @@ void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_socket_get_socket_server_mode(p0, p1, p2);
+            communicate_sending_socket_get_socket_server_mode(p0, p1, p2);
         }
     }
 
@@ -213,7 +213,7 @@ void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_socket_get_socket_client_mode(p0, p3, p4);
+            communicate_sending_socket_get_socket_client_mode(p0, p3, p4);
         }
     }
 }
@@ -223,7 +223,7 @@ void send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, vo
  *
  * @param p0 the socket
  */
-void send_socket_set_nonblocking_mode(void* p0) {
+void communicate_sending_socket_set_nonblocking_mode(void* p0) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -274,7 +274,7 @@ void send_socket_set_nonblocking_mode(void* p0) {
  * @param p0 the host address (Hand over as reference!)
  * @param p1 the address namespace
  */
-void send_socket_allocate_host_address(void* p0, void* p1) {
+void communicate_sending_socket_allocate_host_address(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -316,7 +316,7 @@ void send_socket_allocate_host_address(void* p0, void* p1) {
  * @param p1 the socket address size (Hand over as reference!)
  * @param p2 the address namespace
  */
-void send_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
+void communicate_sending_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -400,7 +400,7 @@ void send_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
  * @param p4 the port model
  * @param p5 the address namespace
  */
-void send_socket_initialise_socket_address(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void communicate_sending_socket_initialise_socket_address(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -472,7 +472,7 @@ void send_socket_initialise_socket_address(void* p0, void* p1, void* p2, void* p
  * @param p19 the language
  * @param p20 the language count
  */
-void send_socket(void* p0, void* p1, void* p2, void* p3,
+void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10,
     void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20) {
 
@@ -502,25 +502,25 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
 
 /*??
     // Get socket- and address namespace.
-    startup_socket_get_namespace((void*) &sn, (void*) &an, p5, p6);
+    startup_socket_memorise_getting_namespace((void*) &sn, (void*) &an, p5, p6);
 */
     // Get socket communication style.
     startup_socket_get_style((void*) &st, p7, p8);
 /*??
     // Get socket.
-    send_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
+    communicate_sending_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
 
     fwprintf(stderr, L"TEST: send socket: %i \n", **s);
 */
 
     // Set non-blocking mode for socket.
-//??    send_socket_set_nonblocking_mode((void*) *s);
+//??    communicate_sending_socket_set_nonblocking_mode((void*) *s);
 
 /*??
     // Allocate host address.
-    send_socket_allocate_host_address((void*) &ha, (void*) &an);
+    communicate_sending_socket_allocate_host_address((void*) &ha, (void*) &an);
     // Allocate socket address.
-    send_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
+    communicate_sending_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
 */
     // Allocate http body character vector.
     allocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -531,7 +531,7 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
     // Initialise host address.
     startup_socket_get_host_address(ha, p2, p3, (void*) &an);
     // Initialise socket address.
-    send_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
+    communicate_sending_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
 */
 
     // Encode http body.
@@ -630,5 +630,5 @@ void send_socket(void* p0, void* p1, void* p2, void* p3,
 */
 }
 
-/* SOCKET_SENDER_SOURCE */
+/* SOCKET_SENDING_COMMUNICATOR_SOURCE */
 #endif

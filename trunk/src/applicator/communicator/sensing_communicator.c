@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sensing_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: sensing_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SENSOR_SOURCE
-#define SENSOR_SOURCE
+#ifndef SENSING_COMMUNICATOR_SOURCE
+#define SENSING_COMMUNICATOR_SOURCE
 
 #include "../../applicator/communicator/sensing/gnu_linux_console_sensing_communicator.c"
 #include "../../applicator/communicator/sensing/socket_sensing_communicator.c"
@@ -47,7 +47,7 @@
  * @param p1 the service thread
  * @param p2 the thread procedure
  */
-void sense_message(void* p0, void* p1, void* p2) {
+void communicate_sensing_message(void* p0, void* p1, void* p2) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -127,7 +127,7 @@ void sense_message(void* p0, void* p1, void* p2) {
  * @param p7 the signal memory count
  * @param p8 the signal memory size
  */
-void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void communicate_sensing(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense interrupt request.");
 
@@ -376,7 +376,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
             set_element(p2, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) hdc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             // Sense incoming message.
-            sense_message(p2, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) &sense_gnu_linux_console);
+            communicate_sensing_message(p2, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) &communicate_sensing_gnu_linux_console);
         }
     }
 
@@ -395,7 +395,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
             set_element(p2, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) hdc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             // Sense incoming message.
-            sense_message(p2, (void*) X_WINDOW_SYSTEM_THREAD, (void*) &sense_x_window_system);
+            communicate_sensing_message(p2, (void*) X_WINDOW_SYSTEM_THREAD, (void*) &communicate_sensing_x_window_system);
         }
     }
 
@@ -420,7 +420,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
             set_element(p2, (void*) &i, (void*) hdc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             // Sense incoming message (http request or response).
-            sense_message(p2, (void*) WWW_SERVICE_THREAD, (void*) &sense_www_socket);
+            communicate_sensing_message(p2, (void*) WWW_SERVICE_THREAD, (void*) &communicate_sensing_www_socket);
         }
     }
 
@@ -445,7 +445,7 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
             set_element(p2, (void*) &i, (void*) hdc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             // Sense incoming message (http request or response).
-            sense_message(p2, (void*) CYBOI_SERVICE_THREAD, (void*) &sense_cyboi_socket);
+            communicate_sensing_message(p2, (void*) CYBOI_SERVICE_THREAD, (void*) &communicate_sensing_cyboi_socket);
         }
     }
 
@@ -455,5 +455,5 @@ void sense(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     }
 }
 
-/* SENSOR_SOURCE */
+/* SENSING_COMMUNICATOR_SOURCE */
 #endif

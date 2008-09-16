@@ -19,19 +19,21 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: getting_memoriser.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: getting_memoriser.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GETTER_SOURCE
-#define GETTER_SOURCE
+#ifndef GETTING_MEMORISER_SOURCE
+#define GETTING_MEMORISER_SOURCE
 
-#include "../../applicator/getter/abstraction_getter.c"
-#include "../../applicator/getter/name_getter.c"
+#include "../../applicator/memoriser/getting/abstraction_getting_memoriser.c"
+#include "../../applicator/memoriser/getting/name_getting_memoriser.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/cybol/get_description_cybol_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/memory/get_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
@@ -51,7 +53,7 @@
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  */
-void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
+void memorise_getting(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get standard meta information.");
 
@@ -110,7 +112,7 @@ void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get compound.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) GET_COMPOUND_NAME, (void*) GET_COMPOUND_NAME_COUNT,
+        (void*) COMPOUND_GET_FLOW_OPERATION_CYBOL_NAME, (void*) COMPOUND_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -118,7 +120,7 @@ void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get index.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) GET_INDEX_NAME, (void*) GET_INDEX_NAME_COUNT,
+        (void*) INDEX_GET_FLOW_OPERATION_CYBOL_NAME, (void*) INDEX_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &in, (void*) &inc, (void*) &ins,
         (void*) &ia, (void*) &iac, (void*) &ias,
         (void*) &im, (void*) &imc, (void*) &ims,
@@ -126,7 +128,7 @@ void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get description.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) GET_DESCRIPTION_NAME, (void*) GET_DESCRIPTION_NAME_COUNT,
+        (void*) DESCRIPTION_GET_FLOW_OPERATION_CYBOL_NAME, (void*) DESCRIPTION_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &dn, (void*) &dnc, (void*) &dns,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
@@ -134,7 +136,7 @@ void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
         p2, p3);
     // Get result.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) GET_RESULT_COMPARISON_OPERATION_CYBOL_NAME, (void*) GET_RESULT_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
+        (void*) RESULT_GET_FLOW_OPERATION_CYBOL_NAME, (void*) RESULT_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
@@ -146,23 +148,23 @@ void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*dm, *dmc, (void*) GET_NAME_DESCRIPTION_MODEL, (void*) GET_NAME_DESCRIPTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*dm, *dmc, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // CAUTION! Use references not only for the model, but also for count and size!
-            get_name((void*) rm, *rmc, *rms, *cm, *cmc, *im, *imc);
+            memorise_getting_name((void*) rm, *rmc, *rms, *cm, *cmc, *im, *imc);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*dm, *dmc, (void*) GET_ABSTRACTION_DESCRIPTION_MODEL, (void*) GET_ABSTRACTION_DESCRIPTION_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*dm, *dmc, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // CAUTION! Use references not only for the model, but also for count and size!
-            get_abstraction((void*) rm, *rmc, *rms, *cm, *cmc, *im, *imc);
+            memorise_getting_abstraction((void*) rm, *rmc, *rms, *cm, *cmc, *im, *imc);
         }
     }
 
@@ -172,5 +174,5 @@ void get(void* p0, int* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* GETTER_SOURCE */
+/* GETTING_MEMORISER_SOURCE */
 #endif

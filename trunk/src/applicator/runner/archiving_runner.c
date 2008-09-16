@@ -19,17 +19,18 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: archiving_runner.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: archiving_runner.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ARCHIVE_RUNNER_SOURCE
-#define ARCHIVE_RUNNER_SOURCE
+#ifndef ARCHIVING_RUNNER_SOURCE
+#define ARCHIVING_RUNNER_SOURCE
 
 #include <unistd.h>
 #include "../../applicator/runner/executing_runner.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/command/unix_command_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
@@ -48,7 +49,7 @@
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
  */
-void run_archive(void* p0, void* p1, void* p2, void* p3) {
+void run_archiving(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run archive command.");
 
@@ -145,10 +146,10 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
@@ -157,8 +158,8 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_CREATE, (void*) ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME, (void*) CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
         }
     }
 
@@ -172,10 +173,10 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
@@ -184,8 +185,8 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_UPDATE, (void*) ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME, (void*) UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
         }
     }
 
@@ -199,10 +200,10 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
@@ -211,8 +212,8 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_BZIP2, (void*) ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME, (void*) BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
         }
     }
 
@@ -335,10 +336,10 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
@@ -347,8 +348,8 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_CREATE, (void*) ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *ARCHIVE_UNIX_COMMAND_MODEL_CREATE_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME, (void*) CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *CREATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
         }
     }
 
@@ -362,10 +363,10 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
@@ -374,8 +375,8 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_UPDATE, (void*) ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *ARCHIVE_UNIX_COMMAND_MODEL_UPDATE_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME, (void*) UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *UPDATE_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
         }
     }
 
@@ -389,10 +390,10 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
@@ -401,8 +402,8 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ARCHIVE_UNIX_COMMAND_MODEL_BZIP2, (void*) ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *ARCHIVE_UNIX_COMMAND_MODEL_BZIP2_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME, (void*) BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *BZIP2_ARCHIVE_RUN_OPERATION_CYBOL_NAME_COUNT;
         }
     }
 
@@ -482,5 +483,5 @@ void run_archive(void* p0, void* p1, void* p2, void* p3) {
 */
 }
 
-/* ARCHIVE_RUNNER_SOURCE */
+/* ARCHIVING_RUNNER_SOURCE */
 #endif

@@ -19,20 +19,23 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: copying_memoriser.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: copying_memoriser.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COPIER_SOURCE
-#define COPIER_SOURCE
+#ifndef COPYING_MEMORISER_SOURCE
+#define COPYING_MEMORISER_SOURCE
 
-#include "../../applicator/copier/boolean_copier.c"
-#include "../../applicator/copier/character_vector_copier.c"
-#include "../../applicator/copier/integer_vector_copier.c"
+#include "../../applicator/memoriser/copying/boolean_copying_memoriser.c"
+#include "../../applicator/memoriser/copying/character_vector_copying_memoriser.c"
+#include "../../applicator/memoriser/copying/integer_vector_copying_memoriser.c"
+#include "../../constant/abstraction/cybol/logicvalue_cybol_abstraction.c"
+#include "../../constant/abstraction/cybol/number_cybol_abstraction.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/memory/copy_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
@@ -50,7 +53,7 @@
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  */
-void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
+void memorise_copying(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Copy primitive model.");
 
@@ -96,7 +99,7 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get source.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COPIER_SOURCE_NAME, (void*) COPIER_SOURCE_NAME_COUNT,
+        (void*) SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME, (void*) SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT,
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
@@ -105,7 +108,7 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get destination.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COPY_DESTINATION_NAME, (void*) COPY_DESTINATION_NAME_COUNT,
+        (void*) DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME, (void*) DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT,
         (void*) &dn, (void*) &dnc, (void*) &dns,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
@@ -114,7 +117,7 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     // Get abstraction.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) COPY_ABSTRACTION_NAME, (void*) COPY_ABSTRACTION_NAME_COUNT,
+        (void*) ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT,
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
@@ -130,17 +133,17 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            copy_boolean(dm, *dmc, *dms, *sm, *smc);
+            memorise_copying_boolean(dm, *dmc, *dms, *sm, *smc);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*am, *amc, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*am, *amc, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            copy_character_vector(dm, *dmc, *dms, *sm, *smc);
+            memorise_copying_character_vector(dm, *dmc, *dms, *sm, *smc);
         }
     }
 
@@ -150,7 +153,7 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            copy_integer_vector(dm, *dmc, *dms, *sm, *smc);
+            memorise_copying_integer_vector(dm, *dmc, *dms, *sm, *smc);
         }
     }
 
@@ -160,5 +163,5 @@ void copy(void* p0, int* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* COPIER_SOURCE */
+/* COPYING_MEMORISER_SOURCE */
 #endif

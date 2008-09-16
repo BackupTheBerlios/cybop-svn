@@ -19,18 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: branch_guider.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: branch_guider.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BRANCHER_SOURCE
-#define BRANCHER_SOURCE
+#ifndef BRANCH_GUIDER_SOURCE
+#define BRANCH_GUIDER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/boolean_memory_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/flow/branch_flow_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
@@ -66,7 +68,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p12 the priority (Hand over as reference!)
  * @param p13 the signal identification (Hand over as reference!)
  */
-void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+void guide_branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
@@ -114,7 +116,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     // Get criterion.
     get_universal_compound_element_by_name(p10, p11,
-        (void*) CRITERION_NAME, (void*) CRITERION_NAME_COUNT,
+        (void*) CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME, (void*) CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -123,7 +125,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     // Get true model.
     get_universal_compound_element_by_name(p10, p11,
-        (void*) TRUE_MODEL_NAME, (void*) TRUE_MODEL_NAME_COUNT,
+        (void*) TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME, (void*) TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &tn, (void*) &tnc, (void*) &tns,
         (void*) &ta, (void*) &tac, (void*) &tas,
         (void*) &tm, (void*) &tmc, (void*) &tms,
@@ -132,7 +134,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     // Get false model.
     get_universal_compound_element_by_name(p10, p11,
-        (void*) FALSE_MODEL_NAME, (void*) FALSE_MODEL_NAME_COUNT,
+        (void*) FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME, (void*) FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &fn, (void*) &fnc, (void*) &fns,
         (void*) &fa, (void*) &fac, (void*) &fas,
         (void*) &fm, (void*) &fmc, (void*) &fms,
@@ -142,7 +144,7 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_arrays(*cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+    compare_arrays(*cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
     // The direct execution flag.
     int x = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -159,5 +161,5 @@ void branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     }
 }
 
-/* BRANCHER_SOURCE */
+/* BRANCH_GUIDER_SOURCE */
 #endif

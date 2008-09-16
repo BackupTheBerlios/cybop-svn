@@ -19,22 +19,23 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: starting_maintainer.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: starting_maintainer.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef STARTER_SOURCE
-#define STARTER_SOURCE
+#ifndef STARTING_MAINTAINER_SOURCE
+#define STARTING_MAINTAINER_SOURCE
 
-#include "../../applicator/starter/gnu_linux_console_starter.c"
-#include "../../applicator/starter/socket_starter.c"
-#include "../../applicator/starter/x_window_system_starter.c"
+#include "../../applicator/maintainer/starting/gnu_linux_console_starting_maintainer.c"
+#include "../../applicator/maintainer/starting/socket_starting_maintainer.c"
+#include "../../applicator/maintainer/starting/x_window_system_starting_maintainer.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/lifecycle_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
@@ -56,7 +57,7 @@
  * @param p4 the knowledge memory size
  * @param p5 the internal memory
  */
-void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup service.");
 
@@ -115,7 +116,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get service.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SERVICE_NAME, (void*) SERVICE_NAME_COUNT,
+        (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
@@ -124,7 +125,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get socket namespace.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SERVICE_NAMESPACE_NAME, (void*) SERVICE_NAMESPACE_NAME_COUNT,
+        (void*) NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
         (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
@@ -133,7 +134,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get communication style.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SERVICE_STYLE_NAME, (void*) SERVICE_STYLE_NAME_COUNT,
+        (void*) STYLE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) STYLE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
         (void*) &stn, (void*) &stnc, (void*) &stns,
         (void*) &sta, (void*) &stac, (void*) &stas,
         (void*) &stm, (void*) &stmc, (void*) &stms,
@@ -142,7 +143,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     // Get host address.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) SERVICE_ADDRESS_NAME, (void*) SERVICE_ADDRESS_NAME_COUNT,
+        (void*) ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
@@ -158,7 +159,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION, (void*) GNU_LINUX_CONSOLE_INTERFACE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -168,7 +169,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION, (void*) X_WINDOW_SYSTEM_INTERFACE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -178,7 +179,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) WWW_SERVICE_MODEL, (void*) WWW_SERVICE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) WWW_CYBOL_CHANNEL, (void*) WWW_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -189,7 +190,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_PORT_MODEL, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
+                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_SERVICE_PORT_MODEL, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
 
             } else {
 
@@ -200,7 +201,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) CYBOI_SERVICE_MODEL, (void*) CYBOI_SERVICE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) CYBOI_CYBOL_CHANNEL, (void*) CYBOI_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -211,7 +212,7 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_PORT_MODEL, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
+                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_SERVICE_PORT_MODEL, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
 
             } else {
 
@@ -226,5 +227,5 @@ void startup_service(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5)
     }
 }
 
-/* STARTER_SOURCE */
+/* STARTING_MAINTAINER_SOURCE */
 #endif

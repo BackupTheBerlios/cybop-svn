@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GNU_LINUX_CONSOLE_SENSOR_SOURCE
-#define GNU_LINUX_CONSOLE_SENSOR_SOURCE
+#ifndef GNU_LINUX_CONSOLE_SENSING_COMMUNICATOR_SOURCE
+#define GNU_LINUX_CONSOLE_SENSING_COMMUNICATOR_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -56,7 +56,7 @@
  * @param p2 the sleep time
  * @param p3 the input stream
  */
-void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
+void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -179,7 +179,7 @@ void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
  *
  * @param p0 the internal memory
  */
-void sense_gnu_linux_console(void* p0) {
+void communicate_sensing_gnu_linux_console(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense gnu/linux console.");
 
@@ -214,7 +214,7 @@ void sense_gnu_linux_console(void* p0) {
 
     fwprintf(stderr, L"TEST sense gnu/linux console irq pointer: %i\n", *irq);
 
-        sense_gnu_linux_console_message(*irq, *mt, *st, *is);
+        communicate_sensing_gnu_linux_console_message(*irq, *mt, *st, *is);
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -228,5 +228,5 @@ void sense_gnu_linux_console(void* p0) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* GNU_LINUX_CONSOLE_SENSOR_SOURCE */
+/* GNU_LINUX_CONSOLE_SENSING_COMMUNICATOR_SOURCE */
 #endif

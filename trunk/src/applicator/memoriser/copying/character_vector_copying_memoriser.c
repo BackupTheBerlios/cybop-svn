@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: character_vector_copying_memoriser.c,v $ $Revision: 1.4 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: character_vector_copying_memoriser.c,v $ $Revision: 1.5 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_VECTOR_COPIER_SOURCE
-#define CHARACTER_VECTOR_COPIER_SOURCE
+#ifndef CHARACTER_VECTOR_COPYING_MEMORISER_SOURCE
+#define CHARACTER_VECTOR_COPYING_MEMORISER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -42,7 +42,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void memorise_copying_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     set(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
@@ -113,5 +113,5 @@ void copy_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 }
 
-/* CHARACTER_VECTOR_COPIER_SOURCE */
+/* CHARACTER_VECTOR_COPYING_MEMORISER_SOURCE */
 #endif

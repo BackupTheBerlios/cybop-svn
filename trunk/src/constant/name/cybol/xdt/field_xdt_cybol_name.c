@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: field_xdt_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: field_xdt_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FIELD_XDT_CYBOL_NAME_SOURCE
 #define FIELD_XDT_CYBOL_NAME_SOURCE
 
-#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The kbv test number field xdt cybol name. */
 static wchar_t KBV_TEST_NUMBER_FIELD_XDT_CYBOL_NAME_ARRAY[] = {L'k', L'b', L'v', L'_', L't', L'e', L's', L't', L'_', L'n', L'u', L'm', L'b', L'e', L'r'};
@@ -1234,14 +1234,14 @@ static wchar_t* SERVICE_POINT_VALUE_FIELD_XDT_CYBOL_NAME = SERVICE_POINT_VALUE_F
 static int* SERVICE_POINT_VALUE_FIELD_XDT_CYBOL_NAME_COUNT = NUMBER_19_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The service name of fee field xdt cybol name. */
-static wchar_t SERVICE_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME_ARRAY[] = {L's', L'e', L'r', L'v', L'i', L'c', L'e', L'_', L'n', L'a', L'm', L'e', L'_', L'o', L'f', L'_', L'f', L'e', L'e'};
-static wchar_t* SERVICE_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME = SERVICE_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME_ARRAY;
-static int* SERVICE_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME_COUNT = NUMBER_19_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME_ARRAY[] = {L's', L'e', L'r', L'v', L'i', L'c', L'e', L'_', L'n', L'a', L'm', L'e', L'_', L'o', L'f', L'_', L'f', L'e', L'e'};
+static wchar_t* SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME = SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME_ARRAY;
+static int* SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_FEE_FIELD_XDT_CYBOL_NAME_COUNT = NUMBER_19_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The service name of certificate field xdt cybol name. */
-static wchar_t SERVICE_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME_ARRAY[] = {L's', L'e', L'r', L'v', L'i', L'c', L'e', L'_', L'n', L'a', L'm', L'e', L'_', L'o', L'f', L'_', L'c', L'e', L'r', L't', L'i', L'f', L'i', L'c', L'a', L't', L'e'};
-static wchar_t* SERVICE_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME = SERVICE_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME_ARRAY;
-static int* SERVICE_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME_COUNT = NUMBER_27_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME_ARRAY[] = {L's', L'e', L'r', L'v', L'i', L'c', L'e', L'_', L'n', L'a', L'm', L'e', L'_', L'o', L'f', L'_', L'c', L'e', L'r', L't', L'i', L'f', L'i', L'c', L'a', L't', L'e'};
+static wchar_t* SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME = SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME_ARRAY;
+static int* SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_OF_CERTIFICATE_FIELD_XDT_CYBOL_NAME_COUNT = NUMBER_27_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The billing diagnosis field xdt cybol name. */
 static wchar_t BILLING_DIAGNOSIS_FIELD_XDT_CYBOL_NAME_ARRAY[] = {L'b', L'i', L'l', L'l', L'i', L'n', L'g', L'_', L'd', L'i', L'a', L'g', L'n', L'o', L's', L'i', L's'};

@@ -19,18 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: loop_guider.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: loop_guider.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef LOOPER_SOURCE
-#define LOOPER_SOURCE
+#ifndef LOOP_GUIDER_SOURCE
+#define LOOP_GUIDER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/boolean_memory_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/operation/flow/loop_flow_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/array.c"
@@ -65,7 +67,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p12 the priority (Hand over as reference!)
  * @param p13 the signal identification (Hand over as reference!)
  */
-void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+void guide_loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Loop program flow.");
@@ -100,7 +102,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
 
     // Get model.
     get_universal_compound_element_by_name(p10, p11,
-        (void*) LOOP_MODEL_NAME, (void*) LOOP_MODEL_NAME_COUNT,
+        (void*) MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME, (void*) MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &mn, (void*) &mnc, (void*) &mns,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
@@ -108,7 +110,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
         p1, p2);
     // Get break flag.
     get_universal_compound_element_by_name(p10, p11,
-        (void*) BREAK_FLAG_NAME, (void*) BREAK_FLAG_NAME_COUNT,
+        (void*) BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME, (void*) BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT,
         (void*) &bn, (void*) &bnc, (void*) &bns,
         (void*) &ba, (void*) &bac, (void*) &bas,
         (void*) &bm, (void*) &bmc, (void*) &bms,
@@ -126,7 +128,7 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
         // Check if break flag is set to true.
-        if (**bm != *FALSE_BOOLEAN) {
+        if (**bm != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Leave the loop if the break flag is true.
             break;
@@ -140,5 +142,5 @@ void loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     }
 }
 
-/* LOOPER_SOURCE */
+/* LOOP_GUIDER_SOURCE */
 #endif

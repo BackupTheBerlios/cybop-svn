@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: executing_runner.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: executing_runner.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef EXECUTE_RUNNER_SOURCE
-#define EXECUTE_RUNNER_SOURCE
+#ifndef EXECUTING_RUNNER_SOURCE
+#define EXECUTING_RUNNER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 #include <errno.h>
@@ -40,7 +40,7 @@
  *
  * @param p0 the arguments
  */
-void run_execute(void* p0) {
+void run_executing(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Execute command/ program as process.");
 
@@ -359,5 +359,5 @@ void run_execute(void* p0) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* EXECUTE_RUNNER_SOURCE */
+/* EXECUTING_RUNNER_SOURCE */
 #endif

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: smallerness_comparator.c,v $ $Revision: 1.6 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: smallerness_comparator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,7 +92,7 @@ void compare_smallerness(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** ra = NULL_POINTER_MEMORY_MODEL;
     void** rac = NULL_POINTER_MEMORY_MODEL;
     void** ras = NULL_POINTER_MEMORY_MODEL;
-    void** rm = NULL_POINTER_MEMORY_MODEL;
+    int** rm = (int**) NULL_POINTER_MEMORY_MODEL;
     void** rmc = NULL_POINTER_MEMORY_MODEL;
     void** rms = NULL_POINTER_MEMORY_MODEL;
     void** rd = NULL_POINTER_MEMORY_MODEL;
@@ -178,11 +178,11 @@ void compare_smallerness(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (*((wchar_t*) *lsm) < *((wchar_t*) *rsm)) {
 
-                *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
+                **rm = *TRUE_BOOLEAN_MEMORY_MODEL;
 
             } else {
 
-                *rm = *FALSE_BOOLEAN;
+                **rm = *FALSE_BOOLEAN_MEMORY_MODEL;
             }
         }
 
@@ -204,11 +204,11 @@ void compare_smallerness(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (*((int*) *lsm) < *((int*) *rsm)) {
 
-                *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
+                **rm = *TRUE_BOOLEAN_MEMORY_MODEL;
 
             } else {
 
-                *rm = *FALSE_BOOLEAN;
+                **rm = *FALSE_BOOLEAN_MEMORY_MODEL;
             }
         }
 
@@ -230,11 +230,11 @@ void compare_smallerness(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (*((double*) *lsm) < *((double*) *rsm)) {
 
-                *rm = *TRUE_BOOLEAN_MEMORY_MODEL;
+                **rm = *TRUE_BOOLEAN_MEMORY_MODEL;
 
             } else {
 
-                *rm = *FALSE_BOOLEAN;
+                **rm = *FALSE_BOOLEAN_MEMORY_MODEL;
             }
         }
 

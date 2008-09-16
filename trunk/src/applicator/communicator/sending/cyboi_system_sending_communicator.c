@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi_system_sending_communicator.c,v $ $Revision: 1.4 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: cyboi_system_sending_communicator.c,v $ $Revision: 1.5 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CYBOI_SYSTEM_SENDER_SOURCE
-#define CYBOI_SYSTEM_SENDER_SOURCE
+#ifndef CYBOI_SYSTEM_SENDING_COMMUNICATOR_SOURCE
+#define CYBOI_SYSTEM_SENDING_COMMUNICATOR_SOURCE
 
 #include <signal.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
@@ -52,7 +52,7 @@
  * @param p10 the signal priority (Hand over as reference!)
  * @param p11 the signal identification (Hand over as reference!)
  */
-void send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+void communicate_sending_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send message to cyboi system.");
 
@@ -79,5 +79,5 @@ void send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
     pthread_mutex_unlock(*mt);
 }
 
-/* CYBOI_SYSTEM_SENDER_SOURCE */
+/* CYBOI_SYSTEM_SENDING_COMMUNICATOR_SOURCE */
 #endif
