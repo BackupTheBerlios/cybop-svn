@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: shell_sending_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: shell_sending_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/model/stream_model.c"
 #include "../../../logger/logger.c"
 #include "../../../memoriser/allocator.c"
 #include "../../../memoriser/converter.c"
@@ -91,13 +92,13 @@ void send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
             }
 
             // Set new line character.
-            set_array_elements(a, (void*) &ac, (void*) LINE_FEED_CONTROL_CHARACTER_CODE, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(a, (void*) &ac, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             ac = ac + *PRIMITIVE_MEMORY_MODEL_COUNT;
         }
     }
 
     // Write encoded array as message to shell standard output.
-    write_data((void*) &STANDARD_OUTPUT_MODEL, (void*) STANDARD_OUTPUT_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT);
+    write_data((void*) &STANDARD_OUTPUT_STREAM_MODEL, (void*) STANDARD_OUTPUT_STREAM_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
     // Deallocate array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -77,7 +77,7 @@ void send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
 */
 /*??
         // Get communication partner socket.
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p1, (void*) &i, p0, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 */
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: service_port_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: service_port_model.c,v $ $Revision: 1.3 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,7 +54,7 @@ static int* TELNET_PORT_MODEL = NUMBER_23_INTEGER_MEMORY_MODEL_ARRAY;
 static int* SMTP_PORT_MODEL = NUMBER_25_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The world wide web (www) hypertext transfer protocol (http) port model. */
-static int* WWW_PORT_MODEL = NUMBER_80_INTEGER_MEMORY_MODEL_ARRAY;
+static int* WWW_PORT_MODEL_MODEL = NUMBER_80_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The post office protocol version 3 (pop3) port model. */
 static int* POP3_PORT_MODEL = NUMBER_110_INTEGER_MEMORY_MODEL_ARRAY;
@@ -63,7 +63,7 @@ static int* POP3_PORT_MODEL = NUMBER_110_INTEGER_MEMORY_MODEL_ARRAY;
 static int* HTTPS_PORT_MODEL = NUMBER_443_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The cybernetics oriented interpreter (cyboi) port model. */
-static int* CYBOI_PORT_MODEL = NUMBER_1971_INTEGER_MEMORY_MODEL_ARRAY;
+static int* CYBOI_PORT_MODEL_MODEL = NUMBER_1971_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SERVICE_PORT_MODEL_SOURCE */
 #endif

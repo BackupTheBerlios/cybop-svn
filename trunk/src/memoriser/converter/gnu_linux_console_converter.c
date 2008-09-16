@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.24 $ $Date: 2008-09-14 21:29:47 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.25 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -151,7 +151,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
  * Decodes a gnu/linux console character into a command.
  *
  * This function changes the key codes into real names as defined by CYBOL.
- * Example: The LINE_FEED_CONTROL_CHARACTER_CODE (<enter> key) gets converted into the
+ * Example: The LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL (<enter> key) gets converted into the
  * constant ENTER_KEYBOARD_KEY_CYBOL_NAME with the value "enter", which is used so in CYBOL files.
  *
  * @param p0 the destination command (Hand over as reference!)

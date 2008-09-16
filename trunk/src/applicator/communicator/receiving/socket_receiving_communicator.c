@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -218,7 +218,7 @@ void receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     fwprintf(stderr, L"TEST: receive socket signal sock: %i \n", **((int**) s));
 
     // Set signal into signal memory.
-    set_signal(p3, p4, p5, a, ac, m, mc, d, dc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) s);
+    set_signal(p3, p4, p5, a, ac, m, mc, d, dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) s);
 */
 
 /*??

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,6 +39,8 @@
 #include "../../constant/model/cybol/service_cybol_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/model/service_port_model.c"
+#include "../../constant/model/signal_priority_model.c"
 #include "../../constant/name/cybol/operation/communication/send_communication_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/compound_accessor.c"
@@ -330,7 +332,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_cyboi_system(p2, p6, p7, p8, ma, mac, mm, mmc, md, mdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, p9);
+            send_cyboi_system(p2, p6, p7, p8, ma, mac, mm, mmc, md, mdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, p9);
         }
     }
 
@@ -340,11 +342,11 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            send_socket(p2, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+//??            send_socket(p2, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
 
             //?? TEST: For testing reasons, the p2 was replaced with p9 here!
             //?? The signal id serves as client socket to which this cyboi system has to reply.
-            send_socket(p9, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+            send_socket(p9, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 
@@ -394,7 +396,7 @@ void send_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            send_socket(p2, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) WWW_PORT, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+            send_socket(p2, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) WWW_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 

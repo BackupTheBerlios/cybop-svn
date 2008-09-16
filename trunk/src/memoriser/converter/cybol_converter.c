@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.4 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.5 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -745,7 +745,7 @@ void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int w1 = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int w2 = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            compare_arrays(sc, (void*) &scc, (void*) FILE_CHANNEL, (void*) FILE_CHANNEL_COUNT, (void*) &w1, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(sc, (void*) &scc, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT, (void*) &w1, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             // CAUTION! Use the original source abstraction and NOT the mapped runtime memory abstraction here!
             // This is necessary because not only the CYBOL abstraction is mapped to COMPOUND,
             // but also other abstractions like XDT are.

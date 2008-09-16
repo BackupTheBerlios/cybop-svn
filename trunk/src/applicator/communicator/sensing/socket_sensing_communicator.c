@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -229,15 +229,15 @@ void sense_socket(void* p0, void* p1) {
         i = *base + *SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Get communication partner socket.
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME_MEMORY_MEMORY_NAME;
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Get communication partner socket address.
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &pa, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Get original socket of this system.
-        i = *base + *SOCKET_INTERNAL;
+        i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &os, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {

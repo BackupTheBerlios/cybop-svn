@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.23 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.24 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -558,7 +558,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
             get_new_signal_identification(*s, *sc, (void*) &id);
 
             // Add signal to signal memory.
-            set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+            set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
             // Set interrupt request flag, in order to notify the signal checker
             // that a new signal has been placed in the signal memory.
@@ -697,7 +697,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         get_new_signal_identification(*s, *sc, (void*) &id);
 
         // Add signal to signal memory.
-        set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_CYBOI_SIGNAL_PRIORITY, (void*) id);
+        set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
         // Set interrupt request flag, in order to notify the signal checker
         // that a new signal has been placed in the signal memory.

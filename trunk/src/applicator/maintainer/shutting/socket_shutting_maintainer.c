@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_shutting_maintainer.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: socket_shutting_maintainer.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,7 +59,7 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
         int** si = (int**) NULL_POINTER_MEMORY_MODEL;
 
         // Get socket internal of this system.
-        i = *base + *SOCKET_INTERNAL;
+        i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &si, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
         if (*si != *NULL_POINTER_MEMORY_MODEL) {
@@ -91,10 +91,10 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
             void** bs = NULL_POINTER_MEMORY_MODEL;
 
             // Get socket address of this system.
-            i = *base + *SOCKET_ADDRESS_INTERNAL;
+            i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &a, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get communication partner socket address.
-            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &pa, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get socket address size of this system.
             i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL;
@@ -103,17 +103,17 @@ void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
             get_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get socket of this system.
-            i = *base + *SOCKET_INTERNAL;
+            i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get communication partner socket.
-            i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get character buffer.
-            i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
+            i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
+            i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
+            i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
             get_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 /*??
             // Get signal ids.

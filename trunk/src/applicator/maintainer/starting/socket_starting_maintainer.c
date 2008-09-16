@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_starting_maintainer.c,v $ $Revision: 1.7 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: socket_starting_maintainer.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,12 +36,16 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/cybol/http_request_cybol_model.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/model/cybol/address_cybol_model.c"
+#include "../../../constant/model/cybol/communication_style_cybol_model.c"
+#include "../../../constant/model/cybol/http_request_cybol_model.c"
+#include "../../../constant/model/cybol/namespace_cybol_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../memoriser/accessor.c"
 #include "../../../memoriser/array.c"
 #include "../../../memoriser/allocator.c"
@@ -133,7 +137,7 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) STREAM_COMMUNICATION_STYLE_MODEL, (void*) STREAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p1, p2, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -143,7 +147,7 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p1, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -153,7 +157,7 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) RAW_COMMUNICATION_STYLE_MODEL, (void*) RAW_COMMUNICATION_STYLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p1, p2, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -206,7 +210,7 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_MODEL, (void*) LOOPBACK_ADDRESS_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -223,7 +227,7 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p1, p2, (void*) ANY_ADDRESS_MODEL, (void*) ANY_ADDRESS_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p1, p2, (void*) ANY_ADDRESS_CYBOL_MODEL, (void*) ANY_ADDRESS_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -337,7 +341,7 @@ void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2
                 // is limited to 108 ascii characters in the gnu c library!
                 // The documentation called it a "magic number" and does not
                 // know why this limit exists.
-                if (*fc < *NUMBER_108_INTEGER) {
+                if (*fc < *NUMBER_108_INTEGER_MEMORY_MODEL) {
 
                     // CAUTION! Do NOT reallocate the file name array with:
                     // int nc = *fc + *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -642,8 +646,8 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             // With the known type "short int" of the "sun_family" field and
             // a fixed size "108" of the "sun_path" field, the overall size of
             // the "sockaddr_un" structure can be calculated as sum.
-            *as = sizeof(short int) + *NUMBER_108_INTEGER;
-            *pas = sizeof(short int) + *NUMBER_108_INTEGER;
+            *as = sizeof(short int) + *NUMBER_108_INTEGER_MEMORY_MODEL;
+            *pas = sizeof(short int) + *NUMBER_108_INTEGER_MEMORY_MODEL;
 
         } else if (an == AF_INET) {
 
@@ -705,7 +709,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // suffice for transferring standard data over tcp/ip.
         // Another possible size could be 8192.
         *bc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        *bs = *NUMBER_8192_INTEGER;
+        *bs = *NUMBER_8192_INTEGER_MEMORY_MODEL;
 
         // Allocate character buffer.
         //
@@ -717,23 +721,23 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Set communication partner socket address.
         if (an == AF_LOCAL) {
 
-            i = *base + *SOCKET_ADDRESS_INTERNAL;
+            i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
             set_element(p0, (void*) &i, (void*) &la, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
             set_element(p0, (void*) &i, (void*) &pla, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
         } else if (an == AF_INET) {
 
-            i = *base + *SOCKET_ADDRESS_INTERNAL;
+            i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
             set_element(p0, (void*) &i, (void*) &ia4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
             set_element(p0, (void*) &i, (void*) &pia4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
         } else if (an == AF_INET6) {
 
-            i = *base + *SOCKET_ADDRESS_INTERNAL;
+            i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
             set_element(p0, (void*) &i, (void*) &ia6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL;
+            i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
             set_element(p0, (void*) &i, (void*) &pia6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         }
 
@@ -744,17 +748,17 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL;
         set_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Set socket of this system.
-        i = *base + *SOCKET_INTERNAL;
+        i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
         set_element(p0, (void*) &i, (void*) &s, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Set communication partner socket.
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL;
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
         set_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Set character buffer.
-        i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL;
+        i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL_MEMORY_MEMORY_NAME;
         set_element(p0, (void*) &i, (void*) &b, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL;
+        i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
         set_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL;
+        i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
         set_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
 /*??
