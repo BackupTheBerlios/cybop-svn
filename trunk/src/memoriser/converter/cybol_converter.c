@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.5 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.6 $ $Date: 2008-09-17 14:44:22 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1106,7 +1106,80 @@ void decode_cybol_process_declaration(void* p0, void* p1) {
 }
 
 /**
- * Decodes the cybol byte array into a compound.
+ * Processes the cybol element.
+ *
+ * @param p0 the current position (Hand over as reference!)
+ * @param p1 the remaining count
+ * @param p2 the tag name (Hand over as reference!)
+ * @param p3 the tag name count
+ * @param p4 the attributes (Hand over as reference!)
+ * @param p5 the attributes count
+ * @param p6 the content flag (if tag is not empty)
+ */
+void decode_cybol_process_element(void* p0, void* p1) {
+
+    // The part name, abstraction, model, details.
+    void* n = *NULL_POINTER_MEMORY_MODEL;
+    int* nc = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* ns = (int*) *NULL_POINTER_MEMORY_MODEL;
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    int* ac = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* as = (int*) *NULL_POINTER_MEMORY_MODEL;
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    int* mc = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* ms = (int*) *NULL_POINTER_MEMORY_MODEL;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    int* dc = (int*) *NULL_POINTER_MEMORY_MODEL;
+    int* ds = (int*) *NULL_POINTER_MEMORY_MODEL;
+
+    // Set tag name to current position.
+    // The tag name follows right after the start tag begin character "<", e.g.:
+    // <part ...
+    *t = *pos;
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(pos, (void*) &rem, (void*) EMPTY_TAG_END_XML_NAME, (void*) EMPTY_TAG_END_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // Remember tag count and current position.
+            ...
+
+            // Remember remaining count.
+            rem = rem - TAG_END_XML_NAME_COUNT;
+
+            break;
+        }
+
+        compare_arrays(pos, (void*) &rem, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // Remember tag count and current position.
+            ...
+
+            // Remember remaining count.
+            rem = rem - TAG_END_XML_NAME_COUNT;
+
+            // Call function for handling meta properties recursively.
+            ...
+
+            break;
+        }
+
+        // Increment current byte position which serves as loop variable.
+        pos++;
+    }
+
+    decode_cybol_select_attribute(n, (void*) nc, (void*) ns, a, (void*) ac, (void*) as, m, (void*) mc, (void*) ms, d, (void*) dc, (void*) ds);
+}
+
+/**
+ * Selects the begin pointer and count of the various parts.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count
@@ -1116,7 +1189,6 @@ void decode_cybol_process_declaration(void* p0, void* p1) {
  */
 void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-/*??
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* sc = (int*) p4;
@@ -1155,7 +1227,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The decoder is in "declaration" mode.
 
-            decode_cybol_declaration((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
+            decode_cybol_process_declaration((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
 
             // Reset "declaration" mode flag.
             dec = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1164,7 +1236,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The decoder is in "definition" mode.
 
-            decode_cybol_definition((void*) &c, b, (void*) &rem);
+            decode_cybol_process_definition((void*) &c, b, (void*) &rem);
 
             // Reset "definition" mode flag.
             def = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1173,7 +1245,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The decoder is in "comment" mode.
 
-            decode_cybol_comment((void*) &c, b, (void*) &rem);
+            decode_cybol_process_comment((void*) &c, b, (void*) &rem);
 
             // Reset "comment" mode flag.
             com = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1182,7 +1254,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The decoder is in "element" mode.
 
-            decode_cybol_element((void*) &c, b, (void*) &rem);
+            decode_cybol_process_element((void*) &c, b, (void*) &rem);
 
             // Reset "element" mode flag.
             ele = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1192,14 +1264,27 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // The decoder is in no (or neutral) mode.
             // This means, that the next meaningful character sequence may be searched below.
 
+            //
+            // CAUTION! The order of the comparisons is IMPORTANT!
+            // Do NOT change it easily!
+            // The reason is that all elements begin with a "<" character:
+            // - declaration: <?
+            // - definition: <!
+            // - comment: <!--
+            // - element: <
+            //
+            // Before arbitrary elements beginning with just "<" and a term can be identified,
+            // all other possibilities (declaration, definition, comment) have to have
+            // been processed, in order to be excluded.
+            //
+
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 compare_arrays(b, (void*) &rem, (void*) DECLARATION_BEGIN_XML_NAME, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Set "declaration" mode flag.
-                    dec = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    decode_cybol_process_declaration((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
                 }
             }
 
@@ -1209,8 +1294,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Set "definition" mode flag.
-                    def = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    decode_cybol_process_definition((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
                 }
             }
 
@@ -1220,8 +1304,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Set "comment" mode flag.
-                    com = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    decode_cybol_process_comment((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
                 }
             }
 
@@ -1231,8 +1314,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Set "element" mode flag.
-                    ele = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    decode_cybol_process_element((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
                 }
             }
         }
@@ -1241,7 +1323,6 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select cybol section. The source byte array count is null.");
     }
-*/
 }
 
 /**

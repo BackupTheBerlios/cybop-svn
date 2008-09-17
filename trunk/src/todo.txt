@@ -7,9 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.59 $ $Date: 2008-09-04 20:31:29 $ $Author: christian $
+# @version $Revision: 1.60 $ $Date: 2008-09-17 14:44:22 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * in cybol_converter.c, replace "&rem" with "DECLARATION_BEGIN_XML_NAME_COUNT"?
+            --> comparison requires equal counts!
+            --> compare_arrays(b, (void*) &rem, (void*) DECLARATION_BEGIN_XML_NAME, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         * Add a mapper translating cybol- into memory abstractions and vice-versa
             (currently, the cybol abstractions are used directly to allocate/ access memory structures)
