@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.7 $ $Date: 2008-09-18 14:31:03 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.8 $ $Date: 2008-09-18 23:16:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CYBOL_CONVERTER_SOURCE
-#define CYBOL_CONVERTER_SOURCE
+#ifndef XML_CONVERTER_SOURCE
+#define XML_CONVERTER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
@@ -1106,21 +1106,471 @@ void decode_cybol_process_declaration(void* p0, void* p1) {
 }
 
 /**
- * Processes the cybol attribute.
+ * Detects the xml attribute value end.
  *
  * @param p0 the current position (Hand over as reference!)
  * @param p1 the remaining count
- * @param p2 the tag name (Hand over as reference!)
- * @param p3 the tag name count
- * @param p4 the attributes (Hand over as reference!)
- * @param p5 the attributes count
- * @param p6 the content flag (if tag is not empty)
+ * @param p2 the comparison result
  */
-void decode_cybol_process_attribute(void* p0, void* p1) {
+void decode_xml_detect_attribute_value_end(void* p0, void* p1, void* p2) {
+
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* r = (int*) p2;
+
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+            int* rem = (int*) p1;
+
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                void** pos = (void**) p0;
+
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml attribute value end.");
+
+                if (*rem >= *ATTRIBUTE_VALUE_END_XML_NAME_COUNT) {
+
+                    compare_arrays(*pos, (void*) ATTRIBUTE_VALUE_END_XML_NAME_COUNT, (void*) ATTRIBUTE_VALUE_END_XML_NAME, (void*) ATTRIBUTE_VALUE_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                    if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        // Increment current position.
+                        *pos = *pos + (*ATTRIBUTE_VALUE_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+
+                        // Decrement remaining count.
+                        *rem = *rem - *ATTRIBUTE_VALUE_END_XML_NAME_COUNT;
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute value end. The remaining count is too small.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute value end. The current position is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute value end. The remaining count is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute value end. The comparison result is null.");
+    }
 }
 
 /**
- * Processes the cybol element.
+ * Processes the xml attribute value.
+ *
+ * @param p0 the current position (Hand over as reference!)
+ * @param p1 the remaining count
+ * @param p2 the attribute value (Hand over as reference!)
+ * @param p3 the attribute value count
+ */
+void decode_xml_process_attribute_value(void* p0, void* p1, void* p2, void* p3) {
+
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* avc = (int*) p3;
+
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** av = (void**) p2;
+
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+                int* rem = (int*) p1;
+
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                    void** pos = (void**) p0;
+
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml attribute value.");
+
+                    // Set attribute value.
+                    *av = *pos;
+
+                    // The comparison result.
+                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                        if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            break;
+                        }
+
+                        decode_xml_detect_attribute_value_end(p0, p1, (void*) &r);
+
+                        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            // Increment current position.
+                            *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+
+                            // Decrement remaining count.
+                            *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            // Increment attribute value count.
+                            (*avc)++;
+
+                        } else {
+
+                            //
+                            // The attribute value end was found.
+                            //
+                            // CAUTION! In this case, the current position and remaining count
+                            // were already changed in the called function, to be processed further
+                            // in other functions.
+                            //
+                            // The attribute value and count are left as they are.
+                            //
+
+                            break;
+                        }
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute value. The current position is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute value. The remaining count is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute value. The attribute is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute value. The attribute count is null.");
+    }
+}
+
+/**
+ * Detects the xml attribute name end.
+ *
+ * @param p0 the current position (Hand over as reference!)
+ * @param p1 the remaining count
+ * @param p2 the comparison result
+ */
+void decode_xml_detect_attribute_name_end(void* p0, void* p1, void* p2) {
+
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* r = (int*) p2;
+
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+            int* rem = (int*) p1;
+
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                void** pos = (void**) p0;
+
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml attribute name end.");
+
+                if (*rem >= *ATTRIBUTE_NAME_END_XML_NAME_COUNT) {
+
+                    compare_arrays(*pos, (void*) ATTRIBUTE_NAME_END_XML_NAME_COUNT, (void*) ATTRIBUTE_NAME_END_XML_NAME, (void*) ATTRIBUTE_NAME_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                    if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        // Increment current position.
+                        *pos = *pos + (*ATTRIBUTE_NAME_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+
+                        // Decrement remaining count.
+                        *rem = *rem - *ATTRIBUTE_NAME_END_XML_NAME_COUNT;
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute name end. The remaining count is too small.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute name end. The current position is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute name end. The remaining count is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute name end. The comparison result is null.");
+    }
+}
+
+/**
+ * Processes the xml attribute name.
+ *
+ * @param p0 the current position (Hand over as reference!)
+ * @param p1 the remaining count
+ * @param p2 the attribute name (Hand over as reference!)
+ * @param p3 the attribute name count
+ */
+void decode_xml_process_attribute_name(void* p0, void* p1, void* p2, void* p3) {
+
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* anc = (int*) p3;
+
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** an = (void**) p2;
+
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+                int* rem = (int*) p1;
+
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                    void** pos = (void**) p0;
+
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml attribute name.");
+
+                    // Set attribute name.
+                    *an = *pos;
+
+                    // The comparison result.
+                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                        if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            break;
+                        }
+
+                        decode_xml_detect_attribute_name_end(p0, p1, (void*) &r);
+
+                        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            // Increment current position.
+                            *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+
+                            // Decrement remaining count.
+                            *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            // Increment attribute name count.
+                            (*anc)++;
+
+                        } else {
+
+                            //
+                            // The attribute name end was found.
+                            //
+                            // CAUTION! In this case, the current position and remaining count
+                            // were already changed in the called function, to be processed further
+                            // in other functions.
+                            //
+                            // The attribute name and count are left as they are.
+                            //
+
+                            break;
+                        }
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute name. The current position is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute name. The remaining count is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute name. The attribute is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute name. The attribute count is null.");
+    }
+}
+
+/**
+ * Detects the xml element name end.
+ *
+ * @param p0 the current position (Hand over as reference!)
+ * @param p1 the remaining count
+ * @param p2 the comparison result
+ */
+void decode_xml_detect_element_name_end(void* p0, void* p1, void* p2) {
+
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* r = (int*) p2;
+
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+            int* rem = (int*) p1;
+
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                void** pos = (void**) p0;
+
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml element name end.");
+
+                if (*rem >= *TAG_NAME_END_XML_NAME_COUNT) {
+
+                    compare_arrays(*pos, (void*) TAG_NAME_END_XML_NAME_COUNT, (void*) TAG_NAME_END_XML_NAME, (void*) TAG_NAME_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                    if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        // Increment current position.
+                        *pos = *pos + (*TAG_NAME_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+
+                        // Decrement remaining count.
+                        *rem = *rem - *TAG_NAME_END_XML_NAME_COUNT;
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml element name end. The remaining count is too small.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml element name end. The current position is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml element name end. The remaining count is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml element name end. The comparison result is null.");
+    }
+}
+
+/**
+ * Processes the xml element name.
+ *
+ * @param p0 the current position (Hand over as reference!)
+ * @param p1 the remaining count
+ * @param p2 the element name (Hand over as reference!)
+ * @param p3 the element name count
+ */
+void decode_xml_process_element_name(void* p0, void* p1, void* p2, void* p3) {
+
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* enc = (int*) p3;
+
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** en = (void**) p2;
+
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+                int* rem = (int*) p1;
+
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                    void** pos = (void**) p0;
+
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml element name.");
+
+                    // Set element name.
+                    *en = *pos;
+
+                    // The comparison result.
+                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                        if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            break;
+                        }
+
+                        decode_xml_detect_element_name_end(p0, p1, (void*) &r);
+
+                        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            // Increment current position.
+                            *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+
+                            // Decrement remaining count.
+                            *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            // Increment element name count.
+                            (*enc)++;
+
+                        } else {
+
+                            //
+                            // The element name end was found.
+                            //
+                            // CAUTION! In this case, the current position and remaining count
+                            // were already changed in the called function, to be processed further
+                            // in other functions.
+                            //
+                            // The element name and count are left as they are.
+                            //
+
+                            break;
+                        }
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml element name. The current position is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml element name. The remaining count is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml element name. The element is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml element name. The element count is null.");
+    }
+}
+
+/**
+ * Processes the xml element.
+ *
+ * @param p0 the current position (Hand over as reference!)
+ * @param p1 the remaining count
+ * @param p2 the element name (Hand over as reference!)
+ * @param p3 the element name count
+ * @param p4 the attribute name (Hand over as reference!)
+ * @param p5 the attribute name count
+ * @param p4 the attribute value (Hand over as reference!)
+ * @param p5 the attribute value count
+ * @param p6 the content flag (if tag is not empty)
+ */
+void decode_xml_process_element(void* p0, void* p1) {
+
+    decode_xml_process_element_name(p0, p1, en, enc);
+    decode_xml_process_attribute_name(p0, p1, an, anc);
+    decode_xml_process_attribute_value(p0, p1, av, avc);
+}
+
+/**
+ * Processes the xml element.
  *
  * @param p0 the current position (Hand over as reference!)
  * @param p1 the remaining count
@@ -1130,7 +1580,7 @@ void decode_cybol_process_attribute(void* p0, void* p1) {
  * @param p5 the attributes count
  * @param p6 the content flag (if tag is not empty)
  */
-void decode_cybol_process_element(void* p0, void* p1) {
+void decode_xml_process_element(void* p0, void* p1) {
 
     // The part name, abstraction, model, details.
     void* n = *NULL_POINTER_MEMORY_MODEL;
@@ -1156,44 +1606,15 @@ void decode_cybol_process_element(void* p0, void* p1) {
 
     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(pos, (void*) &rem, (void*) EMPTY_TAG_END_XML_NAME, (void*) EMPTY_TAG_END_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            // Remember tag count and current position.
-            ...
-
-            // Remember remaining count.
-            rem = rem - TAG_END_XML_NAME_COUNT;
-
-            break;
-        }
-
-        compare_arrays(pos, (void*) &rem, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            // Remember tag count and current position.
-            ...
-
-            // Remember remaining count.
-            rem = rem - TAG_END_XML_NAME_COUNT;
-
-            // Call function for handling meta properties recursively.
-            ...
-
-            break;
-        }
+        decode_xml_detect_attributes(void* p0, void* p1);
 
         // Increment current byte position which serves as loop variable.
         pos++;
     }
-
-    decode_cybol_select_attribute(n, (void*) nc, (void*) ns, a, (void*) ac, (void*) as, m, (void*) mc, (void*) ms, d, (void*) dc, (void*) ds);
 }
 
 /**
- * Selects the begin pointer and count of the various parts.
+ * Detects the begin pointer and count of the various parts.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count
@@ -1201,7 +1622,7 @@ void decode_cybol_process_element(void* p0, void* p1) {
  * @param p3 the source byte array
  * @param p4 the source byte array count
  */
-void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_xml_detect(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -1241,7 +1662,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The decoder is in "declaration" mode.
 
-            decode_cybol_process_declaration((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
+            decode_xml_process_declaration((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
 
             // Reset "declaration" mode flag.
             dec = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1250,7 +1671,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The decoder is in "definition" mode.
 
-            decode_cybol_process_definition((void*) &c, b, (void*) &rem);
+            decode_xml_process_definition((void*) &c, b, (void*) &rem);
 
             // Reset "definition" mode flag.
             def = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1259,7 +1680,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The decoder is in "comment" mode.
 
-            decode_cybol_process_comment((void*) &c, b, (void*) &rem);
+            decode_xml_process_comment((void*) &c, b, (void*) &rem);
 
             // Reset "comment" mode flag.
             com = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1268,7 +1689,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // The decoder is in "element" mode.
 
-            decode_cybol_process_element((void*) &c, b, (void*) &rem);
+            decode_xml_process_element((void*) &c, b, (void*) &rem);
 
             // Reset "element" mode flag.
             ele = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -1298,7 +1719,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_cybol_process_declaration((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
+                    decode_xml_process_declaration((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
                 }
             }
 
@@ -1308,7 +1729,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_cybol_process_definition((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
+                    decode_xml_process_definition((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
                 }
             }
 
@@ -1318,7 +1739,7 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_cybol_process_comment((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
+                    decode_xml_process_comment((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
                 }
             }
 
@@ -1328,19 +1749,19 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_cybol_process_element((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
+                    decode_xml_process_element((void*) &c, (void*) &cc, (void*) &b, (void*) &rem);
                 }
             }
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select cybol section. The source byte array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml section. The source byte array count is null.");
     }
 }
 
 /**
- * Decodes the cybol byte array into a compound.
+ * Decodes the xml byte array into a compound.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count
@@ -1348,15 +1769,15 @@ void decode_cybol_select(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source byte array
  * @param p4 the source byte array count
  */
-void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode xml.");
 
-    decode_cybol_select(p0, p1, p2, p3, p4);
+    decode_xml_detect(p0, p1, p2, p3, p4);
 }
 
 /**
- * Encodes the compound into a cybol byte array.
+ * Encodes the compound into a xml byte array.
  *
  * @param p0 the destination message (Hand over as reference!)
  * @param p1 the destination message count
@@ -1364,10 +1785,10 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p3 the source compound
  * @param p4 the source compound count
  */
-void encode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode cybol.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode xml.");
 }
 
-/* CYBOL_CONVERTER_SOURCE */
+/* XML_CONVERTER_SOURCE */
 #endif
