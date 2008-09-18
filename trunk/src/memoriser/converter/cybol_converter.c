@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.6 $ $Date: 2008-09-17 14:44:22 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.7 $ $Date: 2008-09-18 14:31:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1103,6 +1103,20 @@ void decode_cybol_process_declaration(void* p0, void* p1) {
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process cybol declaration. The remaining bytes count is null.");
     }
 */
+}
+
+/**
+ * Processes the cybol attribute.
+ *
+ * @param p0 the current position (Hand over as reference!)
+ * @param p1 the remaining count
+ * @param p2 the tag name (Hand over as reference!)
+ * @param p3 the tag name count
+ * @param p4 the attributes (Hand over as reference!)
+ * @param p5 the attributes count
+ * @param p6 the content flag (if tag is not empty)
+ */
+void decode_cybol_process_attribute(void* p0, void* p1) {
 }
 
 /**
