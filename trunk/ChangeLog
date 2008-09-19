@@ -14,12 +14,32 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.80 $ $Date: 2008-09-19 14:16:25 $ $Author: christian $
+# @version $Revision: 1.81 $ $Date: 2008-09-19 21:12:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 2008-09-19  Christian Heller  <christian.heller@tuxtax.de>
         * Continue implementing CYBOL parser in file "cybol_converter.c"
+        * Add file "model_allocator.c"; a "model" is a memory structure together
+            with its "count" and "size" as meta information about that memory structure
+        * Add file "part_allocator.c"; a "part" is a memory structure of arbitrary abstraction;
+            a part may be added as entry to a compound, but it is not to be mixed up with the "compound" structure itself;
+            a part contains information ("name" and "abstraction") about the "model" it contains,
+            and optionally further meta information ("details) which is also called properties
+        * Add file "xml_converter.c", so that all kinds of XML files can now be translated into a compound tree,
+            which afterwards can be converted in a second step into an arbitrary memory structure;
+            this is comparable to the well-known Document Object Model (DOM) approach;
+            a Simple API for XML (SAX)-like approach was intended first as it could be faster,
+            but then special, largely redundant converters would have to be written for each XML-based format
+            (Of course, the possibility of callback-like functions was considered.
+            These can be realised in a non-OOP language by just forwarding an "abstraction" and then doing
+            if-else comparisons -- just like the Virtual Machine (VM) of any OOP language does internally --,
+            to finally call a matching function that would convert a specific XML-based format.
+            However, since the number of attributes of an arbitrary XML element is unknown,
+            but CYBOI relies on "name", "channel", "abstraction" and "model",
+            in order to be able to create a memory structure -- depending on the "abstraction" attribute --,
+            a DOM-like approach seems the clearer solution, even if it is a bit slower in performance.
+            Anyway, it brings more flexibility and saves redundant code when parsing other XML formats besides CYBOL.)
 
 2008-09-18  Christian Heller  <christian.heller@tuxtax.de>
         * Continue implementing CYBOL parser in file "cybol_converter.c"

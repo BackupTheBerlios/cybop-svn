@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: allocator.c,v $ $Revision: 1.29 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
+ * @version $RCSfile: allocator.c,v $ $Revision: 1.30 $ $Date: 2008-09-19 21:12:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,6 +38,7 @@
 #include "../memoriser/allocator/fraction_allocator.c"
 #include "../memoriser/allocator/integer_vector_allocator.c"
 #include "../memoriser/allocator/internal_memory_allocator.c"
+#include "../memoriser/allocator/part_allocator.c"
 #include "../memoriser/allocator/pointer_vector_allocator.c"
 #include "../memoriser/allocator/signal_memory_allocator.c"
 #include "../memoriser/allocator/unsigned_long_vector_allocator.c"
@@ -138,6 +139,16 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             allocate_internal_memory(p0, p1);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p2, p3, (void*) PART_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            allocate_part(p0, p1);
         }
     }
 
@@ -285,6 +296,16 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        compare_arrays(p3, p4, (void*) PART_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            reallocate_part(p0, p1, p2);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
         compare_arrays(p3, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -421,6 +442,16 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             deallocate_internal_memory(p0, p1);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p2, p3, (void*) PART_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            deallocate_part(p0, p1);
         }
     }
 

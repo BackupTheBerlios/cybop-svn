@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.34 $ $Date: 2008-09-16 22:47:57 $ $Author: christian $
+ * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.35 $ $Date: 2008-09-19 21:12:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -846,35 +846,14 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
                                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode model.");
 
                                     // Allocate knowledge model name.
-                                    allocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-                                    **nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-                                    **ns = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p0, (void*) *ns, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
-
-                                    // A knowledge model channel is not received (allocated),
-                                    // since that is only needed temporarily for model loading.
-
-                                    // Allocate knowledge model abstraction.
-                                    allocate(p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-                                    **ac = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p5, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-                                    **as = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p3, (void*) *as, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
-
-                                    // Allocate knowledge model model.
-                                    allocate(p7, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-                                    **mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p8, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-                                    **ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p6, (void*) *ms, p14, p15);
-
-                                    // Allocate knowledge model details.
-                                    allocate(p10, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-                                    **dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p11, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-                                    **ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                                    allocate(p9, (void*) *ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+                                    allocate_model(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                                    // A channel is not allocated, since that is only needed temporarily for model loading.
+                                    // Allocate abstraction.
+                                    allocate_model(p3, p4, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                                    // Allocate model.
+                                    allocate_model(p6, p7, p8, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p14, p15);
+                                    // Allocate details.
+                                    allocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
                                     // Decode name.
                                     decode_ascii_character_vector(p0, (void*) *nc, (void*) *ns, p16, p17);
