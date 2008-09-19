@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.79 $ $Date: 2008-09-18 23:16:25 $ $Author: christian $
+# @version $Revision: 1.80 $ $Date: 2008-09-19 14:16:25 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-09-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue implementing CYBOL parser in file "cybol_converter.c"
 
 2008-09-18  Christian Heller  <christian.heller@tuxtax.de>
         * Continue implementing CYBOL parser in file "cybol_converter.c"

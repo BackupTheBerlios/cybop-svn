@@ -7,14 +7,17 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.61 $ $Date: 2008-09-18 23:16:25 $ $Author: christian $
+# @version $Revision: 1.62 $ $Date: 2008-09-19 14:16:25 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Realise something like a callback in file "cybol_converter.c";
+        * Rename "cybol_converter.c" into "xml_converter.c"?
+        * Realise something like a callback in file "xml_converter.c";
             call specific functions when the begin or end of an xml element or attribute is reached,
             and hand over an "abstraction" argument, so that the right xml format
             (e.g. CYBOL or HXP etc.) can be evaluated in a special file, external to the standard xml parser
+        --> OR better use a DOM-like structure and translate it in a second step into CYBOI knowledge?
+
         * in cybol_converter.c, replace "&rem" with "DECLARATION_BEGIN_XML_NAME_COUNT"?
             --> comparison requires equal counts!
             --> compare_arrays(b, (void*) &rem, (void*) DECLARATION_BEGIN_XML_NAME, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
