@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_name.c,v $ $Revision: 1.4 $ $Date: 2008-09-18 23:16:26 $ $Author: christian $
+ * @version $RCSfile: xml_name.c,v $ $Revision: 1.5 $ $Date: 2008-09-20 08:54:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,11 +42,6 @@ static int* DECLARATION_END_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY
 static wchar_t DEFINITION_BEGIN_XML_NAME_ARRAY[] = {L'<', L'!'};
 static wchar_t* DEFINITION_BEGIN_XML_NAME = DEFINITION_BEGIN_XML_NAME_ARRAY;
 static int* DEFINITION_BEGIN_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The definition end xml name. */
-static wchar_t DEFINITION_END_XML_NAME_ARRAY[] = {L'>'};
-static wchar_t* DEFINITION_END_XML_NAME = DEFINITION_END_XML_NAME_ARRAY;
-static int* DEFINITION_END_XML_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The comment begin xml name. */
 static wchar_t COMMENT_BEGIN_XML_NAME_ARRAY[] = {L'<', L'!', L'-', L'-'};
@@ -87,13 +82,6 @@ static int* EMPTY_TAG_END_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 static wchar_t ATTRIBUTE_NAME_END_XML_NAME_ARRAY[] = {L'=', L'"'};
 static wchar_t* ATTRIBUTE_NAME_END_XML_NAME = ATTRIBUTE_NAME_END_XML_NAME_ARRAY;
 static int* ATTRIBUTE_NAME_END_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The attribute value begin xml name. */
-/*??
-static wchar_t ATTRIBUTE_VALUE_BEGIN_XML_NAME_ARRAY[] = {L'"'};
-static wchar_t* ATTRIBUTE_VALUE_BEGIN_XML_NAME = ATTRIBUTE_VALUE_BEGIN_XML_NAME_ARRAY;
-static int* ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
-*/
 
 /** The attribute value end xml name. */
 static wchar_t ATTRIBUTE_VALUE_END_XML_NAME_ARRAY[] = {L'"'};
