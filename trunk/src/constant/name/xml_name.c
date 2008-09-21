@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_name.c,v $ $Revision: 1.5 $ $Date: 2008-09-20 08:54:08 $ $Author: christian $
+ * @version $RCSfile: xml_name.c,v $ $Revision: 1.6 $ $Date: 2008-09-21 22:24:19 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
