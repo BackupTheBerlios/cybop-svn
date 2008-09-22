@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_converter.c,v $ $Revision: 1.24 $ $Date: 2008-09-21 22:24:19 $ $Author: christian $
+ * @version $RCSfile: xml_converter.c,v $ $Revision: 1.25 $ $Date: 2008-09-22 21:43:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,50 +41,35 @@
 #include "../../memoriser/communicator.c"
 
 //
-// Forward declarations.
-//
-
-/**
- * Processes the xml element content.
- *
- * @param p0 the destination compound (Hand over as reference!)
- * @param p1 the destination compound count
- * @param p2 the destination compound size
- * @param p3 the current position (Hand over as reference!)
- * @param p4 the remaining count
- */
-void decode_xml_process_element_content(void* p0, void* p1, void* p2, void* p3, void* p4);
-
-//
 // General.
 //
 
 /**
  * Detects the xml tag end.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_tag_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml tag end.");
 
                 if (*rem >= *TAG_END_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) TAG_END_XML_NAME_COUNT, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) TAG_END_XML_NAME_COUNT, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -123,29 +108,29 @@ void decode_xml_detect_tag_end(void* p0, void* p1, void* p2) {
 /**
  * Detects the xml declaration begin.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_declaration_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml declaration begin.");
 
                 if (*rem >= *DECLARATION_BEGIN_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, (void*) DECLARATION_BEGIN_XML_NAME, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, (void*) DECLARATION_BEGIN_XML_NAME, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -180,29 +165,29 @@ void decode_xml_detect_declaration_begin(void* p0, void* p1, void* p2) {
 /**
  * Detects the xml declaration end.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_declaration_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml declaration end.");
 
                 if (*rem >= *DECLARATION_END_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) DECLARATION_END_XML_NAME_COUNT, (void*) DECLARATION_END_XML_NAME, (void*) DECLARATION_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) DECLARATION_END_XML_NAME_COUNT, (void*) DECLARATION_END_XML_NAME, (void*) DECLARATION_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -315,29 +300,29 @@ void decode_xml_process_declaration(void* p0, void* p1, void* p2, void* p3, void
 /**
  * Detects the xml definition begin.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_definition_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml definition begin.");
 
                 if (*rem >= *DEFINITION_BEGIN_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) DEFINITION_BEGIN_XML_NAME_COUNT, (void*) DEFINITION_BEGIN_XML_NAME, (void*) DEFINITION_BEGIN_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) DEFINITION_BEGIN_XML_NAME_COUNT, (void*) DEFINITION_BEGIN_XML_NAME, (void*) DEFINITION_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -418,6 +403,9 @@ void decode_xml_process_definition(void* p0, void* p1) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml definition.");
 
+        // The break flag.
+        int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -441,29 +429,29 @@ void decode_xml_process_definition(void* p0, void* p1) {
 /**
  * Detects the xml comment begin.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_comment_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml comment begin.");
 
                 if (*rem >= *COMMENT_BEGIN_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) COMMENT_BEGIN_XML_NAME_COUNT, (void*) COMMENT_BEGIN_XML_NAME, (void*) COMMENT_BEGIN_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) COMMENT_BEGIN_XML_NAME_COUNT, (void*) COMMENT_BEGIN_XML_NAME, (void*) COMMENT_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -498,29 +486,29 @@ void decode_xml_detect_comment_begin(void* p0, void* p1, void* p2) {
 /**
  * Detects the xml comment end.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_comment_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml comment end.");
 
                 if (*rem >= *COMMENT_END_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) COMMENT_END_XML_NAME_COUNT, (void*) COMMENT_END_XML_NAME, (void*) COMMENT_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) COMMENT_END_XML_NAME_COUNT, (void*) COMMENT_END_XML_NAME, (void*) COMMENT_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -659,14 +647,6 @@ void decode_xml_select_element_content(void* p0, void* p1, void* p2, void* p3, v
 
                         decode_xml_process_end_tag((void*) &tn, (void*) &tnc, p7, p8);
 
-    /*??
-                        // Add element to compound.
-                        // CAUTION! Hand over the name as reference!
-                        add_compound_element_by_name(p0, p1, p2,
-                            (void*) tn, (void*) tnc, (void*) tns, (void*) &a, (void*) &ac, (void*) &as,
-                            (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds);
-    */
-
                         // Set break flag, because this xml element's end tag
                         // has been reached and its content fully been processed.
                         *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -765,6 +745,9 @@ void decode_xml_process_element_content(void* p0, void* p1, void* p2, void* p3, 
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml element content.");
 
+        // The break flag.
+        int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -774,7 +757,12 @@ void decode_xml_process_element_content(void* p0, void* p1, void* p2, void* p3, 
                 break;
             }
 
-            decode_xml_select_element_content(p0, p1, p2, p3, p4, p5, p6, p7);
+            if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+
+            decode_xml_select_element_content(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
         }
 
     } else {
@@ -790,29 +778,29 @@ void decode_xml_process_element_content(void* p0, void* p1, void* p2, void* p3, 
 /**
  * Detects the xml start tag begin.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_start_tag_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml start tag begin.");
 
                 if (*rem >= *START_TAG_BEGIN_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) START_TAG_BEGIN_XML_NAME_COUNT, (void*) START_TAG_BEGIN_XML_NAME, (void*) START_TAG_BEGIN_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) START_TAG_BEGIN_XML_NAME_COUNT, (void*) START_TAG_BEGIN_XML_NAME, (void*) START_TAG_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -847,29 +835,29 @@ void decode_xml_detect_start_tag_begin(void* p0, void* p1, void* p2) {
 /**
  * Detects the xml end tag begin.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
-void decode_xml_detect_xml_end_tag_begin(void* p0, void* p1, void* p2) {
+void decode_xml_detect_end_tag_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml end tag begin.");
 
                 if (*rem >= *END_TAG_BEGIN_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) END_TAG_BEGIN_XML_NAME_COUNT, (void*) END_TAG_BEGIN_XML_NAME, (void*) END_TAG_BEGIN_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) END_TAG_BEGIN_XML_NAME_COUNT, (void*) END_TAG_BEGIN_XML_NAME, (void*) END_TAG_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -904,29 +892,29 @@ void decode_xml_detect_xml_end_tag_begin(void* p0, void* p1, void* p2) {
 /**
  * Detects the xml empty tag end.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_empty_tag_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml empty tag end.");
 
                 if (*rem >= *EMPTY_TAG_END_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) EMPTY_TAG_END_XML_NAME_COUNT, (void*) EMPTY_TAG_END_XML_NAME, (void*) EMPTY_TAG_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) EMPTY_TAG_END_XML_NAME_COUNT, (void*) EMPTY_TAG_END_XML_NAME, (void*) EMPTY_TAG_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1091,101 +1079,112 @@ void decode_xml_process_end_tag(void* p0, void* p1, void* p2, void* p3) {
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
  * @param p2 the destination model size
- * @param p3 the current position (Hand over as reference!)
- * @param p4 the remaining count
+ * @param p3 the break flag
+ * @param p4 the current position (Hand over as reference!)
+ * @param p5 the remaining count
  */
-void decode_xml_select_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_xml_select_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p1;
+        int* rem = (int*) p5;
 
-        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-            void** pos = (void**) p0;
+            void** pos = (void**) p4;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml element.");
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-            // The comparison result.
-            int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int* b = (int*) p3;
 
-            decode_xml_process_attribute_name((void*) &an, (void*) &anc, p6, p7);
-            decode_xml_process_attribute_value((void*) &av, (void*) &avc, p6, p7);
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml element.");
 
-            if (anc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                // The comparison result.
+                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                // A part is only generated, if an attribute name exists (attribute name count > 0).
-                // The attribute value count, on the other hand, may be zero.
+                decode_xml_process_attribute_name((void*) &an, (void*) &anc, p4, p5);
+                decode_xml_process_attribute_value((void*) &av, (void*) &avc, p4, p5);
 
-                allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
-                    (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                    (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                if (anc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // Add attribute to compound.
-                // CAUTION! Hand over the name as reference!
-                add_compound_element_by_name(p0, p1, p2,
-                    (void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
-                    (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds);
-            }
+                    // A part is only generated, if an attribute name exists (attribute name count > 0).
+                    // The attribute value count, on the other hand, may be zero.
 
-            //
-            // CAUTION! The ORDER of the following function calls is IMPORTANT!
-            // The empty tag end "/>" has to be searched BEFORE
-            // the simple tag end ">", because of the slash "/" character.
-            //
-            // CAUTION! The comparison result HAS TO BE ZERO, if a detection is to be taking place!
-            // Many "detect" functions are called in a sequence, below.
-            // If the result of one detection function was positive (*r == 1),
-            // then that function increments the current position and decrements the remaining count.
-            // In this case, further detection functions following afterwards might detect
-            // further characters and CHANGE the current position and remaining count, and so forth,
-            // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-            // Therefore, the checks for (r == 0) below avoid another detection,
-            // if the result already has a value unequal zero.
-            //
+                    allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+                        (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-            if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                decode_xml_detect_empty_tag_end(p0, p1, (void*) &r, p5);
-
-                if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    // This xml element is empty, so that the loop can be left now.
-
-                    break;
+                    // Add attribute to compound.
+                    // CAUTION! Hand over the name as reference!
+                    add_compound_element_by_name(p0, p1, p2,
+                        (void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds);
                 }
-            }
 
-            if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                //
+                // CAUTION! The ORDER of the following function calls is IMPORTANT!
+                // The empty tag end "/>" has to be searched BEFORE
+                // the simple tag end ">", because of the slash "/" character.
+                //
+                // CAUTION! The comparison result HAS TO BE ZERO, if a detection is to be taking place!
+                // Many "detect" functions are called in a sequence, below.
+                // If the result of one detection function was positive (*r == 1),
+                // then that function increments the current position and decrements the remaining count.
+                // In this case, further detection functions following afterwards might detect
+                // further characters and CHANGE the current position and remaining count, and so forth,
+                // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
+                // Therefore, the checks for (r == 0) below avoid another detection,
+                // if the result already has a value unequal zero.
+                //
 
-                decode_xml_detect_tag_end(p0, p1, (void*) &r);
+                if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    decode_xml_detect_empty_tag_end((void*) &r, p4, p5);
 
-                    //
-                    // The tag end was found.
-                    //
-                    // CAUTION! In this case, the current position and remaining count
-                    // were already changed in the called function, to be processed further
-                    // in other functions.
-                    //
+                    if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // The empty tag flag is zero which means that this xml element
-                    // has content and an end tag should close it.
-                    // There is also the possibility that the tag does NOT have
-                    // any content, in which case an end tag should follow next.
+                        // This xml element is empty, so that the loop can be left now.
 
-                    decode_xml_process_element_content(p6, p7);
+                        // Set break flag.
+                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    }
                 }
-            }
 
-            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // Increment current position.
-                *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    decode_xml_detect_tag_end((void*) &r, p4, p5);
 
-                // Decrement remaining count.
-                *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        //
+                        // The tag end was found.
+                        //
+                        // CAUTION! In this case, the current position and remaining count
+                        // were already changed in the called function, to be processed further
+                        // in other functions.
+                        //
+
+                        // The empty tag flag is zero which means that this xml element
+                        // has content and an end tag should close it.
+                        // There is also the possibility that the tag does NOT have
+                        // any content, in which case an end tag should follow next.
+
+                        decode_xml_process_element_content(p4, p5);
+                    }
+                }
+
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // Increment current position.
+                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+
+                    // Decrement remaining count.
+                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml element. The break flag is null.");
             }
 
         } else {
@@ -1210,17 +1209,17 @@ void decode_xml_select_element(void* p0, void* p1, void* p2, void* p3, void* p4)
  */
 void decode_xml_process_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p1;
+        int* rem = (int*) p4;
 
-        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-            void** pos = (void**) p0;
+            void** pos = (void**) p3;
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml element.");
 
-            decode_xml_process_tag_name(p3, p4, p5, p6, p7);
+            decode_xml_process_tag_name(p3, p4, p5, p3, p4);
 
             // The tag name end found may be one of: " ", "/>", ">".
             // The position now points to the next character AFTER the tag name end,
@@ -1250,6 +1249,17 @@ void decode_xml_process_element(void* p0, void* p1, void* p2, void* p3, void* p4
             void* dc = *NULL_POINTER_MEMORY_MODEL;
             void* ds = *NULL_POINTER_MEMORY_MODEL;
 
+/*??
+            // Add element to compound.
+            // CAUTION! Hand over the name as reference!
+            add_compound_element_by_name(p0, p1, p2,
+                (void*) tn, (void*) tnc, (void*) tns, (void*) &a, (void*) &ac, (void*) &as,
+                (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds);
+*/
+
+            // The break flag.
+            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -1259,7 +1269,7 @@ void decode_xml_process_element(void* p0, void* p1, void* p2, void* p3, void* p4
                     break;
                 }
 
-                decode_xml_select_element();
+                decode_xml_select_element(p0, p1, p2, (void*) &b, p3, p4);
             }
 
         } else {
@@ -1280,29 +1290,29 @@ void decode_xml_process_element(void* p0, void* p1, void* p2, void* p3, void* p4
 /**
  * Detects the xml tag name end.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_tag_name_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml tag name end.");
 
                 if (*rem >= *TAG_NAME_END_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) TAG_NAME_END_XML_NAME_COUNT, (void*) TAG_NAME_END_XML_NAME, (void*) TAG_NAME_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) TAG_NAME_END_XML_NAME_COUNT, (void*) TAG_NAME_END_XML_NAME, (void*) TAG_NAME_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1380,7 +1390,7 @@ void decode_xml_select_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_tag_name_end(p0, p1, (void*) &r);
+                    decode_xml_detect_tag_name_end((void*) &r, p4, p5);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1389,7 +1399,7 @@ void decode_xml_select_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_empty_tag_end(p0, p1, (void*) &r, p4);
+                    decode_xml_detect_empty_tag_end((void*) &r, p0, p1, p4);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1398,7 +1408,7 @@ void decode_xml_select_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_tag_end(p0, p1, (void*) &r);
+                    decode_xml_detect_tag_end((void*) &r, p4, p5);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1514,29 +1524,29 @@ void decode_xml_process_tag_name(void* p0, void* p1, void* p2, void* p3, void* p
 /**
  * Detects the xml attribute name end.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_attribute_name_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml attribute name end.");
 
                 if (*rem >= *ATTRIBUTE_NAME_END_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) ATTRIBUTE_NAME_END_XML_NAME_COUNT, (void*) ATTRIBUTE_NAME_END_XML_NAME, (void*) ATTRIBUTE_NAME_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) ATTRIBUTE_NAME_END_XML_NAME_COUNT, (void*) ATTRIBUTE_NAME_END_XML_NAME, (void*) ATTRIBUTE_NAME_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1598,7 +1608,7 @@ void decode_xml_select_attribute_name(void* p0, void* p1, void* p2, void* p3, vo
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_attribute_name_end(p0, p1, (void*) &r);
+                    decode_xml_detect_attribute_name_end((void*) &r, p0, p1);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1710,29 +1720,29 @@ void decode_xml_process_attribute_name(void* p0, void* p1, void* p2, void* p3) {
 /**
  * Detects the xml attribute value end.
  *
- * @param p0 the current position (Hand over as reference!)
- * @param p1 the remaining count
- * @param p2 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
 void decode_xml_detect_attribute_value_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* r = (int*) p2;
+        int* rem = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p1;
+            void** pos = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p0;
+                int* r = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml attribute value end.");
 
                 if (*rem >= *ATTRIBUTE_VALUE_END_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) ATTRIBUTE_VALUE_END_XML_NAME_COUNT, (void*) ATTRIBUTE_VALUE_END_XML_NAME, (void*) ATTRIBUTE_VALUE_END_XML_NAME_COUNT, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) ATTRIBUTE_VALUE_END_XML_NAME_COUNT, (void*) ATTRIBUTE_VALUE_END_XML_NAME, (void*) ATTRIBUTE_VALUE_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1794,7 +1804,7 @@ void decode_xml_select_attribute_value(void* p0, void* p1, void* p2, void* p3, v
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_attribute_value_end(p0, p1, (void*) &r);
+                    decode_xml_detect_attribute_value_end((void*) &r, p0, p1);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
