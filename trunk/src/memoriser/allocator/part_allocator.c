@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: part_allocator.c,v $ $Revision: 1.1 $ $Date: 2008-09-19 21:12:15 $ $Author: christian $
+ * @version $RCSfile: part_allocator.c,v $ $Revision: 1.2 $ $Date: 2008-09-25 21:36:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,8 +44,9 @@
  * @param p9 the destination details (Hand over as reference!)
  * @param p10 the destination details count (Hand over as reference!)
  * @param p11 the destination details size (Hand over as reference!)
- * @param p12 the source abstraction
- * @param p13 the source abstraction count
+ * @param p12 the source size
+ * @param p13 the source abstraction
+ * @param p14 the source abstraction count
  */
 void allocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
@@ -58,7 +59,7 @@ void allocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Allocate abstraction.
     allocate_model(p3, p4, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Allocate model.
-    allocate_model(p6, p7, p8, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p12, p13);
+    allocate_model(p6, p7, p8, p12, p13, p14);
     // Allocate details.
     allocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 }

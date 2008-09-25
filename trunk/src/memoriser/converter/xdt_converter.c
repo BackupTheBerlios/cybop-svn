@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.35 $ $Date: 2008-09-19 21:12:15 $ $Author: christian $
+ * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.36 $ $Date: 2008-09-25 21:36:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -845,15 +845,7 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode model.");
 
-                                    // Allocate knowledge model name.
-                                    allocate_model(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                                    // A channel is not allocated, since that is only needed temporarily for model loading.
-                                    // Allocate abstraction.
-                                    allocate_model(p3, p4, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                                    // Allocate model.
-                                    allocate_model(p6, p7, p8, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p14, p15);
-                                    // Allocate details.
-                                    allocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+                                    allocate_part(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p14, p15);
 
                                     // Decode name.
                                     decode_ascii_character_vector(p0, (void*) *nc, (void*) *ns, p16, p17);
