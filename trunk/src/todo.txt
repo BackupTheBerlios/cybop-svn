@@ -7,14 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.63 $ $Date: 2008-09-22 21:43:46 $ $Author: christian $
+# @version $Revision: 1.64 $ $Date: 2008-10-02 22:17:08 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue in file "xml_converter.c" with function "decode_xml_process_element";
-            allocate new instance for tag (element) name and attribute names/ values;
-            add element to compound
-        * Continue "cybol_converter.c"
+        * Compile and debug all source code
+        * Test file "xml_converter.c" functionality calling "model_diagram_converter.c" directly
+        * Continue "cybol_converter.c", to translate the model tree into a cyboi schema-conform structure
 
         * Add a mapper translating cybol- into memory abstractions and vice-versa
             (currently, the cybol abstractions are used directly to allocate/ access memory structures)
