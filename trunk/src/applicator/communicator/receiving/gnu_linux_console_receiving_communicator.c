@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -31,6 +31,7 @@
 #include "../../../constant/channel/cybol_channel.c"
 #include "../../../constant/model/log/level_log_model.c"
 #include "../../../logger/logger.c"
+#include "../../../memoriser/communicator/gnu_linux_console_communicator.c"
 
 /**
  * Receives textual user interface (tui) message via gnu/linux console.

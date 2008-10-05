@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.11 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -428,17 +428,17 @@ void communicate_sending_socket_initialise_socket_address(void* p0, void* p1, vo
             // With the known type "short int" of the "sun_family" field and
             // a fixed size "108" of the "sun_path" field, the overall size of
             // the "sockaddr_un" structure can be calculated as sum.
-            startup_socket_initialise_local_socket_address(p0, p1, p2);
+            maintain_starting_socket_initialise_local_socket_address(p0, p1, p2);
 
         } else if (*n == AF_INET) {
 
             // Initialise ipv4 socket address.
-            startup_socket_initialise_ipv4_socket_address(p0, p3, p4);
+            maintain_starting_socket_initialise_ipv4_socket_address(p0, p3, p4);
 
         } else if (*n == AF_INET6) {
 
             // Initialise ipv6 socket address.
-            startup_socket_initialise_ipv6_socket_address(p0, p3, p4);
+            maintain_starting_socket_initialise_ipv6_socket_address(p0, p3, p4);
         }
 
     } else {
@@ -502,10 +502,10 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
 
 /*??
     // Get socket- and address namespace.
-    startup_socket_memorise_getting_namespace((void*) &sn, (void*) &an, p5, p6);
+    maintain_starting_socket_memorise_getting_namespace((void*) &sn, (void*) &an, p5, p6);
 */
     // Get socket communication style.
-    startup_socket_get_style((void*) &st, p7, p8);
+    maintain_starting_socket_get_style((void*) &st, p7, p8);
 /*??
     // Get socket.
     communicate_sending_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
@@ -529,7 +529,7 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
 
 /*??
     // Initialise host address.
-    startup_socket_get_host_address(ha, p2, p3, (void*) &an);
+    maintain_starting_socket_get_host_address(ha, p2, p3, (void*) &an);
     // Initialise socket address.
     communicate_sending_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
 */

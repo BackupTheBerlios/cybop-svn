@@ -19,12 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:55 $ $Author: christian $
+ * @version $RCSfile: communicator.c,v $ $Revision: 1.7 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMMUNICATOR_SOURCE
-#define COMMUNICATOR_SOURCE
+//
+// CAUTION! Do NOT name the pre-processor statement COMMUNICATOR_SOURCE!
+// The reason is that this name is already used by the file "memoriser/communicator.c".
+//
+#ifndef APPLICATOR_COMMUNICATOR_SOURCE
+#define APPLICATOR_COMMUNICATOR_SOURCE
 
 #include "../applicator/communicator/receiving_communicator.c"
 #include "../applicator/communicator/sending_communicator.c"
@@ -137,5 +141,5 @@ void communicate(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5) {
     }
 }
 
-/* COMMUNICATOR_SOURCE */
+/* APPLICATOR_COMMUNICATOR_SOURCE */
 #endif

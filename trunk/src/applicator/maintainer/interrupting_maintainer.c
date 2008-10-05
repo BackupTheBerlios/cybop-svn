@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: interrupting_maintainer.c,v $ $Revision: 1.5 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: interrupting_maintainer.c,v $ $Revision: 1.6 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -151,7 +151,7 @@ void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            interrupt_thread((void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
+            maintain_interrupting_thread((void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
         }
     }
 
@@ -161,7 +161,7 @@ void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            interrupt_thread((void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
+            maintain_interrupting_thread((void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
         }
     }
 
@@ -171,7 +171,7 @@ void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            interrupt_thread((void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
+            maintain_interrupting_thread((void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
         }
     }
 
@@ -181,7 +181,7 @@ void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            interrupt_thread((void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
+            maintain_interrupting_thread((void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
         }
     }
 

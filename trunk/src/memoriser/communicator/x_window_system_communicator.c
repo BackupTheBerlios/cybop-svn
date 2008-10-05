@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.24 $ $Date: 2008-09-16 07:13:50 $ $Author: christian $
+ * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.25 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,10 +27,12 @@
 #define X_WINDOW_SYSTEM_COMMUNICATOR_SOURCE
 
 #include <X11/Xlib.h>
-#include "../../globals/constants/cyboi/cyboi_signal_priority_constants.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/graphical_user_interface_cybol_name.c"
+#include "../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
 
@@ -78,14 +80,14 @@ void sense_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p3,
 
                     // Get actual command belonging to the button and event.
                     get_universal_compound_element_by_name(p12, p13,
-                        (void*) GUI_LEFT_PRESS_COMMAND_NAME, (void*) GUI_LEFT_PRESS_COMMAND_NAME_COUNT,
+                        (void*) LEFT_PRESS_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LEFT_PRESS_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                         p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p16, p17);
 
                 } else if (*t == ButtonRelease) {
 
                     // Get actual command belonging to the button and event.
                     get_universal_compound_element_by_name(p12, p13,
-                        (void*) GUI_LEFT_RELEASE_COMMAND_NAME, (void*) GUI_LEFT_RELEASE_COMMAND_NAME_COUNT,
+                        (void*) LEFT_RELEASE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LEFT_RELEASE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                         p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p16, p17);
                 }
 
@@ -472,13 +474,13 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get interrupt request internal.
     get_element(p0, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &sirq, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get user interface root internal.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_INTERNAL, (void*) &r, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_COUNT_INTERNAL, (void*) &rc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_SIZE_INTERNAL, (void*) &rs, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &r, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &rc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &rs, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get user interface commands internal.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_INTERNAL, (void*) &c, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_COUNT_INTERNAL, (void*) &cc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL, (void*) &cs, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_INTERNAL_MEMORY_MEMORY_NAME, (void*) &c, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &cc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &cs, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get x window system internals.
     get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     get_element(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -542,7 +544,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // Get actual command belonging to the x window system expose event.
             get_universal_compound_element_by_name(*c, *cc,
-                (void*) GUI_EXPOSE_COMMAND_NAME, (void*) GUI_EXPOSE_COMMAND_NAME_COUNT,
+                (void*) EXPOSE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) EXPOSE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 (void*) &cn, (void*) &cnc, (void*) &cns,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
@@ -558,7 +560,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
             get_new_signal_identification(*s, *sc, (void*) &id);
 
             // Add signal to signal memory.
-            set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
+//??            set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
             // Set interrupt request flag, in order to notify the signal checker
             // that a new signal has been placed in the signal memory.
@@ -678,7 +680,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         //?? about the gui root node. Therefore, the actual window as its
         //?? only part element is determined here and handed over to
         //?? further procedures.
-        get_compound_element_by_index(*r, *rc, (void*) NUMBER_0_INTEGER,
+        get_compound_element_by_index(*r, *rc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL,
             (void*) &tmpn, (void*) &tmpnc, (void*) &tmpns,
             (void*) &tmpa, (void*) &tmpac, (void*) &tmpas,
             (void*) &tmpm, (void*) &tmpmc, (void*) &tmpms,
@@ -687,7 +689,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // Determine command, depending on mouse button and event type.
         // CAUTION! Hand over command abstraction, model, details as reference!
         sense_x_window_system_part(&cn, &cnc, &cns, &ca, &cac, &cas, &cm, &cmc, &cms, &cd, &cdc, &cds,
-            *tmpm, *tmpmc, &(e.xbutton.x), &(e.xbutton.y), (void*) NUMBER_0_INTEGER,
+            *tmpm, *tmpmc, &(e.xbutton.x), &(e.xbutton.y), (void*) NUMBER_0_INTEGER_MEMORY_MODEL,
             &t, &(e.xbutton.button), *k, *kc);
 
         // Lock signal memory mutex.
@@ -697,7 +699,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         get_new_signal_identification(*s, *sc, (void*) &id);
 
         // Add signal to signal memory.
-        set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
+//??        set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
         // Set interrupt request flag, in order to notify the signal checker
         // that a new signal has been placed in the signal memory.

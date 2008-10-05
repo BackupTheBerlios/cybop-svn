@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: addition_calculator.c,v $ $Revision: 1.6 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: addition_calculator.c,v $ $Revision: 1.7 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -151,7 +151,7 @@ void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            add_character_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
+            calculate_addition_character_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
         }
     }
 
@@ -161,7 +161,7 @@ void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            add_integer_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
+            calculate_addition_integer_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
         }
     }
 

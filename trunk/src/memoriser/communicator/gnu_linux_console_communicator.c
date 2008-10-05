@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.20 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.21 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,16 +29,17 @@
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/character_code/ascii/ascii_character_code_model.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../../memoriser/array.c"
+#include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 
 /**
  * Reads the gnu/linux console into a character array.

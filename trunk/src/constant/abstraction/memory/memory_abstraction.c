@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.6 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -82,6 +82,11 @@ static int* INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_M
 static wchar_t INTERNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'n', L'a', L'l', L'_', L'm', L'e', L'm', L'o', L'r', L'y'};
 static wchar_t* INTERNAL_MEMORY_MEMORY_ABSTRACTION = INTERNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY;
 static int* INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The part memory abstraction. */
+static wchar_t PART_MEMORY_ABSTRACTION_ARRAY[] = {L'p', L'a', L'r', L't'};
+static wchar_t* PART_MEMORY_ABSTRACTION = PART_MEMORY_ABSTRACTION_ARRAY;
+static int* PART_MEMORY_ABSTRACTION_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The pointer_vector memory abstraction. */
 static wchar_t POINTER_VECTOR_MEMORY_ABSTRACTION_ARRAY[] = {L'p', L'o', L'i', L'n', L't', L'e', L'r', L'_', L'v', L'e', L'c', L't', L'o', L'r'};

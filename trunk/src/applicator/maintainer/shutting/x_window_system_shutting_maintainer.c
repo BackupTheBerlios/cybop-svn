@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_shutting_maintainer.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: x_window_system_shutting_maintainer.c,v $ $Revision: 1.7 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,7 +67,7 @@ void maintain_shutting_x_window_system(void* p0, void* p1, void* p2) {
     if (*di != *NULL_POINTER_MEMORY_MODEL) {
 
         // Interrupt x window system service thread.
-        interrupt_thread(p1, p2);
+        maintain_interrupting_thread(p1, p2);
 
         // The display name.
         // An example identifying the second screen of the first

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_shutting_maintainer.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: socket_shutting_maintainer.c,v $ $Revision: 1.8 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,7 +66,7 @@ void maintain_shutting_socket(void* p0, void* p1, void* p2, void* p3) {
         if (*si != *NULL_POINTER_MEMORY_MODEL) {
 
             // Interrupt ALL socket service threads of this system.
-            interrupt_thread(p2, p3);
+            maintain_interrupting_thread(p2, p3);
 
             // The socket address (local, ipv4, ipv6) of this system.
             void** a = NULL_POINTER_MEMORY_MODEL;

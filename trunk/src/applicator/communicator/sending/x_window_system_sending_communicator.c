@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../../../logger/logger.c"
 #include "../../../memoriser/accessor.c"
 #include "../../../memoriser/array.c"
+#include "../../../memoriser/communicator.c"
 
 /**
  * Sends an x window system message.

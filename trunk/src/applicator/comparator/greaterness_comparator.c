@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: greaterness_or_equality_comparator.c.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: greaterness_comparator.c,v $ $Revision: 1.1 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GREATERNESS_OR_EQUALITY_COMPARATOR_SOURCE
-#define GREATERNESS_OR_EQUALITY_COMPARATOR_SOURCE
+#ifndef GREATERNESS_COMPARATOR_SOURCE
+#define GREATERNESS_COMPARATOR_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -36,7 +36,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Compares if the left parameter is greater than or equal to the right parameter.
+ * Compares if the left parameter is greater than the right parameter.
  *
  * Expected parameters:
  * - left_side (required): the left side value of the comparison
@@ -57,7 +57,7 @@
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  */
-void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void compare_greaterness(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // The left side name, abstraction, model, details.
     void** lsn = NULL_POINTER_MEMORY_MODEL;
@@ -145,7 +145,7 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         (void*) &sd, (void*) &sdc, (void*) &sds,
         p2, p3);
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Compare if one parameter is greater than or equal to the other.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Compare if one parameter is greater than the other.");
 
     // The result parameter comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -176,7 +176,7 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Use character parameters.");
 
-            if (*((wchar_t*) *lsm) >= *((wchar_t*) *rsm)) {
+            if (*((wchar_t*) *lsm) > *((wchar_t*) *rsm)) {
 
                 **rm = *TRUE_BOOLEAN_MEMORY_MODEL;
 
@@ -202,7 +202,7 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Use integer parameters.");
 
-            if (*((int*) *lsm) >= *((int*) *rsm)) {
+            if (*((int*) *lsm) > *((int*) *rsm)) {
 
                 **rm = *TRUE_BOOLEAN_MEMORY_MODEL;
 
@@ -228,7 +228,7 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Use double parameters.");
 
-            if (*((double*) *lsm) >= *((double*) *rsm)) {
+            if (*((double*) *lsm) > *((double*) *rsm)) {
 
                 **rm = *TRUE_BOOLEAN_MEMORY_MODEL;
 
@@ -240,9 +240,9 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare if one parameter is greater than or equal to the other. The result parameter is not a boolean.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare if one parameter is greater than the other. The result parameter is not a boolean.");
     }
 }
 
-/* GREATERNESS_OR_EQUALITY_COMPARATOR_SOURCE */
+/* GREATERNESS_COMPARATOR_SOURCE */
 #endif

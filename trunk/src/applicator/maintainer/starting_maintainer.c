@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: starting_maintainer.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: starting_maintainer.c,v $ $Revision: 1.8 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -163,7 +163,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            startup_gnu_linux_console(p5, p2, p3, p4);
+            maintain_starting_gnu_linux_console(p5, p2, p3, p4);
         }
     }
 
@@ -173,7 +173,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            startup_x_window_system(p5, p2, p3, p4);
+            maintain_starting_x_window_system(p5, p2, p3, p4);
         }
     }
 
@@ -190,7 +190,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_SERVICE_PORT_MODEL, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
+                maintain_starting_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) WWW_SERVICE_PORT_MODEL, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
 
             } else {
 
@@ -212,7 +212,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 
                 // Startup server socket if it does not already exist.
-                startup_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_SERVICE_PORT_MODEL, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
+                maintain_starting_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_SERVICE_PORT_MODEL, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
 
             } else {
 
@@ -223,7 +223,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not startup service. The service model is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not start up service. The service model is unknown.");
     }
 }
 

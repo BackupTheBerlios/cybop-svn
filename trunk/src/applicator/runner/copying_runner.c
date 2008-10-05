@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: copying_runner.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: copying_runner.c,v $ $Revision: 1.7 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -235,7 +235,7 @@ void run_copying(void* p0, void* p1, void* p2, void* p3) {
     argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Execute arguments as process.
-    run_execute(arg);
+    run_executing(arg);
 
     // Deallocate arguments vector.
     deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);

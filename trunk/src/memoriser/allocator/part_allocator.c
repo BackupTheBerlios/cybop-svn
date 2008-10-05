@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: part_allocator.c,v $ $Revision: 1.3 $ $Date: 2008-10-02 22:17:08 $ $Author: christian $
+ * @version $RCSfile: part_allocator.c,v $ $Revision: 1.4 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,23 +28,24 @@
 
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
+#include "../../memoriser/allocator/model_allocator.c"
 
 /**
  * Allocates the part.
  *
- * @param p0 the destination name (Hand over as reference!)
- * @param p1 the destination name count (Hand over as reference!)
- * @param p2 the destination name size (Hand over as reference!)
- * @param p3 the destination abstraction (Hand over as reference!)
- * @param p4 the destination abstraction count (Hand over as reference!)
- * @param p5 the destination abstraction size (Hand over as reference!)
- * @param p6 the destination model (Hand over as reference!)
- * @param p7 the destination model count (Hand over as reference!)
- * @param p8 the destination model size (Hand over as reference!)
- * @param p9 the destination details (Hand over as reference!)
- * @param p10 the destination details count (Hand over as reference!)
- * @param p11 the destination details size (Hand over as reference!)
- * @param p12 the source size
+ * @param p0 the model name (Hand over as reference!)
+ * @param p1 the model name count (Hand over as reference!)
+ * @param p2 the model name size (Hand over as reference!)
+ * @param p3 the model abstraction (Hand over as reference!)
+ * @param p4 the model abstraction count (Hand over as reference!)
+ * @param p5 the model abstraction size (Hand over as reference!)
+ * @param p6 the model model (Hand over as reference!)
+ * @param p7 the model model count (Hand over as reference!)
+ * @param p8 the model model size (Hand over as reference!)
+ * @param p9 the model details (Hand over as reference!)
+ * @param p10 the model details count (Hand over as reference!)
+ * @param p11 the model details size (Hand over as reference!)
+ * @param p12 the model size
  * @param p13 the source abstraction
  * @param p14 the source abstraction count
  */

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_shutting_maintainer.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_shutting_maintainer.c,v $ $Revision: 1.7 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +64,7 @@ void maintain_shutting_gnu_linux_console(void* p0, void* p1, void* p2) {
     if ((*ipi != *NULL_POINTER_MEMORY_MODEL) || (opi == *NULL_POINTER_MEMORY_MODEL)) {
 
         // Interrupt gnu/linux console service thread.
-        interrupt_thread(p1, p2);
+        maintain_interrupting_thread(p1, p2);
 
         // The gnu/linux console input- and output stream.
         FILE** ip = (FILE**) NULL_POINTER_MEMORY_MODEL;

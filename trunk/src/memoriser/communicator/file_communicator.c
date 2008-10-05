@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_communicator.c,v $ $Revision: 1.38 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: file_communicator.c,v $ $Revision: 1.39 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,16 +27,17 @@
 #define FILE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/character_code/ascii/ascii_character_code_model.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../globals/constants/system/system_file_name_constants.c"
+#include "../../constant/model/stream_model.c"
 #include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
-#include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../../memoriser/array.c"
+#include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
+#include "../../variable/reallocation_factor.c"
 
 /**
  * Reads a file stream.
@@ -146,7 +147,7 @@ void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p3, p4, (void*) INPUT_SYSTEM_FILE_NAME, (void*) INPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p3, p4, (void*) STANDARD_INPUT_STREAM_MODEL, (void*) STANDARD_INPUT_STREAM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -301,7 +302,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(*d, p1, (void*) OUTPUT_SYSTEM_FILE_NAME, (void*) OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(*d, p1, (void*) STANDARD_OUTPUT_STREAM_MODEL, (void*) STANDARD_OUTPUT_STREAM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -325,7 +326,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(*d, p1, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME, (void*) ERROR_OUTPUT_SYSTEM_FILE_NAME_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(*d, p1, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

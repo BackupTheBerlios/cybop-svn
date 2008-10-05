@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: equality_comparator.c,v $ $Revision: 1.5 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: equality_comparator.c,v $ $Revision: 1.6 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -161,7 +161,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_all(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
+            compare_equality_all(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
                 *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
         }
@@ -173,7 +173,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_prefix(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
+            compare_equality_prefix(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
                 *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
         }
@@ -185,7 +185,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_suffix(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
+            compare_equality_suffix(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
                 *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
         }
@@ -197,7 +197,7 @@ void compare_equality(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_part(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
+            compare_equality_part(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
                 *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
                 *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
         }

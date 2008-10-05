@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: model_allocator.c,v $ $Revision: 1.1 $ $Date: 2008-09-19 21:12:15 $ $Author: christian $
+ * @version $RCSfile: model_allocator.c,v $ $Revision: 1.2 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,25 @@
 
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
+
+/**
+ * Allocates the model.
+ *
+ * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
+ * @param p2 the abstraction
+ * @param p3 the abstraction count
+ */
+void allocate(void* p0, void* p1, void* p2, void* p3);
+
+/**
+ * Sets the integer vector element.
+ *
+ * @param p0 the integer vector
+ * @param p1 the index
+ * @param p2 the element (Hand over as reference!)
+ */
+void set_integer_vector_element(void* p0, void* p1, void* p2);
 
 /**
  * Allocates the model.

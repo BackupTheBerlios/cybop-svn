@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: maintainer.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: maintainer.c,v $ $Revision: 1.6 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,7 +90,7 @@ void maintain(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_exit(p0, p1, p2, p3, p4);
+//??            maintain_exit(p0, p1, p2, p3, p4);
         }
     }
 
@@ -100,7 +100,7 @@ void maintain(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_shutdown(p0, p1, p2, p3, p4);
+            maintain_shutting(p0, p1, p2, p3, p4, p5);
         }
     }
 
@@ -110,7 +110,7 @@ void maintain(void* p0, int* p1, void* p2, void* p3, void* p4, void* p5, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_startup(p0, p1, p2, p3, p4);
+            maintain_starting(p0, p1, p2, p3, p4, p5);
         }
     }
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: shutting_maintainer.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: shutting_maintainer.c,v $ $Revision: 1.7 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -89,7 +89,7 @@ void maintain_shutting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_gnu_linux_console(p5, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
+            maintain_shutting_gnu_linux_console(p5, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
         }
     }
 
@@ -99,7 +99,7 @@ void maintain_shutting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_x_window_system(p5, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
+            maintain_shutting_x_window_system(p5, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
         }
     }
 
@@ -109,7 +109,7 @@ void maintain_shutting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_socket(p5, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
+            maintain_shutting_socket(p5, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
         }
     }
 
@@ -119,13 +119,13 @@ void maintain_shutting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_socket(p5, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
+            maintain_shutting_socket(p5, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not shutdown service. The service model is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not shut down service. The service model is unknown.");
     }
 }
 

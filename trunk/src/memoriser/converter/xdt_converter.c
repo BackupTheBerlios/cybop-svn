@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.36 $ $Date: 2008-09-25 21:36:31 $ $Author: christian $
+ * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.37 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -845,7 +845,7 @@ void decode_xdt_decode_model(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode model.");
 
-                                    allocate_part(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p14, p15);
+                                    allocate_part(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p14, p15);
 
                                     // Decode name.
                                     decode_ascii_character_vector(p0, (void*) *nc, (void*) *ns, p16, p17);

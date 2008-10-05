@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-09-14 21:29:47 $ $Author: christian $
+ * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.11 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,11 +29,11 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include <stdio.h>
+#include "../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/cybol/communication_mode_cybol_model.c"
 #include "../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: manager.c,v $ $Revision: 1.52 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: manager.c,v $ $Revision: 1.53 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -310,13 +310,13 @@ void manage(void* p0, void* p1) {
     // The "interrupt" procedures are called within the "shutdown" procedures.
 
     // Shutdown gnu/linux console.
-    shutdown_gnu_linux_console(i, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
+    maintain_shutting_gnu_linux_console(i, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
     // Shutdown x window system.
-    shutdown_x_window_system(i, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
+    maintain_shutting_x_window_system(i, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
     // Shutdown www service.
-    shutdown_socket(i, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME,(void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
+    maintain_shutting_socket(i, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME,(void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
     // Shutdown cyboi service.
-    shutdown_socket(i, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
+    maintain_shutting_socket(i, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
 
     //
     // Variable finalisation.

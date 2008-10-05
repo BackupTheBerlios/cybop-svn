@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: inline_communicator.c,v $ $Revision: 1.18 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: inline_communicator.c,v $ $Revision: 1.19 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,8 +27,8 @@
 #define INLINE_COMMUNICATOR_SOURCE
 
 #include <stdio.h>
-#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"

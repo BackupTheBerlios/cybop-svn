@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -251,7 +251,7 @@ void communicate_sensing_socket(void* p0, void* p1) {
             // and processed in the system signal handler procedure
             // (situated in the controller/checker.c module).
 
-            communicate_sensing_message(*irq, *mt, *st, *ps, *pa, *pas, *os);
+            communicate_sensing_socket_message(*irq, *mt, *st, *ps, *pa, *pas, *os);
         }
 
     } else {
@@ -276,7 +276,7 @@ void communicate_sensing_www_socket(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense www socket.");
 
-    communicate_sensing(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    communicate_sensing_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }
 
 /**
@@ -288,7 +288,7 @@ void communicate_sensing_cyboi_socket(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense cyboi socket.");
 
-    communicate_sensing(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    communicate_sensing_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */
