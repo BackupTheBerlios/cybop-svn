@@ -30,28 +30,22 @@
  * - green: #C0FFC0
  * - orange: #FFDCA8
  *
- * @version $Revision: 1.4 $ $Date: 2006-01-23 21:58:42 $ $Author: christian $
+ * @version $Revision: 1.5 $ $Date: 2008-10-13 00:12:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-/**
- * The body.
- */
 body {
 
     background-color: #000000;
-    font-family: "FreeSans", "Helvetica", "Nimbus Sans L", "Verdana", "Bitstream Vera Sans", "Arial", "Times New Roman";
-    font-size: 10pt;
-    color: #FFFFC0;
     margin-left: 0cm;
     margin-top: 0cm;
     margin-right: 0cm;
     margin-bottom: 0cm;
+    /* Minimum width avoids line feed and display errors in modern browsers. */
+    min-width: 40em;
 }
 
-/**
- * The header.
- */
+/*
 h1 { font-size: 18pt; font-weight: bold; text-align: left; color: #C0C0FF; }
 h2 { font-size: 16pt; font-weight: bold; text-align: left; color: #C0C0FF; }
 h3 { font-size: 14pt; font-weight: bold; text-align: left; color: #C0C0FF; }
@@ -59,23 +53,14 @@ h4 { font-size: 12pt; font-weight: bold; text-align: left; color: #C0C0FF; }
 h5 { font-size: 10pt; font-weight: bold; text-align: left; color: #C0C0FF; }
 h6 { font-size: 08pt; font-weight: bold; text-align: left; color: #C0C0FF; }
 
-/**
- * The text paragraph.
- */
 p {
 
     text-align: left;
 }
 
-/**
- * The table.
- */
 table {
 }
 
-/**
- * The table column header.
- */
 th {
 
     font-size: 10pt;
@@ -83,25 +68,141 @@ th {
     color: #000000;
 }
 
-/**
- * The table column data.
- */
 td {
 
     font-size: 10pt;
 }
 
-/**
- * The list.
- */
 ul.circle {
 
     list-style-type: circle;
 }
 
-/**
- * The links to other pages.
- */
-a:link { color: #C0C0FF; text-decoration: none; }
+a:link { color: #C0C0FF;  }
 a:active { color: #FF8080; text-decoration: none; }
 a:visited { color: #C0FFC0; text-decoration: none; }
+*/
+
+div#page {
+    /* Set horizontal alignment, to conform with the standard. */
+    margin: 10px;
+    padding: 0;
+    width: 1000px;
+    background-color: #000000;
+    /* Align page content left. */
+    text-align: left;
+    font-family: "FreeSans", "Helvetica", "Nimbus Sans L", "Verdana", "Bitstream Vera Sans", "Arial", "Times New Roman";
+    font-size: 1.0em;
+    color: #FFFFC0;
+}
+
+div#navigation {
+    width: 170px;
+    float: left;
+    margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #FFFFC0;
+    padding: 0;
+    background-color: #FFFFC0;
+    color: #000000;
+    font-size: 0.8em;
+}
+
+div#navigation h1 {
+    display: block;
+    margin: 0;
+    border-width: 0px;
+    padding: 0.2em;
+    background-color: #FF8080;
+    color: #000000;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+div#navigation a {
+    display: block;
+    padding: 0.2em;
+    text-decoration: none;
+}
+
+div#navigation a:link {
+    background-color: #FFFFC0;
+    color: #000000;
+}
+
+div#navigation a:visited {
+    background-color: #FFFFC0;
+    color: #808080;
+}
+
+div#navigation a:hover {
+    background-color: #C0C0FF;
+    color: #000000;
+}
+
+div#navigation a:active {
+    background-color: #000000;
+    color: #C0C0FF;
+}
+
+div#information {
+    width: 100%;
+    float: left;
+    margin: 0;
+    border-width: 0px;
+    border-style: solid;
+    border-color: #FFFFC0;
+    padding: 0;
+    background-color: #000000;
+    color: #FFFFC0;
+    text-align: center;
+}
+
+div#information a {
+    display: block;
+    padding: 0.2em;
+    text-decoration: none;
+}
+
+div#information a:link {
+    background-color: #000000;
+    color: #FFFFC0;
+}
+
+div#information a:visited {
+    background-color: #000000;
+    color: #808080;
+}
+
+div#information a:hover {
+    background-color: #C0C0FF;
+    color: #000000;
+}
+
+div#information a:active {
+    background-color: #000000;
+    color: #C0C0FF;
+}
+
+div#content {
+}
+
+* html div#content {
+    /* The workaround for the 3 pixel bug of Internet Explorer up to version 6. */
+    height: 1em;
+}
+
+div#advertisement {
+    width: 200px;
+    float: right;
+}
+
+div#footer {
+    /* The "clear" resets the element flow. */
+    clear: both;
+    margin: 0;
+    padding: 0.1em;
+    text-align: center;
+    font-size: 0.8em;
+}

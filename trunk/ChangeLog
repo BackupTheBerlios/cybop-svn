@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.87 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
+# @version $Revision: 1.88 $ $Date: 2008-10-13 00:12:23 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-10-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Start adapting website to using modern CSS layout
 
 2008-10-05  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up compilation errors
