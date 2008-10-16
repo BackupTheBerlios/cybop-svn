@@ -17,7 +17,7 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.50 $ $Date: 2008-10-13 00:12:23 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.51 $ $Date: 2008-10-16 23:36:25 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <meta name="description" content="CYBOP Homepage"/>
     <meta name="keywords" content="CYBOP,CYBOL,CYBOI,Cybernetics Oriented Programming"/>
@@ -87,171 +87,94 @@
                 </a>
             </div>
         </div>
-        <div id="content">
-            Text
-        </div>
+        <!--
+            This area has to be added BEFORE the content in the center,
+            even if it is displayed at last on the screen!
+            This is because no float was defined for the centered area,
+            so that its size may be calculated dynamically, depending on
+            the width of the left- and right areas.
+            Also, the wrong box model of the Internet Explorer can be equalised that way.
+        -->
         <div id="advertisement">
-            Text
-        </div>
-        <div id="footer">
-            Copyright (c) 2002-2007. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 2007-07-31
-        </div>
-    <!--
-        <table width="1000" cellspacing="0" cellpadding="0" border="0">
-        <!-- Content. -->
-    <!--
-        <tr>
-            <td>
-                <table width="100%" cellspacing="0" cellpadding="20" border="0">
-                <tr align="left" valign="top">
-                    <td>
-                        <!-- Menu. -->
-    <!--
-                        <table width="170" bgcolor="#FFFFC0" cellspacing="1" cellpadding="2" border="0">
-                        <tr bgcolor="#FF8080">
-                            <th align="left">
-                                General
-                            </th>
-                        </tr>
-                        <tr bgcolor="#FFFFC0">
-                            <td>
-                        </table>
-    -->
-    <!--
-                    </td>
-                    <td>
-                        <!-- Logo. -->
-    <!--
-                        <table width="100%" cellspacing="2" cellpadding="0" border="0">
-                        <tr>
-                            <td align="left" valign="top">
-                                <h2>Cybernetics Oriented Programming (CYBOP)</h2>
-                                <p>
-                                    <b>CYBOP</b> stands for <i>Cybernetics Oriented Programming</i> and is a new theory<br>
-                                    for software development, building on concepts which are taken from nature.
-                                </p>
-                                <p>
-                                    <b>CYBOL</b> is an XML-based application programming- and knowledge<br>
-                                    specification language and thus completely platform-independent.
-                                </p>
-                                <p>
-                                    <b>CYBOI</b> is the corresponding interpreter that is needed to execute<br>
-                                    systems defined in CYBOL.
-                                </p>
-                                <br>
-                            </td>
-                        </tr>
-                        </table>
-                        <br>
-                        <!-- News. -->
-    <!--
-                        <table width="550" bgcolor="#C0C0FF" cellspacing="0" cellpadding="2" border="0">
-                        <tr>
-                            <th align="center"><b>News</b></th>
-                        </tr>
-                        </table>
-                        <br>
-                        <table width="500" cellspacing="0" cellpadding="5" border="0">
-                        <tr align="left" valign="top">
-                            <td width="90">2007-07-31</td>
-                            <td>
-                                Published <i>Cybernetics Oriented Language</i> (CYBOL)
-                                <a href="books/cybol/cybol.pdf">Specification</a>
-                                Version 2.0, Draft 2007-07-31.
-                            </td>
-                        </tr>
-                        <tr align="left" valign="top">
-                            <td width="90">2007-06-02</td>
-                            <td>
-                                <i>CYBOP</i> to be presented at <a href="http://www.linuxtag.org/2007/">LinuxTag 2007</a> in Berlin.
-                            </td>
-                        </tr>
-                        <tr align="left" valign="top">
-                            <td width="90">2007-05-31</td>
-                            <td>
-                                Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOP 0.8.0</a>.
-                            </td>
-                        </tr>
-                        <tr align="left" valign="top">
-                            <td width="90">2007-01-19</td>
-                            <td>
-                                Published <a href="books/cybop/index.html">book</a>
-                                <i>Cybernetics Oriented Programming</i> (CYBOP).
-                            </td>
-                        </tr>
-                        <tr>
-                            <th align="left" valign="top"><a href="news.html">more...</a></th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td align="right" valign="bottom">
-                                <br><br>
-                                <a href="http://www.ethipat.org/">
-                                    <img src="ethipat.png" alt="Vote for a New Patent System" width="400" vspace="2" border="0"/>
-                                </a>
-                            </td>
-                        </tr>
-                        </table>
-                    </td>
-                    <td>
-                        <table width="170" cellspacing="0" cellpadding="0" border="0">
-                        <tr>
-                            <td bgcolor="#C0C0FF" align="center" valign="top">
-                                <a href="http://www.cybop.net">
-                                    <img src="logo_original.png" alt="Logo" width="160" height="186" border="1"/>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="middle">
-                                <br><br>
-                                <i>Sapere aude! Dare to know!</i><br>
-                                <i>Have courage to use your own understanding!</i><br>
-                                (Immanuel Kant)<br><br>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="bottom">
-                                <a href="books/cybop/index.html">
-                                    <img src="books/cybop/cover_small.jpeg" alt="CYBOP Book Cover" vspace="2" border="0"/>
-                                </a><br>
-                                CYBOP - The Book
-                            </td>
-                        </tr>
-                        </table>
-                    </td>
-                </tr>
-                </table>
-            </td>
-        </tr>
-        <!-- Copyright Information. -->
-    <!--
-        <tr>
-            <td>
-                <hr noshade size="1"/>
-                Copyright (c) 2002-2007. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 2007-07-31
-            </td>
-        </tr>
-        </table>
-        <!-- Start of temporary protest banner using JavaScript. -->
-    <!--
-        <div id="todestag" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; text-align: center; color: #fff; font-family: Verdana,sans-serif; visibility: hidden; -moz-opacity: 0.9; filter:alpha(opacity=90); opacity: 0.9; z-index: 100;">
+            <a href="http://www.cybop.net">
+                <img src="logo_original.png" alt="Logo" width="160" height="186" border="1"/>
+            </a>
             <p>
-                <a href="http://www.vorratsdatenspeicherung.de/">
-                    <img src="http://www.vorratsdatenspeicherung.de/images/todestag2007.png" style="border: none" alt="Stoppt die Vorratsdatenspeicherung!" title="Stoppt die Vorratsdatenspeicherung!" align="top" width="600" height="300" />
-                </a>
-                <a href="javascript:HideTodestag();" style="color: #fff; font-size: 12px;">X Schlie&szlig;en</a>
+                <i>
+                    Sapere aude!<br/>
+                    Dare to know!<br/>
+                    Have courage to<br/>
+                    use your own<br/>
+                    understanding!<br/>
+                </i>
+                (Immanuel Kant)
+            </p>
+            <a href="books/cybop/index.html">
+                <img src="books/cybop/cover_small.jpeg" alt="CYBOP Book Cover" vspace="2" border="0"/>
+            </a>
+            <p>
+                CYBOP - The Book
             </p>
         </div>
-        <script type="text/javascript">
-            <!--
-            function ShowHideTodestag() {id="todestag"; obj = (document.getElementById ? document.getElementById(id) : (document.all ? document.all[id] : (document.layers ? document.layers[id] : null))); obj.style.visibility = (obj.style.visibility == 'visible' ? 'hidden' : 'visible');};
-            function HideTodestag() {ShowHideTodestag()}; if(document.cookie.indexOf('OnlineDemoGesehen=1')==-1){ShowHideTodestag()};
-            // -->
-    <!--
-        </script>
-        <!-- End of temporary protest banner using JavaScript. -->
+        <div id="description">
+            <h1>Cybernetics Oriented Programming (CYBOP)</h1>
+            <p>
+                <b>CYBOP</b> stands for <i>Cybernetics Oriented Programming</i> and is a new theory
+                for software development, building on concepts which are taken from nature.
+            </p>
+            <p>
+                <b>CYBOL</b> is an XML-based application programming- and knowledge
+                specification language and thus completely platform-independent.
+            </p>
+            <p>
+                <b>CYBOI</b> is the corresponding interpreter that is needed to execute
+                systems defined in CYBOL.
+            </p>
+        </div>
+        <div id="news">
+            <h1>News</h1>
+            <table>
+            <tr>
+                <th>2007-07-31</th>
+                <td>
+                    Published <i>Cybernetics Oriented Language</i> (CYBOL)
+                    <a href="books/cybol/cybol.pdf">Specification</a>
+                    Version 2.0, Draft 2007-07-31.
+                </td>
+            </tr>
+            <tr>
+                <th>2007-06-02</th>
+                <td>
+                    <i>CYBOP</i> to be presented at <a href="http://www.linuxtag.org/2007/">LinuxTag 2007</a> in Berlin.
+                </td>
+            </tr>
+            <tr>
+                <th>2007-05-31</th>
+                <td>
+                    Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOP 0.8.0</a>.
+                </td>
+            </tr>
+            <tr>
+                <th>2007-01-19</th>
+                <td>
+                    Published <a href="books/cybop/index.html">book</a>
+                    <i>Cybernetics Oriented Programming</i> (CYBOP).
+                </td>
+            </tr>
+            <tr>
+                <th align="left" valign="top"><a href="news.html">more...</a></th>
+                <td></td>
+            </tr>
+            </table>
+            <br/><br/>
+            <a href="http://www.ethipat.org/">
+                <img src="ethipat.png" alt="Vote for a New Patent System" width="400" vspace="2" border="0"/>
+            </a>
+        </div>
+        <div id="footer">
+            <hr noshade size="1"/>
+            Copyright (c) 2002-2008. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL Licence. Last Update: 2008-10-17
+        </div>
     </div>
 </body>
 </html>

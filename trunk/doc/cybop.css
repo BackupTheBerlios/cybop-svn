@@ -30,80 +30,97 @@
  * - green: #C0FFC0
  * - orange: #FFDCA8
  *
- * @version $Revision: 1.5 $ $Date: 2008-10-13 00:12:23 $ $Author: christian $
+ * @version $Revision: 1.6 $ $Date: 2008-10-16 23:36:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 body {
 
     background-color: #000000;
-    margin-left: 0cm;
-    margin-top: 0cm;
-    margin-right: 0cm;
-    margin-bottom: 0cm;
+    margin: 0cm;
     /* Minimum width avoids line feed and display errors in modern browsers. */
-    min-width: 40em;
+    min-width: 800px;
+    width: 1100px;
 }
-
-/*
-h1 { font-size: 18pt; font-weight: bold; text-align: left; color: #C0C0FF; }
-h2 { font-size: 16pt; font-weight: bold; text-align: left; color: #C0C0FF; }
-h3 { font-size: 14pt; font-weight: bold; text-align: left; color: #C0C0FF; }
-h4 { font-size: 12pt; font-weight: bold; text-align: left; color: #C0C0FF; }
-h5 { font-size: 10pt; font-weight: bold; text-align: left; color: #C0C0FF; }
-h6 { font-size: 08pt; font-weight: bold; text-align: left; color: #C0C0FF; }
-
-p {
-
-    text-align: left;
-}
-
-table {
-}
-
-th {
-
-    font-size: 10pt;
-    font-weight: bold;
-    color: #000000;
-}
-
-td {
-
-    font-size: 10pt;
-}
-
-ul.circle {
-
-    list-style-type: circle;
-}
-
-a:link { color: #C0C0FF;  }
-a:active { color: #FF8080; text-decoration: none; }
-a:visited { color: #C0FFC0; text-decoration: none; }
-*/
 
 div#page {
-    /* Set horizontal alignment, to conform with the standard. */
-    margin: 10px;
-    padding: 0;
-    width: 1000px;
+    margin: 20px;
     background-color: #000000;
-    /* Align page content left. */
     text-align: left;
-    font-family: "FreeSans", "Helvetica", "Nimbus Sans L", "Verdana", "Bitstream Vera Sans", "Arial", "Times New Roman";
-    font-size: 1.0em;
+    font-family: "Monospace", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Lucida Console", "FreeMono", "Nimbus Mono L", "Andale Mono", "Consolas", "Everson Mono", "Courier", "Prestige";
     color: #FFFFC0;
 }
 
+div#page h1 {
+    color: #C0C0FF;
+    font-size: 1.4em;
+}
+
+div#page h2 {
+    color: #C0C0FF;
+    font-size: 0.9em;
+}
+
+div#page p {
+    color: #FFFFC0;
+    font-size: 0.9em;
+}
+
+div#page table {
+    margin: 5px;
+    padding: 0.2em;
+    font-size: 0.9em;
+}
+
+div#page tr {
+    text-align: left;
+    vertical-align: top;
+}
+
+div#page th {
+    background-color: #C0C0FF;
+    color: #000000;
+}
+
+div#page td {
+    margin: 5px;
+}
+
+div#page a {
+    padding: 0.2em;
+    text-decoration: none;
+}
+
+div#page a:link {
+    color: #C0C0FF;
+}
+
+div#page a:visited {
+    color: #808080;
+}
+
+div#page a:hover {
+    background-color: #C0C0FF;
+    color: #000000;
+}
+
+div#page a:active {
+    background-color: #FFFFC0;
+    color: #000000;
+}
+
+* html div#page {
+    /* The workaround for the 3 pixel bug of Internet Explorer up to version 6. */
+    height: 1em;
+}
+
 div#navigation {
+    margin-right: 20px;
     width: 170px;
     float: left;
-    margin: 0;
     border-width: 1px;
     border-style: solid;
     border-color: #FFFFC0;
-    padding: 0;
     background-color: #FFFFC0;
     color: #000000;
     font-size: 0.8em;
@@ -111,8 +128,7 @@ div#navigation {
 
 div#navigation h1 {
     display: block;
-    margin: 0;
-    border-width: 0px;
+    margin: 0px;
     padding: 0.2em;
     background-color: #FF8080;
     color: #000000;
@@ -148,12 +164,7 @@ div#navigation a:active {
 
 div#information {
     width: 100%;
-    float: left;
-    margin: 0;
     border-width: 0px;
-    border-style: solid;
-    border-color: #FFFFC0;
-    padding: 0;
     background-color: #000000;
     color: #FFFFC0;
     text-align: center;
@@ -185,24 +196,81 @@ div#information a:active {
     color: #C0C0FF;
 }
 
-div#content {
+div#description {
+    max-width: 800px;
 }
 
-* html div#content {
-    /* The workaround for the 3 pixel bug of Internet Explorer up to version 6. */
-    height: 1em;
+div#description h1 {
+    color: #C0C0FF;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+div#news {
+    margin-left: 200px;
+    margin-top: 50px;
+    max-width: 600px;
+}
+
+div#news h1 {
+    margin: 2px;
+    padding: 0.2em;
+    background-color: #C0C0FF;
+    color: #000000;
+    font-size: 1.0em;
+}
+
+div#news table {
+    margin: 2px;
+    padding: 0.2em;
+    font-size: 0.9em;
+}
+
+div#news tr {
+    text-align: left;
+    vertical-align: top;
+}
+
+div#news th {
+    width: 90px;
+    background-color: #000000;
+    color: #FFFFC0;
 }
 
 div#advertisement {
-    width: 200px;
+    margin-left: 20px;
     float: right;
+    width: 180px;
+    color: #FFFFC0;
+    text-align: center;
+    vertical-align: top;
 }
 
 div#footer {
     /* The "clear" resets the element flow. */
     clear: both;
-    margin: 0;
     padding: 0.1em;
-    text-align: center;
+    text-align: left;
     font-size: 0.8em;
 }
+
+/*
+    <!-- Start of temporary protest banner using JavaScript. -->
+<!--
+    <div id="todestag" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; text-align: center; color: #fff; font-family: Verdana,sans-serif; visibility: hidden; -moz-opacity: 0.9; filter:alpha(opacity=90); opacity: 0.9; z-index: 100;">
+        <p>
+            <a href="http://www.vorratsdatenspeicherung.de/">
+                <img src="http://www.vorratsdatenspeicherung.de/images/todestag2007.png" style="border: none" alt="Stoppt die Vorratsdatenspeicherung!" title="Stoppt die Vorratsdatenspeicherung!" align="top" width="600" height="300"/>
+            </a>
+            <a href="javascript:HideTodestag();" style="color: #fff; font-size: 12px;">X Schlie&szlig;en</a>
+        </p>
+    </div>
+    <script type="text/javascript">
+        <!--
+        function ShowHideTodestag() {id="todestag"; obj = (document.getElementById ? document.getElementById(id) : (document.all ? document.all[id] : (document.layers ? document.layers[id] : null))); obj.style.visibility = (obj.style.visibility == 'visible' ? 'hidden' : 'visible');};
+        function HideTodestag() {ShowHideTodestag()}; if(document.cookie.indexOf('OnlineDemoGesehen=1')==-1){ShowHideTodestag()};
+        // -->
+<!--
+    </script>
+    <!-- End of temporary protest banner using JavaScript. -->
+*/
