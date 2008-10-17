@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--
+        $RCSfile: index.shtml,v $
+
+        Copyright (c) 2002-2008. Christian Heller and the CYBOP developers.
+
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+        Texts. A copy of the license is included in the section entitled
+        "GNU Free Documentation License".
+
+        http://www.cybop.net
+        - Cybernetics Oriented Programming -
+    /-->
+    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 00:42:03 $ $Author: christian $">
+    <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
+    <link rel="stylesheet" type="text/css" href="cybop.css"/>
+    <title>CYBOP</title>
+</head>
+<body>
+    <div id="page">
+        <!--#include file="menu.inc" -->
+        <!--
+            This area has to be added BEFORE the content in the center,
+            even if it is displayed at last on the screen!
+            This is because no float was defined for the centered area,
+            so that its size may be calculated dynamically, depending on
+            the width of the left- and right areas.
+            Also, the wrong box model of the Internet Explorer can be equalised that way.
+        -->
+        <div id="advertisement">
+            <a href="http://www.cybop.net">
+                <img src="logo_original.png" alt="Logo" width="160" height="186" border="1"/>
+            </a>
+            <p>
+                <i>
+                    Sapere aude!<br/>
+                    Dare to know!<br/>
+                    Have courage to<br/>
+                    use your own<br/>
+                    understanding!<br/>
+                </i>
+                (Immanuel Kant)
+            </p>
+            <a href="books/cybop/index.html">
+                <img src="books/cybop/cover_small.jpeg" alt="CYBOP Book Cover" vspace="2" border="0"/>
+            </a>
+            <p>
+                CYBOP - The Book
+            </p>
+        </div>
+        <div id="description">
+            <h1>Cybernetics Oriented Programming (CYBOP)</h1>
+            <p>
+                <b>CYBOP</b> stands for <i>Cybernetics Oriented Programming</i> and is a new theory
+                for software development, building on concepts which are taken from nature.
+            </p>
+            <p>
+                <b>CYBOL</b> is an XML-based application programming- and knowledge
+                specification language and thus completely platform-independent.
+            </p>
+            <p>
+                <b>CYBOI</b> is the corresponding interpreter that is needed to execute
+                systems defined in CYBOL.
+            </p>
+        </div>
+        <div id="news">
+            <h1>News</h1>
+            <table>
+            <tr>
+                <th>2007-07-31</th>
+                <td>
+                    Published <i>Cybernetics Oriented Language</i> (CYBOL)
+                    <a href="books/cybol/cybol.pdf">Specification</a>
+                    Version 2.0, Draft 2007-07-31.
+                </td>
+            </tr>
+            <tr>
+                <th>2007-06-02</th>
+                <td>
+                    <i>CYBOP</i> to be presented at <a href="http://www.linuxtag.org/2007/">LinuxTag 2007</a> in Berlin.
+                </td>
+            </tr>
+            <tr>
+                <th>2007-05-31</th>
+                <td>
+                    Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOP 0.8.0</a>.
+                </td>
+            </tr>
+            <tr>
+                <th>2007-01-19</th>
+                <td>
+                    Published <a href="books/cybop/index.html">book</a>
+                    <i>Cybernetics Oriented Programming</i> (CYBOP).
+                </td>
+            </tr>
+            <tr>
+                <th align="left" valign="top"><a href="news.shtml">more...</a></th>
+                <td></td>
+            </tr>
+            </table>
+            <br/><br/>
+            <a href="http://www.ethipat.org/">
+                <img src="ethipat.png" alt="Vote for a New Patent System" width="400" vspace="2" border="0"/>
+            </a>
+        </div>
+        <div id="footer">
+            <hr noshade size="1"/>
+            Copyright (c) 2002-2008. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL Licence. Last Update: 2008-10-17
+        </div>
+    </div>
+</body>
+</html>
