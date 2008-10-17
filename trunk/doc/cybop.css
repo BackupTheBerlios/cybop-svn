@@ -30,7 +30,7 @@
  * - green: #C0FFC0
  * - orange: #FFDCA8
  *
- * @version $Revision: 1.7 $ $Date: 2008-10-17 08:07:06 $ $Author: christian $
+ * @version $Revision: 1.8 $ $Date: 2008-10-17 11:37:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -251,24 +251,3 @@ div#footer {
     text-align: left;
     font-size: 0.8em;
 }
-
-/*
-    <!-- Start of temporary protest banner using JavaScript. -->
-<!--
-    <div id="todestag" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; text-align: center; color: #fff; font-family: Verdana,sans-serif; visibility: hidden; -moz-opacity: 0.9; filter:alpha(opacity=90); opacity: 0.9; z-index: 100;">
-        <p>
-            <a href="http://www.vorratsdatenspeicherung.de/">
-                <img src="http://www.vorratsdatenspeicherung.de/images/todestag2007.png" style="border: none" alt="Stoppt die Vorratsdatenspeicherung!" title="Stoppt die Vorratsdatenspeicherung!" align="top" width="600" height="300"/>
-            </a>
-            <a href="javascript:HideTodestag();" style="color: #fff; font-size: 12px;">X Schlie&szlig;en</a>
-        </p>
-    </div>
-    <script type="text/javascript">
-        <!--
-        function ShowHideTodestag() {id="todestag"; obj = (document.getElementById ? document.getElementById(id) : (document.all ? document.all[id] : (document.layers ? document.layers[id] : null))); obj.style.visibility = (obj.style.visibility == 'visible' ? 'hidden' : 'visible');};
-        function HideTodestag() {ShowHideTodestag()}; if(document.cookie.indexOf('OnlineDemoGesehen=1')==-1){ShowHideTodestag()};
-        // -->
-<!--
-    </script>
-    <!-- End of temporary protest banner using JavaScript. -->
-*/
