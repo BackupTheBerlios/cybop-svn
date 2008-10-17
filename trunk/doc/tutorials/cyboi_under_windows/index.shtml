@@ -18,7 +18,7 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 14:27:26 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $">
     <meta name="author" content="Christian Heller <christian.heller@tuxtax.de>">
     <link rel="stylesheet" type="text/css" href="../../cybop.css"/>
 </head>
@@ -105,7 +105,7 @@
                     <p>
                         Cygwin is a Linux-like environment for Windows. It consists of two parts:
                         A DLL (cygwin1.dll) which acts as a Linux emulation layer providing substantial Linux API functionality.
-                        A collection of tools, which provide Linux look and feel. 
+                        A collection of tools, which provide Linux look and feel.
                         The Cygwin DLL works with all non-beta, non "release candidate", ix86 32 bit versions of Windows since Windows 95, with the exception of Windows CE.
                     </p>
                     <p>
@@ -137,11 +137,11 @@
                         Ich habe erst mal DJGPP (mit gcc 2.95) heruntergeladen und installiert.
                     </p>
                     <p>
-                        1. Problem: Das Programm benutzt X11 Bibliothek, die nur unter Linux zu finden sind, d.h. das Kompilieren war nicht mglich. 
+                        1. Problem: Das Programm benutzt X11 Bibliothek, die nur unter Linux zu finden sind, d.h. das Kompilieren war nicht mglich.
                     </p>
                     <p>
                         2. Problem: Wenn man dann den Source ohne X-11-Bibliotheck nimmt, dann hat der Compiler Problem mit den Source-Dateien, weil diese mit gcc 3.3 unter Linux kompiliert worden sind. Das Kompilieren ist mir wieder nicht gelungen, da eine lange Reihe von Fehlern aufgetreten ist. Ich habe manche davon geprft, weil ich ungefhr sehen wollte, wo das Problem liegt. Es hat sich festgestellt, dass die meisten Fehlermeldungen von der Quellkode kommen.
-                        Der Compiler (Version 2.95 gcc-Dos) kann nicht mit dem Source umgehen, da die Variablendeklarationen auch nach dem Aufruf von Funktionen gemacht worden sind. Es gibt auch andere Fehlermeldungen, aber die oben genannte kommt am hufigsten vor, d.h. es mssen dann alle Quellkode-Dateien verndert werden und dies ist nicht so praktisch und zeitaufwendig. 
+                        Der Compiler (Version 2.95 gcc-Dos) kann nicht mit dem Source umgehen, da die Variablendeklarationen auch nach dem Aufruf von Funktionen gemacht worden sind. Es gibt auch andere Fehlermeldungen, aber die oben genannte kommt am hufigsten vor, d.h. es mssen dann alle Quellkode-Dateien verndert werden und dies ist nicht so praktisch und zeitaufwendig.
                         Das Programm ist wirklich rein Funktional, aber benutzt teilweise den Syntax von c++. Die Kommentare sind wie bei c++ mit "//" definiert und die Variablendeklarationen nach dem Funktionsaufruf zu finden, ansonsten habe ich selber nicht so viel Ahnung von c++, was ich schlecht beurteilen kann. Auf jeden Fall gcc 2.95 kommt damit nicht zurecht. Wenn ich gcc -x c++ benutze, dann kann ich wiederum nicht kompilieren, da gcc c++ bestimmte Typen aus der C-Sparche nicht kennt, also in beiden Fllen, wre die Kode zu ndern. Auch kommt noch dazu, dass ich keine neuere Version z. B. gcc 3.3 fr DJGPP gefunden habe, somit ist gcc 2.95 in Moment schon alt und fr die Zukunft noch lter und nutzloser. Aus diesem Grund ist die Lsung mit der DJGPP nicht effizient und wurde verworfen.
                     </p>
                     <p>
@@ -151,9 +151,9 @@
                         Zu der dritten Variante gcc mit Cygwin
                     </p>
                     <p>
-                        Ich habe nochmals alles mit Cygwin kompiliert und geprft. Das Kompilieren geht problemlos, sogar die Source-Kode mit X11-Bibliothek. Es hat sich festgestellt, dass das Programm nur 2 Bibliotheken braucht, um die erzeugte Exe-Datei nach dem Kompilieren unter irgendeinem Windows-Rechner zum Laufen zu bringen Dies sind cygwin1.dll und cygX11-6.dll. 
-                        Diese kann man auch statisch zu der Exe-Datei binden, sodass eine grere Exe-Datei entsteht, was problemlos ohne Cygwin-Umgebung gestartet werden kann, aber in Prinzip geht auch, wenn die Exe-Datei und die 
-                        2 Bibliotheken in einem Verzeichnis zu finden sind, also statisches Binden ist auch nicht unbedingt notwendig. 
+                        Ich habe nochmals alles mit Cygwin kompiliert und geprft. Das Kompilieren geht problemlos, sogar die Source-Kode mit X11-Bibliothek. Es hat sich festgestellt, dass das Programm nur 2 Bibliotheken braucht, um die erzeugte Exe-Datei nach dem Kompilieren unter irgendeinem Windows-Rechner zum Laufen zu bringen Dies sind cygwin1.dll und cygX11-6.dll.
+                        Diese kann man auch statisch zu der Exe-Datei binden, sodass eine grere Exe-Datei entsteht, was problemlos ohne Cygwin-Umgebung gestartet werden kann, aber in Prinzip geht auch, wenn die Exe-Datei und die
+                        2 Bibliotheken in einem Verzeichnis zu finden sind, also statisches Binden ist auch nicht unbedingt notwendig.
                         Wenn man alle drei Dateien zippt, dann kommen wir auf ungefhr 1 MB Grsse, was sogar auf eine Diskette passt.
                     </p>
                     <p>
@@ -211,10 +211,7 @@
                 </td>
             </tr>
         </table>
-        <div id="footer">
-            <hr noshade size="1"/>
-            Copyright (c) 2002-2008. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL Licence. Last Update: 2008-10-17
-        </div>
+        <!--#include virtual="../../footer.inc" -->
     </div>
 </body>
 </html>

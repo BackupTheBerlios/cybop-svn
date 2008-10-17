@@ -17,7 +17,7 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 14:27:26 $">
+    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-17 23:08:32 $">
     <meta name="author" content="$Author: christian $">
     <link rel="stylesheet" type="text/css" href="../cybop.css"/>
     <title>CYBOP 0.3.1.0</title>
@@ -72,10 +72,7 @@
                 </td>
             </tr>
         </table>
-        <div id="footer">
-            <hr noshade size="1"/>
-            Copyright (c) 2002-2008. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL Licence. Last Update: 2008-10-17
-        </div>
+        <!--#include virtual="../footer.inc" -->
     </div>
 </body>
 </html>

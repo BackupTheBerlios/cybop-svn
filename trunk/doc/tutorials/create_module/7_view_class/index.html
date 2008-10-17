@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>$RCSfile: index.html,v $</title>
+    <!--
+        Copyright (c) 1999-2002. Christian Heller. All rights reserved.
+
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+        Texts. A copy of the license is included in the section entitled
+        "GNU Free Documentation License".
+
+        http://www.resmedicinae.org
+        - Information in Medicine -
+    /-->
+    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 23:08:32 $">
+    <meta name="author" content="$Author: christian $">
+    <!-- Forces web server to reload pages every 30 days and not to take it from a proxy. -->
+    <meta http-equiv="expires" content="2592000"/>
+    <!-- Includes Cascading Style Sheet. -->
+    <link rel="stylesheet" type="text/css" href="../../../../../resmedicinae.css"/>
+</head>
+<body>
+    <table width="700" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+        <td>
+            <!-- Menu Link. -->
+            <a href="../../../../../index.html">
+                <img src="../../../../../logo.png" alt="Logo" align="right" valign="top" border="0"/>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- Contents. -->
+            <h4>7 View Class</h4>
+            <p>
+                Our next aim is to get a graphical output.
+                In a first step, we have to create a new class HelloWorldViewImpl which
+                inherits most functionality from its AbstractApplicationView parent class.
+                However, one addition has to be made: Inserting a constructor method
+                (Example 5.1) to create a panel containing a label which finally keeps the
+                "Hello World!" string.
+            </p>
+            <p>
+                The "sayHello" method of HelloWorldControllerImpl should now be renamed to
+                "createView". Instead of the Console output commands "System.out.println",
+                we will now add just one line to return a new instance of HelloWorldViewImpl
+                (Example 5.2).
+            </p>
+            <p>
+                Because of the renamed "createView" method in HelloWorldControllerImpl, we
+                also need to change the corresponding method call in HelloWorldLauncher
+                (Example 5.3). At first, the view is created. Then, it is handed over as
+                parameter of the "show" method which HelloWorldControllerImpl inherits from
+                AbstractApplication.
+            </p>
+            <p>
+                <img src="screenshot.png"></img>
+            </p>
+            <table width="100%" cellspacing="0" cellpadding="10" border="0">
+            <tr>
+                <td width="200" align="left" valign="middle">
+                    <a href="../6_concerns/index.html">Next</a>
+                </td>
+                <td width="200" align="center" valign="middle">
+                    <a href="../index.html">Contents</a>
+                </td>
+                <td width="200" align="right" valign="middle">
+                    Next
+                </td>
+            </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- Copyright Information. -->
+            <br/>
+            <hr noshade size="1"/>
+            <font size="1">Copyright (c) 1999-2002. <a href="mailto:resmedicinae-webmasters@lists.sourceforge.net">The Res Medicinae Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 07.05.2002</font>
+        </td>
+    </tr>
+    </table>
+</body>
+</html>

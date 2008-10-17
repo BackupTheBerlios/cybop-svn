@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>$RCSfile: index.html,v $</title>
+    <!--
+        Copyright (c) 1999-2002. Christian Heller. All rights reserved.
+
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+        Texts. A copy of the license is included in the section entitled
+        "GNU Free Documentation License".
+
+        http://www.resmedicinae.org
+        - Information in Medicine -
+    /-->
+    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 23:08:32 $">
+    <meta name="author" content="$Author: christian $">
+    <!-- Forces web server to reload pages every 30 days and not to take it from a proxy. -->
+    <meta http-equiv="expires" content="2592000"/>
+    <!-- Includes Cascading Style Sheet. -->
+    <link rel="stylesheet" type="text/css" href="../../../../../resmedicinae.css"/>
+</head>
+<body>
+    <table width="700" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+        <td>
+            <!-- Menu Link. -->
+            <a href="../../../../../index.html">
+                <img src="../../../../../logo.png" alt="Logo" align="right" valign="top" border="0"/>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- Contents. -->
+            <h4>3 Launcher Class</h4>
+            <p>
+                Actually, it is bad design to start an application from a static <code>main</code> method within that application itself.
+                We want to implement an independent component that doesn't know where it is called from.
+                If the application is to be treated as a component, it should rather be started from another, external component, sometimes referred to as container.
+            </p>
+            <p>
+                Since there is no such external container at the moment, the <a href="HelloWorldLauncher.java">HelloWorldLauncher.java</a> class will serve as a replacement.
+                This class contains nothing but one static <code>main</code> method.
+                It can be used to run the <code>HelloWorldControllerImpl</code> application.
+            </p>
+            <p>
+                Simply remove the <code>main</code> method from the <a href="HelloWorldControllerImpl.java">HelloWorldControllerImpl.java</a> class and
+                add it to the new <code>HelloWorldLauncher</code> class.
+                The controller class contains no methods now.
+                You will have to run the <code>HelloWorldLauncher</code> instead of the <code>HelloWorldControllerImpl</code> now,
+                on command line or per shell/batch script.
+            </p>
+            <p>
+                Our sample screenshot hasn't changed yet.
+            </p>
+            <p>
+                <img src="screenshot.png"></img><br>
+            </p>
+            <table width="100%" cellspacing="0" cellpadding="10" border="0">
+            <tr>
+                <td width="200" align="left" valign="middle">
+                    <a href="../2_application_class/index.html">Next</a>
+                </td>
+                <td width="200" align="center" valign="middle">
+                    <a href="../index.html">Contents</a>
+                </td>
+                <td width="200" align="right" valign="middle">
+                    <a href="../4_say_method/index.html">Next</a>
+                </td>
+            </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- Copyright Information. -->
+            <br/>
+            <hr noshade size="1"/>
+            <font size="1">Copyright (c) 1999-2002. <a href="mailto:resmedicinae-webmasters@lists.sourceforge.net">The Res Medicinae Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 06.05.2002</font>
+        </td>
+    </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>$RCSfile: index.html,v $</title>
+    <!--
+        Copyright (c) 1999-2002. Christian Heller. All rights reserved.
+
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+        Texts. A copy of the license is included in the section entitled
+        "GNU Free Documentation License".
+
+        http://www.resmedicinae.org
+        - Information in Medicine -
+    /-->
+    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 23:08:32 $">
+    <meta name="author" content="$Author: christian $">
+    <!-- Forces web server to reload pages every 30 days and not to take it from a proxy. -->
+    <meta http-equiv="expires" content="2592000"/>
+    <!-- Includes Cascading Style Sheet. -->
+    <link rel="stylesheet" type="text/css" href="../../../../../resmedicinae.css"/>
+</head>
+<body>
+    <table width="700" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+        <td>
+            <!-- Menu Link. -->
+            <a href="../../../../../index.html">
+                <img src="../../../../../logo.png" alt="Logo" align="right" valign="top" border="0"/>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- Contents. -->
+            <h4>4 Say Method</h4>
+            <p>
+                Since the launcher's only functionality is to run the component, it shouldn't contain the methods to display the "Hello World!" message.
+                The latter is clearly a task of our module controller.
+                That's why we now create a new public method <code>sayHelloWorld</code> in <a href="HelloWorldControllerImpl.java">HelloWorldControllerImpl.java</a>
+                to print out the message on console. The same commands are deleted in the launcher.
+            </p>
+            <p>
+                All that the <a href="HelloWorldLauncher.java">HelloWorldLauncher.java</a> has to do now is to create an instance of <code>HelloWorldControllerImpl</code>
+                and invoke the <code>sayHelloWorld</code> method on that instance.
+            </p>
+            <pre>
+    HelloWorldControllerImpl c = new HelloWorldControllerImpl();
+
+    if (c != null) {
+
+        c.sayHelloWorld();
+
+    } else {
+
+        throw new NullPointerException("Could not say 'Hello World!'. The Hello World application is null.");
+    }
+            </pre>
+            <p>
+                As a rule of Component Oriented Programming, you should always use the standard constructor to create a new instance and avoid handing over parameters to it.
+                Any parameters will be forwarded later, using special "Lifecycle" methods.
+            </p>
+            <p>
+                As <b>always</b>, when some method is called on some instance in the form <code>instance.method()</code>,
+                we need to <b>check that instance for <code>null</code></b> and throw a NullPointerException if the instance is <code>null</code>.
+            </p>
+            <p>
+                Our sample screenshot still hasn't changed:
+            </p>
+            <p>
+                <img src="screenshot.png"></img>
+            </p>
+            <table width="100%" cellspacing="0" cellpadding="10" border="0">
+            <tr>
+                <td width="200" align="left" valign="middle">
+                    <a href="../3_launcher_class/index.html">Next</a>
+                </td>
+                <td width="200" align="center" valign="middle">
+                    <a href="../index.html">Contents</a>
+                </td>
+                <td width="200" align="right" valign="middle">
+                    <a href="../5_component_lifecycle/index.html">Next</a>
+                </td>
+            </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!-- Copyright Information. -->
+            <br/>
+            <hr noshade size="1"/>
+            <font size="1">Copyright (c) 1999-2002. <a href="mailto:resmedicinae-webmasters@lists.sourceforge.net">The Res Medicinae Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 07.05.2002</font>
+        </td>
+    </tr>
+    </table>
+</body>
+</html>

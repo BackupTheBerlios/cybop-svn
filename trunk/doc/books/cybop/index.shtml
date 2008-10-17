@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!--
-        $RCSfile: index.html,v $
+        $RCSfile: index.shtml,v $
 
         Copyright (c) 2002-2008. Christian Heller.
 
@@ -11,7 +11,7 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.15 $ $Date: 2008-10-16 23:36:25 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <link rel="stylesheet" type="text/css" href="../../cybop.css"/>
     <title>CYBOP Book</title>
@@ -125,10 +125,10 @@
                 <h2><a name="review">Review</a></h2>
                 <ul>
                     <li>
-                        <a href="review/2007-11-30_gilbert_herschberger.html">2007-11-30, Gilbert Herschberger, Marietta, Georgia, USA</a>
+                        <a href="review/2007-11-30_gilbert_herschberger.shtml">2007-11-30, Gilbert Herschberger, Marietta, Georgia, USA</a>
                     </li>
                     <li>
-                        <a href="review/2007-07-16_max_kleiner.html">2007-07-16, Max Kleiner, Bern, Schweiz [German language]</a>
+                        <a href="review/2007-07-16_max_kleiner.shtml">2007-07-16, Max Kleiner, Bern, Schweiz [German language]</a>
                     </li>
                 </ul>
             </td>
@@ -164,10 +164,7 @@
             </td>
         </tr>
         </table>
-        <div id="footer">
-            <hr noshade size="1"/>
-            Copyright (c) 2002-2008. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL Licence. Last Update: 2008-10-17
-        </div>
+        <!--#include virtual="../../footer.inc" -->
     </div>
 </body>
 </html>

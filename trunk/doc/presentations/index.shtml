@@ -18,7 +18,7 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-17 01:07:47 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.3 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <link rel="stylesheet" type="text/css" href="../cybop.css"/>
     <title>Presentations</title>
@@ -111,10 +111,7 @@
             </td>
         </tr>
         </table>
-        <div id="footer">
-            <hr noshade size="1"/>
-            Copyright (c) 2002-2008. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL Licence. Last Update: 2008-10-17
-        </div>
+        <!--#include virtual="../footer.inc" -->
     </div>
 </body>
 </html>

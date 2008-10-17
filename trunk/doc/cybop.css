@@ -30,7 +30,7 @@
  * - green: #C0FFC0
  * - orange: #FFDCA8
  *
- * @version $Revision: 1.9 $ $Date: 2008-10-17 14:27:25 $ $Author: christian $
+ * @version $Revision: 1.10 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,7 +69,7 @@ div#page p {
 
 div#page table {
     margin: 5px;
-    min-width: 800px;
+    max-width: 600;
     padding: 0.2em;
     font-size: 0.9em;
 }
@@ -197,7 +197,6 @@ div#information a:active {
 }
 
 div#description {
-    max-width: 800px;
 }
 
 div#description h1 {
@@ -209,7 +208,7 @@ div#description h1 {
 div#news {
     margin-left: 200px;
     margin-top: 50px;
-    max-width: 600px;
+    margin-right: 200px;
 }
 
 div#news h1 {

@@ -17,7 +17,7 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.4 $ $Date: 2008-10-17 14:27:25 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.5 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <link rel="stylesheet" type="text/css" href="cybop.css"/>
     <title>CYBOP</title>
@@ -47,7 +47,7 @@
                 </i>
                 (Immanuel Kant)
             </p>
-            <a href="books/cybop/index.html">
+            <a href="books/cybop/index.shtml">
                 <img src="books/cybop/cover_small.jpeg" alt="CYBOP Book Cover" vspace="2" border="0"/>
             </a>
             <p>
@@ -95,7 +95,7 @@
             <tr>
                 <th>2007-01-19</th>
                 <td>
-                    Published <a href="books/cybop/index.html">book</a>
+                    Published <a href="books/cybop/index.shtml">book</a>
                     <i>Cybernetics Oriented Programming</i> (CYBOP).
                 </td>
             </tr>
@@ -109,10 +109,7 @@
                 <img src="ethipat.png" alt="Vote for a New Patent System" width="400" vspace="2" border="0"/>
             </a>
         </div>
-        <div id="footer">
-            <hr noshade size="1"/>
-            Copyright (c) 2002-2008. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL Licence. Last Update: 2008-10-17
-        </div>
+        <!--#include virtual="footer.inc" -->
     </div>
 </body>
 </html>
