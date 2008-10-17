@@ -17,7 +17,7 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 00:42:03 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-17 01:07:47 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <meta http-equiv="expires" content="0"/>
     <link rel="stylesheet" type="text/css" href="../cybop.css"/>
@@ -25,7 +25,7 @@
 </head>
 <body>
     <div id="page">
-        <!--#include file="../menu.inc" -->
+        <!--#include virtual="../menu.inc" -->
         <h1>Credits</h1>
         <p>
             Our CYBOP logo was designed by <i>Thomas Saur</i> of

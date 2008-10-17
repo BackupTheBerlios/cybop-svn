@@ -18,13 +18,13 @@
         http://www.resmedicinae.org
         - Information in Medicine -
     /-->
-    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 00:42:03 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-17 01:07:47 $ $Author: christian $">
     <meta name="author" content="Christian Heller <christian.heller@tuxtax.de>">
     <link rel="stylesheet" type="text/css" href="../cybop.css"/>
 </head>
 <body>
     <div id="page">
-        <!--#include file="../menu.inc" -->
+        <!--#include virtual="../menu.inc" -->
         <h1>How to help</h1>
         <h2>Tasks</h2>
         <p>
