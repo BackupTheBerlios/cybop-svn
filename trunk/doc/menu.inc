@@ -1,12 +1,15 @@
         <div id="navigation">
             <h1>General</h1>
+            <a href="/index.shtml">
+                Home
+            </a>
             <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">
                 Download
             </a>
             <a href="http://developer.berlios.de/mail/?group_id=669">
                 Mailing Lists
             </a>
-            <a href="licence/index.shtml">
+            <a href="/licence/index.shtml">
                 Licence Issues
             </a>
             <a href="http://www.gnu.org/gnu/thegnuproject.html">
@@ -15,20 +18,20 @@
             <a href="http://developer.berlios.de/project/stats/?group_id=669">
                 Activity Statistics
             </a>
-            <a href="credits/index.shtml">
+            <a href="/credits/index.shtml">
                 Credits
             </a>
             <h1>Documentation</h1>
-            <a href="books/index.shtml">
+            <a href="/books/index.shtml">
                 Books
             </a>
-            <a href="presentations/index.shtml">
+            <a href="/presentations/index.shtml">
                 Presentations
             </a>
-            <a href="papers/index.shtml">
+            <a href="/papers/index.shtml">
                 Papers
             </a>
-            <a href="tutorials/index.shtml">
+            <a href="/tutorials/index.shtml">
                 Tutorials
             </a>
             <h1>Development</h1>
@@ -38,10 +41,10 @@
             <a href="http://developer.berlios.de/cvs/?group_id=669">
                 CVS
             </a>
-            <a href="plan/index.shtml">
+            <a href="/plan/index.shtml">
                 Project Plan
             </a>
-            <a href="help/index.shtml">
+            <a href="/help/index.shtml">
                 How to help
             </a>
             <div id="information">
@@ -51,11 +54,11 @@
                 </a>
                 <a href="http://www.ffii.org/">
                     Fight Software Patents!<br/>
-                    <img src="patent_button.png" alt="Eurolinux Petition" vspace="2" border="1"/>
+                    <img src="/patent_button.png" alt="Eurolinux Petition" vspace="2" border="1"/>
                 </a>
                 <a href="http://www.resmedicinae.org">
                     Res Medicinae<br/>
-                    <img src="res_medicinae.png" alt="Res Medicinae" vspace="2" border="1"/>
+                    <img src="/res_medicinae.png" alt="Res Medicinae" vspace="2" border="1"/>
                 </a>
             </div>
         </div>

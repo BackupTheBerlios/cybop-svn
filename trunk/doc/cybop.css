@@ -30,7 +30,7 @@
  * - green: #C0FFC0
  * - orange: #FFDCA8
  *
- * @version $Revision: 1.6 $ $Date: 2008-10-16 23:36:25 $ $Author: christian $
+ * @version $Revision: 1.7 $ $Date: 2008-10-17 08:07:06 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -100,8 +100,6 @@ div#page a:visited {
 }
 
 div#page a:hover {
-    background-color: #C0C0FF;
-    color: #000000;
 }
 
 div#page a:active {
