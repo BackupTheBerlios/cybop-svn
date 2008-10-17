@@ -2,9 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>CYBOP 0.3.1.1</title>
     <!--
-        $RCSfile: features.html,v $
+        $RCSfile: 0.3.1.1.shtml,v $
 
         Copyright (c) 2002-2004. Christian Heller. All rights reserved.
 
@@ -18,31 +17,19 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.1 $ $Date: 2005-02-12 22:44:23 $">
+    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 14:27:26 $">
     <meta name="author" content="$Author: christian $">
-    <!-- Includes Cascading Style Sheet. -->
-    <link rel="stylesheet" type="text/css" href="../../cybop.css"/>
-    <!-- Forces web server to reload pages every 30 days and not to take it from a proxy. -->
-    <meta http-equiv="expires" content="2592000"/>
+    <link rel="stylesheet" type="text/css" href="../cybop.css"/>
+    <title>CYBOP 0.3.1.1</title>
 </head>
 <body>
-    <table width="900" cellspacing="0" cellpadding="0" border="0">
-    <tr>
-        <td>
-            <!-- Menu Link. -->
-            <a href="../../index.html">
-                <img src="../../logo.png" alt="Logo" align="right" valign="top" border="0"/>
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <!-- Contents. -->
-            <h4>CYBOP 0.3.1.1</h4>
-            <table width="100%" bgcolor="#C0C0FF" cellspacing="0" cellpadding="0" border="0">
+    <div id="page">
+        <!--#include virtual="../menu.inc" -->
+        <h1>CYBOP 0.3.1.1</h1>
+        <table>
             <tr>
                 <td>
-                    <table width="100%" cellspacing="1" cellpadding="2" border="0">
+                    <table>
                     <tr>
                         <th width="10"/>
                         <th>
@@ -55,7 +42,7 @@
                     <tr bgcolor="#000000">
                         <td bgcolor="#C0FFC0"/>
                         <td align="left" valign="top">
-                            <h6>CYBOI</h6>
+                            <h2>CYBOI</h2>
                             <ul>
                                 <li>Mark /etc/cyboi/config.cybol as configuration file</li>
                                 <li>Add CYBOI manpage cyboi.1.gz</li>
@@ -71,17 +58,11 @@
                     </table>
                 </td>
             </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <!-- Copyright Information. -->
-            <br/>
+        </table>
+        <div id="footer">
             <hr noshade size="1"/>
-            <font size="1">Copyright (c) 2002-2004. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL license. Last Update: 2004-12-06</font>
-        </td>
-    </tr>
-    </table>
+            Copyright (c) 2002-2008. <a href="mailto:cybop-webmasters@lists.berlios.de">The CYBOP Webmasters</a>. All rights reserved. GNU FDL Licence. Last Update: 2008-10-17
+        </div>
+    </div>
 </body>
 </html>

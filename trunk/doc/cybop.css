@@ -30,7 +30,7 @@
  * - green: #C0FFC0
  * - orange: #FFDCA8
  *
- * @version $Revision: 1.8 $ $Date: 2008-10-17 11:37:46 $ $Author: christian $
+ * @version $Revision: 1.9 $ $Date: 2008-10-17 14:27:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,8 @@ body {
     margin: 0cm;
     /* Minimum width avoids line feed and display errors in modern browsers. */
     min-width: 800px;
-    width: 1100px;
+    width: 1000px;
+    max-width: 1200px;
 }
 
 div#page {
@@ -68,6 +69,7 @@ div#page p {
 
 div#page table {
     margin: 5px;
+    min-width: 800px;
     padding: 0.2em;
     font-size: 0.9em;
 }

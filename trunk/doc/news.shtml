@@ -18,7 +18,7 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-17 01:07:47 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.3 $ $Date: 2008-10-17 14:27:25 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <link rel="stylesheet" type="text/css" href="cybop.css"/>
     <title>CYBOP News Archive</title>
@@ -28,37 +28,36 @@
         <!--#include virtual="menu.inc" -->
         <div id="news">
             <h1>News Archive</h1>
-            <br>
-            <table width="700" cellspacing="0" cellpadding="5" border="0">
-            <tr align="left" valign="top">
-                <td width="90">2007-07-31</td>
+            <table>
+            <tr>
+                <th>2007-07-31</th>
                 <td>
                     Published <i>Cybernetics Oriented Language</i> (CYBOL)
                     <a href="books/cybol/cybol.pdf">Specification</a>
                     Version 2.0, Draft 2007-07-31.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2007-06-02</td>
+            <tr>
+                <th>2007-06-02</th>
                 <td>
                     <i>CYBOP</i> to be presented at <a href="http://www.linuxtag.org/2007/">LinuxTag 2007</a> in Berlin.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2007-05-31</td>
+            <tr>
+                <th>2007-05-31</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOP 0.8.0</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2007-01-19</td>
+            <tr>
+                <th>2007-01-19</th>
                 <td>
                     Published <a href="books/cybop/index.html">book</a>
                     <i>Cybernetics Oriented Programming</i> (CYBOP).
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2006-09-09</td>
+            <tr>
+                <th>2006-09-09</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOP 1.1.0</a>,
                     <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOL 1.1.0</a> and
@@ -66,31 +65,31 @@
                     the latter including support for <i>Textual User Interfaces</i> (TUI), shell command execution and thus scripting.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2005-12-15</td>
+            <tr>
+                <th>2005-12-15</th>
                 <td>
                     Published <a href="papers/index.html">paper</a>
                     <i>Reflexions on Knowledge Modelling</i>
                     introducing more details on CYBOP.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2005-08-29</td>
+            <tr>
+                <th>2005-08-29</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOI 0.6.0.0</a>,
                     including rudimentary support for <i>Textual User Interfaces</i> (TUI).
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2005-07-12</td>
+            <tr>
+                <th>2005-07-12</th>
                 <td>
                     Added new <a href="presentations/index.html">presentation</a>
                     and <a href="papers/index.html">diploma work</a> (both in German),
                     prepared by <a href="mailto:rolf.holzmueller@gmx.de">Rolf Holzmueller</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2005-06-28</td>
+            <tr>
+                <th>2005-06-28</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOI 0.5.0.0</a>,
                     together with a number of documentation packages.
@@ -98,20 +97,20 @@
                     <a href="http://www.resmedicinae.org">Res Medicinae</a> project.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2005-05-12</td>
+            <tr>
+                <th>2005-05-12</th>
                 <td>
                     Added / updated CYBOL <a href="cybol/index.html">DTD, XSD and EBNF</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2005-04-25</td>
+            <tr>
+                <th>2005-04-25</th>
                 <td>
                     Added / updated <a href="tutorials/index.html">Tutorials</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2005-03-14</td>
+            <tr>
+                <th>2005-03-14</th>
                 <td>
                     Published <a href="papers/index.html">paper</a>
                     <i>A new Pattern Systematics</i>, serving as position paper
@@ -119,37 +118,37 @@
                     <a href="http://hillside.net/europlop/">European Conference on Pattern Languages of Programs</a> (EuroPLoP).
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2005-03-01</td>
+            <tr>
+                <th>2005-03-01</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOI 0.4.0.0</a>,
                     now containing a <i>Hello, World!</i> example CYBOL application.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2004-11-23</td>
+            <tr>
+                <th>2004-11-23</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOI 0.3.1.0</a>,
                     for the first time as <a href="http://www.debian.org">Debian</a> (.deb) package.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2004-09-13</td>
+            <tr>
+                <th>2004-09-13</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOI 0.3.0.0</a>,
                     which can parse CYBOL (XML) files.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2004-07-18</td>
+            <tr>
+                <th>2004-07-18</th>
                 <td>
                     Published <a href="papers/index.html">paper</a>
                     <i>Cybernetics Oriented Language (CYBOL)</i> at the
                     <a href="http://www.iiisci.org/sci2004/">World Multi-Conference on Systemics, Cybernetics and Informatics</a> (SCI).
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2004-07-09</td>
+            <tr>
+                <th>2004-07-09</th>
                 <td>
                     Added <a href="tutorials/index.html">Sockets and CYBOI under Windows Tutorials</a> [German],
                     written by <a href="mailto:makie2001@web.de">Marcel Kiesling</a>
@@ -157,99 +156,99 @@
                     respectively.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2004-06-23</td>
+            <tr>
+                <th>2004-06-23</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOI 0.2.2.0</a>,
                     which can read a signal inline or from a file.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2004-06-11</td>
+            <tr>
+                <th>2004-06-11</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOI 0.2.1.0</a>,
                     compilable but <i>not</i> runnable!
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2004-04-29</td>
+            <tr>
+                <th>2004-04-29</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOI 0.2.0.0</a>,
                     now written in the C programming language.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2004-02-09</td>
+            <tr>
+                <th>2004-02-09</th>
                 <td>
                     Added first version of CYBOL <a href="cybol/cybol.dtd">DTD</a>
                     and <a href="cybol/cybol.xsd">XSD</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2004-02-03</td>
+            <tr>
+                <th>2004-02-03</th>
                 <td>
                     Added <a href="tutorials/index.html">X11 and XLib Tutorial</a> [German],
                     written by <a href="mailto:martin.fache@myrbel.de">Martin Fache</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-10-26</td>
+            <tr>
+                <th>2003-10-26</th>
                 <td>
                     Christian will present the <a href="papers/index.html">paper</a>
                     <i>A new Concept for System Communication</i> at the
                     <a href="http://oopsla.acm.org/">Conference on Object-Oriented Programming, Systems, Languages and Applications</a> (OOPSLA).
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-09-18</td>
+            <tr>
+                <th>2003-09-18</th>
                 <td>
                     Revised project and feature plan for
                     <a href="http://cybop.berlios.de/plan/index.html">CYBOP</a> and
                     <a href="http://resmedicinae.sourceforge.net/projectplan/index.html">Res Medicinae</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-09-11</td>
+            <tr>
+                <th>2003-09-11</th>
                 <td>
                     Minor <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">release 0.1.0.0</a>,
                     of the new XML-based programming language CYBOL and the corresponding interpreter CYBOI.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-07-11</td>
+            <tr>
+                <th>2003-07-11</th>
                 <td>
                     Added <a href="mailto:jens.kleinschmidt@gmx.de">Jens Kleinschmidt</a>'s
                     <a href="papers/index.html">diploma work</a> on image transfer using CORBA/ SOAP.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-06-27</td>
+            <tr>
+                <th>2003-06-27</th>
                 <td>
                     The <a href="http://www.josmc.org">Journal of Free and Open Source Medical Computing</a> (JOSMC)
                     has published our <a href="http://www.josmc.org/bohl2003.pdf">article</a> <i>A flexible Software Architecture for
                     Presentation Layers demonstrated on Medical Documentation with Episodes and Inclusion of Topological Report</i>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-06-23</td>
+            <tr>
+                <th>2003-06-23</th>
                 <td>
                     <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">Internal release 0.0.7.0</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-06-05</td>
+            <tr>
+                <th>2003-06-05</th>
                 <td>
                     Added new <a href="papers/index.html">student papers</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-04-28</td>
+            <tr>
+                <th>2003-04-28</th>
                 <td>
                     <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">Internal release 0.0.6.0</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-03-15</td>
+            <tr>
+                <th>2003-03-15</th>
                 <td>
                     Added <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">first release 0.0.5.0</a>
                     after factoring out CYBOP from <a href="http://www.resmedicinae.org">Res Medicinae</a>.
@@ -257,23 +256,23 @@
                     stuff can already be produced with our framework.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-03-07</td>
+            <tr>
+                <th>2003-03-07</th>
                 <td>
                     Moved design stuff, tutorials and some implementation issues from
                     <a href="http://www.resmedicinae.org">Res Medicinae</a> project to here.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-03-07</td>
+            <tr>
+                <th>2003-03-07</th>
                 <td>
                     Added <a href="papers/index.html">diploma works</a>
                     of <a href="mailto:info@jens-bohl.de">Jens Bohl</a>
                     and <a href="mailto:info@torstenkunze.de">Torsten Kunze</a>.
                 </td>
             </tr>
-            <tr align="left" valign="top">
-                <td width="90">2003-02-10</td>
+            <tr>
+                <th>2003-02-10</th>
                 <td>
                     Launched new <a href="http://www.cybop.net">CYBOP</a> project which is hosted on the
                     German <a href="http://developer.berlios.de">BerliOS</a> Free Software Developer's Portal.
