@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: optionaliser.c,v $ $Revision: 1.21 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: optionaliser.c,v $ $Revision: 1.22 $ $Date: 2008-10-23 05:18:41 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -166,6 +166,8 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             // The glibc file stream functions expect standard (multibyte) character arrays.
             //
 
+    fwprintf(stderr, L"TEST 00 t null: %i\n", t);
+
             // Allocate terminated file name as multibyte character array.
             allocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
@@ -218,6 +220,9 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
     fwprintf(stderr, L"TEST 6 tc: %i\n", tc);
 
             if (*f != *NULL_POINTER_MEMORY_MODEL) {
+
+    fwprintf(stderr, L"TEST 7 ts: %i\n", ts);
+    fwprintf(stderr, L"TEST 7 tc: %i\n", tc);
 
                 // The file owner.
                 int o = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
