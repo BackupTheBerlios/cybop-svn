@@ -7,11 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.64 $ $Date: 2008-10-02 22:17:08 $ $Author: christian $
+# @version $Revision: 1.65 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Compile and debug all source code
+        * Debug source code: continue from "communicate_receiving_file_system" in file "file_system_receiving_communicator.c",
+            which is called from file "initialiser.c",
+            before calling the "check" function in file "checker.c"
         * Test file "xml_converter.c" functionality calling "model_diagram_converter.c" directly
         * Continue "cybol_converter.c", to translate the model tree into a cyboi schema-conform structure
 
@@ -30,19 +32,15 @@
                     parts belong to the compound in whose file they stand
             --> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
 
-        * Adapt all source code to wide characters (UTF-32 Unicode character encoding)
-        * Convert CYBOL files to UTF-8 Unicode character encoding
-
-        * Replace "libxml2" parser with an own solution
-
+        * Simplify and unify array functions by introducing NEW files for handling of primitive data types,
+            e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
+            that way, the different types are outsourced from the array handling files and redundancies are avoided
         * Assign "sizeof" for each programming language type to a global variable just once at startup
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code
-
         * Find unspecific bug causing a segmentation fault in optionaliser,
             sometimes in function "optionalise_log_file", other times in "optionalise_log_level"
         * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
             knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
-
         * Check the following files in directory "memoriser/converter/",
             which were probably not converted correctly from "char" to "wchar_t":
             gnu_linux_console_converter.c
@@ -74,18 +72,7 @@
             (see modules "character_vector_accessor.c" and "wide_character_vector_accessor.c", which already have it);
             this is to reduce the amount of source code and to take the burden of handling count and size from the developer working with arrays
 
-        * Replace redundant standard functions (arrays, set_elements etc.) with some sort of TEMPLATE replacing the type;
-            this could save hundreds of lines of code; possibly use a C++ compiler just because of this reason?
-        * Simplify and unify array source code files, perhaps using macros for type replacement?
-        * Some functions can be unified without using macros or the like, just by handing over the type's size as argument!
-        * YES, ALL array functions CAN be unified, if introducing NEW files for handling of primitive data types,
-            e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
-            that way the different types are outsourced from the array handling files and redundancies are avoided
-
         * Does the logger need an own mutex? ... because it is accessed by all threads!
-
-        * Beautify source code and write rules into style guide document,
-            e.g. always apply this order: get, set, remove or: read, write or: allocate, deallocate etc.
 
         * Commands of gnu/linux console MUESSEN uebergeben werden
         * Suche nach gedrueckter Taste in commands
@@ -274,5 +261,3 @@
             ==> solution 1 seems desirable, but would need some thinking on how to implement this in CYBOI
             ==> for now, as temporary solution, the properties are stored redundantly (twice) in the template
                 that needs them (for example "menu_item" entries in the resmedicinae-revue menu) and in its super template
-
-        * Check in LaTeX source files of CYBOP book to CVS

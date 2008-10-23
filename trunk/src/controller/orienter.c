@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: orienter.c,v $ $Revision: 1.5 $ $Date: 2008-09-03 22:04:01 $ $Author: christian $
+ * @version $RCSfile: orienter.c,v $ $Revision: 1.6 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,7 +64,7 @@ void orient(void* p0, void* p1) {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        log_write_terminated_message(stdout, L"Error: Could not orient stream. The orientation is null.\n");
+        // log_write_terminated_message(stdout, L"Error: Could not orient stream. The orientation is null.\n");
     }
 }
 

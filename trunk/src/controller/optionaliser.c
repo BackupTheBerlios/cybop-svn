@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: optionaliser.c,v $ $Revision: 1.22 $ $Date: 2008-10-23 05:18:41 $ $Author: christian $
+ * @version $RCSfile: optionaliser.c,v $ $Revision: 1.23 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,6 +54,8 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* l = (int*) p0;
+
+    fwprintf(stderr, L"TEST 0 log_level: %i\n", *l);
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
@@ -109,12 +111,20 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+    fwprintf(stderr, L"TEST 1 log_level: %i\n", *l);
+
             compare_arrays(p1, p2, (void*) DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+    fwprintf(stderr, L"TEST 2 log_level: %i\n", *l);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+    fwprintf(stderr, L"TEST 3 log_level: %i\n", *l);
+
                 // Set log level.
                 *l = *DEBUG_LEVEL_LOG_MODEL;
+
+    fwprintf(stderr, L"TEST 4 log_level: %i\n", *l);
             }
         }
 
@@ -153,7 +163,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
             // Do NOT show the following message, as it would only disturb the user!
-            log_write_terminated_message(stdout, L"Debug: Optionalise log file.\n");
+            // log_write_terminated_message(stdout, L"Debug: Optionalise log file.\n");
 
             // The terminated file name as character array.
             void* t = *NULL_POINTER_MEMORY_MODEL;
@@ -201,7 +211,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
     fwprintf(stderr, L"TEST 4 tc: %i\n", tc);
 
             // Add null termination character to terminated file name.
-            set_array_elements(t, (void*) &tc, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(t, (void*) &tc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     fwprintf(stderr, L"TEST 5 ts: %i\n", ts);
     fwprintf(stderr, L"TEST 5 tc: %i\n", tc);
@@ -328,7 +338,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
         // Do NOT show the following message, as it would only disturb the user!
-        log_write_terminated_message(stdout, L"Debug: Optionalise option.\n");
+        // log_write_terminated_message(stdout, L"Debug: Optionalise option.\n");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -455,7 +465,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
             // NOT get processed, unless set to a valid value lying within the array.
             //
             // CAUTION! Do NOT misuse the index parameter *j handed over to this function!
-            // The parameter j is the loop index and must not be altered here!
+            // The parameter j is the loop index and must NOT be altered here!
             // Therefore, a new local variable i is introduced.
             int i = *ac;
             // The command line argument option as multibyte character array.
@@ -560,10 +570,21 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
             // copied for the cybol knowledge file name.
             optionalise_option(p0, p1, p2, p3, p4, p5, vw, (void*) &vwc, ow, (void*) &owc);
 
+    fwprintf(stderr, L"TEST deallocate ow: %ls\n", ow);
+    fwprintf(stderr, L"TEST deallocate owc: %i\n", owc);
+    fwprintf(stderr, L"TEST deallocate ows: %i\n", ows);
+
             // Deallocate option as wide character array.
             deallocate((void*) &ow, (void*) &ows, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST deallocate vw: %ls\n", vw);
+    fwprintf(stderr, L"TEST deallocate vwc: %i\n", vwc);
+    fwprintf(stderr, L"TEST deallocate vws: %i\n", vws);
+
             // Deallocate value as wide character array.
             deallocate((void*) &vw, (void*) &vws, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST deallocate END: %i\n", ow);
 
         } else {
 

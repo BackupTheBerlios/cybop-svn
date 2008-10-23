@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.88 $ $Date: 2008-10-13 00:12:23 $ $Author: christian $
+# @version $Revision: 1.89 $ $Date: 2008-10-23 20:56:24 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-10-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug source code to the point where the "initialiser.c" calls the
+            function "communicate_receiving_file_system" in file "file_system_receiving_communicator.c"
 
 2008-10-13  Christian Heller  <christian.heller@tuxtax.de>
         * Start adapting website to using modern CSS layout
@@ -27,6 +31,7 @@
 
 2008-10-02  Christian Heller  <christian.heller@tuxtax.de>
         * Finish implementing XML parser in file "xml_converter.c"
+        * Replace "libxml2" parser with this own solution
         * Add file "xml_cybol_name.c"
 
 2008-09-25  Christian Heller  <christian.heller@tuxtax.de>
@@ -125,6 +130,9 @@
         * Finish adapting files in directory constant/model/
         * Finish adapting files in directory constant/name/
 
+2008-08-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Check in LaTeX source files and graphics of CYBOP book to CVS
+
 2008-08-18  Christian Heller  <christian.heller@tuxtax.de>
         * Finish adapting file in directory constant/channel/
 
@@ -197,6 +205,8 @@
 2008-05-28  Christian Heller  <christian.heller@tuxtax.de>
         * Replace function calls to "strlen" with "wcslen", where suitable
         * Convert files from "char" to "wchar_t" in directory "applicator/"
+        * Finish adapting all source code to 32 Bit wide characters
+        * Convert CYBOL files to UTF-8 Unicode character encoding
 
 2008-05-27  Christian Heller  <christian.heller@tuxtax.de>
         * Convert files from "char" to "wchar_t" in directory "memoriser/converter/"

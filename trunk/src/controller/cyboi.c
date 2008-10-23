@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.40 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.41 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -166,9 +166,13 @@ int main(int p0, char** p1) {
         // since one of the options determines the log output file name.
         orient((void*) LOG_OUTPUT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
+    fwprintf(stderr, L"TEST cyboi 0: %i\n", kc);
+
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run cyboi.");
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Globalised global variables already.");
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Optionalised log file already.");
+
+    fwprintf(stderr, L"TEST cyboi 1: %i\n", kc);
 
         if (m == *VERSION_OPERATION_MODE_CYBOI_MODEL) {
 
@@ -185,10 +189,16 @@ int main(int p0, char** p1) {
 
         } else if (m == *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL) {
 
+    fwprintf(stderr, L"TEST cyboi 2: %i\n", kc);
+
             if ((k != *NULL_POINTER_MEMORY_MODEL) && (kc >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+
+    fwprintf(stderr, L"TEST cyboi 3: %i\n", kc);
 
                 // Manage system startup and shutdown using the given cybol knowledge file.
                 manage(k, (void*) &kc);
+
+    fwprintf(stderr, L"TEST cyboi 4: %i\n", kc);
 
             } else {
 

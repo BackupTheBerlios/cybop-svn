@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,46 +59,22 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive file system message.");
 
-    //?? The temporary workaround flag to use the libxml2 parser.
-    //?? Later, when an own xml parser is implemented in cyboi,
-    //?? delete this flag and change the corresponding blocks below!
-    int w = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    //?? If the abstraction is "compound", then a cybol (xml) file representing
-    //?? a compound model is expected, so that the libxml2 parser is to be used.
-    //?? Otherwise, the flag remains zero and the file is read and parsed normally.
-    compare_arrays(p8, p9, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) &w, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    // The read model.
+    void* rm = *NULL_POINTER_MEMORY_MODEL;
+    int rmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    if (w != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    // Allocate read model.
+    allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-        decode(p0, p1, p2, p3, p4, p5, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+    // Read persistent byte stream over channel.
+    read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
-    } else {
+    // Decode byte stream according to given document type.
+    decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
-        //
-        // Read.
-        //
-
-        // The read model.
-        void* rm = *NULL_POINTER_MEMORY_MODEL;
-        int rmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-        // Allocate read model of type character, to read single bytes.
-        allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-        // Read persistent byte stream over channel.
-        read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
-
-        //
-        // Decode.
-        //
-
-        // Decode byte stream according to given document type.
-        decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
-
-        // Deallocate read model.
-        deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    }
+    // Deallocate read model.
+    deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */
