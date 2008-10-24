@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.56 $ $Date: 2008-10-24 22:07:25 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.57 $ $Date: 2008-10-24 22:09:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -106,11 +106,11 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
             // Decode cybol file into xml compound memory model.
-            decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
+//??            decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
 
             // Decode xml compound memory model into cyboi knowledge compound memory model.
             // Basically, structural data (tags) and meta data (attributes) are swapped in meaning.
-            decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
+//??            decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
 
             // Deallocate xml model.
             deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
