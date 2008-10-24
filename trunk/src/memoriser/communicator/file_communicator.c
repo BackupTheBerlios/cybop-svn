@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_communicator.c,v $ $Revision: 1.39 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
+ * @version $RCSfile: file_communicator.c,v $ $Revision: 1.40 $ $Date: 2008-10-24 22:07:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -75,28 +75,21 @@ void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
                             break;
                         }
 
-                        if (*dc == *ds) {
+                        if (*ds <= *dc) {
 
                             // Increase size.
-                            *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *dc;
 
                             // Reallocate array.
                             reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                         }
 
-                        if (*dc < *ds) {
+                        // Set character in destination array.
+                        // The array count serves as index for setting the character.
+                        set_array_elements(*d, p1, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                            // Set character in destination array.
-                            // The array count serves as index for setting the character.
-                            set_array_elements(*d, p1, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                            // Increase array count.
-                            (*dc)++;
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The index exceeds the array size.");
-                        }
+                        // Increase array count.
+                        (*dc)++;
 
                         // Read next character.
                         c = fgetc(p3);

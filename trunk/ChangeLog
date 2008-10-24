@@ -14,9 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.89 $ $Date: 2008-10-23 20:56:24 $ $Author: christian $
+# @version $Revision: 1.90 $ $Date: 2008-10-24 22:07:25 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-10-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct wide- into normal character array in function "communicate_receiving_file_system"
+            of file "file_system_receiving_communicator.c"
+        * Adapt "decode" function in module "converter.c", to first
+            convert cybol into xml and only afterwards into a cyboi compound
 
 2008-10-23  Christian Heller  <christian.heller@tuxtax.de>
         * Debug source code to the point where the "initialiser.c" calls the

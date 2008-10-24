@@ -7,13 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.65 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
+# @version $Revision: 1.66 $ $Date: 2008-10-24 22:07:25 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Debug source code: continue from "communicate_receiving_file_system" in file "file_system_receiving_communicator.c",
-            which is called from file "initialiser.c",
-            before calling the "check" function in file "checker.c"
+        * Continue with function "decode" in file "converter.c"
         * Test file "xml_converter.c" functionality calling "model_diagram_converter.c" directly
         * Continue "cybol_converter.c", to translate the model tree into a cyboi schema-conform structure
 

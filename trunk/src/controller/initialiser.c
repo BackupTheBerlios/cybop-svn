@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: initialiser.c,v $ $Revision: 1.25 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
+ * @version $RCSfile: initialiser.c,v $ $Revision: 1.26 $ $Date: 2008-10-24 22:07:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -113,7 +113,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     fwprintf(stderr, L"TEST initialiser p5: %i\n", *((int*) p5));
 
     // Receive startup model model and details (read from file and decode).
-    communicate_receiving_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds, p4, p5, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    communicate_receiving_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds, p4, p5, ma, (void*) mac);
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add initial signal to signal memory.");
