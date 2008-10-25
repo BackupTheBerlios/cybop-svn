@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: lifecycle_operation_cybol_model.c,v $ $Revision: 1.3 $ $Date: 2008-09-07 23:01:38 $ $Author: christian $
+ * @version $RCSfile: lifecycle_operation_cybol_model.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LIFECYCLE_OPERATION_CYBOL_MODEL_SOURCE
 #define LIFECYCLE_OPERATION_CYBOL_MODEL_SOURCE
 
+#include <stddef.h>
 #include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The exit lifecycle operation cybol model. */

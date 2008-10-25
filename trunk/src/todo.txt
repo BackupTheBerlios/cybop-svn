@@ -7,11 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.66 $ $Date: 2008-10-24 22:07:25 $ $Author: christian $
+# @version $Revision: 1.67 $ $Date: 2008-10-25 23:20:03 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue with function "decode" in file "converter.c"
+        * Continue with file "file_system_receiving_communicator.c"
+            --> Check why utf-8-converted wide character model count is zero!
+
         * Test file "xml_converter.c" functionality calling "model_diagram_converter.c" directly
         * Continue "cybol_converter.c", to translate the model tree into a cyboi schema-conform structure
 

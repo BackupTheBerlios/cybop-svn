@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: field_xdt_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: field_xdt_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef FIELD_XDT_CYBOL_NAME_SOURCE
 #define FIELD_XDT_CYBOL_NAME_SOURCE
 
+#include <stddef.h>
 #include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The kbv test number field xdt cybol name. */

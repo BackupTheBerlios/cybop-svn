@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.6 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
+ * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.7 $ $Date: 2008-10-25 23:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MEMORY_ABSTRACTION_SOURCE
 #define MEMORY_ABSTRACTION_SOURCE
 
+#include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The character_vector memory abstraction. */

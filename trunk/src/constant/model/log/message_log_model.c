@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: message_log_model.c,v $ $Revision: 1.5 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: message_log_model.c,v $ $Revision: 1.6 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MESSAGE_LOG_MODEL_SOURCE
 #define MESSAGE_LOG_MODEL_SOURCE
 
+#include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 //

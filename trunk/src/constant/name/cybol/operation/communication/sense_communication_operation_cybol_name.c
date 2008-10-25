@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sense_communication_operation_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: sense_communication_operation_cybol_name.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_SOURCE
 #define SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_SOURCE
 
+#include <stddef.h>
 #include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The channel sense communication operation cybol name. */

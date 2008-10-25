@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.41 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.42 $ $Date: 2008-10-25 23:20:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,6 +27,10 @@
 #define CYBOI_SOURCE
 
 #include <string.h>
+#include "../constant/model/cyboi/operation_mode_cyboi_model.c"
+#include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/integer_memory_model.c"
+#include "../constant/model/memory/pointer_memory_model.c"
 #include "../controller/globaliser.c"
 #include "../controller/helper.c"
 #include "../controller/informant.c"
@@ -34,11 +38,9 @@
 #include "../controller/optionaliser.c"
 #include "../controller/orienter.c"
 #include "../controller/tester.c"
-#include "../constant/model/cyboi/operation_mode_cyboi_model.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
 #include "../variable/log_setting.c"
+
+#include "../memoriser/converter/xml_converter.c"
 
 //
 // This is the main file of the Cybernetics Oriented Interpreter (CYBOI).

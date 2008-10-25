@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: keyboard_key_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: keyboard_key_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef KEYBOARD_KEY_CYBOL_NAME_SOURCE
 #define KEYBOARD_KEY_CYBOL_NAME_SOURCE
 
+#include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The enter keyboard key cybol name. */

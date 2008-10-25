@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: webdav_request_method_http_model.c,v $ $Revision: 1.2 $ $Date: 2008-09-04 20:31:30 $ $Author: christian $
+ * @version $RCSfile: webdav_request_method_http_model.c,v $ $Revision: 1.3 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef WEBDAV_REQUEST_METHOD_HTTP_MODEL_SOURCE
 #define WEBDAV_REQUEST_METHOD_HTTP_MODEL_SOURCE
 
+#include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The propfind webdav request method http model. Reads properties as resources from an xml file. Retrieves the directory structure of a remote system. */

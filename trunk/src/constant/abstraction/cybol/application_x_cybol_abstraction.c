@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: application_x_cybol_abstraction.c,v $ $Revision: 1.3 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: application_x_cybol_abstraction.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef APPLICATION_X_CYBOL_ABSTRACTION_SOURCE
 #define APPLICATION_X_CYBOL_ABSTRACTION_SOURCE
 
+#include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 //

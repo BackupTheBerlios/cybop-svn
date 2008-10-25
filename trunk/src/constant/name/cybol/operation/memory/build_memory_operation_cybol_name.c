@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: build_memory_operation_cybol_name.c,v $ $Revision: 1.1 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: build_memory_operation_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef BUILD_FLOW_OPERATION_CYBOL_NAME_SOURCE
 #define BUILD_FLOW_OPERATION_CYBOL_NAME_SOURCE
 
+#include <stddef.h>
 #include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The base build flow operation cybol name. */

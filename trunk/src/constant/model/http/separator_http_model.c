@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: separator_http_model.c,v $ $Revision: 1.5 $ $Date: 2008-09-14 21:29:46 $ $Author: christian $
+ * @version $RCSfile: separator_http_model.c,v $ $Revision: 1.6 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SEPARATOR_HTTP_MODEL_SOURCE
 #define SEPARATOR_HTTP_MODEL_SOURCE
 
+#include <stddef.h>
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 

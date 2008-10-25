@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: escape_control_sequence_gnu_linux_console_model.c,v $ $Revision: 1.1 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: escape_control_sequence_gnu_linux_console_model.c,v $ $Revision: 1.2 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_SOURCE
 #define ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_SOURCE
 
-#include <wchar.h>
+#include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 /**

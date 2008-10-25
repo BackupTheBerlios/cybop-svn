@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: separator_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
+ * @version $RCSfile: separator_cybol_name.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef SEPARATOR_CYBOL_NAME_SOURCE
 #define SEPARATOR_CYBOL_NAME_SOURCE
 
+#include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The list separator (between base name and index) cybol name. */

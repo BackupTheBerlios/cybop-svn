@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: path_cybol_abstraction.c,v $ $Revision: 1.3 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
+ * @version $RCSfile: path_cybol_abstraction.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CYBOL_PATH_LANGUAGE_CONSTANTS_SOURCE
 #define CYBOL_PATH_LANGUAGE_CONSTANTS_SOURCE
 
+#include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 //

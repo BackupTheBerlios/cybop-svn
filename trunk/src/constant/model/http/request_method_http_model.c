@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: request_method_http_model.c,v $ $Revision: 1.4 $ $Date: 2008-09-14 08:25:20 $ $Author: christian $
+ * @version $RCSfile: request_method_http_model.c,v $ $Revision: 1.5 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef REQUEST_METHOD_HTTP_MODEL_SOURCE
 #define REQUEST_METHOD_HTTP_MODEL_SOURCE
 
+#include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The get request method http model. Transfers content from server as arguments in uri. */

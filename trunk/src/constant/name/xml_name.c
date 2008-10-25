@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_name.c,v $ $Revision: 1.6 $ $Date: 2008-09-21 22:24:19 $ $Author: christian $
+ * @version $RCSfile: xml_name.c,v $ $Revision: 1.7 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef XML_NAME_SOURCE
 #define XML_NAME_SOURCE
 
+#include <stddef.h>
 #include "../../constant/model/memory/integer_memory_model.c"
 
 /** The declaration begin xml name. */
@@ -42,6 +43,11 @@ static int* DECLARATION_END_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY
 static wchar_t DEFINITION_BEGIN_XML_NAME_ARRAY[] = {L'<', L'!'};
 static wchar_t* DEFINITION_BEGIN_XML_NAME = DEFINITION_BEGIN_XML_NAME_ARRAY;
 static int* DEFINITION_BEGIN_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The definition end xml name. */
+static wchar_t DEFINITION_END_XML_NAME_ARRAY[] = {L'>'};
+static wchar_t* DEFINITION_END_XML_NAME = DEFINITION_END_XML_NAME_ARRAY;
+static int* DEFINITION_END_XML_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The comment begin xml name. */
 static wchar_t COMMENT_BEGIN_XML_NAME_ARRAY[] = {L'<', L'!', L'-', L'-'};

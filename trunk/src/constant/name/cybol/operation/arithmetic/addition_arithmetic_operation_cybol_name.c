@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: addition_arithmetic_operation_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-09-09 21:17:22 $ $Author: christian $
+ * @version $RCSfile: addition_arithmetic_operation_cybol_name.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_SOURCE
 #define ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_SOURCE
 
+#include <stddef.h>
 #include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The abstraction addition arithmetic operation cybol name. */

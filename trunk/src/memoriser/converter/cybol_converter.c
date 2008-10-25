@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.10 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.11 $ $Date: 2008-10-25 23:20:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef XML_CONVERTER_SOURCE
-#define XML_CONVERTER_SOURCE
+#ifndef CYBOL_CONVERTER_SOURCE
+#define CYBOL_CONVERTER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
@@ -1043,13 +1043,18 @@ void decode_cybol_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* 
 /**
  * Decodes cybol.
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source model
- * @param p4 the source model count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source model
+ * @param p7 the source model count
+ * @param p8 the source details
+ * @param p9 the source details count
  */
-void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
 }
@@ -1068,5 +1073,5 @@ void encode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode cybol.");
 }
 
-/* XML_CONVERTER_SOURCE */
+/* CYBOL_CONVERTER_SOURCE */
 #endif

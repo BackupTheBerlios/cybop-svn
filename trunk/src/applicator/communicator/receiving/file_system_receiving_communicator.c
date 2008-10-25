@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-10-24 22:07:25 $ $Author: christian $
+ * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-10-25 23:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,11 +73,33 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     fwprintf(stderr, L"TEST receive read rmc: %i\n", rmc);
     fwprintf(stderr, L"TEST receive read rms: %i\n", rms);
 
-    // Decode byte stream according to given document type.
-    decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+    // The wide character model.
+    void* wm = *NULL_POINTER_MEMORY_MODEL;
+    int wmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int wms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate wide character model.
+    allocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, rm, (void*) &rmc);
+
+    fwprintf(stderr, L"TEST receive wide character model: %ls\n", (wchar_t*) wm);
+    fwprintf(stderr, L"TEST receive wide character model count: %i\n", wmc);
 
     // Deallocate read model.
     deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST receive language: %ls\n", (wchar_t*) p8);
+    fwprintf(stderr, L"TEST receive language count: %i\n", *((int*) p9));
+
+    // Decode byte stream according to given document type.
+    decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+
+    fwprintf(stderr, L"TEST receive decode mc: %i\n", *((int*) p1));
+    fwprintf(stderr, L"TEST receive decode dc: %i\n", *((int*) p4));
+
+    // Deallocate wide character model.
+    deallocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */
