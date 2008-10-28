@@ -1,4 +1,4 @@
-        <div id="navigation">
+        <div id="navigation" width="200px">
             <h1>General</h1>
             <a href="/index.shtml">
                 Home

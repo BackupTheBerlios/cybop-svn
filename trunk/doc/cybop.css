@@ -30,7 +30,7 @@
  * - green: #C0FFC0
  * - orange: #FFDCA8
  *
- * @version $Revision: 1.10 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $
+ * @version $Revision: 1.11 $ $Date: 2008-10-28 08:12:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -116,7 +116,9 @@ div#page a:active {
 
 div#navigation {
     margin-right: 20px;
+/*
     width: 170px;
+*/
     float: left;
     border-width: 1px;
     border-style: solid;

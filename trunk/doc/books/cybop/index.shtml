@@ -11,7 +11,7 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.1 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-28 08:12:12 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <link rel="stylesheet" type="text/css" href="../../cybop.css"/>
     <title>CYBOP Book</title>
@@ -19,7 +19,7 @@
 <body>
     <div id="page">
         <h1>CYBOP Book</h1>
-        <table>
+        <table cellspacing="10px">
         <tr>
             <td>
                 <a href="cover.jpeg">
@@ -45,37 +45,24 @@
                 Canada: CAD 60.00<br>
             </td>
             <td>
-                Order Book now at either:<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.amazon.de/Cybernetics-Oriented-Programming-Christian-Heller/dp/3981089804/sr=8-1/qid=1169666060/ref=sr_1_1/302-7558907-0519230?ie=UTF8&s=books">amazon.de</a> (international orders)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.jpc.de/jpcng/books/detail/-/lang/en/currency/USD/buchnum/133558906/rk/books/rsk/hitlist">jpc.de</a> (English, USD Orders)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.jpc.de/jpcng/books/detail/-/lang/en/currency/GBP/buchnum/133558906/rk/books/rsk/hitlist">jpc.de</a> (English, UK GBP Orders)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.jpc.de/jpcng/books/detail/-/lang/de/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de</a> (Deutsch, EUR)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.jpc.de/jpcng/books/detail/-/lang/fr/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de</a> (en Francais, EUR)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.jpc.de/jpcng/books/detail/-/lang/nl/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de</a> (Nederlands, EUR)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.jpc.de/jpcng/books/detail/-/lang/es/currency/EUR/buchnum/133558906/rk/books/rsk/hitlist">jpc.de</a> (Espanol, EUR)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.jpc.de/jpcng/books/detail/-/lang/pl/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de</a> (Polski, EUR)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://kulturkaufhaus.shop-asp.de/shop/action/productDetails?aUrl=90008115&artiId=6530512">kulturkaufhaus.de</a> (Dussmann KulturKaufhaus)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.libri.de/shop/action/productDetails/6530512/christian_heller_cybernetics_oriented_programming_cybop_3981089804.html">libri.de</a><br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.buch.de/shop/home/suchartikel/cybernetics_oriented_programming_cybop/christian_heller/ISBN3-9810898-0-4/ID14278475.html?jumpId=988428">buch.de</a><br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.bol.de/shop/bde_homestartseite/suchartikel/cybernetics_oriented_programming_cybop/christian_heller/ISBN3-9810898-0-4/ID14278475.html?jumpId=973296">bol.de</a><br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://www.lob.de">lob.de</a> (Lehmanns)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="http://buchhandel.bvdep.com/TitelSuche.asp?Func=Detail&Caller=vlbPublic&SearchId=3104458&HierSrcId=&SerieSrcId=&DirectSearchId=&CurrentPage=0&DetailIndex=0&SrcId=0-2890156&CanBeSubmitted=true&debug=&stichwort=cybop&autor=&preis_von=&preis_bis=&schlagwort=&jahr_von=&jahr_bis=&reihentitel=&medientyp=&verlag=&isbn=&titel=">buchhandel.de</a> (Fachhaendler)<br>
-                <img src="../../mark_on_black.png" alt="-" width="8" height="8" border="0"/>
-                <a href="mailto:info@tuxtax.de">info@tuxtax.de</a> (per Nachnahme, in Deutschland)<br>
+                <div id="navigation">
+                    <h1>Order Book now at either:</h1>
+                    <a href="http://www.amazon.de/Cybernetics-Oriented-Programming-Christian-Heller/dp/3981089804/sr=8-1/qid=1169666060/ref=sr_1_1/302-7558907-0519230?ie=UTF8&s=books">amazon.de (international orders)</a>
+                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/en/currency/USD/buchnum/133558906/rk/books/rsk/hitlist">jpc.de (English, USD Orders)</a>
+                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/en/currency/GBP/buchnum/133558906/rk/books/rsk/hitlist">jpc.de (English, UK GBP Orders)</a>
+                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/de/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de (Deutsch, EUR)</a>
+                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/fr/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de (en Francais, EUR)</a>
+                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/nl/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de (Nederlands, EUR)</a>
+                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/es/currency/EUR/buchnum/133558906/rk/books/rsk/hitlist">jpc.de (Espanol, EUR)</a>
+                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/pl/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de (Polski, EUR)</a>
+                    <a href="http://kulturkaufhaus.shop-asp.de/shop/action/productDetails?aUrl=90008115&artiId=6530512">kulturkaufhaus.de (Dussmann)</a>
+                    <a href="http://www.libri.de/shop/action/productDetails/6530512/christian_heller_cybernetics_oriented_programming_cybop_3981089804.html">libri.de</a>
+                    <a href="http://www.buch.de/shop/home/suchartikel/cybernetics_oriented_programming_cybop/christian_heller/ISBN3-9810898-0-4/ID14278475.html?jumpId=988428">buch.de</a>
+                    <a href="http://www.bol.de/shop/bde_homestartseite/suchartikel/cybernetics_oriented_programming_cybop/christian_heller/ISBN3-9810898-0-4/ID14278475.html?jumpId=973296">bol.de</a>
+                    <a href="http://www.lob.de">lob.de (Lehmanns)</a>
+                    <a href="http://buchhandel.bvdep.com/TitelSuche.asp?Func=Detail&Caller=vlbPublic&SearchId=3104458&HierSrcId=&SerieSrcId=&DirectSearchId=&CurrentPage=0&DetailIndex=0&SrcId=0-2890156&CanBeSubmitted=true&debug=&stichwort=cybop&autor=&preis_von=&preis_bis=&schlagwort=&jahr_von=&jahr_bis=&reihentitel=&medientyp=&verlag=&isbn=&titel=">buchhandel.de (Fachhaendler)</a>
+                    <a href="mailto:info@tuxtax.de">info@tuxtax.de (per Nachnahme, in Deutschland)</a>
+                </div>
             </td>
         </tr>
         </table>
