@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_detector.c,v $ $Revision: 1.1 $ $Date: 2008-10-25 23:20:10 $ $Author: christian $
+ * @version $RCSfile: xml_detector.c,v $ $Revision: 1.2 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,7 +38,7 @@
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_tag_end(void* p0, void* p1, void* p2) {
+void detect_xml_tag_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -95,7 +95,7 @@ void decode_xml_detect_tag_end(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_declaration_begin(void* p0, void* p1, void* p2) {
+void detect_xml_declaration_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -152,7 +152,7 @@ void decode_xml_detect_declaration_begin(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_declaration_end(void* p0, void* p1, void* p2) {
+void detect_xml_declaration_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -209,7 +209,7 @@ void decode_xml_detect_declaration_end(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_definition_begin(void* p0, void* p1, void* p2) {
+void detect_xml_definition_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -266,7 +266,7 @@ void decode_xml_detect_definition_begin(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_comment_begin(void* p0, void* p1, void* p2) {
+void detect_xml_comment_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -323,7 +323,7 @@ void decode_xml_detect_comment_begin(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_comment_end(void* p0, void* p1, void* p2) {
+void detect_xml_comment_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -380,7 +380,7 @@ void decode_xml_detect_comment_end(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_start_tag_begin(void* p0, void* p1, void* p2) {
+void detect_xml_start_tag_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -396,17 +396,32 @@ void decode_xml_detect_start_tag_begin(void* p0, void* p1, void* p2) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml start tag begin.");
 
+    fwprintf(stderr, L"TEST detect xml start tag begin rem: %i\n", *rem);
+    fwprintf(stderr, L"TEST detect xml start tag begin START_TAG_BEGIN_XML_NAME_COUNT: %i\n", *START_TAG_BEGIN_XML_NAME_COUNT);
+
                 if (*rem >= *START_TAG_BEGIN_XML_NAME_COUNT) {
+
+    fwprintf(stderr, L"TEST detect xml start tag begin pre r: %i\n", *r);
 
                     compare_arrays(*pos, (void*) START_TAG_BEGIN_XML_NAME_COUNT, (void*) START_TAG_BEGIN_XML_NAME, (void*) START_TAG_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
+    fwprintf(stderr, L"TEST detect xml start tag begin post r: %i\n", *r);
+
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stderr, L"TEST detect xml start tag begin pre pos: %i\n", *pos);
 
                         // Increment current position.
                         *pos = *pos + (*START_TAG_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
 
+    fwprintf(stderr, L"TEST detect xml start tag begin post pos: %i\n", *pos);
+
+    fwprintf(stderr, L"TEST detect xml start tag begin pre rem: %i\n", *rem);
+
                         // Decrement remaining count.
                         *rem = *rem - *START_TAG_BEGIN_XML_NAME_COUNT;
+
+    fwprintf(stderr, L"TEST detect xml start tag begin post rem: %i\n", *rem);
                     }
 
                 } else {
@@ -437,7 +452,7 @@ void decode_xml_detect_start_tag_begin(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_end_tag_begin(void* p0, void* p1, void* p2) {
+void detect_xml_end_tag_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -494,7 +509,7 @@ void decode_xml_detect_end_tag_begin(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_empty_tag_end(void* p0, void* p1, void* p2) {
+void detect_xml_empty_tag_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -551,7 +566,7 @@ void decode_xml_detect_empty_tag_end(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_tag_name_end(void* p0, void* p1, void* p2) {
+void detect_xml_tag_name_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -608,7 +623,7 @@ void decode_xml_detect_tag_name_end(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_attribute_name_end(void* p0, void* p1, void* p2) {
+void detect_xml_attribute_name_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -665,7 +680,7 @@ void decode_xml_detect_attribute_name_end(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_detect_attribute_value_end(void* p0, void* p1, void* p2) {
+void detect_xml_attribute_value_end(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 

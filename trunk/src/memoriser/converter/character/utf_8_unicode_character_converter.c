@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.6 $ $Date: 2008-09-04 20:31:32 $ $Author: christian $
+ * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.7 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -85,44 +85,53 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
 
         size_t* sc = (size_t*) p4;
 
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-            size_t* ds = (size_t*) p2;
+            char* s = (char*) p3;
 
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+            if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-                int* dc = (int*) p1;
+                size_t* ds = (size_t*) p2;
 
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+                if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                    wchar_t** d = (wchar_t**) p0;
+                    int* dc = (int*) p1;
 
-                    if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode UTF-8 Unicode character vector.");
+                        wchar_t** d = (wchar_t**) p0;
 
-                        // The new destination wide character vector size.
-                        //
-                        // CAUTION! The "worst case" is assumed, i.e. that each source character
-                        // represents an ascii character encoded by utf-8 with ONE single byte.
-                        // Therefore, the destination size is adjusted accordingly.
-                        // In case not all source characters are ascii characters -- even better,
-                        // since then more than just one source character were used for encoding,
-                        // and the destination wide character array will have LESS entries (count)
-                        // than the destination size that was set before.
-                        // In this case, the destination size will be too big, but can be reduced
-                        // to the actual destination count below, if so wanted.
-                        *ds = *dc + (*sc * *NUMBER_1_INTEGER_MEMORY_MODEL);
+                        if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        // Reallocate destination wide character vector.
-                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode UTF-8 Unicode character vector.");
 
-                        if (*dc <= (*ds - (*sc * *NUMBER_1_INTEGER_MEMORY_MODEL))) {
+        fwprintf(stderr, L"TEST decode utf-8 sc: %i\n", *sc);
+
+        fwprintf(stderr, L"TEST decode utf-8 ds: %i\n", *ds);
+        fwprintf(stderr, L"TEST decode utf-8 dc: %i\n", *dc);
+        fwprintf(stderr, L"TEST decode utf-8 d: %ls\n", (wchar_t*) *d);
+
+                            // The new destination wide character vector size.
+                            //
+                            // CAUTION! The "worst case" is assumed, i.e. that each source character
+                            // represents an ascii character encoded by utf-8 with ONE single byte.
+                            // Therefore, the destination size is adjusted accordingly.
+                            // In case not all source characters are ascii characters -- even better,
+                            // since then more than just one source character were used for encoding,
+                            // and the destination wide character array will have LESS entries (count)
+                            // than the destination size that was set before.
+                            // In this case, the destination size will be too big, but can be reduced
+                            // to the actual destination count below, if so wanted.
+                            *ds = *dc + (*sc * *NUMBER_1_INTEGER_MEMORY_MODEL);
+
+        fwprintf(stderr, L"TEST decode utf-8 new ds: %i\n", *ds);
+
+                            // Reallocate destination wide character vector.
+                            reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                             // The state of the conversion.
                             //
-                            // In the introduction of this chapter it was said that
-                            // certain character sets use a stateful encoding.
+                            // Certain character sets use a stateful encoding.
                             // That is, the encoded values depend in some way
                             // on the previous bytes in the text.
                             //
@@ -146,12 +155,18 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                             // Converts the multibyte character string into a wide character string.
                             //
                             // Returns the number of wide characters converted.
-                            int n = mbsnrtowcs(*d, (void*) &p3, *sc, *ds, st);
+                            int n = mbsnrtowcs(*d, &s, *sc, *ds, &st);
+
+        fwprintf(stderr, L"TEST decode utf-8 n: %i\n", n);
+
+        fwprintf(stderr, L"TEST decode utf-8 converted d: %ls\n", (wchar_t*) *d);
 
                             if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                 // Increment destination count by the number of wide characters converted.
                                 *dc = *dc + n;
+
+        fwprintf(stderr, L"TEST decode utf-8 final dc: %i\n", *dc);
 
                             } else {
 
@@ -160,27 +175,27 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count exceeds the size.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count is negative.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count is negative.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination size is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The source is null.");
         }
 
     } else {
@@ -234,50 +249,42 @@ void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                     // Reallocate destination character vector.
                     reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    if (*dc <= (*ds - (*sc * *NUMBER_4_INTEGER_MEMORY_MODEL))) {
+                    // The state of the conversion.
+                    //
+                    // Certain character sets use a stateful encoding.
+                    // That is, the encoded values depend in some way
+                    // on the previous bytes in the text.
+                    //
+                    // Since the conversion functions allow converting a text
+                    // in more than one step, there must be a way to pass this
+                    // information from one call of the functions to another.
+                    //
+                    // A variable of type mbstate_t can contain all the
+                    // information about the shift state needed from one call
+                    // to a conversion function to another.
+                    mbstate_t st;
 
-                        // The state of the conversion.
-                        //
-                        // In the introduction of this chapter it was said that
-                        // certain character sets use a stateful encoding.
-                        // That is, the encoded values depend in some way
-                        // on the previous bytes in the text.
-                        //
-                        // Since the conversion functions allow converting a text
-                        // in more than one step, there must be a way to pass this
-                        // information from one call of the functions to another.
-                        //
-                        // A variable of type mbstate_t can contain all the
-                        // information about the shift state needed from one call
-                        // to a conversion function to another.
-                        mbstate_t st;
+                    // Clear the whole conversion state variable.
+                    //
+                    // There is no specific function or initializer to put the
+                    // state object in any specific state. The rules are that
+                    // the object should always represent the initial state
+                    // before the first use and this is achieved here.
+                    memset((void*) &st, '\0', sizeof(st));
 
-                        // Clear the whole conversion state variable.
-                        //
-                        // There is no specific function or initializer to put the
-                        // state object in any specific state. The rules are that
-                        // the object should always represent the initial state
-                        // before the first use and this is achieved here.
-                        memset((void*) &st, '\0', sizeof(st));
+                    // Converts the wide character string into a multibyte character string.
+                    //
+                    // Returns the number of multibyte characters converted.
+                    int n = wcsnrtombs(*d, (void*) &p3, *sc, *ds, &st);
 
-                        // Converts the wide character string into a multibyte character string.
-                        //
-                        // Returns the number of multibyte characters converted.
-                        int n = wcsnrtombs(*d, (void*) &p3, *sc, *ds, st);
+                    if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                            // Increment destination count by the number of multibyte characters converted.
-                            *dc = *dc + n;
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The conversion failed, possibly because one of the wide characters in the input string has no valid multibyte character equivalent.");
-                        }
+                        // Increment destination count by the number of multibyte characters converted.
+                        *dc = *dc + n;
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The destination count exceeds the size.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The conversion failed, possibly because one of the wide characters in the input string has no valid multibyte character equivalent.");
                     }
 
                 } else {

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_selector.c,v $ $Revision: 1.1 $ $Date: 2008-10-25 23:20:10 $ $Author: christian $
+ * @version $RCSfile: xml_selector.c,v $ $Revision: 1.2 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -37,14 +37,14 @@
 // Forward declarations.
 //
 
-void decode_xml_process_declaration(void* p0, void* p1, void* p2, void* p3, void* p4);
-void decode_xml_process_definition(void* p0, void* p1, void* p2, void* p3, void* p4);
-void decode_xml_process_comment(void* p0, void* p1);
-void decode_xml_process_element_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
-void decode_xml_process_end_tag(void* p0, void* p1);
-void decode_xml_process_attribute_name(void* p0, void* p1, void* p2, void* p3);
-void decode_xml_process_attribute_value(void* p0, void* p1, void* p2, void* p3);
-void decode_xml_process_element(void* p0, void* p1, void* p2, void* p3, void* p4);
+void process_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4);
+void process_xml_definition(void* p0, void* p1, void* p2, void* p3, void* p4);
+void process_xml_comment(void* p0, void* p1);
+void process_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
+void process_xml_end_tag(void* p0, void* p1);
+void process_xml_attribute_name(void* p0, void* p1, void* p2, void* p3);
+void process_xml_attribute_value(void* p0, void* p1, void* p2, void* p3);
+void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4);
 
 /**
  * Selects the xml declaration.
@@ -56,7 +56,7 @@ void decode_xml_process_element(void* p0, void* p1, void* p2, void* p3, void* p4
  * @param p4 the current position (Hand over as reference!)
  * @param p5 the remaining count
  */
-void decode_xml_select_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void select_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -69,7 +69,7 @@ void decode_xml_select_declaration(void* p0, void* p1, void* p2, void* p3, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            decode_xml_detect_declaration_end((void*) &r, p4, p5);
+            detect_xml_declaration_end((void*) &r, p4, p5);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -91,7 +91,7 @@ void decode_xml_select_declaration(void* p0, void* p1, void* p2, void* p3, void*
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_select_definition(void* p0, void* p1, void* p2) {
+void select_xml_definition(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -151,7 +151,7 @@ void decode_xml_select_definition(void* p0, void* p1, void* p2) {
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_select_comment(void* p0, void* p1, void* p2) {
+void select_xml_comment(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -217,7 +217,7 @@ void decode_xml_select_comment(void* p0, void* p1, void* p2) {
  * @param p7 the current position (Hand over as reference!)
  * @param p8 the remaining count
  */
-void decode_xml_select_element_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p8 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -268,11 +268,11 @@ void decode_xml_select_element_content(void* p0, void* p1, void* p2, void* p3, v
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_end_tag_begin((void*) &r, p7, p8);
+                    detect_xml_end_tag_begin((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        decode_xml_process_end_tag(p7, p8);
+                        process_xml_end_tag(p7, p8);
 
                         // Set break flag, because this xml element's end tag
                         // has been reached and its content fully been processed.
@@ -282,34 +282,34 @@ void decode_xml_select_element_content(void* p0, void* p1, void* p2, void* p3, v
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_declaration_begin((void*) &r, p7, p8);
+                    detect_xml_declaration_begin((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // The data contained in an XML declaration are added to the destination details.
-                        decode_xml_process_declaration(p3, p4, p5, p7, p8);
+                        process_xml_declaration(p3, p4, p5, p7, p8);
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_definition_begin((void*) &r, p7, p8);
+                    detect_xml_definition_begin((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // The data contained in an XML definition are added to the destination details.
-                        decode_xml_process_definition(p3, p4, p5, p7, p8);
+                        process_xml_definition(p3, p4, p5, p7, p8);
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_comment_begin((void*) &r, p7, p8);
+                    detect_xml_comment_begin((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // The data contained in an XML comment are just ignored.
-                        decode_xml_process_comment(p6, p7);
+                        process_xml_comment(p6, p7);
                     }
                 }
 
@@ -317,14 +317,14 @@ void decode_xml_select_element_content(void* p0, void* p1, void* p2, void* p3, v
 
     fwprintf(stderr, L"TEST select element content 1 rem: %i\n", *rem);
 
-                    decode_xml_detect_start_tag_begin((void*) &r, p7, p8);
+                    detect_xml_start_tag_begin((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stderr, L"TEST select element content 2 rem: %i\n", *rem);
 
                         // The data contained in an XML element are added to the destination model.
-                        decode_xml_process_element(p0, p1, p2, p7, p8);
+                        process_xml_element(p0, p1, p2, p7, p8);
                     }
                 }
 
@@ -363,7 +363,7 @@ void decode_xml_select_element_content(void* p0, void* p1, void* p2, void* p3, v
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void decode_xml_select_end_tag(void* p0, void* p1, void* p2) {
+void select_xml_end_tag(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -400,7 +400,7 @@ void decode_xml_select_end_tag(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_tag_end((void*) &r, p1, p2);
+                    detect_xml_tag_end((void*) &r, p1, p2);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -452,7 +452,7 @@ void decode_xml_select_end_tag(void* p0, void* p1, void* p2) {
  * @param p2 the current position (Hand over as reference!)
  * @param p3 the remaining count
  */
-void decode_xml_select_tag_name(void* p0, void* p1, void* p2, void* p3) {
+void select_xml_tag_name(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -493,7 +493,7 @@ void decode_xml_select_tag_name(void* p0, void* p1, void* p2, void* p3) {
 
                     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        decode_xml_detect_tag_name_end((void*) &r, p2, p3);
+                        detect_xml_tag_name_end((void*) &r, p2, p3);
 
                         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -505,7 +505,7 @@ void decode_xml_select_tag_name(void* p0, void* p1, void* p2, void* p3) {
 
                     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        decode_xml_detect_empty_tag_end((void*) &r, p2, p3);
+                        detect_xml_empty_tag_end((void*) &r, p2, p3);
 
                         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -517,7 +517,7 @@ void decode_xml_select_tag_name(void* p0, void* p1, void* p2, void* p3) {
 
                     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        decode_xml_detect_tag_end((void*) &r, p2, p3);
+                        detect_xml_tag_end((void*) &r, p2, p3);
 
                         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -568,7 +568,7 @@ void decode_xml_select_tag_name(void* p0, void* p1, void* p2, void* p3) {
  * @param p2 the current position (Hand over as reference!)
  * @param p3 the remaining count
  */
-void decode_xml_select_attribute_name(void* p0, void* p1, void* p2, void* p3) {
+void select_xml_attribute_name(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -593,7 +593,7 @@ void decode_xml_select_attribute_name(void* p0, void* p1, void* p2, void* p3) {
 
                     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        decode_xml_detect_attribute_name_end((void*) &r, p2, p3);
+                        detect_xml_attribute_name_end((void*) &r, p2, p3);
 
                         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -653,7 +653,7 @@ void decode_xml_select_attribute_name(void* p0, void* p1, void* p2, void* p3) {
  * @param p2 the current position (Hand over as reference!)
  * @param p3 the remaining count
  */
-void decode_xml_select_attribute_value(void* p0, void* p1, void* p2, void* p3) {
+void select_xml_attribute_value(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -678,7 +678,7 @@ void decode_xml_select_attribute_value(void* p0, void* p1, void* p2, void* p3) {
 
                     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        decode_xml_detect_attribute_value_end((void*) &r, p2, p3);
+                        detect_xml_attribute_value_end((void*) &r, p2, p3);
 
                         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -743,7 +743,7 @@ void decode_xml_select_attribute_value(void* p0, void* p1, void* p2, void* p3) {
  * @param p7 the current position (Hand over as reference!)
  * @param p8 the remaining count
  */
-void decode_xml_select_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void select_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p8 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -766,8 +766,8 @@ void decode_xml_select_element(void* p0, void* p1, void* p2, void* p3, void* p4,
                 void* av = *NULL_POINTER_MEMORY_MODEL;
                 int avc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                decode_xml_process_attribute_name((void*) &an, (void*) &anc, p7, p8);
-                decode_xml_process_attribute_value((void*) &av, (void*) &avc, p7, p8);
+                process_xml_attribute_name((void*) &an, (void*) &anc, p7, p8);
+                process_xml_attribute_value((void*) &av, (void*) &avc, p7, p8);
 
                 // The destination attribute name.
                 void* n = *NULL_POINTER_MEMORY_MODEL;
@@ -832,7 +832,7 @@ void decode_xml_select_element(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_empty_tag_end((void*) &r, p7, p8);
+                    detect_xml_empty_tag_end((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -845,7 +845,7 @@ void decode_xml_select_element(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_xml_detect_tag_end((void*) &r, p7, p8);
+                    detect_xml_tag_end((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -855,7 +855,7 @@ void decode_xml_select_element(void* p0, void* p1, void* p2, void* p3, void* p4,
                         // were already changed in the called function, to be processed further
                         // in other functions.
 
-                        decode_xml_process_element_content(p0, p1, p2, p3, p4, p5, p7, p8);
+                        process_xml_element_content(p0, p1, p2, p3, p4, p5, p7, p8);
                     }
                 }
 

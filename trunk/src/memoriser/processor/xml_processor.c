@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_processor.c,v $ $Revision: 1.1 $ $Date: 2008-10-25 23:20:10 $ $Author: christian $
+ * @version $RCSfile: xml_processor.c,v $ $Revision: 1.2 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  * @param p3 the current position (Hand over as reference!)
  * @param p4 the remaining count
  */
-void decode_xml_process_declaration(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void process_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -60,7 +60,7 @@ void decode_xml_process_declaration(void* p0, void* p1, void* p2, void* p3, void
                 break;
             }
 
-            decode_xml_select_declaration(p0, p1, p2, (void*) &b, p3, p4);
+            select_xml_declaration(p0, p1, p2, (void*) &b, p3, p4);
         }
 
     } else {
@@ -78,7 +78,7 @@ void decode_xml_process_declaration(void* p0, void* p1, void* p2, void* p3, void
  * @param p3 the current position (Hand over as reference!)
  * @param p4 the remaining bytes count
  */
-void decode_xml_process_definition(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void process_xml_definition(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -96,7 +96,7 @@ void decode_xml_process_definition(void* p0, void* p1, void* p2, void* p3, void*
                 break;
             }
 
-            decode_xml_select_definition((void*) &b, p3, p4);
+            select_xml_definition((void*) &b, p3, p4);
         }
 
     } else {
@@ -111,7 +111,7 @@ void decode_xml_process_definition(void* p0, void* p1, void* p2, void* p3, void*
  * @param p0 the current position (Hand over as reference!)
  * @param p1 the remaining bytes count
  */
-void decode_xml_process_comment(void* p0, void* p1) {
+void process_xml_comment(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -129,7 +129,7 @@ void decode_xml_process_comment(void* p0, void* p1) {
                 break;
             }
 
-            decode_xml_select_comment((void*) &b, p0, p1);
+            select_xml_comment((void*) &b, p0, p1);
         }
 
     } else {
@@ -150,7 +150,7 @@ void decode_xml_process_comment(void* p0, void* p1) {
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
  */
-void decode_xml_process_element_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void process_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -177,7 +177,7 @@ void decode_xml_process_element_content(void* p0, void* p1, void* p2, void* p3, 
                 break;
             }
 
-            decode_xml_select_element_content(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+            select_xml_element_content(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
         }
 
     } else {
@@ -192,7 +192,7 @@ void decode_xml_process_element_content(void* p0, void* p1, void* p2, void* p3, 
  * @param p0 the current position (Hand over as reference!)
  * @param p1 the remaining count
  */
-void decode_xml_process_end_tag(void* p0, void* p1) {
+void process_xml_end_tag(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -216,7 +216,7 @@ void decode_xml_process_end_tag(void* p0, void* p1) {
                     break;
                 }
 
-                decode_xml_select_end_tag((void*) &b, p0, p1);
+                select_xml_end_tag((void*) &b, p0, p1);
             }
 
         } else {
@@ -239,7 +239,7 @@ void decode_xml_process_end_tag(void* p0, void* p1) {
  * @param p3 the current position (Hand over as reference!)
  * @param p4 the remaining count
  */
-void decode_xml_process_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -294,7 +294,7 @@ void decode_xml_process_tag_name(void* p0, void* p1, void* p2, void* p3, void* p
                     break;
                 }
 
-                decode_xml_select_tag_name((void*) &tnc, (void*) &b, p3, p4);
+                select_xml_tag_name((void*) &tnc, (void*) &b, p3, p4);
             }
 
             // Decode destination tag name name.
@@ -339,7 +339,7 @@ void decode_xml_process_tag_name(void* p0, void* p1, void* p2, void* p3, void* p
  * @param p2 the current position (Hand over as reference!)
  * @param p3 the remaining count
  */
-void decode_xml_process_attribute_name(void* p0, void* p1, void* p2, void* p3) {
+void process_xml_attribute_name(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -370,7 +370,7 @@ void decode_xml_process_attribute_name(void* p0, void* p1, void* p2, void* p3) {
                         break;
                     }
 
-                    decode_xml_select_attribute_name(p1, (void*) &b, p2, p3);
+                    select_xml_attribute_name(p1, (void*) &b, p2, p3);
                 }
 
             } else {
@@ -397,7 +397,7 @@ void decode_xml_process_attribute_name(void* p0, void* p1, void* p2, void* p3) {
  * @param p2 the current position (Hand over as reference!)
  * @param p3 the remaining count
  */
-void decode_xml_process_attribute_value(void* p0, void* p1, void* p2, void* p3) {
+void process_xml_attribute_value(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -428,7 +428,7 @@ void decode_xml_process_attribute_value(void* p0, void* p1, void* p2, void* p3) 
                         break;
                     }
 
-                    decode_xml_select_attribute_value(p1, (void*) &b, p2, p3);
+                    select_xml_attribute_value(p1, (void*) &b, p2, p3);
                 }
 
             } else {
@@ -456,7 +456,7 @@ void decode_xml_process_attribute_value(void* p0, void* p1, void* p2, void* p3) 
  * @param p3 the current position (Hand over as reference!)
  * @param p4 the remaining count
  */
-void decode_xml_process_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -508,7 +508,7 @@ void decode_xml_process_element(void* p0, void* p1, void* p2, void* p3, void* p4
             // depending on the source byte array.
 
             // Decode tag name.
-            decode_xml_process_tag_name((void*) &d, (void*) &dc, (void*) &ds, p3, p4);
+            process_xml_tag_name((void*) &d, (void*) &dc, (void*) &ds, p3, p4);
 
             // The tag name end found may be one of: " ", "/>", ">".
             // The position now points to the next character AFTER the tag name end,
@@ -532,7 +532,7 @@ void decode_xml_process_element(void* p0, void* p1, void* p2, void* p3, void* p4
                 }
 
                 // Process the element's attributes.
-                decode_xml_select_element((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, (void*) &b, p3, p4);
+                select_xml_element((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, (void*) &b, p3, p4);
             }
 
             //?? Extend compound size etc. before?

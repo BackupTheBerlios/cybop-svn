@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_converter.c,v $ $Revision: 1.28 $ $Date: 2008-10-25 23:20:09 $ $Author: christian $
+ * @version $RCSfile: xml_converter.c,v $ $Revision: 1.29 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,7 +46,9 @@ void decode_xml(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode xml.");
 
-    decode_xml_process_element_content(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+    fwprintf(stderr, L"TEST decode xml byte array: %ls\n", (wchar_t*) p6);
+
+    process_xml_element_content(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
 }
 
 /**

@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.91 $ $Date: 2008-10-25 23:20:03 $ $Author: christian $
+# @version $Revision: 1.92 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-10-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Search bug that utf-8 decoding does not work for a CYBOL/ XML file
+            (it does work if handing over an internal ASCII character sequence; not found yet)
 
 2008-10-25  Christian Heller  <christian.heller@tuxtax.de>
         * Debug file "xml_converter.c" and related files

@@ -1,4 +1,5 @@
 <model>
+    TEST 為 TEST - DELETE LATER!
     <part name="startup" channel="inline" abstraction="operation/plain" model="communicate">
         <property name="type" channel="inline" abstraction="text/plain" model="sending"/>
         <property name="channel" channel="inline" abstraction="text/plain" model="cyboi"/>
@@ -34,6 +35,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.13 $ $Date: 2008-09-17 14:44:22 $ $Author: christian $
+    @version $Revision: 1.14 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
