@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.11 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
+ * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.12 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -117,7 +117,7 @@ void communicate_sending_socket_get_socket_client_mode(void* p0, void* p1, void*
                 // It is a global variable/ function and other operations
                 // may have set some value that is not wanted here.
                 //
-                // CAUTION! Initialise the error number BEFORE calling the procedure
+                // CAUTION! Initialise the error number BEFORE calling the function
                 // that might cause an error.
                 errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
 

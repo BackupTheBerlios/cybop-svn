@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_processor.c,v $ $Revision: 1.2 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
+ * @version $RCSfile: xml_processor.c,v $ $Revision: 1.3 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -487,10 +487,14 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
             void* dc = *NULL_POINTER_MEMORY_MODEL;
             void* ds = *NULL_POINTER_MEMORY_MODEL;
 
+    fwprintf(stderr, L"TEST process element 0: %i\n", *rem);
+
             // Allocate destination name.
             allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST process element 1: %i\n", *rem);
 
             // Decode destination part name.
             // CAUTION! The pre-defined constant "part" is used as name here!
@@ -498,17 +502,23 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // add a number as suffix, to make the name unique.
             decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PART_XML_CYBOL_NAME, (void*) PART_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
+    fwprintf(stderr, L"TEST process element 2: %i\n", *rem);
+
             // Decode destination part abstraction.
             // CAUTION! All xml elements (parts) are of the abstraction "compound",
             // as internally used by the function "allocate_part" above.
             // If an xml element is empty, the compound will just not contain any parts.
             decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
+    fwprintf(stderr, L"TEST process element 3: %i\n", *rem);
+
             // The destination part model and details are decoded further below,
             // depending on the source byte array.
 
             // Decode tag name.
-            process_xml_tag_name((void*) &d, (void*) &dc, (void*) &ds, p3, p4);
+            process_xml_tag_name((void*) &d, (void*) dc, (void*) ds, p3, p4);
+
+    fwprintf(stderr, L"TEST process element 4: %i\n", *rem);
 
             // The tag name end found may be one of: " ", "/>", ">".
             // The position now points to the next character AFTER the tag name end,
@@ -526,14 +536,18 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     break;
                 }
 
+    fwprintf(stderr, L"TEST process element 5: %i\n", *rem);
+
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     break;
                 }
 
                 // Process the element's attributes.
-                select_xml_element((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, (void*) &b, p3, p4);
+                select_xml_element((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds, (void*) &b, p3, p4);
             }
+
+    fwprintf(stderr, L"TEST process element 6: %i\n", *rem);
 
             //?? Extend compound size etc. before?
 
@@ -542,6 +556,8 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Storing many parts with identical tag name is not a problem,
             // since the tag name of a part is added to its details compound.
             add_compound_element_by_name(p0, p1, p2, (void*) &n, (void*) &nc, (void*) &ns, a, ac, as, m, mc, ms, d, dc, ds);
+
+    fwprintf(stderr, L"TEST process element 7: %i\n", *rem);
 
         } else {
 

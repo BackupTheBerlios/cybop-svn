@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.7 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
+ * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.8 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -83,7 +83,7 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        size_t* sc = (size_t*) p4;
+        int* sc = (int*) p4;
 
         if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -91,7 +91,7 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
 
             if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-                size_t* ds = (size_t*) p2;
+                int* ds = (int*) p2;
 
                 if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -105,12 +105,6 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
 
                             log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode UTF-8 Unicode character vector.");
 
-        fwprintf(stderr, L"TEST decode utf-8 sc: %i\n", *sc);
-
-        fwprintf(stderr, L"TEST decode utf-8 ds: %i\n", *ds);
-        fwprintf(stderr, L"TEST decode utf-8 dc: %i\n", *dc);
-        fwprintf(stderr, L"TEST decode utf-8 d: %ls\n", (wchar_t*) *d);
-
                             // The new destination wide character vector size.
                             //
                             // CAUTION! The "worst case" is assumed, i.e. that each source character
@@ -123,8 +117,6 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                             // In this case, the destination size will be too big, but can be reduced
                             // to the actual destination count below, if so wanted.
                             *ds = *dc + (*sc * *NUMBER_1_INTEGER_MEMORY_MODEL);
-
-        fwprintf(stderr, L"TEST decode utf-8 new ds: %i\n", *ds);
 
                             // Reallocate destination wide character vector.
                             reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -142,7 +134,7 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                             // A variable of type mbstate_t can contain all the
                             // information about the shift state needed from one call
                             // to a conversion function to another.
-                            mbstate_t st;
+//??                            mbstate_t st;
 
                             // Clear the whole conversion state variable.
                             //
@@ -150,27 +142,39 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                             // state object in any specific state. The rules are that
                             // the object should always represent the initial state
                             // before the first use and this is achieved here.
-                            memset((void*) &st, '\0', sizeof(st));
+//??                            memset((void*) &st, '\0', sizeof(st));
+
+                            // Initialise error number.
+                            // It is a global variable/ function and other operations
+                            // may have set some value that is not wanted here.
+                            //
+                            // CAUTION! Initialise the error number BEFORE calling the function
+                            // that might cause an error.
+                            errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                             // Converts the multibyte character string into a wide character string.
                             //
                             // Returns the number of wide characters converted.
-                            int n = mbsnrtowcs(*d, &s, *sc, *ds, &st);
-
-        fwprintf(stderr, L"TEST decode utf-8 n: %i\n", n);
-
-        fwprintf(stderr, L"TEST decode utf-8 converted d: %ls\n", (wchar_t*) *d);
+//??                            int n = mbsnrtowcs(*d, &s, *sc, *ds, &st);
+                            int n = mbsnrtowcs(*d, &s, *sc, *ds, *NULL_POINTER_MEMORY_MODEL);
 
                             if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                 // Increment destination count by the number of wide characters converted.
                                 *dc = *dc + n;
 
-        fwprintf(stderr, L"TEST decode utf-8 final dc: %i\n", *dc);
-
                             } else {
 
-                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The conversion failed, possibly due to an invalid multibyte sequence.");
+                                if (errno == EILSEQ) {
+
+        fwprintf(stderr, L"TEST ERROR EILSEQ errno: %i\n", errno);
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The input string contains an invalid multibyte sequence.");
+
+                                } else {
+
+        fwprintf(stderr, L"TEST ERROR UNKNOWN errno: %i\n", errno);
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. An unknown error occured.");
+                                }
                             }
 
                         } else {
@@ -271,6 +275,14 @@ void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                     // the object should always represent the initial state
                     // before the first use and this is achieved here.
                     memset((void*) &st, '\0', sizeof(st));
+
+                    // Initialise error number.
+                    // It is a global variable/ function and other operations
+                    // may have set some value that is not wanted here.
+                    //
+                    // CAUTION! Initialise the error number BEFORE calling the function
+                    // that might cause an error.
+                    errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Converts the wide character string into a multibyte character string.
                     //

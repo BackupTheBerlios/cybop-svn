@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: tester.c,v $ $Revision: 1.27 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: tester.c,v $ $Revision: 1.28 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1291,6 +1291,53 @@ void test_float_constants() {
     fwprintf(stdout, L"Test reciprocal of the square root of 2: %f\n", *RECIPROCAL_OF_THE_SQUARE_ROOT_OF_2_DOUBLE_MEMORY_MODEL);
 }
 
+/**
+ * Tests the utf-8 decoding.
+ */
+void test_decode_utf8() {
+
+    log_write_terminated_message((void*) stdout, L"Test utf-8 decoding:\n");
+
+    wchar_t* f = L"exit/run.cybol";
+    int fc = 14;
+
+    // The read model.
+    void* rm = *NULL_POINTER_MEMORY_MODEL;
+    int rmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate read model.
+    allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Read persistent byte stream over channel.
+    read_data((void*) &rm, (void*) &rmc, (void*) &rms, (void*) f, (void*) &fc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+
+    fwprintf(stderr, L"TEST rms: %i\n", rms);
+    fwprintf(stderr, L"TEST rmc: %i\n", rmc);
+    fwprintf(stderr, L"TEST rm: %s\n", (wchar_t*) rm);
+
+    // The wide character model.
+    void* wm = *NULL_POINTER_MEMORY_MODEL;
+    int wmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int wms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate wide character model.
+    allocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, rm, (void*) &rmc);
+    //?? TEST only! DELETE LATER!
+//??    decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, (void*) ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST wm: %ls\n", (wchar_t*) wm);
+    fwprintf(stderr, L"TEST wmc: %i\n", wmc);
+
+    // Deallocate read model.
+    deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Deallocate wide character model.
+    deallocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+}
+
 //?? ========================================================================================
 
 /*??
@@ -1375,7 +1422,7 @@ void test() {
 //??    test_integer_array();
 //??    test_character_array_with_termination();
 //??    test_array_resizing();
-    test_wide_character_output();
+//??    test_wide_character_output();
 //??    test_wide_character_wprintf();
 //??    test_integer_to_wide_character_conversion();
 //??    test_ascii_character_wide_character_equality();
@@ -1393,6 +1440,7 @@ void test() {
 //??    test_encode_integer_vector();
 //??    test_encode_integer();
 //??    test_float_constants();
+    test_decode_utf8();
 }
 
 /* TEST_SOURCE */

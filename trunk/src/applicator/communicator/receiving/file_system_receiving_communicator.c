@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.11 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
+ * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.12 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,7 +72,7 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
 
     fwprintf(stderr, L"TEST receive file system rms: %i\n", rms);
     fwprintf(stderr, L"TEST receive file system rmc: %i\n", rmc);
-    fwprintf(stderr, L"TEST receive file system rm: %s\n", (char*) rm);
+//??    fwprintf(stderr, L"TEST receive file system rm: %s\n", (char*) rm);
 
     // The wide character model.
     void* wm = *NULL_POINTER_MEMORY_MODEL;
@@ -86,8 +86,8 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     //?? TEST only! DELETE LATER!
 //??    decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, (void*) ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST receive file system wm: %ls\n", (wchar_t*) wm);
     fwprintf(stderr, L"TEST receive file system wmc: %i\n", wmc);
+//??    fwprintf(stderr, L"TEST receive file system wm: %ls\n", (wchar_t*) wm);
 
     // Deallocate read model.
     deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
