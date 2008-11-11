@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.93 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
+# @version $Revision: 1.94 $ $Date: 2008-11-11 11:05:33 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-11-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug xml conversion
 
 2008-11-03  Christian Heller  <christian.heller@tuxtax.de>
         * Implement new test function "test_decode_utf8" in file "tester.c"

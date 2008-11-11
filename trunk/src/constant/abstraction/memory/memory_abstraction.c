@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.7 $ $Date: 2008-10-25 23:20:03 $ $Author: christian $
+ * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.8 $ $Date: 2008-11-11 11:05:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,9 +70,11 @@ static wchar_t* FRACTION_MEMORY_ABSTRACTION = FRACTION_MEMORY_ABSTRACTION_ARRAY;
 static int* FRACTION_MEMORY_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The integer memory abstraction. */
+/*??
 static wchar_t INTEGER_MEMORY_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'g', L'e', L'r'};
 static wchar_t* INTEGER_MEMORY_ABSTRACTION = INTEGER_MEMORY_ABSTRACTION_ARRAY;
 static int* INTEGER_MEMORY_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
+*/
 
 /** The integer_vector memory abstraction. */
 static wchar_t INTEGER_VECTOR_MEMORY_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'g', L'e', L'r', L'_', L'v', L'e', L'c', L't', L'o', L'r'};

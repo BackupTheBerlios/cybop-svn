@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_processor.c,v $ $Revision: 1.3 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
+ * @version $RCSfile: xml_processor.c,v $ $Revision: 1.4 $ $Date: 2008-11-11 11:05:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -268,10 +268,20 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
             void* dc = *NULL_POINTER_MEMORY_MODEL;
             void* ds = *NULL_POINTER_MEMORY_MODEL;
 
+    fwprintf(stderr, L"TEST process xml tag name 0: %i\n", *rem);
+    fwprintf(stderr, L"TEST process xml tag name 0 n: %i\n", n);
+    fwprintf(stderr, L"TEST process xml tag name 0 nc: %i\n", nc);
+    fwprintf(stderr, L"TEST process xml tag name 0 ns: %i\n", ns);
+
             // Allocate destination tag name.
             allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST process xml tag name 1: %i\n", *rem);
+    fwprintf(stderr, L"TEST process xml tag name 1 n: %ls\n", (wchar_t*) n);
+    fwprintf(stderr, L"TEST process xml tag name 1 nc: %i\n", *((int*) nc));
+    fwprintf(stderr, L"TEST process xml tag name 1 ns: %i\n", *((int*) ns));
 
             // The source tag name.
             void* tn = *pos;
@@ -281,6 +291,9 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stderr, L"TEST process xml tag name 2: %i\n", *rem);
+    fwprintf(stderr, L"TEST process xml tag name 2 tnc: %i\n", tnc);
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -297,11 +310,19 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 select_xml_tag_name((void*) &tnc, (void*) &b, p3, p4);
             }
 
+    fwprintf(stderr, L"TEST process xml tag name 3: %i\n", *rem);
+    fwprintf(stderr, L"TEST process xml tag name 3 tnc: %i\n", tnc);
+
             // Decode destination tag name name.
             // CAUTION! The pre-defined constant "tag" is used as name here!
             // The "add_compound_element_by_name" function below will automatically
             // add a number as suffix, to make the name unique.
             decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TAG_XML_CYBOL_NAME, (void*) TAG_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    fwprintf(stderr, L"TEST process xml tag name 4: %i\n", *rem);
+    fwprintf(stderr, L"TEST process xml tag name 4 n: %ls\n", (wchar_t*) n);
+    fwprintf(stderr, L"TEST process xml tag name 4 nc: %i\n", *((int*) nc));
+    fwprintf(stderr, L"TEST process xml tag name 4 ns: %i\n", *((int*) ns));
 
             // Decode destination tag name abstraction.
             // CAUTION! All xml element tag names are of the abstraction "wide_character",
@@ -315,10 +336,20 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             //?? Extend compound size etc. before?
 
+    fwprintf(stderr, L"TEST process xml tag name 5: %i\n", *rem);
+    fwprintf(stderr, L"TEST process xml tag name 5 n: %ls\n", (wchar_t*) n);
+    fwprintf(stderr, L"TEST process xml tag name 5 nc: %i\n", *((int*) nc));
+    fwprintf(stderr, L"TEST process xml tag name 5 ns: %i\n", *((int*) ns));
+
             // Add tag name to destination xml element (compound) details.
             // CAUTION! Hand over the tag name name as reference!
             // CAUTION! The pre-defined constant "tag" is used as name here!
             add_compound_element_by_name(p0, p1, p2, (void*) &n, (void*) &nc, (void*) &ns, a, ac, as, m, mc, ms, d, dc, ds);
+
+    fwprintf(stderr, L"TEST process xml tag name 6: %i\n", *rem);
+    fwprintf(stderr, L"TEST process xml tag name 6 n: %ls\n", (wchar_t*) n);
+    fwprintf(stderr, L"TEST process xml tag name 6 nc: %i\n", *((int*) nc));
+    fwprintf(stderr, L"TEST process xml tag name 6 ns: %i\n", *((int*) ns));
 
         } else {
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: model_allocator.c,v $ $Revision: 1.2 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
+ * @version $RCSfile: model_allocator.c,v $ $Revision: 1.3 $ $Date: 2008-11-11 11:05:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,47 +60,38 @@ void set_integer_vector_element(void* p0, void* p1, void* p2);
  */
 void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* ss = (int*) p3;
+        int** ds = (int**) p2;
 
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int** ds = (int**) p2;
+            int** dc = (int**) p1;
 
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate model.");
 
-                int** dc = (int**) p1;
+            allocate(p0, p3, p4, p5);
+            allocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate model.");
-
-                allocate(p0, p3, p4, p5);
-                allocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-                allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-
-                // The OLD solution was:
-                // **dc = *ss;
-                // **ds = *ss;
-                //
-                // This is just mentioned here, so that in case of troubles
-                // the new solution (call of function "set_integer_vector_element")
-                // can easier be checked.
-                set_integer_vector_element(*dc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p3);
-                set_integer_vector_element(*ds, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p3);
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The destination model count is null.");
-            }
+            // The OLD solution was:
+            // **dc = *((int*) p3);
+            // **ds = *((int*) p3);
+            //
+            // This is just mentioned here, so that in case of troubles
+            // the new solution (call of function "set_integer_vector_element")
+            // can easier be checked.
+            set_integer_vector_element(*dc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3);
+            set_integer_vector_element(*ds, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The destination model size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The destination model count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The source size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The destination model size is null.");
     }
 }
 

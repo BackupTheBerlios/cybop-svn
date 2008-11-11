@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.58 $ $Date: 2008-10-25 23:20:05 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.59 $ $Date: 2008-11-11 11:05:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -536,12 +536,12 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         // Similarly, all cybol files are expected to be encoded as utf-8.
         //
         // When decoding a value of abstraction "character" from cybol into cyboi,
-        // it is assumed to be a multibyte utf-8 encoded character string (CHARACTER_VECTOR_MEMORY_ABSTRACTION)
-        // and gets converted into a "wchar_t" (PLAIN_TEXT_CYBOL_ABSTRACTION) array internally.
+        // it is assumed to be a multibyte utf-8 encoded character string (char*)
+        // and gets converted into a wide character string (wchar_t*) internally.
         //
         // When encoding a value of abstraction "wide_character" from cyboi into cybol,
-        // it is assumed to be a "wchar_t" array of (PLAIN_TEXT_CYBOL_ABSTRACTION)
-        // and gets converted into a multibyte utf-8 encoded character string (CHARACTER_VECTOR_MEMORY_ABSTRACTION).
+        // it is assumed to be a wide character string (wchar_t*)
+        // and gets converted into a multibyte utf-8 encoded character string (char*).
         //
         // Therefore, the comparison here only considers "PLAIN_TEXT_CYBOL_ABSTRACTION",
         // but not "CHARACTER_VECTOR_MEMORY_ABSTRACTION".
