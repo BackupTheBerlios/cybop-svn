@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.53 $ $Date: 2008-11-11 11:05:34 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.54 $ $Date: 2008-11-12 22:16:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -795,10 +795,8 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
  * @param p15 the details size
  */
 void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
-    void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9,
-    void* p10, void* p11, void* p12,
-    void* p13, void* p14, void* p15) {
+    void* p4, void* p5, void* p6, void* p7, void* p8, void* p9,
+    void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -1062,8 +1060,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
         // Therefore, add compound element by name here.
 
         // CAUTION! Use compound count as index for adding new elements.
-        set_compound_element_by_index(p0, p1, p2, p1,
-            p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+        set_compound_element_by_index(p0, p1, p2, p1, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
     }
 }
 
@@ -1074,8 +1071,8 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
  * @param p1 the compound model count
  * @param p2 the compound model size
  * @param p3 the name (Hand over as reference!)
- * @param p4 the name count (Hand over as reference!)
- * @param p5 the name size (Hand over as reference!)
+ * @param p4 the name count
+ * @param p5 the name size
  * @param p6 the abstraction
  * @param p7 the abstraction count
  * @param p8 the abstraction size
@@ -1104,40 +1101,25 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 
                 log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Add compound element by name:");
 
-                // The multibyte name suffix.
-                void* ms = *NULL_POINTER_MEMORY_MODEL;
-                int msc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                int mss = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 // The name suffix.
                 void* s = *NULL_POINTER_MEMORY_MODEL;
                 int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST add compound element 0 sc: %i\n", sc);
+    fwprintf(stderr, L"TEST add compound element 0 p1 dc: %i\n", *((int*) p1));
 
-                // Allocate name suffix as multibyte character array.
-                allocate_array((void*) &ms, (void*) &mss, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 // Allocate name suffix as wide character array.
                 allocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"TEST add compound element 1 dc: %i\n", *((int*) p1));
     fwprintf(stderr, L"TEST add compound element 1 ss: %i\n", ss);
     fwprintf(stderr, L"TEST add compound element 1 sc: %i\n", sc);
     fwprintf(stderr, L"TEST add compound element 1 s: %ls\n", (wchar_t*) s);
 
                 // Use compound count as index to create the element name suffix,
                 // because the element is added at the end of the compound container.
-                // The suffix integer is first encoded into a multibyte character array,
-                // and afterwards decoded into a wide character array.
-                encode((void*) &ms, (void*) &msc, (void*) &mss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT,
-                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-
-    fwprintf(stderr, L"TEST add compound element 1 mss: %i\n", mss);
-    fwprintf(stderr, L"TEST add compound element 1 msc: %i\n", msc);
-    fwprintf(stderr, L"TEST add compound element 1 ms: %s\n", (char*) ms);
-
-                decode((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, ms, (void*) &msc,
-                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+                // The suffix integer is encoded into a wide character array.
+                encode((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT,
+                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     fwprintf(stderr, L"TEST add compound element 2 ss: %i\n", ss);
     fwprintf(stderr, L"TEST add compound element 2 sc: %i\n", sc);
@@ -1150,13 +1132,15 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                     // CAUTION! Add constant in case *nc is zero!
                     *ns = (*nc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *LIST_SEPARATOR_CYBOL_NAME_COUNT + sc;
 
+    fwprintf(stderr, L"TEST add compound element 2 ns pre: %i\n", *ns);
                     // Reallocate name character vector.
                     reallocate_array(p3, p4, p5, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    fwprintf(stderr, L"TEST add compound element 2 ns post: %i\n", *ns);
                 }
 
-    fwprintf(stderr, L"TEST add compound element 3 s: %ls\n", (wchar_t*) s);
     fwprintf(stderr, L"TEST add compound element 3 sc: %i\n", sc);
     fwprintf(stderr, L"TEST add compound element 3 ss: %i\n", ss);
+    fwprintf(stderr, L"TEST add compound element 3 s: %ls\n", (wchar_t*) s);
 
                 // The element name already contains the element base name.
 
@@ -1165,35 +1149,33 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                 set_array_elements(*n, p4, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 *nc = *nc + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
-    fwprintf(stderr, L"TEST add compound element 4 s: %ls\n", (wchar_t*) s);
-    fwprintf(stderr, L"TEST add compound element 4 sc: %i\n", sc);
-    fwprintf(stderr, L"TEST add compound element 4 ss: %i\n", ss);
+    fwprintf(stderr, L"TEST add compound element 4 nc: %i\n", *nc);
+    fwprintf(stderr, L"TEST add compound element 4 ns: %i\n", *ns);
+    fwprintf(stderr, L"TEST add compound element 4 n: %ls\n", (wchar_t*) *n);
 
                 // Set new element name by adding the index determined above.
                 // Use name count as index to add the new characters.
                 set_array_elements(*n, p4, s, (void*) &sc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 *nc = *nc + sc;
 
-    fwprintf(stderr, L"TEST add compound element 5 s: %ls\n", (wchar_t*) s);
-    fwprintf(stderr, L"TEST add compound element 5 sc: %i\n", sc);
-    fwprintf(stderr, L"TEST add compound element 5 ss: %i\n", ss);
+    fwprintf(stderr, L"TEST add compound element 5 nc: %i\n", *nc);
+    fwprintf(stderr, L"TEST add compound element 5 ns: %i\n", *ns);
+    fwprintf(stderr, L"TEST add compound element 5 n: %ls\n", (wchar_t*) *n);
 
-                // Deallocate name suffix as multibyte character array.
-                deallocate_array((void*) &ms, (void*) &mss, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 // Deallocate name suffix as wide character array.
                 deallocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"TEST add compound element 6 s: %ls\n", (wchar_t*) s);
     fwprintf(stderr, L"TEST add compound element 6 sc: %i\n", sc);
     fwprintf(stderr, L"TEST add compound element 6 ss: %i\n", ss);
+    fwprintf(stderr, L"TEST add compound element 6 s: %ls\n", (wchar_t*) s);
 
                 // CAUTION! Use compound count as index for adding new elements.
                 // CAUTION! Use DEREFERENCED name, as it was handed over as reference!
                 set_compound_element_by_index(p0, p1, p2, p1, *n, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
 
-    fwprintf(stderr, L"TEST add compound element 7 s: %ls\n", (wchar_t*) s);
     fwprintf(stderr, L"TEST add compound element 7 sc: %i\n", sc);
     fwprintf(stderr, L"TEST add compound element 7 ss: %i\n", ss);
+    fwprintf(stderr, L"TEST add compound element 7 s: %ls\n", (wchar_t*) s);
 
             } else {
 
@@ -1268,8 +1250,7 @@ void replace_compound_element_by_name(void* p0, void* p1, void* p2,
         // DO USE the name, name count and name size that were
         // handed over as parameters to this procedure!
         // They were allocated by a translator while parsing CYBOL files.
-        set_compound_element_by_index(p0, p1, p2, p1,
-            p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
+        set_compound_element_by_index(p0, p1, p2, p1, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
     }
 */
 }

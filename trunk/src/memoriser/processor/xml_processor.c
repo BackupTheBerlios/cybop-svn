@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_processor.c,v $ $Revision: 1.4 $ $Date: 2008-11-11 11:05:34 $ $Author: christian $
+ * @version $RCSfile: xml_processor.c,v $ $Revision: 1.5 $ $Date: 2008-11-12 22:16:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -344,7 +344,7 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Add tag name to destination xml element (compound) details.
             // CAUTION! Hand over the tag name name as reference!
             // CAUTION! The pre-defined constant "tag" is used as name here!
-            add_compound_element_by_name(p0, p1, p2, (void*) &n, (void*) &nc, (void*) &ns, a, ac, as, m, mc, ms, d, dc, ds);
+            add_compound_element_by_name(p0, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
 
     fwprintf(stderr, L"TEST process xml tag name 6: %i\n", *rem);
     fwprintf(stderr, L"TEST process xml tag name 6 n: %ls\n", (wchar_t*) n);

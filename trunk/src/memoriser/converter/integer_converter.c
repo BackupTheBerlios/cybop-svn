@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_converter.c,v $ $Revision: 1.30 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
+ * @version $RCSfile: integer_converter.c,v $ $Revision: 1.31 $ $Date: 2008-11-12 22:16:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -141,14 +141,20 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode integer into wide character.");
 
+    fwprintf(stderr, L"TEST encode integer into wide character 0 ds: %i\n", *ds);
+    fwprintf(stderr, L"TEST encode integer into wide character 0 dc: %i\n", *dc);
+    fwprintf(stderr, L"TEST encode integer into wide character 0 d: %ls\n", *d);
+
                 // The integer value.
                 int* v = (int*) *NULL_POINTER_MEMORY_MODEL;
 
                 // Get integer value.
                 get_array_elements(p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
+    fwprintf(stderr, L"TEST encode integer into wide character 1 v: %i\n", *v);
+
                 // Initialise destination count to -1.
-                // CAUTION! It must be negative for the loop to run.
+                // CAUTION! It has to be NEGATIVE, for the loop to run!
                 *dc = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
                 while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
@@ -168,6 +174,10 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // to avoid a zero value in case destination string size is zero.
                     *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
+    fwprintf(stderr, L"TEST encode integer into wide character 2 ds: %i\n", *ds);
+    fwprintf(stderr, L"TEST encode integer into wide character 2 dc: %i\n", *dc);
+    fwprintf(stderr, L"TEST encode integer into wide character 2 d: %ls\n", *d);
+
                     // Reallocate destination string.
                     reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
@@ -184,6 +194,10 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     *dc = swprintf(*d, *ds, L"%i", *v);
 /* CYGWIN_ENVIRONMENT */
 #endif
+
+    fwprintf(stderr, L"TEST encode integer into wide character 3 ds: %i\n", *ds);
+    fwprintf(stderr, L"TEST encode integer into wide character 3 dc: %i\n", *dc);
+    fwprintf(stderr, L"TEST encode integer into wide character 3 d: %ls\n", *d);
                 }
 
             } else {

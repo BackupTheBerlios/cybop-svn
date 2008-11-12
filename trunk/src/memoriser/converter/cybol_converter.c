@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.11 $ $Date: 2008-10-25 23:20:05 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.12 $ $Date: 2008-11-12 22:16:37 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1041,6 +1041,78 @@ void decode_cybol_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* 
 }
 
 /**
+ * Processes cybol root node.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the source model
+ * @param p7 the source model count
+ * @param p8 the source details
+ * @param p9 the source details count
+ */
+void process_cybol_root(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* sc = (int*) p4;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process cybol root.");
+
+        // The part model name, abstraction, model, details.
+        void* mn = *NULL_POINTER_MEMORY_MODEL;
+        int mnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int mns = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        void* ma = *NULL_POINTER_MEMORY_MODEL;
+        int mac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int mas = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        void* mm = *NULL_POINTER_MEMORY_MODEL;
+        int mmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int mms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        void* md = *NULL_POINTER_MEMORY_MODEL;
+        int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The part details name, abstraction, model, details.
+        void* dn = *NULL_POINTER_MEMORY_MODEL;
+        int dnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int dns = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        void* da = *NULL_POINTER_MEMORY_MODEL;
+        int dac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int das = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        void* dm = *NULL_POINTER_MEMORY_MODEL;
+        int dmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int dms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        void* dd = *NULL_POINTER_MEMORY_MODEL;
+        int ddc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int dds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        // The loop variable.
+        int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+            if (j >= *sc) {
+
+                break;
+            }
+
+            get_compound_element_by_index(p6, p7, (void*) &j, (void*) &mn, (void*) &mnc, (void*) &mns, (void*) &ma, (void*) &mac, (void*) &mas, (void*) &mm, (void*) &mmc, (void*) &mms, (void*) &md, (void*) &mdc, (void*) &mds);
+            get_compound_element_by_index(p8, p9, (void*) &j, (void*) &dn, (void*) &dnc, (void*) &dns, (void*) &da, (void*) &dac, (void*) &das, (void*) &dm, (void*) &dmc, (void*) &dms, (void*) &dd, (void*) &ddc, (void*) &dds);
+
+            // Increment loop variable.
+            j++;
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process cybol root. The source count is null.");
+    }
+}
+
+/**
  * Decodes cybol.
  *
  * @param p0 the destination model (Hand over as reference!)
@@ -1057,6 +1129,8 @@ void decode_cybol_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* 
 void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
+
+    process_cybol_root(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
 }
 
 /**
