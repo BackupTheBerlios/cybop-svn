@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_converter.c,v $ $Revision: 1.31 $ $Date: 2008-11-12 22:16:37 $ $Author: christian $
+ * @version $RCSfile: integer_converter.c,v $ $Revision: 1.32 $ $Date: 2008-11-13 21:42:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,10 +55,10 @@
  * and NOT an integer pointer pointer (integer array) is handed over as p0.
  *
  * @param p0 the destination integer number (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source character array
- * @param p4 the source count
+ * @param p1 the destination integer number count
+ * @param p2 the destination integer number size
+ * @param p3 the source wide character array
+ * @param p4 the source wide character array count
  */
 void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -120,16 +120,16 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * Encodes the integer model and creates a wide character byte stream from it.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
+ * @param p1 the destination wide character array count
+ * @param p2 the destination wide character array size
  * @param p3 the source integer number
- * @param p4 the source count
+ * @param p4 the source integer number count
  */
 void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        size_t* ds = (size_t*) p2;
+        int* ds = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -153,51 +153,57 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     fwprintf(stderr, L"TEST encode integer into wide character 1 v: %i\n", *v);
 
-                // Initialise destination count to -1.
-                // CAUTION! It has to be NEGATIVE, for the loop to run!
-                *dc = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                    if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        break;
-                    }
-
-                    // Initialise destination string count to zero.
-                    // CAUTION! This is essential because otherwise,
-                    // the array reallocation calculates wrong values.
-                    *dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                    // Set destination string size one greater than the count
-                    // to have space for the terminating null character and
-                    // to avoid a zero value in case destination string size is zero.
-                    *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                // Set destination size.
+                // CAUTION! The old destination size is used as summand,
+                // so that it can grow stepwise, in case this function
+                // has been called recursively by itself.
+                // The addition of number one, on the other hand,
+                // is necessary to avoid a zero size resulting from
+                // a possible multiplication with zero.
+                *ds = *ds + (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
     fwprintf(stderr, L"TEST encode integer into wide character 2 ds: %i\n", *ds);
     fwprintf(stderr, L"TEST encode integer into wide character 2 dc: %i\n", *dc);
     fwprintf(stderr, L"TEST encode integer into wide character 2 d: %ls\n", *d);
 
-                    // Reallocate destination string.
-                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                // Reallocate destination string.
+                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                    // Transform source integer to destination string.
-                    // A null wide character is written to mark the end of the string.
-                    // The return value is the number of characters generated
-                    // for the given input, excluding the trailing null.
-                    // If not all output fits into the provided buffer,
-                    // a negative value is returned.
+                // Transform source integer to destination string.
+                // A null wide character is written to mark the end of the string.
+                // The return value is the number of characters generated
+                // for the given input, excluding the trailing null.
+                // If not all output fits into the provided buffer,
+                // a negative value is returned.
 #ifdef CYGWIN_ENVIRONMENT
-                    *dc = wsprintfW(*d, L"%i", *v);
+                int test = wsprintfW(*d, L"%i", *v);
 /* CYGWIN_ENVIRONMENT */
 #else
-                    *dc = swprintf(*d, *ds, L"%i", *v);
+                int test = swprintf(*d, *ds, L"%i", *v);
 /* CYGWIN_ENVIRONMENT */
 #endif
 
     fwprintf(stderr, L"TEST encode integer into wide character 3 ds: %i\n", *ds);
     fwprintf(stderr, L"TEST encode integer into wide character 3 dc: %i\n", *dc);
     fwprintf(stderr, L"TEST encode integer into wide character 3 d: %ls\n", *d);
+
+                if (test >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // The integer was converted successfully.
+
+                    // Set destination count.
+                    *dc = test;
+
+                } else {
+
+                    // The value returned by the conversion function is negative,
+                    // which means that the integer was NOT converted successfully.
+
+                    // Call this function itself recursively.
+                    // This is done every time again, until the integer
+                    // gets finally converted successfully.
+                    // The only argument that grows is the destination count p2 (== *ds).
+                    encode_integer(p0, p1, p2, p3, p4);
                 }
 
             } else {

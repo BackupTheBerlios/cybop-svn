@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: tester.c,v $ $Revision: 1.28 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
+ * @version $RCSfile: tester.c,v $ $Revision: 1.29 $ $Date: 2008-11-13 21:42:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -687,14 +687,16 @@ void test_integer_to_wide_character_conversion() {
     // If not all output fits into the provided buffer,
     // a negative value is returned.
 #ifdef CYGWIN_ENVIRONMENT
-    tc = wsprintfW((wchar_t*) t, L"%i", *NUMBER_2_INTEGER_MEMORY_MODEL);
+    tc = wsprintfW((wchar_t*) t, L"%i", *NUMBER_5_INTEGER_MEMORY_MODEL);
 /* CYGWIN_ENVIRONMENT */
 #else
-    tc = swprintf((wchar_t*) t, ts, L"%i", *NUMBER_2_INTEGER_MEMORY_MODEL);
+    tc = swprintf((wchar_t*) t, ts, L"%i", *NUMBER_5_INTEGER_MEMORY_MODEL);
 /* CYGWIN_ENVIRONMENT */
 #endif
 
-    fwprintf(stdout, L"TEST tc %i\n", tc);
+    fwprintf(stdout, L"TEST ts: %i\n", ts);
+    fwprintf(stdout, L"TEST tc: %i\n", tc);
+    fwprintf(stdout, L"TEST t: %ls\n", (wchar_t*) t);
 
     // Deallocate test wide character array.
     deallocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -1424,7 +1426,7 @@ void test() {
 //??    test_array_resizing();
 //??    test_wide_character_output();
 //??    test_wide_character_wprintf();
-//??    test_integer_to_wide_character_conversion();
+    test_integer_to_wide_character_conversion();
 //??    test_ascii_character_wide_character_equality();
 //??    test_pointer_cast();
 //??    test_character_array_single_element();
@@ -1440,7 +1442,7 @@ void test() {
 //??    test_encode_integer_vector();
 //??    test_encode_integer();
 //??    test_float_constants();
-    test_decode_utf8();
+//??    test_decode_utf8();
 }
 
 /* TEST_SOURCE */

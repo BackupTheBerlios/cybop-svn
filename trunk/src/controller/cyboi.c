@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.42 $ $Date: 2008-10-25 23:20:05 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.43 $ $Date: 2008-11-13 21:42:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -153,12 +153,14 @@ int main(int p0, char** p1) {
         // Allocate cybol knowledge file path.
         allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
+    fwprintf(stderr, L"TEST pre m: %i\n", m);
     fwprintf(stderr, L"TEST pre k: %ls\n", k);
     fwprintf(stderr, L"TEST pre kc: %i\n", kc);
 
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
 
+    fwprintf(stderr, L"TEST post m: %i\n", m);
     fwprintf(stderr, L"TEST post k: %ls\n", k);
     fwprintf(stderr, L"TEST post kc: %i\n", kc);
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.41 $ $Date: 2008-11-12 22:16:37 $ $Author: christian $
+ * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.42 $ $Date: 2008-11-13 21:42:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,8 +57,8 @@
  * @param p0 the destination integer vector (Hand over as reference!)
  * @param p1 the destination integer vector count
  * @param p2 the destination integer vector size
- * @param p3 the source byte stream
- * @param p4 the source byte stream count
+ * @param p3 the source wide character array
+ * @param p4 the source wide character array count
  */
 void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -193,11 +193,11 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 /**
  * Encodes the integer vector elements and creates a byte stream from it.
  *
- * @param p0 the destination byte stream (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source integer vector model
- * @param p4 the source integer vector model count
+ * @param p0 the destination wide character array (Hand over as reference!)
+ * @param p1 the destination wide character array count
+ * @param p2 the destination wide character array size
+ * @param p3 the source integer vector
+ * @param p4 the source integer vector count
  * @param p5 the iteration count
  */
 void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
@@ -230,6 +230,9 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                         void* c = *NULL_POINTER_MEMORY_MODEL;
                         int cc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         int cs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                        // Allocate integer wide character.
+                        allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                         if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -272,7 +275,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                                 *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
                             }
 
-                            // Set integer characters.
+                            // Set (copy) integer characters.
                             set_array_elements(*d, p1, c, (void*) &cc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                             *dc = *dc + cc;
 
@@ -294,6 +297,11 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
 
                             log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer vector elements. The source count is zero or smaller.");
                         }
+
+                        // Deallocate integer wide character.
+                        // CAUTION! It may be deallocated here, since its content
+                        // was copied in the "set_array_elements" function, further above!
+                        deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     } else {
 
@@ -324,11 +332,11 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
 /**
  * Encodes the integer vector model and creates a byte stream from it.
  *
- * @param p0 the destination byte stream (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source vector model
- * @param p4 the source count
+ * @param p0 the destination wide character array (Hand over as reference!)
+ * @param p1 the destination wide character array count
+ * @param p2 the destination wide character array size
+ * @param p3 the source integer vector
+ * @param p4 the source integer vector count
  */
 void encode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
