@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: character_vector_copying_memoriser.c,v $ $Revision: 1.5 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: character_vector_copying_memoriser.c,v $ $Revision: 1.6 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,7 @@
  */
 void memorise_copying_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    set(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    replace(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
 /*??
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {

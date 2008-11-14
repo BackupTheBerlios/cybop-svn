@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.60 $ $Date: 2008-11-12 22:16:37 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.61 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -127,7 +127,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            set(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 //??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
@@ -157,17 +157,38 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
 //?? TEST BEGIN
     fwprintf(stderr, L"TEST model diagram begin: %i\n", mc);
+    fwprintf(stderr, L"TEST model diagram mc: %i\n", mc);
+    fwprintf(stderr, L"TEST model diagram dc: %i\n", dc);
             // The model diagram.
             void* md = *NULL_POINTER_MEMORY_MODEL;
             int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
             allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 m, (void*) &mc, d, (void*) &dc);
+    fwprintf(stderr, L"TEST model diagram mdc: %i\n", mdc);
+            // The multibyte character stream.
+            void* mb = *NULL_POINTER_MEMORY_MODEL;
+            int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+    fwprintf(stderr, L"TEST model diagram mbc: %i\n", mbc);
+            // The file name.
+            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
+            int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
+            int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
             deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     fwprintf(stderr, L"TEST model diagram end: %i\n", mc);
 //?? TEST END
 
@@ -198,7 +219,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            set(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 //??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
@@ -259,7 +280,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            set(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 //??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
@@ -290,7 +311,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            set(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 //??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
@@ -301,7 +322,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            set(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
         }
     }
 

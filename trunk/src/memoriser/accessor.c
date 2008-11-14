@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: accessor.c,v $ $Revision: 1.21 $ $Date: 2008-09-11 23:02:45 $ $Author: christian $
+ * @version $RCSfile: accessor.c,v $ $Revision: 1.22 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@
 #include "../memoriser/array.c"
 
 /**
- * Sets the source into the destination.
+ * Replaces the destination- with the source vector.
  *
  * This function automatically adjusts the destination's count and size.
  *
@@ -52,9 +52,9 @@
  * @param p5 the abstraction
  * @param p6 the abstraction count
  */
-void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -65,7 +65,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            set_character(p0, p1, p2, p3, p4);
+            replace_character_vector(p0, p1, p2, p3, p4);
         }
     }
 
@@ -75,7 +75,48 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            set_wide_character(p0, p1, p2, p3, p4);
+            replace_wide_character_vector(p0, p1, p2, p3, p4);
+        }
+    }
+}
+
+/**
+ * Appends the source- to the destination vector.
+ *
+ * This function automatically adjusts the destination's count and size.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
+ * @param p5 the abstraction
+ * @param p6 the abstraction count
+ */
+void append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Append.");
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p5, p6, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            append_character_vector(p0, p1, p2, p3, p4);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            append_wide_character_vector(p0, p1, p2, p3, p4);
         }
     }
 }

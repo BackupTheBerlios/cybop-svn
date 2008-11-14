@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: optionaliser.c,v $ $Revision: 1.23 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
+ * @version $RCSfile: optionaliser.c,v $ $Revision: 1.24 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -361,7 +361,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Copy file path from value to cybol knowledge file path.
-                set_wide_character(p1, p2, p3, p6, p7);
+                replace_wide_character_vector(p1, p2, p3, p6, p7);
 
                 // Set knowledge operation mode.
                 *m = *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL;

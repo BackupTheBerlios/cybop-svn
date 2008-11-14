@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.55 $ $Date: 2008-11-13 21:42:30 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.56 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1187,13 +1187,23 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
     fwprintf(stderr, L"TEST add compound element 6 nc: %i\n", *nc);
     fwprintf(stderr, L"TEST add compound element 6 n: %ls\n", (wchar_t*) *n);
 
+    fwprintf(stderr, L"TEST add compound element 7 p2: %i\n", p2);
+    fwprintf(stderr, L"TEST add compound element 7 *p2: %i\n", *((int*) p2));
+    fwprintf(stderr, L"TEST add compound element 7 p1: %i\n", p1);
+    fwprintf(stderr, L"TEST add compound element 7 *p1: %i\n", *((int*) p1));
+    fwprintf(stderr, L"TEST add compound element 7 p0: %i\n", p0);
+
                 // CAUTION! Use compound count as index for adding new elements.
                 // CAUTION! Use DEREFERENCED name, as it was handed over as reference!
                 set_compound_element_by_index(p0, p1, p2, p1, *n, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
 
-    fwprintf(stderr, L"TEST add compound element 7 ns: %i\n", *ns);
-    fwprintf(stderr, L"TEST add compound element 7 nc: %i\n", *nc);
-    fwprintf(stderr, L"TEST add compound element 7 n: %ls\n", (wchar_t*) *n);
+    fwprintf(stderr, L"TEST add compound element 8 p2: %i\n", *((int*) p2));
+    fwprintf(stderr, L"TEST add compound element 8 p1: %i\n", *((int*) p1));
+    fwprintf(stderr, L"TEST add compound element 8 p0: %i\n", p0);
+
+    fwprintf(stderr, L"TEST add compound element 9 ns: %i\n", *ns);
+    fwprintf(stderr, L"TEST add compound element 9 nc: %i\n", *nc);
+    fwprintf(stderr, L"TEST add compound element 9 n: %ls\n", (wchar_t*) *n);
 
             } else {
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: character_vector_accessor.c,v $ $Revision: 1.12 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: character_vector_accessor.c,v $ $Revision: 1.13 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,7 +34,10 @@
 #include "../../memoriser/array.c"
 
 /**
- * Sets the source into the destination character.
+ * Replace the destination- with the source character vector.
+ *
+ * The destination count AND size BOTH take the value of the source
+ * character vector COUNT, even if the source size differs from the source count.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
@@ -42,7 +45,7 @@
  * @param p3 the source
  * @param p4 the source count
  */
-void set_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void replace_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -60,54 +63,39 @@ void set_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set character.");
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace character vector.");
 
-                    // CAUTION! The destination array needs to be resized not only
-                    // if the source array is greater, but also if it is smaller!
-                    // If this is not done, false results may occur.
-                    //
-                    // Example: A colour gets copied from source to destination.
-                    // The source colour is "red" with a count of 3.
-                    // The destination colour is "green" with a count of 5.
-                    // If the source colour gets copied to the destination,
-                    // the resulting destination array is "reden" with a count of 5.
-                    // This colour value does not exist and will cause errors!
-                    //
-                    // Therefore, the destination array count and size ALWAYS
-                    // have to be adapted to the source array count and size.
-                    // If this had been done in the example, the resulting
-                    // destination array would have been "red" with a count of 3,
-                    // which is correct.
+                    // Set destination size.
+                    *ds = *sc;
 
-                    // CAUTION! Do NOT use < or > here, for the reasons explained above!
-                    if (*sc != *dc) {
+                    // Reallocate destination character vector.
+                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                        *dc = *sc;
-                        *ds = *dc;
-
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                    }
-
+                    // Replace destination- with source character vector.
+                    // Use an index with value zero, so that all characters get replaced.
                     set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                    // Set destination count to the same value as the -size.
+                    *dc = *ds;
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set character elements. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace character elements. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set character elements. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace character elements. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set character elements. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace character elements. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set character elements. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace character elements. The source count is null.");
     }
 }
 

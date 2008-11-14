@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_selector.c,v $ $Revision: 1.2 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
+ * @version $RCSfile: xml_selector.c,v $ $Revision: 1.3 $ $Date: 2008-11-14 23:21:18 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -757,115 +757,124 @@ void select_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                 int* b = (int*) p6;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml element.");
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                // The source attribute name.
-                void* an = *NULL_POINTER_MEMORY_MODEL;
-                int anc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                // The source attribute value.
-                void* av = *NULL_POINTER_MEMORY_MODEL;
-                int avc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    void** dd = (void**) p0;
 
-                process_xml_attribute_name((void*) &an, (void*) &anc, p7, p8);
-                process_xml_attribute_value((void*) &av, (void*) &avc, p7, p8);
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml element.");
 
-                // The destination attribute name.
-                void* n = *NULL_POINTER_MEMORY_MODEL;
-                void* nc = *NULL_POINTER_MEMORY_MODEL;
-                void* ns = *NULL_POINTER_MEMORY_MODEL;
-                // The destination attribute abstraction.
-                void* a = *NULL_POINTER_MEMORY_MODEL;
-                void* ac = *NULL_POINTER_MEMORY_MODEL;
-                void* as = *NULL_POINTER_MEMORY_MODEL;
-                // The destination attribute model.
-                void* m = *NULL_POINTER_MEMORY_MODEL;
-                void* mc = *NULL_POINTER_MEMORY_MODEL;
-                void* ms = *NULL_POINTER_MEMORY_MODEL;
-                // The destination attribute details.
-                void* d = *NULL_POINTER_MEMORY_MODEL;
-                void* dc = *NULL_POINTER_MEMORY_MODEL;
-                void* ds = *NULL_POINTER_MEMORY_MODEL;
+                    // The source attribute name.
+                    void* an = *NULL_POINTER_MEMORY_MODEL;
+                    int anc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    // The source attribute value.
+                    void* av = *NULL_POINTER_MEMORY_MODEL;
+                    int avc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                // Allocate destination attribute.
-                allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
-                    (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                    (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                    process_xml_attribute_name((void*) &an, (void*) &anc, p7, p8);
+                    process_xml_attribute_value((void*) &av, (void*) &avc, p7, p8);
 
-                // Decode destination attribute name.
-                decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, an, (void*) &anc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                    // The destination attribute name.
+                    void* n = *NULL_POINTER_MEMORY_MODEL;
+                    void* nc = *NULL_POINTER_MEMORY_MODEL;
+                    void* ns = *NULL_POINTER_MEMORY_MODEL;
+                    // The destination attribute abstraction.
+                    void* a = *NULL_POINTER_MEMORY_MODEL;
+                    void* ac = *NULL_POINTER_MEMORY_MODEL;
+                    void* as = *NULL_POINTER_MEMORY_MODEL;
+                    // The destination attribute model.
+                    void* m = *NULL_POINTER_MEMORY_MODEL;
+                    void* mc = *NULL_POINTER_MEMORY_MODEL;
+                    void* ms = *NULL_POINTER_MEMORY_MODEL;
+                    // The destination attribute details.
+                    void* d = *NULL_POINTER_MEMORY_MODEL;
+                    void* dc = *NULL_POINTER_MEMORY_MODEL;
+                    void* ds = *NULL_POINTER_MEMORY_MODEL;
 
-                // Decode destination attribute abstraction.
-                decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                    // Allocate destination attribute.
+                    allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+                        (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                // Decode destination attribute model.
-                decode((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, av, (void*) &avc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                    // Decode destination attribute name.
+                    decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, an, (void*) &anc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                // The destination attribute details do NOT have to be decoded,
-                // since an attribute itself has just name and value, but no meta information.
+                    // Decode destination attribute abstraction.
+                    decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                //?? Extend compound size etc. before?
+                    // Decode destination attribute model.
+                    decode((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, av, (void*) &avc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                // Add part to whole (compound) model.
-                // CAUTION! Hand over the name as reference!
-                // Storing many parts with identical tag name is not a problem,
-                // since the tag name of a part is added to its details compound.
-                add_compound_element_by_name(p3, p4, p5, (void*) &n, (void*) &nc, (void*) &ns, a, ac, as, m, mc, ms, d, dc, ds);
+                    // The destination attribute details do NOT have to be decoded,
+                    // since an attribute itself has just name and value, but no meta information.
 
-                //
-                // CAUTION! The ORDER of the following function calls is IMPORTANT!
-                // The empty tag end "/>" has to be searched BEFORE
-                // the simple tag end ">", because of the slash "/" character.
-                //
-                // CAUTION! The comparison result HAS TO BE ZERO, if a detection is to be taking place!
-                // Many "detect" functions are called in a sequence, below.
-                // If the result of one detection function was positive (r == 1),
-                // then that function increments the current position and decrements the remaining count.
-                // In this case, further detection functions following afterwards might detect
-                // further characters and CHANGE the current position and remaining count, and so forth,
-                // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-                // Therefore, the checks for (r == 0) below avoid another detection,
-                // if the result already has a value unequal zero.
-                //
+                    //?? Extend compound size etc. before?
 
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    // Add part to whole (compound) model.
+                    // CAUTION! Hand over the name as reference!
+                    // Storing many parts with identical tag name is not a problem,
+                    // since the tag name of a part is added to its details compound.
+                    add_compound_element_by_name(*dd, p4, p5, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    //
+                    // CAUTION! The ORDER of the following function calls is IMPORTANT!
+                    // The empty tag end "/>" has to be searched BEFORE
+                    // the simple tag end ">", because of the slash "/" character.
+                    //
+                    // CAUTION! The comparison result HAS TO BE ZERO, if a detection is to be taking place!
+                    // Many "detect" functions are called in a sequence, below.
+                    // If the result of one detection function was positive (r == 1),
+                    // then that function increments the current position and decrements the remaining count.
+                    // In this case, further detection functions following afterwards might detect
+                    // further characters and CHANGE the current position and remaining count, and so forth,
+                    // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
+                    // Therefore, the checks for (r == 0) below avoid another detection,
+                    // if the result already has a value unequal zero.
+                    //
 
-                    detect_xml_empty_tag_end((void*) &r, p7, p8);
+                    // The comparison result.
+                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        // This xml element is empty, so that the loop can be left now.
+                        detect_xml_empty_tag_end((void*) &r, p7, p8);
 
-                        // Set break flag.
-                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            // This xml element is empty, so that the loop can be left now.
+
+                            // Set break flag.
+                            *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                        }
                     }
-                }
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_tag_end((void*) &r, p7, p8);
+                        detect_xml_tag_end((void*) &r, p7, p8);
 
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        // The tag end was found.
-                        //
-                        // CAUTION! In this case, the current position and remaining count
-                        // were already changed in the called function, to be processed further
-                        // in other functions.
+                            // The tag end was found.
+                            //
+                            // CAUTION! In this case, the current position and remaining count
+                            // were already changed in the called function, to be processed further
+                            // in other functions.
 
-                        process_xml_element_content(p0, p1, p2, p3, p4, p5, p7, p8);
+                            process_xml_element_content(p0, p1, p2, p3, p4, p5, p7, p8);
+                        }
                     }
-                }
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Increment current position.
-                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                        // Increment current position.
+                        *pos = *pos + *POINTER_PRIMITIVE_SIZE;
 
-                    // Decrement remaining count.
-                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                        // Decrement remaining count.
+                        *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml element. The destination is null.");
                 }
 
             } else {

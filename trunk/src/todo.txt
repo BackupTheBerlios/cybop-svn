@@ -7,12 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.71 $ $Date: 2008-11-12 22:16:37 $ $Author: christian $
+# @version $Revision: 1.72 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue debugging in function "encode_integer", "encode_integer_vector_elements", "add_compound_element_by_name"
-        * Test file "xml_converter.c" functionality calling "model_diagram_converter.c" directly
+        * Continue checking model diagram converter which still produces a slightly wrong output
+
         * Continue "cybol_converter.c", to translate the model tree into a cyboi schema-conform structure
 
         * Add a mapper translating cybol- into memory abstractions and vice-versa
