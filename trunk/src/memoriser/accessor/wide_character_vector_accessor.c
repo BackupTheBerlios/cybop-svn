@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: wide_character_vector_accessor.c,v $ $Revision: 1.12 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
+ * @version $RCSfile: wide_character_vector_accessor.c,v $ $Revision: 1.13 $ $Date: 2008-11-27 18:35:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
