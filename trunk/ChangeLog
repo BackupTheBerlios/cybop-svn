@@ -14,9 +14,19 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.97 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
+# @version $Revision: 1.98 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-11-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug logger which called array functionality that called the logger in turn,
+            thereby causing a circular reference and endless loop
+
+2008-11-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace all usages of "stderr" stream with "stdout",
+            on the search for some bug in the logger
+        * Debug "stream_socket_communicator.c" and "datagram_socket_communicator.c"
+            by replacing "=" with "==" for comparison (found by chance)
 
 2008-11-14  Christian Heller  <christian.heller@tuxtax.de>
         * Debug xml conversion

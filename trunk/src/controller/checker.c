@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.57 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.58 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -307,7 +307,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         void** irq = (void**) p0;
 
-//??    fwprintf(stderr, L"TEST IRQ 1: %i\n", p0);
+//??    fwprintf(stdout, L"TEST IRQ 1: %i\n", p0);
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Check for interrupt requests.");
 
@@ -321,7 +321,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
         // pointer reference NULL_POINTER_MEMORY_MODEL is used here.
         if (*irq == NULL_POINTER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST IRQ 2: %i\n", p0);
+    fwprintf(stdout, L"TEST IRQ 2: %i\n", p0);
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
@@ -348,7 +348,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                         // Set mutex.
                         get_element(p9, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST detected signal memory irq: %i\n", **((int**) irq));
+    fwprintf(stdout, L"TEST detected signal memory irq: %i\n", **((int**) irq));
                     }
 
                 } else {
@@ -365,7 +365,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         if (*irq == NULL_POINTER_MEMORY_MODEL) {
 
-//??    fwprintf(stderr, L"TEST IRQ 3: %i\n", p0);
+//??    fwprintf(stdout, L"TEST IRQ 3: %i\n", p0);
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
@@ -373,13 +373,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             //?? TODO: The mutex is NOT needed here; delete later!
             if (p11 != *NULL_POINTER_MEMORY_MODEL) {
 
-//??    fwprintf(stderr, L"TEST IRQ 4: %i\n", p0);
+//??    fwprintf(stdout, L"TEST IRQ 4: %i\n", p0);
 
                 void** gnu_linux_console_mutex = (void**) p11;
 
                 if (p10 != *NULL_POINTER_MEMORY_MODEL) {
 
-//??    fwprintf(stderr, L"TEST IRQ 5: %i\n", p0);
+//??    fwprintf(stdout, L"TEST IRQ 5: %i\n", p0);
 
                     //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
@@ -389,7 +389,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??    fwprintf(stderr, L"TEST IRQ 6: %i\n", p0);
+//??    fwprintf(stdout, L"TEST IRQ 6: %i\n", p0);
 
                         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected gnu/linux console interrupt.");
 
@@ -405,7 +405,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                         get_element(p16, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                         get_element(p17, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST detected gnu/linux console irq: %i\n", **((int**) irq));
+    fwprintf(stdout, L"TEST detected gnu/linux console irq: %i\n", **((int**) irq));
                     }
 
                 } else {
@@ -453,7 +453,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                         get_element(p24, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                         get_element(p25, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST detected x window system irq: %i\n", **((int**) irq));
+    fwprintf(stdout, L"TEST detected x window system irq: %i\n", **((int**) irq));
                     }
 
                 } else {
@@ -689,7 +689,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST index of signal with highest priority: %i\n", i);
+    fwprintf(stdout, L"TEST index of signal with highest priority: %i\n", i);
 
         // A signal was found and has to be handled.
         // Handling a signal has higher priority than checking for new interrupt requests.
@@ -698,15 +698,15 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         check_get(p4, p5, p6, *signal_memory_mutex, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
     //?? For testing only. Delete these lines later!
-    fwprintf(stderr, L"TEST checker signal a: %ls\n", *((wchar_t**) a));
-    fwprintf(stderr, L"TEST checker signal ac: %i\n", **((int**) ac));
-//??    fwprintf(stderr, L"TEST signal m: %ls\n", *m);
-    fwprintf(stderr, L"TEST checker signal mc: %i\n", **((int**) mc));
+    fwprintf(stdout, L"TEST checker signal a: %ls\n", *((wchar_t**) a));
+    fwprintf(stdout, L"TEST checker signal ac: %i\n", **((int**) ac));
+//??    fwprintf(stdout, L"TEST signal m: %ls\n", *m);
+    fwprintf(stdout, L"TEST checker signal mc: %i\n", **((int**) mc));
     // CAUTION! d and dc are NULL. Do NOT try to print their values here!
 /*??
     //?? p and id are not used anymore and do not always exist. So printing their value sometimes causes a crash.
-    fwprintf(stderr, L"TEST p: %i\n", **((int**) p));
-    fwprintf(stderr, L"TEST id: %i\n", **((int**) id));
+    fwprintf(stdout, L"TEST p: %i\n", **((int**) p));
+    fwprintf(stdout, L"TEST id: %i\n", **((int**) id));
 */
 
         // Handle signal.
@@ -735,12 +735,12 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if ((irq != (int**) NULL_POINTER_MEMORY_MODEL) && (*irq != (int*) *NULL_POINTER_MEMORY_MODEL) && (**irq != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
-    fwprintf(stderr, L"TEST checker irq: %i\n", **irq);
+    fwprintf(stdout, L"TEST checker irq: %i\n", **irq);
 
-    fwprintf(stderr, L"TEST checker irq a: %ls\n", (wchar_t*) *a);
-    fwprintf(stderr, L"TEST checker irq ac: %i\n", **((int**) ac));
-    fwprintf(stderr, L"TEST checker irq mc: %i\n", **((int**) mc));
-    fwprintf(stderr, L"TEST checker irq dc: %i\n", **((int**) dc));
+    fwprintf(stdout, L"TEST checker irq a: %ls\n", (wchar_t*) *a);
+    fwprintf(stdout, L"TEST checker irq ac: %i\n", **((int**) ac));
+    fwprintf(stdout, L"TEST checker irq mc: %i\n", **((int**) mc));
+    fwprintf(stdout, L"TEST checker irq dc: %i\n", **((int**) dc));
 
             // Lock mutex.
             pthread_mutex_lock(*mt);

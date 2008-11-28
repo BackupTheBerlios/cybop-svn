@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_communicator.c,v $ $Revision: 1.41 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
+ * @version $RCSfile: file_communicator.c,v $ $Revision: 1.42 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -325,7 +325,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // The given string is not a file name, but specifies the "standard_error_output".
-                    f = stderr;
+                    f = stdout;
 
                     write_file_stream((void*) f, p3, p4);
 

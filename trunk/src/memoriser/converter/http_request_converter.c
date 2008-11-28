@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.18 $ $Date: 2008-09-14 08:25:21 $ $Author: christian $
+ * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.19 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -106,8 +106,8 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
         // Setting of parameter.
         //
 
-    fwprintf(stderr, L"TEST http request parameter dest: %i \n", *dest);
-    fwprintf(stderr, L"TEST http request parameter destc: %i \n", *((int*) p1));
+    fwprintf(stdout, L"TEST http request parameter dest: %i \n", *dest);
+    fwprintf(stdout, L"TEST http request parameter destc: %i \n", *((int*) p1));
 
         // The parameter name, abstraction, model, details.
         void** n = NULL_POINTER_MEMORY_MODEL;
@@ -123,8 +123,8 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
         void** dc = NULL_POINTER_MEMORY_MODEL;
         void** ds = NULL_POINTER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST http request parameter pn: %ls \n", (wchar_t*) p3);
-    fwprintf(stderr, L"TEST http request parameter pnc: %i \n", *((int*) p4));
+    fwprintf(stdout, L"TEST http request parameter pn: %ls \n", (wchar_t*) p3);
+    fwprintf(stdout, L"TEST http request parameter pnc: %i \n", *((int*) p4));
 
         // Get parameter from model, using its key as name.
         get_universal_compound_element_by_name(*dest, p1,
@@ -136,12 +136,12 @@ void decode_http_request_set_parameter(void* p0, void* p1, void* p2, void* p3, v
             p7, p8);
 
 /*??
-    fwprintf(stderr, L"TEST http request parameter nc: %i \n", **((int**) nc));
-    fwprintf(stderr, L"TEST http request parameter n: %ls \n", (wchar_t*) *n);
-    fwprintf(stderr, L"TEST http request parameter ac: %i \n", **((int**) ac));
-    fwprintf(stderr, L"TEST http request parameter a: %ls \n", (wchar_t*) *a);
-    fwprintf(stderr, L"TEST http request parameter mc: %i \n", **((int**) mc));
-    fwprintf(stderr, L"TEST http request parameter m: %ls \n", (wchar_t*) *m);
+    fwprintf(stdout, L"TEST http request parameter nc: %i \n", **((int**) nc));
+    fwprintf(stdout, L"TEST http request parameter n: %ls \n", (wchar_t*) *n);
+    fwprintf(stdout, L"TEST http request parameter ac: %i \n", **((int**) ac));
+    fwprintf(stdout, L"TEST http request parameter a: %ls \n", (wchar_t*) *a);
+    fwprintf(stdout, L"TEST http request parameter mc: %i \n", **((int**) mc));
+    fwprintf(stdout, L"TEST http request parameter m: %ls \n", (wchar_t*) *m);
 */
 
         // Decode and set parameter value according to given abstraction.
@@ -218,8 +218,8 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
             ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
-    fwprintf(stderr, L"TEST http request parameter k: %ls \n", (wchar_t*) k);
-    fwprintf(stderr, L"TEST http request parameter kc: %i \n", kc);
+    fwprintf(stdout, L"TEST http request parameter k: %ls \n", (wchar_t*) k);
+    fwprintf(stdout, L"TEST http request parameter kc: %i \n", kc);
 
         //
         // Value.
@@ -231,8 +231,8 @@ void decode_http_request_parameter(void* p0, void* p1, void* p2, void* p3, void*
 
         // No further separators have to be found.
 
-    fwprintf(stderr, L"TEST http request parameter v: %ls \n", (wchar_t*) v);
-    fwprintf(stderr, L"TEST http request parameter vc: %i \n", vc);
+    fwprintf(stdout, L"TEST http request parameter v: %ls \n", (wchar_t*) v);
+    fwprintf(stdout, L"TEST http request parameter vc: %i \n", vc);
 
         // Sets the value of the parameter with the given key, within the compound.
         decode_http_request_set_parameter(p0, p1, p2, k, (void*) &kc, v, (void*) &vc, p5, p6);
@@ -315,8 +315,8 @@ void decode_http_request_parameters(void* p0, void* p1, void* p2, void* p3, void
                 break;
             }
 
-    fwprintf(stderr, L"TEST http request parameters p: %ls \n", (wchar_t*) p);
-    fwprintf(stderr, L"TEST http request parameters pc: %i \n", pc);
+    fwprintf(stdout, L"TEST http request parameters p: %ls \n", (wchar_t*) p);
+    fwprintf(stdout, L"TEST http request parameters pc: %i \n", pc);
         }
 
     } else {
@@ -615,8 +615,8 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
             ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
-    fwprintf(stderr, L"TEST http request header a: %ls \n", (wchar_t*) a);
-    fwprintf(stderr, L"TEST http request header ac: %i \n", ac);
+    fwprintf(stdout, L"TEST http request header a: %ls \n", (wchar_t*) a);
+    fwprintf(stdout, L"TEST http request header ac: %i \n", ac);
 
         //
         // Value.
@@ -627,8 +627,8 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
         int vc = ic;
         // No further separators have to be found.
 
-    fwprintf(stderr, L"TEST http request header v: %ls \n", (wchar_t*) v);
-    fwprintf(stderr, L"TEST http request header vc: %i \n", vc);
+    fwprintf(stdout, L"TEST http request header v: %ls \n", (wchar_t*) v);
+    fwprintf(stdout, L"TEST http request header vc: %i \n", vc);
 
     } else {
 
@@ -707,8 +707,8 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
                 break;
             }
 
-    fwprintf(stderr, L"TEST http request headers h: %ls \n", (wchar_t*) h);
-    fwprintf(stderr, L"TEST http request headers hc: %i \n", hc);
+    fwprintf(stdout, L"TEST http request headers h: %ls \n", (wchar_t*) h);
+    fwprintf(stdout, L"TEST http request headers hc: %i \n", hc);
 
         }
 
@@ -848,8 +848,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             schc = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
-    fwprintf(stderr, L"TEST http request uri sch: %ls \n", (wchar_t*) sch);
-    fwprintf(stderr, L"TEST http request uri schc: %i \n", schc);
+    fwprintf(stdout, L"TEST http request uri sch: %ls \n", (wchar_t*) sch);
+    fwprintf(stdout, L"TEST http request uri schc: %i \n", schc);
 
         //
         // Authority.
@@ -951,8 +951,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
-    fwprintf(stderr, L"TEST http request uri a: %ls \n", (wchar_t*) a);
-    fwprintf(stderr, L"TEST http request uri ac: %i \n", ac);
+    fwprintf(stdout, L"TEST http request uri a: %ls \n", (wchar_t*) a);
+    fwprintf(stdout, L"TEST http request uri ac: %i \n", ac);
 
         //
         // Path.
@@ -1032,8 +1032,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
-    fwprintf(stderr, L"TEST http request uri p: %ls \n", (wchar_t*) p);
-    fwprintf(stderr, L"TEST http request uri pc: %i \n", pc);
+    fwprintf(stdout, L"TEST http request uri p: %ls \n", (wchar_t*) p);
+    fwprintf(stdout, L"TEST http request uri pc: %i \n", pc);
 
         //
         // Query.
@@ -1045,7 +1045,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // Reset separator index.
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST http request uri qc 0: %i \n", qc);
+    fwprintf(stdout, L"TEST http request uri qc 0: %i \n", qc);
 
         // Get separator index.
         get_array_elements_index(i, (void*) &ic, (void*) QUERY_SEPARATOR_URI_MODEL, (void*) QUERY_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1059,7 +1059,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             q = i + sep + *QUERY_SEPARATOR_URI_MODEL_COUNT;
             qc = ic - sep - *QUERY_SEPARATOR_URI_MODEL_COUNT;
 
-    fwprintf(stderr, L"TEST http request uri qc 1: %i \n", qc);
+    fwprintf(stdout, L"TEST http request uri qc 1: %i \n", qc);
 
             // Set new source index.
             i = i + sep + *QUERY_SEPARATOR_URI_MODEL_COUNT;
@@ -1079,7 +1079,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 // Set new count.
                 qc = sep;
 
-    fwprintf(stderr, L"TEST http request uri qc 2: %i \n", qc);
+    fwprintf(stdout, L"TEST http request uri qc 2: %i \n", qc);
 
                 // Set new source index.
                 //
@@ -1094,7 +1094,7 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 // No separator was found.
                 // The remaining source is assumed to contain no further parts.
 
-    fwprintf(stderr, L"TEST http request uri qc 3: %i \n", qc);
+    fwprintf(stdout, L"TEST http request uri qc 3: %i \n", qc);
 
                 // Set source index to null.
                 i = *NULL_POINTER_MEMORY_MODEL;
@@ -1102,8 +1102,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             }
         }
 
-    fwprintf(stderr, L"TEST http request uri q: %ls \n", (wchar_t*) q);
-    fwprintf(stderr, L"TEST http request uri qc: %i \n", qc);
+    fwprintf(stdout, L"TEST http request uri q: %ls \n", (wchar_t*) q);
+    fwprintf(stdout, L"TEST http request uri qc: %i \n", qc);
 
         //
         // Fragment.
@@ -1128,8 +1128,8 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
             fc = ic - sep - *FRAGMENT_SEPARATOR_URI_MODEL_COUNT;
         }
 
-    fwprintf(stderr, L"TEST http request uri f: %ls \n", (wchar_t*) f);
-    fwprintf(stderr, L"TEST http request uri fc: %i \n", fc);
+    fwprintf(stdout, L"TEST http request uri f: %ls \n", (wchar_t*) f);
+    fwprintf(stdout, L"TEST http request uri fc: %i \n", fc);
 
         // Set the scheme value within the compound.
         decode_http_request_set_parameter(p0, p1, p2, (void*) SCHEME_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) SCHEME_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, sch, (void*) &schc, p5, p6);
@@ -1223,8 +1223,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
-    fwprintf(stderr, L"TEST http request line rm: %ls \n", (wchar_t*) rm);
-    fwprintf(stderr, L"TEST http request line rmc: %i \n", rmc);
+    fwprintf(stdout, L"TEST http request line rm: %ls \n", (wchar_t*) rm);
+    fwprintf(stdout, L"TEST http request line rmc: %i \n", rmc);
 
         //
         // Uniform resource identifier.
@@ -1258,8 +1258,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
-    fwprintf(stderr, L"TEST http request line uri: %ls \n", (wchar_t*) uri);
-    fwprintf(stderr, L"TEST http request line uric: %i \n", uric);
+    fwprintf(stdout, L"TEST http request line uri: %ls \n", (wchar_t*) uri);
+    fwprintf(stdout, L"TEST http request line uric: %i \n", uric);
 
         //
         // Protocol version.
@@ -1270,8 +1270,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         int pvc = ic;
         // No further separators have to be found.
 
-    fwprintf(stderr, L"TEST http request line pv: %ls \n", (wchar_t*) pv);
-    fwprintf(stderr, L"TEST http request line pvc: %i \n", pvc);
+    fwprintf(stdout, L"TEST http request line pv: %ls \n", (wchar_t*) pv);
+    fwprintf(stdout, L"TEST http request line pvc: %i \n", pvc);
 
         // CAUTION! Do NOT move the function calls below to any other function!
         // The reason is that the http protocol version was decoded here so that
@@ -1297,8 +1297,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         // The uri's parts are set as parameters in the destination compound model.
         decode_http_request_uri(p0, p1, p2, uri, (void*) &uric, p12, p13);
 
-    fwprintf(stderr, L"TEST http request line END i: %ls \n", (wchar_t*) uri);
-    fwprintf(stderr, L"TEST http request line END ic: %i \n", uric);
+    fwprintf(stdout, L"TEST http request line END i: %ls \n", (wchar_t*) uri);
+    fwprintf(stdout, L"TEST http request line END ic: %i \n", uric);
 
     } else {
 
@@ -1362,12 +1362,12 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode http request.");
 
-    fwprintf(stderr, L"TEST http request mc p1: %i \n", *((int*) p1));
-    fwprintf(stderr, L"TEST http request dc p4: %i \n", *((int*) p4));
-    fwprintf(stderr, L"TEST http request sc p7: %i \n", *((int*) p7));
-    fwprintf(stderr, L"TEST http request kmc p9: %i \n", *((int*) p9));
+    fwprintf(stdout, L"TEST http request mc p1: %i \n", *((int*) p1));
+    fwprintf(stdout, L"TEST http request dc p4: %i \n", *((int*) p4));
+    fwprintf(stdout, L"TEST http request sc p7: %i \n", *((int*) p7));
+    fwprintf(stdout, L"TEST http request kmc p9: %i \n", *((int*) p9));
 
-    fwprintf(stderr, L"TEST http request s p6: %ls \n", (wchar_t*) p6);
+    fwprintf(stdout, L"TEST http request s p6: %ls \n", (wchar_t*) p6);
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter
@@ -1409,8 +1409,8 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
-    fwprintf(stderr, L"TEST http request rl: %ls \n", (wchar_t*) rl);
-    fwprintf(stderr, L"TEST http request rlc: %i \n", rlc);
+    fwprintf(stdout, L"TEST http request rl: %ls \n", (wchar_t*) rl);
+    fwprintf(stdout, L"TEST http request rlc: %i \n", rlc);
 
         //
         // Headers.
@@ -1444,8 +1444,8 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             ic = *NUMBER_0_INTEGER_MEMORY_MODEL;
         }
 
-    fwprintf(stderr, L"TEST http request h: %ls \n", (wchar_t*) h);
-    fwprintf(stderr, L"TEST http request hc: %i \n", hc);
+    fwprintf(stdout, L"TEST http request h: %ls \n", (wchar_t*) h);
+    fwprintf(stdout, L"TEST http request hc: %i \n", hc);
 
         //
         // Body.
@@ -1471,14 +1471,14 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             // The remaining source is assumed to contain no further parts.
         }
 
-    fwprintf(stderr, L"TEST http request b: %ls \n", (wchar_t*) b);
-    fwprintf(stderr, L"TEST http request bc: %i \n", bc);
+    fwprintf(stdout, L"TEST http request b: %ls \n", (wchar_t*) b);
+    fwprintf(stdout, L"TEST http request bc: %i \n", bc);
 
         // Decode request line containing request method, uniform resource identifier and protocol version.
         decode_http_request_line(p0, p1, p2, p3, p4, p5, b, (void*) &bc, h, (void*) &hc, rl, (void*) &rlc, p8, p9);
 
-    fwprintf(stderr, L"TEST http request END i: %ls \n", (wchar_t*) i);
-    fwprintf(stderr, L"TEST http request END ic: %i \n", ic);
+    fwprintf(stdout, L"TEST http request END i: %ls \n", (wchar_t*) i);
+    fwprintf(stdout, L"TEST http request END ic: %i \n", ic);
 
     } else {
 

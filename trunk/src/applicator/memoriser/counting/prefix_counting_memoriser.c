@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: prefix_counting_memoriser.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: prefix_counting_memoriser.c,v $ $Revision: 1.8 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,9 +67,9 @@ void memorise_counting_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // the number of parts within that compound.
             set_element(*r, NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST r: %i\n", **r);
-    fwprintf(stderr, L"TEST rc: %i\n", *((int*) rc));
-    fwprintf(stderr, L"TEST cc: %i\n", *cc);
+    fwprintf(stdout, L"TEST r: %i\n", **r);
+    fwprintf(stdout, L"TEST rc: %i\n", *((int*) rc));
+    fwprintf(stdout, L"TEST cc: %i\n", *cc);
 
         } else {
 

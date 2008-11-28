@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_handler.c,v $ $Revision: 1.27 $ $Date: 2008-09-06 23:17:20 $ $Author: christian $
+ * @version $RCSfile: compound_handler.c,v $ $Revision: 1.28 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -126,8 +126,8 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
                             if (*x != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 */
 
-    fwprintf(stderr, L"TEST handle compound part a: %ls\n", *((wchar_t**) a));
-    fwprintf(stderr, L"TEST handle compound part ac: %i\n", **((int**) ac));
+    fwprintf(stdout, L"TEST handle compound part a: %ls\n", *((wchar_t**) a));
+    fwprintf(stdout, L"TEST handle compound part ac: %i\n", **((int**) ac));
 
                                 handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p12, p13, p14);
 
@@ -218,7 +218,7 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                 break;
             }
 
-    fwprintf(stderr, L"TEST handle compound j: %i\n", j);
+    fwprintf(stdout, L"TEST handle compound j: %i\n", j);
 
             handle_compound_part(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, (void*) &j);
 

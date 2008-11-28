@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.21 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.22 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,7 +88,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             c = fgetwc(s);
 //??            c = fgetc(s);
 
-    fwprintf(stderr, L"TEST read gnu/linux console c: %c\n", c);
+    fwprintf(stdout, L"TEST read gnu/linux console c: %c\n", c);
 
             if (csi == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 

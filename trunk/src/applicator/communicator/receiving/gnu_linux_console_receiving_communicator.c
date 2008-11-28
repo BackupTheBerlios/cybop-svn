@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -67,21 +67,21 @@ void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void*
     // Allocate character array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST receive pre read: %i\n", ac);
+    fwprintf(stdout, L"TEST receive pre read: %i\n", ac);
 
     // Read pressed keyboard keys as message from gnu/linux console.
     read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12);
 
-    fwprintf(stderr, L"TEST a: %s\n", (wchar_t*) a);
-    fwprintf(stderr, L"TEST ac: %i\n", ac);
-    fwprintf(stderr, L"TEST as: %i\n", as);
+    fwprintf(stdout, L"TEST a: %s\n", (wchar_t*) a);
+    fwprintf(stdout, L"TEST ac: %i\n", ac);
+    fwprintf(stdout, L"TEST as: %i\n", as);
 
     // Decode character array into command.
     decode(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
 
-    fwprintf(stderr, L"TEST m: %s\n", *((wchar_t**) p6));
-    fwprintf(stderr, L"TEST mc: %i\n", *((int*) p7));
-    fwprintf(stderr, L"TEST ms: %i\n", *((int*) p8));
+    fwprintf(stdout, L"TEST m: %s\n", *((wchar_t**) p6));
+    fwprintf(stdout, L"TEST mc: %i\n", *((int*) p7));
+    fwprintf(stdout, L"TEST ms: %i\n", *((int*) p8));
 
     // Deallocate character array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);

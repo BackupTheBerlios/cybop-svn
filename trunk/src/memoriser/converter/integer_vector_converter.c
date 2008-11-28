@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.42 $ $Date: 2008-11-13 21:42:30 $ $Author: christian $
+ * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.43 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -239,18 +239,18 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                             // Get first integer from vector.
                             get_element(p3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, &i, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST encode integer vector elements 0 i: %i\n", *((int*) i));
-    fwprintf(stderr, L"TEST encode integer vector elements 0 cs: %i\n", cs);
-    fwprintf(stderr, L"TEST encode integer vector elements 0 cc: %i\n", cc);
-    fwprintf(stderr, L"TEST encode integer vector elements 0 c: %ls\n", (wchar_t*) c);
+    fwprintf(stdout, L"TEST encode integer vector elements 0 i: %i\n", *((int*) i));
+    fwprintf(stdout, L"TEST encode integer vector elements 0 cs: %i\n", cs);
+    fwprintf(stdout, L"TEST encode integer vector elements 0 cc: %i\n", cc);
+    fwprintf(stdout, L"TEST encode integer vector elements 0 c: %ls\n", (wchar_t*) c);
 
                             // Encode first integer.
                             encode_integer((void*) &c, (void*) &cc, (void*) &cs, i, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-    fwprintf(stderr, L"TEST encode integer vector elements 1 i: %i\n", *((int*) i));
-    fwprintf(stderr, L"TEST encode integer vector elements 1 cs: %i\n", cs);
-    fwprintf(stderr, L"TEST encode integer vector elements 1 cc: %i\n", cc);
-    fwprintf(stderr, L"TEST encode integer vector elements 1 c: %ls\n", (wchar_t*) c);
+    fwprintf(stdout, L"TEST encode integer vector elements 1 i: %i\n", *((int*) i));
+    fwprintf(stdout, L"TEST encode integer vector elements 1 cs: %i\n", cs);
+    fwprintf(stdout, L"TEST encode integer vector elements 1 cc: %i\n", cc);
+    fwprintf(stdout, L"TEST encode integer vector elements 1 c: %ls\n", (wchar_t*) c);
 
                             // CAUTION! Add one for the comma character added further below!
                             if ((*dc + *NUMBER_1_INTEGER_MEMORY_MODEL + cc) >= *ds) {
@@ -345,8 +345,8 @@ void encode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // The iteration count.
     int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST encode integer vector sc: %i\n", *((int*) p4));
-    fwprintf(stderr, L"TEST encode integer vector s: %i\n", *((int*) p3));
+    fwprintf(stdout, L"TEST encode integer vector sc: %i\n", *((int*) p4));
+    fwprintf(stdout, L"TEST encode integer vector s: %i\n", *((int*) p3));
 
     // Encode integer vector elements.
     // Hand over zero iteration value, since this is the initial call.

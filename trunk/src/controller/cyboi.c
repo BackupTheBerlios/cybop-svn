@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.43 $ $Date: 2008-11-13 21:42:30 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.44 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -106,7 +106,7 @@ int main(int p0, char** p1) {
         //
         // It is generally a good idea to orient a stream as early as possible.
         // This can prevent surprise and hard to reproduce errors,
-        // especially for the standard streams stdin, stdout, and stderr.
+        // especially for the standard streams stdin, stdout, and stdout.
         //
         // Since a stream is created in the unoriented state
         // it has at that point no conversion associated with it.
@@ -136,7 +136,7 @@ int main(int p0, char** p1) {
         // They will also get converted into wide characters of type "wchar_t" there.
         orient((void*) stdin, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
         orient((void*) stdout, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
-        orient((void*) stderr, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+        orient((void*) stdout, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
         // The operation mode.
         //
@@ -153,16 +153,16 @@ int main(int p0, char** p1) {
         // Allocate cybol knowledge file path.
         allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST pre m: %i\n", m);
-    fwprintf(stderr, L"TEST pre k: %ls\n", k);
-    fwprintf(stderr, L"TEST pre kc: %i\n", kc);
+    fwprintf(stdout, L"TEST pre m: %i\n", m);
+    fwprintf(stdout, L"TEST pre k: %ls\n", k);
+    fwprintf(stdout, L"TEST pre kc: %i\n", kc);
 
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
 
-    fwprintf(stderr, L"TEST post m: %i\n", m);
-    fwprintf(stderr, L"TEST post k: %ls\n", k);
-    fwprintf(stderr, L"TEST post kc: %i\n", kc);
+    fwprintf(stdout, L"TEST post m: %i\n", m);
+    fwprintf(stdout, L"TEST post k: %ls\n", k);
+    fwprintf(stdout, L"TEST post kc: %i\n", kc);
 
         // Orient log output file stream.
         //
@@ -170,13 +170,13 @@ int main(int p0, char** p1) {
         // since one of the options determines the log output file name.
         orient((void*) LOG_OUTPUT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
-    fwprintf(stderr, L"TEST cyboi 0: %i\n", kc);
+    fwprintf(stdout, L"TEST cyboi 0: %i\n", kc);
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run cyboi.");
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Globalised global variables already.");
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Optionalised log file already.");
 
-    fwprintf(stderr, L"TEST cyboi 1: %i\n", kc);
+    fwprintf(stdout, L"TEST cyboi 1: %i\n", kc);
 
         if (m == *VERSION_OPERATION_MODE_CYBOI_MODEL) {
 
@@ -193,16 +193,16 @@ int main(int p0, char** p1) {
 
         } else if (m == *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL) {
 
-    fwprintf(stderr, L"TEST cyboi 2: %i\n", kc);
+    fwprintf(stdout, L"TEST cyboi 2: %i\n", kc);
 
             if ((k != *NULL_POINTER_MEMORY_MODEL) && (kc >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
-    fwprintf(stderr, L"TEST cyboi 3: %i\n", kc);
+    fwprintf(stdout, L"TEST cyboi 3: %i\n", kc);
 
                 // Manage system startup and shutdown using the given cybol knowledge file.
                 manage(k, (void*) &kc);
 
-    fwprintf(stderr, L"TEST cyboi 4: %i\n", kc);
+    fwprintf(stdout, L"TEST cyboi 4: %i\n", kc);
 
             } else {
 

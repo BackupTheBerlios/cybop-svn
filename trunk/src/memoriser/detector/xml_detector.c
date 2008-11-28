@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_detector.c,v $ $Revision: 1.2 $ $Date: 2008-10-28 22:27:17 $ $Author: christian $
+ * @version $RCSfile: xml_detector.c,v $ $Revision: 1.3 $ $Date: 2008-11-28 22:04:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -396,32 +396,32 @@ void detect_xml_start_tag_begin(void* p0, void* p1, void* p2) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml start tag begin.");
 
-    fwprintf(stderr, L"TEST detect xml start tag begin rem: %i\n", *rem);
-    fwprintf(stderr, L"TEST detect xml start tag begin START_TAG_BEGIN_XML_NAME_COUNT: %i\n", *START_TAG_BEGIN_XML_NAME_COUNT);
+    fwprintf(stdout, L"TEST detect xml start tag begin rem: %i\n", *rem);
+    fwprintf(stdout, L"TEST detect xml start tag begin START_TAG_BEGIN_XML_NAME_COUNT: %i\n", *START_TAG_BEGIN_XML_NAME_COUNT);
 
                 if (*rem >= *START_TAG_BEGIN_XML_NAME_COUNT) {
 
-    fwprintf(stderr, L"TEST detect xml start tag begin pre r: %i\n", *r);
+    fwprintf(stdout, L"TEST detect xml start tag begin pre r: %i\n", *r);
 
                     compare_arrays(*pos, (void*) START_TAG_BEGIN_XML_NAME_COUNT, (void*) START_TAG_BEGIN_XML_NAME, (void*) START_TAG_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"TEST detect xml start tag begin post r: %i\n", *r);
+    fwprintf(stdout, L"TEST detect xml start tag begin post r: %i\n", *r);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST detect xml start tag begin pre pos: %i\n", *pos);
+    fwprintf(stdout, L"TEST detect xml start tag begin pre pos: %i\n", *pos);
 
                         // Increment current position.
                         *pos = *pos + (*START_TAG_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
 
-    fwprintf(stderr, L"TEST detect xml start tag begin post pos: %i\n", *pos);
+    fwprintf(stdout, L"TEST detect xml start tag begin post pos: %i\n", *pos);
 
-    fwprintf(stderr, L"TEST detect xml start tag begin pre rem: %i\n", *rem);
+    fwprintf(stdout, L"TEST detect xml start tag begin pre rem: %i\n", *rem);
 
                         // Decrement remaining count.
                         *rem = *rem - *START_TAG_BEGIN_XML_NAME_COUNT;
 
-    fwprintf(stderr, L"TEST detect xml start tag begin post rem: %i\n", *rem);
+    fwprintf(stdout, L"TEST detect xml start tag begin post rem: %i\n", *rem);
                     }
 
                 } else {

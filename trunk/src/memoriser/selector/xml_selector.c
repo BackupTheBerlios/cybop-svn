@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_selector.c,v $ $Revision: 1.3 $ $Date: 2008-11-14 23:21:18 $ $Author: christian $
+ * @version $RCSfile: xml_selector.c,v $ $Revision: 1.4 $ $Date: 2008-11-28 22:04:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -261,7 +261,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                 // Any "process" function called afterwards can rely on this and start processing right away.
                 //
 
-    fwprintf(stderr, L"TEST select element content 0 rem: %i\n", *rem);
+    fwprintf(stdout, L"TEST select element content 0 rem: %i\n", *rem);
 
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -315,13 +315,13 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST select element content 1 rem: %i\n", *rem);
+    fwprintf(stdout, L"TEST select element content 1 rem: %i\n", *rem);
 
                     detect_xml_start_tag_begin((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST select element content 2 rem: %i\n", *rem);
+    fwprintf(stdout, L"TEST select element content 2 rem: %i\n", *rem);
 
                         // The data contained in an XML element are added to the destination model.
                         process_xml_element(p0, p1, p2, p7, p8);

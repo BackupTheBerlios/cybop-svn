@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.11 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
+ * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.12 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -73,12 +73,12 @@ void read_stream_socket_data(void* p0, void* p1, void* p2, void* p3) {
                 errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
 /*??
-            fwprintf(stderr, L"TEST: sense socket thread client socket: %i \n", *ps);
+            fwprintf(stdout, L"TEST: sense socket thread client socket: %i \n", *ps);
 */
 
-    fwprintf(stderr, L"TEST pre b: %s \n", (char*) *b);
-    fwprintf(stderr, L"TEST pre bc: %i \n", *bc);
-    fwprintf(stderr, L"TEST pre bs: %i \n", *bs);
+    fwprintf(stdout, L"TEST pre b: %s \n", (char*) *b);
+    fwprintf(stdout, L"TEST pre bc: %i \n", *bc);
+    fwprintf(stdout, L"TEST pre bs: %i \n", *bs);
 
 /*??
                 // Receive message from client.
@@ -92,15 +92,15 @@ void read_stream_socket_data(void* p0, void* p1, void* p2, void* p3) {
                 *bc = recv(*ps, *b, *bs, *NUMBER_0_INTEGER_MEMORY_MODEL);
 */
 
-    fwprintf(stderr, L"TEST post b: %s \n", (char*) *b);
-    fwprintf(stderr, L"TEST post bc: %i \n", *bc);
-    fwprintf(stderr, L"TEST post bs: %i \n", *bs);
+    fwprintf(stdout, L"TEST post b: %s \n", (char*) *b);
+    fwprintf(stdout, L"TEST post bc: %i \n", *bc);
+    fwprintf(stdout, L"TEST post bs: %i \n", *bs);
 
                 if (*bc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Successfully sensed stream socket message.");
 
-                } else if (*bc = *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                } else if (*bc == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. No data could be sensed.");
 

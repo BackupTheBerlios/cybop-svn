@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.12 $ $Date: 2008-11-12 22:16:37 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.13 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -463,35 +463,35 @@ void decode_cybol_cybol_property(void* p0, void* p1, void* p2, void* p3, void* p
 
         if (pv != *NULL_POINTER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST decode compound cybol property p12: %i\n", pv);
-    fwprintf(stderr, L"TEST decode compound cybol property p13: %s\n", (char*) p13);
-    fwprintf(stderr, L"TEST decode compound cybol property p14: %i\n", *((int*) p14));
+    fwprintf(stdout, L"TEST decode compound cybol property p12: %i\n", pv);
+    fwprintf(stdout, L"TEST decode compound cybol property p13: %s\n", (char*) p13);
+    fwprintf(stdout, L"TEST decode compound cybol property p14: %i\n", *((int*) p14));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST decode compound cybol property NAME_ATTRIBUTE_AS_CHAR: %s\n", NAME_ATTRIBUTE_AS_CHAR);
-    fwprintf(stderr, L"TEST decode compound cybol property NAME_ATTRIBUTE_AS_CHAR_COUNT: %i\n", *((int*) NAME_ATTRIBUTE_AS_CHAR_COUNT));
+    fwprintf(stdout, L"TEST decode compound cybol property NAME_ATTRIBUTE_AS_CHAR: %s\n", NAME_ATTRIBUTE_AS_CHAR);
+    fwprintf(stdout, L"TEST decode compound cybol property NAME_ATTRIBUTE_AS_CHAR_COUNT: %i\n", *((int*) NAME_ATTRIBUTE_AS_CHAR_COUNT));
 
-    fwprintf(stderr, L"TEST decode compound cybol property 0: %i\n", r);
+    fwprintf(stdout, L"TEST decode compound cybol property 0: %i\n", r);
 
                 compare_arrays(p13, p14, (void*) NAME_ATTRIBUTE_AS_CHAR, (void*) NAME_ATTRIBUTE_AS_CHAR_COUNT, (void*) &r, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"TEST decode compound cybol property 1: %i\n", r);
+    fwprintf(stdout, L"TEST decode compound cybol property 1: %i\n", r);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST decode compound cybol property 2: %i\n", r);
+    fwprintf(stdout, L"TEST decode compound cybol property 2: %i\n", r);
 
                     // Determine temporary character array count.
                     int tmpc = strlen((char*) pv->content);
 
-    fwprintf(stderr, L"TEST decode compound cybol property 3 tmpc: %i\n", tmpc);
+    fwprintf(stdout, L"TEST decode compound cybol property 3 tmpc: %i\n", tmpc);
 
                     // Get source name.
                     decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) pv->content, (void*) &tmpc);
 
-    fwprintf(stderr, L"TEST decode compound cybol property name: %ls\n", *((wchar_t**) p0));
-    fwprintf(stderr, L"TEST decode compound cybol property name count: %i\n", *((int*) p1));
+    fwprintf(stdout, L"TEST decode compound cybol property name: %ls\n", *((wchar_t**) p0));
+    fwprintf(stdout, L"TEST decode compound cybol property name count: %i\n", *((int*) p1));
 
                     /*?? OLD solution. Delete later:
                     *n = pv->content;
@@ -659,7 +659,7 @@ void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode compound cybol node.");
 
-    fwprintf(stderr, L"TEST decode compound cybol node p3: %i\n", p3);
+    fwprintf(stdout, L"TEST decode compound cybol node p3: %i\n", p3);
 
             // The source name, channel, abstraction, model.
             void* sn = *NULL_POINTER_MEMORY_MODEL;
@@ -692,14 +692,14 @@ void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
             decode_cybol_cybol_properties((void*) &sn, (void*) &snc, (void*) &sns, (void*) &sc, (void*) &scc, (void*) &scs,
                 (void*) &sa, (void*) &sac, (void*) &sas, (void*) &sm, (void*) &smc, (void*) &sms, p3);
 
-    fwprintf(stderr, L"TEST decode compound cybol node sn: %ls\n", (wchar_t*) sn);
-    fwprintf(stderr, L"TEST decode compound cybol node snc: %i\n", snc);
-    fwprintf(stderr, L"TEST decode compound cybol node sc: %ls\n", (wchar_t*) sc);
-    fwprintf(stderr, L"TEST decode compound cybol node scc: %i\n", scc);
-    fwprintf(stderr, L"TEST decode compound cybol node sa: %ls\n", (wchar_t*) sa);
-    fwprintf(stderr, L"TEST decode compound cybol node sac: %i\n", sac);
-    fwprintf(stderr, L"TEST decode compound cybol node sm: %ls\n", (wchar_t*) sm);
-    fwprintf(stderr, L"TEST decode compound cybol node smc: %i\n", smc);
+    fwprintf(stdout, L"TEST decode compound cybol node sn: %ls\n", (wchar_t*) sn);
+    fwprintf(stdout, L"TEST decode compound cybol node snc: %i\n", snc);
+    fwprintf(stdout, L"TEST decode compound cybol node sc: %ls\n", (wchar_t*) sc);
+    fwprintf(stdout, L"TEST decode compound cybol node scc: %i\n", scc);
+    fwprintf(stdout, L"TEST decode compound cybol node sa: %ls\n", (wchar_t*) sa);
+    fwprintf(stdout, L"TEST decode compound cybol node sac: %i\n", sac);
+    fwprintf(stdout, L"TEST decode compound cybol node sm: %ls\n", (wchar_t*) sm);
+    fwprintf(stdout, L"TEST decode compound cybol node smc: %i\n", smc);
 
             //
             // Name.
@@ -715,8 +715,8 @@ void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Decode destination name.
             decode((void*) &dn, (void*) dnc, (void*) dns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sn, (void*) &snc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST decode compound cybol node dn: %ls\n", (wchar_t*) dn);
-    fwprintf(stderr, L"TEST decode compound cybol node dnc: %i\n", *dnc);
+    fwprintf(stdout, L"TEST decode compound cybol node dn: %ls\n", (wchar_t*) dn);
+    fwprintf(stdout, L"TEST decode compound cybol node dnc: %i\n", *dnc);
 
             //
             // Channel.
@@ -739,8 +739,8 @@ void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Decode destination abstraction.
             decode((void*) &da, (void*) dac, (void*) das, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sa, (void*) &sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST decode compound cybol node da: %ls\n", (wchar_t*) da);
-    fwprintf(stderr, L"TEST decode compound cybol node dac: %i\n", *dac);
+    fwprintf(stdout, L"TEST decode compound cybol node da: %ls\n", (wchar_t*) da);
+    fwprintf(stdout, L"TEST decode compound cybol node dac: %i\n", *dac);
 
             //
             // Model.
@@ -782,8 +782,8 @@ void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // For example, an "xdt" file is converted into a compound.
                 decode_abstraction((void*) &ra, (void*) &rac, *NULL_POINTER_MEMORY_MODEL, sa, (void*) &sac);
 
-    fwprintf(stderr, L"TEST decode compound cybol node ra: %ls\n", (wchar_t*) ra);
-    fwprintf(stderr, L"TEST decode compound cybol node rac: %i\n", rac);
+    fwprintf(stdout, L"TEST decode compound cybol node ra: %ls\n", (wchar_t*) ra);
+    fwprintf(stdout, L"TEST decode compound cybol node rac: %i\n", rac);
 
                 // The read model.
                 void* rm = *NULL_POINTER_MEMORY_MODEL;
@@ -796,8 +796,8 @@ void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Read read model as persistent byte array over channel.
                 read_data((void*) &rm, (void*) &rmc, (void*) &rms, sm, (void*) &smc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, sc, (void*) &scc);
 
-    fwprintf(stderr, L"TEST decode compound cybol node rm: %ls\n", (wchar_t*) rm);
-    fwprintf(stderr, L"TEST decode compound cybol node rmc: %i\n", rmc);
+    fwprintf(stdout, L"TEST decode compound cybol node rm: %ls\n", (wchar_t*) rm);
+    fwprintf(stdout, L"TEST decode compound cybol node rmc: %i\n", rmc);
 
                 // Allocate destination model.
                 allocate((void*) &dmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
@@ -816,8 +816,8 @@ void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             }
 
-    fwprintf(stderr, L"TEST decode compound cybol node dm: %i\n", dm);
-    fwprintf(stderr, L"TEST decode compound cybol node dmc: %i\n", *dmc);
+    fwprintf(stdout, L"TEST decode compound cybol node dm: %i\n", dm);
+    fwprintf(stdout, L"TEST decode compound cybol node dmc: %i\n", *dmc);
 
             //
             // Details.
@@ -840,8 +840,8 @@ void decode_cybol_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Decode destination details child node children.
                 decode_cybol_cybol_nodes((void*) &dd, (void*) ddc, (void*) dds, p3, p4);
 
-    fwprintf(stderr, L"TEST decode compound cybol node dd: %i\n", dd);
-    fwprintf(stderr, L"TEST decode compound cybol node ddc: %i\n", *ddc);
+    fwprintf(stdout, L"TEST decode compound cybol node dd: %i\n", dd);
+    fwprintf(stdout, L"TEST decode compound cybol node ddc: %i\n", *ddc);
             }
 
             // Add model to compound.
@@ -902,7 +902,7 @@ void decode_cybol_cybol_nodes(void* p0, void* p1, void* p2, void* p3, void* p4) 
                 break;
             }
 
-    fwprintf(stderr, L"TEST decode compound cybol nodes cc: %i\n", cc);
+    fwprintf(stdout, L"TEST decode compound cybol nodes cc: %i\n", cc);
 
             if (c->type == XML_ELEMENT_NODE) {
 
@@ -980,8 +980,8 @@ void decode_cybol_libxml2_parser_workaround(void* p0, void* p1, void* p2, void* 
                     // Add null termination character to terminated file name.
                     set_array_elements(tmp, (void*) &tmpc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"TEST decode tmp: %s\n", (char*) tmp);
-    fwprintf(stderr, L"TEST decode tmpc: %i\n", tmpc);
+    fwprintf(stdout, L"TEST decode tmp: %s\n", (char*) tmp);
+    fwprintf(stdout, L"TEST decode tmpc: %i\n", tmpc);
 
                     // Initialise the library.
                     // Check potential ABI mismatches between the version

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: initialiser.c,v $ $Revision: 1.26 $ $Date: 2008-10-24 22:07:25 $ $Author: christian $
+ * @version $RCSfile: initialiser.c,v $ $Revision: 1.27 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -106,11 +106,11 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // The "cybol" abstraction is needed since CYBOL files are to be used as knowledge source.
     decode_utf_8_unicode_character_vector((void*) &ma, (void*) mac, (void*) mas, (void*) ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST initialiser ma: %ls\n", (wchar_t*) ma);
-    fwprintf(stderr, L"TEST initialiser mac: %i\n", *mac);
+    fwprintf(stdout, L"TEST initialiser ma: %ls\n", (wchar_t*) ma);
+    fwprintf(stdout, L"TEST initialiser mac: %i\n", *mac);
 
-    fwprintf(stderr, L"TEST initialiser p4: %ls\n", (wchar_t*) p4);
-    fwprintf(stderr, L"TEST initialiser p5: %i\n", *((int*) p5));
+    fwprintf(stdout, L"TEST initialiser p4: %ls\n", (wchar_t*) p4);
+    fwprintf(stdout, L"TEST initialiser p5: %i\n", *((int*) p5));
 
     // Receive startup model model and details (read from file and decode).
     communicate_receiving_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds, p4, p5, ma, (void*) mac);

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -140,7 +140,7 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
                     // which may now be processed in the main thread of this system.
                     *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST sense gnu/linux console irq value: %i\n", *irq);
+    fwprintf(stdout, L"TEST sense gnu/linux console irq value: %i\n", *irq);
 
                     // Unlock gnu/linux console mutex.
                     pthread_mutex_unlock(mt);
@@ -212,7 +212,7 @@ void communicate_sensing_gnu_linux_console(void* p0) {
         // and processed in the system signal handler procedure
         // (situated in the controller/checker.c module).
 
-    fwprintf(stderr, L"TEST sense gnu/linux console irq pointer: %i\n", *irq);
+    fwprintf(stdout, L"TEST sense gnu/linux console irq pointer: %i\n", *irq);
 
         communicate_sensing_gnu_linux_console_message(*irq, *mt, *st, *is);
     }

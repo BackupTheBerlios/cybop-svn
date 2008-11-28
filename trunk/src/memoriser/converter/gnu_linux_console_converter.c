@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.27 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.28 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -213,17 +213,17 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode gnu/linux console.");
 
-    fwprintf(stderr, L"TEST decode gnu/linux console s: %s\n", (char*) p3);
-    fwprintf(stderr, L"TEST decode gnu/linux console sc: %i\n", *((int*) p4));
+    fwprintf(stdout, L"TEST decode gnu/linux console s: %s\n", (char*) p3);
+    fwprintf(stdout, L"TEST decode gnu/linux console sc: %i\n", *((int*) p4));
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST a0: %i\n", p3);
+    fwprintf(stdout, L"TEST a0: %i\n", p3);
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST a1: %i\n", p3);
+    fwprintf(stdout, L"TEST a1: %i\n", p3);
 
             if (*sc > *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT) {
 
@@ -235,35 +235,35 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
                 // since they would not be equal if their size differed.
                 compare_arrays(p3, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"TEST a2: %i\n", p3);
+    fwprintf(stdout, L"TEST a2: %i\n", p3);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST a3: %i\n", p3);
+    fwprintf(stdout, L"TEST a3: %i\n", p3);
 
                     // Initialise temporary character sequence with pointer to the
                     // first character AFTER the escape control sequence prefix.
                     void* t = p3 + (*ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
                     int tc = *sc - *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
 
-    fwprintf(stderr, L"TEST a4: %i\n", p3);
+    fwprintf(stdout, L"TEST a4: %i\n", p3);
 
                     decode_gnu_linux_console_escape_control_sequence(p0, p1, p2, t, (void*) &tc);
 
-    fwprintf(stderr, L"TEST a5: %i\n", p3);
+    fwprintf(stdout, L"TEST a5: %i\n", p3);
                 }
             }
         }
 
-    fwprintf(stderr, L"TEST b0: %i\n", p3);
+    fwprintf(stdout, L"TEST b0: %i\n", p3);
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stderr, L"TEST b1: %i\n", p3);
+    fwprintf(stdout, L"TEST b1: %i\n", p3);
 
             decode_gnu_linux_console_character(p0, p1, p2, p3, p4);
 
-    fwprintf(stderr, L"TEST b2: %i\n", p3);
+    fwprintf(stdout, L"TEST b2: %i\n", p3);
         }
 
     } else {

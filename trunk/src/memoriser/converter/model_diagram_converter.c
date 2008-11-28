@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.22 $ $Date: 2008-11-14 23:21:18 $ $Author: christian $
+ * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.23 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -166,7 +166,7 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram compound.");
 
-    fwprintf(stderr, L"TEST encode model diagram compound 0: %i\n", *((int*) p5));
+    fwprintf(stdout, L"TEST encode model diagram compound 0: %i\n", *((int*) p5));
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -185,7 +185,7 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
             void** dc = NULL_POINTER_MEMORY_MODEL;
             void** ds = NULL_POINTER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST encode model diagram compound 1 j: %i\n", j);
+    fwprintf(stdout, L"TEST encode model diagram compound 1 j: %i\n", j);
 
             // The new tree level.
             //
@@ -195,7 +195,7 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
             // Otherwise, it would never be decremented anymore leading to wrong indentation.
             int nl = *l + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST encode model diagram compound 2 nl: %i\n", nl);
+    fwprintf(stdout, L"TEST encode model diagram compound 2 nl: %i\n", nl);
 
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
@@ -204,7 +204,7 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
                     break;
                 }
 
-    fwprintf(stderr, L"TEST encode model diagram compound 3 j: %i\n", j);
+    fwprintf(stdout, L"TEST encode model diagram compound 3 j: %i\n", j);
 
                 // Get part abstraction, model, details at current index.
                 get_compound_element_by_index(p3, p4, (void*) &j,
@@ -213,20 +213,20 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
                     (void*) &m, (void*) &mc, (void*) &ms,
                     (void*) &d, (void*) &dc, (void*) &ds);
 
-    fwprintf(stderr, L"TEST encode model diagram compound 4 j: %i\n", j);
-    fwprintf(stderr, L"TEST encode model diagram compound 4 p1: %i\n", *((int*) p1));
-    fwprintf(stderr, L"TEST encode model diagram compound 4 p0: %i\n", p0);
-    fwprintf(stderr, L"TEST encode model diagram compound 4 p0 as wchar_t: %ls\n", *((wchar_t**) p0));
+    fwprintf(stdout, L"TEST encode model diagram compound 4 j: %i\n", j);
+    fwprintf(stdout, L"TEST encode model diagram compound 4 p1: %i\n", *((int*) p1));
+    fwprintf(stdout, L"TEST encode model diagram compound 4 p0: %i\n", p0);
+    fwprintf(stdout, L"TEST encode model diagram compound 4 p0 as wchar_t: %ls\n", *((wchar_t**) p0));
 
                 // Add line feed character to destination array.
                 append_wide_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-    fwprintf(stderr, L"TEST encode model diagram compound 5 j: %i\n", j);
+    fwprintf(stdout, L"TEST encode model diagram compound 5 j: %i\n", j);
 
                 // Encode part.
                 encode_model_diagram_node(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, (void*) &nl, p6);
 
-    fwprintf(stderr, L"TEST encode model diagram compound 6 j: %i\n", j);
+    fwprintf(stdout, L"TEST encode model diagram compound 6 j: %i\n", j);
 
                 // Increment loop variable.
                 j++;
@@ -272,22 +272,22 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram node.");
 
-    fwprintf(stderr, L"TEST encode model diagram 0: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 0: %i\n", *((int*) p11));
 
             // Add indentation.
             encode_model_diagram_indentation(p0, p1, p2, p11, p12);
 
-    fwprintf(stderr, L"TEST encode model diagram 1: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 1: %i\n", *((int*) p11));
 
             // Add part name to destination array.
             append_wide_character_vector(p0, p1, p2, p3, p4);
 
-    fwprintf(stderr, L"TEST encode model diagram 2: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 2: %i\n", *((int*) p11));
 
             // Add space character to destination array.
             append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-    fwprintf(stderr, L"TEST encode model diagram 3: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 3: %i\n", *((int*) p11));
 
             // Add pipe character to destination array.
             append_wide_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
@@ -301,7 +301,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             // The comparison result.
             int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST encode model diagram 4: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 4: %i\n", *((int*) p11));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -319,7 +319,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 }
             }
 
-    fwprintf(stderr, L"TEST encode model diagram 5: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 5: %i\n", *((int*) p11));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -337,7 +337,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 }
             }
 
-    fwprintf(stderr, L"TEST encode model diagram 6: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 6: %i\n", *((int*) p11));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -359,7 +359,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 }
             }
 
-    fwprintf(stderr, L"TEST encode model diagram 7: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 7: %i\n", *((int*) p11));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -381,7 +381,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 }
             }
 
-    fwprintf(stderr, L"TEST encode model diagram 8: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 8: %i\n", *((int*) p11));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -403,7 +403,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 }
             }
 
-    fwprintf(stderr, L"TEST encode model diagram 9: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 9: %i\n", *((int*) p11));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -425,7 +425,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 }
             }
 
-    fwprintf(stderr, L"TEST encode model diagram 10: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 10: %i\n", *((int*) p11));
 
             if (*dc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -435,7 +435,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 encode_model_diagram_compound(p0, p1, p2, p9, p10, p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
             }
 
-    fwprintf(stderr, L"TEST encode model diagram 11: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST encode model diagram 11: %i\n", *((int*) p11));
 
         } else {
 

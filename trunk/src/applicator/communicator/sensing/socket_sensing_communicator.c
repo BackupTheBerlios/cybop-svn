@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
+ * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.11 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -90,7 +90,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
 
                         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense socket message.");
 
-    fwprintf(stderr, L"TEST: sense (stream) socket server socket: %i \n", *os);
+    fwprintf(stdout, L"TEST: sense (stream) socket server socket: %i \n", *os);
 
                         // Accept client socket request and store client socket.
                         //
@@ -108,7 +108,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
                         // communication partner socket that initiated the connection.
                         *ps = accept(*os, (struct sockaddr*) p4, (socklen_t*) p5);
 
-    fwprintf(stderr, L"TEST: sense (stream) socket client partner socket ps: %i \n", *ps);
+    fwprintf(stdout, L"TEST: sense (stream) socket client partner socket ps: %i \n", *ps);
 
                         // CAUTION! Do NOT close client socket here!
                         // It is stored in the internal memory and only closed

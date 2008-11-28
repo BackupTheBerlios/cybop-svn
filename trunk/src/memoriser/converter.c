@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.61 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.62 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -156,9 +156,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
 
 //?? TEST BEGIN
-    fwprintf(stderr, L"TEST model diagram begin: %i\n", mc);
-    fwprintf(stderr, L"TEST model diagram mc: %i\n", mc);
-    fwprintf(stderr, L"TEST model diagram dc: %i\n", dc);
+    fwprintf(stdout, L"TEST model diagram begin: %i\n", mc);
+    fwprintf(stdout, L"TEST model diagram mc: %i\n", mc);
+    fwprintf(stdout, L"TEST model diagram dc: %i\n", dc);
             // The model diagram.
             void* md = *NULL_POINTER_MEMORY_MODEL;
             int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -169,7 +169,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 m, (void*) &mc, d, (void*) &dc);
-    fwprintf(stderr, L"TEST model diagram mdc: %i\n", mdc);
+    fwprintf(stdout, L"TEST model diagram mdc: %i\n", mdc);
             // The multibyte character stream.
             void* mb = *NULL_POINTER_MEMORY_MODEL;
             int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -178,7 +178,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
-    fwprintf(stderr, L"TEST model diagram mbc: %i\n", mbc);
+    fwprintf(stdout, L"TEST model diagram mbc: %i\n", mbc);
             // The file name.
             void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
             int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
@@ -189,7 +189,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
             deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    fwprintf(stderr, L"TEST model diagram end: %i\n", mc);
+    fwprintf(stdout, L"TEST model diagram end: %i\n", mc);
 //?? TEST END
 
             // Decode xml compound memory model into cyboi knowledge compound memory model.

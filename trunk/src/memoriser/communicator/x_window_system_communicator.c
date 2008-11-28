@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.25 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
+ * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.26 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -551,7 +551,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 (void*) &cd, (void*) &cdc, (void*) &cds,
                 *k, *kc);
 
-    fwprintf(stderr, L"TEST expose sense t: %i\n", t);
+    fwprintf(stdout, L"TEST expose sense t: %i\n", t);
 
             // Lock signal memory mutex.
             pthread_mutex_lock(*smt);
@@ -673,7 +673,7 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else if ((t == ButtonPress) || (t == ButtonRelease)) {
 
-    fwprintf(stderr, L"TEST button press sense t: %i\n", t);
+    fwprintf(stdout, L"TEST button press sense t: %i\n", t);
 
         //?? TODO: This is a temporary solution!
         //?? There is no meta information (such as position or size) known

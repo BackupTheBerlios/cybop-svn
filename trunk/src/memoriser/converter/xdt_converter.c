@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.37 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
+ * @version $RCSfile: xdt_converter.c,v $ $Revision: 1.38 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -414,9 +414,9 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
 /*??
                             // Test values.
-                            fwprintf(stderr, L"Test: Decode xdt record. Field size fs: %i\n", fs);
-                            fwprintf(stderr, L"Test: Decode xdt record. Field identification id: %i\n", fid);
-                            fwprintf(stderr, L"Test: Decode xdt record. Field content count fcc: %i\n", fcc);
+                            fwprintf(stdout, L"Test: Decode xdt record. Field size fs: %i\n", fs);
+                            fwprintf(stdout, L"Test: Decode xdt record. Field identification id: %i\n", fid);
+                            fwprintf(stdout, L"Test: Decode xdt record. Field content count fcc: %i\n", fcc);
 */
 
                             if (v == *NUMBER_1_INTEGER_MEMORY_MODEL) {
@@ -645,9 +645,9 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
 /*??
                                             // Test values.
-                                            fwprintf(stderr, L"Test: Decode xdt package. Record size rs: %i\n", rs);
-                                            fwprintf(stderr, L"Test: Decode xdt package. Record identification id: %i\n", rid);
-                                            fwprintf(stderr, L"Test: Decode xdt package. Record content count pfc: %i\n\n", *pfc);
+                                            fwprintf(stdout, L"Test: Decode xdt package. Record size rs: %i\n", rs);
+                                            fwprintf(stdout, L"Test: Decode xdt package. Record identification id: %i\n", rid);
+                                            fwprintf(stdout, L"Test: Decode xdt package. Record content count pfc: %i\n\n", *pfc);
 */
 
                                             if (rs > *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -672,8 +672,8 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
 /*??
                                                     // Test values.
-                                                    fwprintf(stderr, L"Test: Decode xdt package. Package header: %i\n", *ph);
-                                                    fwprintf(stderr, L"Test: Decode xdt package. Package header count: %i\n\n", *phc);
+                                                    fwprintf(stdout, L"Test: Decode xdt package. Package header: %i\n", *ph);
+                                                    fwprintf(stdout, L"Test: Decode xdt package. Package header count: %i\n\n", *phc);
 */
 
                                                     // Store xdt package content.
@@ -696,8 +696,8 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
 /*??
                                                     // Test values.
-                                                    fwprintf(stderr, L"Test: Decode xdt package. Package footer: %i\n", *pf);
-                                                    fwprintf(stderr, L"Test: Decode xdt package. Package footer count: %i\n\n", *pfc);
+                                                    fwprintf(stdout, L"Test: Decode xdt package. Package footer: %i\n", *pf);
+                                                    fwprintf(stdout, L"Test: Decode xdt package. Package footer count: %i\n\n", *pfc);
 */
 
                                                     // Decrement package content count.
@@ -915,7 +915,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
 /*??
         // Test values.
-        fwprintf(stderr, L"Test: Select xdt field. Field identification: %i\n", *id);
+        fwprintf(stdout, L"Test: Select xdt field. Field identification: %i\n", *id);
 */
 
         // The knowledge model name.
@@ -4294,9 +4294,9 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
 
 /*??
                 // Test values.
-                fwprintf(stderr, L"Test: Process xdt record. Field size fs: %i\n", fs);
-                fwprintf(stderr, L"Test: Process xdt record. Field identification id: %i\n", fid);
-                fwprintf(stderr, L"Test: Process xdt record. Field content count fcc: %i\n", fcc);
+                fwprintf(stdout, L"Test: Process xdt record. Field size fs: %i\n", fs);
+                fwprintf(stdout, L"Test: Process xdt record. Field identification id: %i\n", fid);
+                fwprintf(stdout, L"Test: Process xdt record. Field content count fcc: %i\n", fcc);
 */
 
                 if (v == *NUMBER_1_INTEGER_MEMORY_MODEL) {
@@ -4365,7 +4365,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
 /*??
         // Test values.
-        fwprintf(stderr, L"Test: Select xdt record. Record identification: %i\n", *id);
+        fwprintf(stdout, L"Test: Select xdt record. Record identification: %i\n", *id);
 */
 
         // The knowledge model name.
@@ -4691,9 +4691,9 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
 
 /*??
                 // Test values.
-                fwprintf(stderr, L"\nTest: Process xdt package. Record size rs: %i\n", rs);
-                fwprintf(stderr, L"Test: Process xdt package. Record identification id: %i\n", rid);
-                fwprintf(stderr, L"Test: Process xdt package. Record content count pfc: %i\n", rcc);
+                fwprintf(stdout, L"\nTest: Process xdt package. Record size rs: %i\n", rs);
+                fwprintf(stdout, L"Test: Process xdt package. Record identification id: %i\n", rid);
+                fwprintf(stdout, L"Test: Process xdt package. Record content count pfc: %i\n", rcc);
 */
 
                 if (rs > *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -4871,7 +4871,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
 /*??
                     // Test values.
-                    fwprintf(stderr, L"TEST xdt file source count: %i\n\n", *sc);
+                    fwprintf(stdout, L"TEST xdt file source count: %i\n\n", *sc);
 */
 
                     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
@@ -4891,10 +4891,10 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
 /*??
                         // Test values.
-                        fwprintf(stderr, L"TEST package size: %i\n", ps);
-                        fwprintf(stderr, L"TEST package header count: %i\n", phc);
-                        fwprintf(stderr, L"TEST package footer count: %i\n", pfc);
-                        fwprintf(stderr, L"TEST package content: %i\n", pcc);
+                        fwprintf(stdout, L"TEST package size: %i\n", ps);
+                        fwprintf(stdout, L"TEST package header count: %i\n", phc);
+                        fwprintf(stdout, L"TEST package footer count: %i\n", pfc);
+                        fwprintf(stdout, L"TEST package content: %i\n", pcc);
 */
 
                         if (ps > *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -4904,7 +4904,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
 /*??
                             // Test values.
-                            fwprintf(stderr, L"TEST package remaining bytes: %i\n\n", rem);
+                            fwprintf(stdout, L"TEST package remaining bytes: %i\n\n", rem);
 */
 
                             // Select xdt package.

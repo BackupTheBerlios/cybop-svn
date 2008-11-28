@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.12 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
+ * @version $RCSfile: socket_sending_communicator.c,v $ $Revision: 1.13 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -510,7 +510,7 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     // Get socket.
     communicate_sending_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
 
-    fwprintf(stderr, L"TEST: send socket: %i \n", **s);
+    fwprintf(stdout, L"TEST: send socket: %i \n", **s);
 */
 
     // Set non-blocking mode for socket.

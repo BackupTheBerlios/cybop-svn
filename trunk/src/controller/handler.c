@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: handler.c,v $ $Revision: 1.32 $ $Date: 2008-09-07 23:01:39 $ $Author: christian $
+ * @version $RCSfile: handler.c,v $ $Revision: 1.33 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -98,8 +98,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST handle a: %ls\n", (wchar_t*) p10);
-    fwprintf(stderr, L"TEST handle ac: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST handle a: %ls\n", (wchar_t*) p10);
+    fwprintf(stdout, L"TEST handle ac: %i\n", *((int*) p11));
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

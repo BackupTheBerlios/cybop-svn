@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_starting_maintainer.c,v $ $Revision: 1.9 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: socket_starting_maintainer.c,v $ $Revision: 1.10 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -839,7 +839,7 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 r = bind(*s, (struct sockaddr*) ia4, *((socklen_t*) as));
 
-    fwprintf(stderr, L"TEST: startup socket bind s: %i \n", *s);
+    fwprintf(stdout, L"TEST: startup socket bind s: %i \n", *s);
     sleep(2);
 
             } else if (an == AF_INET6) {
@@ -871,7 +871,7 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
                     // pending client connection requests.
                     r = listen(*s, *NUMBER_1_INTEGER_MEMORY_MODEL);
 
-    fwprintf(stderr, L"TEST: startup socket listen s: %i \n", *s);
+    fwprintf(stdout, L"TEST: startup socket listen s: %i \n", *s);
     sleep(2);
 
                     if (r < *NUMBER_0_INTEGER_MEMORY_MODEL) {

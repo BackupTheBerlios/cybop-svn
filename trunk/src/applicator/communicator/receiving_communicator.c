@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -121,17 +121,17 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
             // Get gnu/linux console input stream.
             get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &is, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"TEST receive pre m: %i\n", p3);
-    fwprintf(stderr, L"TEST receive pre m: %i\n", *((void**) p3));
-    fwprintf(stderr, L"TEST receive pre mc: %i\n", p4);
-    fwprintf(stderr, L"TEST receive pre mc: %i\n", *((int*) p4));
+    fwprintf(stdout, L"TEST receive pre m: %i\n", p3);
+    fwprintf(stdout, L"TEST receive pre m: %i\n", *((void**) p3));
+    fwprintf(stdout, L"TEST receive pre mc: %i\n", p4);
+    fwprintf(stdout, L"TEST receive pre mc: %i\n", *((int*) p4));
 
             communicate_receiving_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2);
 
-    fwprintf(stderr, L"TEST receive post m: %i\n", p3);
-    fwprintf(stderr, L"TEST receive post m: %i\n", *((void**) p3));
-    fwprintf(stderr, L"TEST receive post mc: %i\n", p4);
-    fwprintf(stderr, L"TEST receive post mc: %i\n", *((int*) p4));
+    fwprintf(stdout, L"TEST receive post m: %i\n", p3);
+    fwprintf(stdout, L"TEST receive post m: %i\n", *((void**) p3));
+    fwprintf(stdout, L"TEST receive post mc: %i\n", p4);
+    fwprintf(stdout, L"TEST receive post mc: %i\n", *((int*) p4));
         }
     }
 

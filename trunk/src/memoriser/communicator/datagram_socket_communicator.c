@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: datagram_socket_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
+ * @version $RCSfile: datagram_socket_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,11 +88,11 @@ void read_datagram_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Successfully read from datagram socket.");
 
-                        fwprintf(stderr, L"TEST b: %s \n", (char*) *b);
-                        fwprintf(stderr, L"TEST bc: %i \n", *bc);
-                        fwprintf(stderr, L"TEST bs: %i \n", *bs);
+                        fwprintf(stdout, L"TEST b: %s \n", (char*) *b);
+                        fwprintf(stdout, L"TEST bc: %i \n", *bc);
+                        fwprintf(stdout, L"TEST bs: %i \n", *bs);
 
-                    } else if (*bc = *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    } else if (*bc == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not read from datagram socket. No data could be sensed.");
 

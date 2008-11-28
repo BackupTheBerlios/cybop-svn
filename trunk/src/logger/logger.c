@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: logger.c,v $ $Revision: 1.21 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: logger.c,v $ $Revision: 1.22 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -82,21 +82,6 @@
 // a MUTEX has to be set BEFORE, so that the log output does not conflict
 // between the main program flow and threads.
 //
-
-//
-// Forward declarations.
-//
-
-/**
- * Sets the array elements.
- *
- * @param p0 the array
- * @param p1 the index
- * @param p2 the elements (Hand over as array!)
- * @param p3 the count
- * @param p4 the type
- */
-void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4);
 
 /**
  * Writes a terminated log message to the given output stream.
@@ -202,6 +187,95 @@ void log_get_level_name(void* p0, void* p1, void* p2) {
 }
 
 /**
+ * Sets the wide character array elements to the log message array.
+ *
+ * CAUTION! This function is an identical copy of the
+ * "set_wide_character_array_elements" function!
+ * This copy is necessary to avoid circular references between
+ * the logger and the "set_wide_character_array_elements" function,
+ * because the "set_wide_character_array_elements" function calls
+ * the logger and, if not this copy, vice versa.
+ *
+ * @param p0 the array
+ * @param p1 the index
+ * @param p2 the elements (Hand over as array!)
+ * @param p3 the elements count
+ */
+void log_set_wide_character_array_elements(void* p0, void* p1, void* p2, void* p3) {
+
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* c = (int*) p3;
+
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+                int* i = (int*) p1;
+
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                    // The destination base.
+                    void* db = (void*) (p0 + (*i * *WIDE_CHARACTER_PRIMITIVE_SIZE));
+                    // The source element.
+                    wchar_t* se = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
+                    // The destination element.
+                    wchar_t* de = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
+                    // The loop variable.
+                    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    // The size.
+                    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                        if (j >= *c) {
+
+                            break;
+                        }
+
+                        // Determine size.
+                        s = j * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+
+                        // Determine source and destination element.
+                        se = (wchar_t*) (p2 + s);
+                        de = (wchar_t*) (db + s);
+
+                        // Set destination element.
+                        *de = *se;
+
+                        j++;
+                    }
+
+                } else {
+
+                    // CAUTION! DO NOT use logging functionality here!
+                    // The logger cannot log itself.
+                    log_write_terminated_message((void*) stdout, L"Error: Could not set log wide character array elements. The array is null.\n");
+                }
+
+            } else {
+
+                // CAUTION! DO NOT use logging functionality here!
+                // The logger cannot log itself.
+                log_write_terminated_message((void*) stdout, L"Error: Could not set log wide character array elements. The index is null.\n");
+            }
+
+        } else {
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger cannot log itself.
+            log_write_terminated_message((void*) stdout, L"Error: Could not set log wide character array elements. The elements is null.\n");
+        }
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger cannot log itself.
+        log_write_terminated_message((void*) stdout, L"Error: Could not set log wide character array elements. The elements count is null.\n");
+    }
+}
+
+/**
  * Logs the given message.
  *
  * CAUTION! This function cannot be called "log" as that name
@@ -286,35 +360,37 @@ void log_message(void* p0, void* p1, void* p2) {
                     // See module "log_level_name_constants.c"!
 
                     // Copy log level.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, ln, (void*) &lnc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    log_set_wide_character_array_elements((void*) LOG_MESSAGE, (void*) &i, ln, (void*) &lnc);
                     // Increment index.
                     i = i + lnc;
+
                     // Copy colon.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) COLON_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    log_set_wide_character_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) COLON_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                     // Increment index.
                     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
+
                     // Copy space.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    log_set_wide_character_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                     // Increment index.
                     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
+
                     // Copy log message.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, p1, (void*) &mmc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    log_set_wide_character_array_elements((void*) LOG_MESSAGE, (void*) &i, p1, (void*) &mmc);
                     // Increment index.
                     i = i + mmc;
+
                     // Copy line feed control wide character.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    log_set_wide_character_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                     // Increment index.
                     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
+
                     // Copy null termination wide character.
-                    set_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    log_set_wide_character_array_elements((void*) LOG_MESSAGE, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                     // Log message.
-                    log_write_terminated_message((void*) stdout, (void*) LOG_MESSAGE);
+                    log_write_terminated_message((void*) LOG_OUTPUT, (void*) LOG_MESSAGE);
 
                 } else {
-
-                    // The log output value of type FILE is null.
-                    // Probably, it was not opened correctly in module "optionaliser.c".
 
                     // CAUTION! DO NOT use logging functionality here!
                     // The logger cannot log itself.

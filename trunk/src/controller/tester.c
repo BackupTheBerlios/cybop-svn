@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: tester.c,v $ $Revision: 1.29 $ $Date: 2008-11-13 21:42:30 $ $Author: christian $
+ * @version $RCSfile: tester.c,v $ $Revision: 1.30 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -136,12 +136,12 @@ void test_preprocessor_directives() {
 /**
  * Tests the standard output and error stream.
  */
-void test_stdout_stderr() {
+void test_stdout_stdout() {
 
-    log_write_terminated_message((void*) stdout, L"Test stdout stderr:\n");
+    log_write_terminated_message((void*) stdout, L"Test stdout stdout:\n");
 
     log_write_terminated_message((void*) stdout, L"test stdout ok\n");
-    log_write_terminated_message((void*) stderr, L"test stderr ok\n");
+    log_write_terminated_message((void*) stdout, L"test stdout ok\n");
 }
 
 /**
@@ -151,13 +151,13 @@ void test_type_sizes() {
 
     log_write_terminated_message((void*) stdout, L"Test type sizes:\n");
 
-    fwprintf(stderr, L"null: %i\n", *NULL_POINTER_MEMORY_MODEL);
-    fwprintf(stderr, L"int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
-    fwprintf(stderr, L"char size: %i\n", *CHARACTER_PRIMITIVE_SIZE);
-    fwprintf(stderr, L"wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
-    fwprintf(stderr, L"unsigned long size: %i\n", *UNSIGNED_LONG_PRIMITIVE_SIZE);
-    fwprintf(stderr, L"void* size: %i\n", *POINTER_PRIMITIVE_SIZE);
-    fwprintf(stderr, L"double size: %i\n", *DOUBLE_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"null: %i\n", *NULL_POINTER_MEMORY_MODEL);
+    fwprintf(stdout, L"int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"char size: %i\n", *CHARACTER_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"unsigned long size: %i\n", *UNSIGNED_LONG_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"void* size: %i\n", *POINTER_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"double size: %i\n", *DOUBLE_PRIMITIVE_SIZE);
 }
 
 /**
@@ -199,14 +199,14 @@ void test_pointer_addition() {
     void* v6 = ((void*) v) + *NUMBER_1_INTEGER_MEMORY_MODEL; // increased by 1
     void* v7 = (void*) (v + *NUMBER_1_INTEGER_MEMORY_MODEL); // increased by 1
 
-    fwprintf(stderr, L"void pointer v0: %i\n", v0);
-    fwprintf(stderr, L"void pointer v1: %i\n", v1);
-    fwprintf(stderr, L"void pointer v2: %i\n", v2);
-    fwprintf(stderr, L"void pointer v3: %i\n", v3);
-    fwprintf(stderr, L"void pointer v4: %i\n", v4);
-    fwprintf(stderr, L"void pointer v5: %i\n", v5);
-    fwprintf(stderr, L"void pointer v6: %i\n", v6);
-    fwprintf(stderr, L"void pointer v7: %i\n", v7);
+    fwprintf(stdout, L"void pointer v0: %i\n", v0);
+    fwprintf(stdout, L"void pointer v1: %i\n", v1);
+    fwprintf(stdout, L"void pointer v2: %i\n", v2);
+    fwprintf(stdout, L"void pointer v3: %i\n", v3);
+    fwprintf(stdout, L"void pointer v4: %i\n", v4);
+    fwprintf(stdout, L"void pointer v5: %i\n", v5);
+    fwprintf(stdout, L"void pointer v6: %i\n", v6);
+    fwprintf(stdout, L"void pointer v7: %i\n", v7);
 
     // Calculate int pointer addresses using various formulas and casts.
     int* i0 = i; // unchanged
@@ -218,14 +218,14 @@ void test_pointer_addition() {
     int* i6 = ((void*) i) + *NUMBER_1_INTEGER_MEMORY_MODEL; // increased by 1
     int* i7 = (void*) (i + *NUMBER_1_INTEGER_MEMORY_MODEL); // increased by 4
 
-    fwprintf(stderr, L"int pointer i0: %i\n", i0);
-    fwprintf(stderr, L"int pointer i1: %i\n", i1);
-    fwprintf(stderr, L"int pointer i2: %i\n", i2);
-    fwprintf(stderr, L"int pointer i3: %i\n", i3);
-    fwprintf(stderr, L"int pointer i4: %i\n", i4);
-    fwprintf(stderr, L"int pointer i5: %i\n", i5);
-    fwprintf(stderr, L"int pointer i6: %i\n", i6);
-    fwprintf(stderr, L"int pointer i7: %i\n", i7);
+    fwprintf(stdout, L"int pointer i0: %i\n", i0);
+    fwprintf(stdout, L"int pointer i1: %i\n", i1);
+    fwprintf(stdout, L"int pointer i2: %i\n", i2);
+    fwprintf(stdout, L"int pointer i3: %i\n", i3);
+    fwprintf(stdout, L"int pointer i4: %i\n", i4);
+    fwprintf(stdout, L"int pointer i5: %i\n", i5);
+    fwprintf(stdout, L"int pointer i6: %i\n", i6);
+    fwprintf(stdout, L"int pointer i7: %i\n", i7);
 
     // Calculate double pointer addresses using various formulas and casts.
     double* d0 = d; // unchanged
@@ -237,14 +237,14 @@ void test_pointer_addition() {
     double* d6 = ((void*) d) + *NUMBER_1_INTEGER_MEMORY_MODEL; // increased by 1
     double* d7 = (void*) (d + *NUMBER_1_INTEGER_MEMORY_MODEL); // increased by 8
 
-    fwprintf(stderr, L"double pointer d0: %i\n", d0);
-    fwprintf(stderr, L"double pointer d1: %i\n", d1);
-    fwprintf(stderr, L"double pointer d2: %i\n", d2);
-    fwprintf(stderr, L"double pointer d3: %i\n", d3);
-    fwprintf(stderr, L"double pointer d4: %i\n", d4);
-    fwprintf(stderr, L"double pointer d5: %i\n", d5);
-    fwprintf(stderr, L"double pointer d6: %i\n", d6);
-    fwprintf(stderr, L"double pointer d7: %i\n", d7);
+    fwprintf(stdout, L"double pointer d0: %i\n", d0);
+    fwprintf(stdout, L"double pointer d1: %i\n", d1);
+    fwprintf(stdout, L"double pointer d2: %i\n", d2);
+    fwprintf(stdout, L"double pointer d3: %i\n", d3);
+    fwprintf(stdout, L"double pointer d4: %i\n", d4);
+    fwprintf(stdout, L"double pointer d5: %i\n", d5);
+    fwprintf(stdout, L"double pointer d6: %i\n", d6);
+    fwprintf(stdout, L"double pointer d7: %i\n", d7);
 
     // Calculate char pointer addresses using various formulas and casts.
     char* c0 = c; // unchanged
@@ -256,14 +256,14 @@ void test_pointer_addition() {
     char* c6 = ((void*) c) + *NUMBER_1_INTEGER_MEMORY_MODEL; // increased by 1
     char* c7 = (void*) (c + *NUMBER_1_INTEGER_MEMORY_MODEL); // increased by 1
 
-    fwprintf(stderr, L"char pointer c0: %i\n", c0);
-    fwprintf(stderr, L"char pointer c1: %i\n", c1);
-    fwprintf(stderr, L"char pointer c2: %i\n", c2);
-    fwprintf(stderr, L"char pointer c3: %i\n", c3);
-    fwprintf(stderr, L"char pointer c4: %i\n", c4);
-    fwprintf(stderr, L"char pointer c5: %i\n", c5);
-    fwprintf(stderr, L"char pointer c6: %i\n", c6);
-    fwprintf(stderr, L"char pointer c7: %i\n", c7);
+    fwprintf(stdout, L"char pointer c0: %i\n", c0);
+    fwprintf(stdout, L"char pointer c1: %i\n", c1);
+    fwprintf(stdout, L"char pointer c2: %i\n", c2);
+    fwprintf(stdout, L"char pointer c3: %i\n", c3);
+    fwprintf(stdout, L"char pointer c4: %i\n", c4);
+    fwprintf(stdout, L"char pointer c5: %i\n", c5);
+    fwprintf(stdout, L"char pointer c6: %i\n", c6);
+    fwprintf(stdout, L"char pointer c7: %i\n", c7);
 
     // Calculate wchar_t pointer addresses using various formulas and casts.
     wchar_t* wc0 = wc; // unchanged
@@ -275,14 +275,14 @@ void test_pointer_addition() {
     wchar_t* wc6 = ((void*) wc) + *NUMBER_1_INTEGER_MEMORY_MODEL; // increased by 1
     wchar_t* wc7 = (void*) (wc + *NUMBER_1_INTEGER_MEMORY_MODEL); // increased by 4
 
-    fwprintf(stderr, L"wchar_t pointer wc0: %i\n", wc0);
-    fwprintf(stderr, L"wchar_t pointer wc1: %i\n", wc1);
-    fwprintf(stderr, L"wchar_t pointer wc2: %i\n", wc2);
-    fwprintf(stderr, L"wchar_t pointer wc3: %i\n", wc3);
-    fwprintf(stderr, L"wchar_t pointer wc4: %i\n", wc4);
-    fwprintf(stderr, L"wchar_t pointer wc5: %i\n", wc5);
-    fwprintf(stderr, L"wchar_t pointer wc6: %i\n", wc6);
-    fwprintf(stderr, L"wchar_t pointer wc7: %i\n", wc7);
+    fwprintf(stdout, L"wchar_t pointer wc0: %i\n", wc0);
+    fwprintf(stdout, L"wchar_t pointer wc1: %i\n", wc1);
+    fwprintf(stdout, L"wchar_t pointer wc2: %i\n", wc2);
+    fwprintf(stdout, L"wchar_t pointer wc3: %i\n", wc3);
+    fwprintf(stdout, L"wchar_t pointer wc4: %i\n", wc4);
+    fwprintf(stdout, L"wchar_t pointer wc5: %i\n", wc5);
+    fwprintf(stdout, L"wchar_t pointer wc6: %i\n", wc6);
+    fwprintf(stdout, L"wchar_t pointer wc7: %i\n", wc7);
 
     // Calculate unsigned long pointer addresses using various formulas and casts.
     unsigned long* ul0 = ul; // unchanged
@@ -294,14 +294,14 @@ void test_pointer_addition() {
     unsigned long* ul6 = ((void*) ul) + *NUMBER_1_INTEGER_MEMORY_MODEL; // increased by 1
     unsigned long* ul7 = (void*) (ul + *NUMBER_1_INTEGER_MEMORY_MODEL); // increased by 4
 
-    fwprintf(stderr, L"unsigned long pointer ul0: %i\n", ul0);
-    fwprintf(stderr, L"unsigned long pointer ul1: %i\n", ul1);
-    fwprintf(stderr, L"unsigned long pointer ul2: %i\n", ul2);
-    fwprintf(stderr, L"unsigned long pointer ul3: %i\n", ul3);
-    fwprintf(stderr, L"unsigned long pointer ul4: %i\n", ul4);
-    fwprintf(stderr, L"unsigned long pointer ul5: %i\n", ul5);
-    fwprintf(stderr, L"unsigned long pointer ul6: %i\n", ul6);
-    fwprintf(stderr, L"unsigned long pointer ul7: %i\n", ul7);
+    fwprintf(stdout, L"unsigned long pointer ul0: %i\n", ul0);
+    fwprintf(stdout, L"unsigned long pointer ul1: %i\n", ul1);
+    fwprintf(stdout, L"unsigned long pointer ul2: %i\n", ul2);
+    fwprintf(stdout, L"unsigned long pointer ul3: %i\n", ul3);
+    fwprintf(stdout, L"unsigned long pointer ul4: %i\n", ul4);
+    fwprintf(stdout, L"unsigned long pointer ul5: %i\n", ul5);
+    fwprintf(stdout, L"unsigned long pointer ul6: %i\n", ul6);
+    fwprintf(stdout, L"unsigned long pointer ul7: %i\n", ul7);
 
     // Free arrays.
     free(v);
@@ -335,9 +335,9 @@ void test_integer_array() {
     *ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
     allocate((void*) &m, (void*) ms, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"pre mc: %i\n", *mc);
-    fwprintf(stderr, L"pre ms: %i\n", *ms);
-    fwprintf(stderr, L"pre m: %i\n", *m);
+    fwprintf(stdout, L"pre mc: %i\n", *mc);
+    fwprintf(stdout, L"pre ms: %i\n", *ms);
+    fwprintf(stdout, L"pre m: %i\n", *m);
 
     //
     // Use either the "decode" function or the three "set" functions below.
@@ -365,12 +365,12 @@ void test_integer_array() {
     get_element(m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &result1, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
     get_element(m, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &result2, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"post mc: %i\n", *mc);
-    fwprintf(stderr, L"post ms: %i\n", *ms);
-    fwprintf(stderr, L"post m: %i\n", *m);
-    fwprintf(stderr, L"post result0: %i\n", *result0);
-    fwprintf(stderr, L"post result1: %i\n", *result1);
-    fwprintf(stderr, L"post result2: %i\n", *result2);
+    fwprintf(stdout, L"post mc: %i\n", *mc);
+    fwprintf(stdout, L"post ms: %i\n", *ms);
+    fwprintf(stdout, L"post m: %i\n", *m);
+    fwprintf(stdout, L"post result0: %i\n", *result0);
+    fwprintf(stdout, L"post result1: %i\n", *result1);
+    fwprintf(stdout, L"post result2: %i\n", *result2);
 
     // Deallocate test knowledge model.
     deallocate((void*) &m, (void*) ms, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
@@ -779,7 +779,7 @@ void test_character_array_single_element() {
         }
 
         catest = (wchar_t*) (c + i);
-        fwprintf(stderr, L"ca: %c\n", *catest);
+        fwprintf(stdout, L"ca: %c\n", *catest);
 
         i++;
     }
@@ -882,7 +882,7 @@ void test_pointer_return() {
     get_array_elements(c, (void*) NUMBER_6_INTEGER_MEMORY_MODEL, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Print result (character array).
-    fwprintf(stderr, L"r: %ls\n", (wchar_t*) r);
+    fwprintf(stdout, L"r: %ls\n", (wchar_t*) r);
 
     // Destroy character array.
     deallocate((void*) &cs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
@@ -903,7 +903,7 @@ void test_pointer_array() {
     void* c = (void*) L"Hello World!";
     int cs = *NUMBER_13_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"c: %ls\n", (wchar_t*) c);
+    fwprintf(stdout, L"c: %ls\n", (wchar_t*) c);
 
     // The pointer array.
     void** p = NULL_POINTER_MEMORY_MODEL;
@@ -912,7 +912,7 @@ void test_pointer_array() {
     // Create pointer array.
     allocate_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"p: %i\n", p);
+    fwprintf(stdout, L"p: %i\n", p);
 
     // The result array.
     void** r = NULL_POINTER_MEMORY_MODEL;
@@ -921,22 +921,22 @@ void test_pointer_array() {
     // Testing.
     //
 
-    fwprintf(stderr, L"p[0] before set: %i\n", p[0]);
-    fwprintf(stderr, L"p[1] before set: %i\n", p[1]);
+    fwprintf(stdout, L"p[0] before set: %i\n", p[0]);
+    fwprintf(stdout, L"p[1] before set: %i\n", p[1]);
 
     // Set character array in pointer array.
     // Hand over character array as reference, because pointer array is expected!
     set_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"p[0] after set: %i\n", p[0]);
-    fwprintf(stderr, L"p[1] after set: %i\n", p[1]);
+    fwprintf(stdout, L"p[0] after set: %i\n", p[0]);
+    fwprintf(stdout, L"p[1] after set: %i\n", p[1]);
 
     // Get character array from pointer array.
     get_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &r, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Print result (character array).
-    fwprintf(stderr, L"r pointer: %i\n", *r);
-    fwprintf(stderr, L"r string: %ls\n", (wchar_t*) *r);
+    fwprintf(stdout, L"r pointer: %i\n", *r);
+    fwprintf(stdout, L"r string: %ls\n", (wchar_t*) *r);
 
     //
     // Destruction.
@@ -984,8 +984,8 @@ void test_pointer_array_with_null_values() {
     fwprintf(stdout, L"Result pointer as simple pointer r3: %i\n", r3);
     fwprintf(stdout, L"Result pointer as character r4: %c\n", **r4);
 
-    fwprintf(stderr, L"NULL_POINTER_MEMORY_MODEL: %i \n", NULL_POINTER_MEMORY_MODEL);
-    fwprintf(stderr, L"*NULL_POINTER_MEMORY_MODEL: %i \n", *NULL_POINTER_MEMORY_MODEL);
+    fwprintf(stdout, L"NULL_POINTER_MEMORY_MODEL: %i \n", NULL_POINTER_MEMORY_MODEL);
+    fwprintf(stdout, L"*NULL_POINTER_MEMORY_MODEL: %i \n", *NULL_POINTER_MEMORY_MODEL);
 
     deallocate_pointer_array((void*) &a, (void*) &as);
 }
@@ -1017,11 +1017,11 @@ void test_file_read() {
     allocate_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
 //??    read_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
 
-    fwprintf(stderr, L"a: %i\n", a);
-    fwprintf(stderr, L"as: %i\n", as);
-    fwprintf(stderr, L"ac: %i\n", ac);
-    fwprintf(stderr, L"fn: %i\n", fn);
-    fwprintf(stderr, L"fnc: %i\n", fnc);
+    fwprintf(stdout, L"a: %i\n", a);
+    fwprintf(stdout, L"as: %i\n", as);
+    fwprintf(stdout, L"ac: %i\n", ac);
+    fwprintf(stdout, L"fn: %i\n", fn);
+    fwprintf(stdout, L"fnc: %i\n", fnc);
 
     int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
     char* c = (char*) *NULL_POINTER_MEMORY_MODEL;
@@ -1199,9 +1199,9 @@ void test_decode_integer_vector() {
     // Get integer at index 2 from integer vector.
     get_element(d, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i2, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"Integer 0: %i\n", *i0);
-    fwprintf(stderr, L"Integer 1: %i\n", *i1);
-    fwprintf(stderr, L"Integer 2: %i\n", *i2);
+    fwprintf(stdout, L"Integer 0: %i\n", *i0);
+    fwprintf(stdout, L"Integer 1: %i\n", *i1);
+    fwprintf(stdout, L"Integer 2: %i\n", *i2);
 
     // Deallocate integer vector.
     deallocate((void*) &d, (void*) &ds, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
@@ -1314,9 +1314,9 @@ void test_decode_utf8() {
     // Read persistent byte stream over channel.
     read_data((void*) &rm, (void*) &rmc, (void*) &rms, (void*) f, (void*) &fc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
-    fwprintf(stderr, L"TEST rms: %i\n", rms);
-    fwprintf(stderr, L"TEST rmc: %i\n", rmc);
-    fwprintf(stderr, L"TEST rm: %s\n", (wchar_t*) rm);
+    fwprintf(stdout, L"TEST rms: %i\n", rms);
+    fwprintf(stdout, L"TEST rmc: %i\n", rmc);
+    fwprintf(stdout, L"TEST rm: %s\n", (wchar_t*) rm);
 
     // The wide character model.
     void* wm = *NULL_POINTER_MEMORY_MODEL;
@@ -1330,8 +1330,8 @@ void test_decode_utf8() {
     //?? TEST only! DELETE LATER!
 //??    decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, (void*) ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST wm: %ls\n", (wchar_t*) wm);
-    fwprintf(stderr, L"TEST wmc: %i\n", wmc);
+    fwprintf(stdout, L"TEST wm: %ls\n", (wchar_t*) wm);
+    fwprintf(stdout, L"TEST wmc: %i\n", wmc);
 
     // Deallocate read model.
     deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -1410,15 +1410,15 @@ void test() {
 
     // How to use printf to check parameter values.
     // The printf function uses stdout for output, but nothing appears on console.
-    // Therefore, fprintf is used and stderr is given for output.
+    // Therefore, fprintf is used and stdout is given for output.
     // Example:
     // int x = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // fwprintf(stderr, L"The value of x is: %d\n", x);
+    // fwprintf(stdout, L"The value of x is: %d\n", x);
 
 //??    test_logger();
 //??    test_inline_assembler_code();
 //??    test_preprocessor_directives();
-//??    test_stdout_stderr();
+//??    test_stdout_stdout();
 //??    test_type_sizes();
 //??    test_pointer_addition();
 //??    test_integer_array();

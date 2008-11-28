@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,8 +79,8 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message via socket.");
 
-    fwprintf(stderr, L"TEST 1 l: %s \n", (wchar_t*) p8);
-    fwprintf(stderr, L"TEST 1 lc: %i \n", *((int*) p9));
+    fwprintf(stdout, L"TEST 1 l: %s \n", (wchar_t*) p8);
+    fwprintf(stdout, L"TEST 1 lc: %i \n", *((int*) p9));
 
     read_stream_socket(p0, p1, p2, p3);
 
@@ -92,8 +92,8 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     // compound model and details being handed over as parameters.
 //??    decode(p0, p1, p2, p3, p4, p5, *b, p29, p12, p13, p8, p9);
 
-    fwprintf(stderr, L"TEST 2 l: %s \n", (wchar_t*) p8);
-    fwprintf(stderr, L"TEST 2 lc: %i \n", *((int*) p9));
+    fwprintf(stdout, L"TEST 2 l: %s \n", (wchar_t*) p8);
+    fwprintf(stdout, L"TEST 2 lc: %i \n", *((int*) p9));
 
 /*??
     // The action name, abstraction, model, details.
@@ -123,16 +123,16 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
         (void*) &ad, (void*) &adc, (void*) &ads,
         p0, p1);
 
-    fwprintf(stderr, L"TEST 3 bc: %i \n", *((int*) p29));
-    fwprintf(stderr, L"TEST 3 bs: %i \n", *((int*) p30));
+    fwprintf(stdout, L"TEST 3 bc: %i \n", *((int*) p29));
+    fwprintf(stdout, L"TEST 3 bs: %i \n", *((int*) p30));
 
     if (*am != *NULL_POINTER_MEMORY_MODEL) {
 
         // The action parameter is NOT null, so it
         // will be used for generating a signal.
 
-    fwprintf(stderr, L"TEST 4 am: %s \n", (wchar_t*) *am);
-    fwprintf(stderr, L"TEST 4 amc: %i \n", **((int**) amc));
+    fwprintf(stdout, L"TEST 4 am: %s \n", (wchar_t*) *am);
+    fwprintf(stdout, L"TEST 4 amc: %i \n", **((int**) amc));
 
         // Receive socket signal.
         receive_socket_signal(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, *am, *amc, p23, p26);
@@ -142,8 +142,8 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not receive socket message. The action parameter is null.");
     }
 
-    fwprintf(stderr, L"TEST 5 bc: %i \n", *((int*) p29));
-    fwprintf(stderr, L"TEST 5 bs: %i \n", *((int*) p30));
+    fwprintf(stdout, L"TEST 5 bc: %i \n", *((int*) p29));
+    fwprintf(stdout, L"TEST 5 bs: %i \n", *((int*) p30));
 */
 
     /** The index parameter. */
@@ -192,14 +192,14 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
 */
 
 /*??
-    fwprintf(stderr, L"TEST: receive socket signal actual command n: %s \n", (wchar_t*) *n);
-    fwprintf(stderr, L"TEST: receive socket signal actual command nc: %i \n", **((int**) nc));
-    fwprintf(stderr, L"TEST: receive socket signal actual command a: %s \n", (wchar_t*) *a);
-    fwprintf(stderr, L"TEST: receive socket signal actual command ac: %i \n", **((int**) ac));
-    fwprintf(stderr, L"TEST: receive socket signal actual command m: %s \n", (wchar_t*) *m);
-    fwprintf(stderr, L"TEST: receive socket signal actual command mc: %i \n", **((int**) mc));
-    fwprintf(stderr, L"TEST: receive socket signal actual command d: %i \n", *d);
-    fwprintf(stderr, L"TEST: receive socket signal actual command dc: %i \n", **((int**) dc));
+    fwprintf(stdout, L"TEST: receive socket signal actual command n: %s \n", (wchar_t*) *n);
+    fwprintf(stdout, L"TEST: receive socket signal actual command nc: %i \n", **((int**) nc));
+    fwprintf(stdout, L"TEST: receive socket signal actual command a: %s \n", (wchar_t*) *a);
+    fwprintf(stdout, L"TEST: receive socket signal actual command ac: %i \n", **((int**) ac));
+    fwprintf(stdout, L"TEST: receive socket signal actual command m: %s \n", (wchar_t*) *m);
+    fwprintf(stdout, L"TEST: receive socket signal actual command mc: %i \n", **((int**) mc));
+    fwprintf(stdout, L"TEST: receive socket signal actual command d: %i \n", *d);
+    fwprintf(stdout, L"TEST: receive socket signal actual command dc: %i \n", **((int**) dc));
 */
 
 /*??
@@ -214,8 +214,8 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     //?? possibly move it away from "signal_memory_accessor.c" into another file.
     set_new_signal_identification((void*) &s, p18);
 
-    fwprintf(stderr, L"TEST: receive socket signal p18: %i \n", *((int*) p18));
-    fwprintf(stderr, L"TEST: receive socket signal sock: %i \n", **((int**) s));
+    fwprintf(stdout, L"TEST: receive socket signal p18: %i \n", *((int*) p18));
+    fwprintf(stdout, L"TEST: receive socket signal sock: %i \n", **((int**) s));
 
     // Set signal into signal memory.
     set_signal(p3, p4, p5, a, ac, m, mc, d, dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) s);

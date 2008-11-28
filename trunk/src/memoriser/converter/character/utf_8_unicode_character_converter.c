@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.8 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
+ * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.9 $ $Date: 2008-11-28 22:04:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -167,12 +167,12 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
 
                                 if (errno == EILSEQ) {
 
-        fwprintf(stderr, L"TEST ERROR EILSEQ errno: %i\n", errno);
+        fwprintf(stdout, L"TEST ERROR EILSEQ errno: %i\n", errno);
                                     log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. The input string contains an invalid multibyte sequence.");
 
                                 } else {
 
-        fwprintf(stderr, L"TEST ERROR UNKNOWN errno: %i\n", errno);
+        fwprintf(stdout, L"TEST ERROR UNKNOWN errno: %i\n", errno);
                                     log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode utf-8 unicode character stream. An unknown error occured.");
                                 }
                             }

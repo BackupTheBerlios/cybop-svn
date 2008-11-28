@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.29 $ $Date: 2008-09-08 21:28:36 $ $Author: christian $
+ * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.30 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -346,8 +346,8 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
             get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"layout: %s\n", *lm);
-    fwprintf(stderr, L"layout count: %i\n", *((int*) *lmc));
+    fwprintf(stdout, L"layout: %s\n", *lm);
+    fwprintf(stdout, L"layout count: %i\n", *((int*) *lmc));
 
             compare_arrays(*lm, *lmc, (void*) ROOT_LAYOUT_CYBOL_MODEL, (void*) ROOT_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 

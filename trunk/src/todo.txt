@@ -7,11 +7,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.72 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
+# @version $Revision: 1.73 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
         * Continue checking model diagram converter which still produces a slightly wrong output
+            - do not convert integer etc. from multibyte into integer;
+            - instead, convert multibyte into wide character altogether, the complete cybol file
+            - only afterwards, convert (decode) the single wide characters into integer etc.
 
         * Continue "cybol_converter.c", to translate the model tree into a cyboi schema-conform structure
 

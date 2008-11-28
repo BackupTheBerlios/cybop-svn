@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.56 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.57 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -286,7 +286,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // CAUTION! Only call this procedure if a prefix was found!
                                     get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT);
 
-//??    fwprintf(stderr, L"TEST part f %i\n", *f);
+//??    fwprintf(stdout, L"TEST part f %i\n", *f);
 
                                 } else if (m == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -303,7 +303,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // CAUTION! Only call this procedure if a prefix was found!
                                     get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) META_SEPARATOR_CYBOL_NAME_COUNT);
 
-//??    fwprintf(stderr, L"TEST meta f %i\n", *f);
+//??    fwprintf(stdout, L"TEST meta f %i\n", *f);
                                 }
 
                                 if ((*f == *NUMBER_0_INTEGER_MEMORY_MODEL) || (*f == *NUMBER_1_INTEGER_MEMORY_MODEL)) {
@@ -315,7 +315,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
                                     get_compound_element_name_length(n, (void*) &nc, (void*) &l);
 
-//??    fwprintf(stderr, L"TEST length %i\n", l);
+//??    fwprintf(stdout, L"TEST length %i\n", l);
 
                                     // Determine element name.
                                     // It equals the name without prefix.
@@ -871,39 +871,39 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 
                                                                     if (*i >= *cs) {
 
-    fwprintf(stderr, L"TEST set compound element by index 00 i: %i\n", *i);
-    fwprintf(stderr, L"TEST set compound element by index 00 cs: %i\n", *cs);
-    fwprintf(stderr, L"TEST set compound element by index 00 cc: %i\n", *cc);
+    fwprintf(stdout, L"TEST set compound element by index 00 i: %i\n", *i);
+    fwprintf(stdout, L"TEST set compound element by index 00 cs: %i\n", *cs);
+    fwprintf(stdout, L"TEST set compound element by index 00 cc: %i\n", *cc);
                                                                         // Increase size.
                                                                         *cs = (*cs * *COMPOUND_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
-    fwprintf(stderr, L"TEST set compound element by index 00 new cs: %i\n", *cs);
+    fwprintf(stdout, L"TEST set compound element by index 00 new cs: %i\n", *cs);
 
                                                                         // Reallocate names, abstractions, models, details.
-    fwprintf(stderr, L"TEST set compound element by index 0 n: %i\n", *n);
+    fwprintf(stdout, L"TEST set compound element by index 0 n: %i\n", *n);
                                                                         reallocate_array(n, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 1 nc: %i\n", *nc);
+    fwprintf(stdout, L"TEST set compound element by index 1 nc: %i\n", *nc);
                                                                         reallocate_array(nc, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 2 ns: %i\n", *ns);
+    fwprintf(stdout, L"TEST set compound element by index 2 ns: %i\n", *ns);
                                                                         reallocate_array(ns, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 3 a: %i\n", *a);
+    fwprintf(stdout, L"TEST set compound element by index 3 a: %i\n", *a);
                                                                         reallocate_array(a, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 4 ac: %i\n", *ac);
+    fwprintf(stdout, L"TEST set compound element by index 4 ac: %i\n", *ac);
                                                                         reallocate_array(ac, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 5 as: %i\n", *as);
+    fwprintf(stdout, L"TEST set compound element by index 5 as: %i\n", *as);
                                                                         reallocate_array(as, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 6 m: %i\n", *m);
+    fwprintf(stdout, L"TEST set compound element by index 6 m: %i\n", *m);
                                                                         reallocate_array(m, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 7 mc: %i\n", *mc);
+    fwprintf(stdout, L"TEST set compound element by index 7 mc: %i\n", *mc);
                                                                         reallocate_array(mc, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 8 ms: %i\n", *ms);
+    fwprintf(stdout, L"TEST set compound element by index 8 ms: %i\n", *ms);
                                                                         reallocate_array(ms, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 9 d: %i\n", *d);
+    fwprintf(stdout, L"TEST set compound element by index 9 d: %i\n", *d);
                                                                         reallocate_array(d, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 10 dc: %i\n", *dc);
+    fwprintf(stdout, L"TEST set compound element by index 10 dc: %i\n", *dc);
                                                                         reallocate_array(dc, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 11 ds: %i\n", *ds);
+    fwprintf(stdout, L"TEST set compound element by index 11 ds: %i\n", *ds);
                                                                         reallocate_array(ds, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 12 ds: %i\n", *ds);
+    fwprintf(stdout, L"TEST set compound element by index 12 ds: %i\n", *ds);
 
                                                                         // Set new array reference.
                                                                         // CAUTION! If an array gets reallocated, a new array is
@@ -911,7 +911,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                                                                         // Therefore, the new array reference needs to be set.
                                                                         // The old array gets destroyed automatically by reallocate.
                                                                         set_array_elements(p0, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) n, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST set compound element by index 13 ds: %i\n", *ds);
+    fwprintf(stdout, L"TEST set compound element by index 13 ds: %i\n", *ds);
                                                                         set_array_elements(p0, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) nc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
                                                                         set_array_elements(p0, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
                                                                         set_array_elements(p0, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
@@ -1065,7 +1065,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
     // Incorrect examples: ".patient", "#patient"
     get_compound_element_index(p0, p1, p3, p4, (void*) &i);
 
-//??    fwprintf(stderr, L"TEST element index %i\n", i);
+//??    fwprintf(stdout, L"TEST element index %i\n", i);
 
     if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1124,14 +1124,14 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                 int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stderr, L"TEST add compound element 0 p1 dc: %i\n", *((int*) p1));
+    fwprintf(stdout, L"TEST add compound element 0 p1 dc: %i\n", *((int*) p1));
 
                 // Allocate name suffix as wide character array.
                 allocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"TEST add compound element 1 ss: %i\n", ss);
-    fwprintf(stderr, L"TEST add compound element 1 sc: %i\n", sc);
-    fwprintf(stderr, L"TEST add compound element 1 s: %ls\n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST add compound element 1 ss: %i\n", ss);
+    fwprintf(stdout, L"TEST add compound element 1 sc: %i\n", sc);
+    fwprintf(stdout, L"TEST add compound element 1 s: %ls\n", (wchar_t*) s);
 
                 // Use compound count as index to create the element name suffix,
                 // because the element is added at the end of the compound container.
@@ -1139,9 +1139,9 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                 encode((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT,
                     *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stderr, L"TEST add compound element 2 ss: %i\n", ss);
-    fwprintf(stderr, L"TEST add compound element 2 sc: %i\n", sc);
-    fwprintf(stderr, L"TEST add compound element 2 s: %ls\n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST add compound element 2 ss: %i\n", ss);
+    fwprintf(stdout, L"TEST add compound element 2 sc: %i\n", sc);
+    fwprintf(stdout, L"TEST add compound element 2 s: %ls\n", (wchar_t*) s);
 
                 // Resize name.
                 if ((*nc + *LIST_SEPARATOR_CYBOL_NAME_COUNT + sc) >= *ns) {
@@ -1150,15 +1150,15 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                     // CAUTION! Add constant in case *nc is zero!
                     *ns = (*nc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *LIST_SEPARATOR_CYBOL_NAME_COUNT + sc;
 
-    fwprintf(stderr, L"TEST add compound element 2 ns pre: %i\n", *ns);
+    fwprintf(stdout, L"TEST add compound element 2 ns pre: %i\n", *ns);
                     // Reallocate name character vector.
                     reallocate_array(p3, p4, p5, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-    fwprintf(stderr, L"TEST add compound element 2 ns post: %i\n", *ns);
+    fwprintf(stdout, L"TEST add compound element 2 ns post: %i\n", *ns);
                 }
 
-    fwprintf(stderr, L"TEST add compound element 3 ss: %i\n", ss);
-    fwprintf(stderr, L"TEST add compound element 3 sc: %i\n", sc);
-    fwprintf(stderr, L"TEST add compound element 3 s: %ls\n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST add compound element 3 ss: %i\n", ss);
+    fwprintf(stdout, L"TEST add compound element 3 sc: %i\n", sc);
+    fwprintf(stdout, L"TEST add compound element 3 s: %ls\n", (wchar_t*) s);
 
                 // The element name already contains the element base name.
 
@@ -1167,43 +1167,43 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
                 set_array_elements(*n, p4, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 *nc = *nc + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
-    fwprintf(stderr, L"TEST add compound element 4 ns: %i\n", *ns);
-    fwprintf(stderr, L"TEST add compound element 4 nc: %i\n", *nc);
-    fwprintf(stderr, L"TEST add compound element 4 n: %ls\n", (wchar_t*) *n);
+    fwprintf(stdout, L"TEST add compound element 4 ns: %i\n", *ns);
+    fwprintf(stdout, L"TEST add compound element 4 nc: %i\n", *nc);
+    fwprintf(stdout, L"TEST add compound element 4 n: %ls\n", (wchar_t*) *n);
 
                 // Set new element name by adding the index determined above.
                 // Use name count as index to add the new characters.
                 set_array_elements(*n, p4, s, (void*) &sc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
                 *nc = *nc + sc;
 
-    fwprintf(stderr, L"TEST add compound element 5 ns: %i\n", *ns);
-    fwprintf(stderr, L"TEST add compound element 5 nc: %i\n", *nc);
-    fwprintf(stderr, L"TEST add compound element 5 n: %ls\n", (wchar_t*) *n);
+    fwprintf(stdout, L"TEST add compound element 5 ns: %i\n", *ns);
+    fwprintf(stdout, L"TEST add compound element 5 nc: %i\n", *nc);
+    fwprintf(stdout, L"TEST add compound element 5 n: %ls\n", (wchar_t*) *n);
 
                 // Deallocate name suffix as wide character array.
                 deallocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stderr, L"TEST add compound element 6 ns: %i\n", *ns);
-    fwprintf(stderr, L"TEST add compound element 6 nc: %i\n", *nc);
-    fwprintf(stderr, L"TEST add compound element 6 n: %ls\n", (wchar_t*) *n);
+    fwprintf(stdout, L"TEST add compound element 6 ns: %i\n", *ns);
+    fwprintf(stdout, L"TEST add compound element 6 nc: %i\n", *nc);
+    fwprintf(stdout, L"TEST add compound element 6 n: %ls\n", (wchar_t*) *n);
 
-    fwprintf(stderr, L"TEST add compound element 7 p2: %i\n", p2);
-    fwprintf(stderr, L"TEST add compound element 7 *p2: %i\n", *((int*) p2));
-    fwprintf(stderr, L"TEST add compound element 7 p1: %i\n", p1);
-    fwprintf(stderr, L"TEST add compound element 7 *p1: %i\n", *((int*) p1));
-    fwprintf(stderr, L"TEST add compound element 7 p0: %i\n", p0);
+    fwprintf(stdout, L"TEST add compound element 7 p2: %i\n", p2);
+    fwprintf(stdout, L"TEST add compound element 7 *p2: %i\n", *((int*) p2));
+    fwprintf(stdout, L"TEST add compound element 7 p1: %i\n", p1);
+    fwprintf(stdout, L"TEST add compound element 7 *p1: %i\n", *((int*) p1));
+    fwprintf(stdout, L"TEST add compound element 7 p0: %i\n", p0);
 
                 // CAUTION! Use compound count as index for adding new elements.
                 // CAUTION! Use DEREFERENCED name, as it was handed over as reference!
                 set_compound_element_by_index(p0, p1, p2, p1, *n, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
 
-    fwprintf(stderr, L"TEST add compound element 8 p2: %i\n", *((int*) p2));
-    fwprintf(stderr, L"TEST add compound element 8 p1: %i\n", *((int*) p1));
-    fwprintf(stderr, L"TEST add compound element 8 p0: %i\n", p0);
+    fwprintf(stdout, L"TEST add compound element 8 p2: %i\n", *((int*) p2));
+    fwprintf(stdout, L"TEST add compound element 8 p1: %i\n", *((int*) p1));
+    fwprintf(stdout, L"TEST add compound element 8 p0: %i\n", p0);
 
-    fwprintf(stderr, L"TEST add compound element 9 ns: %i\n", *ns);
-    fwprintf(stderr, L"TEST add compound element 9 nc: %i\n", *nc);
-    fwprintf(stderr, L"TEST add compound element 9 n: %ls\n", (wchar_t*) *n);
+    fwprintf(stdout, L"TEST add compound element 9 ns: %i\n", *ns);
+    fwprintf(stdout, L"TEST add compound element 9 nc: %i\n", *nc);
+    fwprintf(stdout, L"TEST add compound element 9 n: %ls\n", (wchar_t*) *n);
 
             } else {
 
@@ -1258,7 +1258,7 @@ void replace_compound_element_by_name(void* p0, void* p1, void* p2,
     // Incorrect examples: ".patient", "#patient"
     get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-//??    fwprintf(stderr, L"TEST part index %i\n", i);
+//??    fwprintf(stdout, L"TEST part index %i\n", i);
 
     if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1619,9 +1619,9 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
     // as well as the flag indicating a part- or meta element.
     get_compound_element_name_and_remaining_name(p6, p7, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
-//??    fwprintf(stderr, L"TEST r %s\n", (char*) r);
-//??    fwprintf(stderr, L"TEST rc %i\n", rc);
-//??    fwprintf(stderr, L"TEST f %i\n", f);
+//??    fwprintf(stdout, L"TEST r %s\n", (char*) r);
+//??    fwprintf(stdout, L"TEST rc %i\n", rc);
+//??    fwprintf(stdout, L"TEST f %i\n", f);
 
     if (f == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1632,7 +1632,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-//??    fwprintf(stderr, L"TEST part index %i\n", i);
+//??    fwprintf(stdout, L"TEST part index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1684,7 +1684,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p3, p4, e, (void*) &ec, (void*) &i);
 
-//??    fwprintf(stderr, L"TEST meta index %i\n", i);
+//??    fwprintf(stdout, L"TEST meta index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1982,9 +1982,9 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
     get_compound_element_name_and_remaining_name(p4, p5, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
 /*??
-    fwprintf(stderr, L"TEST r %s\n", (char*) r);
-    fwprintf(stderr, L"TEST rc %i\n", rc);
-    fwprintf(stderr, L"TEST f %i\n", f);
+    fwprintf(stdout, L"TEST r %s\n", (char*) r);
+    fwprintf(stdout, L"TEST rc %i\n", rc);
+    fwprintf(stdout, L"TEST f %i\n", f);
 */
 
     if (f == *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -1996,7 +1996,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-//??    fwprintf(stderr, L"TEST part index %i\n", i);
+//??    fwprintf(stdout, L"TEST part index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -2036,7 +2036,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p2, p3, e, (void*) &ec, (void*) &i);
 
-//??    fwprintf(stderr, L"TEST meta index %i\n", i);
+//??    fwprintf(stdout, L"TEST meta index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
