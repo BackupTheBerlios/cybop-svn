@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_processor.c,v $ $Revision: 1.7 $ $Date: 2008-11-28 22:04:11 $ $Author: christian $
+ * @version $RCSfile: xml_processor.c,v $ $Revision: 1.8 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,6 +60,11 @@ void process_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 break;
             }
 
+            if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+
             select_xml_declaration(p0, p1, p2, (void*) &b, p3, p4);
         }
 
@@ -96,6 +101,11 @@ void process_xml_definition(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 break;
             }
 
+            if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+
             select_xml_definition((void*) &b, p3, p4);
         }
 
@@ -125,6 +135,11 @@ void process_xml_comment(void* p0, void* p1) {
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+
+            if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 break;
             }
@@ -216,6 +231,11 @@ void process_xml_end_tag(void* p0, void* p1) {
                     break;
                 }
 
+                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    break;
+                }
+
                 select_xml_end_tag((void*) &b, p0, p1);
             }
 
@@ -236,128 +256,156 @@ void process_xml_end_tag(void* p0, void* p1) {
  * @param p0 the destination element details (Hand over as reference!)
  * @param p1 the destination element details count
  * @param p2 the destination element details size
- * @param p3 the current position (Hand over as reference!)
- * @param p4 the remaining count
+ * @param p3 the has attributes flag
+ * @param p4 the has content flag
+ * @param p5 the is empty flag
+ * @param p6 the current position (Hand over as reference!)
+ * @param p7 the remaining count
  */
-void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p4;
+        int* rem = (int*) p7;
 
-        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-            void** pos = (void**) p3;
+            void** pos = (void**) p6;
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+            if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** dd = (void**) p0;
+                int* ie = (int*) p5;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml tag name.");
+                if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-                // The destination tag name name.
-                void* n = *NULL_POINTER_MEMORY_MODEL;
-                void* nc = *NULL_POINTER_MEMORY_MODEL;
-                void* ns = *NULL_POINTER_MEMORY_MODEL;
-                // The destination tag name abstraction.
-                void* a = *NULL_POINTER_MEMORY_MODEL;
-                void* ac = *NULL_POINTER_MEMORY_MODEL;
-                void* as = *NULL_POINTER_MEMORY_MODEL;
-                // The destination tag name model.
-                void* m = *NULL_POINTER_MEMORY_MODEL;
-                void* mc = *NULL_POINTER_MEMORY_MODEL;
-                void* ms = *NULL_POINTER_MEMORY_MODEL;
-                // The destination tag name details.
-                void* d = *NULL_POINTER_MEMORY_MODEL;
-                void* dc = *NULL_POINTER_MEMORY_MODEL;
-                void* ds = *NULL_POINTER_MEMORY_MODEL;
+                    int* hc = (int*) p4;
 
-    fwprintf(stdout, L"TEST process xml tag name 0: %i\n", *rem);
-    fwprintf(stdout, L"TEST process xml tag name 0 n: %i\n", n);
-    fwprintf(stdout, L"TEST process xml tag name 0 nc: %i\n", nc);
-    fwprintf(stdout, L"TEST process xml tag name 0 ns: %i\n", ns);
+                    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-                // Allocate destination tag name.
-                allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
-                    (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                    (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                        int* ha = (int*) p3;
 
-    fwprintf(stdout, L"TEST process xml tag name 1: %i\n", *rem);
-    fwprintf(stdout, L"TEST process xml tag name 1 n: %ls\n", (wchar_t*) n);
-    fwprintf(stdout, L"TEST process xml tag name 1 nc: %i\n", *((int*) nc));
-    fwprintf(stdout, L"TEST process xml tag name 1 ns: %i\n", *((int*) ns));
+                        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                // The source tag name.
-                void* tn = *pos;
-                int tnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                            void** dd = (void**) p0;
 
-                // The break flag.
-                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml tag name.");
 
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                            // The destination tag name name.
+                            void* n = *NULL_POINTER_MEMORY_MODEL;
+                            void* nc = *NULL_POINTER_MEMORY_MODEL;
+                            void* ns = *NULL_POINTER_MEMORY_MODEL;
+                            // The destination tag name abstraction.
+                            void* a = *NULL_POINTER_MEMORY_MODEL;
+                            void* ac = *NULL_POINTER_MEMORY_MODEL;
+                            void* as = *NULL_POINTER_MEMORY_MODEL;
+                            // The destination tag name model.
+                            void* m = *NULL_POINTER_MEMORY_MODEL;
+                            void* mc = *NULL_POINTER_MEMORY_MODEL;
+                            void* ms = *NULL_POINTER_MEMORY_MODEL;
+                            // The destination tag name details.
+                            void* d = *NULL_POINTER_MEMORY_MODEL;
+                            void* dc = *NULL_POINTER_MEMORY_MODEL;
+                            void* ds = *NULL_POINTER_MEMORY_MODEL;
 
-    fwprintf(stdout, L"TEST process xml tag name 2: %i\n", *rem);
-    fwprintf(stdout, L"TEST process xml tag name 2 tnc: %i\n", tnc);
+                fwprintf(stdout, L"TEST process xml tag name 0: %i\n", *rem);
 
-                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                            // Allocate destination tag name.
+                            allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                                (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+                                (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml tag name. The remaining count is zero or smaller.");
+                fwprintf(stdout, L"TEST process xml tag name 1: %i\n", *rem);
+                fwprintf(stdout, L"TEST process xml tag name 1 n: %ls\n", (wchar_t*) n);
+                fwprintf(stdout, L"TEST process xml tag name 1 nc: %i\n", *((int*) nc));
+                fwprintf(stdout, L"TEST process xml tag name 1 ns: %i\n", *((int*) ns));
 
-                        break;
+                            // The source tag name.
+                            void* tn = *pos;
+                            int tnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                fwprintf(stdout, L"TEST process xml tag name 2: %i\n", *rem);
+                fwprintf(stdout, L"TEST process xml tag name 2 tnc: %i\n", tnc);
+
+                                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml tag name. The remaining count is zero or smaller.");
+
+                                    break;
+                                }
+
+                                if ((*ha != *NUMBER_0_INTEGER_MEMORY_MODEL) || (*hc != *NUMBER_0_INTEGER_MEMORY_MODEL) || (*ie != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+
+                                    // A space character as indicator of subsequent attributes or
+                                    // a tag end character as indicator of subsequent element content or
+                                    // an empty tag end character was detected.
+
+                                    break;
+                                }
+
+                                select_xml_tag_name((void*) &tnc, p3, p4, p5, p6, p7);
+                            }
+
+                fwprintf(stdout, L"TEST process xml tag name 3: %i\n", *rem);
+                fwprintf(stdout, L"TEST process xml tag name 3 tnc: %i\n", tnc);
+
+                            // Decode destination tag name name.
+                            // CAUTION! The pre-defined constant "tag" is used as name here!
+                            // The "add_compound_element_by_name" function below will automatically
+                            // add a number as suffix, to make the name unique.
+                            decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TAG_XML_CYBOL_NAME, (void*) TAG_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+                fwprintf(stdout, L"TEST process xml tag name 4: %i\n", *rem);
+                fwprintf(stdout, L"TEST process xml tag name 4 n: %ls\n", (wchar_t*) n);
+                fwprintf(stdout, L"TEST process xml tag name 4 nc: %i\n", *((int*) nc));
+                fwprintf(stdout, L"TEST process xml tag name 4 ns: %i\n", *((int*) ns));
+
+                            // Decode destination tag name abstraction.
+                            // CAUTION! All xml element tag names are of the abstraction "wide_character",
+                            // as handed over as argument in the function "allocate_part" above.
+                            decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+                            // Decode destination tag name model.
+                            decode((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, tn, (void*) &tnc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+                            // The destination tag name does not contain any details.
+
+                            //?? Extend compound size etc. before?
+
+                fwprintf(stdout, L"TEST process xml tag name 5: %i\n", *rem);
+                fwprintf(stdout, L"TEST process xml tag name 5 n: %ls\n", (wchar_t*) n);
+                fwprintf(stdout, L"TEST process xml tag name 5 nc: %i\n", *((int*) nc));
+                fwprintf(stdout, L"TEST process xml tag name 5 ns: %i\n", *((int*) ns));
+
+                            // Add tag name to destination xml element (compound) details.
+                            // CAUTION! Hand over the tag name name as reference!
+                            // CAUTION! The pre-defined constant "tag" is used as name here!
+                            add_compound_element_by_name(*dd, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
+
+                fwprintf(stdout, L"TEST process xml tag name 6: %i\n", *rem);
+                fwprintf(stdout, L"TEST process xml tag name 6 n: %ls\n", (wchar_t*) n);
+                fwprintf(stdout, L"TEST process xml tag name 6 nc: %i\n", *((int*) nc));
+                fwprintf(stdout, L"TEST process xml tag name 6 ns: %i\n", *((int*) ns));
+
+                        } else {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml tag name. The destination is null.");
+                        }
+
+                    } else {
+
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml tag name. The has attributes flag is null.");
                     }
 
-                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                } else {
 
-                        break;
-                    }
-
-                    select_xml_tag_name((void*) &tnc, (void*) &b, p3, p4);
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml tag name. The has content flag is null.");
                 }
-
-    fwprintf(stdout, L"TEST process xml tag name 3: %i\n", *rem);
-    fwprintf(stdout, L"TEST process xml tag name 3 tnc: %i\n", tnc);
-
-                // Decode destination tag name name.
-                // CAUTION! The pre-defined constant "tag" is used as name here!
-                // The "add_compound_element_by_name" function below will automatically
-                // add a number as suffix, to make the name unique.
-                decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TAG_XML_CYBOL_NAME, (void*) TAG_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-    fwprintf(stdout, L"TEST process xml tag name 4: %i\n", *rem);
-    fwprintf(stdout, L"TEST process xml tag name 4 n: %ls\n", (wchar_t*) n);
-    fwprintf(stdout, L"TEST process xml tag name 4 nc: %i\n", *((int*) nc));
-    fwprintf(stdout, L"TEST process xml tag name 4 ns: %i\n", *((int*) ns));
-
-                // Decode destination tag name abstraction.
-                // CAUTION! All xml element tag names are of the abstraction "wide_character",
-                // as handed over as argument in the function "allocate_part" above.
-                decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                // Decode destination tag name model.
-                decode((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, tn, (void*) &tnc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                // The destination tag name does not contain any details.
-
-                //?? Extend compound size etc. before?
-
-    fwprintf(stdout, L"TEST process xml tag name 5: %i\n", *rem);
-    fwprintf(stdout, L"TEST process xml tag name 5 n: %ls\n", (wchar_t*) n);
-    fwprintf(stdout, L"TEST process xml tag name 5 nc: %i\n", *((int*) nc));
-    fwprintf(stdout, L"TEST process xml tag name 5 ns: %i\n", *((int*) ns));
-
-                // Add tag name to destination xml element (compound) details.
-                // CAUTION! Hand over the tag name name as reference!
-                // CAUTION! The pre-defined constant "tag" is used as name here!
-                add_compound_element_by_name(*dd, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
-
-    fwprintf(stdout, L"TEST process xml tag name 6: %i\n", *rem);
-    fwprintf(stdout, L"TEST process xml tag name 6 n: %ls\n", (wchar_t*) n);
-    fwprintf(stdout, L"TEST process xml tag name 6 nc: %i\n", *((int*) nc));
-    fwprintf(stdout, L"TEST process xml tag name 6 ns: %i\n", *((int*) ns));
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml tag name. The destination is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml tag name. The is empty flag is null.");
             }
 
         } else {
@@ -406,6 +454,11 @@ void process_xml_attribute_name(void* p0, void* p1, void* p2, void* p3) {
                     if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute name. The remaining count is zero or smaller.");
+
+                        break;
+                    }
+
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         break;
                     }
@@ -468,6 +521,11 @@ void process_xml_attribute_value(void* p0, void* p1, void* p2, void* p3) {
                         break;
                     }
 
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        break;
+                    }
+
                     select_xml_attribute_value(p1, (void*) &b, p2, p3);
                 }
 
@@ -484,6 +542,160 @@ void process_xml_attribute_value(void* p0, void* p1, void* p2, void* p3) {
     } else {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute value. The remaining count is null.");
+    }
+}
+
+/**
+ * Processes the xml attribute.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the has attributes flag
+ * @param p7 the has content flag
+ * @param p8 the is empty flag
+ * @param p9 the current position (Hand over as reference!)
+ * @param p10 the remaining count
+ */
+void process_xml_attribute(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+
+    if (p10 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* rem = (int*) p10;
+
+        if (p9 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** pos = (void**) p9;
+
+            if (p8 != *NULL_POINTER_MEMORY_MODEL) {
+
+                int* ie = (int*) p8;
+
+                if (p7 != *NULL_POINTER_MEMORY_MODEL) {
+
+                    int* hc = (int*) p7;
+
+                    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+
+                        int* ha = (int*) p6;
+
+                        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+                            void** dd = (void**) p3;
+
+                            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml attribute.");
+
+                            // The source attribute name.
+                            void* an = *NULL_POINTER_MEMORY_MODEL;
+                            int anc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                            // The source attribute value.
+                            void* av = *NULL_POINTER_MEMORY_MODEL;
+                            int avc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            fwprintf(stdout, L"TEST process attribute pre an: %ls\n", (wchar_t*) an);
+
+                            process_xml_attribute_name((void*) &an, (void*) &anc, p8, p9);
+
+            fwprintf(stdout, L"TEST process attribute post an: %ls\n", (wchar_t*) an);
+
+            fwprintf(stdout, L"TEST process attribute pre av: %ls\n", (wchar_t*) av);
+
+                            process_xml_attribute_value((void*) &av, (void*) &avc, p8, p9);
+
+            fwprintf(stdout, L"TEST process attribute post av: %ls\n", (wchar_t*) av);
+
+                            // The destination attribute name.
+                            void* n = *NULL_POINTER_MEMORY_MODEL;
+                            void* nc = *NULL_POINTER_MEMORY_MODEL;
+                            void* ns = *NULL_POINTER_MEMORY_MODEL;
+                            // The destination attribute abstraction.
+                            void* a = *NULL_POINTER_MEMORY_MODEL;
+                            void* ac = *NULL_POINTER_MEMORY_MODEL;
+                            void* as = *NULL_POINTER_MEMORY_MODEL;
+                            // The destination attribute model.
+                            void* m = *NULL_POINTER_MEMORY_MODEL;
+                            void* mc = *NULL_POINTER_MEMORY_MODEL;
+                            void* ms = *NULL_POINTER_MEMORY_MODEL;
+                            // The destination attribute details.
+                            void* d = *NULL_POINTER_MEMORY_MODEL;
+                            void* dc = *NULL_POINTER_MEMORY_MODEL;
+                            void* ds = *NULL_POINTER_MEMORY_MODEL;
+
+                            // Allocate destination attribute.
+                            allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                                (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+                                (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+                            // Decode destination attribute name.
+                            decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, an, (void*) &anc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+                            // Decode destination attribute abstraction.
+                            decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+                            // Decode destination attribute model.
+                            decode((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, av, (void*) &avc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+                            // The destination attribute details do NOT have to be decoded,
+                            // since an attribute itself has just name and value, but no meta information.
+
+                            // Add part to whole (compound) model.
+                            // CAUTION! Hand over the name as reference!
+                            // Storing many parts with identical tag name is not a problem,
+                            // since the tag name of a part is added to its details compound.
+                            add_compound_element_by_name(*dd, p4, p5, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
+
+                            // The break flag.
+                            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute value. The remaining count is zero or smaller.");
+
+                                    break;
+                                }
+
+                                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                                    break;
+                                }
+
+                                //?? WHAT FOR?
+                                //?? select_xml_start_tag(p1, (void*) &b, p2, p3);
+                            }
+
+                        } else {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute. The destination details is null.");
+                        }
+
+                    } else {
+
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute. The has attributes flag is null.");
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute. The has content flag is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute. The is empty flag is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml attribute. The remaining count is null.");
     }
 }
 
@@ -512,7 +724,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml element.");
 
-    fwprintf(stdout, L"TEST process element rem: %i\n", *rem);
+    fwprintf(stdout, L"TEST process element 00: %i\n", *rem);
 
                 // The part name.
                 void* n = *NULL_POINTER_MEMORY_MODEL;
@@ -547,6 +759,9 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PART_XML_CYBOL_NAME, (void*) PART_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     fwprintf(stdout, L"TEST process element 2: %i\n", *rem);
+    fwprintf(stdout, L"TEST process element n: %i\n", (wchar_t*) n);
+    fwprintf(stdout, L"TEST process element nc: %i\n", *((int*) nc));
+    fwprintf(stdout, L"TEST process element ns: %i\n", *((int*) ns));
 
                 // Decode destination part abstraction.
                 // CAUTION! All xml elements (parts) are of the abstraction "compound",
@@ -555,45 +770,41 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     fwprintf(stdout, L"TEST process element 3: %i\n", *rem);
+    fwprintf(stdout, L"TEST process element a: %i\n", (wchar_t*) a);
+    fwprintf(stdout, L"TEST process element ac: %i\n", *((int*) ac));
+    fwprintf(stdout, L"TEST process element as: %i\n", *((int*) as));
 
                 // The destination part model and details are decoded further below,
-                // depending on the source byte array.
+                // depending on the source wide character array.
 
-                // Decode tag name.
-                process_xml_tag_name((void*) &d, (void*) dc, (void*) ds, p3, p4);
+                // The has attributes flag.
+                int ha = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                // The has content flag.
+                int hc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                // The is empty flag.
+                int ie = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stdout, L"TEST process element 4: %i\n", *rem);
+                // Process tag name.
+                process_xml_tag_name((void*) &d, (void*) dc, (void*) ds, (void*) &ha, (void*) &hc, (void*) &ie, p3, p4);
 
-                // The tag name end found may be one of: " ", "/>", ">".
-                // The position now points to the next character AFTER the tag name end,
-                // i.e. to the FIRST character of the attribute name or element content.
+                if (ha != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // The break flag.
-                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    // Reset has attributes flag.
+                    ha = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process xml element. The remaining count is zero or smaller.");
-
-                        break;
-                    }
-
-    fwprintf(stdout, L"TEST process element 5: %i\n", *rem);
-
-                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        break;
-                    }
-
-                    // Process the element's attributes.
-                    select_xml_element((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds, (void*) &b, p3, p4);
+                    // Process attribute.
+                    process_xml_attribute((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds, (void*) &ha, (void*) &hc, (void*) &ie, p3, p4);
                 }
 
-    fwprintf(stdout, L"TEST process element 6: %i\n", *rem);
+                if (hc != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                //?? Extend compound size etc. before?
+                    //?? Forward the hierarchy level here? .. and throughout all functions?
+
+                    // Process the element's content.
+                    process_xml_element_content((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds, p3, p4);
+                }
+
+    fwprintf(stdout, L"TEST process element 4: %i\n", *rem);
 
                 // Add part to whole (compound) model.
                 // CAUTION! Hand over the name as reference!
@@ -601,7 +812,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // since the tag name of a part is added to its details compound.
                 add_compound_element_by_name(*dd, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
 
-    fwprintf(stdout, L"TEST process element 7: %i\n", *rem);
+    fwprintf(stdout, L"TEST process element 5: %i\n", *rem);
 
             } else {
 

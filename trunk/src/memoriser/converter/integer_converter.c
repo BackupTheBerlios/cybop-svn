@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_converter.c,v $ $Revision: 1.33 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
+ * @version $RCSfile: integer_converter.c,v $ $Revision: 1.34 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -46,7 +46,7 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Decodes the byte stream and creates an integer from it.
+ * Decodes the wide character array and creates an integer from it.
  *
  * CAUTION! Do not mix up "integer" and "integer_vector"!
  * The latter is an array storing one or many integer numbers at different indexes.
@@ -117,7 +117,7 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Encodes the integer model and creates a wide character byte stream from it.
+ * Encodes the integer model and creates a wide character array from it.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
  * @param p1 the destination wide character array count
@@ -194,6 +194,8 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Set destination count.
                     *dc = test;
 
+    fwprintf(stdout, L"TEST encode integer into wide character 4 dc: %i\n", *dc);
+
                 } else {
 
                     // The value returned by the conversion function is negative,
@@ -202,9 +204,11 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Call this function itself recursively.
                     // This is done every time again, until the integer
                     // gets finally converted successfully.
-                    // The only argument that grows is the destination count p2 (== *ds).
+                    // The only argument that grows is the destination size p2 (== *ds).
                     encode_integer(p0, p1, p2, p3, p4);
                 }
+
+    fwprintf(stdout, L"TEST encode integer into wide character 5 dc: %i\n", *dc);
 
             } else {
 

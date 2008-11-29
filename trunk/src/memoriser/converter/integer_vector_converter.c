@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.43 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
+ * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.44 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,7 +49,7 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Decodes the byte stream and creates an integer vector model from it.
+ * Decodes the wide character array and creates an integer vector model from it.
  *
  * CAUTION! Do not mix up "integer" and "integer_vector"!
  * The latter is an array storing one or many integer numbers at different indexes.
@@ -191,7 +191,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Encodes the integer vector elements and creates a byte stream from it.
+ * Encodes the integer vector elements and creates a wide character array from it.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
  * @param p1 the destination wide character array count
@@ -330,7 +330,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
 }
 
 /**
- * Encodes the integer vector model and creates a byte stream from it.
+ * Encodes the integer vector model and creates a wide character array from it.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
  * @param p1 the destination wide character array count

@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.98 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+# @version $Revision: 1.99 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-11-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug xml conversion
 
 2008-11-28  Christian Heller  <christian.heller@tuxtax.de>
         * Debug logger which called array functionality that called the logger in turn,

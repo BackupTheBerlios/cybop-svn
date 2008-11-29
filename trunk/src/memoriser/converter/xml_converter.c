@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_converter.c,v $ $Revision: 1.31 $ $Date: 2008-11-28 22:04:11 $ $Author: christian $
+ * @version $RCSfile: xml_converter.c,v $ $Revision: 1.32 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,15 +39,15 @@
  * @param p3 the destination details (Hand over as reference!)
  * @param p4 the destination details count
  * @param p5 the destination details size
- * @param p6 the source byte array
- * @param p7 the source byte array count
+ * @param p6 the source wide character array
+ * @param p7 the source wide character array count
  */
 void decode_xml(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode xml.");
 
 //??    fwprintf(stdout, L"TEST decode xml byte array with count: %ls\n", (wchar_t*) p6);
-    fwprintf(stdout, L"TEST decode xml byte array with count: %i\n", *((int*) p7));
+    fwprintf(stdout, L"TEST decode xml wide character array with count: %i\n", *((int*) p7));
 
     process_xml_element_content(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
 }
@@ -55,13 +55,15 @@ void decode_xml(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 /**
  * Encodes the compound into a xml byte array.
  *
- * @param p0 the destination message (Hand over as reference!)
- * @param p1 the destination message count
- * @param p2 the destination message size
+ * @param p0 the destination wide character array (Hand over as reference!)
+ * @param p1 the destination wide character array count
+ * @param p2 the destination wide character array size
  * @param p3 the source compound
  * @param p4 the source compound count
+ * @param p5 the source compound
+ * @param p6 the source compound count
  */
-void encode_xml(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void encode_xml(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode xml.");
 }

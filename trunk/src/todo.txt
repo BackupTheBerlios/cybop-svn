@@ -7,9 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.73 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+# @version $Revision: 1.74 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * Continue with "process_xml_attribute": possibly delete the "select_xml_start_tag" function,
+            using just attribute name and -value
 
         * Continue checking model diagram converter which still produces a slightly wrong output
             - do not convert integer etc. from multibyte into integer;
@@ -48,6 +51,9 @@
             http_request_converter.c
             http_response_converter.c
             xdt_converter.c
+
+        * Add a new CYBOL XML attribute named "encoding" and possibly one more named "repertoire" (or "set", or "code");
+            currently, only the Unicode character repertoire/set with UTF-8 encoding may be processed
 
         * CAUTION! The following was probably already SOLVED in source code and may get DELETED here!
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
