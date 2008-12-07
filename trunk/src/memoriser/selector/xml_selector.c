@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_selector.c,v $ $Revision: 1.5 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
+ * @version $RCSfile: xml_selector.c,v $ $Revision: 1.6 $ $Date: 2008-12-07 01:06:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,29 +58,59 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4);
  */
 void select_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* b = (int*) p3;
+        int* rem = (int*) p5;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml declaration.");
+        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            void** pos = (void**) p4;
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-            detect_xml_declaration_end((void*) &r, p4, p5);
+                int* b = (int*) p3;
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml declaration.");
 
-                // Set break flag.
-                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                // The comparison result.
+                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    detect_xml_declaration_end((void*) &r, p4, p5);
+
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        // Set break flag.
+                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    }
+                }
+
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // None of the comparisons above delivered a positive (r != 0) result.
+                    // Therefore, increment the current position by one (pointer size).
+
+                    // Increment current position.
+                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+
+                    // Decrement remaining count.
+                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml declaration. The break flag is null.");
             }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml declaration. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml declaration. The break flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml declaration. The remaining count is null.");
     }
 }
 
@@ -112,20 +142,25 @@ void select_xml_definition(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    if (*rem >= *DEFINITION_END_XML_NAME_COUNT) {
+                    detect_xml_definition_end((void*) &r, p1, p2);
 
-                        compare_arrays(*pos, (void*) DEFINITION_END_XML_NAME_COUNT, (void*) DEFINITION_END_XML_NAME, (void*) DEFINITION_END_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                            // Set break flag.
-                            *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                        }
-
-                    } else {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml definition. The remaining count is too small.");
+                        // Set break flag.
+                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
+                }
+
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // None of the comparisons above delivered a positive (r != 0) result.
+                    // Therefore, increment the current position by one (pointer size).
+
+                    // Increment current position.
+                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+
+                    // Decrement remaining count.
+                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
 
             } else {
@@ -172,20 +207,25 @@ void select_xml_comment(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    if (*rem >= *COMMENT_END_XML_NAME_COUNT) {
+                    detect_xml_comment_end((void*) &r, p1, p2);
 
-                        compare_arrays(*pos, (void*) COMMENT_END_XML_NAME_COUNT, (void*) COMMENT_END_XML_NAME, (void*) COMMENT_END_XML_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                            // Set break flag.
-                            *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                        }
-
-                    } else {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml comment. The remaining count is too small.");
+                        // Set break flag.
+                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
+                }
+
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // None of the comparisons above delivered a positive (r != 0) result.
+                    // Therefore, increment the current position by one (pointer size).
+
+                    // Increment current position.
+                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+
+                    // Decrement remaining count.
+                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
 
             } else {
@@ -444,209 +484,183 @@ void select_xml_end_tag(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Selects the tag name.
+ * Selects the attribute begin or tag end.
  *
- * @param p0 the tag name count
- * @param p1 the has attributes flag
- * @param p2 the has content flag
- * @param p3 the is empty flag
- * @param p4 the current position (Hand over as reference!)
- * @param p5 the remaining count
+ * @param p0 the has attribute flag
+ * @param p1 the has content flag
+ * @param p2 the is empty flag
+ * @param p3 the current position (Hand over as reference!)
+ * @param p4 the remaining count
  */
-void select_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p5;
+        int* rem = (int*) p4;
 
-        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-            void** pos = (void**) p4;
+            void** pos = (void**) p3;
 
-            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+            if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-                int* ie = (int*) p3;
+                int* ie = (int*) p2;
 
-                if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+                if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                    int* hc = (int*) p2;
+                    int* hc = (int*) p1;
 
-                    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+                    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                        int* ha = (int*) p1;
+                        int* ha = (int*) p0;
 
-                        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml attribute begin or tag end.");
 
-                            int* tnc = (int*) p0;
+                        //
+                        // CAUTION! The ORDER of the following function calls is IMPORTANT!
+                        // The empty tag end "/>" has to be searched BEFORE
+                        // the simple tag end ">", because of the slash "/" character.
+                        //
+                        // CAUTION! The comparison result HAS TO BE ZERO, if a detection is to be taking place!
+                        // Many "detect" functions are called in a sequence, below.
+                        // If the result of one detection function was positive (r == 1),
+                        // then that function increments the current position and decrements the remaining count.
+                        // In this case, further detection functions following afterwards might detect
+                        // further characters and CHANGE the current position and remaining count, and so forth,
+                        // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
+                        // Therefore, the checks for (r == 0) below avoid another detection,
+                        // if the result already has a value unequal zero.
+                        //
 
-                            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml tag name.");
+                        // The comparison result.
+                        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                            //
-                            // CAUTION! The ORDER of the following function calls is IMPORTANT!
-                            // The empty tag end "/>" has to be searched BEFORE
-                            // the simple tag end ">", because of the slash "/" character.
-                            //
-                            // CAUTION! The comparison result HAS TO BE ZERO, if a detection is to be taking place!
-                            // Many "detect" functions are called in a sequence, below.
-                            // If the result of one detection function was positive (r == 1),
-                            // then that function increments the current position and decrements the remaining count.
-                            // In this case, further detection functions following afterwards might detect
-                            // further characters and CHANGE the current position and remaining count, and so forth,
-                            // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-                            // Therefore, the checks for (r == 0) below avoid another detection,
-                            // if the result already has a value unequal zero.
-                            //
+                        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            // The comparison result.
-                            int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                            detect_xml_attribute_begin((void*) &r, p3, p4);
 
-                            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                detect_xml_tag_name_end((void*) &r, p4, p5);
-
-                                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                                    // The tag name end, indicating subsequent attributes, was found.
-                                    // Set has attributes flag.
-                                    *ha = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                                }
+                                // The tag name end, indicating subsequent attributes, was found.
+                                // Set has attribute flag.
+                                *ha = *NUMBER_1_INTEGER_MEMORY_MODEL;
                             }
+                        }
 
-                            // CAUTION! The ORDER of the following function calls is IMPORTANT!
-                            // The empty tag end "/>" has to be searched BEFORE
-                            // the simple tag end ">", because of the slash "/" character.
+                        // CAUTION! The ORDER of the following function calls is IMPORTANT!
+                        // The empty tag end "/>" has to be searched BEFORE
+                        // the simple tag end ">", because of the slash "/" character.
 
-                            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                detect_xml_empty_tag_end((void*) &r, p4, p5);
+                            detect_xml_empty_tag_end((void*) &r, p3, p4);
 
-                                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                    // The empty tag end was found.
-                                    // Set is empty flag.
-                                    *ie = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                                }
+                                // The empty tag end was found.
+                                // Set is empty flag.
+                                *ie = *NUMBER_1_INTEGER_MEMORY_MODEL;
                             }
+                        }
 
-                            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                detect_xml_tag_end((void*) &r, p4, p5);
+                            detect_xml_tag_end((void*) &r, p3, p4);
 
-                                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                    // The tag end, indicating subsequent element content, was found.
-                                    // Set has content flag.
-                                    *hc = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                                }
+                                // The tag end, indicating subsequent element content, was found.
+                                // Set has content flag.
+                                *hc = *NUMBER_1_INTEGER_MEMORY_MODEL;
                             }
+                        }
 
-                            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                // Increment current position.
-                                *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                            // Increment current position.
+                            *pos = *pos + *POINTER_PRIMITIVE_SIZE;
 
-                                // Decrement remaining count.
-                                *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                                // Increment tag name count.
-                                (*tnc)++;
-                            }
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag name. The tag name count is null.");
+                            // Decrement remaining count.
+                            *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag name. The has attributes flag is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml attribute begin or tag end. The has attribute flag is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag name. The has content flag is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml attribute begin or tag end. The has content flag is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag name. The is empty flag is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml attribute begin or tag end. The is empty flag is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag name. The current position is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml attribute begin or tag end. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag name. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml attribute begin or tag end. The remaining count is null.");
     }
 }
 
 /**
  * Selects the attribute name.
  *
- * @param p0 the attribute name count
- * @param p1 the break flag
- * @param p2 the current position (Hand over as reference!)
- * @param p3 the remaining count
+ * @param p0 the break flag
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
-void select_xml_attribute_name(void* p0, void* p1, void* p2, void* p3) {
+void select_xml_attribute_name(void* p0, void* p1, void* p2) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p3;
+        int* rem = (int*) p2;
 
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            void** pos = (void**) p2;
+            void** pos = (void**) p1;
 
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                int* b = (int*) p1;
+                int* b = (int*) p0;
 
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml attribute name.");
 
-                    int* anc = (int*) p0;
+                // The comparison result.
+                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml attribute name.");
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // The comparison result.
-                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    detect_xml_attribute_name_end((void*) &r, p1, p2);
 
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        detect_xml_attribute_name_end((void*) &r, p2, p3);
+                        // The attribute name end was found.
+                        //
+                        // CAUTION! The current position and remaining count were already
+                        // changed in the called function, to be processed further.
+                        //
+                        // The attribute count is left as it is.
 
-                        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                            // The attribute name end was found.
-                            //
-                            // CAUTION! The current position and remaining count were already
-                            // changed in the called function, to be processed further.
-                            //
-                            // The attribute count is left as it is.
-
-                            // Set break flag.
-                            *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                        }
+                        // Set break flag.
+                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
+                }
 
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        // Increment current position.
-                        *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    // Increment current position.
+                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
 
-                        // Decrement remaining count.
-                        *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                        // Increment attribute name count.
-                        (*anc)++;
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml attribute name. The attribute name count is null.");
+                    // Decrement remaining count.
+                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
 
             } else {
@@ -668,69 +682,56 @@ void select_xml_attribute_name(void* p0, void* p1, void* p2, void* p3) {
 /**
  * Selects the attribute value.
  *
- * @param p0 the attribute value count
- * @param p1 the break flag
- * @param p2 the current position (Hand over as reference!)
- * @param p3 the remaining count
+ * @param p0 the break flag
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
  */
-void select_xml_attribute_value(void* p0, void* p1, void* p2, void* p3) {
+void select_xml_attribute_value(void* p0, void* p1, void* p2) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p3;
+        int* rem = (int*) p2;
 
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            void** pos = (void**) p2;
+            void** pos = (void**) p1;
 
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                int* b = (int*) p1;
+                int* b = (int*) p0;
 
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml attribute value.");
 
-                    int* avc = (int*) p0;
+                // The comparison result.
+                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml attribute value.");
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // The comparison result.
-                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    detect_xml_attribute_value_end((void*) &r, p1, p2);
 
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        detect_xml_attribute_value_end((void*) &r, p2, p3);
+                        //
+                        // The attribute value end was found.
+                        //
+                        // CAUTION! The current position and remaining count were already
+                        // changed in the called function, to be processed further.
+                        //
+                        // The attribute value and count are left as they are.
+                        //
 
-                        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                            //
-                            // The attribute value end was found.
-                            //
-                            // CAUTION! The current position and remaining count were already
-                            // changed in the called function, to be processed further.
-                            //
-                            // The attribute value and count are left as they are.
-                            //
-
-                            // Set break flag.
-                            *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                        }
+                        // Set break flag.
+                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }
+                }
 
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        // Increment current position.
-                        *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    // Increment current position.
+                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
 
-                        // Decrement remaining count.
-                        *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                        // Increment attribute value count.
-                        (*avc)++;
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml attribute value. The attribute value count is null.");
+                    // Decrement remaining count.
+                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
 
             } else {
@@ -746,90 +747,6 @@ void select_xml_attribute_value(void* p0, void* p1, void* p2, void* p3) {
     } else {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml attribute value. The remaining count is null.");
-    }
-}
-
-/**
- * Selects the tag.
- *
- * @param p0 the attribute value count
- * @param p1 the break flag
- * @param p2 the current position (Hand over as reference!)
- * @param p3 the remaining count
- */
-void select_xml_tag(void* p0, void* p1, void* p2, void* p3) {
-
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* rem = (int*) p3;
-
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-            void** pos = (void**) p2;
-
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-                int* b = (int*) p1;
-
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    int* avc = (int*) p0;
-
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml tag.");
-
-                    // The comparison result.
-                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        detect_xml_attribute_value_end((void*) &r, p2, p3);
-
-                        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                            //
-                            // The attribute value end was found.
-                            //
-                            // CAUTION! The current position and remaining count were already
-                            // changed in the called function, to be processed further.
-                            //
-                            // The attribute value and count are left as they are.
-                            //
-
-                            // Set break flag.
-                            *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                        }
-                    }
-
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Increment current position.
-                        *pos = *pos + *POINTER_PRIMITIVE_SIZE;
-
-                        // Decrement remaining count.
-                        *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                        // Increment attribute value count.
-                        (*avc)++;
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag. The attribute value count is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag. The break flag is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag. The current position is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select xml tag. The remaining count is null.");
     }
 }
 

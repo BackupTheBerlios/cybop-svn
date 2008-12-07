@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_detector.c,v $ $Revision: 1.4 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
+ * @version $RCSfile: xml_detector.c,v $ $Revision: 1.5 $ $Date: 2008-12-07 01:06:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,63 +30,6 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-
-/**
- * Detects the xml tag end.
- *
- * @param p0 the comparison result
- * @param p1 the current position (Hand over as reference!)
- * @param p2 the remaining count
- */
-void detect_xml_tag_end(void* p0, void* p1, void* p2) {
-
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* rem = (int*) p2;
-
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-            void** pos = (void**) p1;
-
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                int* r = (int*) p0;
-
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml tag end.");
-
-                if (*rem >= *TAG_END_XML_NAME_COUNT) {
-
-                    compare_arrays(*pos, (void*) TAG_END_XML_NAME_COUNT, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                    if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Increment current position.
-                        *pos = *pos + (*TAG_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
-
-                        // Decrement remaining count.
-                        *rem = *rem - *TAG_END_XML_NAME_COUNT;
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag end. The remaining count is too small.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag end. The comparison result is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag end. The current position is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag end. The remaining count is null.");
-    }
-}
 
 /**
  * Detects the xml declaration begin.
@@ -256,6 +199,63 @@ void detect_xml_definition_begin(void* p0, void* p1, void* p2) {
     } else {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml definition begin. The remaining count is null.");
+    }
+}
+
+/**
+ * Detects the xml definition end.
+ *
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
+ */
+void detect_xml_definition_end(void* p0, void* p1, void* p2) {
+
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* rem = (int*) p2;
+
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** pos = (void**) p1;
+
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                int* r = (int*) p0;
+
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml definition end.");
+
+                if (*rem >= *DEFINITION_END_XML_NAME_COUNT) {
+
+                    compare_arrays(*pos, (void*) DEFINITION_END_XML_NAME_COUNT, (void*) DEFINITION_END_XML_NAME, (void*) DEFINITION_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                    if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        // Increment current position.
+                        *pos = *pos + (*DEFINITION_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+
+                        // Decrement remaining count.
+                        *rem = *rem - *DEFINITION_END_XML_NAME_COUNT;
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml definition end. The remaining count is too small.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml definition end. The comparison result is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml definition end. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml definition end. The remaining count is null.");
     }
 }
 
@@ -503,6 +503,63 @@ void detect_xml_end_tag_begin(void* p0, void* p1, void* p2) {
 }
 
 /**
+ * Detects the xml tag end.
+ *
+ * @param p0 the comparison result
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
+ */
+void detect_xml_tag_end(void* p0, void* p1, void* p2) {
+
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* rem = (int*) p2;
+
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** pos = (void**) p1;
+
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                int* r = (int*) p0;
+
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml tag end.");
+
+                if (*rem >= *TAG_END_XML_NAME_COUNT) {
+
+                    compare_arrays(*pos, (void*) TAG_END_XML_NAME_COUNT, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                    if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        // Increment current position.
+                        *pos = *pos + (*TAG_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+
+                        // Decrement remaining count.
+                        *rem = *rem - *TAG_END_XML_NAME_COUNT;
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag end. The remaining count is too small.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag end. The comparison result is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag end. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag end. The remaining count is null.");
+    }
+}
+
+/**
  * Detects the xml empty tag end.
  *
  * @param p0 the comparison result
@@ -560,13 +617,13 @@ void detect_xml_empty_tag_end(void* p0, void* p1, void* p2) {
 }
 
 /**
- * Detects the xml tag name end.
+ * Detects the xml attribute begin.
  *
  * @param p0 the comparison result
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
  */
-void detect_xml_tag_name_end(void* p0, void* p1, void* p2) {
+void detect_xml_attribute_begin(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -580,39 +637,39 @@ void detect_xml_tag_name_end(void* p0, void* p1, void* p2) {
 
                 int* r = (int*) p0;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml tag name end.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml attribute begin.");
 
-                if (*rem >= *TAG_NAME_END_XML_NAME_COUNT) {
+                if (*rem >= *ATTRIBUTE_BEGIN_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) TAG_NAME_END_XML_NAME_COUNT, (void*) TAG_NAME_END_XML_NAME, (void*) TAG_NAME_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) ATTRIBUTE_BEGIN_XML_NAME_COUNT, (void*) ATTRIBUTE_BEGIN_XML_NAME, (void*) ATTRIBUTE_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*TAG_NAME_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*ATTRIBUTE_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
-                        *rem = *rem - *TAG_NAME_END_XML_NAME_COUNT;
+                        *rem = *rem - *ATTRIBUTE_BEGIN_XML_NAME_COUNT;
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag name end. The remaining count is too small.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute begin. The remaining count is too small.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag name end. The comparison result is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute begin. The comparison result is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag name end. The current position is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute begin. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml tag name end. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect xml attribute begin. The remaining count is null.");
     }
 }
 
@@ -639,17 +696,17 @@ void detect_xml_attribute_name_end(void* p0, void* p1, void* p2) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml attribute name end.");
 
-                if (*rem >= *ATTRIBUTE_NAME_END_XML_NAME_COUNT) {
+                if (*rem >= *ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT) {
 
-                    compare_arrays(*pos, (void*) ATTRIBUTE_NAME_END_XML_NAME_COUNT, (void*) ATTRIBUTE_NAME_END_XML_NAME, (void*) ATTRIBUTE_NAME_END_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*pos, (void*) ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT, (void*) ATTRIBUTE_VALUE_BEGIN_XML_NAME, (void*) ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*ATTRIBUTE_NAME_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
-                        *rem = *rem - *ATTRIBUTE_NAME_END_XML_NAME_COUNT;
+                        *rem = *rem - *ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT;
                     }
 
                 } else {

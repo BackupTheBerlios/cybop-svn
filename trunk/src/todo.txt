@@ -7,12 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.74 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
+# @version $Revision: 1.75 $ $Date: 2008-12-07 01:06:45 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue with "process_xml_attribute": possibly delete the "select_xml_start_tag" function,
-            using just attribute name and -value
+        * Parsing seems to be all right
+        * Continue with adding parsed nodes to compound (which is not complete yet;
+            it currently only contains the root node)
 
         * Continue checking model diagram converter which still produces a slightly wrong output
             - do not convert integer etc. from multibyte into integer;

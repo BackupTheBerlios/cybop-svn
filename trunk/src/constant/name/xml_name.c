@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_name.c,v $ $Revision: 1.7 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
+ * @version $RCSfile: xml_name.c,v $ $Revision: 1.8 $ $Date: 2008-12-07 01:06:46 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,11 +69,6 @@ static wchar_t END_TAG_BEGIN_XML_NAME_ARRAY[] = {L'<', L'/'};
 static wchar_t* END_TAG_BEGIN_XML_NAME = END_TAG_BEGIN_XML_NAME_ARRAY;
 static int* END_TAG_BEGIN_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The tag name end xml name. */
-static wchar_t TAG_NAME_END_XML_NAME_ARRAY[] = {L' '};
-static wchar_t* TAG_NAME_END_XML_NAME = TAG_NAME_END_XML_NAME_ARRAY;
-static int* TAG_NAME_END_XML_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
-
 /** The tag end xml name. */
 static wchar_t TAG_END_XML_NAME_ARRAY[] = {L'>'};
 static wchar_t* TAG_END_XML_NAME = TAG_END_XML_NAME_ARRAY;
@@ -84,10 +79,15 @@ static wchar_t EMPTY_TAG_END_XML_NAME_ARRAY[] = {L'/', L'>'};
 static wchar_t* EMPTY_TAG_END_XML_NAME = EMPTY_TAG_END_XML_NAME_ARRAY;
 static int* EMPTY_TAG_END_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The attribute name end xml name. */
-static wchar_t ATTRIBUTE_NAME_END_XML_NAME_ARRAY[] = {L'=', L'"'};
-static wchar_t* ATTRIBUTE_NAME_END_XML_NAME = ATTRIBUTE_NAME_END_XML_NAME_ARRAY;
-static int* ATTRIBUTE_NAME_END_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+/** The attribute begin xml name. */
+static wchar_t ATTRIBUTE_BEGIN_XML_NAME_ARRAY[] = {L' '};
+static wchar_t* ATTRIBUTE_BEGIN_XML_NAME = ATTRIBUTE_BEGIN_XML_NAME_ARRAY;
+static int* ATTRIBUTE_BEGIN_XML_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The attribute value begin xml name. */
+static wchar_t ATTRIBUTE_VALUE_BEGIN_XML_NAME_ARRAY[] = {L'=', L'"'};
+static wchar_t* ATTRIBUTE_VALUE_BEGIN_XML_NAME = ATTRIBUTE_VALUE_BEGIN_XML_NAME_ARRAY;
+static int* ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The attribute value end xml name. */
 static wchar_t ATTRIBUTE_VALUE_END_XML_NAME_ARRAY[] = {L'"'};
