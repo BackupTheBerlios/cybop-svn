@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_name.c,v $ $Revision: 1.8 $ $Date: 2008-12-07 01:06:46 $ $Author: christian $
+ * @version $RCSfile: xml_name.c,v $ $Revision: 1.9 $ $Date: 2008-12-12 00:52:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -39,16 +39,6 @@ static wchar_t DECLARATION_END_XML_NAME_ARRAY[] = {L'?', L'>'};
 static wchar_t* DECLARATION_END_XML_NAME = DECLARATION_END_XML_NAME_ARRAY;
 static int* DECLARATION_END_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The definition begin xml name. */
-static wchar_t DEFINITION_BEGIN_XML_NAME_ARRAY[] = {L'<', L'!'};
-static wchar_t* DEFINITION_BEGIN_XML_NAME = DEFINITION_BEGIN_XML_NAME_ARRAY;
-static int* DEFINITION_BEGIN_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The definition end xml name. */
-static wchar_t DEFINITION_END_XML_NAME_ARRAY[] = {L'>'};
-static wchar_t* DEFINITION_END_XML_NAME = DEFINITION_END_XML_NAME_ARRAY;
-static int* DEFINITION_END_XML_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
-
 /** The comment begin xml name. */
 static wchar_t COMMENT_BEGIN_XML_NAME_ARRAY[] = {L'<', L'!', L'-', L'-'};
 static wchar_t* COMMENT_BEGIN_XML_NAME = COMMENT_BEGIN_XML_NAME_ARRAY;
@@ -58,6 +48,16 @@ static int* COMMENT_BEGIN_XML_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 static wchar_t COMMENT_END_XML_NAME_ARRAY[] = {L'-', L'-', L'>'};
 static wchar_t* COMMENT_END_XML_NAME = COMMENT_END_XML_NAME_ARRAY;
 static int* COMMENT_END_XML_NAME_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The definition begin xml name. */
+static wchar_t DEFINITION_BEGIN_XML_NAME_ARRAY[] = {L'<', L'!'};
+static wchar_t* DEFINITION_BEGIN_XML_NAME = DEFINITION_BEGIN_XML_NAME_ARRAY;
+static int* DEFINITION_BEGIN_XML_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The definition end xml name. */
+static wchar_t DEFINITION_END_XML_NAME_ARRAY[] = {L'>'};
+static wchar_t* DEFINITION_END_XML_NAME = DEFINITION_END_XML_NAME_ARRAY;
+static int* DEFINITION_END_XML_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The start tag begin xml name. */
 static wchar_t START_TAG_BEGIN_XML_NAME_ARRAY[] = {L'<'};

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_detector.c,v $ $Revision: 1.5 $ $Date: 2008-12-07 01:06:46 $ $Author: christian $
+ * @version $RCSfile: xml_detector.c,v $ $Revision: 1.6 $ $Date: 2008-12-12 00:52:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -396,32 +396,17 @@ void detect_xml_start_tag_begin(void* p0, void* p1, void* p2) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect xml start tag begin.");
 
-    fwprintf(stdout, L"TEST detect xml start tag begin rem: %i\n", *rem);
-    fwprintf(stdout, L"TEST detect xml start tag begin START_TAG_BEGIN_XML_NAME_COUNT: %i\n", *START_TAG_BEGIN_XML_NAME_COUNT);
-
                 if (*rem >= *START_TAG_BEGIN_XML_NAME_COUNT) {
-
-    fwprintf(stdout, L"TEST detect xml start tag begin pre r: %i\n", *r);
 
                     compare_arrays(*pos, (void*) START_TAG_BEGIN_XML_NAME_COUNT, (void*) START_TAG_BEGIN_XML_NAME, (void*) START_TAG_BEGIN_XML_NAME_COUNT, p0, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    fwprintf(stdout, L"TEST detect xml start tag begin post r: %i\n", *r);
-
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-    fwprintf(stdout, L"TEST detect xml start tag begin pre pos: %i\n", *pos);
 
                         // Increment current position.
                         *pos = *pos + (*START_TAG_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
 
-    fwprintf(stdout, L"TEST detect xml start tag begin post pos: %i\n", *pos);
-
-    fwprintf(stdout, L"TEST detect xml start tag begin pre rem: %i\n", *rem);
-
                         // Decrement remaining count.
                         *rem = *rem - *START_TAG_BEGIN_XML_NAME_COUNT;
-
-    fwprintf(stdout, L"TEST detect xml start tag begin post rem: %i\n", *rem);
                     }
 
                 } else {

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_selector.c,v $ $Revision: 1.6 $ $Date: 2008-12-07 01:06:46 $ $Author: christian $
+ * @version $RCSfile: xml_selector.c,v $ $Revision: 1.7 $ $Date: 2008-12-12 00:52:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -278,10 +278,12 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                 // Before arbitrary elements -- beginning with just "<" and a term -- can be identified,
                 // all other possibilities (declaration, definition, comment) have to have
                 // been processed, in order to be excluded.
+                // Also, the comment begin <!-- has to be searched BEFORE the definition begin <!.
+                // The very first comparison, however, is to search for the end tag begin "</".
                 // The reason is that all elements begin with a "<" character:
                 // - declaration: <?
-                // - definition: <!
                 // - comment: <!--
+                // - definition: <!
                 // - element: <
                 //
                 // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
@@ -301,7 +303,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                 // Any "process" function called afterwards can rely on this and start processing right away.
                 //
 
-    fwprintf(stdout, L"TEST select element content 0 rem: %i\n", *rem);
+    fwprintf(stdout, L"TEST select element content rem: %i\n", *rem);
 
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -311,6 +313,8 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                     detect_xml_end_tag_begin((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stdout, L"TEST select element content end tag begin: %i\n", *rem);
 
                         process_xml_end_tag(p7, p8);
 
@@ -326,19 +330,10 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+    fwprintf(stdout, L"TEST select element content declaration begin: %i\n", *rem);
+
                         // The data contained in an XML declaration are added to the destination details.
                         process_xml_declaration(p3, p4, p5, p7, p8);
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect_xml_definition_begin((void*) &r, p7, p8);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // The data contained in an XML definition are added to the destination details.
-                        process_xml_definition(p3, p4, p5, p7, p8);
                     }
                 }
 
@@ -348,20 +343,33 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+    fwprintf(stdout, L"TEST select element content comment begin: %i\n", *rem);
+
                         // The data contained in an XML comment are just ignored.
-                        process_xml_comment(p6, p7);
+                        process_xml_comment(p7, p8);
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stdout, L"TEST select element content 1 rem: %i\n", *rem);
+                    detect_xml_definition_begin((void*) &r, p7, p8);
+
+                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stdout, L"TEST select element content definition begin: %i\n", *rem);
+
+                        // The data contained in an XML definition are added to the destination details.
+                        process_xml_definition(p3, p4, p5, p7, p8);
+                    }
+                }
+
+                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     detect_xml_start_tag_begin((void*) &r, p7, p8);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stdout, L"TEST select element content 2 rem: %i\n", *rem);
+    fwprintf(stdout, L"TEST select element content start tag begin: %i\n", *rem);
 
                         // The data contained in an XML element are added to the destination model.
                         process_xml_element(p0, p1, p2, p7, p8);
@@ -369,6 +377,8 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                 }
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stdout, L"TEST select element content nothing detected: %i\n", *rem);
 
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
@@ -537,22 +547,6 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect_xml_attribute_begin((void*) &r, p3, p4);
-
-                            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                                // The tag name end, indicating subsequent attributes, was found.
-                                // Set has attribute flag.
-                                *ha = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                            }
-                        }
-
-                        // CAUTION! The ORDER of the following function calls is IMPORTANT!
-                        // The empty tag end "/>" has to be searched BEFORE
-                        // the simple tag end ">", because of the slash "/" character.
-
-                        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
                             detect_xml_empty_tag_end((void*) &r, p3, p4);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -572,6 +566,18 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
                                 // The tag end, indicating subsequent element content, was found.
                                 // Set has content flag.
                                 *hc = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            }
+                        }
+
+                        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            detect_xml_attribute_begin((void*) &r, p3, p4);
+
+                            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                                // The tag name end, indicating subsequent attributes, was found.
+                                // Set has attribute flag.
+                                *ha = *NUMBER_1_INTEGER_MEMORY_MODEL;
                             }
                         }
 

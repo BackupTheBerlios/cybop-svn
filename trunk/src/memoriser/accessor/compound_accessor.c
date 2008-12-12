@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.57 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.58 $ $Date: 2008-12-12 00:52:52 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -842,9 +842,14 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                     get_array_elements(p0, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &dc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
                     get_array_elements(p0, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ds, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
+    fwprintf(stdout, L"TEST Set compound element by index ns: %i\n", *ns);
+    fwprintf(stdout, L"TEST Set compound element by index nc: %i\n", *nc);
+    fwprintf(stdout, L"TEST Set compound element by index n: %i\n", *n);
+
                     // CAUTION! If a compound model was properly allocated, then all arrays should exist!
                     // Therefore, check all arrays for null pointers here.
 
+/*??
                     if (*n != *NULL_POINTER_MEMORY_MODEL) {
 
                         if (*nc != *NULL_POINTER_MEMORY_MODEL) {
@@ -868,6 +873,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                                                             if (*dc != *NULL_POINTER_MEMORY_MODEL) {
 
                                                                 if (*ds != *NULL_POINTER_MEMORY_MODEL) {
+*/
 
                                                                     if (*i >= *cs) {
 
@@ -949,6 +955,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                                                                         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The index exceeds the size.");
                                                                     }
 
+/*??
                                                                 } else {
 
                                                                     log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The details sizes is null.");
@@ -1008,6 +1015,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 
                         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The names is null.");
                     }
+*/
 
                 } else {
 
