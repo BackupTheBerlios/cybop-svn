@@ -14,9 +14,17 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.101 $ $Date: 2008-12-12 00:52:52 $ $Author: christian $
+# @version $Revision: 1.102 $ $Date: 2008-12-22 12:57:20 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-12-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug xml conversion
+        * Make tag- and attribute xml nodes receive a name in function "process_xml_element"
+            (use "PLAIN_TEXT_CYBOL_ABSTRACTION" instead of "WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION")
+        * Use "COMPOUND_MEMORY_ABSTRACTION" instead of "WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION"
+            in function call to "allocate_part" in function "process_xml_element",
+            because a part gets converted into a compound; only tag- and attribute names are wide character arrays
 
 2008-12-11  Christian Heller  <christian.heller@tuxtax.de>
         * Search bug in xml conversion -- parent node is null when adding element nodes

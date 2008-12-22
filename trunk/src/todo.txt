@@ -7,19 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.76 $ $Date: 2008-12-12 00:52:52 $ $Author: christian $
+# @version $Revision: 1.77 $ $Date: 2008-12-22 12:57:20 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Parsing seems to be all right:
-            - xml_processor, xml_selector o.k.
-        * Error occures only when adding an element (tag) node in function "process_xml_element"
-            - in function call to "add_compound_element_by_name"
-            - error happens (not?) only for empty tags ending with a "/>" in example "exit/run.cybol"
-        * Debug adding parsed nodes to compound:
-            - error identified in "set_compound_element_by_index"
-            - commented out null_pointer checks there
-            - some pointers are undefined --> check out why!
+        * Introduce new "add" functions besides "add_compound_element_by_name",
+            in order to be able to use tag names without number suffix
 
         * Continue checking model diagram converter which still produces a slightly wrong output
             - do not convert integer etc. from multibyte into integer;

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.23 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
+ * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.24 $ $Date: 2008-12-22 12:57:20 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -216,7 +216,7 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
     fwprintf(stdout, L"TEST encode model diagram compound 4 j: %i\n", j);
     fwprintf(stdout, L"TEST encode model diagram compound 4 p1: %i\n", *((int*) p1));
     fwprintf(stdout, L"TEST encode model diagram compound 4 p0: %i\n", p0);
-    fwprintf(stdout, L"TEST encode model diagram compound 4 p0 as wchar_t: %ls\n", *((wchar_t**) p0));
+//??    fwprintf(stdout, L"TEST encode model diagram compound 4 p0 as wchar_t: %ls\n", *((wchar_t**) p0));
 
                 // Add line feed character to destination array.
                 append_wide_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
