@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_processor.c,v $ $Revision: 1.11 $ $Date: 2008-12-22 12:57:20 $ $Author: christian $
+ * @version $RCSfile: xml_processor.c,v $ $Revision: 1.12 $ $Date: 2008-12-23 22:37:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -349,7 +349,7 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4, void
                             // CAUTION! The pre-defined constant "tag" is used as name here!
                             // The "add_compound_element_by_name" function below will automatically
                             // add a number as suffix, to make the name unique.
-                            decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TAG_XML_CYBOL_NAME, (void*) TAG_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+                            decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) NODE_NAME_XML_CYBOL_NAME, (void*) NODE_NAME_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
                 fwprintf(stdout, L"TEST process xml tag name 4: %i\n", *rem);
                 fwprintf(stdout, L"TEST process xml tag name 4 n: %ls\n", (wchar_t*) n);
@@ -768,7 +768,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // CAUTION! The pre-defined constant "part" is used as name here!
                 // The "add_compound_element_by_name" function below will automatically
                 // add a number as suffix, to make the name unique.
-                decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PART_XML_CYBOL_NAME, (void*) PART_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+                decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) NODE_XML_CYBOL_NAME, (void*) NODE_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
     fwprintf(stdout, L"TEST process element 2: %i\n", *rem);
     fwprintf(stdout, L"TEST process element n: %i\n", (wchar_t*) n);
@@ -822,7 +822,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // CAUTION! Hand over the name as reference!
                 // Storing many parts with identical tag name is not a problem,
                 // since the tag name of a part is added to its details compound.
-                add_compound_element_by_name(*dd, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
+                add_compound_element_by_name_with_suffix(*dd, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
 
     fwprintf(stdout, L"TEST process element 6: %i\n", *rem);
 

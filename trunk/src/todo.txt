@@ -7,19 +7,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.77 $ $Date: 2008-12-22 12:57:20 $ $Author: christian $
+# @version $Revision: 1.78 $ $Date: 2008-12-23 22:37:04 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Introduce new "add" functions besides "add_compound_element_by_name",
-            in order to be able to use tag names without number suffix
+        * Continue cybol converter
+        * Add function "detect_cybol_node_type"
+        * Use only function "process_cybol_node" for all node types, but move if-elses into a "select..." function
 
         * Continue checking model diagram converter which still produces a slightly wrong output
             - do not convert integer etc. from multibyte into integer;
             - instead, convert multibyte into wide character altogether, the complete cybol file
             - only afterwards, convert (decode) the single wide characters into integer etc.
-
-        * Continue "cybol_converter.c", to translate the model tree into a cyboi schema-conform structure
 
         * Add a mapper translating cybol- into memory abstractions and vice-versa
             (currently, the cybol abstractions are used directly to allocate/ access memory structures)

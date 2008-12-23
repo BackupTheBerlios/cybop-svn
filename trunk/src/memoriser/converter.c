@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.63 $ $Date: 2008-11-29 23:14:25 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.64 $ $Date: 2008-12-23 22:37:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -108,41 +108,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-/*??
-        // CAUTION! For cybol files, only the abstraction "character" is defined.
-        // No distinction is made between "character" and "wide character", in other words:
-        // a cybol abstraction named "wide_character" does not exist.
-        // Similarly, all cybol files are expected to be encoded as utf-8.
-        //
-        // When decoding a value of abstraction "character" from cybol into cyboi,
-        // it is assumed to be a multibyte utf-8 encoded character string (CHARACTER_VECTOR_MEMORY_ABSTRACTION)
-        // and gets converted into a "wchar_t" (PLAIN_TEXT_CYBOL_ABSTRACTION) array internally.
-        //
-        // When encoding a value of abstraction "wide_character" from cyboi into cybol,
-        // it is assumed to be a "wchar_t" array of (PLAIN_TEXT_CYBOL_ABSTRACTION)
-        // and gets converted into a multibyte utf-8 encoded character string (CHARACTER_VECTOR_MEMORY_ABSTRACTION).
-        //
-        // Therefore, the comparison here only considers "CHARACTER_VECTOR_MEMORY_ABSTRACTION",
-        // but not "PLAIN_TEXT_CYBOL_ABSTRACTION".
-        compare_arrays(p10, p11, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
-//??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
-        }
-*/
-
-        compare_arrays(p10, p11, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
         compare_arrays(p10, p11, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -209,6 +174,37 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
             // Deallocate xml details.
             deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+//?? TEST BEGIN
+            // Reset model diagram.
+            md = *NULL_POINTER_MEMORY_MODEL;
+            mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *((void**) p0), p1, *((void**) p3), p4);
+            // Reset multibyte character stream.
+            mb = *NULL_POINTER_MEMORY_MODEL;
+            mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // Reset file name.
+            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
+            fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
+            fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
         }
     }
 
@@ -321,7 +317,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
-//??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -331,7 +326,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+//??            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
         }
     }
 
@@ -579,7 +576,9 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            encode_utf_8_unicode_character_vector(p0, p1, p2, p7, p8);
+            append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+//??            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
         }
     }
 

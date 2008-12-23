@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.58 $ $Date: 2008-12-12 00:52:52 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.59 $ $Date: 2008-12-23 22:37:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1113,6 +1113,51 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** n = (void**) p3;
+
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Add compound element by name:");
+
+        // CAUTION! Use compound count as index for adding new elements.
+        // CAUTION! Use DEREFERENCED name, as it was handed over as reference!
+        set_compound_element_by_index(p0, p1, p2, p1, *n, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add compound element by name. The name is null.");
+    }
+}
+
+/**
+ * Adds the compound element by name with suffix.
+ *
+ * The name suffix starts with "_$", e.g.:
+ * part_$0
+ * part_$1
+ * channel_$2
+ * abstraction_$0
+ *
+ * @param p0 the compound model
+ * @param p1 the compound model count
+ * @param p2 the compound model size
+ * @param p3 the name (Hand over as reference!)
+ * @param p4 the name count
+ * @param p5 the name size
+ * @param p6 the abstraction
+ * @param p7 the abstraction count
+ * @param p8 the abstraction size
+ * @param p9 the model
+ * @param p10 the model count
+ * @param p11 the model size
+ * @param p12 the details
+ * @param p13 the details count
+ * @param p14 the details size
+ */
+void add_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
+    void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+
     if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* ns = (int*) p5;
@@ -1125,7 +1170,7 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 
                 void** n = (void**) p3;
 
-                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Add compound element by name:");
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Add compound element by name with suffix.");
 
                 // The name suffix.
                 void* s = *NULL_POINTER_MEMORY_MODEL;
@@ -1201,9 +1246,7 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
     fwprintf(stdout, L"TEST add compound element 7 *p1: %i\n", *((int*) p1));
     fwprintf(stdout, L"TEST add compound element 7 p0: %i\n", p0);
 
-                // CAUTION! Use compound count as index for adding new elements.
-                // CAUTION! Use DEREFERENCED name, as it was handed over as reference!
-                set_compound_element_by_index(p0, p1, p2, p1, *n, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+                add_compound_element_by_name(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
 
     fwprintf(stdout, L"TEST add compound element 8 p2: %i\n", *((int*) p2));
     fwprintf(stdout, L"TEST add compound element 8 p1: %i\n", *((int*) p1));
@@ -1215,17 +1258,17 @@ void add_compound_element_by_name(void* p0, void* p1, void* p2,
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add compound element by name. The name is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add compound element by name with suffix. The name is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add compound element by name. The name count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add compound element by name with suffix. The name count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add compound element by name. The name size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add compound element by name with suffix. The name size is null.");
     }
 }
 

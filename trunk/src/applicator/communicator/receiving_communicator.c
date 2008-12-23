@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-12-23 22:37:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 
 #include "../../applicator/communicator/receiving/file_system_receiving_communicator.c"
 #include "../../applicator/communicator/receiving/gnu_linux_console_receiving_communicator.c"
+#include "../../applicator/communicator/receiving/inline_receiving_communicator.c"
 #include "../../applicator/communicator/receiving/latex_receiving_communicator.c"
 #include "../../applicator/communicator/receiving/socket_receiving_communicator.c"
 #include "../../applicator/communicator/receiving/x_window_system_receiving_communicator.c"
@@ -78,6 +79,20 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p22, p23, (void*) CYBOI_CYBOL_CHANNEL, (void*) CYBOI_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // Receive model by reading http request or response.
+            //
+            // CAUTION! The details are handed over as well,
+            // since they will store http headers as meta data.
+//??            communicate_receiving_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+        }
+    }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -137,11 +152,41 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p22, p23, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p22, p23, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            communicate_receiving_x_window_system(p0, p7, p8, p9, p10, p11, p12);
+            // Receive model by reading message data.
+            //
+            // CAUTION! The details are handed over as well, since sometimes,
+            // they are read from the message together with the model, for
+            // example when converting from a file in xdt format.
+            communicate_receiving_inline(p3, p4, p5, p6, p7, p8, p14, p15, p18, p19);
+
+            // Receive details by reading meta message data.
+            //
+            // CAUTION! Sometimes, the details are read from a different source than the
+            // model, for example the html attributes of an html table when creating a wui.
+            //
+            // Example:
+            // <part name="receive_table_row" channel="inline" abstraction="operation" model="receive">
+            //     <property name="channel" channel="inline" abstraction="character" model="file"/>
+            //     <property name="language" channel="inline" abstraction="character" model="compound"/>
+            //     <property name="message" channel="inline" abstraction="character" model="residenz/wui/address_table_row.cybol"/>
+            //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
+            //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
+            // </part>
+            communicate_receiving_inline(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p16, p17, p18, p19);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p22, p23, (void*) LATEX_CYBOL_CHANNEL, (void*) LATEX_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            communicate_receiving_latex(p0, p13, p14);
         }
     }
 
@@ -161,25 +206,11 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p22, p23, (void*) CYBOI_CYBOL_CHANNEL, (void*) CYBOI_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p22, p23, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Receive model by reading http request or response.
-            //
-            // CAUTION! The details are handed over as well,
-            // since they will store http headers as meta data.
-//??            communicate_receiving_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p22, p23, (void*) LATEX_CYBOL_CHANNEL, (void*) LATEX_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??            communicate_receiving_latex(p0, p13, p14);
+//??            communicate_receiving_x_window_system(p0, p7, p8, p9, p10, p11, p12);
         }
     }
 

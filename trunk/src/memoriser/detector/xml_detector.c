@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_detector.c,v $ $Revision: 1.6 $ $Date: 2008-12-12 00:52:52 $ $Author: christian $
+ * @version $RCSfile: xml_detector.c,v $ $Revision: 1.7 $ $Date: 2008-12-23 22:37:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,6 +29,7 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/xml_name.c"
 #include "../../logger/logger.c"
 
 /**

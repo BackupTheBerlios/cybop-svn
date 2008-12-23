@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_cybol_name.c,v $ $Revision: 1.2 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
+ * @version $RCSfile: xml_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-12-23 22:37:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,15 +29,80 @@
 #include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
-/** The part xml cybol name. */
-static wchar_t PART_XML_CYBOL_NAME_ARRAY[] = {L'p', L'a', L'r', L't'};
-static wchar_t* PART_XML_CYBOL_NAME = PART_XML_CYBOL_NAME_ARRAY;
-static int* PART_XML_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+/** The node xml cybol name. */
+static wchar_t NODE_XML_CYBOL_NAME_ARRAY[] = {L'n', L'o', L'd', L'e'};
+static wchar_t* NODE_XML_CYBOL_NAME = NODE_XML_CYBOL_NAME_ARRAY;
+static int* NODE_XML_CYBOL_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The tag xml cybol name. */
-static wchar_t TAG_XML_CYBOL_NAME_ARRAY[] = {L't', L'a', L'g'};
-static wchar_t* TAG_XML_CYBOL_NAME = TAG_XML_CYBOL_NAME_ARRAY;
-static int* TAG_XML_CYBOL_NAME_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+/**
+ * The node name xml cybol name.
+ *
+ * CAUTION! The node name is intentionally left empty.
+ * The cyboi xml parser adds the xml tag name and xml attribute names
+ * to a node's details, all on the same level.
+ * But because xml attributes may have arbitrary names,
+ * an ambiguous situation could be caused when fixing a node's name.
+ *
+ * Example:
+ *
+ * <catalogue>
+ *     <article number="01234">
+ *         <colour name="red" value="255,0,0" model="rgb"/>
+ *         <size width="10" length="5" height="2"/>
+ *     </article>
+ * </catalogue>
+ *
+ * The "colour" tag has an attribute "name" with the value "red".
+ * After having parsed the xml file, the resulting cyboi model might look as follows:
+ *
+ *  | compound
+ * +-node_$0 | compound
+ * | +-node_$0 | compound
+ * | | +-node_$0 | compound
+ * | | | #-name | wide_character_vector | colour
+ * | | | #-name | wide_character_vector | red
+ * | | | #-value | wide_character_vector | 255,0,0
+ * | | | #-model | wide_character_vector | rgb
+ * | | +-node_$1 | compound
+ * | | | #-name | wide_character_vector | size
+ * | | | #-width | wide_character_vector | 10
+ * | | | #-length | wide_character_vector | 5
+ * | | | #-height | wide_character_vector | 2
+ * | | #-name | wide_character_vector | article
+ * | | #-number | wide_character_vector | 01234
+ * | #-name | wide_character_vector | catalogue
+ *
+ * One of the nodes has two sub nodes (for the tag name and attribute name)
+ * with identical name:
+ *
+ * | | | #-name | wide_character_vector | colour
+ * | | | #-name | wide_character_vector | red
+ *
+ * In order to avoid an ambiguous situation of this kind,
+ * the node name representing the tag name does NOT receive ANY name.
+ * In other words, it is just left empty.
+ * For the example above, this would result in the following cyboi model:
+ *
+ *  | compound
+ * +-node_$0 | compound
+ * | +-node_$0 | compound
+ * | | +-node_$0 | compound
+ * | | | #- | wide_character_vector | colour
+ * | | | #-name | wide_character_vector | red
+ * | | | #-value | wide_character_vector | 255,0,0
+ * | | | #-model | wide_character_vector | rgb
+ * | | +-node_$1 | compound
+ * | | | #- | wide_character_vector | size
+ * | | | #-width | wide_character_vector | 10
+ * | | | #-length | wide_character_vector | 5
+ * | | | #-height | wide_character_vector | 2
+ * | | #- | wide_character_vector | article
+ * | | #-number | wide_character_vector | 01234
+ * | #- | wide_character_vector | catalogue
+ */
+static wchar_t NODE_NAME_XML_CYBOL_NAME_ARRAY[] = {};
+static wchar_t* NODE_NAME_XML_CYBOL_NAME = NODE_NAME_XML_CYBOL_NAME_ARRAY;
+static int* NODE_NAME_XML_CYBOL_NAME_COUNT = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* XML_CYBOL_NAME_SOURCE */
 #endif
