@@ -7,13 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.78 $ $Date: 2008-12-23 22:37:04 $ $Author: christian $
+# @version $Revision: 1.79 $ $Date: 2008-12-26 16:19:10 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
         * Continue cybol converter
-        * Add function "detect_cybol_node_type"
-        * Use only function "process_cybol_node" for all node types, but move if-elses into a "select..." function
+        * Add or delete functions "detect_cybol_node_type" and "select_cybol_node"
 
         * Continue checking model diagram converter which still produces a slightly wrong output
             - do not convert integer etc. from multibyte into integer;

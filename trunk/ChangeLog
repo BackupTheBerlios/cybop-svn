@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.103 $ $Date: 2008-12-23 22:37:04 $ $Author: christian $
+# @version $Revision: 1.104 $ $Date: 2008-12-26 16:19:10 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-12-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue cybol converter
+        * Call function "process_cybol_node" recursively
 
 2008-12-23  Christian Heller  <christian.heller@tuxtax.de>
         * Start implementing cybol converter in file "cybol_converter.c"

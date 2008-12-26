@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: text_cybol_abstraction.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:03 $ $Author: christian $
+ * @version $RCSfile: text_cybol_abstraction.c,v $ $Revision: 1.5 $ $Date: 2008-12-26 16:19:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,6 +52,42 @@
 //
 
 /**
+ * The text/abstraction cybol abstraction.
+ *
+ * This constant is necessary to translate cybol- into memory abstractions,
+ * because both are not always identical.
+ */
+static wchar_t ABSTRACTION_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'a', L'b', L's', L't', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
+static wchar_t* ABSTRACTION_TEXT_CYBOL_ABSTRACTION = ABSTRACTION_TEXT_CYBOL_ABSTRACTION_ARRAY;
+static int* ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
+
+/**
+ * The text/cybol cybol abstraction as ascii character string.
+ *
+ * CAUTION! This constant is redundant with CYBOL_TEXT_CYBOL_ABSTRACTION.
+ * It is necessary, because the module "initialiser.c" needs to hand over
+ * a multibyte character string as argument, which later gets decoded
+ * into a wide character string.
+ *
+ * The "CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT" from above is used as count.
+ */
+static char ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {'t', 'e', 'x', 't', '/', 'c', 'y', 'b', 'o', 'l'};
+static char* ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION = ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION_ARRAY;
+
+/**
+ * The text/plain cybol abstraction as ascii character string.
+ *
+ * CAUTION! This constant is redundant with PLAIN_TEXT_CYBOL_ABSTRACTION.
+ * It is necessary, because certain pieces of source code need to hand over
+ * a multibyte character string as argument, which later gets decoded
+ * into a wide character string.
+ *
+ * The "CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT" from above is used as count.
+ */
+static char ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {'t', 'e', 'x', 't', '/', 'p', 'l', 'a', 'i', 'n'};
+static char* ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION = ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY;
+
+/**
  * The text/css cybol abstraction.
  *
  * Cascading Style Sheets.
@@ -73,18 +109,6 @@ static int* CSS_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARR
 static wchar_t CYBOL_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'c', L'y', L'b', L'o', L'l'};
 static wchar_t* CYBOL_TEXT_CYBOL_ABSTRACTION = CYBOL_TEXT_CYBOL_ABSTRACTION_ARRAY;
 static int* CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
-
-/**
- * The text/cybol cybol abstraction as ascii character string.
- *
- * CAUTION! This redundant constant is necessary, because the module "initialiser.c"
- * needs to hand over a multibyte character string as argument, which later gets
- * decoded into a wide character string.
- *
- * The "CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT" from above is used as count.
- */
-static char ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {'t', 'e', 'x', 't', '/', 'c', 'y', 'b', 'o', 'l'};
-static char* ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION = ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION_ARRAY;
 
 /**
  * The text/html cybol abstraction.
@@ -134,9 +158,6 @@ static int* MODEL_DIAGRAM_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_18_INTEGER_MEMOR
 static wchar_t PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'p', L'l', L'a', L'i', L'n'};
 static wchar_t* PLAIN_TEXT_CYBOL_ABSTRACTION = PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY;
 static int* PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
-
-static char ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {'t', 'e', 'x', 't', '/', 'p', 'l', 'a', 'i', 'n'};
-static char* ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION = ASCII_PLAIN_TEXT_CYBOL_ABSTRACTION_ARRAY;
 
 /**
  * The text/xdt cybol abstraction.

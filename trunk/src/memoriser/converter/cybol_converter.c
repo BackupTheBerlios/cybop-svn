@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.14 $ $Date: 2008-12-23 22:37:05 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.15 $ $Date: 2008-12-26 16:19:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,17 +29,6 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/processor/cybol_processor.c"
-/*??
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/channel/cybol_channel.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../src/constant/name/xml_name.c"
-#include "../../memoriser/converter/abstraction_converter.c"
-#include "../../memoriser/array.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/communicator.c"
-*/
 
 /**
  * Decodes cybol.
@@ -59,7 +48,7 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
 
-    process_cybol_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
+    process_cybol_node(p0, p1, p2, p6, p7, p8, p9);
 }
 
 /**
