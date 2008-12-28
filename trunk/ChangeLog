@@ -14,9 +14,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.104 $ $Date: 2008-12-26 16:19:10 $ $Author: christian $
+# @version $Revision: 1.105 $ $Date: 2008-12-28 12:14:32 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-12-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue cybol converter
+        * Correct files "converter.c" and "abstraction_converter.c" using the function "replace_wide_character_vector"
+        * Delete file "cybol_selector.c"
 
 2008-12-26  Christian Heller  <christian.heller@tuxtax.de>
         * Continue cybol converter
@@ -60,8 +65,11 @@
 
 2008-11-14  Christian Heller  <christian.heller@tuxtax.de>
         * Debug xml conversion
-        * Fix model_diagram_converter.c
-        * Add new functions append, replace, insert, overwrite to wide_character_vector_accessor.c
+        * Fix file "model_diagram_converter.c"; do not convert integer etc. from multibyte;
+            instead, convert multibyte into wide character altogether, the complete cybol file,
+            before calling the model diagram converter; only afterwards, convert (decode)
+            the single wide characters into integer etc.
+        * Add new functions append, replace, insert, overwrite to file "wide_character_vector_accessor.c"
 
 2008-11-13  Christian Heller  <christian.heller@tuxtax.de>
         * Debug integer_converter.c, compound_accessor.c

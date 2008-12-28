@@ -7,20 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.79 $ $Date: 2008-12-26 16:19:10 $ $Author: christian $
+# @version $Revision: 1.80 $ $Date: 2008-12-28 12:14:32 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue cybol converter
-        * Add or delete functions "detect_cybol_node_type" and "select_cybol_node"
-
-        * Continue checking model diagram converter which still produces a slightly wrong output
-            - do not convert integer etc. from multibyte into integer;
-            - instead, convert multibyte into wide character altogether, the complete cybol file
-            - only afterwards, convert (decode) the single wide characters into integer etc.
-
-        * Add a mapper translating cybol- into memory abstractions and vice-versa
-            (currently, the cybol abstractions are used directly to allocate/ access memory structures)
+        * Make signal checking work again
 
         * Rename several things in CYBOL files and CYBOI:
             --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the

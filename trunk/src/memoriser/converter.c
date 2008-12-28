@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.64 $ $Date: 2008-12-23 22:37:04 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.65 $ $Date: 2008-12-28 12:14:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,6 +42,7 @@
 #include "../memoriser/converter/character/ascii_character_vector_converter.c"
 #include "../memoriser/converter/character/utf_16_unicode_character_converter.c"
 #include "../memoriser/converter/character/utf_8_unicode_character_converter.c"
+#include "../memoriser/converter/abstraction_converter.c"
 #include "../memoriser/converter/boolean_converter.c"
 #include "../memoriser/converter/complex_converter.c"
 #include "../memoriser/converter/cybol_converter.c"
@@ -85,6 +86,16 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p10, p11, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            decode_abstraction(p0, p1, p2, p6, p7);
+        }
+    }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: handler.c,v $ $Revision: 1.33 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: handler.c,v $ $Revision: 1.34 $ $Date: 2008-12-28 12:14:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -116,6 +116,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         }
     }
 
+    fwprintf(stdout, L"TEST handle 0: %i\n", r);
+
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         compare_arrays(p10, p11, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -159,6 +161,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         }
     }
 
+    fwprintf(stdout, L"TEST handle 1: %i\n", r);
+
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         compare_arrays(p10, p11, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -193,6 +197,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         }
     }
 
+    fwprintf(stdout, L"TEST handle 2: %i\n", r);
+
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         compare_arrays(p10, p11, (void*) PLAIN_OPERATION_CYBOL_ABSTRACTION, (void*) PLAIN_OPERATION_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -203,6 +209,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             handle_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15, p16, p17);
         }
     }
+
+    fwprintf(stdout, L"TEST handle 3: %i\n", r);
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

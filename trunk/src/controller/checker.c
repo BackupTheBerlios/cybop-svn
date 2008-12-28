@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.58 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.59 $ $Date: 2008-12-28 12:14:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1004,6 +1004,8 @@ void check(void* p0) {
             // Leave loop if shutdown flag was set.
             break;
         }
+
+    fwprintf(stdout, L"TEST check: %i\n", f);
 
         check_signal(p0, *k, *kc, *ks, *s, *sc, *ss, (void*) &f,
             (void*) signal_memory_irq, (void*) signal_memory_mutex, (void*) signal_memory_sleep_time,

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.15 $ $Date: 2008-12-26 16:19:10 $ $Author: christian $
+ * @version $RCSfile: cybol_converter.c,v $ $Revision: 1.16 $ $Date: 2008-12-28 12:14:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -47,6 +47,8 @@
 void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
+
+    fwprintf(stdout, L"TEST decode cybol: %i\n", p6);
 
     process_cybol_node(p0, p1, p2, p6, p7, p8, p9);
 }

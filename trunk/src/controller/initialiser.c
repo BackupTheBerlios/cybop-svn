@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: initialiser.c,v $ $Revision: 1.27 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: initialiser.c,v $ $Revision: 1.28 $ $Date: 2008-12-28 12:14:33 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -104,7 +104,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // and NOT "CYBOL_TEXT_CYBOL_ABSTRACTION", because the "decode" function
     // expects a multibyte character string (as would normally come from a CYBOL file).
     // The "cybol" abstraction is needed since CYBOL files are to be used as knowledge source.
-    decode_utf_8_unicode_character_vector((void*) &ma, (void*) mac, (void*) mas, (void*) ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
+    decode_utf_8_unicode_character_vector((void*) &ma, (void*) mac, (void*) mas, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_AS_CHAR, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
 
     fwprintf(stdout, L"TEST initialiser ma: %ls\n", (wchar_t*) ma);
     fwprintf(stdout, L"TEST initialiser mac: %i\n", *mac);
