@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: allocator.c,v $ $Revision: 1.30 $ $Date: 2008-09-19 21:12:15 $ $Author: christian $
+ * @version $RCSfile: allocator.c,v $ $Revision: 1.31 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,8 +43,6 @@
 #include "../memoriser/allocator/signal_memory_allocator.c"
 #include "../memoriser/allocator/unsigned_long_vector_allocator.c"
 #include "../memoriser/allocator/wide_character_vector_allocator.c"
-#include "../memoriser/allocator/xml_node_allocator.c"
-#include "../memoriser/allocator/xml_property_allocator.c"
 #include "../memoriser/array.c"
 
 /**
@@ -114,6 +112,16 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        compare_arrays(p2, p3, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            allocate_wide_character_vector(p0, p1);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
         compare_arrays(p2, p3, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -139,6 +147,26 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             allocate_internal_memory(p0, p1);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p2, p3, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            allocate_wide_character_vector(p0, p1);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p2, p3, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            allocate_wide_character_vector(p0, p1);
         }
     }
 

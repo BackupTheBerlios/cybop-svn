@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.3 $ $Date: 2008-12-28 12:14:33 $ $Author: christian $
+ * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.4 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -41,6 +41,8 @@
 void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
     void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23);
+
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11);
 
 /**
  * Processes the cybol node.
@@ -143,19 +145,37 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 // This is NOT the root node.
                 // Therefore, the node's details are processed.
 
+    fwprintf(stdout, L"TEST process cybol node 2 sa: %ls\n", (wchar_t*) *sa);
+    fwprintf(stdout, L"TEST process cybol node 2 sac: %i\n", **((int**) sac));
+
+                // The temporary runtime abstraction.
+                void* ra = *NULL_POINTER_MEMORY_MODEL;
+                int rac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                int ras = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                // Allocate temporary runtime abstraction.
+                allocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                // Decode source- into temporary runtime abstraction.
+                // A source's cybol abstraction is most often NOT equal to its runtime abstraction.
+                // For example, an "xdt" file is converted into a compound.
+                // Therefore, the abstraction has to be converted here.
+                decode((void*) &ra, (void*) &rac, (void*) &ras, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
+
     fwprintf(stdout, L"TEST process cybol node 2 sn: %ls\n", (wchar_t*) *sn);
     fwprintf(stdout, L"TEST process cybol node 2 snc: %i\n", **((int**) snc));
     fwprintf(stdout, L"TEST process cybol node 2 sc: %ls\n", (wchar_t*) *sc);
     fwprintf(stdout, L"TEST process cybol node 2 scc: %i\n", **((int**) scc));
-    fwprintf(stdout, L"TEST process cybol node 2 sa: %ls\n", (wchar_t*) *sa);
-    fwprintf(stdout, L"TEST process cybol node 2 sac: %i\n", **((int**) sac));
+    fwprintf(stdout, L"TEST process cybol node 2 sa converted to ra: %ls\n", (wchar_t*) ra);
+    fwprintf(stdout, L"TEST process cybol node 2 sac converted to rac: %i\n", rac);
     fwprintf(stdout, L"TEST process cybol node 2 sm: %ls\n", (wchar_t*) *sm);
     fwprintf(stdout, L"TEST process cybol node 2 smc: %i\n", **((int**) smc));
 
                 // Allocate destination part.
+                // CAUTION! Use the temporary RUNTIME abstraction as source here!
                 allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                     (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                    (void*) NUMBER_0_INTEGER_MEMORY_MODEL, sa, (void*) &sac);
+                    (void*) NUMBER_0_INTEGER_MEMORY_MODEL, ra, (void*) &rac);
 
         fwprintf(stdout, L"TEST process cybol node 3a nc: %i\n", *((int*) nc));
 
@@ -164,10 +184,13 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
         fwprintf(stdout, L"TEST process cybol node 3b nc: %i\n", *((int*) nc));
 
-                // Decode destination part abstraction.
-                // A source's cybol abstraction is most often not equal to its runtime abstraction.
-                // For example, an "xdt" file is converted into a compound.
-                decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
+                // Decode (in this case just copy) destination part abstraction.
+                // CAUTION! Use the temporary RUNTIME abstraction as source here!
+                // CAUTION! Use WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION as abstraction here!
+                replace((void*) &a, (void*) ac, (void*) as, ra, (void*) &rac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+                // Deallocate temporary runtime abstraction.
+                deallocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         fwprintf(stdout, L"TEST process cybol node 4 n: %ls\n", (wchar_t*) n);
         fwprintf(stdout, L"TEST process cybol node 4 nc: %i\n", *((int*) nc));
@@ -175,6 +198,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
         fwprintf(stdout, L"TEST process cybol node 4 ac: %i\n", *((int*) ac));
 
                 // Receive and decode destination part model and details.
+                // CAUTION! Use the original CYBOL abstraction as source here!
                 communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                     (void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
                     *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,

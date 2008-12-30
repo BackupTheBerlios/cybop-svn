@@ -1,7 +1,6 @@
 <model>
-    <part name="startup" channel="inline" abstraction="operation/plain" model="communicate">
-        <property name="type" channel="inline" abstraction="text/plain" model="sending"/>
-        <property name="channel" channel="inline" abstraction="text/plain" model="cyboi"/>
+    <part name="startup" channel="inline" abstraction="operation/plain" model="sending">
+        <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
         <property name="message" channel="inline" abstraction="operation/plain" model="exit"/>
     </part>
 </model>
@@ -34,6 +33,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.15 $ $Date: 2008-11-03 23:16:00 $ $Author: christian $
+    @version $Revision: 1.16 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

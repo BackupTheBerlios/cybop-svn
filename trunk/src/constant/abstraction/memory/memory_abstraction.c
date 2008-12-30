@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.8 $ $Date: 2008-11-11 11:05:34 $ $Author: christian $
+ * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.9 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,6 +64,11 @@ static wchar_t DOUBLE_VECTOR_MEMORY_ABSTRACTION_ARRAY[] = {L'd', L'o', L'u', L'b
 static wchar_t* DOUBLE_VECTOR_MEMORY_ABSTRACTION = DOUBLE_VECTOR_MEMORY_ABSTRACTION_ARRAY;
 static int* DOUBLE_VECTOR_MEMORY_ABSTRACTION_COUNT = NUMBER_13_INTEGER_MEMORY_MODEL_ARRAY;
 
+/** The encapsulated_knowledge_path memory abstraction. */
+static wchar_t ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_ARRAY[] = {L'e', L'n', L'c', L'a', L'p', L's', L'u', L'l', L'a', L't', L'e', L'd', L'_', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L'_', L'p', L'a', L't', L'h'};
+static wchar_t* ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION = ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_ARRAY;
+static int* ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT = NUMBER_27_INTEGER_MEMORY_MODEL_ARRAY;
+
 /** The fraction memory abstraction. */
 static wchar_t FRACTION_MEMORY_ABSTRACTION_ARRAY[] = {L'f', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
 static wchar_t* FRACTION_MEMORY_ABSTRACTION = FRACTION_MEMORY_ABSTRACTION_ARRAY;
@@ -85,6 +90,16 @@ static int* INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_M
 static wchar_t INTERNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'n', L'a', L'l', L'_', L'm', L'e', L'm', L'o', L'r', L'y'};
 static wchar_t* INTERNAL_MEMORY_MEMORY_ABSTRACTION = INTERNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY;
 static int* INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The knowledge_path memory abstraction. */
+static wchar_t KNOWLEDGE_PATH_MEMORY_ABSTRACTION_ARRAY[] = {L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L'_', L'p', L'a', L't', L'h'};
+static wchar_t* KNOWLEDGE_PATH_MEMORY_ABSTRACTION = KNOWLEDGE_PATH_MEMORY_ABSTRACTION_ARRAY;
+static int* KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The operation memory abstraction. */
+static wchar_t OPERATION_MEMORY_ABSTRACTION_ARRAY[] = {L'o', L'p', L'e', L'r', L'a', L't', L'i', L'o', L'n'};
+static wchar_t* OPERATION_MEMORY_ABSTRACTION = OPERATION_MEMORY_ABSTRACTION_ARRAY;
+static int* OPERATION_MEMORY_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The part memory abstraction. */
 static wchar_t PART_MEMORY_ABSTRACTION_ARRAY[] = {L'p', L'a', L'r', L't'};

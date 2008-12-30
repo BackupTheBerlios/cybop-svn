@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.65 $ $Date: 2008-12-28 12:14:33 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.66 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -113,7 +113,8 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            decode_complex(p0, p1, p2, p6, p7);
+            //?? TODO: Implement the following function!
+            //?? decode_cartesian_complex(p0, p1, p2, p6, p7);
         }
     }
 
@@ -225,7 +226,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            decode_double_vector(p0, p1, p2, p6, p7);
+            //?? TEMPORARY solution!
+            //?? TODO: Replace with something like "decode_decimal_fraction".
+            //?? decode_double_vector(p0, p1, p2, p6, p7);
         }
     }
 
@@ -235,8 +238,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
-//??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
+            replace(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -256,7 +258,8 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            decode_date_time(p0, p1, p2, p6, p7);
+            //?? TODO: Rename into "decode_hhmmss_date_time"!
+            //?? decode_date_time(p0, p1, p2, p6, p7);
         }
     }
 
@@ -296,8 +299,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
-//??            decode_utf_8_unicode_character_vector(p0, p1, p2, p6, p7);
+            replace(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -327,7 +329,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -337,9 +339,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-//??            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -369,7 +369,8 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            decode_fraction(p0, p1, p2, p6, p7);
+            //?? TODO: Rename into "decode_vulgar_fraction"!
+            //?? decode_fraction(p0, p1, p2, p6, p7);
         }
     }
 
@@ -393,6 +394,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         }
     }
 
+/*??
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         compare_arrays(p10, p11, (void*) XHTML_APPLICATION_CYBOL_ABSTRACTION, (void*) XHTML_APPLICATION_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -402,6 +404,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             decode_xhtml(p0, p1, p2, p6, p7);
         }
     }
+*/
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -14,9 +14,17 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.105 $ $Date: 2008-12-28 12:14:32 $ $Author: christian $
+# @version $Revision: 1.106 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-12-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Delete files "xml_node_allocator.c" and "xml_property_allocator.c"
+        * Adapt many abstraction constants used in several converters; the original cybol abstraction
+            gets converted into a runtime abstraction, because both are often not identical
+            (for example, a cybol file gets converted into a cyboi memory compound);
+            a runtime abstraction such as "KNOWLEDGE_PATH_MEMORY_ABSTRACTION" in turn may get interpreted
+            differently, for example as "WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION" in file "allocator.c"
 
 2008-12-27  Christian Heller  <christian.heller@tuxtax.de>
         * Continue cybol converter
