@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.44 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.45 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,7 +70,7 @@ int main(int p0, char** p1) {
     // However, if some memory to be freed is forgotten, it will not harm
     // the operating system, as it will be freed automatically on process shutdown.
     //
-    // YET TO ANSWER: How is that with forgotten threads?
+    // TODO: YET TO ANSWER: How is that with forgotten threads?
     // Are they killed automatically when a process is shut down?
 
     // Return 1 to indicate an error, by default.
@@ -153,16 +153,8 @@ int main(int p0, char** p1) {
         // Allocate cybol knowledge file path.
         allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST pre m: %i\n", m);
-    fwprintf(stdout, L"TEST pre k: %ls\n", k);
-    fwprintf(stdout, L"TEST pre kc: %i\n", kc);
-
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
-
-    fwprintf(stdout, L"TEST post m: %i\n", m);
-    fwprintf(stdout, L"TEST post k: %ls\n", k);
-    fwprintf(stdout, L"TEST post kc: %i\n", kc);
 
         // Orient log output file stream.
         //
@@ -170,13 +162,9 @@ int main(int p0, char** p1) {
         // since one of the options determines the log output file name.
         orient((void*) LOG_OUTPUT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
-    fwprintf(stdout, L"TEST cyboi 0: %i\n", kc);
-
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run cyboi.");
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Globalised global variables already.");
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Optionalised log file already.");
-
-    fwprintf(stdout, L"TEST cyboi 1: %i\n", kc);
 
         if (m == *VERSION_OPERATION_MODE_CYBOI_MODEL) {
 
@@ -193,16 +181,10 @@ int main(int p0, char** p1) {
 
         } else if (m == *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL) {
 
-    fwprintf(stdout, L"TEST cyboi 2: %i\n", kc);
-
             if ((k != *NULL_POINTER_MEMORY_MODEL) && (kc >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
-
-    fwprintf(stdout, L"TEST cyboi 3: %i\n", kc);
 
                 // Manage system startup and shutdown using the given cybol knowledge file.
                 manage(k, (void*) &kc);
-
-    fwprintf(stdout, L"TEST cyboi 4: %i\n", kc);
 
             } else {
 
@@ -217,7 +199,12 @@ int main(int p0, char** p1) {
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Exit cyboi normally afterwards.");
 
         // Deoptionalise command line argument options.
-        deoptionalise((void*) LOG_OUTPUT);
+        // CAUTION! Hand over the LOG_OUTPUT variable AS REFERENCE!
+        // This is necessary, because it is reset to null internally.
+        // If this was not done, subsequent logger calls would cause segmentation faults,
+        // because the null pointer test within the logger would be successful,
+        // even though the LOG_OUTPUT pointer would be invalid.
+        deoptionalise((void*) &LOG_OUTPUT);
 
         // Deallocate cybol knowledge file path.
         deallocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -225,7 +212,7 @@ int main(int p0, char** p1) {
         // Shutdown global variables.
         unglobalise();
 
-        // log_write_terminated_message(stdout, L"Information: Exit cyboi normally.\n");
+        log_write_terminated_message(stdout, L"Information: Exit cyboi normally.\n");
 
         // Set return value to 0, to indicate proper shutdown.
         r = *NUMBER_0_INTEGER_MEMORY_MODEL;

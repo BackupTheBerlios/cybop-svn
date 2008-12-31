@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: initialiser.c,v $ $Revision: 1.28 $ $Date: 2008-12-28 12:14:33 $ $Author: christian $
+ * @version $RCSfile: initialiser.c,v $ $Revision: 1.29 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,11 +54,12 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Initialise system with an initial signal.");
 
+/*??
     // The startup model abstraction, model, details.
     //
     // CAUTION! Do NOT use "normal" int as type for counts and sizes here!
     // The reason is that the "set_signal" function below expects int** parameters.
-    // If, for example, the variable mac was an int, then &mac would deliver only int*
+    // If, for example, the variable mac was an int, then &ac would deliver only int*
     // (but not int**) as parameter to be handed over to the "set_signal" function.
     // All other models (and their counts and sizes) coming from knowledge memory
     // are allocated in the same way when being read from cybol sources.
@@ -74,46 +75,42 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     void* md = *NULL_POINTER_MEMORY_MODEL;
     int* mdc = (int*) *NULL_POINTER_MEMORY_MODEL;
     int* mds = (int*) *NULL_POINTER_MEMORY_MODEL;
+*/
 
-    // Allocate startup model abstraction, model, details.
-    allocate((void*) &mac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &mas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &mmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &mms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &mdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &mds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // The part name.
+    void* n = *NULL_POINTER_MEMORY_MODEL;
+    void* nc = *NULL_POINTER_MEMORY_MODEL;
+    void* ns = *NULL_POINTER_MEMORY_MODEL;
+    // The part abstraction.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    void* ac = *NULL_POINTER_MEMORY_MODEL;
+    void* as = *NULL_POINTER_MEMORY_MODEL;
+    // The part model.
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    void* mc = *NULL_POINTER_MEMORY_MODEL;
+    void* ms = *NULL_POINTER_MEMORY_MODEL;
+    // The part details.
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    void* dc = *NULL_POINTER_MEMORY_MODEL;
+    void* ds = *NULL_POINTER_MEMORY_MODEL;
 
-    // Initialise startup model abstraction, model, details count and size.
-    *mac = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *mas = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *mmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *mms = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate destination part.
+    // CAUTION! Use the temporary RUNTIME abstraction as source here!
+    allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+        (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
-    // Allocate startup model abstraction, model, details.
-    // CAUTION! The abstraction's abstraction always HAS TO BE "character".
-    allocate((void*) &ma, (void*) mas, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &mm, (void*) mms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-    // CAUTION! The details' abstraction always HAS TO BE "compound".
-    allocate((void*) &md, (void*) mds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    // Decode (in this case just copy) abstraction.
+    replace((void*) &a, (void*) ac, (void*) as, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    // Decode startup model abstraction.
-    //
-    // CAUTION! The first source argument has to be "ASCII_CYBOL_TEXT_CYBOL_ABSTRACTION"
-    // and NOT "CYBOL_TEXT_CYBOL_ABSTRACTION", because the "decode" function
-    // expects a multibyte character string (as would normally come from a CYBOL file).
-    // The "cybol" abstraction is needed since CYBOL files are to be used as knowledge source.
-    decode_utf_8_unicode_character_vector((void*) &ma, (void*) mac, (void*) mas, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_AS_CHAR, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
-
-    fwprintf(stdout, L"TEST initialiser ma: %ls\n", (wchar_t*) ma);
-    fwprintf(stdout, L"TEST initialiser mac: %i\n", *mac);
-
-    fwprintf(stdout, L"TEST initialiser p4: %ls\n", (wchar_t*) p4);
-    fwprintf(stdout, L"TEST initialiser p5: %i\n", *((int*) p5));
-
-    // Receive startup model model and details (read from file and decode).
-    communicate_receiving_file_system((void*) &mm, (void*) mmc, (void*) mms, (void*) &md, (void*) mdc, (void*) mds, p4, p5, ma, (void*) mac);
+    // Receive and decode destination part model and details.
+    // CAUTION! Use the original CYBOL abstraction as source here!
+    communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        (void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        p4, p5, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add initial signal to signal memory.");
@@ -125,7 +122,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     get_new_signal_identification(p1, p2, (void*) &id);
 
     // Add startup signal to signal memory.
-    set_signal(p1, p2, p3, (void*) &ma, (void*) &mac, (void*) &mm, (void*) &mmc, (void*) &md, (void*) &mdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
+    set_signal(p1, p2, p3, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)
@@ -133,16 +130,18 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // The loop is left as soon as its shutdown flag is set.
     check(p0);
 
+/*??
     // Deallocate startup model abstraction, model, details.
-    deallocate((void*) &ma, (void*) mas, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &mac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &mas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &mm, (void*) mms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &mmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &mms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &md, (void*) mds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &mdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &mds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &a, (void*) mas, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &ac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &m, (void*) mms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &mc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &ms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &d, (void*) mds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &dc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &ds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+*/
 }
 
 /* INITIALISER_SOURCE */

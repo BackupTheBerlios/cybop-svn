@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-12-23 22:37:04 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.11 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -120,7 +120,13 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
             //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
             //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
             // </part>
-            communicate_receiving_file_system(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p16, p17, p18, p19);
+//??            communicate_receiving_file_system(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p16, p17, p18, p19);
+
+            //?? CAUTION! The function call above was commented out ON PURPOSE, since it caused a runtime error!
+            //?? TODO: Figure out what happens inside, before uncommenting it again!
+            //?? For the "inline" channel, this function call was commented out as well, as it is never needed.
+            //?? For the "file" channel, however, it will be needed sometimes, for example for
+            //?? xdt or html or http (if remembered correctly). Just figure this out later, when needed.
         }
     }
 
@@ -163,20 +169,16 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
             // example when converting from a file in xdt format.
             communicate_receiving_inline(p3, p4, p5, p6, p7, p8, p14, p15, p18, p19);
 
-            // Receive details by reading meta message data.
-            //
-            // CAUTION! Sometimes, the details are read from a different source than the
-            // model, for example the html attributes of an html table when creating a wui.
-            //
-            // Example:
-            // <part name="receive_table_row" channel="inline" abstraction="operation" model="receive">
-            //     <property name="channel" channel="inline" abstraction="character" model="file"/>
-            //     <property name="language" channel="inline" abstraction="character" model="compound"/>
-            //     <property name="message" channel="inline" abstraction="character" model="residenz/wui/address_table_row.cybol"/>
-            //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
-            //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
-            // </part>
-            communicate_receiving_inline(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p16, p17, p18, p19);
+            // CAUTION! Do NOT try to receive meta data here!
+            // When calling the following function:
+            // communicate_receiving_inline(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p16, p17, p18, p19);
+            // for some unclear reason the destination array is replaced and returned as null,
+            // if source data do not exist. The normal behaviour, however, would be that
+            // the destination array is left untouched if the source data are empty.
+            // This has probably something to do with the function "replace_wide_character_vector",
+            // but is this unclear.
+            // It has not been investigated further, since inline data receiving does not
+            // use meta data anyway, so that this will probably never be needed.
         }
     }
 

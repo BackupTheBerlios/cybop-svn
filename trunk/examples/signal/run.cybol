@@ -1,11 +1,13 @@
 <model>
-    <part name="message" channel="inline" abstraction="operation/plain" model="exit"/>
+    <part name="startup" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
+        <property name="message" channel="inline" abstraction="operation/plain" model="exit"/>
+    </part>
 </model>
 
 <!--
-    This example contains just one "exit" operation.
+    This example sends the "exit" operation as signal to the cyboi system.
     It shuts down the application, right after startup.
-    That's all.
 /-->
 
 <!--
@@ -30,6 +32,6 @@
     http://www.cybop.net
     - Cybernetics Oriented Programming -
 
-    @version $Revision: 1.17 $ $Date: 2008-12-31 00:14:55 $ $Author: christian $
+    @version $Revision: 1.1 $ $Date: 2008-12-31 00:17:48 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

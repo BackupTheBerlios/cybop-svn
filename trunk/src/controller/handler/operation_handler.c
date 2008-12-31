@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: operation_handler.c,v $ $Revision: 1.49 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
+ * @version $RCSfile: operation_handler.c,v $ $Revision: 1.50 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,6 +35,7 @@
 #include "../../applicator/runner.c"
 #include "../../constant/model/cybol/operation_cybol_model.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../controller/handler/operation/communication_operation_handler.c"
 #include "../../controller/handler/operation/lifecycle_operation_handler.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
@@ -66,6 +67,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) HANDLE_OPERATION_MESSAGE_LOG_MODEL, (void*) HANDLE_OPERATION_MESSAGE_LOG_MODEL_COUNT);
 
     fwprintf(stdout, L"TEST handle operation: %ls\n", (wchar_t*) p10);
+    fwprintf(stdout, L"TEST handle operation count: %i\n", *((int*) p11));
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, p10);
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n");
 
@@ -102,6 +104,7 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
         }
     }
 
+/*??
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         compare_arrays(p10, p11, (void*) COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -110,6 +113,12 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
             communicate(p12, p13, p1, p2, p3, p0);
         }
+    }
+*/
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        handle_communication_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {

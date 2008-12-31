@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: optionaliser.c,v $ $Revision: 1.25 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: optionaliser.c,v $ $Revision: 1.26 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,8 +57,8 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        // Do NOT show the following message, as it would only disturb the user!
-        log_write_terminated_message((void*) stdout, L"Debug: Optionalise log level.\n");
+        // Comment out this function call to avoid disturbing messages at system startup!
+        // log_write_terminated_message((void*) stdout, L"Debug: Optionalise log level.\n");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -152,8 +152,8 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
-            // Do NOT show the following message, as it would only disturb the user!
-            log_write_terminated_message((void*) stdout, L"Debug: Optionalise log file.\n");
+            // Comment out this function call to avoid disturbing messages at system startup!
+            // log_write_terminated_message((void*) stdout, L"Debug: Optionalise log file.\n");
 
             // The terminated file name as character array.
             void* t = *NULL_POINTER_MEMORY_MODEL;
@@ -243,21 +243,29 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
 /**
  * Deoptionalises the log file option.
  *
- * @param p0 the log file stream
+ * @param p0 the log file stream (Hand over as reference!)
  */
 void deoptionalise_log_file(void* p0) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        FILE* f = (FILE*) p0;
+        FILE** f = (FILE**) p0;
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        // Do NOT show the following message, as it would only disturb the user!
-        log_write_terminated_message((void*) stdout, L"Debug: Deoptionalise log file.\n");
+        // Comment out this function call to avoid disturbing messages at system startup!
+        // log_write_terminated_message((void*) stdout, L"Debug: Deoptionalise log file.\n");
 
         // Close log file.
-        fclose(f);
+        fclose(*f);
+
+        // Reset log file pointer.
+        // CAUTION! Hand over the log file stream AS REFERENCE!
+        // This is necessary, because it is reset to null here.
+        // If this was not done, subsequent logger calls would cause segmentation faults,
+        // because the null pointer test within the logger would be successful,
+        // even though the LOG_OUTPUT pointer would be invalid.
+        *f = *NULL_POINTER_MEMORY_MODEL;
 
     } else {
 
@@ -275,7 +283,7 @@ void deoptionalise_log_file(void* p0) {
  * or vice versa, by just comparing with known cyboi options.
  *
  * @param p0 the operation mode
- * @param p1 the cybol knowledge file path
+ * @param p1 the cybol knowledge file path (Hand over as reference!)
  * @param p2 the cybol knowledge file path count
  * @param p3 the cybol knowledge file path size
  * @param p4 the log level
@@ -293,8 +301,8 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        // Do NOT show the following message, as it would only disturb the user!
-        log_write_terminated_message((void*) stdout, L"Debug: Optionalise option.\n");
+        // Comment out this function call to avoid disturbing messages at system startup!
+        // log_write_terminated_message((void*) stdout, L"Debug: Optionalise option.\n");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -370,10 +378,10 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // CAUTION! Do NOT show this warning message, since the last
-            // option argument read from command line is always null,
-            // so that this warning would always appear and only disturb the user.
-            log_write_terminated_message((void*) stdout, L"Warning: Could not optionalise option. The command line option is unknown.\n");
+            // Comment out this function call to avoid disturbing messages at system startup!
+            // The last option argument read from command line is always null,
+            // so that this warning would always appear.
+            // log_write_terminated_message((void*) stdout, L"Warning: Could not optionalise option. The command line option is unknown.\n");
         }
 
     } else {
@@ -412,8 +420,8 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
 
             // CAUTION! DO NOT use logging functionality here!
             // The logger will not work before its options are set.
-            // Do NOT show the following message, as it would only disturb the user!
-            log_write_terminated_message((void*) stdout, L"Information: Optionalise command line argument.\n");
+            // Comment out this function call to avoid disturbing messages at system startup!
+            // log_write_terminated_message((void*) stdout, L"Information: Optionalise command line argument.\n");
 
             // The value index, which is equal to the loop variable increased by one.
             //
@@ -577,8 +585,8 @@ void optionalise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before its options are set.
-        // Do NOT show the following message, as it would only disturb the user!
-        log_write_terminated_message((void*) stdout, L"Information: Optionalise command line arguments.\n");
+        // Comment out this function call to avoid disturbing messages at system startup!
+        // log_write_terminated_message((void*) stdout, L"Information: Optionalise command line arguments.\n");
 
         // The loop variable.
         //

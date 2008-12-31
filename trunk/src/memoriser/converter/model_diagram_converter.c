@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.24 $ $Date: 2008-12-22 12:57:20 $ $Author: christian $
+ * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.25 $ $Date: 2008-12-31 00:14:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,8 +49,8 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
  * in form of many line feed-separated lines representing a model part each.
  *
  * @param p0 the destination knowledge model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
+ * @param p1 the destination knowledge model count
+ * @param p2 the destination knowledge model size
  * @param p3 the source model diagram
  * @param p4 the source count
  */
@@ -63,8 +63,8 @@ void decode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * Encodes the model diagram indentation.
  *
  * @param p0 the destination model diagram (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
+ * @param p1 the destination model diagram count
+ * @param p2 the destination model diagram size
  * @param p3 the tree level
  * @param p4 the details flag
  */
@@ -144,6 +144,27 @@ void encode_model_diagram_indentation(void* p0, void* p1, void* p2, void* p3, vo
 }
 
 /**
+ * Encodes the model diagram line.
+ *
+ * @param p0 the destination model diagram (Hand over as reference!)
+ * @param p1 the destination model diagram count
+ * @param p2 the destination model diagram size
+ */
+void encode_model_diagram_line(void* p0, void* p1, void* p2) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram line.");
+
+    // Add space character to destination array.
+    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+
+    // Add pipe character to destination array.
+    append_wide_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+
+    // Add space character to destination array.
+    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+}
+
+/**
  * Encodes the model diagram compound.
  *
  * @param p0 the destination model diagram (Hand over as reference!)
@@ -166,8 +187,6 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram compound.");
 
-    fwprintf(stdout, L"TEST encode model diagram compound 0: %i\n", *((int*) p5));
-
             // The loop variable.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -185,8 +204,6 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
             void** dc = NULL_POINTER_MEMORY_MODEL;
             void** ds = NULL_POINTER_MEMORY_MODEL;
 
-    fwprintf(stdout, L"TEST encode model diagram compound 1 j: %i\n", j);
-
             // The new tree level.
             //
             // It gets initialised with the current tree level incremented by one.
@@ -195,16 +212,12 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
             // Otherwise, it would never be decremented anymore leading to wrong indentation.
             int nl = *l + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stdout, L"TEST encode model diagram compound 2 nl: %i\n", nl);
-
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (j >= *sc) {
 
                     break;
                 }
-
-    fwprintf(stdout, L"TEST encode model diagram compound 3 j: %i\n", j);
 
                 // Get part abstraction, model, details at current index.
                 get_compound_element_by_index(p3, p4, (void*) &j,
@@ -213,20 +226,11 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
                     (void*) &m, (void*) &mc, (void*) &ms,
                     (void*) &d, (void*) &dc, (void*) &ds);
 
-    fwprintf(stdout, L"TEST encode model diagram compound 4 j: %i\n", j);
-    fwprintf(stdout, L"TEST encode model diagram compound 4 p1: %i\n", *((int*) p1));
-    fwprintf(stdout, L"TEST encode model diagram compound 4 p0: %i\n", p0);
-//??    fwprintf(stdout, L"TEST encode model diagram compound 4 p0 as wchar_t: %ls\n", *((wchar_t**) p0));
-
                 // Add line feed character to destination array.
                 append_wide_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-    fwprintf(stdout, L"TEST encode model diagram compound 5 j: %i\n", j);
-
                 // Encode part.
                 encode_model_diagram_node(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, (void*) &nl, p6);
-
-    fwprintf(stdout, L"TEST encode model diagram compound 6 j: %i\n", j);
 
                 // Increment loop variable.
                 j++;
@@ -247,8 +251,8 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
  * Encodes the model diagram node.
  *
  * @param p0 the destination model diagram (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
+ * @param p1 the destination model diagram count
+ * @param p2 the destination model diagram size
  * @param p3 the source name
  * @param p4 the source name count
  * @param p5 the source abstraction
@@ -272,36 +276,20 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram node.");
 
-    fwprintf(stdout, L"TEST encode model diagram 0: %i\n", *((int*) p11));
-
             // Add indentation.
             encode_model_diagram_indentation(p0, p1, p2, p11, p12);
-
-    fwprintf(stdout, L"TEST encode model diagram 1: %i\n", *((int*) p11));
 
             // Add part name to destination array.
             append_wide_character_vector(p0, p1, p2, p3, p4);
 
-    fwprintf(stdout, L"TEST encode model diagram 2: %i\n", *((int*) p11));
-
-            // Add space character to destination array.
-            append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-    fwprintf(stdout, L"TEST encode model diagram 3: %i\n", *((int*) p11));
-
-            // Add pipe character to destination array.
-            append_wide_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-            // Add space character to destination array.
-            append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+            // Add line.
+            encode_model_diagram_line(p0, p1, p2);
 
             // Add part abstraction to destination array.
             append_wide_character_vector(p0, p1, p2, p5, p6);
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    fwprintf(stdout, L"TEST encode model diagram 4: %i\n", *((int*) p11));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -319,47 +307,27 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 }
             }
 
-    fwprintf(stdout, L"TEST encode model diagram 5: %i\n", *((int*) p11));
-
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) XDT_TEXT_CYBOL_ABSTRACTION, (void*) XDT_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p5, p6, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    if (*mc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Only process the following code, if the model compound contains at least one part.
-
-                        // Add part model to destination array.
-                        encode_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-                    }
+                    encode_model_diagram_line(p0, p1, p2);
+                    encode_double_vector(p0, p1, p2, p7, p8);
                 }
             }
 
-    fwprintf(stdout, L"TEST encode model diagram 6: %i\n", *((int*) p11));
-
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p5, p6, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Add space character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add pipe character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add space character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add part model to destination array.
+                    encode_model_diagram_line(p0, p1, p2);
                     append_wide_character_vector(p0, p1, p2, p7, p8);
                 }
             }
-
-    fwprintf(stdout, L"TEST encode model diagram 7: %i\n", *((int*) p11));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -367,65 +335,43 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Add space character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add pipe character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add space character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add part model to destination array.
+                    encode_model_diagram_line(p0, p1, p2);
                     encode_integer_vector(p0, p1, p2, p7, p8);
                 }
             }
 
-    fwprintf(stdout, L"TEST encode model diagram 8: %i\n", *((int*) p11));
-
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p5, p6, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Add space character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add pipe character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add space character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add part model to destination array.
-                    encode_boolean(p0, p1, p2, p7, p8);
+                    encode_model_diagram_line(p0, p1, p2);
+                    append_wide_character_vector(p0, p1, p2, p7, p8);
                 }
             }
-
-    fwprintf(stdout, L"TEST encode model diagram 9: %i\n", *((int*) p11));
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p5, p6, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Add space character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add pipe character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add space character to destination array.
-                    append_wide_character_vector(p0, p1, p2, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-                    // Add part model to destination array.
-                    encode_double_vector(p0, p1, p2, p7, p8);
+                    encode_model_diagram_line(p0, p1, p2);
+                    append_wide_character_vector(p0, p1, p2, p7, p8);
                 }
             }
 
-    fwprintf(stdout, L"TEST encode model diagram 10: %i\n", *((int*) p11));
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    encode_model_diagram_line(p0, p1, p2);
+                    append_wide_character_vector(p0, p1, p2, p7, p8);
+                }
+            }
 
             if (*dc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -434,8 +380,6 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
                 // Add part details to destination array.
                 encode_model_diagram_compound(p0, p1, p2, p9, p10, p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
             }
-
-    fwprintf(stdout, L"TEST encode model diagram 11: %i\n", *((int*) p11));
 
         } else {
 

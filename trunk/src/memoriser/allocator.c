@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: allocator.c,v $ $Revision: 1.31 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
+ * @version $RCSfile: allocator.c,v $ $Revision: 1.32 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -55,7 +55,7 @@
  */
 void allocate(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate model.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -222,7 +222,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not allocate. The abstraction is unknown.");
     }
 }
 
@@ -237,7 +237,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
  */
 void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Reallocate model.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Reallocate.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -294,6 +294,16 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        compare_arrays(p3, p4, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            reallocate_wide_character_vector(p0, p1, p2);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
         compare_arrays(p3, p4, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -319,6 +329,26 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            reallocate_internal_memory(p0, p1, p2);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p3, p4, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            reallocate_wide_character_vector(p0, p1, p2);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p3, p4, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            reallocate_wide_character_vector(p0, p1, p2);
         }
     }
 
@@ -374,7 +404,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not reallocate model. The abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not reallocate. The abstraction is unknown.");
     }
 }
 
@@ -388,7 +418,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
  */
 void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate model.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -445,6 +475,16 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        compare_arrays(p2, p3, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            deallocate_wide_character_vector(p0, p1);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
         compare_arrays(p2, p3, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -470,6 +510,26 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             deallocate_internal_memory(p0, p1);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p2, p3, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            deallocate_wide_character_vector(p0, p1);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p2, p3, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            deallocate_wide_character_vector(p0, p1);
         }
     }
 
@@ -525,7 +585,7 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not deallocate model. The abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not deallocate. The abstraction is unknown.");
     }
 }
 

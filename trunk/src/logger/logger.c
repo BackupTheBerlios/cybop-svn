@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: logger.c,v $ $Revision: 1.22 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: logger.c,v $ $Revision: 1.23 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -394,7 +394,8 @@ void log_message(void* p0, void* p1, void* p2) {
 
                     // CAUTION! DO NOT use logging functionality here!
                     // The logger cannot log itself.
-                    log_write_terminated_message((void*) stdout, L"Error: Could not log message. The log output is undefined.\n");
+                    // Comment out this function call to avoid disturbing messages at system startup!
+                    // log_write_terminated_message((void*) stdout, L"Error: Could not log message. The log output is undefined.\n");
                 }
 
             } else {

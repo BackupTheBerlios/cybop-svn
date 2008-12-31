@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: inline_receiving_communicator.c,v $ $Revision: 1.1 $ $Date: 2008-12-23 22:37:04 $ $Author: christian $
+ * @version $RCSfile: inline_receiving_communicator.c,v $ $Revision: 1.2 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,8 +42,8 @@
  * @param p3 the details (Hand over as reference!)
  * @param p4 the details count
  * @param p5 the details size
- * @param p6 the message (file name)
- * @param p7 the message (file name) count
+ * @param p6 the message
+ * @param p7 the message count
  * @param p8 the language
  * @param p9 the language count
  */
@@ -57,29 +57,25 @@ void communicate_receiving_inline(void* p0, void* p1, void* p2, void* p3, void* 
     int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate read model.
-    allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     // Read persistent byte stream over channel.
     read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT);
 
-    // The wide character model.
-    void* wm = *NULL_POINTER_MEMORY_MODEL;
-    int wmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int wms = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Allocate wide character model.
-    allocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-    decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, rm, (void*) &rmc);
-
-    // Deallocate read model.
-    deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // CAUTION! Do NOT try to decode from UTF-8 or other formats here!
+    // In other words, do NOT call a function such as this:
+    // decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, rm, (void*) &rmc);
+    //
+    // The reason is that each file is already decoded when being read,
+    // from a multibyte character array into a wide character array.
+    // Therefore, data do NOT have to be decoded once more when being
+    // evaluated as inline wide character array.
 
     // Decode byte stream according to given document type.
-    decode(p0, p1, p2, p3, p4, p5, wm, (void*) &wmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+    decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
-    // Deallocate wide character model.
-    deallocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate read model.
+    deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* INLINE_RECEIVING_COMMUNICATOR_SOURCE */

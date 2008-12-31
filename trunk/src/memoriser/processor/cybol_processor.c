@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.4 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
+ * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.5 $ $Date: 2008-12-31 00:14:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -79,7 +79,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process cybol node model.");
 
-    fwprintf(stdout, L"TEST process cybol node 0: %i\n", *dd);
+//??    fwprintf(stdout, L"TEST process cybol node 0: %i\n", *dd);
 
             // The source details name, channel, abstraction, model.
             void** sn = NULL_POINTER_MEMORY_MODEL;
@@ -90,8 +90,6 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             void** sac = NULL_POINTER_MEMORY_MODEL;
             void** sm = NULL_POINTER_MEMORY_MODEL;
             void** smc = NULL_POINTER_MEMORY_MODEL;
-
-    fwprintf(stdout, L"TEST process cybol node 1: %i\n", *dd);
 
             // Get source details name, channel, abstraction, model.
             //
@@ -145,8 +143,8 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 // This is NOT the root node.
                 // Therefore, the node's details are processed.
 
-    fwprintf(stdout, L"TEST process cybol node 2 sa: %ls\n", (wchar_t*) *sa);
-    fwprintf(stdout, L"TEST process cybol node 2 sac: %i\n", **((int**) sac));
+//??    fwprintf(stdout, L"TEST process cybol node 2 sa: %ls\n", (wchar_t*) *sa);
+//??    fwprintf(stdout, L"TEST process cybol node 2 sac: %i\n", **((int**) sac));
 
                 // The temporary runtime abstraction.
                 void* ra = *NULL_POINTER_MEMORY_MODEL;
@@ -162,6 +160,8 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 // Therefore, the abstraction has to be converted here.
                 decode((void*) &ra, (void*) &rac, (void*) &ras, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
 
+/*??
+
     fwprintf(stdout, L"TEST process cybol node 2 sn: %ls\n", (wchar_t*) *sn);
     fwprintf(stdout, L"TEST process cybol node 2 snc: %i\n", **((int**) snc));
     fwprintf(stdout, L"TEST process cybol node 2 sc: %ls\n", (wchar_t*) *sc);
@@ -170,6 +170,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
     fwprintf(stdout, L"TEST process cybol node 2 sac converted to rac: %i\n", rac);
     fwprintf(stdout, L"TEST process cybol node 2 sm: %ls\n", (wchar_t*) *sm);
     fwprintf(stdout, L"TEST process cybol node 2 smc: %i\n", **((int**) smc));
+*/
 
                 // Allocate destination part.
                 // CAUTION! Use the temporary RUNTIME abstraction as source here!
@@ -177,12 +178,12 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                     (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                     (void*) NUMBER_0_INTEGER_MEMORY_MODEL, ra, (void*) &rac);
 
-        fwprintf(stdout, L"TEST process cybol node 3a nc: %i\n", *((int*) nc));
+//??    fwprintf(stdout, L"TEST process cybol node 3a nc: %i\n", *((int*) nc));
 
                 // Decode destination part name.
                 decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sn, *snc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
-        fwprintf(stdout, L"TEST process cybol node 3b nc: %i\n", *((int*) nc));
+//??    fwprintf(stdout, L"TEST process cybol node 3b nc: %i\n", *((int*) nc));
 
                 // Decode (in this case just copy) destination part abstraction.
                 // CAUTION! Use the temporary RUNTIME abstraction as source here!
@@ -192,10 +193,18 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 // Deallocate temporary runtime abstraction.
                 deallocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-        fwprintf(stdout, L"TEST process cybol node 4 n: %ls\n", (wchar_t*) n);
-        fwprintf(stdout, L"TEST process cybol node 4 nc: %i\n", *((int*) nc));
-        fwprintf(stdout, L"TEST process cybol node 4 a: %ls\n", (wchar_t*) a);
-        fwprintf(stdout, L"TEST process cybol node 4 ac: %i\n", *((int*) ac));
+/*??
+    fwprintf(stdout, L"TEST process cybol node 4 n: %ls\n", (wchar_t*) n);
+    fwprintf(stdout, L"TEST process cybol node 4 nc: %i\n", *((int*) nc));
+    fwprintf(stdout, L"TEST process cybol node 4 a: %ls\n", (wchar_t*) a);
+    fwprintf(stdout, L"TEST process cybol node 4 ac: %i\n", *((int*) ac));
+    fwprintf(stdout, L"TEST process cybol node 4 m: %i\n", m);
+    fwprintf(stdout, L"TEST process cybol node 4 m: %ls\n", (wchar_t*) m);
+    fwprintf(stdout, L"TEST process cybol node 4 mc: %i\n", *((int*) mc));
+    fwprintf(stdout, L"TEST process cybol node 4 d: %i\n", d);
+    fwprintf(stdout, L"TEST process cybol node 4 d: %ls\n", (wchar_t*) d);
+    fwprintf(stdout, L"TEST process cybol node 4 dc: %i\n", *((int*) dc));
+*/
 
                 // Receive and decode destination part model and details.
                 // CAUTION! Use the original CYBOL abstraction as source here!
@@ -205,8 +214,14 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                     *sm, *smc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                     *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sc, *scc);
 
-        fwprintf(stdout, L"TEST process cybol node 5 mc: %i\n", *((int*) mc));
-        fwprintf(stdout, L"TEST process cybol node 5 dc: %i\n", *((int*) dc));
+/*??
+    fwprintf(stdout, L"TEST process cybol node 5 m: %i\n", m);
+    fwprintf(stdout, L"TEST process cybol node 5 m: %ls\n", (wchar_t*) m);
+    fwprintf(stdout, L"TEST process cybol node 5 mc: %i\n", *((int*) mc));
+    fwprintf(stdout, L"TEST process cybol node 5 d: %i\n", d);
+    fwprintf(stdout, L"TEST process cybol node 5 d: %ls\n", (wchar_t*) d);
+    fwprintf(stdout, L"TEST process cybol node 5 dc: %i\n", *((int*) dc));
+*/
             }
 
             // The meta node name, abstraction, model, details.
@@ -226,7 +241,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             // The loop variable.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stdout, L"TEST process cybol node 6 ssmc: %i\n", *ssmc);
+//??    fwprintf(stdout, L"TEST process cybol node 6 ssmc: %i\n", *ssmc);
 
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
@@ -235,16 +250,16 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                     break;
                 }
 
-    fwprintf(stdout, L"TEST process cybol node 7 j: %i\n", j);
+//??    fwprintf(stdout, L"TEST process cybol node 7 j: %i\n", j);
 
                 // Get meta node model.
                 get_compound_element_by_index(p3, p4, (void*) &j, (void*) &mn, (void*) &mnc, (void*) &mns, (void*) &ma, (void*) &mac, (void*) &mas, (void*) &mm, (void*) &mmc, (void*) &mms, (void*) &md, (void*) &mdc, (void*) &mds);
 
-    fwprintf(stdout, L"TEST process cybol node 8 mn: %ls\n", (wchar_t*) *mn);
+//??    fwprintf(stdout, L"TEST process cybol node 8 mn: %ls\n", (wchar_t*) *mn);
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stdout, L"TEST process cybol node 9 b recursive call: %i\n", j);
+//??    fwprintf(stdout, L"TEST process cybol node 9 b recursive call: %i\n", j);
 
                     // This is a standard part node and NOT the root node.
 
@@ -258,7 +273,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                     // Add the meta node model and details directly to the
                     // destination whole node (root).
 
-    fwprintf(stdout, L"TEST process cybol node 9 a recursive call: %i\n", j);
+//??    fwprintf(stdout, L"TEST process cybol node 9 a recursive call: %i\n", j);
 
                     // Process the node's meta information (details),
                     // by recursively calling this function itself.
@@ -269,7 +284,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 j++;
             }
 
-    fwprintf(stdout, L"TEST process cybol node 10: %i\n", j);
+//??    fwprintf(stdout, L"TEST process cybol node 10: %i\n", j);
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -14,9 +14,31 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.106 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
+# @version $Revision: 1.107 $ $Date: 2008-12-31 00:14:55 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2008-12-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Comment out call to "communicate_receiving_inline" to avoid processing meta data
+            in function "communicate_receiving_with_parameters", at "inline" and "file" channel;
+            this call caused a null pointer to be returned for the destination details;
+            it is not needed for inline data as they are not accompanied with meta data;
+            it may be needed later for data received through the file channel,
+            as some file formats may deliver additional meta information; figure out later
+        * Optimise and add some types to file "model_diagram_converter.c"
+        * Fix bug that cut off part of an operation's model, so that no operation was processed;
+            the reason was an old UTF-8 decoding call for inline data that could be deleted
+        * Fix bug that the LOG_OUTPUT variable was not set to null in function "deoptionalise",
+            so that subsequent logger calls caused segmentation faults at system shutdown,
+            because the null pointer test within the logger was successful, even though the pointer was invalid
+        * Add old files from CVS in directory "controller/handler/operation"
+        * Adapt file "operation_handler.c"
+        * Add new CYBOL code example named "signal"
+        * Make CYBOI work again, just before the end of the year; the following was done in 2008:
+            - complete interrupt mechanism and sleeping for different communication channels;
+            - change from ASCII to UNICODE and UTF-8 CYBOL files;
+            - restructure all constants following a MIME type-like style;
+            - implement a self-written XML-and-CYBOL parser and skip the one from libxml2
 
 2008-12-29  Christian Heller  <christian.heller@tuxtax.de>
         * Delete files "xml_node_allocator.c" and "xml_property_allocator.c"

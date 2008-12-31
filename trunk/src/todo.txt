@@ -7,13 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.81 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
+# @version $Revision: 1.82 $ $Date: 2008-12-31 00:14:55 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * cybol_processor.c causes a segmentation fault --> add_compound_element fails, because some model/ part is null
-
-        * Make signal checking work again
+        * Add remaining old files from CVS in directory "controller/handler/operation"
+        * Adapt file "operation_handler.c"
 
         * Rename several things in CYBOL files and CYBOI:
             --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
