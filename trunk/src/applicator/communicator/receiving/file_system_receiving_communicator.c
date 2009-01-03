@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.15 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
+ * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.16 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,56 +59,36 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive file system message.");
 
-    // The read model.
-    void* rm = *NULL_POINTER_MEMORY_MODEL;
-    int rmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The encoded character array.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+    int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int es = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Allocate read model.
-    allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Allocate encoded character array.
+    allocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    // Read persistent byte stream over channel.
-    read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+    // Write file into encoded character array.
+    read_data((void*) &e, (void*) &ec, (void*) &es, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
-/*??
-    fwprintf(stdout, L"TEST receive file system rms: %i\n", rms);
-    fwprintf(stdout, L"TEST receive file system rmc: %i\n", rmc);
-    fwprintf(stdout, L"TEST receive file system rm: %s\n", (char*) rm);
-*/
+    // The serialised wide character array.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // The wide character model.
-    void* wm = *NULL_POINTER_MEMORY_MODEL;
-    int wmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int wms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate serialised wide character array.
+    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    // Allocate wide character model.
-    allocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Decode encoded character array into serialised wide character array.
+    decode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, e, (void*) &ec);
 
-    decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, rm, (void*) &rmc);
+    // Deallocate encoded character array.
+    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-/*??
-    fwprintf(stdout, L"TEST receive file system wmc: %i\n", wmc);
-    fwprintf(stdout, L"TEST receive file system wm: %ls\n", (wchar_t*) wm);
-*/
+    // Deserialise serialised wide character array into destination knowledge model.
+    decode(p0, p1, p2, p3, p4, p5, s, (void*) &sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
-    // Deallocate read model.
-    deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-/*??
-    fwprintf(stdout, L"TEST receive file system l: %ls\n", (wchar_t*) p8);
-    fwprintf(stdout, L"TEST receive file system lc: %i\n", *((int*) p9));
-*/
-
-    // Decode byte stream according to given document type.
-    decode(p0, p1, p2, p3, p4, p5, wm, (void*) &wmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
-
-/*??
-    fwprintf(stdout, L"TEST receive file system decode mc: %i\n", *((int*) p1));
-    fwprintf(stdout, L"TEST receive file system decode dc: %i\n", *((int*) p4));
-*/
-
-    // Deallocate wide character model.
-    deallocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate serialised wide character array.
+    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

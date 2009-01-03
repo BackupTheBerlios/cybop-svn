@@ -13,27 +13,28 @@
 </model>
 
 <!--
-    $RCSfile: gui.cybol,v $
+    Copyright (C) 1999-2009. Christian Heller.
 
-    Copyright (c) 1999-2008. Christian Heller.
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
 
-    This knowledge model is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public License
-    as published by the Free Software Foundation; either version 2
-    of the License, or (at your option) any later version.
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-    This knowledge model is distributed in the hope that it will be useful,
+    CYBOI is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this knowledge model; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
 
-    http://www.cybop.net
-    - Cybernetics Oriented Programming -
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
 
-    @version $Revision: 1.4 $ $Date: 2008-09-12 15:40:10 $ $Author: christian $
+    @version $RCSfile: gui.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

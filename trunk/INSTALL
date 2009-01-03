@@ -6,7 +6,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.7 $ $Date: 2008-06-27 14:52:35 $ $Author: christian $
+# @version $Revision: 1.8 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -58,6 +58,7 @@ ___________________________
 - Execute cyboi and give the "run.cybol" file of an application as argument, e.g.:
 
     /home/cybop/src/controller/cyboi --knowledge exit/run.cybol
+    /home/cybop/src/controller/cyboi --knowledge signal/run.cybol
     /home/cybop/src/controller/cyboi --knowledge exit_text_file/run.cybol
     /home/cybop/src/controller/cyboi --knowledge exit_cybol_file/run.cybol
     /home/cybop/src/controller/cyboi --knowledge shell_output/run.cybol

@@ -7,12 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.82 $ $Date: 2008-12-31 00:14:55 $ $Author: christian $
+# @version $Revision: 1.83 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Add remaining old files from CVS in directory "controller/handler/operation"
-        * Adapt file "operation_handler.c"
+        * Make CYBOL example applications work; continue with "shell_command_execution" in list in file "INSTALL"
 
         * Rename several things in CYBOL files and CYBOI:
             --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
@@ -25,6 +24,9 @@
             --> a "whole" attribute is not needed, as due to the CYBOL structure it is clear that
                     parts belong to the compound in whose file they stand
             --> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
+
+        * Rename utf-8 stuff to "decode/encode" (encoder instead of converter) and
+            other conversions to "deserialise/serialise" (serialiser instead of converter)
 
         * Simplify and unify array functions by introducing NEW files for handling of primitive data types,
             e.g. with functions like "assign_double", "compare_double", "add_double" etc.;

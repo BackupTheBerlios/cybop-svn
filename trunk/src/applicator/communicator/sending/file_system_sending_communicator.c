@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_system_sending_communicator.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: file_system_sending_communicator.c,v $ $Revision: 1.7 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,22 +62,36 @@ void communicate_sending_file_system(void* p0, void* p1, void* p2, void* p3, voi
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send file system message.");
 
-    // The encoded string array to be sent to the file.
-    void* a = *NULL_POINTER_MEMORY_MODEL;
-    int ac = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int as = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The serialised wide character array.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Allocate array.
-    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Allocate serialised wide character array.
+    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    // Encode knowledge model into model diagram (hierarchical text).
-    encode((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
+    // Serialise source knowledge model into serialised wide character array.
+    encode((void*) &s, (void*) &sc, (void*) &ss, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
 
-    // Write encoded array as message to file system.
-    write_data((void*) &p15, p16, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+    // The encoded character array.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+    int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int es = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Deallocate array.
-    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Allocate encoded character array.
+    allocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Encode serialised wide character array into encoded character array.
+    encode_utf_8_unicode_character_vector((void*) &e, (void*) &ec, (void*) &es, s, (void*) &sc);
+
+    // Deallocate serialised wide character array.
+    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Write encoded array into file.
+    write_data((void*) &p15, p16, *NULL_POINTER_MEMORY_MODEL, e, (void*) &ec, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+
+    // Deallocate encoded character array.
+    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* FILE_SYSTEM_SENDING_COMMUNICATOR_SOURCE */

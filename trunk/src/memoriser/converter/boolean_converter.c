@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: boolean_converter.c,v $ $Revision: 1.22 $ $Date: 2008-09-09 21:17:23 $ $Author: christian $
+ * @version $RCSfile: boolean_converter.c,v $ $Revision: 1.23 $ $Date: 2009-01-03 01:24:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -95,14 +95,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // If neither "true" nor "false" value were found, then set
-                    // the boolean (integer) value to "false" here, by default.
-
-                    // Set boolean value to "false", in other words the integer value to "zero".
-                    set_array_elements(*d, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) FALSE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-                    // Increment destination count.
-                    *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The value cannot be interpreted.");
                 }
 
             } else {

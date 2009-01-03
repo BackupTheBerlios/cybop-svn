@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.67 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.68 $ $Date: 2009-01-03 01:24:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -491,6 +491,16 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        compare_arrays(p13, p14, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            replace(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
         compare_arrays(p13, p14, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -541,6 +551,16 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        compare_arrays(p13, p14, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            replace(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
         compare_arrays(p13, p14, (void*) LATEX_APPLICATION_X_CYBOL_ABSTRACTION, (void*) LATEX_APPLICATION_X_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -565,34 +585,17 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            encode_utf_8_unicode_character_vector(p0, p1, p2, p7, p8);
+            replace(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        // CAUTION! For cybol files, only the abstraction "character" is defined.
-        // No distinction is made between "character" and "wide character", in other words:
-        // a cybol abstraction named "wide_character" does not exist.
-        // Similarly, all cybol files are expected to be encoded as utf-8.
-        //
-        // When decoding a value of abstraction "character" from cybol into cyboi,
-        // it is assumed to be a multibyte utf-8 encoded character string (char*)
-        // and gets converted into a wide character string (wchar_t*) internally.
-        //
-        // When encoding a value of abstraction "wide_character" from cyboi into cybol,
-        // it is assumed to be a wide character string (wchar_t*)
-        // and gets converted into a multibyte utf-8 encoded character string (char*).
-        //
-        // Therefore, the comparison here only considers "PLAIN_TEXT_CYBOL_ABSTRACTION",
-        // but not "CHARACTER_VECTOR_MEMORY_ABSTRACTION".
         compare_arrays(p13, p14, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-//??            replace(p0, p1, p2, p6, p7, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         }
     }
 

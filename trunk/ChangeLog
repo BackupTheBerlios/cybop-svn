@@ -14,9 +14,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.107 $ $Date: 2008-12-31 00:14:55 $ $Author: christian $
+# @version $Revision: 1.108 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Readd remaining old files from CVS in directory "controller/handler/operation/"
+        * Adapt file "operation_handler.c"
+        * Add forgotten null pointer test in function "deoptionalise_log_file",
+            which caused a segmentation fault at system shutdown, if no log file was given at startup
+        * Adapt year to 2009 and copyright to GPL 3 in all example CYBOL files belonging to CYBOI
+        * Make CYBOL example applications work by correcting minor things in CYBOI
+            (file system- and shell sending and -receiving)
 
 2008-12-30  Christian Heller  <christian.heller@tuxtax.de>
         * Comment out call to "communicate_receiving_inline" to avoid processing meta data
@@ -31,7 +40,7 @@
         * Fix bug that the LOG_OUTPUT variable was not set to null in function "deoptionalise",
             so that subsequent logger calls caused segmentation faults at system shutdown,
             because the null pointer test within the logger was successful, even though the pointer was invalid
-        * Add old files from CVS in directory "controller/handler/operation"
+        * Readd old files from CVS in directory "controller/handler/operation/"
         * Adapt file "operation_handler.c"
         * Add new CYBOL code example named "signal"
         * Make CYBOI work again, just before the end of the year; the following was done in 2008:

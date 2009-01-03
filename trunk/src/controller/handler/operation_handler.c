@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: operation_handler.c,v $ $Revision: 1.50 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
+ * @version $RCSfile: operation_handler.c,v $ $Revision: 1.51 $ $Date: 2009-01-03 01:24:54 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -35,8 +35,13 @@
 #include "../../applicator/runner.c"
 #include "../../constant/model/cybol/operation_cybol_model.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../controller/handler/operation/arithmetic_operation_handler.c"
 #include "../../controller/handler/operation/communication_operation_handler.c"
+#include "../../controller/handler/operation/comparison_operation_handler.c"
+#include "../../controller/handler/operation/flow_operation_handler.c"
 #include "../../controller/handler/operation/lifecycle_operation_handler.c"
+#include "../../controller/handler/operation/memory_operation_handler.c"
+#include "../../controller/handler/operation/run_operation_handler.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
 
@@ -76,45 +81,8 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            calculate(p12, p13, p1, p2, p3);
-        }
+        handle_arithmetic_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
     }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p10, p11, (void*) BIT_OPERATION_CYBOL_MODEL, (void*) BIT_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??            calculate(p12, p13, p1, p2, p3);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p10, p11, (void*) BOOLEAN_OPERATION_CYBOL_MODEL, (void*) BOOLEAN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??            calculate(p12, p13, p1, p2, p3);
-        }
-    }
-
-/*??
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p10, p11, (void*) COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            communicate(p12, p13, p1, p2, p3, p0);
-        }
-    }
-*/
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -123,35 +91,13 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) COMPARISON_OPERATION_CYBOL_MODEL, (void*) COMPARISON_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare(p12, p13, p1, p2, p3);
-        }
+        handle_comparison_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) FLOW_OPERATION_CYBOL_MODEL, (void*) FLOW_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            guide(p12, p13, p1, p2, p3, p0);
-        }
+        handle_flow_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
     }
-
-/*??
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p10, p11, (void*) LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            maintain(p12, p13, p1, p2, p3, p0, p7);
-        }
-    }
-*/
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -160,22 +106,12 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) MEMORY_OPERATION_CYBOL_MODEL, (void*) MEMORY_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            memorise(p12, p13, p1, p2, p3);
-        }
+        handle_memory_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) RUN_OPERATION_CYBOL_MODEL, (void*) RUN_OPERATION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            run(p12, p13, p1, p2, p3);
-        }
+        handle_run_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
     }
 }
 

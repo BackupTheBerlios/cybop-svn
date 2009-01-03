@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: optionaliser.c,v $ $Revision: 1.26 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
+ * @version $RCSfile: optionaliser.c,v $ $Revision: 1.27 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -256,16 +256,30 @@ void deoptionalise_log_file(void* p0) {
         // Comment out this function call to avoid disturbing messages at system startup!
         // log_write_terminated_message((void*) stdout, L"Debug: Deoptionalise log file.\n");
 
-        // Close log file.
-        fclose(*f);
+        // CAUTION! This test is necessary! Do NOT delete it!
+        // Checking the file stream argument above is not sufficient,
+        // since a segmentation fault will occur here,
+        // if no log file is given as command line argument at system startup.
+        if (*f != *NULL_POINTER_MEMORY_MODEL) {
 
-        // Reset log file pointer.
-        // CAUTION! Hand over the log file stream AS REFERENCE!
-        // This is necessary, because it is reset to null here.
-        // If this was not done, subsequent logger calls would cause segmentation faults,
-        // because the null pointer test within the logger would be successful,
-        // even though the LOG_OUTPUT pointer would be invalid.
-        *f = *NULL_POINTER_MEMORY_MODEL;
+            // Close log file.
+            fclose(*f);
+
+            // Reset log file pointer.
+            // CAUTION! Hand over the log file stream AS REFERENCE!
+            // This is necessary, because it is reset to null here.
+            // If this was not done, subsequent logger calls would cause segmentation faults,
+            // because the null pointer test within the logger would be successful,
+            // even though the LOG_OUTPUT pointer would be invalid.
+            *f = *NULL_POINTER_MEMORY_MODEL;
+
+        } else {
+
+            // CAUTION! DO NOT use logging functionality here!
+            // The logger will not work before its options are set.
+            // Do NOT show the following message, as it would only disturb the user!
+            // log_write_terminated_message((void*) stdout, L"Warning: Could not deoptionalise log file. No log file was given at system startup.\n");
+        }
 
     } else {
 
@@ -625,7 +639,7 @@ void deoptionalise(void* p0) {
     // CAUTION! DO NOT use logging functionality here!
     // The logger will not work before its options are set.
     // Do NOT show the following message, as it would only disturb the user!
-    log_write_terminated_message((void*) stdout, L"Information: Deoptionalise command line argument options.\n");
+    // log_write_terminated_message((void*) stdout, L"Information: Deoptionalise command line argument options.\n");
 
     // Deoptionalise log file.
     deoptionalise_log_file(p0);
