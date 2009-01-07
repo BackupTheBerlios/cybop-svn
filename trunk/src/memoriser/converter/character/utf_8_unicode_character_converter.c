@@ -19,13 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.9 $ $Date: 2008-11-28 22:04:11 $ $Author: christian $
+ * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.10 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef UTF_8_UNICODE_CHARACTER_CONVERTER_SOURCE
 #define UTF_8_UNICODE_CHARACTER_CONVERTER_SOURCE
 
+#include <errno.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"

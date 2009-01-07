@@ -19,23 +19,24 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: flow_operation_handler.c,v $ $Revision: 1.4 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: file_operation_handler.c,v $ $Revision: 1.1 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FLOW_OPERATION_HANDLER_SOURCE
-#define FLOW_OPERATION_HANDLER_SOURCE
+#ifndef FILE_OPERATION_HANDLER_SOURCE
+#define FILE_OPERATION_HANDLER_SOURCE
 
-#include "../../../applicator/guider/branch_guider.c"
-#include "../../../applicator/guider/loop_guider.c"
-#include "../../../constant/model/cybol/operation/flow_operation_cybol_model.c"
+#include "../../../applicator/filer/archiving_filer.c"
+#include "../../../applicator/filer/copying_filer.c"
+#include "../../../applicator/filer/directory_contents_listing_filer.c"
+#include "../../../constant/model/cybol/operation/file_operation_cybol_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
 #include "../../../memoriser/array.c"
 
 /**
- * Handles the flow operation signal.
+ * Handles the file operation signal.
  *
  * @param p0 the internal memory
  * @param p1 the knowledge memory
@@ -55,34 +56,44 @@
  * @param p15 the signal identification (Hand over as reference!)
  * @param p16 the comparison result
  */
-void handle_flow_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+void handle_file_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle flow operation.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle file operation.");
 
     // The comparison result.
     int* r = (int*) p16;
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) BRANCH_FLOW_OPERATION_CYBOL_MODEL, (void*) BRANCH_FLOW_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p10, p11, (void*) ARCHIVE_FILE_OPERATION_CYBOL_MODEL, (void*) ARCHIVE_FILE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            guide_branch(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
+//??            file_archiving(p12, p13, p1, p2);
         }
     }
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) LOOP_FLOW_OPERATION_CYBOL_MODEL, (void*) LOOP_FLOW_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p10, p11, (void*) COPY_FILE_OPERATION_CYBOL_MODEL, (void*) COPY_FILE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            guide_loop(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
+//??            file_copying(p12, p13, p1, p2);
+        }
+    }
+
+    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p10, p11, (void*) LIST_DIRECTORY_CONTENTS_FILE_OPERATION_CYBOL_MODEL, (void*) LIST_DIRECTORY_CONTENTS_FILE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            file_directory_contents_listing(p12, p13, p1, p2);
         }
     }
 }
 
-/* FLOW_OPERATION_HANDLER_SOURCE */
+/* FILE_OPERATION_HANDLER_SOURCE */
 #endif

@@ -19,14 +19,19 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: memory_operation_handler.c,v $ $Revision: 1.3 $ $Date: 2009-01-03 01:24:54 $ $Author: christian $
+ * @version $RCSfile: memory_operation_handler.c,v $ $Revision: 1.4 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef MEMORY_OPERATION_HANDLER_SOURCE
 #define MEMORY_OPERATION_HANDLER_SOURCE
 
-#include "../../../applicator/memoriser.c"
+#include "../../../applicator/memoriser/building_memoriser.c"
+#include "../../../applicator/memoriser/copying_memoriser.c"
+#include "../../../applicator/memoriser/counting_memoriser.c"
+#include "../../../applicator/memoriser/creating_memoriser.c"
+#include "../../../applicator/memoriser/destructing_memoriser.c"
+#include "../../../applicator/memoriser/getting_memoriser.c"
 #include "../../../constant/model/cybol/operation/memory_operation_cybol_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: executing_runner.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: executing_runner.c,v $ $Revision: 1.5 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,19 +30,61 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "../../constant/model/command/unix_command_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/command_option/unix/shell_unix_command_option_name.c"
 #include "../../logger/logger.c"
+#include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 
 /**
  * Execute command/ program as process.
  *
- * @param p0 the arguments
+ * @param p0 the user command
+ * @param p1 the user command count
  */
-void run_executing(void* p0) {
+void run_executing(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Execute command/ program as process.");
+
+    // The shell command line.
+    void* cl = *NULL_POINTER_MEMORY_MODEL;
+    int clc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int cls = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate shell command line.
+    allocate((void*) &cl, (void*) &cls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Append shell command.
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) SHELL_UNIX_COMMAND_MODEL, (void*) SHELL_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Append shell command.
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME, (void*) CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Append user command.
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    append((void*) &cl, (void*) &clc, (void*) &cls, p0, p1, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Append null character as string termination.
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    fwprintf(stdout, L"TEST dir: %ls\n", (wchar_t*) cl);
+    fwprintf(stdout, L"TEST dir count: %i\n", clc);
+
+    // The encoded shell command line.
+    void* ecl = *NULL_POINTER_MEMORY_MODEL;
+    int eclc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ecls = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate encoded shell command line.
+    allocate((void*) &ecl, (void*) &ecls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Encode encoded shell command line.
+    encode_utf_8_unicode_character_vector((void*) &ecl, (void*) &eclc, (void*) &ecls, cl, (void*) &clc);
+
+    // Deallocate shell command line.
+    deallocate((void*) &cl, (void*) &cls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     // Initialise error number.
     // It is a global variable/ function and other operations
@@ -50,6 +92,7 @@ void run_executing(void* p0) {
     errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Run a command/ program as shell command in an own process.
+    //
     // The "system" function provides a simple, portable mechanism for running
     // another program; it does all three steps (fork/execv/wait) automatically.
     // The function does all the work of running a subprogram, but it doesn't
@@ -59,7 +102,10 @@ void run_executing(void* p0) {
     // In particular, it searches the directories in "PATH" to find programs to execute.
     // The return value is -1 if it wasn't possible to create the shell process,
     // and otherwise is the status of the shell process.
-    int r = system(p0);
+    //
+    // CAUTION! The command line MUST NOT be given as wide character array!
+    // This is just because the "system" function call expects an ASCII string.
+    int r = system(ecl);
 
     if (r == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
 
@@ -67,21 +113,28 @@ void run_executing(void* p0) {
 
         if (errno == EINTR) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not execute command/ program as process. The function was interrupted by delivery of a signal to the calling process.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"The function was interrupted by delivery of a signal to the calling process.");
 
         } else if (errno == ECHILD) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not execute command/ program as process. There are no child processes to wait for, or the specified pid is not a child of the calling process.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"There are no child processes to wait for, or the specified pid is not a child of the calling process.");
 
         } else if (errno == EINVAL) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not execute command/ program as process. An invalid value was provided for the options argument.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"An invalid value was provided for the options argument.");
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"An unknown error occured.");
         }
 
     } else {
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Successfully executed command/ program as process. The child process was left; the parent process continues.");
     }
+
+    // Deallocate encoded shell command line.
+    deallocate((void*) &ecl, (void*) &ecls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
 /*??
     //?? The following block implements the same three primitive functions

@@ -19,14 +19,18 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: comparison_operation_handler.c,v $ $Revision: 1.3 $ $Date: 2009-01-03 01:24:54 $ $Author: christian $
+ * @version $RCSfile: comparison_operation_handler.c,v $ $Revision: 1.4 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMPARISON_OPERATION_HANDLER_SOURCE
 #define COMPARISON_OPERATION_HANDLER_SOURCE
 
-#include "../../../applicator/comparator.c"
+#include "../../../applicator/comparator/equality_comparator.c"
+#include "../../../applicator/comparator/greaterness_comparator.c"
+#include "../../../applicator/comparator/greaterness_or_equality_comparator.c"
+#include "../../../applicator/comparator/smallerness_comparator.c"
+#include "../../../applicator/comparator/smallerness_or_equality_comparator.c"
 #include "../../../constant/model/cybol/operation/comparison_operation_cybol_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"

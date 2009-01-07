@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: initialiser.c,v $ $Revision: 1.29 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
+ * @version $RCSfile: initialiser.c,v $ $Revision: 1.30 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef INITIALISER_SOURCE
 #define INITIALISER_SOURCE
 
-#include "../applicator/communicator/receiving/file_system_receiving_communicator.c"
+#include "../applicator/communicator/receiving_communicator.c"
 #include "../controller/checker.c"
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"

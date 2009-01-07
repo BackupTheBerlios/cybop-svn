@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: directory_contents_listing_runner.c,v $ $Revision: 1.7 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
+ * @version $RCSfile: copying_filer.c,v $ $Revision: 1.1 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DIRECTORY_CONTENTS_LISTING_RUNNER_SOURCE
-#define DIRECTORY_CONTENTS_LISTING_RUNNER_SOURCE
+#ifndef COPYING_FILER_SOURCE
+#define COPYING_FILER_SOURCE
 
 #include <unistd.h>
 #include "../../applicator/runner/executing_runner.c"
@@ -34,68 +34,89 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/operation/run/list_run_operation_cybol_name.c"
-#include "../../constant/name/command_option/unix/list_unix_command_option_name.c"
+#include "../../constant/name/command_option/unix/copy_unix_command_option_name.c"
+#include "../../constant/name/cybol/operation/file/copy_file_operation_cybol_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
 #include "../../variable/reallocation_factor.c"
 
 /**
- * Runs the list directory contents command.
+ * Copies the file resource.
  *
  * @param p0 the parameters
  * @param p1 the parameters count
  * @param p2 the knowledge memory
  * @param p3 the knowledge memory count
  */
-void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
+void file_copying(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run list directory contents command.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Copy file resource.");
 
-    // The all name, abstraction, model, details.
-    void** alln = NULL_POINTER_MEMORY_MODEL;
-    void** allnc = NULL_POINTER_MEMORY_MODEL;
-    void** allns = NULL_POINTER_MEMORY_MODEL;
-    void** alla = NULL_POINTER_MEMORY_MODEL;
-    void** allac = NULL_POINTER_MEMORY_MODEL;
-    void** allas = NULL_POINTER_MEMORY_MODEL;
-    int** allm = (int**) NULL_POINTER_MEMORY_MODEL;
-    void** allmc = NULL_POINTER_MEMORY_MODEL;
-    void** allms = NULL_POINTER_MEMORY_MODEL;
-    void** alld = NULL_POINTER_MEMORY_MODEL;
-    void** alldc = NULL_POINTER_MEMORY_MODEL;
-    void** allds = NULL_POINTER_MEMORY_MODEL;
+    // The recursive name, abstraction, model, details.
+    void** recursiven = NULL_POINTER_MEMORY_MODEL;
+    void** recursivenc = NULL_POINTER_MEMORY_MODEL;
+    void** recursivens = NULL_POINTER_MEMORY_MODEL;
+    void** recursivea = NULL_POINTER_MEMORY_MODEL;
+    void** recursiveac = NULL_POINTER_MEMORY_MODEL;
+    void** recursiveas = NULL_POINTER_MEMORY_MODEL;
+    int** recursivem = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** recursivemc = NULL_POINTER_MEMORY_MODEL;
+    void** recursivems = NULL_POINTER_MEMORY_MODEL;
+    void** recursived = NULL_POINTER_MEMORY_MODEL;
+    void** recursivedc = NULL_POINTER_MEMORY_MODEL;
+    void** recursiveds = NULL_POINTER_MEMORY_MODEL;
+    // The source name, abstraction, model, details.
+    void** sourcen = NULL_POINTER_MEMORY_MODEL;
+    void** sourcenc = NULL_POINTER_MEMORY_MODEL;
+    void** sourcens = NULL_POINTER_MEMORY_MODEL;
+    void** sourcea = NULL_POINTER_MEMORY_MODEL;
+    void** sourceac = NULL_POINTER_MEMORY_MODEL;
+    void** sourceas = NULL_POINTER_MEMORY_MODEL;
+    int** sourcem = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** sourcemc = NULL_POINTER_MEMORY_MODEL;
+    void** sourcems = NULL_POINTER_MEMORY_MODEL;
+    void** sourced = NULL_POINTER_MEMORY_MODEL;
+    void** sourcedc = NULL_POINTER_MEMORY_MODEL;
+    void** sourceds = NULL_POINTER_MEMORY_MODEL;
+    // The destination name, abstraction, model, details.
+    void** destinationn = NULL_POINTER_MEMORY_MODEL;
+    void** destinationnc = NULL_POINTER_MEMORY_MODEL;
+    void** destinationns = NULL_POINTER_MEMORY_MODEL;
+    void** destinationa = NULL_POINTER_MEMORY_MODEL;
+    void** destinationac = NULL_POINTER_MEMORY_MODEL;
+    void** destinationas = NULL_POINTER_MEMORY_MODEL;
+    int** destinationm = (int**) NULL_POINTER_MEMORY_MODEL;
+    void** destinationmc = NULL_POINTER_MEMORY_MODEL;
+    void** destinationms = NULL_POINTER_MEMORY_MODEL;
+    void** destinationd = NULL_POINTER_MEMORY_MODEL;
+    void** destinationdc = NULL_POINTER_MEMORY_MODEL;
+    void** destinationds = NULL_POINTER_MEMORY_MODEL;
 
-    // The long listing name, abstraction, model, details.
-    void** longlistingn = NULL_POINTER_MEMORY_MODEL;
-    void** longlistingnc = NULL_POINTER_MEMORY_MODEL;
-    void** longlistingns = NULL_POINTER_MEMORY_MODEL;
-    void** longlistinga = NULL_POINTER_MEMORY_MODEL;
-    void** longlistingac = NULL_POINTER_MEMORY_MODEL;
-    void** longlistingas = NULL_POINTER_MEMORY_MODEL;
-    int** longlistingm = (int**) NULL_POINTER_MEMORY_MODEL;
-    void** longlistingmc = NULL_POINTER_MEMORY_MODEL;
-    void** longlistingms = NULL_POINTER_MEMORY_MODEL;
-    void** longlistingd = NULL_POINTER_MEMORY_MODEL;
-    void** longlistingdc = NULL_POINTER_MEMORY_MODEL;
-    void** longlistingds = NULL_POINTER_MEMORY_MODEL;
-
-    // Get all option.
+    // Get recursive option.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) ALL_LIST_RUN_OPERATION_CYBOL_NAME, (void*) ALL_LIST_RUN_OPERATION_CYBOL_NAME_COUNT,
-        (void*) &alln, (void*) &allnc, (void*) &allns,
-        (void*) &alla, (void*) &allac, (void*) &allas,
-        (void*) &allm, (void*) &allmc, (void*) &allms,
-        (void*) &alld, (void*) &alldc, (void*) &allds,
+        (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
+        (void*) &recursiven, (void*) &recursivenc, (void*) &recursivens,
+        (void*) &recursivea, (void*) &recursiveac, (void*) &recursiveas,
+        (void*) &recursivem, (void*) &recursivemc, (void*) &recursivems,
+        (void*) &recursived, (void*) &recursivedc, (void*) &recursiveds,
         p2, p3);
 
-    // Get long listing option.
+    // Get source option.
     get_universal_compound_element_by_name(p0, p1,
-        (void*) LONG_LISTING_LIST_RUN_OPERATION_CYBOL_NAME, (void*) LONG_LISTING_LIST_RUN_OPERATION_CYBOL_NAME_COUNT,
-        (void*) &longlistingn, (void*) &longlistingnc, (void*) &longlistingns,
-        (void*) &longlistinga, (void*) &longlistingac, (void*) &longlistingas,
-        (void*) &longlistingm, (void*) &longlistingmc, (void*) &longlistingms,
-        (void*) &longlistingd, (void*) &longlistingdc, (void*) &longlistingds,
+        (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
+        (void*) &sourcen, (void*) &sourcenc, (void*) &sourcens,
+        (void*) &sourcea, (void*) &sourceac, (void*) &sourceas,
+        (void*) &sourcem, (void*) &sourcemc, (void*) &sourcems,
+        (void*) &sourced, (void*) &sourcedc, (void*) &sourceds,
+        p2, p3);
+
+    // Get destination option.
+    get_universal_compound_element_by_name(p0, p1,
+        (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME, (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
+        (void*) &destinationn, (void*) &destinationnc, (void*) &destinationns,
+        (void*) &destinationa, (void*) &destinationac, (void*) &destinationas,
+        (void*) &destinationm, (void*) &destinationmc, (void*) &destinationms,
+        (void*) &destinationd, (void*) &destinationdc, (void*) &destinationds,
         p2, p3);
 
     // The arguments vector.
@@ -104,30 +125,30 @@ void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
     int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Determine arguments size.
-    args = *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT;
+    args = *SHELL_UNIX_COMMAND_MODEL_COUNT;
 
     // Allocate arguments vector.
     allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     // Assemble arguments by copying the actual command.
     // A null termination character is added behind the last argument, see below!
-    set_array_elements(arg, (void*) &argc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-    argc = argc + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT;
+    set_array_elements(arg, (void*) &argc, (void*) SHELL_UNIX_COMMAND_MODEL, (void*) SHELL_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    argc = argc + *SHELL_UNIX_COMMAND_MODEL_COUNT;
 
     //
-    // All option.
+    // Recursive option.
     //
 
-    if (*allm != *NULL_POINTER_MEMORY_MODEL) {
+    if (*recursivem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**allm == *TRUE_BOOLEAN_MEMORY_MODEL) {
+        if (**recursivem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
@@ -136,25 +157,25 @@ void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
         }
     }
 
     //
-    // Long listing option.
+    // Source option.
     //
 
-    if (*longlistingm != *NULL_POINTER_MEMORY_MODEL) {
+    if (*sourcem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**longlistingm == *TRUE_BOOLEAN_MEMORY_MODEL) {
+        if (**sourcem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize arguments, if necessary.
             // One extra place for space character.
-            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT) >= args) {
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT) >= args) {
 
                 // Determine arguments size.
-                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
             }
@@ -163,8 +184,35 @@ void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(arg, (void*) &argc, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            argc = argc + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
+        }
+    }
+
+    //
+    // Destination option.
+    //
+
+    if (*destinationm != *NULL_POINTER_MEMORY_MODEL) {
+
+        if (**destinationm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+            // Resize arguments, if necessary.
+            // One extra place for space character.
+            if ((argc + *PRIMITIVE_MEMORY_MODEL_COUNT + *DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT) >= args) {
+
+                // Determine arguments size.
+                args = argc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
+
+                reallocate_pointer_vector((void*) &arg, (void*) &argc, (void*) &args);
+            }
+
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
+            set_array_elements(arg, (void*) &argc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
+            set_array_elements(arg, (void*) &argc, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            argc = argc + *DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
         }
     }
 
@@ -187,7 +235,7 @@ void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
     argc = argc + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Execute arguments as process.
-    run_executing(arg);
+//??    run_executing(arg);
 
     // Deallocate arguments vector.
     deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -265,33 +313,33 @@ void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
     //
 
     // Determine command size.
-    commands = *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT;
+    commands = *SHELL_UNIX_COMMAND_MODEL_COUNT;
 
     // Allocate command.
     allocate_array((void*) &command, (void*) &commands, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     // Assemble command by copying the actual command.
     // A null termination character is added behind the last argument, see below!
-    set_array_elements(command, (void*) &commandc, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-    commandc = commandc + *LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT;
+    set_array_elements(command, (void*) &commandc, (void*) SHELL_UNIX_COMMAND_MODEL, (void*) SHELL_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    commandc = commandc + *SHELL_UNIX_COMMAND_MODEL_COUNT;
 
     // Increase arguments vector size for command argument.
     args++;
 
     //
-    // All option.
+    // Recursive option.
     //
 
-    if (*allm != *NULL_POINTER_MEMORY_MODEL) {
+    if (*recursivem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**allm == *TRUE_BOOLEAN_MEMORY_MODEL) {
+        if (**recursivem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
@@ -300,25 +348,25 @@ void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
         }
     }
 
     //
-    // Long listing option.
+    // Source option.
     //
 
-    if (*longlistingm != *NULL_POINTER_MEMORY_MODEL) {
+    if (*sourcem != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (**longlistingm == *TRUE_BOOLEAN_MEMORY_MODEL) {
+        if (**sourcem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Resize command, if necessary.
             // One extra place for space character.
-            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT) >= commands) {
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT) >= commands) {
 
                 // Determine command size.
-                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
 
                 reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
             }
@@ -327,8 +375,35 @@ void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
             // A null termination character is added behind the last argument, see below!
             set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
             commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
-            set_array_elements(command, (void*) &commandc, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            commandc = commandc + *LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
+        }
+    }
+
+    //
+    // Destination option.
+    //
+
+    if (*destinationm != *NULL_POINTER_MEMORY_MODEL) {
+
+        if (**destinationm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+            // Resize command, if necessary.
+            // One extra place for space character.
+            if ((commandc + *PRIMITIVE_MEMORY_MODEL_COUNT + *DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT) >= commands) {
+
+                // Determine command size.
+                commands = commandc * *POINTER_VECTOR_REALLOCATION_FACTOR + *PRIMITIVE_MEMORY_MODEL_COUNT + *DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
+
+                reallocate_pointer_vector((void*) &command, (void*) &commandc, (void*) &commands);
+            }
+
+            // Assemble option by copying the actual argument.
+            // A null termination character is added behind the last argument, see below!
+            set_array_elements(command, (void*) &commandc, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *PRIMITIVE_MEMORY_MODEL_COUNT;
+            set_array_elements(command, (void*) &commandc, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            commandc = commandc + *DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT;
         }
     }
 
@@ -408,5 +483,5 @@ void run_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
 */
 }
 
-/* DIRECTORY_CONTENTS_LISTING_RUNNER_SOURCE */
+/* COPYING_FILER_SOURCE */
 #endif

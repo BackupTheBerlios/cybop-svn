@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: run_operation_handler.c,v $ $Revision: 1.3 $ $Date: 2009-01-03 01:24:54 $ $Author: christian $
+ * @version $RCSfile: run_operation_handler.c,v $ $Revision: 1.4 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef RUN_OPERATION_HANDLER_SOURCE
 #define RUN_OPERATION_HANDLER_SOURCE
 
-#include "../../../applicator/runner.c"
+#include "../../../applicator/runner/program_runner.c"
 #include "../../../constant/model/cybol/operation/run_operation_cybol_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -61,36 +61,6 @@ void handle_run_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
     // The comparison result.
     int* r = (int*) p16;
-
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p10, p11, (void*) ARCHIVE_RUN_OPERATION_CYBOL_MODEL, (void*) ARCHIVE_RUN_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??            run_archiving(p12, p13, p1, p2);
-        }
-    }
-
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p10, p11, (void*) COPY_RUN_OPERATION_CYBOL_MODEL, (void*) COPY_RUN_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??            run_copying(p12, p13, p1, p2);
-        }
-    }
-
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p10, p11, (void*) LIST_DIRECTORY_CONTENTS_RUN_OPERATION_CYBOL_MODEL, (void*) LIST_DIRECTORY_CONTENTS_RUN_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??            run_directory_contents_listing(p12, p13, p1, p2);
-        }
-    }
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

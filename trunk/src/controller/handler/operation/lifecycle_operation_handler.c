@@ -19,14 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: lifecycle_operation_handler.c,v $ $Revision: 1.4 $ $Date: 2009-01-03 01:24:54 $ $Author: christian $
+ * @version $RCSfile: lifecycle_operation_handler.c,v $ $Revision: 1.5 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef LIFECYCLE_OPERATION_HANDLER_SOURCE
 #define LIFECYCLE_OPERATION_HANDLER_SOURCE
 
-#include "../../../applicator/maintainer.c"
+#include "../../../applicator/maintainer/interrupting_maintainer.c"
+#include "../../../applicator/maintainer/shutting_maintainer.c"
+#include "../../../applicator/maintainer/starting_maintainer.c"
 #include "../../../constant/model/cybol/operation/lifecycle_operation_cybol_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"

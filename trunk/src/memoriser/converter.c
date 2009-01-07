@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.68 $ $Date: 2009-01-03 01:24:54 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.69 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,6 +63,9 @@
 #include "../memoriser/converter/xhtml_converter.c"
 #include "../memoriser/converter/xml_converter.c"
 #include "../memoriser/array.c"
+
+//?? TEMPORARY FOR TESTING! DELETE LATER!
+#include "../memoriser/communicator/file_communicator.c"
 
 /**
  * Decodes the source into the destination, according to the given language.

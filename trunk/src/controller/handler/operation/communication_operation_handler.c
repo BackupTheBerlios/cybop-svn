@@ -19,14 +19,16 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communication_operation_handler.c,v $ $Revision: 1.3 $ $Date: 2008-12-31 00:17:48 $ $Author: christian $
+ * @version $RCSfile: communication_operation_handler.c,v $ $Revision: 1.4 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef COMMUNICATION_OPERATION_HANDLER_SOURCE
 #define COMMUNICATION_OPERATION_HANDLER_SOURCE
 
-#include "../../../applicator/communicator.c"
+#include "../../../applicator/communicator/receiving_communicator.c"
+#include "../../../applicator/communicator/sending_communicator.c"
+#include "../../../applicator/communicator/sensing_communicator.c"
 #include "../../../constant/model/cybol/operation/communication_operation_cybol_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"

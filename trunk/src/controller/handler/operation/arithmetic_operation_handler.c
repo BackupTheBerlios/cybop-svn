@@ -19,14 +19,14 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: arithmetic_operation_handler.c,v $ $Revision: 1.6 $ $Date: 2009-01-03 01:24:54 $ $Author: christian $
+ * @version $RCSfile: arithmetic_operation_handler.c,v $ $Revision: 1.7 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ARITHMETIC_OPERATION_HANDLER_SOURCE
 #define ARITHMETIC_OPERATION_HANDLER_SOURCE
 
-#include "../../../applicator/calculator.c"
+#include "../../../applicator/calculator/addition_calculator.c"
 #include "../../../constant/model/cybol/operation/arithmetic_operation_cybol_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
