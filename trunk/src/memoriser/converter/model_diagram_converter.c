@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.25 $ $Date: 2008-12-31 00:14:57 $ $Author: christian $
+ * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.26 $ $Date: 2009-01-09 23:15:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -266,112 +266,114 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
  */
 void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    if (p10 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p8 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* dc = (int*) p10;
+        int* mc = (int*) p8;
 
-        if (p8 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram node.");
 
-            int* mc = (int*) p8;
+        // Add indentation.
+        encode_model_diagram_indentation(p0, p1, p2, p11, p12);
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram node.");
+        // Add part name to destination array.
+        append_wide_character_vector(p0, p1, p2, p3, p4);
 
-            // Add indentation.
-            encode_model_diagram_indentation(p0, p1, p2, p11, p12);
+        // Add line.
+        encode_model_diagram_line(p0, p1, p2);
 
-            // Add part name to destination array.
-            append_wide_character_vector(p0, p1, p2, p3, p4);
+        // Add part abstraction to destination array.
+        append_wide_character_vector(p0, p1, p2, p5, p6);
 
-            // Add line.
-            encode_model_diagram_line(p0, p1, p2);
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            // Add part abstraction to destination array.
-            append_wide_character_vector(p0, p1, p2, p5, p6);
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // The comparison result.
-            int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            compare_arrays(p5, p6, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                if (*mc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    // Only process the following code, if the model compound contains at least one part.
 
-                    if (*mc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Only process the following code, if the model compound contains at least one part.
-
-                        // Add part model to destination array.
-                        encode_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-                    }
+                    // Add part model to destination array.
+                    encode_model_diagram_compound(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
                 }
             }
+        }
 
-            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p5, p6, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    encode_model_diagram_line(p0, p1, p2);
-                    encode_double_vector(p0, p1, p2, p7, p8);
-                }
+                encode_model_diagram_line(p0, p1, p2);
+                append_wide_character_vector(p0, p1, p2, p7, p8);
             }
+        }
 
-            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p5, p6, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    encode_model_diagram_line(p0, p1, p2);
-                    append_wide_character_vector(p0, p1, p2, p7, p8);
-                }
+                encode_model_diagram_line(p0, p1, p2);
+                encode_double_vector(p0, p1, p2, p7, p8);
             }
+        }
 
-            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p5, p6, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    encode_model_diagram_line(p0, p1, p2);
-                    encode_integer_vector(p0, p1, p2, p7, p8);
-                }
+                encode_model_diagram_line(p0, p1, p2);
+                encode_integer_vector(p0, p1, p2, p7, p8);
             }
+        }
 
-            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p5, p6, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    encode_model_diagram_line(p0, p1, p2);
-                    append_wide_character_vector(p0, p1, p2, p7, p8);
-                }
+                encode_model_diagram_line(p0, p1, p2);
+                append_wide_character_vector(p0, p1, p2, p7, p8);
             }
+        }
 
-            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p5, p6, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    encode_model_diagram_line(p0, p1, p2);
-                    append_wide_character_vector(p0, p1, p2, p7, p8);
-                }
+                encode_model_diagram_line(p0, p1, p2);
+                append_wide_character_vector(p0, p1, p2, p7, p8);
             }
+        }
 
-            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p5, p6, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    encode_model_diagram_line(p0, p1, p2);
-                    append_wide_character_vector(p0, p1, p2, p7, p8);
-                }
+                encode_model_diagram_line(p0, p1, p2);
+                append_wide_character_vector(p0, p1, p2, p7, p8);
             }
+        }
+
+        // CAUTION! Do NOT move this test to the beginning of the function!
+        // Otherwise, a model will not be processed, if the details happen to be null.
+        if (p10 != *NULL_POINTER_MEMORY_MODEL) {
+
+            int* dc = (int*) p10;
 
             if (*dc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -383,12 +385,12 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram node. The model count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram node. The details count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram node. The details count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram node. The model count is null.");
     }
 }
 

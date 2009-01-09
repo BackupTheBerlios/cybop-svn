@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: initialiser.c,v $ $Revision: 1.30 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: initialiser.c,v $ $Revision: 1.31 $ $Date: 2009-01-09 23:15:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,57 +54,39 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Initialise system with an initial signal.");
 
-/*??
-    // The startup model abstraction, model, details.
-    //
-    // CAUTION! Do NOT use "normal" int as type for counts and sizes here!
+    // CAUTION! Do NOT use "normal" int as type for startup model counts and sizes below!
     // The reason is that the "set_signal" function below expects int** parameters.
     // If, for example, the variable mac was an int, then &ac would deliver only int*
     // (but not int**) as parameter to be handed over to the "set_signal" function.
     // All other models (and their counts and sizes) coming from knowledge memory
     // are allocated in the same way when being read from cybol sources.
-    //
-    // CAUTION! A (transient) knowledge model channel is not created,
-    // since that is only needed temporarily for model loading.
-    void* ma = *NULL_POINTER_MEMORY_MODEL;
-    int* mac = (int*) *NULL_POINTER_MEMORY_MODEL;
-    int* mas = (int*) *NULL_POINTER_MEMORY_MODEL;
-    void* mm = *NULL_POINTER_MEMORY_MODEL;
-    int* mmc = (int*) *NULL_POINTER_MEMORY_MODEL;
-    int* mms = (int*) *NULL_POINTER_MEMORY_MODEL;
-    void* md = *NULL_POINTER_MEMORY_MODEL;
-    int* mdc = (int*) *NULL_POINTER_MEMORY_MODEL;
-    int* mds = (int*) *NULL_POINTER_MEMORY_MODEL;
-*/
 
-    // The part name.
+    // The startup model name.
     void* n = *NULL_POINTER_MEMORY_MODEL;
     void* nc = *NULL_POINTER_MEMORY_MODEL;
     void* ns = *NULL_POINTER_MEMORY_MODEL;
-    // The part abstraction.
+    // The startup model abstraction.
     void* a = *NULL_POINTER_MEMORY_MODEL;
     void* ac = *NULL_POINTER_MEMORY_MODEL;
     void* as = *NULL_POINTER_MEMORY_MODEL;
-    // The part model.
+    // The startup model model.
     void* m = *NULL_POINTER_MEMORY_MODEL;
     void* mc = *NULL_POINTER_MEMORY_MODEL;
     void* ms = *NULL_POINTER_MEMORY_MODEL;
-    // The part details.
+    // The startup model details.
     void* d = *NULL_POINTER_MEMORY_MODEL;
     void* dc = *NULL_POINTER_MEMORY_MODEL;
     void* ds = *NULL_POINTER_MEMORY_MODEL;
 
-    // Allocate destination part.
-    // CAUTION! Use the temporary RUNTIME abstraction as source here!
+    // Allocate startup model.
     allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
         (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
-    // Decode (in this case just copy) abstraction.
+    // Copy startup model abstraction.
     replace((void*) &a, (void*) ac, (void*) as, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    // Receive and decode destination part model and details.
-    // CAUTION! Use the original CYBOL abstraction as source here!
+    // Receive and decode startup model model and -details.
     communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
@@ -121,7 +103,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // Get new signal identification by incrementing the current maximum signal's one.
     get_new_signal_identification(p1, p2, (void*) &id);
 
-    // Add startup signal to signal memory.
+    // Add startup model as signal to signal memory.
     set_signal(p1, p2, p3, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
     // The system is now started up and complete so that a loop

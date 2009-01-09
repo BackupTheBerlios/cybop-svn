@@ -7,12 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.85 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
+# @version $Revision: 1.86 $ $Date: 2009-01-09 23:15:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Make CYBOL example applications work; continue with "helloworld" in list in file "INSTALL";
-            segmentation fault when activating "receive" in file "startup.cybol"
+        * Make CYBOL example application "helloworld" work; continue in list in file "INSTALL";
+            segmentation fault caused by "receive" in file "startup.cybol"
 
         * Rename several things in CYBOL files and CYBOI:
             --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
@@ -26,16 +26,11 @@
                     parts belong to the compound in whose file they stand
             --> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
 
-        * Rename utf-8 stuff to "decode/encode" (encoder instead of converter) and
-            other conversions to "deserialise/serialise" (serialiser instead of converter)
-
         * Simplify and unify array functions by introducing NEW files for handling of primitive data types,
             e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
             that way, the different types are outsourced from the array handling files and redundancies are avoided
         * Assign "sizeof" for each programming language type to a global variable just once at startup
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code
-        * Find unspecific bug causing a segmentation fault in optionaliser,
-            sometimes in function "optionalise_log_file", other times in "optionalise_log_level"
         * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
             knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
         * Check the following files in directory "memoriser/converter/",
@@ -47,6 +42,8 @@
 
         * Add a new CYBOL XML attribute named "encoding" and possibly one more named "repertoire" (or "set", or "code");
             currently, only the Unicode character repertoire/set with UTF-8 encoding may be processed
+        * Rename utf-8 stuff to "decode/encode" (encoder instead of converter) and
+            other conversions to "deserialise/serialise" (serialiser instead of converter)
 
         * CAUTION! The following was probably already SOLVED in source code and may get DELETED here!
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
@@ -66,16 +63,22 @@
                 (do this DIRECTLY, just like the "loop" and "branch" functions do,
                 and NOT in form of an encapsulating signal)
 
+        * For the following points, see example of "wide_character_vector_accessor.c", where this is already implemented!
         * Increase count and size in "*_accessor.c" files automatically and adapt all source code accordingly
-            (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.)
+            (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.);
         * Create new "set", "remove", "get" functions which automatically adjust the destination's count and size
             (see modules "character_vector_accessor.c" and "wide_character_vector_accessor.c", which already have it);
             this is to reduce the amount of source code and to take the burden of handling count and size from the developer working with arrays
 
         * Does the logger need an own mutex? ... because it is accessed by all threads!
 
-        * Commands of gnu/linux console MUESSEN uebergeben werden
-        * Suche nach gedrueckter Taste in commands
+        * Possible Bug? in function "set_compound_element_by_index":
+            set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+            --> the "(void*) &p4" does possibly lead to errors, since a reference to the
+                local variable p4 is stored, which gets destroyed as soon as the function is left
+
+        * Commands of gnu/linux console HAVE TO BE handed over!
+        * Search for pressed key in commands
         * Wenn returned command == NULL, dann suche nach "default" in commands
             (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)
         * Gedruecktes Zeichen/ Taste muss mit in einem Parameter zurueckgegeben werden!

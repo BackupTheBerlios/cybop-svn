@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.8 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
+ * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.9 $ $Date: 2009-01-09 23:15:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,35 +78,16 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     void* dc = *NULL_POINTER_MEMORY_MODEL;
     void* ds = *NULL_POINTER_MEMORY_MODEL;
 
-    // The temporary runtime abstraction.
-    void* ra = *NULL_POINTER_MEMORY_MODEL;
-    int rac = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int ras = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Allocate temporary runtime abstraction.
-    allocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-    // Decode source- into temporary runtime abstraction.
-    // A cybol abstraction is NOT equal to the runtime cyboi abstraction.
-    // For example, "memory/compound" is converted into just "compound".
-    // Therefore, the abstraction has to be converted here.
-    decode((void*) &ra, (void*) &rac, (void*) &ras, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
-
     // Allocate part.
     allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        (void*) NUMBER_0_INTEGER_MEMORY_MODEL, ra, (void*) &rac);
+        (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p9, p10);
 
     // Decode part name.
-    decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4);
+    replace((void*) &n, (void*) nc, (void*) ns, p5, p6, p3, p4);
 
-    // Decode (in this case just copy) part abstraction.
-    // CAUTION! Use the temporary RUNTIME abstraction as source here!
-    // CAUTION! Use WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION as abstraction here!
+    // Copy part abstraction.
     replace((void*) &a, (void*) ac, (void*) as, p9, p10, p7, p8);
-
-    // Deallocate temporary runtime abstraction.
-    deallocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     //
     // CAUTION! Do NOT decode part model here!
@@ -119,8 +100,8 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // The part details are left empty.
     //
 
-    // Use the determined whole model, if it exists.
-    set_compound_element_by_name(p0, p1, p2, n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+    // Add part to whole model.
+    add_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 }
 
 /**

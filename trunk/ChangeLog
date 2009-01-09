@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.110 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
+# @version $Revision: 1.111 $ $Date: 2009-01-09 23:15:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix minor things to make CYBOL "create" operation work in CYBOL example "helloworld"
 
 2009-01-08  Christian Heller  <christian.heller@tuxtax.de>
         * Make CYBOL example application "program_execution" work
