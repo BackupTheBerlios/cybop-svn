@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.8 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -64,13 +64,19 @@ void communicate_sending_gnu_linux_console(void* p0, void* p1, void* p2, void* p
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send gnu/linux console message.");
 
-    // The encoded string array to be sent to the gnu/linux console (terminal).
-    void* a = *NULL_POINTER_MEMORY_MODEL;
-    int ac = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int as = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The serialised wide character array.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Allocate array.
-    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Allocate serialised wide character array.
+    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Serialise source knowledge model into serialised wide character array.
+//??    encode((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+
+    // Encode textual user interface (tui) into array.
+    encode_gnu_linux_console((void*) &s, (void*) &sc, (void*) &ss, p1, p2, p3, p4, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8, p11, p12);
 
     if (p9 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -78,29 +84,24 @@ void communicate_sending_gnu_linux_console(void* p0, void* p1, void* p2, void* p
 
         if (*f != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Resize destination character array for erase display control sequence.
-            if ((ac + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT + *ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT) >= as) {
-
-                // Set destination character array size.
-                // CAUTION! Add constant in case ac is zero!
-                as = ac * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR
-                    + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT
-                    + *ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
-
-                // Reallocate destination character array.
-                reallocate_array((void*) &a, (void*) &ac, (void*) &as, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            }
-
-            // Set erase display control sequence.
-            set_array_elements(a, (void*) &ac, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            ac = ac + *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
-            set_array_elements(a, (void*) &ac, (void*) ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            ac = ac + *ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
+            append((void*) &s, (void*) &sc, (void*) &ss, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            append((void*) &s, (void*) &sc, (void*) &ss, (void*) ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
-    // Encode textual user interface (tui) into array.
-    encode_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p1, p2, p3, p4, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8, p11, p12);
+    // The encoded character array.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+    int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int es = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate encoded character array.
+    allocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Encode serialised wide character array into encoded character array.
+    encode_utf_8_unicode_character_vector((void*) &e, (void*) &ec, (void*) &es, s, (void*) &sc);
+
+    // Deallocate serialised wide character array.
+    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     // The gnu/linux console output stream.
     void** op = NULL_POINTER_MEMORY_MODEL;
@@ -108,11 +109,11 @@ void communicate_sending_gnu_linux_console(void* p0, void* p1, void* p2, void* p
     // Get gnu/linux console output stream.
     get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &op, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
-    // Write encoded array as message to gnu/linux console.
-    write_data((void*) op, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
+    // Write encoded array as message to shell standard output.
+    write_data((void*) op, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, e, (void*) &ec, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
 
-    // Deallocate array.
-    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate encoded character array.
+    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_CONSOLE_SENDING_COMMUNICATOR_SOURCE */

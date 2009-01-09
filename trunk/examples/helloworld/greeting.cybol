@@ -1,10 +1,10 @@
 <model>
-    <part name="string" channel="inline" abstraction="character" model="Hello, World!">
-        <property name="position" channel="inline" abstraction="integer" model="5,2,1"/>
-        <property name="size" channel="inline" abstraction="integer" model="60,3,1"/>
-        <property name="shape" channel="inline" abstraction="character" model="rectangle"/>
-        <property name="layout" channel="inline" abstraction="character" model="coordinates"/>
-        <property name="foreground" channel="inline" abstraction="character" model="green"/>
+    <part name="string" channel="inline" abstraction="text/plain" model="Hello, World!">
+        <property name="position" channel="inline" abstraction="number/integer" model="5,2,1"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="60,3,1"/>
+        <property name="shape" channel="inline" abstraction="text/plain" model="rectangle"/>
+        <property name="layout" channel="inline" abstraction="text/plain" model="coordinates"/>
+        <property name="foreground" channel="inline" abstraction="text/plain" model="green"/>
     </part>
 </model>
 
@@ -31,6 +31,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: greeting.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: greeting.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

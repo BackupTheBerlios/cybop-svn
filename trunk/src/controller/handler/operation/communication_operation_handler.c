@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communication_operation_handler.c,v $ $Revision: 1.4 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: communication_operation_handler.c,v $ $Revision: 1.5 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,21 +66,11 @@ void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) INTERRUPT_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) INTERRUPT_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??            communicate_interrupting(p0, p1, p2, p3, p4, p5);
-        }
-    }
-
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
         compare_arrays(p10, p11, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            communicate_receiving(p0, p1, p2, p3, p4, p5);
+            communicate_receiving(p12, p13, p0, p1, p2, p3);
         }
     }
 
@@ -104,7 +94,7 @@ void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            communicate_sensing(p0, p1, p2, p3, p4, p5);
+            communicate_sensing(p12, p13, p0, p1, p2, p3, p4, p5, p6);
         }
     }
 }

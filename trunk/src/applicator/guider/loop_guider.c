@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: loop_guider.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: loop_guider.c,v $ $Revision: 1.5 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,6 +70,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 void guide_loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
 
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Loop program flow.");
 
     // The model name, abstraction, model, details.

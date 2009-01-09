@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: lifecycle_operation_cybol_model.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
+ * @version $RCSfile: lifecycle_operation_cybol_model.c,v $ $Revision: 1.5 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -33,6 +33,11 @@
 static wchar_t EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY[] = {L'e', L'x', L'i', L't'};
 static wchar_t* EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL = EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY;
 static int* EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The interrupt lifecycle operation cybol model. */
+static wchar_t INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'r', L'u', L'p', L't'};
+static wchar_t* INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL = INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY;
+static int* INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The shutdown lifecycle operation cybol model. */
 static wchar_t SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L'h', L'u', L't', L'd', L'o', L'w', L'n'};

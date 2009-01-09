@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communication_operation_cybol_model.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
+ * @version $RCSfile: communication_operation_cybol_model.c,v $ $Revision: 1.5 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,11 +28,6 @@
 
 #include <stddef.h>
 #include "../../../../constant/model/memory/integer_memory_model.c"
-
-/** The interrupt communication operation cybol model. */
-static wchar_t INTERRUPT_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'r', L'u', L'p', L't'};
-static wchar_t* INTERRUPT_COMMUNICATION_OPERATION_CYBOL_MODEL = INTERRUPT_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY;
-static int* INTERRUPT_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The receive communication operation cybol model. */
 static wchar_t RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_ARRAY[] = {L'r', L'e', L'c', L'e', L'i', L'v', L'e'};

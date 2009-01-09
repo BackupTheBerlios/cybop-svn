@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: branch_guider.c,v $ $Revision: 1.4 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: branch_guider.c,v $ $Revision: 1.5 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -61,7 +61,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * @param p5 the signal memory count
  * @param p6 the signal memory size
  * @param p7 the shutdown flag
- * @param p8 the interrupt request flag
+ * @param p8 the signal memory interrupt request flag
  * @param p9 the signal memory mutex
  * @param p10 the parameters
  * @param p11 the parameters count

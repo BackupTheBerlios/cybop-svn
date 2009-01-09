@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: arithmetic_operation_handler.c,v $ $Revision: 1.7 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: arithmetic_operation_handler.c,v $ $Revision: 1.8 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,7 +78,7 @@ void handle_arithmetic_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            calculate_addition(p12, p13, p1, p2, p3);
+//??            calculate_division(p12, p13, p1, p2, p3);
         }
     }
 
@@ -88,7 +88,7 @@ void handle_arithmetic_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            calculate_addition(p12, p13, p1, p2, p3);
+//??            calculate_multiplication(p12, p13, p1, p2, p3);
         }
     }
 
@@ -98,7 +98,7 @@ void handle_arithmetic_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            calculate_addition(p12, p13, p1, p2, p3);
+//??            calculate_subtraction(p12, p13, p1, p2, p3);
         }
     }
 }

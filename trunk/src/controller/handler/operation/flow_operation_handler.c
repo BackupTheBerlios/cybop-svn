@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: flow_operation_handler.c,v $ $Revision: 1.4 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: flow_operation_handler.c,v $ $Revision: 1.5 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,7 +69,7 @@ void handle_flow_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            guide_branch(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
+            guide_branch(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
         }
     }
 
@@ -79,7 +79,7 @@ void handle_flow_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            guide_loop(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
+            guide_loop(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
         }
     }
 }

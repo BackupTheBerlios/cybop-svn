@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: run_operation_handler.c,v $ $Revision: 1.4 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: run_operation_handler.c,v $ $Revision: 1.5 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -68,7 +68,7 @@ void handle_run_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            run_program(p12, p13, p1, p2);
+            run_program(p12, p13, p1, p2);
         }
     }
 }

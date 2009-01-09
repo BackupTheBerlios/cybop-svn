@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.7 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.8 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -43,7 +43,7 @@
 #include "../../memoriser/allocator.c"
 
 /**
- * Creates a knowledge model and adds it to the given compound element.
+ * Creates a part and adds it to the given compound.
  *
  * @param p0 the compound
  * @param p1 the compound count
@@ -59,79 +59,72 @@
  */
 void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Create and set knowledge model.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Create and set part.");
 
-    // The knowledge model name, abstraction, model, details.
-    //
-    // CAUTION! A (transient) knowledge model channel is not created,
-    // since that is only needed temporarily for model loading.
-    void* kmn = *NULL_POINTER_MEMORY_MODEL;
-    int* kmnc = (int*) *NULL_POINTER_MEMORY_MODEL;
-    int* kmns = (int*) *NULL_POINTER_MEMORY_MODEL;
-    void* kma = *NULL_POINTER_MEMORY_MODEL;
-    int* kmac = (int*) *NULL_POINTER_MEMORY_MODEL;
-    int* kmas = (int*) *NULL_POINTER_MEMORY_MODEL;
-    void* kmm = *NULL_POINTER_MEMORY_MODEL;
-    int* kmmc = (int*) *NULL_POINTER_MEMORY_MODEL;
-    int* kmms = (int*) *NULL_POINTER_MEMORY_MODEL;
-    void* kmd = *NULL_POINTER_MEMORY_MODEL;
-    int* kmdc = (int*) *NULL_POINTER_MEMORY_MODEL;
-    int* kmds = (int*) *NULL_POINTER_MEMORY_MODEL;
+    // The part name.
+    void* n = *NULL_POINTER_MEMORY_MODEL;
+    void* nc = *NULL_POINTER_MEMORY_MODEL;
+    void* ns = *NULL_POINTER_MEMORY_MODEL;
+    // The part abstraction.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    void* ac = *NULL_POINTER_MEMORY_MODEL;
+    void* as = *NULL_POINTER_MEMORY_MODEL;
+    // The part model.
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    void* mc = *NULL_POINTER_MEMORY_MODEL;
+    void* ms = *NULL_POINTER_MEMORY_MODEL;
+    // The part details.
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    void* dc = *NULL_POINTER_MEMORY_MODEL;
+    void* ds = *NULL_POINTER_MEMORY_MODEL;
 
-    // Allocate knowledge model name, abstraction, model, details count and size.
-    allocate((void*) &kmnc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    allocate((void*) &kmns, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    allocate((void*) &kmac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    allocate((void*) &kmas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    allocate((void*) &kmmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    allocate((void*) &kmms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    allocate((void*) &kmdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-    allocate((void*) &kmds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    // The temporary runtime abstraction.
+    void* ra = *NULL_POINTER_MEMORY_MODEL;
+    int rac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ras = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Initialise knowledge model name, abstraction, model, details count and size.
-    *kmnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *kmns = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *kmac = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *kmas = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *kmmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *kmms = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *kmdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *kmds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate temporary runtime abstraction.
+    allocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-    // Allocate knowledge model name, abstraction, model, details.
-    // CAUTION! The name's abstraction always HAS TO BE "character".
-    allocate((void*) &kmn, (void*) kmns, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // CAUTION! The abstraction's abstraction always HAS TO BE "character".
-    allocate((void*) &kma, (void*) kmas, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &kmm, (void*) kmms, p9, p10);
-    // CAUTION! The details' abstraction always HAS TO BE "compound".
-    allocate((void*) &kmd, (void*) kmds, COMPOUND_MEMORY_ABSTRACTION, COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    // Decode source- into temporary runtime abstraction.
+    // A cybol abstraction is NOT equal to the runtime cyboi abstraction.
+    // For example, "memory/compound" is converted into just "compound".
+    // Therefore, the abstraction has to be converted here.
+    decode((void*) &ra, (void*) &rac, (void*) &ras, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
 
-    // Decode knowledge model name, abstraction.
-    decode((void*) &kmn, (void*) kmnc, (void*) kmns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4);
-    decode((void*) &kma, (void*) kmac, (void*) kmas, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8);
+    // Allocate part.
+    allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+        (void*) NUMBER_0_INTEGER_MEMORY_MODEL, ra, (void*) &rac);
+
+    // Decode part name.
+    decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4);
+
+    // Decode (in this case just copy) part abstraction.
+    // CAUTION! Use the temporary RUNTIME abstraction as source here!
+    // CAUTION! Use WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION as abstraction here!
+    replace((void*) &a, (void*) ac, (void*) as, p9, p10, p7, p8);
+
+    // Deallocate temporary runtime abstraction.
+    deallocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     //
-    // CAUTION! Do NOT decode knowledge model model here!
-    // This function's purpose is only to allocate an empty knowledge model.
-    // The knowledge model may get filled with data in the "decode" operation,
+    // CAUTION! Do NOT decode part model here!
+    // This function's purpose is only to allocate an empty part.
+    // The part model may get filled with data in the "decode" operation,
     // which is called when a "receive" logic operation is found in cybol.
     //
-    // CAUTION! Do NOT decode knowledge model details here!
-    // This function's purpose is only to allocate an empty knowledge model.
-    // The knowledge details are left empty.
+    // CAUTION! Do NOT decode part details here!
+    // This function's purpose is only to allocate an empty part.
+    // The part details are left empty.
     //
 
     // Use the determined whole model, if it exists.
-    set_compound_element_by_name(p0, p1, p2,
-        kmn, (void*) kmnc, (void*) kmns,
-        kma, (void*) kmac, (void*) kmas,
-        kmm, (void*) kmmc, (void*) kmms,
-        kmd, (void*) kmdc, (void*) kmds);
+    set_compound_element_by_name(p0, p1, p2, n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 }
 
 /**
- * Creates a knowledge model.
+ * Creates a part.
  *
  * The new knowledge model gets added to either of:
  * - whole element's part models

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.5 $ $Date: 2008-12-31 00:14:57 $ $Author: christian $
+ * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.6 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -155,7 +155,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 allocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Decode source- into temporary runtime abstraction.
-                // A source's cybol abstraction is most often NOT equal to its runtime abstraction.
+                // A cybol abstraction is NOT equal to the runtime cyboi abstraction.
                 // For example, an "xdt" file is converted into a compound.
                 // Therefore, the abstraction has to be converted here.
                 decode((void*) &ra, (void*) &rac, (void*) &ras, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);

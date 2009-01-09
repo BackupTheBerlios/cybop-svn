@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: command_run_operation_cybol_name.c,v $ $Revision: 1.3 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
+ * @version $RCSfile: command_run_operation_cybol_name.c,v $ $Revision: 1.4 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +30,11 @@
 #include "../../../../../constant/model/memory/integer_memory_model.c"
 
 /** The command run operation cybol name. */
+/*??
 static wchar_t COMMAND_RUN_OPERATION_CYBOL_NAME_ARRAY[] = {L'c', L'o', L'm', L'm', L'a', L'n', L'd'};
 static wchar_t* COMMAND_RUN_OPERATION_CYBOL_NAME = COMMAND_RUN_OPERATION_CYBOL_NAME_ARRAY;
 static int* COMMAND_RUN_OPERATION_CYBOL_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
+*/
 
 /* COMMAND_RUN_OPERATION_CYBOL_NAME_SOURCE */
 #endif

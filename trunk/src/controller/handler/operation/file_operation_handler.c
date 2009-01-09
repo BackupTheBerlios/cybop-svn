@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_operation_handler.c,v $ $Revision: 1.1 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: file_operation_handler.c,v $ $Revision: 1.2 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,7 +70,7 @@ void handle_file_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            file_archiving(p12, p13, p1, p2);
+            file_archiving(p12, p13, p1, p2);
         }
     }
 
@@ -80,7 +80,7 @@ void handle_file_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            file_copying(p12, p13, p1, p2);
+            file_copying(p12, p13, p1, p2);
         }
     }
 

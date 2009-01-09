@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: run_operation_cybol_model.c,v $ $Revision: 1.4 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: run_operation_cybol_model.c,v $ $Revision: 1.5 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,9 +30,9 @@
 #include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The program run operation cybol model. */
-static wchar_t PROGRAM_RUN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'p', L'r', L'o', L'g', L'r', L'a', L'm'};
+static wchar_t PROGRAM_RUN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'r', L'u', L'n'};
 static wchar_t* PROGRAM_RUN_OPERATION_CYBOL_MODEL = PROGRAM_RUN_OPERATION_CYBOL_MODEL_ARRAY;
-static int* PROGRAM_RUN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
+static int* PROGRAM_RUN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* RUN_OPERATION_CYBOL_MODEL_SOURCE */
 #endif

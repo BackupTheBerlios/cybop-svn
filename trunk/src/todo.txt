@@ -7,11 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.84 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+# @version $Revision: 1.85 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Make CYBOL example applications work; continue with "program_execution" in list in file "INSTALL"
+        * Make CYBOL example applications work; continue with "helloworld" in list in file "INSTALL";
+            segmentation fault when activating "receive" in file "startup.cybol"
 
         * Rename several things in CYBOL files and CYBOI:
             --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the

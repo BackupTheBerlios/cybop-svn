@@ -14,9 +14,16 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.109 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+# @version $Revision: 1.110 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Make CYBOL example application "program_execution" work
+        * Uncomment function calls in all files of directory "controller/handler/operation/";
+            adapt some files in directory "applicator/" and some constants
+        * Add file "constant/abstraction/cybol/memory_cybol_abstraction.c",
+            which contains constants for the creation of memory models
 
 2009-01-07  Christian Heller  <christian.heller@tuxtax.de>
         * Delete files like "runner.c" etc. in directory "applicator/";

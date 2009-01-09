@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.13 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
+ * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.14 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -28,6 +28,7 @@
 
 #include "../../constant/abstraction/cybol/datetime_cybol_abstraction.c"
 #include "../../constant/abstraction/cybol/logicvalue_cybol_abstraction.c"
+#include "../../constant/abstraction/cybol/memory_cybol_abstraction.c"
 #include "../../constant/abstraction/cybol/operation_cybol_abstraction.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -68,6 +69,16 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             replace_wide_character_vector(p0, p1, p2, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p3, p4, (void*) COMPOUND_MEMORY_CYBOL_ABSTRACTION, (void*) COMPOUND_MEMORY_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            replace_wide_character_vector(p0, p1, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
