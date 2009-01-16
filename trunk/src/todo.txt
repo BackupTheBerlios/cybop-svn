@@ -7,10 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.86 $ $Date: 2009-01-09 23:15:15 $ $Author: christian $
+# @version $Revision: 1.87 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Continue debugging in function "get_compound_element_by_name" of file "compound_accessor.c";
+            the element name is correct now (without prefix), but somehow the correct model is not returned
+            --> tested in function "get_universal_compound_element_by_name"
         * Make CYBOL example application "helloworld" work; continue in list in file "INSTALL";
             segmentation fault caused by "receive" in file "startup.cybol"
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.8 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.9 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -365,6 +365,10 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         compare_arrays((void*) *cm, (void*) *cmc, (void*) SHELL_CYBOL_CHANNEL, (void*) SHELL_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stdout, L"TEST sending mmc: %i\n", *mmc);
+    fwprintf(stdout, L"TEST sending *mmc: %i\n", *((int*) *mmc));
+    fwprintf(stdout, L"TEST sending mm: %ls\n", (wchar_t*) *mm);
 
             communicate_sending_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *nlm, *nlmc);
         }

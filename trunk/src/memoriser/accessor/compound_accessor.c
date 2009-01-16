@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.60 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.61 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,50 +60,61 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  *
  * @param p0 the element name without prefix (Hand over as reference!)
  * @param p1 the element name count (Hand over as reference!)
- * @param p2 the full name
- * @param p3 the full name count
- * @param p4 the separator count
+ * @param p2 the element name size (Hand over as reference!)
+ * @param p3 the full name
+ * @param p4 the full name count
+ * @param p5 the separator count
  */
-void get_compound_element_name_without_prefix(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void get_compound_element_name_without_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* sc = (int*) p4;
+        int* sc = (int*) p5;
 
-        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* fc = (int*) p3;
+            int* fc = (int*) p4;
 
-            if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-                if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+                if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-                    int* ec = (int*) p1;
+                    int* es = (int*) p2;
 
-                    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+                    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                        void** e = (void**) p0;
+                        int* ec = (int*) p1;
 
-                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get compound element name without prefix.");
+                        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                        // Let the name begin behind the separator element.
-                        // Example:
-                        // .resmedicinae.tui.menu.entry#background
-                        // is now only:
-                        // resmedicinae.tui.menu.entry#background
-                        *e = p2 + *sc;
+                            void** e = (void**) p0;
 
-                        // Reduce the name's length by separator element in turn.
-                        *ec = *fc - *sc;
+                            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get compound element name without prefix.");
+
+                            // Set compound element name without prefix.
+                            //
+                            // Let the name begin behind the separator element.
+                            // Example:
+                            // .resmedicinae.tui.menu.entry#background
+                            // is now only:
+                            // resmedicinae.tui.menu.entry#background
+                            *e = p3 + (*sc * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                            *ec = *fc - *sc;
+                            *es = *ec * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+
+                        } else {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name without prefix. The element name is null.");
+                        }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name without prefix. The element name is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name without prefix. The element name count is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name without prefix. The element name count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name without prefix. The element name size is null.");
                 }
 
             } else {
@@ -123,78 +134,93 @@ void get_compound_element_name_without_prefix(void* p0, void* p1, void* p2, void
 }
 
 /**
- * Gets the compound element name length.
+ * Gets the compound element name count and size.
  *
- * @param p0 the name
- * @param p1 the name count
- * @param p2 the name length (Hand over as reference!)
+ * @param p0 the compound element name count
+ * @param p1 the compound element name size
+ * @param p2 the name
+ * @param p3 the name count
  */
-void get_compound_element_name_length(void* p0, void* p1, void* p2) {
+void get_compound_element_name_count_and_size(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* l = (int*) p2;
+        int* nc = (int*) p3;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* nc = (int*) p1;
+            int* ens = (int*) p1;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get compound element name length.");
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            // The part separator index.
-            int p = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-            // The meta separator index.
-            int m = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+                int* enc = (int*) p0;
 
-            get_array_elements_index(p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) &p, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            get_array_elements_index(p0, p1, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get compound element name length.");
 
-            if ((p >= *NUMBER_0_INTEGER_MEMORY_MODEL) && (m == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL)) {
+                // The part separator index.
+                int p = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+                // The meta separator index.
+                int m = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                // The name contains one or more part separator(s).
-                // The next separator is a part separator.
-                // Its index marks the end of an element name.
-                *l = p;
+                get_array_elements_index(p2, p3, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) &p, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                get_array_elements_index(p2, p3, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            } else if ((p == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) && (m >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+                if ((p >= *NUMBER_0_INTEGER_MEMORY_MODEL) && (m == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL)) {
 
-                // The name contains one or more meta separator(s).
-                // The next separator is a meta separator.
-                // Its index marks the end of an element name.
-                *l = m;
-
-            } else if ((p >= *NUMBER_0_INTEGER_MEMORY_MODEL) && (m >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
-
-                // The name contains part- as well as meta separator(s).
-
-                if (p < m) {
-
+                    // The name contains one or more part separator(s).
                     // The next separator is a part separator.
                     // Its index marks the end of an element name.
-                    *l = p;
+                    *enc = p;
+                    *ens = p * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+
+                } else if ((p == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) && (m >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+
+                    // The name contains one or more meta separator(s).
+                    // The next separator is a meta separator.
+                    // Its index marks the end of an element name.
+                    *enc = m;
+                    *ens = m * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+
+                } else if ((p >= *NUMBER_0_INTEGER_MEMORY_MODEL) && (m >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+
+                    // The name contains part- as well as meta separator(s).
+
+                    if (p < m) {
+
+                        // The next separator is a part separator.
+                        // Its index marks the end of an element name.
+                        *enc = p;
+                        *ens = p * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+
+                    } else {
+
+                        // The next separator is a meta separator.
+                        // Its index marks the end of an element name.
+                        *enc = m;
+                        *ens = m * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                    }
 
                 } else {
 
-                    // The next separator is a meta separator.
-                    // Its index marks the end of an element name.
-                    *l = m;
+                    // The name does NOT contain any separators.
+                    // Its count (length) marks the end of an element name.
+                    *enc = *nc;
+                    *ens = *nc * *WIDE_CHARACTER_PRIMITIVE_SIZE;
                 }
 
             } else {
 
-                // The name does NOT contain any separators.
-                // Its count (length) marks the end of an element name.
-                *l = *nc;
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name length. The compound element name count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name length. The name count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name length. The compound element name size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name length. The separator index is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get compound element name length. The name count is null.");
     }
 }
 
@@ -267,9 +293,13 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                 // Get position of meta separator.
                                 get_array_elements_index(p0, p1, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
+    fwprintf(stdout, L"TEST compound full nc: %i\n", *((int*) p1));
+    fwprintf(stdout, L"TEST compound full n: %ls\n", (wchar_t*) p0);
+
                                 // The name without prefix.
                                 void* n = *NULL_POINTER_MEMORY_MODEL;
                                 int nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                                int ns = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                 if (p == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -278,15 +308,18 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // Set meta hierarchy flag to zero, because this is a part element.
                                     *f = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+//??    fwprintf(stdout, L"TEST part hierarchy flag f %i\n", *f);
+
                                     // Get compound element name without prefix.
                                     // Example:
                                     // .resmedicinae.tui.menu.entry#background
                                     // is now only:
                                     // resmedicinae.tui.menu.entry#background
                                     // CAUTION! Only call this procedure if a prefix was found!
-                                    get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT);
+                                    get_compound_element_name_without_prefix((void*) &n, (void*) &nc, (void*) &ns, p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT);
 
-//??    fwprintf(stdout, L"TEST part f %i\n", *f);
+    fwprintf(stdout, L"TEST compound without prefix nc: %i\n", nc);
+    fwprintf(stdout, L"TEST compound without prefix n: %ls\n", (wchar_t*) n);
 
                                 } else if (m == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -301,7 +334,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // is now only:
                                     // resmedicinae.tui.menu.entry#background
                                     // CAUTION! Only call this procedure if a prefix was found!
-                                    get_compound_element_name_without_prefix((void*) &n, (void*) &nc, p0, p1, (void*) META_SEPARATOR_CYBOL_NAME_COUNT);
+                                    get_compound_element_name_without_prefix((void*) &n, (void*) &nc, (void*) &ns, p0, p1, (void*) META_SEPARATOR_CYBOL_NAME_COUNT);
 
 //??    fwprintf(stdout, L"TEST meta f %i\n", *f);
                                 }
@@ -310,27 +343,29 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
                                     // A part separator "." or meta separator "#" has been found.
 
-                                    // The compound element name length.
-                                    int l = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                                    // The compound element name count and size.
+                                    int enc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                                    int ens = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                                    get_compound_element_name_length(n, (void*) &nc, (void*) &l);
+                                    get_compound_element_name_count_and_size((void*) &enc, (void*) &ens, n, (void*) &nc);
 
-//??    fwprintf(stdout, L"TEST length %i\n", l);
+    fwprintf(stdout, L"TEST compound enc %i\n", enc);
+    fwprintf(stdout, L"TEST compound ens %i\n", ens);
 
                                     // Determine element name.
                                     // It equals the name without prefix.
                                     *e = n;
 
                                     // Determine element name count.
-                                    // It equals the element name length determined above.
-                                    *ec = l;
+                                    // It equals the element name count determined above.
+                                    *ec = enc;
 
                                     // Determine remaining name.
                                     // It starts with the separator.
                                     // Example: "hello.test"
                                     // The index of the separator is 5.
-                                    // The starting index of the remaining name ".test" is likewise 5.
-                                    *r = (void*) (n + l);
+                                    // The starting index of the remaining name ".test" is (5 * *WIDE_CHARACTER_PRIMITIVE_SIZE).
+                                    *r = (void*) (n + ens);
 
                                     // The remaining name count is the full name count
                                     // decreased by the separator index.
@@ -338,7 +373,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // The full name count is 10.
                                     // The separator index is 5.
                                     // The count of the remaining name ".test" is 10 - 5 = 5.
-                                    *rc = nc - l;
+                                    *rc = nc - enc;
 
                                 } else {
 
@@ -2019,11 +2054,11 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
     // as well as the flag indicating a part- or meta element.
     get_compound_element_name_and_remaining_name(p4, p5, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
-/*??
-    fwprintf(stdout, L"TEST r %s\n", (char*) r);
+    fwprintf(stdout, L"TEST e %ls\n", (wchar_t*) e);
+    fwprintf(stdout, L"TEST ec %i\n", ec);
+    fwprintf(stdout, L"TEST r %ls\n", (wchar_t*) r);
     fwprintf(stdout, L"TEST rc %i\n", rc);
     fwprintf(stdout, L"TEST f %i\n", f);
-*/
 
     if (f == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -2034,7 +2069,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-//??    fwprintf(stdout, L"TEST part index %i\n", i);
+    fwprintf(stdout, L"TEST part index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -2190,6 +2225,9 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
         (void*) &m, (void*) &mc, (void*) &ms,
         (void*) &d, (void*) &dc, (void*) &ds);
 
+    fwprintf(stdout, L"TEST universal 0 mc: %i\n", *mc);
+    fwprintf(stdout, L"TEST universal 0 m: %ls\n", (wchar_t*) *m);
+
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -2202,7 +2240,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -2237,11 +2275,15 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*a, *ac, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*a, *ac, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get universal compound element as knowledge.");
+
+    fwprintf(stdout, L"TEST universal 1 mc: %i\n", *mc);
+    fwprintf(stdout, L"TEST universal 1 *mc: %i\n", *((int*) *mc));
+    fwprintf(stdout, L"TEST universal 1 m: %ls\n", (wchar_t*) *m);
 
             // Get compound element as encapsulated model.
             //
@@ -2258,6 +2300,10 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
             // information, which is why a null pointer is handed over here twice.
             get_compound_element_by_name(p16, p17, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 *m, *mc, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15);
+
+    fwprintf(stdout, L"TEST universal 2 p11: %i\n", **((void***) p11));
+    fwprintf(stdout, L"TEST universal 2 *p11: %i\n", *((int*) **((void***) p11)));
+    fwprintf(stdout, L"TEST universal 2 p10: %ls\n", (wchar_t*) **((void***) p10));
         }
     }
 

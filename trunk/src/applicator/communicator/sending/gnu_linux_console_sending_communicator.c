@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.8 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.9 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -52,8 +52,8 @@
  * @param p4 the source root model count
  * @param p5 the source root details (meta properties of root window compound model)
  * @param p6 the source root details count
- * @param p7 the source part name (area to be repainted)
- * @param p8 the source part name count
+ * @param p7 the source area to be repainted part name
+ * @param p8 the source area to be repainted part name count
  * @param p9 the source clean flag
  * @param p10 the source clean flag count
  * @param p11 the knowledge memory

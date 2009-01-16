@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.17 $ $Date: 2009-01-09 23:15:15 $ $Author: christian $
+ * @version $RCSfile: file_system_receiving_communicator.c,v $ $Revision: 1.18 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -70,12 +70,8 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     // Allocate encoded character array.
     allocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST receive file 0: %i\n", *((int*) p9));
-
     // Write file into encoded character array.
     read_data((void*) &e, (void*) &ec, (void*) &es, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
-
-    fwprintf(stdout, L"TEST receive file 1: %i\n", *((int*) p9));
 
     // The serialised wide character array.
     void* s = *NULL_POINTER_MEMORY_MODEL;
@@ -85,12 +81,8 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     // Allocate serialised wide character array.
     allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST receive file 2: %i\n", *((int*) p9));
-
     // Decode encoded character array into serialised wide character array.
     decode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, e, (void*) &ec);
-
-    fwprintf(stdout, L"TEST receive file 3: %i\n", *((int*) p9));
 
     // Deallocate encoded character array.
     deallocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -108,41 +100,34 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     fwprintf(stdout, L"TEST receive file 6: %i\n", *((int*) p9));
 
 //?? TEST BEGIN
-    fwprintf(stdout, L"TEST model diagram mc: %i\n", *((int*) p1));
-    fwprintf(stdout, L"TEST model diagram dc: %i\n", *((int*) p4));
-            // The model diagram.
-            void* md = *NULL_POINTER_MEMORY_MODEL;
-            int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // Allocate model diagram.
-            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    fwprintf(stdout, L"TEST model diagram between dc: %i\n", *((int*) p4));
-            // Encode model into model diagram.
-            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
-                p0, p1, p3, p4);
-    fwprintf(stdout, L"TEST model diagram mdc: %i\n", mdc);
-    fwprintf(stdout, L"TEST model diagram md: %ls\n", (wchar_t*) md);
-            // The multibyte character stream.
-            void* mb = *NULL_POINTER_MEMORY_MODEL;
-            int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // Allocate multibyte character stream.
-            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            // Encode model diagram into multibyte character stream.
-            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
-    fwprintf(stdout, L"TEST model diagram mbc: %i\n", mbc);
-            // The file name.
-            void* fn = L"TEST_CREATE.txt";
-            int fnc = *NUMBER_15_INTEGER_MEMORY_MODEL;
-            int fns = *NUMBER_16_INTEGER_MEMORY_MODEL;
-            // Write multibyte character stream as message to file system.
-            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
-            // Deallocate model diagram.
-            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            // Deallocate multibyte character stream.
-            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    fwprintf(stdout, L"TEST model diagram end: %i\n", mdc);
+    // The model diagram.
+    void* md = *NULL_POINTER_MEMORY_MODEL;
+    int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate model diagram.
+    allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Encode model into model diagram.
+    encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+        *((void**) p0), p1, *((void**) p3), p4);
+    // The multibyte character stream.
+    void* mb = *NULL_POINTER_MEMORY_MODEL;
+    int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate multibyte character stream.
+    allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Encode model diagram into multibyte character stream.
+    encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+    // The file name.
+    void* fn = L"TEST_RECEIVE_FILE.txt";
+    int fnc = *NUMBER_21_INTEGER_MEMORY_MODEL;
+    int fns = *NUMBER_22_INTEGER_MEMORY_MODEL;
+    // Write multibyte character stream as message to file system.
+    write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+    // Deallocate model diagram.
+    deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate multibyte character stream.
+    deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
 }
 

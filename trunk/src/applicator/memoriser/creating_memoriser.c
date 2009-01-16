@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.9 $ $Date: 2009-01-09 23:15:15 $ $Author: christian $
+ * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.10 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -102,6 +102,37 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     // Add part to whole model.
     add_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+
+//?? TEST BEGIN
+    // The model diagram.
+    void* md = *NULL_POINTER_MEMORY_MODEL;
+    int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate model diagram.
+    allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Encode model into model diagram.
+    encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+        p0, p1, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+    // The multibyte character stream.
+    void* mb = *NULL_POINTER_MEMORY_MODEL;
+    int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate multibyte character stream.
+    allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Encode model diagram into multibyte character stream.
+    encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+    // The file name.
+    void* fn = L"TEST_CREATE.txt";
+    int fnc = *NUMBER_15_INTEGER_MEMORY_MODEL;
+    int fns = *NUMBER_16_INTEGER_MEMORY_MODEL;
+    // Write multibyte character stream as message to file system.
+    write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+    // Deallocate model diagram.
+    deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate multibyte character stream.
+    deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
 }
 
 /**

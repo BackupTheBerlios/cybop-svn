@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.26 $ $Date: 2009-01-09 23:15:16 $ $Author: christian $
+ * @version $RCSfile: model_diagram_converter.c,v $ $Revision: 1.27 $ $Date: 2009-01-16 00:24:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -226,6 +226,23 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
                     (void*) &m, (void*) &mc, (void*) &ms,
                     (void*) &d, (void*) &dc, (void*) &ds);
 
+/*??
+    fwprintf(stdout, L"TEST encode model diagram compound p0: %i\n", p0);
+    fwprintf(stdout, L"TEST encode model diagram compound p1: %i\n", p1);
+    fwprintf(stdout, L"TEST encode model diagram compound p2: %i\n", p2);
+    fwprintf(stdout, L"TEST encode model diagram compound *n: %i\n", *n);
+    fwprintf(stdout, L"TEST encode model diagram compound *nc: %i\n", *nc);
+    fwprintf(stdout, L"TEST encode model diagram compound *a: %i\n", *a);
+    fwprintf(stdout, L"TEST encode model diagram compound *ac: %i\n", *ac);
+    fwprintf(stdout, L"TEST encode model diagram compound *m: %i\n", *m);
+    fwprintf(stdout, L"TEST encode model diagram compound *mc: %i\n", *mc);
+    fwprintf(stdout, L"TEST encode model diagram compound *d: %i\n", *d);
+    fwprintf(stdout, L"TEST encode model diagram compound *dc: %i\n", *dc);
+    fwprintf(stdout, L"TEST encode model diagram compound nl: %i\n", nl);
+    fwprintf(stdout, L"TEST encode model diagram compound &nl: %i\n", &nl);
+    fwprintf(stdout, L"TEST encode model diagram compound p6: %i\n", p6);
+*/
+
                 // Add line feed character to destination array.
                 append_wide_character_vector(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
@@ -417,6 +434,8 @@ void encode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode model diagram.");
 
     // The tree level.
+    // CAUTION! Do NOT forward *NUMBER_0_INTEGER_MEMORY_MODEL directly,
+    // since the tree level value gets changed in the following functions!
     int l = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Encode model diagram root node.

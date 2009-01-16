@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.9 $ $Date: 2008-12-30 00:47:32 $ $Author: christian $
+ * @version $RCSfile: memory_abstraction.c,v $ $Revision: 1.10 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,11 +54,6 @@ static wchar_t DATETIME_MEMORY_ABSTRACTION_ARRAY[] = {L'd', L'a', L't', L'e', L'
 static wchar_t* DATETIME_MEMORY_ABSTRACTION = DATETIME_MEMORY_ABSTRACTION_ARRAY;
 static int* DATETIME_MEMORY_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The double memory abstraction. */
-static wchar_t DOUBLE_MEMORY_ABSTRACTION_ARRAY[] = {L'd', L'o', L'u', L'b', L'l', L'e'};
-static wchar_t* DOUBLE_MEMORY_ABSTRACTION = DOUBLE_MEMORY_ABSTRACTION_ARRAY;
-static int* DOUBLE_MEMORY_ABSTRACTION_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
-
 /** The double_vector memory abstraction. */
 static wchar_t DOUBLE_VECTOR_MEMORY_ABSTRACTION_ARRAY[] = {L'd', L'o', L'u', L'b', L'l', L'e', L'_', L'v', L'e', L'c', L't', L'o', L'r'};
 static wchar_t* DOUBLE_VECTOR_MEMORY_ABSTRACTION = DOUBLE_VECTOR_MEMORY_ABSTRACTION_ARRAY;
@@ -73,13 +68,6 @@ static int* ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT = NUMBER_27_INT
 static wchar_t FRACTION_MEMORY_ABSTRACTION_ARRAY[] = {L'f', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
 static wchar_t* FRACTION_MEMORY_ABSTRACTION = FRACTION_MEMORY_ABSTRACTION_ARRAY;
 static int* FRACTION_MEMORY_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The integer memory abstraction. */
-/*??
-static wchar_t INTEGER_MEMORY_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'g', L'e', L'r'};
-static wchar_t* INTEGER_MEMORY_ABSTRACTION = INTEGER_MEMORY_ABSTRACTION_ARRAY;
-static int* INTEGER_MEMORY_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
-*/
 
 /** The integer_vector memory abstraction. */
 static wchar_t INTEGER_VECTOR_MEMORY_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'g', L'e', L'r', L'_', L'v', L'e', L'c', L't', L'o', L'r'};
@@ -120,11 +108,6 @@ static int* SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT = NUMBER_13_INTEGER_MEMORY_MO
 static wchar_t UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION_ARRAY[] = {L'u', L'n', L's', L'i', L'g', L'n', L'e', L'd', L'_', L'l', L'o', L'n', L'g', L'_', L'v', L'e', L'c', L't', L'o', L'r'};
 static wchar_t* UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION = UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION_ARRAY;
 static int* UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION_COUNT = NUMBER_20_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The wide_character memory abstraction. */
-static wchar_t WIDE_CHARACTER_MEMORY_ABSTRACTION_ARRAY[] = {L'w', L'i', L'd', L'e', L'_', L'c', L'h', L'a', L'r', L'a', L'c', L't', L'e', L'r'};
-static wchar_t* WIDE_CHARACTER_MEMORY_ABSTRACTION = WIDE_CHARACTER_MEMORY_ABSTRACTION_ARRAY;
-static int* WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The wide_character_vector memory abstraction. */
 static wchar_t WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_ARRAY[] = {L'w', L'i', L'd', L'e', L'_', L'c', L'h', L'a', L'r', L'a', L'c', L't', L'e', L'r', L'_', L'v', L'e', L'c', L't', L'o', L'r'};
