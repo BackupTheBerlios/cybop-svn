@@ -17,7 +17,7 @@
         http://www.resmedicinae.org
         - Information in Medicine -
     /-->
-    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-17 23:08:32 $">
+    <meta name="date" content="$Revision: 1.3 $ $Date: 2009-01-16 16:42:36 $">
     <meta name="author" content="$Author: christian $">
     <link rel="stylesheet" type="text/css" href="../cybop.css"/>
     <title>CYBOP 0.2.0.0</title>
@@ -49,7 +49,7 @@
                         </td>
                         <td align="left" valign="top">
                             Michael Simon<br>
-                            <<a href="mailto:michael.simon@gmx.net">michael.simon@gmx.net</a>>
+                            &lt;<a href="mailto:michael.simon@gmx.net">michael.simon@gmx.net</a>&gt;
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
@@ -64,11 +64,11 @@
                         </td>
                         <td align="left" valign="top">
                             Christian Heller<br>
-                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
+                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
                             Karsten Tellhelm<br>
-                            <<a href="mailto:hrlm22@yahoo.de">hrlm22@yahoo.de</a>><br>
+                            &lt;<a href="mailto:hrlm22@yahoo.de">hrlm22@yahoo.de</a>&gt;<br>
                             Martin Fache<br>
-                            <<a href="mailto:martin.fache@myrbel.de">martin.fache@myrbel.de</a>><br>
+                            &lt;<a href="mailto:martin.fache@myrbel.de">martin.fache@myrbel.de</a>&gt;<br>
                         </td>
                     </tr>
                     <tr bgcolor="#000000">
@@ -81,7 +81,7 @@
                         </td>
                         <td align="left" valign="top">
                             Christian Heller<br>
-                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>>
+                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
                         </td>
                     </tr>
                     </table>

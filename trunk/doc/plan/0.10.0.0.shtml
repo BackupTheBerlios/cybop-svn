@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!--
-        $RCSfile: 1.0.0.0.shtml,v $
+        $RCSfile: 0.10.0.0.shtml,v $
 
         Copyright (c) 2002-2007. Christian Heller and the CYBOP developers.
 
@@ -18,18 +18,18 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.3 $ $Date: 2009-01-16 16:42:36 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.1 $ $Date: 2009-01-16 16:42:36 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <link rel="stylesheet" type="text/css" href="../cybop.css"/>
-    <title>CYBOP 1.0.0.0</title>
+    <title>CYBOP 0.10.0.0</title>
 </head>
 <body>
     <div id="page">
         <!--#include virtual="../menu.inc" -->
-        <h1>CYBOP 1.0.0.0</h1>
         <table>
             <tr>
                 <td>
+                    <h1>CYBOP 0.10.0.0</h1>
                     <table>
                     <tr>
                         <th width="10"/>
@@ -45,10 +45,7 @@
                         <td align="left" valign="top">
                             <h2>Project</h2>
                             <ul>
-                                <li>Add to Debian stable</li>
-                                <li>Provide RPM packages</li>
-                                <li>Provide Windows setup assistant
-                                    (if it still exists/ is still popular by then ;-)</li>
+                                <li></li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
@@ -59,22 +56,9 @@
                         <td align="left" valign="top">
                             <h2>CYBOI</h2>
                             <ul>
-                                <li>Check for user/ group permission at every access to knowledge memory</li>
-                                <li>Implement CYBOL serialisation and persistence handling</li>
-                                <li>Implement RPC communication</li>
-                                <li>Implement HXP communication</li>
-                                <li>Implement CORBA (Healthcare/ HDTF/ CORBAmed) communication</li>
-                                <li>Implement SOAP communication</li>
-                                <li>Implement HL7 Message communication</li>
-                                <li>Implement HL7 <i>Clinical Document Architecture</i> (CDA) communication</li>
-                                <li>Implement DICOM communication</li>
-                                <li>Use colors for log messages on console (see SuSE Linux logs:
-                                    <i>Doing action ... ok (green)/failed (red)</i>,
-                                    <i>ok</i> on the right side of the screen)</li>
-                                <li>Implement translation of other models (files in various formats),
-                                    e.g. XML, OpenDocument, SXW (OpenOffice), HXP (Healthcare Exchange Protocol) etc.
-                                    All of these are translated into memory-internal compound models.</li>
-                                <li>Burn parts into hardware chip</li>
+                                <li>Complete tcp socket handling for web user interfaces</li>
+                                <li>Complete xdt (German medical exchange format) parser</li>
+                                <li>Improve X-Windows graphics drawing routines (xlibs)</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
@@ -87,17 +71,10 @@
                         <td align="left" valign="top">
                             <h2>CYBOL</h2>
                             <ul>
-                                <li>Rename <i>knowledge</i> to <i>pointer</i> and <i>encapsulated</i> to <i>pointer_pointer</i>?</li>
-                                <li>Think through ontology (package structure) once more</li>
-                                <li>Implement <i>start_progress</i> and <i>stop_progress</i> action
-                                    to set <i>Wait</i> cursor at beginning and end of <i>handle</i></li>
-                                <li>Implement <i>login</i> at system startup</li>
-                                <li>Implement <i>UnDo</i> functionality; see design patterns <i>Command</i> and <i>Memento</i></li>
+                                <li></li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
-                            Christian Heller<br>
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
                         </td>
                     </tr>
                     </table>

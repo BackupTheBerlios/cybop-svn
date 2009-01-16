@@ -17,7 +17,7 @@
         http://www.cybop.net
         - Cybernetics Oriented Programming -
     /-->
-    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-17 23:08:32 $">
+    <meta name="date" content="$Revision: 1.3 $ $Date: 2009-01-16 16:42:36 $">
     <meta name="author" content="$Author: christian $">
     <link rel="stylesheet" type="text/css" href="../cybop.css"/>
     <title>CYBOP 0.2.1.0</title>
@@ -66,7 +66,7 @@
                         </td>
                         <td align="left" valign="top">
                             Christian Heller<br>
-                            <<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>><br>
+                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
                         </td>
                     </tr>
                     </table>
