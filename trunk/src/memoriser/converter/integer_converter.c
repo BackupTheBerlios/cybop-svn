@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_converter.c,v $ $Revision: 1.35 $ $Date: 2008-12-12 00:52:52 $ $Author: christian $
+ * @version $RCSfile: integer_converter.c,v $ $Revision: 1.36 $ $Date: 2009-01-17 15:56:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,15 +34,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
+#include "../../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../../memoriser/allocator.c"
 
 /**
@@ -62,57 +62,59 @@
  */
 void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* sc = (int*) p4;
+        int* d = (int*) p0;
 
-        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode integer.");
 
-            int* d = (int*) p0;
+        // The temporary null-terminated string.
+        void* tmp = *NULL_POINTER_MEMORY_MODEL;
+        int tmpc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int tmps = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode integer.");
+        // Create temporary null-terminated string.
+        allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
-            // The temporary null-terminated string.
-            wchar_t* tmp = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
-            int tmps = *sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+        // Copy original string to temporary null-terminated string.
+        append_wide_character_vector((void*) &tmp, (void*) &tmpc, (void*) &tmps, p3, p4);
+        // Add string termination to temporary null-terminated string.
+        // The source count is used as index for the termination character.
+        append_wide_character_vector((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-            // Create temporary null-terminated string.
-            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        // The tail variable is useless here and only needed for the string
+        // transformation function. If the whole string array consists of
+        // many sub strings, separated by space characters, then each sub
+        // string gets interpreted as integer number.
+        // The tail variable in this case points to the remaining sub string.
+        wchar_t* tail = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
 
-            // Copy original string to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            // Add string termination to temporary null-terminated string.
-            // The source count is used as index for the termination character.
-            set_array_elements((void*) tmp, p4, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        // Initialise error number.
+        // It is a global variable/ function and other operations
+        // may have set some value that is not wanted here.
+        errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            // The tail variable is useless here and only needed for the string
-            // transformation function. If the whole string array consists of
-            // many sub strings, separated by space characters, then each sub
-            // string gets interpreted as integer number.
-            // The tail variable in this case points to the remaining sub string.
-            wchar_t* tail = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
+        // Set integer value.
+        //
+        // Transform string to integer value.
+        // The third parameter is the number base:
+        // 0 - tries to automatically identify the correct number base
+        // 8 - octal, e.g. 083
+        // 10 - decimal, e.g. 1234
+        // 16 - hexadecimal, e.g. 3d4 or, optionally, 0x3d4
+        *d = wcstol((wchar_t*) tmp, &tail, *NUMBER_10_INTEGER_MEMORY_MODEL);
 
-            // Set integer value.
-            //
-            // Transform string to integer value.
-            // The third parameter is the number base:
-            // 0 - tries to automatically identify the correct number base
-            // 8 - octal
-            // 10 - decimal
-            // 16 - hexadecimal
-            *d = wcstol(tmp, &tail, *NUMBER_10_INTEGER_MEMORY_MODEL);
+        if (errno != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Destroy temporary null-terminated string.
-            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer. An error (probably overflow) occured.");
         }
+
+        // Destroy temporary null-terminated string.
+        deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer. The destination is null.");
     }
 }
 
@@ -148,7 +150,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 
                 // The integer value.
-                int* v = (int*) *NULL_POINTER_MEMORY_MODEL;
+                void* v = *NULL_POINTER_MEMORY_MODEL;
 
                 // Get integer value.
                 get_array_elements(p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
@@ -161,10 +163,11 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // CAUTION! The old destination size is used as summand,
                 // so that it can grow stepwise, in case this function
                 // has been called recursively by itself.
-                // The addition of number one, on the other hand,
-                // is necessary to avoid a zero size resulting from
-                // a possible multiplication with zero.
-                *ds = *ds + (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                // CAUTION! Do NOT use the destination count here,
+                // since it is left at its initial value
+                // as long as the conversion was not successful,
+                // so that the size would not grow here.
+                *ds = *ds + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
 /*??
     fwprintf(stdout, L"TEST encode integer into wide character 2 ds: %i\n", *ds);
@@ -182,10 +185,10 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // If not all output fits into the provided buffer,
                 // a negative value is returned.
 #ifdef CYGWIN_ENVIRONMENT
-                int test = wsprintfW(*d, L"%i", *v);
+                int test = wsprintfW(*d, L"%i", *((int*) v));
 /* CYGWIN_ENVIRONMENT */
 #else
-                int test = swprintf(*d, *ds, L"%i", *v);
+                int test = swprintf(*d, *ds, L"%i", *((int*) v));
 /* CYGWIN_ENVIRONMENT */
 #endif
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.45 $ $Date: 2008-12-12 00:52:52 $ $Author: christian $
+ * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.46 $ $Date: 2009-01-17 15:56:17 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,19 +34,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
-#include "../../variable/reallocation_factor.c"
 #include "../../memoriser/converter/integer_converter.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/allocator.c"
+#include "../../variable/primitive_type_size.c"
+#include "../../variable/reallocation_factor.c"
 
 /**
  * Decodes the wide character array and creates an integer vector model from it.
@@ -91,9 +91,6 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         int fec = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The integer value.
                         int v = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                        // The remaining vector elements.
-                        void* e = *NULL_POINTER_MEMORY_MODEL;
-                        int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Find comma character index.
                         get_array_elements_index(p3, p4, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
@@ -106,8 +103,9 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         } else {
 
-                            // Set first element count to source count, if no comma
-                            // was found, or if the string started with a comma.
+                            // Set first element count to source count,
+                            // if no comma was found (i == -1)
+                            // or if the string started with a comma (i == 0).
                             fec = *sc;
                         }
 
@@ -126,28 +124,12 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // (which is 3, as needed for the length)
                         decode_integer((void*) &v, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, (void*) &fec);
 
-                        // Check vector size.
-                        if (*dc >= *ds) {
-
-                            // Calculate new vector size.
-                            //
-                            // CAUTION! Add number one as summand at the end to
-                            // avoid a zero result, since the initial size is zero!
-                            *ds = (*dc * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                            // Reallocate vector.
-                            reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        }
-
-                        // Set integer value.
-                        set_element(*d, (void*) dc, (void*) &v, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                        // Increment integer vector count, because of new element.
-                        (*dc)++;
+                        append_integer_vector(p0, p1, p2, (void*) &v, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                         if (i > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            // If a comma was found, then process the remaining integer vector elements.
+                            // If a comma (at a later than the first position) was found,
+                            // then process the remaining integer vector elements.
 
                             // The next vector element.
                             //
@@ -157,8 +139,11 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             // Index of first comma: 3
                             // Next vector element starts at index: 4
                             // (which is the comma index plus 1)
-                            e = p3 + (i * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *NUMBER_1_INTEGER_MEMORY_MODEL;
-                            ec = *sc - (i * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            //
+                            // CAUTION! Do ONLY multiply the summand for the element pointer with the type size,
+                            // but NOT the subtrahend for the element count!
+                            void* e = p3 + ((i + *NUMBER_1_INTEGER_MEMORY_MODEL) * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                            int ec = *sc - (i + *NUMBER_1_INTEGER_MEMORY_MODEL);
 
                             // Recursively call this function.
                             decode_integer_vector(p0, p1, p2, e, (void*) &ec);
@@ -166,7 +151,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer vector. The source count is zero.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer vector. The source count is zero (or smaller).");
                     }
 
                 } else {
@@ -256,40 +241,29 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
     fwprintf(stdout, L"TEST encode integer vector elements 1 c: %ls\n", (wchar_t*) c);
 */
 
-                            // CAUTION! Add one for the comma character added further below!
-                            if ((*dc + *NUMBER_1_INTEGER_MEMORY_MODEL + cc) >= *ds) {
-
-                                // The new destination integer vector size.
-                                // CAUTION! Add one for the comma character added further below!
-                                // CAUTION! Add constant in case *dc is zero!
-                                *ds = (*dc * *INTEGER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL + cc;
-
-                                // Reallocate destination character array.
-                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                            }
-
                             if (*it > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                                 // If this is NOT the first iteration cycle through the source array,
                                 // then add a comma character before adding a new integer element,
                                 // in order to separate from already existing elements.
 
-                                // Set comma character.
-                                set_array_elements(*d, p1, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                                *dc = *dc + *PRIMITIVE_MEMORY_MODEL_COUNT;
+                                // Append comma character.
+                                append_wide_character_vector(p0, p1, p2, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
                             }
 
-                            // Set (copy) integer characters.
-                            set_array_elements(*d, p1, c, (void*) &cc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                            *dc = *dc + cc;
+                            // Append integer characters.
+                            append_wide_character_vector(p0, p1, p2, c, (void*) &cc);
 
                             // Determine remaining vector elements.
                             //
                             // CAUTION! The source count has to be greater than zero!
                             // However, this does not have to be checked here,
                             // as it is already checked further above.
-                            void* e = p3 + (*NUMBER_1_INTEGER_MEMORY_MODEL * *INTEGER_PRIMITIVE_SIZE);
-                            int ec = *sc - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            //
+                            // CAUTION! Do ONLY multiply the summand for the element pointer with the type size,
+                            // but NOT the subtrahend for the element count!
+                            void* e = p3 + (*PRIMITIVE_MEMORY_MODEL_COUNT * *INTEGER_PRIMITIVE_SIZE);
+                            int ec = *sc - *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                             // Increment iteration count.
                             (*it)++;
