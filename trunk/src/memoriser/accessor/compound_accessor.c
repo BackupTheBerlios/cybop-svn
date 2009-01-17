@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.61 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.62 $ $Date: 2009-01-17 00:10:08 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -293,8 +293,10 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                 // Get position of meta separator.
                                 get_array_elements_index(p0, p1, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) &m, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
+/*??
     fwprintf(stdout, L"TEST compound full nc: %i\n", *((int*) p1));
     fwprintf(stdout, L"TEST compound full n: %ls\n", (wchar_t*) p0);
+*/
 
                                 // The name without prefix.
                                 void* n = *NULL_POINTER_MEMORY_MODEL;
@@ -318,8 +320,10 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // CAUTION! Only call this procedure if a prefix was found!
                                     get_compound_element_name_without_prefix((void*) &n, (void*) &nc, (void*) &ns, p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT);
 
+/*??
     fwprintf(stdout, L"TEST compound without prefix nc: %i\n", nc);
     fwprintf(stdout, L"TEST compound without prefix n: %ls\n", (wchar_t*) n);
+*/
 
                                 } else if (m == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -349,8 +353,10 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
 
                                     get_compound_element_name_count_and_size((void*) &enc, (void*) &ens, n, (void*) &nc);
 
+/*??
     fwprintf(stdout, L"TEST compound enc %i\n", enc);
     fwprintf(stdout, L"TEST compound ens %i\n", ens);
+*/
 
                                     // Determine element name.
                                     // It equals the name without prefix.
@@ -2054,11 +2060,13 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
     // as well as the flag indicating a part- or meta element.
     get_compound_element_name_and_remaining_name(p4, p5, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
+/*??
     fwprintf(stdout, L"TEST e %ls\n", (wchar_t*) e);
     fwprintf(stdout, L"TEST ec %i\n", ec);
     fwprintf(stdout, L"TEST r %ls\n", (wchar_t*) r);
     fwprintf(stdout, L"TEST rc %i\n", rc);
     fwprintf(stdout, L"TEST f %i\n", f);
+*/
 
     if (f == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -2069,7 +2077,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-    fwprintf(stdout, L"TEST part index %i\n", i);
+//??    fwprintf(stdout, L"TEST part index %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -2225,9 +2233,6 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
         (void*) &m, (void*) &mc, (void*) &ms,
         (void*) &d, (void*) &dc, (void*) &ds);
 
-    fwprintf(stdout, L"TEST universal 0 mc: %i\n", *mc);
-    fwprintf(stdout, L"TEST universal 0 m: %ls\n", (wchar_t*) *m);
-
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -2281,10 +2286,6 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get universal compound element as knowledge.");
 
-    fwprintf(stdout, L"TEST universal 1 mc: %i\n", *mc);
-    fwprintf(stdout, L"TEST universal 1 *mc: %i\n", *((int*) *mc));
-    fwprintf(stdout, L"TEST universal 1 m: %ls\n", (wchar_t*) *m);
-
             // Get compound element as encapsulated model.
             //
             // CAUTION!
@@ -2300,10 +2301,6 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
             // information, which is why a null pointer is handed over here twice.
             get_compound_element_by_name(p16, p17, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 *m, *mc, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15);
-
-    fwprintf(stdout, L"TEST universal 2 p11: %i\n", **((void***) p11));
-    fwprintf(stdout, L"TEST universal 2 *p11: %i\n", *((int*) **((void***) p11)));
-    fwprintf(stdout, L"TEST universal 2 p10: %ls\n", (wchar_t*) **((void***) p10));
         }
     }
 

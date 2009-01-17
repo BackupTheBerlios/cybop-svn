@@ -7,15 +7,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.87 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
+# @version $Revision: 1.88 $ $Date: 2009-01-17 00:10:08 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue debugging in function "get_compound_element_by_name" of file "compound_accessor.c";
-            the element name is correct now (without prefix), but somehow the correct model is not returned
-            --> tested in function "get_universal_compound_element_by_name"
-        * Make CYBOL example application "helloworld" work; continue in list in file "INSTALL";
-            segmentation fault caused by "receive" in file "startup.cybol"
+        * Make CYBOL example application "helloworld" work; only gnu-linux-console does not work yet
+        * Check integer vector conversion from cybol to memory (decode)
+            --> numbers after comma are ignored somehow
+        * Make UI application work (the last in the list in file "INSTALL")
 
         * Rename several things in CYBOL files and CYBOI:
             --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
