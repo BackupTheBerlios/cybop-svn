@@ -1,10 +1,10 @@
 <model>
-    <part name="handle_gnu_linux_console" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_gnu_linux_console.cybol"/>
-    <part name="handle_x_window_system" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_x_window_system.cybol"/>
-    <part name="handle_www_service" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_www_service.cybol"/>
-    <part name="handle_cyboi_service" channel="file" abstraction="compound" model="ui_control/logic/handler/handle_cyboi_service.cybol"/>
-    <part name="gnu_linux_console_command" channel="inline" abstraction="character" model=".ui_control.logic.user_interface.main_window_actions"/>
-    <part name="gnu_linux_console_command_model" channel="inline" abstraction="character" model=""/>
+    <part name="handle_gnu_linux_console" channel="file" abstraction="text/cybol" model="ui_control/logic/handler/handle_gnu_linux_console.cybol"/>
+    <part name="handle_x_window_system" channel="file" abstraction="text/cybol" model="ui_control/logic/handler/handle_x_window_system.cybol"/>
+    <part name="handle_www_service" channel="file" abstraction="text/cybol" model="ui_control/logic/handler/handle_www_service.cybol"/>
+    <part name="handle_cyboi_service" channel="file" abstraction="text/cybol" model="ui_control/logic/handler/handle_cyboi_service.cybol"/>
+    <part name="gnu_linux_console_command" channel="inline" abstraction="text/plain" model=".ui_control.logic.user_interface.main_window_actions"/>
+    <part name="gnu_linux_console_command_model" channel="inline" abstraction="text/plain" model=""/>
 </model>
 
 <!--
@@ -30,6 +30,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: handler.cybol,v $ $Revision: 1.7 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: handler.cybol,v $ $Revision: 1.8 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

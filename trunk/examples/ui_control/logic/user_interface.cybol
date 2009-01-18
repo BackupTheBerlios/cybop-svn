@@ -1,14 +1,14 @@
 <model>
-    <part name="select_current_part" channel="file" abstraction="compound" model="ui_control/logic/user_interface/select_current_part.cybol"/>
-    <part name="select_previous_part" channel="file" abstraction="compound" model="ui_control/logic/user_interface/select_previous_part.cybol"/>
-    <part name="select_next_part" channel="file" abstraction="compound" model="ui_control/logic/user_interface/select_next_part.cybol"/>
-    <part name="enter" channel="file" abstraction="compound" model="ui_control/logic/user_interface/enter.cybol"/>
-    <part name="show_about_information" channel="file" abstraction="compound" model="ui_control/logic/user_interface/show_about_information.cybol"/>
-    <part name="hide_about_information" channel="file" abstraction="compound" model="ui_control/logic/user_interface/hide_about_information.cybol"/>
-    <part name="refresh_gui" channel="inline" abstraction="operation" model="send">
-        <property name="channel" channel="inline" abstraction="character" model="x_window_system"/>
-        <property name="receiver" channel="inline" abstraction="character" model="user"/>
-        <property name="message" channel="inline" abstraction="knowledge" model=".ui_control.gui.main_window"/>
+    <part name="select_current_part" channel="file" abstraction="text/cybol" model="ui_control/logic/user_interface/select_current_part.cybol"/>
+    <part name="select_previous_part" channel="file" abstraction="text/cybol" model="ui_control/logic/user_interface/select_previous_part.cybol"/>
+    <part name="select_next_part" channel="file" abstraction="text/cybol" model="ui_control/logic/user_interface/select_next_part.cybol"/>
+    <part name="enter" channel="file" abstraction="text/cybol" model="ui_control/logic/user_interface/enter.cybol"/>
+    <part name="show_about_information" channel="file" abstraction="text/cybol" model="ui_control/logic/user_interface/show_about_information.cybol"/>
+    <part name="hide_about_information" channel="file" abstraction="text/cybol" model="ui_control/logic/user_interface/hide_about_information.cybol"/>
+    <part name="refresh_gui" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="x-window-system"/>
+        <property name="receiver" channel="inline" abstraction="text/plain" model="user"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.gui.main_window"/>
     </part>
 </model>
 
@@ -35,6 +35,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: user_interface.cybol,v $ $Revision: 1.7 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: user_interface.cybol,v $ $Revision: 1.8 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

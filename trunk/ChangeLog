@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.115 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
+# @version $Revision: 1.116 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt CYBOL example application "ui_control" to new MIME-type-like abstractions
 
 2009-01-17  Christian Heller  <christian.heller@tuxtax.de>
         * Correct minor bugs in files "integer_converter.c" and "integer_vector_converter.c"

@@ -1,65 +1,68 @@
 <model>
-    <part name="assemble_current_element_background" channel="inline" abstraction="operation" model="add">
-        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
-        <property name="summand_2" channel="inline" abstraction="character" model="#background"/>
-        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="assemble_current_element_background" channel="inline" abstraction="operation/plain" model="add">
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="text/plain" model="#background"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="unfocus_background" channel="inline" abstraction="operation" model="copy">
-        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.menu_item.background"/>
-        <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="unfocus_background" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_item.background"/>
+        <property name="destination" channel="inline" abstraction="path/encapsulated" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="assemble_current_element_foreground" channel="inline" abstraction="operation" model="add">
-        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
-        <property name="summand_2" channel="inline" abstraction="character" model="#foreground"/>
-        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="assemble_current_element_foreground" channel="inline" abstraction="operation/plain" model="add">
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="text/plain" model="#foreground"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="unfocus_foreground" channel="inline" abstraction="operation" model="copy">
-        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.menu_item.foreground"/>
-        <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="unfocus_foreground" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_item.foreground"/>
+        <property name="destination" channel="inline" abstraction="path/encapsulated" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="assemble_next_element_name" channel="inline" abstraction="operation" model="add">
-        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
-        <property name="summand_2" channel="inline" abstraction="character" model="#next"/>
-        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="assemble_next_element_name" channel="inline" abstraction="operation/plain" model="add">
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="text/plain" model="#next"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
     <!-- The element name assembled before is now used to get the real element that the name points to. -->
-    <part name="determine_real_element_name" channel="inline" abstraction="operation" model="copy">
-        <property name="source" channel="inline" abstraction="encapsulated" model=".ui_control.tui.main_window.menu#focus"/>
-        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="determine_real_element_name" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/encapsulated" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="assemble_next_element_background" channel="inline" abstraction="operation" model="add">
-        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
-        <property name="summand_2" channel="inline" abstraction="character" model="#background"/>
-        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="assemble_next_element_background" channel="inline" abstraction="operation/plain" model="add">
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="text/plain" model="#background"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="focus_background" channel="inline" abstraction="operation" model="copy">
-        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.selection.background"/>
-        <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="focus_background" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.selection.background"/>
+        <property name="destination" channel="inline" abstraction="path/encapsulated" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="assemble_next_element_foreground" channel="inline" abstraction="operation" model="add">
-        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
-        <property name="summand_2" channel="inline" abstraction="character" model="#foreground"/>
-        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="assemble_next_element_foreground" channel="inline" abstraction="operation/plain" model="add">
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="text/plain" model="#foreground"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="focus_foreground" channel="inline" abstraction="operation" model="copy">
-        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.selection.foreground"/>
-        <property name="destination" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="focus_foreground" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.selection.foreground"/>
+        <property name="destination" channel="inline" abstraction="path/encapsulated" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="send_tui" channel="inline" abstraction="operation" model="send">
-        <property name="channel" channel="inline" abstraction="character" model="gnu_linux_console"/>
-        <property name="receiver" channel="inline" abstraction="character" model="user"/>
-        <property name="message" channel="inline" abstraction="knowledge" model=".ui_control.tui"/>
-        <property name="area" channel="inline" abstraction="character" model=".main_window.menu"/>
+    <part name="send_tui" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
+        <property name="receiver" channel="inline" abstraction="text/plain" model="user"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.tui"/>
+<!--
+        <property name="area" channel="inline" abstraction="path/knowledge" model=".main_window.menu"/>
+-->
+        <property name="area" channel="inline" abstraction="text/plain" model=".main_window.menu"/>
     </part>
 </model>
 
@@ -86,6 +89,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: select_next_part.cybol,v $ $Revision: 1.8 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: select_next_part.cybol,v $ $Revision: 1.9 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

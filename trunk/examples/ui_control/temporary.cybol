@@ -1,7 +1,7 @@
 <model>
-    <part name="character" channel="inline" abstraction="character" model=""/>
-    <part name="integer" channel="inline" abstraction="integer" model=""/>
-    <part name="double" channel="inline" abstraction="double" model=""/>
+    <part name="character" channel="inline" abstraction="text/plain" model=""/>
+    <part name="integer" channel="inline" abstraction="number/integer" model=""/>
+    <part name="double" channel="inline" abstraction="number/double" model=""/>
 </model>
 
 <!--
@@ -27,6 +27,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: temporary.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: temporary.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

@@ -1,6 +1,6 @@
 <model>
-    <part name="menu_bar" channel="file" abstraction="compound" model="gui_style/menu_bar.cybol"/>
-    <part name="menu" channel="file" abstraction="compound" model="gui_style/menu.cybol"/>
+    <part name="menu_bar" channel="file" abstraction="text/cybol" model="gui_style/menu_bar.cybol"/>
+    <part name="menu" channel="file" abstraction="text/cybol" model="gui_style/menu.cybol"/>
 </model>
 
 <!--
@@ -26,6 +26,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: gui_style.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: gui_style.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

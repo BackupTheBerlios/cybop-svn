@@ -1,14 +1,14 @@
 <model>
-    <part name="main_window" channel="file" abstraction="compound" model="ui_control/gui/main_window/window.cybol">
-        <property name="shape" channel="inline" abstraction="character" model="rectangle"/>
-        <property name="layout" channel="inline" abstraction="character" model="root"/>
-        <property name="cell" channel="inline" abstraction="character" model=""/>
-        <property name="position" channel="inline" abstraction="integer" model="100,100,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="800,600,1"/>
-        <property name="background" channel="inline" abstraction="character" model="white"/>
-        <property name="foreground" channel="inline" abstraction="character" model="white"/>
-        <property name="title" channel="inline" abstraction="character" model="Res Medicinae"/>
-        <property name="icon" channel="file" abstraction="png" model="ui_control/gui/main_window/icon.png"/>
+    <part name="main_window" channel="file" abstraction="text/cybol" model="ui_control/gui/main_window/window.cybol">
+        <property name="shape" channel="inline" abstraction="text/plain" model="rectangle"/>
+        <property name="layout" channel="inline" abstraction="text/plain" model="root"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model=""/>
+        <property name="position" channel="inline" abstraction="number/integer" model="100,100,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="800,600,1"/>
+        <property name="background" channel="inline" abstraction="text/plain" model="white"/>
+        <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
+        <property name="title" channel="inline" abstraction="text/plain" model="Res Medicinae"/>
+        <property name="icon" channel="file" abstraction="image/png" model="ui_control/gui/main_window/icon.png"/>
     </part>
 </model>
 
@@ -35,6 +35,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: gui.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: gui.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

@@ -1,12 +1,12 @@
 <model>
-    <part name="exit_item" channel="inline" abstraction="character" model="Exit">
-        <property name="layout" channel="inline" abstraction="character" model="compass"/>
-        <property name="cell" channel="inline" abstraction="character" model="north"/>
-        <property name="style" channel="inline" abstraction="knowledge" model=".ui_control.settings.gui_style.menu"/>
-        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="0,0,0"/>
-        <property name="mouse_over_action" channel="inline" abstraction="character" model="select"/>
-        <property name="mouse_click_action" channel="inline" abstraction="character" model="ui_control.logic.exit_program"/>
+    <part name="exit_item" channel="inline" abstraction="text/plain" model="Exit">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="north"/>
+        <property name="style" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.gui_style.menu"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="mouse_over_action" channel="inline" abstraction="path/knowledge" model="select"/>
+        <property name="mouse_click_action" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.exit_program"/>
     </part>
 </model>
 
@@ -33,6 +33,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: module_menu.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: module_menu.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

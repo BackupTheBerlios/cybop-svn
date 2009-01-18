@@ -1,8 +1,8 @@
 <model>
-    <part name="title" channel="inline" abstraction="character" model="Res Medicinae">
-        <property name="super" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.menu_header"/>
-        <property name="position" channel="inline" abstraction="integer" model="30,0,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="20,1,1"/>
+    <part name="title" channel="inline" abstraction="text/plain" model="Res Medicinae">
+        <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_header"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="30,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="20,1,1"/>
     </part>
 </model>
 
@@ -29,6 +29,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: header.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: header.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

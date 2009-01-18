@@ -1,18 +1,18 @@
 <model>
-    <part name="get_command_of_current_element" channel="inline" abstraction="operation" model="add">
-        <property name="summand_1" channel="inline" abstraction="knowledge" model=".ui_control.tui.main_window.menu#focus"/>
-        <property name="summand_2" channel="inline" abstraction="character" model="#button_press_action"/>
-        <property name="sum" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="get_command_of_current_element" channel="inline" abstraction="operation/plain" model="add">
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window.menu#focus"/>
+        <property name="summand_2" channel="inline" abstraction="text/plain" model="#button_press_action"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="determine_real_command" channel="inline" abstraction="operation" model="copy">
-        <property name="source" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
-        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.temporary.character"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="determine_real_command" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/encapsulated" model=".ui_control.temporary.character"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.temporary.character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <part name="send_command_as_signal" channel="inline" abstraction="operation" model="send">
-        <property name="channel" channel="inline" abstraction="character" model="signal"/>
-        <property name="message" channel="inline" abstraction="encapsulated" model=".ui_control.temporary.character"/>
+    <part name="send_command_as_signal" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
+        <property name="message" channel="inline" abstraction="path/encapsulated" model=".ui_control.temporary.character"/>
     </part>
 </model>
 
@@ -39,6 +39,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: enter.cybol,v $ $Revision: 1.7 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: enter.cybol,v $ $Revision: 1.8 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

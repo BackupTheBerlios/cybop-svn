@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_channel.c,v $ $Revision: 1.4 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
+ * @version $RCSfile: cybol_channel.c,v $ $Revision: 1.5 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -60,9 +60,9 @@ static wchar_t* INLINE_CYBOL_CHANNEL = INLINE_CYBOL_CHANNEL_ARRAY;
 static int* INLINE_CYBOL_CHANNEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The lamport tex (latex) cybol channel. */
-static wchar_t LATEX_CYBOL_CHANNEL_ARRAY[] = {L'i', L'n', L'l', L'i', L'n', L'e'};
+static wchar_t LATEX_CYBOL_CHANNEL_ARRAY[] = {L'l', L'a', L't', L'e', L'x'};
 static wchar_t* LATEX_CYBOL_CHANNEL = LATEX_CYBOL_CHANNEL_ARRAY;
-static int* LATEX_CYBOL_CHANNEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+static int* LATEX_CYBOL_CHANNEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The secure file transfer protocol (sftp) cybol channel. */
 static wchar_t SFTP_CYBOL_CHANNEL_ARRAY[] = {L's', L'f', L't', L'p'};

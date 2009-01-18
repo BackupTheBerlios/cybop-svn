@@ -1,9 +1,9 @@
 <model>
-    <part name="width" channel="inline" abstraction="integer" model="50"/>
-    <part name="height" channel="inline" abstraction="integer" model="20"/>
-    <part name="left_border" channel="inline" abstraction="" model="">
-        <property name="colour" channel="inline" abstraction="vector" model="0,0,0"/>
-        <property name="colour_style" channel="inline" abstraction="character" model="rgb"/>
+    <part name="width" channel="inline" abstraction="number/integer" model="50"/>
+    <part name="height" channel="inline" abstraction="number/integer" model="20"/>
+    <part name="left_border" channel="inline" abstraction="text/plain" model="">
+        <property name="colour" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="colour_style" channel="inline" abstraction="text/plain" model="rgb"/>
     </part>
 </model>
 
@@ -30,6 +30,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: menu.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: menu.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

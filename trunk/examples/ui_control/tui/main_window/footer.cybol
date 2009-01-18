@@ -1,8 +1,8 @@
 <model>
-    <part name="url" channel="inline" abstraction="character" model="http://www.cybop.net">
-        <property name="super" channel="inline" abstraction="knowledge" model=".ui_control.settings.tui.menu_footer"/>
-        <property name="position" channel="inline" abstraction="integer" model="25,0,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="40,1,1"/>
+    <part name="url" channel="inline" abstraction="text/plain" model="http://www.cybop.net">
+        <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_footer"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="25,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="40,1,1"/>
     </part>
 </model>
 
@@ -29,6 +29,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: footer.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: footer.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

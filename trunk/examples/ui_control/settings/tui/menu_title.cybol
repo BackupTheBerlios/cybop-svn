@@ -1,10 +1,10 @@
 <model>
-    <part name="shape" channel="inline" abstraction="character" model="rectangle"/>
-    <part name="layout" channel="inline" abstraction="character" model="coordinates"/>
-    <part name="background" channel="inline" abstraction="character" model="blue"/>
-    <part name="foreground" channel="inline" abstraction="character" model="white"/>
-    <part name="bold" channel="inline" abstraction="boolean" model="true"/>
-    <part name="underline" channel="inline" abstraction="boolean" model="true"/>
+    <part name="shape" channel="inline" abstraction="text/plain" model="rectangle"/>
+    <part name="layout" channel="inline" abstraction="text/plain" model="coordinates"/>
+    <part name="background" channel="inline" abstraction="text/plain" model="blue"/>
+    <part name="foreground" channel="inline" abstraction="text/plain" model="white"/>
+    <part name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    <part name="underline" channel="inline" abstraction="logicvalue/boolean" model="true"/>
 </model>
 
 <!--
@@ -30,6 +30,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: menu_title.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: menu_title.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

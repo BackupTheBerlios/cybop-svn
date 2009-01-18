@@ -1,9 +1,9 @@
 <model>
-    <part name="functionality" channel="file" abstraction="compound" model="ui_control/logic/functionality.cybol"/>
-    <part name="handler" channel="file" abstraction="compound" model="ui_control/logic/handler.cybol"/>
-    <part name="lifecycle" channel="file" abstraction="compound" model="ui_control/logic/lifecycle.cybol"/>
-    <part name="translation" channel="file" abstraction="compound" model="ui_control/logic/translation.cybol"/>
-    <part name="user_interface" channel="file" abstraction="compound" model="ui_control/logic/user_interface.cybol"/>
+    <part name="functionality" channel="file" abstraction="text/cybol" model="ui_control/logic/functionality.cybol"/>
+    <part name="handler" channel="file" abstraction="text/cybol" model="ui_control/logic/handler.cybol"/>
+    <part name="lifecycle" channel="file" abstraction="text/cybol" model="ui_control/logic/lifecycle.cybol"/>
+    <part name="translation" channel="file" abstraction="text/cybol" model="ui_control/logic/translation.cybol"/>
+    <part name="user_interface" channel="file" abstraction="text/cybol" model="ui_control/logic/user_interface.cybol"/>
 </model>
 
 <!--
@@ -29,6 +29,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: logic.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: logic.cybol,v $ $Revision: 1.7 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

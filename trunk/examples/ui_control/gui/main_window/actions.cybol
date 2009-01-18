@@ -1,6 +1,6 @@
 <model>
-    <part name="expose" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.refresh_gui"/>
-    <part name="exit" channel="inline" abstraction="knowledge" model=".ui_control.logic.lifecycle.exit_program"/>
+    <part name="expose" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.refresh_gui"/>
+    <part name="exit" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.lifecycle.exit_program"/>
 </model>
 
 <!--
@@ -26,6 +26,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: actions.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: actions.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

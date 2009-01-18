@@ -1,9 +1,9 @@
 <model>
 <!--
-    <part name="copy_name" channel="inline" abstraction="operation" model="copy">
-        <property name="source" channel="inline" abstraction="knowledge" model=".ui_control.application_information.name"/>
-        <property name="destination" channel="inline" abstraction="knowledge" model=".ui_control.tui.about_dialogue.name"/>
-        <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+    <part name="copy_name" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.name"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.name"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="character"/>
     </part>
 -->
 </model>
@@ -31,6 +31,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: handle_x_window_system.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: handle_x_window_system.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

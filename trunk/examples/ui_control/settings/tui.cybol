@@ -1,48 +1,48 @@
 <model>
-    <part name="window" channel="file" abstraction="compound" model="ui_control/settings/tui/window.cybol"/>
-    <part name="menu" channel="file" abstraction="compound" model="ui_control/settings/tui/menu.cybol"/>
-    <part name="menu_header" channel="file" abstraction="compound" model="ui_control/settings/tui/menu_header.cybol"/>
-    <part name="menu_title" channel="file" abstraction="compound" model="ui_control/settings/tui/menu_title.cybol"/>
-    <part name="menu_item" channel="file" abstraction="compound" model="ui_control/settings/tui/menu_item.cybol"/>
-    <part name="menu_footer" channel="file" abstraction="compound" model="ui_control/settings/tui/menu_footer.cybol"/>
-    <part name="label" channel="file" abstraction="compound" model="ui_control/settings/tui/label.cybol"/>
-    <part name="button" channel="file" abstraction="compound" model="ui_control/settings/tui/button.cybol"/>
-    <part name="selection" channel="file" abstraction="compound" model="ui_control/settings/tui/selection.cybol"/>
+    <part name="window" channel="file" abstraction="text/cybol" model="ui_control/settings/tui/window.cybol"/>
+    <part name="menu" channel="file" abstraction="text/cybol" model="ui_control/settings/tui/menu.cybol"/>
+    <part name="menu_header" channel="file" abstraction="text/cybol" model="ui_control/settings/tui/menu_header.cybol"/>
+    <part name="menu_title" channel="file" abstraction="text/cybol" model="ui_control/settings/tui/menu_title.cybol"/>
+    <part name="menu_item" channel="file" abstraction="text/cybol" model="ui_control/settings/tui/menu_item.cybol"/>
+    <part name="menu_footer" channel="file" abstraction="text/cybol" model="ui_control/settings/tui/menu_footer.cybol"/>
+    <part name="label" channel="file" abstraction="text/cybol" model="ui_control/settings/tui/label.cybol"/>
+    <part name="button" channel="file" abstraction="text/cybol" model="ui_control/settings/tui/button.cybol"/>
+    <part name="selection" channel="file" abstraction="text/cybol" model="ui_control/settings/tui/selection.cybol"/>
 <!--
-    <part name="tab_order" channel="inline" abstraction="integer" model="0"/>
-    <part name="tab_stop" channel="inline" abstraction="boolean" model="true"/>
-    <part name="border_icons" channel="inline" abstraction="character" model="system,minimize,maximize,close"/>
-    <part name="border_style" channel="inline" abstraction="character" model="none"/>
-    <part name="hint" channel="inline" abstraction="character" model=""/>
-    <part name="show_hint" channel="inline" abstraction="boolean" model="true"/>
-    <part name="focus" channel="inline" abstraction="boolean" model=""/>
-    <part name="selected" channel="inline" abstraction="boolean" model=""/>
-    <part name="visible" channel="inline" abstraction="boolean" model="true"/>
-    <part name="font_charset" channel="inline" abstraction="character" model="default"/>
-    <part name="font_colour" channel="inline" abstraction="character" model="black"/>
-    <part name="font_height" channel="inline" abstraction="character" model="11"/>
-    <part name="font_name" channel="inline" abstraction="character" model="Helvetica"/>
-    <part name="font_style" channel="inline" abstraction="character" model="bold"/>
-    <part name="read_only" channel="inline" abstraction="boolean" model="false"/>
-    <part name="horizontal_scroll_bar" channel="inline" abstraction="boolean" model="false"/>
-    <part name="horizontal_scroll_bar_increment" channel="inline" abstraction="integer" model="3"/>
-    <part name="vertical_scroll_bar" channel="inline" abstraction="boolean" model="false"/>
-    <part name="vertical_scroll_bar_increment" channel="inline" abstraction="integer" model="3"/>
-    <part name="checked" channel="inline" abstraction="boolean" model="false"/>
+    <part name="tab_order" channel="inline" abstraction="number/integer" model="0"/>
+    <part name="tab_stop" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    <part name="border_icons" channel="inline" abstraction="text/plain" model="system,minimize,maximize,close"/>
+    <part name="border_style" channel="inline" abstraction="text/plain" model="none"/>
+    <part name="hint" channel="inline" abstraction="text/plain" model=""/>
+    <part name="show_hint" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    <part name="focus" channel="inline" abstraction="logicvalue/boolean" model=""/>
+    <part name="selected" channel="inline" abstraction="logicvalue/boolean" model=""/>
+    <part name="visible" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    <part name="font_charset" channel="inline" abstraction="text/plain" model="default"/>
+    <part name="font_colour" channel="inline" abstraction="text/plain" model="black"/>
+    <part name="font_height" channel="inline" abstraction="text/plain" model="11"/>
+    <part name="font_name" channel="inline" abstraction="text/plain" model="Helvetica"/>
+    <part name="font_style" channel="inline" abstraction="text/plain" model="bold"/>
+    <part name="read_only" channel="inline" abstraction="logicvalue/boolean" model="false"/>
+    <part name="horizontal_scroll_bar" channel="inline" abstraction="logicvalue/boolean" model="false"/>
+    <part name="horizontal_scroll_bar_increment" channel="inline" abstraction="number/integer" model="3"/>
+    <part name="vertical_scroll_bar" channel="inline" abstraction="logicvalue/boolean" model="false"/>
+    <part name="vertical_scroll_bar_increment" channel="inline" abstraction="number/integer" model="3"/>
+    <part name="checked" channel="inline" abstraction="logicvalue/boolean" model="false"/>
     <part name="bitmap" channel="file" abstraction="bmp" model=""/>
-    <part name="on_mouse_down" channel="inline" abstraction="character" model=""/>
-    <part name="on_mouse_release" channel="inline" abstraction="character" model=""/>
-    <part name="on_double_click" channel="inline" abstraction="character" model="some.command"/>
-    <part name="on_key_press" channel="inline" abstraction="character" model=""/>
-    <part name="drawing_style" channel="inline" abstraction="character" model="transparent"/>
-    <part name="active" channel="inline" abstraction="boolean" model="false"/>
-    <part name="align" channel="inline" abstraction="character" model="left"/>
-    <part name="bevel_inner" channel="inline" abstraction="boolean" model="false"/>
-    <part name="bevel_outer" channel="inline" abstraction="boolean" model="false"/>
-    <part name="auto_size" channel="inline" abstraction="boolean" model="true"/>
-    <part name="foreground" channel="inline" abstraction="character" model=""/>
-    <part name="foreground" channel="inline" abstraction="character" model=""/>
-    <part name="shadow" channel="inline" abstraction="boolean" model="false"/>
+    <part name="on_mouse_down" channel="inline" abstraction="text/plain" model=""/>
+    <part name="on_mouse_release" channel="inline" abstraction="text/plain" model=""/>
+    <part name="on_double_click" channel="inline" abstraction="text/plain" model="some.command"/>
+    <part name="on_key_press" channel="inline" abstraction="text/plain" model=""/>
+    <part name="drawing_style" channel="inline" abstraction="text/plain" model="transparent"/>
+    <part name="active" channel="inline" abstraction="logicvalue/boolean" model="false"/>
+    <part name="align" channel="inline" abstraction="text/plain" model="left"/>
+    <part name="bevel_inner" channel="inline" abstraction="logicvalue/boolean" model="false"/>
+    <part name="bevel_outer" channel="inline" abstraction="logicvalue/boolean" model="false"/>
+    <part name="auto_size" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    <part name="foreground" channel="inline" abstraction="text/plain" model=""/>
+    <part name="foreground" channel="inline" abstraction="text/plain" model=""/>
+    <part name="shadow" channel="inline" abstraction="logicvalue/boolean" model="false"/>
 -->
 </model>
 
@@ -69,6 +69,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: tui.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: tui.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

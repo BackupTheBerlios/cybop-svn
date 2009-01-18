@@ -1,19 +1,19 @@
 <model>
-    <part name="about_ui_control_item" channel="inline" abstraction="character" model="About Revue">
-        <property name="layout" channel="inline" abstraction="character" model="compass"/>
-        <property name="cell" channel="inline" abstraction="character" model="north"/>
-        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="0,0,0"/>
-        <property name="mouse_over_action" channel="inline" abstraction="character" model="select"/>
-        <property name="mouse_click_action" channel="inline" abstraction="character" model=".ui_control.logic.show_about_dialogue"/>
+    <part name="about_ui_control_item" channel="inline" abstraction="text/plain" model="About Revue">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="north"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="mouse_over_action" channel="inline" abstraction="text/plain" model="select"/>
+        <property name="mouse_click_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.show_about_dialogue"/>
     </part>
-    <part name="about_resmedicinae_item" channel="inline" abstraction="character" model="About Res Medicinae">
-        <property name="layout" channel="inline" abstraction="character" model="compass"/>
-        <property name="cell" channel="inline" abstraction="character" model="north"/>
-        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="0,0,0"/>
-        <property name="mouse_over_action" channel="inline" abstraction="character" model="select"/>
-        <property name="mouse_click_action" channel="inline" abstraction="character" model=".ui_control.logic.show_about_dialogue"/>
+    <part name="about_resmedicinae_item" channel="inline" abstraction="text/plain" model="About Res Medicinae">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="north"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="mouse_over_action" channel="inline" abstraction="text/plain" model="select"/>
+        <property name="mouse_click_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.show_about_dialogue"/>
     </part>
 </model>
 
@@ -40,6 +40,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: help_menu.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: help_menu.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

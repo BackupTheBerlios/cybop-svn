@@ -1,7 +1,7 @@
 <model>
-    <part name="enter" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.hide_about_information"/>
-    <part name="escape" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.hide_about_information"/>
-    <part name="o" channel="inline" abstraction="knowledge" model=".ui_control.logic.user_interface.hide_about_information"/>
+    <part name="enter" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.hide_about_information"/>
+    <part name="escape" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.hide_about_information"/>
+    <part name="o" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.hide_about_information"/>
 </model>
 
 <!--
@@ -27,6 +27,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: actions.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: actions.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

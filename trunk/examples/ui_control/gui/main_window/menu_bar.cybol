@@ -1,24 +1,24 @@
 <model>
-    <part name="module_menu" channel="inline" abstraction="character" model="Module">
-        <property name="layout" channel="inline" abstraction="character" model="compass"/>
-        <property name="cell" channel="inline" abstraction="character" model="west"/>
-        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="100,20,1"/>
-        <property name="left_release" channel="inline" abstraction="knowledge" model=".ui_control.logic.exit_program"/>
+    <part name="module_menu" channel="inline" abstraction="text/plain" model="Module">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="west"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="100,20,1"/>
+        <property name="left_release" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.exit_program"/>
     </part>
 <!--
-    <part name="view_menu" channel="inline" abstraction="character" model="View">
-        <property name="layout" channel="inline" abstraction="character" model="compass"/>
-        <property name="cell" channel="inline" abstraction="character" model="east"/>
-        <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="0,0,0"/>
+    <part name="view_menu" channel="inline" abstraction="text/plain" model="View">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="east"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="0,0,0"/>
     </part>
 -->
-    <part name="help_menu" channel="inline" abstraction="character" model="Help">
-        <property name="layout" channel="inline" abstraction="character" model="compass"/>
-        <property name="cell" channel="inline" abstraction="character" model="east"/>
-        <property name="position" channel="inline" abstraction="integer" model="200,0,0"/>
-        <property name="size" channel="inline" abstraction="integer" model="100,20,1"/>
+    <part name="help_menu" channel="inline" abstraction="text/plain" model="Help">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="east"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="200,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="100,20,1"/>
     </part>
 </model>
 
@@ -45,6 +45,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: menu_bar.cybol,v $ $Revision: 1.5 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @version $RCSfile: menu_bar.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
