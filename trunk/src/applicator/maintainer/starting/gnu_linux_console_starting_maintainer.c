@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_starting_maintainer.c,v $ $Revision: 1.6 $ $Date: 2008-09-16 22:47:56 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_starting_maintainer.c,v $ $Revision: 1.7 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,14 +30,15 @@
 
 #include <stdio.h>
 #include <termios.h>
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
-#include "../../../variable/thread_identification.c"
+#include "../../../memoriser/allocator/model_allocator.c"
 #include "../../../memoriser/accessor.c"
 #include "../../../memoriser/allocator.c"
+#include "../../../variable/thread_identification.c"
 
 /**
  * Starts up the gnu/linux console.
@@ -66,24 +67,31 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
         // The gnu/linux console input- and output stream.
         FILE* ip = (FILE*) *NULL_POINTER_MEMORY_MODEL;
         FILE* op = (FILE*) *NULL_POINTER_MEMORY_MODEL;
+/*??
         // The original termios interface.
         struct termios* to = (struct termios*) *NULL_POINTER_MEMORY_MODEL;
         // The working termios interface.
         struct termios* tw = (struct termios*) *NULL_POINTER_MEMORY_MODEL;
-        // The character buffer used for input in the thread procedure.
+*/
+        // The character buffer used for input in the thread function.
         void* b = *NULL_POINTER_MEMORY_MODEL;
-        int* bc = (int*) *NULL_POINTER_MEMORY_MODEL;
-        int* bs = (int*) *NULL_POINTER_MEMORY_MODEL;
+        void* bc = *NULL_POINTER_MEMORY_MODEL;
+        void* bs = *NULL_POINTER_MEMORY_MODEL;
 
         // Create gnu/linux console internals.
-//??        allocate((void*) &ip, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-//??        allocate((void*) &op, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+//??        allocate((void*) &ip, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//??        allocate((void*) &op, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+/*??
         to = (struct termios*) malloc(sizeof(struct termios));
         tw = (struct termios*) malloc(sizeof(struct termios));
+*/
 
-        // Allocate character buffer count, size.
-        allocate((void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-        allocate((void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+        // Allocate character buffer.
+        //
+        // CAUTION! Its size is initialised with three,
+        // because longer escape sequences are not known.
+        // Example: An up arrow delivers 'ESC' + '[' + 'A'
+        allocate_model((void*) &b, (void*) &bc, (void*) &bs, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
         // Initialise gnu/linux console internals.
         //
@@ -91,6 +99,7 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
         ip = stdin;
         op = stdout;
 
+/*??
         // Get file descriptor for output file stream.
         int opd = fileno(op);
 
@@ -104,18 +113,9 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
 
         // Assign termios attributes.
         tcsetattr(opd, TCSANOW, tw);
+*/
 
-        // Initialise character buffer count, size.
-        //
-        // CAUTION! Its size is initialised with three,
-        // because longer escape sequences are not known.
-        // Example: An up arrow delivers 'ESC' + '[' + 'A'
-        *bc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        *bs = *NUMBER_3_INTEGER_MEMORY_MODEL;
-
-        // Allocate character buffer.
-        allocate((void*) &b, (void*) bs, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
+/*??
         // Check for gnu/linux console.
         int l = strcmp("linux", getenv("TERM"));
 
@@ -127,12 +127,15 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"This is a standard serial terminal.");
         }
+*/
 
         // Set gnu/linux console internals.
         set_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &ip, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         set_element(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &op, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+/*??
         set_element(p0, (void*) GNU_LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL_MEMORY_MEMORY_NAME, (void*) &to, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         set_element(p0, (void*) GNU_LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL_MEMORY_MEMORY_NAME, (void*) &tw, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+*/
         set_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL_MEMORY_MEMORY_NAME, (void*) &b, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         set_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &bc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         set_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &bs, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);

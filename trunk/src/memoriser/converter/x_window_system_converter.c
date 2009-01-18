@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.30 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
+ * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.31 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,9 +138,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Determine source whole size coordinates.
-            get_element(*wsm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &wsmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-            get_element(*wsm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &wsmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-            get_element(*wsm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &wsmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &wsmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &wsmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &wsmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             // Set original area position coordinates, set to the zero origo.
             oapx = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -338,13 +338,13 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Get source part position coordinates.
-            get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-            get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-            get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get source part size coordinates.
-            get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-            get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-            get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     fwprintf(stdout, L"layout: %s\n", *lm);
     fwprintf(stdout, L"layout count: %i\n", *((int*) *lmc));

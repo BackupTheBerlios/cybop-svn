@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communicator.c,v $ $Revision: 1.32 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
+ * @version $RCSfile: communicator.c,v $ $Revision: 1.33 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -199,7 +199,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source byte array
- * @param p4 the source count
+ * @param p4 the source byte array count
  * @param p5 the type
  * @param p6 the type count
  */

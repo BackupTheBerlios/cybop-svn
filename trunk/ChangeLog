@@ -14,13 +14,16 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.114 $ $Date: 2009-01-17 15:56:17 $ $Author: christian $
+# @version $Revision: 1.115 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 2009-01-17  Christian Heller  <christian.heller@tuxtax.de>
         * Correct minor bugs in files "integer_converter.c" and "integer_vector_converter.c"
         * Review file "gnu_linux_console_converter.c" and adapt as well as simplify many pieces
+        * Make CYBOL example "helloworld" work when sending to gnu_linux_console
+        * Adapt several gnu linux console files for: startup, shutdown, conversion, writing
+        * Simplify variable declaration and allocation using the file "model_allocator.c"
 
 2009-01-16  Christian Heller  <christian.heller@tuxtax.de>
         * Prepare project plan on website for coming release

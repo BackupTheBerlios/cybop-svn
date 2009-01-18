@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.22 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.23 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -38,8 +38,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/array.c"
+#include "../../memoriser/allocator/model_allocator.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
+#include "../../memoriser/array.c"
 
 /**
  * Reads the gnu/linux console into a character array.
@@ -168,10 +169,10 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
  * Writes the terminal control sequences into a gnu/linux console.
  *
  * @param p0 the destination gnu/linux console (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source terminal control sequences
- * @param p4 the source count
+ * @param p1 the destination gnu/linux console count
+ * @param p2 the destination gnu/linux console size
+ * @param p3 the source terminal control sequences as utf-8 encoded multibyte characters
+ * @param p4 the source terminal control sequences as utf-8 encoded multibyte characters count
  */
 void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -185,29 +186,32 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to gnu/linux console.");
 
+/*??
             // Possible locales are: LANG, LC_CTYPE, LC_ALL.
             // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
             char* loc = setlocale(LC_ALL, "");
+*/
 
-            // The terminated control sequences string.
-            wchar_t* ts = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
-            // Increase control sequences count by one, for termination character.
-            int tss = *sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+            // The terminated control sequences.
+            void* ts = *NULL_POINTER_MEMORY_MODEL;
+            void* tsc = *NULL_POINTER_MEMORY_MODEL;
+            void* tss = *NULL_POINTER_MEMORY_MODEL;
 
-            // Create terminated control sequences string.
-            allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            // Allocate terminated control sequences.
+            //
+            // CAUTION! Use a standard (non-wide) character vector here,
+            // because the source is handed over as utf-8 encoded multibyte characters
+            // and will be forwarded as such to the gnu linux console!
+            allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-            // Set terminated control sequences string by first copying the actual
-            // control sequences and then adding the null termination character.
-            set_array_elements((void*) ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            set_array_elements((void*) ts, p4, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            // Append control sequences and null termination character.
+            append_character_vector((void*) &ts, tsc, tss, p3, p4);
+            append_character_vector((void*) &ts, tsc, tss, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
             if (*d != *NULL_POINTER_MEMORY_MODEL) {
 
                 // Write to terminal.
-    //??            fputs((char*) ts, *d);
-    //??            fputws((wchar_t*) ts, *d);
-                fwprintf(*d, "%ls", ts);
+                fwprintf(*d, L"%s", (char*) ts);
 
                 // Flush any buffered output on the stream to the file.
                 //
@@ -225,8 +229,8 @@ void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The destination terminal file is null.");
             }
 
-            // Destroy terminated control sequences.
-            deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            // Deallocate terminated control sequences.
+            deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
         } else {
 

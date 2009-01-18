@@ -13,19 +13,14 @@
     </part>
     <!-- Write knowledge tree into file. This is only for testing reasons and can also be deleted. -->
     <part name="test_knowledge_tree" channel="inline" abstraction="operation/plain" model="send">
-<!--
-        <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
--->
         <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
         <property name="language" channel="inline" abstraction="text/plain" model="text/model-diagram"/>
         <property name="message" channel="inline" abstraction="path/knowledge" model=".greeting"/>
         <property name="receiver" channel="inline" abstraction="text/plain" model="TEST_HELLOWORLD.txt"/>
     </part>
-<!--
     <part name="startup_gnu_linux_console" channel="inline" abstraction="operation/plain" model="startup">
-        <property name="service" channel="inline" abstraction="text/plain" model="gnu_linux_console"/>
+        <property name="service" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
     </part>
--->
     <part name="send_greeting_to_output" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
 <!--
@@ -34,11 +29,9 @@
         <property name="message" channel="inline" abstraction="path/knowledge" model=".greeting"/>
         <property name="clean" channel="inline" abstraction="logicvalue/boolean" model="true"/>
     </part>
-<!--
     <part name="shutdown_gnu_linux_console" channel="inline" abstraction="operation/plain" model="shutdown">
-        <property name="service" channel="inline" abstraction="text/plain" model="gnu_linux_console"/>
+        <property name="service" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
     </part>
--->
 <!--
     <part name="destroy_greeting" channel="inline" abstraction="operation/plain" model="destroy">
         <property name="model" channel="inline" abstraction="path/knowledge" model=".greeting"/>
@@ -70,6 +63,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: startup.cybol,v $ $Revision: 1.24 $ $Date: 2009-01-17 15:56:17 $ $Author: christian $
+    @version $RCSfile: startup.cybol,v $ $Revision: 1.25 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
