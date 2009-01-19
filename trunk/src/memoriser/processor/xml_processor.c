@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_processor.c,v $ $Revision: 1.13 $ $Date: 2008-12-31 00:14:57 $ $Author: christian $
+ * @version $RCSfile: xml_processor.c,v $ $Revision: 1.14 $ $Date: 2009-01-19 23:33:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -320,19 +320,16 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4, void
                                 }
                             }
 
-                            // The destination tag name name.
+                            // The destination tag name part name, abstraction, model, details.
                             void* n = *NULL_POINTER_MEMORY_MODEL;
                             void* nc = *NULL_POINTER_MEMORY_MODEL;
                             void* ns = *NULL_POINTER_MEMORY_MODEL;
-                            // The destination tag name abstraction.
                             void* a = *NULL_POINTER_MEMORY_MODEL;
                             void* ac = *NULL_POINTER_MEMORY_MODEL;
                             void* as = *NULL_POINTER_MEMORY_MODEL;
-                            // The destination tag name model.
                             void* m = *NULL_POINTER_MEMORY_MODEL;
                             void* mc = *NULL_POINTER_MEMORY_MODEL;
                             void* ms = *NULL_POINTER_MEMORY_MODEL;
-                            // The destination tag name details.
                             void* d = *NULL_POINTER_MEMORY_MODEL;
                             void* dc = *NULL_POINTER_MEMORY_MODEL;
                             void* ds = *NULL_POINTER_MEMORY_MODEL;
@@ -614,19 +611,16 @@ void process_xml_attribute(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 //??    fwprintf(stdout, L"TEST process attribute avc: %i\n", avc);
 //??    fwprintf(stdout, L"TEST process attribute av: %ls\n", (wchar_t*) av);
 
-                        // The destination attribute name.
+                        // The destination attribute name, abstraction, model, details.
                         void* n = *NULL_POINTER_MEMORY_MODEL;
                         void* nc = *NULL_POINTER_MEMORY_MODEL;
                         void* ns = *NULL_POINTER_MEMORY_MODEL;
-                        // The destination attribute abstraction.
                         void* a = *NULL_POINTER_MEMORY_MODEL;
                         void* ac = *NULL_POINTER_MEMORY_MODEL;
                         void* as = *NULL_POINTER_MEMORY_MODEL;
-                        // The destination attribute model.
                         void* m = *NULL_POINTER_MEMORY_MODEL;
                         void* mc = *NULL_POINTER_MEMORY_MODEL;
                         void* ms = *NULL_POINTER_MEMORY_MODEL;
-                        // The destination attribute details.
                         void* d = *NULL_POINTER_MEMORY_MODEL;
                         void* dc = *NULL_POINTER_MEMORY_MODEL;
                         void* ds = *NULL_POINTER_MEMORY_MODEL;
@@ -740,26 +734,23 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml element.");
 
-                // The part name.
+                // The part name, abstraction, model, details.
                 void* n = *NULL_POINTER_MEMORY_MODEL;
                 void* nc = *NULL_POINTER_MEMORY_MODEL;
                 void* ns = *NULL_POINTER_MEMORY_MODEL;
-                // The part abstraction.
                 void* a = *NULL_POINTER_MEMORY_MODEL;
                 void* ac = *NULL_POINTER_MEMORY_MODEL;
                 void* as = *NULL_POINTER_MEMORY_MODEL;
-                // The part model.
                 void* m = *NULL_POINTER_MEMORY_MODEL;
                 void* mc = *NULL_POINTER_MEMORY_MODEL;
                 void* ms = *NULL_POINTER_MEMORY_MODEL;
-                // The part details.
                 void* d = *NULL_POINTER_MEMORY_MODEL;
                 void* dc = *NULL_POINTER_MEMORY_MODEL;
                 void* ds = *NULL_POINTER_MEMORY_MODEL;
 
 //??    fwprintf(stdout, L"TEST process element 0: %i\n", *rem);
 
-                // Allocate destination name.
+                // Allocate destination part.
                 allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                     (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                     (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);

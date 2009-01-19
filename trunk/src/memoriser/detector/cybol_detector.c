@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_detector.c,v $ $Revision: 1.3 $ $Date: 2008-12-28 12:14:33 $ $Author: christian $
+ * @version $RCSfile: cybol_detector.c,v $ $Revision: 1.4 $ $Date: 2009-01-19 23:33:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,10 +50,10 @@ void detect_cybol_root_node(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect cybol root node.");
 
-        if ((p1 == *NULL_POINTER_MEMORY_MODEL) || (p2 == *NULL_POINTER_MEMORY_MODEL)
-            || (p3 == *NULL_POINTER_MEMORY_MODEL) || (p4 == *NULL_POINTER_MEMORY_MODEL)
-            || (p5 == *NULL_POINTER_MEMORY_MODEL) || (p6 == *NULL_POINTER_MEMORY_MODEL)
-            || (p7 == *NULL_POINTER_MEMORY_MODEL) || (p8 == *NULL_POINTER_MEMORY_MODEL)) {
+        if ((p1 == *NULL_POINTER_MEMORY_MODEL) && (p2 == *NULL_POINTER_MEMORY_MODEL)
+            && (p3 == *NULL_POINTER_MEMORY_MODEL) && (p4 == *NULL_POINTER_MEMORY_MODEL)
+            && (p5 == *NULL_POINTER_MEMORY_MODEL) && (p6 == *NULL_POINTER_MEMORY_MODEL)
+            && (p7 == *NULL_POINTER_MEMORY_MODEL) && (p8 == *NULL_POINTER_MEMORY_MODEL)) {
 
             *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
         }

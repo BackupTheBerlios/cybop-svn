@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.6 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
+ * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.7 $ $Date: 2009-01-19 23:33:13 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -116,19 +116,16 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                 (void*) &sm, (void*) &smc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
-            // The part name.
+            // The part name, abstraction, model, details.
             void* n = *NULL_POINTER_MEMORY_MODEL;
             void* nc = *NULL_POINTER_MEMORY_MODEL;
             void* ns = *NULL_POINTER_MEMORY_MODEL;
-            // The part abstraction.
             void* a = *NULL_POINTER_MEMORY_MODEL;
             void* ac = *NULL_POINTER_MEMORY_MODEL;
             void* as = *NULL_POINTER_MEMORY_MODEL;
-            // The part model.
             void* m = *NULL_POINTER_MEMORY_MODEL;
             void* mc = *NULL_POINTER_MEMORY_MODEL;
             void* ms = *NULL_POINTER_MEMORY_MODEL;
-            // The part details.
             void* d = *NULL_POINTER_MEMORY_MODEL;
             void* dc = *NULL_POINTER_MEMORY_MODEL;
             void* ds = *NULL_POINTER_MEMORY_MODEL;
@@ -161,7 +158,6 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 decode((void*) &ra, (void*) &rac, (void*) &ras, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
 
 /*??
-
     fwprintf(stdout, L"TEST process cybol node 2 sn: %ls\n", (wchar_t*) *sn);
     fwprintf(stdout, L"TEST process cybol node 2 snc: %i\n", **((int**) snc));
     fwprintf(stdout, L"TEST process cybol node 2 sc: %ls\n", (wchar_t*) *sc);
@@ -207,7 +203,8 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 */
 
                 // Receive and decode destination part model and details.
-                // CAUTION! Use the original CYBOL abstraction as source here!
+                // CAUTION! Use the ORIGINAL CYBOL abstraction as source here
+                // (not the temporary runtime abstraction)!
                 communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                     (void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
                     *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,

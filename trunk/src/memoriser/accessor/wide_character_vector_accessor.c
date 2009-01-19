@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: wide_character_vector_accessor.c,v $ $Revision: 1.13 $ $Date: 2008-11-27 18:35:46 $ $Author: christian $
+ * @version $RCSfile: wide_character_vector_accessor.c,v $ $Revision: 1.14 $ $Date: 2009-01-19 23:33:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -175,11 +175,8 @@ void replace_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void*
                     reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Replace destination- with source wide character vector.
-                    // Use an index with value zero, so that all characters get replaced.
                     //
-                    // CAUTION! Do NOT set the destination count above
-                    // (together with the destination size),
-                    // because it is used here as index!
+                    // CAUTION! Use an index with value zero, so that all characters get replaced.
                     set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                     // Set destination count to the same value as the -size.

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: copying_memoriser.c,v $ $Revision: 1.7 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
+ * @version $RCSfile: copying_memoriser.c,v $ $Revision: 1.8 $ $Date: 2009-01-19 23:33:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -44,7 +44,8 @@
  * Copies a primitive model.
  *
  * Expected parameters:
- * - abstraction (required): the source value
+ * - abstraction (required): the type of data
+ * - source (required): the source value
  * - destination (required): the destination value
  *
  * @param p0 the parameters
@@ -129,7 +130,7 @@ void memorise_copying(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*am, *amc, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*am, *amc, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -139,7 +140,7 @@ void memorise_copying(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*am, *amc, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*am, *amc, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

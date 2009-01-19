@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: file_operation_cybol_model.c,v $ $Revision: 1.1 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: file_operation_cybol_model.c,v $ $Revision: 1.2 $ $Date: 2009-01-19 23:33:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -34,10 +34,14 @@ static wchar_t ARCHIVE_FILE_OPERATION_CYBOL_MODEL_ARRAY[] = {L'a', L'r', L'c', L
 static wchar_t* ARCHIVE_FILE_OPERATION_CYBOL_MODEL = ARCHIVE_FILE_OPERATION_CYBOL_MODEL_ARRAY;
 static int* ARCHIVE_FILE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The copy file operation cybol model. */
-static wchar_t COPY_FILE_OPERATION_CYBOL_MODEL_ARRAY[] = {L'c', L'o', L'p', L'y'};
+/**
+ * The copy file operation cybol model.
+ *
+ * CAUTION! Its name must not be just "copy", because that is already used as memory operation!
+ */
+static wchar_t COPY_FILE_OPERATION_CYBOL_MODEL_ARRAY[] = {L'c', L'o', L'p', L'y', L'_', L'f', L'i', L'l', L'e'};
 static wchar_t* COPY_FILE_OPERATION_CYBOL_MODEL = COPY_FILE_OPERATION_CYBOL_MODEL_ARRAY;
-static int* COPY_FILE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+static int* COPY_FILE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The list_directory_contents file operation cybol model. */
 static wchar_t LIST_DIRECTORY_CONTENTS_FILE_OPERATION_CYBOL_MODEL_ARRAY[] = {L'l', L'i', L's', L't', L'_', L'd', L'i', L'r', L'e', L'c', L't', L'o', L'r', L'y', L'_', L'c', L'o', L'n', L't', L'e', L'n', L't', L's'};

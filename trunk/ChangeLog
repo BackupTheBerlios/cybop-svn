@@ -14,9 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.117 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
+# @version $Revision: 1.118 $ $Date: 2009-01-19 23:33:10 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace last remaining Unicode character in "ascii" border or file "gnu_linux_console_converter.c"
+            with ASCII vertical line (the non-ASCII pipe caused a wrong text user interface output)
+        * Eliminate bug in file "cybol_detector.c" where || was used instead of && for CYBOL root node detection
+        * Correct copying of strings; rename one of two redundant CYBOL operations (for memory and file) into "copy_file"
 
 2009-01-18  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt CYBOL example application "ui_control" to new MIME-type-like abstractions

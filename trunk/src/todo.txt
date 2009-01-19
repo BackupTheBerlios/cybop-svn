@@ -7,11 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.91 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
+# @version $Revision: 1.92 $ $Date: 2009-01-19 23:33:10 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Make CYBOL example application "ui_control" work (the last in the list in file "INSTALL")
+        * Make CYBOL example application "ui_control" work
+        * Replace "receive" where actually "sense" is meant
+        * Investigate and fix sensing mechanism
 
         * CAUTION! The following was probably already SOLVED in source code and may get DELETED here!
         * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),

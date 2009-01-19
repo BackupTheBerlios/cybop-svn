@@ -137,10 +137,12 @@
         <property name="service" channel="inline" abstraction="text/plain" model="x-window-system"/>
     </part>
 -->
+<!--
     <part name="select_current_menu_item" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
         <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.select_current_part"/>
     </part>
+-->
     <part name="send_tui" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
         <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window"/>
@@ -190,6 +192,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: startup.cybol,v $ $Revision: 1.16 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
+    @version $RCSfile: startup.cybol,v $ $Revision: 1.17 $ $Date: 2009-01-19 23:33:10 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

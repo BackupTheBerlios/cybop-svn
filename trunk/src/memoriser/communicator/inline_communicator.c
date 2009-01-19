@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: inline_communicator.c,v $ $Revision: 1.19 $ $Date: 2008-10-05 23:15:03 $ $Author: christian $
+ * @version $RCSfile: inline_communicator.c,v $ $Revision: 1.20 $ $Date: 2009-01-19 23:33:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -36,75 +36,33 @@
 /**
  * Reads an inline stream and writes it into a byte array.
  *
- * @param p0 the destination (byte array) (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source (inline data)
- * @param p4 the source count
+ * @param p0 the destination wide character array (Hand over as reference!)
+ * @param p1 the destination wide character array count
+ * @param p2 the destination wide character array size
+ * @param p3 the source wide character array
+ * @param p4 the source wide character array count
  */
 void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read inline.");
 
-        int* sc = (int*) p4;
-
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* ds = (int*) p2;
-
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-                int* dc = (int*) p1;
-
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    void** d = (void**) p0;
-
-                    // Set new array size.
-                    *ds = *sc;
-
-                    // Reallocate array.
-                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                    // The destination array index to start writing at.
-                    int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                    set_array_elements(*d, (void*) &i, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                    // Set new array count.
-                    *dc = *sc;
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read inline. The array count is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read inline. The array count is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read inline. The array size is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read inline. The inline byte stream count is null.");
-    }
+    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
 /**
  * Writes an inline stream that was read from a byte array.
  *
- * @param p0 the destination (inline data) (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source (byte array)
- * @param p4 the source count
+ * @param p0 the destination wide character array (Hand over as reference!)
+ * @param p1 the destination wide character array count
+ * @param p2 the destination wide character array size
+ * @param p3 the source wide character array
+ * @param p4 the source wide character array count
  */
 void write_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write inline.");
+
+    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* INLINE_COMMUNICATOR_SOURCE */

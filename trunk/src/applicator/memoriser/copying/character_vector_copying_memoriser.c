@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: character_vector_copying_memoriser.c,v $ $Revision: 1.6 $ $Date: 2008-11-14 23:21:17 $ $Author: christian $
+ * @version $RCSfile: character_vector_copying_memoriser.c,v $ $Revision: 1.7 $ $Date: 2009-01-19 23:33:11 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,72 +45,6 @@
 void memorise_copying_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     replace(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-/*??
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* sc = (int*) p4;
-
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* ds = (int*) p2;
-
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-                int* dc = (int*) p1;
-
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    void** d = (void**) p0;
-
-                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Copy character vector.");
-
-                    // CAUTION! The destination array needs to be resized not only
-                    // if the source array is greater, but also if it is smaller!
-                    // If this is not done, false results may occur.
-                    // Example: A colour gets copied from source to destination.
-                    // The source colour is "red" with a count of 3.
-                    // The destination colour is "green" with a count of 5.
-                    // If the source colour gets copied to the destination,
-                    // the resulting destination array is "reden" with a count of 5.
-                    // This colour value does not exist and will cause errors!
-                    // Therefore, the destination array count and size ALWAYS
-                    // have to be adapted to the source array count and size.
-                    // If this had been done in the example, the resulting
-                    // destination array would have been "red" with a count of 3,
-                    // which is correct.
-
-                    // CAUTION! Do NOT use < or > here, for the reasons explained above!
-                    if (*sc != *dc) {
-
-                        *dc = *sc;
-                        *ds = *dc;
-
-                        reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                    }
-
-                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy character vector. The destination is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy character vector. The destination count is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy character vector. The destination size is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy character vector. The source count is null.");
-    }
-*/
 }
 
 /* CHARACTER_VECTOR_COPYING_MEMORISER_SOURCE */
