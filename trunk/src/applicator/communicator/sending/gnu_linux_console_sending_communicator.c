@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.10 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -83,9 +83,6 @@ void communicate_sending_gnu_linux_console(void* p0, void* p1, void* p2, void* p
             append((void*) &s, sc, ss, (void*) ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ERASE_DISPLAY_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         }
     }
-
-    // Serialise source knowledge model into serialised wide character array.
-//??    encode((void*) &s, sc, ss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
 
     // Encode textual user interface (tui) into array.
     encode_gnu_linux_console((void*) &s, sc, ss, p1, p2, p3, p4, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8, p11, p12);

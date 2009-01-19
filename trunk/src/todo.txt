@@ -7,11 +7,33 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.90 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
+# @version $Revision: 1.91 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
         * Make CYBOL example application "ui_control" work (the last in the list in file "INSTALL")
+
+        * CAUTION! The following was probably already SOLVED in source code and may get DELETED here!
+        * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
+            because escape sequences consist of more than just one character (mostly three)
+        * Find some way to predict the number of characters or find an eof or the like,
+            in order to properly handle escape control sequences
+
+        * Commands of gnu/linux console HAVE TO BE handed over!
+        * Search for pressed key in commands
+        * Wenn returned command == NULL, dann suche nach "default" in commands
+            (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)
+        * Gedruecktes Zeichen/ Taste muss mit in einem Parameter zurueckgegeben werden!
+
+        * For the following points, see example of "wide_character_vector_accessor.c", where this is already implemented!
+        * Increase count and size in "*_accessor.c" files automatically and adapt all source code accordingly
+            (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.);
+        * Create new "set", "remove", "get" functions which automatically adjust the destination's count and size
+            (see modules "character_vector_accessor.c" and "wide_character_vector_accessor.c", which already have it);
+            this is to reduce the amount of source code and to take the burden of handling count and size from the developer working with arrays
+
+        * Rename utf-8 stuff to "decode/encode" (encoder instead of converter) and
+            other conversions to "deserialise/serialise" (serialiser instead of converter)
 
         * Rename several things in CYBOL files and CYBOI:
             --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
@@ -24,6 +46,8 @@
             --> a "whole" attribute is not needed, as due to the CYBOL structure it is clear that
                     parts belong to the compound in whose file they stand
             --> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
+        * Add a new CYBOL XML attribute named "encoding" and possibly one more named "repertoire" (or "set", or "code");
+            currently, only the Unicode character repertoire/set with UTF-8 encoding may be processed
 
         * Simplify and unify array functions by introducing NEW files for handling of primitive data types,
             e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
@@ -32,23 +56,6 @@
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code
         * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
             knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
-        * Check the following files in directory "memoriser/converter/",
-            which were probably not converted correctly from "char" to "wchar_t":
-            gnu_linux_console_converter.c
-            http_request_converter.c
-            http_response_converter.c
-            xdt_converter.c
-
-        * Add a new CYBOL XML attribute named "encoding" and possibly one more named "repertoire" (or "set", or "code");
-            currently, only the Unicode character repertoire/set with UTF-8 encoding may be processed
-        * Rename utf-8 stuff to "decode/encode" (encoder instead of converter) and
-            other conversions to "deserialise/serialise" (serialiser instead of converter)
-
-        * CAUTION! The following was probably already SOLVED in source code and may get DELETED here!
-        * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
-            because escape sequences consist of more than just one character (mostly three)
-        * Find some way to predict the number of characters or find an eof or the like,
-            in order to properly handle escape control sequences
 
         * stop thread if irq has already been set to 1; only continue sensing if irq is 0,
             e.g. in function "sense_gnu_linux_console"
@@ -62,25 +69,12 @@
                 (do this DIRECTLY, just like the "loop" and "branch" functions do,
                 and NOT in form of an encapsulating signal)
 
-        * For the following points, see example of "wide_character_vector_accessor.c", where this is already implemented!
-        * Increase count and size in "*_accessor.c" files automatically and adapt all source code accordingly
-            (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.);
-        * Create new "set", "remove", "get" functions which automatically adjust the destination's count and size
-            (see modules "character_vector_accessor.c" and "wide_character_vector_accessor.c", which already have it);
-            this is to reduce the amount of source code and to take the burden of handling count and size from the developer working with arrays
-
         * Does the logger need an own mutex? ... because it is accessed by all threads!
 
         * Possible Bug? in function "set_compound_element_by_index":
             set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
             --> the "(void*) &p4" does possibly lead to errors, since a reference to the
                 local variable p4 is stored, which gets destroyed as soon as the function is left
-
-        * Commands of gnu/linux console HAVE TO BE handed over!
-        * Search for pressed key in commands
-        * Wenn returned command == NULL, dann suche nach "default" in commands
-            (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)
-        * Gedruecktes Zeichen/ Taste muss mit in einem Parameter zurueckgegeben werden!
 
         * CONTINUE in: function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
             // Add fragment to given compound model.
@@ -153,9 +147,6 @@
         * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
         * Enable multiple abstractions like "character|UTF-32|gzip", separated by
             a "pipe" character and processed one-by-one, in the given order
-        * Correct encode for background- and foreground colour in "encode_gnu_linux_console_shape" function of
-            "gnu_linux_console_converter.c": allocate destination variables before handing them over as parameters
-        * Check all places where "rellocate" is used, if the new array is SET / ASSIGNED new right afterwards
         * Adapt all places in source code where reallocation is used to new
             reallocation factor handling and also shrink memory structures appropriately
         * Include the sources of all documents into the distributable tarball cybop-0.9.0/
@@ -263,3 +254,7 @@
             ==> solution 1 seems desirable, but would need some thinking on how to implement this in CYBOI
             ==> for now, as temporary solution, the properties are stored redundantly (twice) in the template
                 that needs them (for example "menu_item" entries in the resmedicinae-revue menu) and in its super template
+
+        * Implement an own solution for character set conversion, since the
+            three function sets of the gnu C library all have their drawbacks
+            (see comment at beginning of file "utf_8_unicode_character_converter.c")

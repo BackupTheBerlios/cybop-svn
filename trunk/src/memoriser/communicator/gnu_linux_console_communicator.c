@@ -19,14 +19,13 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.23 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.24 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef GNU_LINUX_CONSOLE_COMMUNICATOR_SOURCE
 #define GNU_LINUX_CONSOLE_COMMUNICATOR_SOURCE
 
-#include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
@@ -176,70 +175,66 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
  */
 void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* sc = (int*) p4;
+        FILE** d = (FILE**) p0;
 
-        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to gnu/linux console.");
 
-            FILE** d = (FILE**) p0;
+        // The terminated control sequences.
+        void* ts = *NULL_POINTER_MEMORY_MODEL;
+        void* tsc = *NULL_POINTER_MEMORY_MODEL;
+        void* tss = *NULL_POINTER_MEMORY_MODEL;
 
-            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to gnu/linux console.");
+        // Allocate terminated control sequences.
+        //
+        // CAUTION! Use a standard (non-wide) character vector here,
+        // because the source is handed over as utf-8 encoded multibyte characters
+        // and will be forwarded as such to the gnu linux console!
+        allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-/*??
-            // Possible locales are: LANG, LC_CTYPE, LC_ALL.
-            // CAUTION! This setting is necessary for UTF-8 Unicode characters to work.
-            char* loc = setlocale(LC_ALL, "");
-*/
+        // Append control sequences and null termination character.
+        append_character_vector((void*) &ts, tsc, tss, p3, p4);
+        append_character_vector((void*) &ts, tsc, tss, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-            // The terminated control sequences.
-            void* ts = *NULL_POINTER_MEMORY_MODEL;
-            void* tsc = *NULL_POINTER_MEMORY_MODEL;
-            void* tss = *NULL_POINTER_MEMORY_MODEL;
+        if (*d != *NULL_POINTER_MEMORY_MODEL) {
 
-            // Allocate terminated control sequences.
+            // Write to terminal.
+//??            fwprintf(*d, L"%s", (char*) ts);
+
+            //?? This is a TEMPORARY workaround.
+            //?? The UTF-8 conversion returns the total number of bytes,
+            //?? of all multibyte characters that were converted from wide characters.
+            //?? So the size is known, but not the actual number of characters,
+            //?? since one character may occupy more than just one byte.
+            //?? This may sometimes lead to problems (THIS IS AN ASSUMPTION),
+            //?? so that the text user interface is not drawn properly or not at all.
+            //?? Therefore, as a workaround, the source is printed on console as is,
+            //?? without null termination character.
+            fwprintf(*d, L"%s", (char*) p3);
+
+            // Flush any buffered output on the stream to the file.
             //
-            // CAUTION! Use a standard (non-wide) character vector here,
-            // because the source is handed over as utf-8 encoded multibyte characters
-            // and will be forwarded as such to the gnu linux console!
-            allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-            // Append control sequences and null termination character.
-            append_character_vector((void*) &ts, tsc, tss, p3, p4);
-            append_character_vector((void*) &ts, tsc, tss, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-            if (*d != *NULL_POINTER_MEMORY_MODEL) {
-
-                // Write to terminal.
-                fwprintf(*d, L"%s", (char*) ts);
-
-                // Flush any buffered output on the stream to the file.
-                //
-                // If this was not done here, the buffered output on the
-                // stream would only get flushed automatically when either:
-                // - one tried to do output and the output buffer is full
-                // - the stream was closed
-                // - the program terminated by calling exit
-                // - a newline was written with the stream being line buffered
-                // - an input operation on any stream actually read data from its file
-                fflush(*d);
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The destination terminal file is null.");
-            }
-
-            // Deallocate terminated control sequences.
-            deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // If this was not done here, the buffered output on the
+            // stream would only get flushed automatically when either:
+            // - one tried to do output and the output buffer is full
+            // - the stream was closed
+            // - the program terminated by calling exit
+            // - a newline was written with the stream being line buffered
+            // - an input operation on any stream actually read data from its file
+            fflush(*d);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The destination terminal file parameter is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The destination terminal file is null.");
         }
+
+        // Deallocate terminated control sequences.
+        deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The source terminal control sequences count parameter is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The destination terminal file parameter is null.");
     }
 }
 

@@ -14,16 +14,27 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.116 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+# @version $Revision: 1.117 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 2009-01-18  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt CYBOL example application "ui_control" to new MIME-type-like abstractions
+        * Search bug that text user interface of CYBOL example application "ui_control"
+            does not get displayed properly
+        * Change several minor things related to Unicode and UTF-8 handling
+        * Investigate three possible ways for character conversion in GNU C library documentation:
+            - "Non-reentrant Conversion"
+            - "Restartable Multibyte Conversion"
+            - "Generic Charset Conversion"
+            currently, "Restartable Multibyte Conversion" functions are used in CYBOI,
+            but since all of the above functions have drawbacks, CYBOI may have to
+            implement its very own conversion functions in the future
 
 2009-01-17  Christian Heller  <christian.heller@tuxtax.de>
         * Correct minor bugs in files "integer_converter.c" and "integer_vector_converter.c"
         * Review file "gnu_linux_console_converter.c" and adapt as well as simplify many pieces
+        * Correct files "terminal_background_converter.c" and "terminal_foreground_converter.c"
         * Make CYBOL example "helloworld" work when sending to gnu_linux_console
         * Adapt several gnu linux console files for: startup, shutdown, conversion, writing
         * Simplify variable declaration and allocation using the file "model_allocator.c"

@@ -1,6 +1,6 @@
 <model>
     <part name="shape" channel="inline" abstraction="text/plain" model="rectangle"/>
-    <part name="border" channel="inline" abstraction="text/plain" model="line"/>
+    <part name="border" channel="inline" abstraction="text/plain" model="ascii"/>
     <part name="layout" channel="inline" abstraction="text/plain" model="coordinates"/>
     <part name="background" channel="inline" abstraction="text/plain" model="green"/>
     <part name="foreground" channel="inline" abstraction="text/plain" model="white"/>
@@ -30,6 +30,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: window.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @version $RCSfile: window.cybol,v $ $Revision: 1.7 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

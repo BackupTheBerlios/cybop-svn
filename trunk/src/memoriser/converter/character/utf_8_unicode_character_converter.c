@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.10 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: utf_8_unicode_character_converter.c,v $ $Revision: 1.11 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,12 +27,103 @@
 #define UTF_8_UNICODE_CHARACTER_CONVERTER_SOURCE
 
 #include <errno.h>
+#include <locale.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
+
+//
+// Reflexions on character set conversion.
+//
+// A Unix C library such as the GNU C library contains three different sets
+// of functions in two families to handle character set conversion:
+//
+// 1 First Family
+// - specified in the ISO C90 standard
+// - portable even beyond the Unix world
+// - most commonly used but the least useful one;
+//   its functions should be avoided whenever possible
+// - the wide character set is fixed by the implementation
+//   (in the case of GNU C library it is always UCS-4 encoded ISO 10646)
+// - if neither the source nor the destination character set is the character set used
+//   for wchar_t representation, there is at least a two-step conversion process necessary
+// - character set assumed for multibyte encoding is not specified as an argument to the functions;
+//   instead, the character set specified by the LC_CTYPE category of the current locale is used;
+//   for every conversion where neither the source nor the destination character set is the character set
+//   of the locale for the LC_CTYPE category, one has to change the LC_CTYPE locale using "setlocale";
+//   parallel conversions to and from different character sets are not possible,
+//   since the LC_CTYPE selection is global and shared by all threads
+// - self-made observation (not taken from the GNU C library manual):
+//   not all Unicode characters are contained in one of the standard locales;
+//   e.g. special Unicode Box drawing characters are useful when creating a Text User Interfaces (TUI);
+//   but unfortunately, they are missing in the existing locales;
+//   an example for such a missing Unicode character is this one:
+//   U+2570 box drawings light arc up and right
+//
+// 1.1 First Function Set "Non-reentrant Conversion"
+// - defined in original ISO C90 standard
+// - almost entirely useless
+// - one cannot first convert single characters and then strings
+//   since one cannot tell the conversion functions which state to use
+// - usable only in a very limited set of situations
+// - one must complete converting the entire string before starting a new one
+// - each string/text must be converted with the same function
+// - highly requested that the "Restartable Multibyte Conversion" functions
+//   be used in place of non-reentrant conversion functions
+//
+// 1.2 Second Function Set "Restartable Multibyte Conversion"
+// - defined in Amendment 1 to ISO C90 standard
+// - convert strings from a multibyte representation to wide character strings
+// - functions handling more than one character at a time require NUL terminated strings as the argument
+//   (converting blocks of text does not work unless one can add a NUL byte at an appropriate place);
+//   the GNU C library contains some extensions to the standard that allow specifying a size,
+//   but basically they also expect terminated strings
+// - can be used in many contexts, e.g. if the text itself comes from a file with
+//   translations and the user can decide about the current locale, which determines
+//   the translation and therefore also the external encoding used
+//
+// 2 Second Family
+// - third function set: generic charset conversion
+// - introduced in the early Unix standards (XPG2)
+// - still part of the latest and greatest Unix standard: Unix 98
+// - defines a completely new set of most powerful and useful functions
+//
+// 2.1 Third Function Set "Generic Charset Conversion"
+// - defines "iconv" functions as interface; does not provide an implementation
+// - provide more freedom while performing the conversion
+// - not at all coupled to the selected locales;
+//   has no constraints on the character sets selected for source and destination;
+//   only limited by the set of available conversions;
+//   does not specify that any conversion at all must be available
+// - problems with the specification of the iconv functions can lead to portability issues
+// - since it is not practical to encode the conversions directly in the C library,
+//   the conversion information must come from files outside the C library:
+//
+// a Loading Conversion Tables from Data Files
+// - C library contains a set of generic conversion functions
+// - data files are loaded when necessary
+// - requires a great deal of effort to apply to all character sets (potentially an infinite set)
+// - differences in the structure of the different character sets is so large,
+//   that many different variants of the table-processing functions must be developed
+// - the generic nature of these functions make them slower than specifically implemented functions
+//
+// b Dynamically Loading Object Files
+// - execute the conversion functions contained in object files
+// - provides much more flexibility
+// - with documented interface, third parties may extend the set of available conversion modules
+// - dynamic loading must be available
+// - design is limiting on platforms (outside ELF) that do not support dynamic loading in statically linked programs
+// - number of available conversions in iconv implementations is often very limited
+// - most problematic point, that the way the iconv conversion functions are implemented on all known Unix systems:
+//   the availability of the conversion functions from character set A to B and
+//   the conversion from B to C does not imply that the conversion from A to C is available
+//
+// Because of these drawbacks of all of the three function sets described above, it seems
+// inevitable to -- one day -- write "self-made", CYBOI-internal conversion functions.
+//
 
 //
 // UTF-8 (8-bit UCS/Unicode Transformation Format) is a variable-length
@@ -121,6 +212,22 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
 
                             // Reallocate destination wide character vector.
                             reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                            // Set locale.
+                            //
+                            // Possible locales are: LANG, LC_CTYPE, ..., LC_ALL
+                            // where LANG has the lowest and LC_ALL the highest priority.
+                            // That is, if LC_ALL is specified, it overwrites e.g. the LC_CTYPE setting.
+                            // If no value "" is given, the default will be used.
+                            // Note, that LC_CTYPE suffices for the purpose of character conversion,
+                            // since it is the category that applies to classification and conversion
+                            // of characters, and to multibyte and wide characters.
+                            //
+                            // CAUTION! This setting is necessary for UTF-8 Unicode character conversion
+                            // with restartable multibyte conversion functions like "mbsnrtowcs"
+                            // and "wcsnrtombs" to work correctly.
+                            // The return value is not used; this is a global setting.
+                            char* loc = setlocale(LC_CTYPE, "");
 
                             // The state of the conversion.
                             //
@@ -249,10 +356,26 @@ void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                     // than the destination size that was set before.
                     // In this case, the destination size will be too big, but can be reduced
                     // to the actual destination count below, if so wanted.
-                    *ds = (*dc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + (*sc * *NUMBER_4_INTEGER_MEMORY_MODEL);
+                    *ds = *dc + (*sc * *NUMBER_4_INTEGER_MEMORY_MODEL);
 
                     // Reallocate destination character vector.
                     reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                    // Set locale.
+                    //
+                    // Possible locales are: LANG, LC_CTYPE, ..., LC_ALL
+                    // where LANG has the lowest and LC_ALL the highest priority.
+                    // That is, if LC_ALL is specified, it overwrites e.g. the LC_CTYPE setting.
+                    // If no value "" is given, the default will be used.
+                    // Note, that LC_CTYPE suffices for the purpose of character conversion,
+                    // since it is the category that applies to classification and conversion
+                    // of characters, and to multibyte and wide characters.
+                    //
+                    // CAUTION! This setting is necessary for UTF-8 Unicode character conversion
+                    // with restartable multibyte conversion functions like "mbsnrtowcs"
+                    // and "wcsnrtombs" to work correctly.
+                    // The return value is not used; this is a global setting.
+                    char* loc = setlocale(LC_CTYPE, "");
 
                     // The state of the conversion.
                     //
@@ -287,7 +410,8 @@ void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
 
                     // Converts the wide character string into a multibyte character string.
                     //
-                    // Returns the number of multibyte characters converted.
+                    // Except in the case of an encoding error, the return value is the
+                    // number of bytes in all the multibyte character sequences stored in *d.
                     int n = wcsnrtombs(*d, (void*) &p3, *sc, *ds, &st);
 
                     if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {

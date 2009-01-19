@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.30 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.31 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -469,23 +469,36 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console rectangle border.");
 
-    fwprintf(stdout, L"TEST encode border 0: %i\n", p0);
-
                             // The comparison result.
                             int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) LINE_BORDER_CYBOL_MODEL, (void*) LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                compare_arrays(p6, p7, (void*) ASCII_LINE_BORDER_CYBOL_MODEL, (void*) ASCII_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                    *hc = *DIGIT_TWO_UNICODE_CHARACTER_CODE_MODEL;
-                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_UNICODE_CHARACTER_CODE_MODEL;
-                                    *ltc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
-                                    *rtc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
-                                    *lbc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
-                                    *rbc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *hc = *HYPHEN_MINUS_UNICODE_CHARACTER_CODE_MODEL;
+                                    *vc = *LATIN_LETTER_DENTAL_CLICK_UNICODE_CHARACTER_CODE_MODEL;
+                                    *ltc = *PLUS_SIGN_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rtc = *PLUS_SIGN_UNICODE_CHARACTER_CODE_MODEL;
+                                    *lbc = *PLUS_SIGN_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rbc = *PLUS_SIGN_UNICODE_CHARACTER_CODE_MODEL;
+                                }
+                            }
+
+                            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                                compare_arrays(p6, p7, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+                                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                                    *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL;
+                                    *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_UNICODE_CHARACTER_CODE_MODEL;
+                                    *ltc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rtc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *lbc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rbc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
                                 }
                             }
 
@@ -506,16 +519,16 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                compare_arrays(p6, p7, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                    *hc = *BOX_DRAWINGS_DOUBLE_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL;
-                                    *vc = *BOX_DRAWINGS_DOUBLE_VERTICAL_UNICODE_CHARACTER_CODE_MODEL;
-                                    *ltc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
-                                    *rtc = *BOX_DRAWINGS_DOUBLE_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
-                                    *lbc = *BOX_DRAWINGS_DOUBLE_UP_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
-                                    *rbc = *BOX_DRAWINGS_DOUBLE_UP_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *hc = *DIGIT_TWO_UNICODE_CHARACTER_CODE_MODEL;
+                                    *vc = *BOX_DRAWINGS_LIGHT_VERTICAL_UNICODE_CHARACTER_CODE_MODEL;
+                                    *ltc = *BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rtc = *BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *lbc = *BOX_DRAWINGS_LIGHT_UP_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL;
+                                    *rbc = *BOX_DRAWINGS_LIGHT_UP_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL;
                                 }
                             }
 
@@ -608,8 +621,6 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
 
                             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console rectangle.");
 
-    fwprintf(stdout, L"TEST encode rectangle 0: %i\n", p0);
-
                             // The horizontal character.
                             wchar_t hc = *SPACE_UNICODE_CHARACTER_CODE_MODEL;
                             // The vertical character.
@@ -639,13 +650,6 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                             int yl = *py + *sy;
                             // The x loop limit as sum of position and size.
                             int xl = *px + *sx;
-
-    fwprintf(stdout, L"TEST encode rectangle z: %i\n", z);
-    fwprintf(stdout, L"TEST encode rectangle y: %i\n", y);
-    fwprintf(stdout, L"TEST encode rectangle x: %i\n", x);
-    fwprintf(stdout, L"TEST encode rectangle zl: %i\n", zl);
-    fwprintf(stdout, L"TEST encode rectangle yl: %i\n", yl);
-    fwprintf(stdout, L"TEST encode rectangle xl: %i\n", xl);
 
                             // The character index.
                             int ci = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -846,8 +850,6 @@ void encode_gnu_linux_console_rectangle_coordinates_layout(void* p0, void* p1, v
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console rectangle coordinates layout.");
 
-    fwprintf(stdout, L"TEST encode rectangle coordinates layout 0: %i\n", p0);
-
     int* cpx = (int*) p0;
     int* cpy = (int*) p1;
     int* cpz = (int*) p2;
@@ -1028,8 +1030,6 @@ void encode_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, voi
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console rectangle layout.");
 
-    fwprintf(stdout, L"TEST encode rectangle layout 0: %i\n", p0);
-
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -1097,8 +1097,6 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     void* p22, void* p23, void* p24, void* p25, void* p26, void* p27) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console coordinates.");
-
-    fwprintf(stdout, L"TEST encode coordinates 0: %i\n", p0);
 
     // The source part position x, y, z.
     int* px = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -1252,8 +1250,6 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 */
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console shape.");
-
-    fwprintf(stdout, L"TEST encode shape 0: %i\n", p0);
 
 /*??
         // The character.
@@ -1450,8 +1446,6 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
     void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode gnu/linux console.");
-
-    fwprintf(stdout, L"TEST encode 0: %i\n", p0);
 
     // The source part name, abstraction, model, details.
     void** n = NULL_POINTER_MEMORY_MODEL;
