@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.32 $ $Date: 2009-01-19 23:33:12 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.33 $ $Date: 2009-01-20 23:46:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -167,6 +167,10 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode gnu/linux console character.");
 
+    fwprintf(stdout, L"TEST decode character p2: %i\n", *((int*) p2));
+    fwprintf(stdout, L"TEST decode character p1: %i\n", *((int*) p1));
+    fwprintf(stdout, L"TEST decode character p0: %ls\n", (wchar_t*) *((void**) p0));
+
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -192,6 +196,9 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+    fwprintf(stdout, L"TEST decode character cc: %i\n", *((int*) p4));
+    fwprintf(stdout, L"TEST decode character c: %ls\n", (wchar_t*) p3);
+
         // None of the control characters above matched.
         // Pass along character without modification.
         replace(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
@@ -215,13 +222,11 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode gnu/linux console.");
 
-    fwprintf(stdout, L"TEST decode gnu/linux console s: %s\n", (char*) p3);
+    fwprintf(stdout, L"TEST decode gnu/linux console s: %ls\n", (wchar_t*) p3);
     fwprintf(stdout, L"TEST decode gnu/linux console sc: %i\n", *((int*) p4));
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    fwprintf(stdout, L"TEST a0: %i\n", p3);
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.60 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.61 $ $Date: 2009-01-20 23:46:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -393,11 +393,11 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected gnu/linux console interrupt.");
 
-                        // Set interrupt request flag.
+                        // Get interrupt request flag.
                         get_element(p10, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Set mutex.
+                        // Get mutex.
                         get_element(p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Set handler.
+                        // Get handler.
                         get_element(p12, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                         get_element(p13, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                         get_element(p14, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);

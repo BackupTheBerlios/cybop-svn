@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.10 $ $Date: 2009-01-20 23:46:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -72,14 +72,14 @@ void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void*
     // Read pressed keyboard keys as message from gnu/linux console.
     read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12);
 
-    fwprintf(stdout, L"TEST a: %s\n", (wchar_t*) a);
+    fwprintf(stdout, L"TEST a: %ls\n", (wchar_t*) a);
     fwprintf(stdout, L"TEST ac: %i\n", ac);
     fwprintf(stdout, L"TEST as: %i\n", as);
 
     // Decode character array into command.
     decode(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
 
-    fwprintf(stdout, L"TEST m: %s\n", *((wchar_t**) p6));
+    fwprintf(stdout, L"TEST m: %ls\n", *((wchar_t**) p6));
     fwprintf(stdout, L"TEST mc: %i\n", *((int*) p7));
     fwprintf(stdout, L"TEST ms: %i\n", *((int*) p8));
 

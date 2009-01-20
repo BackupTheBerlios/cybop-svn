@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.24 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.25 $ $Date: 2009-01-20 23:46:15 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -96,7 +96,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 csi = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Copy source character to destination character array.
-                decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                 // An escape character followed by a left square bracket character
                 // were read before. So this is an escape control sequence.
@@ -121,7 +121,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                     csi = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Copy source character to destination character array.
-                    decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                    decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                 } else {
 
@@ -141,7 +141,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
                 esc = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 // Copy source character to destination character array.
-                decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
             } else if (c == WEOF) {
 
@@ -151,7 +151,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             } else {
 
                 // Copy source character to destination character array.
-                decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                decode_utf_8_unicode_character_vector(p0, p1, p2, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                 // Set loop exit flag.
                 f = *NUMBER_1_INTEGER_MEMORY_MODEL;

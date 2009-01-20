@@ -14,9 +14,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.118 $ $Date: 2009-01-19 23:33:10 $ $Author: christian $
+# @version $Revision: 1.119 $ $Date: 2009-01-20 23:46:14 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Investigate and fix gnu linux console input sensing mechanism
 
 2009-01-19  Christian Heller  <christian.heller@tuxtax.de>
         * Replace last remaining Unicode character in "ascii" border or file "gnu_linux_console_converter.c"
