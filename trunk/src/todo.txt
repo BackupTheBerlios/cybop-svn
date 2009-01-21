@@ -7,11 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.93 $ $Date: 2009-01-20 23:46:15 $ $Author: christian $
+# @version $Revision: 1.94 $ $Date: 2009-01-21 22:02:04 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Fix display of selected menu item; a segmentation fault was caused due to ...
+        * Fix the bug causing tui input actions to bring a segmentation fault
         * Make CYBOL example application "ui_control" work
 
         * CAUTION! The following was probably already SOLVED in source code and may get DELETED here!

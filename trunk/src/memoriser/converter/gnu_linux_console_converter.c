@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.33 $ $Date: 2009-01-20 23:46:15 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.34 $ $Date: 2009-01-21 22:02:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1870,33 +1870,38 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             (void*) &wsd, (void*) &wsdc, (void*) &wsds,
             p13, p14);
 
-        if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL) || (rn == *NULL_POINTER_MEMORY_MODEL)) {
-//??        if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
-
-            // Either, no hierarchical element name (repaint area) was given
-            // (p11 == *NULL_POINTER_MEMORY_MODEL), in which case not just a small area
-            // but the whole textual user interface (tui) window is repainted,
-            // (CAUTION! (*((int*) p12) == 0) is also necessary!)
-            // OR:
-            // the remaining compound element name (area to be repainted)
-            // is null, which means the final element in the hierarchical
-            // name has been reached and can be repainted.
-            // Previous names pointing to surrounding areas higher
-            // in the hierarchy are not painted that way, to be more efficient.
-
-            // Encode shape.
-            encode_gnu_linux_console_shape(p0, p1, p2, p5, p6, p3, p4,
-                *hm, *hmc, *im, *imc, *blm, *blmc, *um, *umc, *bm, *bmc,
-                *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc,
-                *wpm, *wpmc, *wsm, *wsmc, *bom, *bomc,
-                *cm, *cmc, *lm, *lmc, *shm, *shmc);
-        }
-
         compare_arrays(p3, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) &ar, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (ar != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // The part model is a compound.
+            // The part model IS a compound.
+
+            // CAUTION! Paint the compound's background etc.,
+            // but do NOT hand over the model!
+            // Since the model is a compound and not a valid character,
+            // it will cause wrong characters or question marks to be printed on screen!
+            // Therefore, do hand over a null pointer instead of the model!
+            if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL) || (rn == *NULL_POINTER_MEMORY_MODEL)) {
+
+                // Either, no hierarchical element name (repaint area) was given
+                // (p11 == *NULL_POINTER_MEMORY_MODEL), in which case not just a small area
+                // but the whole textual user interface (tui) window is repainted,
+                // (CAUTION! (*((int*) p12) == 0) is also necessary!)
+                // OR:
+                // the remaining compound element name (area to be repainted)
+                // is null, which means the final element in the hierarchical
+                // name has been reached and can be repainted.
+                // Previous names pointing to surrounding areas higher
+                // in the hierarchy are not painted that way, to be more efficient.
+
+                // Encode shape.
+                encode_gnu_linux_console_shape(p0, p1, p2,
+                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+                    *hm, *hmc, *im, *imc, *blm, *blmc, *um, *umc, *bm, *bmc,
+                    *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc,
+                    *wpm, *wpmc, *wsm, *wsmc, *bom, *bomc,
+                    *cm, *cmc, *lm, *lmc, *shm, *shmc);
+            }
 
             if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -1959,6 +1964,32 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             } else {
 
                 log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode compound model into gnu/linux console control sequences. The source count parameter is null.");
+            }
+
+        } else {
+
+            // The part model is NOT a compound.
+
+            if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL) || (rn == *NULL_POINTER_MEMORY_MODEL)) {
+    //??        if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+
+                // Either, no hierarchical element name (repaint area) was given
+                // (p11 == *NULL_POINTER_MEMORY_MODEL), in which case not just a small area
+                // but the whole textual user interface (tui) window is repainted,
+                // (CAUTION! (*((int*) p12) == 0) is also necessary!)
+                // OR:
+                // the remaining compound element name (area to be repainted)
+                // is null, which means the final element in the hierarchical
+                // name has been reached and can be repainted.
+                // Previous names pointing to surrounding areas higher
+                // in the hierarchy are not painted that way, to be more efficient.
+
+                // Encode shape.
+                encode_gnu_linux_console_shape(p0, p1, p2, p5, p6, p3, p4,
+                    *hm, *hmc, *im, *imc, *blm, *blmc, *um, *umc, *bm, *bmc,
+                    *bgm, *bgmc, *fgm, *fgmc, *pm, *pmc, *sm, *smc,
+                    *wpm, *wpmc, *wsm, *wsmc, *bom, *bomc,
+                    *cm, *cmc, *lm, *lmc, *shm, *shmc);
             }
         }
 

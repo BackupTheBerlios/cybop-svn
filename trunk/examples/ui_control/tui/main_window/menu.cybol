@@ -26,6 +26,7 @@
         <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
         <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
     </part>
+-->
 <!--
     <part name="backup_item" channel="inline" abstraction="text/plain" model="s - Starte Residenz">
         <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_item"/>
@@ -34,12 +35,6 @@
         <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.apw_item"/>
         <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.decrypt_item"/>
         <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.functionality.backup"/>
--->
-        <!--
-            Delete the "background", "foreground" and "bold" properties later, since they are already part of the standard setting!
-            But as long as CYBOI does not handle super templates at creation time, they must be added explicitly here.
-        -->
-<!--
         <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
         <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
         <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
@@ -53,12 +48,6 @@
         <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.apw_item"/>
         <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.decrypt_item"/>
         <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.functionality.backup"/>
--->
-        <!--
-            Delete the "background", "foreground" and "bold" properties later, since they are already part of the standard setting!
-            But as long as CYBOI does not handle super templates at creation time, they must be added explicitly here.
-        -->
-<!--
         <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
         <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
         <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
@@ -72,12 +61,6 @@
         <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.backup_item"/>
         <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.account_item"/>
         <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.functionality.decrypt_laboratory_data"/>
--->
-        <!--
-            Delete the "background", "foreground" and "bold" properties later, since they are already part of the standard setting!
-            But as long as CYBOI does not handle super templates at creation time, they must be added explicitly here.
-        -->
-<!--
         <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
         <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
         <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
@@ -91,12 +74,6 @@
         <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.decrypt_item"/>
         <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.about_item"/>
         <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.functionality.account"/>
--->
-        <!--
-            Delete the "background", "foreground" and "bold" properties later, since they are already part of the standard setting!
-            But as long as CYBOI does not handle super templates at creation time, they must be added explicitly here.
-        -->
-<!--
         <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
         <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
         <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
@@ -109,10 +86,6 @@
         <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.x_window_item"/>
         <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.exit_item"/>
         <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.user_interface.show_about_information"/>
-        <!--
-            Delete the "background", "foreground" and "bold" properties later, since they are already part of the standard setting!
-            But as long as CYBOI does not handle super templates at creation time, they must be added explicitly here.
-        -->
         <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
         <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
         <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
@@ -124,14 +97,14 @@
         <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.about_item"/>
         <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.apw_item"/>
         <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.lifecycle.exit_program"/>
-        <!--
-            Delete the "background", "foreground" and "bold" properties later, since they are already part of the standard setting!
-            But as long as CYBOI does not handle super templates at creation time, they must be added explicitly here.
-        -->
         <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
         <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
         <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
     </part>
+    <!--
+        Delete the "background", "foreground" and "bold" properties later, since they are already part of the standard setting!
+        But as long as CYBOI does not handle super templates at creation time, they must be added explicitly here.
+    -->
 </model>
 
 <!--
@@ -157,6 +130,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: menu.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @version $RCSfile: menu.cybol,v $ $Revision: 1.7 $ $Date: 2009-01-21 22:02:04 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

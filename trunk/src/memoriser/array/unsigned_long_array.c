@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: unsigned_long_array.c,v $ $Revision: 1.20 $ $Date: 2008-09-04 20:31:31 $ $Author: christian $
+ * @version $RCSfile: unsigned_long_array.c,v $ $Revision: 1.21 $ $Date: 2009-01-21 22:02:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -136,10 +136,21 @@ void reallocate_unsigned_long_array(void* p0, void* p1, void* p2) {
                 // Create a new array with extended size.
                 *a = (void*) realloc(*a, m);
 
-                // Determine the NEW memory area to be allocated.
-                // It is the product of the given size reduced by the
-                // existing element count, and the type size.
-                int n = (*s - *c) * *UNSIGNED_LONG_PRIMITIVE_SIZE;
+                // The NEW memory area to be allocated.
+                int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                if (*s >= *c) {
+
+                    // CAUTION! Do NOT change this value if the size is
+                    // smaller than the count, because this will result
+                    // in a negative value and cause the new array elements
+                    // pointer further below to cross the array's boundary!
+
+                    // Determine the NEW memory area to be allocated.
+                    // It is the product of the given size reduced by the
+                    // existing element count, and the type size.
+                    n = (*s - *c) * *UNSIGNED_LONG_PRIMITIVE_SIZE;
+                }
 
                 // The new array elements.
                 void* e = *a + (m - n);

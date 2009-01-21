@@ -23,7 +23,6 @@
     </part>
     <part name="send_tui" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
-        <property name="receiver" channel="inline" abstraction="text/plain" model="user"/>
         <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.tui"/>
         <property name="area" channel="inline" abstraction="text/plain" model=".main_window.menu"/>
     </part>
@@ -52,6 +51,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: select_current_part.cybol,v $ $Revision: 1.9 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @version $RCSfile: select_current_part.cybol,v $ $Revision: 1.10 $ $Date: 2009-01-21 22:02:04 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

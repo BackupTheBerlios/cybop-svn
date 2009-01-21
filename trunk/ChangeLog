@@ -14,9 +14,18 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.119 $ $Date: 2009-01-20 23:46:14 $ $Author: christian $
+# @version $Revision: 1.120 $ $Date: 2009-01-21 22:02:04 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix bad bug in all arrays' function "reallocate": the new memory area to be allocated
+            was always set, even if the new array size was smaller than the old array count,
+            which caused the pointer to the new array to cross the array's boundary
+        * Fix bug in file "gnu_linux_console_converter.c" that caused the content of
+            compound parts to be painted even though it does not represent valid characters;
+            this caused wrong characters or question marks to appear on screen;
+            a null pointer is handed over instead of a compound model now
 
 2009-01-20  Christian Heller  <christian.heller@tuxtax.de>
         * Investigate and fix gnu linux console input sensing mechanism

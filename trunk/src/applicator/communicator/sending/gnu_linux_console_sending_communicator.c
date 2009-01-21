@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-01-19 01:07:53 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sending_communicator.c,v $ $Revision: 1.12 $ $Date: 2009-01-21 22:02:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -86,6 +86,13 @@ void communicate_sending_gnu_linux_console(void* p0, void* p1, void* p2, void* p
 
     // Encode textual user interface (tui) into array.
     encode_gnu_linux_console((void*) &s, sc, ss, p1, p2, p3, p4, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8, p11, p12);
+
+//?? TEST BEGIN
+    void* fn = L"TEST_CONSOLE_CONVERSION.txt";
+    int fnc = *NUMBER_27_INTEGER_MEMORY_MODEL;
+    int fns = *NUMBER_28_INTEGER_MEMORY_MODEL;
+    write_file((void*) &fn, (void*) &fnc, (void*) &fns, s, sc);
+//?? TEST END
 
     // The encoded character array.
     void* e = *NULL_POINTER_MEMORY_MODEL;
