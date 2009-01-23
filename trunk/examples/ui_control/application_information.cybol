@@ -9,7 +9,7 @@
     <part name="description" channel="inline" abstraction="text/plain" model="Medical Information System"/>
     <part name="authors" channel="inline" abstraction="text/plain" model="Christian Heller (christian.heller@tuxtax.de)"/>
     <part name="helpers" channel="inline" abstraction="text/plain" model=""/>
-    <part name="licence" channel="inline" abstraction="text/plain" model="This software is published under the GPL GNU General Public License."/>
+    <part name="licence" channel="inline" abstraction="text/plain" model="This software is published under the GPL GNU General Public Licence."/>
 <!--
     <part name="licence" channel="inline" abstraction="text/plain" model="
         This software is published under the GPL GNU General Public License.\n
@@ -52,6 +52,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: application_information.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @version $RCSfile: application_information.cybol,v $ $Revision: 1.7 $ $Date: 2009-01-23 23:11:25 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
