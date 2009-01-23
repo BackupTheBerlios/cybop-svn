@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: tester.c,v $ $Revision: 1.31 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
+ * @version $RCSfile: tester.c,v $ $Revision: 1.32 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -603,9 +603,13 @@ void test_wide_character_output() {
 void test_wide_character_wprintf() {
 
     /** The test wide character string. */
-//??    static wchar_t TEST_WIDE_CHARACTER_STRING_ARRAY[] = {'r', 'e', 'c', 't', 'a', 'n', 0xE7, 0x82, 0xBA, 'l', 'e'};
-    static wchar_t TEST_WIDE_CHARACTER_STRING_ARRAY[] = {'r', 'e', 'c', 't', 'a', 'n', 0xE2, 0x94, 0x80, 'l', 'e'};
-    static wchar_t* TEST_WIDE_CHARACTER_STRING = TEST_WIDE_CHARACTER_STRING_ARRAY;
+    // The following does NOT work and will bring the compilation warning:
+    // "cast to pointer from integer of different size"
+    // The reason is that an "L" is needed before EACH character, to make it a wide character!
+    // Therefore, the following three lines are commented out.
+    // static wchar_t TEST_WIDE_CHARACTER_STRING_ARRAY[] = {'r', 'e', 'c', 't', 'a', 'n', 0xE7, 0x82, 0xBA, 'l', 'e'};
+    // static wchar_t TEST_WIDE_CHARACTER_STRING_ARRAY[] = {'r', 'e', 'c', 't', 'a', 'n', 0xE2, 0x94, 0x80, 'l', 'e'};
+    // static wchar_t* TEST_WIDE_CHARACTER_STRING = TEST_WIDE_CHARACTER_STRING_ARRAY;
 
 //??    static wchar_t TEST_WIDE_CHARACTER_STRING_WITH_TERMINATION_ARRAY[] = {'r', 'e', 'c', 't', 'a', 'n', '為', 'l', 'e', '\0'};
     static wchar_t TEST_WIDE_CHARACTER_STRING_WITH_TERMINATION_ARRAY[] = {'r', 'e', 'c', 't', 'a', 'n', '─', 'l', 'e', '\0'};
@@ -634,7 +638,7 @@ void test_wide_character_wprintf() {
     fwide(stdout, *NUMBER_1_INTEGER_MEMORY_MODEL);
 
     log_write_terminated_message((void*) stdout, L"Test fputws.\n");
-    log_write_terminated_message((void*) stdout, (wchar_t*) TEST_WIDE_CHARACTER_STRING);
+//??    log_write_terminated_message((void*) stdout, (wchar_t*) TEST_WIDE_CHARACTER_STRING);
     wprintf(L"Test wprintf without stream argument.\n");
 
     // Test wide character constants.
@@ -645,8 +649,8 @@ void test_wide_character_wprintf() {
     fwprintf(stdout, L"Test hello world L ls without cast: %10ls\n", L"hello world");
     fwprintf(stdout, L"Test hello world L s without cast: %10s\n", L"hello world");
 
-    fwprintf(stdout, L"Test wide character string ls: %5ls \n", TEST_WIDE_CHARACTER_STRING);
-    fwprintf(stdout, L"Test wide character string s: %5s \n", TEST_WIDE_CHARACTER_STRING);
+//??    fwprintf(stdout, L"Test wide character string ls: %5ls \n", TEST_WIDE_CHARACTER_STRING);
+//??    fwprintf(stdout, L"Test wide character string s: %5s \n", TEST_WIDE_CHARACTER_STRING);
     fwprintf(stdout, L"Test wide character string with termination: %5ls \n", TEST_WIDE_CHARACTER_STRING_WITH_TERMINATION);
 
     fwprintf(stdout, L"Test wide character string L ls: %5ls \n", TEST_WIDE_CHARACTER_STRING_WITH_L);
@@ -658,8 +662,8 @@ void test_wide_character_wprintf() {
     fwprintf(stdout, L"Test wide character string with UTF-16 codes and termination ls: %5ls \n", TEST_WIDE_CHARACTER_STRING_WITH_UTF_16_CODES_AND_TERMINATION);
     fwprintf(stdout, L"Test wide character string with UTF-16 codes and termination s: %5s \n", TEST_WIDE_CHARACTER_STRING_WITH_UTF_16_CODES_AND_TERMINATION);
 
-    fwprintf(stdout, L"Test wide character string fourth letter with cast: %lc \n", (wchar_t*) TEST_WIDE_CHARACTER_STRING[3]);
-    fwprintf(stdout, L"Test wide character string fourth letter without cast: %lc \n", TEST_WIDE_CHARACTER_STRING[3]);
+//??    fwprintf(stdout, L"Test wide character string fourth letter with cast: %lc \n", (wchar_t*) TEST_WIDE_CHARACTER_STRING[3]);
+//??    fwprintf(stdout, L"Test wide character string fourth letter without cast: %lc \n", TEST_WIDE_CHARACTER_STRING[3]);
 
     log_write_terminated_message((void*) stdout, L"Test END.\n");
 }

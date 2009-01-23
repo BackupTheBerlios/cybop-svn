@@ -19,14 +19,13 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.10 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
+ * @version $RCSfile: creating_memoriser.c,v $ $Revision: 1.11 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef CREATING_MEMORISER_SOURCE
 #define CREATING_MEMORISER_SOURCE
 
-#include <libxml/tree.h>
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
 #include "../../constant/model/cybol/compound_element_cybol_model.c"

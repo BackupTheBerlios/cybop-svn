@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_selector.c,v $ $Revision: 1.8 $ $Date: 2008-12-31 00:14:57 $ $Author: christian $
+ * @version $RCSfile: xml_selector.c,v $ $Revision: 1.9 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -92,7 +92,7 @@ void select_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     // Therefore, increment the current position by one (pointer size).
 
                     // Increment current position.
-                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
                     // Decrement remaining count.
                     *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -157,7 +157,7 @@ void select_xml_definition(void* p0, void* p1, void* p2) {
                     // Therefore, increment the current position by one (pointer size).
 
                     // Increment current position.
-                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
                     // Decrement remaining count.
                     *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -222,7 +222,7 @@ void select_xml_comment(void* p0, void* p1, void* p2) {
                     // Therefore, increment the current position by one (pointer size).
 
                     // Increment current position.
-                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
                     // Decrement remaining count.
                     *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -384,7 +384,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                     // Therefore, increment the current position by one (pointer size).
 
                     // Increment current position.
-                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
                     // Decrement remaining count.
                     *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -471,7 +471,7 @@ void select_xml_end_tag(void* p0, void* p1, void* p2) {
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Increment current position.
-                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
                     // Decrement remaining count.
                     *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -584,7 +584,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             // Increment current position.
-                            *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                            *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
                             // Decrement remaining count.
                             *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -663,7 +663,7 @@ void select_xml_attribute_name(void* p0, void* p1, void* p2) {
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Increment current position.
-                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
                     // Decrement remaining count.
                     *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -734,7 +734,7 @@ void select_xml_attribute_value(void* p0, void* p1, void* p2) {
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // Increment current position.
-                    *pos = *pos + *POINTER_PRIMITIVE_SIZE;
+                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
 
                     // Decrement remaining count.
                     *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;

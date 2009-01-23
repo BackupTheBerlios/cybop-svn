@@ -15,13 +15,41 @@ AC_MSG_RESULT([$host_cpu])
 
 AC_MSG_CHECKING([For target cpu])
 
+#
+# Compile a 32-bit application on 64-bit GNU/Linux.
+#
+# See GCC man page for "-m32" and "-m64" options!
+# These options generate code for a 32-bit or 64-bit environment.
+#
+# The 32-bit environment sets int, long and pointer to 32 bits
+# and generates code that runs on any i386 system.
+# The 64-bit environment sets int to 32 bits and long and pointer to 64 bits
+# and generates code for AMD's x86-64 architecture.
+#
+# GNU ld can link i386 code. Supported emulations:
+# elf_i386
+# elf_x86_64
+#
+
+# This is the original code, for 32 bit emulation compilation.
+#case $host in
+#    x86_64*linux*)
+#	test -n "$CC" || CC="gcc -m32"
+#	test -n "$LD" || LD="ld -m elf_i386"
+#	test -n "$AS" || AS="as --32"
+#	host_32bits_emulation="yes"
+#	host_cpu="i386"
+#    ;;
+#esac
+
+# This is a copy of the block above, for 64 bit compilation.
 case $host in
     x86_64*linux*)
-	test -n "$CC" || CC="gcc -m32"
-	test -n "$LD" || LD="ld -m elf_i386"
-	test -n "$AS" || AS="as --32"
-	host_32bits_emulation="yes"
-	host_cpu="i386"
+	test -n "$CC" || CC="gcc -m64"
+	test -n "$LD" || LD="ld -m elf_x86_64"
+	test -n "$AS" || AS="as --64"
+	host_32bits_emulation="no"
+	host_cpu="x86_64"
     ;;
 esac
 
@@ -41,7 +69,8 @@ esac
 
 AM_CONDITIONAL(LINUX_OPERATING_SYSTEM, [test "$cybop_os_linux" = "yes"])
 AM_CONDITIONAL(WIN32_OPERATING_SYSTEM, [test "$cybop_os_win32" = "yes"])
-AM_CONDITIONAL(LINUX_EMULATION, [test "$host_32bits_emulation" = "yes"])
+#AM_CONDITIONAL(LINUX_EMULATION, [test "$host_32bits_emulation" = "yes"])
+AM_CONDITIONAL(LINUX_EMULATION, [test "$host_32bits_emulation" = "no"])
 
 # Checks for programs.
 AC_PROG_CC
@@ -62,9 +91,9 @@ AC_CHECK_LIB([glut], [glutInit])
 AC_CHECK_LIB([pthread], [pthread_exit])
 #AC_CHECK_LIB([xml2], [xmlParseFile])
 
-PKG_CHECK_MODULES(LIBXML2,libxml-2.0 >= 2.4.30)
-AC_SUBST(LIBXML2_CFLAGS)
-AC_SUBST(LIBXML2_LIBS)
+#PKG_CHECK_MODULES(LIBXML2,libxml-2.0 >= 2.4.30)
+#AC_SUBST(LIBXML2_CFLAGS)
+#AC_SUBST(LIBXML2_LIBS)
 
 # Checks for header files.
 AC_PATH_X

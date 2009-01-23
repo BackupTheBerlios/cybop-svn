@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: identification_cyboi_model.c,v $ $Revision: 1.3 $ $Date: 2008-10-25 23:20:04 $ $Author: christian $
+ * @version $RCSfile: identification_cyboi_model.c,v $ $Revision: 1.4 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -40,7 +40,7 @@ static wchar_t* VERSION_IDENTIFICATION_CYBOI_MODEL = VERSION_IDENTIFICATION_CYBO
 static int* VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The copyright identification cyboi model. */
-static wchar_t COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'C', L'o', L'p', L'y', L'r', L'i', L'g', L'h', L't', L' ', L'(', L'C', L')', L' ', L'1', L'9', L'9', L'9', L'-', L'2', L'0', L'0', L'8', L'.', L' ', L'C', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L' ', L'H', L'e', L'l', L'l', L'e', L'r', L'.'};
+static wchar_t COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'C', L'o', L'p', L'y', L'r', L'i', L'g', L'h', L't', L' ', L'(', L'C', L')', L' ', L'1', L'9', L'9', L'9', L'-', L'2', L'0', L'0', L'9', L'.', L' ', L'C', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L' ', L'H', L'e', L'l', L'l', L'e', L'r', L'.'};
 static wchar_t* COPYRIGHT_IDENTIFICATION_CYBOI_MODEL = COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY;
 static int* COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_42_INTEGER_MEMORY_MODEL_ARRAY;
 

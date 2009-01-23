@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: operation_handler.c,v $ $Revision: 1.53 $ $Date: 2009-01-21 22:02:04 $ $Author: christian $
+ * @version $RCSfile: operation_handler.c,v $ $Revision: 1.54 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -66,8 +66,8 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) HANDLE_OPERATION_MESSAGE_LOG_MODEL, (void*) HANDLE_OPERATION_MESSAGE_LOG_MODEL_COUNT);
 
 /*??
-    fwprintf(stdout, L"TEST handle operation: %ls\n", (wchar_t*) p10);
     fwprintf(stdout, L"TEST handle operation count: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST handle operation: %ls\n", (wchar_t*) p10);
 */
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, p10);

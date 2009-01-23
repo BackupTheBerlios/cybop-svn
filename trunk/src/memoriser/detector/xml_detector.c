@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_detector.c,v $ $Revision: 1.7 $ $Date: 2008-12-23 22:37:05 $ $Author: christian $
+ * @version $RCSfile: xml_detector.c,v $ $Revision: 1.8 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,7 +62,7 @@ void detect_xml_declaration_begin(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*DECLARATION_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*DECLARATION_BEGIN_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *DECLARATION_BEGIN_XML_NAME_COUNT;
@@ -119,7 +119,7 @@ void detect_xml_declaration_end(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*DECLARATION_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*DECLARATION_END_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *DECLARATION_END_XML_NAME_COUNT;
@@ -176,7 +176,7 @@ void detect_xml_definition_begin(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*DEFINITION_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*DEFINITION_BEGIN_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *DEFINITION_BEGIN_XML_NAME_COUNT;
@@ -233,7 +233,7 @@ void detect_xml_definition_end(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*DEFINITION_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*DEFINITION_END_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *DEFINITION_END_XML_NAME_COUNT;
@@ -290,7 +290,7 @@ void detect_xml_comment_begin(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*COMMENT_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*COMMENT_BEGIN_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *COMMENT_BEGIN_XML_NAME_COUNT;
@@ -347,7 +347,7 @@ void detect_xml_comment_end(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*COMMENT_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*COMMENT_END_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *COMMENT_END_XML_NAME_COUNT;
@@ -404,7 +404,7 @@ void detect_xml_start_tag_begin(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*START_TAG_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*START_TAG_BEGIN_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *START_TAG_BEGIN_XML_NAME_COUNT;
@@ -461,7 +461,7 @@ void detect_xml_end_tag_begin(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*END_TAG_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*END_TAG_BEGIN_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *END_TAG_BEGIN_XML_NAME_COUNT;
@@ -518,7 +518,7 @@ void detect_xml_tag_end(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*TAG_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*TAG_END_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *TAG_END_XML_NAME_COUNT;
@@ -575,7 +575,7 @@ void detect_xml_empty_tag_end(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*EMPTY_TAG_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*EMPTY_TAG_END_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *EMPTY_TAG_END_XML_NAME_COUNT;
@@ -632,7 +632,7 @@ void detect_xml_attribute_begin(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*ATTRIBUTE_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*ATTRIBUTE_BEGIN_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *ATTRIBUTE_BEGIN_XML_NAME_COUNT;
@@ -689,7 +689,7 @@ void detect_xml_attribute_name_end(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT;
@@ -746,7 +746,7 @@ void detect_xml_attribute_value_end(void* p0, void* p1, void* p2) {
                     if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Increment current position.
-                        *pos = *pos + (*ATTRIBUTE_VALUE_END_XML_NAME_COUNT * *POINTER_PRIMITIVE_SIZE);
+                        *pos = *pos + (*ATTRIBUTE_VALUE_END_XML_NAME_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Decrement remaining count.
                         *rem = *rem - *ATTRIBUTE_VALUE_END_XML_NAME_COUNT;
