@@ -14,7 +14,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.121 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $
+# @version $Revision: 1.122 $ $Date: 2009-01-23 14:45:06 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -24,6 +24,7 @@
         * Fix bug in xml parsing files where "POINTER_PRIMITIVE_SIZE" was used instead of "WIDE_CHARACTER_PRIMITIVE_SIZE"
             (this bug became obvious because the 32-bit environment set int, long and pointer to 32 bits,
             but the now valid 64-bit environment sets int to 32 bits and long and pointer to 64 bits)
+        * Prepare file "NEWS" for coming 0.9.0 release
 
 2009-01-21  Christian Heller  <christian.heller@tuxtax.de>
         * Fix bad bug in all arrays' function "reallocate": the new memory area to be allocated
