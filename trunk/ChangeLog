@@ -14,12 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.123 $ $Date: 2009-01-24 12:02:12 $ $Author: christian $
+# @version $Revision: 1.124 $ $Date: 2009-01-24 22:46:10 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 2009-01-24  Christian Heller  <christian.heller@tuxtax.de>
         * Prepare "project plan" web page for coming 0.9.0 release
+        * Search and fix "Bus error" bug appearing since the autoconf/ make files were adapted to 64 Bit architecture:
+            the reason was that "INTEGER_ARRAY_MEMORY_ABSTRACTION" instead of "POINTER_ARRAY_MEMORY_ABSTRACTION"
+            was handed over to function calls of "get_array_elements" of file "compound_handler.c"
 
 2009-01-23  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt file "configure.ac" to using 64 Bit compilation mode and "x86_64" architecture

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.61 $ $Date: 2009-01-20 23:46:15 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.62 $ $Date: 2009-01-24 22:46:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,11 +42,11 @@
  * @param p3 the signal memory mutex
  * @param p4 the signal index
  * @param p5 the action abstraction (Hand over as reference!)
- * @param p6 the action abstraction count
+ * @param p6 the action abstraction count (Hand over as reference!)
  * @param p7 the action model (Hand over as reference!)
- * @param p8 the action model count
+ * @param p8 the action model count (Hand over as reference!)
  * @param p9 the action details (Hand over as reference!)
- * @param p10 the action details count
+ * @param p10 the action details count (Hand over as reference!)
  * @param p11 the signal priority (Hand over as reference!)
  * @param p12 the signal identification (Hand over as reference!)
  */

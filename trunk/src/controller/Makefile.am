@@ -13,12 +13,4 @@ if WIN32_OPERATING_SYSTEM
     OS = -DWIN32_OPERATING_SYSTEM
 endif
 
-if LINUX_EMULATION
-    EMUL = -L/usr/lib32
-endif
-
-#AM_CFLAGS = -I/usr/include $(LIBXML2_CFLAGS) $(OS)
 AM_CFLAGS = -I/usr/include $(OS)
-
-#LDADD = $(EMUL) @LIBXML2_LIBS@
-LDADD = $(EMUL)

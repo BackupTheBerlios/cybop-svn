@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_handler.c,v $ $Revision: 1.29 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+ * @version $RCSfile: compound_handler.c,v $ $Revision: 1.30 $ $Date: 2009-01-24 22:46:10 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -112,11 +112,11 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                             // Get abstraction, model, details.
                             get_array_elements(*pa, p15, (void*) &a, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                            get_array_elements(*pac, p15, (void*) &ac, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                            get_array_elements(*pac, p15, (void*) &ac, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
                             get_array_elements(*pm, p15, (void*) &m, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                            get_array_elements(*pmc, p15, (void*) &mc, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                            get_array_elements(*pmc, p15, (void*) &mc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
                             get_array_elements(*pd, p15, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                            get_array_elements(*pdc, p15, (void*) &dc, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                            get_array_elements(*pdc, p15, (void*) &dc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
                             // Add part model (signal) to memory, using the whole signal's priority.
                             // (Each signal has a priority. A signal may consist of part
@@ -213,6 +213,10 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         // The loop variable.
         int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+/*??
+    fwprintf(stdout, L"TEST handle compound sc: %i\n", *sc);
+*/
+
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             if (j >= *sc) {
@@ -220,7 +224,9 @@ void handle_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
                 break;
             }
 
-//??    fwprintf(stdout, L"TEST handle compound j: %i\n", j);
+/*??
+    fwprintf(stdout, L"TEST handle compound j: %i\n", j);
+*/
 
             handle_compound_part(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, (void*) &j);
 
