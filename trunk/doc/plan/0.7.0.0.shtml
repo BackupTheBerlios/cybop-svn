@@ -18,7 +18,7 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.3 $ $Date: 2009-01-16 16:42:36 $">
+    <meta name="date" content="$Revision: 1.4 $ $Date: 2009-01-24 12:02:12 $">
     <meta name="author" content="$Author: christian $">
     <link rel="stylesheet" type="text/css" href="../cybop.css"/>
     <title>CYBOP 0.7.0.0</title>
@@ -43,96 +43,25 @@
                     <tr bgcolor="#000000">
                         <td bgcolor="#C0FFC0"/>
                         <td align="left" valign="top">
-                            <h2>Project</h2>
-                            <ul>
-                                <li>Add <i>libpthread</i> library to Makefile, for linking</li>
-                                <li>Add minor things to Makefile, for Linux-Windows platform compilations,
-                                    so that conditional preprocessor directives like:
-                                    <i>#ifdef LINUX_OPERATING_SYSTEM</i> can be used in the source code</li>
-                                <li>Provide source code tar balls (tar.gz), as pre-condition</li>
-                                <li>Maintain (update) Debian packages</li>
-                                <li>Sponsor Debian packages and upload to testing distribution</li>
-                            </ul>
-                        </td>
-                        <td align="left" valign="top">
-                            Christian Heller<br>
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr bgcolor="#000000">
-                        <td bgcolor="#C0FFC0"/>
-                        <td align="left" valign="top">
                             <h2>CYBOI</h2>
                             <ul>
-                                <li>Implement x window system gui event handling</li>
                                 <li>Update and add more things for wide character handling</li>
-                                <li>Investigate CPU idle mechanisms including: <i>pause</i>, <i>sleep</i> and system signals
-                                    --> the decision fell on a simple <i>sleep</i> loop for reasons explained in the code;<br>
-                                    change signal <i>wait</i> loop to become blocking, that is to react only to interrupts;
-                                    this avoids wasting system resources (CPU activity) as it happened up to now</li>
-                                <li>Implement threads using mutexes (atomic flags) for reception of signals via x window system and linux console (terminal)</li>
-                                <li>Exit threads using the USR1 operating system signal</li>
-                                <li>Prepare access to meta elements of a compound double hierarchy and completely restructure
-                                    <i>memoriser/accessor/compound_accessor.c</i><br>
+                                <li>Prepare access to meta elements of a compound double hierarchy;
                                     two knowledge tree separators are now possible: the part separator <i>.</i> and the meta separator <i>#</i></li>
-                                <li>Restructure "memoriser/accessor/compound_accessor.c" once more; the three procedures:<br>
-                                    1 set_compound_element_by_name<br>
-                                    2 remove_compound_element_by_name<br>
-                                    3 get_compound_element_by_name<br>
-                                    do now not only get handed over the <i>compound model</i>,
-                                    but also the corresponding <i>compound details</i> (meta information)
-                                    -- that way, meta properties can be determined properly
-                                    (which was done wrong before, as the properties were searched
-                                    in the <i>compound model</i> instead of in the <i>compound details</i></li>
-                                <li>Merge two procedures "get_compound_element_by_encapsulated_name" and "get_real_compound_element_by_name"<br>
-                                    - rename this new, merged procedure to "get_universal_compound_element_by_name"<br>
-                                    - adapt all source code to new procedure<br>
-                                    - change all places where logic parameters were retrieved with "get_compound_element_by_name" to the new "get_universal_compound_element_by_name"<br>
-                                    - this means that from now on, CYBOL knowledge templates can be written much more flexibly, since models can be given as<br>
+                                <li>Restructure compound handling, so that functions now get handed over the
+                                    <i>compound model</i> and corresponding <i>compound details</i> (meta information)</li>
+                                <li>Provide universal "get" function, so that CYBOL knowledge templates can be written
+                                    much more flexibly, since models can be given as<br>
                                     1 hard-coded inline value<br>
                                     2 hierarchical name to a model (= encapsulated model)<br>
                                     3 hierarchical name pointing to another hierarchical name containing a model (= double-encapsulated model)</li>
-                                <li>Add unix shell command processing from within CYBOL</li>
-                                <li>Factor out <i>copy</i> procedures for single types into an own <i>applicator/copy/</i> directory</li>
-                                <li>Fix hard-to-find bug that colour values were not always copied correctly for the textual user interface (tui);
-                                    the reson is that, when copying a colour value, the destination array ALWAYS has to be resized,
-                                    no matter whether it is greater or smaller than the source array;
-                                    otherwise, some suffixes may be left at the end of a newly copied colour and make that colour unknown/ unusable</li>
-                                <li>Rework textual user interface (tui) handling; introduce windowing technique</li>
-                                <li>Correct bug that tui is walking right and down when sending it several times:<br>
-                                    the reason was that the original value coming from cybol was manipulated,
-                                    when calculating the coordinates according to the given layout;
-                                    copies are used instead now, so that the original tui parameters are stable</li>
-                                <li>Implement selective repaint; small areas instead of the whole textual user interface (tui) can be repainted now</li>
-                                <li>Implement <i>clear</i> as property to the <i>send</i> operation, so that the tui is not cleared every time, only if wanted</li>
-                                <li>Add <i>enter</i> (carriage return, line feed) and <i>escape</i> character handling for tui</li>
-                                <li>Decrease sleep time from 1 to 0.1 --> much better performance, but processor is more busy now :-|</li>
-                                <li>Comment out my own implementation of fork/ execv/ wait, which did not work reliably for running external processes;<br>
-                                    probably, there are some conflicts with the threads/ mutexes/ signal checker loop used in CYBOI;<br>
-                                    for now, the <i>system</i> function is used to run external commands/ programs in an own child process;<br>
-                                    this even has the advantage of better portability between platforms :-)</li>
-                                <li>Rename <i>create</i> function to "<i>receive_file_system</i> function;<br>
-                                    prepare <i>receive_file_system</i> procedure for receiving various file formats:<br>
-                                    this is to foresee coming file format conversions when receiving (loading) or sending (saving) files;<br>
-                                    this may be done on the local file system or over a remote connection</li>
-                                <li>Eliminate bug that <i>compound</i> logic models were not processed;
-                                    --> the reason was that <i>cybol</i> was given as abstraction in CYBOL
-                                    so that the abstraction at runtime still was <i>cybol</i> instead of <i>compound</i>;
-                                    therefore, rename/ merge all <i>cybol</i> abstractions into <i>compound</i></li>
-                                <li>Eliminate bug at shutdown: when shutting down the x window system service,
-                                    CYBOI tried to remove some entries from the internal memory,
-                                    which moved all other entries one place forward in that memory,
-                                    so that none of the pointers pointed to the correct place anymore</li>
-                                <li>Extend signal handler by enabling processing of signals with abstractions <i>encapsulated_knowledge</i>
-                                    and <i>knowledge</i>, in addition to the already existing abstractions <i>compound</i> and <i>operation</i></li>
-                                <li>Check and correct interrupting (exiting) of <i>receive</i> service threads</li>
+                                <li>Implement threads using mutexes (atomic flags) for reception of signals via x window system and linux console (terminal)</li>
                                 <li>Interrupt (exit) and free resources of all <i>receive</i> service threads automatically at
                                     system shutdown, which is necessary in case a CYBOL application developer forgot to do that</li>
-                                <li>Factor out some manager code into the new procedures <i>startup_internal_memory</i> and <i>startup_system_signal_handler</i></li>
-                                <li>Check for an existing thread first, before creating a new one;<br>
-                                    when a <i>receive</i> procedure is called more than once,
-                                    for example to hand over a new command set to wait for and receive,
-                                    a new thread MUST NOT be created every time</li>
+                                <li>Rework textual user interface (tui) handling; introduce windowing technique</li>
+                                <li>Implement selective repaint; small areas instead of the whole textual user interface (tui) can be repainted now</li>
+                                <li>Implement x window system gui event handling</li>
+                                <li>Add unix shell command processing from within CYBOL</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
@@ -152,6 +81,25 @@
                         <td align="left" valign="top">
                             Christian Heller<br>
                             &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#000000">
+                        <td bgcolor="#C0FFC0"/>
+                        <td align="left" valign="top">
+                            <h2>Project</h2>
+                            <ul>
+                                <li>Add <i>libpthread</i> library to Makefile, for linking</li>
+                                <li>Add minor things to Makefile, for Linux-Windows platform compilations,
+                                    so that conditional preprocessor directives like:
+                                    <i>#ifdef LINUX_OPERATING_SYSTEM</i> can be used in the source code</li>
+                                <li>Provide source code tar balls (tar.gz), as pre-condition</li>
+                                <li>Update Debian packages</li>
+                                <li>Sponsor Debian packages and upload to testing distribution</li>
+                            </ul>
+                        </td>
+                        <td align="left" valign="top">
+                            Christian Heller<br>
+                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
                         </td>
                     </tr>
                     </table>

@@ -18,7 +18,7 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.3 $ $Date: 2009-01-16 16:42:36 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.4 $ $Date: 2009-01-24 12:02:12 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <link rel="stylesheet" type="text/css" href="../cybop.css"/>
     <title>CYBOP 0.8.0.0</title>
@@ -43,68 +43,20 @@
                     <tr bgcolor="#000000">
                         <td bgcolor="#C0FFC0"/>
                         <td align="left" valign="top">
-                            <h2>Project</h2>
-                            <ul>
-                                <li>Add opengl/ mesa libraries to makefile</li>
-                            </ul>
-                        </td>
-                        <td align="left" valign="top">
-                            Christian Heller<br>
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
-                        </td>
-                    </tr>
-                    <tr bgcolor="#000000">
-                        <td bgcolor="#C0FFC0"/>
-                        <td align="left" valign="top">
                             <h2>CYBOI</h2>
                             <ul>
-                                <li>Move "tester.c" into controller/ directory; add new test procedures</li>
-                                <li>Restructure cyboi command line argument handling to allow for dynamic log file, log level etc.</li>
-                                <li>Add "optionaliser.c" source file to controller directory;
-                                    move command line option evaluating into new optionaliser</li>
+                                <li>Restructure CYBOI command line argument handling to allow for dynamic log file, log level etc.</li>
                                 <li>Recognise command line options: version, help, test</li>
-                                <li>Restructure globals/constants/ directory</li>
-                                <li>Rename all ASCII character constants to just "CHARACTER";
-                                    rename wide character constants to "_WIDE_CHARACTER"</li>
-                                <li>Add opengl startup and shutdown</li>
-                                <li>Move away NULL_POINTER from "variables.c" into an own file "pointer_constants.c"</li>
-                                <li>Change NULL_POINTER so that it is now a void**, pointing to an array containing just a null void pointer;
-                                    Change NULL_POINTER values in all source code into *NULL_POINTER
-                                    Change &NULL_POINTER values in all source code into NULL_POINTER</li>
-                                <li>Fix error in linux_console_converter serialisation that caused the tui to crash (integer vector elements were read as pointers, not integers)</li>
-                                <li>Fix bug with integer parsing and -serialisation</li>
-                                <li>Fix bug that pointer vector instead of integer vector was used;
-                                    Adjust comma characters to be added only if one element already exists in the destination array</li>
-                                <li>Replace some integer values with constants of the kind NUMBER_X_INTEGER</li>
-                                <li>Add name, name count, name size to functions "get_compound_element_by_name" and "get_universal_compound_element_by_name";
-                                    Adjust all source code by adding name parameters to these function calls</li>
-                                <li>Add "name" parameters to "get_compound_element_by_index" function and adapt all code</li>
-                                <li>Add <i>stdin</i> and <i>stdout</i> to internal memory at startup, and keep both separately,
-                                    since the textual user interface (tui) does need both at the same time, to handle input and output</li>
-                                <li>Add "fflush" wherever a stream is output to a file, in order to not delay the output to an arbitrary system event</li>
-                                <li>Correct bug that details model was not always created when reading a part from a CYBOL file that did not have details;
-                                    but a details compound ALWAYS has to be allocated, because at runtime, properties might be added as details to a part model;
-                                    this was changed in the cybol_translator.c file</li>
-                                <li>Complete "model_diagram_converter.c"</li>
-                                <li>Implement file output of text</li>
-                                <li>Implement shell input, output, error output</li>
-                                <li>Prepare printing of application knowledge tree as structured model diagram into file or onto shell</li>
-                                <li>Add "add_compound_element_by_name" and "replace_compound_element_by_name" functions to "compound_accessor.c"</li>
-                                <li>Make compound element names in "add_compound_element_by_name" function receive an enumerated index suffix</li>
-                                <li>Complete basic structure of xdt_converter</li>
-                                <li>Correct bug in "character_converter.c", that caused arrays not to be extended</li>
+                                <li>Implement file output of text, now available in CYBOL</li>
+                                <li>Implement shell input, output, error output, now available in CYBOL</li>
+                                <li>Complete serialiser converting cybop knowledge models into structured text
+                                    called "model diagram" (good for debugging cybop knowledge models)</li>
                                 <li>Generate formatted xhtml code, with tags and attributes, from CYBOL</li>
-                                <li>Correct socket handling in send_socket operation</li>
-                                <li>Add "communication_partner" socket, address, address_size to internal memory</li>
-                                <li>Make ipv4 socket send/ receive connections work not only among two processes, e.g. from shell to shell,
-                                    but also from a web browser sending a request to a cyboi service;
-                                    the problem was that port numbers had not been converted from host- into network byte order;
-                                    host addresses were already converted properly;
-                                    make "close" command work in http server when sent from a web browser</li>
-                                <li>Debug "receive_socket" operation; add errno handling; make socket non-blocking; add sleep call</li>
-                                <li>Unify unix- and tcp socket files into just "socket" source files;
-                                    complete startup_socket.c; finish socket address handling;
-                                    remove unix socket everywhere; rename tcp socket into www service</li>
+                                <li>Provide first version of web user interfaces (wui) using tcp socket (not usable yet)</li>
+                                <li>Complete parser converting the German X Datentraeger (xDT) medical exchange format into CYBOI knowledge models</li>
+                                <li>Add opengl startup and shutdown</li>
+                                <li>Add new test procedures</li>
+                                <li>Internal improvements and bugfixes</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
@@ -118,6 +70,19 @@
                             <h2>CYBOL</h2>
                             <ul>
                                 <li>Update cybol example applications</li>
+                            </ul>
+                        </td>
+                        <td align="left" valign="top">
+                            Christian Heller<br>
+                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#000000">
+                        <td bgcolor="#C0FFC0"/>
+                        <td align="left" valign="top">
+                            <h2>Project</h2>
+                            <ul>
+                                <li>Add opengl/ mesa libraries to makefile</li>
                             </ul>
                         </td>
                         <td align="left" valign="top">
