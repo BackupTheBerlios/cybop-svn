@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.10 $ $Date: 2009-01-20 23:46:15 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-01-25 01:08:44 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -71,6 +71,9 @@ void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void*
 
     // Read pressed keyboard keys as message from gnu/linux console.
     read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12);
+
+    // CAUTION! The multibyte- is converted to a wide character internally (in glibc function "fgetwc").
+    // Function calls to "decode_utf_8_unicode_character_vector" are therefore NOT necessary here!
 
     fwprintf(stdout, L"TEST a: %ls\n", (wchar_t*) a);
     fwprintf(stdout, L"TEST ac: %i\n", ac);

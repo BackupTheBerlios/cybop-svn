@@ -7,11 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.95 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $
+# @version $Revision: 1.96 $ $Date: 2009-01-25 01:08:43 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Fix the bug causing tui input actions to bring a segmentation fault
+        * Check why application does not react after having processed one tui input (signal/ irq/ sleep problem?)
         * Make CYBOL example application "ui_control" work
 
         * Simplify source code by using the function "allocate_model" wherever an array gets created

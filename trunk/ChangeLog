@@ -14,7 +14,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.124 $ $Date: 2009-01-24 22:46:10 $ $Author: christian $
+# @version $Revision: 1.125 $ $Date: 2009-01-25 01:08:43 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -23,6 +23,8 @@
         * Search and fix "Bus error" bug appearing since the autoconf/ make files were adapted to 64 Bit architecture:
             the reason was that "INTEGER_ARRAY_MEMORY_ABSTRACTION" instead of "POINTER_ARRAY_MEMORY_ABSTRACTION"
             was handed over to function calls of "get_array_elements" of file "compound_handler.c"
+        * Fix bug causing tui input actions to bring a segmentation fault:
+            the reason was superfluous function calls of "decode_utf_8_unicode_character_vector" in function "read_gnu_linux_console"
 
 2009-01-23  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt file "configure.ac" to using 64 Bit compilation mode and "x86_64" architecture
