@@ -14,9 +14,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.125 $ $Date: 2009-01-25 01:08:43 $ $Author: christian $
+# @version $Revision: 1.126 $ $Date: 2009-01-25 11:46:47 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Factor out handling of encapsulated- and knowledge logic into new files
+            "encapsulated_handler.c" and "knowledge_handler.c"
+        * Let both handle not only compound logic, but also operation logic
+            (the latter was missing up to now, which is why some example application functions did not work)
 
 2009-01-24  Christian Heller  <christian.heller@tuxtax.de>
         * Prepare "project plan" web page for coming 0.9.0 release

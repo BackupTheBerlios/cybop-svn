@@ -19,20 +19,22 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: handler.c,v $ $Revision: 1.38 $ $Date: 2009-01-24 22:46:10 $ $Author: christian $
+ * @version $RCSfile: handler.c,v $ $Revision: 1.39 $ $Date: 2009-01-25 11:46:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef HANDLER_SOURCE
 #define HANDLER_SOURCE
 
-#include "../controller/handler/compound_handler.c"
-#include "../controller/handler/operation_handler.c"
 #include "../constant/abstraction/cybol/operation_cybol_abstraction.c"
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
+#include "../controller/handler/compound_handler.c"
+#include "../controller/handler/encapsulated_handler.c"
+#include "../controller/handler/knowledge_handler.c"
+#include "../controller/handler/operation_handler.c"
 #include "../logger/logger.c"
 #include "../memoriser/array.c"
 
@@ -68,41 +70,12 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Handle signal.");
 
-    // The logic name, abstraction, model, details.
-    void** ln = NULL_POINTER_MEMORY_MODEL;
-    void** lnc = NULL_POINTER_MEMORY_MODEL;
-    void** lns = NULL_POINTER_MEMORY_MODEL;
-    void** la = NULL_POINTER_MEMORY_MODEL;
-    void** lac = NULL_POINTER_MEMORY_MODEL;
-    void** las = NULL_POINTER_MEMORY_MODEL;
-    void** lm = NULL_POINTER_MEMORY_MODEL;
-    void** lmc = NULL_POINTER_MEMORY_MODEL;
-    void** lms = NULL_POINTER_MEMORY_MODEL;
-    void** ld = NULL_POINTER_MEMORY_MODEL;
-    void** ldc = NULL_POINTER_MEMORY_MODEL;
-    void** lds = NULL_POINTER_MEMORY_MODEL;
-    // The encapsulated logic name, abstraction, model, details.
-    void** eln = NULL_POINTER_MEMORY_MODEL;
-    void** elnc = NULL_POINTER_MEMORY_MODEL;
-    void** elns = NULL_POINTER_MEMORY_MODEL;
-    void** ela = NULL_POINTER_MEMORY_MODEL;
-    void** elac = NULL_POINTER_MEMORY_MODEL;
-    void** elas = NULL_POINTER_MEMORY_MODEL;
-    void** elm = NULL_POINTER_MEMORY_MODEL;
-    void** elmc = NULL_POINTER_MEMORY_MODEL;
-    void** elms = NULL_POINTER_MEMORY_MODEL;
-    void** eld = NULL_POINTER_MEMORY_MODEL;
-    void** eldc = NULL_POINTER_MEMORY_MODEL;
-    void** elds = NULL_POINTER_MEMORY_MODEL;
-
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-/*??
     fwprintf(stdout, L"TEST handle ac: %i\n", p11);
     fwprintf(stdout, L"TEST handle *ac: %i\n", *((int*) p11));
     fwprintf(stdout, L"TEST handle a: %ls\n", (wchar_t*) p10);
-*/
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -114,7 +87,6 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Handle compound logic.
             handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p16, p17, p18);
         }
     }
@@ -125,40 +97,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Get compound logic element as double-encapsulated model.
-            //
-            // CAUTION!
-            // The abstraction of an encapsulated name must always be "character".
-            // The details are uninteresting, since an encapsulated name cannot have
-            // constraints. That is, only the model is of interest. It contains the
-            // hierarchical name of the knowledge part to be retrieved.
-            //
-            // Example of a model pointing to another model containing a logic name:
-            // model="application.record.logic_name"
-            //
-            // The knowledge root does not have a details container with meta
-            // information, which is why a null pointer is handed over here twice.
-            //
-            // Compare also with procedure "get_universal_compound_element_by_name"
-            // in source file "memoriser/accessor/compound_accessor.c"!
-            get_compound_element_by_name(p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                p12, p13,
-                (void*) &eln, (void*) &elnc, (void*) &elns,
-                (void*) &ela, (void*) &elac, (void*) &elas,
-                (void*) &elm, (void*) &elmc, (void*) &elms,
-                (void*) &eld, (void*) &eldc, (void*) &elds);
-
-            // The knowledge root does not have a details container with meta
-            // information, which is why a null pointer is handed over here twice.
-            get_compound_element_by_name(p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                *elm, *elmc,
-                (void*) &ln, (void*) &lnc, (void*) &lns,
-                (void*) &la, (void*) &lac, (void*) &las,
-                (void*) &lm, (void*) &lmc, (void*) &lms,
-                (void*) &ld, (void*) &ldc, (void*) &lds);
-
-            // Handle compound logic.
-            handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *lm, *lmc, p16, p17, p18);
+            handle_encapsulated(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p16, p17, p18);
         }
     }
 
@@ -168,31 +107,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Get compound logic element as encapsulated model.
-            //
-            // CAUTION!
-            // The abstraction of an encapsulated name must always be "character".
-            // The details are uninteresting, since an encapsulated name cannot have
-            // constraints. That is, only the model is of interest. It contains the
-            // hierarchical name of the knowledge part to be retrieved.
-            //
-            // Example of a model containing a hierarchical logic name:
-            // model="application.record.logic"
-            //
-            // The knowledge root does not have a details container with meta
-            // information, which is why a null pointer is handed over here twice.
-            //
-            // Compare also with procedure "get_universal_compound_element_by_name"
-            // in source file "memoriser/accessor/compound_accessor.c"!
-            get_compound_element_by_name(p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                p12, p13,
-                (void*) &ln, (void*) &lnc, (void*) &lns,
-                (void*) &la, (void*) &lac, (void*) &las,
-                (void*) &lm, (void*) &lmc, (void*) &lms,
-                (void*) &ld, (void*) &ldc, (void*) &lds);
-
-            // Handle compound logic.
-            handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *lm, *lmc, p16, p17, p18);
+            handle_knowledge(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p16, p17, p18);
         }
     }
 
@@ -202,7 +117,6 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Handle simple operation.
             handle_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15, p16, p17);
         }
     }

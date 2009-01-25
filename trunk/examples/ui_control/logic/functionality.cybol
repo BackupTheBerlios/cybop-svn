@@ -1,6 +1,9 @@
 <model>
     <part name="start_apw" channel="inline" abstraction="operation/plain" model="run">
-        <property name="program" channel="inline" abstraction="text/plain" model="dosemu.bin -E 'call c:\a\apwxms.exe magda\' -X"/>
+        <property name="program" channel="inline" abstraction="text/plain" model="xdosemu"/>
+<!--
+        <property name="program" channel="inline" abstraction="text/plain" model="dosemu.bin -E 'call c:\a\apwxms.exe christian\' -X"/>
+-->
     </part>
     <part name="show_x_window" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="x-window-system"/>
@@ -58,6 +61,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: functionality.cybol,v $ $Revision: 1.8 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @version $RCSfile: functionality.cybol,v $ $Revision: 1.9 $ $Date: 2009-01-25 11:46:48 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

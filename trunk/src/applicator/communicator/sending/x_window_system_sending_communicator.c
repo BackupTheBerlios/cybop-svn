@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.10 $ $Date: 2008-10-05 23:15:02 $ $Author: christian $
+ * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-01-25 11:46:48 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,7 +42,7 @@
  *
  * @param p0 the internal memory
  * @param p1 the source gui compound model
- * @param p2 the source count
+ * @param p2 the source gui compound model count
  * @param p3 the knowledge memory
  * @param p4 the knowledge memory count
  */
