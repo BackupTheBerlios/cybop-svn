@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.62 $ $Date: 2009-01-24 22:46:10 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.63 $ $Date: 2009-01-26 05:37:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -209,6 +209,8 @@ void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
                 && (*www_service_irq == *NUMBER_0_INTEGER_MEMORY_MODEL)
                 && (*cyboi_service_irq == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
+    fwprintf(stdout, L"TEST wait 2: %i\n", *signal_memory_irq);
+
                 sleep(*signal_memory_sleep_time);
             }
 
@@ -305,9 +307,9 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        void** irq = (void**) p0;
+        void*** irq = (void***) p0;
 
-//??    fwprintf(stdout, L"TEST IRQ 1: %i\n", p0);
+    fwprintf(stdout, L"TEST IRQ 1: %i\n", p0);
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Check for interrupt requests.");
 
@@ -363,9 +365,11 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
         }
 */
 
+    fwprintf(stdout, L"TEST IRQ 2: %i\n", p0);
+
         if (*irq == NULL_POINTER_MEMORY_MODEL) {
 
-//??    fwprintf(stdout, L"TEST IRQ 3: %i\n", p0);
+    fwprintf(stdout, L"TEST IRQ 3: %i\n", p0);
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
@@ -373,13 +377,13 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             //?? TODO: The mutex is NOT needed here; delete later!
             if (p11 != *NULL_POINTER_MEMORY_MODEL) {
 
-//??    fwprintf(stdout, L"TEST IRQ 4: %i\n", p0);
+    fwprintf(stdout, L"TEST IRQ 4: %i\n", p0);
 
                 void** gnu_linux_console_mutex = (void**) p11;
 
                 if (p10 != *NULL_POINTER_MEMORY_MODEL) {
 
-//??    fwprintf(stdout, L"TEST IRQ 5: %i\n", p0);
+    fwprintf(stdout, L"TEST IRQ 5: %i\n", p0);
 
                     //?? TODO: OLD comment; delete later!
                     // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
@@ -389,7 +393,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                     if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??    fwprintf(stdout, L"TEST IRQ 6: %i\n", p0);
+    fwprintf(stdout, L"TEST IRQ 6: %i\n", p0);
 
                         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected gnu/linux console interrupt.");
 
@@ -405,7 +409,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                         get_element(p16, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                         get_element(p17, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST detected gnu/linux console irq: %i\n", **((int**) irq));
+    fwprintf(stdout, L"TEST detected gnu/linux console irq: %i\n", ***((int***) irq));
                     }
 
                 } else {
@@ -559,7 +563,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             }
         }
 
-        if (*irq == *NULL_POINTER_MEMORY_MODEL) {
+        if (*irq == NULL_POINTER_MEMORY_MODEL) {
 
             log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. No interrupt request flag is set.");
         }
@@ -732,6 +736,10 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             p19, p20, p21, p22, p23, p24, p25, p26,
             p27, p28, p29, p30, p31, p32, p33, p34,
             p35, p36, p37, p38, p39, p40, p41, p42);
+
+    fwprintf(stdout, L"TEST checker irq: %i\n", irq);
+    fwprintf(stdout, L"TEST checker *irq: %i\n", *irq);
+    fwprintf(stdout, L"TEST checker **irq: %i\n", **irq);
 
         if ((irq != (int**) NULL_POINTER_MEMORY_MODEL) && (*irq != (int*) *NULL_POINTER_MEMORY_MODEL) && (**irq != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 

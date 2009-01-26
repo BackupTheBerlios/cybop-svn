@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-01-25 11:46:48 $ $Author: christian $
+ * @version $RCSfile: x_window_system_sending_communicator.c,v $ $Revision: 1.12 $ $Date: 2009-01-26 05:37:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -58,9 +58,10 @@ void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3,
 
     pthread_mutex_lock(*xmt);
 
+    fwprintf(stdout, L"TEST send x 0: %i\n", p0);
+
     // Encode compound model into x window system window.
-    encode(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT);
+    encode_x_window_system(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4);
 
     // The display, which is a subsumption of
     // xserver, screens, hardware (input devices etc.).
@@ -69,8 +70,12 @@ void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3,
     // Get display.
     get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
+    fwprintf(stdout, L"TEST send x 1: %i\n", p0);
+
     // Show window on display.
     write_data(d, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p0, *NULL_POINTER_MEMORY_MODEL, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT);
+
+    fwprintf(stdout, L"TEST send x 2: %i\n", p0);
 
     pthread_mutex_unlock(*xmt);
 

@@ -58,7 +58,6 @@
         <property name="message" channel="inline" abstraction="text/plain" model="ui_control/tui.cybol"/>
         <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.tui"/>
     </part>
-<!--
     <part name="create_gui" channel="inline" abstraction="operation/plain" model="create">
         <property name="name" channel="inline" abstraction="text/plain" model="gui"/>
         <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
@@ -71,7 +70,6 @@
         <property name="message" channel="inline" abstraction="text/plain" model="ui_control/gui.cybol"/>
         <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.gui"/>
     </part>
--->
     <part name="create_logic" channel="inline" abstraction="operation/plain" model="create">
         <property name="name" channel="inline" abstraction="text/plain" model="logic"/>
         <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
@@ -132,11 +130,9 @@
     <part name="startup_tui" channel="inline" abstraction="operation/plain" model="startup">
         <property name="service" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
     </part>
-<!--
     <part name="startup_gui" channel="inline" abstraction="operation/plain" model="startup">
         <property name="service" channel="inline" abstraction="text/plain" model="x-window-system"/>
     </part>
--->
     <part name="select_current_menu_item" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
         <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.select_current_part"/>
@@ -190,6 +186,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: startup.cybol,v $ $Revision: 1.18 $ $Date: 2009-01-20 23:46:14 $ $Author: christian $
+    @version $RCSfile: startup.cybol,v $ $Revision: 1.19 $ $Date: 2009-01-26 05:37:31 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

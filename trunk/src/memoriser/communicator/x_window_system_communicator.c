@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.26 $ $Date: 2008-11-28 22:04:10 $ $Author: christian $
+ * @version $RCSfile: x_window_system_communicator.c,v $ $Revision: 1.27 $ $Date: 2009-01-26 05:37:32 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -765,22 +765,38 @@ void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // Get x window system internals.
         get_element(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-        // Request input events (signals) to be put into event queue.
-        XSelectInput(*d, **w, ExposureMask
-            | KeyPressMask | KeyReleaseMask
-            | ButtonPressMask | ButtonReleaseMask | PointerMotionMask | ButtonMotionMask
-            | Button1MotionMask | Button2MotionMask | Button3MotionMask | Button4MotionMask | Button5MotionMask
-            | EnterWindowMask | LeaveWindowMask);
+        // CAUTION! This test is necessary to avoid a "Segmentation fault"!
+        if (*d != *NULL_POINTER_MEMORY_MODEL) {
 
-        // Show the window (make it visible).
-        XMapWindow(*d, **w);
+            // CAUTION! This test is necessary to avoid a "Segmentation fault"!
+            if (*w != *NULL_POINTER_MEMORY_MODEL) {
 
-        // Flush all pending requests to the X server.
-        XFlush(*d);
+                // Request input events (signals) to be put into event queue.
+                XSelectInput(*d, **w, ExposureMask
+                    | KeyPressMask | KeyReleaseMask
+                    | ButtonPressMask | ButtonReleaseMask | PointerMotionMask | ButtonMotionMask
+                    | Button1MotionMask | Button2MotionMask | Button3MotionMask | Button4MotionMask | Button5MotionMask
+                    | EnterWindowMask | LeaveWindowMask);
+
+                // Show the window (make it visible).
+                XMapWindow(*d, **w);
+
+                // Flush all pending requests to the X server.
+                XFlush(*d);
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to x window system display. The destination display is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to x window system display. The destination display is null.");
+        }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to x window system display. The destination display is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to x window system display. The destination display argument is null.");
     }
 }
 
