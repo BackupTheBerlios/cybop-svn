@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.63 $ $Date: 2009-01-26 05:37:31 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.64 $ $Date: 2009-01-26 23:14:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -209,10 +209,14 @@ void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
                 && (*www_service_irq == *NUMBER_0_INTEGER_MEMORY_MODEL)
                 && (*cyboi_service_irq == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
-    fwprintf(stdout, L"TEST wait 2: %i\n", *signal_memory_irq);
-
                 sleep(*signal_memory_sleep_time);
             }
+
+    fwprintf(stdout, L"TEST wait *signal_memory_irq: %i\n", *signal_memory_irq);
+    fwprintf(stdout, L"TEST wait *gnu_linux_console_irq: %i\n", *gnu_linux_console_irq);
+    fwprintf(stdout, L"TEST wait *x_window_system_irq: %i\n", *x_window_system_irq);
+    fwprintf(stdout, L"TEST wait *www_service_irq: %i\n", *www_service_irq);
+    fwprintf(stdout, L"TEST wait *cyboi_service_irq: %i\n", *cyboi_service_irq);
 
             // The sleep loop above is left as soon as the interrupt variable
             // is set to a value other than zero.
@@ -263,34 +267,34 @@ void check_wait(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
  * @param p5 the handler model count (Hand over as reference!)
  * @param p6 the handler details (Hand over as reference!)
  * @param p7 the handler details count (Hand over as reference!)
- * @param p8 the signal memory interrupt request flag (Hand over as reference!)
- * @param p9 the signal memory mutex (Hand over as reference!)
- * @param p10 the gnu/linux console interrupt request flag (Hand over as reference!)
- * @param p11 the gnu/linux console mutex (Hand over as reference!)
+ * @param p8 the signal memory interrupt request flag
+ * @param p9 the signal memory mutex
+ * @param p10 the gnu/linux console interrupt request flag
+ * @param p11 the gnu/linux console mutex
  * @param p12 the gnu/linux console handler abstraction (Hand over as reference!)
  * @param p13 the gnu/linux console handler abstraction count (Hand over as reference!)
  * @param p14 the gnu/linux console handler model (Hand over as reference!)
  * @param p15 the gnu/linux console handler model count (Hand over as reference!)
  * @param p16 the gnu/linux console handler details (Hand over as reference!)
  * @param p17 the gnu/linux console handler details count (Hand over as reference!)
- * @param p18 the x window system interrupt request flag (Hand over as reference!)
- * @param p19 the x window system mutex (Hand over as reference!)
+ * @param p18 the x window system interrupt request flag
+ * @param p19 the x window system mutex
  * @param p20 the x window system handler abstraction (Hand over as reference!)
  * @param p21 the x window system handler abstraction count (Hand over as reference!)
  * @param p22 the x window system handler model (Hand over as reference!)
  * @param p23 the x window system handler model count (Hand over as reference!)
  * @param p24 the x window system handler details (Hand over as reference!)
  * @param p25 the x window system handler details count (Hand over as reference!)
- * @param p26 the www service interrupt request flag (Hand over as reference!)
- * @param p27 the www service mutex (Hand over as reference!)
+ * @param p26 the www service interrupt request flag
+ * @param p27 the www service mutex
  * @param p28 the www service handler abstraction (Hand over as reference!)
  * @param p29 the www service handler abstraction count (Hand over as reference!)
  * @param p30 the www service handler model (Hand over as reference!)
  * @param p31 the www service handler model count (Hand over as reference!)
  * @param p32 the www service handler details (Hand over as reference!)
  * @param p33 the www service handler details count (Hand over as reference!)
- * @param p34 the cyboi service interrupt request flag (Hand over as reference!)
- * @param p35 the cyboi service mutex (Hand over as reference!)
+ * @param p34 the cyboi service interrupt request flag
+ * @param p35 the cyboi service mutex
  * @param p36 the cyboi service handler abstraction (Hand over as reference!)
  * @param p37 the cyboi service handler abstraction count (Hand over as reference!)
  * @param p38 the cyboi service handler model (Hand over as reference!)
@@ -307,263 +311,152 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        void*** irq = (void***) p0;
+        void** irq = (void**) p0;
 
-    fwprintf(stdout, L"TEST IRQ 1: %i\n", p0);
+    fwprintf(stdout, L"TEST IRQ 0: %i\n", p0);
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Check for interrupt requests.");
 
-/*??
-        // CAUTION! Compare *irq to NULL_POINTER_MEMORY_MODEL here!
-        // An alternative would be to do the following cast above:
-        // void*** irq = (void***) p0;
-        // and then compare **irq to *NULL_POINTER_MEMORY_MODEL.
-        // However, working with *** pointers is not nice,
-        // so that the simpler version of comparing to the
-        // pointer reference NULL_POINTER_MEMORY_MODEL is used here.
-        if (*irq == NULL_POINTER_MEMORY_MODEL) {
+        if (*irq == *NULL_POINTER_MEMORY_MODEL) {
 
-    fwprintf(stdout, L"TEST IRQ 2: %i\n", p0);
+    fwprintf(stdout, L"TEST IRQ 1: %i\n", p0);
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            //?? TODO: The mutex is NOT needed here; delete later!
-            if (p9 != *NULL_POINTER_MEMORY_MODEL) {
+            if (*((int*) p8) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                void** signal_memory_mutex = (void**) p9;
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected signal memory interrupt.");
 
-                if (p8 != *NULL_POINTER_MEMORY_MODEL) {
+                // Set interrupt request flag.
+                get_element(p8, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                // Set mutex.
+                get_element(p9, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                    //?? TODO: OLD comment; delete later!
-                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                    // and casting to int** might change the expected size.
-                    // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** signal_memory_irq = (void**) p8;
-
-                    if (**((int**) signal_memory_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected signal memory interrupt.");
-
-                        // Set interrupt request flag.
-                        get_element(p8, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Set mutex.
-                        get_element(p9, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-    fwprintf(stdout, L"TEST detected signal memory irq: %i\n", **((int**) irq));
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The signal memory interrupt request flag is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The signal memory mutex is null.");
+    fwprintf(stdout, L"TEST detected signal memory irq: %i\n", *((int*) *irq));
             }
         }
-*/
 
     fwprintf(stdout, L"TEST IRQ 2: %i\n", p0);
 
-        if (*irq == NULL_POINTER_MEMORY_MODEL) {
+        if (*irq == *NULL_POINTER_MEMORY_MODEL) {
 
     fwprintf(stdout, L"TEST IRQ 3: %i\n", p0);
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            //?? TODO: The mutex is NOT needed here; delete later!
-            if (p11 != *NULL_POINTER_MEMORY_MODEL) {
-
-    fwprintf(stdout, L"TEST IRQ 4: %i\n", p0);
-
-                void** gnu_linux_console_mutex = (void**) p11;
-
-                if (p10 != *NULL_POINTER_MEMORY_MODEL) {
-
-    fwprintf(stdout, L"TEST IRQ 5: %i\n", p0);
-
-                    //?? TODO: OLD comment; delete later!
-                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                    // and casting to int** might change the expected size.
-                    // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** gnu_linux_console_irq = (void**) p10;
-
-                    if (**((int**) gnu_linux_console_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (*((int*) p10) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stdout, L"TEST IRQ 6: %i\n", p0);
 
-                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected gnu/linux console interrupt.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected gnu/linux console interrupt.");
 
-                        // Get interrupt request flag.
-                        get_element(p10, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Get mutex.
-                        get_element(p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Get handler.
-                        get_element(p12, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p13, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p14, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p15, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p16, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p17, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                // Get interrupt request flag.
+                get_element(p10, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                // Get mutex.
+                get_element(p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST detected gnu/linux console irq: %i\n", ***((int***) irq));
-                    }
+                *((void**) p2) = &p12;
+                *((void**) p3) = &p13;
+                *((void**) p4) = &p14;
+                *((void**) p5) = &p15;
+                *((void**) p6) = &p16;
+                *((void**) p7) = &p17;
+/*??
+                *((void**) p2) = *((void**) p12);
+                *((void**) p3) = *((void**) p13);
+                *((void**) p4) = *((void**) p14);
+                *((void**) p5) = *((void**) p15);
+                *((void**) p6) = *((void**) p16);
+                *((void**) p7) = *((void**) p17);
+*/
+/*??
+                // Get handler.
+                get_element(p12, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p13, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p14, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p15, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p16, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p17, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+*/
 
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The gnu/linux console interrupt request flag is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The gnu/linux console mutex is null.");
+    fwprintf(stdout, L"TEST detected gnu/linux console irq: %i\n", *((int*) *irq));
             }
         }
 
-        if (*irq == NULL_POINTER_MEMORY_MODEL) {
+        if (*irq == *NULL_POINTER_MEMORY_MODEL) {
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            //?? TODO: The mutex is NOT needed here; delete later!
-            if (p19 != *NULL_POINTER_MEMORY_MODEL) {
+            if (*((int*) p18) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                void** x_window_system_mutex = (void**) p19;
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected x window system interrupt.");
 
-                if (p18 != *NULL_POINTER_MEMORY_MODEL) {
+                // Set interrupt request flag.
+                get_element(p18, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                // Set mutex.
+                get_element(p19, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                // Set handler.
+                get_element(p20, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p21, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p22, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p23, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p24, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p25, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                    //?? TODO: OLD comment; delete later!
-                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                    // and casting to int** might change the expected size.
-                    // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** x_window_system_irq = (void**) p18;
-
-                    if (**((int**) x_window_system_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected x window system interrupt.");
-
-                        // Set interrupt request flag.
-                        get_element(p18, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Set mutex.
-                        get_element(p19, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Set handler.
-                        get_element(p20, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p21, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p22, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p23, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p24, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p25, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-    fwprintf(stdout, L"TEST detected x window system irq: %i\n", **((int**) irq));
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The x window system interrupt request flag is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The x window system mutex is null.");
+    fwprintf(stdout, L"TEST detected x window system irq: %i\n", *((int*) *irq));
             }
         }
 
-        if (*irq == NULL_POINTER_MEMORY_MODEL) {
+        if (*irq == *NULL_POINTER_MEMORY_MODEL) {
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            //?? TODO: The mutex is NOT needed here; delete later!
-            if (p27 != *NULL_POINTER_MEMORY_MODEL) {
+            if (*((int*) p26) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                void** www_service_mutex = (void**) p27;
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected www service interrupt.");
 
-                if (p26 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    //?? TODO: OLD comment; delete later!
-                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                    // and casting to int** might change the expected size.
-                    // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** www_service_irq = (void**) p26;
-
-                    if (**((int**) www_service_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected www service interrupt.");
-
-                        // Set interrupt request flag.
-                        get_element(p26, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Set mutex.
-                        get_element(p27, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Set handler.
-                        get_element(p28, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p29, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p30, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p31, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p32, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p33, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The www service interrupt request flag is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The www service mutex is null.");
+                // Set interrupt request flag.
+                get_element(p26, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                // Set mutex.
+                get_element(p27, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                // Set handler.
+                get_element(p28, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p29, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p30, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p31, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p32, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p33, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             }
         }
 
-        if (*irq == NULL_POINTER_MEMORY_MODEL) {
+        if (*irq == *NULL_POINTER_MEMORY_MODEL) {
 
             // This interrupt is only checked if the irq flag is null.
             // If it is not null, then another interrupt has been found before.
 
-            //?? TODO: The mutex is NOT needed here; delete later!
-            if (p35 != *NULL_POINTER_MEMORY_MODEL) {
+            if (*((int*) p34) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                void** cyboi_service_mutex = (void**) p35;
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected cyboi service interrupt.");
 
-                if (p34 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    //?? TODO: OLD comment; delete later!
-                    // CAUTION! Do NOT cast to int** because the value is assigned to *mt below
-                    // and casting to int** might change the expected size.
-                    // (Pointer and integer do not necessarily always have to have the same size.)
-                    void** cyboi_service_irq = (void**) p34;
-
-                    if (**((int**) cyboi_service_irq) != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected cyboi service interrupt.");
-
-                        // Set interrupt request flag.
-                        get_element(p34, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Set mutex.
-                        get_element(p35, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        // Set handler.
-                        get_element(p36, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p37, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p38, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p39, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p40, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                        get_element(p41, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The cyboi service interrupt request flag is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. The cyboi service mutex is null.");
+                // Set interrupt request flag.
+                get_element(p34, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p0, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                // Set mutex.
+                get_element(p35, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                // Set handler.
+                get_element(p36, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p37, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p38, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p39, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p40, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                get_element(p41, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             }
         }
 
-        if (*irq == NULL_POINTER_MEMORY_MODEL) {
+        if (*irq == *NULL_POINTER_MEMORY_MODEL) {
 
             log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. No interrupt request flag is set.");
         }
@@ -585,35 +478,35 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
  * @param p5 the signal memory count
  * @param p6 the signal memory size
  * @param p7 the shutdown flag
- * @param p8 the signal memory interrupt request flag (Hand over as reference!)
- * @param p9 the signal memory mutex (Hand over as reference!)
+ * @param p8 the signal memory interrupt request flag
+ * @param p9 the signal memory mutex
  * @param p10 the signal memory sleep time (Hand over as reference!)
- * @param p11 the gnu/linux console interrupt request flag (Hand over as reference!)
- * @param p12 the gnu/linux console mutex (Hand over as reference!)
+ * @param p11 the gnu/linux console interrupt request flag
+ * @param p12 the gnu/linux console mutex
  * @param p13 the gnu/linux console handler abstraction (Hand over as reference!)
  * @param p14 the gnu/linux console handler abstraction count (Hand over as reference!)
  * @param p15 the gnu/linux console handler model (Hand over as reference!)
  * @param p16 the gnu/linux console handler model count (Hand over as reference!)
  * @param p17 the gnu/linux console handler details (Hand over as reference!)
  * @param p18 the gnu/linux console handler details count (Hand over as reference!)
- * @param p19 the x window system interrupt request flag (Hand over as reference!)
- * @param p20 the x window system mutex (Hand over as reference!)
+ * @param p19 the x window system interrupt request flag
+ * @param p20 the x window system mutex
  * @param p21 the x window system handler abstraction (Hand over as reference!)
  * @param p22 the x window system handler abstraction count (Hand over as reference!)
  * @param p23 the x window system handler model (Hand over as reference!)
  * @param p24 the x window system handler model count (Hand over as reference!)
  * @param p25 the x window system handler details (Hand over as reference!)
  * @param p26 the x window system handler details count (Hand over as reference!)
- * @param p27 the www service interrupt request flag (Hand over as reference!)
- * @param p28 the www service mutex (Hand over as reference!)
+ * @param p27 the www service interrupt request flag
+ * @param p28 the www service mutex
  * @param p29 the www service handler abstraction (Hand over as reference!)
  * @param p30 the www service handler abstraction count (Hand over as reference!)
  * @param p31 the www service handler model (Hand over as reference!)
  * @param p32 the www service handler model count (Hand over as reference!)
  * @param p33 the www service handler details (Hand over as reference!)
  * @param p34 the www service handler details count (Hand over as reference!)
- * @param p35 the cyboi service interrupt request flag (Hand over as reference!)
- * @param p36 the cyboi service mutex (Hand over as reference!)
+ * @param p35 the cyboi service interrupt request flag
+ * @param p36 the cyboi service mutex
  * @param p37 the cyboi service handler abstraction (Hand over as reference!)
  * @param p38 the cyboi service handler abstraction count (Hand over as reference!)
  * @param p39 the cyboi service handler model (Hand over as reference!)
@@ -635,34 +528,8 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     //
     // CAUTION! These have to be handed over as REFERENCE to this function,
     // since their values get manipulated in the "check_interrupts" function called further below!
-    void** signal_memory_irq = (void**) p8;
-    void** signal_memory_mutex = (void**) p9;
     void** signal_memory_sleep_time = (void**) p10;
-    void** gnu_linux_console_irq = (void**) p11;
-    void** gnu_linux_console_mutex = (void**) p12;
-    void** x_window_system_irq = (void**) p19;
-    void** x_window_system_mutex = (void**) p20;
-    void** www_service_irq = (void**) p27;
-    void** www_service_mutex = (void**) p28;
-    void** cyboi_service_irq = (void**) p35;
-    void** cyboi_service_mutex = (void**) p36;
 
-    // The signal abstraction, model, details.
-    void** a = NULL_POINTER_MEMORY_MODEL;
-    void** ac = NULL_POINTER_MEMORY_MODEL;
-    void** as = NULL_POINTER_MEMORY_MODEL;
-    void** m = NULL_POINTER_MEMORY_MODEL;
-    void** mc = NULL_POINTER_MEMORY_MODEL;
-    void** ms = NULL_POINTER_MEMORY_MODEL;
-    void** d = NULL_POINTER_MEMORY_MODEL;
-    void** dc = NULL_POINTER_MEMORY_MODEL;
-    void** ds = NULL_POINTER_MEMORY_MODEL;
-    // The signal priority.
-    void** p = NULL_POINTER_MEMORY_MODEL;
-    // The signal identification.
-    void** id = NULL_POINTER_MEMORY_MODEL;
-    // The direct execution flag.
-    int x = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The highest priority index.
     int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
@@ -698,8 +565,25 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // A signal was found and has to be handled.
         // Handling a signal has higher priority than checking for new interrupt requests.
 
+        // The signal abstraction, model, details.
+        void** a = NULL_POINTER_MEMORY_MODEL;
+        void** ac = NULL_POINTER_MEMORY_MODEL;
+        void** as = NULL_POINTER_MEMORY_MODEL;
+        void** m = NULL_POINTER_MEMORY_MODEL;
+        void** mc = NULL_POINTER_MEMORY_MODEL;
+        void** ms = NULL_POINTER_MEMORY_MODEL;
+        void** d = NULL_POINTER_MEMORY_MODEL;
+        void** dc = NULL_POINTER_MEMORY_MODEL;
+        void** ds = NULL_POINTER_MEMORY_MODEL;
+        // The signal priority.
+        void** p = NULL_POINTER_MEMORY_MODEL;
+        // The signal identification.
+        void** id = NULL_POINTER_MEMORY_MODEL;
+        // The direct execution flag.
+        int x = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
         // Get signal at given index.
-        check_get(p4, p5, p6, *signal_memory_mutex, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
+        check_get(p4, p5, p6, p9, (void*) &i, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &p, (void*) &id);
 
     //?? For testing only. Delete these lines later!
     fwprintf(stdout, L"TEST checker signal a: %ls\n", *((wchar_t**) a));
@@ -714,7 +598,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 */
 
         // Handle signal.
-        handle(p0, p1, p2, p3, p4, p5, p6, p7, *signal_memory_irq, *signal_memory_mutex, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
+        handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
 
     } else {
 
@@ -722,9 +606,29 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // may check for new interrupt requests now.
 
         // The interrupt request flag.
-        int** irq = (int**) NULL_POINTER_MEMORY_MODEL;
+        void* irq = *NULL_POINTER_MEMORY_MODEL;
         // The mutex.
-        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
+        void* mt = *NULL_POINTER_MEMORY_MODEL;
+        // The signal abstraction, model, details.
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        void* ac = *NULL_POINTER_MEMORY_MODEL;
+        void* as = *NULL_POINTER_MEMORY_MODEL;
+        void* m = *NULL_POINTER_MEMORY_MODEL;
+        void* mc = *NULL_POINTER_MEMORY_MODEL;
+        void* ms = *NULL_POINTER_MEMORY_MODEL;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+        void* dc = *NULL_POINTER_MEMORY_MODEL;
+        void* ds = *NULL_POINTER_MEMORY_MODEL;
+        // The signal priority.
+        void* p = *NULL_POINTER_MEMORY_MODEL;
+        // The signal identification.
+        void* id = *NULL_POINTER_MEMORY_MODEL;
+        // The direct execution flag.
+        int x = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    fwprintf(stdout, L"TEST checker irq p13: %ls\n", (wchar_t*) *((void**) p13));
+    fwprintf(stdout, L"TEST checker irq p14: %i\n", p14);
+    fwprintf(stdout, L"TEST checker irq *p14: %i\n", *((int*) *((void**) p14)));
 
         // Check interrupt request flags and get the appropriate:
         // - interrupt request flag (to be reset below)
@@ -738,20 +642,23 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             p35, p36, p37, p38, p39, p40, p41, p42);
 
     fwprintf(stdout, L"TEST checker irq: %i\n", irq);
-    fwprintf(stdout, L"TEST checker *irq: %i\n", *irq);
-    fwprintf(stdout, L"TEST checker **irq: %i\n", **irq);
 
-        if ((irq != (int**) NULL_POINTER_MEMORY_MODEL) && (*irq != (int*) *NULL_POINTER_MEMORY_MODEL) && (**irq != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+        if ((irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) irq) != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
-    fwprintf(stdout, L"TEST checker irq: %i\n", **irq);
+    void* test = *((void**) p14);
+    fwprintf(stdout, L"TEST checker irq test: %i\n", test);
+    fwprintf(stdout, L"TEST checker irq *test: %i\n", *((int*) test));
 
-    fwprintf(stdout, L"TEST checker irq a: %ls\n", (wchar_t*) *a);
-    fwprintf(stdout, L"TEST checker irq ac: %i\n", **((int**) ac));
-    fwprintf(stdout, L"TEST checker irq mc: %i\n", **((int**) mc));
-    fwprintf(stdout, L"TEST checker irq dc: %i\n", **((int**) dc));
+    fwprintf(stdout, L"TEST checker irq pre: %i\n", *((int*) irq));
+
+    fwprintf(stdout, L"TEST checker irq a: %ls\n", (wchar_t*) a);
+    fwprintf(stdout, L"TEST checker irq ac: %i\n", ac);
+    fwprintf(stdout, L"TEST checker irq *ac: %i\n", *((int*) ac));
+    fwprintf(stdout, L"TEST checker irq mc: %i\n", *((int*) mc));
+    fwprintf(stdout, L"TEST checker irq dc: %i\n", *((int*) dc));
 
             // Lock mutex.
-            pthread_mutex_lock(*mt);
+            pthread_mutex_lock(mt);
 
             // Reset interrupt request flag.
             //
@@ -762,16 +669,18 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // This is done here, right after checking the interrupt flag
             // and yet BEFORE receiving data and handling the signal below,
             // so that the system may react faster to new interrupt requests.
-            **irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            *((int*) irq) = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    fwprintf(stdout, L"TEST checker irq post reset: %i\n", *((int*) irq));
 
             // Unlock mutex.
-            pthread_mutex_unlock(*mt);
+            pthread_mutex_unlock(mt);
 
             // Handle signal.
             //
             // CAUTION! The "handle" function has to be called DIRECTLY here!
             // For reasons, see the comment block above!
-            handle(p0, p1, p2, p3, p4, p5, p6, p7, *signal_memory_irq, *signal_memory_mutex, *a, *ac, *m, *mc, *d, *dc, p, id, &x);
+            handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, a, ac, m, mc, d, dc, (void*) &p, (void*) &id, (void*) &x);
 
             // CAUTION! An interrupt request was detected and the corresponding data received.
             // It is therefore VERY likely that new signals have been generated while handling the data.
@@ -783,7 +692,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // No interrupt request was detected, so that the cyboi system
             // can be sent to sleep now, in order to save cpu time.
 
-            check_wait(*signal_memory_sleep_time, *signal_memory_irq, *gnu_linux_console_irq, *x_window_system_irq, *www_service_irq, *cyboi_service_irq);
+            check_wait(*signal_memory_sleep_time, p8, p11, p19, p27, p35);
         }
     }
 
@@ -845,65 +754,45 @@ void check(void* p0) {
     void** gnu_linux_console_irq = NULL_POINTER_MEMORY_MODEL;
     // The gnu/linux console mutex.
     void** gnu_linux_console_mutex = NULL_POINTER_MEMORY_MODEL;
-    // The gnu/linux console handler abstraction.
+    // The gnu/linux console handler abstraction, model, details.
     void** gnu_linux_console_handler_a = NULL_POINTER_MEMORY_MODEL;
-    // The gnu/linux console handler abstraction count.
     void** gnu_linux_console_handler_ac = NULL_POINTER_MEMORY_MODEL;
-    // The gnu/linux console handler model.
     void** gnu_linux_console_handler_m = NULL_POINTER_MEMORY_MODEL;
-    // The gnu/linux console handler model count.
     void** gnu_linux_console_handler_mc = NULL_POINTER_MEMORY_MODEL;
-    // The gnu/linux console handler details.
     void** gnu_linux_console_handler_d = NULL_POINTER_MEMORY_MODEL;
-    // The gnu/linux console handler details count.
     void** gnu_linux_console_handler_dc = NULL_POINTER_MEMORY_MODEL;
     // The x window system interrupt request flag.
     void** x_window_system_irq = NULL_POINTER_MEMORY_MODEL;
     // The x window system mutex.
     void** x_window_system_mutex = NULL_POINTER_MEMORY_MODEL;
-    // The x window system handler abstraction.
+    // The x window system handler abstraction, model, details.
     void** x_window_system_handler_a = NULL_POINTER_MEMORY_MODEL;
-    // The x window system handler abstraction count.
     void** x_window_system_handler_ac = NULL_POINTER_MEMORY_MODEL;
-    // The x window system handler model.
     void** x_window_system_handler_m = NULL_POINTER_MEMORY_MODEL;
-    // The x window system handler model count.
     void** x_window_system_handler_mc = NULL_POINTER_MEMORY_MODEL;
-    // The x window system handler details.
     void** x_window_system_handler_d = NULL_POINTER_MEMORY_MODEL;
-    // The x window system handler details count.
     void** x_window_system_handler_dc = NULL_POINTER_MEMORY_MODEL;
     // The www service interrupt request flag.
     void** www_service_irq = NULL_POINTER_MEMORY_MODEL;
     // The www service mutex.
     void** www_service_mutex = NULL_POINTER_MEMORY_MODEL;
-    // The www service handler abstraction.
+    // The www service handler abstraction, model, details.
     void** www_service_handler_a = NULL_POINTER_MEMORY_MODEL;
-    // The www service handler abstraction count.
     void** www_service_handler_ac = NULL_POINTER_MEMORY_MODEL;
-    // The www service handler model.
     void** www_service_handler_m = NULL_POINTER_MEMORY_MODEL;
-    // The www service handler model count.
     void** www_service_handler_mc = NULL_POINTER_MEMORY_MODEL;
-    // The www service handler details.
     void** www_service_handler_d = NULL_POINTER_MEMORY_MODEL;
-    // The www service handler details count.
     void** www_service_handler_dc = NULL_POINTER_MEMORY_MODEL;
     // The cyboi service interrupt request flag.
     void** cyboi_service_irq = NULL_POINTER_MEMORY_MODEL;
     // The cyboi service mutex.
     void** cyboi_service_mutex = NULL_POINTER_MEMORY_MODEL;
-    // The cyboi service handler abstraction.
+    // The cyboi service handler abstraction, model, details.
     void** cyboi_service_handler_a = NULL_POINTER_MEMORY_MODEL;
-    // The cyboi service handler abstraction count.
     void** cyboi_service_handler_ac = NULL_POINTER_MEMORY_MODEL;
-    // The cyboi service handler model.
     void** cyboi_service_handler_m = NULL_POINTER_MEMORY_MODEL;
-    // The cyboi service handler model count.
     void** cyboi_service_handler_mc = NULL_POINTER_MEMORY_MODEL;
-    // The cyboi service handler details.
     void** cyboi_service_handler_d = NULL_POINTER_MEMORY_MODEL;
-    // The cyboi service handler details count.
     void** cyboi_service_handler_dc = NULL_POINTER_MEMORY_MODEL;
 
     // Get knowledge memory internals.
@@ -924,33 +813,23 @@ void check(void* p0) {
     get_element(p0, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gnu_linux_console_irq, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get gnu/linux console mutex.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gnu_linux_console_mutex, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler abstraction.
+    // Get gnu/linux console handler abstraction, model, details.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gnu_linux_console_handler_a, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler abstraction count.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gnu_linux_console_handler_ac, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler model.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gnu_linux_console_handler_m, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler model count.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gnu_linux_console_handler_mc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler details.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gnu_linux_console_handler_d, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get gnu/linux console handler details count.
     get_element(p0, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gnu_linux_console_handler_dc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get x window system interrupt request flag.
     get_element(p0, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &x_window_system_irq, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get x window system mutex.
     get_element(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &x_window_system_mutex, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get x window system handler abstraction.
+    // Get x window system handler abstraction, model, details.
     get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME, (void*) &x_window_system_handler_a, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get x window system handler abstraction count.
     get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &x_window_system_handler_ac, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get x window system handler model.
     get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME, (void*) &x_window_system_handler_m, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get x window system handler model count.
     get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &x_window_system_handler_mc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get x window system handler details.
     get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, (void*) &x_window_system_handler_d, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get x window system handler details count.
     get_element(p0, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &x_window_system_handler_dc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get www service interrupt request flag.
     i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
@@ -958,22 +837,17 @@ void check(void* p0) {
     // Get www service mutex.
     i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &www_service_mutex, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get www service handler abstraction.
+    // Get www service handler abstraction, model, details.
     i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &www_service_handler_a, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get www service handler abstraction count.
     i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &www_service_handler_ac, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get www service handler model.
     i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &www_service_handler_m, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get www service handler model count.
     i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &www_service_handler_mc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get www service handler details.
     i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &www_service_handler_d, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get www service handler details count.
     i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &www_service_handler_dc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
     // Get cyboi service interrupt request flag.
@@ -982,22 +856,17 @@ void check(void* p0) {
     // Get cyboi service mutex.
     i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &cyboi_service_mutex, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get cyboi service handler abstraction.
+    // Get cyboi service handler abstraction, model, details.
     i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &cyboi_service_handler_a, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get cyboi service handler abstraction count.
     i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &cyboi_service_handler_ac, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get cyboi service handler model.
     i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &cyboi_service_handler_m, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get cyboi service handler model count.
     i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &cyboi_service_handler_mc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get cyboi service handler details.
     i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &cyboi_service_handler_d, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    // Get cyboi service handler details count.
     i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
     get_element(p0, (void*) &i, (void*) &cyboi_service_handler_dc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
@@ -1014,11 +883,11 @@ void check(void* p0) {
         }
 
         check_signal(p0, *k, *kc, *ks, *s, *sc, *ss, (void*) &f,
-            (void*) signal_memory_irq, (void*) signal_memory_mutex, (void*) signal_memory_sleep_time,
-            (void*) gnu_linux_console_irq, (void*) gnu_linux_console_mutex, (void*) gnu_linux_console_handler_a, (void*) gnu_linux_console_handler_ac, (void*) gnu_linux_console_handler_m, (void*) gnu_linux_console_handler_mc, (void*) gnu_linux_console_handler_d, (void*) gnu_linux_console_handler_dc,
-            (void*) x_window_system_irq, (void*) x_window_system_mutex, (void*) x_window_system_handler_a, (void*) x_window_system_handler_ac, (void*) x_window_system_handler_m, (void*) x_window_system_handler_mc, (void*) x_window_system_handler_d, (void*) x_window_system_handler_dc,
-            (void*) www_service_irq, (void*) www_service_mutex, (void*) www_service_handler_a, (void*) www_service_handler_ac, (void*) www_service_handler_m, (void*) www_service_handler_mc, (void*) www_service_handler_d, (void*) www_service_handler_dc,
-            (void*) cyboi_service_irq, (void*) cyboi_service_mutex, (void*) cyboi_service_handler_a, (void*) cyboi_service_handler_ac, (void*) cyboi_service_handler_m, (void*) cyboi_service_handler_mc, (void*) cyboi_service_handler_d, (void*) cyboi_service_handler_dc);
+            *signal_memory_irq, *signal_memory_mutex, (void*) signal_memory_sleep_time,
+            *gnu_linux_console_irq, *gnu_linux_console_mutex, (void*) gnu_linux_console_handler_a, (void*) gnu_linux_console_handler_ac, (void*) gnu_linux_console_handler_m, (void*) gnu_linux_console_handler_mc, (void*) gnu_linux_console_handler_d, (void*) gnu_linux_console_handler_dc,
+            *x_window_system_irq, *x_window_system_mutex, (void*) x_window_system_handler_a, (void*) x_window_system_handler_ac, (void*) x_window_system_handler_m, (void*) x_window_system_handler_mc, (void*) x_window_system_handler_d, (void*) x_window_system_handler_dc,
+            *www_service_irq, *www_service_mutex, (void*) www_service_handler_a, (void*) www_service_handler_ac, (void*) www_service_handler_m, (void*) www_service_handler_mc, (void*) www_service_handler_d, (void*) www_service_handler_dc,
+            *cyboi_service_irq, *cyboi_service_mutex, (void*) cyboi_service_handler_a, (void*) cyboi_service_handler_ac, (void*) cyboi_service_handler_m, (void*) cyboi_service_handler_mc, (void*) cyboi_service_handler_d, (void*) cyboi_service_handler_dc);
     }
 }
 

@@ -14,9 +14,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.127 $ $Date: 2009-01-26 05:37:31 $ $Author: christian $
+# @version $Revision: 1.128 $ $Date: 2009-01-26 23:14:58 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct a few pointer issues in file "checker.c"
+        * Search bug that not all interrupts arrive correctly in functions "check_interrupts" and "check_signal"
 
 2009-01-25  Christian Heller  <christian.heller@tuxtax.de>
         * Factor out handling of encapsulated- and knowledge logic into new files
