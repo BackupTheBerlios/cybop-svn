@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.9 $ $Date: 2008-11-28 22:04:09 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.10 $ $Date: 2009-01-27 23:03:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -95,7 +95,7 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
                     // 'getwchar()', since that returns 'WEOF' instead of 'EOF'!
                     wint_t c = fgetwc(is);
 
-//??                    fwprintf(stdout, L"TEST character %i\n", e);
+    fwprintf(stdout, L"TEST sense gnu/linux console character %i\n", c);
 
                     // Unread character, that is push it back on the stream to
                     // make it available to be input again from the stream, by the
@@ -145,12 +145,21 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
                     // Unlock gnu/linux console mutex.
                     pthread_mutex_unlock(mt);
 
-                    while (*irq == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+    fwprintf(stdout, L"TEST sense gnu/linux console sleep pre: %i\n", *irq);
 
+                    while (*irq != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stdout, L"TEST sense gnu/linux console sleep start: %i\n", *irq);
                         // Sleep as long as the gnu/linux console interrupt is not handled and reset yet.
                         // This is to give the central processing unit (cpu) some
                         // time to breathe, that is to be idle or to process other signals.
-                        sleep(*st);
+//??                        sleep(*st);
+
+                        //?? TEST
+                        sleep(5.0);
+                        *irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    fwprintf(stdout, L"TEST sense gnu/linux console sleep end: %i\n", *irq);
                     }
 
                 } else {

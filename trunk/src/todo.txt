@@ -7,11 +7,11 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.97 $ $Date: 2009-01-26 23:14:58 $ $Author: christian $
+# @version $Revision: 1.98 $ $Date: 2009-01-27 23:03:50 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Find a way to get back valid pointer values from function "check_interrupts", in function "check_signal"
+        * Investigate why only the first interrupt signal, but not following interrupts are detected on gnu/linux console
         * Make CYBOL example application "ui_control" work
 
         * Change copyright year to 2009 in all source code files

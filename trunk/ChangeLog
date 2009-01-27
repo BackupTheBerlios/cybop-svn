@@ -14,9 +14,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.128 $ $Date: 2009-01-26 23:14:58 $ $Author: christian $
+# @version $Revision: 1.129 $ $Date: 2009-01-27 23:03:50 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Simplify file "checker.c"
+        * Investigate why only the first interrupt signal, but not following interrupts
+            are detected on gnu/linux console
 
 2009-01-26  Christian Heller  <christian.heller@tuxtax.de>
         * Correct a few pointer issues in file "checker.c"

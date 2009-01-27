@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.66 $ $Date: 2009-01-27 17:57:46 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.67 $ $Date: 2009-01-27 23:03:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,52 +69,52 @@ void check_get(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
  * Waits for an interrupt request.
  *
  * @param p0 the sleep time
- * @param p0 the internal memory
+ * @param p1 the internal memory
  */
 void check_wait(void* p0, void* p1) {
 
-    // The internal memory index.
-    int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The signal memory interrupt request.
-    void** sm = NULL_POINTER_MEMORY_MODEL;
-    // The gnu/linux console interrupt request.
-    void** lc = NULL_POINTER_MEMORY_MODEL;
-    // The x window system interrupt request.
-    void** xw = NULL_POINTER_MEMORY_MODEL;
-    // The www service interrupt request.
-    void** ww = NULL_POINTER_MEMORY_MODEL;
-    // The cyboi service interrupt request.
-    void** cy = NULL_POINTER_MEMORY_MODEL;
+        double* sl = (double*) p0;
 
-    // Get interrupt requests.
-    get_element(p1, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &sm, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p1, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &lc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p1, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &xw, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-    get_element(p1, (void*) &i, (void*) &ww, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-    get_element(p1, (void*) &i, (void*) &cy, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        // The internal memory index.
+        int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-    //
-    // REMARK! The following variable checks and casts are not indented,
-    // since many more variables may have to be added in the future,
-    // so that indentation would lead to unreadable source code here.
-    //
+        // The signal memory interrupt request.
+        void** sm = NULL_POINTER_MEMORY_MODEL;
+        // The gnu/linux console interrupt request.
+        void** lc = NULL_POINTER_MEMORY_MODEL;
+        // The x window system interrupt request.
+        void** xw = NULL_POINTER_MEMORY_MODEL;
+        // The www service interrupt request.
+        void** ww = NULL_POINTER_MEMORY_MODEL;
+        // The cyboi service interrupt request.
+        void** cy = NULL_POINTER_MEMORY_MODEL;
 
-    if (*cy != *NULL_POINTER_MEMORY_MODEL) {
+        // Get interrupt requests.
+        get_element(p1, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &sm, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p1, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &lc, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p1, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &xw, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
+        get_element(p1, (void*) &i, (void*) &ww, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
+        get_element(p1, (void*) &i, (void*) &cy, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    if (*ww != *NULL_POINTER_MEMORY_MODEL) {
+        //
+        // REMARK! The following variable checks and casts are not indented,
+        // since many more variables may have to be added in the future,
+        // so that indentation would lead to unreadable source code here.
+        //
 
-    if (*xw != *NULL_POINTER_MEMORY_MODEL) {
+        if (*cy != *NULL_POINTER_MEMORY_MODEL) {
 
-    if (*lc != *NULL_POINTER_MEMORY_MODEL) {
+        if (*ww != *NULL_POINTER_MEMORY_MODEL) {
 
-    if (*sm != *NULL_POINTER_MEMORY_MODEL) {
+        if (*xw != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        if (*lc != *NULL_POINTER_MEMORY_MODEL) {
 
-            double* sl = (double*) p0;
+        if (*sm != *NULL_POINTER_MEMORY_MODEL) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Wait for an interrupt request.");
 
@@ -215,41 +215,41 @@ void check_wait(void* p0, void* p1) {
     fwprintf(stdout, L"TEST wait *www_service_irq: %i\n", *((int*) *ww));
     fwprintf(stdout, L"TEST wait *cyboi_service_irq: %i\n", *((int*) *cy));
 
-            // The sleep loop above is left as soon as the interrupt variable
-            // is set to a value other than zero.
+            // The sleep loop above is left as soon as at least one of the
+            // interrupt variables is set to a value other than zero.
             // This may happen if some user action is noted in one of the
             // receive threads, e.g. linux console, x window system, tcp socket.
             // In this case, a signal is placed in the signal memory and
-            // the interrupt variable is set to *NUMBER_1_INTEGER_MEMORY_MODEL.
+            // the corresponding interrupt variable is set to *NUMBER_1_INTEGER_MEMORY_MODEL.
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The signal memory sleep time is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The signal memory interrupt request is null.");
+        }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The gnu/linux console interrupt request is null.");
+        }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The x window system interrupt request is null.");
+        }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The www service interrupt request is null.");
+        }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The cyboi service interrupt request is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The signal memory interrupt request is null.");
-    }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The gnu/linux console interrupt request is null.");
-    }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The x window system interrupt request is null.");
-    }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The www service interrupt request is null.");
-    }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The cyboi service interrupt request is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not wait for an interrupt request. The sleep time is null.");
     }
 }
 
@@ -272,23 +272,22 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
         void*** irq = (void***) p0;
 
-    fwprintf(stdout, L"TEST IRQ 00: %i\n", p0);
-
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Check for interrupt requests.");
 
         if (*irq == NULL_POINTER_MEMORY_MODEL) {
 
-        fwprintf(stdout, L"TEST IRQ 0: %i\n", p0);
-
             // The internal memory index.
             int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-            if (**irq == *NULL_POINTER_MEMORY_MODEL) {
-
-        fwprintf(stdout, L"TEST IRQ 1: %i\n", p0);
-
-                // This interrupt is only checked if the irq flag is null.
-                // If it is not null, then another interrupt has been found before.
+            // CAUTION! The boolean logic expression is necessary, because:
+            // - first case: irq is null which means that NO OTHER irq has been checked before
+            // - second case: irq is not null which means some other irq has been retrieved from
+            //   internal memory and checked before, BUT its value is zero anyway (irq not set)
+            //
+            // In both cases, this interrupt is retrieved and checked.
+            // Otherwise, if an irq was retrieved AND its value is not zero (irq is set),
+            // this and further interrupts are NOT checked.
+            if ((**irq == *NULL_POINTER_MEMORY_MODEL) || ((**irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) **irq) == *NUMBER_0_INTEGER_MEMORY_MODEL))) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected signal memory interrupt.");
 
@@ -297,19 +296,18 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 // Get signal memory mutex.
                 get_element(p8, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, p1, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-        fwprintf(stdout, L"TEST detected signal memory irq: %i\n", *((int*) *irq));
+    fwprintf(stdout, L"TEST detected signal memory irq: %i\n", *((int*) **irq));
             }
 
-        fwprintf(stdout, L"TEST IRQ 2: %i\n", p0);
-
-            if (**irq == *NULL_POINTER_MEMORY_MODEL) {
-
-        fwprintf(stdout, L"TEST IRQ 3: %i\n", p0);
-
-                // This interrupt is only checked if the irq flag is null.
-                // If it is not null, then another interrupt has been found before.
-
-    fwprintf(stdout, L"TEST IRQ 6: %i\n", p0);
+            // CAUTION! The boolean logic expression is necessary, because:
+            // - first case: irq is null which means that NO OTHER irq has been checked before
+            // - second case: irq is not null which means some other irq has been retrieved from
+            //   internal memory and checked before, BUT its value is zero anyway (irq not set)
+            //
+            // In both cases, this interrupt is retrieved and checked.
+            // Otherwise, if an irq was retrieved AND its value is not zero (irq is set),
+            // this and further interrupts are NOT checked.
+            if ((**irq == *NULL_POINTER_MEMORY_MODEL) || ((**irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) **irq) == *NUMBER_0_INTEGER_MEMORY_MODEL))) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected gnu/linux console interrupt.");
 
@@ -325,13 +323,18 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 get_element(p8, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                 get_element(p8, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST detected gnu/linux console irq: %i\n", *((int*) *irq));
+    fwprintf(stdout, L"TEST detected gnu/linux console irq: %i\n", *((int*) **irq));
             }
 
-            if (**irq == *NULL_POINTER_MEMORY_MODEL) {
-
-                // This interrupt is only checked if the irq flag is null.
-                // If it is not null, then another interrupt has been found before.
+            // CAUTION! The boolean logic expression is necessary, because:
+            // - first case: irq is null which means that NO OTHER irq has been checked before
+            // - second case: irq is not null which means some other irq has been retrieved from
+            //   internal memory and checked before, BUT its value is zero anyway (irq not set)
+            //
+            // In both cases, this interrupt is retrieved and checked.
+            // Otherwise, if an irq was retrieved AND its value is not zero (irq is set),
+            // this and further interrupts are NOT checked.
+            if ((**irq == *NULL_POINTER_MEMORY_MODEL) || ((**irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) **irq) == *NUMBER_0_INTEGER_MEMORY_MODEL))) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected x window system interrupt.");
 
@@ -347,13 +350,18 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 get_element(p8, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                 get_element(p8, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST detected x window system irq: %i\n", *((int*) *irq));
+    fwprintf(stdout, L"TEST detected x window system irq: %i\n", *((int*) **irq));
             }
 
-            if (**irq == *NULL_POINTER_MEMORY_MODEL) {
-
-                // This interrupt is only checked if the irq flag is null.
-                // If it is not null, then another interrupt has been found before.
+            // CAUTION! The boolean logic expression is necessary, because:
+            // - first case: irq is null which means that NO OTHER irq has been checked before
+            // - second case: irq is not null which means some other irq has been retrieved from
+            //   internal memory and checked before, BUT its value is zero anyway (irq not set)
+            //
+            // In both cases, this interrupt is retrieved and checked.
+            // Otherwise, if an irq was retrieved AND its value is not zero (irq is set),
+            // this and further interrupts are NOT checked.
+            if ((**irq == *NULL_POINTER_MEMORY_MODEL) || ((**irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) **irq) == *NUMBER_0_INTEGER_MEMORY_MODEL))) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected www service interrupt.");
 
@@ -378,10 +386,15 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 get_element(p8, (void*) &i, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             }
 
-            if (**irq == *NULL_POINTER_MEMORY_MODEL) {
-
-                // This interrupt is only checked if the irq flag is null.
-                // If it is not null, then another interrupt has been found before.
+            // CAUTION! The boolean logic expression is necessary, because:
+            // - first case: irq is null which means that NO OTHER irq has been checked before
+            // - second case: irq is not null which means some other irq has been retrieved from
+            //   internal memory and checked before, BUT its value is zero anyway (irq not set)
+            //
+            // In both cases, this interrupt is retrieved and checked.
+            // Otherwise, if an irq was retrieved AND its value is not zero (irq is set),
+            // this and further interrupts are NOT checked.
+            if ((**irq == *NULL_POINTER_MEMORY_MODEL) || ((**irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) **irq) == *NUMBER_0_INTEGER_MEMORY_MODEL))) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detected cyboi service interrupt.");
 
@@ -406,7 +419,15 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 get_element(p8, (void*) &i, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             }
 
-            if (**irq == *NULL_POINTER_MEMORY_MODEL) {
+            // CAUTION! The boolean logic expression is necessary, because:
+            // - first case: irq is null which means that NO OTHER irq has been checked before
+            // - second case: irq is not null which means some other irq has been retrieved from
+            //   internal memory and checked before, BUT its value is zero anyway (irq not set)
+            //
+            // In both cases, this interrupt is retrieved and checked.
+            // Otherwise, if an irq was retrieved AND its value is not zero (irq is set),
+            // this and further interrupts are NOT checked.
+            if ((**irq == *NULL_POINTER_MEMORY_MODEL) || ((**irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) **irq) == *NUMBER_0_INTEGER_MEMORY_MODEL))) {
 
                 log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not check for interrupt requests. No interrupt request is set.");
             }
@@ -536,18 +557,15 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     fwprintf(stdout, L"TEST checker irq: %i\n", *irq);
 
-        if ((irq != NULL_POINTER_MEMORY_MODEL) && (*irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) *((void**) irq)) != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+        // CAUTION! These conditions have to be CONNECTED by a boolean AND operator,
+        // because otherwise, the "else" branch below would not always be reached.
+        if ((*irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) *irq) != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
     fwprintf(stdout, L"TEST checker irq pre reset: %i\n", *((int*) *irq));
 
     fwprintf(stdout, L"TEST checker irq a: %ls\n", (wchar_t*) *a);
     fwprintf(stdout, L"TEST checker irq ac: %i\n", *ac);
-/*??
     //?? Signal memory interrupts do NOT have an abstraction, model, details!
-    fwprintf(stdout, L"TEST checker irq *ac: %i\n", *((int*) *ac));
-    fwprintf(stdout, L"TEST checker irq mc: %i\n", *((int*) *mc));
-    fwprintf(stdout, L"TEST checker irq dc: %i\n", *((int*) *dc));
-*/
 
             // Lock mutex.
             pthread_mutex_lock(*mt);
