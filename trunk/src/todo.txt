@@ -7,11 +7,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.98 $ $Date: 2009-01-27 23:03:50 $ $Author: christian $
+# @version $Revision: 1.99 $ $Date: 2009-01-28 22:28:43 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Investigate why only the first interrupt signal, but not following interrupts are detected on gnu/linux console
+        * Investigate why:
+            - switching the action to about dialogue does not work
+                (with the about dialogue shown, still only the actions of the main window are taken)
+            - only the first interrupt signal, but not following interrupts are detected on gnu/linux console
+                (this does not seem to be the case anymore with lock/unlock mutex commented out)
         * Make CYBOL example application "ui_control" work
 
         * Change copyright year to 2009 in all source code files

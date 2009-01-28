@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.67 $ $Date: 2009-01-27 23:03:50 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.68 $ $Date: 2009-01-28 22:28:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -522,10 +522,12 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     //?? For testing only. Delete these lines later!
     fwprintf(stdout, L"TEST checker signal a: %ls\n", *((wchar_t**) a));
+/*??
     fwprintf(stdout, L"TEST checker signal ac: %i\n", **((int**) ac));
 //??    fwprintf(stdout, L"TEST signal m: %ls\n", *m);
     fwprintf(stdout, L"TEST checker signal mc: %i\n", **((int**) mc));
     // CAUTION! d and dc are NULL. Do NOT try to print their values here!
+*/
 /*??
     //?? p and id are not used anymore and do not always exist. So printing their value sometimes causes a crash.
     fwprintf(stdout, L"TEST p: %i\n", **((int**) p));
@@ -567,8 +569,10 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     fwprintf(stdout, L"TEST checker irq ac: %i\n", *ac);
     //?? Signal memory interrupts do NOT have an abstraction, model, details!
 
+/*??
             // Lock mutex.
             pthread_mutex_lock(*mt);
+*/
 
             // Reset interrupt request.
             //
@@ -581,10 +585,15 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // so that the system may react faster to new interrupt requests.
             *((int*) *irq) = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+            //?? TEST
+            sleep(0.1);
+
     fwprintf(stdout, L"TEST checker irq post reset: %i\n", *((int*) *irq));
 
+/*??
             // Unlock mutex.
             pthread_mutex_unlock(*mt);
+*/
 
             // Handle signal.
             //

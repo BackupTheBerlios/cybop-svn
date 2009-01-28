@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.10 $ $Date: 2009-01-27 23:03:50 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-01-28 22:28:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -132,6 +132,11 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
                     // encounter end of file.
                     ungetwc(c, is);
 
+    fwprintf(stdout, L"TEST sense gnu/linux console post unget: %i\n", c);
+
+                    //?? TEST
+                    sleep(1);
+
                     // Lock gnu/linux console mutex.
                     pthread_mutex_lock(mt);
 
@@ -147,20 +152,21 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
 
     fwprintf(stdout, L"TEST sense gnu/linux console sleep pre: %i\n", *irq);
 
+                    //?? TEST
+                    sleep(0.1);
+
+/*??
                     while (*irq != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     fwprintf(stdout, L"TEST sense gnu/linux console sleep start: %i\n", *irq);
                         // Sleep as long as the gnu/linux console interrupt is not handled and reset yet.
                         // This is to give the central processing unit (cpu) some
                         // time to breathe, that is to be idle or to process other signals.
-//??                        sleep(*st);
-
-                        //?? TEST
-                        sleep(5.0);
-                        *irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                        sleep(*st);
 
     fwprintf(stdout, L"TEST sense gnu/linux console sleep end: %i\n", *irq);
                     }
+*/
 
                 } else {
 
