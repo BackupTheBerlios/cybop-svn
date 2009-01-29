@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-01-28 22:28:43 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.12 $ $Date: 2009-01-29 16:14:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,7 @@
 
 #include <pthread.h>
 #include <signal.h>
-#include <stdio.h>
-//?? #include <wchar.h>
+#include <wchar.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
@@ -76,6 +75,13 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
 
                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense gnu/linux console message.");
 
+//??    fwprintf(stdout, L"TEST sense gnu/linux console 0: %i\n", *irq);
+
+                    // Lock gnu/linux console mutex.
+                    pthread_mutex_lock(mt);
+
+//??    fwprintf(stdout, L"TEST sense gnu/linux console 1: %i\n", *irq);
+
                     // Get character from gnu/linux console input stream,
                     // just to detect that some (event) character is available.
                     // This is also called "peeking ahead" at the input.
@@ -95,7 +101,7 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
                     // 'getwchar()', since that returns 'WEOF' instead of 'EOF'!
                     wint_t c = fgetwc(is);
 
-    fwprintf(stdout, L"TEST sense gnu/linux console character %i\n", c);
+//??    fwprintf(stdout, L"TEST sense gnu/linux console 2: %i\n", *irq);
 
                     // Unread character, that is push it back on the stream to
                     // make it available to be input again from the stream, by the
@@ -132,39 +138,31 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
                     // encounter end of file.
                     ungetwc(c, is);
 
-    fwprintf(stdout, L"TEST sense gnu/linux console post unget: %i\n", c);
-
-                    //?? TEST
-                    sleep(1);
-
-                    // Lock gnu/linux console mutex.
-                    pthread_mutex_lock(mt);
+//??    fwprintf(stdout, L"TEST sense gnu/linux console 3: %i\n", *irq);
 
                     // Set gnu/linux console interrupt request to indicate
                     // that a message has been received via gnu/linux console,
                     // which may now be processed in the main thread of this system.
                     *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-    fwprintf(stdout, L"TEST sense gnu/linux console irq value: %i\n", *irq);
+//??    fwprintf(stdout, L"TEST sense gnu/linux console 4: %i\n", *irq);
 
                     // Unlock gnu/linux console mutex.
                     pthread_mutex_unlock(mt);
 
-    fwprintf(stdout, L"TEST sense gnu/linux console sleep pre: %i\n", *irq);
-
-                    //?? TEST
-                    sleep(0.1);
+//??    fwprintf(stdout, L"TEST sense gnu/linux console 5: %i\n", *irq);
 
 /*??
                     while (*irq != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stdout, L"TEST sense gnu/linux console sleep start: %i\n", *irq);
+//??    fwprintf(stdout, L"TEST sense gnu/linux console 6: %i\n", *irq);
+
                         // Sleep as long as the gnu/linux console interrupt is not handled and reset yet.
                         // This is to give the central processing unit (cpu) some
                         // time to breathe, that is to be idle or to process other signals.
                         sleep(*st);
 
-    fwprintf(stdout, L"TEST sense gnu/linux console sleep end: %i\n", *irq);
+//??    fwprintf(stdout, L"TEST sense gnu/linux console 7: %i\n", *irq);
                     }
 */
 
@@ -226,8 +224,6 @@ void communicate_sensing_gnu_linux_console(void* p0) {
         // (situated in the applicator/interrupt/ directory)
         // and processed in the system signal handler procedure
         // (situated in the controller/checker.c module).
-
-    fwprintf(stdout, L"TEST sense gnu/linux console irq pointer: %i\n", *irq);
 
         communicate_sensing_gnu_linux_console_message(*irq, *mt, *st, *is);
     }

@@ -14,9 +14,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.130 $ $Date: 2009-01-28 22:28:43 $ $Author: christian $
+# @version $Revision: 1.131 $ $Date: 2009-01-29 16:14:11 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Reactivate storage and manipulation of terminal settings at console startup, so that pressing
+            the <enter> button is not required for input; restore settings at console shutdown
+        * Investigate signal processing, which does not work reliably
 
 2009-01-28  Christian Heller  <christian.heller@tuxtax.de>
         * Investigate signal processing, which does not work reliably

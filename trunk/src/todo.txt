@@ -7,11 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.99 $ $Date: 2009-01-28 22:28:43 $ $Author: christian $
+# @version $Revision: 1.100 $ $Date: 2009-01-29 16:14:12 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Investigate why:
+        * ADD mutex to function "read_gnu_linux_console_character"!
+        * Investigate signal processing, which does not work reliably:
             - switching the action to about dialogue does not work
                 (with the about dialogue shown, still only the actions of the main window are taken)
             - only the first interrupt signal, but not following interrupts are detected on gnu/linux console

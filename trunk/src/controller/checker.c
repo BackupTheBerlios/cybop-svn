@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.68 $ $Date: 2009-01-28 22:28:43 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.69 $ $Date: 2009-01-29 16:14:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -569,10 +569,8 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     fwprintf(stdout, L"TEST checker irq ac: %i\n", *ac);
     //?? Signal memory interrupts do NOT have an abstraction, model, details!
 
-/*??
             // Lock mutex.
             pthread_mutex_lock(*mt);
-*/
 
             // Reset interrupt request.
             //
@@ -585,15 +583,10 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // so that the system may react faster to new interrupt requests.
             *((int*) *irq) = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            //?? TEST
-            sleep(0.1);
-
     fwprintf(stdout, L"TEST checker irq post reset: %i\n", *((int*) *irq));
 
-/*??
             // Unlock mutex.
             pthread_mutex_unlock(*mt);
-*/
 
             // Handle signal.
             //
@@ -607,6 +600,8 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // signals may be handled in the next iteration of the signal checker loop.
 
         } else {
+
+    fwprintf(stdout, L"TEST checker sleep: %i\n", *irq);
 
             // No interrupt request was detected, so that the cyboi system
             // can be sent to sleep now, in order to save cpu time.

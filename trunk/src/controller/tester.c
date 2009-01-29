@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: tester.c,v $ $Revision: 1.32 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $
+ * @version $RCSfile: tester.c,v $ $Revision: 1.33 $ $Date: 2009-01-29 16:14:12 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1074,11 +1074,11 @@ void test_file_write() {
 }
 
 /**
- * Tests the console.
+ * Tests the console output.
  */
-void test_console() {
+void test_console_output() {
 
-    log_write_terminated_message((void*) stdout, L"Test console:\n");
+    log_write_terminated_message((void*) stdout, L"Test console output:\n");
 
 /*??
     if (strcmp("linux", getenv("TERM")) == *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -1121,6 +1121,93 @@ void test_console() {
         log_write_terminated_message((void*) stdout, L"This is a normal serial terminal.\n");
     }
 */
+}
+
+/**
+ * Tests the console input.
+ */
+void test_console_input() {
+
+    log_write_terminated_message((void*) stdout, L"Test console input:\n");
+
+#ifdef GNU_LINUX_OPERATING_SYSTEM
+    // The terminal device name.
+    FILE* t = (FILE*) *NULL_POINTER_MEMORY_MODEL;
+    // The old termios settings.
+    struct termios* to = (struct termios*) *NULL_POINTER_MEMORY_MODEL;
+    // The new termios settings.
+    struct termios* tn = (struct termios*) *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate gnu/linux console internals.
+    to = (struct termios*) malloc(sizeof(struct termios));
+    tn = (struct termios*) malloc(sizeof(struct termios));
+
+    // Set file stream.
+    t = stdin;
+
+    // Get file descriptor for file stream.
+    // CAUTION! The stream "stdin" must be used instead of "stdout" here!
+    int d = fileno(t);
+
+    // Test standard streams.
+    int testin = fileno(stdin);
+    int testout = fileno(stdout);
+    int testerr = fileno(stderr);
+    fwprintf(stdout, L"TEST in %i\n", testin);
+    fwprintf(stdout, L"TEST out %i\n", testout);
+    fwprintf(stdout, L"TEST err %i\n", testerr);
+
+    // Store old termios settings.
+    int e = tcgetattr(d, (void*) to);
+
+    if (e != *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) {
+
+        // Initialise new termios settings.
+        *tn = *to;
+
+        // Manipulate termios attributes.
+        // Set number of characters.
+        tn->c_cc[VMIN] = *NUMBER_1_INTEGER_MEMORY_MODEL;
+        tn->c_cc[VTIME] = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        tn->c_lflag &= ~ICANON;
+        // Switch off echo.
+        tn->c_lflag &= ~ECHO;
+
+        // Set new termios attributes.
+        tcsetattr(d, TCSANOW, (void*) tn);
+
+        wint_t c = fgetwc(t);
+
+        fwprintf(stdout, L"TEST c: %i\n", c);
+
+        ungetwc(c, t);
+
+        fwprintf(stdout, L"TEST unget c: %i\n", c);
+
+        wint_t again = fgetwc(t);
+
+        fwprintf(stdout, L"TEST again c: %i\n", again);
+
+        // Reset terminal to old settings.
+        tcsetattr(d, TCSANOW, (void*) to);
+
+    } else {
+
+        if (errno == EBADF) {
+
+            log_write_terminated_message((void*) stdout, L"Could not store old termios settings. The filedes argument is not a valid file descriptor.\n");
+
+        } else if (errno == ENOTTY) {
+
+            log_write_terminated_message((void*) stdout, L"Could not store old termios settings. The filedes is not associated with a terminal.\n");
+
+        } else {
+
+            log_write_terminated_message((void*) stdout, L"Could not store old termios settings.\n");
+        }
+    }
+// GNU_LINUX_OPERATING_SYSTEM
+#endif
 }
 
 /**
@@ -1446,7 +1533,8 @@ void test() {
 //??    test_pointer_array_with_null_values();
 //??    test_file_read();
 //??    test_file_write();
-    test_console();
+//??    test_console_output();
+    test_console_input();
 //??    test_mesa_opengl(*NUMBER_0_INTEGER_MEMORY_MODEL, (char**) NULL_POINTER_MEMORY_MODEL);
 //??    test_decode_integer_vector();
 //??    test_encode_integer_vector();
