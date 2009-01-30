@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.26 $ $Date: 2009-01-25 01:08:44 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.27 $ $Date: 2009-01-30 00:33:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -45,15 +45,16 @@
  * Reads a gnu/linux console character.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
+ * @param p1 the destination wide character array count
+ * @param p2 the destination wide character array size
  * @param p3 the loop break flag
  * @param p4 the input character
  * @param p5 the escape character mode
  * @param p6 the escape control sequence mode
  * @param p7 the source input stream
+ * @param p8 the mutex
  */
-void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -85,6 +86,9 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
                         // the function that might cause an error.
                         errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+                        // Lock gnu/linux console mutex.
+                        pthread_mutex_lock(p8);
+
                         // Read character from source input stream of gnu/linux console.
                         //
                         // CAUTION! The multibyte- is converted to a wide character internally,
@@ -92,16 +96,12 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
                         // Function calls to "decode_utf_8_unicode_character_vector" are therefore NOT necessary here!
                         *c = fgetwc(s);
 
-                    fwprintf(stdout, L"TEST read gnu/linux console c: %i\n", p4);
-                    fwprintf(stdout, L"TEST read gnu/linux console c: %ls\n", (wchar_t*) p4);
+                        // Unlock gnu/linux console mutex.
+                        pthread_mutex_unlock(p8);
 
                         if (errno != EILSEQ) {
 
-                    fwprintf(stdout, L"TEST read gnu/linux console no error: %i\n", p4);
-
                             if (*csi == *NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                    fwprintf(stdout, L"TEST read gnu/linux console csi: %i\n", p4);
 
                                 // Reset escape control sequence flag.
                                 *csi = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -117,21 +117,19 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                             } else if (*esc == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-                    fwprintf(stdout, L"TEST read gnu/linux console esc: %i\n", p4);
-
                                 // Reset escape character flag.
                                 *esc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                 // An escape character was read before.
-                                // Find out if it was just that escape character,
-                                // or if a left square bracket character follows now,
-                                // in which case this is the start of an escape control sequence.
+
+    fwprintf(stdout, L"TEST read esc active: %i\n", *c);
 
                                 if (*c == *((wint_t*) LEFT_SQUARE_BRACKET_UNICODE_CHARACTER_CODE_MODEL)) {
 
-                    fwprintf(stdout, L"TEST read gnu/linux console esc bracket: %i\n", p4);
+    fwprintf(stdout, L"TEST read esc active [: %i\n", *c);
 
-                                    // This is the start of an escape control sequence.
+                                    // The escape character read before is followed by an opening square bracket,
+                                    // which means that this is the start of an escape control sequence.
 
                                     // Set escape control sequence flag.
                                     *csi = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -141,13 +139,20 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                                 } else {
 
-                    fwprintf(stdout, L"TEST read gnu/linux console unget: %i\n", p4);
+    fwprintf(stdout, L"TEST read esc active ungetwc: %i\n", *c);
 
                                     // This is NOT going to be an escape control sequence.
-                                    // An escape- followed by another, second character has been detected.
+                                    // An escape- followed by another, second character
+                                    // (which is not an opening square bracket) has been detected.
 
-                                    // Unget this character so that it may be processed later.
+                                    // Lock gnu/linux console mutex.
+                                    pthread_mutex_lock(p8);
+
+                                    // Unget this character so that it may be processed once more later on.
                                     ungetwc(*c, p7);
+
+                                    // Unlock gnu/linux console mutex.
+                                    pthread_mutex_unlock(p8);
 
                                     // Set loop break flag.
                                     *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -155,7 +160,7 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                             } else if (*c == *((wint_t*) ESCAPE_CONTROL_UNICODE_CHARACTER_CODE_MODEL)) {
 
-                    fwprintf(stdout, L"TEST read gnu/linux console escape character: %i\n", p4);
+    fwprintf(stdout, L"TEST read esc ctrl: %i\n", *c);
 
                                 // Set escape character flag.
                                 *esc = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -163,16 +168,55 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
                                 // Copy source character to destination character array.
                                 append_wide_character_vector(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
+                                // The next input character.
+                                wint_t n = *((wint_t*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL);
+
+                                // Lock gnu/linux console mutex.
+                                //
+                                // CAUTION! This lock HAS TO ENCLOSE BOTH, the "fgetwc" and the "ungetwc" function calls!
+                                // Otherwise, the gnu/linux console sensing thread might manipulate data in between!
+                                pthread_mutex_lock(p8);
+
+                                // Read next character from source input stream of gnu/linux console.
+                                //
+                                // CAUTION! The multibyte- is converted to a wide character internally,
+                                // so that the return value of type "wint_t" may be casted to "wchar_t".
+                                // Function calls to "decode_utf_8_unicode_character_vector" are therefore NOT necessary here!
+                                n = fgetwc(s);
+
+                                if (n == WEOF) {
+
+    fwprintf(stdout, L"TEST read esc weof: %i\n", n);
+
+                                    // This escape character read before is followed by no other characters.
+                                    // So it must have a meaning by itself, for example to exit a programme.
+
+                                    // Set loop break flag.
+                                    *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                                } else {
+
+    fwprintf(stdout, L"TEST read esc no weof: %i\n", n);
+
+                                    // At least one more character is following this escape character.
+
+                                    // Unget this character so that it may be processed once more later on.
+                                    ungetwc(n, p7);
+                                }
+
+                                // Unlock gnu/linux console mutex.
+                                pthread_mutex_unlock(p8);
+
                             } else if (*c == WEOF) {
 
-                    fwprintf(stdout, L"TEST read gnu/linux console WEOF: %i\n", p4);
+    fwprintf(stdout, L"TEST read only eof: %i\n", *c);
 
                                 // Set loop break flag.
                                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             } else {
 
-                    fwprintf(stdout, L"TEST read gnu/linux console standard character: %i\n", p4);
+    fwprintf(stdout, L"TEST read std char: %i\n", *c);
 
                                 // Copy source character to destination character array.
                                 append_wide_character_vector(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
@@ -183,9 +227,7 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                         } else {
 
-                    fwprintf(stdout, L"TEST read gnu/linux console CONVERSION ERROR: %ls\n", (wchar_t*) p4);
-
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from gnu/linux console. The conversion from multibyte- to wide character failed.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from gnu/linux console. The character reading failed.");
 
                             // Set loop break flag.
                             *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -224,8 +266,9 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source input stream
+ * @param p4 the mutex
  */
-void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
+void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read gnu/linux console.");
 
@@ -245,7 +288,7 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
             break;
         }
 
-        read_gnu_linux_console_character(p0, p1, p2, (void*) &b, (void*) &c, (void*) &esc, (void*) &csi, p3);
+        read_gnu_linux_console_character(p0, p1, p2, (void*) &b, (void*) &c, (void*) &esc, (void*) &csi, p3, p4);
     }
 }
 

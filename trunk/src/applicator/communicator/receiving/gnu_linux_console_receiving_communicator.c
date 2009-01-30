@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-01-25 01:08:44 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_receiving_communicator.c,v $ $Revision: 1.12 $ $Date: 2009-01-30 00:33:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -53,9 +53,10 @@
  * @param p14 the commands count
  * @param p15 the knowledge memory
  * @param p16 the knowledge memory count
+ * @param p17 the mutex
  */
 void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive gnu/linux console message.");
 
@@ -67,24 +68,14 @@ void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void*
     // Allocate character array.
     allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST receive pre read: %i\n", ac);
-
     // Read pressed keyboard keys as message from gnu/linux console.
-    read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12);
+    read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12, p17);
 
     // CAUTION! The multibyte- is converted to a wide character internally (in glibc function "fgetwc").
     // Function calls to "decode_utf_8_unicode_character_vector" are therefore NOT necessary here!
 
-    fwprintf(stdout, L"TEST a: %ls\n", (wchar_t*) a);
-    fwprintf(stdout, L"TEST ac: %i\n", ac);
-    fwprintf(stdout, L"TEST as: %i\n", as);
-
     // Decode character array into command.
     decode(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
-
-    fwprintf(stdout, L"TEST m: %ls\n", *((wchar_t**) p6));
-    fwprintf(stdout, L"TEST mc: %i\n", *((int*) p7));
-    fwprintf(stdout, L"TEST ms: %i\n", *((int*) p8));
 
     // Deallocate character array.
     deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);

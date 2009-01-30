@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: communicator.c,v $ $Revision: 1.34 $ $Date: 2009-01-19 23:33:11 $ $Author: christian $
+ * @version $RCSfile: communicator.c,v $ $Revision: 1.35 $ $Date: 2009-01-30 00:33:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -110,7 +110,7 @@ void read_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void*
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            read_gnu_linux_console(p0, p1, p2, p3);
+//??            read_gnu_linux_console(p0, p1, p2, p3);
         }
     }
 

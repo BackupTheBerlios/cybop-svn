@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.12 $ $Date: 2009-01-29 16:14:12 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.13 $ $Date: 2009-01-30 00:33:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -63,7 +63,7 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
 
         if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-            unsigned int* st = (unsigned int*) p2;
+            double* st = (double*) p2;
 
             if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -75,12 +75,19 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
 
                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense gnu/linux console message.");
 
-//??    fwprintf(stdout, L"TEST sense gnu/linux console 0: %i\n", *irq);
-
                     // Lock gnu/linux console mutex.
+                    //
+                    // CAUTION! This lock has to stand not only before the interrupt request is set below,
+                    // BUT ALSO BEFORE the next character is detected in the input stream!
+                    //
+                    // This is because the main thread might be reading characters from the
+                    // input stream right now in parallel, while this thread tries to read as well.
+                    //
+                    // This was tested out and lead to errors, because the "ungetwc" function below
+                    // was unexpectedly putting back a character such as ^ (escape) or [
+                    // which (in the case of escape) caused the programme to exit
+                    // and other inputs like arrow down not to be recognised properly.
                     pthread_mutex_lock(mt);
-
-//??    fwprintf(stdout, L"TEST sense gnu/linux console 1: %i\n", *irq);
 
                     // Get character from gnu/linux console input stream,
                     // just to detect that some (event) character is available.
@@ -100,8 +107,6 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
                     // CAUTION! Use 'wint_t' instead of 'int' as return type for
                     // 'getwchar()', since that returns 'WEOF' instead of 'EOF'!
                     wint_t c = fgetwc(is);
-
-//??    fwprintf(stdout, L"TEST sense gnu/linux console 2: %i\n", *irq);
 
                     // Unread character, that is push it back on the stream to
                     // make it available to be input again from the stream, by the
@@ -138,33 +143,26 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
                     // encounter end of file.
                     ungetwc(c, is);
 
-//??    fwprintf(stdout, L"TEST sense gnu/linux console 3: %i\n", *irq);
-
                     // Set gnu/linux console interrupt request to indicate
                     // that a message has been received via gnu/linux console,
                     // which may now be processed in the main thread of this system.
                     *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-//??    fwprintf(stdout, L"TEST sense gnu/linux console 4: %i\n", *irq);
-
                     // Unlock gnu/linux console mutex.
                     pthread_mutex_unlock(mt);
 
-//??    fwprintf(stdout, L"TEST sense gnu/linux console 5: %i\n", *irq);
-
-/*??
                     while (*irq != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??    fwprintf(stdout, L"TEST sense gnu/linux console 6: %i\n", *irq);
-
                         // Sleep as long as the gnu/linux console interrupt is not handled and reset yet.
+                        //
                         // This is to give the central processing unit (cpu) some
                         // time to breathe, that is to be idle or to process other signals.
+                        //
+                        // Also, many character inputs are processed at once in the main thread
+                        // and only if there are no further characters to be read, the irq flag is reset,
+                        // so that this endless loop can be left and new inputs detected.
                         sleep(*st);
-
-//??    fwprintf(stdout, L"TEST sense gnu/linux console 7: %i\n", *irq);
                     }
-*/
 
                 } else {
 

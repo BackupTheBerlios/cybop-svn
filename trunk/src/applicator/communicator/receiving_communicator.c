@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.11 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.12 $ $Date: 2009-01-30 00:33:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -136,23 +136,17 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+            // The gnu/linux console mutex.
+            void** mt = NULL_POINTER_MEMORY_MODEL;
             // The gnu/linux console input stream.
             void** is = NULL_POINTER_MEMORY_MODEL;
 
+            // Get gnu/linux console mutex.
+            get_element(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &mt, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             // Get gnu/linux console input stream.
-            get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &is, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+            get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &is, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST receive pre m: %i\n", p3);
-    fwprintf(stdout, L"TEST receive pre m: %i\n", *((void**) p3));
-    fwprintf(stdout, L"TEST receive pre mc: %i\n", p4);
-    fwprintf(stdout, L"TEST receive pre mc: %i\n", *((int*) p4));
-
-            communicate_receiving_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2);
-
-    fwprintf(stdout, L"TEST receive post m: %i\n", p3);
-    fwprintf(stdout, L"TEST receive post m: %i\n", *((void**) p3));
-    fwprintf(stdout, L"TEST receive post mc: %i\n", p4);
-    fwprintf(stdout, L"TEST receive post mc: %i\n", *((int*) p4));
+            communicate_receiving_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2, *mt);
         }
     }
 

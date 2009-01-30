@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.69 $ $Date: 2009-01-29 16:14:12 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.70 $ $Date: 2009-01-30 00:33:58 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -209,11 +209,13 @@ void check_wait(void* p0, void* p1) {
                 sleep(*sl);
             }
 
+/*??
     fwprintf(stdout, L"TEST wait *signal_memory_irq: %i\n", *((int*) *sm));
     fwprintf(stdout, L"TEST wait *gnu_linux_console_irq: %i\n", *((int*) *lc));
     fwprintf(stdout, L"TEST wait *x_window_system_irq: %i\n", *((int*) *xw));
     fwprintf(stdout, L"TEST wait *www_service_irq: %i\n", *((int*) *ww));
     fwprintf(stdout, L"TEST wait *cyboi_service_irq: %i\n", *((int*) *cy));
+*/
 
             // The sleep loop above is left as soon as at least one of the
             // interrupt variables is set to a value other than zero.
@@ -296,7 +298,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 // Get signal memory mutex.
                 get_element(p8, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, p1, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST detected signal memory irq: %i\n", *((int*) **irq));
+//??    fwprintf(stdout, L"TEST detected signal memory irq: %i\n", *((int*) **irq));
             }
 
             // CAUTION! The boolean logic expression is necessary, because:
@@ -323,7 +325,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 get_element(p8, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                 get_element(p8, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST detected gnu/linux console irq: %i\n", *((int*) **irq));
+//??    fwprintf(stdout, L"TEST detected gnu/linux console irq: %i\n", *((int*) **irq));
             }
 
             // CAUTION! The boolean logic expression is necessary, because:
@@ -350,7 +352,7 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 get_element(p8, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                 get_element(p8, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-    fwprintf(stdout, L"TEST detected x window system irq: %i\n", *((int*) **irq));
+//??    fwprintf(stdout, L"TEST detected x window system irq: %i\n", *((int*) **irq));
             }
 
             // CAUTION! The boolean logic expression is necessary, because:
@@ -511,7 +513,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stdout, L"TEST index of signal with highest priority: %i\n", i);
+//??    fwprintf(stdout, L"TEST index of signal with highest priority: %i\n", i);
 
         // A signal was found and has to be handled.
         // Handling a signal has higher priority than checking for new interrupt requests.
@@ -520,6 +522,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         check_get((void*) &irq, (void*) &mt, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
             (void*) &d, (void*) &dc, (void*) &p, (void*) &id, p4, p5, (void*) &i, p0);
 
+/*??
     //?? For testing only. Delete these lines later!
     fwprintf(stdout, L"TEST checker signal a: %ls\n", *((wchar_t**) a));
 /*??
@@ -557,17 +560,19 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // - handler (to be forwarded to the "handle" function below)
         check_interrupts((void*) &irq, (void*) &mt, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, p0);
 
-    fwprintf(stdout, L"TEST checker irq: %i\n", *irq);
+//??    fwprintf(stdout, L"TEST checker irq: %i\n", *irq);
 
         // CAUTION! These conditions have to be CONNECTED by a boolean AND operator,
         // because otherwise, the "else" branch below would not always be reached.
         if ((*irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) *irq) != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
+/*??
     fwprintf(stdout, L"TEST checker irq pre reset: %i\n", *((int*) *irq));
 
     fwprintf(stdout, L"TEST checker irq a: %ls\n", (wchar_t*) *a);
     fwprintf(stdout, L"TEST checker irq ac: %i\n", *ac);
     //?? Signal memory interrupts do NOT have an abstraction, model, details!
+*/
 
             // Lock mutex.
             pthread_mutex_lock(*mt);
@@ -582,8 +587,6 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // and yet BEFORE receiving data and handling the signal below,
             // so that the system may react faster to new interrupt requests.
             *((int*) *irq) = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    fwprintf(stdout, L"TEST checker irq post reset: %i\n", *((int*) *irq));
 
             // Unlock mutex.
             pthread_mutex_unlock(*mt);
@@ -600,8 +603,6 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             // signals may be handled in the next iteration of the signal checker loop.
 
         } else {
-
-    fwprintf(stdout, L"TEST checker sleep: %i\n", *irq);
 
             // No interrupt request was detected, so that the cyboi system
             // can be sent to sleep now, in order to save cpu time.
