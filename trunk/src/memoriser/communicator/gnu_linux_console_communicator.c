@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.27 $ $Date: 2009-01-30 00:33:58 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_communicator.c,v $ $Revision: 1.28 $ $Date: 2009-01-30 12:59:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -122,11 +122,7 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                                 // An escape character was read before.
 
-    fwprintf(stdout, L"TEST read esc active: %i\n", *c);
-
                                 if (*c == *((wint_t*) LEFT_SQUARE_BRACKET_UNICODE_CHARACTER_CODE_MODEL)) {
-
-    fwprintf(stdout, L"TEST read esc active [: %i\n", *c);
 
                                     // The escape character read before is followed by an opening square bracket,
                                     // which means that this is the start of an escape control sequence.
@@ -138,8 +134,6 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
                                     append_wide_character_vector(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
                                 } else {
-
-    fwprintf(stdout, L"TEST read esc active ungetwc: %i\n", *c);
 
                                     // This is NOT going to be an escape control sequence.
                                     // An escape- followed by another, second character
@@ -160,63 +154,22 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                             } else if (*c == *((wint_t*) ESCAPE_CONTROL_UNICODE_CHARACTER_CODE_MODEL)) {
 
-    fwprintf(stdout, L"TEST read esc ctrl: %i\n", *c);
-
                                 // Set escape character flag.
                                 *esc = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                 // Copy source character to destination character array.
                                 append_wide_character_vector(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-                                // The next input character.
-                                wint_t n = *((wint_t*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL);
-
-                                // Lock gnu/linux console mutex.
-                                //
-                                // CAUTION! This lock HAS TO ENCLOSE BOTH, the "fgetwc" and the "ungetwc" function calls!
-                                // Otherwise, the gnu/linux console sensing thread might manipulate data in between!
-                                pthread_mutex_lock(p8);
-
-                                // Read next character from source input stream of gnu/linux console.
-                                //
-                                // CAUTION! The multibyte- is converted to a wide character internally,
-                                // so that the return value of type "wint_t" may be casted to "wchar_t".
-                                // Function calls to "decode_utf_8_unicode_character_vector" are therefore NOT necessary here!
-                                n = fgetwc(s);
-
-                                if (n == WEOF) {
-
-    fwprintf(stdout, L"TEST read esc weof: %i\n", n);
-
-                                    // This escape character read before is followed by no other characters.
-                                    // So it must have a meaning by itself, for example to exit a programme.
-
-                                    // Set loop break flag.
-                                    *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                                } else {
-
-    fwprintf(stdout, L"TEST read esc no weof: %i\n", n);
-
-                                    // At least one more character is following this escape character.
-
-                                    // Unget this character so that it may be processed once more later on.
-                                    ungetwc(n, p7);
-                                }
-
-                                // Unlock gnu/linux console mutex.
-                                pthread_mutex_unlock(p8);
-
                             } else if (*c == WEOF) {
 
-    fwprintf(stdout, L"TEST read only eof: %i\n", *c);
+                                // The function "communicate_sensing_gnu_linux_console_message" filters out
+                                // invalid (non-existing) characters recognised by the return value WEOF (-1).
+                                // However, to be on the safe side, they are filtered out here once more.
 
                                 // Set loop break flag.
                                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             } else {
-
-    fwprintf(stdout, L"TEST read std char: %i\n", *c);
 
                                 // Copy source character to destination character array.
                                 append_wide_character_vector(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);

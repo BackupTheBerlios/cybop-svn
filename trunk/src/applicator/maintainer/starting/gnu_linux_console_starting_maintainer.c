@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_starting_maintainer.c,v $ $Revision: 1.8 $ $Date: 2009-01-29 16:14:12 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_starting_maintainer.c,v $ $Revision: 1.9 $ $Date: 2009-01-30 12:59:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -110,13 +110,41 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
             // Initialise new termios settings.
             *tn = *to;
 
+            //
             // Manipulate termios attributes.
-            // Set number of characters.
-            tn->c_cc[VMIN] = *NUMBER_1_INTEGER_MEMORY_MODEL;
-            tn->c_cc[VTIME] = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            //
+            // A good documentation of possible flags may be found at:
+            // http://www.unixguide.net/unix/programming/3.6.2.shtml
+            //
+            // c_iflag: always needed, only not if using software flow control (ick)
+            // c_oflag: mostly hacks to make output to slow terminals work,
+            //          newer systems have dropped almost all of them as obsolete
+            // c_cflag: set character size, generate even parity, enabling hardware flow control
+            // c_lflag: most applications will probably want to turn off ICANON
+            //          (canonical, i.e. line-based, input processing), ECHO and ISIG
+            // c_cc: an array of characters that have special meanings on input;
+            //       these characters are given names like VINTR, VSTOP etc.
+            //       the names are indexes into the array
+            //       two of these "characters" are not really characters at all,
+            //       but control the behaviour of read() when ICANON is disabled;
+            //       these are VMIN and VTIME
+            //
+            // VTIME: the time to wait before read() will return;
+            //        its value is (if not 0) always interpreted as a timer in tenths of seconds
+            // VMIN: the number of bytes of input to be available, before read() will return
+            //
+
+            // Turn off.
             tn->c_lflag &= ~ICANON;
-            // Switch off echo.
+            // Turn off echo.
             tn->c_lflag &= ~ECHO;
+            // Set number of input characters to be available, before read() will return.
+            // CAUTION! This value HAS TO BE set to zero, so that one key press such as ESCAPE
+            // gets processed right away (e.g. to exit an application), without waiting for
+            // yet another character input.
+            tn->c_cc[VMIN] = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Set time to wait before read() will return.
+            tn->c_cc[VTIME] = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Set new termios attributes.
             tcsetattr(d, TCSANOW, (void*) tn);

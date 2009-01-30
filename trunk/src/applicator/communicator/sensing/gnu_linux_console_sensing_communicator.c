@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.13 $ $Date: 2009-01-30 00:33:58 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_sensing_communicator.c,v $ $Revision: 1.14 $ $Date: 2009-01-30 12:59:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -93,60 +93,61 @@ void communicate_sensing_gnu_linux_console_message(void* p0, void* p1, void* p2,
                     // just to detect that some (event) character is available.
                     // This is also called "peeking ahead" at the input.
                     //
-                    // CAUTION! For the narrow stream functions it is important to store the
-                    // result of these functions in a variable of type int instead of char,
-                    // even if one plans to use it only as a character. Storing EOF in a char
-                    // variable truncates its value to the size of a character, so that it
-                    // is no longer distinguishable from the valid character (char) -1.
-                    // So, one should always use an int for the result of getc and friends,
-                    // and check for EOF after the call; once it is verified that the result
-                    // is NOT EOF, one can be sure that it will fit in a char variable
-                    // without loss of information.
-                    // int c = fgetc(is);
-                    //
                     // CAUTION! Use 'wint_t' instead of 'int' as return type for
                     // 'getwchar()', since that returns 'WEOF' instead of 'EOF'!
                     wint_t c = fgetwc(is);
 
-                    // Unread character, that is push it back on the stream to
-                    // make it available to be input again from the stream, by the
-                    // next call to fgetc or another input function on that stream.
-                    //
-                    // If c is EOF, ungetc does nothing and just returns EOF.
-                    // This lets you call ungetc with the return value of getc
-                    // without needing to check for an error from getc.
-                    //
-                    // The character that you push back doesn't have to be the same
-                    // as the last character that was actually read from the stream.
-                    // In fact, it isn't necessary to actually read any characters
-                    // from the stream before unreading them with ungetc!
-                    // But that is a strange way to write a program;
-                    // usually ungetc is used only to unread a character that was
-                    // just read from the same stream.
-                    //
-                    // The GNU C library only supports one character of pushback.
-                    // In other words, it does not work to call ungetc twice without
-                    // doing input in between.
-                    // Other systems might let you push back multiple characters;
-                    // then reading from the stream retrieves the characters in the
-                    // reverse order that they were pushed.
-                    //
-                    // Pushing back characters doesn't alter the file;
-                    // only the internal buffering for the stream is affected.
-                    // If a file positioning function (such as fseek, fseeko or rewind)
-                    // is called, any pending pushed-back characters are discarded.
-                    //
-                    // Unreading a character on a stream that is at end of file
-                    // clears the end-of-file indicator for the stream, because it
-                    // makes the character of input available.
-                    // After you read that character, trying to read again will
-                    // encounter end of file.
-                    ungetwc(c, is);
+                    if (c == WEOF) {
 
-                    // Set gnu/linux console interrupt request to indicate
-                    // that a message has been received via gnu/linux console,
-                    // which may now be processed in the main thread of this system.
-                    *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                        // No valid character was returned.
+
+                        // Sleep for some time.
+                        // This is to give the central processing unit (cpu) some
+                        // time to breathe, that is to be idle or to process other signals.
+                        sleep(*st);
+
+                    } else {
+
+                        // Unread character, that is push it back on the stream to
+                        // make it available to be input again from the stream, by the
+                        // next call to fgetc or another input function on that stream.
+                        //
+                        // If c is EOF, ungetc does nothing and just returns EOF.
+                        // This lets you call ungetc with the return value of getc
+                        // without needing to check for an error from getc.
+                        //
+                        // The character that you push back doesn't have to be the same
+                        // as the last character that was actually read from the stream.
+                        // In fact, it isn't necessary to actually read any characters
+                        // from the stream before unreading them with ungetc!
+                        // But that is a strange way to write a program;
+                        // usually ungetc is used only to unread a character that was
+                        // just read from the same stream.
+                        //
+                        // The GNU C library only supports one character of pushback.
+                        // In other words, it does not work to call ungetc twice without
+                        // doing input in between.
+                        // Other systems might let you push back multiple characters;
+                        // then reading from the stream retrieves the characters in the
+                        // reverse order that they were pushed.
+                        //
+                        // Pushing back characters doesn't alter the file;
+                        // only the internal buffering for the stream is affected.
+                        // If a file positioning function (such as fseek, fseeko or rewind)
+                        // is called, any pending pushed-back characters are discarded.
+                        //
+                        // Unreading a character on a stream that is at end of file
+                        // clears the end-of-file indicator for the stream, because it
+                        // makes the character of input available.
+                        // After you read that character, trying to read again will
+                        // encounter end of file.
+                        ungetwc(c, is);
+
+                        // Set gnu/linux console interrupt request to indicate
+                        // that a message has been received via gnu/linux console,
+                        // which may now be processed in the main thread of this system.
+                        *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    }
 
                     // Unlock gnu/linux console mutex.
                     pthread_mutex_unlock(mt);
