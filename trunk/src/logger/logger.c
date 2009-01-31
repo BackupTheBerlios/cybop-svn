@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: logger.c,v $ $Revision: 1.24 $ $Date: 2009-01-31 16:06:31 $ $Author: christian $
+ * @version $RCSfile: logger.c,v $ $Revision: 1.25 $ $Date: 2009-01-31 16:31:28 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -49,6 +49,7 @@
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/model/memory_model.c"
 #include "../variable/log_setting.c"
+#include "../variable/primitive_type_size.c"
 
 //
 // CAUTION! Following some reflexions on logging. There are two possibilities:
