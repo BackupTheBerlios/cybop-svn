@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008. Christian Heller.
+ * Copyright (C) 1999-2009. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: executing_runner.c,v $ $Revision: 1.5 $ $Date: 2009-01-07 01:14:05 $ $Author: christian $
+ * @version $RCSfile: executing_runner.c,v $ $Revision: 1.6 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -69,8 +69,10 @@ void run_executing(void* p0, void* p1) {
     // Append null character as string termination.
     append((void*) &cl, (void*) &clc, (void*) &cls, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
+/*??
     fwprintf(stdout, L"TEST dir: %ls\n", (wchar_t*) cl);
     fwprintf(stdout, L"TEST dir count: %i\n", clc);
+*/
 
     // The encoded shell command line.
     void* ecl = *NULL_POINTER_MEMORY_MODEL;

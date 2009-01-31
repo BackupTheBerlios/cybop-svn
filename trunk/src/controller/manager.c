@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008. Christian Heller.
+ * Copyright (C) 1999-2009. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: manager.c,v $ $Revision: 1.54 $ $Date: 2008-10-23 20:56:25 $ $Author: christian $
+ * @version $RCSfile: manager.c,v $ $Revision: 1.55 $ $Date: 2009-01-31 16:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 

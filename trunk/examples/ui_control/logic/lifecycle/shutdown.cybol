@@ -33,6 +33,10 @@
         <property name="name" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
     </part>
 -->
+    <part name="clean_tui" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
+        <property name="clean" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    </part>
     <part name="exit_application" channel="inline" abstraction="operation/plain" model="exit"/>
 </model>
 
@@ -59,6 +63,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: shutdown.cybol,v $ $Revision: 1.9 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @version $RCSfile: shutdown.cybol,v $ $Revision: 1.10 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

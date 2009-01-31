@@ -1,6 +1,6 @@
 <model>
     <part name="translate" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.translation.translate_application_information_to_about_dialogue"/>
-    <part name="send_tui" channel="inline" abstraction="operation/plain" model="send">
+    <part name="send" channel="inline" abstraction="operation/plain" model="send">
 <!--
         <property name="channel" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.user_interface"/>
 -->
@@ -8,9 +8,9 @@
         <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue"/>
         <property name="clean" channel="inline" abstraction="logicvalue/boolean" model="true"/>
     </part>
-    <part name="sense_tui_commands" channel="inline" abstraction="operation/plain" model="sense">
+    <part name="sense" channel="inline" abstraction="operation/plain" model="sense">
         <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
-        <property name="handler" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.handle_gnu_linux_console"/>
+        <property name="handler" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.handle_about_dialog"/>
     </part>
 </model>
 
@@ -37,6 +37,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: show_about_information.cybol,v $ $Revision: 1.10 $ $Date: 2009-01-23 23:11:26 $ $Author: christian $
+    @version $RCSfile: show_about_information.cybol,v $ $Revision: 1.11 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

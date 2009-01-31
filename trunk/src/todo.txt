@@ -7,26 +7,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.102 $ $Date: 2009-01-30 12:59:29 $ $Author: christian $
+# @version $Revision: 1.103 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
-
-        * Investigate why switching the actions from main window to about dialogue does not work
-            (with the about dialogue shown, still only the actions of the main window are taken)
-
-        * Change copyright year to 2009 in all source code files
 
         * Simplify source code by using the function "allocate_model" wherever an array gets created
         * Simplify source code by merging all functions of file "xml_selector.c" into just one and
             using flags for distinction between corresponding "detect_*" functions to be called
         * Simplify source code by merging all functions of file "xml_detector.c" into just one and
             handing over the corresponding wide character array and its count as arguments
-
-        * CAUTION! The following was probably already SOLVED in source code and may get DELETED here!
-        * Reactivate loop in function "read_gnu_linux_console" (which was blocking the program flow),
-            because escape sequences consist of more than just one character (mostly three)
-        * Find some way to predict the number of characters or find an eof or the like,
-            in order to properly handle escape control sequences
 
         * Commands of gnu/linux console HAVE TO BE handed over!
         * Search for pressed key in commands

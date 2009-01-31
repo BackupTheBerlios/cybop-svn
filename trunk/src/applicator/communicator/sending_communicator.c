@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008. Christian Heller.
+ * Copyright (C) 1999-2009. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.9 $ $Date: 2009-01-16 00:24:15 $ $Author: christian $
+ * @version $RCSfile: sending_communicator.c,v $ $Revision: 1.10 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -366,9 +366,11 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+/*??
     fwprintf(stdout, L"TEST sending mmc: %i\n", *mmc);
     fwprintf(stdout, L"TEST sending *mmc: %i\n", *((int*) *mmc));
     fwprintf(stdout, L"TEST sending mm: %ls\n", (wchar_t*) *mm);
+*/
 
             communicate_sending_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *nlm, *nlmc);
         }

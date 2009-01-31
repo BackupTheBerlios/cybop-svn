@@ -5,15 +5,11 @@
     <part name="arrow_left" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.select_previous_part"/>
     <part name="enter" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.enter"/>
     <part name="escape" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.lifecycle.exit_program"/>
-    <part name="a" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.functionality.start_apw"/>
+    <part name="m" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.functionality.start_mc"/>
+    <part name="d" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.functionality.start_dosemu"/>
     <part name="x" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.functionality.show_x_window"/>
-<!--
-    <part name="s" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.functionality.backup"/>
-    <part name="e" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.functionality.decrypt_laboratory_data"/>
-    <part name="r" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.functionality.account"/>
--->
-    <part name="i" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.show_about_information"/>
-    <part name="b" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.lifecycle.exit_program"/>
+    <part name="a" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.show_about_information"/>
+    <part name="e" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.lifecycle.exit_program"/>
 </model>
 
 <!--
@@ -39,6 +35,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: actions.cybol,v $ $Revision: 1.8 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @version $RCSfile: actions.cybol,v $ $Revision: 1.9 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

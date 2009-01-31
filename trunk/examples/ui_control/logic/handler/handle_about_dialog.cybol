@@ -9,13 +9,6 @@
         <property name="sum" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.gnu_linux_console_command_model"/>
         <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
     </part>
-    <!-- Write knowledge tree into file. -->
-    <part name="test_knowledge_tree" channel="inline" abstraction="operation/plain" model="send">
-        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
-        <property name="language" channel="inline" abstraction="text/plain" model="text/model-diagram"/>
-        <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
-        <property name="receiver" channel="inline" abstraction="text/plain" model="TEST_COMMAND.txt"/>
-    </part>
     <part name="send" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
         <property name="message" channel="inline" abstraction="path/encapsulated" model=".ui_control.logic.handler.gnu_linux_console_command_model"/>
@@ -45,6 +38,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: handle_about_dialog.cybol,v $ $Revision: 1.1 $ $Date: 2009-01-23 23:11:26 $ $Author: christian $
+    @version $RCSfile: handle_about_dialog.cybol,v $ $Revision: 1.2 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

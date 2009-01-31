@@ -14,9 +14,17 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.133 $ $Date: 2009-01-30 12:59:28 $ $Author: christian $
+# @version $Revision: 1.134 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-01-31  Christian Heller  <christian.heller@tuxtax.de>
+        * Edit example application "ui_control":
+            - adapt menu entries
+            - translate user interface into English
+            - fix bug that prevented switching the actions from main window to about dialogue
+        * Change copyright year to 2009 in all CYBOI source code files
+        * Release CYBOP 0.9.0
 
 2009-01-30  Christian Heller  <christian.heller@tuxtax.de>
         * Change terminal attributes in file "gnu_linux_console_starting_maintainer.c",

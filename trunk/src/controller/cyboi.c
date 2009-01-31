@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008. Christian Heller.
+ * Copyright (C) 1999-2009. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.45 $ $Date: 2008-12-31 00:14:56 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.46 $ $Date: 2009-01-31 16:06:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -212,7 +212,7 @@ int main(int p0, char** p1) {
         // Shutdown global variables.
         unglobalise();
 
-        log_write_terminated_message(stdout, L"Information: Exit cyboi normally.\n");
+        log_write_terminated_message(stdout, L"\nInformation: Exit cyboi normally.\n");
 
         // Set return value to 0, to indicate proper shutdown.
         r = *NUMBER_0_INTEGER_MEMORY_MODEL;

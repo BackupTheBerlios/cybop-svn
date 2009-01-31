@@ -41,7 +41,7 @@
         <property name="position" channel="inline" abstraction="number/integer" model="5,11,0"/>
         <property name="size" channel="inline" abstraction="number/integer" model="70,1,1"/>
     </part>
-    <part name="authors_label" channel="inline" abstraction="text/plain" model="Autoren:">
+    <part name="authors_label" channel="inline" abstraction="text/plain" model="Authors:">
         <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.label"/>
         <property name="position" channel="inline" abstraction="number/integer" model="5,13,0"/>
         <property name="size" channel="inline" abstraction="number/integer" model="70,1,1"/>
@@ -91,6 +91,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: window.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @version $RCSfile: window.cybol,v $ $Revision: 1.7 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->

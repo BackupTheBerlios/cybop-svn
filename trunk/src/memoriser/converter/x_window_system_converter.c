@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008. Christian Heller.
+ * Copyright (C) 1999-2009. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.31 $ $Date: 2009-01-18 00:22:31 $ $Author: christian $
+ * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.32 $ $Date: 2009-01-31 16:06:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -346,8 +346,10 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
             get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
+/*??
     fwprintf(stdout, L"layout: %s\n", *lm);
     fwprintf(stdout, L"layout count: %i\n", *((int*) *lmc));
+*/
 
             compare_arrays(*lm, *lmc, (void*) ROOT_LAYOUT_CYBOL_MODEL, (void*) ROOT_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 

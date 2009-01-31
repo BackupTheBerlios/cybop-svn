@@ -154,7 +154,7 @@
         <property name="handler" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.handle_gnu_linux_console"/>
     </part>
 <!--
-    <part name="receive_gui_commands" channel="inline" abstraction="operation/plain" model="receive ??NEW: sense">
+    <part name="sense_gui_commands" channel="inline" abstraction="operation/plain" model="sense">
         <property name="channel" channel="inline" abstraction="text/plain" model="x-window-system"/>
         <property name="root" channel="inline" abstraction="path/knowledge" model=".ui_control.gui"/>
         <property name="commands" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.gui_main_window_actions"/>
@@ -186,6 +186,6 @@
     Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
     Christian Heller <christian.heller@tuxtax.de>
 
-    @version $RCSfile: startup.cybol,v $ $Revision: 1.19 $ $Date: 2009-01-26 05:37:31 $ $Author: christian $
+    @version $RCSfile: startup.cybol,v $ $Revision: 1.20 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
     @author Christian Heller <christian.heller@tuxtax.de>
 /-->
