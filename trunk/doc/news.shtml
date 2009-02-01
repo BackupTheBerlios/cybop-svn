@@ -5,7 +5,7 @@
     <!--
         $RCSfile: news.shtml,v $
 
-        Copyright (c) 2002-2007. Christian Heller and the CYBOP developers.
+        Copyright (c) 2002-2009. Christian Heller and the CYBOP developers.
 
         Permission is granted to copy, distribute and/or modify this document
         under the terms of the GNU Free Documentation License, Version 1.1
@@ -18,7 +18,7 @@
         - Cybernetics Oriented Programming -
     /-->
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
-    <meta name="date" content="$Revision: 1.5 $ $Date: 2009-01-23 14:12:28 $ $Author: christian $">
+    <meta name="date" content="$Revision: 1.6 $ $Date: 2009-02-01 02:00:30 $ $Author: christian $">
     <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
     <link rel="stylesheet" type="text/css" href="cybop.css"/>
     <title>CYBOP News Archive</title>
@@ -30,7 +30,7 @@
             <h1>News Archive</h1>
             <table>
             <tr>
-                <th>2009-02-07</th>
+                <th>2009-02-01</th>
                 <td>
                     Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOP 0.9.0</a>.
                 </td>

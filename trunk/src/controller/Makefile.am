@@ -1,4 +1,3 @@
-
 EXTRA_DIST = handler manager tester checker.c globaliser.c handler.c helper.c informant.c initialiser.c manager.c optionaliser.c orienter.c tester.c
 
 bin_PROGRAMS = cyboi
