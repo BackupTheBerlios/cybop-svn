@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.12 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+ * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.13 $ $Date: 2009-02-07 00:39:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -88,7 +88,12 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
 
                         int* irq = (int*) p0;
 
-                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense socket message.");
+                        // CAUTION! DO NOT log this function call!
+                        // This function is executed within a thread, but the
+                        // logging is not guaranteed to be thread-safe and might
+                        // cause unpredictable programme behaviour.
+                        // Also, this function runs in an endless loop and would produce huge log files.
+                        // log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense socket message.");
 
     fwprintf(stdout, L"TEST: sense (stream) socket server socket: %i \n", *os);
 
@@ -163,27 +168,47 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The interrupt is null.");
+                        // CAUTION! DO NOT log this function call!
+                        // This function is executed within a thread, but the
+                        // logging is not guaranteed to be thread-safe and might
+                        // cause unpredictable programme behaviour.
+                        // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The interrupt is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The mutex is null.");
+                    // CAUTION! DO NOT log this function call!
+                    // This function is executed within a thread, but the
+                    // logging is not guaranteed to be thread-safe and might
+                    // cause unpredictable programme behaviour.
+                    // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The mutex is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The sleep time is null.");
+                // CAUTION! DO NOT log this function call!
+                // This function is executed within a thread, but the
+                // logging is not guaranteed to be thread-safe and might
+                // cause unpredictable programme behaviour.
+                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The sleep time is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The communication partner-connected socket is null.");
+            // CAUTION! DO NOT log this function call!
+            // This function is executed within a thread, but the
+            // logging is not guaranteed to be thread-safe and might
+            // cause unpredictable programme behaviour.
+            // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The communication partner-connected socket is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The original socket of this system is null.");
+        // CAUTION! DO NOT log this function call!
+        // This function is executed within a thread, but the
+        // logging is not guaranteed to be thread-safe and might
+        // cause unpredictable programme behaviour.
+        // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The original socket of this system is null.");
     }
 }
 
@@ -199,7 +224,11 @@ void communicate_sensing_socket(void* p0, void* p1) {
 
         int* base = (int*) p1;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense socket.");
+        // CAUTION! DO NOT log this function call!
+        // This function is executed within a thread, but the
+        // logging is not guaranteed to be thread-safe and might
+        // cause unpredictable programme behaviour.
+        // log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense socket.");
 
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
@@ -256,7 +285,11 @@ void communicate_sensing_socket(void* p0, void* p1) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket. The base internal is null.");
+        // CAUTION! DO NOT log this function call!
+        // This function is executed within a thread, but the
+        // logging is not guaranteed to be thread-safe and might
+        // cause unpredictable programme behaviour.
+        // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket. The base internal is null.");
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -274,7 +307,11 @@ void communicate_sensing_socket(void* p0, void* p1) {
  */
 void communicate_sensing_www_socket(void* p0) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense www socket.");
+    // CAUTION! DO NOT log this function call!
+    // This function is executed within a thread, but the
+    // logging is not guaranteed to be thread-safe and might
+    // cause unpredictable programme behaviour.
+    // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense www socket.");
 
     communicate_sensing_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }
@@ -286,7 +323,11 @@ void communicate_sensing_www_socket(void* p0) {
  */
 void communicate_sensing_cyboi_socket(void* p0) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense cyboi socket.");
+    // CAUTION! DO NOT log this function call!
+    // This function is executed within a thread, but the
+    // logging is not guaranteed to be thread-safe and might
+    // cause unpredictable programme behaviour.
+    // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense cyboi socket.");
 
     communicate_sensing_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }

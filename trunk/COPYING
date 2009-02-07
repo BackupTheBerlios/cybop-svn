@@ -1,26 +1,24 @@
 #
-# $RCSfile: COPYING,v $
-#
 # This file mentions the legal issues for distributing cybop.
 #
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.5 $ $Date: 2008-09-03 22:03:58 $ $Author: christian $
+# @version $RCSfile: COPYING,v $ $Revision: 1.6 $ $Date: 2009-02-07 00:39:21 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-Different licenses apply to the various parts of the CYBOP project.
-The licenses are printed in full text further below.
+Different licences apply to the various parts of the CYBOP project.
+The licences are printed in full text further below.
 
-1 Cybernetics Oriented Programming (CYBOP):
+1 Cybernetics Oriented Programming (CYBOP)
 
 The concepts behind the CYBOP Software Development Theory and all
 documentation are released under the GNU Free Documentation License (GFDL).
 It ensures that all CYBOP ideas are freely available, understandable
 and extensible by anybody.
 
-2 Cybernetics Oriented Language (CYBOL):
+2 Cybernetics Oriented Language (CYBOL)
 
 The XML-based CYBOL Knowledge Modelling Language is used to model abstract
 domain- and application concepts. The CYBOL core models are put under the
@@ -31,7 +29,7 @@ organisational knowledge and data in general, which they want to keep private.
 An insurance company uses special algorithms to calculate their policies;
 healthcare institutions use their own organisational concepts.
 
-3 Cybernetics Oriented Interpreter (CYBOI):
+3 Cybernetics Oriented Interpreter (CYBOI)
 
 The CYBOI Knowledge Interpreter is the active core system that serves as
 interface between the computer hardware and the passive knowledge encoded
@@ -39,7 +37,7 @@ in CYBOL. It is placed under the GNU General Public License (GPL) so that
 it will always be free, and any extensions to it will be free as well.
 
 
--------------------- The licenses in full text follow. --------------------
+-------------------- The licences in full text follow --------------------
 
 
                 GNU Free Documentation License

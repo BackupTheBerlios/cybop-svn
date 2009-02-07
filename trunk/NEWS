@@ -1,6 +1,4 @@
 #
-# $RCSfile: NEWS,v $
-#
 # This file represents a record of user-visible changes to cybop.
 #
 # The format is not strict, but the changes to the most recent version
@@ -9,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.4 $ $Date: 2009-01-23 14:45:06 $ $Author: christian $
+# @version $RCSfile: NEWS,v $ $Revision: 1.5 $ $Date: 2009-02-07 00:39:21 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 

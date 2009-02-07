@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_sensing_communicator.c,v $ $Revision: 1.10 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+ * @version $RCSfile: x_window_system_sensing_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-02-07 00:39:21 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -56,9 +56,6 @@
  * @param d the display
  */
 int communicate_sensing_x_window_system_check_events(pthread_mutex_t* mt, struct _XDisplay* d) {
-
-    // CAUTION! Do NOT add a log message here!
-    // It would eat up too much performance, since this function is called repeatedly.
 
     // The number of events.
     int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -124,7 +121,12 @@ void communicate_sensing_x_window_system_message(void* p0, void* p1, void* p2, v
 
                     int* irq = (int*) p0;
 
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense x window system message.");
+                    // CAUTION! DO NOT log this function call!
+                    // This function is executed within a thread, but the
+                    // logging is not guaranteed to be thread-safe and might
+                    // cause unpredictable programme behaviour.
+                    // Also, this function runs in an endless loop and would produce huge log files.
+                    // log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense x window system message.");
 
                     // CAUTION! Do NOT use the following statement directly here:
                     // while (XEventsQueued(*d, QueuedAfterReading) == 0) { ...}
@@ -174,22 +176,38 @@ void communicate_sensing_x_window_system_message(void* p0, void* p1, void* p2, v
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system message. The interrupt is null.");
+                    // CAUTION! DO NOT log this function call!
+                    // This function is executed within a thread, but the
+                    // logging is not guaranteed to be thread-safe and might
+                    // cause unpredictable programme behaviour.
+                    // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system message. The interrupt is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system message. The mutex is null.");
+                // CAUTION! DO NOT log this function call!
+                // This function is executed within a thread, but the
+                // logging is not guaranteed to be thread-safe and might
+                // cause unpredictable programme behaviour.
+                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system message. The mutex is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system message. The sleep time is null.");
+            // CAUTION! DO NOT log this function call!
+            // This function is executed within a thread, but the
+            // logging is not guaranteed to be thread-safe and might
+            // cause unpredictable programme behaviour.
+            // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system message. The sleep time is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system message. The display is null.");
+        // CAUTION! DO NOT log this function call!
+        // This function is executed within a thread, but the
+        // logging is not guaranteed to be thread-safe and might
+        // cause unpredictable programme behaviour.
+        // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense x window system message. The display is null.");
     }
 }
 
@@ -200,7 +218,11 @@ void communicate_sensing_x_window_system_message(void* p0, void* p1, void* p2, v
  */
 void communicate_sensing_x_window_system(void* p0) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense x window system.");
+    // CAUTION! DO NOT log this function call!
+    // This function is executed within a thread, but the
+    // logging is not guaranteed to be thread-safe and might
+    // cause unpredictable programme behaviour.
+    // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense x window system.");
 
     // The interrupt.
     void** irq = NULL_POINTER_MEMORY_MODEL;

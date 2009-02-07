@@ -16,7 +16,7 @@
 % http://www.resmedicinae.org
 % - Information in Medicine -
 %
-% Version: $Revision: 1.2 $ $Date: 2008-09-07 15:36:07 $ $Author: christian $
+% Version: $Revision: 1.3 $ $Date: 2009-02-07 00:39:21 $ $Author: christian $
 % Authors: Christian Heller <christian.heller@tuxtax.de>
 %
 
@@ -307,8 +307,8 @@ on the architecture and implementation of the \emph{CYBOI Interpreter}.
         that too much functionality had been put into the thread functions,
         e.g. the handling of a signal, reception and conversion of data.
         All that is now done in the main thread instead. What remains for the
-        input/ output threads is just the setting of an interrupt flag,
-        whenever data arrive.
+        input/ output threads is just the setting of an interrupt flag in a
+        "sense" function, whenever data arrive.
     \item[2008] All CYBOI source code gets adapted to using wide characters/ Unicode.
     \item[2008] CYBOL abstraction constants now follow the MIME type schema.
         All constants, no matter for which kind of model or format,
@@ -320,7 +320,7 @@ on the architecture and implementation of the \emph{CYBOI Interpreter}.
         know about the abstraction/ type of their parts (even a file system knows
         about whether it deals with a directory or file, and which kind of file);
         contain the actual model/ data/ value.
-    \item[2008] Open issues yet to be implemented are, for example:
+    \item[20xx] Open issues yet to be implemented are, for example:
         compiling CYBOI under \emph{Windows} OS and making use of their GUI
         functionality; improving the GUI layout and providing a GUI theme
         infrastructure; specifying serialisation in more detail.
