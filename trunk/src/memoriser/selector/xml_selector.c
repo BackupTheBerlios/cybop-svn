@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_selector.c,v $ $Revision: 1.10 $ $Date: 2009-01-31 16:06:34 $ $Author: christian $
+ * @version $RCSfile: xml_selector.c,v $ $Revision: 1.11 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -30,8 +30,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/xml_cybol_name.c"
+#include "../../constant/name/xml_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/detector/xml_detector.c"
+#include "../../memoriser/detector.c"
 
 //
 // Forward declarations.
@@ -77,7 +78,7 @@ void select_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_declaration_end((void*) &r, p4, p5);
+                    detect((void*) &r, p4, p5, (void*) DECLARATION_END_XML_NAME, (void*) DECLARATION_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -91,11 +92,7 @@ void select_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
 
-                    // Increment current position.
-                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
-
-                    // Decrement remaining count.
-                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    detect_move_position(p4, p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
                 }
 
             } else {
@@ -142,7 +139,7 @@ void select_xml_definition(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_definition_end((void*) &r, p1, p2);
+                    detect((void*) &r, p1, p2, (void*) DEFINITION_END_XML_NAME, (void*) DEFINITION_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -156,11 +153,7 @@ void select_xml_definition(void* p0, void* p1, void* p2) {
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
 
-                    // Increment current position.
-                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
-
-                    // Decrement remaining count.
-                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
                 }
 
             } else {
@@ -207,7 +200,7 @@ void select_xml_comment(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_comment_end((void*) &r, p1, p2);
+                    detect((void*) &r, p1, p2, (void*) COMMENT_END_XML_NAME, (void*) COMMENT_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -221,11 +214,7 @@ void select_xml_comment(void* p0, void* p1, void* p2) {
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
 
-                    // Increment current position.
-                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
-
-                    // Decrement remaining count.
-                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
                 }
 
             } else {
@@ -310,7 +299,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_end_tag_begin((void*) &r, p7, p8);
+                    detect((void*) &r, p7, p8, (void*) END_TAG_BEGIN_XML_NAME, (void*) END_TAG_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -326,7 +315,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_declaration_begin((void*) &r, p7, p8);
+                    detect((void*) &r, p7, p8, (void*) DECLARATION_BEGIN_XML_NAME, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -339,7 +328,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_comment_begin((void*) &r, p7, p8);
+                    detect((void*) &r, p7, p8, (void*) COMMENT_BEGIN_XML_NAME, (void*) COMMENT_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -352,7 +341,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_definition_begin((void*) &r, p7, p8);
+                    detect((void*) &r, p7, p8, (void*) DEFINITION_BEGIN_XML_NAME, (void*) DEFINITION_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -365,7 +354,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_start_tag_begin((void*) &r, p7, p8);
+                    detect((void*) &r, p7, p8, (void*) START_TAG_BEGIN_XML_NAME, (void*) START_TAG_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -383,11 +372,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
 
-                    // Increment current position.
-                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
-
-                    // Decrement remaining count.
-                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
                 }
 
             } else {
@@ -450,7 +435,7 @@ void select_xml_end_tag(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_tag_end((void*) &r, p1, p2);
+                    detect((void*) &r, p1, p2, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -470,11 +455,7 @@ void select_xml_end_tag(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Increment current position.
-                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
-
-                    // Decrement remaining count.
-                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
                 }
 
             } else {
@@ -547,7 +528,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect_xml_empty_tag_end((void*) &r, p3, p4);
+                            detect((void*) &r, p3, p4, (void*) EMPTY_TAG_END_XML_NAME, (void*) EMPTY_TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -559,7 +540,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect_xml_tag_end((void*) &r, p3, p4);
+                            detect((void*) &r, p3, p4, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -571,7 +552,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect_xml_attribute_begin((void*) &r, p3, p4);
+                            detect((void*) &r, p3, p4, (void*) ATTRIBUTE_BEGIN_XML_NAME, (void*) ATTRIBUTE_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -583,11 +564,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            // Increment current position.
-                            *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
-
-                            // Decrement remaining count.
-                            *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            detect_move_position(p3, p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
                         }
 
                     } else {
@@ -644,7 +621,7 @@ void select_xml_attribute_name(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_attribute_name_end((void*) &r, p1, p2);
+                    detect((void*) &r, p1, p2, (void*) ATTRIBUTE_VALUE_BEGIN_XML_NAME, (void*) ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -662,11 +639,7 @@ void select_xml_attribute_name(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Increment current position.
-                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
-
-                    // Decrement remaining count.
-                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
                 }
 
             } else {
@@ -713,7 +686,7 @@ void select_xml_attribute_value(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_xml_attribute_value_end((void*) &r, p1, p2);
+                    detect((void*) &r, p1, p2, (void*) ATTRIBUTE_VALUE_END_XML_NAME, (void*) ATTRIBUTE_VALUE_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -733,11 +706,7 @@ void select_xml_attribute_value(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Increment current position.
-                    *pos = *pos + *WIDE_CHARACTER_PRIMITIVE_SIZE;
-
-                    // Decrement remaining count.
-                    *rem = *rem - *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
                 }
 
             } else {

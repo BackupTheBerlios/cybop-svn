@@ -12,12 +12,16 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $RCSfile: ChangeLog,v $ $Revision: 1.136 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.137 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
 2009-02-08  Christian Heller  <christian.heller@tuxtax.de>
         * Reactivate socket functionality
+        * Add new file "detector.c" which replaces the now removed file "xml_detector.c";
+            adapt file "xml_selector.c" to changed function calls;
+            the new file "detector.c" simplifies implementing parsers for various
+            data structure types and thereby files
 
 2009-02-06  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt and correct minor things in project files

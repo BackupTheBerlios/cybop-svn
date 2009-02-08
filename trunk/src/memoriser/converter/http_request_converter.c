@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.20 $ $Date: 2009-01-31 16:06:33 $ $Author: christian $
+ * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.21 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1365,9 +1365,10 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     fwprintf(stdout, L"TEST http request mc p1: %i \n", *((int*) p1));
     fwprintf(stdout, L"TEST http request dc p4: %i \n", *((int*) p4));
     fwprintf(stdout, L"TEST http request sc p7: %i \n", *((int*) p7));
-    fwprintf(stdout, L"TEST http request kmc p9: %i \n", *((int*) p9));
-
     fwprintf(stdout, L"TEST http request s p6: %ls \n", (wchar_t*) p6);
+/*??
+    fwprintf(stdout, L"TEST http request kmc p9: %i \n", *((int*) p9));
+*/
 
         // The source index.
         // CAUTION! A local variable is used instead of the parameter

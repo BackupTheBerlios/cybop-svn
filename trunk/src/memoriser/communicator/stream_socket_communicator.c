@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.14 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
+ * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.15 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -76,12 +76,6 @@ void read_stream_socket(void* p0, void* p1, void* p2, void* p3) {
                     // that might cause an error.
                     errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        fwprintf(stdout, L"TEST: Read stream socket: %i \n", *ps);
-
-        fwprintf(stdout, L"TEST pre b: %s \n", (char*) *b);
-        fwprintf(stdout, L"TEST pre bc: %i \n", *bc);
-        fwprintf(stdout, L"TEST pre bs: %i \n", *bs);
-
                     // Receive message from client.
                     //
                     // If the flags argument (fourth one) is zero, then one can
@@ -89,11 +83,7 @@ void read_stream_socket(void* p0, void* p1, void* p2, void* p3) {
                     // Normally, "recv" blocks until there is input available to be read.
                     //
                     // CAUTION! A message MUST NOT be longer than the given buffer size!
-                    *bc = recv(*ps, *b, *bs, *NUMBER_0_INTEGER_MEMORY_MODEL);
-
-        fwprintf(stdout, L"TEST post b: %s \n", (char*) *b);
-        fwprintf(stdout, L"TEST post bc: %i \n", *bc);
-        fwprintf(stdout, L"TEST post bs: %i \n", *bs);
+                    *bc = recv(*ps, *b, *((size_t*) bs), *NUMBER_0_INTEGER_MEMORY_MODEL);
 
                     if (*bc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

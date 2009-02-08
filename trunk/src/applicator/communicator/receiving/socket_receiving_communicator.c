@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
+ * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.12 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -82,15 +82,21 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     fwprintf(stdout, L"TEST 1 lc: %i \n", *((int*) p10));
 
     // The encoded character array.
+    // CAUTION! Its size has to be GREATER than zero, e.g. 1024!
+    // Otherwise, there will be no place for the data to be received.
     void* e = *NULL_POINTER_MEMORY_MODEL;
     int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int es = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int es = *NUMBER_1024_INTEGER_MEMORY_MODEL;
 
     // Allocate encoded character array.
     allocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
     // Read message from stream.
     read_stream_socket((void*) &e, (void*) &ec, (void*) &es, p6);
+
+    fwprintf(stdout, L"TEST receive socket e: %s \n", (char*) e);
+    fwprintf(stdout, L"TEST receive socket ec: %i \n", ec);
+    fwprintf(stdout, L"TEST receive socket es: %i \n", es);
 
     // The serialised wide character array.
     void* s = *NULL_POINTER_MEMORY_MODEL;
@@ -102,6 +108,10 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
 
     // Decode encoded character array into serialised wide character array.
     decode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, e, (void*) &ec);
+
+    fwprintf(stdout, L"TEST receive socket s: %ls \n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST receive socket sc: %i \n", sc);
+    fwprintf(stdout, L"TEST receive socket ss: %i \n", ss);
 
     // Deallocate encoded character array.
     deallocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);

@@ -7,9 +7,24 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.103 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+# @version $Revision: 1.104 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * CONTINUE with rewriting and simplifying the http_request parser, using the new "detect" function
+        * Continue function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
+            // Add fragment to given compound model.
+            set_compound_element_by_name(*d, p1, p2,
+                k, (void*) &kc, (void*) &kc,
+                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                v, (void*) &vc, (void*) &vc,
+                *NULL_POINTER, *NULL_POINTER, *NULL_POINTER);
+        //?? TODO: The model and details content p8, p9, p10, p11, p12, p13 need to be RESET (emptied) every time since
+        //?? otherwise, new commands are just added to the "action" part entry, in "receive_socket.c"
+        * Hand over an empty cybol model? ... just like for xdt/bdt, containing no entries for: method, scheme, authority, path, fragment, action
+        * Introduce new functions to delete the content of an allocated entity (for compound, integer_vector, xdt etc.),
+            so that for each new http request, the model is initially empty, in function "receive_socket_message"
+        * Adapt function "decode_http_request" accordingly
 
         * Simplify source code by using the function "allocate_model" wherever an array gets created
         * Simplify source code by merging all functions of file "xml_selector.c" into just one and
@@ -73,21 +88,6 @@
             set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
             --> the "(void*) &p4" does possibly lead to errors, since a reference to the
                 local variable p4 is stored, which gets destroyed as soon as the function is left
-
-        * CONTINUE in: function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
-            // Add fragment to given compound model.
-            set_compound_element_by_name(*d, p1, p2,
-                k, (void*) &kc, (void*) &kc,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-                v, (void*) &vc, (void*) &vc,
-                *NULL_POINTER, *NULL_POINTER, *NULL_POINTER);
-
-        //?? TODO: The model and details content p8, p9, p10, p11, p12, p13 need to be RESET (emptied) every time since
-        //?? otherwise, new commands are just added to the "action" part entry, in "receive_socket.c"
-        * Hand over an empty cybol model (just like for xdt/bdt) containing no entries for: method, scheme, authority, path, fragment, action
-        * Introduce new functions to delete the content of an allocated entity (for compound, integer_vector, xdt etc.),
-            so that for each new http request, the model is initially empty, in function "receive_socket_message"
-        * Adapt function "decode_http_request" accordingly
 
         * Create three different sockets (local, inet, inet6)? distinguish at socket startup?
             and store as different entries in internal memory?
