@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.13 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+ * @version $RCSfile: receiving_communicator.c,v $ $Revision: 1.14 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -86,11 +86,24 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+            // The base internal.
+            int base = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME;
+            // The internal memory index.
+            int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+            // The communication partner-connected socket of this system.
+            void** ps = NULL_POINTER_MEMORY_MODEL;
+
+            // Get communication partner-connected socket of this system.
+            i = base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
+            get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    fwprintf(stdout, L"TEST ps: %i \n", *((int*) *ps));
+
             // Receive model by reading http request or response.
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-//??            communicate_receiving_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) &receive_socket_cyboi, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+            communicate_receiving_socket(p3, p4, p5, p6, p7, p8, *ps, p20, p21, p18, p19, p1, p2);
         }
     }
 
@@ -146,7 +159,9 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
             // Get gnu/linux console input stream.
             get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &is, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-            communicate_receiving_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2, *mt);
+            communicate_receiving_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL,
+                NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL,
+                p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2, *mt);
         }
     }
 
@@ -278,6 +293,8 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message.");
 
+    fwprintf(stdout, L"TEST receiving: %i \n", p0);
+
     // The channel name, abstraction, model, details.
     void** cn = NULL_POINTER_MEMORY_MODEL;
     void** cnc = NULL_POINTER_MEMORY_MODEL;
@@ -382,6 +399,7 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     void** cod = NULL_POINTER_MEMORY_MODEL;
     void** codc = NULL_POINTER_MEMORY_MODEL;
     void** cods = NULL_POINTER_MEMORY_MODEL;
+/*??
     // The blocking name, abstraction, model, details.
     void** bn = NULL_POINTER_MEMORY_MODEL;
     void** bnc = NULL_POINTER_MEMORY_MODEL;
@@ -395,6 +413,7 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     void** bd = NULL_POINTER_MEMORY_MODEL;
     void** bdc = NULL_POINTER_MEMORY_MODEL;
     void** bds = NULL_POINTER_MEMORY_MODEL;
+*/
 
     // Get channel.
     get_universal_compound_element_by_name(p0, p1,
@@ -404,7 +423,6 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
         p3, p4);
-
     // Get language.
     get_universal_compound_element_by_name(p0, p1,
         (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
@@ -413,7 +431,6 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         (void*) &lm, (void*) &lmc, (void*) &lms,
         (void*) &ld, (void*) &ldc, (void*) &lds,
         p3, p4);
-
     // Get message.
     get_universal_compound_element_by_name(p0, p1,
         (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
@@ -422,7 +439,6 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
         p3, p4);
-
     // Get meta message.
     get_universal_compound_element_by_name(p0, p1,
         (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
@@ -431,7 +447,6 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         (void*) &mem, (void*) &memc, (void*) &mems,
         (void*) &med, (void*) &medc, (void*) &meds,
         p3, p4);
-
     // Get model.
     get_universal_compound_element_by_name(p0, p1,
         (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
@@ -440,7 +455,6 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         (void*) &mom, (void*) &momc, (void*) &moms,
         (void*) &mod, (void*) &modc, (void*) &mods,
         p3, p4);
-
     // Get root.
     get_universal_compound_element_by_name(p0, p1,
         (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
@@ -449,7 +463,6 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
         p3, p4);
-
     // Get socket communication style.
     get_universal_compound_element_by_name(p0, p1,
         (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
@@ -458,7 +471,6 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         (void*) &stm, (void*) &stmc, (void*) &stms,
         (void*) &std, (void*) &stdc, (void*) &stds,
         p3, p4);
-
     // Get commands.
     get_universal_compound_element_by_name(p0, p1,
         (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
@@ -467,7 +479,7 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         (void*) &com, (void*) &comc, (void*) &coms,
         (void*) &cod, (void*) &codc, (void*) &cods,
         p3, p4);
-
+/*??
     // Get blocking.
     get_universal_compound_element_by_name(p0, p1,
         (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
@@ -476,10 +488,11 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         (void*) &bm, (void*) &bmc, (void*) &bms,
         (void*) &bd, (void*) &bdc, (void*) &bds,
         p3, p4);
+*/
 
     // Receive data using the parameters determined above.
     communicate_receiving_with_parameters(p2, p3, p4, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods,
-        *rm, *rmc, *rms, *com, *comc, *mm, *mmc, *mem, *memc, *lm, *lmc, (void*) stm, (void*) stmc, *cm, *cmc);
+        *rm, *rmc, *rms, *com, *comc, *mm, *mmc, *mem, *memc, *lm, *lmc, *stm, *stmc, *cm, *cmc);
 }
 
 /* RECEIVING_COMMUNICATOR_SOURCE */

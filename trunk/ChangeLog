@@ -12,9 +12,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $RCSfile: ChangeLog,v $ $Revision: 1.135 $ $Date: 2009-02-07 00:39:21 $ $Author: christian $
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.136 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-02-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Reactivate socket functionality
 
 2009-02-06  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt and correct minor things in project files

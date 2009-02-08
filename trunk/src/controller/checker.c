@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: checker.c,v $ $Revision: 1.71 $ $Date: 2009-01-31 16:06:30 $ $Author: christian $
+ * @version $RCSfile: checker.c,v $ $Revision: 1.72 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -386,6 +386,8 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 get_element(p8, (void*) &i, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                 i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
                 get_element(p8, (void*) &i, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+//??    fwprintf(stdout, L"TEST detected www service irq: %i\n", *((int*) **irq));
             }
 
             // CAUTION! The boolean logic expression is necessary, because:
@@ -419,9 +421,11 @@ void check_interrupts(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                 get_element(p8, (void*) &i, p6, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
                 i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
                 get_element(p8, (void*) &i, p7, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+//??    fwprintf(stdout, L"TEST detected cyboi service irq: %i\n", *((int*) **irq));
             }
 
-            // CAUTION! The boolean logic expression is necessary, because:
+            // CAUTION! The boolean logic AND expression && is necessary, because:
             // - first case: irq is null which means that NO OTHER irq has been checked before
             // - second case: irq is not null which means some other irq has been retrieved from
             //   internal memory and checked before, BUT its value is zero anyway (irq not set)
@@ -560,7 +564,13 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // - handler (to be forwarded to the "handle" function below)
         check_interrupts((void*) &irq, (void*) &mt, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, p0);
 
-//??    fwprintf(stdout, L"TEST checker irq: %i\n", *irq);
+/*??
+    fwprintf(stdout, L"TEST checker irq: %i\n", *irq);
+    fwprintf(stdout, L"TEST checker handler ac: %i\n", *ac);
+    fwprintf(stdout, L"TEST checker handler a: %i\n", *a);
+    fwprintf(stdout, L"TEST checker handler mc: %i\n", *mc);
+    fwprintf(stdout, L"TEST checker handler m: %i\n", *m);
+*/
 
         // CAUTION! These conditions have to be CONNECTED by a boolean AND operator,
         // because otherwise, the "else" branch below would not always be reached.

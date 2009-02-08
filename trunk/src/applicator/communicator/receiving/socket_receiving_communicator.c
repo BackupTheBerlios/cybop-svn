@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.10 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+ * @version $RCSfile: socket_receiving_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,41 +59,66 @@
 /**
  * Receives message via socket.
  *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model count
- * @param p2 the model size
- * @param p3 the details (Hand over as reference!)
- * @param p4 the details count
- * @param p5 the details size
- * @param p6 the commands model (Hand over as reference!)
- * @param p7 the commands model count
- * @param p8 the language model (Hand over as reference!)
- * @param p9 the language model count
- * @param p10 the communication style model (Hand over as reference!)
- * @param p11 the communication style model count
- * @param p12 the knowledge memory
- * @param p13 the knowledge memory count
+ * @param p0 the destination message model (Hand over as reference!)
+ * @param p1 the destination message model count
+ * @param p2 the destination message model size
+ * @param p3 the destination message details (Hand over as reference!)
+ * @param p4 the destination message details count
+ * @param p5 the destination message details size
+ * @param p6 the source communication partner-connected socket of this system
+ * @param p7 the socket communication style model
+ * @param p8 the socket communication style model count
+ * @param p9 the language model
+ * @param p10 the language model count
+ * @param p11 the knowledge memory
+ * @param p12 the knowledge memory count
  */
 void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
-    void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
+    void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message via socket.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive socket message.");
 
-    fwprintf(stdout, L"TEST 1 l: %s \n", (wchar_t*) p8);
-    fwprintf(stdout, L"TEST 1 lc: %i \n", *((int*) p9));
+    fwprintf(stdout, L"TEST 1 l: %s \n", (wchar_t*) p9);
+    fwprintf(stdout, L"TEST 1 lc: %i \n", *((int*) p10));
 
-    read_stream_socket(p0, p1, p2, p3);
+    // The encoded character array.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+    int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int es = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    //?? TODO: The model content p8, p9, p10 needs to be RESET every time since
+    // Allocate encoded character array.
+    allocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Read message from stream.
+    read_stream_socket((void*) &e, (void*) &ec, (void*) &es, p6);
+
+    // The serialised wide character array.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate serialised wide character array.
+    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Decode encoded character array into serialised wide character array.
+    decode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, e, (void*) &ec);
+
+    // Deallocate encoded character array.
+    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Deserialise serialised wide character array into destination knowledge model.
+    // The http request's parameters are written into the destination compound model.
+    decode(p0, p1, p2, p3, p4, p5, s, (void*) &sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10);
+
+    //?? TODO: The destination compound model content needs to be RESET every time since
     //?? otherwise, new commands are just added to the "action" part entry, for example.
     //?? Instead, all values should be replaced!
 
-    // Decode http request and write any parameters into the
-    // compound model and details being handed over as parameters.
-//??    decode(p0, p1, p2, p3, p4, p5, *b, p29, p12, p13, p8, p9);
+    fwprintf(stdout, L"TEST 2 l: %s \n", (wchar_t*) p9);
+    fwprintf(stdout, L"TEST 2 lc: %i \n", *((int*) p10));
 
-    fwprintf(stdout, L"TEST 2 l: %s \n", (wchar_t*) p8);
-    fwprintf(stdout, L"TEST 2 lc: %i \n", *((int*) p9));
+    // Deallocate serialised wide character array.
+    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
 /*??
     // The action name, abstraction, model, details.

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.13 $ $Date: 2009-02-07 00:39:21 $ $Author: christian $
+ * @version $RCSfile: socket_sensing_communicator.c,v $ $Revision: 1.14 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -97,6 +97,19 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
 
     fwprintf(stdout, L"TEST: sense (stream) socket server socket: %i \n", *os);
 
+                        // Initialise error number.
+                        // It is a global variable/ function and other operations
+                        // may have set some value that is not wanted here.
+                        //
+                        // CAUTION! Initialise the error number BEFORE calling the procedure
+                        // that might cause an error.
+                        //
+                        // CAUTION! Do NOT reset the GLOBAL "errno" variable here!
+                        // All what is said above is true, but is this a THREAD
+                        // and other threads might access the "errno" variable
+                        // at the same time, which would lead to false programme behaviour.
+                        // errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
                         // Accept client socket request and store client socket.
                         //
                         // Accepting a connection does NOT make the original socket
@@ -111,41 +124,13 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
                         //
                         // The address "pa" returns information about the name of the
                         // communication partner socket that initiated the connection.
-                        *ps = accept(*os, (struct sockaddr*) p4, (socklen_t*) p5);
-
-    fwprintf(stdout, L"TEST: sense (stream) socket client partner socket ps: %i \n", *ps);
-
-                        // CAUTION! Do NOT close client socket here!
-                        // It is stored in the internal memory and only closed
-                        // in the "send_socket" operation, when replying to the client.
-                        // close(*ps);
-
-                        // Lock socket mutex.
-                        pthread_mutex_lock(mt);
-
-                        // Set socket interrupt request to indicate
-                        // that a message has been received via socket,
-                        // which may now be processed in the main thread of this system.
-                        *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                        // Unlock socket mutex.
-                        pthread_mutex_unlock(mt);
-
-                        while (*irq == *NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                            // Sleep as long as the socket interrupt is not handled and reset yet.
-                            // This is to give the central processing unit (cpu) some
-                            // time to breathe, that is to be idle or to process other signals.
-                            sleep(*st);
-                        }
-
-                        // CAUTION! The "select" procedure was NOT used to make this socket
-                        // non-blocking, because it has some overhead in that other sockets
-                        // need to be considered and their file descriptors handed over as
-                        // parameter.
                         //
-                        // CAUTION! An alternative approach to speed up communication would be
-                        // to keep all accepted client sockets open, for example by storing them
+                        // CAUTION! The "select" procedure was NOT used to make this socket non-blocking,
+                        // because it has some overhead in that other sockets need to be considered
+                        // and their file descriptors handed over as parameter.
+                        //
+                        // An alternative approach to speed up communication would be to keep
+                        // all accepted client sockets open, for example by storing them
                         // in a "socket memory" container. This container would have to be
                         // allocated at server socket startup and deallocated at shutdown.
                         // It would have to be accessed using a special mutex. Further, it would
@@ -165,6 +150,85 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
                         // - it would be unclear when to close the client socket, since it was
                         //   actually stored in the socket memory to be ready for multiple
                         //   data exchanges and to avoid steady accept/close cycles
+                        *ps = accept(*os, (struct sockaddr*) p4, (socklen_t*) p5);
+
+                        if (*ps >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stdout, L"TEST: sense (stream) socket client partner socket ps: %i \n", *ps);
+
+                            // CAUTION! Do NOT close client socket here!
+                            // It is stored in the internal memory and only closed
+                            // in the "send_socket" operation, when replying to the client.
+                            // close(*ps);
+
+                            // Lock socket mutex.
+                            pthread_mutex_lock(mt);
+
+                            // Set socket interrupt request to indicate
+                            // that a message has been received via socket,
+                            // which may now be processed in the main thread of this system.
+                            *irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            // Unlock socket mutex.
+                            pthread_mutex_unlock(mt);
+
+                            while (*irq != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                                // Sleep as long as the socket interrupt is not handled and reset yet.
+                                // This is to give the central processing unit (cpu) some
+                                // time to breathe, that is to be idle or to process other signals.
+                                sleep(*st);
+                            }
+
+                        } else {
+
+                            if (errno == EBADF) {
+
+                                // CAUTION! DO NOT log this function call!
+                                // This function is executed within a thread, but the
+                                // logging is not guaranteed to be thread-safe and might
+                                // cause unpredictable programme behaviour.
+                                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. The socket argument is not a valid file descriptor.");
+
+                            } else if (errno == ENOTSOCK) {
+
+                                // CAUTION! DO NOT log this function call!
+                                // This function is executed within a thread, but the
+                                // logging is not guaranteed to be thread-safe and might
+                                // cause unpredictable programme behaviour.
+                                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. The descriptor socket argument is not a socket.");
+
+                            } else if (errno == EOPNOTSUPP) {
+
+                                // CAUTION! DO NOT log this function call!
+                                // This function is executed within a thread, but the
+                                // logging is not guaranteed to be thread-safe and might
+                                // cause unpredictable programme behaviour.
+                                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. The descriptor socket does not support this operation.");
+
+                            } else if (errno == EWOULDBLOCK) {
+
+                                // CAUTION! DO NOT log this function call!
+                                // This function is executed within a thread, but the
+                                // logging is not guaranteed to be thread-safe and might
+                                // cause unpredictable programme behaviour.
+                                //
+                                // CAUTION! Do NOT log the following error!
+                                // The reason is that the socket is non-blocking,
+                                // so that the "accept" procedure returns always,
+                                // even if no connection was established,
+                                // which would unnecessarily fill up the log file.
+                                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. The socket has nonblocking mode set, and there are no pending connections immediately available.");
+
+                            } else {
+
+                                // CAUTION! DO NOT log this function call!
+                                // This function is executed within a thread, but the
+                                // logging is not guaranteed to be thread-safe and might
+                                // cause unpredictable programme behaviour.
+                                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. An unknown error occured while accepting a socket connection.");
+                            }
+                        }
 
                     } else {
 
@@ -172,7 +236,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
                         // This function is executed within a thread, but the
                         // logging is not guaranteed to be thread-safe and might
                         // cause unpredictable programme behaviour.
-                        // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The interrupt is null.");
+                        // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. The interrupt is null.");
                     }
 
                 } else {
@@ -181,7 +245,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
                     // This function is executed within a thread, but the
                     // logging is not guaranteed to be thread-safe and might
                     // cause unpredictable programme behaviour.
-                    // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The mutex is null.");
+                    // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. The mutex is null.");
                 }
 
             } else {
@@ -190,7 +254,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
                 // This function is executed within a thread, but the
                 // logging is not guaranteed to be thread-safe and might
                 // cause unpredictable programme behaviour.
-                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The sleep time is null.");
+                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. The sleep time is null.");
             }
 
         } else {
@@ -199,7 +263,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
             // This function is executed within a thread, but the
             // logging is not guaranteed to be thread-safe and might
             // cause unpredictable programme behaviour.
-            // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The communication partner-connected socket is null.");
+            // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. The communication partner-connected socket is null.");
         }
 
     } else {
@@ -208,7 +272,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
         // This function is executed within a thread, but the
         // logging is not guaranteed to be thread-safe and might
         // cause unpredictable programme behaviour.
-        // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense (stream) socket message. The original socket of this system is null.");
+        // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense socket message. The original socket of this system is null.");
     }
 }
 
@@ -257,7 +321,7 @@ void communicate_sensing_socket(void* p0, void* p1) {
         // Get sleep time.
         i = *base + *SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        // Get communication partner socket.
+        // Get communication partner-connected socket of this system.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
         get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
         // Get communication partner socket address.

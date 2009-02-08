@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: sensing_communicator.c,v $ $Revision: 1.10 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+ * @version $RCSfile: sensing_communicator.c,v $ $Revision: 1.11 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -429,6 +429,9 @@ void communicate_sensing(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         compare_arrays((void*) *cm, (void*) *cmc, (void*) CYBOI_CYBOL_CHANNEL, (void*) CYBOI_CYBOL_CHANNEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stdout, L"TEST sense cyboi service hac: %i\n", *hac);
+    fwprintf(stdout, L"TEST sense cyboi service ha: %i\n", *ha);
 
             // Set handler abstraction, model, details.
             i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME;

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.13 $ $Date: 2009-01-31 16:06:33 $ $Author: christian $
+ * @version $RCSfile: stream_socket_communicator.c,v $ $Revision: 1.14 $ $Date: 2009-02-08 13:04:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -42,126 +42,8 @@
  * Reads a byte array stream from the stream socket.
  *
  * @param p0 the destination byte array (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source communication partner-connected socket of this system
- *           (the client socket to accept, receive data from and attach as parameter to the
- *           cyboi signal generated later, so that this server may reply to the correct client)
- */
-void read_stream_socket_data(void* p0, void* p1, void* p2, void* p3) {
-
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-        size_t* bs = (size_t*) p2;
-
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* bc = (int*) p1;
-
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                void** b = (void**) p0;
-
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Read stream socket data.");
-
-                // Initialise error number.
-                // It is a global variable/ function and other operations
-                // may have set some value that is not wanted here.
-                //
-                // CAUTION! Initialise the error number BEFORE calling the procedure
-                // that might cause an error.
-                errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-/*??
-            fwprintf(stdout, L"TEST: sense socket thread client socket: %i \n", *ps);
-*/
-
-    fwprintf(stdout, L"TEST pre b: %s \n", (char*) *b);
-    fwprintf(stdout, L"TEST pre bc: %i \n", *bc);
-    fwprintf(stdout, L"TEST pre bs: %i \n", *bs);
-
-/*??
-                // Receive message from client.
-                //
-                // If the flags argument (fourth one) is zero, then one can
-                // just as well use the "read" instead of the "recv" procedure.
-                // Normally, "recv" blocks until there is input available to be read.
-                // ?? Not so here, as the socket was set to "non-blocking" mode at startup. ??
-                //
-                // CAUTION! A message MUST NOT be longer than the given buffer size!
-                *bc = recv(*ps, *b, *bs, *NUMBER_0_INTEGER_MEMORY_MODEL);
-*/
-
-    fwprintf(stdout, L"TEST post b: %s \n", (char*) *b);
-    fwprintf(stdout, L"TEST post bc: %i \n", *bc);
-    fwprintf(stdout, L"TEST post bs: %i \n", *bs);
-
-                if (*bc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Successfully sensed stream socket message.");
-
-                } else if (*bc == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. No data could be sensed.");
-
-                } else {
-
-                    if (errno == EBADF) {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. The socket argument is not a valid file descriptor.");
-
-                    } else if (errno == ENOTSOCK) {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. The descriptor socket is not a socket.");
-
-                    } else if (errno == EWOULDBLOCK) {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. The read operation would block even though nonblocking mode has been set on the socket.");
-
-                    } else if (errno == EINTR) {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. The operation was interrupted by a signal before any data was read.");
-
-                    } else if (errno == ENOTCONN) {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. The socket was never connected.");
-
-                    } else {
-
-                        // CAUTION! Do NOT log the following error:
-                        // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. An unknown error occured while receiving data.");
-                        //
-                        // The reason is that the socket is non-blocking,
-                        // so that the "accept" procedure returns always,
-                        // even if no connection was established.
-                        // But if no connection and client socket are there,
-                        // then the "recv" or "recvfrom" procedure returns an error,
-                        // which would unnecessarily fill up the log file.
-                    }
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. The buffer is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. The buffer count is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. The buffer size is null.");
-    }
-}
-
-/**
- * Reads a byte array stream from the stream socket.
- *
- * @param p0 the destination byte array (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
+ * @param p1 the destination byte array count
+ * @param p2 the destination byte array size
  * @param p3 the source communication partner-connected socket of this system
  *           (the client socket to accept, receive data from and attach as parameter to the
  *           cyboi signal generated later, so that this server may reply to the correct client)
@@ -172,55 +54,101 @@ void read_stream_socket(void* p0, void* p1, void* p2, void* p3) {
 
         int* ps = (int*) p3;
 
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read stream socket.");
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        // Initialise error number.
-        // It is a global variable/ function and other operations
-        // may have set some value that is not wanted here.
-        //
-        // CAUTION! Initialise the error number BEFORE calling the procedure
-        // that might cause an error.
-        errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int* bs = (int*) p2;
 
-/*??
-        if (*ps >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            read_stream_socket_data();
+                int* bc = (int*) p1;
 
-        } else {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            if (errno == EBADF) {
+                    void** b = (void**) p0;
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense via stream socket. The socket argument is not a valid file descriptor.");
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read stream socket.");
 
-            } else if (errno == ENOTSOCK) {
+                    // Initialise error number.
+                    // It is a global variable/ function and other operations
+                    // may have set some value that is not wanted here.
+                    //
+                    // CAUTION! Initialise the error number BEFORE calling the procedure
+                    // that might cause an error.
+                    errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense via stream socket. The descriptor socket argument is not a socket.");
+        fwprintf(stdout, L"TEST: Read stream socket: %i \n", *ps);
 
-            } else if (errno == EOPNOTSUPP) {
+        fwprintf(stdout, L"TEST pre b: %s \n", (char*) *b);
+        fwprintf(stdout, L"TEST pre bc: %i \n", *bc);
+        fwprintf(stdout, L"TEST pre bs: %i \n", *bs);
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense via stream socket. The descriptor socket does not support this operation.");
+                    // Receive message from client.
+                    //
+                    // If the flags argument (fourth one) is zero, then one can
+                    // just as well use the "read" instead of the "recv" procedure.
+                    // Normally, "recv" blocks until there is input available to be read.
+                    //
+                    // CAUTION! A message MUST NOT be longer than the given buffer size!
+                    *bc = recv(*ps, *b, *bs, *NUMBER_0_INTEGER_MEMORY_MODEL);
 
-            } else if (errno == EWOULDBLOCK) {
+        fwprintf(stdout, L"TEST post b: %s \n", (char*) *b);
+        fwprintf(stdout, L"TEST post bc: %i \n", *bc);
+        fwprintf(stdout, L"TEST post bs: %i \n", *bs);
 
-                // CAUTION! Do NOT log the following error:
-                // log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense via stream socket. The socket has nonblocking mode set, and there are no pending connections immediately available.");
-                //
-                // The reason is that the socket is non-blocking,
-                // so that the "accept" procedure returns always,
-                // even if no connection was established,
-                // which would unnecessarily fill up the log file.
+                    if (*bc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Successfully read stream socket.");
+
+                    } else if (*bc == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. No data could be sensed.");
+
+                    } else {
+
+                        if (errno == EBADF) {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. The socket argument is not a valid file descriptor.");
+
+                        } else if (errno == ENOTSOCK) {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. The descriptor socket is not a socket.");
+
+                        } else if (errno == EWOULDBLOCK) {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. The read operation would block even though nonblocking mode has been set on the socket.");
+
+                        } else if (errno == EINTR) {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. The operation was interrupted by a signal before any data was read.");
+
+                        } else if (errno == ENOTCONN) {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. The socket was never connected.");
+
+                        } else {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. An unknown error occured while receiving data.");
+                        }
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. The buffer is null.");
+                }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not sense via stream socket. An unknown error occured while accepting a socket connection.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. The buffer count is null.");
             }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. The buffer size is null.");
         }
-*/
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from stream socket. The partner-connected socket of this system is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read stream socket. The partner-connected socket of this system is null.");
     }
 }
 
