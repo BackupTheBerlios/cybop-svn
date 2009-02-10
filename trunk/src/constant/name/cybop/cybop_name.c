@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybop_name.c,v $ $Revision: 1.4 $ $Date: 2009-01-31 16:06:30 $ $Author: christian $
+ * @version $RCSfile: cybop_name.c,v $ $Revision: 1.5 $ $Date: 2009-02-10 01:01:04 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -59,18 +59,22 @@ static int* MODEL_CYBOP_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 //
 
 /** The name cybop name as char. */
+/*??
 static char NAME_CYBOP_NAME_AS_CHAR_ARRAY[] = {'n', 'a', 'm', 'e'};
 static char* NAME_CYBOP_NAME_AS_CHAR = NAME_CYBOP_NAME_AS_CHAR_ARRAY;
 
 /** The channel cybop name as char. */
+/*??
 static char CHANNEL_CYBOP_NAME_AS_CHAR_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
 static char* CHANNEL_CYBOP_NAME_AS_CHAR = CHANNEL_CYBOP_NAME_AS_CHAR_ARRAY;
 
 /** The abstraction cybop name as char. */
+/*??
 static char ABSTRACTION_CYBOP_NAME_AS_CHAR_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
 static char* ABSTRACTION_CYBOP_NAME_AS_CHAR = ABSTRACTION_CYBOP_NAME_AS_CHAR_ARRAY;
 
 /** The model cybop name as char. */
+/*??
 static char MODEL_CYBOP_NAME_AS_CHAR_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
 static char* MODEL_CYBOP_NAME_AS_CHAR = MODEL_CYBOP_NAME_AS_CHAR_ARRAY;
 

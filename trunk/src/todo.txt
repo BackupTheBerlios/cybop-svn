@@ -7,12 +7,32 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.104 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
+# @version $Revision: 1.105 $ $Date: 2009-02-10 01:01:04 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE with rewriting and simplifying the http_request parser, using the new "detect" function
-        * Continue function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
+        * CONTINUE with rewriting the http_request parser (processor, selector, detector);
+            if "name" constants for deserialised compound model are needed, then put them to "constant/name/http_model/"
+
+        * Do not automatically convert to wchar_t, since http requests are byte-oriented and may contain other encodings
+            --> check this out on examples found in the WWW; Is only the "body" encoded, or the protocol as well?
+
+        * Translate ALL data formats in two steps:
+            1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound
+            2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound --> ?? (action/ signal??)
+
+        * Receive at least the following (taken from old file "apps/residenz/wui/index_input.cybol"):
+            <model>
+                <part name="method" channel="inline" abstraction="character" model=""/>
+                <part name="scheme" channel="inline" abstraction="character" model=""/>
+                <part name="authority" channel="inline" abstraction="character" model=""/>
+                <part name="path" channel="inline" abstraction="character" model=""/>
+                <part name="fragment" channel="inline" abstraction="character" model=""/>
+                <part name="action" channel="inline" abstraction="character" model=""/>
+            </model>
+
+        * ?? OLD task comment:
+            Continue function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
             // Add fragment to given compound model.
             set_compound_element_by_name(*d, p1, p2,
                 k, (void*) &kc, (void*) &kc,

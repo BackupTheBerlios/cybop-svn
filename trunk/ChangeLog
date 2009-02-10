@@ -12,9 +12,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $RCSfile: ChangeLog,v $ $Revision: 1.137 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.138 $ $Date: 2009-02-10 01:01:04 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-02-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Rename and move file "separator_http_model.c" to "separator_http_name.c"
+        * Add files "http_request_processor.c" and "http_request_selector.c"
+        * Start implementing http request parsing functionality, to soon replace the old file "http_request_converter.c"
+        * Move directory "constant/name/cybol/xdt/" to "constant/name/xdt_model/"
 
 2009-02-08  Christian Heller  <christian.heller@tuxtax.de>
         * Reactivate socket functionality
