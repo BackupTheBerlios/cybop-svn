@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: field_xdt_model_name.c,v $ $Revision: 1.1 $ $Date: 2009-02-10 01:01:04 $ $Author: christian $
+ * @version $RCSfile: field_xdt_model_name.c,v $ $Revision: 1.2 $ $Date: 2009-02-10 01:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,7 +27,7 @@
 #define FIELD_XDT_MODEL_NAME_SOURCE
 
 #include <stddef.h>
-#include "../../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The kbv test number field xdt model name. */
 static wchar_t KBV_TEST_NUMBER_FIELD_XDT_MODEL_NAME_ARRAY[] = {L'k', L'b', L'v', L'_', L't', L'e', L's', L't', L'_', L'n', L'u', L'm', L'b', L'e', L'r'};

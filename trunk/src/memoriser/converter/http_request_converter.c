@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.21 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
+ * @version $RCSfile: http_request_converter.c,v $ $Revision: 1.22 $ $Date: 2009-02-10 01:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,13 +29,13 @@
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../constant/model/http/request_method_http_model.c"
-#include "../../constant/model/http/separator_http_model.c"
 #include "../../constant/model/http/webdav_request_method_http_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/uri/separator_uri_model.c"
 #include "../../constant/name/cybol/operation/communication/sense_communication_operation_cybol_name.c"
 #include "../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
+#include "../../constant/name/http/separator_http_name.c"
 #include "../../logger/logger.c"
 
 //
@@ -594,7 +594,7 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_MODEL, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        get_array_elements_index(i, (void*) &ic, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -602,8 +602,8 @@ void decode_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
             ac = sep;
 
             // Set new source index.
-            i = i + sep + *HEADER_ARGUMENT_SEPARATOR_HTTP_MODEL_COUNT;
-            ic = ic - sep - *HEADER_ARGUMENT_SEPARATOR_HTTP_MODEL_COUNT;
+            i = i + sep + *HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_COUNT;
+            ic = ic - sep - *HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_COUNT;
 
         } else {
 
@@ -680,7 +680,7 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
             sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) HEADER_SEPARATOR_HTTP_MODEL, (void*) HEADER_SEPARATOR_HTTP_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            get_array_elements_index(i, (void*) &ic, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
             if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -693,8 +693,8 @@ void decode_http_request_headers(void* p0, void* p1, void* p2, void* p3, void* p
                 decode_http_request_header(p0, p1, p2, h, (void*) &hc);
 
                 // Set new source index.
-                i = i + sep + *HEADER_SEPARATOR_HTTP_MODEL_COUNT;
-                ic = ic - sep - *HEADER_SEPARATOR_HTTP_MODEL_COUNT;
+                i = i + sep + *HEADER_SEPARATOR_HTTP_NAME_COUNT;
+                ic = ic - sep - *HEADER_SEPARATOR_HTTP_NAME_COUNT;
 
             } else {
 
@@ -1202,7 +1202,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) REQUEST_METHOD_SEPARATOR_HTTP_MODEL, (void*) REQUEST_METHOD_SEPARATOR_HTTP_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        get_array_elements_index(i, (void*) &ic, (void*) REQUEST_METHOD_SEPARATOR_HTTP_NAME, (void*) REQUEST_METHOD_SEPARATOR_HTTP_NAME_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1210,8 +1210,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             rmc = sep;
 
             // Set new source index.
-            i = i + sep + *REQUEST_METHOD_SEPARATOR_HTTP_MODEL_COUNT;
-            ic = ic - sep - *REQUEST_METHOD_SEPARATOR_HTTP_MODEL_COUNT;
+            i = i + sep + *REQUEST_METHOD_SEPARATOR_HTTP_NAME_COUNT;
+            ic = ic - sep - *REQUEST_METHOD_SEPARATOR_HTTP_NAME_COUNT;
 
         } else {
 
@@ -1237,7 +1237,7 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_HTTP_MODEL, (void*) UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_HTTP_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        get_array_elements_index(i, (void*) &ic, (void*) UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_HTTP_NAME, (void*) UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_HTTP_NAME_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1245,8 +1245,8 @@ void decode_http_request_line(void* p0, void* p1, void* p2, void* p3, void* p4, 
             uric = sep;
 
             // Set new source index.
-            i = i + sep + *UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_HTTP_MODEL_COUNT;
-            ic = ic - sep - *UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_HTTP_MODEL_COUNT;
+            i = i + sep + *UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_HTTP_NAME_COUNT;
+            ic = ic - sep - *UNIFORM_RESOURCE_IDENTIFIER_SEPARATOR_HTTP_NAME_COUNT;
 
         } else {
 
@@ -1389,7 +1389,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) REQUEST_LINE_SEPARATOR_HTTP_MODEL, (void*) REQUEST_LINE_SEPARATOR_HTTP_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        get_array_elements_index(i, (void*) &ic, (void*) REQUEST_LINE_SEPARATOR_HTTP_NAME, (void*) REQUEST_LINE_SEPARATOR_HTTP_NAME_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1397,8 +1397,8 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             rlc = sep;
 
             // Set new source index.
-            i = i + sep + *REQUEST_LINE_SEPARATOR_HTTP_MODEL_COUNT;
-            ic = ic - sep - *REQUEST_LINE_SEPARATOR_HTTP_MODEL_COUNT;
+            i = i + sep + *REQUEST_LINE_SEPARATOR_HTTP_NAME_COUNT;
+            ic = ic - sep - *REQUEST_LINE_SEPARATOR_HTTP_NAME_COUNT;
 
         } else {
 
@@ -1424,7 +1424,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) HEADERS_SEPARATOR_HTTP_MODEL, (void*) HEADERS_SEPARATOR_HTTP_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        get_array_elements_index(i, (void*) &ic, (void*) HEADERS_SEPARATOR_HTTP_NAME, (void*) HEADERS_SEPARATOR_HTTP_NAME_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1432,8 +1432,8 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             hc = sep;
 
             // Set new source index.
-            i = i + sep + *REQUEST_LINE_SEPARATOR_HTTP_MODEL_COUNT;
-            ic = ic - sep - *REQUEST_LINE_SEPARATOR_HTTP_MODEL_COUNT;
+            i = i + sep + *REQUEST_LINE_SEPARATOR_HTTP_NAME_COUNT;
+            ic = ic - sep - *REQUEST_LINE_SEPARATOR_HTTP_NAME_COUNT;
 
         } else {
 
@@ -1459,7 +1459,7 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) BODY_SEPARATOR_HTTP_MODEL, (void*) BODY_SEPARATOR_HTTP_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        get_array_elements_index(i, (void*) &ic, (void*) BODY_SEPARATOR_HTTP_NAME, (void*) BODY_SEPARATOR_HTTP_NAME_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

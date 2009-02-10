@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: record_xdt_model_name.c,v $ $Revision: 1.1 $ $Date: 2009-02-10 01:01:04 $ $Author: christian $
+ * @version $RCSfile: record_xdt_model_name.c,v $ $Revision: 1.2 $ $Date: 2009-02-10 01:13:43 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -27,7 +27,7 @@
 #define RECORD_XDT_MODEL_NAME_SOURCE
 
 #include <stddef.h>
-#include "../../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The medical practice data record xdt model name. */
 static wchar_t MEDICAL_PRACTICE_DATA_RECORD_XDT_MODEL_NAME_ARRAY[] = {L'm', L'e', L'd', L'i', L'c', L'a', L'l', L'_', L'p', L'r', L'a', L'c', L't', L'i', L'c', L'e', L'_', L'd', L'a', L't', L'a'};
