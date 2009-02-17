@@ -7,20 +7,17 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.105 $ $Date: 2009-02-10 01:01:04 $ $Author: christian $
+# @version $Revision: 1.106 $ $Date: 2009-02-17 23:20:02 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE with rewriting the http_request parser (processor, selector, detector);
+        * CONTINUE with rewriting the http_request_processor;
             if "name" constants for deserialised compound model are needed, then put them to "constant/name/http_model/"
-
         * Do not automatically convert to wchar_t, since http requests are byte-oriented and may contain other encodings
             --> check this out on examples found in the WWW; Is only the "body" encoded, or the protocol as well?
-
         * Translate ALL data formats in two steps:
-            1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound
-            2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound --> ?? (action/ signal??)
-
+            1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound; http --> http_request_compound
+            2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound / http_request_compound --> ?? (action/ signal??)
         * Receive at least the following (taken from old file "apps/residenz/wui/index_input.cybol"):
             <model>
                 <part name="method" channel="inline" abstraction="character" model=""/>
@@ -30,7 +27,7 @@
                 <part name="fragment" channel="inline" abstraction="character" model=""/>
                 <part name="action" channel="inline" abstraction="character" model=""/>
             </model>
-
+        * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
         * ?? OLD task comment:
             Continue function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
             // Add fragment to given compound model.
@@ -46,13 +43,9 @@
             so that for each new http request, the model is initially empty, in function "receive_socket_message"
         * Adapt function "decode_http_request" accordingly
 
-        * Simplify source code by using the function "allocate_model" wherever an array gets created
-        * Simplify source code by merging all functions of file "xml_selector.c" into just one and
-            using flags for distinction between corresponding "detect_*" functions to be called
-        * Simplify source code by merging all functions of file "xml_detector.c" into just one and
-            handing over the corresponding wide character array and its count as arguments
+        * Simplify source code by using the function "allocate_model" wherever an array with count and size gets created
 
-        * Commands of gnu/linux console HAVE TO BE handed over!
+        * Do commands of gnu/linux console still HAVE TO BE handed over (as in old solution)?
         * Search for pressed key in commands
         * Wenn returned command == NULL, dann suche nach "default" in commands
             (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)
@@ -162,7 +155,6 @@
         * It was decided that "send" operations do NOT run in an own thread (for now and the near future, at least),
             also if querying a server via http, since this would mix up the signal handling mechanism
 
-        * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
         * Enable multiple abstractions like "character|UTF-32|gzip", separated by
             a "pipe" character and processed one-by-one, in the given order
         * Adapt all places in source code where reallocation is used to new

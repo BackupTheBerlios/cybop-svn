@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_selector.c,v $ $Revision: 1.11 $ $Date: 2009-02-08 22:34:57 $ $Author: christian $
+ * @version $RCSfile: xml_selector.c,v $ $Revision: 1.12 $ $Date: 2009-02-17 23:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -413,22 +413,6 @@ void select_xml_end_tag(void* p0, void* p1, void* p2) {
                 int* b = (int*) p0;
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select xml end tag.");
-
-                //
-                // CAUTION! The ORDER of the following function calls is IMPORTANT!
-                // The empty tag end "/>" has to be searched BEFORE
-                // the simple tag end ">", because of the slash "/" character.
-                //
-                // CAUTION! The comparison result HAS TO BE ZERO, if a detection is to be taking place!
-                // Many "detect" functions are called in a sequence, below.
-                // If the result of one detection function was positive (r == 1),
-                // then that function increments the current position and decrements the remaining count.
-                // In this case, further detection functions following afterwards might detect
-                // further characters and CHANGE the current position and remaining count, and so forth,
-                // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-                // Therefore, the checks for (r == 0) below avoid another detection,
-                // if the result already has a value unequal zero.
-                //
 
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER_MEMORY_MODEL;

@@ -19,24 +19,20 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_response_converter.c,v $ $Revision: 1.19 $ $Date: 2009-02-10 01:13:43 $ $Author: christian $
+ * @version $RCSfile: http_response_selector.c,v $ $Revision: 1.1 $ $Date: 2009-02-17 23:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef HTTP_RESPONSE_CONVERTER_SOURCE
-#define HTTP_RESPONSE_CONVERTER_SOURCE
+#ifndef HTTP_RESPONSE_SELECTOR_SOURCE
+#define HTTP_RESPONSE_SELECTOR_SOURCE
 
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/abstraction/mime/text_mime_abstraction.c"
-#include "../../constant/model/character_set/iso_8859_character_set_model.c"
-#include "../../constant/model/http/protocol_version_http_model.c"
-#include "../../constant/model/http/request_method_http_model.c"
-#include "../../constant/model/http/status_code_http_model.c"
 #include "../../constant/model/log/message_log_model.c"
-#include "../../constant/name/http/header_http_name.c"
-#include "../../constant/name/http/separator_http_name.c"
-#include "../../constant/name/http/variable_http_name.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/cybol/xml_cybol_name.c"
+#include "../../constant/name/xml_name.c"
 #include "../../logger/logger.c"
+#include "../../memoriser/detector.c"
 
 //
 // An http server response delivers message data in text format (like MIME 1.0),
@@ -77,23 +73,6 @@
 //
 
 /**
- * Decodes an http response into a compound.
- *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count
- * @param p2 the destination model size
- * @param p3 the destination details (Hand over as reference!)
- * @param p4 the destination details count
- * @param p5 the destination details size
- * @param p6 the source http response
- * @param p7 the source http response count
- */
-void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode http response.");
-}
-
-/**
  * Encodes an http response status line.
  *
  * @param p0 the destination http response (Hand over as reference!)
@@ -102,6 +81,7 @@ void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
  * @param p3 the source details (always of abstraction "compound")
  * @param p4 the source details count
  */
+/*??
 void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode http response status line.");
@@ -130,6 +110,7 @@ void encode_http_response_status_line(void* p0, void* p1, void* p2, void* p3, vo
  * @param p4 the source details count
  * @param p5 the body count
  */
+/*??
 void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode http response headers.");
@@ -190,6 +171,7 @@ void encode_http_response_headers(void* p0, void* p1, void* p2, void* p3, void* 
  * @param p3 the source model (of abstraction "character")
  * @param p4 the source model count
  */
+/*??
 void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode http response body.");
@@ -212,6 +194,7 @@ void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4)
  * @param p5 the source details (always of abstraction "compound")
  * @param p6 the source details count
  */
+/*??
 void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
@@ -290,5 +273,5 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
     }
 }
 
-/* HTTP_RESPONSE_CONVERTER_SOURCE */
+/* HTTP_RESPONSE_SELECTOR_SOURCE */
 #endif

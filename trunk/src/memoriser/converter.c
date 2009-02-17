@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.72 $ $Date: 2009-01-31 16:06:31 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.73 $ $Date: 2009-02-17 23:20:03 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,8 +50,6 @@
 #include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
 #include "../memoriser/converter/gnu_linux_console_converter.c"
-#include "../memoriser/converter/http_request_converter.c"
-#include "../memoriser/converter/http_response_converter.c"
 #include "../memoriser/converter/integer_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/latex_converter.c"
@@ -257,26 +255,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
             //?? TODO: Rename into "decode_hhmmss_date_time"!
             //?? decode_date_time(p0, p1, p2, p6, p7);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p10, p11, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            decode_http_request(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p10, p11, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            decode_http_response(p0, p1, p2, p3, p4, p5, p6, p7);
         }
     }
 
@@ -513,26 +491,6 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             encode_date_time(p0, p1, p2, p7, p8);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p13, p14, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            encode_http_request(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays(p13, p14, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            encode_http_response(p0, p1, p2, p7, p8, p9, p10);
         }
     }
 
