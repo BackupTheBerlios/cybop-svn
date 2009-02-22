@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_processor.c,v $ $Revision: 1.2 $ $Date: 2009-02-17 23:20:03 $ $Author: christian $
+ * @version $RCSfile: http_request_processor.c,v $ $Revision: 1.3 $ $Date: 2009-02-22 19:07:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -62,34 +62,120 @@
 // comment for HTML4's 17.13.1.
 //
 
-void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4) {
+/**
+ * Processes the http request method.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the current position (Hand over as reference!)
+ * @param p7 the remaining count
+ */
+void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    select_http_request_method(p0, p1, p2);
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* rem = (int*) p4;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request method.");
+
+        // The break flag.
+        int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+            if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+
+            select_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+
+            if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request method. The remaining bytes count is null.");
+    }
 }
 
-void process_http_request_uri(void* p0, void* p1, void* p2) {
+/**
+ * Processes the http request uri.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the current position (Hand over as reference!)
+ * @param p7 the remaining count
+ */
+void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    select_http_request_uri(p0, p1, p2);
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* rem = (int*) p4;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request uri.");
+
+        // The break flag.
+        int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+            if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+
+            select_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+
+            if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request uri. The remaining bytes count is null.");
+    }
 }
 
 void process_http_request_protocol(void* p0, void* p1, void* p2) {
 
-    select_http_request_protocol(p0, p1, p2);
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request protocol.");
+
+//??    select_http_request_protocol(p0, p1, p2);
 }
 
 void process_http_request_header_argument(void* p0, void* p1, void* p2) {
 
-    select_http_request_header_argument(p0, p1, p2);
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header argument.");
+
+//??    select_http_request_header_argument(p0, p1, p2);
 }
 
 void process_http_request_header_value(void* p0, void* p1, void* p2) {
 
-    select_http_request_header_value(p0, p1, p2);
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header value.");
+
+//??    select_http_request_header_value(p0, p1, p2);
 }
 
 void process_http_request_body(void* p0, void* p1, void* p2) {
 
-    select_http_request_body(p0, p1, p2);
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request body.");
+
+//??    select_http_request_body(p0, p1, p2);
 }
 
 /* HTTP_REQUEST_PROCESSOR_SOURCE */

@@ -12,9 +12,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $RCSfile: ChangeLog,v $ $Revision: 1.139 $ $Date: 2009-02-17 23:20:02 $ $Author: christian $
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.140 $ $Date: 2009-02-22 19:07:23 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-02-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Readd files "http_request_converter.c" and "http_response_converter.c"
 
 2009-02-17  Christian Heller  <christian.heller@tuxtax.de>
         * Delete files "http_request_converter.c" and "http_response_converter.c"

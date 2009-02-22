@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.73 $ $Date: 2009-02-17 23:20:03 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.74 $ $Date: 2009-02-22 19:07:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -50,6 +50,8 @@
 #include "../memoriser/converter/double_vector_converter.c"
 #include "../memoriser/converter/fraction_converter.c"
 #include "../memoriser/converter/gnu_linux_console_converter.c"
+#include "../memoriser/converter/http_request_converter.c"
+#include "../memoriser/converter/http_response_converter.c"
 #include "../memoriser/converter/integer_converter.c"
 #include "../memoriser/converter/integer_vector_converter.c"
 #include "../memoriser/converter/latex_converter.c"
@@ -125,21 +127,21 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // The xml model.
+            // The temporary model.
             void* m = *NULL_POINTER_MEMORY_MODEL;
             int mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The xml details.
+            // The temporary details.
             void* d = *NULL_POINTER_MEMORY_MODEL;
             int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            // Allocate xml model.
+            // Allocate temporary model.
             allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-            // Allocate xml details.
+            // Allocate temporary details.
             allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
-            // Decode cybol file into xml compound memory model.
+            // Decode source message (cybol file) into temporary compound memory model.
             decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
 
 //?? TEST BEGIN
@@ -173,13 +175,13 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
 
-            // Decode xml compound memory model into cyboi knowledge compound memory model.
+            // Decode temporary compound memory model into cyboi knowledge compound memory model.
             // Basically, structural data (tags) and meta data (attributes) are swapped in meaning.
             decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
 
-            // Deallocate xml model.
+            // Deallocate temporary model.
             deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-            // Deallocate xml details.
+            // Deallocate temporary details.
             deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
 //?? TEST BEGIN
@@ -255,6 +257,196 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
             //?? TODO: Rename into "decode_hhmmss_date_time"!
             //?? decode_date_time(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p10, p11, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // The temporary model.
+            void* m = *NULL_POINTER_MEMORY_MODEL;
+            int mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The temporary details.
+            void* d = *NULL_POINTER_MEMORY_MODEL;
+            int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            // Allocate temporary model.
+            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            // Allocate temporary details.
+            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+            // Decode source message into temporary compound memory model.
+            decode_http_request((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
+
+//?? TEST BEGIN
+            // The model diagram.
+            void* md = *NULL_POINTER_MEMORY_MODEL;
+            int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                m, (void*) &mc, d, (void*) &dc);
+            // The multibyte character stream.
+            void* mb = *NULL_POINTER_MEMORY_MODEL;
+            int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // The file name.
+            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
+            int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
+            int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
+
+            // Decode temporary compound memory model into cyboi knowledge compound memory model.
+            decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
+
+            // Deallocate temporary model.
+            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate temporary details.
+            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+//?? TEST BEGIN
+            // Reset model diagram.
+            md = *NULL_POINTER_MEMORY_MODEL;
+            mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *((void**) p0), p1, *((void**) p3), p4);
+            // Reset multibyte character stream.
+            mb = *NULL_POINTER_MEMORY_MODEL;
+            mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // Reset file name.
+            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
+            fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
+            fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p10, p11, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // The temporary model.
+            void* m = *NULL_POINTER_MEMORY_MODEL;
+            int mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The temporary details.
+            void* d = *NULL_POINTER_MEMORY_MODEL;
+            int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            // Allocate temporary model.
+            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            // Allocate temporary details.
+            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+            // Decode source message into temporary compound memory model.
+            decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
+
+//?? TEST BEGIN
+            // The model diagram.
+            void* md = *NULL_POINTER_MEMORY_MODEL;
+            int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                m, (void*) &mc, d, (void*) &dc);
+            // The multibyte character stream.
+            void* mb = *NULL_POINTER_MEMORY_MODEL;
+            int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // The file name.
+            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
+            int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
+            int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
+
+            // Decode temporary compound memory model into cyboi knowledge compound memory model.
+            decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
+
+            // Deallocate temporary model.
+            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate temporary details.
+            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+//?? TEST BEGIN
+            // Reset model diagram.
+            md = *NULL_POINTER_MEMORY_MODEL;
+            mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *((void**) p0), p1, *((void**) p3), p4);
+            // Reset multibyte character stream.
+            mb = *NULL_POINTER_MEMORY_MODEL;
+            mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // Reset file name.
+            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
+            fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
+            fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
         }
     }
 
@@ -491,6 +683,196 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             encode_date_time(p0, p1, p2, p7, p8);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p10, p11, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // The temporary model.
+            void* m = *NULL_POINTER_MEMORY_MODEL;
+            int mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The temporary details.
+            void* d = *NULL_POINTER_MEMORY_MODEL;
+            int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            // Allocate temporary model.
+            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            // Allocate temporary details.
+            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+            // Decode source message into temporary compound memory model.
+            decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
+
+//?? TEST BEGIN
+            // The model diagram.
+            void* md = *NULL_POINTER_MEMORY_MODEL;
+            int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                m, (void*) &mc, d, (void*) &dc);
+            // The multibyte character stream.
+            void* mb = *NULL_POINTER_MEMORY_MODEL;
+            int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // The file name.
+            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
+            int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
+            int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
+
+            // Decode temporary compound memory model into cyboi knowledge compound memory model.
+            decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
+
+            // Deallocate temporary model.
+            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate temporary details.
+            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+//?? TEST BEGIN
+            // Reset model diagram.
+            md = *NULL_POINTER_MEMORY_MODEL;
+            mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *((void**) p0), p1, *((void**) p3), p4);
+            // Reset multibyte character stream.
+            mb = *NULL_POINTER_MEMORY_MODEL;
+            mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // Reset file name.
+            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
+            fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
+            fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(p10, p11, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // The temporary model.
+            void* m = *NULL_POINTER_MEMORY_MODEL;
+            int mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The temporary details.
+            void* d = *NULL_POINTER_MEMORY_MODEL;
+            int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            // Allocate temporary model.
+            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            // Allocate temporary details.
+            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+            // Decode source message into temporary compound memory model.
+            decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
+
+//?? TEST BEGIN
+            // The model diagram.
+            void* md = *NULL_POINTER_MEMORY_MODEL;
+            int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                m, (void*) &mc, d, (void*) &dc);
+            // The multibyte character stream.
+            void* mb = *NULL_POINTER_MEMORY_MODEL;
+            int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // The file name.
+            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
+            int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
+            int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
+
+            // Decode temporary compound memory model into cyboi knowledge compound memory model.
+            decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
+
+            // Deallocate temporary model.
+            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate temporary details.
+            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+//?? TEST BEGIN
+            // Reset model diagram.
+            md = *NULL_POINTER_MEMORY_MODEL;
+            mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *((void**) p0), p1, *((void**) p3), p4);
+            // Reset multibyte character stream.
+            mb = *NULL_POINTER_MEMORY_MODEL;
+            mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // Reset file name.
+            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
+            fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
+            fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
         }
     }
 

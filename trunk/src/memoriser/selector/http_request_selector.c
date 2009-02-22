@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_selector.c,v $ $Revision: 1.2 $ $Date: 2009-02-17 23:20:03 $ $Author: christian $
+ * @version $RCSfile: http_request_selector.c,v $ $Revision: 1.3 $ $Date: 2009-02-22 19:07:23 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,8 +29,7 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/xml_cybol_name.c"
-#include "../../constant/name/xml_name.c"
+#include "../../constant/name/http/separator_http_name.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/detector.c"
 
@@ -92,517 +91,447 @@
 // Forward declarations.
 //
 
-void process_http_request_uri(void* p0, void* p1, void* p2);
+void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
+void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
 void process_http_request_protocol(void* p0, void* p1, void* p2);
 void process_http_request_header_argument(void* p0, void* p1, void* p2);
 void process_http_request_header_value(void* p0, void* p1, void* p2);
 void process_http_request_body(void* p0, void* p1, void* p2);
+void process_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
 
 /**
  * Selects the http request method.
  *
- * @param p0 the break flag
- * @param p1 the current position (Hand over as reference!)
- * @param p2 the remaining count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the break flag
+ * @param p7 the current position (Hand over as reference!)
+ * @param p8 the remaining count
  */
-void select_http_request_method(void* p0, void* p1, void* p2) {
+void select_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p2;
+        int* b = (int*) p6;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request method.");
 
-            void** pos = (void**) p1;
+        //
+        // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
+        // if a detection is to be taking place!
+        // Many "detect" functions are called in a sequence, below.
+        // If the result of one detection function was positive (r == 1),
+        // then that function increments the current position and decrements the remaining count.
+        // In this case, further detection functions following afterwards might detect
+        // further characters and CHANGE the current position and remaining count, and so forth,
+        // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
+        // Therefore, the checks for (r == 0) below avoid another detection,
+        // if the result already has a value unequal zero.
+        //
+        // CAUTION! If a detection was successful, then the current position and remaining count
+        // were already adapted within the corresponding "detect" function (as called below),
+        // so that they now point to the first character following the detected character sequence.
+        // Any "process" function called afterwards can rely on this and start processing right away.
+        //
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                int* b = (int*) p0;
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request method.");
+            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                //
-                // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
-                // if a detection is to be taking place!
-                // Many "detect" functions are called in a sequence, below.
-                // If the result of one detection function was positive (r == 1),
-                // then that function increments the current position and decrements the remaining count.
-                // In this case, further detection functions following afterwards might detect
-                // further characters and CHANGE the current position and remaining count, and so forth,
-                // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-                // Therefore, the checks for (r == 0) below avoid another detection,
-                // if the result already has a value unequal zero.
-                //
-                // CAUTION! If a detection was successful, then the current position and remaining count
-                // were already adapted within the corresponding "detect" function (as called below),
-                // so that they now point to the first character following the detected character sequence.
-                // Any "process" function called afterwards can rely on this and start processing right away.
-                //
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                process_http_request_uri(p0, p1, p2, p3, p4, p5, p7, p8);
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect((void*) &r, p1, p2, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        process_http_request_uri(p1, p2);
-
-                        // Set break flag.
-                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request method. The break flag is null.");
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
             }
+        }
 
-        } else {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request method. The current position is null.");
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request method. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request method. The break flag is null.");
     }
 }
 
 /**
  * Selects the http request uri.
  *
- * @param p0 the break flag
- * @param p1 the current position (Hand over as reference!)
- * @param p2 the remaining count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the break flag
+ * @param p7 the current position (Hand over as reference!)
+ * @param p8 the remaining count
  */
-void select_http_request_uri(void* p0, void* p1, void* p2) {
+void select_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p2;
+        int* b = (int*) p0;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request uri.");
 
-            void** pos = (void**) p1;
+        //
+        // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
+        // if a detection is to be taking place!
+        // Many "detect" functions are called in a sequence, below.
+        // If the result of one detection function was positive (r == 1),
+        // then that function increments the current position and decrements the remaining count.
+        // In this case, further detection functions following afterwards might detect
+        // further characters and CHANGE the current position and remaining count, and so forth,
+        // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
+        // Therefore, the checks for (r == 0) below avoid another detection,
+        // if the result already has a value unequal zero.
+        //
+        // CAUTION! If a detection was successful, then the current position and remaining count
+        // were already adapted within the corresponding "detect" function (as called below),
+        // so that they now point to the first character following the detected character sequence.
+        // Any "process" function called afterwards can rely on this and start processing right away.
+        //
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                int* b = (int*) p0;
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request uri.");
+            detect((void*) &r, p1, p2, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                //
-                // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
-                // if a detection is to be taking place!
-                // Many "detect" functions are called in a sequence, below.
-                // If the result of one detection function was positive (r == 1),
-                // then that function increments the current position and decrements the remaining count.
-                // In this case, further detection functions following afterwards might detect
-                // further characters and CHANGE the current position and remaining count, and so forth,
-                // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-                // Therefore, the checks for (r == 0) below avoid another detection,
-                // if the result already has a value unequal zero.
-                //
-                // CAUTION! If a detection was successful, then the current position and remaining count
-                // were already adapted within the corresponding "detect" function (as called below),
-                // so that they now point to the first character following the detected character sequence.
-                // Any "process" function called afterwards can rely on this and start processing right away.
-                //
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+//??                process_http_request_protocol(p1, p2);
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect((void*) &r, p1, p2, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        process_http_request_protocol(p1, p2);
-
-                        // Set break flag.
-                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request uri. The break flag is null.");
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
             }
+        }
 
-        } else {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request uri. The current position is null.");
+            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request uri. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request uri. The break flag is null.");
     }
 }
 
 /**
  * Selects the http request protocol.
  *
- * @param p0 the break flag
- * @param p1 the current position (Hand over as reference!)
- * @param p2 the remaining count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the break flag
+ * @param p7 the current position (Hand over as reference!)
+ * @param p8 the remaining count
  */
-void select_http_request_protocol(void* p0, void* p1, void* p2) {
+void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p2;
+        int* b = (int*) p0;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request protocol.");
 
-            void** pos = (void**) p1;
+        //
+        // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
+        // Before the request response line final element http name (ending with "carriage return"
+        // and "line feed") can be identified, the possibility of a body begin http name
+        // (twice "carriage return" and "line feed") indicating the message body
+        // has to be considered:
+        // - twice "carriage return" and "line feed"
+        // - "carriage return" and "line feed"
+        //
+        // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
+        // if a detection is to be taking place!
+        // Many "detect" functions are called in a sequence, below.
+        // If the result of one detection function was positive (r == 1),
+        // then that function increments the current position and decrements the remaining count.
+        // In this case, further detection functions following afterwards might detect
+        // further characters and CHANGE the current position and remaining count, and so forth,
+        // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
+        // Therefore, the checks for (r == 0) below avoid another detection,
+        // if the result already has a value unequal zero.
+        //
+        // CAUTION! If a detection was successful, then the current position and remaining count
+        // were already adapted within the corresponding "detect" function (as called below),
+        // so that they now point to the first character following the detected character sequence.
+        // Any "process" function called afterwards can rely on this and start processing right away.
+        //
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                int* b = (int*) p0;
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request protocol.");
+            detect((void*) &r, p1, p2, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                //
-                // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
-                // Before the request response line final element http name (ending with "carriage return"
-                // and "line feed") can be identified, the possibility of a body begin http name
-                // (twice "carriage return" and "line feed") indicating the message body
-                // has to be considered:
-                // - twice "carriage return" and "line feed"
-                // - "carriage return" and "line feed"
-                //
-                // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
-                // if a detection is to be taking place!
-                // Many "detect" functions are called in a sequence, below.
-                // If the result of one detection function was positive (r == 1),
-                // then that function increments the current position and decrements the remaining count.
-                // In this case, further detection functions following afterwards might detect
-                // further characters and CHANGE the current position and remaining count, and so forth,
-                // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-                // Therefore, the checks for (r == 0) below avoid another detection,
-                // if the result already has a value unequal zero.
-                //
-                // CAUTION! If a detection was successful, then the current position and remaining count
-                // were already adapted within the corresponding "detect" function (as called below),
-                // so that they now point to the first character following the detected character sequence.
-                // Any "process" function called afterwards can rely on this and start processing right away.
-                //
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+//??                process_http_request_body(p1, p2);
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect((void*) &r, p1, p2, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        process_http_request_body(p1, p2);
-
-                        // Set break flag.
-                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect((void*) &r, p1, p2, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        process_http_request_header_argument(p1, p2);
-
-                        // Set break flag.
-                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request protocol. The break flag is null.");
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
             }
+        }
 
-        } else {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request protocol. The current position is null.");
+            detect((void*) &r, p1, p2, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??                process_http_request_header_argument(p1, p2);
+
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request protocol. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request protocol. The break flag is null.");
     }
 }
 
 /**
  * Selects the http request header argument.
  *
- * @param p0 the break flag
- * @param p1 the current position (Hand over as reference!)
- * @param p2 the remaining count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the break flag
+ * @param p7 the current position (Hand over as reference!)
+ * @param p8 the remaining count
  */
-void select_http_request_header_argument(void* p0, void* p1, void* p2) {
+void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p2;
+        int* b = (int*) p0;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request header argument.");
 
-            void** pos = (void**) p1;
+        //
+        // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
+        // if a detection is to be taking place!
+        // Many "detect" functions are called in a sequence, below.
+        // If the result of one detection function was positive (r == 1),
+        // then that function increments the current position and decrements the remaining count.
+        // In this case, further detection functions following afterwards might detect
+        // further characters and CHANGE the current position and remaining count, and so forth,
+        // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
+        // Therefore, the checks for (r == 0) below avoid another detection,
+        // if the result already has a value unequal zero.
+        //
+        // CAUTION! If a detection was successful, then the current position and remaining count
+        // were already adapted within the corresponding "detect" function (as called below),
+        // so that they now point to the first character following the detected character sequence.
+        // Any "process" function called afterwards can rely on this and start processing right away.
+        //
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                int* b = (int*) p0;
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request header argument.");
+            detect((void*) &r, p1, p2, (void*) HEADER_ARGUMENT_HTTP_NAME, (void*) HEADER_ARGUMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                //
-                // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
-                // if a detection is to be taking place!
-                // Many "detect" functions are called in a sequence, below.
-                // If the result of one detection function was positive (r == 1),
-                // then that function increments the current position and decrements the remaining count.
-                // In this case, further detection functions following afterwards might detect
-                // further characters and CHANGE the current position and remaining count, and so forth,
-                // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-                // Therefore, the checks for (r == 0) below avoid another detection,
-                // if the result already has a value unequal zero.
-                //
-                // CAUTION! If a detection was successful, then the current position and remaining count
-                // were already adapted within the corresponding "detect" function (as called below),
-                // so that they now point to the first character following the detected character sequence.
-                // Any "process" function called afterwards can rely on this and start processing right away.
-                //
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+//??                process_http_request_header_value(p1, p2);
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect((void*) &r, p1, p2, (void*) HEADER_ARGUMENT_HTTP_NAME, (void*) HEADER_ARGUMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        process_http_request_header_value(p1, p2);
-
-                        // Set break flag.
-                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request header argument. The break flag is null.");
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
             }
+        }
 
-        } else {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request header argument. The current position is null.");
+            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request header argument. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request header argument. The break flag is null.");
     }
 }
 
 /**
  * Selects the http request header value.
  *
- * @param p0 the break flag
- * @param p1 the current position (Hand over as reference!)
- * @param p2 the remaining count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the break flag
+ * @param p7 the current position (Hand over as reference!)
+ * @param p8 the remaining count
  */
-void select_http_request_header_value(void* p0, void* p1, void* p2) {
+void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p2;
+        int* b = (int*) p0;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request header value.");
 
-            void** pos = (void**) p1;
+        //
+        // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
+        // Before the header value http name or header http name (ending with "carriage return"
+        // and "line feed") can be identified, the possibility of a body begin
+        // (twice "carriage return" and "line feed") indicating the message body
+        // has to be considered:
+        // - twice "carriage return" and "line feed"
+        // - "carriage return" and "line feed"
+        //
+        // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
+        // if a detection is to be taking place!
+        // Many "detect" functions are called in a sequence, below.
+        // If the result of one detection function was positive (r == 1),
+        // then that function increments the current position and decrements the remaining count.
+        // In this case, further detection functions following afterwards might detect
+        // further characters and CHANGE the current position and remaining count, and so forth,
+        // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
+        // Therefore, the checks for (r == 0) below avoid another detection,
+        // if the result already has a value unequal zero.
+        //
+        // CAUTION! If a detection was successful, then the current position and remaining count
+        // were already adapted within the corresponding "detect" function (as called below),
+        // so that they now point to the first character following the detected character sequence.
+        // Any "process" function called afterwards can rely on this and start processing right away.
+        //
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                int* b = (int*) p0;
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request header value.");
+            detect((void*) &r, p1, p2, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                //
-                // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
-                // Before the header value http name or header http name (ending with "carriage return"
-                // and "line feed") can be identified, the possibility of a body begin
-                // (twice "carriage return" and "line feed") indicating the message body
-                // has to be considered:
-                // - twice "carriage return" and "line feed"
-                // - "carriage return" and "line feed"
-                //
-                // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
-                // if a detection is to be taking place!
-                // Many "detect" functions are called in a sequence, below.
-                // If the result of one detection function was positive (r == 1),
-                // then that function increments the current position and decrements the remaining count.
-                // In this case, further detection functions following afterwards might detect
-                // further characters and CHANGE the current position and remaining count, and so forth,
-                // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-                // Therefore, the checks for (r == 0) below avoid another detection,
-                // if the result already has a value unequal zero.
-                //
-                // CAUTION! If a detection was successful, then the current position and remaining count
-                // were already adapted within the corresponding "detect" function (as called below),
-                // so that they now point to the first character following the detected character sequence.
-                // Any "process" function called afterwards can rely on this and start processing right away.
-                //
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+//??                process_http_request_body(p1, p2);
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect((void*) &r, p1, p2, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        process_http_request_body(p1, p2);
-
-                        // Set break flag.
-                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect((void*) &r, p1, p2, (void*) HEADER_HTTP_NAME, (void*) HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        process_http_request_header_argument(p1, p2);
-
-                        // Set break flag.
-                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request header value. The break flag is null.");
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
             }
+        }
 
-        } else {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request header value. The current position is null.");
+            detect((void*) &r, p1, p2, (void*) HEADER_HTTP_NAME, (void*) HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??                process_http_request_header_argument(p1, p2);
+
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request header value. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request header value. The break flag is null.");
     }
 }
 
 /**
  * Selects the http request body.
  *
- * @param p0 the break flag
- * @param p1 the current position (Hand over as reference!)
- * @param p2 the remaining count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the break flag
+ * @param p7 the current position (Hand over as reference!)
+ * @param p8 the remaining count
  */
-void select_http_request_body(void* p0, void* p1, void* p2) {
+void select_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p2;
+        int* b = (int*) p0;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request body.");
 
-            void** pos = (void**) p1;
+        //
+        // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
+        // if a detection is to be taking place!
+        // Many "detect" functions are called in a sequence, below.
+        // If the result of one detection function was positive (r == 1),
+        // then that function increments the current position and decrements the remaining count.
+        // In this case, further detection functions following afterwards might detect
+        // further characters and CHANGE the current position and remaining count, and so forth,
+        // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
+        // Therefore, the checks for (r == 0) below avoid another detection,
+        // if the result already has a value unequal zero.
+        //
+        // CAUTION! If a detection was successful, then the current position and remaining count
+        // were already adapted within the corresponding "detect" function (as called below),
+        // so that they now point to the first character following the detected character sequence.
+        // Any "process" function called afterwards can rely on this and start processing right away.
+        //
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                int* b = (int*) p0;
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request body.");
+            detect((void*) &r, p1, p2, (void*) BODY_END_HTTP_NAME, (void*) BODY_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
-                //
-                // CAUTION! The comparison result HAS TO BE ZERO (r == 0),
-                // if a detection is to be taking place!
-                // Many "detect" functions are called in a sequence, below.
-                // If the result of one detection function was positive (r == 1),
-                // then that function increments the current position and decrements the remaining count.
-                // In this case, further detection functions following afterwards might detect
-                // further characters and CHANGE the current position and remaining count, and so forth,
-                // which would have the effect of "jumping" over some characters and produce WRONG RESULTS!
-                // Therefore, the checks for (r == 0) below avoid another detection,
-                // if the result already has a value unequal zero.
-                //
-                // CAUTION! If a detection was successful, then the current position and remaining count
-                // were already adapted within the corresponding "detect" function (as called below),
-                // so that they now point to the first character following the detected character sequence.
-                // Any "process" function called afterwards can rely on this and start processing right away.
-                //
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect((void*) &r, p1, p2, (void*) BODY_END_HTTP_NAME, (void*) BODY_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Set break flag.
-                        *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request body. The break flag is null.");
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
             }
+        }
 
-        } else {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request body. The current position is null.");
+            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request body. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request body. The break flag is null.");
     }
 }
 
