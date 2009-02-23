@@ -7,14 +7,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.106 $ $Date: 2009-02-17 23:20:02 $ $Author: christian $
+# @version $Revision: 1.107 $ $Date: 2009-02-23 22:53:30 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE with rewriting the http_request_processor;
-            if "name" constants for deserialised compound model are needed, then put them to "constant/name/http_model/"
+        * Adapt file "xml_processor.c" to using the new function "append_part"
+
+        * CONTINUE with rewriting the http_request_processor; CHECK where to use char or wchar_t
         * Do not automatically convert to wchar_t, since http requests are byte-oriented and may contain other encodings
-            --> check this out on examples found in the WWW; Is only the "body" encoded, or the protocol as well?
         * Translate ALL data formats in two steps:
             1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound; http --> http_request_compound
             2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound / http_request_compound --> ?? (action/ signal??)

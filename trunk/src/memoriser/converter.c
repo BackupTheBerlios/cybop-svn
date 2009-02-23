@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: converter.c,v $ $Revision: 1.74 $ $Date: 2009-02-22 19:07:23 $ $Author: christian $
+ * @version $RCSfile: converter.c,v $ $Revision: 1.75 $ $Date: 2009-02-23 22:53:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -303,7 +303,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
-            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
+            void* fn = L"TEST_HTTP_REQUEST_CONVERSION_MODEL_DIAGRAM.txt";
             int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
             int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
@@ -342,7 +342,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // Reset file name.
-            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
+            fn = L"TEST_HTTP_REQUEST_COMPOUND_CONVERSION_MODEL_DIAGRAM.txt";
             fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
             fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
@@ -398,7 +398,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
-            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
+            void* fn = L"TEST_HTTP_RESPONSE_CONVERSION_MODEL_DIAGRAM.txt";
             int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
             int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
@@ -437,7 +437,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // Reset file name.
-            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
+            fn = L"TEST_HTTP_RESPONSE_COMPOUND_CONVERSION_MODEL_DIAGRAM.txt";
             fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
             fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
@@ -729,7 +729,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
-            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
+            void* fn = L"TEST_HTTP_REQUEST_CONVERSION_MODEL_DIAGRAM.txt";
             int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
             int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
@@ -768,7 +768,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // Reset file name.
-            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
+            fn = L"TEST_HTTP_REQUEST_COMOUND_CONVERSION_MODEL_DIAGRAM.txt";
             fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
             fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
@@ -824,7 +824,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
-            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
+            void* fn = L"TEST_HTTP_RESPONSE_CONVERSION_MODEL_DIAGRAM.txt";
             int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
             int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
@@ -863,7 +863,7 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // Reset file name.
-            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
+            fn = L"TEST_HTTP_RESPONSE_COMPOUND_CONVERSION_MODEL_DIAGRAM.txt";
             fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
             fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.

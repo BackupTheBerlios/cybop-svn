@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_processor.c,v $ $Revision: 1.3 $ $Date: 2009-02-22 19:07:23 $ $Author: christian $
+ * @version $RCSfile: http_request_processor.c,v $ $Revision: 1.4 $ $Date: 2009-02-23 22:53:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -29,7 +29,9 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/http/compound_http_name.c"
 #include "../../logger/logger.c"
+#include "../../memoriser/accessor/part_accessor.c"
 #include "../../memoriser/selector/http_request_selector.c"
 
 //
@@ -76,33 +78,65 @@
  */
 void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p4;
+        int* rem = (int*) p7;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request method.");
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        // The break flag.
-        int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            void** pos = (void**) p6;
 
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-            if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                void** dd = (void**) p3;
 
-                break;
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request method.");
+
+                // The request method.
+                void* rm = *pos;
+                int rmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                // The break flag.
+                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        break;
+                    }
+
+                    select_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        append_part(p3, p4, p5,
+                            (void*) METHOD_COMPOUND_HTTP_NAME, (void*) METHOD_COMPOUND_HTTP_NAME_COUNT,
+                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                            rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
+                        break;
+
+                    } else {
+
+                        // Increment request method count.
+                        rmc++;
+                    }
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request method. The destination details is null.");
             }
 
-            select_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+        } else {
 
-            if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                break;
-            }
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request method. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request method. The remaining bytes count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request method. The remaining count is null.");
     }
 }
 
