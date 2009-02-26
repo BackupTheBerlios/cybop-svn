@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: part_accessor.c,v $ $Revision: 1.1 $ $Date: 2009-02-23 22:53:31 $ $Author: christian $
+ * @version $RCSfile: part_accessor.c,v $ $Revision: 1.2 $ $Date: 2009-02-26 23:11:29 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -74,7 +74,7 @@ void append_part(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Allocate destination.
         allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
             (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-            (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, p6);
 
         // Decode source name.
         decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,

@@ -12,9 +12,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $RCSfile: ChangeLog,v $ $Revision: 1.141 $ $Date: 2009-02-23 22:53:30 $ $Author: christian $
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.142 $ $Date: 2009-02-26 23:11:29 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-02-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt file "xml_processor.c" to using the new function "append_part"
 
 2009-02-23  Christian Heller  <christian.heller@tuxtax.de>
         * Add file "compound_http_name.c" for storing parsed http elements in one compound model

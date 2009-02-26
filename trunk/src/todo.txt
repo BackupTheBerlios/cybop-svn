@@ -7,11 +7,9 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.107 $ $Date: 2009-02-23 22:53:30 $ $Author: christian $
+# @version $Revision: 1.108 $ $Date: 2009-02-26 23:11:29 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
-
-        * Adapt file "xml_processor.c" to using the new function "append_part"
 
         * CONTINUE with rewriting the http_request_processor; CHECK where to use char or wchar_t
         * Do not automatically convert to wchar_t, since http requests are byte-oriented and may contain other encodings
