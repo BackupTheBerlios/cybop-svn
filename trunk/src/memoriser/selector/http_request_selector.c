@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_selector.c,v $ $Revision: 1.3 $ $Date: 2009-02-22 19:07:23 $ $Author: christian $
+ * @version $RCSfile: http_request_selector.c,v $ $Revision: 1.4 $ $Date: 2009-03-04 07:44:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -180,9 +180,9 @@ void select_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
  */
 void select_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* b = (int*) p0;
+        int* b = (int*) p6;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request uri.");
 
@@ -209,11 +209,11 @@ void select_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p1, p2, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??                process_http_request_protocol(p1, p2);
+                process_http_request_protocol(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -222,7 +222,7 @@ void select_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
@@ -246,9 +246,9 @@ void select_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
  */
 void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* b = (int*) p0;
+        int* b = (int*) p6;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request protocol.");
 
@@ -283,11 +283,11 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p1, p2, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??                process_http_request_body(p1, p2);
+                process_http_request_body(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -296,11 +296,11 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p1, p2, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??                process_http_request_header_argument(p1, p2);
+                process_http_request_header_argument(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -309,7 +309,7 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
@@ -330,12 +330,14 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
  * @param p6 the break flag
  * @param p7 the current position (Hand over as reference!)
  * @param p8 the remaining count
+ * @param p9 the header argument
+ * @param p10 the header argument count
  */
-void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* b = (int*) p0;
+        int* b = (int*) p6;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request header argument.");
 
@@ -362,11 +364,11 @@ void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p1, p2, (void*) HEADER_ARGUMENT_HTTP_NAME, (void*) HEADER_ARGUMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) HEADER_ARGUMENT_HTTP_NAME, (void*) HEADER_ARGUMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??                process_http_request_header_value(p1, p2);
+                process_http_request_header_value(p0, p1, p2, p3, p4, p5, p7, p8, p9, p10);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -375,7 +377,7 @@ void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
@@ -399,9 +401,9 @@ void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
  */
 void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* b = (int*) p0;
+        int* b = (int*) p6;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request header value.");
 
@@ -436,11 +438,11 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p1, p2, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??                process_http_request_body(p1, p2);
+                process_http_request_body(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -449,11 +451,11 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p1, p2, (void*) HEADER_HTTP_NAME, (void*) HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) HEADER_HTTP_NAME, (void*) HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??                process_http_request_header_argument(p1, p2);
+                process_http_request_header_argument(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -462,13 +464,71 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http request header value. The break flag is null.");
     }
+}
+
+/**
+ * Selects the http request header.
+ *
+ * @param p0 the destination details (Hand over as reference!)
+ * @param p1 the destination details count
+ * @param p2 the destination details size
+ * @param p3 the header argument
+ * @param p4 the header argument count
+ * @param p5 the header value
+ * @param p6 the header value count
+ */
+void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request header.");
+
+    // The decoded header argument wide character array.
+    void* ha = *NULL_POINTER_MEMORY_MODEL;
+    int hac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int has = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The decoded header value wide character array.
+    void* hv = *NULL_POINTER_MEMORY_MODEL;
+    int hvc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int hvs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate decoded header argument wide character array.
+    allocate((void*) &ha, (void*) &has, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Allocate decoded header value wide character array.
+    allocate((void*) &hv, (void*) &hvs, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+
+    // Decode encoded character array into decoded header argument wide character array.
+    decode_utf_8_unicode_character_vector((void*) &ha, (void*) &hac, (void*) &has, p3, p4);
+    // Decode encoded character array into decoded header value wide character array.
+    decode_utf_8_unicode_character_vector((void*) &hv, (void*) &hvc, (void*) &hvs, p5, p6);
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_arrays(ha, (void*) &hac, (void*) CONTENT_TYPE_HEADER_HTTP_NAME, (void*) CONTENT_TYPE_HEADER_HTTP_NAME_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            append_part(p0, p1, p2,
+                (void*) CONTENT_TYPE_COMPOUND_HTTP_NAME, (void*) CONTENT_TYPE_COMPOUND_HTTP_NAME_COUNT,
+                (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                hv, (void*) &hvc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+        }
+    }
+
+    //?? ... Add further header comparisons here!
+
+    // Deallocate decoded header argument wide character array.
+    deallocate((void*) &ha, (void*) has, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate decoded header value wide character array.
+    deallocate((void*) &hv, (void*) hvs, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 }
 
 /**
@@ -486,9 +546,9 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
  */
 void select_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* b = (int*) p0;
+        int* b = (int*) p6;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http request body.");
 
@@ -515,7 +575,7 @@ void select_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p1, p2, (void*) BODY_END_HTTP_NAME, (void*) BODY_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) BODY_END_HTTP_NAME, (void*) BODY_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -526,7 +586,7 @@ void select_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
 
     } else {

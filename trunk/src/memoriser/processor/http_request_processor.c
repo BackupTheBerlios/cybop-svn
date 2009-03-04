@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_processor.c,v $ $Revision: 1.4 $ $Date: 2009-02-23 22:53:31 $ $Author: christian $
+ * @version $RCSfile: http_request_processor.c,v $ $Revision: 1.5 $ $Date: 2009-03-04 07:44:50 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -154,62 +154,366 @@ void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p
  */
 void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p4;
+        int* rem = (int*) p7;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request uri.");
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        // The break flag.
-        int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            void** pos = (void**) p6;
 
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-            if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                void** dd = (void**) p3;
 
-                break;
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request uri.");
+
+                // The uri.
+                void* u = *pos;
+                int uc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                // The break flag.
+                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        break;
+                    }
+
+                    select_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        append_part(p3, p4, p5,
+                            (void*) URI_COMPOUND_HTTP_NAME, (void*) URI_COMPOUND_HTTP_NAME_COUNT,
+                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                            u, (void*) &uc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
+                        break;
+
+                    } else {
+
+                        // Increment uri count.
+                        uc++;
+                    }
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request uri. The destination details is null.");
             }
 
-            select_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+        } else {
 
-            if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                break;
-            }
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request uri. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request uri. The remaining bytes count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request uri. The remaining count is null.");
     }
 }
 
-void process_http_request_protocol(void* p0, void* p1, void* p2) {
+/**
+ * Processes the http request protocol.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the current position (Hand over as reference!)
+ * @param p7 the remaining count
+ */
+void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request protocol.");
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-//??    select_http_request_protocol(p0, p1, p2);
+        int* rem = (int*) p7;
+
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** pos = (void**) p6;
+
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+                void** dd = (void**) p3;
+
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request protocol.");
+
+                // The protocol.
+                void* p = *pos;
+                int pc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                // The break flag.
+                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        break;
+                    }
+
+                    select_http_request_protocol(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        append_part(p3, p4, p5,
+                            (void*) PROTOCOL_COMPOUND_HTTP_NAME, (void*) PROTOCOL_COMPOUND_HTTP_NAME_COUNT,
+                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                            p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
+                        break;
+
+                    } else {
+
+                        // Increment protocol count.
+                        pc++;
+                    }
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request protocol. The destination details is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request protocol. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request protocol. The remaining count is null.");
+    }
 }
 
-void process_http_request_header_argument(void* p0, void* p1, void* p2) {
+/**
+ * Processes the http request header argument.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the current position (Hand over as reference!)
+ * @param p7 the remaining count
+ */
+void process_http_request_header_argument(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header argument.");
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-//??    select_http_request_header_argument(p0, p1, p2);
+        int* rem = (int*) p7;
+
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** pos = (void**) p6;
+
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+                void** dd = (void**) p3;
+
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header argument.");
+
+                // The header argument.
+                void* ha = *pos;
+                int hac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                // The break flag.
+                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        break;
+                    }
+
+                    select_http_request_header_argument(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7, ha, (void*) &hac);
+
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        break;
+
+                    } else {
+
+                        // Increment header argument count.
+                        hac++;
+                    }
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header argument. The destination details is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header argument. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header argument. The remaining count is null.");
+    }
 }
 
-void process_http_request_header_value(void* p0, void* p1, void* p2) {
+/**
+ * Processes the http request header value.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the current position (Hand over as reference!)
+ * @param p7 the remaining count
+ * @param p8 the header argument
+ * @param p9 the header argument count
+ */
+void process_http_request_header_value(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header value.");
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-//??    select_http_request_header_value(p0, p1, p2);
+        int* rem = (int*) p7;
+
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** pos = (void**) p6;
+
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+                void** dd = (void**) p3;
+
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header value.");
+
+                // The header value.
+                void* hv = *pos;
+                int hvc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                // The break flag.
+                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        break;
+                    }
+
+                    select_http_request_header_value(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        select_http_request_header(p3, p4, p5, p8, p9, hv, (void*) &hvc);
+
+                        break;
+
+                    } else {
+
+                        // Increment header value count.
+                        hvc++;
+                    }
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header value. The destination details is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header value. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header value. The remaining count is null.");
+    }
 }
 
-void process_http_request_body(void* p0, void* p1, void* p2) {
+/**
+ * Processes the http request body.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the current position (Hand over as reference!)
+ * @param p7 the remaining count
+ */
+void process_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request body.");
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-//??    select_http_request_body(p0, p1, p2);
+        int* rem = (int*) p7;
+
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** pos = (void**) p6;
+
+            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+                void** dd = (void**) p3;
+
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request body.");
+
+                // The body.
+                void* bo = *pos;
+                int boc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                // The break flag.
+                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        break;
+                    }
+
+                    select_http_request_body(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+/*??
+                        append_part(p3, p4, p5,
+                            (void*) PROTOCOL_COMPOUND_HTTP_NAME, (void*) PROTOCOL_COMPOUND_HTTP_NAME_COUNT,
+                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                            p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+*/
+
+                        break;
+
+                    } else {
+
+                        // Increment body count.
+                        boc++;
+                    }
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request body. The destination details is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request body. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request body. The remaining count is null.");
+    }
 }
 
 /* HTTP_REQUEST_PROCESSOR_SOURCE */

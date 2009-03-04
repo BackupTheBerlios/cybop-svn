@@ -7,9 +7,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.108 $ $Date: 2009-02-26 23:11:29 $ $Author: christian $
+# @version $Revision: 1.109 $ $Date: 2009-03-04 07:44:50 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * Add further comparisons in function "select_http_request_header"
+        * Sort constants alphabetically in files "compound_http_name.c" and other "http" files
+        * Complete http constants -- see http specification!
+        * Only "body" is left to be processed and added to the destination model using "append_part";
+            all other elements, headers etc. are completed
 
         * CONTINUE with rewriting the http_request_processor; CHECK where to use char or wchar_t
         * Do not automatically convert to wchar_t, since http requests are byte-oriented and may contain other encodings

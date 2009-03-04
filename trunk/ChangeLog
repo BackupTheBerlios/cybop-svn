@@ -12,9 +12,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $RCSfile: ChangeLog,v $ $Revision: 1.142 $ $Date: 2009-02-26 23:11:29 $ $Author: christian $
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.143 $ $Date: 2009-03-04 07:44:50 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-03-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue handling of http headers in files "http_request_processor.c" and "http_request_selector.c"
 
 2009-02-26  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt file "xml_processor.c" to using the new function "append_part"
