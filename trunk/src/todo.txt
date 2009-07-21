@@ -7,13 +7,13 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.109 $ $Date: 2009-03-04 07:44:50 $ $Author: christian $
+# @version $Revision: 1.110 $ $Date: 2009-07-21 15:39:55 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Add further comparisons in function "select_http_request_header"
-        * Sort constants alphabetically in files "compound_http_name.c" and other "http" files
-        * Complete http constants -- see http specification!
+        * Find a unified way to name internal memory models that were parsed from external formats
+            (currently, such files are named differently, e.g. "*_memory_name", "*_model_name", "cyboi_*_name", "compound_*_name")
+            and uncomment comparison blocks in function "select_http_request_header"
         * Only "body" is left to be processed and added to the destination model using "append_part";
             all other elements, headers etc. are completed
 
