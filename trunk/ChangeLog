@@ -12,9 +12,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $RCSfile: ChangeLog,v $ $Revision: 1.144 $ $Date: 2009-07-22 06:55:54 $ $Author: christian $
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.145 $ $Date: 2009-07-22 17:18:16 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-07-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct the names of a few constants in various files
 
 2009-07-21  Christian Heller  <christian.heller@tuxtax.de>
         * Sort http constants alphabetically where useful

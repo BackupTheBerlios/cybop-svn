@@ -7,9 +7,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.111 $ $Date: 2009-07-22 06:55:54 $ $Author: christian $
+# @version $Revision: 1.112 $ $Date: 2009-07-22 17:18:16 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
+            Should models in cybol/ dir be one level higher?
+            Isn't cybol and cyboi-adapted models (like cyboi_http) the same,
+            no matter whether in memory or serialised as cybol?
 
         * Add one file with prefix "cyboi_" in parallel to constants of standard formats,
             and put these parallel files into the same directory as the standard format, e.g.:
