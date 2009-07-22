@@ -12,9 +12,14 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $RCSfile: ChangeLog,v $ $Revision: 1.143 $ $Date: 2009-03-04 07:44:50 $ $Author: christian $
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.144 $ $Date: 2009-07-22 06:55:54 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-07-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Sort http constants alphabetically where useful
+        * Add further http header constants, taken from the HTTP 1.1 RFC 2616 specification
+        * Add further comparisons in function "select_http_request_header"
 
 2009-03-03  Christian Heller  <christian.heller@tuxtax.de>
         * Continue handling of http headers in files "http_request_processor.c" and "http_request_selector.c"

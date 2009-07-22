@@ -7,13 +7,27 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.110 $ $Date: 2009-07-21 15:39:55 $ $Author: christian $
+# @version $Revision: 1.111 $ $Date: 2009-07-22 06:55:54 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Find a unified way to name internal memory models that were parsed from external formats
-            (currently, such files are named differently, e.g. "*_memory_name", "*_model_name", "cyboi_*_name", "compound_*_name")
-            and uncomment comparison blocks in function "select_http_request_header"
+        * Add one file with prefix "cyboi_" in parallel to constants of standard formats,
+            and put these parallel files into the same directory as the standard format, e.g.:
+            in src/constant/name/http/header/
+            "request_header_cyboi_http_name.c" in addition to "request_header_http_name.c" with
+            "ACCEPT_REQUEST_HEADER_CYBOI_HTTP_NAME" instead of "ACCEPT_REQUEST_HEADER_HTTP_NAME"
+            or:
+            in src/constant/name/xdt/
+            "field_cyboi_xdt_name.c" in addition to "field_xdt_name.c" with
+            "KBV_TEST_NUMBER_FIELD_CYBOI_XDT_NAME" instead of "KBV_TEST_NUMBER_FIELD_XDT_NAME"
+            this is necessary, because names or models of standard formats are not always intuitive,
+            so that CYBOI uses its own speaking names internally, e.g.:
+            HTTP header names start with a capital letter, but CYBOI uses lower-case names only;
+            xDT fields are represented by numbers, but CYBOI uses speaking names
+        * Merge all files using old naming schemes like "memory", "model", "compound" into new format
+        * Delete old files: "compound_http_name.c", "header_http_name.c", "field_xdt_model_name.c" etc.
+        * Uncomment comparison block in function "select_http_request_header"
+
         * Only "body" is left to be processed and added to the destination model using "append_part";
             all other elements, headers etc. are completed
 
