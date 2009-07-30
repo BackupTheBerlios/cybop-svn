@@ -7,9 +7,15 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.112 $ $Date: 2009-07-22 17:18:16 $ $Author: christian $
+# @version $Revision: 1.113 $ $Date: 2009-07-30 22:05:38 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+        * Simplify and unify array functions by introducing NEW files for handling of primitive data types,
+            e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
+            that way, the different types are outsourced from the array handling files and redundancies are avoided
+        * Assign "sizeof" for each programming language type to a global variable just once at startup
+            and henceforth use that variable instead of each time determining "sizeof", throughout all source code
 
         * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
             Should models in cybol/ dir be one level higher?
@@ -98,11 +104,6 @@
         * Add a new CYBOL XML attribute named "encoding" and possibly one more named "repertoire" (or "set", or "code");
             currently, only the Unicode character repertoire/set with UTF-8 encoding may be processed
 
-        * Simplify and unify array functions by introducing NEW files for handling of primitive data types,
-            e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
-            that way, the different types are outsourced from the array handling files and redundancies are avoided
-        * Assign "sizeof" for each programming language type to a global variable just once at startup
-            and henceforth use that variable instead of each time determining "sizeof", throughout all source code
         * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
             knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
 
