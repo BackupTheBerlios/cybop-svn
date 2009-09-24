@@ -7,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.113 $ $Date: 2009-07-30 22:05:38 $ $Author: christian $
+# @version $Revision: 1.114 $ $Date: 2009-09-24 21:32:11 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -16,6 +16,10 @@
             that way, the different types are outsourced from the array handling files and redundancies are avoided
         * Assign "sizeof" for each programming language type to a global variable just once at startup
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code
+
+        * convert all type constants to numbers (not strings)? ... not only for primitives, arrays, but also compound types like "fraction" or "complex"
+            OR use numbers just for internal memory structures and strings for abstraction names of outside structures (CYBOL)?
+        * add primitive operations like "add" etc.
 
         * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
             Should models in cybol/ dir be one level higher?
