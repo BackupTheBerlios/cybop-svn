@@ -7,10 +7,12 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.114 $ $Date: 2009-09-24 21:32:11 $ $Author: christian $
+# @version $Revision: 1.115 $ $Date: 2009-10-01 22:01:46 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Continue typifier: hand over destination as extra argument and do NOT use
+            it to store the original value, since this would lead to side effects!
         * Simplify and unify array functions by introducing NEW files for handling of primitive data types,
             e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
             that way, the different types are outsourced from the array handling files and redundancies are avoided
