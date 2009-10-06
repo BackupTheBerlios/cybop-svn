@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_processor.c,v $ $Revision: 1.5 $ $Date: 2009-03-04 07:44:50 $ $Author: christian $
+ * @version $RCSfile: http_request_processor.c,v $ $Revision: 1.6 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -112,7 +112,7 @@ void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p
 
                         append_part(p3, p4, p5,
                             (void*) METHOD_COMPOUND_HTTP_NAME, (void*) METHOD_COMPOUND_HTTP_NAME_COUNT,
-                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION,
                             rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                         break;
@@ -188,7 +188,7 @@ void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
                         append_part(p3, p4, p5,
                             (void*) URI_COMPOUND_HTTP_NAME, (void*) URI_COMPOUND_HTTP_NAME_COUNT,
-                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION,
                             u, (void*) &uc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                         break;
@@ -264,7 +264,7 @@ void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void*
 
                         append_part(p3, p4, p5,
                             (void*) PROTOCOL_COMPOUND_HTTP_NAME, (void*) PROTOCOL_COMPOUND_HTTP_NAME_COUNT,
-                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION,
                             p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                         break;
@@ -487,7 +487,7 @@ void process_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4,
 /*??
                         append_part(p3, p4, p5,
                             (void*) PROTOCOL_COMPOUND_HTTP_NAME, (void*) PROTOCOL_COMPOUND_HTTP_NAME_COUNT,
-                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION,
                             p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 */
 

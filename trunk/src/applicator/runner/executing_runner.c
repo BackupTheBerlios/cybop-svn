@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: executing_runner.c,v $ $Revision: 1.6 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+ * @version $RCSfile: executing_runner.c,v $ $Revision: 1.7 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -54,20 +54,20 @@ void run_executing(void* p0, void* p1) {
     int cls = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate shell command line.
-    allocate((void*) &cl, (void*) &cls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &cl, (void*) &cls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
     // Append shell command.
-    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) SHELL_UNIX_COMMAND_MODEL, (void*) SHELL_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) SHELL_UNIX_COMMAND_MODEL, (void*) SHELL_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
     // Append shell command.
-    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME, (void*) CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME, (void*) CHARACTER_SHELL_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
     // Append user command.
-    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    append((void*) &cl, (void*) &clc, (void*) &cls, p0, p1, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    append((void*) &cl, (void*) &clc, (void*) &cls, p0, p1, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) QUOTATION_MARK_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
     // Append null character as string termination.
-    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    append((void*) &cl, (void*) &clc, (void*) &cls, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
 /*??
     fwprintf(stdout, L"TEST dir: %ls\n", (wchar_t*) cl);
@@ -80,13 +80,13 @@ void run_executing(void* p0, void* p1) {
     int ecls = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate encoded shell command line.
-    allocate((void*) &ecl, (void*) &ecls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &ecl, (void*) &ecls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
     // Encode encoded shell command line.
     encode_utf_8_unicode_character_vector((void*) &ecl, (void*) &eclc, (void*) &ecls, cl, (void*) &clc);
 
     // Deallocate shell command line.
-    deallocate((void*) &cl, (void*) &cls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &cl, (void*) &cls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
     // Initialise error number.
     // It is a global variable/ function and other operations
@@ -136,7 +136,7 @@ void run_executing(void* p0, void* p1) {
     }
 
     // Deallocate encoded shell command line.
-    deallocate((void*) &ecl, (void*) &ecls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &ecl, (void*) &ecls, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
 /*??
     //?? The following block implements the same three primitive functions

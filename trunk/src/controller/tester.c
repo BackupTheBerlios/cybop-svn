@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: tester.c,v $ $Revision: 1.34 $ $Date: 2009-01-31 16:06:31 $ $Author: christian $
+ * @version $RCSfile: tester.c,v $ $Revision: 1.35 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -171,8 +171,8 @@ void test_type_sizes() {
  *
  * The following addition adds 8 instead of just 2.
  * int* m = (int*) *NULL_POINTER_MEMORY_MODEL;
- * allocate((void*) &m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
- * set_element(m, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_10_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+ * allocate((void*) &m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+ * set_element(m, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_10_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
  * int* c = m + 2;
  * should be: = 10 + 2 = 12
  * but it is: = 10 + (2 * sizeof(int)) = 10 + 8 = 18
@@ -329,11 +329,11 @@ void test_integer_array() {
     int* ms = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate test knowledge model.
-    allocate((void*) &mc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &mc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
     *mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    allocate((void*) &ms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &ms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
     *ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    allocate((void*) &m, (void*) ms, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &m, (void*) ms, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"pre mc: %i\n", *mc);
     fwprintf(stdout, L"pre ms: %i\n", *ms);
@@ -347,13 +347,13 @@ void test_integer_array() {
 /*??
     // Decode (parse) test value and assign to test knowledge model.
     decode((void*) &m, (void*) mc, (void*) ms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) test, (void*) &testc,
-        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 */
 
     // Set test values.
-    set_element(m, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    set_element(m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    set_element(m, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    set_element(m, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    set_element(m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    set_element(m, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
     // The result values read out from the integer vector.
     int* result0 = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -361,9 +361,9 @@ void test_integer_array() {
     int* result2 = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     // Get result values.
-    get_element(m, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &result0, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &result1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(m, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &result2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(m, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &result0, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    get_element(m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &result1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    get_element(m, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &result2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"post mc: %i\n", *mc);
     fwprintf(stdout, L"post ms: %i\n", *ms);
@@ -373,9 +373,9 @@ void test_integer_array() {
     fwprintf(stdout, L"post result2: %i\n", *result2);
 
     // Deallocate test knowledge model.
-    deallocate((void*) &m, (void*) ms, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &mc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &ms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &m, (void*) ms, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &mc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &ms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -464,7 +464,7 @@ void test_wide_character_output() {
     struct termios* tw = (struct termios*) *NULL_POINTER_MEMORY_MODEL;
 
     // Create gnu/linux console internals.
-//??        allocate((void*) &t, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+//??        allocate((void*) &t, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
     to = (struct termios*) malloc(sizeof(struct termios));
     tw = (struct termios*) malloc(sizeof(struct termios));
 
@@ -682,7 +682,7 @@ void test_integer_to_wide_character_conversion() {
     size_t ts = *NUMBER_2_INTEGER_MEMORY_MODEL;
 
     // Allocate test wide character array.
-    allocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
     // Transform source integer to destination string.
     // A null wide character is written to mark the end of the string.
@@ -703,7 +703,7 @@ void test_integer_to_wide_character_conversion() {
     fwprintf(stdout, L"TEST t: %ls\n", (wchar_t*) t);
 
     // Deallocate test wide character array.
-    deallocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -870,7 +870,7 @@ void test_pointer_return() {
 
     // Create character array.
     c = (void*) L"Hello World!";
-    allocate((void*) &cs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &cs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
     *cs = *NUMBER_13_INTEGER_MEMORY_MODEL;
 
     // THIS is the important part of the test.
@@ -889,7 +889,7 @@ void test_pointer_return() {
     fwprintf(stdout, L"r: %ls\n", (wchar_t*) r);
 
     // Destroy character array.
-    deallocate((void*) &cs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &cs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -1279,7 +1279,7 @@ void test_decode_integer_vector() {
     int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate integer vector.
-    allocate((void*) &d, (void*) &ds, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &d, (void*) &ds, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
     // Decode character array into integer vector.
     decode_integer_vector((void*) &d, (void*) &dc, (void*) &ds, s, (void*) &sc);
@@ -1290,18 +1290,18 @@ void test_decode_integer_vector() {
     int* i2 = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     // Get integer at index 0 from integer vector.
-    get_element(d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &i0, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &i0, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
     // Get integer at index 1 from integer vector.
-    get_element(d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
     // Get integer at index 2 from integer vector.
-    get_element(d, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(d, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"Integer 0: %i\n", *i0);
     fwprintf(stdout, L"Integer 1: %i\n", *i1);
     fwprintf(stdout, L"Integer 2: %i\n", *i2);
 
     // Deallocate integer vector.
-    deallocate((void*) &d, (void*) &ds, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &d, (void*) &ds, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -1324,7 +1324,7 @@ void test_encode_integer_vector() {
     int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate destination character vector.
-    allocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
     // Use compound count as index to create the element name suffix,
     // because the element is added at the end of the compound container.
@@ -1335,7 +1335,7 @@ void test_encode_integer_vector() {
     fwprintf(stdout, L"Encoded character array size: %i\n", ds);
 
     // Deallocate destination character vector.
-    deallocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -1406,7 +1406,7 @@ void test_decode_utf8() {
     int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate read model.
-    allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
     // Read persistent byte stream over channel.
     read_data((void*) &rm, (void*) &rmc, (void*) &rms, (void*) f, (void*) &fc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
@@ -1421,7 +1421,7 @@ void test_decode_utf8() {
     int wms = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate wide character model.
-    allocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
     decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, rm, (void*) &rmc);
     //?? TEST only! DELETE LATER!
@@ -1431,10 +1431,10 @@ void test_decode_utf8() {
     fwprintf(stdout, L"TEST wmc: %i\n", wmc);
 
     // Deallocate read model.
-    deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
     // Deallocate wide character model.
-    deallocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 }
 
 //?? ========================================================================================

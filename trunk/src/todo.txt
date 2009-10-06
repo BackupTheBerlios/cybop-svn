@@ -1,0 +1,292 @@
+#
+# $RCSfile: todo.txt,v $
+#
+# This file lists so-called "TODO" items, in other words open tasks
+# to be worked on in the future.
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# @version $Revision: 1.118 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
+# @author Christian Heller <christian.heller@tuxtax.de>
+#
+
+        * Debug source code by cleaning up errors stemming from array change implemented previously
+
+        * Assign "sizeof" for each programming language type to a global variable just once at startup
+            and henceforth use that variable instead of each time determining "sizeof", throughout all source code
+
+        * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
+            Should models in cybol/ dir be one level higher?
+            Isn't cybol and cyboi-adapted models (like cyboi_http) the same,
+            no matter whether in memory or serialised as cybol?
+        * Add one file with prefix "cyboi_" in parallel to constants of standard formats,
+            and put these parallel files into the same directory as the standard format, e.g.:
+            in src/constant/name/http/header/
+            "request_header_cyboi_http_name.c" in addition to "request_header_http_name.c" with
+            "ACCEPT_REQUEST_HEADER_CYBOI_HTTP_NAME" instead of "ACCEPT_REQUEST_HEADER_HTTP_NAME"
+            or:
+            in src/constant/name/xdt/
+            "field_cyboi_xdt_name.c" in addition to "field_xdt_name.c" with
+            "KBV_TEST_NUMBER_FIELD_CYBOI_XDT_NAME" instead of "KBV_TEST_NUMBER_FIELD_XDT_NAME"
+            this is necessary, because names or models of standard formats are not always intuitive,
+            so that CYBOI uses its own speaking names internally, e.g.:
+            HTTP header names start with a capital letter, but CYBOI uses lower-case names only;
+            xDT fields are represented by numbers, but CYBOI uses speaking names
+        * Merge all files using old naming schemes like "memory", "model", "compound" into new format
+        * Delete old files: "compound_http_name.c", "header_http_name.c", "field_xdt_model_name.c" etc.
+        * Uncomment comparison block in function "select_http_request_header"
+
+        * Only "body" is left to be processed and added to the destination model using "append_part";
+            all other elements, headers etc. are completed
+
+        * CONTINUE with rewriting the http_request_processor; CHECK where to use char or wchar_t
+        * Do not automatically convert to wchar_t, since http requests are byte-oriented and may contain other encodings
+        * Translate ALL data formats in two steps:
+            1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound; http --> http_request_compound
+            2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound / http_request_compound --> ?? (action/ signal??)
+        * Receive at least the following (taken from old file "apps/residenz/wui/index_input.cybol"):
+            <model>
+                <part name="method" channel="inline" abstraction="character" model=""/>
+                <part name="scheme" channel="inline" abstraction="character" model=""/>
+                <part name="authority" channel="inline" abstraction="character" model=""/>
+                <part name="path" channel="inline" abstraction="character" model=""/>
+                <part name="fragment" channel="inline" abstraction="character" model=""/>
+                <part name="action" channel="inline" abstraction="character" model=""/>
+            </model>
+        * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
+        * ?? OLD task comment:
+            Continue function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
+            // Add fragment to given compound model.
+            set_compound_element_by_name(*d, p1, p2,
+                k, (void*) &kc, (void*) &kc,
+                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
+                v, (void*) &vc, (void*) &vc,
+                *NULL_POINTER, *NULL_POINTER, *NULL_POINTER);
+        //?? TODO: The model and details content p8, p9, p10, p11, p12, p13 need to be RESET (emptied) every time since
+        //?? otherwise, new commands are just added to the "action" part entry, in "receive_socket.c"
+        * Hand over an empty cybol model? ... just like for xdt/bdt, containing no entries for: method, scheme, authority, path, fragment, action
+        * Introduce new functions to delete the content of an allocated entity (for compound, integer_vector, xdt etc.),
+            so that for each new http request, the model is initially empty, in function "receive_socket_message"
+        * Adapt function "decode_http_request" accordingly
+
+        * Simplify source code by using the function "allocate_model" wherever an array with count and size gets created
+
+        * Do commands of gnu/linux console still HAVE TO BE handed over (as in old solution)?
+        * Search for pressed key in commands
+        * Wenn returned command == NULL, dann suche nach "default" in commands
+            (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)
+        * Gedruecktes Zeichen/ Taste muss mit in einem Parameter zurueckgegeben werden!
+
+        * For the following points, see example of "wide_character_vector_accessor.c", where this is already implemented!
+        * Increase count and size in "*_accessor.c" files automatically and adapt all source code accordingly
+            (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.);
+        * Create new "set", "remove", "get" functions which automatically adjust the destination's count and size
+            (see modules "character_vector_accessor.c" and "wide_character_vector_accessor.c", which already have it);
+            this is to reduce the amount of source code and to take the burden of handling count and size from the developer working with arrays
+
+        * Rename utf-8 stuff to "decode/encode" (encoder instead of converter) and
+            other conversions to "deserialise/serialise" (serialiser instead of converter)
+
+        * Rename several things in CYBOL files and CYBOI:
+            --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
+                exception that "create" and "receive" information are mixed, in order to serialise models easily;
+            --> rename "abstraction" attribute to "language" for all CYBOL tags!
+            --> rename "model" attribute to "message" for all CYBOL tags!
+            --> a "model" attribute (with new meaning as knowledge model to store received data) is not needed,
+                as it gets created internally
+            --> an "element" attribute is not needed, as the CYBOL structure determines parts and properties
+            --> a "whole" attribute is not needed, as due to the CYBOL structure it is clear that
+                    parts belong to the compound in whose file they stand
+            --> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
+        * Add a new CYBOL XML attribute named "encoding" and possibly one more named "repertoire" (or "set", or "code");
+            currently, only the Unicode character repertoire/set with UTF-8 encoding may be processed
+
+        * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
+            knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
+
+        * stop thread if irq has already been set to 1; only continue sensing if irq is 0,
+            e.g. in function "sense_gnu_linux_console"
+        * possibly also wait some time while irq is 0, not only while irq is 1
+
+        * Set "receive" model in internal memory to NULL in "interrupt" (stop sensing) function,
+            but do NOT destroy, since it belongs to the knowledge model tree
+        * Edit "receive_message" function:
+            ?? The following is possibly NOT correct anymore, as the handler is already represented by a receive operation!
+            - Call the "handle" function handing over the command determined before
+                (do this DIRECTLY, just like the "loop" and "branch" functions do,
+                and NOT in form of an encapsulating signal)
+
+        * Does the logger need an own mutex? ... because it is accessed by all threads!
+
+        * Possible Bug? in function "set_compound_element_by_index":
+            set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+            --> the "(void*) &p4" does possibly lead to errors, since a reference to the
+                local variable p4 is stored, which gets destroyed as soon as the function is left
+
+        * Create three different sockets (local, inet, inet6)? distinguish at socket startup?
+            and store as different entries in internal memory?
+        * move and rename "set_new_signal_identification" to e.g. /globals/references/integer_references.c
+            and name function e.g. "get_integer_reference"
+        * Implement session on application level (Res Medicinae)
+        * Add the following comment to a matching source code file:
+
+            Since http is a stateless protocol, it does not provide a possibility to
+            find out whether or not several consequent http requests belong together.
+
+            Therefore, the application on the next higher level of abstraction has to
+            care about that, by opening a "session" for each request from an unknown user.
+            Every such session gets a unique identifier called "session id".
+
+            Whenever the client now sends an http request to the server,
+            it also sends the session id, so that data already stored on the
+            server can be assigned to the correct user.
+
+            There are several ways to transfer a session id:
+            1 as cookie
+            2 within the uri
+                2.1 GET
+                    2.1.1 in the query, e.g.:
+                        http://domain.tld/index.php?sid=3Dedb0e8665db4e9042fe0176a89aade16
+                    2.1.2 in the path
+                        http://domain.tld/edb0e8665db4e9042fe0176a89aade16/index.php
+                2.2 POST (within html forms, using input elements of type ?hidden")
+
+            Problems:
+            1 Many users have cookies deactivated in their browsers.
+            However, an application may request to activate cookies.
+            2 Each uri of a (generated) webpage has to be modified to contain the session id.
+            2.2 All navigation has to occur via html forms (buttons etc.); simple links do not suffice
+
+            In order to avoid users manipulating and using the session id of another user,
+            a session id has to be generated from a range of values that is large enough to
+            minimise the probability of guessing another user's session id.
+
+        * The following might be SUPERFLUOUS, since now, a CYBOL operation hands over
+            special properties, e.g. to store the socket number etc.!
+        * Store socket of a client, in order to be able to reply to it:
+            1 hand over a cybol property, to store the socket in the knowledge tree
+                --> no, since low-level sockets should not be known to cybol applications
+            2 store many sockets in a special socket container or in internal memory, respectively
+                --> not necessary to handle many sockets, since each connection is treated like a new request
+            3 hand over socket as additional parameter of a signal, in order to be able to send a reply to the client
+                --> replace the "signal id" parameter with the socket
+                --> possibly also hand over the communication partner address, if necessary
+                --> remove communication partner socket + address from internal memory in turn
+                --> close socket after having sent a reply to the requesting client
+        * It was decided that "send" operations do NOT run in an own thread (for now and the near future, at least),
+            also if querying a server via http, since this would mix up the signal handling mechanism
+
+        * Enable multiple abstractions like "character|UTF-32|gzip", separated by
+            a "pipe" character and processed one-by-one, in the given order
+        * Adapt all places in source code where reallocation is used to new
+            reallocation factor handling and also shrink memory structures appropriately
+        * Include the sources of all documents into the distributable tarball cybop-0.9.0/
+            --> really? This will grow it up to 500 MB in size due to the images
+
+        * Define data types with fixed length (using preprocessor #define??),
+            so that they mean the same on different platforms (see Qt library or Java's types)
+
+        * Write an actual manual that is updated as necessary to reflect the current
+            state of cybop; just looking at the papers, it is hard to know what is
+            current and what is not; in the meantime, one thing that would help is some
+            kind of brief overview of the papers -- especially which ones should be read
+            first if someone was trying to use the system; also cautioning about ones
+            that are partly outdated, etc.; the list of purported "tutorials" doesn't
+            really make sense to beginners either
+
+        * Check out handling of "super" property:
+            --> if parts exist, then a new part with the same name (stemming from the same
+                model or its super category) must NOT be created!
+            --> prevent this in CYBOI, using conditions
+            --> only one (super) category makes sense, because templates/ models
+                belong to a certain dimension like: TUI, GUI, WUI, domain model;
+                so the upper-most category for a tui model may be one that
+                provides ALL essential properties like "shape", "border", "background" etc.
+
+        Q: Why should a tui knowledge template NOT be implemented with properties of abstraction "knowledge" or "encapsulated", as follows:
+
+            <part name="apw_entry" channel="inline" abstraction="character" model="a - Starte Arztpraxis Wiegand (APW) im DOS Emulator (DOSemu)">
+                <property name="position" channel="inline" abstraction="integer" model="1,3,0"/>
+                <property name="size" channel="inline" abstraction="integer" model="68,1,1"/>
+                <property name="shape" channel="inline" abstraction="knowledge" model=".revue.settings.tui.shape"/>
+                <property name="layout" channel="inline" abstraction="knowledge" model=".revue.settings.tui.layout"/>
+                <property name="background" channel="inline" abstraction="knowledge" model=".revue.settings.tui.menu_item_background"/>
+                <property name="foreground" channel="inline" abstraction="knowledge" model=".revue.settings.tui.menu_item_foreground"/>
+                <property name="bold" channel="inline" abstraction="knowledge" model=".revue.settings.tui.bold"/>
+                <property name="previous" channel="inline" abstraction="character" model=".revue.tui.main_window.menu.exit_entry"/>
+                <property name="next" channel="inline" abstraction="character" model=".revue.tui.main_window.menu.backup_entry"/>
+                <property name="button_press_action" channel="inline" abstraction="character" model=".revue.logic.functionality.start_apw"/>
+            </part>
+
+        A1: Because the user interface logic "select_next_part.cybol" and "select_previous_part.cybol",
+            and potentially other logic templates do access the properties, in order to set their value, for example:
+
+            <part name="assemble_current_element_background" channel="inline" abstraction="operation" model="add">
+                <property name="summand_1" channel="inline" abstraction="knowledge" model=".revue.tui.main_window.menu#focus"/>
+                <property name="summand_2" channel="inline" abstraction="character" model="#background"/>
+                <property name="sum" channel="inline" abstraction="knowledge" model=".revue.temporary.character"/>
+                <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+            </part>
+            <part name="unfocus_background" channel="inline" abstraction="operation" model="copy">
+                <property name="source" channel="inline" abstraction="knowledge" model=".revue.settings.tui.menu_item_background"/>
+                <property name="destination" channel="inline" abstraction="encapsulated" model=".revue.temporary.character"/>
+                <property name="abstraction" channel="inline" abstraction="character" model="character"/>
+            </part>
+
+            This copies a new background colour value from ".revue.settings.tui.menu_item_background" to the
+            destination element's property "#background", which is stored in ".revue.temporary.character".
+            But by copying the colour value to the "#background" property, that property does not contain
+            a knowledge path of the kind ".revue.settings.tui.menu_item_background" anymore, but rather
+            a simple colour value like "blue". At that time, the abstraction "knowledge" would NOT be
+            correct anymore, because the simple colour value is of abstraction "character" instead.
+
+        A2: Even if CYBOI-internal procedures implemented a mechanism that tried to retrieve the
+            real model that a knowledge model path pointed to, this would NOT solve the problem!
+            The reason is that then not the actual value of the property would be set, but rather
+            the value of the standard setting (!) that the knowledge path pointed to.
+
+            --> RULE to avoid the problems described in A1 and A2:
+            Single properties of a textual user interface (tui) should not be stored as knowledge path
+            of abstraction "knowledge" or "encapsulated", but always as primitive values.
+            To ease application development, however, there is the possibility to use the "super" property,
+            which permits the inheritance of properties like colours etc. Following an example:
+
+            <part name="main_window" channel="file" abstraction="compound" model="revue/tui/main_window/window.cybol">
+                <property name="super" channel="inline" abstraction="knowledge" model=".revue.settings.tui.window"/>
+                <property name="position" channel="inline" abstraction="integer" model="0,0,0"/>
+                <property name="size" channel="inline" abstraction="integer" model="80,24,1"/>
+            </part>
+
+            A corresponding settings file may look like this:
+
+            <model>
+                <part name="shape" channel="inline" abstraction="character" model="rectangle"/>
+                <part name="layout" channel="inline" abstraction="character" model="coordinates"/>
+                <part name="background" channel="inline" abstraction="character" model="blue"/>
+                <part name="foreground" channel="inline" abstraction="character" model="white"/>
+                <part name="bold" channel="inline" abstraction="boolean" model="true"/>
+            </model>
+
+            CAUTION! The solution proposed above does not (yet) work satisfyingly.
+            Only real properties of a knowledge template are created, but NOT those of a super model.
+            In other words, a created runtime knowledge model that links to a super model does not
+            own the properties of the super model itself. This causes a problem because logic templates
+            like "select_next_part.cybol" try to access the properties of a model DIRECTLY, for example
+            for setting a colour. But if the property does not exist in the model and only in its
+            super model, then it cannot be set.
+
+            --> TODO: For later versions of CYBOI, the super templates/ models must be handled better, either:
+            1 at creation time in form of a super template whose properties would get instantiated for the model containing the super property
+                it is important that the super template should only deliver the properties for the current template,
+                but not be created (instantiated) itself (handle this in CYBOL parser or XML translator)
+            2 at runtime, as it is done now in the tui, which gets the properties of a super model at runtime
+                the problem here is that the model does not really itself contain the properties of its super model,
+                as described above
+            ==> solution 1 seems desirable, but would need some thinking on how to implement this in CYBOI
+            ==> for now, as temporary solution, the properties are stored redundantly (twice) in the template
+                that needs them (for example "menu_item" entries in the resmedicinae-revue menu) and in its super template
+
+        * Implement an own solution for character set conversion, since the
+            three function sets of the gnu C library all have their drawbacks
+            (see comment at beginning of file "utf_8_unicode_character_converter.c")

@@ -19,314 +19,233 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: array.c,v $ $Revision: 1.22 $ $Date: 2009-01-31 16:06:31 $ $Author: christian $
+ * @version $RCSfile: array.c,v $ $Revision: 1.23 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
 #ifndef ARRAY_SOURCE
 #define ARRAY_SOURCE
 
-#include "../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
-#include "../memoriser/array/character_array.c"
-#include "../memoriser/array/double_array.c"
-#include "../memoriser/array/integer_array.c"
-#include "../memoriser/array/pointer_array.c"
-#include "../memoriser/array/unsigned_long_array.c"
-#include "../memoriser/array/wide_character_array.c"
+#include <stdlib.h>
+#include <string.h>
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
+#include "../../variable/primitive_type_size.c"
 
 /**
  * Allocates the array.
  *
- * The sizeof operation can only be used for real arrays, expressed with [].
- * Since CYBOI allocates arrays dynamically and stores them as *,
- * the array size needs to be given extra here because sizeof will not work.
- * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
- *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the size
- * @param p2 the type
+ * @param p1 the array size
+ * @param p2 the array type
  */
 void allocate_array(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p2;
+        void** a = (void**) p0;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate array.");
 
-        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+        // The memory area to be allocated.
+        int ma = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            allocate_pointer_array(p0, p1);
+        // Calculate memory area depending on given array type.
+        calculate_area((void*) &ma, p1, p2);
 
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+        // A minimal space in memory is always allocated,
+        // even if the requested size is zero.
+        // In other words, a handle to the new instance is always returned.
+        *a = (void*) malloc((size_t) ma);
 
-            allocate_integer_array(p0, p1);
-
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
-
-            allocate_unsigned_long_array(p0, p1);
-
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
-
-            allocate_double_array(p0, p1);
-
-        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            allocate_character_array(p0, p1);
-
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            allocate_wide_character_array(p0, p1);
-        }
+        // Initialise array elements with null pointer.
+        memset(*a, *NUMBER_0_INTEGER_MEMORY_MODEL, ma);
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_CREATE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate array. The array is null.");
     }
 }
 
 /**
  * Deallocates the array.
  *
- * The sizeof operation can only be used for real arrays, expressed with [].
- * Since CYBOI allocates arrays dynamically and stores them as *,
- * the array size needs to be given extra here because sizeof will not work.
- * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
- *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the size
- * @param p2 the type
+ * @param p1 the array size
+ * @param p2 the array type
  */
 void deallocate_array(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p2;
+        void** a = (void**) p0;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate array.");
 
-        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            deallocate_pointer_array(p0, p1);
-
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
-
-            deallocate_integer_array(p0, p1);
-
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
-
-            deallocate_unsigned_long_array(p0, p1);
-
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
-
-            deallocate_double_array(p0, p1);
-
-        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            deallocate_character_array(p0, p1);
-
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            deallocate_wide_character_array(p0, p1);
-        }
+        free(*a);
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_DESTROY_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate array. The array is null.");
     }
 }
 
 /**
  * Reallocates the array.
  *
- * The sizeof operation can only be used for real arrays, expressed with [].
- * Since CYBOI allocates arrays dynamically and stores them as *,
- * the array size needs to be given extra here because sizeof will not work.
- * See: http://pegasus.rutgers.edu/~elflord/cpp/gotchas/index.shtml
- *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the count
- * @param p2 the size
- * @param p3 the type
+ * @param p1 the array count
+ * @param p2 the array size
+ * @param p3 the array type
  */
 void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p3;
+        int* as = (int*) p2;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Reallocate array.");
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+            int* ac = (int*) p1;
 
-            reallocate_pointer_array(p0, p1, p2);
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+                void** a = (void**) p0;
 
-            reallocate_integer_array(p0, p1, p2);
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Reallocate array.");
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
+                // The memory area to be allocated.
+                int ma = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            reallocate_unsigned_long_array(p0, p1, p2);
+                // Calculate memory area depending on given array type.
+                calculate_area((void*) &ma, p2, p3);
 
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+                // Create a new array with extended size.
+                *a = (void*) realloc(*a, (size_t) ma);
 
-            reallocate_double_array(p0, p1, p2);
+                // The NEW memory area to be initialised.
+                int nma = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+                if (*as >= *ac) {
 
-            reallocate_character_array(p0, p1, p2);
+                    // CAUTION! Do NOT change this value if the size is
+                    // smaller than the count, because this will result
+                    // in a negative value and cause the new array elements
+                    // pointer further below to cross the array's boundary!
 
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+                    // Calculate extra array size, which is the given array size
+                    // reduced by the existing element count.
+                    int eas = *as - *ac;
 
-            reallocate_wide_character_array(p0, p1, p2);
+                    // Calculate new memory area depending on given array type.
+                    calculate_area((void*) &nma, (void*) &eas, p3);
+                }
+
+                // The new array elements.
+                void* na = *a + (ma - nma);
+
+                // Initialise ONLY NEW array elements (new memory area)
+                // with null pointer. Leave existing elements untouched.
+                memset(na, *NUMBER_0_INTEGER_MEMORY_MODEL, nma);
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate array. The array is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate array. The array count is null.");
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_RESIZE_ARRAY_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate array. The array size is null.");
     }
 }
 
 /**
  * Compares the array elements.
  *
- * Returns 1 if the array elements are equal;
+ * Returns the number one if the array elements are equal;
  * leaves the given result parameter unchanged, otherwise.
  *
- * @param p0 the first array
- * @param p1 the second array
- * @param p2 the count
- * @param p3 the result (Hand over as reference!)
- * @param p4 the type
+ * @param p0 the result (Hand over as reference!)
+ * @param p1 the first array
+ * @param p2 the second array
+ * @param p3 the array count
+ * @param p4 the array type
  */
 void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* t = (int*) p4;
-
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare array elements.");
-
-        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            compare_pointer_array_elements(p0, p1, p2, p3);
-
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
-
-            compare_integer_array_elements(p0, p1, p2, p3);
-
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
-
-            compare_unsigned_long_array_elements(p0, p1, p2, p3);
-
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
-
-            compare_double_array_elements(p0, p1, p2, p3);
-
-        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            compare_character_array_elements(p0, p1, p2, p3);
-
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            compare_wide_character_array_elements(p0, p1, p2, p3);
-        }
-
-    } else {
-
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_COMPARE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
-    }
-}
-
-/**
- * Compares the arrays.
- *
- * This procedure compares only the element counts of both arrays.
- * The actual elements comparison happens in compare_array_elements.
- *
- * @param p0 the first array
- * @param p1 the first array count
- * @param p2 the second array
- * @param p3 the second array count
- * @param p4 the result (Hand over as reference!)
- * @param p5 the type
- */
-void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* sc = (int*) p3;
+        int* ac = (int*) p3;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* fc = (int*) p1;
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare arrays.");
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            if (*fc == *sc) {
+                    int* r = (int*) p0;
 
-                compare_array_elements(p0, p2, p3, p4, p5);
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare array elements.");
+
+                    // The loop variable.
+                    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    // The memory area.
+                    int ma = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    // The comparison result.
+                    int r2 = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                        if (j >= *ac) {
+
+                            // All elements have been compared and are equal.
+                            *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            break;
+                        }
+
+                        // Calculate memory area depending on given array type.
+                        calculate_area((void*) &ma, (void*) &j, p4);
+
+                        // Reset comparison result.
+                        r2 = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                        compare((void*) &r2, p1, p2, (void*) &ma, p4);
+
+                        if (r2 == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            // Stop comparison if two elements are not equal.
+                            break;
+                        }
+
+                        j++;
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The result is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The first array is null.");
             }
 
         } else {
 
-//??            log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The second array is null.");
         }
 
     } else {
 
-//??        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_HANDLE_CREATE_MODEL_SIGNAL_THE_KNOWLEDGE_SIZE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
-    }
-}
-
-/**
- * Gets the array elements.
- *
- * @param p0 the array
- * @param p1 the index
- * @param p2 the elements (Hand over as array reference!)
- * @param p3 the type
- */
-void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
-
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* t = (int*) p3;
-
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get array elements.");
-
-        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            get_pointer_array_elements(p0, p1, p2);
-
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
-
-            get_integer_array_elements(p0, p1, p2);
-
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
-
-            get_unsigned_long_array_elements(p0, p1, p2);
-
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
-
-            get_double_array_elements(p0, p1, p2);
-
-        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            get_character_array_elements(p0, p1, p2);
-
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            get_wide_character_array_elements(p0, p1, p2);
-        }
-
-    } else {
-
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The array count is null.");
     }
 }
 
@@ -335,46 +254,53 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
  *
  * @param p0 the array
  * @param p1 the index
- * @param p2 the elements (Hand over as array!)
- * @param p3 the count
- * @param p4 the type
+ * @param p2 the elements
+ * @param p3 the elements count
+ * @param p4 the array type
  */
 void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p4;
+        int* sc = (int*) p3;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set array elements.");
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set array elements.");
 
-            set_pointer_array_elements(p0, p1, p2, p3);
+            // The offset.
+            int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The destination base.
+            // CAUTION! It HAS TO BE initialised with p0,
+            // since an offset is added to it below.
+            void* db = p0;
+            // The loop variable.
+            int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+            // Calculate offset depending on given array type.
+            calculate_area((void*) &o, p1, p4);
+            add_integer((void*) &db, (void*) &o, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
-            set_integer_array_elements(p0, p1, p2, p3);
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
+                if (j >= *sc) {
 
-            set_unsigned_long_array_elements(p0, p1, p2, p3);
+                    break;
+                }
 
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+                assign_area_with_offset(db, p2, (void*) &j, p4);
 
-            set_double_array_elements(p0, p1, p2, p3);
+                j++;
+            }
 
-        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+        } else {
 
-            set_character_array_elements(p0, p1, p2, p3);
-
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
-
-            set_wide_character_array_elements(p0, p1, p2, p3);
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set array elements. The array is null.");
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_SET_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set array elements. The elements count is null.");
     }
 }
 
@@ -382,47 +308,154 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * Removes the array elements.
  *
  * @param p0 the array
- * @param p1 the size
+ * @param p1 the array size
  * @param p2 the index
- * @param p3 the count
- * @param p4 the type
+ * @param p3 the elements count
+ * @param p4 the array type
  */
 void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p4;
+        int* i = (int*) p2;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Remove array elements.");
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+            int* as = (int*) p1;
 
-            remove_pointer_array_elements(p0, p1, p2, p3);
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Remove array elements.");
 
-            remove_integer_array_elements(p0, p1, p2, p3);
+                // The destination offset.
+                int dos = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                // The source offset.
+                int sos = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
+                // Calculate destination offset depending on given array type.
+                calculate_area((void*) &dos, p2, p4);
+                // Calculate source offset depending on given array type.
+                calculate_area((void*) &sos, p3, p4);
 
-            remove_unsigned_long_array_elements(p0, p1, p2, p3);
+                // The destination.
+                // CAUTION! It HAS TO BE initialised with p0,
+                // since an offset is added to it below.
+                void* d = p0;
 
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+                // Add offset to destination.
+                add_integer((void*) &d, (void*) &dos, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
-            remove_double_array_elements(p0, p1, p2, p3);
+                // The source.
+                // CAUTION! It HAS TO BE initialised with d,
+                // AFTER the offset has been added to d above,
+                // since an offset is added to it below.
+                void* s = d;
 
-        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+                // Add offset to source.
+                add_integer((void*) &s, (void*) &sos, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 
-            remove_character_array_elements(p0, p1, p2, p3);
+                // The subtrahend.
+                // CAUTION! It HAS TO BE initialised with *i,
+                // since an offset is added to it below.
+                int sub = *i;
 
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+                // Add elements count to subtrahend.
+                add_integer((void*) &sub, p3, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
-            remove_wide_character_array_elements(p0, p1, p2, p3);
+                // The remaining elements size.
+                // CAUTION! It HAS TO BE initialised with *as,
+                // since an offset is added to it below.
+                int r = *as;
+
+                // Subtract subtrahend from array size.
+                subtract_integer((void*) &r, (void*) &sub, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+
+                // The loop variable.
+                int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                // Starting from the given index, move all remaining elements
+                // one place towards the beginning of the elements.
+                //
+                // Example: "test..array"
+                // maxcount = 11
+                // index = 4 (remove "..")
+                // count = 2
+                // rest = 11 - (4 + 2) = 11 - 6 = 5
+                //
+                // Finally, all remaining elements are moved by
+                // "element count" places towards the beginning of the array.
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                    if (j >= r) {
+
+                        break;
+                    }
+
+                    assign_area_with_offset(d, s, (void*) &j, p4);
+
+                    j++;
+                }
+
+                // There is no need to set the former last elements to 0.
+                // The calling procedure may just cut off the remaining
+                // elements by decreasing the array size (resizing).
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove array elements. The array is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove array elements. The array size is null.");
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_REMOVE_ARRAY_ELEMENTS_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove array elements. The index is null.");
+    }
+}
+
+/**
+ * Gets the destination array elements from the source array starting at index.
+ *
+ * @param p0 the destination elements (Hand over as array reference!)
+ * @param p1 the source array
+ * @param p2 the index
+ * @param p3 the array type
+ */
+void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
+
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** d = (void**) p0;
+
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get array elements.");
+
+            // The offset.
+            int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            // Calculate offset depending on given array type.
+            calculate_area((void*) &o, p2, p3);
+
+            // The destination elements.
+            // CAUTION! It HAS TO BE initialised with p1,
+            // since an offset is added to it below.
+            *d = p1;
+
+            // Add offset to destination elements.
+            add_integer(p0, (void*) &o, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get array elements. The destination elements is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get array elements. The source array is null.");
     }
 }
 
@@ -433,49 +466,80 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * leaves the given index parameter unchanged, otherwise.
  * Only the first occurence of the elements is considered.
  *
- * @param p0 the array
- * @param p1 the array count
- * @param p2 the elements
- * @param p3 the elements count
- * @param p4 the index (Hand over as reference!)
- * @param p5 the type
+ * @param p0 the index (Hand over as reference!)
+ * @param p1 the array
+ * @param p2 the array count
+ * @param p3 the elements
+ * @param p4 the elements count
+ * @param p5 the array type
  */
 void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p5;
+        int* ec = (int*) p4;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get array elements index.");
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+            int* ac = (int*) p2;
 
-            get_pointer_array_elements_index(p0, p1, p2, p3, p4);
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            get_integer_array_elements_index(p0, p1, p2, p3, p4);
+                    int* i = (int*) p0;
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get array elements index.");
 
-            get_unsigned_long_array_elements_index(p0, p1, p2, p3, p4);
+                    // The iteration limit.
+                    int l = *ac - *ec + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    // The element.
+                    void* e = *NULL_POINTER_MEMORY_MODEL;
+                    // The loop variable.
+                    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    // The comparison result.
+                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-            get_double_array_elements_index(p0, p1, p2, p3, p4);
+                        if (j >= l) {
 
-        } else if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+                            // The element has not been found.
+                            break;
+                        }
 
-            get_character_array_elements_index(p0, p1, p2, p3, p4);
+                        get_array_elements((void*) &e, p1, (void*) &j, p5);
+                        compare_array_elements((void*) &r, e, p3, p4, p5);
 
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+                        if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-            get_wide_character_array_elements_index(p0, p1, p2, p3, p4);
+                            // The element has been found.
+                            *i = j;
+
+                            break;
+                        }
+
+                        j++;
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get array elements index. The index is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get array elements index. The array is null.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get array elements index. The array count is null.");
         }
 
     } else {
 
-        log_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL, (void*) COULD_NOT_GET_ARRAY_ELEMENTS_INDEX_THE_TYPE_IS_NULL_MESSAGE_LOG_MODEL_COUNT);
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get array elements index. The elements count is null.");
     }
 }
 

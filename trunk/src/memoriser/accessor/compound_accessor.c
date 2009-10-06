@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.63 $ $Date: 2009-01-31 16:06:31 $ $Author: christian $
+ * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.64 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -1218,7 +1218,7 @@ void add_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
                 // because the element is added at the end of the compound container.
                 // The suffix integer is encoded into a wide character array.
                 encode((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT,
-                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
 //??    fwprintf(stdout, L"TEST add compound element 2 ss: %i\n", ss);
 //??    fwprintf(stdout, L"TEST add compound element 2 sc: %i\n", sc);
@@ -1625,14 +1625,14 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                         *((int*) *nc) = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Decode the basisname
-                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p2, p3, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION, CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p2, p3, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
                         // Decode the list separator
-                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION, CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
                         // Decode the index
                         indexstr_count = snprintf(indexstr, indexstr_size, "%i", ic);
-                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, indexstr, &indexstr_count, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION, CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, indexstr, &indexstr_count, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
                         ic = ic + *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }

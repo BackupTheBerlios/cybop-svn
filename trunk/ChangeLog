@@ -12,9 +12,20 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $RCSfile: ChangeLog,v $ $Revision: 1.146 $ $Date: 2009-07-30 22:05:38 $ $Author: christian $
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.147 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-10-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert memory abstraction constants from strings to numbers,
+            for arrays, primitives vectors, compound types etc.
+        * Merge array abstraction constants into file "memory_abstraction.c"
+        * Add primitive operations for adding, multiplying, comparing values
+        * Simplify and unify array functions by introducing NEW files with functions
+            to "assign", "compare", "add" values of primitive data types;
+            that way, the type handling is outsourced and redundancies are avoided
+        * Add reworked array files (assigner, comparator, multiplier etc.) into directory "memoriser"
+        * Delete now outdated directory "memoriser/array/"
 
 2009-07-30  Christian Heller  <christian.heller@tuxtax.de>
         * Add new file "integer_assigner.c" starting extraction of source code

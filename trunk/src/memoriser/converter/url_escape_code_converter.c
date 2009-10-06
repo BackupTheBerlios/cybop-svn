@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: url_escape_code_converter.c,v $ $Revision: 1.11 $ $Date: 2009-01-31 16:06:34 $ $Author: christian $
+ * @version $RCSfile: url_escape_code_converter.c,v $ $Revision: 1.12 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -357,11 +357,11 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
                     // Increase destination count.
                     *dc = *dc + tc;
@@ -689,11 +689,11 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
                     // Increase destination count.
                     *dc = *dc + tc;

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.47 $ $Date: 2009-01-31 16:06:33 $ $Author: christian $
+ * @version $RCSfile: integer_vector_converter.c,v $ $Revision: 1.48 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -222,7 +222,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                         if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             // Get first integer from vector.
-                            get_element(p3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, &i, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                            get_element(p3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, &i, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
 /*??
     fwprintf(stdout, L"TEST encode integer vector elements 0 i: %i\n", *((int*) i));

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.37 $ $Date: 2009-01-31 16:06:33 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_converter.c,v $ $Revision: 1.38 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -91,7 +91,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
         }
     }
 
@@ -101,7 +101,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
         }
     }
 
@@ -111,7 +111,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
         }
     }
 
@@ -121,7 +121,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
         }
     }
 
@@ -163,7 +163,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
         }
     }
 
@@ -173,7 +173,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            replace(p0, p1, p2, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
         }
     }
 
@@ -186,7 +186,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         // None of the control characters above matched.
         // Pass along character without modification.
-        replace(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        replace(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
     }
 }
 
@@ -665,7 +665,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                 if (ci < *cc) {
 
                                                     // Get character value at position x.
-                                                    get_element(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                                                    get_element(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
                                                 }
 
                                                 // Encode character using escape codes.
@@ -739,7 +739,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                         if (ci < *cc) {
 
                                                             // Get character value at position x.
-                                                            get_element(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                                                            get_element(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
                                                         }
 
                                                     } else {
@@ -1116,13 +1116,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     int fasz = oasz;
 
     // Get part position x, y, z.
-    get_element(p14, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &px, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p14, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &py, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p14, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &pz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p14, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &px, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    get_element(p14, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &py, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    get_element(p14, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &pz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
     // Get part size x, y, z.
-    get_element(p16, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &sx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p16, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &sy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-    get_element(p16, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &sz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get_element(p16, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &sx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    get_element(p16, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &sy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    get_element(p16, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &sz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
     // Set current position coordinates, initialised with part position.
     cpx = *px;
@@ -1136,13 +1136,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     if (p20 != *NULL_POINTER_MEMORY_MODEL) {
 
         // Determine source whole position coordinates.
-        get_element(p18, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wpmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p18, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wpmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p18, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wpmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p18, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wpmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        get_element(p18, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wpmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        get_element(p18, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wpmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
         // Determine source whole size coordinates.
-        get_element(p20, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wsmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p20, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wsmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        get_element(p20, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wsmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p20, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wsmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        get_element(p20, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wsmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        get_element(p20, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wsmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
         // Set original area position coordinates, initialised with whole position.
         oapx = *wpmx;

@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: gnu_linux_console_starting_maintainer.c,v $ $Revision: 1.10 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+ * @version $RCSfile: gnu_linux_console_starting_maintainer.c,v $ $Revision: 1.11 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -78,8 +78,8 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
 
 /*??
         // Allocate input- and output stream.
-        allocate((void*) &ip, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &op, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &ip, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        allocate((void*) &op, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 */
         // Allocate termios settings.
         to = (struct termios*) malloc(sizeof(struct termios));
@@ -90,7 +90,7 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
         // CAUTION! Its size is initialised with three,
         // because longer escape sequences are not known.
         // Example: An up arrow delivers 'ESC' + '[' + 'A'
-        allocate_model((void*) &b, (void*) &bc, (void*) &bs, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        allocate_model((void*) &b, (void*) &bc, (void*) &bs, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
         // Initialise gnu/linux console internals.
         //

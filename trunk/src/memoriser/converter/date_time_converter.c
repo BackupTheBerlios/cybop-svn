@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: date_time_converter.c,v $ $Revision: 1.20 $ $Date: 2009-01-31 16:06:33 $ $Author: christian $
+ * @version $RCSfile: date_time_converter.c,v $ $Revision: 1.21 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -214,7 +214,7 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                             *ds = *ds * *INTEGER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Reallocate date time.
-                            reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                            reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
                         }
 
                         // Set date time integer values.

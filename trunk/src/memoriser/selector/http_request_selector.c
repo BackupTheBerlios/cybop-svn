@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: http_request_selector.c,v $ $Revision: 1.5 $ $Date: 2009-07-21 15:39:56 $ $Author: christian $
+ * @version $RCSfile: http_request_selector.c,v $ $Revision: 1.6 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -147,7 +147,7 @@ void select_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -213,7 +213,7 @@ void select_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -287,7 +287,7 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -300,7 +300,7 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -368,7 +368,7 @@ void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) HEADER_ARGUMENT_HTTP_NAME, (void*) HEADER_ARGUMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) HEADER_ARGUMENT_HTTP_NAME, (void*) HEADER_ARGUMENT_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -442,7 +442,7 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -455,7 +455,7 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) HEADER_HTTP_NAME, (void*) HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) HEADER_HTTP_NAME, (void*) HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -502,9 +502,9 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
     int hvs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate decoded header argument wide character array.
-    allocate((void*) &ha, (void*) &has, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &ha, (void*) &has, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
     // Allocate decoded header value wide character array.
-    allocate((void*) &hv, (void*) &hvs, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &hv, (void*) &hvs, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
     // Decode encoded character array into decoded header argument wide character array.
     decode_utf_8_unicode_character_vector((void*) &ha, (void*) &hac, (void*) &has, p3, p4);
@@ -1144,9 +1144,9 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 */
 
     // Deallocate decoded header argument wide character array.
-    deallocate((void*) &ha, (void*) &has, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &ha, (void*) &has, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
     // Deallocate decoded header value wide character array.
-    deallocate((void*) &hv, (void*) &hvs, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &hv, (void*) &hvs, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -1193,7 +1193,7 @@ void select_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) BODY_END_HTTP_NAME, (void*) BODY_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) BODY_END_HTTP_NAME, (void*) BODY_END_HTTP_NAME_COUNT, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

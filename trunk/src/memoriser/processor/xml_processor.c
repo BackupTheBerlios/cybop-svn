@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: xml_processor.c,v $ $Revision: 1.17 $ $Date: 2009-02-26 23:11:29 $ $Author: christian $
+ * @version $RCSfile: xml_processor.c,v $ $Revision: 1.18 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -315,7 +315,7 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                                     append_part(p0, p1, p2,
                                         (void*) NODE_NAME_XML_CYBOL_NAME, (void*) NODE_NAME_XML_CYBOL_NAME_COUNT,
-                                        (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                                        (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION,
                                         tn, (void*) &tnc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                                     break;
@@ -558,7 +558,7 @@ void process_xml_attribute(void* p0, void* p1, void* p2, void* p3, void* p4, voi
                         process_xml_attribute_value((void*) &av, (void*) &avc, p5, p6);
 
                         append_part(p0, p1, p2, an, (void*) &anc,
-                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT,
+                            (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION,
                             av, (void*) &avc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                         // The has attribute flag.

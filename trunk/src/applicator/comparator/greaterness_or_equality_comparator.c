@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: greaterness_or_equality_comparator.c,v $ $Revision: 1.3 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+ * @version $RCSfile: greaterness_or_equality_comparator.c,v $ $Revision: 1.4 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -169,8 +169,8 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
         rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Compare parameter abstractions.
-        compare_arrays(*lsa, *lsac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-        compare_arrays(*rsa, *rsac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*lsa, *lsac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(*rsa, *rsac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
         if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 

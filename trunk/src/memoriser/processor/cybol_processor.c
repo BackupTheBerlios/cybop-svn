@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.9 $ $Date: 2009-02-26 23:11:29 $ $Author: christian $
+ * @version $RCSfile: cybol_processor.c,v $ $Revision: 1.10 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -164,7 +164,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 // Decode (in this case just copy) destination part abstraction.
                 // CAUTION! Use the temporary RUNTIME abstraction as source here!
                 // CAUTION! Use WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION as abstraction here!
-                replace((void*) &a, (void*) ac, (void*) as, ra, (void*) &rac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+                replace((void*) &a, (void*) ac, (void*) as, ra, (void*) &rac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
                 // Deallocate temporary runtime abstraction.
                 deallocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);

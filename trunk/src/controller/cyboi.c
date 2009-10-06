@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: cyboi.c,v $ $Revision: 1.46 $ $Date: 2009-01-31 16:06:30 $ $Author: christian $
+ * @version $RCSfile: cyboi.c,v $ $Revision: 1.47 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -151,7 +151,7 @@ int main(int p0, char** p1) {
         int ks = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Allocate cybol knowledge file path.
-        allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
@@ -207,7 +207,7 @@ int main(int p0, char** p1) {
         deoptionalise((void*) &LOG_OUTPUT);
 
         // Deallocate cybol knowledge file path.
-        deallocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        deallocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 
         // Shutdown global variables.
         unglobalise();

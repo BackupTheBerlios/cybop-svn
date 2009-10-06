@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.32 $ $Date: 2009-01-31 16:06:34 $ $Author: christian $
+ * @version $RCSfile: x_window_system_converter.c,v $ $Revision: 1.33 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -138,9 +138,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Determine source whole size coordinates.
-            get_element(*wsm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &wsmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*wsm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &wsmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*wsm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &wsmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*wsm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &wsmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            get_element(*wsm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &wsmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            get_element(*wsm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &wsmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
             // Set original area position coordinates, set to the zero origo.
             oapx = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -338,13 +338,13 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Get source part position coordinates.
-            get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
             // Get source part size coordinates.
-            get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-            get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 
 /*??
     fwprintf(stdout, L"layout: %s\n", *lm);
@@ -372,7 +372,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // Reset comparison result.
                 r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                compare_arrays(*a, *ac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(*a, *ac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

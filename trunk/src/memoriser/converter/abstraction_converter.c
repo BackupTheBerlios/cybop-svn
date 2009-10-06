@@ -19,7 +19,7 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.16 $ $Date: 2009-01-31 16:06:33 $ $Author: christian $
+ * @version $RCSfile: abstraction_converter.c,v $ $Revision: 1.17 $ $Date: 2009-10-06 21:25:27 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
@@ -57,7 +57,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            replace_wide_character_vector(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
         }
     }
 
@@ -117,7 +117,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            replace_wide_character_vector(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
         }
     }
 
@@ -147,7 +147,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+            replace_wide_character_vector(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
         }
     }
 
