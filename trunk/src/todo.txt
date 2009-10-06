@@ -7,7 +7,7 @@
 # http://www.cybop.net
 # - Cybernetics Oriented Programming -
 #
-# @version $Revision: 1.115 $ $Date: 2009-10-01 22:01:46 $ $Author: christian $
+# @version $Revision: 1.116 $ $Date: 2009-10-06 14:02:26 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
@@ -16,19 +16,19 @@
         * Simplify and unify array functions by introducing NEW files for handling of primitive data types,
             e.g. with functions like "assign_double", "compare_double", "add_double" etc.;
             that way, the different types are outsourced from the array handling files and redundancies are avoided
+
         * Assign "sizeof" for each programming language type to a global variable just once at startup
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code
-
-        * convert all type constants to numbers (not strings)? ... not only for primitives, arrays, but also compound types like "fraction" or "complex"
-            OR use numbers just for internal memory structures and strings for abstraction names of outside structures (CYBOL)?
-        * add primitive operations like "add" etc.
+        * Simplify source code by using the function "allocate_model" wherever an array with count and size gets created;
+            adapt "compound_allocator.c" and others to use "part_allocator.c" and "model_allocator.c"
+        * Convert memory (NOT CYBOL) abstraction constants from strings to integer ... not only for arrays, but also "fraction" etc.
+        * Add primitive operations like "add" etc.
 
         * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
             Should models in cybol/ dir be one level higher?
             Isn't cybol and cyboi-adapted models (like cyboi_http) the same,
             no matter whether in memory or serialised as cybol?
-
-        * Add one file with prefix "cyboi_" in parallel to constants of standard formats,
+        ==> Add one file with prefix "cyboi_" in parallel to constants of standard formats,
             and put these parallel files into the same directory as the standard format, e.g.:
             in src/constant/name/http/header/
             "request_header_cyboi_http_name.c" in addition to "request_header_http_name.c" with
@@ -77,8 +77,6 @@
         * Introduce new functions to delete the content of an allocated entity (for compound, integer_vector, xdt etc.),
             so that for each new http request, the model is initially empty, in function "receive_socket_message"
         * Adapt function "decode_http_request" accordingly
-
-        * Simplify source code by using the function "allocate_model" wherever an array with count and size gets created
 
         * Do commands of gnu/linux console still HAVE TO BE handed over (as in old solution)?
         * Search for pressed key in commands
