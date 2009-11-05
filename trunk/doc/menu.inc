@@ -38,8 +38,8 @@
             <a href="http://developer.berlios.de/bugs/?group_id=669">
                 Bug Report
             </a>
-            <a href="http://developer.berlios.de/cvs/?group_id=669">
-                CVS
+            <a href="http://developer.berlios.de/svn/?group_id=669">
+                Source Code
             </a>
             <a href="/plan/index.shtml">
                 Project Plan
