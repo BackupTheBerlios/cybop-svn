@@ -30,6 +30,16 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 //
+// Count.
+//
+// This count is valid for ALL memory abstractions below,
+// as they are just integer numbers.
+//
+
+/** The memory abstraction count. */
+static int* MEMORY_ABSTRACTION_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
+
+//
 // Primitive.
 //
 // Range: 0..999
