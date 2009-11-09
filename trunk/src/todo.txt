@@ -11,7 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Debug source code by cleaning up errors stemming from array change implemented previously
+        * Debug source code by cleaning up errors stemming from previously implemented array changes
 
         * Assign "sizeof" for each programming language type to a global variable just once at startup
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code
