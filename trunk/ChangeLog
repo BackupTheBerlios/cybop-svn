@@ -16,11 +16,17 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-2009-10-09  Christian Heller  <christian.heller@tuxtax.de>
+2009-11-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Update architecture document in OpenOffice and PDF format
+
+2009-11-09  Christian Heller  <christian.heller@tuxtax.de>
         * Debug source code by cleaning up errors stemming from previously implemented array changes
         * Spread array functions to different files
         * Rename "memoriser" directory into "executor"
         * Restructure and partly rename files in "executor" directory
+
+2009-10-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert source code repository from Concurrent Versions System (CVS) to Subversion (SVN)
 
 2009-10-06  Christian Heller  <christian.heller@tuxtax.de>
         * Convert memory abstraction constants from strings to numbers,
