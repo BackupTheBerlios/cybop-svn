@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef MODEL_DIAGRAM_CONVERTER_SOURCE
-#define MODEL_DIAGRAM_CONVERTER_SOURCE
+#ifndef MODEL_DIAGRAM_ENCODER_SOURCE
+#define MODEL_DIAGRAM_ENCODER_SOURCE
 
 #include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
@@ -41,23 +41,6 @@
 //
 
 void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12);
-
-/**
- * Decodes the model diagram and creates a knowledge model from it.
- *
- * A model diagram in this case is a textual representation of a knowledge model,
- * in form of many line feed-separated lines representing a model part each.
- *
- * @param p0 the destination knowledge model (Hand over as reference!)
- * @param p1 the destination knowledge model count
- * @param p2 the destination knowledge model size
- * @param p3 the source model diagram
- * @param p4 the source count
- */
-void decode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode model diagram.");
-}
 
 /**
  * Encodes the model diagram indentation.
@@ -442,5 +425,5 @@ void encode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void
     encode_model_diagram_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 }
 
-/* MODEL_DIAGRAM_CONVERTER_SOURCE */
+/* MODEL_DIAGRAM_ENCODER_SOURCE */
 #endif

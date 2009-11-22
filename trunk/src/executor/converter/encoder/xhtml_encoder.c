@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef XHTML_CONVERTER_SOURCE
-#define XHTML_CONVERTER_SOURCE
+#ifndef XHTML_ENCODER_SOURCE
+#define XHTML_ENCODER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -37,18 +37,6 @@
 #include "../../memoriser/accessor/compound_accessor.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
-
-/**
- * Decodes an xhtml format into a compound model.
- *
- * @param p0 the destination part (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source xhtml byte array
- * @param p4 the source count
- */
-void decode_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4) {
-}
 
 /**
  * Encodes the xhtml indentation.
@@ -467,5 +455,5 @@ void encode_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4,
     encode_xhtml_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l);
 }
 
-/* XHTML_CONVERTER_SOURCE */
+/* XHTML_ENCODER_SOURCE */
 #endif

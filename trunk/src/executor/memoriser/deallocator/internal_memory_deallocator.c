@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTERNAL_MEMORY_ALLOCATOR_SOURCE
-#define INTERNAL_MEMORY_ALLOCATOR_SOURCE
+#ifndef INTERNAL_MEMORY_DEALLOCATOR_SOURCE
+#define INTERNAL_MEMORY_DEALLOCATOR_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
@@ -32,20 +32,6 @@
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
-
-/**
- * Allocates the internal memory.
- *
- * @param p0 the internal memory (Hand over as reference!)
- * @param p1 the internal memory size
- */
-void allocate_internal_memory(void* p0, void* p1) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate internal memory.");
-
-    // Allocate internal memory.
-    allocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
 
 /**
  * Deallocates the internal memory.
@@ -79,5 +65,5 @@ void deallocate_internal_memory(void* p0, void* p1) {
     deallocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/* INTERNAL_MEMORY_ALLOCATOR_SOURCE */
+/* INTERNAL_MEMORY_DEALLOCATOR_SOURCE */
 #endif

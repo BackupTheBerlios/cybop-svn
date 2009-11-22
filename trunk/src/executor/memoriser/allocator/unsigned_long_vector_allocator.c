@@ -45,18 +45,5 @@ void allocate_unsigned_long_vector(void* p0, void* p1) {
     allocate_array(p0, p1, (void*) UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/**
- * Deallocates the unsigned long vector.
- *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
- */
-void deallocate_unsigned_long_vector(void* p0, void* p1) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate unsigned long vector.");
-
-    deallocate_array(p0, p1, (void*) UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION);
-}
-
 /* UNSIGNED_LONG_VECTOR_ALLOCATOR_SOURCE */
 #endif

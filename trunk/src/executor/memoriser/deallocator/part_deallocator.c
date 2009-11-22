@@ -23,15 +23,15 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PART_ALLOCATOR_SOURCE
-#define PART_ALLOCATOR_SOURCE
+#ifndef PART_DEALLOCATOR_SOURCE
+#define PART_DEALLOCATOR_SOURCE
 
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/allocator/model_allocator.c"
 
 /**
- * Allocates the part.
+ * Deallocates the part.
  *
  * @param p0 the model name (Hand over as reference!)
  * @param p1 the model name count (Hand over as reference!)
@@ -49,11 +49,12 @@
  * @param p13 the source abstraction
  * @param p14 the source abstraction count
  */
-void allocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate part.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate part.");
 
+/*??
     // Allocate name.
     allocate_model(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
     // A channel is not allocated, since that is only needed temporarily for model loading.
@@ -63,7 +64,8 @@ void allocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     allocate_model(p6, p7, p8, p12, p13, p14);
     // Allocate details.
     allocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+*/
 }
 
-/* PART_ALLOCATOR_SOURCE */
+/* PART_DEALLOCATOR_SOURCE */
 #endif

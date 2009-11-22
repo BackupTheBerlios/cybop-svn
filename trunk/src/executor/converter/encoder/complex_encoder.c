@@ -23,70 +23,13 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPLEX_CONVERTER_SOURCE
-#define COMPLEX_CONVERTER_SOURCE
+#ifndef COMPLEX_ENCODER_SOURCE
+#define COMPLEX_ENCODER_SOURCE
 
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-
-//
-// A complex consists of two floats, a real and an imaginary.
-//
-
-/**
- * Decodes the byte stream and creates a complex model from it.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void decode_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* sc = (int*) p4;
-
-        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
-
-            void* s = (void*) p3;
-
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                void* d = (void*) p0;
-
-/*??
-            //??    log_message((void*) &INFORMATION_LEVEL_LOG_MODEL, (void*) &"Initialise complex.");
-
-            //??    fscanf(p1, %d, (void*) &(t->real));
-            //??    fscanf(p1, %d, (void*) &(t->imaginary));
-
-                // Initialise elements.
-                int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                // Set elements.
-                set_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
-                set_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
-*/
-            } else {
-
-//??                log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_DESTINATION_IS_NULL_MESSAGE_COUNT);
-            }
-
-        } else {
-
-//??            log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_IS_NULL_MESSAGE_COUNT);
-        }
-
-    } else {
-
-//??        log_message((void*) &ERROR_LEVEL_LOG_MODEL, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE, (void*) &COULD_NOT_PARSE_INTEGER_THE_SOURCE_COUNT_IS_NULL_MESSAGE_COUNT);
-    }
-}
 
 /**
  * Encodes the complex model and creates a byte stream from it.
@@ -119,5 +62,5 @@ void encode_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 }
 
-/* COMPLEX_CONVERTER_SOURCE */
+/* COMPLEX_ENCODER_SOURCE */
 #endif

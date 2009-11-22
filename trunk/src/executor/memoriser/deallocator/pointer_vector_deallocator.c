@@ -23,27 +23,14 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_VECTOR_ALLOCATOR_SOURCE
-#define POINTER_VECTOR_ALLOCATOR_SOURCE
+#ifndef POINTER_VECTOR_DEALLOCATOR_SOURCE
+#define POINTER_VECTOR_DEALLOCATOR_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
-
-/**
- * Allocates the pointer vector.
- *
- * @param p0 the vector (Hand over as reference!)
- * @param p1 the vector size
- */
-void allocate_pointer_vector(void* p0, void* p1) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate pointer vector.");
-
-    allocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
 
 /**
  * Deallocates the pointer vector.
@@ -58,19 +45,5 @@ void deallocate_pointer_vector(void* p0, void* p1) {
     deallocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/**
- * Reallocates the pointer vector.
- *
- * @param p0 the vector (Hand over as reference!)
- * @param p1 the vector count
- * @param p2 the vector size
- */
-void reallocate_pointer_vector(void* p0, void* p1, void* p2) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Reallocate pointer vector.");
-
-    reallocate_array(p0, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
-
-/* POINTER_VECTOR_ALLOCATOR_SOURCE */
+/* POINTER_VECTOR_DEALLOCATOR_SOURCE */
 #endif

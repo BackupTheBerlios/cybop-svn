@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FILE_COMMUNICATOR_SOURCE
-#define FILE_COMMUNICATOR_SOURCE
+#ifndef FILE_SENDER_SOURCE
+#define FILE_SENDER_SOURCE
 
 #include <stdio.h>
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
@@ -40,183 +40,13 @@
 #include "../../variable/reallocation_factor.c"
 
 /**
- * Reads a file stream.
- *
- * @param p0 the destination byte array (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source file stream
- */
-void read_file_stream(void* p0, void* p1, void* p2, void* p3) {
-
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
-
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* ds = (int*) p2;
-
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-                int* dc = (int*) p1;
-
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    void** d = (void**) p0;
-
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Read file stream.");
-
-                    // Read first character.
-                    char c = fgetc(p3);
-
-                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                        if (c == EOF) {
-
-                            break;
-                        }
-
-                        if (*ds <= *dc) {
-
-                            // Increase size.
-                            // CAUTION! Adding one is necessary to avoid a zero size, if the count is zero!
-                            *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                            // Reallocate array.
-                            reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                        }
-
-                        // Set character in destination array.
-                        // The array count serves as index for setting the character.
-                        set_array_elements(*d, p1, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                        // Increase array count.
-                        (*dc)++;
-
-                        // Read next character.
-                        c = fgetc(p3);
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The destination is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The destination count is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The destination size is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file stream. The file is null.");
-    }
-}
-
-/**
- * Reads a file and writes it into a byte array.
- *
- * @param p0 the destination byte array (Hand over as reference!)
- * @param p1 the destination byte array count
- * @param p2 the destination byte array size
- * @param p3 the source file name
- * @param p4 the source file name count
- */
-void read_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* sc = (int*) p4;
-
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read file.");
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The file.
-        FILE* f = (FILE*) *NULL_POINTER_MEMORY_MODEL;
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_arrays(p3, p4, (void*) STANDARD_INPUT_STREAM_MODEL, (void*) STANDARD_INPUT_STREAM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                // The given string is not a file name, but specifies the "standard_input".
-                f = stdin;
-
-                read_file_stream(p0, p1, p2, (void*) f);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            // If the given name does not match the standard input, then interpret it as file name.
-
-            // The terminated file name.
-            void* tn = *NULL_POINTER_MEMORY_MODEL;
-            int tnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            int tns = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-            // Allocate terminated file name.
-            allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-            // Encode wide character name into multibyte character array.
-            encode_utf_8_unicode_character_vector((void*) &tn, (void*) &tnc, (void*) &tns, p3, p4);
-
-            if (tns <= tnc) {
-
-                // Increase character array size to have place for the termination character.
-                tns = tnc + *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                // Reallocate terminated file name as multibyte character array.
-                reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            }
-
-            // Add null termination character to terminated file name.
-            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-            // Open file.
-            // CAUTION! The file name cannot be handed over as is.
-            // CYBOI strings are NOT terminated with the null character '\0'.
-            // Since 'fopen' expects a null terminated string, the termination character
-            // must be added to the string before that is used to open the file.
-            f = fopen((char*) tn, "r");
-
-            if (f != *NULL_POINTER_MEMORY_MODEL) {
-
-                read_file_stream(p0, p1, p2, (void*) f);
-
-                // Close file.
-                // CAUTION! Check file for null pointer to avoid a segmentation fault!
-                fclose(f);
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file. The file is null.");
-            }
-
-            // Deallocate terminated file name.
-            deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read file. The source count is null.");
-    }
-}
-
-/**
- * Writes a file stream.
+ * Sends a file stream.
  *
  * @param p0 the destination file stream
  * @param p1 the source byte array
  * @param p2 the source byte array count
  */
-void write_file_stream(void* p0, void* p1, void* p2) {
+void send_file_stream(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -224,7 +54,7 @@ void write_file_stream(void* p0, void* p1, void* p2) {
 
         if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Write file stream.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Send file stream.");
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -259,17 +89,17 @@ void write_file_stream(void* p0, void* p1, void* p2) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file stream. The file is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not send file stream. The file is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file stream. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not send file stream. The source count is null.");
     }
 }
 
 /**
- * Writes a file that was read from a byte array.
+ * Sends a file that was read from a byte array.
  *
  * @param p0 the destination file name (Hand over as reference!)
  * @param p1 the destination file name count
@@ -277,7 +107,7 @@ void write_file_stream(void* p0, void* p1, void* p2) {
  * @param p3 the source byte array
  * @param p4 the source byte array count
  */
-void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -287,7 +117,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void** d = (void**) p0;
 
-            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write file.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send file.");
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -303,7 +133,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // The given string is not a file name, but specifies the "standard_output".
                     f = stdout;
 
-                    write_file_stream((void*) f, p3, p4);
+                    send_file_stream((void*) f, p3, p4);
 
                     // Flush any buffered output on the stream to the file.
                     //
@@ -327,7 +157,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // The given string is not a file name, but specifies the "standard_error_output".
                     f = stdout;
 
-                    write_file_stream((void*) f, p3, p4);
+                    send_file_stream((void*) f, p3, p4);
 
                     // Flush any buffered output on the stream to the file.
                     //
@@ -379,7 +209,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (f != *NULL_POINTER_MEMORY_MODEL) {
 
-                    write_file_stream((void*) f, p3, p4);
+                    send_file_stream((void*) f, p3, p4);
 
                     // Flush any buffered output on the stream to the file.
                     //
@@ -398,7 +228,7 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file. The file is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not send file. The file is null.");
                 }
 
                 // Deallocate terminated file name.
@@ -407,14 +237,14 @@ void write_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not send file. The destination is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write file. The destination count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not send file. The destination count is null.");
     }
 }
 
-/* FILE_COMMUNICATOR_SOURCE */
+/* FILE_SENDER_SOURCE */
 #endif

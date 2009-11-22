@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ASCII_CHARACTER_VECTOR_CONVERTER_SOURCE
-#define ASCII_CHARACTER_VECTOR_CONVERTER_SOURCE
+#ifndef ASCII_CHARACTER_VECTOR_DECODER_SOURCE
+#define ASCII_CHARACTER_VECTOR_DECODER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -119,71 +119,5 @@ void decode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void*
     }
 }
 
-/**
- * Encodes the character vector model and creates an ascii character byte stream from it.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void encode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* sc = (int*) p4;
-
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* ds = (int*) p2;
-
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-                int* dc = (int*) p1;
-
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    void** d = (void**) p0;
-
-                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode ascii character vector.");
-
-                    if ((*dc + *sc) >= *ds) {
-
-                        // The new destination character vector size.
-                        // CAUTION! Add constant in case *dc is zero!
-                        *ds = (*dc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *sc;
-
-                        // Reallocate destination character vector.
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                    }
-
-                    // Set source into destination character vector.
-                    set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                    // Increment destination count.
-                    *dc = *dc + *sc;
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode ascii character vector. The destination is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode ascii character vector. The destination count is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode ascii character vector. The destination size is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode ascii character vector. The source count is null.");
-    }
-}
-
-/* ASCII_CHARACTER_VECTOR_CONVERTER_SOURCE */
+/* ASCII_CHARACTER_VECTOR_DECODER_SOURCE */
 #endif

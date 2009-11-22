@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BOOLEAN_CONVERTER_SOURCE
-#define BOOLEAN_CONVERTER_SOURCE
+#ifndef BOOLEAN_ENCODER_SOURCE
+#define BOOLEAN_ENCODER_SOURCE
 
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/cybol/boolean_cybol_model.c"
@@ -36,83 +36,6 @@
 #include "../../logger/logger.c"
 #include "../../memoriser/allocator.c"
 #include "../../memoriser/array.c"
-
-/**
- * Decodes the byte stream and creates a boolean model from it.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* sc = (int*) p4;
-
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* dc = (int*) p1;
-
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                int** d = (int**) p0;
-
-                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode boolean.");
-
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    compare_array_elements(p3, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Set boolean value to "true", in other words the integer value to "one".
-                        set_array_elements(*d, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-                        // Increment destination count.
-                        *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    compare_array_elements(p3, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) FALSE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Set boolean value to "false", in other words the integer value to "zero".
-                        set_array_elements(*d, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) FALSE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-                        // Increment destination count.
-                        *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The value cannot be interpreted.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The destination is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The destination count is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The source count is null.");
-    }
-}
 
 /**
  * Encodes the boolean model and creates a byte stream from it.
@@ -209,5 +132,5 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* BOOLEAN_CONVERTER_SOURCE */
+/* BOOLEAN_ENCODER_SOURCE */
 #endif

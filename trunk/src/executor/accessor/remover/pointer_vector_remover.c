@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_VECTOR_ACCESSOR_SOURCE
-#define POINTER_VECTOR_ACCESSOR_SOURCE
+#ifndef POINTER_VECTOR_REMOVER_SOURCE
+#define POINTER_VECTOR_REMOVER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
@@ -32,20 +32,6 @@
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
-
-/**
- * Sets the pointer vector element.
- *
- * @param p0 the pointer vector
- * @param p1 the index
- * @param p2 the element (Hand over as reference!)
- */
-void set_pointer_vector_element(void* p0, void* p1, void* p2) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set pointer vector element.");
-
-    set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
 
 /**
  * Removes the pointer vector element.
@@ -61,19 +47,5 @@ void remove_pointer_vector_element(void* p0, void* p1, void* p2) {
     remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/**
- * Gets the pointer vector element.
- *
- * @param p0 the pointer vector
- * @param p1 the index
- * @param p2 the element (Hand over as reference!)
- */
-void get_pointer_vector_element(void* p0, void* p1, void* p2) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get pointer vector element.");
-
-    get_array_elements(p0, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
-
-/* POINTER_VECTOR_ACCESSOR_SOURCE */
+/* POINTER_VECTOR_REMOVER_SOURCE */
 #endif

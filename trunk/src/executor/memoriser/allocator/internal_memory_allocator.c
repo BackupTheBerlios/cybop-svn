@@ -47,37 +47,5 @@ void allocate_internal_memory(void* p0, void* p1) {
     allocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/**
- * Deallocates the internal memory.
- *
- * The configuration parameters existing in the internal memory have to be
- * deallocated (destroyed) where they were allocated (created)!
- *
- * If, for example, parameters were added by the x window system modules,
- * then these x window system modules are also responsible for destroying them.
- *
- * Configuration parameter allocation/ deallocation is thus clearly in the
- * responsibility of the module developer and no effort is undertaken here
- * to automatically deallocate those configuration parameters which are still
- * existent in internal memory (unequal *NULL_POINTER_MEMORY_MODEL).
- *
- * @param p0 the internal memory (Hand over as reference!)
- * @param p1 the internal memory size
- */
-void deallocate_internal_memory(void* p0, void* p1) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate internal memory.");
-
-    // CAUTION! Do NOT try to REMOVE the parameters!
-    // Each configuration parameter has a fixed position within
-    // the internal memory and CANNOT be removed.
-    // Trying to do so, would result in a runtime error:
-    // *** glibc detected *** double free or corruption (fasttop)
-    // because the internal memory is already freed below.
-
-    // Deallocate internal memory.
-    deallocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
-
 /* INTERNAL_MEMORY_ALLOCATOR_SOURCE */
 #endif

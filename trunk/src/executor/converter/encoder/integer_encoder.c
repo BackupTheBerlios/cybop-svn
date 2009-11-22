@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_CONVERTER_SOURCE
-#define INTEGER_CONVERTER_SOURCE
+#ifndef INTEGER_ENCODER_SOURCE
+#define INTEGER_ENCODER_SOURCE
 
 #ifdef CYGWIN_ENVIRONMENT
 #include <windows.h>
@@ -44,79 +44,6 @@
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../../memoriser/allocator.c"
-
-/**
- * Decodes the wide character array and creates an integer from it.
- *
- * CAUTION! Do not mix up "integer" and "integer_vector"!
- * The latter is an array storing one or many integer numbers at different indexes.
- *
- * This operation has an integer as result, so a normal integer pointer
- * and NOT an integer pointer pointer (integer array) is handed over as p0.
- *
- * @param p0 the destination integer number (Hand over as reference!)
- * @param p1 the destination integer number count
- * @param p2 the destination integer number size
- * @param p3 the source wide character array
- * @param p4 the source wide character array count
- */
-void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* d = (int*) p0;
-
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode integer.");
-
-        // The temporary null-terminated string.
-        void* tmp = *NULL_POINTER_MEMORY_MODEL;
-        int tmpc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        int tmps = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-        // Create temporary null-terminated string.
-        allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-        // Copy original string to temporary null-terminated string.
-        append_wide_character_vector((void*) &tmp, (void*) &tmpc, (void*) &tmps, p3, p4);
-        // Add string termination to temporary null-terminated string.
-        // The source count is used as index for the termination character.
-        append_wide_character_vector((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-        // The tail variable is useless here and only needed for the string
-        // transformation function. If the whole string array consists of
-        // many sub strings, separated by space characters, then each sub
-        // string gets interpreted as integer number.
-        // The tail variable in this case points to the remaining sub string.
-        wchar_t* tail = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
-
-        // Initialise error number.
-        // It is a global variable/ function and other operations
-        // may have set some value that is not wanted here.
-        errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-        // Set integer value.
-        //
-        // Transform string to integer value.
-        // The third parameter is the number base:
-        // 0 - tries to automatically identify the correct number base
-        // 8 - octal, e.g. 083
-        // 10 - decimal, e.g. 1234
-        // 16 - hexadecimal, e.g. 3d4 or, optionally, 0x3d4
-        *d = wcstol((wchar_t*) tmp, &tail, *NUMBER_10_INTEGER_MEMORY_MODEL);
-
-        if (errno != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer. An error (probably overflow) occured.");
-        }
-
-        // Destroy temporary null-terminated string.
-        deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode integer. The destination is null.");
-    }
-}
 
 /**
  * Encodes the integer model and creates a wide character array from it.
@@ -241,5 +168,5 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* INTEGER_CONVERTER_SOURCE */
+/* INTEGER_ENCODER_SOURCE */
 #endif

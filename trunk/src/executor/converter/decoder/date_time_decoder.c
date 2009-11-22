@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DATE_TIME_CONVERTER_SOURCE
-#define DATE_TIME_CONVERTER_SOURCE
+#ifndef DATE_TIME_DECODER_SOURCE
+#define DATE_TIME_DECODER_SOURCE
 
 #include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
@@ -86,18 +86,6 @@ void decode_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode date time. The source count is null.");
     }
-}
-
-/**
- * Encodes the date time model and creates a byte stream from it.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void encode_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
@@ -261,17 +249,5 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
     }
 }
 
-/**
- * Encodes the date time model and creates a ddmmyyyy byte stream from it.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void encode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4) {
-}
-
-/* DATE_TIME_CONVERTER_SOURCE */
+/* DATE_TIME_DECODER_SOURCE */
 #endif

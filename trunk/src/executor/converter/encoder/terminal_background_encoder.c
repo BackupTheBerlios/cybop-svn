@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TERMINAL_BACKGROUND_CONVERTER_SOURCE
-#define TERMINAL_BACKGROUND_CONVERTER_SOURCE
+#ifndef TERMINAL_BACKGROUND_ENCODER_SOURCE
+#define TERMINAL_BACKGROUND_ENCODER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -36,18 +36,6 @@
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
 #include "../../memoriser/array.c"
-
-/**
- * Decodes the control sequence code into a terminal background colour name.
- *
- * @param p0 the destination colour name (Hand over as reference!)
- * @param p1 the destination colour name count
- * @param p2 the destination colour name size
- * @param p3 the source control sequence code
- * @param p4 the source control sequence code count
- */
-void decode_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4) {
-}
 
 /**
  * Encodes the terminal background colour name into a control sequence code.
@@ -144,5 +132,5 @@ void encode_terminal_background(void* p0, void* p1, void* p2, void* p3, void* p4
     }
 }
 
-/* TERMINAL_BACKGROUND_CONVERTER_SOURCE */
+/* TERMINAL_BACKGROUND_ENCODER_SOURCE */
 #endif

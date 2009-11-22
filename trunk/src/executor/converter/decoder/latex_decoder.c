@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef LATEX_CONVERTER_SOURCE
-#define LATEX_CONVERTER_SOURCE
+#ifndef LATEX_DECODER_SOURCE
+#define LATEX_DECODER_SOURCE
 
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
@@ -41,17 +41,5 @@
 void decode_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
-/**
- * Encodes the latex model and creates a byte stream from it.
- *
- * @param p0 the destination byte stream (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source latex model
- * @param p4 the source count
- */
-void encode_latex(void* p0, void* p1, void* p2, void* p3, void* p4) {
-}
-
-/* LATEX_CONVERTER_SOURCE */
+/* LATEX_DECODER_SOURCE */
 #endif

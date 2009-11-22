@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef HTTP_RESPONSE_CONVERTER_SOURCE
-#define HTTP_RESPONSE_CONVERTER_SOURCE
+#ifndef HTTP_RESPONSE_DECODER_SOURCE
+#define HTTP_RESPONSE_DECODER_SOURCE
 
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
@@ -49,21 +49,5 @@ void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
 //??    process_http_response(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
 }
 
-/**
- * Encodes the compound into an http response.
- *
- * @param p0 the destination wide character array (Hand over as reference!)
- * @param p1 the destination wide character array count
- * @param p2 the destination wide character array size
- * @param p3 the source compound
- * @param p4 the source compound count
- * @param p5 the source compound
- * @param p6 the source compound count
- */
-void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode http response.");
-}
-
-/* HTTP_RESPONSE_CONVERTER_SOURCE */
+/* HTTP_RESPONSE_DECODER_SOURCE */
 #endif

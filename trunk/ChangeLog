@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2009-11-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt files in "executor" directory to new structure
+
 2009-11-18  Christian Heller  <christian.heller@tuxtax.de>
         * Update architecture document in OpenOffice and PDF format
 

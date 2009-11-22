@@ -23,31 +23,12 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef XML_CONVERTER_SOURCE
-#define XML_CONVERTER_SOURCE
+#ifndef XML_ENCODER_SOURCE
+#define XML_ENCODER_SOURCE
 
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/processor/xml_processor.c"
-
-/**
- * Decodes the xml byte array into a compound model and -details.
- *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count
- * @param p2 the destination model size
- * @param p3 the destination details (Hand over as reference!)
- * @param p4 the destination details count
- * @param p5 the destination details size
- * @param p6 the source wide character array
- * @param p7 the source wide character array count
- */
-void decode_xml(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode xml.");
-
-    process_xml_element_content(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
-}
 
 /**
  * Encodes the compound into a xml byte array.
@@ -65,5 +46,5 @@ void encode_xml(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode xml.");
 }
 
-/* XML_CONVERTER_SOURCE */
+/* XML_ENCODER_SOURCE */
 #endif

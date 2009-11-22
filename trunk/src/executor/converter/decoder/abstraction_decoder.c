@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ABSTRACTION_CONVERTER_SOURCE
-#define ABSTRACTION_CONVERTER_SOURCE
+#ifndef ABSTRACTION_DECODER_SOURCE
+#define ABSTRACTION_DECODER_SOURCE
 
 #include "../../constant/abstraction/cybol/datetime_cybol_abstraction.c"
 #include "../../constant/abstraction/cybol/logicvalue_cybol_abstraction.c"
@@ -187,5 +187,5 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* ABSTRACTION_CONVERTER_SOURCE */
+/* ABSTRACTION_DECODER_SOURCE */
 #endif

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FRACTION_CONVERTER_SOURCE
-#define FRACTION_CONVERTER_SOURCE
+#ifndef FRACTION_DECODER_SOURCE
+#define FRACTION_DECODER_SOURCE
 
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
@@ -91,35 +91,5 @@ void decode_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/**
- * Encodes the fraction model and creates a byte stream from it.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void encode_fraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-/*??
-    //?? log_message((void*) &INFORMATION_LEVEL_LOG_MODEL, (void*) &"Finalise fraction.");
-
-    // Initialise elements.
-    int d = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Get elements.
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &DENOMINATOR_INDEX, (void*) &d);
-    get_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &NUMERATOR_INDEX, (void*) &n);
-
-    // Remove elements.
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_MEMORY_MODEL_COUNT, (void*) &DENOMINATOR_INDEX);
-    remove_array_element(p0, (void*) &INTEGER_ARRAY, (void*) &FRACTION_MEMORY_MODEL_COUNT, (void*) &NUMERATOR_INDEX);
-
-//??    sprintf(p1, %l, (void*) &(m->value));
-*/
-}
-
-/* FRACTION_CONVERTER_SOURCE */
+/* FRACTION_DECODER_SOURCE */
 #endif

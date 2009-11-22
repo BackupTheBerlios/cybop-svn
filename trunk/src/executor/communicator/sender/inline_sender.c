@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INLINE_COMMUNICATOR_SOURCE
-#define INLINE_COMMUNICATOR_SOURCE
+#ifndef INLINE_SENDER_SOURCE
+#define INLINE_SENDER_SOURCE
 
 #include <stdio.h>
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
@@ -35,7 +35,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Reads an inline stream and writes it into a byte array.
+ * Sends an inline stream that was read from a byte array.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
  * @param p1 the destination wide character array count
@@ -43,28 +43,12 @@
  * @param p3 the source wide character array
  * @param p4 the source wide character array count
  */
-void read_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void send_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read inline.");
-
-    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-}
-
-/**
- * Writes an inline stream that was read from a byte array.
- *
- * @param p0 the destination wide character array (Hand over as reference!)
- * @param p1 the destination wide character array count
- * @param p2 the destination wide character array size
- * @param p3 the source wide character array
- * @param p4 the source wide character array count
- */
-void write_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write inline.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send inline.");
 
     append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
 }
 
-/* INLINE_COMMUNICATOR_SOURCE */
+/* INLINE_SENDER_SOURCE */
 #endif

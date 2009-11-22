@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_COMMUNICATOR_SOURCE
-#define X_WINDOW_SYSTEM_COMMUNICATOR_SOURCE
+#ifndef X_WINDOW_SYSTEM_RECEIVER_SOURCE
+#define X_WINDOW_SYSTEM_RECEIVER_SOURCE
 
 #include <X11/Xlib.h>
 #include <pthread.h>
@@ -422,7 +422,7 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
 }
 
 /**
- * Reads the x window system display into a window.
+ * Receives the x window system display into a window.
  *
  * @param p0 the destination window (Hand over as reference!)
  * @param p1 the destination count
@@ -430,7 +430,7 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
  * @param p3 the source display
  * @param p4 the source count
  */
-void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // The knowledge memory.
     void** k = NULL_POINTER_MEMORY_MODEL;
@@ -743,63 +743,5 @@ void read_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/**
- * Writes the window onto the x window system display.
- *
- * @param p0 the destination display (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the internal memory
- * @param p4 the source count
- */
-void write_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-        struct _XDisplay** d = (struct _XDisplay**) p0;
-
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to x window system display.");
-
-        // The window.
-        int** w = (int**) NULL_POINTER_MEMORY_MODEL;
-
-        // Get x window system internals.
-        get_element(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
-
-        // CAUTION! This test is necessary to avoid a "Segmentation fault"!
-        if (*d != *NULL_POINTER_MEMORY_MODEL) {
-
-            // CAUTION! This test is necessary to avoid a "Segmentation fault"!
-            if (*w != *NULL_POINTER_MEMORY_MODEL) {
-
-                // Request input events (signals) to be put into event queue.
-                XSelectInput(*d, **w, ExposureMask
-                    | KeyPressMask | KeyReleaseMask
-                    | ButtonPressMask | ButtonReleaseMask | PointerMotionMask | ButtonMotionMask
-                    | Button1MotionMask | Button2MotionMask | Button3MotionMask | Button4MotionMask | Button5MotionMask
-                    | EnterWindowMask | LeaveWindowMask);
-
-                // Show the window (make it visible).
-                XMapWindow(*d, **w);
-
-                // Flush all pending requests to the X server.
-                XFlush(*d);
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to x window system display. The destination display is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to x window system display. The destination display is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to x window system display. The destination display argument is null.");
-    }
-}
-
-/* X_WINDOW_SYSTEM_COMMUNICATOR_SOURCE */
+/* X_WINDOW_SYSTEM_RECEIVER_SOURCE */
 #endif

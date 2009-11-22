@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CYBOL_CONVERTER_SOURCE
-#define CYBOL_CONVERTER_SOURCE
+#ifndef CYBOL_DECODER_SOURCE
+#define CYBOL_DECODER_SOURCE
 
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
@@ -51,19 +51,5 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     process_cybol_node(p0, p1, p2, p6, p7, p8, p9);
 }
 
-/**
- * Encodes cybol.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source model
- * @param p4 the source model count
- */
-void encode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode cybol.");
-}
-
-/* CYBOL_CONVERTER_SOURCE */
+/* CYBOL_DECODER_SOURCE */
 #endif

@@ -53,18 +53,5 @@ void allocate_date_time(void* p0, void* p1) {
     allocate_array(p0, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/**
- * Deallocates the date time.
- *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
- */
-void deallocate_date_time(void* p0, void* p1) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate date time.");
-
-    deallocate_array(p0, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-}
-
 /* DATE_TIME_ALLOCATOR_SOURCE */
 #endif

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PART_ACCESSOR_SOURCE
-#define PART_ACCESSOR_SOURCE
+#ifndef PART_APPENDER_SOURCE
+#define PART_APPENDER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
@@ -107,5 +107,5 @@ void append_part(void* p0, void* p1, void* p2, void* p3, void* p4,
     }
 }
 
-/* PART_ACCESSOR_SOURCE */
+/* PART_APPENDER_SOURCE */
 #endif

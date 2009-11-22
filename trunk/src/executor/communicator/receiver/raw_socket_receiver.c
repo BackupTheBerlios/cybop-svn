@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RAW_SOCKET_COMMUNICATOR_SOURCE
-#define RAW_SOCKET_COMMUNICATOR_SOURCE
+#ifndef RAW_SOCKET_RECEIVER_SOURCE
+#define RAW_SOCKET_RECEIVER_SOURCE
 
 #include <sys/socket.h>
 #include <errno.h>
@@ -38,7 +38,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Reads a byte array stream from the raw socket.
+ * Receives a byte array stream from the raw socket.
  *
  * @param p0 the destination byte array (Hand over as reference!)
  * @param p1 the destination count
@@ -46,30 +46,11 @@
  * @param p3 the source socket
  * @param p4 the source count
  */
-void read_raw_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void receive_raw_socket(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read from raw socket.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive from raw socket.");
     log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"The raw socket functionality is NOT implemented yet.");
 }
 
-/**
- * Writes a byte array stream to the raw socket.
- *
- * @param p0 the destination socket of this system
- * @param p1 the source byte array
- * @param p2 the source byte array count
- * @param p3 the socket address of the communication partner (Hand over as reference!)
- * @param p4 the socket address of the communication partner size
- * @param p5 the communication mode
- * @param p6 the communication mode count
- * @param p7 the communication style
- */
-void write_raw_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    // Not implemented.
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to raw socket.");
-    log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"The raw socket functionality is NOT implemented yet!");
-}
-
-/* RAW_SOCKET_COMMUNICATOR_SOURCE */
+/* RAW_SOCKET_RECEIVER_SOURCE */
 #endif

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_CONVERTER_SOURCE
-#define INTEGER_CONVERTER_SOURCE
+#ifndef INTEGER_DECODER_SOURCE
+#define INTEGER_DECODER_SOURCE
 
 #ifdef CYGWIN_ENVIRONMENT
 #include <windows.h>
@@ -118,128 +118,5 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/**
- * Encodes the integer model and creates a wide character array from it.
- *
- * @param p0 the destination wide character array (Hand over as reference!)
- * @param p1 the destination wide character array count
- * @param p2 the destination wide character array size
- * @param p3 the source integer number
- * @param p4 the source integer number count
- */
-void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* ds = (int*) p2;
-
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* dc = (int*) p1;
-
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                wchar_t** d = (wchar_t**) p0;
-
-                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode integer into wide character.");
-
-/*??
-    fwprintf(stdout, L"TEST encode integer into wide character 0 ds: %i\n", *ds);
-    fwprintf(stdout, L"TEST encode integer into wide character 0 dc: %i\n", *dc);
-    fwprintf(stdout, L"TEST encode integer into wide character 0 d: %ls\n", *d);
-*/
-
-                // The integer value.
-                void* v = *NULL_POINTER_MEMORY_MODEL;
-
-                // Get integer value.
-                get_array_elements(p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-/*??
-    fwprintf(stdout, L"TEST encode integer into wide character 1 v: %i\n", *v);
-*/
-
-                // Set destination size.
-                // CAUTION! The old destination size is used as summand,
-                // so that it can grow stepwise, in case this function
-                // has been called recursively by itself.
-                // CAUTION! Do NOT use the destination count here,
-                // since it is left at its initial value
-                // as long as the conversion was not successful,
-                // so that the size would not grow here.
-                *ds = *ds + *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-/*??
-    fwprintf(stdout, L"TEST encode integer into wide character 2 ds: %i\n", *ds);
-    fwprintf(stdout, L"TEST encode integer into wide character 2 dc: %i\n", *dc);
-    fwprintf(stdout, L"TEST encode integer into wide character 2 d: %ls\n", *d);
-*/
-
-                // Reallocate destination string.
-                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                // Transform source integer to destination string.
-                // A null wide character is written to mark the end of the string.
-                // The return value is the number of characters generated
-                // for the given input, excluding the trailing null.
-                // If not all output fits into the provided buffer,
-                // a negative value is returned.
-#ifdef CYGWIN_ENVIRONMENT
-                int test = wsprintfW(*d, L"%i", *((int*) v));
-/* CYGWIN_ENVIRONMENT */
-#else
-                int test = swprintf(*d, *ds, L"%i", *((int*) v));
-/* CYGWIN_ENVIRONMENT */
-#endif
-
-/*??
-    fwprintf(stdout, L"TEST encode integer into wide character 3 ds: %i\n", *ds);
-    fwprintf(stdout, L"TEST encode integer into wide character 3 dc: %i\n", *dc);
-    fwprintf(stdout, L"TEST encode integer into wide character 3 d: %ls\n", *d);
-*/
-
-                if (test >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    // The integer was converted successfully.
-
-                    // Set destination count.
-                    *dc = test;
-
-/*??
-    fwprintf(stdout, L"TEST encode integer into wide character 4 dc: %i\n", *dc);
-*/
-
-                } else {
-
-                    // The value returned by the conversion function is negative,
-                    // which means that the integer was NOT converted successfully.
-
-                    // Call this function itself recursively.
-                    // This is done every time again, until the integer
-                    // gets finally converted successfully.
-                    // The only argument that grows is the destination size p2 (== *ds).
-                    encode_integer(p0, p1, p2, p3, p4);
-                }
-
-/*??
-    fwprintf(stdout, L"TEST encode integer into wide character 5 dc: %i\n", *dc);
-*/
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer into wide character. The destination is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer into wide character. The destination count is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode integer into wide character. The destination size is null.");
-    }
-}
-
-/* INTEGER_CONVERTER_SOURCE */
+/* INTEGER_DECODER_SOURCE */
 #endif

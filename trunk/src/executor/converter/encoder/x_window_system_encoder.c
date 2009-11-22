@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_CONVERTER_SOURCE
-#define X_WINDOW_SYSTEM_CONVERTER_SOURCE
+#ifndef X_WINDOW_SYSTEM_ENCODER_SOURCE
+#define X_WINDOW_SYSTEM_ENCODER_SOURCE
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -37,18 +37,6 @@
 #include "../../constant/name/cybol/graphical_user_interface_cybol_name.c"
 #include "../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../memoriser/accessor.c"
-
-/**
- * Decodes the x window system model into a compound model.
- *
- * @param p0 the destination compound model (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the internal memory containing all x window system windows
- * @param p4 the source count
- */
-void decode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
-}
 
 /**
  * Encodes the source compound model into an x window system model.
@@ -715,5 +703,5 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
     }
 }
 
-/* X_WINDOW_SYSTEM_CONVERTER_SOURCE */
+/* X_WINDOW_SYSTEM_ENCODER_SOURCE */
 #endif

@@ -23,27 +23,14 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_VECTOR_ALLOCATOR_SOURCE
-#define CHARACTER_VECTOR_ALLOCATOR_SOURCE
+#ifndef CHARACTER_VECTOR_DEALLOCATOR_SOURCE
+#define CHARACTER_VECTOR_DEALLOCATOR_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
-
-/**
- * Allocates the character vector.
- *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
- */
-void allocate_character_vector(void* p0, void* p1) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate character vector.");
-
-    allocate_array(p0, p1, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-}
 
 /**
  * Deallocates the character vector.
@@ -58,5 +45,5 @@ void deallocate_character_vector(void* p0, void* p1) {
     deallocate_array(p0, p1, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/* CHARACTER_VECTOR_ALLOCATOR_SOURCE */
+/* CHARACTER_VECTOR_DEALLOCATOR_SOURCE */
 #endif

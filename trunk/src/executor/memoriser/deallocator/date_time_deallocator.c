@@ -23,35 +23,14 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DATE_TIME_ALLOCATOR_SOURCE
-#define DATE_TIME_ALLOCATOR_SOURCE
+#ifndef DATE_TIME_DEALLOCATOR_SOURCE
+#define DATE_TIME_DEALLOCATOR_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/array.c"
-
-/**
- * Allocates the date time.
- *
- * It consists of the following parts:
- * year (y)
- * month (m)
- * day (d)
- * hour (h)
- * minute (m)
- * second (s)
- *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
- */
-void allocate_date_time(void* p0, void* p1) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate date time.");
-
-    allocate_array(p0, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-}
 
 /**
  * Deallocates the date time.
@@ -66,5 +45,5 @@ void deallocate_date_time(void* p0, void* p1) {
     deallocate_array(p0, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/* DATE_TIME_ALLOCATOR_SOURCE */
+/* DATE_TIME_DEALLOCATOR_SOURCE */
 #endif

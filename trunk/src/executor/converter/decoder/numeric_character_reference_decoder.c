@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef NUMERIC_CHARACTER_REFERENCE_CONVERTER_SOURCE
-#define NUMERIC_CHARACTER_REFERENCE_CONVERTER_SOURCE
+#ifndef NUMERIC_CHARACTER_REFERENCE_DECODER_SOURCE
+#define NUMERIC_CHARACTER_REFERENCE_DECODER_SOURCE
 
 #include "../../globals/constants/character/character_constants.c"
 #include "../../globals/constants/character/numeric_character_reference_constants.c"
@@ -2644,87 +2644,5 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
     }
 }
 
-/**
- * Encodes a character into a numeric character reference (html escape code).
- *
- * @param p0 the destination numeric character reference (html escape code)
- * @param p1 the destination numeric character reference (html escape code) count
- * @param p2 the destination numeric character reference (html escape code) size
- * @param p3 the source character
- * @param p4 the source character count
- */
-void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* ds = (int*) p2;
-
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* dc = (int*) p1;
-
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                void** d = (void**) p0;
-
-                // The temporary value.
-                void** t = NULL_POINTER_MEMORY_MODEL;
-                int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-/*??
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    compare_arrays(p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        t = (void**) &SPACE_URL_ESCAPE_CODE;
-                        tc = *SPACE_URL_ESCAPE_CODE_COUNT;
-                        ts = tc;
-                    }
-                }
-*/
-
-                //
-                // Set actual destination, using the temporary value.
-                //
-
-                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    if ((*dc + tc) > *ds) {
-
-                        // Calculate destination size.
-                        *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
-
-                        // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-                    }
-
-                    // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-
-                    // Increase destination count.
-                    *dc = *dc + tc;
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode numeric character reference. The destination is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode numeric character reference. The destination count is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode numeric character reference. The destination size is null.");
-    }
-}
-
-/* NUMERIC_CHARACTER_REFERENCE_CONVERTER_SOURCE */
+/* NUMERIC_CHARACTER_REFERENCE_DECODER_SOURCE */
 #endif

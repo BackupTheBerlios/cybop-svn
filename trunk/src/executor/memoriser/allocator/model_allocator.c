@@ -34,7 +34,6 @@
 //
 
 void allocate(void* p0, void* p1, void* p2, void* p3);
-void deallocate(void* p0, void* p1, void* p2, void* p3);
 void set_integer_vector_element(void* p0, void* p1, void* p2);
 
 /**
@@ -81,43 +80,6 @@ void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
     } else {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The destination model size is null.");
-    }
-}
-
-/**
- * Deallocates the model.
- *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count (Hand over as reference!)
- * @param p2 the destination model size (Hand over as reference!)
- * @param p3 the source size
- * @param p4 the source abstraction
- * @param p5 the source abstraction count
- */
-void deallocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int** ds = (int**) p2;
-
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int** dc = (int**) p1;
-
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate model.");
-
-            deallocate(p0, p3, p4, p5);
-            deallocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-            deallocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate model. The destination model count is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate model. The destination model size is null.");
     }
 }
 

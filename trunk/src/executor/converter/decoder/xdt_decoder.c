@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef XDT_CONVERTER_SOURCE
-#define XDT_CONVERTER_SOURCE
+#ifndef XDT_DECODER_SOURCE
+#define XDT_DECODER_SOURCE
 
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
@@ -4955,19 +4955,5 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     }
 }
 
-/**
- * Encodes a compound model into an xdt format byte array.
- *
- * @param p0 the destination xdt byte array (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source compound model
- * @param p4 the source count
- */
-void encode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode compound model into xdt format.");
-}
-
-/* XDT_CONVERTER_SOURCE */
+/* XDT_DECODER_SOURCE */
 #endif

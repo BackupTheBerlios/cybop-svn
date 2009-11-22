@@ -45,32 +45,5 @@ void allocate_pointer_vector(void* p0, void* p1) {
     allocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/**
- * Deallocates the pointer vector.
- *
- * @param p0 the vector (Hand over as reference!)
- * @param p1 the vector size
- */
-void deallocate_pointer_vector(void* p0, void* p1) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate pointer vector.");
-
-    deallocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
-
-/**
- * Reallocates the pointer vector.
- *
- * @param p0 the vector (Hand over as reference!)
- * @param p1 the vector count
- * @param p2 the vector size
- */
-void reallocate_pointer_vector(void* p0, void* p1, void* p2) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Reallocate pointer vector.");
-
-    reallocate_array(p0, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
-
 /* POINTER_VECTOR_ALLOCATOR_SOURCE */
 #endif

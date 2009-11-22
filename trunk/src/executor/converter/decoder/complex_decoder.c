@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPLEX_CONVERTER_SOURCE
-#define COMPLEX_CONVERTER_SOURCE
+#ifndef COMPLEX_DECODER_SOURCE
+#define COMPLEX_DECODER_SOURCE
 
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
@@ -88,36 +88,5 @@ void decode_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/**
- * Encodes the complex model and creates a byte stream from it.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void encode_complex(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-/*??
-    //??    log_message((void*) &INFORMATION_LEVEL_LOG_MODEL, (void*) &"Finalise complex.");
-
-    // Initialise elements.
-    int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Get elements.
-    get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &IMAGINARY_INDEX, (void*) &i);
-    get_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &REAL_INDEX, (void*) &r);
-
-    // Remove elements.
-    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_MEMORY_MODEL_COUNT, (void*) &IMAGINARY_INDEX);
-    remove_array_element(p0, (void*) &DOUBLE_ARRAY, (void*) &COMPLEX_MEMORY_MODEL_COUNT, (void*) &REAL_INDEX);
-
-    //??    fwprintf(p1, %d, (void*) &(t->real));
-    //??    fwprintf(p1, %d, (void*) &(t->imaginary));
-*/
-}
-
-/* COMPLEX_CONVERTER_SOURCE */
+/* COMPLEX_DECODER_SOURCE */
 #endif

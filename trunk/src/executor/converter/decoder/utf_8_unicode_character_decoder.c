@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef UTF_8_UNICODE_CHARACTER_CONVERTER_SOURCE
-#define UTF_8_UNICODE_CHARACTER_CONVERTER_SOURCE
+#ifndef UTF_8_UNICODE_CHARACTER_DECODER_SOURCE
+#define UTF_8_UNICODE_CHARACTER_DECODER_SOURCE
 
 #include <errno.h>
 #include <locale.h>
@@ -316,134 +316,5 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
     }
 }
 
-/**
- * Encodes an UTF-32 Unicode wide character vector into an UTF-8 Unicode multibyte character stream.
- *
- * @param p0 the destination UTF-8 Unicode multibyte character stream (Hand over as reference!)
- * @param p1 the destination UTF-8 Unicode multibyte character stream count
- * @param p2 the destination UTF-8 Unicode multibyte character stream size
- * @param p3 the source wide character array
- * @param p4 the source wide character array count
- */
-void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* sc = (int*) p4;
-
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* ds = (int*) p2;
-
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-                int* dc = (int*) p1;
-
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    void** d = (void**) p0;
-
-                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode UTF-8 Unicode character vector.");
-
-                    // The new destination wide character vector size.
-                    //
-                    // CAUTION! The "worst case" is assumed, i.e. that each source wide character
-                    // represents a non-ascii character encoded by utf-8 with FOUR single bytes.
-                    // Therefore, the destination size is adjusted accordingly.
-                    // In case some source wide characters are ascii characters -- even better,
-                    // since then less than four destination characters are used for encoding,
-                    // and the destination character array will have LESS entries (count)
-                    // than the destination size that was set before.
-                    // In this case, the destination size will be too big, but can be reduced
-                    // to the actual destination count below, if so wanted.
-                    *ds = *dc + (*sc * *NUMBER_4_INTEGER_MEMORY_MODEL);
-
-                    // Reallocate destination character vector.
-                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                    // Set locale.
-                    //
-                    // Possible locales are: LANG, LC_CTYPE, ..., LC_ALL
-                    // where LANG has the lowest and LC_ALL the highest priority.
-                    // That is, if LC_ALL is specified, it overwrites e.g. the LC_CTYPE setting.
-                    // If no value "" is given, the default will be used.
-                    // Note, that LC_CTYPE suffices for the purpose of character conversion,
-                    // since it is the category that applies to classification and conversion
-                    // of characters, and to multibyte and wide characters.
-                    //
-                    // CAUTION! This setting is necessary for UTF-8 Unicode character conversion
-                    // with restartable multibyte conversion functions like "mbsnrtowcs"
-                    // and "wcsnrtombs" to work correctly.
-                    // The return value is not used; this is a global setting.
-                    char* loc = setlocale(LC_CTYPE, "");
-
-                    // The state of the conversion.
-                    //
-                    // Certain character sets use a stateful encoding.
-                    // That is, the encoded values depend in some way
-                    // on the previous bytes in the text.
-                    //
-                    // Since the conversion functions allow converting a text
-                    // in more than one step, there must be a way to pass this
-                    // information from one call of the functions to another.
-                    //
-                    // A variable of type mbstate_t can contain all the
-                    // information about the shift state needed from one call
-                    // to a conversion function to another.
-                    mbstate_t st;
-
-                    // Clear the whole conversion state variable.
-                    //
-                    // There is no specific function or initializer to put the
-                    // state object in any specific state. The rules are that
-                    // the object should always represent the initial state
-                    // before the first use and this is achieved here.
-                    memset((void*) &st, '\0', sizeof(st));
-
-                    // Initialise error number.
-                    // It is a global variable/ function and other operations
-                    // may have set some value that is not wanted here.
-                    //
-                    // CAUTION! Initialise the error number BEFORE calling the function
-                    // that might cause an error.
-                    errno = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                    // Converts the wide character string into a multibyte character string.
-                    //
-                    // Except in the case of an encoding error, the return value is the
-                    // number of bytes in all the multibyte character sequences stored in *d.
-                    int n = wcsnrtombs(*d, (void*) &p3, *sc, *ds, &st);
-
-                    if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Increment destination count by the number of multibyte characters converted.
-                        *dc = *dc + n;
-
-                    } else {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The conversion failed, possibly because one of the wide characters in the input string has no valid multibyte character equivalent.");
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The destination is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The destination count is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The destination size is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode utf-8 unicode character stream. The source count is null.");
-    }
-}
-
-/* UTF_8_UNICODE_CHARACTER_CONVERTER_SOURCE */
+/* UTF_8_UNICODE_CHARACTER_DECODER_SOURCE */
 #endif

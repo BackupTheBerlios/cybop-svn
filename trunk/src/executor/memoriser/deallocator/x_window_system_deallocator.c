@@ -23,19 +23,11 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
-#define X_WINDOW_SYSTEM_ALLOCATOR_SOURCE
+#ifndef X_WINDOW_SYSTEM_DEALLOCATOR_SOURCE
+#define X_WINDOW_SYSTEM_DEALLOCATOR_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
-
-/**
- * Allocates an x window system window.
- *
- * @param p0 the internals memory
- */
-void allocate_x_window_system_window(void* p0) {
-}
 
 /**
  * Deallocates the x window system window.
@@ -45,5 +37,5 @@ void allocate_x_window_system_window(void* p0) {
 void deallocate_x_window_system_window(void* p0) {
 }
 
-/* X_WINDOW_SYSTEM_ALLOCATOR_SOURCE */
+/* X_WINDOW_SYSTEM_DEALLOCATOR_SOURCE */
 #endif

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef UTF_16_UNICODE_CHARACTER_CONVERTER_SOURCE
-#define UTF_16_UNICODE_CHARACTER_CONVERTER_SOURCE
+#ifndef UTF_16_UNICODE_CHARACTER_DECODER_SOURCE
+#define UTF_16_UNICODE_CHARACTER_DECODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
@@ -87,19 +87,5 @@ void decode_utf_16_unicode_character_stream(void* p0, void* p1, void* p2, void* 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode UTF-16 Unicode character stream.");
 }
 
-/**
- * Encodes an UTF-32 Unicode wide character array into an UTF-16 Unicode character stream.
- *
- * @param p0 the destination UTF-16 Unicode character stream (Hand over as reference!)
- * @param p1 the destination UTF-16 Unicode character stream count
- * @param p2 the destination UTF-16 Unicode character stream size
- * @param p3 the source wide character array
- * @param p4 the source wide character array count
- */
-void encode_utf_16_unicode_character_stream(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode UTF-16 Unicode character stream.");
-}
-
-/* UTF_16_UNICODE_CHARACTER_CONVERTER_SOURCE */
+/* UTF_16_UNICODE_CHARACTER_DECODER_SOURCE */
 #endif

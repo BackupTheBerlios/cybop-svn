@@ -37,13 +37,5 @@
 void allocate_x_window_system_window(void* p0) {
 }
 
-/**
- * Deallocates the x window system window.
- *
- * @param p0 the internals memory
- */
-void deallocate_x_window_system_window(void* p0) {
-}
-
 /* X_WINDOW_SYSTEM_ALLOCATOR_SOURCE */
 #endif

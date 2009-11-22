@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BOOLEAN_CONVERTER_SOURCE
-#define BOOLEAN_CONVERTER_SOURCE
+#ifndef BOOLEAN_DECODER_SOURCE
+#define BOOLEAN_DECODER_SOURCE
 
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/cybol/boolean_cybol_model.c"
@@ -114,100 +114,5 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/**
- * Encodes the boolean model and creates a byte stream from it.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- */
-void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* sc = (int*) p4;
-
-        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* s = (int*) p3;
-
-            if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-                int* ds = (int*) p2;
-
-                if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    int* dc = (int*) p1;
-
-                    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                        void** d = (void**) p0;
-
-                        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode boolean.");
-
-                        if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                            if (*s == *NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                                // Set destination character vector.
-                                *ds = *dc + *TRUE_BOOLEAN_CYBOL_MODEL_COUNT;
-
-                                // Reallocate destination character vector.
-                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                                // Set source into destination character vector.
-                                set_array_elements(*d, p1, TRUE_BOOLEAN_CYBOL_MODEL, TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                                // Increment destination count.
-                                *dc = *dc + *TRUE_BOOLEAN_CYBOL_MODEL_COUNT;
-
-                            } else {
-
-                                // Set destination character vector.
-                                *ds = *dc + *FALSE_BOOLEAN_CYBOL_MODEL_COUNT;
-
-                                // Reallocate destination character vector.
-                                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                                // Set source into destination character vector.
-                                set_array_elements(*d, p1, FALSE_BOOLEAN_CYBOL_MODEL, FALSE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-
-                                // Increment destination count.
-                                *dc = *dc + *FALSE_BOOLEAN_CYBOL_MODEL_COUNT;
-                            }
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The source count is zero.");
-                        }
-
-                    } else {
-
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The destination is null.");
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The destination count is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The destination size is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The source is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode boolean. The source count is null.");
-    }
-}
-
-/* BOOLEAN_CONVERTER_SOURCE */
+/* BOOLEAN_DECODER_SOURCE */
 #endif

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GNU_LINUX_CONSOLE_COMMUNICATOR_SOURCE
-#define GNU_LINUX_CONSOLE_COMMUNICATOR_SOURCE
+#ifndef GNU_LINUX_CONSOLE_RECEIVER_SOURCE
+#define GNU_LINUX_CONSOLE_RECEIVER_SOURCE
 
 #include <errno.h>
 #include <wchar.h>
@@ -44,7 +44,7 @@
 #include "../../memoriser/array.c"
 
 /**
- * Reads a gnu/linux console character.
+ * Receives a gnu/linux console character.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
  * @param p1 the destination wide character array count
@@ -56,7 +56,7 @@
  * @param p7 the source input stream
  * @param p8 the mutex
  */
-void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void receives_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -78,7 +78,7 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                         int* b = (int*) p3;
 
-                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Read gnu/linux console character.");
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Receive gnu/linux console character.");
 
                         // Initialise error number.
                         // It is a global variable/ function and other operations
@@ -91,7 +91,7 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
                         // Lock gnu/linux console mutex.
                         pthread_mutex_lock(p8);
 
-                        // Read character from source input stream of gnu/linux console.
+                        // Receive character from source input stream of gnu/linux console.
                         //
                         // CAUTION! The multibyte- is converted to a wide character internally,
                         // so that the return value of type "wint_t" may be casted to "wchar_t".
@@ -113,8 +113,8 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                                 // Set loop break flag.
                                 // An escape character followed by a left square bracket character
-                                // were read before. So this is an escape control sequence.
-                                // Since all values have been read, the loop can be left now.
+                                // were received before. So this is an escape control sequence.
+                                // Since all values have been received, the loop can be left now.
                                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             } else if (*esc == *NUMBER_1_INTEGER_MEMORY_MODEL) {
@@ -122,11 +122,11 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
                                 // Reset escape character flag.
                                 *esc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                                // An escape character was read before.
+                                // An escape character was received before.
 
                                 if (*c == *((wint_t*) LEFT_SQUARE_BRACKET_UNICODE_CHARACTER_CODE_MODEL)) {
 
-                                    // The escape character read before is followed by an opening square bracket,
+                                    // The escape character received before is followed by an opening square bracket,
                                     // which means that this is the start of an escape control sequence.
 
                                     // Set escape control sequence flag.
@@ -182,7 +182,7 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read from gnu/linux console. The character reading failed.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive from gnu/linux console. The character reading failed.");
 
                             // Set loop break flag.
                             *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -190,32 +190,32 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read gnu/linux console character. The loop break flag is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive gnu/linux console character. The loop break flag is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read gnu/linux console character. The input character is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive gnu/linux console character. The input character is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read gnu/linux console character. The escape character mode is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive gnu/linux console character. The escape character mode is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read gnu/linux console character. The escape control sequence is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive gnu/linux console character. The escape control sequence is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not read gnu/linux console character. The source input stream is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive gnu/linux console character. The source input stream is null.");
     }
 }
 
 /**
- * Reads from gnu/linux console.
+ * Receives from gnu/linux console.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
  * @param p1 the destination count
@@ -223,9 +223,9 @@ void read_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, vo
  * @param p3 the source input stream
  * @param p4 the mutex
  */
-void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Read gnu/linux console.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive gnu/linux console.");
 
     // The loop break flag.
     int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -243,83 +243,9 @@ void read_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
             break;
         }
 
-        read_gnu_linux_console_character(p0, p1, p2, (void*) &b, (void*) &c, (void*) &esc, (void*) &csi, p3, p4);
+        receive_gnu_linux_console_character(p0, p1, p2, (void*) &b, (void*) &c, (void*) &esc, (void*) &csi, p3, p4);
     }
 }
 
-/**
- * Writes the terminal control sequences into a gnu/linux console.
- *
- * @param p0 the destination gnu/linux console (Hand over as reference!)
- * @param p1 the destination gnu/linux console count
- * @param p2 the destination gnu/linux console size
- * @param p3 the source terminal control sequences as utf-8 encoded multibyte characters
- * @param p4 the source terminal control sequences as utf-8 encoded multibyte characters count
- */
-void write_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-        FILE** d = (FILE**) p0;
-
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Write to gnu/linux console.");
-
-        // The terminated control sequences.
-        void* ts = *NULL_POINTER_MEMORY_MODEL;
-        void* tsc = *NULL_POINTER_MEMORY_MODEL;
-        void* tss = *NULL_POINTER_MEMORY_MODEL;
-
-        // Allocate terminated control sequences.
-        //
-        // CAUTION! Use a standard (non-wide) character vector here,
-        // because the source is handed over as utf-8 encoded multibyte characters
-        // and will be forwarded as such to the gnu linux console!
-        allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-
-        // Append control sequences and null termination character.
-        append_character_vector((void*) &ts, tsc, tss, p3, p4);
-        append_character_vector((void*) &ts, tsc, tss, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-        if (*d != *NULL_POINTER_MEMORY_MODEL) {
-
-            // Write to terminal.
-//??            fwprintf(*d, L"%s", (char*) ts);
-
-            //?? This is a TEMPORARY workaround.
-            //?? The UTF-8 conversion returns the total number of bytes,
-            //?? of all multibyte characters that were converted from wide characters.
-            //?? So the size is known, but not the actual number of characters,
-            //?? since one character may occupy more than just one byte.
-            //?? This may sometimes lead to problems (THIS IS AN ASSUMPTION),
-            //?? so that the text user interface is not drawn properly or not at all.
-            //?? Therefore, as a workaround, the source is printed on console as is,
-            //?? without null termination character.
-            fwprintf(*d, L"%s", (char*) p3);
-
-            // Flush any buffered output on the stream to the file.
-            //
-            // If this was not done here, the buffered output on the
-            // stream would only get flushed automatically when either:
-            // - one tried to do output and the output buffer is full
-            // - the stream was closed
-            // - the program terminated by calling exit
-            // - a newline was written with the stream being line buffered
-            // - an input operation on any stream actually read data from its file
-            fflush(*d);
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The destination terminal file is null.");
-        }
-
-        // Deallocate terminated control sequences.
-        deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not write to gnu/linux console. The destination terminal file parameter is null.");
-    }
-}
-
-/* GNU_LINUX_CONSOLE_COMMUNICATOR_SOURCE */
+/* GNU_LINUX_CONSOLE_RECEIVER_SOURCE */
 #endif
