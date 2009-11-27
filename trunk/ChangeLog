@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2009-11-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Extract comparison functions from "comparator.c" into extra files, e.g. "character_comparator.c"
+
 2009-11-22  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt files in "executor" directory to new structure
 

@@ -41,10 +41,10 @@
  * leaves the given result parameter unchanged, otherwise.
  *
  * @param p0 the result (Hand over as reference!)
- * @param p1 the first array
- * @param p2 the second array
+ * @param p1 the left array
+ * @param p2 the right array
  * @param p3 the array count
- * @param p4 the array type
+ * @param p4 the type
  */
 void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -103,12 +103,12 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The first array is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The left array is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The second array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The right array is null.");
         }
 
     } else {
@@ -124,37 +124,37 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * The actual elements comparison happens in compare_array_elements.
  *
  * @param p0 the result (Hand over as reference!)
- * @param p1 the first array
- * @param p2 the first array count
- * @param p3 the second array
- * @param p4 the second array count
+ * @param p1 the left array
+ * @param p2 the left array count
+ * @param p3 the right array
+ * @param p4 the right array count
  * @param p5 the array type
  */
 void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* sc = (int*) p4;
+        int* rc = (int*) p4;
 
         if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* fc = (int*) p2;
+            int* lc = (int*) p2;
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare arrays.");
 
-            if (*fc == *sc) {
+            if (*lc == *rc) {
 
                 compare_array_elements(p0, p1, p3, p4, p5);
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays. The first array count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays. The left array count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays. The second array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays. The right array count is null.");
     }
 }
 

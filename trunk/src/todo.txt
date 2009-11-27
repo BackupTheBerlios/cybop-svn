@@ -11,6 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Adapt branching files in "executor" directory (e.g. "appender.c") to new file structure
         * Debug source code by cleaning up errors stemming from previously implemented array changes
 
         * Assign "sizeof" for each programming language type to a global variable just once at startup
