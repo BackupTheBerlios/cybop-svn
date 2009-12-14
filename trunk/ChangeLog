@@ -1,4 +1,4 @@
-#
+﻿#
 # This file records the changes that are made to cybop.
 #
 # The format of this file is quite strict. Here are some tips for ChangeLog writing:
@@ -15,6 +15,9 @@
 # @version $RCSfile: ChangeLog,v $ $Revision: 1.147 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-12-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Split file "assigner.c" and put resulting files into "executor/accessor/assigner/" directory
 
 2009-11-27  Christian Heller  <christian.heller@tuxtax.de>
         * Extract comparison functions from "comparator.c" into extra files, e.g. "character_comparator.c"
