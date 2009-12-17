@@ -19,41 +19,48 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: negator.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
+ * @version $RCSfile: pointer_adder.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef NEGATOR_SOURCE
-#define NEGATOR_SOURCE
+#ifndef POINTER_INTEGER_ADDER_SOURCE
+#define POINTER_INTEGER_ADDER_SOURCE
 
-#include <stdlib.h>
-#include <string.h>
-#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Negates the destination integer.
+ * Adds the source integer to the destination pointer.
  *
- * @param p0 the destination and source integer (at the same time)
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the source
  */
-void negate_integer(void* p0) {
+void add_integer_to_pointer(void* p0, void* p1) {
 
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* d = (int*) p0;
+        int* s = (int*) p1;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Negate integer.");
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        *d = -(*d);
+            void** d = (void**) p0;
+
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add integer to pointer.");
+
+            *d = *d + *s;
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add integer to pointer. The destination is null.");
+        }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not negate integer. The destination is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add integer to pointer. The source is null.");
     }
 }
 
-/* NEGATOR_SOURCE */
+/* POINTER_INTEGER_ADDER_SOURCE */
 #endif

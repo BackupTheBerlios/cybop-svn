@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: subtracter.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
+ * @version $RCSfile: adder.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SUBTRACTER_SOURCE
-#define SUBTRACTER_SOURCE
+#ifndef INTEGER_ADDER_SOURCE
+#define INTEGER_ADDER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -32,39 +32,37 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/adder.c"
-#include "../../memoriser/negator.c"
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Subtracts the source integer from the destination.
+ * Adds the source integer to the destination of the given type.
  *
- * @param p0 the destination
- * @param p1 the source
+ * @param p0 the destination (If of type "pointer", then hand over as reference!)
+ * @param p1 the source integer
  * @param p2 the type
  */
-void subtract_integer(void* p0, void* p1, void* p2) {
+void add_integer(void* p0, void* p1, void* p2) {
 
-    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* s = (int*) p1;
+        int* t = (int*) p2;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Subtract integer.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add integer.");
 
-        // The negated subtrahend.
-        int n = *s;
+        if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
-        // Negate subtrahend.
-        negate_integer((void*) &n, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+            add_integer_to_integer(p0, p1);
 
-        // Add negated subtrahend.
-        add_integer(p0, (void*) &n, p2);
+        } else if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+
+            add_integer_to_pointer(p0, p1);
+        }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not subtract integer. The source is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add integer. The type is null.");
     }
 }
 
-/* SUBTRACTER_SOURCE */
+/* INTEGER_ADDER_SOURCE */
 #endif

@@ -19,48 +19,51 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_adder.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
+ * @version $RCSfile: subtracter.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_ADDER_SOURCE
-#define INTEGER_ADDER_SOURCE
+#ifndef INTEGER_INTEGER_SUBTRACTER_SOURCE
+#define INTEGER_INTEGER_SUBTRACTER_SOURCE
 
+#include <stdlib.h>
+#include <string.h>
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
+#include "../../memoriser/adder.c"
+#include "../../memoriser/negator.c"
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Adds the source integer to the destination integer.
+ * Subtracts the source integer from the destination integer.
  *
  * @param p0 the destination
  * @param p1 the source
  */
-void add_integer_to_integer(void* p0, void* p1) {
+void subtract_integer(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* s = (int*) p1;
 
-        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Subtract integer.");
 
-            int* d = (int*) p0;
+        // The negated subtrahend.
+        int n = *s;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add integer to integer.");
+        // Negate subtrahend.
+        negate_integer((void*) &n);
 
-            *d = *d + *s;
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add integer to integer. The destination is null.");
-        }
+        // Add negated subtrahend.
+        add_integer_to_integer(p0, (void*) &n);
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add integer to integer. The source is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not subtract integer. The source is null.");
     }
 }
 
-/* INTEGER_ADDER_SOURCE */
+/* INTEGER_INTEGER_SUBTRACTER_SOURCE */
 #endif
