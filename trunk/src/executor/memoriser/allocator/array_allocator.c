@@ -49,11 +49,14 @@ void allocate_array(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate array.");
 
-        // The memory area to be allocated.
+        // The memory area.
         int ma = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        // Calculate memory area depending on given array type.
-        calculate_area((void*) &ma, p1, p2);
+        // Determine type size.
+        determine_size((void*) &ma, p2);
+
+        // Calculate memory area.
+        multiply_with_integer((void*) &ma, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
         // A minimal space in memory is always allocated,
         // even if the requested size is zero.

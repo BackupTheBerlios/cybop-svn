@@ -11,6 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Move content of "comparator.c" to some other place and delete this file
+            from the root of the "executor/" directory
+
         * Adapt branching files in "executor" directory (e.g. "appender.c") to new file structure
         * Debug source code by cleaning up errors stemming from previously implemented array changes
 
@@ -33,7 +36,7 @@
             this is necessary, because names or models of standard formats are not always intuitive,
             so that CYBOI uses its own speaking names internally, e.g.:
             HTTP header names start with a capital letter, but CYBOI uses lower-case names only;
-            xDT fields are represented by numbers, but CYBOI uses speaking names
+            xDT fields are represented by numbers, but CYBOI uses speaking names (text)
         * Merge all files using old naming schemes like "memory", "model", "compound" into new format
         * Delete old files: "compound_http_name.c", "header_http_name.c", "field_xdt_model_name.c" etc.
         * Uncomment comparison block in function "select_http_request_header"

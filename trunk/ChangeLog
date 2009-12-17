@@ -1,4 +1,4 @@
-﻿#
+#
 # This file records the changes that are made to cybop.
 #
 # The format of this file is quite strict. Here are some tips for ChangeLog writing:
@@ -15,6 +15,20 @@
 # @version $RCSfile: ChangeLog,v $ $Revision: 1.147 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
+
+2009-12-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Distinguish between unary and binary operations in "executor/calculator/" directory
+            (for unary operations it suffices to distinguish abstractions like "integer", "double" etc.
+            and to offer a corresponding module and function for each such abstraction;
+            for binary operations, the two operands may have different abstractions, so that
+            different main modules have to be used, e.g. "integer_adder.c" instead of just "adder.c"
+        * Rename "adder.c" file into "integer_adder.c" and create equally named sub directory
+            with files "integer_integer_adder.c" and "pointer_integer_adder.c" (more are possible)
+        * Keep structure extensible, since other files like "double_adder.c" or
+            "wide_character_adder.c" may be added later on
+        * Delete file "calculator.c"
+        * Add new file "size_determiner.c" returning the size of a primitive type
+        * Adapt files "array_allocator.c" and "array_reallocator.c"
 
 2009-12-14  Christian Heller  <christian.heller@tuxtax.de>
         * Split file "assigner.c" and put resulting files into "executor/accessor/assigner/" directory

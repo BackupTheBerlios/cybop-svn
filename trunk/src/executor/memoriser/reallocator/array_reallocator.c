@@ -58,11 +58,14 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Reallocate array.");
 
-                // The memory area to be allocated.
+                // The memory area.
                 int ma = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                // Calculate memory area depending on given array type.
-                calculate_area((void*) &ma, p2, p3);
+                // Determine type size.
+                determine_size((void*) &ma, p3);
+
+                // Calculate memory area.
+                multiply_with_integer((void*) &ma, p2, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Create a new array with extended size.
                 *a = (void*) realloc(*a, (size_t) ma);
@@ -81,8 +84,11 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
                     // reduced by the existing element count.
                     int eas = *as - *ac;
 
-                    // Calculate new memory area depending on given array type.
-                    calculate_area((void*) &nma, (void*) &eas, p3);
+                    // Determine type size.
+                    determine_size((void*) &nma, p3);
+
+                    // Calculate memory area.
+                    multiply_with_integer((void*) &nma, (void*) &eas, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
                 }
 
                 // The new array elements.
