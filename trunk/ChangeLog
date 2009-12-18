@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2009-12-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Restructure "executor/comparator/" directory for distinguishing between "equality", "greaterness" etc.
+        * Move content of "comparator.c" into this directory and delete the file from "executor/" directory
+
 2009-12-17  Christian Heller  <christian.heller@tuxtax.de>
         * Distinguish between unary and binary operations in "executor/calculator/" directory
             (for unary operations it suffices to distinguish abstractions like "integer", "double" etc.

@@ -11,9 +11,6 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Move content of "comparator.c" to some other place and delete this file
-            from the root of the "executor/" directory
-
         * Adapt branching files in "executor" directory (e.g. "appender.c") to new file structure
         * Debug source code by cleaning up errors stemming from previously implemented array changes
 

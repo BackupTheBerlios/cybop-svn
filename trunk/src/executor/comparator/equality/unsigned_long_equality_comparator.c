@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef WIDE_CHARACTER_COMPARATOR_SOURCE
-#define WIDE_CHARACTER_COMPARATOR_SOURCE
+#ifndef UNSIGNED_LONG_EQUALITY_COMPARATOR_SOURCE
+#define UNSIGNED_LONG_EQUALITY_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -35,27 +35,27 @@
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Compares the wide character values.
+ * Compares the unsigned longs for equality.
  *
  * @param p0 the result (number 1 if equal; unchanged otherwise)
  * @param p1 the left value
  * @param p2 the right value
  */
-void compare_wide_character(void* p0, void* p1, void* p2) {
+void compare_equal_unsigned_long(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        wchar_t* e2 = (wchar_t*) p2;
+        unsigned long* e2 = (unsigned long*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            wchar_t* e1 = (wchar_t*) p1;
+            unsigned long* e1 = (unsigned long*) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* r = (int*) p0;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare wide character values.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare unsigned longs for equality.");
 
                 if (*e1 == *e2) {
 
@@ -65,19 +65,19 @@ void compare_wide_character(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare wide character values. The result is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare unsigned longs for equality. The result is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare wide character values. The left value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare unsigned longs for equality. The left value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare wide character values. The right value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare unsigned longs for equality. The right value is null.");
     }
 }
 
-/* WIDE_CHARACTER_COMPARATOR_SOURCE */
+/* UNSIGNED_LONG_EQUALITY_COMPARATOR_SOURCE */
 #endif

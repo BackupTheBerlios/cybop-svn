@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPARATOR_SOURCE
-#define COMPARATOR_SOURCE
+#ifndef EQUALITY_COMPARATOR_SOURCE
+#define EQUALITY_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -35,59 +35,44 @@
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Compares values.
+ * Compares two values for equality.
  *
  * @param p0 the result (number 1 if equal; unchanged otherwise)
- * @param p1 the first array
- * @param p2 the second array
- * @param p3 the offset
- * @param p4 the type
+ * @param p1 the left value
+ * @param p2 the right value
+ * @param p3 the type
  */
-void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void compare_equal(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p4;
+        int* t = (int*) p3;
 
-        // The first element.
-        // CAUTION! It HAS TO BE initialised with p1,
-        // since an offset is added to it below.
-        void* e1 = p1;
-        // The second element.
-        // CAUTION! It HAS TO BE initialised with p2,
-        // since an offset is added to it below.
-        void* e2 = p2;
-
-        // Add offset to first element.
-        add_integer((void*) &e1, p3, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        // Add offset to second element.
-        add_integer((void*) &e2, p3, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare values.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare for equality.");
 
         if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
-            compare_character(p0, e1, e2);
+            compare_equal_character(p0, p1, p2);
 
         } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
-            compare_double(p0, e1, e2);
+            compare_equal_double(p0, p1, p2);
 
         } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
-            compare_integer(p0, e1, e2);
+            compare_equal_integer(p0, p1, p2);
 
         } else if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
-            compare_pointer(p0, e1, e2);
+            compare_equal_pointer(p0, p1, p2);
 
         } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
-            compare_unsigned_long(p0, e1, e2);
+            compare_equal_unsigned_long(p0, p1, p2);
 
         } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
-            compare_wide_character(p0, e1, e2);
+            compare_equal_wide_character(p0, p1, p2);
         }
 
     } else {
@@ -96,5 +81,33 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* COMPARATOR_SOURCE */
+/**
+ * Compares the two values found at the given offset for equality.
+ *
+ * @param p0 the result (number 1 if equal; unchanged otherwise)
+ * @param p1 the left array
+ * @param p2 the right array
+ * @param p3 the type
+ * @param p4 the offset
+ */
+void compare_equal_with_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    // The first element.
+    // CAUTION! It HAS TO BE initialised with p1,
+    // since an offset is added to it below.
+    void* e1 = p1;
+    // The second element.
+    // CAUTION! It HAS TO BE initialised with p2,
+    // since an offset is added to it below.
+    void* e2 = p2;
+
+    // Add offset to first element.
+    add_integer((void*) &e1, p4, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    // Add offset to second element.
+    add_integer((void*) &e2, p4, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+
+    compare_equal(p0, e1, e2, p3);
+}
+
+/* EQUALITY_COMPARATOR_SOURCE */
 #endif

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ARRAY_COMPARATOR_SOURCE
-#define ARRAY_COMPARATOR_SOURCE
+#ifndef ARRAY_EQUALITY_COMPARATOR_SOURCE
+#define ARRAY_EQUALITY_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -35,7 +35,7 @@
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Compares the array elements.
+ * Compares the array elements for equality.
  *
  * Returns the number one if the array elements are equal;
  * leaves the given result parameter unchanged, otherwise.
@@ -46,7 +46,7 @@
  * @param p3 the array count
  * @param p4 the type
  */
-void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void compare_equal_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -60,14 +60,19 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     int* r = (int*) p0;
 
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare array elements.");
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare array elements for equality.");
 
                     // The loop variable.
                     int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                    // The memory area.
-                    int ma = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    // The type size.
+                    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    // The offset.
+                    int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
                     // The comparison result.
                     int r2 = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                    // Determine type size.
+                    determine_size((void*) &s, p4);
 
                     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
@@ -79,13 +84,18 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             break;
                         }
 
-                        // Calculate memory area depending on given array type.
-                        calculate_area((void*) &ma, (void*) &j, p4);
+                        // Reset offset to type size.
+                        o = s;
+
+                        // Calculate offset.
+                        multiply_with_integer((void*) &o, (void*) &j, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                         // Reset comparison result.
                         r2 = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                        compare((void*) &r2, p1, p2, (void*) &ma, p4);
+                        // CAUTION! This function does not change the result flag, if unequal.
+                        // Therefore, the result flag always has to be initialised with zero before!
+                        compare_equal_with_offset((void*) &r2, p1, p2, p4, (void*) &o);
 
                         if (r2 == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -98,27 +108,27 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The result is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements for equality. The result is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The left array is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements for equality. The left array is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The right array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements for equality. The right array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements. The array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements for equality. The array count is null.");
     }
 }
 
 /**
- * Compares the arrays.
+ * Compares the arrays for equality.
  *
  * This procedure compares only the element counts of both arrays.
  * The actual elements comparison happens in compare_array_elements.
@@ -130,7 +140,7 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p4 the right array count
  * @param p5 the array type
  */
-void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void compare_equal_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -140,23 +150,23 @@ void compare_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
 
             int* lc = (int*) p2;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare arrays.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare arrays for equality.");
 
             if (*lc == *rc) {
 
-                compare_array_elements(p0, p1, p3, p4, p5);
+                compare_equal_array_elements(p0, p1, p3, p4, p5);
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays. The left array count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays for equality. The left array count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays. The right array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays for equality. The right array count is null.");
     }
 }
 
-/* ARRAY_COMPARATOR_SOURCE */
+/* ARRAY_EQUALITY_COMPARATOR_SOURCE */
 #endif

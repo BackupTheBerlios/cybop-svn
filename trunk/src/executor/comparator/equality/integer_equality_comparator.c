@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_COMPARATOR_SOURCE
-#define DOUBLE_COMPARATOR_SOURCE
+#ifndef INTEGER_EQUALITY_COMPARATOR_SOURCE
+#define INTEGER_EQUALITY_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -35,27 +35,27 @@
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Compares the double values.
+ * Compares the integers for equality.
  *
  * @param p0 the result (number 1 if equal; unchanged otherwise)
  * @param p1 the left value
  * @param p2 the right value
  */
-void compare_double(void* p0, void* p1, void* p2) {
+void compare_equal_integer(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        double* e2 = (double*) p2;
+        int* e2 = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            double* e1 = (double*) p1;
+            int* e1 = (int*) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* r = (int*) p0;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare double values.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare integers for equality.");
 
                 if (*e1 == *e2) {
 
@@ -65,19 +65,19 @@ void compare_double(void* p0, void* p1, void* p2) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare double values. The result is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integers for equality. The result is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare double values. The left value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integers for equality. The left value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare double values. The right value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integers for equality. The right value is null.");
     }
 }
 
-/* DOUBLE_COMPARATOR_SOURCE */
+/* INTEGER_EQUALITY_COMPARATOR_SOURCE */
 #endif
