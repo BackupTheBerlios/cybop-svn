@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2009. Christian Heller.
+ * Copyright (C) 1999-2010. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -46,6 +46,9 @@
  * - index (required): the index of the element to be retrieved, within the compound
  * - description (required): the kind of data (name, abstraction) to retrieve from the compound's part
  * - result (required): the result knowledge model in which to store the retrieved element
+ *
+ * CAUTION! Do NOT rename this procedure to "get",
+ * as that name is already used by the corresponding executor operation.
  *
  * @param p0 the parameters
  * @param p1 the parameters count

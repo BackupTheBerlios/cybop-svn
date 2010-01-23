@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2009. Christian Heller.
+ * Copyright (C) 1999-2010. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -26,12 +26,12 @@
 #ifndef CHARACTER_VECTOR_APPENDER_SOURCE
 #define CHARACTER_VECTOR_APPENDER_SOURCE
 
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../logger/logger.c"
-#include "../../memoriser/array.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../../logger/logger.c"
+#include "../../../memoriser/array.c"
 
 /**
  * Appends the source- to the destination character vector.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2009. Christian Heller.
+ * Copyright (C) 1999-2010. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_VECTOR_ACCESSOR_SOURCE
-#define POINTER_VECTOR_ACCESSOR_SOURCE
+#ifndef POINTER_VECTOR_SETTER_SOURCE
+#define POINTER_VECTOR_SETTER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
@@ -47,33 +47,5 @@ void set_pointer_vector_element(void* p0, void* p1, void* p2) {
     set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
 }
 
-/**
- * Removes the pointer vector element.
- *
- * @param p0 the pointer vector
- * @param p1 the size
- * @param p2 the index
- */
-void remove_pointer_vector_element(void* p0, void* p1, void* p2) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Remove pointer vector element.");
-
-    remove_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
-
-/**
- * Gets the pointer vector element.
- *
- * @param p0 the pointer vector
- * @param p1 the index
- * @param p2 the element (Hand over as reference!)
- */
-void get_pointer_vector_element(void* p0, void* p1, void* p2) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get pointer vector element.");
-
-    get_array_elements(p0, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-}
-
-/* POINTER_VECTOR_ACCESSOR_SOURCE */
+/* POINTER_VECTOR_SETTER_SOURCE */
 #endif

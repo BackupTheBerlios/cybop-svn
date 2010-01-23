@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2009. Christian Heller.
+ * Copyright (C) 1999-2010. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -40,13 +40,13 @@
  * @param p0 the destination base
  * @param p1 the value
  * @param p2 the offset
- * @param p3 the array type
+ * @param p3 the abstraction
  */
 void assign(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p3;
+        int* a = (int*) p3;
 
         if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -59,27 +59,27 @@ void assign(void* p0, void* p1, void* p2, void* p3) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Assign value.");
 
-            if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+            if (*a == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
                 assign_character(de, se);
 
-            } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
                 assign_double(de, se);
 
-            } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
                 assign_integer(de, se);
 
-            } else if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
                 assign_pointer(de, se);
 
-            } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
 
                 assign_unsigned_long(de, se);
 
-            } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
 
                 assign_wide_character(de, se);
             }
@@ -91,7 +91,7 @@ void assign(void* p0, void* p1, void* p2, void* p3) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign value. The type is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign value. The abstraction is null.");
     }
 }
 

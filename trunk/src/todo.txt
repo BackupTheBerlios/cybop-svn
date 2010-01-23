@@ -11,8 +11,14 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Adapt branching files in "executor" directory (e.g. "appender.c") to new file structure
-        * Debug source code by cleaning up errors stemming from previously implemented array changes
+        * Introduce new "_MEMORY_MODEL" constants for models and channels,
+            in order to allow efficient integer- instead of string comparisons;
+            possibly introduce a double structure similar to /usr in linux,
+            e.g. constant/model/memory/xdt in addition to constant/model/xdt
+        * Continue with adapting executor/communicator/*
+
+        * Continue adapting source code by cleaning up errors stemming from
+            previously implemented changes in arrays, abstraction constants, model constants etc.
 
         * Assign "sizeof" for each programming language type to a global variable just once at startup
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code

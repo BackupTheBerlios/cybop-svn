@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2009. Christian Heller.
+ * Copyright (C) 1999-2010. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -38,28 +38,32 @@
  * Negates the source of the given type.
  *
  * @param p0 the destination and source (at the same time)
- * @param p1 the type
+ * @param p1 the abstraction
  */
 void negate(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p1;
+        int* a = (int*) p1;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Negate.");
 
-        if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+        if (*a == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
 
 //            negate_double(p0);
 
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*a == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             negate_integer(p0);
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not negate. The abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not negate. The type is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not negate. The abstraction is null.");
     }
 }
 

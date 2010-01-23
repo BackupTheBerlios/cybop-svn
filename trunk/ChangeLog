@@ -16,6 +16,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-01-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Change copyright year to 2010 in all CYBOI source code files
+        * Adapt branching files in "executor" directory (e.g. "appender.c") to use
+            new integer-based "_ABSTRACTION" constants without "_ABSTRACTION_COUNT"
+        * Adapt source code by cleaning up errors stemming from
+            previously implemented changes in arrays, abstraction constants, model constants etc.
+
 2009-12-18  Christian Heller  <christian.heller@tuxtax.de>
         * Restructure "executor/comparator/" directory for distinguishing between "equality", "greaterness" etc.
         * Move content of "comparator.c" into this directory and delete the file from "executor/" directory

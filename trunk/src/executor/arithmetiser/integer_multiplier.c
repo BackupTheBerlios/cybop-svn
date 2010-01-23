@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2009. Christian Heller.
+ * Copyright (C) 1999-2010. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -41,23 +41,27 @@
  *
  * @param p0 the destination (If of type "pointer", then hand over as reference!)
  * @param p1 the source integer
- * @param p2 the type
+ * @param p2 the abstraction
  */
 void multiply_with_integer(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p2;
+        int* a = (int*) p2;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Multiply with integer.");
 
-        if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+        if (*a == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
             multiply_integer_with_integer(p0, p1);
 
-        } else if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
 
 //            multiply_pointer_with_integer(p0, p1);
+
+        } else {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not multiply with integer. The abstraction is unknown.");
         }
 
     } else {
