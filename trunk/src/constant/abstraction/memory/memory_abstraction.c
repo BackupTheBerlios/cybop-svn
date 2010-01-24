@@ -30,6 +30,18 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 //
+// In earlier versions of CYBOI, these "abstraction" constants were character arrays (strings).
+// In order to gain better performance, they were later converted into simple integer numbers.
+//
+// There is no problem with that and concerns are not necessary, because:
+// - abstractions as given in CYBOL files are represented by character arrays, e.g. "boolean" or "xdt"
+// - when reading the corresponding model data, they are converted into memory-internal structures
+// - a "boolean" becomes and "int" and an "xdt" file becomes a "compound" memory model
+// - since the models have to be converted, the corresponding abstractions have to be converted, too
+// - therefore, it is no problem to represent memory-internal abstractions with an integer instead of a character array
+//
+
+//
 // Count.
 //
 // This count is valid for ALL memory abstractions below,

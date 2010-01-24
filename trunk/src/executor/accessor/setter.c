@@ -43,21 +43,24 @@
  * Sets the element.
  *
  * @param p0 the model
- * @param p1 the index
- * @param p2 the element (Hand over as reference!)
- * @param p3 the abstraction
+ * @param p1 the model count
+ * @param p2 the model size
+ * @param p3 the index
+ * @param p4 the element (Hand over as reference!)
+ * @param p5 the element count
+ * @param p6 the abstraction
  */
-void set(void* p0, void* p1, void* p2, void* p3) {
+void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* a = (int*) p3;
+        int* a = (int*) p6;
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set element.");
 
         if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
 
-            set_character_vector_element(p0, p1, p2);
+            set_character_vector_element(p0, p3, p4);
 
         } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
 
@@ -73,15 +76,17 @@ void set(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *DOUBLE_VECTOR_MEMORY_ABSTRACTION) {
 
-            set_double_vector_element(p0, p1, p2);
+            set_double_vector_element(p0, p3, p4);
 
         } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
 
 //??            set_fraction_element(p0, p1, p2);
 
-        } else if (*a == *INTEGER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
 
-            set_integer_vector_element(p0, p1, p2);
+            set_integer_vector_element(p0, p3, p4);
+            set_integer_vector_element(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5);
+            set_integer_vector_element(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5);
 
         } else if (*a == *INTERNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -89,7 +94,7 @@ void set(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *POINTER_VECTOR_MEMORY_ABSTRACTION) {
 
-            set_pointer_vector_element(p0, p1, p2);
+            set_pointer_vector_element(p0, p3, p4);
 
         } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -101,7 +106,7 @@ void set(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
 
-            set_wide_character_vector_element(p0, p1, p2);
+            set_wide_character_vector_element(p0, p3, p4);
 
         } else {
 

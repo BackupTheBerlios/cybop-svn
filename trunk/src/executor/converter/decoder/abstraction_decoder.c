@@ -57,7 +57,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -67,7 +67,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -77,7 +77,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -87,7 +87,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -97,7 +97,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -107,7 +107,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -117,7 +117,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -127,7 +127,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -137,7 +137,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -147,7 +147,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -157,7 +157,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -167,7 +167,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -177,7 +177,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_wide_character_vector(p0, p1, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            set(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 

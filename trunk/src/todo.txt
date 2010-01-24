@@ -11,20 +11,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Add to ChangeLog: Do NOT replace strings for name/channel/abstraction/model
-            with integers for now, since all of these may be given dynamically at runtime,
-            as model, so that their meaning depends on the context and they may not be
-            converted from a string into an integer that has correct meaning only within CYBOI
-
---
-
-        * Continue with adapting executor/communicator/*
-
         * Continue adapting source code by cleaning up errors stemming from
             previously implemented changes in arrays, abstraction constants, model constants etc.
+            --> continue with: executor/communicator/*
 
         * Assign "sizeof" for each programming language type to a global variable just once at startup
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code
+        * Check if standard "*_ARRAY_MEMORY_ABSTRACTION" may replace "*_VECTOR_MEMORY_ABSTRACTION"
 
         * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
             Should models in cybol/ dir be one level higher?

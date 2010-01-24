@@ -83,10 +83,18 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p9, p10);
 
     // Decode part name.
-    replace((void*) &n, (void*) nc, (void*) ns, p5, p6, p3, p4);
+    //
+    // The OLD solution was:
+    // replace((void*) &n, (void*) nc, (void*) ns, p5, p6, p3, p4);
+    // DELETE later!
+    decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4);
 
-    // Copy part abstraction.
-    replace((void*) &a, (void*) ac, (void*) as, p9, p10, p7, p8);
+    // Decode part abstraction.
+    //
+    // The OLD solution was:
+    // replace((void*) &a, (void*) ac, (void*) as, p9, p10, p7, p8);
+    // DELETE later!
+    decode((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8);
 
     //
     // CAUTION! Do NOT decode part model here!

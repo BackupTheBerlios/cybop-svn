@@ -139,12 +139,17 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 // Therefore, the node's details are processed.
 
                 // The temporary runtime abstraction.
+                // CAUTION! It is needed to retrieve the abstraction of the part to be created.
+                // Otherwise, it would not be known which part model to create.
+                // The source abstraction cannot be converted directly into the part's abstraction,
+                // because the part model has not been allocated yet when reading the abstraction
+                // for the first time.
                 void* ra = *NULL_POINTER_MEMORY_MODEL;
                 int rac = *NUMBER_0_INTEGER_MEMORY_MODEL;
                 int ras = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Allocate temporary runtime abstraction.
-                allocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                allocate_array((void*) &ra, (void*) &ras, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Decode source- into temporary runtime abstraction.
                 // A cybol abstraction is NOT equal to the runtime cyboi abstraction.
@@ -161,13 +166,14 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 // Decode destination part name.
                 decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sn, *snc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
-                // Decode (in this case just copy) destination part abstraction.
-                // CAUTION! Use the temporary RUNTIME abstraction as source here!
-                // CAUTION! Use WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION as abstraction here!
-                replace((void*) &a, (void*) ac, (void*) as, ra, (void*) &rac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+                // Decode destination part abstraction.
+                // CAUTION! The temporary runtime abstraction may also have been used as source here.
+                // In this case, its (integer) value would have had to be copied to the part abstraction.
+                // However, to be more consistent, the "decode" function is called a second time.
+                decode((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
 
                 // Deallocate temporary runtime abstraction.
-                deallocate_array((void*) &ra, (void*) &ras, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                deallocate_array((void*) &ra, (void*) &ras, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
 
                 // Receive and decode destination part model and details.
                 // CAUTION! Use the ORIGINAL CYBOL abstraction as source here

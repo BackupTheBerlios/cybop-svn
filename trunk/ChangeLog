@@ -16,10 +16,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-01-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt various files to use new integer-based "_MEMORY_ABSTRACTION" constants
+
 2010-01-22  Christian Heller  <christian.heller@tuxtax.de>
         * Change copyright year to 2010 in all CYBOI source code files
         * Adapt branching files in "executor" directory (e.g. "appender.c") to use
-            new integer-based "_ABSTRACTION" constants without "_ABSTRACTION_COUNT"
+            new integer-based "_MEMORY_ABSTRACTION" constants
         * Adapt source code by cleaning up errors stemming from
             previously implemented changes in arrays, abstraction constants, model constants etc.
 
