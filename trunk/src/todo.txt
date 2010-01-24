@@ -11,10 +11,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Introduce new "_MEMORY_MODEL" constants for models and channels,
-            in order to allow efficient integer- instead of string comparisons;
-            possibly introduce a double structure similar to /usr in linux,
-            e.g. constant/model/memory/xdt in addition to constant/model/xdt
+        * Add to ChangeLog: Do NOT replace strings for name/channel/abstraction/model
+            with integers for now, since all of these may be given dynamically at runtime,
+            as model, so that their meaning depends on the context and they may not be
+            converted from a string into an integer that has correct meaning only within CYBOI
+
+--
+
         * Continue with adapting executor/communicator/*
 
         * Continue adapting source code by cleaning up errors stemming from
