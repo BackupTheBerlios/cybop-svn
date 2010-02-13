@@ -44,7 +44,7 @@ void get_integer_vector_element(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get integer vector element.");
 
-    get_array_elements(p0, p1, p2, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
 }
 
 /* INTEGER_VECTOR_GETTER_SOURCE */

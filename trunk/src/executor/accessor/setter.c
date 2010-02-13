@@ -82,7 +82,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
 //??            set_fraction_element(p0, p1, p2);
 
-        } else if (*a == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
             set_integer_vector_element(p0, p3, p4);
             set_integer_vector_element(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5);

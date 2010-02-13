@@ -130,7 +130,7 @@ void maintain_shutting_socket(void* p0, void* p1, void* p2, void* p3) {
 
 /*??
             // Destroy signal ids.
-            deallocate_array((void*) id, (void*) ids, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+            deallocate_array((void*) id, (void*) ids, (void*) INTEGER_MEMORY_ABSTRACTION);
             deallocate(idc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
             deallocate(ids, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
 */

@@ -80,7 +80,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 void* v = *NULL_POINTER_MEMORY_MODEL;
 
                 // Get integer value.
-                get_array_elements(p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                get_array_elements(p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) INTEGER_MEMORY_ABSTRACTION);
 
 /*??
     fwprintf(stdout, L"TEST encode integer into wide character 1 v: %i\n", *v);
@@ -103,7 +103,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
 */
 
                 // Reallocate destination string.
-                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 // Transform source integer to destination string.
                 // A null wide character is written to mark the end of the string.

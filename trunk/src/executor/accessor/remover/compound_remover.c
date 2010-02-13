@@ -81,18 +81,18 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
                     void** ds = NULL_POINTER_MEMORY_MODEL;
 
                     // Get names, abstractions, models, details.
-                    get_array_elements(p0, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) &n, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) &nc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) &ns, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &a, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &ac, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) &as, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &m, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &mc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ms, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &dc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                    get_array_elements(p0, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ds, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) &n, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) &nc, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) &ns, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &a, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &ac, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) &as, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &m, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &mc, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ms, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &dc, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements(p0, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ds, (void*) POINTER_MEMORY_ABSTRACTION);
 
                     if (*n != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -121,18 +121,18 @@ void remove_compound_element_by_index(void* p0, void* p1, void* p2, void* p3) {
                                                                     if (*i < *cc) {
 
                                                                         // Remove part name, abstraction, model, details.
-                                                                        remove_array_elements(*n, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*nc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*ns, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*a, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*ac, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*as, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*m, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*mc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*ms, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*d, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*dc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                                        remove_array_elements(*ds, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*n, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*nc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*ns, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*a, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*ac, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*as, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*m, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*mc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*ms, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*d, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*dc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        remove_array_elements(*ds, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
 
                                                                         // Decrement count.
                                                                         (*cc)--;
@@ -257,18 +257,18 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
         int pc = *((int*) p3) + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
         // Allocate prefix.
-        allocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        allocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         // Set prefix as concatenation of base name and list separator.
-        set_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, p3, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(p, p3, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        set_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, p3, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        set_array_elements(p, p3, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         //create integer model for the index
         void* indexstr = *NULL_POINTER_MEMORY_MODEL;
         int indexstr_count = *NUMBER_0_INTEGER_MEMORY_MODEL;
         int indexstr_size = *NUMBER_10_INTEGER_MEMORY_MODEL;
 
-        allocate_array((void*) &indexstr, (void*) &indexstr_size, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        allocate_array((void*) &indexstr, (void*) &indexstr_size, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -289,7 +289,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                     // Reset comparison result.
                     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    compare_arrays(p, &pc, *n, &pc, &r, WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p, &pc, *n, &pc, &r, WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
@@ -317,9 +317,9 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
         }
 
         // Deallocate prefix.
-        deallocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        deallocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         // Deallocate index string.
-        deallocate_array((void*) &indexstr, (void*) &indexstr_count, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        deallocate_array((void*) &indexstr, (void*) &indexstr_count, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     }
 */
 }
@@ -412,7 +412,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                get_array_elements_index(p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, &s, WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                get_array_elements_index(p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, &s, WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 remove_compound_element_by_index(p0, p1, p2, (void*) &i);
 
@@ -464,7 +464,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                get_array_elements_index(p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, &s, WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                get_array_elements_index(p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, &s, WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 remove_compound_element_by_index(p3, p4, p5, (void*) &i);
 

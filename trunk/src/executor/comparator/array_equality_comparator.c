@@ -88,7 +88,7 @@ void compare_equal_array_elements(void* p0, void* p1, void* p2, void* p3, void* 
                         o = s;
 
                         // Calculate offset.
-                        multiply_with_integer((void*) &o, (void*) &j, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        multiply_with_integer((void*) &o, (void*) &j, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                         // Reset comparison result.
                         r2 = *NUMBER_0_INTEGER_MEMORY_MODEL;

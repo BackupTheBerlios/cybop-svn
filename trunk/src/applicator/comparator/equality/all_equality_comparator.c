@@ -96,7 +96,7 @@ void compare_equality_all(void* p0, void* p1, void* p2,
                 int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Compare result parameter abstraction. It must be a boolean.
-                compare_arrays(p18, p19, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p18, p19, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -114,8 +114,8 @@ void compare_equality_all(void* p0, void* p1, void* p2,
                     rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                    compare_arrays(p9, p10, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p0, p1, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_arrays(p9, p10, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
@@ -124,7 +124,7 @@ void compare_equality_all(void* p0, void* p1, void* p2,
                         // Reinitialise result parameter.
                         r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                        compare_arrays(p3, p4, p12, p13, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        compare_arrays(p3, p4, p12, p13, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -141,8 +141,8 @@ void compare_equality_all(void* p0, void* p1, void* p2,
                     rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                    compare_arrays(p9, p10, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p0, p1, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_arrays(p9, p10, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
@@ -163,8 +163,8 @@ void compare_equality_all(void* p0, void* p1, void* p2,
                     rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Compare parameter abstractions.
-                    compare_arrays(p0, p1, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                    compare_arrays(p9, p10, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p0, p1, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &lr, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_arrays(p9, p10, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) &rr, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 

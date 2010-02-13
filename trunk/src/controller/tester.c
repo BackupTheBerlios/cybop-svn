@@ -419,12 +419,12 @@ void test_array_resizing() {
     int cs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate original array.
-    allocate_array((void*) &o, (void*) &os, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &o, (void*) &os, (void*) CHARACTER_MEMORY_ABSTRACTION);
     // Allocate copied array.
-    allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
     // Fill original array with text.
-    set_array_elements(o, (void*) &oc, (void*) t, (void*) tc, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(o, (void*) &oc, (void*) t, (void*) tc, (void*) CHARACTER_MEMORY_ABSTRACTION);
     oc = oc + *tc;
 
     // Print original array content.
@@ -432,15 +432,15 @@ void test_array_resizing() {
 
     // Reallocate copied array.
     os = os + *NUMBER_10_INTEGER_MEMORY_MODEL;
-    reallocate_array((void*) &o, (void*) &oc, (void*) &os, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    reallocate_array((void*) &o, (void*) &oc, (void*) &os, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
     // Print original array content.
     log_write_terminated_message((void*) stdout, t);
 
     // Deallocate original array.
-    deallocate_array((void*) &o, (void*) &os, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &o, (void*) &os, (void*) CHARACTER_MEMORY_ABSTRACTION);
     // Deallocate copied array.
-    deallocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -490,44 +490,44 @@ void test_wide_character_output() {
     int tss = *NUMBER_1000_INTEGER_MEMORY_MODEL;
 
     // Create terminated control sequences string.
-    allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Set terminated control sequences string by first copying the actual
     // control sequences and then adding the null termination character.
     // (Termination character does not seem to be necessary for wide character strings.)
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
 
     wprintf(L"\033[32mgreen colour\033[0mswitched off.");
 
     // \033
     wchar_t wc = 0x001B;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
     // [
     wc = 0x005B;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
     // 3
     wc = 0x0033;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
     // 2
     wc = 0x0032;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
     // m
     wc = 0x006d;
-    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
 
-    set_array_elements(ts, (void*) &tsc, (void*) LATIN_CAPITAL_LETTER_H_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) LATIN_CAPITAL_LETTER_H_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
-    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(ts, (void*) &tsc, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     tsc++;
 
     // Write to terminal.
@@ -536,7 +536,7 @@ void test_wide_character_output() {
 //??    log_write_terminated_message((void*) stdout, (wchar_t*) ts, t);
 
     // Destroy terminated control sequences.
-    deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &ts, (void*) &tss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // UTF-8 still allows you to use C1 control characters such as CSI, even
     // though UTF-8 also uses bytes in the range 0x80-0x9F. It is important to
@@ -761,7 +761,7 @@ void test_character_array_single_element() {
     int cs = *NUMBER_5_INTEGER_MEMORY_MODEL;
 
     // Create character array.
-    allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     set_wide_character_array_elements(c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) LATIN_CAPITAL_LETTER_A_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
     set_wide_character_array_elements(c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) LATIN_CAPITAL_LETTER_B_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
@@ -789,7 +789,7 @@ void test_character_array_single_element() {
     }
 
     // Destroy character array.
-    deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -804,7 +804,7 @@ void test_character_array_multiple_elements() {
     int ds = *NUMBER_22_INTEGER_MEMORY_MODEL;
 
     // Create destination array.
-    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // The source array.
     wchar_t a[] = {L'T', L'h', L'i', L's', L' ', L'i', L's', L' ', L'a', L' ', L't', L'e', L's', L't', L'.', L'\n', L'\0'};
@@ -838,7 +838,7 @@ void test_character_array_multiple_elements() {
     // including two places for new line '\n' and c string termination '\0'.
     int ns = *NUMBER_15_INTEGER_MEMORY_MODEL;
 
-    reallocate_array((void*) &d, (void*) &ns, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    reallocate_array((void*) &d, (void*) &ns, (void*) &ns, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     log_write_terminated_message((void*) stdout, (wchar_t*) d);
 
@@ -851,7 +851,7 @@ void test_character_array_multiple_elements() {
     log_write_terminated_message((void*) stdout, (wchar_t*) r);
 
     // Destroy destination array.
-    deallocate_array((void*) &d, (void*) &ns, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &d, (void*) &ns, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -883,7 +883,7 @@ void test_pointer_return() {
     void* r = *NULL_POINTER_MEMORY_MODEL;
 
     // Get character from character array.
-    get_array_elements(c, (void*) NUMBER_6_INTEGER_MEMORY_MODEL, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(c, (void*) NUMBER_6_INTEGER_MEMORY_MODEL, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Print result (character array).
     fwprintf(stdout, L"r: %ls\n", (wchar_t*) r);
@@ -914,7 +914,7 @@ void test_pointer_array() {
     int ps = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
     // Create pointer array.
-    allocate_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &p, (void*) &ps, (void*) POINTER_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"p: %i\n", p);
 
@@ -930,13 +930,13 @@ void test_pointer_array() {
 
     // Set character array in pointer array.
     // Hand over character array as reference, because pointer array is expected!
-    set_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"p[0] after set: %i\n", p[0]);
     fwprintf(stdout, L"p[1] after set: %i\n", p[1]);
 
     // Get character array from pointer array.
-    get_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &r, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &r, (void*) POINTER_MEMORY_ABSTRACTION);
 
     // Print result (character array).
     fwprintf(stdout, L"r pointer: %i\n", *r);
@@ -947,7 +947,7 @@ void test_pointer_array() {
     //
 
     // Destroy pointer array.
-    deallocate_array((void*) &p, (void*) &ps, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &p, (void*) &ps, (void*) POINTER_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -1354,7 +1354,7 @@ void test_encode_integer() {
     int s = *NUMBER_18_INTEGER_MEMORY_MODEL;
 
     // Allocate destination character array.
-    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Use compound count as index to create the element name suffix,
     // because the element is added at the end of the compound container.
@@ -1365,7 +1365,7 @@ void test_encode_integer() {
     fwprintf(stdout, L"Test: Destination character array size: %i\n", ds);
 
     // Deallocate destination character array.
-    deallocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /**

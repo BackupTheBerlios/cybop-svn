@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-02-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up errors in executor/ directory stemming from previously implemented changes
+
 2010-01-24  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt various files to use new integer-based "_MEMORY_ABSTRACTION" constants
 

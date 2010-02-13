@@ -65,7 +65,7 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
                 determine_size((void*) &ma, p3);
 
                 // Calculate memory area.
-                multiply_with_integer((void*) &ma, p2, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                multiply_with_integer((void*) &ma, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                 // Create a new array with extended size.
                 *a = (void*) realloc(*a, (size_t) ma);
@@ -88,7 +88,7 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
                     determine_size((void*) &nma, p3);
 
                     // Calculate memory area.
-                    multiply_with_integer((void*) &nma, (void*) &eas, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                    multiply_with_integer((void*) &nma, (void*) &eas, (void*) INTEGER_MEMORY_ABSTRACTION);
                 }
 
                 // The new array elements.

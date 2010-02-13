@@ -149,7 +149,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 int ras = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Allocate temporary runtime abstraction.
-                allocate_array((void*) &ra, (void*) &ras, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                allocate_array((void*) &ra, (void*) &ras, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                 // Decode source- into temporary runtime abstraction.
                 // A cybol abstraction is NOT equal to the runtime cyboi abstraction.
@@ -173,7 +173,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 decode((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
 
                 // Deallocate temporary runtime abstraction.
-                deallocate_array((void*) &ra, (void*) &ras, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                deallocate_array((void*) &ra, (void*) &ras, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                 // Receive and decode destination part model and details.
                 // CAUTION! Use the ORIGINAL CYBOL abstraction as source here

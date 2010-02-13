@@ -339,7 +339,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
     fwprintf(stdout, L"layout count: %i\n", *((int*) *lmc));
 */
 
-            compare_arrays(*lm, *lmc, (void*) ROOT_LAYOUT_CYBOL_MODEL, (void*) ROOT_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(*lm, *lmc, (void*) ROOT_LAYOUT_CYBOL_MODEL, (void*) ROOT_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -360,7 +360,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // Reset comparison result.
                 r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                compare_arrays(*a, *ac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(*a, *ac, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -370,7 +370,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     int texts = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Create terminated text.
-                    allocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    allocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     // Encode wide character name into text, which is a multibyte character array.
                     encode_utf_8_unicode_character_vector((void*) &text, (void*) &textc, (void*) &texts, *m, *mc);
@@ -381,11 +381,11 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                         texts = textc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                         // Reallocate terminated file name as multibyte character array.
-                        reallocate_array((void*) &text, (void*) &textc, (void*) &texts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        reallocate_array((void*) &text, (void*) &textc, (void*) &texts, (void*) CHARACTER_MEMORY_ABSTRACTION);
                     }
 
                     // Add null termination character to text.
-                    set_array_elements(text, (void*) &textc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(text, (void*) &textc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     //?? TODO: Create "text" as 2byte character array,
                     //?? since the xlib C library expects it that way.
@@ -399,7 +399,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     XDrawString(*di, **w, *gc, *pmx, *pmy + *NUMBER_20_INTEGER_MEMORY_MODEL, text, textc);
 
                     // Destroy terminated text.
-                    deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     /*
                     In the conventional 'XFontStruct' model, an X client opens
@@ -557,9 +557,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 tis = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Create terminated title.
-                allocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                allocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_MEMORY_ABSTRACTION);
                 // Create terminated icon name.
-                allocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                allocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                 // Encode wide character name into title, which is a multibyte character array.
                 encode_utf_8_unicode_character_vector((void*) &tt, (void*) &ttc, (void*) &tts, *tm, *tmc);
@@ -572,7 +572,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     tts = ttc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate title as multibyte character array.
-                    reallocate_array((void*) &tt, (void*) &ttc, (void*) &tts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    reallocate_array((void*) &tt, (void*) &ttc, (void*) &tts, (void*) CHARACTER_MEMORY_ABSTRACTION);
                 }
 
                 if (tis <= tic) {
@@ -581,13 +581,13 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     tis = tic + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate icon name as multibyte character array.
-                    reallocate_array((void*) &ti, (void*) &tic, (void*) &tis, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    reallocate_array((void*) &ti, (void*) &tic, (void*) &tis, (void*) CHARACTER_MEMORY_ABSTRACTION);
                 }
 
                 // Add null termination character to title.
-                set_array_elements(tt, (void*) &ttc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(tt, (void*) &ttc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
                 // Add null termination character to icon name.
-                set_array_elements(ti, (void*) &tic, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(ti, (void*) &tic, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                 // Set terminated window title.
                 //
@@ -598,15 +598,15 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 XSetIconName(*di, **w, (char*) ti);
 
                 // Destroy terminated title.
-                deallocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                deallocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_MEMORY_ABSTRACTION);
                 // Destroy terminated icon name.
-                deallocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                deallocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_MEMORY_ABSTRACTION);
             }
 
             // Reset comparison result.
             r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            compare_arrays(*a, *ac, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(*a, *ac, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

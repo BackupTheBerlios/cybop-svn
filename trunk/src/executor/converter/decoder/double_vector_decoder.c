@@ -61,19 +61,19 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int tmps = *sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
             // Create temporary null-terminated string.
-            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             // The index.
             int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Copy original string to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements((void*) tmp, (void*) &i, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             // This is used as index to set the termination character.
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements((void*) tmp, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -100,10 +100,10 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             //?? to be able to take the double value?
 
             // Set double value.
-            set_array_elements(*d, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(*d, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DOUBLE_MEMORY_ABSTRACTION);
 
             // Destroy temporary null-terminated string.
-            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         } else {
 

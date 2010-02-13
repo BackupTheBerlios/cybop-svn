@@ -158,7 +158,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set hidden property.
-    compare_arrays(p10, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+    compare_arrays(p10, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -170,7 +170,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set inverse property.
-    compare_arrays(p11, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+    compare_arrays(p11, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -182,7 +182,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set blink property.
-    compare_arrays(p12, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+    compare_arrays(p12, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -194,7 +194,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set underline property.
-    compare_arrays(p13, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+    compare_arrays(p13, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -206,7 +206,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set bold property.
-    compare_arrays(p14, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+    compare_arrays(p14, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -264,7 +264,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) ASCII_LINE_BORDER_CYBOL_MODEL, (void*) ASCII_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                compare_arrays(p6, p7, (void*) ASCII_LINE_BORDER_CYBOL_MODEL, (void*) ASCII_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -279,7 +279,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                compare_arrays(p6, p7, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -294,7 +294,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) ROUND_LINE_BORDER_CYBOL_MODEL, (void*) ROUND_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                compare_arrays(p6, p7, (void*) ROUND_LINE_BORDER_CYBOL_MODEL, (void*) ROUND_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -309,7 +309,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_arrays(p6, p7, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                                compare_arrays(p6, p7, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -694,7 +694,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) NORTH_COMPASS_LAYOUT_CYBOL_MODEL, (void*) NORTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) NORTH_COMPASS_LAYOUT_CYBOL_MODEL, (void*) NORTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -713,7 +713,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) SOUTH_COMPASS_LAYOUT_CYBOL_MODEL, (void*) SOUTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) SOUTH_COMPASS_LAYOUT_CYBOL_MODEL, (void*) SOUTH_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -731,7 +731,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) WEST_COMPASS_LAYOUT_CYBOL_MODEL, (void*) WEST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) WEST_COMPASS_LAYOUT_CYBOL_MODEL, (void*) WEST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -750,7 +750,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) EAST_COMPASS_LAYOUT_CYBOL_MODEL, (void*) EAST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) EAST_COMPASS_LAYOUT_CYBOL_MODEL, (void*) EAST_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -768,7 +768,7 @@ void encode_gnu_linux_console_rectangle_compass_layout(void* p0, void* p1, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p12, p13, (void*) CENTRE_COMPASS_LAYOUT_CYBOL_MODEL, (void*) CENTRE_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p12, p13, (void*) CENTRE_COMPASS_LAYOUT_CYBOL_MODEL, (void*) CENTRE_COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -825,7 +825,7 @@ void encode_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, voi
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p20, p21, (void*) COORDINATES_LAYOUT_CYBOL_MODEL, (void*) COORDINATES_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p20, p21, (void*) COORDINATES_LAYOUT_CYBOL_MODEL, (void*) COORDINATES_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -836,7 +836,7 @@ void encode_gnu_linux_console_rectangle_layout(void* p0, void* p1, void* p2, voi
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p20, p21, (void*) COMPASS_LAYOUT_CYBOL_MODEL, (void*) COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p20, p21, (void*) COMPASS_LAYOUT_CYBOL_MODEL, (void*) COMPASS_LAYOUT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1040,7 +1040,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p35, p36, (void*) RECTANGLE_SHAPE_CYBOL_MODEL, (void*) RECTANGLE_SHAPE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p35, p36, (void*) RECTANGLE_SHAPE_CYBOL_MODEL, (void*) RECTANGLE_SHAPE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1054,7 +1054,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p35, p36, (void*) CIRCLE_SHAPE_CYBOL_MODEL, (void*) CIRCLE_SHAPE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p35, p36, (void*) CIRCLE_SHAPE_CYBOL_MODEL, (void*) CIRCLE_SHAPE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1068,7 +1068,7 @@ void encode_gnu_linux_console_shape(void* p0, void* p1, void* p2, void* p3, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p35, p36, (void*) POLYGON_SHAPE_CYBOL_MODEL, (void*) POLYGON_SHAPE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p35, p36, (void*) POLYGON_SHAPE_CYBOL_MODEL, (void*) POLYGON_SHAPE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1656,7 +1656,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
             (void*) &wsd, (void*) &wsdc, (void*) &wsds,
             p13, p14);
 
-        compare_arrays(p3, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) &ar, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays(p3, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) &ar, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (ar != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1709,7 +1709,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                         (void*) &d, (void*) &dc, (void*) &ds);
 
                     // Compare expected name with that of the current compound part element.
-                    compare_arrays(*n, *nc, en, (void*) &enc, (void*) &nr, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(*n, *nc, en, (void*) &enc, (void*) &nr, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL) || (nr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 

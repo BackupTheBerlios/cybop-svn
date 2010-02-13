@@ -75,7 +75,7 @@ void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, voi
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p2, p3, (void*) LOCAL_NAMESPACE_CYBOL_MODEL, (void*) LOCAL_NAMESPACE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p2, p3, (void*) LOCAL_NAMESPACE_CYBOL_MODEL, (void*) LOCAL_NAMESPACE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -86,7 +86,7 @@ void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, voi
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p2, p3, (void*) INET_NAMESPACE_CYBOL_MODEL, (void*) INET_NAMESPACE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p2, p3, (void*) INET_NAMESPACE_CYBOL_MODEL, (void*) INET_NAMESPACE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -97,7 +97,7 @@ void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, voi
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_arrays(p2, p3, (void*) INET6_NAMESPACE_CYBOL_MODEL, (void*) INET6_NAMESPACE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                compare_arrays(p2, p3, (void*) INET6_NAMESPACE_CYBOL_MODEL, (void*) INET6_NAMESPACE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -137,7 +137,7 @@ void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p1, p2, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -147,7 +147,7 @@ void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p1, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -157,7 +157,7 @@ void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p1, p2, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -210,7 +210,7 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p1, p2, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -227,7 +227,7 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p1, p2, (void*) ANY_ADDRESS_CYBOL_MODEL, (void*) ANY_ADDRESS_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    compare_arrays(p1, p2, (void*) ANY_ADDRESS_CYBOL_MODEL, (void*) ANY_ADDRESS_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -253,7 +253,7 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
                     int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Allocate terminated address model.
-                    allocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    allocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     // Encode wide character name into multibyte character array.
                     encode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, p1, p2);
@@ -264,18 +264,18 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
                         ss = sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                         // Reallocate terminated file name as multibyte character array.
-                        reallocate_array((void*) &s, (void*) &sc, (void*) &ss, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        reallocate_array((void*) &s, (void*) &sc, (void*) &ss, (void*) CHARACTER_MEMORY_ABSTRACTION);
                     }
 
                     // Add null termination character to terminated file name.
-                    set_array_elements(s, (void*) &sc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(s, (void*) &sc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     // Convert uint16_t integer hostshort from host byte order
                     // to network byte order.
                     inet_pton(*an, s, p0);
 
                     // Deallocate terminated address model.
-                    deallocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    deallocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_MEMORY_ABSTRACTION);
                 }
 
             } else {
@@ -345,7 +345,7 @@ void maintain_starting_socket_initialise_local_socket_address(void* p0, void* p1
 
                     // CAUTION! Do NOT reallocate the file name array with:
                     // int nc = *fc + *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    // reallocate_array((void*) &((*a)->sun_path), p2, (void*) &nc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    // reallocate_array((void*) &((*a)->sun_path), p2, (void*) &nc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                     //
                     // The reason is that the size of the "sun_path" field of
                     // the "sockaddr_un" structure had to be fixed (to 108,
@@ -369,8 +369,8 @@ void maintain_starting_socket_initialise_local_socket_address(void* p0, void* p1
 
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
-                    set_array_elements(path, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-                    set_array_elements(path, p2, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(path, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    set_array_elements(path, p2, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 } else {
 
@@ -623,7 +623,7 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Allocate signal ids.
         allocate((void*) &idc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
         allocate((void*) &ids, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-        allocate_array((void*) &id, (void*) ids, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+        allocate_array((void*) &id, (void*) ids, (void*) INTEGER_MEMORY_ABSTRACTION);
 */
 
         // Initialise socket address size of this system.

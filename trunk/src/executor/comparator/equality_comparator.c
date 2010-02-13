@@ -50,27 +50,27 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare for equality.");
 
-        if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+        if (*t == *CHARACTER_MEMORY_ABSTRACTION) {
 
             compare_equal_character(p0, p1, p2);
 
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *DOUBLE_MEMORY_ABSTRACTION) {
 
             compare_equal_double(p0, p1, p2);
 
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *INTEGER_MEMORY_ABSTRACTION) {
 
             compare_equal_integer(p0, p1, p2);
 
-        } else if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *POINTER_MEMORY_ABSTRACTION) {
 
             compare_equal_pointer(p0, p1, p2);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
             compare_equal_unsigned_long(p0, p1, p2);
 
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
             compare_equal_wide_character(p0, p1, p2);
         }
@@ -102,9 +102,9 @@ void compare_equal_with_offset(void* p0, void* p1, void* p2, void* p3, void* p4)
     void* e2 = p2;
 
     // Add offset to first element.
-    add_integer((void*) &e1, p4, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    add_integer((void*) &e1, p4, (void*) POINTER_MEMORY_ABSTRACTION);
     // Add offset to second element.
-    add_integer((void*) &e2, p4, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    add_integer((void*) &e2, p4, (void*) POINTER_MEMORY_ABSTRACTION);
 
     compare_equal(p0, e1, e2, p3);
 }

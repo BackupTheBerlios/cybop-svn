@@ -47,48 +47,48 @@ void inform(void* p0) {
     int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate message.
-    allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Copy name.
-    set_array_elements(m, (void*) &i, (void*) NAME_IDENTIFICATION_CYBOI_MODEL, (void*) NAME_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) NAME_IDENTIFICATION_CYBOI_MODEL, (void*) NAME_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *NAME_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy space wide character.
-    set_array_elements(m, (void*) &i, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy version.
-    set_array_elements(m, (void*) &i, (void*) VERSION_IDENTIFICATION_CYBOI_MODEL, (void*) VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) VERSION_IDENTIFICATION_CYBOI_MODEL, (void*) VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy copyright.
-    set_array_elements(m, (void*) &i, (void*) COPYRIGHT_IDENTIFICATION_CYBOI_MODEL, (void*) COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) COPYRIGHT_IDENTIFICATION_CYBOI_MODEL, (void*) COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy licence.
-    set_array_elements(m, (void*) &i, (void*) LICENCE_IDENTIFICATION_CYBOI_MODEL, (void*) LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) LICENCE_IDENTIFICATION_CYBOI_MODEL, (void*) LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy null termination wide character.
-    set_array_elements(m, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Log message.
     log_write_terminated_message(p0, m);
 
     // Deallocate message.
-    deallocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /* INFORMANT_SOURCE */

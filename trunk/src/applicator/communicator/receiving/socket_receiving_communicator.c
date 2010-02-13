@@ -261,7 +261,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     wchar_t* url_basename = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
     int url_basename_count = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Create url basename.
-    allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &url_basename, (void*) &url_basename_count, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Get url base name.
     receive_socket_url(msg, &msg_count, &url_basename, &url_basename_count);
 
@@ -269,7 +269,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     wchar_t* param = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
     int param_count = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Create paramater.
-    allocate_array((void*) &param, (void*) &param_count, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array((void*) &param, (void*) &param_count, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Get parameters.
     receive_socket_parameter(msg, &msg_count, &param, &param_count);
 
@@ -282,7 +282,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+    compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

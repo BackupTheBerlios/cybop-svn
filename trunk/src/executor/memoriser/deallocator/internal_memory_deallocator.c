@@ -62,7 +62,7 @@ void deallocate_internal_memory(void* p0, void* p1) {
     // because the internal memory is already freed below.
 
     // Deallocate internal memory.
-    deallocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array(p0, p1, (void*) POINTER_MEMORY_ABSTRACTION);
 }
 
 /* INTERNAL_MEMORY_DEALLOCATOR_SOURCE */

@@ -83,10 +83,10 @@ void memorise_copying_integer_vector(void* p0, void* p1, void* p2, void* p3, voi
                         *dc = *sc;
                         *ds = *dc;
 
-                        reallocate_array(p0, p1, p2, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                        reallocate_array(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
                     }
 
-                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                 } else {
 

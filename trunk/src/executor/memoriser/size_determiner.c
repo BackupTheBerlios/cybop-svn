@@ -50,27 +50,27 @@ void determine_size(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Determine size.");
 
-        if (*t == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+        if (*t == *CHARACTER_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) CHARACTER_PRIMITIVE_SIZE);
 
-        } else if (*t == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *DOUBLE_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) DOUBLE_PRIMITIVE_SIZE);
 
-        } else if (*t == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *INTEGER_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) INTEGER_PRIMITIVE_SIZE);
 
-        } else if (*t == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *POINTER_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) POINTER_PRIMITIVE_SIZE);
 
-        } else if (*t == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) UNSIGNED_LONG_PRIMITIVE_SIZE);
 
-        } else if (*t == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*t == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }

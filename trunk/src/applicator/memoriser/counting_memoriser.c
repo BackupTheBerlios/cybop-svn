@@ -153,7 +153,7 @@ void memorise_counting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -163,7 +163,7 @@ void memorise_counting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -173,7 +173,7 @@ void memorise_counting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        compare_arrays((void*) *sm, (void*) *smc, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

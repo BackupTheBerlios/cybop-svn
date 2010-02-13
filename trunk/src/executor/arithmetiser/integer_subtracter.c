@@ -51,11 +51,11 @@ void add_integer(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Subtract integer.");
 
-        if (*a == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+        if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
             subtract_integer_from_integer(p0, p1);
 
-        } else if (*a == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
 //            subtract_integer_from_pointer(p0, p1);
 

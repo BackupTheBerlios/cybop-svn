@@ -42,7 +42,7 @@ void deallocate_fraction(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate fraction.");
 
-    deallocate_array(p0, p1, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
+    deallocate_array(p0, p1, (void*) DOUBLE_MEMORY_ABSTRACTION);
 }
 
 /* FRACTION_DEALLOCATOR_SOURCE */

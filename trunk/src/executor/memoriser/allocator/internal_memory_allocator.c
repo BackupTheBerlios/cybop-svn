@@ -44,7 +44,7 @@ void allocate_internal_memory(void* p0, void* p1) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate internal memory.");
 
     // Allocate internal memory.
-    allocate_array(p0, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array(p0, p1, (void*) POINTER_MEMORY_ABSTRACTION);
 }
 
 /* INTERNAL_MEMORY_ALLOCATOR_SOURCE */

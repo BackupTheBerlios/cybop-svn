@@ -44,7 +44,7 @@ void set_double_vector_element(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set double vector element.");
 
-    set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
+    set_array_elements(p0, p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DOUBLE_MEMORY_ABSTRACTION);
 }
 
 /* DOUBLE_VECTOR_SETTER_SOURCE */

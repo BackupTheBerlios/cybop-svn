@@ -90,7 +90,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                         int cs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Allocate integer wide character.
-                        allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                         if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -152,7 +152,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                         // Deallocate integer wide character.
                         // CAUTION! It may be deallocated here, since its content
                         // was copied in the "set_array_elements" function, further above!
-                        deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     } else {
 

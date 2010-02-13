@@ -217,7 +217,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
                 int bs = bc;
 
                 // Allocate temporary body.
-                allocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                allocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 // Encode body containing optional user data (such as an encoded/serialised xhtml page).
                 //
@@ -245,17 +245,17 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
                     *ds = *dc + bc;
 
                     // Reallocate destination http response using the new size.
-                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                 }
 
                 // Copy temporary body to the end of the actual destination http response.
-                set_array_elements(*d, p1, b, (void*) &bc, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                set_array_elements(*d, p1, b, (void*) &bc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 // Increase destination http response count by the body count.
                 *dc = *dc + bc;
 
                 // Deallocate temporary body.
-                deallocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                deallocate_array((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             } else {
 

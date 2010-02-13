@@ -42,7 +42,7 @@ void allocate_integer_vector(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate integer vector.");
 
-    allocate_array(p0, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array(p0, p1, (void*) INTEGER_MEMORY_ABSTRACTION);
 }
 
 /* INTEGER_VECTOR_ALLOCATOR_SOURCE */

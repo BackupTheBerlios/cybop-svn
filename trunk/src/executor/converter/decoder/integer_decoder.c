@@ -74,7 +74,7 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int tmps = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Create temporary null-terminated string.
-        allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         // Copy original string to temporary null-terminated string.
         append_wide_character_vector((void*) &tmp, (void*) &tmpc, (void*) &tmps, p3, p4);
@@ -110,7 +110,7 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
 
         // Destroy temporary null-terminated string.
-        deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+        deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     } else {
 

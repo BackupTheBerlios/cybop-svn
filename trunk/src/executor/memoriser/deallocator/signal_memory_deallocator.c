@@ -91,14 +91,14 @@ void deallocate_signal_memory(void* p0, void* p1) {
         //
         // CAUTION! The p0 parameter (s) needs to be dereferenced since it is
         // handed over as reference, but this procedure expects a normal array.
-        get_array_elements(*s, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &a, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &ac, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &m, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &mc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &dc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) &p, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &id, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+        get_array_elements(*s, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &a, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*s, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &ac, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*s, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &m, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*s, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &mc, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*s, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*s, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &dc, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*s, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) &p, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*s, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &id, (void*) POINTER_MEMORY_ABSTRACTION);
 
         //
         // CAUTION! Do NOT try to REMOVE the abstractions, models, details, priorities, identifications!
@@ -115,17 +115,17 @@ void deallocate_signal_memory(void* p0, void* p1) {
         // CAUTION! Do NOT hand over as reference!
         // The variables are of type void**.
         // The expression (&*variable) is the same like (variable).
-        deallocate_array((void*) a, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) ac, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) m, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) mc, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) d, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) dc, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) p, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) id, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+        deallocate_array((void*) a, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) ac, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) m, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) mc, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) d, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) dc, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) p, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) id, p1, (void*) POINTER_MEMORY_ABSTRACTION);
 
         // Deallocate signal memory.
-        deallocate_array(p0, (void*) SIGNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+        deallocate_array(p0, (void*) SIGNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION);
 
     } else {
 

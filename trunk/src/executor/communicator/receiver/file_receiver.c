@@ -82,12 +82,12 @@ void receive_file_stream(void* p0, void* p1, void* p2, void* p3) {
                             *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Reallocate array.
-                            reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                            reallocate_array(p0, p1, p2, (void*) CHARACTER_MEMORY_ABSTRACTION);
                         }
 
                         // Set character in destination array.
                         // The array count serves as index for setting the character.
-                        set_array_elements(*d, p1, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, p1, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                         // Increase array count.
                         (*dc)++;
@@ -141,7 +141,7 @@ void receives_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p3, p4, (void*) STANDARD_INPUT_STREAM_MODEL, (void*) STANDARD_INPUT_STREAM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            compare_arrays(p3, p4, (void*) STANDARD_INPUT_STREAM_MODEL, (void*) STANDARD_INPUT_STREAM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -162,7 +162,7 @@ void receives_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int tns = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Allocate terminated file name.
-            allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
             // Encode wide character name into multibyte character array.
             encode_utf_8_unicode_character_vector((void*) &tn, (void*) &tnc, (void*) &tns, p3, p4);
@@ -173,11 +173,11 @@ void receives_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 tns = tnc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 // Reallocate terminated file name as multibyte character array.
-                reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_MEMORY_ABSTRACTION);
             }
 
             // Add null termination character to terminated file name.
-            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
             // Open file.
             // CAUTION! The file name cannot be handed over as is.
@@ -200,7 +200,7 @@ void receives_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             }
 
             // Deallocate terminated file name.
-            deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_MEMORY_ABSTRACTION);
         }
 
     } else {

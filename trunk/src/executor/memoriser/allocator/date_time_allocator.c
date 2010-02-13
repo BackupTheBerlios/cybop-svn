@@ -50,7 +50,7 @@ void allocate_date_time(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate date time.");
 
-    allocate_array(p0, p1, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array(p0, p1, (void*) INTEGER_MEMORY_ABSTRACTION);
 }
 
 /* DATE_TIME_ALLOCATOR_SOURCE */

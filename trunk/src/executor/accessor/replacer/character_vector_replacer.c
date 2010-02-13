@@ -69,11 +69,11 @@ void replace_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) 
                     *ds = *sc;
 
                     // Reallocate destination character vector.
-                    reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    reallocate_array(p0, p1, p2, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     // Replace destination- with source character vector.
                     // Use an index with value zero, so that all characters get replaced.
-                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     // Set destination count to the same value as the -size.
                     *dc = *ds;

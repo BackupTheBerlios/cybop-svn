@@ -96,12 +96,12 @@ void memorise_counting_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, 
             wchar_t* compstring = *NULL_POINTER_MEMORY_MODEL;
             int compstring_count = *((int*) *bnmc) + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
-            allocate_array((void*) &compstring, (void*) &compstring_count, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            allocate_array((void*) &compstring, (void*) &compstring_count, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             // Set the compare string
             // this is the basisname and the list separat
-            set_array_elements(compstring, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, *bnm, *bnmc,  (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
-            set_array_elements(compstring, *bnmc, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            set_array_elements(compstring, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, *bnm, *bnmc,  (void*) CHARACTER_MEMORY_ABSTRACTION);
+            set_array_elements(compstring, *bnmc, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             // The loop count.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -127,7 +127,7 @@ void memorise_counting_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
                             r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                            compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                            compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_MEMORY_ABSTRACTION);
 
                             //if teh begiining of the two arrays ident, then
                             //the compound element is a part of the list
@@ -143,7 +143,7 @@ void memorise_counting_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, 
             }
 
             // destroy compare string.
-            deallocate_array((void*) &compstring, (void*) &compstring_count, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+            deallocate_array((void*) &compstring, (void*) &compstring_count, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 */
 
 /*??

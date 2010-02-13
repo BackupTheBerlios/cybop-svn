@@ -68,7 +68,7 @@ void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3,
     void** d = NULL_POINTER_MEMORY_MODEL;
 
     // Get display.
-    get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+    get_array_elements(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
 
 //??    fwprintf(stdout, L"TEST send x 1: %i\n", p0);
 

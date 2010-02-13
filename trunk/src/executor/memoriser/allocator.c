@@ -55,174 +55,110 @@
  */
 void allocate(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate.");
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int* a = (int*) p2;
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate.");
 
-        compare_arrays((void*) &r, p2, p3, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
 
             allocate_character_vector(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_complex(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_compound(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_date_time(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) DOUBLE_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) DOUBLE_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_double_vector(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_wide_character_vector(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_fraction(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_integer_vector(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_internal_memory(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_wide_character_vector(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_wide_character_vector(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) PART_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) PART_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
 //??            allocate_part(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_pointer_vector(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) SIGNAL_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_signal_memory(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_unsigned_long_vector(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_ARRAY_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        compare_arrays((void*) &r, p2, p3, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             allocate_wide_character_vector(p0, p1);
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    } else {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not allocate. The abstraction is unknown.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate. The abstraction is null.");
     }
 }
 

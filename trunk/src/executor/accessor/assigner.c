@@ -59,27 +59,27 @@ void assign(void* p0, void* p1, void* p2, void* p3) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Assign value.");
 
-            if (*a == *CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+            if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
                 assign_character(de, se);
 
-            } else if (*a == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
                 assign_double(de, se);
 
-            } else if (*a == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
                 assign_integer(de, se);
 
-            } else if (*a == *POINTER_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
                 assign_pointer(de, se);
 
-            } else if (*a == *UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
                 assign_unsigned_long(de, se);
 
-            } else if (*a == *WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION) {
+            } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
                 assign_wide_character(de, se);
             }

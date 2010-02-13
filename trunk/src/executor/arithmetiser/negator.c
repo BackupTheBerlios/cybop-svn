@@ -48,11 +48,11 @@ void negate(void* p0, void* p1) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Negate.");
 
-        if (*a == *DOUBLE_ARRAY_MEMORY_ABSTRACTION) {
+        if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
 //            negate_double(p0);
 
-        } else if (*a == *INTEGER_ARRAY_MEMORY_ABSTRACTION) {
+        } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
             negate_integer(p0);
 

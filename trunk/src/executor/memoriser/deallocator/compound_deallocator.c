@@ -67,18 +67,18 @@ void deallocate_compound(void* p0, void* p1) {
         // Get names, abstractions, models, details.
         // The p0 parameter (c) needs to be dereferenced since it is handed
         // over as reference, but this procedure expects a normal array.
-        get_array_elements(*c, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) &n, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) &nc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) &ns, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &a, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &ac, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) &as, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &m, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &mc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ms, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &dc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ds, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) &n, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) &nc, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) &ns, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &a, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &ac, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) &as, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &m, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &mc, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ms, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &dc, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(*c, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ds, (void*) POINTER_MEMORY_ABSTRACTION);
 
         // CAUTION! Do NOT try to REMOVE the names, abstractions, models, details!
         // Each of them has a fixed position within the compound and
@@ -91,21 +91,21 @@ void deallocate_compound(void* p0, void* p1) {
         // CAUTION! Do NOT hand over as reference!
         // The variables are of type void**.
         // The expression (&*variable) is the same like (variable).
-        deallocate_array((void*) n, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) nc, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) ns, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) a, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) ac, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) as, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) m, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) mc, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) ms, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) d, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) dc, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        deallocate_array((void*) ds, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+        deallocate_array((void*) n, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) nc, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) ns, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) a, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) ac, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) as, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) m, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) mc, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) ms, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) d, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) dc, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) ds, p1, (void*) POINTER_MEMORY_ABSTRACTION);
 
         // Deallocate compound.
-        deallocate_array(p0, (void*) COMPOUND_MEMORY_MODEL_COUNT, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+        deallocate_array(p0, (void*) COMPOUND_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION);
 
     } else {
 

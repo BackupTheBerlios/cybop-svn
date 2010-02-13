@@ -61,23 +61,23 @@ static int* MEMORY_ABSTRACTION_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 // of primitive data types, that may have to be considered here.
 //
 
-/** The character array memory abstraction. */
-static int* CHARACTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
+/** The character memory abstraction. */
+static int* CHARACTER_MEMORY_ABSTRACTION = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The double array memory abstraction. */
-static int* DOUBLE_ARRAY_MEMORY_ABSTRACTION = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
+/** The double memory abstraction. */
+static int* DOUBLE_MEMORY_ABSTRACTION = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The integer array memory abstraction. */
-static int* INTEGER_ARRAY_MEMORY_ABSTRACTION = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+/** The integer memory abstraction. */
+static int* INTEGER_MEMORY_ABSTRACTION = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The pointer array memory abstraction. */
-static int* POINTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+/** The pointer memory abstraction. */
+static int* POINTER_MEMORY_ABSTRACTION = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The unsigned long array memory abstraction. */
-static int* UNSIGNED_LONG_ARRAY_MEMORY_ABSTRACTION = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+/** The unsigned long memory abstraction. */
+static int* UNSIGNED_LONG_MEMORY_ABSTRACTION = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The wide character array memory abstraction. */
-static int* WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
+/** The wide character memory abstraction. */
+static int* WIDE_CHARACTER_MEMORY_ABSTRACTION = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Vector.
@@ -86,22 +86,22 @@ static int* WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION = NUMBER_5_INTEGER_MEMORY_MO
 //
 
 /** The character vector memory abstraction. */
-static int* CHARACTER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1000_INTEGER_MEMORY_MODEL_ARRAY;
+//?? static int* CHARACTER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1000_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The double vector memory abstraction. */
-static int* DOUBLE_VECTOR_MEMORY_ABSTRACTION = NUMBER_1001_INTEGER_MEMORY_MODEL_ARRAY;
+//?? static int* DOUBLE_VECTOR_MEMORY_ABSTRACTION = NUMBER_1001_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The integer vector memory abstraction. */
-static int* INTEGER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1002_INTEGER_MEMORY_MODEL_ARRAY;
+//?? static int* INTEGER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1002_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The pointer vector memory abstraction. */
-static int* POINTER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1003_INTEGER_MEMORY_MODEL_ARRAY;
+//?? static int* POINTER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1003_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The unsigned long vector memory abstraction. */
-static int* UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION = NUMBER_1004_INTEGER_MEMORY_MODEL_ARRAY;
+//?? static int* UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION = NUMBER_1004_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The wide character vector memory abstraction. */
-static int* WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1005_INTEGER_MEMORY_MODEL_ARRAY;
+//?? static int* WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1005_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Path.

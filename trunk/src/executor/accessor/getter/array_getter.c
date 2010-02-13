@@ -64,7 +64,7 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
             *d = p1;
 
             // Add offset to destination elements.
-            add_integer(p0, (void*) &o, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+            add_integer(p0, (void*) &o, (void*) POINTER_MEMORY_ABSTRACTION);
 
         } else {
 

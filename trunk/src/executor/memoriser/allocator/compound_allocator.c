@@ -51,7 +51,7 @@ void allocate_compound(void* p0, void* p1) {
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate compound.");
 
         // Allocate compound.
-        allocate_array(p0, (void*) COMPOUND_MEMORY_MODEL_COUNT, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+        allocate_array(p0, (void*) COMPOUND_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION);
 
         // The names, abstractions, models, details.
         void* n = *NULL_POINTER_MEMORY_MODEL;
@@ -68,34 +68,34 @@ void allocate_compound(void* p0, void* p1) {
         void* ds = *NULL_POINTER_MEMORY_MODEL;
 
         // Allocate names, abstractions, models, details.
-        allocate_array((void*) &n, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &nc, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &ns, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &a, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &ac, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &as, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &m, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &mc, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &ms, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &d, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &dc, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        allocate_array((void*) &ds, p1, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+        allocate_array((void*) &n, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &nc, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &ns, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &a, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &ac, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &as, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &m, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &mc, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &ms, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &d, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &dc, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &ds, p1, (void*) POINTER_MEMORY_ABSTRACTION);
 
         // Set names, abstractions, models, details.
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
-        set_array_elements(*c, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) &n, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) &nc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) &ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) &as, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ms, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ds, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) &n, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) &nc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) &ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) &as, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ms, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ds, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
 
     } else {
 

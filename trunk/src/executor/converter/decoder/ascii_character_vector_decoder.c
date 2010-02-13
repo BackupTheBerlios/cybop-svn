@@ -71,12 +71,12 @@ void decode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void*
                         *ds = *dc + *sc;
 
                         // Reallocate destination character vector.
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                        reallocate_array(p0, p1, p2, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                         if (*dc <= (*ds - *sc)) {
 
                             // Set source into destination character vector.
-                            set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                            set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                             // Increment count.
                             // Example:

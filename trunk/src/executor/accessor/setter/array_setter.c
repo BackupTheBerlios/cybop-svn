@@ -64,7 +64,7 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             // Calculate offset depending on given array type.
             calculate_area((void*) &o, p1, p4);
-            add_integer((void*) &db, (void*) &o, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+            add_integer((void*) &db, (void*) &o, (void*) POINTER_MEMORY_ABSTRACTION);
 
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 

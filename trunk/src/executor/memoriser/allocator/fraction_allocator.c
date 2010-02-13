@@ -42,7 +42,7 @@ void allocate_fraction(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate fraction.");
 
-    allocate_array(p0, p1, (void*) DOUBLE_ARRAY_MEMORY_ABSTRACTION);
+    allocate_array(p0, p1, (void*) DOUBLE_MEMORY_ABSTRACTION);
 }
 
 /* FRACTION_ALLOCATOR_SOURCE */

@@ -75,14 +75,14 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
             void** id = NULL_POINTER_MEMORY_MODEL;
 
             // Get abstractions, models, details, priorities, identifications.
-            get_array_elements(p0, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &a, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-            get_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &ac, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-            get_array_elements(p0, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &m, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-            get_array_elements(p0, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &mc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-            get_array_elements(p0, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-            get_array_elements(p0, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &dc, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-            get_array_elements(p0, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) &p, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-            get_array_elements(p0, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &id, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+            get_array_elements(p0, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &a, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &ac, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements(p0, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &m, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements(p0, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &mc, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements(p0, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements(p0, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &dc, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements(p0, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) &p, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements(p0, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &id, (void*) POINTER_MEMORY_ABSTRACTION);
 
             if (*a != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -111,41 +111,41 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                                                     *sms = (*sms * *SIGNAL_MEMORY_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                                     // Reallocate abstractions, models, details, priorities, identifications.
-                                                    reallocate_array(a, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    reallocate_array(ac, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    reallocate_array(m, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    reallocate_array(mc, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    reallocate_array(d, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    reallocate_array(dc, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    reallocate_array(p, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    reallocate_array(id, p1, p2, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+                                                    reallocate_array(a, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    reallocate_array(ac, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    reallocate_array(m, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    reallocate_array(mc, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    reallocate_array(d, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    reallocate_array(dc, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    reallocate_array(p, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    reallocate_array(id, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
 
                                                     // Set new array reference.
                                                     // CAUTION! If an array gets reallocated, a new array is
                                                     // created and the contents of the old array gets copied.
                                                     // Therefore, the new array reference needs to be set.
                                                     // The old array gets destroyed automatically by reallocate.
-                                                    set_array_elements(p0, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) p, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) id, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+                                                    set_array_elements(p0, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(p0, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(p0, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(p0, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(p0, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(p0, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(p0, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) p, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(p0, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) id, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
                                                 }
 
                                                 if (i < *sms) {
 
                                                     // Set abstraction, model, details, priority, identification.
-                                                    set_array_elements(*a, (void*) &i, (void*) p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*ac, (void*) &i, (void*) p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*m, (void*) &i, (void*) p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*mc, (void*) &i, (void*) p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*d, (void*) &i, (void*) p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*dc, (void*) &i, (void*) p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*p, (void*) &i, (void*) p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*id, (void*) &i, (void*) p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+                                                    set_array_elements(*a, (void*) &i, (void*) p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(*ac, (void*) &i, (void*) p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(*m, (void*) &i, (void*) p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(*mc, (void*) &i, (void*) p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(*d, (void*) &i, (void*) p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(*dc, (void*) &i, (void*) p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(*p, (void*) &i, (void*) p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    set_array_elements(*id, (void*) &i, (void*) p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
 
                                                     // Increment count.
                                                     (*smc)++;

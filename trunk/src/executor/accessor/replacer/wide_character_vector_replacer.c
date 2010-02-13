@@ -86,12 +86,12 @@ void replace_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void*
                     *ds = *sc;
 
                     // Reallocate destination wide character vector.
-                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     // Replace destination- with source wide character vector.
                     //
                     // CAUTION! Use an index with value zero, so that all characters get replaced.
-                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_ARRAY_MEMORY_ABSTRACTION);
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     // Set destination count to the same value as the -size.
                     *dc = *ds;
