@@ -45,11 +45,11 @@ void compare_equal_integer(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* e2 = (int*) p2;
+        int* rv = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* e1 = (int*) p1;
+            int* lv = (int*) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -57,7 +57,7 @@ void compare_equal_integer(void* p0, void* p1, void* p2) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare integers for equality.");
 
-                if (*e1 == *e2) {
+                if (*lv == *rv) {
 
                     // Set result to number one only if areas are equal.
                     *r = *NUMBER_1_INTEGER_MEMORY_MODEL;

@@ -44,7 +44,7 @@
  * @param p1 the left array
  * @param p2 the right array
  * @param p3 the array count
- * @param p4 the type
+ * @param p4 the abstraction
  */
 void compare_equal_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -138,7 +138,7 @@ void compare_equal_array_elements(void* p0, void* p1, void* p2, void* p3, void* 
  * @param p2 the left array count
  * @param p3 the right array
  * @param p4 the right array count
- * @param p5 the array type
+ * @param p5 the abstraction
  */
 void compare_equal_arrays(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 

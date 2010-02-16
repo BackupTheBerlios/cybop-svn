@@ -35,7 +35,7 @@
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Negates the source of the given type.
+ * Negates the source of the given abstraction.
  *
  * @param p0 the destination and source (at the same time)
  * @param p1 the abstraction
@@ -58,7 +58,7 @@ void negate(void* p0, void* p1) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not negate. The abstraction is unknown.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not negate. The abstraction is unknown.");
         }
 
     } else {

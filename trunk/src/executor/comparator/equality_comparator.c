@@ -40,44 +40,48 @@
  * @param p0 the result (number 1 if equal; unchanged otherwise)
  * @param p1 the left value
  * @param p2 the right value
- * @param p3 the type
+ * @param p3 the abstraction
  */
 void compare_equal(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p3;
+        int* a = (int*) p3;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare for equality.");
 
-        if (*t == *CHARACTER_MEMORY_ABSTRACTION) {
+        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
             compare_equal_character(p0, p1, p2);
 
-        } else if (*t == *DOUBLE_MEMORY_ABSTRACTION) {
+        } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
             compare_equal_double(p0, p1, p2);
 
-        } else if (*t == *INTEGER_MEMORY_ABSTRACTION) {
+        } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
             compare_equal_integer(p0, p1, p2);
 
-        } else if (*t == *POINTER_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
             compare_equal_pointer(p0, p1, p2);
 
-        } else if (*t == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
+        } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
             compare_equal_unsigned_long(p0, p1, p2);
 
-        } else if (*t == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
+        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
             compare_equal_wide_character(p0, p1, p2);
+
+        } else {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare values. The abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare values. The type is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare values. The abstraction is null.");
     }
 }
 
@@ -87,26 +91,26 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3) {
  * @param p0 the result (number 1 if equal; unchanged otherwise)
  * @param p1 the left array
  * @param p2 the right array
- * @param p3 the type
+ * @param p3 the abstraction
  * @param p4 the offset
  */
 void compare_equal_with_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    // The first element.
+    // The left element.
     // CAUTION! It HAS TO BE initialised with p1,
     // since an offset is added to it below.
-    void* e1 = p1;
-    // The second element.
+    void* le = p1;
+    // The right element.
     // CAUTION! It HAS TO BE initialised with p2,
     // since an offset is added to it below.
-    void* e2 = p2;
+    void* re = p2;
 
     // Add offset to first element.
-    add_integer((void*) &e1, p4, (void*) POINTER_MEMORY_ABSTRACTION);
+    add_integer((void*) &le, p4, (void*) POINTER_MEMORY_ABSTRACTION);
     // Add offset to second element.
-    add_integer((void*) &e2, p4, (void*) POINTER_MEMORY_ABSTRACTION);
+    add_integer((void*) &re, p4, (void*) POINTER_MEMORY_ABSTRACTION);
 
-    compare_equal(p0, e1, e2, p3);
+    compare_equal(p0, le, re, p3);
 }
 
 /* EQUALITY_COMPARATOR_SOURCE */

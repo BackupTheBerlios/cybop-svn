@@ -37,7 +37,7 @@
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Multiplies the destination of the given type with the source integer.
+ * Multiplies the destination of the given abstraction with the source integer.
  *
  * @param p0 the destination (If of type "pointer", then hand over as reference!)
  * @param p1 the source integer
@@ -66,7 +66,7 @@ void multiply_with_integer(void* p0, void* p1, void* p2) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not multiply with integer. The type is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not multiply with integer. The abstraction is null.");
     }
 }
 

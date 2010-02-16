@@ -45,11 +45,11 @@ void compare_equal_pointer(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        void** e2 = (void**) p2;
+        void** rv = (void**) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            void** e1 = (void**) p1;
+            void** lv = (void**) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -57,7 +57,7 @@ void compare_equal_pointer(void* p0, void* p1, void* p2) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare pointers for equality.");
 
-                if (*e1 == *e2) {
+                if (*lv == *rv) {
 
                     // Set result to number one only if areas are equal.
                     *r = *NUMBER_1_INTEGER_MEMORY_MODEL;

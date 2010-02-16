@@ -35,7 +35,7 @@
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Adds the source integer to the destination of the given type.
+ * Adds the source integer to the destination of the given abstraction.
  *
  * @param p0 the destination (If of type "pointer", then hand over as reference!)
  * @param p1 the source integer
@@ -56,11 +56,15 @@ void add_integer(void* p0, void* p1, void* p2) {
         } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
             add_integer_to_pointer(p0, p1);
+
+        } else {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not add integer. The abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add integer. The type is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add integer. The abstraction is null.");
     }
 }
 

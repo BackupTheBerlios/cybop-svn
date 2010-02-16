@@ -82,6 +82,10 @@ void assign(void* p0, void* p1, void* p2, void* p3) {
             } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
                 assign_wide_character(de, se);
+
+            } else {
+
+                log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not assign value. The abstraction is unknown.");
             }
 
         } else {
@@ -101,14 +105,14 @@ void assign(void* p0, void* p1, void* p2, void* p3) {
  * @param p0 the destination
  * @param p1 the source
  * @param p2 the index
- * @param p3 the type
+ * @param p3 the abstraction
  */
 void assign_with_offset(void* p0, void* p1, void* p2, void* p3) {
 
     // The offset.
     int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Calculate offset depending on given array type.
+    // Calculate offset depending on given abstraction.
     calculate_area((void*) &o, p2, p3);
 
     // Assign source- to destination memory area.

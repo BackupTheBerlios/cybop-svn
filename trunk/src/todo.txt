@@ -11,11 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Clean up errors stemming from previously implemented changes
-            --> only left to do: executor/converter/* and executor/memoriser/*
-            --> continue with: executor/memoriser/allocator.c
         * Replace "compare_arrays" with "compare_equal_arrays" and correct order of parameters
             (use jedit for global search/replace, since kfilereplace does not work)
+        * Clean up errors stemming from previously implemented changes
 
         * Assign "sizeof" for each programming language type to a global variable just once at startup
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code

@@ -45,11 +45,11 @@ void compare_equal_wide_character(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        wchar_t* e2 = (wchar_t*) p2;
+        wchar_t* rv = (wchar_t*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            wchar_t* e1 = (wchar_t*) p1;
+            wchar_t* lv = (wchar_t*) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -57,7 +57,7 @@ void compare_equal_wide_character(void* p0, void* p1, void* p2) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare wide characters for equality.");
 
-                if (*e1 == *e2) {
+                if (*lv == *rv) {
 
                     // Set result to number one only if areas are equal.
                     *r = *NUMBER_1_INTEGER_MEMORY_MODEL;

@@ -66,6 +66,10 @@ void append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
         } else if (*a == *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
 
             append_wide_character_vector(p0, p1, p2, p3, p4);
+
+        } else {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not append value. The abstraction is unknown.");
         }
 
     } else {

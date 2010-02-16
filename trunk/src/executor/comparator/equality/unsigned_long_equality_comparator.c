@@ -45,11 +45,11 @@ void compare_equal_unsigned_long(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        unsigned long* e2 = (unsigned long*) p2;
+        unsigned long* rv = (unsigned long*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            unsigned long* e1 = (unsigned long*) p1;
+            unsigned long* lv = (unsigned long*) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -57,7 +57,7 @@ void compare_equal_unsigned_long(void* p0, void* p1, void* p2) {
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare unsigned longs for equality.");
 
-                if (*e1 == *e2) {
+                if (*lv == *rv) {
 
                     // Set result to number one only if areas are equal.
                     *r = *NUMBER_1_INTEGER_MEMORY_MODEL;

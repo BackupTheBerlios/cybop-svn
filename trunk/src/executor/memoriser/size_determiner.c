@@ -37,47 +37,51 @@
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Determines the size of the given type.
+ * Determines the size of the given abstraction.
  *
  * @param p0 the size
- * @param p1 the type
+ * @param p1 the abstraction
  */
 void determine_size(void* p0, void* p1, void* p2) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* t = (int*) p1;
+        int* a = (int*) p1;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Determine size.");
 
-        if (*t == *CHARACTER_MEMORY_ABSTRACTION) {
+        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) CHARACTER_PRIMITIVE_SIZE);
 
-        } else if (*t == *DOUBLE_MEMORY_ABSTRACTION) {
+        } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) DOUBLE_PRIMITIVE_SIZE);
 
-        } else if (*t == *INTEGER_MEMORY_ABSTRACTION) {
+        } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) INTEGER_PRIMITIVE_SIZE);
 
-        } else if (*t == *POINTER_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) POINTER_PRIMITIVE_SIZE);
 
-        } else if (*t == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
+        } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) UNSIGNED_LONG_PRIMITIVE_SIZE);
 
-        } else if (*t == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
+        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+
+        } else {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not determine size. The abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not determine size. The type is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not determine size. The abstraction is null.");
     }
 }
 

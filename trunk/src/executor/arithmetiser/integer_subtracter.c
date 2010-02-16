@@ -37,7 +37,7 @@
 #include "../../variable/primitive_type_size.c"
 
 /**
- * Subtracts the source integer from the destination of the given type.
+ * Subtracts the source integer from the destination of the given abstraction.
  *
  * @param p0 the destination (If of type "pointer", then hand over as reference!)
  * @param p1 the source integer

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ALLOCATOR_SOURCE
-#define ALLOCATOR_SOURCE
+#ifndef DEALLOCATOR_SOURCE
+#define DEALLOCATOR_SOURCE
 
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../constant/model/memory/integer_memory_model.c"
@@ -51,180 +51,89 @@
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
  * @param p2 the abstraction
- * @param p3 the abstraction count
  */
-void deallocate(void* p0, void* p1, void* p2, void* p3) {
+void deallocate(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate.");
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int* a = (int*) p2;
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate.");
 
-        compare_arrays((void*) &r, p2, p3, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
 
             deallocate_character_vector(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
 
             deallocate_complex(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *COMPOUND_MEMORY_ABSTRACTION) {
 
             deallocate_compound(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *DATETIME_MEMORY_ABSTRACTION) {
 
             deallocate_date_time(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) DOUBLE_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *DOUBLE_VECTOR_MEMORY_ABSTRACTION) {
 
             deallocate_double_vector(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION) {
 
             deallocate_wide_character_vector(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
 
             deallocate_fraction(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *INTEGER_VECTOR_MEMORY_ABSTRACTION) {
 
             deallocate_integer_vector(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *INTERNAL_MEMORY_MEMORY_ABSTRACTION) {
 
             deallocate_internal_memory(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *KNOWLEDGE_PATH_MEMORY_ABSTRACTION) {
 
             deallocate_wide_character_vector(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *OPERATION_MEMORY_ABSTRACTION) {
 
             deallocate_wide_character_vector(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) PART_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *PART_MEMORY_ABSTRACTION) {
 
 //??            deallocate_part(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *POINTER_VECTOR_MEMORY_ABSTRACTION) {
 
             deallocate_pointer_vector(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
 
             deallocate_signal_memory(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION) {
 
             deallocate_unsigned_long_vector(p0, p1);
-        }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_arrays((void*) &r, p2, p3, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        } else if (*a == *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
 
             deallocate_wide_character_vector(p0, p1);
+
+        } else {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not deallocate. The abstraction is unknown.");
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    } else {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not deallocate. The abstraction is unknown.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate. The abstraction is null.");
     }
 }
 
-/* ALLOCATOR_SOURCE */
+/* DEALLOCATOR_SOURCE */
 #endif
