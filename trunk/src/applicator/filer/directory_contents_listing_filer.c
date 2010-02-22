@@ -103,18 +103,18 @@ void file_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
     int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate arguments vector.
-    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Append command.
-    append((void*) &arg, (void*) &argc, (void*) &args, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    append((void*) &arg, (void*) &argc, (void*) &args, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL, (void*) LIST_DIRECTORY_CONTENTS_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     if (*allm != *NULL_POINTER_MEMORY_MODEL) {
 
         if (**allm == *TRUE_BOOLEAN_MEMORY_MODEL) {
 
             // Append all option.
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME, (void*) ALL_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -123,8 +123,8 @@ void file_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
         if (**longlistingm == *TRUE_BOOLEAN_MEMORY_MODEL) {
 
             // Append long listing option.
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME, (void*) LONG_LISTING_LIST_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -132,7 +132,7 @@ void file_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
     run_executing(arg, (void*) &argc);
 
     // Deallocate arguments vector.
-    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /* DIRECTORY_CONTENTS_LISTING_FILER_SOURCE */

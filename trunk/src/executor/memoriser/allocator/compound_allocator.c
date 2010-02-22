@@ -34,7 +34,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/memory/compound_memory_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Allocates the compound.

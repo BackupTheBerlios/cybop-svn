@@ -30,7 +30,7 @@
 #include "../constant/model/cyboi/identification_cyboi_model.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../memoriser/array.c"
+#include "../executor/comparator/array_equality_comparator.c"
 
 /**
  * Writes cyboi help message to given output stream.

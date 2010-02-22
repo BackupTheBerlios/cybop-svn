@@ -32,7 +32,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
-#include "../../../memoriser/array.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Decodes the ascii character byte stream and creates a character vector model from it.

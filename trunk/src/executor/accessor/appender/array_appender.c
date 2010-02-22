@@ -19,30 +19,31 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_vector_accessor.c,v $ $Revision: 1.14 $ $Date: 2009-01-31 16:06:33 $ $Author: christian $
+ * @version $RCSfile: character_vector_accessor.c,v $ $Revision: 1.15 $ $Date: 2009-01-31 16:06:31 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_VECTOR_APPENDER_SOURCE
-#define INTEGER_VECTOR_APPENDER_SOURCE
+#ifndef ARRAY_APPENDER_SOURCE
+#define ARRAY_APPENDER_SOURCE
 
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../logger/logger.c"
-#include "../../memoriser/array.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
- * Appends the source- to the destination integer vector.
+ * Appends the source- to the destination array elements.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
  * @param p4 the source count
+ * @param p5 the abstraction
  */
-void append_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void append_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -60,44 +61,44 @@ void append_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Append integer vector.");
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Append array elements.");
 
                     // Set destination size.
                     *ds = *dc + *sc;
 
-                    // Reallocate destination vector.
-                    reallocate_array(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
+                    // Reallocate destination character vector.
+                    reallocate_array(p0, p1, p2, p5);
 
-                    // Append source- to destination vector.
+                    // Append source- to destination character vector.
                     //
                     // CAUTION! Do NOT set the destination count above
                     // (together with the destination size),
                     // because it is used here as index!
-                    set_array_elements(*d, p1, p3, p4, (void*) INTEGER_MEMORY_ABSTRACTION);
+                    set_array_elements(*d, p1, p3, p4, p5);
 
                     // Set destination count to the same value as the -size.
                     *dc = *ds;
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append integer vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append array elements. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append integer vector. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append array elements. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append integer vector. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append array elements. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append integer vector. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append array elements. The source count is null.");
     }
 }
 
-/* INTEGER_VECTOR_APPENDER_SOURCE */
+/* ARRAY_APPENDER_SOURCE */
 #endif

@@ -80,11 +80,11 @@ void decode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
                         *ds = (*CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+                        reallocate(p0, p1, p2, (void*) CHARACTER_MEMORY_ABSTRACTION);
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+                    set_element(*d, p1, (void*) t, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     // Increase destination count.
                     *dc = *dc + tc;

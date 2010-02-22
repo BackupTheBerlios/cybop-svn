@@ -43,7 +43,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../../memoriser/allocator.c"
+#include "../../executor/memoriser/allocator.c"
 
 /**
  * Decodes the wide character array and creates an integer from it.

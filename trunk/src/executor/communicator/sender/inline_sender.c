@@ -32,7 +32,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Sends an inline stream that was read from a byte array.
@@ -47,7 +47,7 @@ void send_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send inline.");
 
-    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /* INLINE_SENDER_SOURCE */

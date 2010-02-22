@@ -41,7 +41,7 @@
 #include "../../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../../memoriser/allocator/model_allocator.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Sends the terminal control sequences into a gnu/linux console.
@@ -70,7 +70,7 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // CAUTION! Use a standard (non-wide) character vector here,
         // because the source is handed over as utf-8 encoded multibyte characters
         // and will be forwarded as such to the gnu linux console!
-        allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+        allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
         // Append control sequences and null termination character.
         append_character_vector((void*) &ts, tsc, tss, p3, p4);
@@ -109,7 +109,7 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
 
         // Deallocate terminated control sequences.
-        deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+        deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
     } else {
 

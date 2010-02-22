@@ -30,21 +30,21 @@
 #include "../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../memoriser/accessor/character_vector_accessor.c"
-#include "../memoriser/accessor/compound_accessor.c"
+#include "../executor/accessor/getter/compound_getter.c"
 #include "../memoriser/accessor/double_vector_accessor.c"
 #include "../memoriser/accessor/integer_vector_accessor.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"
 #include "../memoriser/accessor/pointer_vector_accessor.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
 #include "../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../memoriser/array.c"
+#include "../executor/comparator/array_equality_comparator.c"
 
 /**
  * Gets the element.
  *
- * @param p0 the model
- * @param p1 the index
- * @param p2 the model element (Hand over as reference!)
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the source
+ * @param p2 the index
  * @param p3 the abstraction
  */
 void get(void* p0, void* p1, void* p2, void* p3) {
@@ -55,9 +55,9 @@ void get(void* p0, void* p1, void* p2, void* p3) {
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get element.");
 
-        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
-            get_character_vector_element(p0, p1, p2);
+            get_array_elements(p0, p1, p2, p3);
 
         } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
 
@@ -73,7 +73,7 @@ void get(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *DOUBLE_VECTOR_MEMORY_ABSTRACTION) {
 
-            get_double_vector_element(p0, p1, p2);
+            get_array_elements(p0, p1, p2, p3);
 
         } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
 
@@ -81,7 +81,7 @@ void get(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *INTEGER_VECTOR_MEMORY_ABSTRACTION) {
 
-            get_integer_vector_element(p0, p1, p2);
+            get_array_elements(p0, p1, p2, p3);
 
         } else if (*a == *INTERNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -89,7 +89,7 @@ void get(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *POINTER_VECTOR_MEMORY_ABSTRACTION) {
 
-            get_pointer_vector_element(p0, p1, p2);
+            get_array_elements(p0, p1, p2, p3);
 
         } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -97,11 +97,11 @@ void get(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION) {
 
-//??            get_unsigned_long_vector_element(p0, p1, p2);
+            get_array_elements(p0, p1, p2, p3);
 
-        } else if (*a == *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
-            get_wide_character_vector_element(p0, p1, p2);
+            get_array_elements(p0, p1, p2, p3);
 
         } else {
 

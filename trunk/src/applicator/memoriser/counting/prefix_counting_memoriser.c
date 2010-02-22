@@ -32,11 +32,11 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/accessor/compound_accessor.c"
-#include "../../../memoriser/allocator.c"
-#include "../../../memoriser/array.c"
-#include "../../../memoriser/communicator.c"
-#include "../../../memoriser/converter.c"
+#include "../../../executor/accessor/getter/compound_getter.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/communicator/receiver.c"
+#include "../../../executor/converter/decoder.c"
 
 /**
  * Counts those compound parts whose name starts with the given prefix.
@@ -127,7 +127,7 @@ void memorise_counting_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
                             r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                            compare_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_MEMORY_ABSTRACTION);
+                            compare_equal_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_MEMORY_ABSTRACTION);
 
                             //if teh begiining of the two arrays ident, then
                             //the compound element is a part of the list

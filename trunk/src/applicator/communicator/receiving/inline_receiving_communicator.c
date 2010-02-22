@@ -28,10 +28,10 @@
 
 #include "../../../constant/channel/cybol_channel.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/communicator/receiver.c"
+#include "../../../executor/converter/decoder.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/allocator.c"
-#include "../../../memoriser/communicator.c"
-#include "../../../memoriser/converter.c"
 
 /**
  * Receives a message from inline, that is from a string of characters.
@@ -57,10 +57,10 @@ void communicate_receiving_inline(void* p0, void* p1, void* p2, void* p3, void* 
     int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate read model.
-    allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Read persistent byte stream over channel.
-    read_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT);
+    receive_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT);
 
     // CAUTION! Do NOT try to decode from UTF-8 or other formats here!
     // In other words, do NOT call a function such as this:
@@ -75,7 +75,7 @@ void communicate_receiving_inline(void* p0, void* p1, void* p2, void* p3, void* 
     decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
     // Deallocate read model.
-    deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /* INLINE_RECEIVING_COMMUNICATOR_SOURCE */

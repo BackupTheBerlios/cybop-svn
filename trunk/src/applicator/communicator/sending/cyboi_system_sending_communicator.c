@@ -32,9 +32,9 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
 #include "../../../memoriser/accessor/signal_memory_accessor.c"
 #include "../../../memoriser/accessor.c"
+#include "../../../logger/logger.c"
 
 /**
  * Sends a message to the cyboi system (this system itself).
@@ -62,9 +62,9 @@ void communicate_sending_cyboi_system(void* p0, void* p1, void* p2, void* p3, vo
     sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER_MEMORY_MODEL;
 
     // Get signal memory mutex.
-    get_element(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &mt, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get((void*) &mt, p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
     // Get interrupt request internal.
-    get_element(p0, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &irq, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    get((void*) &irq, p0, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
 
     // Lock signal memory mutex.
     pthread_mutex_lock(*mt);

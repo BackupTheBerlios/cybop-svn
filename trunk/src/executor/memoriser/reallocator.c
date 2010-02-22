@@ -43,7 +43,7 @@
 #include "../memoriser/allocator/signal_memory_allocator.c"
 #include "../memoriser/allocator/unsigned_long_vector_allocator.c"
 #include "../memoriser/allocator/wide_character_vector_allocator.c"
-#include "../memoriser/array.c"
+#include "../executor/comparator/array_equality_comparator.c"
 
 /**
  * Reallocates the model.
@@ -61,7 +61,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3) {
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Reallocate.");
 
-        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
 //??            reallocate_character_vector(p0, p1, p2);
 
@@ -121,7 +121,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3) {
 
 //??            reallocate_unsigned_long_vector(p0, p1, p2);
 
-        } else if (*a == *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
 //??            reallocate_wide_character_vector(p0, p1, p2);
 

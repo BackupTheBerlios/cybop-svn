@@ -43,7 +43,7 @@
 #include "../memoriser/allocator/signal_memory_allocator.c"
 #include "../memoriser/allocator/unsigned_long_vector_allocator.c"
 #include "../memoriser/allocator/wide_character_vector_allocator.c"
-#include "../memoriser/array.c"
+#include "../executor/comparator/array_equality_comparator.c"
 
 /**
  * Allocates the model.
@@ -60,7 +60,7 @@ void allocate(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate.");
 
-        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
             allocate_character_vector(p0, p1);
 
@@ -120,7 +120,7 @@ void allocate(void* p0, void* p1, void* p2) {
 
             allocate_unsigned_long_vector(p0, p1);
 
-        } else if (*a == *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
             allocate_wide_character_vector(p0, p1);
 

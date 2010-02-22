@@ -32,8 +32,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/memory/destroy_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor/compound_accessor.c"
-#include "../../memoriser/array.c"
+#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 //
 // Forward declarations.
@@ -65,7 +65,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 
         if (*p != *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p1, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, p0, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p1, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, p0, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 }

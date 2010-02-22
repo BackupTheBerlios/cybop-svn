@@ -34,9 +34,9 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../executor/accessor/getter/compound_getter.c"
 #include "../../memoriser/accessor.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Decodes an xhtml format into a compound model.

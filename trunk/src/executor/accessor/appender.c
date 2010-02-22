@@ -30,14 +30,14 @@
 #include "../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../memoriser/accessor/character_vector_accessor.c"
-#include "../memoriser/accessor/compound_accessor.c"
+#include "../executor/accessor/getter/compound_getter.c"
 #include "../memoriser/accessor/double_vector_accessor.c"
 #include "../memoriser/accessor/integer_vector_accessor.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"
 #include "../memoriser/accessor/pointer_vector_accessor.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
 #include "../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../memoriser/array.c"
+#include "../executor/comparator/array_equality_comparator.c"
 
 /**
  * Appends the source- to the destination vector.
@@ -59,13 +59,17 @@ void append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Append.");
 
-        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
-            append_character_vector(p0, p1, p2, p3, p4);
+            append_array_elements(p0, p1, p2, p3, p4, p5);
 
-        } else if (*a == *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
 
-            append_wide_character_vector(p0, p1, p2, p3, p4);
+//??            append_fraction(p0, p1, p2, p3, p4, p5);
+
+        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
+
+            append_array_elements(p0, p1, p2, p3, p4, p5);
 
         } else {
 

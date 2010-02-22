@@ -31,7 +31,7 @@
 #include "../../../constant/model/log/level_log_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/communicator/stream_socket_communicator.c"
+#include "../../../executor/communicator/receiver/stream_socket_receiver.c"
 /*??
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -49,11 +49,11 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../memoriser/accessor/compound_accessor.c"
+#include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../memoriser/accessor/internal_memory_accessor.c"
 #include "../../../memoriser/accessor/signal_memory_accessor.c"
-#include "../../../memoriser/array.c"
-#include "../../../memoriser/allocator.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator.c"
 */
 
 /**
@@ -89,10 +89,10 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     int es = *NUMBER_1024_INTEGER_MEMORY_MODEL;
 
     // Allocate encoded character array.
-    allocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
-    // Read message from stream.
-    read_stream_socket((void*) &e, (void*) &ec, (void*) &es, p6);
+    // Receive message from stream.
+    receive_stream_socket((void*) &e, (void*) &ec, (void*) &es, p6);
 
     fwprintf(stdout, L"TEST receive socket e: %s \n", (char*) e);
     fwprintf(stdout, L"TEST receive socket ec: %i \n", ec);
@@ -104,7 +104,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate serialised wide character array.
-    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Decode encoded character array into serialised wide character array.
     decode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, e, (void*) &ec);
@@ -114,7 +114,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     fwprintf(stdout, L"TEST receive socket ss: %i \n", ss);
 
     // Deallocate encoded character array.
-    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
     // Deserialise serialised wide character array into destination knowledge model.
     // The http request's parameters are written into the destination compound model.
@@ -128,7 +128,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     fwprintf(stdout, L"TEST 2 lc: %i \n", *((int*) p10));
 
     // Deallocate serialised wide character array.
-    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
 /*??
     // The action name, abstraction, model, details.
@@ -282,7 +282,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_arrays((void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    compare_equal_arrays((void*) &r, (void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

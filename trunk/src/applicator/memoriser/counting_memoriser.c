@@ -36,11 +36,11 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/memory/count_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor/compound_accessor.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
-#include "../../memoriser/communicator.c"
-#include "../../memoriser/converter.c"
+#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../executor/memoriser/allocator.c"
+#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../executor/communicator/receiver.c"
+#include "../../executor/converter/decoder.c"
 
 /**
  * Counts compound parts.
@@ -153,7 +153,7 @@ void memorise_counting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, (void*) *sm, (void*) *smc, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL, (void*) ALL_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -163,7 +163,7 @@ void memorise_counting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, (void*) *sm, (void*) *smc, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) PREFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -173,7 +173,7 @@ void memorise_counting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays((void*) *sm, (void*) *smc, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, (void*) *sm, (void*) *smc, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL, (void*) SUFFIX_COUNT_SELECTION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

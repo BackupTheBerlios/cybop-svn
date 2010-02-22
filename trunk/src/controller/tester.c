@@ -55,10 +55,10 @@
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../variable/primitive_type_size.c"
-#include "../memoriser/accessor/compound_accessor.c"
-#include "../memoriser/allocator.c"
-#include "../memoriser/array.c"
-#include "../memoriser/converter.c"
+#include "../executor/accessor/getter/compound_getter.c"
+#include "../executor/memoriser/allocator.c"
+#include "../executor/comparator/array_equality_comparator.c"
+#include "../executor/converter/decoder.c"
 #include "../memoriser/converter/integer_converter.c"
 
 /**
@@ -682,7 +682,7 @@ void test_integer_to_wide_character_conversion() {
     size_t ts = *NUMBER_2_INTEGER_MEMORY_MODEL;
 
     // Allocate test wide character array.
-    allocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Transform source integer to destination string.
     // A null wide character is written to mark the end of the string.
@@ -703,7 +703,7 @@ void test_integer_to_wide_character_conversion() {
     fwprintf(stdout, L"TEST t: %ls\n", (wchar_t*) t);
 
     // Deallocate test wide character array.
-    deallocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &t, (void*) &ts, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -883,7 +883,7 @@ void test_pointer_return() {
     void* r = *NULL_POINTER_MEMORY_MODEL;
 
     // Get character from character array.
-    get_array_elements(c, (void*) NUMBER_6_INTEGER_MEMORY_MODEL, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    get_array_elements(c, (void*) NUMBER_6_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Print result (character array).
     fwprintf(stdout, L"r: %ls\n", (wchar_t*) r);
@@ -1324,7 +1324,7 @@ void test_encode_integer_vector() {
     int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate destination character vector.
-    allocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Use compound count as index to create the element name suffix,
     // because the element is added at the end of the compound container.
@@ -1335,7 +1335,7 @@ void test_encode_integer_vector() {
     fwprintf(stdout, L"Encoded character array size: %i\n", ds);
 
     // Deallocate destination character vector.
-    deallocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -1406,7 +1406,7 @@ void test_decode_utf8() {
     int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate read model.
-    allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
     // Read persistent byte stream over channel.
     read_data((void*) &rm, (void*) &rmc, (void*) &rms, (void*) f, (void*) &fc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
@@ -1421,7 +1421,7 @@ void test_decode_utf8() {
     int wms = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate wide character model.
-    allocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, rm, (void*) &rmc);
     //?? TEST only! DELETE LATER!
@@ -1431,10 +1431,10 @@ void test_decode_utf8() {
     fwprintf(stdout, L"TEST wmc: %i\n", wmc);
 
     // Deallocate read model.
-    deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &rm, (void*) &rms, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
     // Deallocate wide character model.
-    deallocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &wm, (void*) &wms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 //?? ========================================================================================

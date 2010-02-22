@@ -16,6 +16,14 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-02-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace "compare_arrays" with "compare_equal_arrays" and correct order of parameters
+        * Clean up errors stemming from previously implemented changes
+        * Remove superfluous "vector" files, e.g. "character_vector_getter.c" etc.
+        * Remove further superfluous files, e.g. "character_vector_appender.c"
+            and replace them with just one neutral file, e.g. "array_appender.c",
+            since they differed only in their abstraction (type), but not their logic
+
 2010-02-16  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up errors in executor/ directory stemming from previously implemented changes
 

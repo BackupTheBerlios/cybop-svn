@@ -36,7 +36,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/file/archive_file_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor/compound_accessor.c"
+#include "../../executor/accessor/getter/compound_getter.c"
 #include "../../memoriser/allocator/character_vector_allocator.c"
 #include "../../memoriser/allocator/pointer_vector_allocator.c"
 #include "../../variable/reallocation_factor.c"
@@ -126,18 +126,18 @@ void file_archiving(void* p0, void* p1, void* p2, void* p3) {
     int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate arguments vector.
-    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Append command.
-    append((void*) &arg, (void*) &argc, (void*) &args, (void*) ARCHIVE_UNIX_COMMAND_MODEL, (void*) ARCHIVE_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    append((void*) &arg, (void*) &argc, (void*) &args, (void*) ARCHIVE_UNIX_COMMAND_MODEL, (void*) ARCHIVE_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     if (*createm != *NULL_POINTER_MEMORY_MODEL) {
 
         if (**createm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Append create option.
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -146,8 +146,8 @@ void file_archiving(void* p0, void* p1, void* p2, void* p3) {
         if (**updatem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Append update option.
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -156,8 +156,8 @@ void file_archiving(void* p0, void* p1, void* p2, void* p3) {
         if (**bzip2m == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Append bzip2 option.
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -165,7 +165,7 @@ void file_archiving(void* p0, void* p1, void* p2, void* p3) {
     run_executing(arg, (void*) &argc);
 
     // Deallocate arguments vector.
-    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /* ARCHIVING_FILER_SOURCE */

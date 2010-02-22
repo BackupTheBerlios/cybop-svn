@@ -34,8 +34,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/flow/loop_flow_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor/compound_accessor.c"
-#include "../../memoriser/array.c"
+#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 //
 // Forward declarations.

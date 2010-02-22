@@ -31,7 +31,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/array.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Handles the arithmetic operation signal.
@@ -64,7 +64,7 @@ void handle_arithmetic_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) ADD_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) ADD_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) ADD_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) ADD_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -74,7 +74,7 @@ void handle_arithmetic_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -84,7 +84,7 @@ void handle_arithmetic_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -94,7 +94,7 @@ void handle_arithmetic_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

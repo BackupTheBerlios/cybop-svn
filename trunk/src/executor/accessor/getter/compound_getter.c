@@ -37,8 +37,8 @@
 #include "../../constant/name/memory/compound_memory_name.c"
 #include "../../logger/logger.c"
 #include "../../variable/reallocation_factor.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
+#include "../../executor/memoriser/allocator.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 //
 // Forward declarations.
@@ -764,7 +764,7 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
 
                             if (*nc1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                                compare_arrays(p2, p3, (void*) *n1, (void*) *nc1, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                compare_equal_arrays((void*) &r, p2, p3, (void*) *n1, (void*) *nc1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
@@ -1244,7 +1244,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1279,7 +1279,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*a, *ac, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *a, *ac, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

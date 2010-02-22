@@ -37,8 +37,8 @@
 #include "../../constant/name/memory/compound_memory_name.c"
 #include "../../logger/logger.c"
 #include "../../variable/reallocation_factor.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
+#include "../../executor/memoriser/allocator.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Sets the compound element by index.

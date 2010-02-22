@@ -31,11 +31,11 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/accessor/compound_accessor.c"
-#include "../../../memoriser/allocator.c"
-#include "../../../memoriser/array.c"
-#include "../../../memoriser/communicator.c"
-#include "../../../memoriser/converter.c"
+#include "../../../executor/accessor/getter/compound_getter.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/communicator/receiver.c"
+#include "../../../executor/converter/decoder.c"
 
 /**
  * Gets the abstraction as description (meta information) of the part at the given index.

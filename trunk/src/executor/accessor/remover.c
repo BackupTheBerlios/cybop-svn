@@ -30,14 +30,14 @@
 #include "../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../memoriser/accessor/character_vector_accessor.c"
-#include "../memoriser/accessor/compound_accessor.c"
+#include "../executor/accessor/getter/compound_getter.c"
 #include "../memoriser/accessor/double_vector_accessor.c"
 #include "../memoriser/accessor/integer_vector_accessor.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"
 #include "../memoriser/accessor/pointer_vector_accessor.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
 #include "../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../memoriser/array.c"
+#include "../executor/comparator/array_equality_comparator.c"
 
 /**
  * Removes the element.
@@ -58,7 +58,7 @@ void remove_element(void* p0, void* p1, void* p2, void* p3) {
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Remove element.");
 
-        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
             remove_character_vector_element(p0, p1, p2);
 
@@ -102,7 +102,7 @@ void remove_element(void* p0, void* p1, void* p2, void* p3) {
 
 //??            remove_unsigned_long_vector_element(p0, p1, p2);
 
-        } else if (*a == *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
             remove_wide_character_vector_element(p0, p1, p2);
 

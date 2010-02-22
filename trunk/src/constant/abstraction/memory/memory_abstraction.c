@@ -80,30 +80,6 @@ static int* UNSIGNED_LONG_MEMORY_ABSTRACTION = NUMBER_4_INTEGER_MEMORY_MODEL_ARR
 static int* WIDE_CHARACTER_MEMORY_ABSTRACTION = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
-// Vector.
-//
-// Range: 1000..1999
-//
-
-/** The character vector memory abstraction. */
-//?? static int* CHARACTER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1000_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The double vector memory abstraction. */
-//?? static int* DOUBLE_VECTOR_MEMORY_ABSTRACTION = NUMBER_1001_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The integer vector memory abstraction. */
-//?? static int* INTEGER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1002_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The pointer vector memory abstraction. */
-//?? static int* POINTER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1003_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The unsigned long vector memory abstraction. */
-//?? static int* UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION = NUMBER_1004_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The wide character vector memory abstraction. */
-//?? static int* WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION = NUMBER_1005_INTEGER_MEMORY_MODEL_ARRAY;
-
-//
 // Path.
 //
 // Range: 2000..2999

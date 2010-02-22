@@ -34,12 +34,12 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/memory/create_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor/compound_accessor.c"
-#include "../../memoriser/array.c"
-#include "../../memoriser/communicator.c"
+#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../executor/communicator/receiver.c"
 #include "../../memoriser/converter/cybol_converter.c"
-#include "../../memoriser/converter.c"
-#include "../../memoriser/allocator.c"
+#include "../../executor/converter/decoder.c"
+#include "../../executor/memoriser/allocator.c"
 
 /**
  * Creates a part and adds it to the given compound.
@@ -116,7 +116,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Allocate model diagram.
-    allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Encode model into model diagram.
     encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
@@ -126,7 +126,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Allocate multibyte character stream.
-    allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
     // Encode model diagram into multibyte character stream.
     encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
     // The file name.
@@ -136,9 +136,9 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // Write multibyte character stream as message to file system.
     write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
     // Deallocate model diagram.
-    deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Deallocate multibyte character stream.
-    deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
 //?? TEST END
 }
 
@@ -259,7 +259,7 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*em, *emc, (void*) PART_COMPOUND_ELEMENT_CYBOL_MODEL, (void*) PART_COMPOUND_ELEMENT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *em, *emc, (void*) PART_COMPOUND_ELEMENT_CYBOL_MODEL, (void*) PART_COMPOUND_ELEMENT_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -293,7 +293,7 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*em, *emc, (void*) META_COMPOUND_ELEMENT_CYBOL_MODEL, (void*) META_COMPOUND_ELEMENT_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *em, *emc, (void*) META_COMPOUND_ELEMENT_CYBOL_MODEL, (void*) META_COMPOUND_ELEMENT_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

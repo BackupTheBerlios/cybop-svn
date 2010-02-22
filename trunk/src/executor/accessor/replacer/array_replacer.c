@@ -23,15 +23,15 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef WIDE_CHARACTER_VECTOR_REPLACER_SOURCE
-#define WIDE_CHARACTER_VECTOR_REPLACER_SOURCE
+#ifndef ARRAY_REPLACER_SOURCE
+#define ARRAY_REPLACER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/array.c"
 
 /**
  * Replace the destination- with the source wide character vector.
@@ -44,8 +44,9 @@
  * @param p2 the destination size
  * @param p3 the source
  * @param p4 the source count
+ * @param p5 the abstraction
  */
-void replace_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void replace_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -63,7 +64,7 @@ void replace_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void*
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace wide character vector.");
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace array elements.");
 
                     // CAUTION! The destination array needs to be resized not only
                     // if the source array is greater, but also if it is smaller!
@@ -85,37 +86,37 @@ void replace_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void*
                     // Set destination size.
                     *ds = *sc;
 
-                    // Reallocate destination wide character vector.
-                    reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    // Reallocate destination array.
+                    reallocate_array(p0, p1, p2, p5);
 
-                    // Replace destination- with source wide character vector.
+                    // Replace destination- with source array elements.
                     //
-                    // CAUTION! Use an index with value zero, so that all characters get replaced.
-                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    // CAUTION! Use an index with value zero, so that all elements get replaced.
+                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, p5);
 
                     // Set destination count to the same value as the -size.
                     *dc = *ds;
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace wide character vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace array elements. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace wide character vector. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace array elements. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace wide character vector. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace array elements. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace wide character vector. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace array elements. The source count is null.");
     }
 }
 
-/* WIDE_CHARACTER_VECTOR_REPLACER_SOURCE */
+/* ARRAY_REPLACER_SOURCE */
 #endif

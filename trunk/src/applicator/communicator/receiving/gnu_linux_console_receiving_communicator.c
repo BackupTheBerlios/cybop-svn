@@ -30,8 +30,8 @@
 
 #include "../../../constant/channel/cybol_channel.c"
 #include "../../../constant/model/log/level_log_model.c"
+#include "../../../executor/communicator/receiver/gnu_linux_console_receiver.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/communicator/gnu_linux_console_communicator.c"
 
 /**
  * Receives textual user interface (tui) message via gnu/linux console.
@@ -66,10 +66,10 @@ void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void*
     int as = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate character array.
-    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Read pressed keyboard keys as message from gnu/linux console.
-    read_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12, p17);
+    receive_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12, p17);
 
     // CAUTION! The multibyte- is converted to a wide character internally (in glibc function "fgetwc").
     // Function calls to "decode_utf_8_unicode_character_vector" are therefore NOT necessary here!
@@ -78,7 +78,7 @@ void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void*
     decode(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
 
     // Deallocate character array.
-    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

@@ -33,8 +33,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/memory/signal_memory_memory_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
+#include "../../executor/memoriser/allocator.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 #include "../../variable/reallocation_factor.c"
 
 /**

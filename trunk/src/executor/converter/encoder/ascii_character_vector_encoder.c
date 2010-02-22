@@ -32,7 +32,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
-#include "../../../memoriser/array.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Encodes the character vector model and creates an ascii character byte stream from it.

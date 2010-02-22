@@ -35,7 +35,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Encodes the terminal foreground colour name into a control sequence code.
@@ -53,7 +53,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) BLACK_TERMINAL_COLOUR_CYBOL_MODEL, (void*) BLACK_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) BLACK_TERMINAL_COLOUR_CYBOL_MODEL, (void*) BLACK_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -63,7 +63,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) RED_TERMINAL_COLOUR_CYBOL_MODEL, (void*) RED_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) RED_TERMINAL_COLOUR_CYBOL_MODEL, (void*) RED_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -73,7 +73,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) GREEN_TERMINAL_COLOUR_CYBOL_MODEL, (void*) GREEN_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) GREEN_TERMINAL_COLOUR_CYBOL_MODEL, (void*) GREEN_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -83,7 +83,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) YELLOW_TERMINAL_COLOUR_CYBOL_MODEL, (void*) YELLOW_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) YELLOW_TERMINAL_COLOUR_CYBOL_MODEL, (void*) YELLOW_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -93,7 +93,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) BLUE_TERMINAL_COLOUR_CYBOL_MODEL, (void*) BLUE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) BLUE_TERMINAL_COLOUR_CYBOL_MODEL, (void*) BLUE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -103,7 +103,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL, (void*) MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL, (void*) MAGENTA_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -113,7 +113,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) COBALT_TERMINAL_COLOUR_CYBOL_MODEL, (void*) COBALT_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) COBALT_TERMINAL_COLOUR_CYBOL_MODEL, (void*) COBALT_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -123,7 +123,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p3, p4, (void*) WHITE_TERMINAL_COLOUR_CYBOL_MODEL, (void*) WHITE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) WHITE_TERMINAL_COLOUR_CYBOL_MODEL, (void*) WHITE_TERMINAL_COLOUR_CYBOL_MODEL_COUNT, &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

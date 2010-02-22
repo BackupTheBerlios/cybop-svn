@@ -33,7 +33,7 @@
 #include "../../controller/handler/compound_handler.c"
 #include "../../controller/handler/operation_handler.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Handles an encapsulated logic.
@@ -101,7 +101,7 @@ void handle_encapsulated(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     // information, which is why a null pointer is handed over here twice.
     //
     // Compare also with procedure "get_universal_compound_element_by_name"
-    // in source file "memoriser/accessor/compound_accessor.c"!
+    // in source file "executor/accessor/getter/compound_getter.c"!
     get_compound_element_by_name(p1, p2, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         p10, p11,
         (void*) &eln, (void*) &elnc, (void*) &elns,
@@ -123,7 +123,7 @@ void handle_encapsulated(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*la, *lac, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *la, *lac, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -133,7 +133,7 @@ void handle_encapsulated(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*la, *lac, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *la, *lac, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

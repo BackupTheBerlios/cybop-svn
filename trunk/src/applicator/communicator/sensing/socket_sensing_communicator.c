@@ -49,11 +49,11 @@
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/accessor/compound_accessor.c"
+#include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../memoriser/accessor/internal_memory_accessor.c"
 #include "../../../memoriser/accessor/signal_memory_accessor.c"
-#include "../../../memoriser/allocator.c"
-#include "../../../memoriser/array.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Senses socket message.
@@ -314,24 +314,24 @@ void communicate_sensing_socket(void* p0, void* p1) {
 
         // Get interrupt.
         i = *base + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element(p0, (void*) &i, (void*) &irq, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) &i, (void*) &irq, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get mutex.
         i = *base + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element(p0, (void*) &i, (void*) &mt, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) &i, (void*) &mt, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get sleep time.
         i = *base + *SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) &i, (void*) &st, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get communication partner-connected socket of this system.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get communication partner socket address.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element(p0, (void*) &i, (void*) &pa, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) &i, (void*) &pa, (void*) POINTER_MEMORY_ABSTRACTION);
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get original socket of this system.
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element(p0, (void*) &i, (void*) &os, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION, (void*) POINTER_VECTOR_MEMORY_ABSTRACTION_COUNT);
+        get_element(p0, (void*) &i, (void*) &os, (void*) POINTER_MEMORY_ABSTRACTION);
 
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 

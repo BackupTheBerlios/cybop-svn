@@ -35,7 +35,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/model/stream_model.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../../variable/reallocation_factor.c"
 
@@ -141,7 +141,7 @@ void receives_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_arrays(p3, p4, (void*) STANDARD_INPUT_STREAM_MODEL, (void*) STANDARD_INPUT_STREAM_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p3, p4, (void*) STANDARD_INPUT_STREAM_MODEL, (void*) STANDARD_INPUT_STREAM_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

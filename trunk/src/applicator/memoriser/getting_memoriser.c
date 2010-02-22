@@ -35,8 +35,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/memory/get_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor/compound_accessor.c"
-#include "../../memoriser/array.c"
+#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Gets a description (meta information) of the part at the given index.
@@ -151,7 +151,7 @@ void memorise_getting(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*dm, *dmc, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *dm, *dmc, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -162,7 +162,7 @@ void memorise_getting(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(*dm, *dmc, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *dm, *dmc, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

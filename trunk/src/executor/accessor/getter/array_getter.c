@@ -37,10 +37,10 @@
 /**
  * Gets the destination array elements from the source array starting at index.
  *
- * @param p0 the destination elements (Hand over as array reference!)
- * @param p1 the source array
+ * @param p0 the destination (Hand over as array reference!)
+ * @param p1 the source
  * @param p2 the index
- * @param p3 the array type
+ * @param p3 the abstraction
  */
 void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
@@ -64,6 +64,8 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
             *d = p1;
 
             // Add offset to destination elements.
+            // The destination is set to source pointer plus offset.
+            // That's all.
             add_integer(p0, (void*) &o, (void*) POINTER_MEMORY_ABSTRACTION);
 
         } else {
@@ -89,7 +91,7 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
  * @param p2 the array count
  * @param p3 the elements
  * @param p4 the elements count
- * @param p5 the array type
+ * @param p5 the abstraction
  */
 void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 

@@ -33,7 +33,7 @@
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Decodes the byte stream and creates a double model from it.

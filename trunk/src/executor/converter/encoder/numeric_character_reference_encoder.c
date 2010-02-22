@@ -70,7 +70,7 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
 /*??
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_arrays(p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays((void*) &r, p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -93,11 +93,11 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                         *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     // Increase destination count.
                     *dc = *dc + tc;

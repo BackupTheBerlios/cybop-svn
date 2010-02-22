@@ -41,7 +41,7 @@
 #include "../../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../../memoriser/allocator/model_allocator.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Receives a gnu/linux console character.

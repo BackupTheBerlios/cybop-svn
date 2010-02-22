@@ -11,9 +11,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Replace "compare_arrays" with "compare_equal_arrays" and correct order of parameters
-            (use jedit for global search/replace, since kfilereplace does not work)
         * Clean up errors stemming from previously implemented changes
+            CONTINUE in alphabetical order WITH: "file_system_sending_communicator.c"
+
+        * Investigate how to handle setting of destination count and size;
+            see e.g.: "executor/accessor/setter.c", where both are set;
+            Should an extra wrapper function do this?
 
         * Assign "sizeof" for each programming language type to a global variable just once at startup
             and henceforth use that variable instead of each time determining "sizeof", throughout all source code

@@ -30,14 +30,14 @@
 #include "../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../memoriser/accessor/character_vector_accessor.c"
-#include "../memoriser/accessor/compound_accessor.c"
+#include "../executor/accessor/getter/compound_getter.c"
 #include "../memoriser/accessor/double_vector_accessor.c"
 #include "../memoriser/accessor/integer_vector_accessor.c"
 #include "../memoriser/accessor/internal_memory_accessor.c"
 #include "../memoriser/accessor/pointer_vector_accessor.c"
 #include "../memoriser/accessor/signal_memory_accessor.c"
 #include "../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../memoriser/array.c"
+#include "../executor/comparator/array_equality_comparator.c"
 
 /**
  * Sets the element.
@@ -58,9 +58,11 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set element.");
 
-        if (*a == *CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
-            set_character_vector_element(p0, p3, p4);
+            set_array_elements(p0, p3, p4, p5, p6);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
 
@@ -76,7 +78,9 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
         } else if (*a == *DOUBLE_VECTOR_MEMORY_ABSTRACTION) {
 
-            set_double_vector_element(p0, p3, p4);
+            set_array_elements(p0, p3, p4, p5, p6);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
 
@@ -84,9 +88,9 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
         } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
-            set_integer_vector_element(p0, p3, p4);
-            set_integer_vector_element(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5);
-            set_integer_vector_element(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5);
+            set_array_elements(p0, p3, p4, p5, p6);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else if (*a == *INTERNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -94,7 +98,9 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
         } else if (*a == *POINTER_VECTOR_MEMORY_ABSTRACTION) {
 
-            set_pointer_vector_element(p0, p3, p4);
+            set_array_elements(p0, p3, p4, p5, p6);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -102,11 +108,15 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
         } else if (*a == *UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION) {
 
-//??            set_unsigned_long_vector_element(p0, p1, p2);
+            set_array_elements(p0, p3, p4, p5, p6);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
-        } else if (*a == *WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
-            set_wide_character_vector_element(p0, p3, p4);
+            set_array_elements(p0, p3, p4, p5, p6);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else {
 

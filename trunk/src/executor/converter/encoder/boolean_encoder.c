@@ -34,8 +34,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/memory/primitive_memory_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
+#include "../../executor/memoriser/allocator.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Encodes the boolean model and creates a byte stream from it.

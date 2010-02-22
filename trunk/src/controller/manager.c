@@ -36,7 +36,7 @@
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
-#include "../memoriser/allocator.c"
+#include "../executor/memoriser/allocator.c"
 
 /**
  * Manages the system.

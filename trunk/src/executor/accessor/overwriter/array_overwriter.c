@@ -23,26 +23,28 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef WIDE_CHARACTER_VECTOR_APPENDER_SOURCE
-#define WIDE_CHARACTER_VECTOR_APPENDER_SOURCE
+#ifndef WIDE_CHARACTER_VECTOR_OVERWRITER_SOURCE
+#define WIDE_CHARACTER_VECTOR_OVERWRITER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/abstraction/memory/array_memory_abstraction.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
- * Appends the source- to the destination wide character vector.
+ * Overwrites the destination- with the source wide character vector,
+ * starting at index with source count characters.
  *
  * @param p0 the destination (Hand over as reference!)
  * @param p1 the destination count
  * @param p2 the destination size
  * @param p3 the source
  * @param p4 the source count
+ * @param p5 the index
  */
-void append_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void overwrite_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -60,7 +62,7 @@ void append_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* 
 
                     void** d = (void**) p0;
 
-                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Append wide character vector.");
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Overwrite wide character vector.");
 
                     // Set destination size.
                     *ds = *dc + *sc;
@@ -68,36 +70,41 @@ void append_wide_character_vector(void* p0, void* p1, void* p2, void* p3, void* 
                     // Reallocate destination wide character vector.
                     reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
-                    // Append source- to destination wide character vector.
+                    // Starting at index, move existing wide characters
+                    // to the end of the destination vector.
                     //
                     // CAUTION! Do NOT set the destination count above
                     // (together with the destination size),
                     // because it is used here as index!
-                    set_array_elements(*d, p1, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    //?? set_array_elements(*d, p1, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+
+                    // Now copy the source- into the destination vector,
+                    // starting at index.
+                    //?? set_array_elements(*d, p1, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     // Set destination count to the same value as the -size.
                     *dc = *ds;
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append wide character vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not overwrite wide character vector. The destination is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append wide character vector. The destination count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not overwrite wide character vector. The destination count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append wide character vector. The destination size is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not overwrite wide character vector. The destination size is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not append wide character vector. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not overwrite wide character vector. The source count is null.");
     }
 }
 
-/* WIDE_CHARACTER_VECTOR_APPENDER_SOURCE */
+/* WIDE_CHARACTER_VECTOR_OVERWRITER_SOURCE */
 #endif

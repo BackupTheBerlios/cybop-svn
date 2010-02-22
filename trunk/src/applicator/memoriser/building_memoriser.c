@@ -32,11 +32,11 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/memory/build_memory_operation_cybol_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor/compound_accessor.c"
-#include "../../memoriser/array.c"
-#include "../../memoriser/communicator.c"
-#include "../../memoriser/converter.c"
-#include "../../memoriser/allocator.c"
+#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../executor/communicator/receiver.c"
+#include "../../executor/converter/decoder.c"
+#include "../../executor/memoriser/allocator.c"
 
 /**
  * Builds a list name.

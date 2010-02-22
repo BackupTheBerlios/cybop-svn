@@ -41,7 +41,7 @@
  * @param p1 the index
  * @param p2 the elements
  * @param p3 the elements count
- * @param p4 the array type
+ * @param p4 the abstraction
  */
 void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 

@@ -40,7 +40,7 @@
 #include "../../memoriser/converter/character/ascii_character_vector_converter.c"
 #include "../../memoriser/converter/date_time_converter.c"
 #include "../../memoriser/converter/integer_vector_converter.c"
-#include "../../memoriser/array.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 //
 // The "x DatenTransfer" (xDT) is the German version of

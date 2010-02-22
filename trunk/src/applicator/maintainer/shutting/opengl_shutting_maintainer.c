@@ -29,7 +29,7 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../memoriser/accessor.c"
-#include "../../../memoriser/allocator.c"
+#include "../../../executor/memoriser/allocator.c"
 
 /**
  * Shuts down the opengl system.

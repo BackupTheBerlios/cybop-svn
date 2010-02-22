@@ -33,7 +33,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/array.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Handles the communication operation signal.
@@ -66,7 +66,7 @@ void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -76,7 +76,7 @@ void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -90,7 +90,7 @@ void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_arrays(p10, p11, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

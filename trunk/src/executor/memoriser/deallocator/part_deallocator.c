@@ -56,10 +56,10 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
 /*??
     // Allocate name.
-    allocate_model(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate_model(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // A channel is not allocated, since that is only needed temporarily for model loading.
     // Allocate abstraction.
-    allocate_model(p3, p4, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+    allocate_model(p3, p4, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Allocate model.
     allocate_model(p6, p7, p8, p12, p13, p14);
     // Allocate details.

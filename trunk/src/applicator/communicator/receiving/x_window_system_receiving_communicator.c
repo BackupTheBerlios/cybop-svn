@@ -39,7 +39,7 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../memoriser/accessor.c"
-#include "../../../memoriser/allocator.c"
+#include "../../../executor/memoriser/allocator.c"
 */
 
 /**
@@ -57,7 +57,7 @@ void communicate_receiving_x_window_system(void* p0, void* p1, void* p2, void* p
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive x window system message.");
 
-    //?? read_x_window_system();
+    //?? receive_x_window_system();
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

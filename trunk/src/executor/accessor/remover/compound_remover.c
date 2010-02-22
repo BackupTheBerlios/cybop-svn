@@ -37,8 +37,8 @@
 #include "../../constant/name/memory/compound_memory_name.c"
 #include "../../logger/logger.c"
 #include "../../variable/reallocation_factor.c"
-#include "../../memoriser/allocator.c"
-#include "../../memoriser/array.c"
+#include "../../executor/memoriser/allocator.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Removes the compound element by index.
@@ -289,7 +289,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                     // Reset comparison result.
                     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    compare_arrays(p, &pc, *n, &pc, &r, WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays(p, &pc, *n, &pc, &r, WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
@@ -299,14 +299,14 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                         *((int*) *nc) = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Decode the basisname
-                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p2, p3, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p2, p3, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_MEMORY_ABSTRACTION);
 
                         // Decode the list separator
-                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_MEMORY_ABSTRACTION);
 
                         // Decode the index
                         indexstr_count = snprintf(indexstr, indexstr_size, "%i", ic);
-                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, indexstr, &indexstr_count, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_VECTOR_MEMORY_ABSTRACTION);
+                        decode(n, *nc, *ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, indexstr, &indexstr_count, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, CHARACTER_MEMORY_ABSTRACTION);
 
                         ic = ic + *NUMBER_1_INTEGER_MEMORY_MODEL;
                     }

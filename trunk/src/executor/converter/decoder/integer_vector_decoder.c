@@ -44,7 +44,7 @@
 #include "../../logger/logger.c"
 #include "../../memoriser/converter/integer_converter.c"
 #include "../../memoriser/accessor.c"
-#include "../../memoriser/allocator.c"
+#include "../../executor/memoriser/allocator.c"
 #include "../../variable/primitive_type_size.c"
 #include "../../variable/reallocation_factor.c"
 
