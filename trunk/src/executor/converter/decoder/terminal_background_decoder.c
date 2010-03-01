@@ -34,7 +34,7 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor.c"
+#include "../../executor/accessor/getter.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 
 /**

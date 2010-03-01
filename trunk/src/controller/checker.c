@@ -31,7 +31,7 @@
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../logger/logger.c"
-#include "../memoriser/accessor/signal_memory_accessor.c"
+#include "../executor/accessor/getter/signal_memory_getter.c"
 
 /**
  * Gets signal at the given index.

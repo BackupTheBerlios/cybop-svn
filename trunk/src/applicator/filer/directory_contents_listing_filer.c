@@ -35,8 +35,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/file/list_file_operation_cybol_name.c"
 #include "../../constant/name/command_option/unix/list_unix_command_option_name.c"
+#include "../../executor/memoriser/allocator.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/allocator/character_vector_allocator.c"
 #include "../../variable/reallocation_factor.c"
 
 /**
@@ -80,21 +80,23 @@ void file_directory_contents_listing(void* p0, void* p1, void* p2, void* p3) {
     void** longlistingds = NULL_POINTER_MEMORY_MODEL;
 
     // Get all option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ALL_LIST_FILE_OPERATION_CYBOL_NAME, (void*) ALL_LIST_FILE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &alln, (void*) &allnc, (void*) &allns,
         (void*) &alla, (void*) &allac, (void*) &allas,
         (void*) &allm, (void*) &allmc, (void*) &allms,
         (void*) &alld, (void*) &alldc, (void*) &allds,
+        p0, p1,
+        (void*) ALL_LIST_FILE_OPERATION_CYBOL_NAME, (void*) ALL_LIST_FILE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get long listing option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) LONG_LISTING_LIST_FILE_OPERATION_CYBOL_NAME, (void*) LONG_LISTING_LIST_FILE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &longlistingn, (void*) &longlistingnc, (void*) &longlistingns,
         (void*) &longlistinga, (void*) &longlistingac, (void*) &longlistingas,
         (void*) &longlistingm, (void*) &longlistingmc, (void*) &longlistingms,
         (void*) &longlistingd, (void*) &longlistingdc, (void*) &longlistingds,
+        p0, p1,
+        (void*) LONG_LISTING_LIST_FILE_OPERATION_CYBOL_NAME, (void*) LONG_LISTING_LIST_FILE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The arguments vector.

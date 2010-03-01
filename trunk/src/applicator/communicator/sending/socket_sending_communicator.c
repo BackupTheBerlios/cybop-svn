@@ -39,10 +39,10 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/communicator/sender/datagram_socket_sender.c"
+#include "../../../executor/communicator/sender/raw_socket_sender.c"
+#include "../../../executor/communicator/sender/stream_socket_sender.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/communicator/datagram_socket_communicator.c"
-#include "../../../memoriser/communicator/raw_socket_communicator.c"
-#include "../../../executor/communicator/receiver/stream_socket_receiver.c"
 
 /**
  * Gets the socket for server mode.
@@ -264,7 +264,7 @@ void communicate_sending_socket_set_nonblocking_mode(void* p0) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not send message via socket. The base internal is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not send socket / set non-blocking mode. The base internal is null.");
     }
 }
 

@@ -39,12 +39,12 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
-#include "../../../memoriser/accessor/signal_memory_accessor.c"
-#include "../../../memoriser/accessor.c"
-#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/accessor/getter/signal_memory_getter.c"
+#include "../../../executor/accessor/getter.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 #include "../../../variable/thread_identification.c"
 
 /**

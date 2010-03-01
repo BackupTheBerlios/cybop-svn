@@ -35,7 +35,7 @@
 #include "../../constant/name/cybol/graphical_user_interface_cybol_name.c"
 #include "../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor.c"
+#include "../../executor/accessor/getter.c"
 
 /**
  * Sends the window onto the x window system display.

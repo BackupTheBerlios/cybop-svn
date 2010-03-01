@@ -36,8 +36,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/command_option/unix/copy_unix_command_option_name.c"
 #include "../../constant/name/cybol/operation/file/copy_file_operation_cybol_name.c"
+#include "../../executor/memoriser/allocator.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/allocator/character_vector_allocator.c"
 #include "../../variable/reallocation_factor.c"
 
 /**
@@ -93,30 +93,33 @@ void file_copying(void* p0, void* p1, void* p2, void* p3) {
     void** destinationds = NULL_POINTER_MEMORY_MODEL;
 
     // Get recursive option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &recursiven, (void*) &recursivenc, (void*) &recursivens,
         (void*) &recursivea, (void*) &recursiveac, (void*) &recursiveas,
         (void*) &recursivem, (void*) &recursivemc, (void*) &recursivems,
         (void*) &recursived, (void*) &recursivedc, (void*) &recursiveds,
+        p0, p1,
+        (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get source option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &sourcen, (void*) &sourcenc, (void*) &sourcens,
         (void*) &sourcea, (void*) &sourceac, (void*) &sourceas,
         (void*) &sourcem, (void*) &sourcemc, (void*) &sourcems,
         (void*) &sourced, (void*) &sourcedc, (void*) &sourceds,
+        p0, p1,
+        (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get destination option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME, (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &destinationn, (void*) &destinationnc, (void*) &destinationns,
         (void*) &destinationa, (void*) &destinationac, (void*) &destinationas,
         (void*) &destinationm, (void*) &destinationmc, (void*) &destinationms,
         (void*) &destinationd, (void*) &destinationdc, (void*) &destinationds,
+        p0, p1,
+        (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME, (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The arguments vector.

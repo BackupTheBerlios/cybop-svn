@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-03-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up errors stemming from previously implemented changes
+        * Remove superfluous "vector" files, e.g. "character_vector_allocator.c" etc.
+
 2010-02-21  Christian Heller  <christian.heller@tuxtax.de>
         * Replace "compare_arrays" with "compare_equal_arrays" and correct order of parameters
         * Clean up errors stemming from previously implemented changes

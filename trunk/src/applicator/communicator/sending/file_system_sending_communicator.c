@@ -31,10 +31,10 @@
 #include "../../../constant/channel/cybol_channel.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../executor/converter/decoder.c"
 #include "../../../executor/communicator/receiver.c"
+#include "../../../logger/logger.c"
 
 /**
  * Sends a knowledge model as byte stream to the operating system's file system.

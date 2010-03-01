@@ -53,7 +53,7 @@
 #include "../../logger/logger.c"
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../../memoriser/accessor.c"
+#include "../../executor/accessor/getter.c"
 #include "../../memoriser/converter/integer_vector_converter.c"
 #include "../../memoriser/converter/terminal_background_converter.c"
 #include "../../memoriser/converter/terminal_foreground_converter.c"

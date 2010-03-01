@@ -33,9 +33,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/flow/branch_flow_operation_cybol_name.c"
-#include "../../logger/logger.c"
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/comparator/array_equality_comparator.c"
+#include "../../logger/logger.c"
 
 //
 // Forward declarations.
@@ -115,36 +115,39 @@ void guide_branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     void** fds = NULL_POINTER_MEMORY_MODEL;
 
     // Get criterion.
-    get_universal_compound_element_by_name(p10, p11,
-        (void*) CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME, (void*) CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
+        p10, p11,
+        (void*) CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME, (void*) CRITERION_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p1, p2);
 
     // Get true model.
-    get_universal_compound_element_by_name(p10, p11,
-        (void*) TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME, (void*) TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &tn, (void*) &tnc, (void*) &tns,
         (void*) &ta, (void*) &tac, (void*) &tas,
         (void*) &tm, (void*) &tmc, (void*) &tms,
         (void*) &td, (void*) &tdc, (void*) &tds,
+        p10, p11,
+        (void*) TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME, (void*) TRUE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p1, p2);
 
     // Get false model.
-    get_universal_compound_element_by_name(p10, p11,
-        (void*) FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME, (void*) FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &fn, (void*) &fnc, (void*) &fns,
         (void*) &fa, (void*) &fac, (void*) &fas,
         (void*) &fm, (void*) &fmc, (void*) &fms,
         (void*) &fd, (void*) &fdc, (void*) &fds,
+        p10, p11,
+        (void*) FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME, (void*) FALSE_BRANCH_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p1, p2);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_equal_arrays(*cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, &r, (void*) INTEGER_MEMORY_ABSTRACTION);
+    compare_equal_arrays(&r, *cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     // The direct execution flag.
     int x = *NUMBER_0_INTEGER_MEMORY_MODEL;

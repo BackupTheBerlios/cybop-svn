@@ -42,10 +42,10 @@
 #include "../../constant/model/service_port_model.c"
 #include "../../constant/model/signal_priority_model.c"
 #include "../../constant/name/cybol/operation/communication/send_communication_operation_cybol_name.c"
-#include "../../logger/logger.c"
+#include "../../executor/accessor/getter/array_getter.c"
 #include "../../executor/accessor/getter/compound_getter.c"
-#include "../../memoriser/accessor/internal_memory_accessor.c"
 #include "../../executor/memoriser/allocator.c"
+#include "../../logger/logger.c"
 
 /**
  * Sends a message in a special language.
@@ -225,102 +225,113 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     void** nlds = NULL_POINTER_MEMORY_MODEL;
 
     // Get channel.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CHANNEL_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
+        p0, p1,
+        (void*) CHANNEL_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get language.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) LANGUAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &ln, (void*) &lnc, (void*) &lns,
         (void*) &la, (void*) &lac, (void*) &las,
         (void*) &lm, (void*) &lmc, (void*) &lms,
         (void*) &ld, (void*) &ldc, (void*) &lds,
+        p0, p1,
+        (void*) LANGUAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get communication mode.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) MODE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &mon, (void*) &monc, (void*) &mons,
         (void*) &moa, (void*) &moac, (void*) &moas,
         (void*) &mom, (void*) &momc, (void*) &moms,
         (void*) &mod, (void*) &modc, (void*) &mods,
+        p0, p1,
+        (void*) MODE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get socket namespace.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) NAMESPACE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) NAMESPACE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
+        p0, p1,
+        (void*) NAMESPACE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) NAMESPACE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get communication style.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) STYLE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &stn, (void*) &stnc, (void*) &stns,
         (void*) &sta, (void*) &stac, (void*) &stas,
         (void*) &stm, (void*) &stmc, (void*) &stms,
         (void*) &std, (void*) &stdc, (void*) &stds,
+        p0, p1,
+        (void*) STYLE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get sender.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SENDER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) SENDER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
+        p0, p1,
+        (void*) SENDER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) SENDER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get receiver.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) RECEIVER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
+        p0, p1,
+        (void*) RECEIVER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) RECEIVER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get message.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &mn, (void*) &mnc, (void*) &mns,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
+        p0, p1,
+        (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get area.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) AREA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) AREA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
+        p0, p1,
+        (void*) AREA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) AREA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get clean flag.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CLEAN_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CLEAN_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &cln, (void*) &clnc, (void*) &clns,
         (void*) &cla, (void*) &clac, (void*) &clas,
         (void*) &clm, (void*) &clmc, (void*) &clms,
         (void*) &cld, (void*) &cldc, (void*) &clds,
+        p0, p1,
+        (void*) CLEAN_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CLEAN_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get new line flag.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) NEW_LINE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) NEW_LINE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &nln, (void*) &nlnc, (void*) &nlns,
         (void*) &nla, (void*) &nlac, (void*) &nlas,
         (void*) &nlm, (void*) &nlmc, (void*) &nlms,
         (void*) &nld, (void*) &nldc, (void*) &nlds,
+        p0, p1,
+        (void*) NEW_LINE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) NEW_LINE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // The comparison result.

@@ -36,8 +36,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/communication/sense_communication_operation_cybol_name.c"
 #include "../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../logger/logger.c"
 #include "../../executor/accessor/getter/compound_getter.c"
+#include "../../logger/logger.c"
 #include "../../variable/thread_identification.c"
 
 /**
@@ -265,94 +265,104 @@ void communicate_sensing(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 */
 
     // Get channel.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CHANNEL_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
+        p0, p1,
+        (void*) CHANNEL_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get handler.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) HANDLER_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) HANDLER_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &hn, (void*) &hnc, (void*) &hns,
         (void*) &ha, (void*) &hac, (void*) &has,
         (void*) &hm, (void*) &hmc, (void*) &hms,
         (void*) &hd, (void*) &hdc, (void*) &hds,
+        p0, p1,
+        (void*) HANDLER_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) HANDLER_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
 /*??
     // Get language.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_LANGUAGE_NAME, (void*) RECEIVE_LANGUAGE_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &ln, (void*) &lnc, (void*) &lns,
         (void*) &la, (void*) &lac, (void*) &las,
         (void*) &lm, (void*) &lmc, (void*) &lms,
         (void*) &ld, (void*) &ldc, (void*) &lds,
+        p0, p1,
+        (void*) RECEIVE_LANGUAGE_NAME, (void*) RECEIVE_LANGUAGE_NAME_COUNT,
         p3, p4);
 
     // Get message.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_MESSAGE_NAME, (void*) RECEIVE_MESSAGE_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &mn, (void*) &mnc, (void*) &mns,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
+        p0, p1,
+        (void*) RECEIVE_MESSAGE_NAME, (void*) RECEIVE_MESSAGE_NAME_COUNT,
         p3, p4);
 
     // Get meta message.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_META_NAME, (void*) RECEIVE_META_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &men, (void*) &menc, (void*) &mens,
         (void*) &mea, (void*) &meac, (void*) &meas,
         (void*) &mem, (void*) &memc, (void*) &mems,
         (void*) &med, (void*) &medc, (void*) &meds,
+        p0, p1,
+        (void*) RECEIVE_META_NAME, (void*) RECEIVE_META_NAME_COUNT,
         p3, p4);
 
     // Get model.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_MODEL_NAME, (void*) RECEIVE_MODEL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &mon, (void*) &monc, (void*) &mons,
         (void*) &moa, (void*) &moac, (void*) &moas,
         (void*) &mom, (void*) &momc, (void*) &moms,
         (void*) &mod, (void*) &modc, (void*) &mods,
+        p0, p1,
+        (void*) RECEIVE_MODEL_NAME, (void*) RECEIVE_MODEL_NAME_COUNT,
         p3, p4);
 
     // Get root.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_ROOT_NAME, (void*) RECEIVE_ROOT_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
+        p0, p1,
+        (void*) RECEIVE_ROOT_NAME, (void*) RECEIVE_ROOT_NAME_COUNT,
         p3, p4);
 
     // Get socket communication style.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_STYLE_NAME, (void*) RECEIVE_STYLE_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &stn, (void*) &stnc, (void*) &stns,
         (void*) &sta, (void*) &stac, (void*) &stas,
         (void*) &stm, (void*) &stmc, (void*) &stms,
         (void*) &std, (void*) &stdc, (void*) &stds,
+        p0, p1,
+        (void*) RECEIVE_STYLE_NAME, (void*) RECEIVE_STYLE_NAME_COUNT,
         p3, p4);
 
     // Get commands.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_COMMANDS_NAME, (void*) RECEIVE_COMMANDS_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &con, (void*) &conc, (void*) &cons,
         (void*) &coa, (void*) &coac, (void*) &coas,
         (void*) &com, (void*) &comc, (void*) &coms,
         (void*) &cod, (void*) &codc, (void*) &cods,
+        p0, p1,
+        (void*) RECEIVE_COMMANDS_NAME, (void*) RECEIVE_COMMANDS_NAME_COUNT,
         p3, p4);
 
     // Get blocking.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RECEIVE_BLOCKING_NAME, (void*) RECEIVE_BLOCKING_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &bn, (void*) &bnc, (void*) &bns,
         (void*) &ba, (void*) &bac, (void*) &bas,
         (void*) &bm, (void*) &bmc, (void*) &bms,
         (void*) &bd, (void*) &bdc, (void*) &bds,
+        p0, p1,
+        (void*) RECEIVE_BLOCKING_NAME, (void*) RECEIVE_BLOCKING_NAME_COUNT,
         p3, p4);
 */
 

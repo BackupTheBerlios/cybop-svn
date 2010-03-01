@@ -32,8 +32,8 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/comparison_operation_cybol_name.c"
-#include "../../logger/logger.c"
 #include "../../executor/comparator/array_equality_comparator.c"
+#include "../../logger/logger.c"
 
 /**
  * Compares if the left parameter is smaller than or equal to the right parameter.
@@ -113,36 +113,40 @@ void compare_smallerness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
     void** sds = NULL_POINTER_MEMORY_MODEL;
 
     // Get left side.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) LEFT_SIDE_COMPARISON_OPERATION_CYBOL_NAME, (void*) LEFT_SIDE_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &lsn, (void*) &lsnc, (void*) &lsns,
         (void*) &lsa, (void*) &lsac, (void*) &lsas,
         (void*) &lsm, (void*) &lsmc, (void*) &lsms,
         (void*) &lsd, (void*) &lsdc, (void*) &lsds,
+        p0, p1,
+        (void*) LEFT_SIDE_COMPARISON_OPERATION_CYBOL_NAME, (void*) LEFT_SIDE_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get right side.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RIGHT_SIDE_COMPARISON_OPERATION_CYBOL_NAME, (void*) RIGHT_SIDE_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &rsn, (void*) &rsnc, (void*) &rsns,
         (void*) &rsa, (void*) &rsac, (void*) &rsas,
         (void*) &rsm, (void*) &rsmc, (void*) &rsms,
         (void*) &rsd, (void*) &rsdc, (void*) &rsds,
+        p0, p1,
+        (void*) RIGHT_SIDE_COMPARISON_OPERATION_CYBOL_NAME, (void*) RIGHT_SIDE_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get result.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RESULT_COMPARISON_OPERATION_CYBOL_NAME, (void*) RESULT_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
+        p0, p1,
+        (void*) RESULT_COMPARISON_OPERATION_CYBOL_NAME, (void*) RESULT_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get selection.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME, (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
+        p0, p1,
+        (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME, (void*) SELECTION_COMPARISON_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Compare if one parameter is smaller than or equal to the other.");

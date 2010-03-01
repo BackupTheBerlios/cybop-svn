@@ -35,10 +35,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/file/archive_file_operation_cybol_name.c"
-#include "../../logger/logger.c"
 #include "../../executor/accessor/getter/compound_getter.c"
-#include "../../memoriser/allocator/character_vector_allocator.c"
-#include "../../memoriser/allocator/pointer_vector_allocator.c"
+#include "../../executor/memoriser/allocator.c"
+#include "../../logger/logger.c"
 #include "../../variable/reallocation_factor.c"
 
 /**
@@ -94,30 +93,33 @@ void file_archiving(void* p0, void* p1, void* p2, void* p3) {
     void** bzip2ds = NULL_POINTER_MEMORY_MODEL;
 
     // Get create option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &createn, (void*) &createnc, (void*) &createns,
         (void*) &createa, (void*) &createac, (void*) &createas,
         (void*) &createm, (void*) &createmc, (void*) &createms,
         (void*) &created, (void*) &createdc, (void*) &createds,
+        p0, p1,
+        (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get update option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &updaten, (void*) &updatenc, (void*) &updatens,
         (void*) &updatea, (void*) &updateac, (void*) &updateas,
         (void*) &updatem, (void*) &updatemc, (void*) &updatems,
         (void*) &updated, (void*) &updatedc, (void*) &updateds,
+        p0, p1,
+        (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get bzip2 option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &bzip2n, (void*) &bzip2nc, (void*) &bzip2ns,
         (void*) &bzip2a, (void*) &bzip2ac, (void*) &bzip2as,
         (void*) &bzip2m, (void*) &bzip2mc, (void*) &bzip2ms,
         (void*) &bzip2d, (void*) &bzip2dc, (void*) &bzip2ds,
+        p0, p1,
+        (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The arguments vector.

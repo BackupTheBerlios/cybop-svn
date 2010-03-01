@@ -39,7 +39,7 @@
 #include "../../logger/logger.c"
 #include "../../memoriser/accessor/character_vector_accessor.c"
 #include "../../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../../memoriser/allocator/model_allocator.c"
+#include "../../executor/memoriser/allocator/model_allocator.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 

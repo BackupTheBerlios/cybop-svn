@@ -33,9 +33,9 @@
 #include "../executor/accessor/getter/compound_getter.c"
 #include "../memoriser/accessor/double_vector_accessor.c"
 #include "../memoriser/accessor/integer_vector_accessor.c"
-#include "../memoriser/accessor/internal_memory_accessor.c"
+#include "../executor/accessor/getter/array_getter.c"
 #include "../memoriser/accessor/pointer_vector_accessor.c"
-#include "../memoriser/accessor/signal_memory_accessor.c"
+#include "../executor/accessor/getter/signal_memory_getter.c"
 #include "../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../executor/comparator/array_equality_comparator.c"
 

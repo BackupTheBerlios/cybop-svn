@@ -110,36 +110,40 @@ void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
     void** sds = NULL_POINTER_MEMORY_MODEL;
 
     // Get abstraction.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
+        p0, p1,
+        (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get summand 1.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &s1n, (void*) &s1nc, (void*) &s1ns,
         (void*) &s1a, (void*) &s1ac, (void*) &s1as,
         (void*) &s1m, (void*) &s1mc, (void*) &s1ms,
         (void*) &s1d, (void*) &s1dc, (void*) &s1ds,
+        p0, p1,
+        (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get summand 2.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &s2n, (void*) &s2nc, (void*) &s2ns,
         (void*) &s2a, (void*) &s2ac, (void*) &s2as,
         (void*) &s2m, (void*) &s2mc, (void*) &s2ms,
         (void*) &s2d, (void*) &s2dc, (void*) &s2ds,
+        p0, p1,
+        (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get sum.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
+        p0, p1,
+        (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The comparison result.

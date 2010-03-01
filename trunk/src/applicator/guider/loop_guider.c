@@ -33,9 +33,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/flow/loop_flow_operation_cybol_name.c"
-#include "../../logger/logger.c"
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/comparator/array_equality_comparator.c"
+#include "../../logger/logger.c"
 
 //
 // Forward declarations.
@@ -102,20 +102,22 @@ void guide_loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     void** bds = NULL_POINTER_MEMORY_MODEL;
 
     // Get model.
-    get_universal_compound_element_by_name(p10, p11,
-        (void*) MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME, (void*) MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &mn, (void*) &mnc, (void*) &mns,
         (void*) &ma, (void*) &mac, (void*) &mas,
         (void*) &mm, (void*) &mmc, (void*) &mms,
         (void*) &md, (void*) &mdc, (void*) &mds,
+        p10, p11,
+        (void*) MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME, (void*) MODEL_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p1, p2);
     // Get break flag.
-    get_universal_compound_element_by_name(p10, p11,
-        (void*) BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME, (void*) BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &bn, (void*) &bnc, (void*) &bns,
         (void*) &ba, (void*) &bac, (void*) &bas,
         (void*) &bm, (void*) &bmc, (void*) &bms,
         (void*) &bd, (void*) &bdc, (void*) &bds,
+        p10, p11,
+        (void*) BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME, (void*) BREAK_LOOP_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p1, p2);
 
     // The direct execution flag.

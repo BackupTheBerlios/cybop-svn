@@ -35,8 +35,8 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/allocator/model_allocator.c"
-#include "../../../memoriser/accessor.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/accessor/getter.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../variable/thread_identification.c"
 

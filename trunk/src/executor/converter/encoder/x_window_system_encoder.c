@@ -36,7 +36,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/graphical_user_interface_cybol_name.c"
 #include "../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../memoriser/accessor.c"
+#include "../../executor/accessor/getter.c"
 
 /**
  * Encodes the source compound model into an x window system model.

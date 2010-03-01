@@ -50,8 +50,8 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
-#include "../../../memoriser/accessor/internal_memory_accessor.c"
-#include "../../../memoriser/accessor/signal_memory_accessor.c"
+#include "../../../executor/accessor/getter/array_getter.c"
+#include "../../../executor/accessor/getter/signal_memory_getter.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
 */

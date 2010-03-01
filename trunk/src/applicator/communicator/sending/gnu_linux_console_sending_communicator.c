@@ -35,12 +35,12 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../../memoriser/allocator/model_allocator.c"
-#include "../../../memoriser/accessor.c"
-#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/accessor/getter.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/communicator/receiver.c"
 #include "../../../executor/converter/decoder.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/allocator.c"
 #include "../../../variable/reallocation_factor.c"
 
 /**
@@ -109,7 +109,7 @@ void communicate_sending_gnu_linux_console(void* p0, void* p1, void* p2, void* p
     void** op = NULL_POINTER_MEMORY_MODEL;
 
     // Get gnu/linux console output stream.
-    get_array_elements(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &op, (void*) POINTER_MEMORY_ABSTRACTION);
+    get_array_elements((void*) &op, p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
 
     // Write encoded array as message to shell standard output.
     write_data((void*) op, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, e, ec, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);

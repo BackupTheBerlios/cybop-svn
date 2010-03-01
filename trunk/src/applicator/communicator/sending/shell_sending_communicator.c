@@ -34,10 +34,10 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/model/stream_model.c"
-#include "../../../logger/logger.c"
-#include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/converter/decoder.c"
 #include "../../../executor/communicator/receiver.c"
+#include "../../../executor/converter/decoder.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
 
 /**

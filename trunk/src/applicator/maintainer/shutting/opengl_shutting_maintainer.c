@@ -28,7 +28,7 @@
 
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../memoriser/accessor.c"
+#include "../../../executor/accessor/getter.c"
 #include "../../../executor/memoriser/allocator.c"
 
 /**

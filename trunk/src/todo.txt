@@ -12,7 +12,7 @@
 #
 
         * Clean up errors stemming from previously implemented changes
-            CONTINUE in alphabetical order WITH: "file_system_sending_communicator.c"
+            CONTINUE in "applicator/" in alphabetical order WITH: maintainer, memoriser, runner
 
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;

@@ -33,7 +33,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/accessor.c"
+#include "../../executor/accessor/getter.c"
 
 /**
  * Starts up the internal memory.

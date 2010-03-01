@@ -28,7 +28,7 @@
 
 #include "../../constant/model/log/message_log_model.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/allocator/model_allocator.c"
+#include "../../executor/memoriser/allocator/model_allocator.c"
 
 /**
  * Allocates the part.
