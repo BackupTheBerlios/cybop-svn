@@ -36,10 +36,10 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/lifecycle_operation_cybol_name.c"
-#include "../../logger/logger.c"
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 #include "../../executor/memoriser/allocator.c"
+#include "../../logger/logger.c"
 
 /**
  * Starts up a service.
@@ -185,7 +185,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
             // Get server socket internal.
             i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-            get_element(p5, (void*) &i, (void*) &s, (void*) POINTER_MEMORY_ABSTRACTION);
+            get(p5, (void*) &i, (void*) &s, (void*) POINTER_MEMORY_ABSTRACTION);
 
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 
@@ -207,7 +207,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
             // Get server socket internal.
             i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-            get_element(p5, (void*) &i, (void*) &s, (void*) POINTER_MEMORY_ABSTRACTION);
+            get(p5, (void*) &i, (void*) &s, (void*) POINTER_MEMORY_ABSTRACTION);
 
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 

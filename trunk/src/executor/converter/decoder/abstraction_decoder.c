@@ -26,16 +26,16 @@
 #ifndef ABSTRACTION_DECODER_SOURCE
 #define ABSTRACTION_DECODER_SOURCE
 
-#include "../../constant/abstraction/cybol/datetime_cybol_abstraction.c"
-#include "../../constant/abstraction/cybol/logicvalue_cybol_abstraction.c"
-#include "../../constant/abstraction/cybol/operation_cybol_abstraction.c"
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
-#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../../constant/abstraction/cybol/datetime_cybol_abstraction.c"
+#include "../../../constant/abstraction/cybol/logicvalue_cybol_abstraction.c"
+#include "../../../constant/abstraction/cybol/operation_cybol_abstraction.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Decodes the cybol abstraction into a runtime cyboi abstraction.

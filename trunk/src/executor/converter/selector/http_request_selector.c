@@ -26,16 +26,16 @@
 #ifndef HTTP_REQUEST_SELECTOR_SOURCE
 #define HTTP_REQUEST_SELECTOR_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/http/header/entity_header_http_name.c"
-#include "../../constant/name/http/header/general_header_http_name.c"
-#include "../../constant/name/http/header/request_header_http_name.c"
-#include "../../constant/name/http/header/response_header_http_name.c"
-#include "../../constant/name/http/separator_http_name.c"
-#include "../../logger/logger.c"
-#include "../../memoriser/detector.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/http/header/entity_header_http_name.c"
+#include "../../../constant/name/http/header/general_header_http_name.c"
+#include "../../../constant/name/http/header/request_header_http_name.c"
+#include "../../../constant/name/http/header/response_header_http_name.c"
+#include "../../../constant/name/http/separator_http_name.c"
+#include "../../../logger/logger.c"
+#include "../../../memoriser/detector.c"
 
 //
 // An http server request delivers message data in text format (like MIME 1.0),

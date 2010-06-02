@@ -35,8 +35,8 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/command_option/unix/shell_unix_command_option_name.c"
-#include "../../logger/logger.c"
 #include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
+#include "../../logger/logger.c"
 
 /**
  * Execute command/ program as process.

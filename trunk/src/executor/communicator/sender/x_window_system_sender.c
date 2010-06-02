@@ -28,14 +28,14 @@
 
 #include <X11/Xlib.h>
 #include <pthread.h>
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/graphical_user_interface_cybol_name.c"
-#include "../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../logger/logger.c"
-#include "../../executor/accessor/getter.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/graphical_user_interface_cybol_name.c"
+#include "../../../constant/name/memory/internal_memory_memory_name.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/accessor/getter.c"
 
 /**
  * Sends the window onto the x window system display.
@@ -58,7 +58,7 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int** w = (int**) NULL_POINTER_MEMORY_MODEL;
 
         // Get x window system internals.
-        get_element(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_MEMORY_ABSTRACTION);
+        get(p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_MEMORY_ABSTRACTION);
 
         // CAUTION! This test is necessary to avoid a "Segmentation fault"!
         if (*d != *NULL_POINTER_MEMORY_MODEL) {

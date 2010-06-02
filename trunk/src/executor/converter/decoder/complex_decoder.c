@@ -26,10 +26,10 @@
 #ifndef COMPLEX_DECODER_SOURCE
 #define COMPLEX_DECODER_SOURCE
 
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 //
 // A complex consists of two floats, a real and an imaginary.

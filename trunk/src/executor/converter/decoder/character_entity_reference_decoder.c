@@ -26,16 +26,16 @@
 #ifndef CHARACTER_ENTITY_REFERENCE_DECODER_SOURCE
 #define CHARACTER_ENTITY_REFERENCE_DECODER_SOURCE
 
-#include "../../globals/constants/character/character_constants.c"
-#include "../../globals/constants/character/html_character_entity_constants.c"
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
+#include "../../../globals/constants/character/character_constants.c"
+#include "../../../globals/constants/character/html_character_entity_constants.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
+#include "../../../variable/reallocation_factor.c"
 
 /**
  * Decodes a character entity reference (html escape reference) into a character.
@@ -84,7 +84,7 @@ void decode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                    set(*d, p1, (void*) t, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     // Increase destination count.
                     *dc = *dc + tc;

@@ -26,24 +26,24 @@
 #ifndef ALLOCATOR_SOURCE
 #define ALLOCATOR_SOURCE
 
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../executor/comparator/array_equality_comparator.c"
-#include "../executor/memoriser/allocator.c"
-#include "../memoriser/allocator/complex_allocator.c"
-#include "../memoriser/allocator/compound_allocator.c"
-#include "../memoriser/allocator/date_time_allocator.c"
-#include "../memoriser/allocator/double_vector_allocator.c"
-#include "../memoriser/allocator/fraction_allocator.c"
-#include "../memoriser/allocator/integer_vector_allocator.c"
-#include "../memoriser/allocator/internal_memory_allocator.c"
-#include "../memoriser/allocator/part_allocator.c"
-#include "../executor/memoriser/allocator.c"
-#include "../memoriser/allocator/signal_memory_allocator.c"
-#include "../memoriser/allocator/unsigned_long_vector_allocator.c"
-#include "../memoriser/allocator/wide_character_vector_allocator.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../executor/memoriser/allocator.c"
+#include "../../memoriser/allocator/complex_allocator.c"
+#include "../../memoriser/allocator/compound_allocator.c"
+#include "../../memoriser/allocator/date_time_allocator.c"
+#include "../../memoriser/allocator/double_vector_allocator.c"
+#include "../../memoriser/allocator/fraction_allocator.c"
+#include "../../memoriser/allocator/integer_vector_allocator.c"
+#include "../../memoriser/allocator/internal_memory_allocator.c"
+#include "../../memoriser/allocator/part_allocator.c"
+#include "../../executor/memoriser/allocator.c"
+#include "../../memoriser/allocator/signal_memory_allocator.c"
+#include "../../memoriser/allocator/unsigned_long_vector_allocator.c"
+#include "../../memoriser/allocator/wide_character_vector_allocator.c"
 
 /**
  * Allocates the model.
@@ -76,7 +76,7 @@ void allocate(void* p0, void* p1, void* p2) {
 
             allocate_date_time(p0, p1);
 
-        } else if (*a == *DOUBLE_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
             allocate_double_vector(p0, p1);
 
@@ -88,7 +88,7 @@ void allocate(void* p0, void* p1, void* p2) {
 
             allocate_fraction(p0, p1);
 
-        } else if (*a == *INTEGER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
             allocate_integer_vector(p0, p1);
 
@@ -108,7 +108,7 @@ void allocate(void* p0, void* p1, void* p2) {
 
 //??            allocate_part(p0, p1);
 
-        } else if (*a == *POINTER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
             allocate_pointer_vector(p0, p1);
 
@@ -116,7 +116,7 @@ void allocate(void* p0, void* p1, void* p2) {
 
             allocate_signal_memory(p0, p1);
 
-        } else if (*a == *UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
             allocate_unsigned_long_vector(p0, p1);
 

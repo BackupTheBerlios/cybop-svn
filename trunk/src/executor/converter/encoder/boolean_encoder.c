@@ -26,16 +26,16 @@
 #ifndef BOOLEAN_ENCODER_SOURCE
 #define BOOLEAN_ENCODER_SOURCE
 
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/cybol/boolean_cybol_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/boolean_memory_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/memory/primitive_memory_name.c"
-#include "../../logger/logger.c"
-#include "../../executor/memoriser/allocator.c"
-#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/cybol/boolean_cybol_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/memory/primitive_memory_name.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Encodes the boolean model and creates a byte stream from it.

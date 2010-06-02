@@ -11,8 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Clean up errors stemming from previously implemented changes
-            CONTINUE in "applicator/" in alphabetical order WITH: maintainer, memoriser, runner
+        CONTINUE WITH: trying to make cyboi compilable again
 
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;
@@ -202,6 +201,13 @@
             really make sense to beginners either
 
         * Check out handling of "super" property:
+            ==> use "prototype programming" paradigm-like behaviour, i.e.:
+                templates are just templates for initial creation of a model at runtime;
+                later on, each model has to keep ALL its parts with properties itself/ alone
+            ==> therefore, multiple template inheritance should be possible, too
+                (which would enable splitting of aspects like logging etc.)
+                because runtime models do NOT reference their original template anymore,
+                so that conflicts due to inter-dependencies as in OOP may not occur
             --> if parts exist, then a new part with the same name (stemming from the same
                 model or its super category) must NOT be created!
             --> prevent this in CYBOI, using conditions
@@ -289,7 +295,8 @@
             2 at runtime, as it is done now in the tui, which gets the properties of a super model at runtime
                 the problem here is that the model does not really itself contain the properties of its super model,
                 as described above
-            ==> solution 1 seems desirable, but would need some thinking on how to implement this in CYBOI
+            ==> solution 1 seems desirable, but would need some thinking on how to implement this in CYBOI;
+                this is a kind of "prototype programming"-like approach
             ==> for now, as temporary solution, the properties are stored redundantly (twice) in the template
                 that needs them (for example "menu_item" entries in the resmedicinae-revue menu) and in its super template
 

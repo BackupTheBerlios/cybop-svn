@@ -95,7 +95,7 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
 
             // Get communication partner-connected socket of this system.
             i = base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-            get_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_MEMORY_ABSTRACTION);
+            get(p0, (void*) &i, (void*) &ps, (void*) POINTER_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"TEST ps: %i \n", *((int*) *ps));
 
@@ -155,9 +155,9 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
             void** is = NULL_POINTER_MEMORY_MODEL;
 
             // Get gnu/linux console mutex.
-            get_element(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &mt, (void*) POINTER_MEMORY_ABSTRACTION);
+            get(p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &mt, (void*) POINTER_MEMORY_ABSTRACTION);
             // Get gnu/linux console input stream.
-            get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &is, (void*) POINTER_MEMORY_ABSTRACTION);
+            get(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &is, (void*) POINTER_MEMORY_ABSTRACTION);
 
             communicate_receiving_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL,
                 NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL,

@@ -26,10 +26,10 @@
 #ifndef HTTP_RESPONSE_PROCESSOR_SOURCE
 #define HTTP_RESPONSE_PROCESSOR_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 //
 // Many Web servers supply incorrect Content-Type headers with their

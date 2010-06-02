@@ -26,10 +26,10 @@
 #ifndef COMPLEX_ENCODER_SOURCE
 #define COMPLEX_ENCODER_SOURCE
 
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 /**
  * Encodes the complex model and creates a byte stream from it.

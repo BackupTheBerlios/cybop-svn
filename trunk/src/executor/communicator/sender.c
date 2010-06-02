@@ -26,22 +26,22 @@
 #ifndef SENDER_SOURCE
 #define SENDER_SOURCE
 
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../constant/channel/cybol_channel.c"
-#include "../constant/model/cybol/http_request_cybol_model.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/stream_model.c"
-#include "../executor/communicator/sender/datagram_socket_sender.c"
-#include "../memoriser/communicator/file_communicator.c"
-#include "../memoriser/communicator/ftp_communicator.c"
-#include "../executor/communicator/receiver/gnu_linux_console_receiver.c"
-#include "../memoriser/communicator/http_communicator.c"
-#include "../memoriser/communicator/inline_communicator.c"
-#include "../executor/communicator/sender/raw_socket_sender.c"
-#include "../executor/communicator/receiver/stream_socket_receiver.c"
-#include "../memoriser/communicator/x_window_system_communicator.c"
-#include "../executor/comparator/array_equality_comparator.c"
+#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/channel/cybol_channel.c"
+#include "../../constant/model/cybol/http_request_cybol_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/stream_model.c"
+#include "../../executor/communicator/sender/datagram_socket_sender.c"
+#include "../../memoriser/communicator/file_communicator.c"
+#include "../../memoriser/communicator/ftp_communicator.c"
+#include "../../executor/communicator/receiver/gnu_linux_console_receiver.c"
+#include "../../memoriser/communicator/http_communicator.c"
+#include "../../memoriser/communicator/inline_communicator.c"
+#include "../../executor/communicator/sender/raw_socket_sender.c"
+#include "../../executor/communicator/receiver/stream_socket_receiver.c"
+#include "../../memoriser/communicator/x_window_system_communicator.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Sends a data stream according to the given communication channel type

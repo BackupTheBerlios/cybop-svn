@@ -26,8 +26,8 @@
 #ifndef MODEL_DEALLOCATOR_SOURCE
 #define MODEL_DEALLOCATOR_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../logger/logger.c"
 
 //
 // Forward declarations.
@@ -58,8 +58,8 @@ void deallocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate model.");
 
             deallocate(p0, p3, p4, p5);
-            deallocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-            deallocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            deallocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+            deallocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else {
 

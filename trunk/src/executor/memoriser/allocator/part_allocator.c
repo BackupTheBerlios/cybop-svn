@@ -26,9 +26,9 @@
 #ifndef PART_ALLOCATOR_SOURCE
 #define PART_ALLOCATOR_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../logger/logger.c"
-#include "../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
 
 /**
  * Allocates the part.

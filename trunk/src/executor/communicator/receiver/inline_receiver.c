@@ -27,12 +27,12 @@
 #define INLINE_RECEIVER_SOURCE
 
 #include <stdio.h>
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
-#include "../../executor/accessor/getter.c"
-#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/accessor/getter.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Receives an inline stream and writes it into a byte array.

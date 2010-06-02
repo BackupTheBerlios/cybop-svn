@@ -26,13 +26,13 @@
 #ifndef CYBOL_PROCESSOR_SOURCE
 #define CYBOL_PROCESSOR_SOURCE
 
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybop/cybop_name.c"
-#include "../../logger/logger.c"
-#include "../../memoriser/detector/cybol_detector.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybop/cybop_name.c"
+#include "../../../logger/logger.c"
+#include "../../../memoriser/detector/cybol_detector.c"
 
 //
 // Forward declarations.

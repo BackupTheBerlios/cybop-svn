@@ -26,16 +26,16 @@
 #ifndef DATE_TIME_DECODER_SOURCE
 #define DATE_TIME_DECODER_SOURCE
 
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/memory/datetime_memory_name.c"
-#include "../../logger/logger.c"
-#include "../../executor/memoriser/allocator.c"
-#include "../../variable/reallocation_factor.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/memory/datetime_memory_name.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../variable/reallocation_factor.c"
 
 /**
  * Decodes the byte stream and creates a date time model from it.
@@ -202,7 +202,7 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                             *ds = *ds * *INTEGER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Reallocate date time.
-                            reallocate(p0, p1, p2, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+                            reallocate(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
                         }
 
                         // Set date time integer values.

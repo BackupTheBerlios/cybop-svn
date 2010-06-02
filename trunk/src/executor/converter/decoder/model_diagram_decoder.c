@@ -26,15 +26,15 @@
 #ifndef MODEL_DIAGRAM_DECODER_SOURCE
 #define MODEL_DIAGRAM_DECODER_SOURCE
 
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 /**
  * Decodes the model diagram and creates a knowledge model from it.

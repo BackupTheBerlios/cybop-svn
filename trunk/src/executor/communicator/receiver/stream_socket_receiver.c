@@ -29,14 +29,14 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include <stdio.h>
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/cybol/communication_mode_cybol_model.c"
-#include "../../constant/model/cybol/http_request_cybol_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
-#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/cybol/communication_mode_cybol_model.c"
+#include "../../../constant/model/cybol/http_request_cybol_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Receives a byte array stream from the stream socket.

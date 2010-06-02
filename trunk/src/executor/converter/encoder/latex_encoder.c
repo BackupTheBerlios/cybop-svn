@@ -26,8 +26,8 @@
 #ifndef LATEX_ENCODER_SOURCE
 #define LATEX_ENCODER_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../logger/logger.c"
 
 /**
  * Encodes the latex model and creates a byte stream from it.

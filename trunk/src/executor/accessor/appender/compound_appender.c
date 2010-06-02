@@ -26,19 +26,19 @@
 #ifndef COMPOUND_APPENDER_SOURCE
 #define COMPOUND_APPENDER_SOURCE
 
-#include "../../constant/abstraction/cybol/number_cybol_abstraction.c"
-#include "../../constant/abstraction/cybol/path_cybol_abstraction.c"
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/separator_cybol_name.c"
-#include "../../constant/name/memory/compound_memory_name.c"
-#include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
-#include "../../executor/memoriser/allocator.c"
-#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
+#include "../../../constant/abstraction/cybol/path_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/separator_cybol_name.c"
+#include "../../../constant/name/memory/compound_memory_name.c"
+#include "../../../logger/logger.c"
+#include "../../../variable/reallocation_factor.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Adds the compound element by name.
@@ -140,7 +140,7 @@ void add_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
                 // because the element is added at the end of the compound container.
                 // The suffix integer is encoded into a wide character array.
                 encode((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT,
-                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
 //??    fwprintf(stdout, L"TEST add compound element 2 ss: %i\n", ss);
 //??    fwprintf(stdout, L"TEST add compound element 2 sc: %i\n", sc);

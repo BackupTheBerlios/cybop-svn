@@ -26,21 +26,21 @@
 #ifndef XDT_DECODER_SOURCE
 #define XDT_DECODER_SOURCE
 
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/xdt/field_xdt_name.c"
-#include "../../constant/name/xdt/package_xdt_name.c"
-#include "../../constant/name/xdt/record_xdt_name.c"
-#include "../../constant/name/xdt_model/field_xdt_model_name.c"
-#include "../../constant/name/xdt_model/record_xdt_model_name.c"
-#include "../../logger/logger.c"
-#include "../../memoriser/converter/character/ascii_character_vector_converter.c"
-#include "../../memoriser/converter/date_time_converter.c"
-#include "../../memoriser/converter/integer_vector_converter.c"
-#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/xdt/field_xdt_name.c"
+#include "../../../constant/name/xdt/package_xdt_name.c"
+#include "../../../constant/name/xdt/record_xdt_name.c"
+#include "../../../constant/name/xdt_model/field_xdt_model_name.c"
+#include "../../../constant/name/xdt_model/record_xdt_model_name.c"
+#include "../../../logger/logger.c"
+#include "../../../memoriser/converter/character/ascii_character_vector_converter.c"
+#include "../../../memoriser/converter/date_time_converter.c"
+#include "../../../memoriser/converter/integer_vector_converter.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 //
 // The "x DatenTransfer" (xDT) is the German version of

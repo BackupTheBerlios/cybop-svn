@@ -28,26 +28,26 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
+#include "../../../variable/primitive_type_size.c"
 
 /**
  * Sets the array elements.
  *
  * @param p0 the array
- * @param p1 the index
- * @param p2 the elements
- * @param p3 the elements count
+ * @param p1 the elements
+ * @param p2 the elements count
+ * @param p3 the index
  * @param p4 the abstraction
  */
 void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* sc = (int*) p3;
+        int* sc = (int*) p2;
 
         if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -63,7 +63,7 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Calculate offset depending on given array type.
-            calculate_area((void*) &o, p1, p4);
+            calculate_area((void*) &o, p3, p4);
             add_integer((void*) &db, (void*) &o, (void*) POINTER_MEMORY_ABSTRACTION);
 
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
@@ -73,7 +73,7 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     break;
                 }
 
-                assign_area_with_offset(db, p2, (void*) &j, p4);
+                assign_area_with_offset(db, p1, (void*) &j, p4);
 
                 j++;
             }

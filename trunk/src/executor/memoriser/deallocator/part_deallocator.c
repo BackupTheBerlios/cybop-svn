@@ -26,9 +26,9 @@
 #ifndef PART_DEALLOCATOR_SOURCE
 #define PART_DEALLOCATOR_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../logger/logger.c"
-#include "../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
 
 /**
  * Deallocates the part.

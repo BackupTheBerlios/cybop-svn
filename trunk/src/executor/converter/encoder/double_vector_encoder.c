@@ -27,13 +27,13 @@
 #define DOUBLE_VECTOR_ENCODER_SOURCE
 
 #include <string.h>
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
-#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Encodes the double model and creates a wide character byte stream from it.

@@ -34,9 +34,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/memory/get_memory_operation_cybol_name.c"
-#include "../../logger/logger.c"
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/comparator/array_equality_comparator.c"
+#include "../../logger/logger.c"
 
 /**
  * Gets a description (meta information) of the part at the given index.

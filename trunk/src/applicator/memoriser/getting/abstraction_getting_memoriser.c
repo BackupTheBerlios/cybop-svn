@@ -27,15 +27,15 @@
 #define ABSTRACTION_GETTING_MEMORISER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
+#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
-#include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/communicator/receiver.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/decoder.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Gets the abstraction as description (meta information) of the part at the given index.

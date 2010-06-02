@@ -26,11 +26,11 @@
 #ifndef PROCESSOR_SOURCE
 #define PROCESSOR_SOURCE
 
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
 
 //?? TEMPORARY FOR TESTING! DELETE LATER!
-#include "../memoriser/communicator/file_communicator.c"
+#include "../../memoriser/communicator/file_communicator.c"
 
 /* PROCESSOR_SOURCE */
 #endif

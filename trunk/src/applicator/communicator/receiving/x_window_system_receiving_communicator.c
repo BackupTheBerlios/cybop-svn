@@ -30,8 +30,8 @@
 
 #include <X11/Xlib.h>
 //?? #include <X11/Xutil.h>
-#include "../constant/model/log/level_log_model.c"
-#include "../logger/logger.c"
+#include "../../../constant/model/log/level_log_model.c"
+#include "../../../logger/logger.c"
 /*??
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"

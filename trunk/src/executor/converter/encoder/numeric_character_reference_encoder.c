@@ -26,16 +26,16 @@
 #ifndef NUMERIC_CHARACTER_REFERENCE_ENCODER_SOURCE
 #define NUMERIC_CHARACTER_REFERENCE_ENCODER_SOURCE
 
-#include "../../globals/constants/character/character_constants.c"
-#include "../../globals/constants/character/numeric_character_reference_constants.c"
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
+#include "../../../globals/constants/character/character_constants.c"
+#include "../../../globals/constants/character/numeric_character_reference_constants.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
+#include "../../../variable/reallocation_factor.c"
 
 /**
  * Encodes a character into a numeric character reference (html escape code).
@@ -97,7 +97,7 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                     }
 
                     // Add temporary value to destination.
-                    set_element(*d, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    set(*d, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     // Increase destination count.
                     *dc = *dc + tc;

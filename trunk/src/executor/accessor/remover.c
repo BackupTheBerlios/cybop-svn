@@ -26,18 +26,18 @@
 #ifndef REMOVER_SOURCE
 #define REMOVER_SOURCE
 
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../memoriser/accessor/character_vector_accessor.c"
-#include "../executor/accessor/getter/compound_getter.c"
-#include "../memoriser/accessor/double_vector_accessor.c"
-#include "../memoriser/accessor/integer_vector_accessor.c"
-#include "../executor/accessor/getter/array_getter.c"
-#include "../memoriser/accessor/pointer_vector_accessor.c"
-#include "../executor/accessor/getter/signal_memory_getter.c"
-#include "../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../executor/comparator/array_equality_comparator.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../memoriser/accessor/character_vector_accessor.c"
+#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../memoriser/accessor/double_vector_accessor.c"
+#include "../../memoriser/accessor/integer_vector_accessor.c"
+#include "../../executor/accessor/getter/array_getter.c"
+#include "../../memoriser/accessor/pointer_vector_accessor.c"
+#include "../../executor/accessor/getter/signal_memory_getter.c"
+#include "../../memoriser/accessor/wide_character_vector_accessor.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Removes the element.
@@ -74,7 +74,7 @@ void remove_element(void* p0, void* p1, void* p2, void* p3) {
 
 //??            remove_datetime_element(p0, p1, p2);
 
-        } else if (*a == *DOUBLE_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
             remove_double_vector_element(p0, p1, p2);
 
@@ -82,7 +82,7 @@ void remove_element(void* p0, void* p1, void* p2, void* p3) {
 
 //??            remove_fraction_element(p0, p1, p2);
 
-        } else if (*a == *INTEGER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
             remove_integer_vector_element(p0, p1, p2);
 
@@ -90,7 +90,7 @@ void remove_element(void* p0, void* p1, void* p2, void* p3) {
 
 //??            remove_internal_memory_element(p0, p1, p2);
 
-        } else if (*a == *POINTER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
             remove_pointer_vector_element(p0, p1, p2);
 
@@ -98,7 +98,7 @@ void remove_element(void* p0, void* p1, void* p2, void* p3) {
 
 //??            remove_signal_memory_element(p0, p1, p2);
 
-        } else if (*a == *UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
 //??            remove_unsigned_long_vector_element(p0, p1, p2);
 

@@ -26,16 +26,16 @@
 #ifndef DATE_TIME_ENCODER_SOURCE
 #define DATE_TIME_ENCODER_SOURCE
 
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/memory/datetime_memory_name.c"
-#include "../../logger/logger.c"
-#include "../../executor/memoriser/allocator.c"
-#include "../../variable/reallocation_factor.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/memory/datetime_memory_name.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../variable/reallocation_factor.c"
 
 /**
  * Encodes the date time model and creates a byte stream from it.

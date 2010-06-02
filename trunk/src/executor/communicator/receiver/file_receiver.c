@@ -27,17 +27,17 @@
 #define FILE_RECEIVER_SOURCE
 
 #include <stdio.h>
-#include "../../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/character_code/ascii/ascii_character_code_model.c"
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/model/stream_model.c"
-#include "../../logger/logger.c"
-#include "../../executor/comparator/array_equality_comparator.c"
-#include "../../memoriser/converter/character/utf_8_unicode_character_converter.c"
-#include "../../variable/reallocation_factor.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/character_code/ascii/ascii_character_code_model.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/model/stream_model.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../memoriser/converter/character/utf_8_unicode_character_converter.c"
+#include "../../../variable/reallocation_factor.c"
 
 /**
  * Receives a file stream.

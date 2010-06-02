@@ -28,15 +28,15 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/character_code/ascii/ascii_character_code_model.c"
-#include "../../constant/model/cybol/layout_cybol_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/graphical_user_interface_cybol_name.c"
-#include "../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../executor/accessor/getter.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/character_code/ascii/ascii_character_code_model.c"
+#include "../../../constant/model/cybol/layout_cybol_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/graphical_user_interface_cybol_name.c"
+#include "../../../constant/name/memory/internal_memory_memory_name.c"
+#include "../../../executor/accessor/getter.c"
 
 /**
  * Encodes the source compound model into an x window system model.
@@ -70,9 +70,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         XWindowAttributes wa;
 
         // Get x window system internals.
-        get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &di, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_element(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_element(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gc, (void*) POINTER_MEMORY_ABSTRACTION);
+        get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &di, (void*) POINTER_MEMORY_ABSTRACTION);
+        get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_MEMORY_ABSTRACTION);
+        get(p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &gc, (void*) POINTER_MEMORY_ABSTRACTION);
 
         // Get window attributes.
         XGetWindowAttributes(*di, **w, &wa);
@@ -126,9 +126,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Determine source whole size coordinates.
-            get_element(*wsm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &wsmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-            get_element(*wsm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &wsmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-            get_element(*wsm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &wsmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            get(*wsm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &wsmx, (void*) INTEGER_MEMORY_ABSTRACTION);
+            get(*wsm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &wsmy, (void*) INTEGER_MEMORY_ABSTRACTION);
+            get(*wsm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &wsmz, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             // Set original area position coordinates, set to the zero origo.
             oapx = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -326,13 +326,13 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 p7, p8);
 
             // Get source part position coordinates.
-            get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-            get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-            get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            get(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) INTEGER_MEMORY_ABSTRACTION);
+            get(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) INTEGER_MEMORY_ABSTRACTION);
+            get(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) INTEGER_MEMORY_ABSTRACTION);
             // Get source part size coordinates.
-            get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-            get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-            get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+            get(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) INTEGER_MEMORY_ABSTRACTION);
+            get(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) INTEGER_MEMORY_ABSTRACTION);
+            get(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) INTEGER_MEMORY_ABSTRACTION);
 
 /*??
     fwprintf(stdout, L"layout: %s\n", *lm);

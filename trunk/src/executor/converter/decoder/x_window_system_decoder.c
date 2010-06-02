@@ -28,15 +28,15 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/character_code/ascii/ascii_character_code_model.c"
-#include "../../constant/model/cybol/layout_cybol_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/graphical_user_interface_cybol_name.c"
-#include "../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../executor/accessor/getter.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/character_code/ascii/ascii_character_code_model.c"
+#include "../../../constant/model/cybol/layout_cybol_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/graphical_user_interface_cybol_name.c"
+#include "../../../constant/name/memory/internal_memory_memory_name.c"
+#include "../../../executor/accessor/getter.c"
 
 /**
  * Decodes the x window system model into a compound model.

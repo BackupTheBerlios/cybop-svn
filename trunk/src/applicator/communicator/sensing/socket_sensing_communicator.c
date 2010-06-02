@@ -314,24 +314,24 @@ void communicate_sensing_socket(void* p0, void* p1) {
 
         // Get interrupt.
         i = *base + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element((void*) &irq, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &irq, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get mutex.
         i = *base + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element((void*) &mt, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &mt, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get sleep time.
         i = *base + *SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element((void*) &st, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &st, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get communication partner-connected socket of this system.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element((void*) &ps, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &ps, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get communication partner socket address.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element((void*) &pa, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &pa, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element((void*) &pas, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &pas, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get original socket of this system.
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element((void*) &os, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &os, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
 
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 

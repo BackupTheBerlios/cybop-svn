@@ -26,8 +26,8 @@
 #ifndef MODEL_ALLOCATOR_SOURCE
 #define MODEL_ALLOCATOR_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../logger/logger.c"
 
 //
 // Forward declarations.

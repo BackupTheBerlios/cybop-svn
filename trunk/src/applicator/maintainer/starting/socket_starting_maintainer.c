@@ -612,17 +612,17 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         }
 
         // Allocate socket address size of this system.
-        allocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        allocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
         // Allocate communication partner socket address size.
-        allocate((void*) &pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        allocate((void*) &pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
         // Allocate socket of this system.
-        allocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        allocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
         // Allocate communication partner socket.
-        allocate((void*) &ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        allocate((void*) &ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 /*??
         // Allocate signal ids.
-        allocate((void*) &idc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-        allocate((void*) &ids, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        allocate((void*) &idc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        allocate((void*) &ids, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
         allocate_array((void*) &id, (void*) ids, (void*) INTEGER_MEMORY_ABSTRACTION);
 */
 
@@ -701,8 +701,8 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 */
 
         // Allocate character buffer count and size.
-        allocate((void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-        allocate((void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        allocate((void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        allocate((void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         // Initialise character buffer count, size.
         // A possible initial size is 2048, which should
@@ -722,50 +722,50 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (an == AF_LOCAL) {
 
             i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_element(p0, (void*) &i, (void*) &la, (void*) POINTER_MEMORY_ABSTRACTION);
+            set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &la, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_element(p0, (void*) &i, (void*) &pla, (void*) POINTER_MEMORY_ABSTRACTION);
+            set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &pla, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
 
         } else if (an == AF_INET) {
 
             i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_element(p0, (void*) &i, (void*) &ia4, (void*) POINTER_MEMORY_ABSTRACTION);
+            set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &ia4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_element(p0, (void*) &i, (void*) &pia4, (void*) POINTER_MEMORY_ABSTRACTION);
+            set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &pia4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
 
         } else if (an == AF_INET6) {
 
             i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_element(p0, (void*) &i, (void*) &ia6, (void*) POINTER_MEMORY_ABSTRACTION);
+            set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &ia6, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_element(p0, (void*) &i, (void*) &pia6, (void*) POINTER_MEMORY_ABSTRACTION);
+            set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &pia6, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         }
 
         // Set socket address size of this system.
         i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        set_element(p0, (void*) &i, (void*) &as, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         // Set communication partner socket address size.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        set_element(p0, (void*) &i, (void*) &pas, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         // Set socket of this system.
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-        set_element(p0, (void*) &i, (void*) &s, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         // Set communication partner socket.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-        set_element(p0, (void*) &i, (void*) &ps, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         // Set character buffer.
         i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL_MEMORY_MEMORY_NAME;
-        set_element(p0, (void*) &i, (void*) &b, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &b, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-        set_element(p0, (void*) &i, (void*) &bc, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        set_element(p0, (void*) &i, (void*) &bs, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
 
 /*??
         // Set signal ids.
-        set_element(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_element(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_element(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_MEMORY_ABSTRACTION);
+        set(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_MEMORY_ABSTRACTION);
 */
 
         // Initialise error number.

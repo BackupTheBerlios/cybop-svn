@@ -26,18 +26,18 @@
 #ifndef APPENDER_SOURCE
 #define APPENDER_SOURCE
 
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../memoriser/accessor/character_vector_accessor.c"
-#include "../executor/accessor/getter/compound_getter.c"
-#include "../memoriser/accessor/double_vector_accessor.c"
-#include "../memoriser/accessor/integer_vector_accessor.c"
-#include "../executor/accessor/getter/array_getter.c"
-#include "../memoriser/accessor/pointer_vector_accessor.c"
-#include "../executor/accessor/getter/signal_memory_getter.c"
-#include "../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../executor/comparator/array_equality_comparator.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../memoriser/accessor/character_vector_accessor.c"
+#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../memoriser/accessor/double_vector_accessor.c"
+#include "../../memoriser/accessor/integer_vector_accessor.c"
+#include "../../executor/accessor/getter/array_getter.c"
+#include "../../memoriser/accessor/pointer_vector_accessor.c"
+#include "../../executor/accessor/getter/signal_memory_getter.c"
+#include "../../memoriser/accessor/wide_character_vector_accessor.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Appends the source- to the destination vector.

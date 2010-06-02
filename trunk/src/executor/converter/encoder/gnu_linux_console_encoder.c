@@ -33,30 +33,30 @@
 
 #include <stdio.h>
 #include <wchar.h>
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../../constant/model/cybol/layout/compass_layout_cybol_model.c"
-#include "../../constant/model/cybol/border_cybol_model.c"
-#include "../../constant/model/cybol/http_request_cybol_model.c"
-#include "../../constant/model/cybol/layout_cybol_model.c"
-#include "../../constant/model/cybol/shape_cybol_model.c"
-#include "../../constant/model/gnu_linux_console/escape_control_sequence_gnu_linux_console_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/boolean_memory_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/keyboard_key_cybol_name.c"
-#include "../../constant/name/cybol/super_cybol_name.c"
-#include "../../constant/name/cybol/text_user_interface_cybol_name.c"
-#include "../../constant/name/memory/vector_memory_name.c"
-#include "../../logger/logger.c"
-#include "../../executor/accessor/getter/compound_getter.c"
-#include "../../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../../executor/accessor/getter.c"
-#include "../../memoriser/converter/integer_vector_converter.c"
-#include "../../memoriser/converter/terminal_background_converter.c"
-#include "../../memoriser/converter/terminal_foreground_converter.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/model/cybol/layout/compass_layout_cybol_model.c"
+#include "../../../constant/model/cybol/border_cybol_model.c"
+#include "../../../constant/model/cybol/http_request_cybol_model.c"
+#include "../../../constant/model/cybol/layout_cybol_model.c"
+#include "../../../constant/model/cybol/shape_cybol_model.c"
+#include "../../../constant/model/gnu_linux_console/escape_control_sequence_gnu_linux_console_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/keyboard_key_cybol_name.c"
+#include "../../../constant/name/cybol/super_cybol_name.c"
+#include "../../../constant/name/cybol/text_user_interface_cybol_name.c"
+#include "../../../constant/name/memory/vector_memory_name.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/accessor/getter/compound_getter.c"
+#include "../../../memoriser/accessor/wide_character_vector_accessor.c"
+#include "../../../executor/accessor/getter.c"
+#include "../../../memoriser/converter/integer_vector_converter.c"
+#include "../../../memoriser/converter/terminal_background_converter.c"
+#include "../../../memoriser/converter/terminal_foreground_converter.c"
 
 //
 // Forward declarations.
@@ -479,7 +479,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                 if (ci < *cc) {
 
                                                     // Get character value at position x.
-                                                    get_element(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                                    get(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                                                 }
 
                                                 // Encode character using escape codes.
@@ -553,7 +553,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                         if (ci < *cc) {
 
                                                             // Get character value at position x.
-                                                            get_element(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                                            get(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                                                         }
 
                                                     } else {
@@ -930,13 +930,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     int fasz = oasz;
 
     // Get part position x, y, z.
-    get_element(p14, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &px, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-    get_element(p14, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &py, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-    get_element(p14, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &pz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    get(p14, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &px, (void*) INTEGER_MEMORY_ABSTRACTION);
+    get(p14, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &py, (void*) INTEGER_MEMORY_ABSTRACTION);
+    get(p14, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &pz, (void*) INTEGER_MEMORY_ABSTRACTION);
     // Get part size x, y, z.
-    get_element(p16, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &sx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-    get_element(p16, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &sy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-    get_element(p16, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &sz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+    get(p16, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &sx, (void*) INTEGER_MEMORY_ABSTRACTION);
+    get(p16, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &sy, (void*) INTEGER_MEMORY_ABSTRACTION);
+    get(p16, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &sz, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     // Set current position coordinates, initialised with part position.
     cpx = *px;
@@ -950,13 +950,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     if (p20 != *NULL_POINTER_MEMORY_MODEL) {
 
         // Determine source whole position coordinates.
-        get_element(p18, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wpmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-        get_element(p18, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wpmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-        get_element(p18, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wpmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        get(p18, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wpmx, (void*) INTEGER_MEMORY_ABSTRACTION);
+        get(p18, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wpmy, (void*) INTEGER_MEMORY_ABSTRACTION);
+        get(p18, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wpmz, (void*) INTEGER_MEMORY_ABSTRACTION);
         // Determine source whole size coordinates.
-        get_element(p20, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wsmx, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-        get_element(p20, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wsmy, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-        get_element(p20, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wsmz, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        get(p20, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wsmx, (void*) INTEGER_MEMORY_ABSTRACTION);
+        get(p20, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wsmy, (void*) INTEGER_MEMORY_ABSTRACTION);
+        get(p20, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wsmz, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         // Set original area position coordinates, initialised with whole position.
         oapx = *wpmx;

@@ -26,8 +26,8 @@
 #ifndef LATEX_DECODER_SOURCE
 #define LATEX_DECODER_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../logger/logger.c"
 
 /**
  * Decodes the byte stream and creates a latex model from it.

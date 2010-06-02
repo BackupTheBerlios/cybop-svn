@@ -26,9 +26,9 @@
 #ifndef CYBOL_ENCODER_SOURCE
 #define CYBOL_ENCODER_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../logger/logger.c"
-#include "../../memoriser/processor/cybol_processor.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../logger/logger.c"
+#include "../../../memoriser/processor/cybol_processor.c"
 
 /**
  * Encodes cybol.

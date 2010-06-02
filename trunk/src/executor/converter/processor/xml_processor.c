@@ -26,12 +26,12 @@
 #ifndef XML_PROCESSOR_SOURCE
 #define XML_PROCESSOR_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/xml_cybol_name.c"
-#include "../../logger/logger.c"
-#include "../../memoriser/selector/xml_selector.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/xml_cybol_name.c"
+#include "../../../logger/logger.c"
+#include "../../../memoriser/selector/xml_selector.c"
 
 /**
  * Processes the xml declaration.

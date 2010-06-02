@@ -33,8 +33,8 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/lifecycle_operation_cybol_name.c"
-#include "../../logger/logger.c"
 #include "../../executor/accessor/getter/compound_getter.c"
+#include "../../logger/logger.c"
 #include "../../variable/service_interrupt.c"
 #include "../../variable/thread_identification.c"
 

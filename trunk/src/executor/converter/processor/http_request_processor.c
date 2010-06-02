@@ -26,13 +26,13 @@
 #ifndef HTTP_REQUEST_PROCESSOR_SOURCE
 #define HTTP_REQUEST_PROCESSOR_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/http/compound_http_name.c"
-#include "../../logger/logger.c"
-#include "../../memoriser/accessor/part_accessor.c"
-#include "../../memoriser/selector/http_request_selector.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/http/compound_http_name.c"
+#include "../../../logger/logger.c"
+#include "../../../memoriser/accessor/part_accessor.c"
+#include "../../../memoriser/selector/http_request_selector.c"
 
 //
 // Taken from:

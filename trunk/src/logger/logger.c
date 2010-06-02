@@ -40,7 +40,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <wchar.h>
-#include "../constant/abstraction/memory/array_memory_abstraction.c"
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../constant/model/log/level_log_model.c"
 #include "../constant/model/log/level_name_log_model.c"

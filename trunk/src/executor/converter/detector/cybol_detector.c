@@ -26,8 +26,8 @@
 #ifndef CYBOL_DETECTOR_SOURCE
 #define CYBOL_DETECTOR_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../logger/logger.c"
 
 /**
  * Detects the root node.

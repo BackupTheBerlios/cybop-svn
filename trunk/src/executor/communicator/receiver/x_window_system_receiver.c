@@ -28,14 +28,14 @@
 
 #include <X11/Xlib.h>
 #include <pthread.h>
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/graphical_user_interface_cybol_name.c"
-#include "../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../logger/logger.c"
-#include "../../executor/accessor/getter.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/graphical_user_interface_cybol_name.c"
+#include "../../../constant/name/memory/internal_memory_memory_name.c"
+#include "../../../logger/logger.c"
+#include "../../../executor/accessor/getter.c"
 
 /**
  * Determine the graphical part's mouse command.
@@ -307,13 +307,13 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                             p19, p20);
 
                         // Determine graphical part position coordinates.
-                        get_element(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) POINTER_MEMORY_ABSTRACTION);
-                        get_element(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) POINTER_MEMORY_ABSTRACTION);
-                        get_element(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) POINTER_MEMORY_ABSTRACTION);
+                        get(*pm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &pmx, (void*) POINTER_MEMORY_ABSTRACTION);
+                        get(*pm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &pmy, (void*) POINTER_MEMORY_ABSTRACTION);
+                        get(*pm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &pmz, (void*) POINTER_MEMORY_ABSTRACTION);
                         // Determine source part size coordinates.
-                        get_element(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) POINTER_MEMORY_ABSTRACTION);
-                        get_element(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) POINTER_MEMORY_ABSTRACTION);
-                        get_element(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) POINTER_MEMORY_ABSTRACTION);
+                        get(*sm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &smx, (void*) POINTER_MEMORY_ABSTRACTION);
+                        get(*sm, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &smy, (void*) POINTER_MEMORY_ABSTRACTION);
+                        get(*sm, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &smz, (void*) POINTER_MEMORY_ABSTRACTION);
 
                         if ((*mx >= **pmx) && (*my >= **pmy) && (*mz >= **pmz)
                             && (*mx < (**pmx + **smx)) && (*my < (**pmy + **smy)) && (*mz < (**pmz + **smz))) {
@@ -461,30 +461,30 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
     int** w = (int**) NULL_POINTER_MEMORY_MODEL;
 
     // Get knowledge memory internal.
-    get_element(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &k, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &kc, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &ks, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) KNOWLEDGE_MEMORY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &k, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &kc, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &ks, (void*) POINTER_MEMORY_ABSTRACTION);
     // Get signal memory internal.
-    get_element(p0, (void*) SIGNAL_MEMORY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &s, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &sc, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &ss, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) SIGNAL_MEMORY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &s, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) SIGNAL_MEMORY_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &sc, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) SIGNAL_MEMORY_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &ss, (void*) POINTER_MEMORY_ABSTRACTION);
     // Get signal memory mutex.
-    get_element(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &smt, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &smt, (void*) POINTER_MEMORY_ABSTRACTION);
     // Get x window system mutex.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &xmt, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) &xmt, (void*) POINTER_MEMORY_ABSTRACTION);
     // Get interrupt request internal.
-    get_element(p0, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &sirq, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) &sirq, (void*) POINTER_MEMORY_ABSTRACTION);
     // Get user interface root internal.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &r, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &rc, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &rs, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &r, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &rc, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) X_WINDOW_SYSTEM_THREAD_ROOT_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &rs, (void*) POINTER_MEMORY_ABSTRACTION);
     // Get user interface commands internal.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_INTERNAL_MEMORY_MEMORY_NAME, (void*) &c, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &cc, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &cs, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_INTERNAL_MEMORY_MEMORY_NAME, (void*) &c, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &cc, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) X_WINDOW_SYSTEM_THREAD_COMMANDS_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &cs, (void*) POINTER_MEMORY_ABSTRACTION);
     // Get x window system internals.
-    get_element(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
+    get(p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) &w, (void*) POINTER_MEMORY_ABSTRACTION);
 
     // The command name, abstraction, model, details.
     void** cn = NULL_POINTER_MEMORY_MODEL;

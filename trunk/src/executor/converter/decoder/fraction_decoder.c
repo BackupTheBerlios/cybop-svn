@@ -26,10 +26,10 @@
 #ifndef FRACTION_DECODER_SOURCE
 #define FRACTION_DECODER_SOURCE
 
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 //
 // A fraction consists of two integers, a numerator and a denominator.

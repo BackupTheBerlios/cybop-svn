@@ -73,12 +73,12 @@ void communicate_sending_socket_get_socket_server_mode(void* p0, void* p1, void*
 
         // Get socket mutex.
         i = *base + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element(p1, (void*) &i, (void*) &mt, (void*) POINTER_MEMORY_ABSTRACTION);
+        get(p1, (void*) &i, (void*) &mt, (void*) POINTER_MEMORY_ABSTRACTION);
 */
 /*??
         // Get communication partner socket.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-        get_element(p1, (void*) &i, p0, (void*) POINTER_MEMORY_ABSTRACTION);
+        get(p1, (void*) &i, p0, (void*) POINTER_MEMORY_ABSTRACTION);
 */
 
     } else {

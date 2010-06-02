@@ -26,10 +26,10 @@
 #ifndef DETECTOR_SOURCE
 #define DETECTOR_SOURCE
 
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../logger/logger.c"
 
 /**
  * Moves the detector's current parsing position.
@@ -191,8 +191,8 @@ void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     }
 
     // Further comparisons may follow here, if needed. For example, for:
-    // DOUBLE_VECTOR_MEMORY_ABSTRACTION
-    // INTEGER_VECTOR_MEMORY_ABSTRACTION
+    // DOUBLE_MEMORY_ABSTRACTION
+    // INTEGER_MEMORY_ABSTRACTION
     // etc.
 }
 

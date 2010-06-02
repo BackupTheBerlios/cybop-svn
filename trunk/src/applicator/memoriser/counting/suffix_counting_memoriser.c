@@ -27,16 +27,16 @@
 #define SUFFIX_COUNTING_MEMORISER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
+#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
-#include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/communicator/receiver.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/decoder.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Counts those compound parts whose name ends with the given suffix.
@@ -65,7 +65,7 @@ void memorise_counting_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // Set result to compound count value.
             // A loop is not needed here, since the compound count already contains
             // the number of parts within that compound.
-            set_element(*r, NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+            set(*r, NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 
     fwprintf(stdout, L"TEST r: %i\n", **r);
     fwprintf(stdout, L"TEST rc: %i\n", *((int*) rc));

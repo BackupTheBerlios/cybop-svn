@@ -33,9 +33,9 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 #include "../../../variable/thread_identification.c"
 
 /**
@@ -56,8 +56,8 @@ void maintain_shutting_gnu_linux_console(void* p0, void* p1, void* p2) {
     FILE** opi = (FILE**) NULL_POINTER_MEMORY_MODEL;
 
     // Get gnu/linux console internals.
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &ipi, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_element(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &opi, (void*) POINTER_MEMORY_ABSTRACTION);
+    get((void*) &ipi, p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+    get((void*) &opi, p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
 
     // Only deallocate gnu/linux console resources if at least one,
     // the input- OR output stream internal is null.
@@ -79,14 +79,14 @@ void maintain_shutting_gnu_linux_console(void* p0, void* p1, void* p2) {
         void** bs = NULL_POINTER_MEMORY_MODEL;
 
         // Get gnu/linux console internals.
-        get_element(p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &ip, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_element(p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) &op, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_element(p0, (void*) GNU_LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL_MEMORY_MEMORY_NAME, (void*) &to, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_element(p0, (void*) GNU_LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL_MEMORY_MEMORY_NAME, (void*) &tn, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &ip, p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &op, p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &to, p0, (void*) GNU_LINUX_CONSOLE_ORIGINAL_ATTRIBUTES_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &tn, p0, (void*) GNU_LINUX_CONSOLE_WORKING_ATTRIBUTES_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
         // Get character buffer.
-        get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL_MEMORY_MEMORY_NAME, (void*) &b, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) &bc, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_element(p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) &bs, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &b, p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &bc, p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &bs, p0, (void*) GNU_LINUX_CONSOLE_THREAD_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
 
         // Get file descriptor for file stream.
         // CAUTION! The stream "stdin" must be used instead of "stdout" here!
@@ -100,8 +100,8 @@ void maintain_shutting_gnu_linux_console(void* p0, void* p1, void* p2) {
         //
         // CAUTION! DO NOT deallocate ip and op because they refer to stdin and stdout of the system!
         // This might be changed at a (much) later point in CYBOI development.
-        deallocate((void*) &ip, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-        deallocate((void*) &op, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        deallocate((void*) &ip, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        deallocate((void*) &op, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 */
         // Deallocate termios settings.
         free(*to);
@@ -110,8 +110,8 @@ void maintain_shutting_gnu_linux_console(void* p0, void* p1, void* p2) {
         // Deallocate character buffer.
         deallocate((void*) b, *bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         // Deallocate character buffer count, size.
-        deallocate((void*) bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
-        deallocate((void*) bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_VECTOR_MEMORY_ABSTRACTION);
+        deallocate((void*) bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        deallocate((void*) bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     } else {
 

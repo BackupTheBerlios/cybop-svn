@@ -26,8 +26,8 @@
 #ifndef UTF_16_UNICODE_CHARACTER_DECODER_SOURCE
 #define UTF_16_UNICODE_CHARACTER_DECODER_SOURCE
 
-#include "../../../constant/model/log/message_log_model.c"
-#include "../../../logger/logger.c"
+#include "../../../../constant/model/log/message_log_model.c"
+#include "../../../../logger/logger.c"
 
 //
 // In computing, UTF-16 (16-bit Unicode Transformation Format) is a variable-

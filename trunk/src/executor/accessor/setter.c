@@ -26,18 +26,18 @@
 #ifndef SETTER_SOURCE
 #define SETTER_SOURCE
 
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/abstraction/memory/array_memory_abstraction.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../memoriser/accessor/character_vector_accessor.c"
-#include "../executor/accessor/getter/compound_getter.c"
-#include "../memoriser/accessor/double_vector_accessor.c"
-#include "../memoriser/accessor/integer_vector_accessor.c"
-#include "../executor/accessor/getter/array_getter.c"
-#include "../memoriser/accessor/pointer_vector_accessor.c"
-#include "../executor/accessor/getter/signal_memory_getter.c"
-#include "../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../executor/comparator/array_equality_comparator.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../memoriser/accessor/character_vector_accessor.c"
+#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../memoriser/accessor/double_vector_accessor.c"
+#include "../../memoriser/accessor/integer_vector_accessor.c"
+#include "../../executor/accessor/getter/array_getter.c"
+#include "../../memoriser/accessor/pointer_vector_accessor.c"
+#include "../../executor/accessor/getter/signal_memory_getter.c"
+#include "../../memoriser/accessor/wide_character_vector_accessor.c"
+#include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Sets the element.
@@ -45,9 +45,9 @@
  * @param p0 the model
  * @param p1 the model count
  * @param p2 the model size
- * @param p3 the index
- * @param p4 the element (Hand over as reference!)
- * @param p5 the element count
+ * @param p3 the element (Hand over as reference!)
+ * @param p4 the element count
+ * @param p5 the index
  * @param p6 the abstraction
  */
 void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
@@ -61,8 +61,8 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
         if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
             set_array_elements(p0, p3, p4, p5, p6);
-            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
 
@@ -76,11 +76,11 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
 //??            set_datetime_element(p0, p1, p2);
 
-        } else if (*a == *DOUBLE_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
             set_array_elements(p0, p3, p4, p5, p6);
-            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
 
@@ -89,34 +89,34 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
         } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
             set_array_elements(p0, p3, p4, p5, p6);
-            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else if (*a == *INTERNAL_MEMORY_MEMORY_ABSTRACTION) {
 
 //??            set_internal_memory_element(p0, p1, p2);
 
-        } else if (*a == *POINTER_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
             set_array_elements(p0, p3, p4, p5, p6);
-            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
 
 //??            set_signal_memory_element(p0, p1, p2);
 
-        } else if (*a == *UNSIGNED_LONG_VECTOR_MEMORY_ABSTRACTION) {
+        } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
             set_array_elements(p0, p3, p4, p5, p6);
-            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
             set_array_elements(p0, p3, p4, p5, p6);
-            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else {
 

@@ -26,12 +26,12 @@
 #ifndef OPENGL_STARTING_MAINTAINER_SOURCE
 #define OPENGL_STARTING_MAINTAINER_SOURCE
 
-#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Starts up the opengl system.
