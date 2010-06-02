@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-06-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct include paths since some files are in a deeper directory now, after having restructured
+        * Clean up errors stemming from previously implemented changes,
+            in "applicator/" sub directories "maintainer", "memoriser" and "runner"
+
 2010-03-01  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up errors stemming from previously implemented changes
         * Remove superfluous "vector" files, e.g. "character_vector_allocator.c" etc.
@@ -29,10 +34,10 @@
             since they differed only in their abstraction (type), but not their logic
 
 2010-02-16  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up errors in executor/ directory stemming from previously implemented changes
+        * Clean up errors in "executor/" directory stemming from previously implemented changes
 
 2010-02-13  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up errors in executor/ directory stemming from previously implemented changes
+        * Clean up errors in "executor/" directory stemming from previously implemented changes
 
 2010-01-24  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt various files to use new integer-based "_MEMORY_ABSTRACTION" constants
