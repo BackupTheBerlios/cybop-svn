@@ -260,11 +260,11 @@ void manage(void* p0, void* p1) {
     // Allocate internal memory.
     // CAUTION! The internal memory size was declared as int (not int*) above,
     // so that a reference needs to be handed over here!
-    allocate((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION);
     // Allocate knowledge memory.
-    allocate((void*) &k, (void*) ks, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &k, (void*) ks, (void*) COMPOUND_MEMORY_ABSTRACTION);
     // Allocate signal memory.
-    allocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION);
 
     //
     // System startup.
@@ -383,15 +383,15 @@ void manage(void* p0, void* p1) {
     free((void*) cyboi_service_sleep_time);
 
     // Deallocate signal memory.
-    deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION);
     deallocate((void*) &sc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
     deallocate((void*) &ss, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
     // Deallocate knowledge memory.
-    deallocate((void*) &k, (void*) ks, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &k, (void*) ks, (void*) COMPOUND_MEMORY_ABSTRACTION);
     deallocate((void*) &kc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
     deallocate((void*) &ks, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
     // Deallocate internal memory.
-    deallocate((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION);
 }
 
 /* MANAGER_SOURCE */

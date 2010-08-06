@@ -30,20 +30,18 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../executor/memoriser/allocator.c"
-#include "../../executor/memoriser/allocator/complex_allocator.c"
-#include "../../executor/memoriser/allocator/compound_allocator.c"
-#include "../../executor/memoriser/allocator/date_time_allocator.c"
-#include "../../executor/memoriser/allocator/double_vector_allocator.c"
-#include "../../executor/memoriser/allocator/fraction_allocator.c"
-#include "../../executor/memoriser/allocator/integer_vector_allocator.c"
-#include "../../executor/memoriser/allocator/internal_memory_allocator.c"
-#include "../../executor/memoriser/allocator/part_allocator.c"
-#include "../../executor/memoriser/allocator.c"
-#include "../../executor/memoriser/allocator/signal_memory_allocator.c"
-#include "../../executor/memoriser/allocator/unsigned_long_vector_allocator.c"
-#include "../../executor/memoriser/allocator/wide_character_vector_allocator.c"
 #include "../../executor/comparator/array_equality_comparator.c"
+/*??
+#include "../../executor/memoriser/reallocator/complex_reallocator.c"
+#include "../../executor/memoriser/reallocator/compound_reallocator.c"
+#include "../../executor/memoriser/reallocator/date_time_reallocator.c"
+#include "../../executor/memoriser/reallocator/fraction_reallocator.c"
+#include "../../executor/memoriser/reallocator/internal_memory_reallocator.c"
+#include "../../executor/memoriser/reallocator/model_reallocator.c"
+#include "../../executor/memoriser/reallocator/part_reallocator.c"
+#include "../../executor/memoriser/reallocator/signal_memory_reallocator.c"
+#include "../../executor/memoriser/reallocator/x_window_system_reallocator.c"
+*/
 
 /**
  * Reallocates the model.

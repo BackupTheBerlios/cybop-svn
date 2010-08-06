@@ -31,19 +31,15 @@
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../executor/comparator/array_equality_comparator.c"
-#include "../../executor/memoriser/allocator.c"
 #include "../../executor/memoriser/allocator/complex_allocator.c"
 #include "../../executor/memoriser/allocator/compound_allocator.c"
 #include "../../executor/memoriser/allocator/date_time_allocator.c"
-#include "../../executor/memoriser/allocator/double_vector_allocator.c"
 #include "../../executor/memoriser/allocator/fraction_allocator.c"
-#include "../../executor/memoriser/allocator/integer_vector_allocator.c"
 #include "../../executor/memoriser/allocator/internal_memory_allocator.c"
+#include "../../executor/memoriser/allocator/model_allocator.c"
 #include "../../executor/memoriser/allocator/part_allocator.c"
-#include "../../executor/memoriser/allocator.c"
 #include "../../executor/memoriser/allocator/signal_memory_allocator.c"
-#include "../../executor/memoriser/allocator/unsigned_long_vector_allocator.c"
-#include "../../executor/memoriser/allocator/wide_character_vector_allocator.c"
+#include "../../executor/memoriser/allocator/x_window_system_allocator.c"
 
 /**
  * Allocates the model.
@@ -103,6 +99,10 @@ void allocate(void* p0, void* p1, void* p2) {
         } else if (*a == *OPERATION_MEMORY_ABSTRACTION) {
 
             allocate_wide_character_vector(p0, p1);
+
+        } else if (*a == *MODEL_MEMORY_ABSTRACTION) {
+
+//??            allocate_model(p0, p1);
 
         } else if (*a == *PART_MEMORY_ABSTRACTION) {
 

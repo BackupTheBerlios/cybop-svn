@@ -63,7 +63,7 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     // Allocate model.
     allocate_model(p6, p7, p8, p12, p13, p14);
     // Allocate details.
-    allocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    allocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION);
 */
 }
 
