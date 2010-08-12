@@ -34,12 +34,10 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
+#include "../../../executor/communicator/receiver.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
-#include "../../../executor/communicator/receiver.c"
-#include "../../../memoriser/converter/cybol_converter.c"
-#include "../../../executor/converter/decoder.c"
 
 /**
  * Receives a message from the file system.

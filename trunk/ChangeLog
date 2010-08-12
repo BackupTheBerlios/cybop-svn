@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-08-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up errors stemming from previously implemented changes
+
 2010-08-10  Enrico Gallus  <enrico.gallus@googlemail.com>
         * Extend files constant/model/internet_protocol_model.c and constant/model/service_port_model.c
 

@@ -112,7 +112,7 @@ void allocate(void* p0, void* p1, void* p2) {
 
             allocate_pointer_vector(p0, p1);
 
-        } else if (*a == *SIGNAL_MEMORY_ABSTRACTION) {
+        } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
 
             allocate_signal_memory(p0, p1);
 

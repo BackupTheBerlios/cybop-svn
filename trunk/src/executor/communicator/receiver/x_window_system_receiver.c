@@ -323,7 +323,7 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                             // Sense the graphical part's command.
                             sense_x_window_system_command(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, *d, *dc, p17, p18, p19, p20);
 
-                            compare_equal_arrays((void*) &r, *a, *ac, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                            compare_equal_arrays((void*) &r, *a, *ac, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

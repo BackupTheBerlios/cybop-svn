@@ -33,7 +33,7 @@
 // Forward declarations.
 //
 
-void allocate(void* p0, void* p1, void* p2, void* p3);
+void allocate(void* p0, void* p1, void* p2);
 void set_integer_vector_element(void* p0, void* p1, void* p2);
 
 /**
