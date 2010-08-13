@@ -50,13 +50,12 @@
 #include "../../../constant/name/cybol/super_cybol_name.c"
 #include "../../../constant/name/cybol/text_user_interface_cybol_name.c"
 #include "../../../constant/name/memory/vector_memory_name.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
-#include "../../../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../memoriser/converter/integer_vector_converter.c"
-#include "../../../memoriser/converter/terminal_background_converter.c"
-#include "../../../memoriser/converter/terminal_foreground_converter.c"
+#include "../../../executor/converter/decoder/integer_vector_decoder.c"
+#include "../../../executor/converter/decoder/terminal_background_decoder.c"
+#include "../../../executor/converter/decoder/terminal_foreground_decoder.c"
+#include "../../../logger/logger.c"
 
 //
 // Forward declarations.
@@ -226,7 +225,7 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
                 // CAUTION! Use the "ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT" for both comparison values,
                 // since they would not be equal if their size differed.
-                compare_equal_arrays(p3, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                compare_equal_arrays(p3, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

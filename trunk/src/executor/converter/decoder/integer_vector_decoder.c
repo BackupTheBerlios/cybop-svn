@@ -41,10 +41,10 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
-#include "../../../memoriser/converter/integer_converter.c"
 #include "../../../executor/accessor/getter.c"
+#include "../../../executor/converter/decoder/integer_decoder.c"
 #include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 #include "../../../variable/primitive_type_size.c"
 #include "../../../variable/reallocation_factor.c"
 

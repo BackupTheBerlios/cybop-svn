@@ -119,7 +119,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Encode model into model diagram.
     encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
-        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
         p0, p1, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
     // The multibyte character stream.
     void* mb = *NULL_POINTER_MEMORY_MODEL;

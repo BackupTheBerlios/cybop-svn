@@ -40,7 +40,7 @@
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/name/command_option/cyboi_command_option_name.c"
-#include "../memoriser/accessor/wide_character_vector_accessor.c"
+#include "../executor/accessor/setter/array_setter.c"
 
 /**
  * Optionalises the log level option.
@@ -182,7 +182,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             }
 
             // Add null termination character to terminated file name.
-            set_array_elements(t, (void*) &tc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            set_array_elements(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tc, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
             // Increase terminated file name count.
             tc++;

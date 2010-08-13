@@ -32,10 +32,10 @@
 #include "../../../applicator/comparator/smallerness_comparator.c"
 #include "../../../applicator/comparator/smallerness_or_equality_comparator.c"
 #include "../../../constant/model/cybol/operation/comparison_operation_cybol_model.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../logger/logger.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Handles the comparison operation signal.
@@ -68,7 +68,7 @@ void handle_comparison_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) EQUAL_COMPARISON_OPERATION_CYBOL_MODEL, (void*) EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) EQUAL_COMPARISON_OPERATION_CYBOL_MODEL, (void*) EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -78,7 +78,7 @@ void handle_comparison_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) GREATER_COMPARISON_OPERATION_CYBOL_MODEL, (void*) GREATER_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) GREATER_COMPARISON_OPERATION_CYBOL_MODEL, (void*) GREATER_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -88,7 +88,7 @@ void handle_comparison_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) GREATER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL, (void*) GREATER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) GREATER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL, (void*) GREATER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -98,7 +98,7 @@ void handle_comparison_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) SMALLER_COMPARISON_OPERATION_CYBOL_MODEL, (void*) SMALLER_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) SMALLER_COMPARISON_OPERATION_CYBOL_MODEL, (void*) SMALLER_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -108,7 +108,7 @@ void handle_comparison_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) SMALLER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL, (void*) SMALLER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) SMALLER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL, (void*) SMALLER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

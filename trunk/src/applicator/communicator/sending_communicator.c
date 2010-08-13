@@ -413,7 +413,7 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            communicate_sending_socket(p2, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) WWW_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+            communicate_sending_socket(p2, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) TCP_WWW_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 

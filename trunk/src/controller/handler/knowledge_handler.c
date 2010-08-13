@@ -32,8 +32,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../controller/handler/compound_handler.c"
 #include "../../controller/handler/operation_handler.c"
-#include "../../logger/logger.c"
 #include "../../executor/comparator/array_equality_comparator.c"
+#include "../../logger/logger.c"
 
 /**
  * Handles a knowledge logic.

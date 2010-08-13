@@ -50,8 +50,9 @@
  * @param p1 the model count
  * @param p2 the model size
  * @param p3 the abstraction
+ * @param p4 the abstraction count
  */
-void reallocate(void* p0, void* p1, void* p2, void* p3) {
+void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 

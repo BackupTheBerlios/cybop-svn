@@ -54,12 +54,12 @@
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../variable/primitive_type_size.c"
 #include "../executor/accessor/getter/compound_getter.c"
-#include "../executor/memoriser/allocator.c"
 #include "../executor/comparator/array_equality_comparator.c"
 #include "../executor/converter/decoder.c"
-#include "../memoriser/converter/integer_converter.c"
+#include "../executor/converter/integer_decoder.c"
+#include "../executor/memoriser/allocator.c"
+#include "../variable/primitive_type_size.c"
 
 /**
  * Tests the logger.

@@ -40,32 +40,32 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/comparator/array_equality_comparator.c"
-#include "../../executor/decoder/abstraction_decoder.c"
-#include "../../executor/decoder/ascii_character_decoder.c"
-#include "../../executor/decoder/boolean_decoder.c"
-#include "../../executor/decoder/complex_decoder.c"
-#include "../../executor/decoder/cybol_decoder.c"
-#include "../../executor/decoder/date_time_decoder.c"
-#include "../../executor/decoder/double_decoder.c"
-#include "../../executor/decoder/fraction_decoder.c"
-#include "../../executor/decoder/gnu_linux_console_decoder.c"
-#include "../../executor/decoder/http_request_decoder.c"
-#include "../../executor/decoder/http_response_decoder.c"
-#include "../../executor/decoder/integer_decoder.c"
-#include "../../executor/decoder/integer_vector_decoder.c"
-#include "../../executor/decoder/latex_decoder.c"
-#include "../../executor/decoder/model_diagram_decoder.c"
-#include "../../executor/decoder/terminal_background_decoder.c"
-#include "../../executor/decoder/terminal_foreground_decoder.c"
-#include "../../executor/decoder/utf_16_unicode_character_decoder.c"
-#include "../../executor/decoder/utf_8_unicode_character_decoder.c"
-#include "../../executor/decoder/xdt_decoder.c"
-#include "../../executor/decoder/xhtml_decoder.c"
-#include "../../executor/decoder/xml_decoder.c"
-#include "../../executor/decoder/x_window_system_decoder.c"
+#include "../../executor/converter/decoder/abstraction_decoder.c"
+#include "../../executor/converter/decoder/ascii_character_vector_decoder.c"
+#include "../../executor/converter/decoder/boolean_decoder.c"
+#include "../../executor/converter/decoder/complex_decoder.c"
+#include "../../executor/converter/decoder/cybol_decoder.c"
+#include "../../executor/converter/decoder/date_time_decoder.c"
+#include "../../executor/converter/decoder/double_vector_decoder.c"
+#include "../../executor/converter/decoder/fraction_decoder.c"
+#include "../../executor/converter/decoder/gnu_linux_console_decoder.c"
+#include "../../executor/converter/decoder/http_request_decoder.c"
+#include "../../executor/converter/decoder/http_response_decoder.c"
+#include "../../executor/converter/decoder/integer_decoder.c"
+#include "../../executor/converter/decoder/integer_vector_decoder.c"
+#include "../../executor/converter/decoder/latex_decoder.c"
+#include "../../executor/converter/decoder/model_diagram_decoder.c"
+#include "../../executor/converter/decoder/terminal_background_decoder.c"
+#include "../../executor/converter/decoder/terminal_foreground_decoder.c"
+#include "../../executor/converter/decoder/utf_16_unicode_character_decoder.c"
+#include "../../executor/converter/decoder/utf_8_unicode_character_decoder.c"
+#include "../../executor/converter/decoder/xdt_decoder.c"
+#include "../../executor/converter/decoder/xhtml_decoder.c"
+#include "../../executor/converter/decoder/xml_decoder.c"
+#include "../../executor/converter/decoder/x_window_system_decoder.c"
 
 //?? TEMPORARY FOR TESTING! DELETE LATER!
-#include "../../memoriser/communicator/file_communicator.c"
+#include "../../executor/communicator/receiver/file_receiver.c"
 
 /**
  * Decodes the source into the destination, according to the given language.
@@ -137,9 +137,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Allocate temporary model.
-            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Allocate temporary details.
-            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             // Decode source message (cybol file) into temporary compound memory model.
             decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
@@ -150,17 +150,17 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
-            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
                 m, (void*) &mc, d, (void*) &dc);
             // The multibyte character stream.
             void* mb = *NULL_POINTER_MEMORY_MODEL;
             int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate multibyte character stream.
-            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
@@ -170,9 +170,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Write multibyte character stream as message to file system.
             write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
-            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
-            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
 
             // Decode temporary compound memory model into cyboi knowledge compound memory model.
@@ -180,9 +180,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
 
             // Deallocate temporary model.
-            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate temporary details.
-            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
 //?? TEST BEGIN
             // Reset model diagram.
@@ -190,17 +190,17 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
-            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
                 *((void**) p0), p1, *((void**) p3), p4);
             // Reset multibyte character stream.
             mb = *NULL_POINTER_MEMORY_MODEL;
             mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate multibyte character stream.
-            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // Reset file name.
@@ -210,9 +210,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Write multibyte character stream as message to file system.
             write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
-            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
-            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
         }
     }
@@ -276,9 +276,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Allocate temporary model.
-            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Allocate temporary details.
-            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             // Decode source message into temporary compound memory model.
             decode_http_request((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
@@ -289,17 +289,17 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
-            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
                 m, (void*) &mc, d, (void*) &dc);
             // The multibyte character stream.
             void* mb = *NULL_POINTER_MEMORY_MODEL;
             int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate multibyte character stream.
-            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
@@ -309,18 +309,18 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Write multibyte character stream as message to file system.
             write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
-            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
-            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
 
             // Decode temporary compound memory model into cyboi knowledge compound memory model.
             decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
 
             // Deallocate temporary model.
-            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate temporary details.
-            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
 //?? TEST BEGIN
             // Reset model diagram.
@@ -328,17 +328,17 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
-            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
                 *((void**) p0), p1, *((void**) p3), p4);
             // Reset multibyte character stream.
             mb = *NULL_POINTER_MEMORY_MODEL;
             mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate multibyte character stream.
-            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // Reset file name.
@@ -348,9 +348,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Write multibyte character stream as message to file system.
             write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
-            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
-            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
         }
     }
@@ -371,9 +371,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Allocate temporary model.
-            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Allocate temporary details.
-            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             // Decode source message into temporary compound memory model.
             decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
@@ -384,17 +384,17 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
-            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
                 m, (void*) &mc, d, (void*) &dc);
             // The multibyte character stream.
             void* mb = *NULL_POINTER_MEMORY_MODEL;
             int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate multibyte character stream.
-            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
@@ -404,18 +404,18 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Write multibyte character stream as message to file system.
             write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
-            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
-            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
 
             // Decode temporary compound memory model into cyboi knowledge compound memory model.
             decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
 
             // Deallocate temporary model.
-            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate temporary details.
-            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
 //?? TEST BEGIN
             // Reset model diagram.
@@ -423,17 +423,17 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
-            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
                 *((void**) p0), p1, *((void**) p3), p4);
             // Reset multibyte character stream.
             mb = *NULL_POINTER_MEMORY_MODEL;
             mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
             mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate multibyte character stream.
-            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // Reset file name.
@@ -443,9 +443,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Write multibyte character stream as message to file system.
             write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
-            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
-            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
         }
     }

@@ -66,7 +66,7 @@ void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void*
     int as = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate character array.
-    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Read pressed keyboard keys as message from gnu/linux console.
     receive_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12, p17);
@@ -78,7 +78,7 @@ void communicate_receiving_gnu_linux_console(void* p0, void* p1, void* p2, void*
     decode(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
 
     // Deallocate character array.
-    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

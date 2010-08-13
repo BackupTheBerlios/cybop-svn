@@ -42,7 +42,7 @@
  * @param p0 the size
  * @param p1 the abstraction
  */
-void determine_size(void* p0, void* p1, void* p2) {
+void determine_size(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 

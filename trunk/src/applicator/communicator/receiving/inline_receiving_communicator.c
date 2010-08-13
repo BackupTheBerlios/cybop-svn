@@ -57,7 +57,7 @@ void communicate_receiving_inline(void* p0, void* p1, void* p2, void* p3, void* 
     int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate read model.
-    allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Read persistent byte stream over channel.
     receive_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT);
@@ -75,7 +75,7 @@ void communicate_receiving_inline(void* p0, void* p1, void* p2, void* p3, void* 
     decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
     // Deallocate read model.
-    deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* INLINE_RECEIVING_COMMUNICATOR_SOURCE */

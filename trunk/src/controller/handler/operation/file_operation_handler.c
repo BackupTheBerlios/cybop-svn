@@ -30,10 +30,10 @@
 #include "../../../applicator/filer/copying_filer.c"
 #include "../../../applicator/filer/directory_contents_listing_filer.c"
 #include "../../../constant/model/cybol/operation/file_operation_cybol_model.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../logger/logger.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Handles the file operation signal.
@@ -66,7 +66,7 @@ void handle_file_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) ARCHIVE_FILE_OPERATION_CYBOL_MODEL, (void*) ARCHIVE_FILE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) ARCHIVE_FILE_OPERATION_CYBOL_MODEL, (void*) ARCHIVE_FILE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -76,7 +76,7 @@ void handle_file_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) COPY_FILE_OPERATION_CYBOL_MODEL, (void*) COPY_FILE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) COPY_FILE_OPERATION_CYBOL_MODEL, (void*) COPY_FILE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -86,7 +86,7 @@ void handle_file_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) LIST_DIRECTORY_CONTENTS_FILE_OPERATION_CYBOL_MODEL, (void*) LIST_DIRECTORY_CONTENTS_FILE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) LIST_DIRECTORY_CONTENTS_FILE_OPERATION_CYBOL_MODEL, (void*) LIST_DIRECTORY_CONTENTS_FILE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

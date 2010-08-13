@@ -36,8 +36,8 @@
 #include "../../controller/handler/operation/lifecycle_operation_handler.c"
 #include "../../controller/handler/operation/memory_operation_handler.c"
 #include "../../controller/handler/operation/run_operation_handler.c"
-#include "../../logger/logger.c"
 #include "../../executor/comparator/array_equality_comparator.c"
+#include "../../logger/logger.c"
 
 /**
  * Handles the operation signal.

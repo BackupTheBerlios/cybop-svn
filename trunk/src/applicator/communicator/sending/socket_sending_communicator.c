@@ -523,9 +523,9 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     communicate_sending_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
 */
     // Allocate http body character vector.
-    allocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Allocate http message character vector.
-    allocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
 /*??
     // Initialise host address.
@@ -618,9 +618,9 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     close(*((int*) p0));
 
     // Deallocate http body character vector.
-    deallocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Deallocate http message character vector.
-    deallocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
 /*??
     // Deallocate socket address.

@@ -68,7 +68,7 @@ void communicate_sending_file_system(void* p0, void* p1, void* p2, void* p3, voi
     int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate serialised wide character array.
-    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Serialise source knowledge model into serialised wide character array.
     encode((void*) &s, (void*) &sc, (void*) &ss, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
@@ -79,19 +79,19 @@ void communicate_sending_file_system(void* p0, void* p1, void* p2, void* p3, voi
     int es = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate encoded character array.
-    allocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Encode serialised wide character array into encoded character array.
     encode_utf_8_unicode_character_vector((void*) &e, (void*) &ec, (void*) &es, s, (void*) &sc);
 
     // Deallocate serialised wide character array.
-    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Write encoded array into file.
     write_data((void*) &p15, p16, *NULL_POINTER_MEMORY_MODEL, e, (void*) &ec, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
     // Deallocate encoded character array.
-    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* FILE_SYSTEM_SENDING_COMMUNICATOR_SOURCE */

@@ -32,7 +32,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybop/cybop_name.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/detector/cybol_detector.c"
+#include "../../../executor/converter/detector/cybol_detector.c"
 
 //
 // Forward declarations.

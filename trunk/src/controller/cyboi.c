@@ -38,9 +38,8 @@
 #include "../controller/optionaliser.c"
 #include "../controller/orienter.c"
 #include "../controller/tester.c"
+//?? #include "../executor/converter/decoder/xml_decoder.c"
 #include "../variable/log_setting.c"
-
-#include "../memoriser/converter/xml_converter.c"
 
 //
 // This is the main file of the Cybernetics Oriented Interpreter (CYBOI).

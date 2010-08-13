@@ -30,8 +30,8 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/xml_cybol_name.c"
+#include "../../../executor/converter/selector/xml_selector.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/selector/xml_selector.c"
 
 /**
  * Processes the xml declaration.
@@ -656,7 +656,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // Allocate destination part.
         allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
             (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-            (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION);
+            (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         // Decode destination part name.
         // CAUTION! The pre-defined constant "part" is used as name here!
@@ -671,7 +671,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // as internally used by the function "allocate_part" above.
         // If an xml element is empty, the compound will just not contain any parts.
         decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-            (void*) COMPOUND_MEMORY_ABSTRACTION, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
             (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
         // The destination part model and details are decoded further below,

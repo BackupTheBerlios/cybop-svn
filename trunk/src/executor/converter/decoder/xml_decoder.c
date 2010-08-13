@@ -27,8 +27,8 @@
 #define XML_DECODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/converter/processor/xml_processor.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/processor/xml_processor.c"
 
 /**
  * Decodes the xml byte array into a compound model and -details.

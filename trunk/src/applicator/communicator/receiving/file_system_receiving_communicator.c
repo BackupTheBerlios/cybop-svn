@@ -63,7 +63,7 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     int es = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate encoded character array.
-    allocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Write file into encoded character array.
     read_data((void*) &e, (void*) &ec, (void*) &es, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
@@ -74,19 +74,19 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate serialised wide character array.
-    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Decode encoded character array into serialised wide character array.
     decode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, e, (void*) &ec);
 
     // Deallocate encoded character array.
-    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Deserialise serialised wide character array into destination knowledge model.
     decode(p0, p1, p2, p3, p4, p5, s, (void*) &sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
     // Deallocate serialised wide character array.
-    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

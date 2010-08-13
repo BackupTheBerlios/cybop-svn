@@ -33,7 +33,7 @@
 // Forward declarations.
 //
 
-void allocate(void* p0, void* p1, void* p2);
+void allocate(void* p0, void* p1, void* p2, void* p3);
 void set_integer_vector_element(void* p0, void* p1, void* p2);
 
 /**
@@ -44,8 +44,9 @@ void set_integer_vector_element(void* p0, void* p1, void* p2);
  * @param p2 the destination model size (Hand over as reference!)
  * @param p3 the source size
  * @param p4 the source abstraction
+ * @param p5 the source abstraction count
  */
-void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -57,9 +58,9 @@ void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate model.");
 
-            allocate(p0, p3, p4);
-            allocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-            allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+            allocate(p0, p3, p4, p5);
+            allocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             // The OLD solution was:
             // **dc = *((int*) p3);

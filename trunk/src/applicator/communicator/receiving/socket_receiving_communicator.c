@@ -89,7 +89,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     int es = *NUMBER_1024_INTEGER_MEMORY_MODEL;
 
     // Allocate encoded character array.
-    allocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Receive message from stream.
     receive_stream_socket((void*) &e, (void*) &ec, (void*) &es, p6);
@@ -104,7 +104,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate serialised wide character array.
-    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Decode encoded character array into serialised wide character array.
     decode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, e, (void*) &ec);
@@ -114,7 +114,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     fwprintf(stdout, L"TEST receive socket ss: %i \n", ss);
 
     // Deallocate encoded character array.
-    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Deserialise serialised wide character array into destination knowledge model.
     // The http request's parameters are written into the destination compound model.
@@ -128,7 +128,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     fwprintf(stdout, L"TEST 2 lc: %i \n", *((int*) p10));
 
     // Deallocate serialised wide character array.
-    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
 /*??
     // The action name, abstraction, model, details.

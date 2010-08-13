@@ -28,10 +28,10 @@
 
 #include "../../../applicator/calculator/addition_calculator.c"
 #include "../../../constant/model/cybol/operation/arithmetic_operation_cybol_model.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../logger/logger.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Handles the arithmetic operation signal.

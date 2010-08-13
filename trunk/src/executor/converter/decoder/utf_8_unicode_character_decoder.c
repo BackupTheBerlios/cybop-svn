@@ -28,12 +28,12 @@
 
 #include <errno.h>
 #include <locale.h>
-#include "../../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../../constant/model/memory/integer_memory_model.c"
-#include "../../../../constant/model/log/message_log_model.c"
-#include "../../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../../logger/logger.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 //
 // Reflexions on character set conversion.
@@ -264,7 +264,7 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                             //
                             // Returns the number of wide characters converted.
 //??                            int n = mbsnrtowcs(*d, &s, *sc, *ds, &st);
-                            int n = mbsnrtowcs(*d, &s, *sc, *ds, *NULL_POINTER_MEMORY_MODEL);
+                            int n = mbsnrtowcs(*d, (const char**) &s, *sc, *ds, *NULL_POINTER_MEMORY_MODEL);
 
                             if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

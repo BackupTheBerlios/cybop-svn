@@ -30,10 +30,10 @@
 #include "../../../applicator/maintainer/shutting_maintainer.c"
 #include "../../../applicator/maintainer/starting_maintainer.c"
 #include "../../../constant/model/cybol/operation/lifecycle_operation_cybol_model.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../logger/logger.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Handles the lifecycle operation signal.
@@ -66,7 +66,7 @@ void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -79,7 +79,7 @@ void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -89,7 +89,7 @@ void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -99,7 +99,7 @@ void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, p16, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p10, p11, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

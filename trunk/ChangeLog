@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-08-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up errors stemming from previously implemented changes
+
 2010-08-12  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up errors stemming from previously implemented changes
 
