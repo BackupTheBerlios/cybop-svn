@@ -41,9 +41,8 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
-#include "../../../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Encodes the integer model and creates a wide character array from it.

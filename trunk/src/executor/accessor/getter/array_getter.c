@@ -37,8 +37,8 @@
 /**
  * Gets the destination array elements from the source array starting at index.
  *
- * @param p0 the destination (Hand over as array reference!)
- * @param p1 the source
+ * @param p0 the elements (Hand over as array reference!)
+ * @param p1 the array
  * @param p2 the index
  * @param p3 the abstraction
  */
