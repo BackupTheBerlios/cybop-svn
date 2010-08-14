@@ -130,13 +130,13 @@ void maintain_starting_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         struct _XGC* gc = (struct _XGC*) *NULL_POINTER_MEMORY_MODEL;
 
         // Allocate x window system internals.
-        allocate((void*) &sn, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-        allocate((void*) &cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-        allocate((void*) &bg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION);
-        allocate((void*) &fg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION);
-        allocate((void*) &r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-        allocate((void*) &w, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-        allocate((void*) &vm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION);
+        allocate((void*) &sn, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &bg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &fg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &w, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &vm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //??        v = (struct XGCValues*) malloc(sizeof(struct XGCValues));
 
         // Initialise x window system internals.

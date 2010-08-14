@@ -36,7 +36,6 @@
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/communicator/receiver.c"
 #include "../../executor/comparator/array_equality_comparator.c"
-#include "../../executor/converter/cybol_converter.c"
 #include "../../executor/converter/decoder.c"
 #include "../../executor/memoriser/allocator.c"
 #include "../../logger/logger.c"
@@ -116,7 +115,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Allocate model diagram.
-    allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Encode model into model diagram.
     encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
@@ -126,7 +125,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Allocate multibyte character stream.
-    allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Encode model diagram into multibyte character stream.
     encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
     // The file name.
@@ -136,9 +135,9 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // Write multibyte character stream as message to file system.
     write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
     // Deallocate model diagram.
-    deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Deallocate multibyte character stream.
-    deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
 }
 

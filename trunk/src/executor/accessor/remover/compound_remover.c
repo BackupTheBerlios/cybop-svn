@@ -257,18 +257,18 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
         int pc = *((int*) p3) + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
         // Allocate prefix.
-        allocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         // Set prefix as concatenation of base name and list separator.
-        set_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, p3, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
-        set_array_elements(p, p3, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        set_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p2, p3, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        set_array_elements(p, p3, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         //create integer model for the index
         void* indexstr = *NULL_POINTER_MEMORY_MODEL;
         int indexstr_count = *NUMBER_0_INTEGER_MEMORY_MODEL;
         int indexstr_size = *NUMBER_10_INTEGER_MEMORY_MODEL;
 
-        allocate_array((void*) &indexstr, (void*) &indexstr_size, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &indexstr, (void*) &indexstr_size, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -317,9 +317,9 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
         }
 
         // Deallocate prefix.
-        deallocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         // Deallocate index string.
-        deallocate_array((void*) &indexstr, (void*) &indexstr_count, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) &indexstr, (void*) &indexstr_count, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     }
 */
 }

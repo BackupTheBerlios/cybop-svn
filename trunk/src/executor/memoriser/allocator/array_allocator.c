@@ -39,7 +39,7 @@
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the array size
- * @param p2 the array type
+ * @param p2 the array abstraction
  */
 void allocate_array(void* p0, void* p1, void* p2) {
 
@@ -52,7 +52,7 @@ void allocate_array(void* p0, void* p1, void* p2) {
         // The memory area.
         int ma = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        // Determine type size.
+        // Determine abstraction (type) size.
         determine_size((void*) &ma, p2);
 
         // Calculate memory area.

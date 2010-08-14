@@ -11,7 +11,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        CONTINUE WITH: trying to make cyboi compilable again
+2010-08-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up errors stemming from previously implemented changes
+        * Focus on linker errors
+
+2010-08-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Make cyboi fully compilable again
 
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;

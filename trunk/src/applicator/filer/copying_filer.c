@@ -128,18 +128,18 @@ void file_copying(void* p0, void* p1, void* p2, void* p3) {
     int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate arguments vector.
-    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Append command.
-    append((void*) &arg, (void*) &argc, (void*) &args, (void*) COPY_UNIX_COMMAND_MODEL, (void*) COPY_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    append((void*) &arg, (void*) &argc, (void*) &args, (void*) COPY_UNIX_COMMAND_MODEL, (void*) COPY_UNIX_COMMAND_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     if (*recursivem != *NULL_POINTER_MEMORY_MODEL) {
 
         if (**recursivem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Append recursive option.
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -148,8 +148,8 @@ void file_copying(void* p0, void* p1, void* p2, void* p3) {
         if (**sourcem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Append source option.
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -158,8 +158,8 @@ void file_copying(void* p0, void* p1, void* p2, void* p3) {
         if (**destinationm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
             // Append source option.
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
-            append((void*) &arg, (void*) &argc, (void*) &args, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            append((void*) &arg, (void*) &argc, (void*) &args, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -167,7 +167,7 @@ void file_copying(void* p0, void* p1, void* p2, void* p3) {
     run_executing(arg, (void*) &argc);
 
     // Deallocate arguments vector.
-    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* COPYING_FILER_SOURCE */

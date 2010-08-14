@@ -108,7 +108,7 @@ void maintain_shutting_gnu_linux_console(void* p0, void* p1, void* p2) {
         free(*tn);
 
         // Deallocate character buffer.
-        deallocate((void*) b, *bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        deallocate((void*) b, *bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         // Deallocate character buffer count, size.
         deallocate((void*) bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
         deallocate((void*) bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);

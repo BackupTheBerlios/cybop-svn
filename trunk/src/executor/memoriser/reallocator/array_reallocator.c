@@ -40,7 +40,7 @@
  * @param p0 the array (Hand over as reference!)
  * @param p1 the array count
  * @param p2 the array size
- * @param p3 the array type
+ * @param p3 the array abstraction
  */
 void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
@@ -61,7 +61,7 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
                 // The memory area.
                 int ma = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                // Determine type size.
+                // Determine abstraction (type) size.
                 determine_size((void*) &ma, p3);
 
                 // Calculate memory area.
@@ -84,7 +84,7 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
                     // reduced by the existing element count.
                     int eas = *as - *ac;
 
-                    // Determine type size.
+                    // Determine abstraction (type) size.
                     determine_size((void*) &nma, p3);
 
                     // Calculate memory area.

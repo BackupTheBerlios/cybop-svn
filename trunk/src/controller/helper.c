@@ -30,6 +30,7 @@
 #include "../constant/model/cyboi/identification_cyboi_model.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
+#include "../executor/accessor/setter/array_setter.c"
 #include "../executor/comparator/array_equality_comparator.c"
 
 /**
@@ -50,7 +51,7 @@ void help(void* p0) {
     allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Copy message.
-    set_array_elements(m, (void*) &i, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.

@@ -26,18 +26,9 @@
 #ifndef REPLACER_SOURCE
 #define REPLACER_SOURCE
 
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../memoriser/accessor/character_vector_accessor.c"
-#include "../../executor/accessor/getter/compound_getter.c"
-#include "../../memoriser/accessor/double_vector_accessor.c"
-#include "../../memoriser/accessor/integer_vector_accessor.c"
-#include "../../executor/accessor/getter/array_getter.c"
-#include "../../memoriser/accessor/pointer_vector_accessor.c"
-#include "../../executor/accessor/getter/signal_memory_getter.c"
-#include "../../memoriser/accessor/wide_character_vector_accessor.c"
-#include "../../executor/comparator/array_equality_comparator.c"
+#include "../../executor/accessor/replacer/array_replacer.c"
 
 /**
  * Replaces the destination- with the source vector.
@@ -50,32 +41,15 @@
  * @param p3 the source
  * @param p4 the source count
  * @param p5 the abstraction
+ * @param p6 the abstraction count
  */
-void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace.");
 
-        int* a = (int*) p5;
-
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace.");
-
-        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
-
-            replace_character_vector(p0, p1, p2, p3, p4, p5);
-
-        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
-
-            replace_wide_character_vector(p0, p1, p2, p3, p4, p5);
-
-        } else {
-
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not replace. The abstraction is unknown.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace. The abstraction is null.");
-    }
+    // Distinguish the different abstractions and call the corresponding replace function!
+    // The replace function for arrays is called directly from anywhere in the code
+    // and not from here.
 }
 
 /* REPLACER_SOURCE */

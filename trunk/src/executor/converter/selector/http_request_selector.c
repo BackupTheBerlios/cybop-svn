@@ -147,7 +147,7 @@ void select_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -213,7 +213,7 @@ void select_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -287,7 +287,7 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -300,7 +300,7 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            detect((void*) &r, p7, p8, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -368,7 +368,7 @@ void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) HEADER_ARGUMENT_HTTP_NAME, (void*) HEADER_ARGUMENT_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            detect((void*) &r, p7, p8, (void*) HEADER_ARGUMENT_HTTP_NAME, (void*) HEADER_ARGUMENT_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -442,7 +442,7 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_HTTP_NAME, (void*) BODY_BEGIN_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -455,7 +455,7 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) HEADER_HTTP_NAME, (void*) HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            detect((void*) &r, p7, p8, (void*) HEADER_HTTP_NAME, (void*) HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -521,7 +521,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 /*??
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ALLOW_ENTITY_HEADER_HTTP_NAME, (void*) ALLOW_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ALLOW_ENTITY_HEADER_HTTP_NAME, (void*) ALLOW_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -534,7 +534,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -547,7 +547,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -560,7 +560,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -573,7 +573,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -586,7 +586,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_MD5_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_MD5_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_MD5_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_MD5_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -599,7 +599,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -612,7 +612,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -625,7 +625,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) EXPIRES_ENTITY_HEADER_HTTP_NAME, (void*) EXPIRES_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) EXPIRES_ENTITY_HEADER_HTTP_NAME, (void*) EXPIRES_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -638,7 +638,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME, (void*) LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME, (void*) LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -655,7 +655,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_REQUEST_HEADER_HTTP_NAME, (void*) ACCEPT_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_REQUEST_HEADER_HTTP_NAME, (void*) ACCEPT_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -668,7 +668,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME, (void*) ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME, (void*) ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -681,7 +681,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME, (void*) ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME, (void*) ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -694,7 +694,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME, (void*) ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME, (void*) ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -707,7 +707,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) AUTHORIZATION_REQUEST_HEADER_HTTP_NAME, (void*) AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) AUTHORIZATION_REQUEST_HEADER_HTTP_NAME, (void*) AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -720,7 +720,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) EXPECT_REQUEST_HEADER_HTTP_NAME, (void*) EXPECT_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) EXPECT_REQUEST_HEADER_HTTP_NAME, (void*) EXPECT_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -733,7 +733,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) FROM_REQUEST_HEADER_HTTP_NAME, (void*) FROM_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) FROM_REQUEST_HEADER_HTTP_NAME, (void*) FROM_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -746,7 +746,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) HOST_REQUEST_HEADER_HTTP_NAME, (void*) HOST_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) HOST_REQUEST_HEADER_HTTP_NAME, (void*) HOST_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -759,7 +759,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_MATCH_REQUEST_HEADER_HTTP_NAME, (void*) IF_MATCH_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_MATCH_REQUEST_HEADER_HTTP_NAME, (void*) IF_MATCH_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -772,7 +772,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME, (void*) IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME, (void*) IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -785,7 +785,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME, (void*) IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME, (void*) IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -798,7 +798,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_RANGE_REQUEST_HEADER_HTTP_NAME, (void*) IF_RANGE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_RANGE_REQUEST_HEADER_HTTP_NAME, (void*) IF_RANGE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -811,7 +811,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME, (void*) IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME, (void*) IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -824,7 +824,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME, (void*) MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME, (void*) MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -837,7 +837,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME, (void*) PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME, (void*) PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -850,7 +850,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) RANGE_REQUEST_HEADER_HTTP_NAME, (void*) RANGE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) RANGE_REQUEST_HEADER_HTTP_NAME, (void*) RANGE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -863,7 +863,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) REFERER_REQUEST_HEADER_HTTP_NAME, (void*) REFERER_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) REFERER_REQUEST_HEADER_HTTP_NAME, (void*) REFERER_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -876,7 +876,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) TE_REQUEST_HEADER_HTTP_NAME, (void*) TE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) TE_REQUEST_HEADER_HTTP_NAME, (void*) TE_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -889,7 +889,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) USER_AGENT_REQUEST_HEADER_HTTP_NAME, (void*) USER_AGENT_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) USER_AGENT_REQUEST_HEADER_HTTP_NAME, (void*) USER_AGENT_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -902,7 +902,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) VARY_REQUEST_HEADER_HTTP_NAME, (void*) VARY_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) VARY_REQUEST_HEADER_HTTP_NAME, (void*) VARY_REQUEST_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -919,7 +919,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME, (void*) ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME, (void*) ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -932,7 +932,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) AGE_RESPONSE_HEADER_HTTP_NAME, (void*) AGE_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) AGE_RESPONSE_HEADER_HTTP_NAME, (void*) AGE_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -945,7 +945,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ETAG_RESPONSE_HEADER_HTTP_NAME, (void*) ETAG_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) ETAG_RESPONSE_HEADER_HTTP_NAME, (void*) ETAG_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -958,7 +958,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) LOCATION_RESPONSE_HEADER_HTTP_NAME, (void*) LOCATION_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) LOCATION_RESPONSE_HEADER_HTTP_NAME, (void*) LOCATION_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -971,7 +971,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME, (void*) PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME, (void*) PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -984,7 +984,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME, (void*) RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME, (void*) RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -997,7 +997,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) SERVER_RESPONSE_HEADER_HTTP_NAME, (void*) SERVER_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) SERVER_RESPONSE_HEADER_HTTP_NAME, (void*) SERVER_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1010,7 +1010,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME, (void*) WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME, (void*) WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1027,7 +1027,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CACHE_CONTROL_GENERAL_HEADER_HTTP_NAME, (void*) CACHE_CONTROL_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CACHE_CONTROL_GENERAL_HEADER_HTTP_NAME, (void*) CACHE_CONTROL_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1040,7 +1040,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONNECTION_GENERAL_HEADER_HTTP_NAME, (void*) CONNECTION_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) CONNECTION_GENERAL_HEADER_HTTP_NAME, (void*) CONNECTION_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1053,7 +1053,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) DATE_GENERAL_HEADER_HTTP_NAME, (void*) DATE_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) DATE_GENERAL_HEADER_HTTP_NAME, (void*) DATE_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1066,7 +1066,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) PRAGMA_GENERAL_HEADER_HTTP_NAME, (void*) PRAGMA_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) PRAGMA_GENERAL_HEADER_HTTP_NAME, (void*) PRAGMA_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1079,7 +1079,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) TRAILER_GENERAL_HEADER_HTTP_NAME, (void*) TRAILER_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) TRAILER_GENERAL_HEADER_HTTP_NAME, (void*) TRAILER_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1092,7 +1092,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) TRANSFER_ENCODING_GENERAL_HEADER_HTTP_NAME, (void*) TRANSFER_ENCODING_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) TRANSFER_ENCODING_GENERAL_HEADER_HTTP_NAME, (void*) TRANSFER_ENCODING_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1105,7 +1105,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) UPGRADE_GENERAL_HEADER_HTTP_NAME, (void*) UPGRADE_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) UPGRADE_GENERAL_HEADER_HTTP_NAME, (void*) UPGRADE_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1118,7 +1118,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) VIA_GENERAL_HEADER_HTTP_NAME, (void*) VIA_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) VIA_GENERAL_HEADER_HTTP_NAME, (void*) VIA_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1131,7 +1131,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) WARNING_GENERAL_HEADER_HTTP_NAME, (void*) WARNING_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, ha, (void*) &hac, (void*) WARNING_GENERAL_HEADER_HTTP_NAME, (void*) WARNING_GENERAL_HEADER_HTTP_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1193,7 +1193,7 @@ void select_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) BODY_END_HTTP_NAME, (void*) BODY_END_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            detect((void*) &r, p7, p8, (void*) BODY_END_HTTP_NAME, (void*) BODY_END_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

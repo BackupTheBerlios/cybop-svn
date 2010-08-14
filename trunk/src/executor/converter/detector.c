@@ -172,7 +172,7 @@ void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p5, p6, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p5, p6, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -182,7 +182,7 @@ void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -90,7 +90,7 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
         // CAUTION! Its size is initialised with three,
         // because longer escape sequences are not known.
         // Example: An up arrow delivers 'ESC' + '[' + 'A'
-        allocate_model((void*) &b, (void*) &bc, (void*) &bs, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        allocate_model((void*) &b, (void*) &bc, (void*) &bs, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         // Initialise gnu/linux console internals.
         //

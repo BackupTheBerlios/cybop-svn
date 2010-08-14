@@ -135,7 +135,7 @@ void maintain_shutting_socket(void* p0, void* p1, void* p2, void* p3) {
             deallocate(ids, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 */
             // Deallocate character buffer.
-            deallocate((void*) b, *bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) b, *bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             deallocate((void*) bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
             deallocate((void*) bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
             // Deallocate socket of this system.

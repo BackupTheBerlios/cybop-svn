@@ -235,7 +235,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -466,7 +466,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -496,7 +496,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -506,7 +506,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         }
     }
 

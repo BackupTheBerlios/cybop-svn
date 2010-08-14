@@ -148,7 +148,7 @@ void compare_equality_suffix(void* p0, void* p1, void* p2,
 
                                     // CAUTION! Hand over the right side model count as count
                                     // of both, left side parameter and right side parameter!
-                                    compare_equal_arrays(p, p13, p12, p13, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                    compare_equal_arrays((void*) &r, p, p13, p12, p13, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

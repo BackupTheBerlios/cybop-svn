@@ -90,8 +90,8 @@ void calculate_addition_character_vector(void* p0, void* p1, void* p2, void* p3,
                         allocate_array((void*) &summand2, (void*) &summand2c, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                         // Set temporary input operand arrays.
-                        set_array_elements(summand1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
-                        set_array_elements(summand2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements(summand2, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size
@@ -106,9 +106,9 @@ void calculate_addition_character_vector(void* p0, void* p1, void* p2, void* p3,
                         reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                         // Set output operand array.
-                        set_array_elements(*s, (void*) sc, summand1, (void*) &summand1c, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements(*s, summand1, (void*) &summand1c, (void*) sc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                         *sc = *sc + summand1c;
-                        set_array_elements(*s, (void*) sc, summand2, (void*) &summand2c, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements(*s, summand2, (void*) &summand2c, (void*) sc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                         *sc = *sc + summand2c;
 
                         // Deallocate temporary operand arrays.

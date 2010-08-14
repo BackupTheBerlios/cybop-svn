@@ -97,7 +97,7 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                     }
 
                     // Add temporary value to destination.
-                    set(*d, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    set(*d, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                     // Increase destination count.
                     *dc = *dc + tc;

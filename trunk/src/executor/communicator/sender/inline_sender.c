@@ -47,7 +47,7 @@ void send_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send inline.");
 
-    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* INLINE_SENDER_SOURCE */
