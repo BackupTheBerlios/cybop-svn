@@ -27,8 +27,8 @@
 #define HTTP_REQUEST_ENCODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/converter/processor/http_request_processor.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/processor/http_request_processor.c"
 
 /**
  * Encodes the compound into an http request.

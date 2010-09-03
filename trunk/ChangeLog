@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-09-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up errors stemming from previously implemented changes
+        * Focus on linker errors
+
 2010-08-14  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up errors stemming from previously implemented changes
         * CAUTION! Parameter values such as *_MEMORY_ABSTRACTION should always be handed over together with MEMORY_ABSTRACTION_COUNT,

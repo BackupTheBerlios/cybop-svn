@@ -39,6 +39,11 @@ static wchar_t VERSION_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'0', L'.', L'9', L
 static wchar_t* VERSION_IDENTIFICATION_CYBOI_MODEL = VERSION_IDENTIFICATION_CYBOI_MODEL_ARRAY;
 static int* VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
+/** The slogan identification cyboi model. */
+static wchar_t SLOGAN_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'T', L'h', L'e', L' ', L'u', L'n', L'i', L'v', L'e', L'r', L's', L'a', L'l', L' ', L's', L'y', L's', L't', L'e', L'm', L'.'};
+static wchar_t* SLOGAN_IDENTIFICATION_CYBOI_MODEL = SLOGAN_IDENTIFICATION_CYBOI_MODEL_ARRAY;
+static int* SLOGAN_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_21_INTEGER_MEMORY_MODEL_ARRAY;
+
 /** The copyright identification cyboi model. */
 static wchar_t COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'C', L'o', L'p', L'y', L'r', L'i', L'g', L'h', L't', L' ', L'(', L'C', L')', L' ', L'1', L'9', L'9', L'9', L'-', L'2', L'0', L'0', L'9', L'.', L' ', L'C', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L' ', L'H', L'e', L'l', L'l', L'e', L'r', L'.'};
 static wchar_t* COPYRIGHT_IDENTIFICATION_CYBOI_MODEL = COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY;

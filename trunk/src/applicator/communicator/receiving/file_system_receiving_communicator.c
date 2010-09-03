@@ -37,6 +37,7 @@
 #include "../../../executor/communicator/receiver.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/memoriser/deallocator.c"
 #include "../../../logger/logger.c"
 
 /**

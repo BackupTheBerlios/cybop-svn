@@ -61,7 +61,7 @@ void maintain_shutting_socket(void* p0, void* p1, void* p2, void* p3) {
 
         // Get socket internal of this system.
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &si, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &si, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         if (*si != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -93,34 +93,34 @@ void maintain_shutting_socket(void* p0, void* p1, void* p2, void* p3) {
 
             // Get socket address of this system.
             i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &a, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &a, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Get communication partner socket address.
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &pa, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &pa, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Get socket address size of this system.
             i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &as, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &as, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Get communication partner socket address size.
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &pas, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &pas, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Get socket of this system.
             i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &s, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &s, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Get communication partner socket.
             i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &ps, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &ps, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Get character buffer.
             i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &b, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &b, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &bc, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &bc, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &bs, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &bs, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 /*??
             // Get signal ids.
-            get((void*) &id, p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION);
-            get((void*) &idc, p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION);
-            get((void*) &ids, p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &id, p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            get((void*) &idc, p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            get((void*) &ids, p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 */
 
             // Close socket of this system.

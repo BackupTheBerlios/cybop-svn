@@ -32,6 +32,8 @@
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../executor/accessor/setter/array_setter.c"
 #include "../executor/comparator/array_equality_comparator.c"
+#include "../executor/memoriser/allocator/array_allocator.c"
+#include "../executor/memoriser/deallocator/array_deallocator.c"
 
 /**
  * Writes cyboi help message to given output stream.

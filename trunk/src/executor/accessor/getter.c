@@ -41,8 +41,9 @@
  * @param p1 the source
  * @param p2 the index
  * @param p3 the abstraction
+ * @param p4 the abstraction count
  */
-void get(void* p0, void* p1, void* p2, void* p3) {
+void get(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 

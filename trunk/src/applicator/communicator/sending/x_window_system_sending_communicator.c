@@ -35,6 +35,7 @@
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/communicator/receiver.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/converter/encoder/x_window_system_encoder.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -54,7 +55,7 @@ void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3,
     pthread_mutex_t** xmt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
 
     // Get x window system mutex.
-    get((void*) &xmt, p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+    get((void*) &xmt, p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     pthread_mutex_lock(*xmt);
 

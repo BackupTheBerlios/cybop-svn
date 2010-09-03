@@ -50,13 +50,13 @@
 #include "../../../constant/name/cybol/super_cybol_name.c"
 #include "../../../constant/name/cybol/text_user_interface_cybol_name.c"
 #include "../../../constant/name/memory/vector_memory_name.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
-#include "../../../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../memoriser/converter/integer_vector_converter.c"
-#include "../../../memoriser/converter/terminal_background_converter.c"
-#include "../../../memoriser/converter/terminal_foreground_converter.c"
+#include "../../../executor/accessor/setter.c"
+#include "../../../executor/converter/encoder/integer_vector_encoder.c"
+#include "../../../executor/converter/encoder/terminal_background_encoder.c"
+#include "../../../executor/converter/encoder/terminal_foreground_encoder.c"
+#include "../../../logger/logger.c"
 
 //
 // Forward declarations.
@@ -264,7 +264,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_equal_arrays(p6, p7, (void*) ASCII_LINE_BORDER_CYBOL_MODEL, (void*) ASCII_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                compare_equal_arrays((void*) &r, p6, p7, (void*) ASCII_LINE_BORDER_CYBOL_MODEL, (void*) ASCII_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -279,7 +279,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_equal_arrays(p6, p7, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                compare_equal_arrays((void*) &r, p6, p7, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL, (void*) DOUBLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -294,7 +294,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_equal_arrays(p6, p7, (void*) ROUND_LINE_BORDER_CYBOL_MODEL, (void*) ROUND_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                compare_equal_arrays((void*) &r, p6, p7, (void*) ROUND_LINE_BORDER_CYBOL_MODEL, (void*) ROUND_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -309,7 +309,7 @@ void encode_gnu_linux_console_rectangle_border(void* p0, void* p1,
 
                             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                                compare_equal_arrays(p6, p7, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                compare_equal_arrays((void*) &r, p6, p7, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL, (void*) SIMPLE_LINE_BORDER_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -479,7 +479,7 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                                                 if (ci < *cc) {
 
                                                     // Get character value at position x.
-                                                    get(p3, (void*) &ci, (void*) &c, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                                                    get((void*) &c, p3, (void*) &ci, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
                                                 }
 
                                                 // Encode character using escape codes.
@@ -930,13 +930,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     int fasz = oasz;
 
     // Get part position x, y, z.
-    get(p14, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &px, (void*) INTEGER_MEMORY_ABSTRACTION);
-    get(p14, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &py, (void*) INTEGER_MEMORY_ABSTRACTION);
-    get(p14, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &pz, (void*) INTEGER_MEMORY_ABSTRACTION);
+    get((void*) &px, p14, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    get((void*) &py, p14, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    get((void*) &pz, p14, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Get part size x, y, z.
-    get(p16, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &sx, (void*) INTEGER_MEMORY_ABSTRACTION);
-    get(p16, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &sy, (void*) INTEGER_MEMORY_ABSTRACTION);
-    get(p16, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &sz, (void*) INTEGER_MEMORY_ABSTRACTION);
+    get((void*) &sx, p16, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    get((void*) &sy, p16, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    get((void*) &sz, p16, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Set current position coordinates, initialised with part position.
     cpx = *px;
@@ -950,13 +950,13 @@ void encode_gnu_linux_console_coordinates(void* p0, void* p1, void* p2, void* p3
     if (p20 != *NULL_POINTER_MEMORY_MODEL) {
 
         // Determine source whole position coordinates.
-        get(p18, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wpmx, (void*) INTEGER_MEMORY_ABSTRACTION);
-        get(p18, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wpmy, (void*) INTEGER_MEMORY_ABSTRACTION);
-        get(p18, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wpmz, (void*) INTEGER_MEMORY_ABSTRACTION);
+        get((void*) &wpmx, p18, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &wpmy, p18, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &wpmz, p18, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
         // Determine source whole size coordinates.
-        get(p20, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) &wsmx, (void*) INTEGER_MEMORY_ABSTRACTION);
-        get(p20, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) &wsmy, (void*) INTEGER_MEMORY_ABSTRACTION);
-        get(p20, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) &wsmz, (void*) INTEGER_MEMORY_ABSTRACTION);
+        get((void*) &wsmx, p20, (void*) DIMENSION_0_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &wsmy, p20, (void*) DIMENSION_1_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &wsmz, p20, (void*) DIMENSION_2_VECTOR_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         // Set original area position coordinates, initialised with whole position.
         oapx = *wpmx;

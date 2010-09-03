@@ -27,8 +27,8 @@
 #define HTTP_RESPONSE_ENCODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/converter/processor/http_response_processor.c"
 #include "../../../logger/logger.c"
-#include "../../../memoriser/processor/http_response_processor.c"
 
 /**
  * Encodes the compound into an http response.

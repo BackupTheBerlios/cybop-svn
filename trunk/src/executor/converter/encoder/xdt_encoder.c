@@ -36,11 +36,11 @@
 #include "../../../constant/name/xdt/record_xdt_name.c"
 #include "../../../constant/name/xdt_model/field_xdt_model_name.c"
 #include "../../../constant/name/xdt_model/record_xdt_model_name.c"
-#include "../../../logger/logger.c"
-#include "../../../memoriser/converter/character/ascii_character_vector_converter.c"
-#include "../../../memoriser/converter/date_time_converter.c"
-#include "../../../memoriser/converter/integer_vector_converter.c"
+#include "../../../executor/converter/encoder/ascii_character_vector_encoder.c"
+#include "../../../executor/converter/encoder/date_time_encoder.c"
+#include "../../../executor/converter/encoder/integer_vector_encoder.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 //
 // The "x DatenTransfer" (xDT) is the German version of

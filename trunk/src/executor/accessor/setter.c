@@ -26,31 +26,27 @@
 #ifndef SETTER_SOURCE
 #define SETTER_SOURCE
 
+#include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../memoriser/accessor/character_vector_accessor.c"
-#include "../../executor/accessor/getter/compound_getter.c"
-#include "../../memoriser/accessor/double_vector_accessor.c"
-#include "../../memoriser/accessor/integer_vector_accessor.c"
 #include "../../executor/accessor/getter/array_getter.c"
-#include "../../memoriser/accessor/pointer_vector_accessor.c"
+#include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/accessor/getter/signal_memory_getter.c"
-#include "../../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Sets the element.
  *
- * @param p0 the model
- * @param p1 the model count
- * @param p2 the model size
- * @param p3 the element (Hand over as reference!)
- * @param p4 the element count
+ * @param p0 the destination model
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the source element (Hand over as reference!)
+ * @param p4 the source element count
  * @param p5 the index
  * @param p6 the abstraction
+ * @param p7 the abstraction count
  */
-void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 

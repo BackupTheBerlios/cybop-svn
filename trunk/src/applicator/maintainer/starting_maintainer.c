@@ -185,7 +185,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
             // Get server socket internal.
             i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-            get(p5, (void*) &i, (void*) &s, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &s, p5, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 
@@ -207,7 +207,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
             // Get server socket internal.
             i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-            get(p5, (void*) &i, (void*) &s, (void*) POINTER_MEMORY_ABSTRACTION);
+            get((void*) &s, p5, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 

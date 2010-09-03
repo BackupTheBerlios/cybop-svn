@@ -39,8 +39,11 @@
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/communicator/receiver.c"
 #include "../../../executor/converter/decoder.c"
+#include "../../../executor/converter/encoder/gnu_linux_console_encoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/memoriser/deallocator.c"
 #include "../../../variable/reallocation_factor.c"
 
 /**
