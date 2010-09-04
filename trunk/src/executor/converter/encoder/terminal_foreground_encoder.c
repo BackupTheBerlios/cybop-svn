@@ -57,7 +57,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append_wide_character_vector(p0, p1, p2, (void*) BLACK_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) BLACK_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT);
+            append_array_elements(p0, p1, p2, (void*) BLACK_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) BLACK_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -67,7 +67,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append_wide_character_vector(p0, p1, p2, (void*) RED_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) RED_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT);
+            append_array_elements(p0, p1, p2, (void*) RED_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) RED_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -77,7 +77,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append_wide_character_vector(p0, p1, p2, (void*) GREEN_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) GREEN_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT);
+            append_array_elements(p0, p1, p2, (void*) GREEN_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) GREEN_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -87,7 +87,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append_wide_character_vector(p0, p1, p2, (void*) YELLOW_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) YELLOW_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT);
+            append_array_elements(p0, p1, p2, (void*) YELLOW_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) YELLOW_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -97,7 +97,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append_wide_character_vector(p0, p1, p2, (void*) BLUE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) BLUE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT);
+            append_array_elements(p0, p1, p2, (void*) BLUE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) BLUE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -107,7 +107,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append_wide_character_vector(p0, p1, p2, (void*) MAGENTA_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) MAGENTA_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT);
+            append_array_elements(p0, p1, p2, (void*) MAGENTA_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) MAGENTA_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -117,7 +117,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append_wide_character_vector(p0, p1, p2, (void*) COBALT_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) COBALT_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT);
+            append_array_elements(p0, p1, p2, (void*) COBALT_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) COBALT_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -127,7 +127,7 @@ void encode_terminal_foreground(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append_wide_character_vector(p0, p1, p2, (void*) WHITE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) WHITE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT);
+            append_array_elements(p0, p1, p2, (void*) WHITE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL, (void*) WHITE_FOREGROUND_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 }

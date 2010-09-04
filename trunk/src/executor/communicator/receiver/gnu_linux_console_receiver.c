@@ -36,6 +36,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/accessor/appender/array_appender.c"
 #include "../../../executor/communicator/receiver/gnu_linux_console_receiver.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/decoder/utf_8_unicode_character_decoder.c"
@@ -55,7 +56,7 @@
  * @param p7 the source input stream
  * @param p8 the mutex
  */
-void receives_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void receive_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -108,7 +109,7 @@ void receives_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3
                                 *csi = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                 // Copy source character to destination character array.
-                                append_wide_character_vector(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+                                append_array_elements(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 // Set loop break flag.
                                 // An escape character followed by a left square bracket character
@@ -132,7 +133,7 @@ void receives_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3
                                     *csi = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                     // Copy source character to destination character array.
-                                    append_wide_character_vector(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+                                    append_array_elements(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 } else {
 
@@ -159,7 +160,7 @@ void receives_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3
                                 *esc = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                 // Copy source character to destination character array.
-                                append_wide_character_vector(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+                                append_array_elements(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                             } else if (*c == WEOF) {
 
@@ -173,7 +174,7 @@ void receives_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3
                             } else {
 
                                 // Copy source character to destination character array.
-                                append_wide_character_vector(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+                                append_array_elements(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 // Set loop break flag.
                                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;

@@ -31,6 +31,7 @@
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../executor/comparator/array_equality_comparator.c"
+#include "../../executor/memoriser/allocator/array_allocator.c"
 #include "../../executor/memoriser/allocator/complex_allocator.c"
 #include "../../executor/memoriser/allocator/compound_allocator.c"
 #include "../../executor/memoriser/allocator/date_time_allocator.c"
@@ -59,7 +60,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
-            allocate_character_vector(p0, p1);
+            allocate_array(p0, p1, p2);
 
         } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
 
@@ -75,11 +76,11 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
-            allocate_double_vector(p0, p1);
+            allocate_array(p0, p1, p2);
 
         } else if (*a == *ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION) {
 
-            allocate_wide_character_vector(p0, p1);
+            allocate_array(p0, p1, p2);
 
         } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
 
@@ -87,7 +88,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
-            allocate_integer_vector(p0, p1);
+            allocate_array(p0, p1, p2);
 
         } else if (*a == *INTERNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -95,11 +96,11 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *KNOWLEDGE_PATH_MEMORY_ABSTRACTION) {
 
-            allocate_wide_character_vector(p0, p1);
+            allocate_array(p0, p1, p2);
 
         } else if (*a == *OPERATION_MEMORY_ABSTRACTION) {
 
-            allocate_wide_character_vector(p0, p1);
+            allocate_array(p0, p1, p2);
 
         } else if (*a == *MODEL_MEMORY_ABSTRACTION) {
 
@@ -111,7 +112,7 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
-            allocate_pointer_vector(p0, p1);
+            allocate_array(p0, p1, p2);
 
         } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -119,11 +120,11 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
         } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
-            allocate_unsigned_long_vector(p0, p1);
+            allocate_array(p0, p1, p2);
 
         } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
-            allocate_wide_character_vector(p0, p1);
+            allocate_array(p0, p1, p2);
 
         } else {
 

@@ -31,6 +31,9 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator/array_allocator.c"
+#include "../../../executor/memoriser/deallocator/array_deallocator.c"
+#include "../../../executor/memoriser/reallocator/array_reallocator.c"
 #include "../../../logger/logger.c"
 
 /**

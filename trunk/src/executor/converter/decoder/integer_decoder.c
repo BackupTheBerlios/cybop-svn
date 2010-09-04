@@ -76,10 +76,10 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
         allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         // Copy original string to temporary null-terminated string.
-        append_wide_character_vector((void*) &tmp, (void*) &tmpc, (void*) &tmps, p3, p4);
+        append_array_elements((void*) &tmp, (void*) &tmpc, (void*) &tmps, p3, p4);
         // Add string termination to temporary null-terminated string.
         // The source count is used as index for the termination character.
-        append_wide_character_vector((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+        append_array_elements((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
         // The tail variable is useless here and only needed for the string
         // transformation function. If the whole string array consists of

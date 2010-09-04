@@ -29,14 +29,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../memoriser/accessor/character_vector_accessor.c"
-#include "../../executor/accessor/getter/compound_getter.c"
-#include "../../memoriser/accessor/double_vector_accessor.c"
-#include "../../memoriser/accessor/integer_vector_accessor.c"
 #include "../../executor/accessor/getter/array_getter.c"
-#include "../../memoriser/accessor/pointer_vector_accessor.c"
+#include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/accessor/getter/signal_memory_getter.c"
-#include "../../memoriser/accessor/wide_character_vector_accessor.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 
 /**
@@ -50,8 +45,9 @@
  * @param p3 the source
  * @param p4 the source count
  * @param p5 the abstraction
+ * @param p6 the abstraction count
  */
-void append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 

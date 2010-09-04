@@ -121,11 +121,11 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                                 // in order to separate from already existing elements.
 
                                 // Append comma character.
-                                append_wide_character_vector(p0, p1, p2, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+                                append_array_elements(p0, p1, p2, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                             }
 
                             // Append integer characters.
-                            append_wide_character_vector(p0, p1, p2, c, (void*) &cc);
+                            append_array_elements(p0, p1, p2, c, (void*) &cc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                             // Determine remaining vector elements.
                             //

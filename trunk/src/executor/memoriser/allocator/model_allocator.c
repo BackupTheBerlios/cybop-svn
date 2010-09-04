@@ -27,6 +27,7 @@
 #define MODEL_ALLOCATOR_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/accessor/setter/array_setter.c"
 #include "../../../logger/logger.c"
 
 //
@@ -34,7 +35,6 @@
 //
 
 void allocate(void* p0, void* p1, void* p2, void* p3);
-void set_integer_vector_element(void* p0, void* p1, void* p2);
 
 /**
  * Allocates the model.
@@ -62,15 +62,17 @@ void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
             allocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
+            //?? TEMPORARY COMMENT!
+            //
             // The OLD solution was:
             // **dc = *((int*) p3);
             // **ds = *((int*) p3);
             //
             // This is just mentioned here, so that in case of troubles
-            // the new solution (call of function "set_integer_vector_element")
+            // the new solution (call of function "set_array_elements")
             // can easier be checked.
-            set_integer_vector_element(*dc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3);
-            set_integer_vector_element(*ds, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3);
+            set_array_elements(*dc, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+            set_array_elements(*ds, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else {
 
