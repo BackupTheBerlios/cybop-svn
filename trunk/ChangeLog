@@ -16,27 +16,31 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-09-04  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+        * Correct some linking errors
+
 2010-09-03  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up errors stemming from previously implemented changes
-        * Focus on linker errors
+        * Clean up compilation errors stemming from previously implemented changes
+        * Correct some linking errors
 
 2010-08-14  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up errors stemming from previously implemented changes
+        * Clean up compilation errors stemming from previously implemented changes
         * CAUTION! Parameter values such as *_MEMORY_ABSTRACTION should always be handed over together with MEMORY_ABSTRACTION_COUNT,
             but NOT for array functions, to avoid cyclic calls when evaluating an "ABSTRACTION" constant
             which is currently of type "integer" but might become a "wide_character" again in future
 
 2010-08-13  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up errors stemming from previously implemented changes
+        * Clean up compilation errors stemming from previously implemented changes
 
 2010-08-12  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up errors stemming from previously implemented changes
+        * Clean up compilation errors stemming from previously implemented changes
 
 2010-08-10  Enrico Gallus  <enrico.gallus@googlemail.com>
         * Extend files constant/model/internet_protocol_model.c and constant/model/service_port_model.c
 
 2010-08-06  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up errors stemming from previously implemented changes
+        * Clean up compilation errors stemming from previously implemented changes
 
 2010-06-02  Christian Heller  <christian.heller@tuxtax.de>
         * Correct include paths since some files are in a deeper directory now, after having restructured
@@ -44,12 +48,12 @@
             in "applicator/" sub directories "maintainer", "memoriser" and "runner"
 
 2010-03-01  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up errors stemming from previously implemented changes
+        * Clean up compilation errors stemming from previously implemented changes
         * Remove superfluous "vector" files, e.g. "character_vector_allocator.c" etc.
 
 2010-02-21  Christian Heller  <christian.heller@tuxtax.de>
         * Replace "compare_arrays" with "compare_equal_arrays" and correct order of parameters
-        * Clean up errors stemming from previously implemented changes
+        * Clean up compilation errors stemming from previously implemented changes
         * Remove superfluous "vector" files, e.g. "character_vector_getter.c" etc.
         * Remove further superfluous files, e.g. "character_vector_appender.c"
             and replace them with just one neutral file, e.g. "array_appender.c",

@@ -33,6 +33,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/memoriser/reallocator/array_reallocator.c"
 #include "../../../logger/logger.c"
 
 //

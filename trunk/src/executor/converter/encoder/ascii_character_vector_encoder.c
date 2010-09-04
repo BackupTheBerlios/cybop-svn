@@ -26,13 +26,13 @@
 #ifndef ASCII_CHARACTER_VECTOR_ENCODER_SOURCE
 #define ASCII_CHARACTER_VECTOR_ENCODER_SOURCE
 
-#include "../../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../../constant/model/memory/integer_memory_model.c"
-#include "../../../../constant/model/log/message_log_model.c"
-#include "../../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../../logger/logger.c"
-#include "../../../../variable/reallocation_factor.c"
-#include "../../../../executor/comparator/array_equality_comparator.c"
+#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
+#include "../../../variable/reallocation_factor.c"
 
 /**
  * Encodes the character vector model and creates an ascii character byte stream from it.

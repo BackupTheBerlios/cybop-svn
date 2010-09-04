@@ -34,7 +34,9 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/accessor/appender/wide_character_vector_appender.c"
 #include "../../../executor/converter/encoder/integer_vector_encoder.c"
+#include "../../../executor/converter/encoder/double_vector_encoder.c"
 #include "../../../logger/logger.c"
 
 //

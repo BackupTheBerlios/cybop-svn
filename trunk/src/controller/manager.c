@@ -383,15 +383,15 @@ void manage(void* p0, void* p1) {
     free((void*) cyboi_service_sleep_time);
 
     // Deallocate signal memory.
-    deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION);
-    deallocate((void*) &sc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-    deallocate((void*) &ss, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+    deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &sc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &ss, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Deallocate knowledge memory.
-    deallocate((void*) &k, (void*) ks, (void*) COMPOUND_MEMORY_ABSTRACTION);
-    deallocate((void*) &kc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-    deallocate((void*) &ks, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+    deallocate((void*) &k, (void*) ks, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &kc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &ks, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Deallocate internal memory.
-    deallocate((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION);
+    deallocate((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* MANAGER_SOURCE */
