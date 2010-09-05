@@ -32,6 +32,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/memory/destroy_memory_operation_cybol_name.c"
 #include "../../executor/accessor/getter/compound_getter.c"
+#include "../../executor/accessor/remover/compound_remover.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 #include "../../logger/logger.c"
 

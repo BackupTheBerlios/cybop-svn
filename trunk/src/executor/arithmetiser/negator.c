@@ -31,6 +31,8 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+//?? #include "../../executor/arithmetiser/negator/double_negator.c"
+#include "../../executor/arithmetiser/negator/integer_negator.c"
 #include "../../logger/logger.c"
 #include "../../variable/primitive_type_size.c"
 
@@ -50,7 +52,7 @@ void negate(void* p0, void* p1) {
 
         if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
-//            negate_double(p0);
+//??            negate_double(p0);
 
         } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 

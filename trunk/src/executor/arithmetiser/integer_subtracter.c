@@ -31,9 +31,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../executor/arithmetiser/integer_subtracter/integer_integer_subtracter.c"
+//?? #include "../../executor/arithmetiser/integer_subtracter/pointer_integer_subtracter.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/adder.c"
-#include "../../memoriser/negator.c"
 #include "../../variable/primitive_type_size.c"
 
 /**
@@ -57,7 +57,7 @@ void add_integer(void* p0, void* p1, void* p2) {
 
         } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
-//            subtract_integer_from_pointer(p0, p1);
+//??            subtract_integer_from_pointer(p0, p1);
 
         } else {
 

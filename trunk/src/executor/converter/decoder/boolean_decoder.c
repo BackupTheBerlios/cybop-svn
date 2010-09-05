@@ -33,9 +33,9 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/primitive_memory_name.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Decodes the byte stream and creates a boolean model from it.
@@ -67,7 +67,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_elements(p3, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays((void*) &r, p3, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -81,7 +81,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_elements(p3, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) FALSE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays((void*) &r, p3, p4, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

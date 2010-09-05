@@ -105,7 +105,7 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
         // However, to speed up the program, the "set_pointer_array_elements"
         // procedure was used directly, as it does not do so many comparisons
         // (like for example with "POINTER_MEMORY_ABSTRACTION", to find the right procedure).
-        set_pointer_array_elements(p0, (void*) &j, (void*) NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+        set_array_elements(p0, (void*) NULL_POINTER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION);
 
         j++;
     }

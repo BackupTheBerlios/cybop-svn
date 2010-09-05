@@ -31,9 +31,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../executor/arithmetiser/integer_multiplier/integer_integer_multiplier.c"
+//?? #include "../../executor/arithmetiser/integer_multiplier/pointer_integer_multiplier.c"
 #include "../../logger/logger.c"
-#include "../../memoriser/adder.c"
-#include "../../memoriser/negator.c"
 #include "../../variable/primitive_type_size.c"
 
 /**
@@ -57,7 +57,7 @@ void multiply_with_integer(void* p0, void* p1, void* p2) {
 
         } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
-//            multiply_pointer_with_integer(p0, p1);
+//??            multiply_pointer_with_integer(p0, p1);
 
         } else {
 

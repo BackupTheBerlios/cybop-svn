@@ -74,7 +74,7 @@ void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3,
 //??    fwprintf(stdout, L"TEST send x 1: %i\n", p0);
 
     // Show window on display.
-    write_data(d, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p0, *NULL_POINTER_MEMORY_MODEL, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT);
+    send_x_window_system(d, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p0, *NULL_POINTER_MEMORY_MODEL);
 
 //??    fwprintf(stdout, L"TEST send x 2: %i\n", p0);
 

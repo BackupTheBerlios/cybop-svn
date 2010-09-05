@@ -31,6 +31,10 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
+#include "../../../executor/arithmetiser/integer_adder/pointer_integer_adder.c"
+#include "../../../executor/arithmetiser/integer_multiplier.c"
+#include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/primitive_type_size.c"
 
@@ -55,8 +59,11 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
             // The offset.
             int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            // Calculate offset depending on given array type.
-            calculate_area((void*) &o, p2, p3);
+            // Determine abstraction (type) size.
+            determine_size((void*) &o, p3);
+
+            // Calculate memory area (destination offset).
+            multiply_with_integer((void*) &o, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
 
             // The destination elements.
             // CAUTION! It HAS TO BE initialised with p1,
@@ -66,7 +73,7 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
             // Add offset to destination elements.
             // The destination is set to source pointer plus offset.
             // That's all.
-            add_integer(p0, (void*) &o, (void*) POINTER_MEMORY_ABSTRACTION);
+            add_integer_to_pointer(p0, (void*) &o);
 
         } else {
 
@@ -129,7 +136,7 @@ void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, 
                         }
 
                         get_array_elements((void*) &e, p1, (void*) &j, p5);
-                        compare_array_elements((void*) &r, e, p3, p4, p5);
+                        compare_equal_arrays((void*) &r, e, p4, p3, p4, p5);
 
                         if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 

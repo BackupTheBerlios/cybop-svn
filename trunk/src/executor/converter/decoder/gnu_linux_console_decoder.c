@@ -51,6 +51,7 @@
 #include "../../../constant/name/cybol/text_user_interface_cybol_name.c"
 #include "../../../constant/name/memory/vector_memory_name.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
+#include "../../../executor/accessor/replacer/array_replacer.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/converter/decoder/integer_vector_decoder.c"
 #include "../../../executor/converter/decoder/terminal_background_decoder.c"
@@ -90,7 +91,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            replace_array_elements(p0, p1, p2, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -100,7 +101,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            replace_array_elements(p0, p1, p2, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -110,7 +111,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            replace_array_elements(p0, p1, p2, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -120,7 +121,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            replace_array_elements(p0, p1, p2, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -162,7 +163,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            replace_array_elements(p0, p1, p2, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -172,7 +173,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace(p0, p1, p2, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            replace_array_elements(p0, p1, p2, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
         }
     }
 
@@ -185,7 +186,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         // None of the control characters above matched.
         // Pass along character without modification.
-        replace(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        replace_array_elements(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     }
 }
 

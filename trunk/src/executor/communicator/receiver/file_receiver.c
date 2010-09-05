@@ -126,7 +126,7 @@ void receive_file_stream(void* p0, void* p1, void* p2, void* p3) {
  * @param p3 the source file name
  * @param p4 the source file name count
  */
-void receives_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void receive_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -148,7 +148,7 @@ void receives_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // The given string is not a file name, but specifies the "standard_input".
                 f = stdin;
 
-                read_file_stream(p0, p1, p2, (void*) f);
+                receive_file_stream(p0, p1, p2, (void*) f);
             }
         }
 
@@ -188,7 +188,7 @@ void receives_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (f != *NULL_POINTER_MEMORY_MODEL) {
 
-                read_file_stream(p0, p1, p2, (void*) f);
+                receive_file_stream(p0, p1, p2, (void*) f);
 
                 // Close file.
                 // CAUTION! Check file for null pointer to avoid a segmentation fault!

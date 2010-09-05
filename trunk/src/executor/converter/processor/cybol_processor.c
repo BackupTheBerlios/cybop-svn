@@ -31,8 +31,9 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybop/cybop_name.c"
-#include "../../../logger/logger.c"
+#include "../../../executor/accessor/appender/compound_appender.c"
 #include "../../../executor/converter/detector/cybol_detector.c"
+#include "../../../logger/logger.c"
 
 //
 // Forward declarations.

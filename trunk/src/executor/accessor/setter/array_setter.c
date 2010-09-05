@@ -31,16 +31,20 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
+#include "../../../executor/arithmetiser/integer_adder/pointer_integer_adder.c"
+#include "../../../executor/arithmetiser/integer_multiplier.c"
+#include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/primitive_type_size.c"
 
 /**
  * Sets the array elements.
  *
- * @param p0 the array
- * @param p1 the elements
- * @param p2 the elements count
- * @param p3 the index
+ * @param p0 the destination array
+ * @param p1 the source elements
+ * @param p2 the source elements count
+ * @param p3 the destination array index
  * @param p4 the abstraction
  */
 void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
@@ -62,9 +66,13 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // The loop variable.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            // Calculate offset depending on given array type.
-            calculate_area((void*) &o, p3, p4);
-            add_integer((void*) &db, (void*) &o, (void*) POINTER_MEMORY_ABSTRACTION);
+            // Determine abstraction (type) size.
+            determine_size((void*) &o, p4);
+
+            // Calculate memory area (destination offset).
+            multiply_with_integer((void*) &o, p3, (void*) INTEGER_MEMORY_ABSTRACTION);
+
+            add_integer_to_pointer((void*) &db, (void*) &o);
 
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
