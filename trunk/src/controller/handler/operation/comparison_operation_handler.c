@@ -72,7 +72,7 @@ void handle_comparison_operation(void* p0, void* p1, void* p2, void* p3, void* p
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equality(p12, p13, p1, p2, p3);
+//??            compare_equality(p12, p13, p1, p2, p3);
         }
     }
 

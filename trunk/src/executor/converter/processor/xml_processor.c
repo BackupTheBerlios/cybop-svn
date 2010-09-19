@@ -30,6 +30,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/xml_cybol_name.c"
+#include "../../../executor/accessor/appender/compound_appender.c"
 #include "../../../executor/converter/selector/xml_selector.c"
 #include "../../../logger/logger.c"
 
@@ -660,7 +661,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         // Decode destination part name.
         // CAUTION! The pre-defined constant "part" is used as name here!
-        // The "add_compound_element_by_name" function below will automatically
+        // The "append_compound_element_by_name" function below will automatically
         // add a number as suffix, to make the name unique.
         decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
             (void*) NODE_XML_CYBOL_NAME, (void*) NODE_XML_CYBOL_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
@@ -706,7 +707,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // CAUTION! Hand over the name as reference!
         // Storing many parts with identical tag name is not a problem,
         // since the tag name of a part is added to its details compound.
-        add_compound_element_by_name_with_suffix(*dd, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
+        append_compound_element_by_name_with_suffix(*dd, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
 
     } else {
 

@@ -37,6 +37,7 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/comparison_operation_cybol_name.c"
+#include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 #include "../../logger/logger.c"
 

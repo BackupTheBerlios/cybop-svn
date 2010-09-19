@@ -32,8 +32,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/assigner.c"
-#include "../../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
-#include "../../../executor/arithmetiser/integer_adder/pointer_integer_adder.c"
+#include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
 #include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
@@ -58,22 +57,25 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set array elements.");
 
-            // The offset.
-            int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The destination base.
-            // CAUTION! It HAS TO BE initialised with p0,
-            // since an offset is added to it below.
-            void* db = p0;
-            // The loop variable.
-            int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The destination offset.
+            int dos = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Determine abstraction (type) size.
-            determine_size((void*) &o, p4);
+            determine_size((void*) &dos, p4);
 
             // Calculate memory area (destination offset).
-            multiply_with_integer((void*) &o, p3, (void*) INTEGER_MEMORY_ABSTRACTION);
+            multiply_with_integer((void*) &dos, p3, (void*) INTEGER_MEMORY_ABSTRACTION);
 
-            add_integer_to_pointer((void*) &db, (void*) &o);
+            // The destination.
+            // CAUTION! It HAS TO BE initialised with p0,
+            // since an offset is added to it below.
+            void* d = p0;
+
+            // Add offset to destination.
+            add_integer((void*) &d, (void*) &dos, (void*) POINTER_MEMORY_ABSTRACTION);
+
+            // The loop variable.
+            int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
@@ -82,7 +84,7 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     break;
                 }
 
-                assign_with_offset(db, p1, (void*) &j, p4);
+                assign_with_offset(d, p1, (void*) &j, p4);
 
                 j++;
             }

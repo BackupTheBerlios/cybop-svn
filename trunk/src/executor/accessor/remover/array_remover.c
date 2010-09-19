@@ -42,11 +42,11 @@
 /**
  * Removes the array elements.
  *
- * @param p0 the array
- * @param p1 the array size
- * @param p2 the index
- * @param p3 the elements count
- * @param p4 the array type
+ * @param p0 the destination array
+ * @param p1 the destination array size
+ * @param p2 the destination array index
+ * @param p3 the source elements count
+ * @param p4 the abstraction
  */
 void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -74,7 +74,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 // Calculate memory area (destination offset).
                 multiply_with_integer((void*) &dos, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
-                // Calculate memory area (destination offset).
+                // Calculate memory area (source offset).
                 multiply_with_integer((void*) &sos, p3, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                 // The destination.

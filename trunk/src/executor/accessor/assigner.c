@@ -28,8 +28,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/accessor/assigner/character_assigner.c"
 #include "../../executor/accessor/assigner/double_assigner.c"
@@ -37,6 +37,8 @@
 #include "../../executor/accessor/assigner/pointer_assigner.c"
 #include "../../executor/accessor/assigner/unsigned_long_assigner.c"
 #include "../../executor/accessor/assigner/wide_character_assigner.c"
+#include "../../executor/arithmetiser/integer_multiplier.c"
+#include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"
 #include "../../variable/primitive_type_size.c"
 
@@ -44,7 +46,7 @@
  * Assigns the value.
  *
  * @param p0 the destination base
- * @param p1 the value
+ * @param p1 the source value
  * @param p2 the offset
  * @param p3 the abstraction
  */
@@ -118,8 +120,11 @@ void assign_with_offset(void* p0, void* p1, void* p2, void* p3) {
     // The offset.
     int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Calculate offset depending on given abstraction.
-    calculate_area((void*) &o, p2, p3);
+    // Determine abstraction (type) size.
+    determine_size((void*) &o, p3);
+
+    // Calculate memory area (destination offset).
+    multiply_with_integer((void*) &o, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     // Assign source- to destination memory area.
     assign(p0, p1, (void*) &o, p3);

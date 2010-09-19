@@ -19,6 +19,7 @@
 2010-09-19  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up compilation errors stemming from previously implemented changes
         * Correct linking errors
+        * Make cyboi fully compilable and linkable again
 
 2010-09-04  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up compilation errors stemming from previously implemented changes
