@@ -43,7 +43,7 @@
  * @param p5 the abstraction
  * @param p6 the abstraction count
  */
-void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void replace_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace.");
 

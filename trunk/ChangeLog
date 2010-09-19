@@ -16,13 +16,17 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-09-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+        * Correct linking errors
+
 2010-09-04  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up compilation errors stemming from previously implemented changes
-        * Correct some linking errors
+        * Correct linking errors
 
 2010-09-03  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up compilation errors stemming from previously implemented changes
-        * Correct some linking errors
+        * Correct linking errors
 
 2010-08-14  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up compilation errors stemming from previously implemented changes

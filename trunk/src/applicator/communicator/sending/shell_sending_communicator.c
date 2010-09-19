@@ -99,7 +99,7 @@ void communicate_sending_shell(void* p0, void* p1, void* p2, void* p3, void* p4,
     deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Write encoded array as message to shell standard output.
-    write_data((void*) &STANDARD_OUTPUT_STREAM_MODEL, (void*) STANDARD_OUTPUT_STREAM_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, e, (void*) &ec, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+    send_data((void*) &STANDARD_OUTPUT_STREAM_MODEL, (void*) STANDARD_OUTPUT_STREAM_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, e, (void*) &ec, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
     // Deallocate encoded character array.
     deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);

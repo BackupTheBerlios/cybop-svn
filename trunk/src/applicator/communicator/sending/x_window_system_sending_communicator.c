@@ -33,7 +33,7 @@
 #include "../../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../executor/communicator/receiver.c"
+#include "../../../executor/communicator/sender/x_window_system_sender.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/encoder/x_window_system_encoder.c"
 #include "../../../logger/logger.c"

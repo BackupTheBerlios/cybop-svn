@@ -65,7 +65,7 @@
 #include "../../executor/converter/decoder/x_window_system_decoder.c"
 
 //?? TEMPORARY FOR TESTING! DELETE LATER!
-#include "../../executor/communicator/receiver/file_receiver.c"
+#include "../../executor/communicator/sender/file_sender.c"
 
 /**
  * Decodes the source into the destination, according to the given language.
@@ -168,7 +168,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
             int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
-            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
             deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
@@ -208,7 +208,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
             fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
-            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
             deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
@@ -307,7 +307,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
             int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
-            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
             deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
@@ -346,7 +346,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
             fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
-            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
             deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
@@ -402,7 +402,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
             int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
-            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
             deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.
@@ -441,7 +441,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
             fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
-            write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
             deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate multibyte character stream.

@@ -242,7 +242,7 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
                 // Add part to whole (compound) model.
                 // CAUTION! Hand over the name as reference!
-                add_compound_element_by_name(*dd, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+                append_compound_element_by_name(*dd, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
             }
 
         } else {

@@ -28,10 +28,16 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_adder/pointer_integer_adder.c"
+#include "../../executor/arithmetiser/integer_adder.c"
+#include "../../executor/comparator/equality/character_equality_comparator.c"
+#include "../../executor/comparator/equality/double_equality_comparator.c"
+#include "../../executor/comparator/equality/integer_equality_comparator.c"
+#include "../../executor/comparator/equality/pointer_equality_comparator.c"
+#include "../../executor/comparator/equality/unsigned_long_equality_comparator.c"
+#include "../../executor/comparator/equality/wide_character_equality_comparator.c"
 #include "../../logger/logger.c"
 #include "../../variable/primitive_type_size.c"
 
@@ -107,9 +113,9 @@ void compare_equal_with_offset(void* p0, void* p1, void* p2, void* p3, void* p4)
     void* re = p2;
 
     // Add offset to first element.
-    add_integer_to_pointer((void*) &le, p4, (void*) POINTER_MEMORY_ABSTRACTION);
+    add_integer((void*) &le, p4, (void*) POINTER_MEMORY_ABSTRACTION);
     // Add offset to second element.
-    add_integer_to_pointer((void*) &re, p4, (void*) POINTER_MEMORY_ABSTRACTION);
+    add_integer((void*) &re, p4, (void*) POINTER_MEMORY_ABSTRACTION);
 
     compare_equal(p0, le, re, p3);
 }

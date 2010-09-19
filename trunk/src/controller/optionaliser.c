@@ -40,6 +40,7 @@
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/name/command_option/cyboi_command_option_name.c"
+#include "../executor/accessor/replacer/array_replacer.c"
 #include "../executor/accessor/setter/array_setter.c"
 
 /**
@@ -339,7 +340,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Copy file path from value to cybol knowledge file path.
-                replace_wide_character_vector(p1, p2, p3, p6, p7);
+                replace_array_elements(p1, p2, p3, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 // Set knowledge operation mode.
                 *m = *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL;

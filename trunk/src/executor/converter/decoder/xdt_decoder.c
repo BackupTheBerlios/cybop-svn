@@ -36,6 +36,7 @@
 #include "../../../constant/name/xdt/record_xdt_name.c"
 #include "../../../constant/name/xdt_model/field_xdt_model_name.c"
 #include "../../../constant/name/xdt_model/record_xdt_model_name.c"
+#include "../../../executor/accessor/setter/compound_setter.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/decoder/ascii_character_vector_decoder.c"
 #include "../../../executor/converter/decoder/date_time_decoder.c"
@@ -4611,7 +4612,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             //
             // CAUTION! Hand over the name as reference, as it gets changed by adding
             // an index as name suffix, to uniquely identify the record within the compound.
-            add_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+            append_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
         } else {
 
@@ -4791,7 +4792,7 @@ void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4,
         //
         // CAUTION! Hand over the name as reference, as it gets changed by adding
         // an index as name suffix, to uniquely identify the record within the compound.
-        add_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+        append_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
     } else {
 

@@ -31,6 +31,12 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../executor/accessor/assigner/character_assigner.c"
+#include "../../executor/accessor/assigner/double_assigner.c"
+#include "../../executor/accessor/assigner/integer_assigner.c"
+#include "../../executor/accessor/assigner/pointer_assigner.c"
+#include "../../executor/accessor/assigner/unsigned_long_assigner.c"
+#include "../../executor/accessor/assigner/wide_character_assigner.c"
 #include "../../logger/logger.c"
 #include "../../variable/primitive_type_size.c"
 

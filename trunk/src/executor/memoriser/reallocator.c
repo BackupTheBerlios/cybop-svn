@@ -63,7 +63,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
-            reallocate_array(p0, p1, p2);
+            reallocate_array(p0, p1, p2, p3);
 
         } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
 
@@ -79,11 +79,11 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
 
-            reallocate_array(p0, p1, p2);
+            reallocate_array(p0, p1, p2, p3);
 
         } else if (*a == *ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION) {
 
-            reallocate_array(p0, p1, p2);
+            reallocate_array(p0, p1, p2, p3);
 
         } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
 
@@ -91,7 +91,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
-            reallocate_array(p0, p1, p2);
+            reallocate_array(p0, p1, p2, p3);
 
         } else if (*a == *INTERNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -99,11 +99,11 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else if (*a == *KNOWLEDGE_PATH_MEMORY_ABSTRACTION) {
 
-            reallocate_array(p0, p1, p2);
+            reallocate_array(p0, p1, p2, p3);
 
         } else if (*a == *OPERATION_MEMORY_ABSTRACTION) {
 
-            reallocate_array(p0, p1, p2);
+            reallocate_array(p0, p1, p2, p3);
 
         } else if (*a == *PART_MEMORY_ABSTRACTION) {
 
@@ -111,7 +111,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
 
-            reallocate_array(p0, p1, p2);
+            reallocate_array(p0, p1, p2, p3);
 
         } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
 
@@ -119,11 +119,11 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
 
-            reallocate_array(p0, p1, p2);
+            reallocate_array(p0, p1, p2, p3);
 
         } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
 
-            reallocate_array(p0, p1, p2);
+            reallocate_array(p0, p1, p2, p3);
 
         } else {
 

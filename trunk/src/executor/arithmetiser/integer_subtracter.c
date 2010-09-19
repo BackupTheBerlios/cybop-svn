@@ -43,7 +43,7 @@
  * @param p1 the source integer
  * @param p2 the abstraction
  */
-void add_integer(void* p0, void* p1, void* p2) {
+void subtract_integer(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 

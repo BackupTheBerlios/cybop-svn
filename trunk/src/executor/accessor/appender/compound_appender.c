@@ -35,10 +35,11 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
+#include "../../../executor/accessor/setter/compound_setter.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
-#include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Appends the compound element by name.
@@ -130,7 +131,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 //??    fwprintf(stdout, L"TEST append compound element 0 p1 dc: %i\n", *((int*) p1));
 
                 // Allocate name suffix as wide character array.
-                allocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                allocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
 //??    fwprintf(stdout, L"TEST append compound element 1 ss: %i\n", ss);
 //??    fwprintf(stdout, L"TEST append compound element 1 sc: %i\n", sc);
@@ -140,7 +141,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
                 // because the element is appended at the end of the compound container.
                 // The suffix integer is encoded into a wide character array.
                 encode((void*) &s, (void*) &sc, (void*) &ss, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT,
-                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+                    *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
 //??    fwprintf(stdout, L"TEST append compound element 2 ss: %i\n", ss);
 //??    fwprintf(stdout, L"TEST append compound element 2 sc: %i\n", sc);
@@ -155,7 +156,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 
 //??    fwprintf(stdout, L"TEST append compound element 2 ns pre: %i\n", *ns);
                     // Reallocate name character vector.
-                    reallocate_array(p3, p4, p5, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                    reallocate_array(p3, p4, p5, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 //??    fwprintf(stdout, L"TEST append compound element 2 ns post: %i\n", *ns);
                 }
 
@@ -167,7 +168,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 
                 // Append list element separator characters "_$" to element name.
                 // Use name count as index to append the new characters.
-                set_array_elements(*n, p4, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                set_array_elements(*n, p4, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                 *nc = *nc + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
 //??    fwprintf(stdout, L"TEST append compound element 4 ns: %i\n", *ns);
@@ -176,7 +177,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 
                 // Set new element name by appending the index determined above.
                 // Use name count as index to append the new characters.
-                set_array_elements(*n, p4, s, (void*) &sc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                set_array_elements(*n, p4, s, (void*) &sc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                 *nc = *nc + sc;
 
 //??    fwprintf(stdout, L"TEST append compound element 5 ns: %i\n", *ns);
@@ -184,7 +185,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 //??    fwprintf(stdout, L"TEST append compound element 5 n: %ls\n", (wchar_t*) *n);
 
                 // Deallocate name suffix as wide character array.
-                deallocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                deallocate_array((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
 //??    fwprintf(stdout, L"TEST append compound element 6 ns: %i\n", *ns);
 //??    fwprintf(stdout, L"TEST append compound element 6 nc: %i\n", *nc);

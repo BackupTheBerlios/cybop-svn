@@ -12,9 +12,6 @@
 #
 
 2010-xx-xx  Christian Heller  <christian.heller@tuxtax.de>
-        * Clean up errors stemming from previously implemented changes
-
-2010-xx-xx  Christian Heller  <christian.heller@tuxtax.de>
         * Make cyboi fully compilable again
 
         * Investigate how to handle setting of destination count and size;

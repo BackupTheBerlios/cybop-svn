@@ -33,7 +33,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../executor/converter/decoder.c"
-#include "../../../executor/communicator/receiver.c"
+#include "../../../executor/communicator/sender.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -88,7 +88,7 @@ void communicate_sending_file_system(void* p0, void* p1, void* p2, void* p3, voi
     deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Write encoded array into file.
-    write_data((void*) &p15, p16, *NULL_POINTER_MEMORY_MODEL, e, (void*) &ec, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+    send_data((void*) &p15, p16, *NULL_POINTER_MEMORY_MODEL, e, (void*) &ec, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
     // Deallocate encoded character array.
     deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);

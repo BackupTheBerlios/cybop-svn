@@ -31,9 +31,10 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
-#include "../../../executor/arithmetiser/integer_adder/pointer_integer_adder.c"
+#include "../../../executor/accessor/assigner.c"
+#include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
+#include "../../../executor/arithmetiser/integer_subtracter.c"
 #include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/primitive_type_size.c"
@@ -82,7 +83,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 void* d = p0;
 
                 // Add offset to destination.
-                add_integer_to_pointer((void*) &d, (void*) &dos);
+                add_integer((void*) &d, (void*) &dos, (void*) POINTER_MEMORY_ABSTRACTION);
 
                 // The source.
                 // CAUTION! It HAS TO BE initialised with d,
@@ -91,7 +92,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 void* s = d;
 
                 // Add offset to source.
-                add_integer_to_pointer((void*) &s, (void*) &sos);
+                add_integer((void*) &s, (void*) &sos, (void*) POINTER_MEMORY_ABSTRACTION);
 
                 // The subtrahend.
                 // CAUTION! It HAS TO BE initialised with *i,
@@ -99,7 +100,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 int sub = *i;
 
                 // Add elements count to subtrahend.
-                add_integer_to_integer((void*) &sub, p3, (void*) INTEGER_MEMORY_ABSTRACTION);
+                add_integer((void*) &sub, p3, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                 // The remaining elements size.
                 // CAUTION! It HAS TO BE initialised with *as,
@@ -130,7 +131,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         break;
                     }
 
-                    assign_area_with_offset(d, s, (void*) &j, p4);
+                    assign_with_offset(d, s, (void*) &j, p4);
 
                     j++;
                 }

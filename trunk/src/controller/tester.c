@@ -1024,7 +1024,7 @@ void test_file_read() {
     int fnc = *NUMBER_26_INTEGER_MEMORY_MODEL;
 
     allocate_array((void*) &a, (void*) &CHARACTER_ARRAY, (void*) &as);
-//??    read_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
+//??    receive_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
 
     fwprintf(stdout, L"a: %i\n", a);
     fwprintf(stdout, L"as: %i\n", as);
@@ -1075,7 +1075,7 @@ void test_file_write() {
     // The file name count.
     int fnc = *NUMBER_26_INTEGER_MEMORY_MODEL;
 
-//??    write_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
+//??    send_file((void*) &a, (void*) &as, (void*) &ac, (void*) &fn, (void*) &fnc);
 }
 
 /**
@@ -1414,7 +1414,7 @@ void test_decode_utf8() {
     allocate((void*) &rm, (void*) &rms, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Read persistent byte stream over channel.
-    read_data((void*) &rm, (void*) &rmc, (void*) &rms, (void*) f, (void*) &fc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+    receive_data((void*) &rm, (void*) &rmc, (void*) &rms, (void*) f, (void*) &fc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
     fwprintf(stdout, L"TEST rms: %i\n", rms);
     fwprintf(stdout, L"TEST rmc: %i\n", rmc);

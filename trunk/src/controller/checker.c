@@ -30,8 +30,9 @@
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../logger/logger.c"
 #include "../executor/accessor/getter/signal_memory_getter.c"
+#include "../executor/accessor/remover/signal_memory_remover.c"
+#include "../logger/logger.c"
 
 /**
  * Gets signal at the given index.

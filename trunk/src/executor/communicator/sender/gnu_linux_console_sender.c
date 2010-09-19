@@ -68,7 +68,7 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // CAUTION! Use a standard (non-wide) character vector here,
         // because the source is handed over as utf-8 encoded multibyte characters
         // and will be forwarded as such to the gnu linux console!
-        allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION);
+        allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
         // Append control sequences and null termination character.
         append_character_vector((void*) &ts, tsc, tss, p3, p4);
@@ -107,7 +107,7 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
 
         // Deallocate terminated control sequences.
-        deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION);
+        deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     } else {
 

@@ -204,7 +204,7 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                             *ds = *ds * *INTEGER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Reallocate date time.
-                            reallocate(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
+                            reallocate(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
                         }
 
                         // Set date time integer values.

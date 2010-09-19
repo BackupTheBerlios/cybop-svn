@@ -84,14 +84,14 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // Decode part name.
     //
     // The OLD solution was:
-    // replace((void*) &n, (void*) nc, (void*) ns, p5, p6, p3, p4);
+    // replace_array_elements((void*) &n, (void*) nc, (void*) ns, p5, p6, p3, p4);
     // DELETE later!
     decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4);
 
     // Decode part abstraction.
     //
     // The OLD solution was:
-    // replace((void*) &a, (void*) ac, (void*) as, p9, p10, p7, p8);
+    // replace_array_elements((void*) &a, (void*) ac, (void*) as, p9, p10, p7, p8);
     // DELETE later!
     decode((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8);
 
@@ -107,7 +107,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     //
 
     // Add part to whole model.
-    add_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+    append_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
 //?? TEST BEGIN
     // The model diagram.
@@ -133,7 +133,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     int fnc = *NUMBER_15_INTEGER_MEMORY_MODEL;
     int fns = *NUMBER_16_INTEGER_MEMORY_MODEL;
     // Write multibyte character stream as message to file system.
-    write_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+    send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
     // Deallocate model diagram.
     deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Deallocate multibyte character stream.

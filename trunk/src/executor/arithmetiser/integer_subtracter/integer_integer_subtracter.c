@@ -42,7 +42,7 @@
  * @param p0 the destination
  * @param p1 the source
  */
-void subtract_integer(void* p0, void* p1) {
+void subtract_integer_from_integer(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
