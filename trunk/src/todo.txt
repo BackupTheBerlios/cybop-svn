@@ -12,7 +12,7 @@
 #
 
 2010-xx-xx  Christian Heller  <christian.heller@tuxtax.de>
-        * Check for logical errors
+        * Clean up logical errors
         * Provide basic functions such as "append", "replace" etc. for arrays and other abstractions (types) like "compound"
 
         * Investigate how to handle setting of destination count and size;

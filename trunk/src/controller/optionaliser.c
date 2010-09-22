@@ -469,7 +469,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
 
             // Get command line argument option.
             // Example: "--loglevel"
-            get_array_elements(p6, (void*) j, (void*) &o, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &o, p6, (void*) j, (void*) POINTER_MEMORY_ABSTRACTION);
 
             if (*o != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -504,7 +504,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
 
                 // Get command line argument value, standing after the option.
                 // Example: "debug"
-                get_array_elements(p6, (void*) &i, (void*) &v, (void*) POINTER_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &v, p6, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
 
                 if (*v != *NULL_POINTER_MEMORY_MODEL) {
 

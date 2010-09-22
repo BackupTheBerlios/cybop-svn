@@ -29,7 +29,7 @@
 #include "../constant/model/memory/pointer_memory_model.c"
 
 /**
- * Deoptionalises the given command line argument options.
+ * Orients the given stream.
  *
  * @param p0 the stream
  * @param p1 the orientation (positive value: wide character; negative value: narrow character)

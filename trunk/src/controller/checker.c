@@ -492,7 +492,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
     // Get index of the top priority signal.
-    get_highest_priority_signal_index(p4, p5, (void*) &i);
+    get_highest_priority_signal_index((void*) &i, p4, p5);
 
     // There are various possibilities to process signals.
     //

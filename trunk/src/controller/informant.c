@@ -41,8 +41,12 @@ void inform(void* p0) {
 
     // The message.
     void* m = *NULL_POINTER_MEMORY_MODEL;
-    // The cyboi name + space + version + line feed + copyright + line feed + licence + line feed + termination.
-    int ms = *NAME_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
+    // The cyboi name + space + version + line feed + slogan + line feed + copyright + line feed + licence + line feed + termination.
+    int ms = *NAME_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
+        + *VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
+        + *SLOGAN_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
+        + *COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
+        + *LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // The index.
     int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -68,10 +72,11 @@ void inform(void* p0) {
     // Copy slogan.
     set_array_elements(m, (void*) SLOGAN_IDENTIFICATION_CYBOI_MODEL, (void*) SLOGAN_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
-    i = i + *COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT;
+    i = i + *SLOGAN_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
     set_array_elements(m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
-
+    // Increment index.
+    i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy copyright.
     set_array_elements(m, (void*) COPYRIGHT_IDENTIFICATION_CYBOI_MODEL, (void*) COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
@@ -90,6 +95,8 @@ void inform(void* p0) {
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy null termination wide character.
     set_array_elements(m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    // Increment index.
+    i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Log message.
     log_write_terminated_message(p0, m);

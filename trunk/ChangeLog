@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-09-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up logical errors
+        * Make cyboi runnable showing help message
+
 2010-09-19  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up compilation errors stemming from previously implemented changes
         * Correct linking errors

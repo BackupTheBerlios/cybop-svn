@@ -304,7 +304,7 @@ void manage(void* p0, void* p1) {
     //
 
     // Initialise system with an initial signal.
-    initialise(i, s, (void*) sc, (void*) ss, p0, p1);
+    initialise(s, (void*) sc, (void*) ss, p0, p1, i);
 
     //
     // System shutdown.

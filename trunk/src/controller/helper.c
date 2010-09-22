@@ -57,11 +57,11 @@ void help(void* p0) {
     // Increment index.
     i = i + *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) &i, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy null termination wide character.
-    set_array_elements(m, (void*) &i, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Log message.
     log_write_terminated_message(p0, m);

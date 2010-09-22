@@ -179,19 +179,19 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
 /**
  * Gets the index of the signal with highest priority.
  *
- * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the index
+ * @param p0 the index
+ * @param p1 the signal memory
+ * @param p2 the signal memory count
  */
 void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* i = (int*) p2;
+        int* smc = (int*) p2;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* smc = (int*) p1;
+            int* i = (int*) p0;
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get highest priority signal index.");
 
@@ -199,7 +199,7 @@ void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
             void** sp = NULL_POINTER_MEMORY_MODEL;
 
             // Get signal priorities.
-            get_array_elements(p0, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) &sp, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements(p1, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) &sp, (void*) POINTER_MEMORY_ABSTRACTION);
 
             if (*sp != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -245,12 +245,12 @@ void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get highest priority signal index. The signal memory count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get highest priority signal index. The index is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get highest priority signal index. The index is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get highest priority signal index. The signal memory count is null.");
     }
 }
 
@@ -362,15 +362,15 @@ void set_new_signal_identification(void* p0, void* p1) {
  * The new identification is calculated as:
  * maximum signal identification + 1
  *
- * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the signal identification (Hand over as reference!)
+ * @param p0 the signal identification (Hand over as reference!)
+ * @param p1 the signal memory
+ * @param p2 the signal memory count
  */
 void get_new_signal_identification(void* p0, void* p1, void* p2) {
 
-    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* smc = (int*) p1;
+        int* smc = (int*) p2;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get new signal identification.");
 
@@ -378,7 +378,7 @@ void get_new_signal_identification(void* p0, void* p1, void* p2) {
         void** ids = NULL_POINTER_MEMORY_MODEL;
 
         // Get signal identifications.
-        get_array_elements(p0, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &ids, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements(p1, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &ids, (void*) POINTER_MEMORY_ABSTRACTION);
 
         if (*ids != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -423,7 +423,7 @@ void get_new_signal_identification(void* p0, void* p1, void* p2) {
             max++;
 
             // Set new signal identification using the maximum value.
-            set_new_signal_identification(p2, (void*) &max);
+            set_new_signal_identification(p0, (void*) &max);
 
         } else {
 

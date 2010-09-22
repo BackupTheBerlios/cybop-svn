@@ -558,7 +558,7 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
             pthread_mutex_lock(*smt);
 
             // Get new signal identification by incrementing the current maximum signal's one.
-            get_new_signal_identification(*s, *sc, (void*) &id);
+            get_new_signal_identification((void*) &id, *s, *sc);
 
             // Add signal to signal memory.
 //??            set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
@@ -697,7 +697,7 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         pthread_mutex_lock(*smt);
 
         // Get new signal identification by incrementing the current maximum signal's one.
-        get_new_signal_identification(*s, *sc, (void*) &id);
+        get_new_signal_identification((void*) &id, *s, *sc);
 
         // Add signal to signal memory.
 //??        set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);

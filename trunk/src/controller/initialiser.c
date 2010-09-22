@@ -42,12 +42,12 @@
 /**
  * Initialises the system with an initial signal.
  *
- * @param p0 the internal memory
- * @param p1 the signal memory
- * @param p2 the signal memory count
- * @param p3 the signal memory size
- * @param p4 the run source
- * @param p5 the run source count
+ * @param p0 the signal memory
+ * @param p1 the signal memory count
+ * @param p2 the signal memory size
+ * @param p3 the run source
+ * @param p4 the run source count
+ * @param p5 the internal memory
  */
 void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
@@ -90,7 +90,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        p4, p5, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
@@ -101,16 +101,16 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     void** id = NULL_POINTER_MEMORY_MODEL;
 
     // Get new signal identification by incrementing the current maximum signal's one.
-    get_new_signal_identification(p1, p2, (void*) &id);
+    get_new_signal_identification((void*) &id, p0, p1);
 
     // Add startup model as signal to signal memory.
-    set_signal(p1, p2, p3, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
+    set_signal(p0, p1, p2, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    check(p0);
+    check(p5);
 
 /*??
     // Deallocate startup model abstraction, model, details.

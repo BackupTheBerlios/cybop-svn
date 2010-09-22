@@ -54,7 +54,8 @@ void globalise() {
     // Primitive type size variables.
     //
     // CAUTION! DO NOT use array functionality here!
-    // The arrays use the logger which would cause circular references.
+    // The array functions use the logger which in turn depends on global
+    // log variables set here. So this would cause circular references.
     // Instead, use malloc and similar functions directly!
     //
     // CAUTION! The integer size needs to be initialised FIRST,
@@ -300,7 +301,8 @@ void unglobalise() {
     // Primitive type size variables.
     //
     // CAUTION! DO NOT use array functionality here!
-    // The arrays use the logger which would cause circular references.
+    // The array functions use the logger which in turn depends on global
+    // log variables set here. So this would cause circular references.
     // Instead, use malloc and similar functions directly!
     //
 
