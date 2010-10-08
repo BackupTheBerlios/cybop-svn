@@ -287,6 +287,7 @@ void manage(void* p0, void* p1) {
     // For example, the tcp socket is running in an own thread.
     // Therefore, the knowledge memory and signal memory NEED TO BE ADDED
     // to the internal memory, in order to be forwardable to threads.
+log_write_terminated_message(stdout, L"\nTEST: 0\n");
     startup_internal_memory(i,
         (void*) &k, (void*) &kc, (void*) &ks,
         (void*) &s, (void*) &sc, (void*) &ss,
@@ -296,6 +297,7 @@ void manage(void* p0, void* p1) {
         (void*) &www_service_irq, (void*) &www_service_mutex, (void*) &www_service_sleep_time,
         (void*) &cyboi_service_irq, (void*) &cyboi_service_mutex, (void*) &cyboi_service_sleep_time);
 
+log_write_terminated_message(stdout, L"\nTEST: 1\n");
     // Start up system signal handler.
     startup_system_signal_handler();
 
@@ -303,8 +305,10 @@ void manage(void* p0, void* p1) {
     // System initialisation.
     //
 
+log_write_terminated_message(stdout, L"\nTEST: 2\n");
     // Initialise system with an initial signal.
     initialise(s, (void*) sc, (void*) ss, p0, p1, i);
+log_write_terminated_message(stdout, L"\nTEST: 3\n");
 
     //
     // System shutdown.

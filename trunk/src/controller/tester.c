@@ -1517,7 +1517,7 @@ void test() {
     // int x = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // fwprintf(stdout, L"The value of x is: %d\n", x);
 
-//??    test_logger();
+    test_logger();
 //??    test_inline_assembler_code();
 //??    test_preprocessor_directives();
 //??    test_stdout_stdout();
@@ -1539,7 +1539,7 @@ void test() {
 //??    test_file_read();
 //??    test_file_write();
 //??    test_console_output();
-    test_console_input();
+//??    test_console_input();
 //??    test_mesa_opengl(*NUMBER_0_INTEGER_MEMORY_MODEL, (char**) NULL_POINTER_MEMORY_MODEL);
 //??    test_decode_integer_vector();
 //??    test_encode_integer_vector();
