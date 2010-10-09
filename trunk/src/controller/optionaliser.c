@@ -137,7 +137,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 /**
  * Optionalises the log file option.
  *
- * @param p0 the log file stream (Hand over as reference!)
+ * @param p0 the log file (Hand over as reference!)
  * @param p1 the log file name
  * @param p2 the log file name count
  */

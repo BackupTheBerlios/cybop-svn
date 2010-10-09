@@ -182,6 +182,7 @@ int main(int p0, char** p1) {
 
             if ((k != *NULL_POINTER_MEMORY_MODEL) && (kc >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
+log_write_terminated_message(stdout, L"\nTEST cyboi: 2\n");
                 // Manage system startup and shutdown using the given cybol knowledge file.
                 manage(k, (void*) &kc);
 

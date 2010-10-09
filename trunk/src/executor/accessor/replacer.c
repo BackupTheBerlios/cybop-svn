@@ -31,7 +31,7 @@
 #include "../../executor/accessor/replacer/array_replacer.c"
 
 /**
- * Replaces the destination- with the source vector.
+ * Replaces the destination- with the source.
  *
  * This function automatically adjusts the destination's count and size.
  *
@@ -43,13 +43,14 @@
  * @param p5 the abstraction
  * @param p6 the abstraction count
  */
-void replace_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace.");
 
     // Distinguish the different abstractions and call the corresponding replace function!
-    // The replace function for arrays is called directly from anywhere in the code
-    // and not from here.
+
+    // CAUTION! The replace function for arrays is called directly from
+    // anywhere in the code, but not from here, due to differing arguments.
 }
 
 /* REPLACER_SOURCE */
