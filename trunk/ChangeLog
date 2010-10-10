@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-10-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up logical errors
+        * Adapt "set" function to try to make it work with "tester.c"
+
 2010-09-22  Christian Heller  <christian.heller@tuxtax.de>
         * Clean up logical errors
         * Make cyboi runnable showing help message
