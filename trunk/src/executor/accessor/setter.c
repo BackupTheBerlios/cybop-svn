@@ -48,18 +48,29 @@
  */
 void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set.");
 
-        int* a = (int*) p6;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set element.");
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
+        compare_equal_arrays((void*) &r, p6, p7, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set_array_elements(p0, p3, p4, p5, p6);
-            set_array_elements(p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+        }
+    }
 
+    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        // If destination was set, then increase its count and size.
+
+        add_integer(p1, p4, (void*) INTEGER_MEMORY_ABSTRACTION);
+        add_integer(p2, p4, (void*) INTEGER_MEMORY_ABSTRACTION);
+    }
+--
         } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
 
 //??            set_complex_element(p0, p1, p2);

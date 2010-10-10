@@ -324,7 +324,7 @@ void test_integer_array() {
 
     log_write_terminated_message((void*) stdout, L"Test integer array:\n");
 
-    // The test value.
+    // The test value (for the "decode" function below).
     wchar_t* test = L"2,3,4";
     int testc = *NUMBER_5_INTEGER_MEMORY_MODEL;
 
@@ -356,9 +356,9 @@ void test_integer_array() {
 */
 
     // Set test values.
-    set((void*) m, (void*) mc, (void*) ms, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    set((void*) m, (void*) mc, (void*) ms, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    set((void*) m, (void*) mc, (void*) ms, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    set((void*) m, (void*) mc, (void*) ms, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) mc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    set((void*) m, (void*) mc, (void*) ms, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) mc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    set((void*) m, (void*) mc, (void*) ms, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) mc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // The result values read out from the integer vector.
     int* result0 = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -1518,24 +1518,24 @@ void test() {
     // fwprintf(stdout, L"The value of x is: %d\n", x);
 
     test_logger();
+    test_integer_array();
+//??    test_character_array_single_element();
+//??    test_character_array_multiple_elements();
+//??    test_pointer_array();
+//??    test_pointer_array_with_null_values();
+//??    test_array_resizing();
 //??    test_inline_assembler_code();
 //??    test_preprocessor_directives();
 //??    test_stdout_stdout();
 //??    test_type_sizes();
 //??    test_pointer_addition();
-//??    test_integer_array();
 //??    test_character_array_with_termination();
-//??    test_array_resizing();
 //??    test_wide_character_output();
 //??    test_wide_character_wprintf();
 //??    test_integer_to_wide_character_conversion();
 //??    test_ascii_character_wide_character_equality();
 //??    test_pointer_cast();
-//??    test_character_array_single_element();
-//??    test_character_array_multiple_elements();
 //??    test_pointer_return();
-//??    test_pointer_array();
-//??    test_pointer_array_with_null_values();
 //??    test_file_read();
 //??    test_file_write();
 //??    test_console_output();
