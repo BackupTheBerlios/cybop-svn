@@ -45,6 +45,11 @@
 //?? Didier Link <didier@famille-link.fr> said that glut.h would suffice
 //?? and freeglut.h would not be needed.
 //?? #include <GL/freeglut.h>
+#include <stdio.h>
+#include <termios.h>
+#include <wchar.h>
+
+#include "../../logger/logger.c"
 
 /**
  * Tests the standard output and error stream.
@@ -614,18 +619,18 @@ void test_communicator() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test communicator.");
 
-//??    test_stdout_stdout();
-//??    test_wide_character_wprintf();
-//??    test_wide_character_output();
+//    test_stdout_stdout();
+//    test_wide_character_wprintf();
+//    test_wide_character_output();
 
-//??    test_communicator_file_read();
-//??    test_communicator_file_write();
+//    test_communicator_file_read();
+//    test_communicator_file_write();
 
-//??    test_communicator_console_input();
-//??    test_communicator_console_output();
+//    test_communicator_console_input();
+//    test_communicator_console_output();
 
-//??    test_communicator_mesa_opengl_standard(int argc, char **argv);
-//??    test_communicator_mesa_opengl(*NUMBER_0_INTEGER_MEMORY_MODEL, (char**) NULL_POINTER_MEMORY_MODEL);
+//    test_communicator_mesa_opengl_standard(int argc, char **argv);
+//    test_communicator_mesa_opengl(*NUMBER_0_INTEGER_MEMORY_MODEL, (char**) NULL_POINTER_MEMORY_MODEL);
 }
 
 /* COMMUNICATOR_TESTER */

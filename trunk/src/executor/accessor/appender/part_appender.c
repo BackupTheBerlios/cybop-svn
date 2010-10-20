@@ -30,8 +30,9 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../logger/logger.c"
+#include "../../../executor/accessor/appender/compound_appender.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Appends the source to the destination.
@@ -99,7 +100,7 @@ void append_part(void* p0, void* p1, void* p2, void* p3, void* p4,
         // Add source to destination.
         // CAUTION! Hand over the name as reference!
         // The function will automatically add a number as suffix, to make the name unique.
-        append_compound_element_by_name(*dd, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+//??        append_compound_element_by_name(*dd, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
     } else {
 

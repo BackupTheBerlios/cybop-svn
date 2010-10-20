@@ -26,14 +26,13 @@
 #ifndef ASSEMBLER_TESTER
 #define ASSEMBLER_TESTER
 
-#include "../variable/primitive_type_size.c"
+#include "../../logger/logger.c"
+#include "../../variable/primitive_type_size.c"
 
 /**
- * Tests the inline assembler code.
+ * Tests the assembler register handling.
  */
-void test_assembler() {
-
-    log_write_terminated_message((void*) stdout, L"Test inline assembler code:\n");
+void test_assembler_register() {
 
     // Gegeben ist ein zusammenh�gender Block von Worten im RAM.
     // Die Startadresse des Blockes ist im Register ESI angegeben,
@@ -62,6 +61,16 @@ void test_assembler() {
             JMP loop
     end:    NOP
 */
+}
+
+/**
+ * Tests the inline assembler code.
+ */
+void test_assembler() {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test assembler.");
+
+//    test_assembler_register();
 }
 
 /* ASSEMBLER_TESTER */

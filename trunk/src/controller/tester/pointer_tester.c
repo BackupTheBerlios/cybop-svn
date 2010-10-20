@@ -26,6 +26,11 @@
 #ifndef POINTER_TESTER
 #define POINTER_TESTER
 
+#include <stdio.h>
+#include <wchar.h>
+
+#include "../../logger/logger.c"
+
 /**
  * Tests the pointer cast.
  */
@@ -542,19 +547,19 @@ void test_pointer() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test pointer handling.");
 
-//??    test_pointer_cast();
-//??    test_pointer_return();
+//    test_pointer_cast();
+//    test_pointer_return();
 
-//??    test_character_array_with_termination();
-//??    test_character_array_single_element();
-//??    test_character_array_multiple_elements();
+//    test_character_array_with_termination();
+//    test_character_array_single_element();
+//    test_character_array_multiple_elements();
 
-//??    test_integer_array();
+//    test_integer_array();
 
-//??    test_pointer_array();
-//??    test_pointer_array_with_null_values();
+//    test_pointer_array();
+//    test_pointer_array_with_null_values();
 
-//??    test_pointer_addition();
+//    test_pointer_addition();
 }
 
 /* POINTER_TESTER */

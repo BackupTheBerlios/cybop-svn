@@ -42,6 +42,7 @@
 #include "../../../executor/communicator/sender/datagram_socket_sender.c"
 #include "../../../executor/communicator/sender/raw_socket_sender.c"
 #include "../../../executor/communicator/sender/stream_socket_sender.c"
+#include "../../../executor/converter/encoder.c"
 #include "../../../logger/logger.c"
 
 /**

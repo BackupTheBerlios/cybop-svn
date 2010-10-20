@@ -26,6 +26,8 @@
 #ifndef COMPARATOR_TESTER
 #define COMPARATOR_TESTER
 
+#include "../../logger/logger.c"
+
 /**
  * Tests the ascii character - wide character equality.
  */
@@ -55,7 +57,7 @@ void test_comparator() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test comparator.");
 
-    test_ascii_character_wide_character_equality();
+//    test_ascii_character_wide_character_equality();
 }
 
 /* COMPARATOR_TESTER */

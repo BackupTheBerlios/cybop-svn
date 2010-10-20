@@ -26,15 +26,32 @@
 #ifndef TESTER_SOURCE
 #define TESTER_SOURCE
 
+/*??
 #include <locale.h>
 #include <stdio.h>
 #include <wchar.h>
+*/
+/*??
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../constant/model/memory/double_memory_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
+*/
+#include "../controller/tester/accessor_tester.c"
+#include "../controller/tester/arithmetiser_tester.c"
+#include "../controller/tester/assembler_tester.c"
+#include "../controller/tester/communicator_tester.c"
+#include "../controller/tester/comparator_tester.c"
+#include "../controller/tester/constant_tester.c"
+#include "../controller/tester/converter_tester.c"
+#include "../controller/tester/logger_tester.c"
+#include "../controller/tester/memoriser_tester.c"
+#include "../controller/tester/pointer_tester.c"
+#include "../controller/tester/preprocessor_tester.c"
+#include "../controller/tester/variable_tester.c"
+/*??
 #include "../executor/accessor/getter/compound_getter.c"
 #include "../executor/comparator/array_equality_comparator.c"
 #include "../executor/converter/decoder/integer_decoder.c"
@@ -46,6 +63,8 @@
 #include "../executor/memoriser/allocator.c"
 #include "../executor/memoriser/deallocator.c"
 #include "../variable/primitive_type_size.c"
+*/
+
 /**
  * The main test procedure.
  *
@@ -63,14 +82,19 @@ void test() {
     // int x = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // fwprintf(stdout, L"The value of x is: %d\n", x);
 
+    // Globals.
     test_constant();
     test_variable();
     test_assembler();
     test_pointer();
     test_preprocessor();
 
+    // Logger.
     test_logger();
 
+    // Executor.
+    test_accessor();
+    test_arithmetiser();
     test_communicator();
     test_comparator();
     test_converter();

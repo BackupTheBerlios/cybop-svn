@@ -36,6 +36,7 @@
 #include "../../../constant/model/stream_model.c"
 #include "../../../executor/communicator/receiver.c"
 #include "../../../executor/converter/decoder.c"
+#include "../../../executor/converter/encoder.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"

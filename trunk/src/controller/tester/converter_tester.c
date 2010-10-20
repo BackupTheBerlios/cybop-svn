@@ -26,6 +26,10 @@
 #ifndef CONVERTER_TESTER
 #define CONVERTER_TESTER
 
+#include <stdio.h>
+
+#include "../../logger/logger.c"
+
 /**
  * Tests the integer-to-wide character conversion.
  */
@@ -228,14 +232,14 @@ void test_converter() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test converter.");
 
-//??    test_converter_integer_to_wide_character_conversion();
+//    test_converter_integer_to_wide_character_conversion();
 
-//??    test_converter_encode_integer();
+//    test_converter_encode_integer();
 
-//??    test_converter_decode_integer_vector();
-//??    test_converter_encode_integer_vector();
+//    test_converter_decode_integer_vector();
+//    test_converter_encode_integer_vector();
 
-//??    test_converter_decode_utf8();
+//    test_converter_decode_utf8();
 }
 
 /* CONVERTER_TESTER */

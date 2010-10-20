@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-10-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Add test functions
+
 2010-10-19  Christian Heller  <christian.heller@tuxtax.de>
         * Restructure test function directory
 

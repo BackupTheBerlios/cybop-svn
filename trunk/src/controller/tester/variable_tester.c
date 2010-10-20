@@ -26,6 +26,10 @@
 #ifndef VARIABLE_TESTER
 #define VARIABLE_TESTER
 
+#include <stdio.h>
+
+#include "../../logger/logger.c"
+
 /**
  * Tests the type sizes.
  */
@@ -52,7 +56,7 @@ void test_variable() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test variable.");
 
-    test_type_sizes();
+//    test_type_sizes();
 }
 
 /* VARIABLE_TESTER */

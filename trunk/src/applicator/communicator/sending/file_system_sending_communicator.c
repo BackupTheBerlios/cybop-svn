@@ -33,6 +33,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../executor/converter/decoder.c"
+#include "../../../executor/converter/encoder.c"
 #include "../../../executor/communicator/sender.c"
 #include "../../../logger/logger.c"
 

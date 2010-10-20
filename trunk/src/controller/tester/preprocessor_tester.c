@@ -26,6 +26,8 @@
 #ifndef PREPROCESSOR_TESTER
 #define PREPROCESSOR_TESTER
 
+#include "../../logger/logger.c"
+
 /**
  * Tests the preprocessor directives.
  */
@@ -53,7 +55,7 @@ void test_preprocessor() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test preprocessor.");
 
-    test_preprocessor_directives();
+//    test_preprocessor_directives();
 }
 
 /* PREPROCESSOR_TESTER */

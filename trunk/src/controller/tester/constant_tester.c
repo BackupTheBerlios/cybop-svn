@@ -26,6 +26,10 @@
 #ifndef CONSTANT_TESTER
 #define CONSTANT_TESTER
 
+#include <stdio.h>
+
+#include "../../logger/logger.c"
+
 /**
  * Tests the float constants.
  */
@@ -58,7 +62,7 @@ void test_constant() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test constant usage.");
 
-    test_constant_float();
+//    test_constant_float();
 }
 
 /* CONSTANT_TESTER */

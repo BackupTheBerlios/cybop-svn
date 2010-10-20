@@ -26,6 +26,10 @@
 #ifndef MEMORISER_TESTER
 #define MEMORISER_TESTER
 
+#include <wchar.h>
+
+#include "../../logger/logger.c"
+
 /**
  * Tests the array resizing.
  */
@@ -82,7 +86,7 @@ void test_memoriser() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test memoriser.");
 
-    test_array_resizing();
+//    test_array_resizing();
 }
 
 /* MEMORISER_TESTER */

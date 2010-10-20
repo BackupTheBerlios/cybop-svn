@@ -26,6 +26,46 @@
 #ifndef LOGGER_TESTER
 #define LOGGER_TESTER
 
+#include <stdio.h>
+
+#include "../../constant/model/log/level_log_model.c"
+#include "../../logger/logger.c"
+
+/**
+ * Tests the logger standard output.
+ */
+void test_logger_stdout() {
+
+    log_write_terminated_message((void*) stdout, L"Test logger standard output.\n");
+    log_write_terminated_message((void*) stdout, L"It works!\n");
+}
+
+/**
+ * Tests the logger message.
+ */
+void test_logger_message() {
+
+    // A log level other than 'OFF' needs to be set for testing!
+    // For the logging test result, see the corresponding log file
+    // that was given as command line argument!
+
+    /** The log message as constant. */
+    static wchar_t TEST_LOG_MESSAGE_ARRAY[] = {L'T', L'E', L'S', L'T', L' ', L'l', L'o', L'g', L' ', L'm', L'e', L's', L's', L'a', L'g', L'e', L'.'};
+    static wchar_t* TEST_LOG_MESSAGE = TEST_LOG_MESSAGE_ARRAY;
+    static int* TEST_LOG_MESSAGE_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
+
+    log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) TEST_LOG_MESSAGE, (void*) TEST_LOG_MESSAGE_COUNT);
+}
+
+/**
+ * Tests the logger terminated message.
+ */
+void test_logger_terminated_message() {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test terminated log message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"It works!");
+}
+
 /**
  * Tests the logger.
  *
@@ -34,20 +74,11 @@
  */
 void test_logger() {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test logger.");
+    // A log message is not given as the logging is tested only below.
 
-    log_write_terminated_message((void*) stdout, L"Test logger:\n");
-    log_write_terminated_message((void*) stdout, L"CAUTION! A log level other than 'OFF' needs to be set for testing!\n");
-    log_write_terminated_message((void*) stdout, L"For the logging test result, see the corresponding log file that was given as command line argument!\n");
-
-    /** The log message as constant. */
-    static wchar_t TEST_LOG_MESSAGE_ARRAY[] = {L'T', L'E', L'S', L'T', L' ', L'l', L'o', L'g', L' ', L'm', L'e', L's', L's', L'a', L'g', L'e', L'.'};
-    static wchar_t* TEST_LOG_MESSAGE = TEST_LOG_MESSAGE_ARRAY;
-    static int* TEST_LOG_MESSAGE_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
-
-    log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) TEST_LOG_MESSAGE, (void*) TEST_LOG_MESSAGE_COUNT);
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"TEST terminated log message.");
+//    test_logger_stdout();
+//    test_logger_message();
+//    test_logger_terminated_message();
 }
 
 /* LOGGER_TESTER */
