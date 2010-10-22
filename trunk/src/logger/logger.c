@@ -221,6 +221,9 @@ void log_message(void* p0, void* p1, void* p2) {
             // Only log message if log level matches.
             if (*l <= *LOG_LEVEL) {
 
+fwprintf(stdout, L"TEST logger level: %i\n", *l);
+fwprintf(stdout, L"TEST logger level: %i\n", *LOG_LEVEL);
+
                 // The log level name.
                 void* ln = *NULL_POINTER_MEMORY_MODEL;
                 int lnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -228,7 +231,13 @@ void log_message(void* p0, void* p1, void* p2) {
                 // Add name of the given log level to log entry.
                 log_get_level_name((void*) &ln, (void*) &lnc, p0);
 
+fwprintf(stdout, L"TEST logger level name: %ls\n", (wchar_t*) ln);
+fwprintf(stdout, L"TEST logger level name count: %i\n", lnc);
+
                 if (LOG_OUTPUT != *NULL_POINTER_MEMORY_MODEL) {
+
+fwprintf(stdout, L"TEST logger file: %i\n", LOG_OUTPUT);
+fwprintf(stdout, L"TEST logger file number: %i\n", fileno(LOG_OUTPUT));
 
                     //
                     // CAUTION! Do NOT allocate/ reallocate/ deallocate an array here, because:

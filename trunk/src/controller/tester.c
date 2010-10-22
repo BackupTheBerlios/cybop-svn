@@ -26,19 +26,6 @@
 #ifndef TESTER_SOURCE
 #define TESTER_SOURCE
 
-/*??
-#include <locale.h>
-#include <stdio.h>
-#include <wchar.h>
-*/
-/*??
-#include "../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../constant/model/character_code/unicode/unicode_character_code_model.c"
-#include "../constant/model/memory/double_memory_model.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
-*/
 #include "../controller/tester/accessor_tester.c"
 #include "../controller/tester/arithmetiser_tester.c"
 #include "../controller/tester/assembler_tester.c"
@@ -51,19 +38,15 @@
 #include "../controller/tester/pointer_tester.c"
 #include "../controller/tester/preprocessor_tester.c"
 #include "../controller/tester/variable_tester.c"
-/*??
-#include "../executor/accessor/getter/compound_getter.c"
-#include "../executor/comparator/array_equality_comparator.c"
-#include "../executor/converter/decoder/integer_decoder.c"
-#include "../executor/converter/encoder/integer_encoder.c"
-#include "../executor/converter/decoder.c"
-#include "../executor/converter/encoder.c"
-#include "../executor/memoriser/allocator/array_allocator.c"
-#include "../executor/memoriser/deallocator/array_deallocator.c"
-#include "../executor/memoriser/allocator.c"
-#include "../executor/memoriser/deallocator.c"
-#include "../variable/primitive_type_size.c"
-*/
+
+//
+// Examples for source code testing via log messages.
+//
+// fwprintf(stdout, L"TEST integer: %i\n", x);
+// fwprintf(stdout, L"TEST pointer: %i\n", x);
+// fwprintf(stdout, L"TEST w_char array string: %ls\n", (wchar_t*) x);
+// fwprintf(stdout, L"TEST string literal: %ls\n", "string");
+//
 
 /**
  * The main test procedure.

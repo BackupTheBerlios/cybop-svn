@@ -38,13 +38,12 @@
 #include "../controller/optionaliser.c"
 #include "../controller/orienter.c"
 #include "../controller/tester.c"
-//?? #include "../executor/converter/decoder/xml_decoder.c"
 #include "../variable/log_setting.c"
 
 //
 // This is the main file of the Cybernetics Oriented Interpreter (CYBOI).
 // CYBOI can interpret Cybernetics Oriented Language (CYBOL) files,
-// which adhere to the Extended Markup Language (XML) syntax.
+// which adhere to the Extensible Markup Language (XML) syntax.
 //
 
 /**
@@ -63,11 +62,13 @@
 int main(int p0, char** p1) {
 
     // One note about dynamic memory allocation:
-    // There is no point in freeing blocks at the end of a program, because all
-    // of the program's space is given back to the system when the process terminates.
+    // There is no point in freeing blocks at the end of an application programme,
+    // because all of the programme's space is given back to the operating system
+    // when the process terminates.
     // Of course, all dynamically allocated memory should also be freed properly.
-    // However, if some memory to be freed is forgotten, it will not harm
-    // the operating system, as it will be freed automatically on process shutdown.
+    // However, if some memory to be freed is forgotten accidentally, it will
+    // not harm the operating system, as the memory occupied by the application
+    // will be freed automatically on process shutdown.
     //
     // TODO: YET TO ANSWER: How is that with forgotten threads?
     // Are they killed automatically when a process is shut down?
@@ -152,8 +153,20 @@ int main(int p0, char** p1) {
         // Allocate cybol knowledge file path.
         allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
+fwprintf(stdout, L"TEST log level: %i\n", *LOG_LEVEL);
+fwprintf(stdout, L"TEST log file: %i\n", LOG_OUTPUT);
+//fwprintf(stdout, L"TEST log file number: %i\n", fileno(LOG_OUTPUT));
+fwprintf(stdout, L"TEST log message count: %i\n", *LOG_MESSAGE_COUNT);
+fwprintf(stdout, L"TEST log message: %ls\n", LOG_MESSAGE);
+
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
+
+fwprintf(stdout, L"TEST log level: %i\n", *LOG_LEVEL);
+fwprintf(stdout, L"TEST log file: %i\n", LOG_OUTPUT);
+fwprintf(stdout, L"TEST log file number: %i\n", fileno(LOG_OUTPUT));
+fwprintf(stdout, L"TEST log message count: %i\n", *LOG_MESSAGE_COUNT);
+fwprintf(stdout, L"TEST log message: %ls\n", LOG_MESSAGE);
 
         // Orient log output file stream.
         //
@@ -182,7 +195,8 @@ int main(int p0, char** p1) {
 
             if ((k != *NULL_POINTER_MEMORY_MODEL) && (kc >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
-log_write_terminated_message(stdout, L"\nTEST cyboi: 2\n");
+fwprintf(stdout, L"Test cyboi manage start: %10ls \n", "hello world");
+
                 // Manage system startup and shutdown using the given cybol knowledge file.
                 manage(k, (void*) &kc);
 

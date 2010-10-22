@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-10-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Figure out why logging does not produce any message in log file
+
 2010-10-20  Christian Heller  <christian.heller@tuxtax.de>
         * Add test functions
 
