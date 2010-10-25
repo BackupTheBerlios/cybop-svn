@@ -96,7 +96,7 @@ void globalise() {
     LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *LOG_LEVEL = *OFF_LEVEL_LOG_MODEL;
 
-    // Allocate and initialise log level.
+    // Allocate and initialise log message.
     LOG_MESSAGE_COUNT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *LOG_MESSAGE_COUNT = *NUMBER_10000_INTEGER_MEMORY_MODEL;
 

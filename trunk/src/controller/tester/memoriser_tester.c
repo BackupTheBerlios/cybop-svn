@@ -57,7 +57,7 @@ void test_array_resizing() {
     allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
     // Fill original array with text.
-    set_array_elements(o, (void*) &oc, (void*) t, (void*) tc, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(o, (void*) t, (void*) tc, (void*) &oc, (void*) CHARACTER_MEMORY_ABSTRACTION);
     oc = oc + *tc;
 
     // Print original array content.

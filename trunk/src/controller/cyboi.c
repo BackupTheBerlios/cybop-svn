@@ -153,20 +153,8 @@ int main(int p0, char** p1) {
         // Allocate cybol knowledge file path.
         allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
-fwprintf(stdout, L"TEST log level: %i\n", *LOG_LEVEL);
-fwprintf(stdout, L"TEST log file: %i\n", LOG_OUTPUT);
-//fwprintf(stdout, L"TEST log file number: %i\n", fileno(LOG_OUTPUT));
-fwprintf(stdout, L"TEST log message count: %i\n", *LOG_MESSAGE_COUNT);
-fwprintf(stdout, L"TEST log message: %ls\n", LOG_MESSAGE);
-
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
-
-fwprintf(stdout, L"TEST log level: %i\n", *LOG_LEVEL);
-fwprintf(stdout, L"TEST log file: %i\n", LOG_OUTPUT);
-fwprintf(stdout, L"TEST log file number: %i\n", fileno(LOG_OUTPUT));
-fwprintf(stdout, L"TEST log message count: %i\n", *LOG_MESSAGE_COUNT);
-fwprintf(stdout, L"TEST log message: %ls\n", LOG_MESSAGE);
 
         // Orient log output file stream.
         //
@@ -194,8 +182,6 @@ fwprintf(stdout, L"TEST log message: %ls\n", LOG_MESSAGE);
         } else if (m == *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL) {
 
             if ((k != *NULL_POINTER_MEMORY_MODEL) && (kc >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
-
-fwprintf(stdout, L"Test cyboi manage start: %10ls \n", "hello world");
 
                 // Manage system startup and shutdown using the given cybol knowledge file.
                 manage(k, (void*) &kc);

@@ -47,21 +47,25 @@ void test_accessor_size_determiner() {
     int is = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The pointer abstraction (type) size.
     int ps = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The unsigned long abstraction (type) size.
+    int uls = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The wide character abstraction (type) size.
-    int ws = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int wcs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Determine size.
     determine_size((void*) &cs, (void*) CHARACTER_MEMORY_ABSTRACTION);
     determine_size((void*) &ds, (void*) DOUBLE_MEMORY_ABSTRACTION);
     determine_size((void*) &is, (void*) INTEGER_MEMORY_ABSTRACTION);
     determine_size((void*) &ps, (void*) POINTER_MEMORY_ABSTRACTION);
-    determine_size((void*) &ws, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    determine_size((void*) &uls, (void*) UNSIGNED_LONG_PRIMITIVE_SIZE);
+    determine_size((void*) &wcs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"Type size character: %i\n", cs);
     fwprintf(stdout, L"Type size double: %i\n", ds);
     fwprintf(stdout, L"Type size integer: %i\n", is);
     fwprintf(stdout, L"Type size pointer: %i\n", ps);
-    fwprintf(stdout, L"Type size wide character: %i\n", ws);
+    fwprintf(stdout, L"Type size unsigned long: %i\n", uls);
+    fwprintf(stdout, L"Type size wide character: %i\n", wcs);
 }
 
 /**
@@ -83,6 +87,37 @@ void test_accessor_assigner() {
  * Tests the accessor array setter.
  */
 void test_accessor_array_setter() {
+
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    int ds = *NUMBER_100_INTEGER_MEMORY_MODEL;
+    wchar_t* s1 = L"Huhu scheene Welt, lass' mal sehen!";
+    int s1c = *NUMBER_35_INTEGER_MEMORY_MODEL;
+    int i1 = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    wchar_t* s2 = L"Erde";
+    int s2c = *NUMBER_4_INTEGER_MEMORY_MODEL;
+    int i2 = *NUMBER_13_INTEGER_MEMORY_MODEL;
+
+    // Allocate destination array.
+    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+
+    fwprintf(stdout, L"d string: %ls\n", (wchar_t*) d);
+    fwprintf(stdout, L"s1: %ls\n", s1);
+    fwprintf(stdout, L"s1c: %i\n", s1c);
+    fwprintf(stdout, L"i1: %i\n", i1);
+
+    set_array_elements(d, (void*) s1, (void*) &s1c, (void*) &i1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+
+    fwprintf(stdout, L"d string 2: %ls\n", (wchar_t*) d);
+    fwprintf(stdout, L"s2: %ls\n", s2);
+    fwprintf(stdout, L"s2c: %i\n", s2c);
+    fwprintf(stdout, L"i2: %i\n", i2);
+
+    set_array_elements(d, (void*) s2, (void*) &s2c, (void*) &i2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+
+    fwprintf(stdout, L"d string 3: %ls\n", (wchar_t*) d);
+
+    // Deallocate destination array.
+    deallocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -92,8 +127,8 @@ void test_accessor() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test accessor.");
 
-    test_accessor_size_determiner();
-    test_accessor_assigner();
+//    test_accessor_size_determiner();
+//    test_accessor_assigner();
     test_accessor_array_setter();
 }
 

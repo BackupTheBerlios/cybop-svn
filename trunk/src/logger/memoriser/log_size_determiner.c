@@ -46,6 +46,10 @@ void log_determine_size(void* p0, void* p1) {
 
         int* a = (int*) p1;
 
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger cannot log itself.
+        // "Could not determine size. The abstraction is null."
+
         if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
 
             log_assign_integer(p0, (void*) CHARACTER_PRIMITIVE_SIZE);

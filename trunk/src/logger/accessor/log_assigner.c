@@ -32,6 +32,7 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/accessor/assigner/log_integer_assigner.c"
+#include "../../logger/accessor/assigner/log_wide_character_assigner.c"
 #include "../../logger/arithmetiser/log_integer_multiplier.c"
 #include "../../logger/memoriser/log_size_determiner.c"
 #include "../../variable/primitive_type_size.c"
@@ -65,6 +66,10 @@ void log_assign(void* p0, void* p1, void* p2, void* p3) {
             if (*a == *INTEGER_MEMORY_ABSTRACTION) {
 
                 log_assign_integer(de, se);
+
+            } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
+
+                log_assign_wide_character(de, se);
 
             } else {
 

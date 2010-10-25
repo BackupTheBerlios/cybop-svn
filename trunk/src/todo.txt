@@ -11,8 +11,6 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Figure out why logging does not produce any message in log file
-
 2010-xx-xx  Christian Heller  <christian.heller@tuxtax.de>
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;

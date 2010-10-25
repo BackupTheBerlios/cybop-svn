@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-10-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Make logging work again, in either test mode or knowledge mode
+
 2010-10-22  Christian Heller  <christian.heller@tuxtax.de>
         * Figure out why logging does not produce any message in log file
 

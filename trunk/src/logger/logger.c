@@ -221,9 +221,6 @@ void log_message(void* p0, void* p1, void* p2) {
             // Only log message if log level matches.
             if (*l <= *LOG_LEVEL) {
 
-fwprintf(stdout, L"TEST logger level: %i\n", *l);
-fwprintf(stdout, L"TEST logger level: %i\n", *LOG_LEVEL);
-
                 // The log level name.
                 void* ln = *NULL_POINTER_MEMORY_MODEL;
                 int lnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -231,13 +228,7 @@ fwprintf(stdout, L"TEST logger level: %i\n", *LOG_LEVEL);
                 // Add name of the given log level to log entry.
                 log_get_level_name((void*) &ln, (void*) &lnc, p0);
 
-fwprintf(stdout, L"TEST logger level name: %ls\n", (wchar_t*) ln);
-fwprintf(stdout, L"TEST logger level name count: %i\n", lnc);
-
                 if (LOG_OUTPUT != *NULL_POINTER_MEMORY_MODEL) {
-
-fwprintf(stdout, L"TEST logger file: %i\n", LOG_OUTPUT);
-fwprintf(stdout, L"TEST logger file number: %i\n", fileno(LOG_OUTPUT));
 
                     //
                     // CAUTION! Do NOT allocate/ reallocate/ deallocate an array here, because:
@@ -266,7 +257,9 @@ fwprintf(stdout, L"TEST logger file number: %i\n", fileno(LOG_OUTPUT));
 
                     if (mmc <= *LOG_MESSAGE_COUNT) {
 
-                        // RESET maximum message count to count of log message that was handed over as parameter.
+                        // RESET maximum message count to count of log message
+                        // that was handed over as parameter, because that message
+                        // is added as parameter below, that needs an own count.
                         mmc = *mc;
 
                     } else {
@@ -277,6 +270,13 @@ fwprintf(stdout, L"TEST logger file number: %i\n", fileno(LOG_OUTPUT));
                         // to have place to copy them to the log message array further below!
                         // But do NOT subtract "*mc", as it was the reason for a too big message
                         // and would result in a negative value!
+                        //
+                        // CAUTION! DO NOT SUBTRACT the message count itself, as that would lead
+                        // to a negative maximum message count.
+                        //
+                        // CAUTION! The LOG_MESSAGE_COUNT constant has to have a size
+                        // of at least (lnc + 4) which is normally not more than 20,
+                        // depending on the log level name length (count).
                         mmc = *LOG_MESSAGE_COUNT - (lnc + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT);
                     }
 

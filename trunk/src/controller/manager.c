@@ -62,8 +62,12 @@
  */
 void manage(void* p0, void* p1) {
 
+fwprintf(stdout, L"TEST 0: %i\n", p0);
+
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Manage system.");
+
+fwprintf(stdout, L"TEST 1: %i\n", p0);
 
     //
     // Variable declaration.
@@ -158,6 +162,8 @@ void manage(void* p0, void* p1) {
     // Variable allocation.
     //
 
+fwprintf(stdout, L"TEST 2: %i\n", p0);
+
     // The internal memory count and size do not have to be allocated,
     // since they have fixed values that cannot be changed at runtime.
     // Allocate knowledge memory count, size.
@@ -166,6 +172,8 @@ void manage(void* p0, void* p1) {
     // Allocate signal memory count, size.
     allocate((void*) &sc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     allocate((void*) &ss, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+
+fwprintf(stdout, L"TEST 3: %i\n", p0);
 
     // Allocate signal memory interrupt request flag.
     signal_memory_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
@@ -204,6 +212,8 @@ void manage(void* p0, void* p1) {
     // Variable initialisation.
     //
 
+fwprintf(stdout, L"TEST 4: %i\n", p0);
+
     // The internal memory count and size do not have to be initialised here,
     // since they have already been initialised above, right at their declaration.
     // Initialise knowledge memory count, size.
@@ -229,6 +239,8 @@ void manage(void* p0, void* p1) {
     // specifies attributes that are to be used to initialise the mutex.
     // If the parameter is null, the mutex is initialised with default attributes.
     //
+
+fwprintf(stdout, L"TEST 5: %i\n", p0);
 
     // Initialise signal memory mutex.
     pthread_mutex_init(signal_memory_mutex, *NULL_POINTER_MEMORY_MODEL);
@@ -257,6 +269,8 @@ void manage(void* p0, void* p1) {
     // have been initialised above, since the sizes are used for allocation.
     //
 
+fwprintf(stdout, L"TEST 6: %i\n", p0);
+
     // Allocate internal memory.
     // CAUTION! The internal memory size was declared as int (not int*) above,
     // so that a reference needs to be handed over here!
@@ -265,6 +279,8 @@ void manage(void* p0, void* p1) {
     allocate((void*) &k, (void*) ks, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Allocate signal memory.
     allocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+
+fwprintf(stdout, L"TEST 7: %i\n", p0);
 
     //
     // System startup.
@@ -287,7 +303,7 @@ void manage(void* p0, void* p1) {
     // For example, the tcp socket is running in an own thread.
     // Therefore, the knowledge memory and signal memory NEED TO BE ADDED
     // to the internal memory, in order to be forwardable to threads.
-log_write_terminated_message(stdout, L"\nTEST: 0\n");
+
     startup_internal_memory(i,
         (void*) &k, (void*) &kc, (void*) &ks,
         (void*) &s, (void*) &sc, (void*) &ss,
@@ -297,7 +313,8 @@ log_write_terminated_message(stdout, L"\nTEST: 0\n");
         (void*) &www_service_irq, (void*) &www_service_mutex, (void*) &www_service_sleep_time,
         (void*) &cyboi_service_irq, (void*) &cyboi_service_mutex, (void*) &cyboi_service_sleep_time);
 
-log_write_terminated_message(stdout, L"\nTEST: 1\n");
+fwprintf(stdout, L"TEST 8: %i\n", p0);
+
     // Start up system signal handler.
     startup_system_signal_handler();
 
@@ -305,10 +322,12 @@ log_write_terminated_message(stdout, L"\nTEST: 1\n");
     // System initialisation.
     //
 
-log_write_terminated_message(stdout, L"\nTEST: 2\n");
+fwprintf(stdout, L"TEST 9: %i\n", p0);
+
     // Initialise system with an initial signal.
     initialise(s, (void*) sc, (void*) ss, p0, p1, i);
-log_write_terminated_message(stdout, L"\nTEST: 3\n");
+
+fwprintf(stdout, L"TEST 10: %i\n", p0);
 
     //
     // System shutdown.
