@@ -49,7 +49,24 @@ void deallocate_array(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate array.");
 
-        free(*a);
+fwprintf(stdout, L"TEST deallocate array p0: %i\n", p0);
+fwprintf(stdout, L"TEST deallocate array a: %i\n", a);
+fwprintf(stdout, L"TEST deallocate array *a: %i\n", *a);
+fwprintf(stdout, L"TEST deallocate array *NULL_POINTER_MEMORY_MODEL: %i\n", *NULL_POINTER_MEMORY_MODEL);
+
+        // CAUTION!
+        if (*a != *NULL_POINTER_MEMORY_MODEL) {
+
+fwprintf(stdout, L"TEST deallocate array *a if: %i\n", *a);
+
+            free(*a);
+
+fwprintf(stdout, L"TEST deallocate array *a post free: %i\n", *a);
+
+        } else {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not deallocate array. The dereferenced array is null.");
+        }
 
     } else {
 

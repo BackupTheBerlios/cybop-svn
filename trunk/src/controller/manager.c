@@ -32,11 +32,12 @@
 #include "../controller/checker.c"
 #include "../controller/initialiser.c"
 #include "../constant/channel/cybol_channel.c"
-#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
+#include "../executor/memoriser/allocator/model_allocator.c"
+#include "../executor/memoriser/deallocator/model_deallocator.c"
 #include "../logger/logger.c"
-#include "../executor/memoriser/allocator.c"
 
 /**
  * Manages the system.
@@ -159,11 +160,11 @@ void manage(void* p0, void* p1) {
     // Allocate internal memory.
     // CAUTION! The internal memory count and size are set to a
     // pre-defined value given by the constant "INTERNAL_MEMORY_MEMORY_MODEL_COUNT".
-    allocate_model((void*) &i, (void*) ic, (void*) is, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &i, (void*) &ic, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Allocate knowledge memory.
-    allocate_model((void*) &k, (void*) kc, (void*) ks, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &k, (void*) &kc, (void*) &ks, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Allocate signal memory.
-    allocate_model((void*) &s, (void*) sc, (void*) ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Allocate signal memory interrupt request flag.
     signal_memory_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
@@ -363,13 +364,13 @@ fwprintf(stdout, L"TEST manager post: %i\n", p0);
     free((void*) cyboi_service_sleep_time);
 
     // Deallocate signal memory.
-    deallocate_model((void*) &s, (void*) sc, (void*) ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Deallocate knowledge memory.
-    deallocate_model((void*) &k, (void*) kc, (void*) ks, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &k, (void*) &kc, (void*) &ks, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Deallocate internal memory.
     // CAUTION! The internal memory count and size are set to a
     // pre-defined value given by the constant "INTERNAL_MEMORY_MEMORY_MODEL_COUNT".
-    deallocate_model((void*) &i, (void*) ic, (void*) is, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &i, (void*) &ic, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* MANAGER_SOURCE */

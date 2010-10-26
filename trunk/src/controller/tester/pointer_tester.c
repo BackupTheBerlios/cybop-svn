@@ -32,6 +32,36 @@
 #include "../../logger/logger.c"
 
 /**
+ * Tests the pointer null value as subroutine.
+ */
+void test_pointer_null_subroutine(void* p0, void* p1) {
+
+    log_write_terminated_message((void*) stdout, L"Test pointer null as subroutine:\n");
+
+    void** a = (void**) p0;
+    void* b = p1;
+
+    fwprintf(stdout, L"Pointer subroutine a: %i\n", a);
+    fwprintf(stdout, L"Pointer subroutine *a: %i\n", *a);
+    fwprintf(stdout, L"Pointer subroutine b: %i\n", b);
+    fwprintf(stdout, L"Pointer subroutine NULL_POINTER_MEMORY_MODEL: %i\n", NULL_POINTER_MEMORY_MODEL);
+    fwprintf(stdout, L"Pointer subroutine *NULL_POINTER_MEMORY_MODEL: %i\n", *NULL_POINTER_MEMORY_MODEL);
+}
+
+/**
+ * Tests the pointer null value.
+ */
+void test_pointer_null() {
+
+    log_write_terminated_message((void*) stdout, L"Test pointer null:\n");
+
+    void** a = NULL_POINTER_MEMORY_MODEL;
+    void* b = *NULL_POINTER_MEMORY_MODEL;
+
+    test_pointer_null_subroutine((void*) a, b);
+}
+
+/**
  * Tests the pointer cast.
  */
 void test_pointer_cast() {
@@ -547,6 +577,7 @@ void test_pointer() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test pointer handling.");
 
+    test_pointer_null();
 //    test_pointer_cast();
 //    test_pointer_return();
 

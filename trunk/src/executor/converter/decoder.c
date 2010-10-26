@@ -63,6 +63,8 @@
 #include "../../executor/converter/decoder/xhtml_decoder.c"
 #include "../../executor/converter/decoder/xml_decoder.c"
 #include "../../executor/converter/decoder/x_window_system_decoder.c"
+#include "../../executor/memoriser/allocator/model_allocator.c"
+#include "../../executor/memoriser/deallocator/model_deallocator.c"
 
 //?? TEMPORARY FOR TESTING! DELETE LATER!
 #include "../../executor/communicator/sender/file_sender.c"
@@ -129,21 +131,28 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
             // The temporary model.
             void* m = *NULL_POINTER_MEMORY_MODEL;
-            int mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            int ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            void* mc = *NULL_POINTER_MEMORY_MODEL;
+            void* ms = *NULL_POINTER_MEMORY_MODEL;
             // The temporary details.
             void* d = *NULL_POINTER_MEMORY_MODEL;
-            int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            void* dc = *NULL_POINTER_MEMORY_MODEL;
+            void* ds = *NULL_POINTER_MEMORY_MODEL;
+
+fwprintf(stdout, L"TEST decoder 0: %i\n", r);
 
             // Allocate temporary model.
-            allocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            allocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Allocate temporary details.
-            allocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            allocate_model((void*) &d, (void*) &dc, (void*) &ds, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+
+fwprintf(stdout, L"TEST decoder 1: %i\n", r);
 
             // Decode source message (cybol file) into temporary compound memory model.
-            decode_xml((void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds, p6, p7);
+            decode_xml((void*) &m, mc, ms, (void*) &d, dc, ds, p6, p7);
 
+fwprintf(stdout, L"TEST decoder 2: %i\n", r);
+
+/*
 //?? TEST BEGIN
             // The model diagram.
             void* md = *NULL_POINTER_MEMORY_MODEL;
@@ -174,16 +183,22 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Deallocate multibyte character stream.
             deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
+*/
 
             // Decode temporary compound memory model into cyboi knowledge compound memory model.
             // Basically, structural data (tags) and meta data (attributes) are swapped in meaning.
-            decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
+            decode_cybol(p0, p1, p2, p3, p4, p5, m, mc, d, dc);
+
+fwprintf(stdout, L"TEST decoder 3: %i\n", r);
 
             // Deallocate temporary model.
-            deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            deallocate_model((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Deallocate temporary details.
-            deallocate((void*) &d, (void*) &ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            deallocate_model((void*) &d, (void*) &dc, (void*) &ds, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
+fwprintf(stdout, L"TEST decoder 4: %i\n", r);
+
+/*
 //?? TEST BEGIN
             // Reset model diagram.
             md = *NULL_POINTER_MEMORY_MODEL;
@@ -214,6 +229,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Deallocate multibyte character stream.
             deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
+*/
         }
     }
 

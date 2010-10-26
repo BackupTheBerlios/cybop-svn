@@ -38,38 +38,25 @@ void deallocate(void* p0, void* p1, void* p2, void* p3);
 /**
  * Deallocates the model.
  *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count (Hand over as reference!)
- * @param p2 the destination model size (Hand over as reference!)
- * @param p3 the source size
- * @param p4 the source abstraction
- * @param p5 the source abstraction count
+ * @param p0 the model (Hand over as reference!)
+ * @param p1 the model count (Hand over as reference!)
+ * @param p2 the model size (Hand over as reference!)
+ * @param p3 the size
+ * @param p4 the abstraction
+ * @param p5 the abstraction count
  */
 void deallocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate model.");
 
-        int** ds = (int**) p2;
+fwprintf(stdout, L"TEST model deallocator 0: %i\n", p0);
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+    deallocate(p0, p3, p4, p5);
 
-            int** dc = (int**) p1;
+fwprintf(stdout, L"TEST model deallocator 1: %i\n", p0);
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate model.");
-
-            deallocate(p0, p3, p4, p5);
-            deallocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-            deallocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate model. The destination model count is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate model. The destination model size is null.");
-    }
+    deallocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* MODEL_DEALLOCATOR_SOURCE */

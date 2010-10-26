@@ -36,8 +36,8 @@
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/communicator/receiver.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
-#include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/memoriser/deallocator.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -60,34 +60,48 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
 
     // The encoded character array.
     void* e = *NULL_POINTER_MEMORY_MODEL;
-    int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int es = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    void* ec = *NULL_POINTER_MEMORY_MODEL;
+    void* es = *NULL_POINTER_MEMORY_MODEL;
+
+fwprintf(stdout, L"TEST receive 0: %i\n", e);
 
     // Allocate encoded character array.
-    allocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+
+fwprintf(stdout, L"TEST receive 1: %i\n", e);
 
     // Write file into encoded character array.
-    receive_data((void*) &e, (void*) &ec, (void*) &es, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+    receive_data((void*) &e, ec, es, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+
+fwprintf(stdout, L"TEST receive 2: %i\n", e);
 
     // The serialised wide character array.
     void* s = *NULL_POINTER_MEMORY_MODEL;
-    int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    void* sc = *NULL_POINTER_MEMORY_MODEL;
+    void* ss = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate serialised wide character array.
-    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+
+fwprintf(stdout, L"TEST receive 3: %i\n", s);
 
     // Decode encoded character array into serialised wide character array.
-    decode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, e, (void*) &ec);
+    decode_utf_8_unicode_character_vector((void*) &s, sc, ss, e, (void*) ec);
+
+fwprintf(stdout, L"TEST receive 4: %i\n", s);
 
     // Deallocate encoded character array.
-    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+
+fwprintf(stdout, L"TEST receive 5: %i\n", s);
 
     // Deserialise serialised wide character array into destination knowledge model.
-    decode(p0, p1, p2, p3, p4, p5, s, (void*) &sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+    decode(p0, p1, p2, p3, p4, p5, s, sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+
+fwprintf(stdout, L"TEST receive 6: %i\n", s);
 
     // Deallocate serialised wide character array.
-    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

@@ -27,7 +27,6 @@
 #define INITIALISER_SOURCE
 
 #include "../applicator/communicator/receiving_communicator.c"
-#include "../controller/checker.c"
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/channel/cybol_channel.c"
@@ -35,9 +34,11 @@
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/model/signal_priority_model.c"
-#include "../logger/logger.c"
+#include "../controller/checker.c"
 #include "../executor/accessor/getter/signal_memory_getter.c"
-#include "../executor/memoriser/allocator.c"
+#include "../executor/memoriser/allocator/model_allocator.c"
+#include "../executor/memoriser/deallocator/model_deallocator.c"
+#include "../logger/logger.c"
 
 /**
  * Initialises the system with an initial signal.
@@ -83,12 +84,10 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
         (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
-fwprintf(stdout, L"TEST initialiser 0: %i\n", p0);
-
     // Copy startup model abstraction.
     replace_array_elements((void*) &a, (void*) ac, (void*) as, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
-fwprintf(stdout, L"TEST initialiser 1: %i\n", p0);
+fwprintf(stdout, L"TEST initialiser 1 a: %i\n", *((int*) a));
 
     // Receive and decode startup model model and -details.
     communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,

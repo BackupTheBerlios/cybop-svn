@@ -28,13 +28,12 @@
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Deallocates the compound.
@@ -64,6 +63,15 @@ void deallocate_compound(void* p0, void* p1) {
         void** dc = NULL_POINTER_MEMORY_MODEL;
         void** ds = NULL_POINTER_MEMORY_MODEL;
 
+fwprintf(stdout, L"TEST compound deallocator NULL_POINTER: %i\n", NULL_POINTER_MEMORY_MODEL);
+fwprintf(stdout, L"TEST compound deallocator *NULL_POINTER: %i\n", *NULL_POINTER_MEMORY_MODEL);
+fwprintf(stdout, L"TEST compound deallocator n: %i\n", n);
+fwprintf(stdout, L"TEST compound deallocator *n: %i\n", *n);
+fwprintf(stdout, L"TEST compound deallocator p0: %i\n", p0);
+fwprintf(stdout, L"TEST compound deallocator c: %i\n", c);
+fwprintf(stdout, L"TEST compound deallocator *c: %i\n", *c);
+
+/*
         // Get names, abstractions, models, details.
         // The p0 parameter (c) needs to be dereferenced since it is handed
         // over as reference, but this procedure expects a normal array.
@@ -79,6 +87,9 @@ void deallocate_compound(void* p0, void* p1) {
         get_array_elements((void*) &d, *c, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
         get_array_elements((void*) &dc, *c, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
         get_array_elements((void*) &ds, *c, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+*/
+
+fwprintf(stdout, L"TEST compound deallocator 1: %i\n", *c);
 
         // CAUTION! Do NOT try to REMOVE the names, abstractions, models, details!
         // Each of them has a fixed position within the compound and
@@ -103,6 +114,8 @@ void deallocate_compound(void* p0, void* p1) {
         deallocate_array((void*) d, p1, (void*) POINTER_MEMORY_ABSTRACTION);
         deallocate_array((void*) dc, p1, (void*) POINTER_MEMORY_ABSTRACTION);
         deallocate_array((void*) ds, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+
+fwprintf(stdout, L"TEST compound deallocator 2: %i\n", *c);
 
         // Deallocate compound.
         deallocate_array(p0, (void*) COMPOUND_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION);
