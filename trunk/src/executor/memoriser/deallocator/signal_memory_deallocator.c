@@ -91,14 +91,14 @@ void deallocate_signal_memory(void* p0, void* p1) {
         //
         // CAUTION! The p0 parameter (s) needs to be dereferenced since it is
         // handed over as reference, but this procedure expects a normal array.
-        get_array_elements(*s, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &a, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &ac, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &m, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &mc, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &dc, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) &p, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*s, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) &id, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &a, *s, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &ac, *s, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &m, *s, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &mc, *s, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &d, *s, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &dc, *s, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &p, *s, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &id, *s, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
 
         //
         // CAUTION! Do NOT try to REMOVE the abstractions, models, details, priorities, identifications!

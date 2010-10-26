@@ -84,18 +84,18 @@ void allocate_compound(void* p0, void* p1) {
         // Set names, abstractions, models, details.
         // The p0 parameter needs to be dereferenced since it is handed over
         // as reference, but this procedure expects a normal array.
-        set_array_elements(*c, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) &n, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) &nc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) &ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) &as, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ms, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-        set_array_elements(*c, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ds, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &n, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &nc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &as, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &ms, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        set_array_elements(*c, (void*) &ds, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
 
     } else {
 

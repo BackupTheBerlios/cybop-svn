@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-10-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug "controller/manager.c"
+        * Optimise allocation and deallocation by using "allocate_model"
+
 2010-10-25  Christian Heller  <christian.heller@tuxtax.de>
         * Make logging work again, in either test mode or knowledge mode
 

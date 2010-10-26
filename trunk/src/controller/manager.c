@@ -62,12 +62,8 @@
  */
 void manage(void* p0, void* p1) {
 
-fwprintf(stdout, L"TEST 0: %i\n", p0);
-
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Manage system.");
-
-fwprintf(stdout, L"TEST 1: %i\n", p0);
 
     //
     // Variable declaration.
@@ -75,13 +71,16 @@ fwprintf(stdout, L"TEST 1: %i\n", p0);
 
     // The internal memory.
     void* i = *NULL_POINTER_MEMORY_MODEL;
-    int ic = *INTERNAL_MEMORY_MEMORY_MODEL_COUNT;
-    int is = *INTERNAL_MEMORY_MEMORY_MODEL_COUNT;
-
+    void* ic = *NULL_POINTER_MEMORY_MODEL;
+    void* is = *NULL_POINTER_MEMORY_MODEL;
     // The knowledge memory.
     void* k = *NULL_POINTER_MEMORY_MODEL;
-    int* kc = (int*) *NULL_POINTER_MEMORY_MODEL;
-    int* ks = (int*) *NULL_POINTER_MEMORY_MODEL;
+    void* kc = *NULL_POINTER_MEMORY_MODEL;
+    void* ks = *NULL_POINTER_MEMORY_MODEL;
+    // The signal memory.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    void* sc = *NULL_POINTER_MEMORY_MODEL;
+    void* ss = *NULL_POINTER_MEMORY_MODEL;
 
     // A meta knowledge memory?
     // Theoretically, a meta knowledge memory could be created, too, and be
@@ -95,11 +94,6 @@ fwprintf(stdout, L"TEST 1: %i\n", p0);
     // .resmedicinae.gui.menubar#background     --> background colour as meta knowledge about menubar
     // .resmedicinae#name                       --> name as meta knowledge about resmedicinae application
     // #something                               --> meta knowledge about knowledge root = nonsense
-
-    // The signal memory.
-    void* s = *NULL_POINTER_MEMORY_MODEL;
-    int* sc = (int*) *NULL_POINTER_MEMORY_MODEL;
-    int* ss = (int*) *NULL_POINTER_MEMORY_MODEL;
 
     //
     // The signal memory interrupt request flag.
@@ -162,18 +156,14 @@ fwprintf(stdout, L"TEST 1: %i\n", p0);
     // Variable allocation.
     //
 
-fwprintf(stdout, L"TEST 2: %i\n", p0);
-
-    // The internal memory count and size do not have to be allocated,
-    // since they have fixed values that cannot be changed at runtime.
-    // Allocate knowledge memory count, size.
-    allocate((void*) &kc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &ks, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    // Allocate signal memory count, size.
-    allocate((void*) &sc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &ss, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-
-fwprintf(stdout, L"TEST 3: %i\n", p0);
+    // Allocate internal memory.
+    // CAUTION! The internal memory count and size are set to a
+    // pre-defined value given by the constant "INTERNAL_MEMORY_MEMORY_MODEL_COUNT".
+    allocate_model((void*) &i, (void*) ic, (void*) is, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    // Allocate knowledge memory.
+    allocate_model((void*) &k, (void*) kc, (void*) ks, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    // Allocate signal memory.
+    allocate_model((void*) &s, (void*) sc, (void*) ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
     // Allocate signal memory interrupt request flag.
     signal_memory_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
@@ -212,17 +202,6 @@ fwprintf(stdout, L"TEST 3: %i\n", p0);
     // Variable initialisation.
     //
 
-fwprintf(stdout, L"TEST 4: %i\n", p0);
-
-    // The internal memory count and size do not have to be initialised here,
-    // since they have already been initialised above, right at their declaration.
-    // Initialise knowledge memory count, size.
-    *kc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *ks = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    // Initialise signal memory count, size.
-    *sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    *ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
     // Initialise signal memory interrupt request flag.
     *signal_memory_irq = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Initialise gnu/linux console interrupt request flag.
@@ -239,8 +218,6 @@ fwprintf(stdout, L"TEST 4: %i\n", p0);
     // specifies attributes that are to be used to initialise the mutex.
     // If the parameter is null, the mutex is initialised with default attributes.
     //
-
-fwprintf(stdout, L"TEST 5: %i\n", p0);
 
     // Initialise signal memory mutex.
     pthread_mutex_init(signal_memory_mutex, *NULL_POINTER_MEMORY_MODEL);
@@ -263,24 +240,6 @@ fwprintf(stdout, L"TEST 5: %i\n", p0);
     *www_service_sleep_time = *NUMBER_0_1_DOUBLE_MEMORY_MODEL;
     // Initialise cyboi service sleep time.
     *cyboi_service_sleep_time = *NUMBER_0_1_DOUBLE_MEMORY_MODEL;
-
-    //
-    // CAUTION! As an exception, the following allocations have to be done AFTER the sizes
-    // have been initialised above, since the sizes are used for allocation.
-    //
-
-fwprintf(stdout, L"TEST 6: %i\n", p0);
-
-    // Allocate internal memory.
-    // CAUTION! The internal memory size was declared as int (not int*) above,
-    // so that a reference needs to be handed over here!
-    allocate((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    // Allocate knowledge memory.
-    allocate((void*) &k, (void*) ks, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    // Allocate signal memory.
-    allocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-
-fwprintf(stdout, L"TEST 7: %i\n", p0);
 
     //
     // System startup.
@@ -313,8 +272,6 @@ fwprintf(stdout, L"TEST 7: %i\n", p0);
         (void*) &www_service_irq, (void*) &www_service_mutex, (void*) &www_service_sleep_time,
         (void*) &cyboi_service_irq, (void*) &cyboi_service_mutex, (void*) &cyboi_service_sleep_time);
 
-fwprintf(stdout, L"TEST 8: %i\n", p0);
-
     // Start up system signal handler.
     startup_system_signal_handler();
 
@@ -322,12 +279,12 @@ fwprintf(stdout, L"TEST 8: %i\n", p0);
     // System initialisation.
     //
 
-fwprintf(stdout, L"TEST 9: %i\n", p0);
+fwprintf(stdout, L"TEST manager pre: %i\n", p0);
 
     // Initialise system with an initial signal.
     initialise(s, (void*) sc, (void*) ss, p0, p1, i);
 
-fwprintf(stdout, L"TEST 10: %i\n", p0);
+fwprintf(stdout, L"TEST manager post: %i\n", p0);
 
     //
     // System shutdown.
@@ -406,15 +363,13 @@ fwprintf(stdout, L"TEST 10: %i\n", p0);
     free((void*) cyboi_service_sleep_time);
 
     // Deallocate signal memory.
-    deallocate((void*) &s, (void*) ss, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &sc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &ss, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &s, (void*) sc, (void*) ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Deallocate knowledge memory.
-    deallocate((void*) &k, (void*) ks, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &kc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &ks, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &k, (void*) kc, (void*) ks, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
     // Deallocate internal memory.
-    deallocate((void*) &i, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    // CAUTION! The internal memory count and size are set to a
+    // pre-defined value given by the constant "INTERNAL_MEMORY_MEMORY_MODEL_COUNT".
+    deallocate_model((void*) &i, (void*) ic, (void*) is, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* MANAGER_SOURCE */

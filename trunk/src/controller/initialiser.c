@@ -83,8 +83,12 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
         (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
+fwprintf(stdout, L"TEST initialiser 0: %i\n", p0);
+
     // Copy startup model abstraction.
     replace_array_elements((void*) &a, (void*) ac, (void*) as, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+
+fwprintf(stdout, L"TEST initialiser 1: %i\n", p0);
 
     // Receive and decode startup model model and -details.
     communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
@@ -94,17 +98,25 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
         (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
+fwprintf(stdout, L"TEST initialiser 2: %i\n", p0);
+
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add initial signal to signal memory.");
 
     // The signal identification.
     void** id = NULL_POINTER_MEMORY_MODEL;
 
+fwprintf(stdout, L"TEST initialiser 3: %i\n", p0);
+
     // Get new signal identification by incrementing the current maximum signal's one.
     get_new_signal_identification((void*) &id, p0, p1);
 
+fwprintf(stdout, L"TEST initialiser 4: %i\n", p0);
+
     // Add startup model as signal to signal memory.
     set_signal(p0, p1, p2, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
+
+fwprintf(stdout, L"TEST initialiser 5: %i\n", p0);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)
@@ -112,18 +124,10 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // The loop is left as soon as its shutdown flag is set.
     check(p5);
 
-/*??
-    // Deallocate startup model abstraction, model, details.
-    deallocate((void*) &a, (void*) mas, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &ac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &m, (void*) mms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &mc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &ms, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &d, (void*) mds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &dc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-    deallocate((void*) &ds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-*/
+    // Deallocate startup model.
+    deallocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+        (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 }
 
 /* INITIALISER_SOURCE */

@@ -67,18 +67,18 @@ void deallocate_compound(void* p0, void* p1) {
         // Get names, abstractions, models, details.
         // The p0 parameter (c) needs to be dereferenced since it is handed
         // over as reference, but this procedure expects a normal array.
-        get_array_elements(*c, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) &n, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) &nc, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) &ns, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &a, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &ac, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) &as, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &m, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &mc, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ms, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &dc, (void*) POINTER_MEMORY_ABSTRACTION);
-        get_array_elements(*c, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) &ds, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &n, *c, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &nc, *c, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &ns, *c, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &a, *c, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &ac, *c, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &as, *c, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &m, *c, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &mc, *c, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &ms, *c, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &d, *c, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &dc, *c, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &ds, *c, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
 
         // CAUTION! Do NOT try to REMOVE the names, abstractions, models, details!
         // Each of them has a fixed position within the compound and

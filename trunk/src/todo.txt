@@ -11,7 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-2010-xx-xx  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace branching in "executor/" directory using flag instead of direct comparison with abstraction integer value
+        * Continue debugging in "initialiser.c"
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;
             Should an extra wrapper function do this?
