@@ -11,8 +11,14 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Replace branching in "executor/" directory using flag instead of direct comparison with abstraction integer value
+        * Continue in "cybol_processor.c"; also check "xml_processor.c" and
+            adapt both to new order of function parameters
+        * The "free" function in "deallocate_array.c" module still causes an error,
+            which is not its fault, but due to some wrong pointers coming from ??
+            Identify problem!
         * Continue debugging in "initialiser.c"
+
+        * Replace branching in "executor/" directory using flag instead of direct comparison with abstraction integer value
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;
             Should an extra wrapper function do this?

@@ -17,6 +17,9 @@
 #
 
 2010-10-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Search bug causing "Segmentation fault" at destruction of memory models
+
+2010-10-26  Christian Heller  <christian.heller@tuxtax.de>
         * Debug "controller/manager.c"
         * Optimise allocation and deallocation by using "allocate_model"
 

@@ -138,19 +138,13 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             void* dc = *NULL_POINTER_MEMORY_MODEL;
             void* ds = *NULL_POINTER_MEMORY_MODEL;
 
-fwprintf(stdout, L"TEST decoder 0: %i\n", r);
-
             // Allocate temporary model.
             allocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
             // Allocate temporary details.
             allocate_model((void*) &d, (void*) &dc, (void*) &ds, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
-fwprintf(stdout, L"TEST decoder 1: %i\n", r);
-
             // Decode source message (cybol file) into temporary compound memory model.
             decode_xml((void*) &m, mc, ms, (void*) &d, dc, ds, p6, p7);
-
-fwprintf(stdout, L"TEST decoder 2: %i\n", r);
 
 /*
 //?? TEST BEGIN
@@ -186,17 +180,16 @@ fwprintf(stdout, L"TEST decoder 2: %i\n", r);
 */
 
             // Decode temporary compound memory model into cyboi knowledge compound memory model.
-            // Basically, structural data (tags) and meta data (attributes) are swapped in meaning.
+            // Basically, tags (structural data) and attributes (meta data) are swapped in meaning.
             decode_cybol(p0, p1, p2, p3, p4, p5, m, mc, d, dc);
 
-fwprintf(stdout, L"TEST decoder 3: %i\n", r);
-
+fwprintf(stdout, L"TEST decoder 0: %i\n", r);
             // Deallocate temporary model.
             deallocate_model((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+fwprintf(stdout, L"TEST decoder 1: %i\n", r);
             // Deallocate temporary details.
             deallocate_model((void*) &d, (void*) &dc, (void*) &ds, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-
-fwprintf(stdout, L"TEST decoder 4: %i\n", r);
+fwprintf(stdout, L"TEST decoder 2: %i\n", r);
 
 /*
 //?? TEST BEGIN

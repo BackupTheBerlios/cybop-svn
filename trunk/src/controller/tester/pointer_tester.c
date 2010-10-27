@@ -577,9 +577,9 @@ void test_pointer() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test pointer handling.");
 
-    test_pointer_null();
+//    test_pointer_null();
 //    test_pointer_cast();
-//    test_pointer_return();
+    test_pointer_return();
 
 //    test_character_array_with_termination();
 //    test_character_array_single_element();

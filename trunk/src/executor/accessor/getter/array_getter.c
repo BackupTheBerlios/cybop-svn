@@ -48,6 +48,10 @@
  */
 void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
+    // CAUTION! This test is important!
+    // The destination is initialised with the source below.
+    // A source with "null" value would cause an error
+    // (segmentation fault) when trying to add the offset.
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         if (p0 != *NULL_POINTER_MEMORY_MODEL) {

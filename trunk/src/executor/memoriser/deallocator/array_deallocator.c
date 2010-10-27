@@ -49,19 +49,11 @@ void deallocate_array(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate array.");
 
-fwprintf(stdout, L"TEST deallocate array p0: %i\n", p0);
-fwprintf(stdout, L"TEST deallocate array a: %i\n", a);
-fwprintf(stdout, L"TEST deallocate array *a: %i\n", *a);
-fwprintf(stdout, L"TEST deallocate array *NULL_POINTER_MEMORY_MODEL: %i\n", *NULL_POINTER_MEMORY_MODEL);
-
-        // CAUTION!
+        // CAUTION! Check array for null value.
+        // The "free" function would cause an error when handing over a null value.
         if (*a != *NULL_POINTER_MEMORY_MODEL) {
 
-fwprintf(stdout, L"TEST deallocate array *a if: %i\n", *a);
-
             free(*a);
-
-fwprintf(stdout, L"TEST deallocate array *a post free: %i\n", *a);
 
         } else {
 
