@@ -79,7 +79,7 @@ void encode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 void* v = *NULL_POINTER_MEMORY_MODEL;
 
                 // Get integer value.
-                get_array_elements(p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) INTEGER_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &v, p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
 
 /*??
     fwprintf(stdout, L"TEST encode integer into wide character 1 v: %i\n", *v);

@@ -76,11 +76,11 @@ void overwrite_wide_character_vector(void* p0, void* p1, void* p2, void* p3, voi
                     // CAUTION! Do NOT set the destination count above
                     // (together with the destination size),
                     // because it is used here as index!
-                    //?? set_array_elements(*d, p1, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                    //?? set_array_elements(*d, p3, p4, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                     // Now copy the source- into the destination vector,
                     // starting at index.
-                    //?? set_array_elements(*d, p1, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                    //?? set_array_elements(*d, p3, p4, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                     // Set destination count to the same value as the -size.
                     *dc = *ds;

@@ -100,8 +100,8 @@ void memorise_counting_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Set the compare string
             // this is the basisname and the list separat
-            set_array_elements(compstring, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, *bnm, *bnmc,  (void*) CHARACTER_MEMORY_ABSTRACTION);
-            set_array_elements(compstring, *bnmc, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            set_array_elements(compstring, *bnm, *bnmc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            set_array_elements(compstring, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *bnmc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
             // The loop count.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;

@@ -81,7 +81,7 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 // Set source into destination character vector.
-                                set_array_elements(*d, p1, TRUE_BOOLEAN_CYBOL_MODEL, TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                set_array_elements(*d, TRUE_BOOLEAN_CYBOL_MODEL, TRUE_BOOLEAN_CYBOL_MODEL_COUNT, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 // Increment destination count.
                                 *dc = *dc + *TRUE_BOOLEAN_CYBOL_MODEL_COUNT;
@@ -95,7 +95,7 @@ void encode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
                                 reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 // Set source into destination character vector.
-                                set_array_elements(*d, p1, FALSE_BOOLEAN_CYBOL_MODEL, FALSE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                set_array_elements(*d, FALSE_BOOLEAN_CYBOL_MODEL, FALSE_BOOLEAN_CYBOL_MODEL_COUNT, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 // Increment destination count.
                                 *dc = *dc + *FALSE_BOOLEAN_CYBOL_MODEL_COUNT;

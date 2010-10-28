@@ -249,7 +249,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
                 }
 
                 // Copy temporary body to the end of the actual destination http response.
-                set_array_elements(*d, p1, b, (void*) &bc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                set_array_elements(*d, b, (void*) &bc, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                 // Increase destination http response count by the body count.
                 *dc = *dc + bc;

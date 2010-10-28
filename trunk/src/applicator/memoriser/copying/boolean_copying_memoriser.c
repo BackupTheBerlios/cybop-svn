@@ -87,7 +87,7 @@ void memorise_copying_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) 
                         reallocate_array(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
                     }
 
-                    set_array_elements(*d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4, (void*) INTEGER_MEMORY_ABSTRACTION);
+                    set_array_elements(*d, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                 } else {
 

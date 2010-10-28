@@ -27,11 +27,11 @@
 #define ARRAY_APPENDER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Appends the source- to the destination array elements.
@@ -74,7 +74,7 @@ void append_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, voi
                     // CAUTION! Do NOT set the destination count above
                     // (together with the destination size),
                     // because it is used here as index!
-                    set_array_elements(*d, p1, p3, p4, p5);
+                    set_array_elements(*d, p3, p4, p1, p5);
 
                     // Set destination count to the same value as the -size.
                     *dc = *ds;

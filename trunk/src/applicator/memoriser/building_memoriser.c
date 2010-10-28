@@ -143,13 +143,13 @@ void memorise_building(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Reallocate result array.
     reallocate_array(resm, *resms, *resms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
-    // set the result array
-    set_array_elements(*resm, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, *bnm, *bnmc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
-    set_array_elements(*resm, *bnmc, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    // Set result array.
+    set_array_elements(*resm, *bnm, *bnmc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(*resm, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *bnmc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     int temp_index = *((int*) *bnmc) + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
-    set_array_elements(*resm, &temp_index, int_string, &int_string_count, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(*resm, int_string, &int_string_count, &temp_index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Destroy int_string array.
     deallocate_array((void*) &int_string, (void*) &int_string_size, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);

@@ -71,7 +71,7 @@ void send_file_stream(void* p0, void* p1, void* p2) {
                 }
 
                 // Read character from source array.
-                get_array_elements(p1, (void*) &j, (void*) &c, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &c, p1, (void*) &j, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                 // Write character to file.
                 e = fputc(*c, (FILE*) p0);
@@ -198,7 +198,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
 
                 // Add null termination character to terminated file name.
-                set_array_elements(tn, (void*) &tnc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                set_array_elements(tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tnc, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.

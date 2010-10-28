@@ -83,13 +83,8 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     // Deallocate encoded character array.
     deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
-fwprintf(stdout, L"TEST receive 5: %i\n", s);
-fwprintf(stdout, L"TEST receive 5: %ls\n", (wchar_t*) s);
-
     // Deserialise serialised wide character array into destination knowledge model.
     decode(p0, p1, p2, p3, p4, p5, s, sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
-
-fwprintf(stdout, L"TEST receive 6: %i\n", s);
 
     // Deallocate serialised wide character array.
     deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);

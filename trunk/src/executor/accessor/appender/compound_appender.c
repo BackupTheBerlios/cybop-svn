@@ -169,7 +169,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 
                 // Append list element separator characters "_$" to element name.
                 // Use name count as index to append the new characters.
-                set_array_elements(*n, p4, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                set_array_elements(*n, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                 *nc = *nc + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
 //??    fwprintf(stdout, L"TEST append compound element 4 ns: %i\n", *ns);
@@ -178,7 +178,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 
                 // Set new element name by appending the index determined above.
                 // Use name count as index to append the new characters.
-                set_array_elements(*n, p4, s, (void*) &sc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                set_array_elements(*n, s, (void*) &sc, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                 *nc = *nc + sc;
 
 //??    fwprintf(stdout, L"TEST append compound element 5 ns: %i\n", *ns);

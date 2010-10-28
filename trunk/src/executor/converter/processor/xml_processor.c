@@ -32,7 +32,14 @@
 #include "../../../constant/name/cybol/xml_cybol_name.c"
 #include "../../../executor/accessor/appender/compound_appender.c"
 #include "../../../executor/converter/selector/xml_selector.c"
+#include "../../../executor/memoriser/allocator/part_allocator.c"
 #include "../../../logger/logger.c"
+
+//
+// Forward declarations.
+//
+
+void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11);
 
 /**
  * Processes the xml declaration.

@@ -183,13 +183,10 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Basically, tags (structural data) and attributes (meta data) are swapped in meaning.
             decode_cybol(p0, p1, p2, p3, p4, p5, m, mc, d, dc);
 
-fwprintf(stdout, L"TEST decoder 0: %i\n", r);
             // Deallocate temporary model.
             deallocate_model((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-fwprintf(stdout, L"TEST decoder 1: %i\n", r);
             // Deallocate temporary details.
             deallocate_model((void*) &d, (void*) &dc, (void*) &ds, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
-fwprintf(stdout, L"TEST decoder 2: %i\n", r);
 
 /*
 //?? TEST BEGIN

@@ -280,12 +280,8 @@ void manage(void* p0, void* p1) {
     // System initialisation.
     //
 
-fwprintf(stdout, L"TEST manager pre: %i\n", p0);
-
     // Initialise system with an initial signal.
     initialise(s, (void*) sc, (void*) ss, p0, p1, i);
-
-fwprintf(stdout, L"TEST manager post: %i\n", p0);
 
     //
     // System shutdown.

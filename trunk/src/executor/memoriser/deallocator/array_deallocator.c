@@ -53,6 +53,13 @@ void deallocate_array(void* p0, void* p1, void* p2) {
         // The "free" function would cause an error when handing over a null value.
         if (*a != *NULL_POINTER_MEMORY_MODEL) {
 
+            // This function may cause an error if some wrong pointer
+            // is forwarded to it as argument.
+            // If this happens and the system crashes right here showing
+            // a "Segmentation fault" or the like, then it is not the fault
+            // of the "free" function but of the pointer passed on to it.
+            // Somewhere else in the code, the pointer was manipulated
+            // and probably set wrong, e.g. outside an allocated area.
             free(*a);
 
         } else {

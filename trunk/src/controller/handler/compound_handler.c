@@ -82,12 +82,12 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
     void** pdc = NULL_POINTER_MEMORY_MODEL;
 
     // Get abstractions, models, details.
-    get_array_elements(p10, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) &pa, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &pac, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) &pm, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &pmc, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) &pd, (void*) POINTER_MEMORY_ABSTRACTION);
-    get_array_elements(p10, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) &pdc, (void*) POINTER_MEMORY_ABSTRACTION);
+    get_array_elements((void*) &pa, p10, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+    get_array_elements((void*) &pac, p10, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+    get_array_elements((void*) &pm, p10, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+    get_array_elements((void*) &pmc, p10, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+    get_array_elements((void*) &pd, p10, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+    get_array_elements((void*) &pdc, p10, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
 
     if (*pa != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -112,12 +112,12 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
                             void** dc = NULL_POINTER_MEMORY_MODEL;
 
                             // Get abstraction, model, details.
-                            get_array_elements(*pa, p15, (void*) &a, (void*) POINTER_MEMORY_ABSTRACTION);
-                            get_array_elements(*pac, p15, (void*) &ac, (void*) POINTER_MEMORY_ABSTRACTION);
-                            get_array_elements(*pm, p15, (void*) &m, (void*) POINTER_MEMORY_ABSTRACTION);
-                            get_array_elements(*pmc, p15, (void*) &mc, (void*) POINTER_MEMORY_ABSTRACTION);
-                            get_array_elements(*pd, p15, (void*) &d, (void*) POINTER_MEMORY_ABSTRACTION);
-                            get_array_elements(*pdc, p15, (void*) &dc, (void*) POINTER_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &a, *pa, p15, (void*) POINTER_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &ac, *pac, p15, (void*) POINTER_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &m, *pm, p15, (void*) POINTER_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &mc, *pmc, p15, (void*) POINTER_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &d, *pd, p15, (void*) POINTER_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &dc, *pdc, p15, (void*) POINTER_MEMORY_ABSTRACTION);
 
                             // Add part model (signal) to memory, using the whole signal's priority.
                             // (Each signal has a priority. A signal may consist of part

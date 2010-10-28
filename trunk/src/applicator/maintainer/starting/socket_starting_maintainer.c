@@ -269,7 +269,7 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
                     }
 
                     // Add null termination character to terminated file name.
-                    set_array_elements(s, (void*) &sc, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                    set_array_elements(s, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &sc, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     // Convert uint16_t integer hostshort from host byte order
                     // to network byte order.
@@ -370,8 +370,8 @@ void maintain_starting_socket_initialise_local_socket_address(void* p0, void* p1
 
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
-                    set_array_elements(path, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
-                    set_array_elements(path, p2, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    set_array_elements(path, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    set_array_elements(path, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 } else {
 

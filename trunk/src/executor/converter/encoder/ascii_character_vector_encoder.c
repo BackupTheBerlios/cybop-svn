@@ -74,7 +74,7 @@ void encode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void*
                     }
 
                     // Set source into destination character vector.
-                    set_array_elements(*d, p1, p3, p4, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                    set_array_elements(*d, p3, p4, p1, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                     // Increment destination count.
                     *dc = *dc + *sc;

@@ -16,7 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-2010-10-26  Christian Heller  <christian.heller@tuxtax.de>
+2010-10-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt all function calls of "set_array_elements" and "get_array_elements"
+            to new order of arguments, to solve a couple of "Segmentation fault" errors
+
+2010-10-27  Christian Heller  <christian.heller@tuxtax.de>
         * Search bug causing "Segmentation fault" at destruction of memory models
 
 2010-10-26  Christian Heller  <christian.heller@tuxtax.de>

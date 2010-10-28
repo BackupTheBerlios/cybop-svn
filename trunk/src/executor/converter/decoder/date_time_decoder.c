@@ -148,11 +148,11 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         void* syi = p3 + (*NUMBER_4_INTEGER_MEMORY_MODEL * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Copy original string to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, (void*) &i, sdi, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpd, sdi, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                         // Copy original string to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, (void*) &i, smi, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpm, smi, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                         // Copy original string to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, (void*) &i, syi, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpy, syi, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                         // The day termination character index.
                         int dti = *NUMBER_2_INTEGER_MEMORY_MODEL;
@@ -162,11 +162,11 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         int yti = *NUMBER_4_INTEGER_MEMORY_MODEL;
 
                         // Add string termination to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, (void*) &dti, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpd, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &dti, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                         // Add string termination to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, (void*) &mti, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpm, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &mti, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                         // Add string termination to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, (void*) &yti, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpy, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &yti, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                         // The tail variable is useless here and only needed for the string
                         // transformation function. If the whole string array consists of
@@ -208,12 +208,12 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         }
 
                         // Set date time integer values.
-                        set_array_elements(*d, (void*) YEAR_DATETIME_MEMORY_NAME, (void*) &yv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) MONTH_DATETIME_MEMORY_NAME, (void*) &mv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) DAY_DATETIME_MEMORY_NAME, (void*) &dv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) HOUR_DATETIME_MEMORY_NAME, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) MINUTE_DATETIME_MEMORY_NAME, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) SECOND_DATETIME_MEMORY_NAME, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) &yv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) YEAR_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) &mv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MONTH_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) &dv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DAY_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) HOUR_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) MINUTE_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SECOND_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
 
                         // Increase date time count by one, because of new element.
                         (*dc)++;

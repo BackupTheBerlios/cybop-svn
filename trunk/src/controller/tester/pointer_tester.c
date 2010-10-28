@@ -351,13 +351,13 @@ void test_pointer_array() {
 
     // Set character array in pointer array.
     // Hand over character array as reference, because pointer array is expected!
-    set_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+    set_array_elements(p, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"p[0] after set: %i\n", p[0]);
     fwprintf(stdout, L"p[1] after set: %i\n", p[1]);
 
     // Get character array from pointer array.
-    get_array_elements(p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &r, (void*) POINTER_MEMORY_ABSTRACTION);
+    get_array_elements((void*) &r, p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
 
     // Print result (character array).
     fwprintf(stdout, L"r pointer: %i\n", *r);

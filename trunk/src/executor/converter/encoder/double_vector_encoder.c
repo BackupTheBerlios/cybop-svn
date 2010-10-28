@@ -64,7 +64,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 double* v = (double*) *NULL_POINTER_MEMORY_MODEL;
 
                 // Get double value.
-                get_array_elements(p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &v, (void*) DOUBLE_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &v, p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DOUBLE_MEMORY_ABSTRACTION);
 
                 // Initialise destination count to -1.
                 // CAUTION! It must be negative for the loop to run.
