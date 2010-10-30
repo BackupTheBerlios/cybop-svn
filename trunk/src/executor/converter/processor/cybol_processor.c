@@ -32,7 +32,11 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybop/cybop_name.c"
 #include "../../../executor/accessor/appender/compound_appender.c"
+#include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/converter/detector/cybol_detector.c"
+#include "../../../executor/memoriser/allocator/array_allocator.c"
+#include "../../../executor/memoriser/allocator/part_allocator.c"
+#include "../../../executor/memoriser/deallocator/array_deallocator.c"
 #include "../../../logger/logger.c"
 
 //

@@ -17,6 +17,10 @@
 #
 
 2010-10-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix linking bug by adding "encode" function forward declaration to "compound_appender.c"
+        * Update "architecture.odp" document
+
+2010-10-28  Christian Heller  <christian.heller@tuxtax.de>
         * Adapt all function calls of "set_array_elements" and "get_array_elements"
             to new order of arguments, to solve a couple of "Segmentation fault" errors
 

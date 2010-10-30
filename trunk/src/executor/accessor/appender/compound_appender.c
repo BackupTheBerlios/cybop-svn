@@ -37,10 +37,16 @@
 #include "../../../constant/name/memory/compound_memory_name.c"
 #include "../../../executor/accessor/setter/compound_setter.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
-#include "../../../executor/converter/encoder.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
+
+//
+// Forward declarations.
+//
+
+void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
+    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14);
 
 /**
  * Appends the compound element by name.

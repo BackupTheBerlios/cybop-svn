@@ -31,6 +31,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/xml_cybol_name.c"
 #include "../../../executor/accessor/appender/compound_appender.c"
+#include "../../../executor/accessor/appender/part_appender.c"
 #include "../../../executor/converter/selector/xml_selector.c"
 #include "../../../executor/memoriser/allocator/part_allocator.c"
 #include "../../../logger/logger.c"
@@ -295,10 +296,6 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4, void
                             void** dd = (void**) p0;
 
                             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process xml tag name.");
-
-/*??
-    fwprintf(stdout, L"TEST process xml tag name 0: %i\n", *rem);
-*/
 
                             // The source tag name.
                             void* tn = *pos;
@@ -714,7 +711,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // CAUTION! Hand over the name as reference!
         // Storing many parts with identical tag name is not a problem,
         // since the tag name of a part is added to its details compound.
-//??        append_compound_element_by_name_with_suffix(*dd, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
+        append_compound_element_by_name_with_suffix(*dd, p1, p2, (void*) &n, (void*) nc, (void*) ns, a, ac, as, m, mc, ms, d, dc, ds);
 
     } else {
 
