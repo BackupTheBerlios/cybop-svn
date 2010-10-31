@@ -158,7 +158,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set hidden property.
-    compare_equal_arrays(p10, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
+    compare_equal_arrays((void*) &r, p10, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -170,7 +170,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set inverse property.
-    compare_equal_arrays(p11, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
+    compare_equal_arrays((void*) &r, p11, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -182,7 +182,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set blink property.
-    compare_equal_arrays(p12, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
+    compare_equal_arrays((void*) &r, p12, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -194,7 +194,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set underline property.
-    compare_equal_arrays(p13, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
+    compare_equal_arrays((void*) &r, p13, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -206,7 +206,7 @@ void encode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Set bold property.
-    compare_equal_arrays(p14, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) INTEGER_MEMORY_ABSTRACTION);
+    compare_equal_arrays((void*) &r, p14, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1709,7 +1709,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                         (void*) &d, (void*) &dc, (void*) &ds);
 
                     // Compare expected name with that of the current compound part element.
-                    compare_equal_arrays(*n, *nc, en, (void*) &enc, (void*) &nr, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays((void*) &nr, *n, *nc, en, (void*) &enc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if ((p11 == *NULL_POINTER_MEMORY_MODEL) || (*((int*) p12) == *NUMBER_0_INTEGER_MEMORY_MODEL) || (nr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 

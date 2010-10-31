@@ -292,8 +292,6 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                 // Any "process" function called afterwards can rely on this and start processing right away.
                 //
 
-//??    fwprintf(stdout, L"TEST select element content rem: %i\n", *rem);
-
                 // The comparison result.
                 int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -302,8 +300,6 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                     detect((void*) &r, p7, p8, (void*) END_TAG_BEGIN_XML_NAME, (void*) END_TAG_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??    fwprintf(stdout, L"TEST select element content end tag begin: %i\n", *rem);
 
                         process_xml_end_tag(p7, p8);
 
@@ -319,8 +315,6 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??    fwprintf(stdout, L"TEST select element content declaration begin: %i\n", *rem);
-
                         // The data contained in an XML declaration are added to the destination details.
                         process_xml_declaration(p3, p4, p5, p7, p8);
                     }
@@ -331,8 +325,6 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                     detect((void*) &r, p7, p8, (void*) COMMENT_BEGIN_XML_NAME, (void*) COMMENT_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??    fwprintf(stdout, L"TEST select element content comment begin: %i\n", *rem);
 
                         // The data contained in an XML comment are just ignored.
                         process_xml_comment(p7, p8);
@@ -345,8 +337,6 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??    fwprintf(stdout, L"TEST select element content definition begin: %i\n", *rem);
-
                         // The data contained in an XML definition are added to the destination details.
                         process_xml_definition(p3, p4, p5, p7, p8);
                     }
@@ -358,16 +348,12 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??    fwprintf(stdout, L"TEST select element content start tag begin: %i\n", *rem);
-
                         // The data contained in an XML element are added to the destination model.
                         process_xml_element(p0, p1, p2, p7, p8);
                     }
                 }
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-//??    fwprintf(stdout, L"TEST select element content nothing detected: %i\n", *rem);
 
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).

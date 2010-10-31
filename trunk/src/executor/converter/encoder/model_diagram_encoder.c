@@ -26,13 +26,11 @@
 #ifndef MODEL_DIAGRAM_ENCODER_SOURCE
 #define MODEL_DIAGRAM_ENCODER_SOURCE
 
-#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/appender/array_appender.c"
 #include "../../../executor/converter/encoder/integer_vector_encoder.c"
@@ -285,7 +283,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
         encode_model_diagram_line(p0, p1, p2);
 
         // Add part abstraction to destination array.
-        append_array_elements(p0, p1, p2, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        encode_integer_vector(p0, p1, p2, p5, p6);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;

@@ -110,7 +110,7 @@ static int* INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MO
  *
  * Example:
  * The complex number given in trigonometric form:
- * 2 (cos 30� + i sin 30�)
+ * 2 (cos 30° + i sin 30°)
  * which can also be written in exponential form, using Euler's formula:
  * 2 e ^(i 30)
  * would be written in CYBOL as:

@@ -146,7 +146,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Decode source message (cybol file) into temporary compound memory model.
             decode_xml((void*) &m, mc, ms, (void*) &d, dc, ds, p6, p7);
 
-/*
 //?? TEST BEGIN
             // The model diagram.
             void* md = *NULL_POINTER_MEMORY_MODEL;
@@ -157,7 +156,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
-                m, (void*) &mc, d, (void*) &dc);
+                m, mc, d, dc);
             // The multibyte character stream.
             void* mb = *NULL_POINTER_MEMORY_MODEL;
             int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -177,7 +176,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Deallocate multibyte character stream.
             deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
-*/
 
             // Decode temporary compound memory model into cyboi knowledge compound memory model.
             // Basically, tags (structural data) and attributes (meta data) are swapped in meaning.
@@ -188,7 +186,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Deallocate temporary details.
             deallocate_model((void*) &d, (void*) &dc, (void*) &ds, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
-/*
 //?? TEST BEGIN
             // Reset model diagram.
             md = *NULL_POINTER_MEMORY_MODEL;
@@ -219,7 +216,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Deallocate multibyte character stream.
             deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
-*/
         }
     }
 

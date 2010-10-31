@@ -69,6 +69,8 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     // Write file into encoded character array.
     receive_data((void*) &e, ec, es, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
+//??fwprintf(stdout, L"TEST char: %s\n", (char*) e);
+
     // The serialised wide character array.
     void* s = *NULL_POINTER_MEMORY_MODEL;
     void* sc = *NULL_POINTER_MEMORY_MODEL;
@@ -79,6 +81,8 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
 
     // Decode encoded character array into serialised wide character array.
     decode_utf_8_unicode_character_vector((void*) &s, sc, ss, e, (void*) ec);
+
+//??fwprintf(stdout, L"TEST w_char: %ls\n", (wchar_t*) s);
 
     // Deallocate encoded character array.
     deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);

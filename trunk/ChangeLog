@@ -16,7 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-2010-10-28  Christian Heller  <christian.heller@tuxtax.de>
+2010-10-31  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix bugs caused by wrong position of result argument in "compare_equal_arrays" function
+        * Search and partly fix bug that the xml decoder does not work
+
+2010-10-30  Christian Heller  <christian.heller@tuxtax.de>
         * Fix linking bug by adding "encode" function forward declaration to "compound_appender.c"
         * Update "architecture.odp" document
 

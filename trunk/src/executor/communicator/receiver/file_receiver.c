@@ -89,7 +89,7 @@ void receive_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
                         // Set character in destination array.
                         // The array count serves as index for setting the character.
-                        set_array_elements(*d, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p1, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) CHARACTER_MEMORY_ABSTRACTION);
 
                         // Increase array count.
                         (*dc)++;
@@ -134,7 +134,7 @@ void receive_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* sc = (int*) p4;
 
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receives file.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive file.");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;

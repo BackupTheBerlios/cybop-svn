@@ -27,8 +27,8 @@
 #define CYBOL_DECODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/converter/processor/cybol_processor.c"
+#include "../../../logger/logger.c"
 
 /**
  * Decodes cybol.

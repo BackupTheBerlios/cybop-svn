@@ -38,7 +38,7 @@
  * @param p0 the current position (Hand over as reference!)
  * @param p1 the remaining count
  * @param p2 the element count
- * @param p3 the element type size
+ * @param p3 the abstraction size
  */
 void detect_move_position(void* p0, void* p1, void* p2, void* p3) {
 
@@ -95,8 +95,8 @@ void detect_move_position(void* p0, void* p1, void* p2, void* p3) {
  * @param p2 the remaining count
  * @param p3 the element
  * @param p4 the element count
- * @param p5 the element array abstraction
- * @param p6 the element type size
+ * @param p5 the abstraction
+ * @param p6 the abstraction size
  */
 void detect_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
@@ -120,7 +120,7 @@ void detect_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
                     if (*rem >= *ec) {
 
-                        compare_equal_arrays(*pos, p4, p3, p4, p0, p5);
+                        compare_equal_arrays(p0, *pos, p4, p3, p4, p5);
 
                         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

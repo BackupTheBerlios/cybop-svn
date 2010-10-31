@@ -127,7 +127,7 @@ void memorise_counting_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
                             r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                            compare_equal_arrays(compstring, &compstring_count, *cen, &compstring_count, &r, CHARACTER_MEMORY_ABSTRACTION);
+                            compare_equal_arrays(&r, compstring, &compstring_count, *cen, &compstring_count, CHARACTER_MEMORY_ABSTRACTION);
 
                             //if teh begiining of the two arrays ident, then
                             //the compound element is a part of the list

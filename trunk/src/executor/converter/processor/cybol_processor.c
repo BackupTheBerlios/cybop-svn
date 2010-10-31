@@ -150,41 +150,41 @@ void process_cybol_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 // because the part model has not been allocated yet when reading the abstraction
                 // for the first time.
                 void* ra = *NULL_POINTER_MEMORY_MODEL;
-                int rac = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                int ras = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                void* rac = *NULL_POINTER_MEMORY_MODEL;
+                void* ras = *NULL_POINTER_MEMORY_MODEL;
 
-                // Allocate temporary runtime abstraction.
-                allocate_array((void*) &ra, (void*) &ras, (void*) INTEGER_MEMORY_ABSTRACTION);
+                // Allocate temporary runtime abstraction model.
+                allocate_model((void*) &ra, (void*) &rac, (void*) &ras, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                 // Decode source- into temporary runtime abstraction.
                 // A cybol abstraction is NOT equal to the runtime cyboi abstraction.
                 // For example, an "xdt" file is converted into a compound.
                 // Therefore, the abstraction has to be converted here.
-                decode((void*) &ra, (void*) &rac, (void*) &ras, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
+                decode((void*) &ra, rac, ras, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
 
                 // Allocate destination part.
                 // CAUTION! Use the temporary RUNTIME abstraction as source here!
                 allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                     (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-                    (void*) NUMBER_0_INTEGER_MEMORY_MODEL, ra, (void*) &rac);
+                    (void*) NUMBER_0_INTEGER_MEMORY_MODEL, ra, rac);
 
                 // Decode destination part name.
-                decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sn, *snc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+                decode((void*) &n, nc, ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sn, *snc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
                 // Decode destination part abstraction.
                 // CAUTION! The temporary runtime abstraction may also have been used as source here.
                 // In this case, its (integer) value would have had to be copied to the part abstraction.
                 // However, to be more consistent, the "decode" function is called a second time.
-                decode((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
+                decode((void*) &a, ac, as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION, (void*) ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT);
 
-                // Deallocate temporary runtime abstraction.
-                deallocate_array((void*) &ra, (void*) &ras, (void*) INTEGER_MEMORY_ABSTRACTION);
+                // Deallocate temporary runtime abstraction model.
+                deallocate_model((void*) &ra, (void*) &rac, (void*) &ras, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                 // Receive and decode destination part model and details.
                 // CAUTION! Use the ORIGINAL CYBOL abstraction as source here
                 // (not the temporary runtime abstraction)!
                 communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                    (void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
+                    (void*) &m, mc, ms, (void*) &d, dc, ds,
                     *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                     *sm, *smc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
                     *sa, *sac, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *sc, *scc);

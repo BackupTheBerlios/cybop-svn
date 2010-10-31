@@ -290,7 +290,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                     // Reset comparison result.
                     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    compare_equal_arrays(p, &pc, *n, &pc, &r, WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays(&r, p, &pc, *n, &pc, WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 

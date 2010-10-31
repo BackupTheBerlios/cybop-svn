@@ -49,34 +49,5 @@ static wchar_t MODEL_CYBOP_NAME_ARRAY[] = {L'm', L'o', L'd', L'e', L'l'};
 static wchar_t* MODEL_CYBOP_NAME = MODEL_CYBOP_NAME_ARRAY;
 static int* MODEL_CYBOP_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
-//
-// Cybol tag attributes as char.
-//
-// They are needed by the "compound_converter.c" module and
-// may (possibly) be deleted later, if a self-written XML parser is used.
-//
-// The count of the standard (wchar_t) tag attributes (see above) is used here.
-//
-
-/** The name cybop name as char. */
-/*??
-static char NAME_CYBOP_NAME_AS_CHAR_ARRAY[] = {'n', 'a', 'm', 'e'};
-static char* NAME_CYBOP_NAME_AS_CHAR = NAME_CYBOP_NAME_AS_CHAR_ARRAY;
-
-/** The channel cybop name as char. */
-/*??
-static char CHANNEL_CYBOP_NAME_AS_CHAR_ARRAY[] = {'c', 'h', 'a', 'n', 'n', 'e', 'l'};
-static char* CHANNEL_CYBOP_NAME_AS_CHAR = CHANNEL_CYBOP_NAME_AS_CHAR_ARRAY;
-
-/** The abstraction cybop name as char. */
-/*??
-static char ABSTRACTION_CYBOP_NAME_AS_CHAR_ARRAY[] = {'a', 'b', 's', 't', 'r', 'a', 'c', 't', 'i', 'o', 'n'};
-static char* ABSTRACTION_CYBOP_NAME_AS_CHAR = ABSTRACTION_CYBOP_NAME_AS_CHAR_ARRAY;
-
-/** The model cybop name as char. */
-/*??
-static char MODEL_CYBOP_NAME_AS_CHAR_ARRAY[] = {'m', 'o', 'd', 'e', 'l'};
-static char* MODEL_CYBOP_NAME_AS_CHAR = MODEL_CYBOP_NAME_AS_CHAR_ARRAY;
-
 /* CYBOP_NAME_SOURCE */
 #endif
