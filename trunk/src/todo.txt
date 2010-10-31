@@ -11,8 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Uncommend "append_compound_element_by_name_with_suffix" in "xml_processor.c" and correct dependency problem;
-            this is the reason why a signal with empty model is created that has no effect
+        * Search and fix bug that the cybol decoder does not work
 
         * Replace branching in "executor/" directory using flag instead of direct comparison with abstraction integer value
         * Investigate how to handle setting of destination count and size;
