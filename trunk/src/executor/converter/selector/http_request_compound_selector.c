@@ -368,7 +368,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) SCHEME_SEPARATOR_URI_MODEL, (void*) SCHEME_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) SCHEME_SEPARATOR_URI_MODEL, (void*) SCHEME_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -407,7 +407,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) AUTHORITY_SEPARATOR_URI_MODEL, (void*) AUTHORITY_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) AUTHORITY_SEPARATOR_URI_MODEL, (void*) AUTHORITY_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -423,7 +423,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
             ic = ic - sep - *AUTHORITY_SEPARATOR_URI_MODEL_COUNT;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) PATH_SEPARATOR_URI_MODEL, (void*) PATH_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) PATH_SEPARATOR_URI_MODEL, (void*) PATH_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -444,7 +444,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
             } else {
 
                 // Get separator index.
-                get_array_elements_index(i, (void*) &ic, (void*) QUERY_SEPARATOR_URI_MODEL, (void*) QUERY_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) QUERY_SEPARATOR_URI_MODEL, (void*) QUERY_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -465,7 +465,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
                 } else {
 
                     // Get separator index.
-                    get_array_elements_index(i, (void*) &ic, (void*) FRAGMENT_SEPARATOR_URI_MODEL, (void*) FRAGMENT_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) FRAGMENT_SEPARATOR_URI_MODEL, (void*) FRAGMENT_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -510,7 +510,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) PATH_SEPARATOR_URI_MODEL, (void*) PATH_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) PATH_SEPARATOR_URI_MODEL, (void*) PATH_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -526,7 +526,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
             ic = ic - sep - *PATH_SEPARATOR_URI_MODEL_COUNT;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) QUERY_SEPARATOR_URI_MODEL, (void*) QUERY_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) QUERY_SEPARATOR_URI_MODEL, (void*) QUERY_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -547,7 +547,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
             } else {
 
                 // Get separator index.
-                get_array_elements_index(i, (void*) &ic, (void*) FRAGMENT_SEPARATOR_URI_MODEL, (void*) FRAGMENT_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) FRAGMENT_SEPARATOR_URI_MODEL, (void*) FRAGMENT_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -593,7 +593,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
     fwprintf(stdout, L"TEST http request uri qc 0: %i \n", qc);
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) QUERY_SEPARATOR_URI_MODEL, (void*) QUERY_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) QUERY_SEPARATOR_URI_MODEL, (void*) QUERY_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -614,7 +614,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
             sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
             // Get separator index.
-            get_array_elements_index(i, (void*) &ic, (void*) FRAGMENT_SEPARATOR_URI_MODEL, (void*) FRAGMENT_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) FRAGMENT_SEPARATOR_URI_MODEL, (void*) FRAGMENT_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
             if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -661,7 +661,7 @@ void decode_http_request_compound_uri(void* p0, void* p1, void* p2, void* p3, vo
         sep = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get separator index.
-        get_array_elements_index(i, (void*) &ic, (void*) FRAGMENT_SEPARATOR_URI_MODEL, (void*) FRAGMENT_SEPARATOR_URI_MODEL_COUNT, (void*) &sep, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        get_array_elements_index((void*) &sep, i, (void*) &ic, (void*) FRAGMENT_SEPARATOR_URI_MODEL, (void*) FRAGMENT_SEPARATOR_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (sep >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

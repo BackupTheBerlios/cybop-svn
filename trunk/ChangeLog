@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix pointer bugs caused by wrong position of arguments in "get_compound_element_index" function calls
+        * Fix pointer bugs caused by passing plain argument instead of its reference to "set" function calls
+        * Fix pointer bugs caused by passing result argument's reference instead of just argument in "*_operation_handler.c" functions
+        * Make "exit" example application work again
+
 2010-10-31  Christian Heller  <christian.heller@tuxtax.de>
         * Fix bugs caused by wrong position of result argument in "compare_equal_arrays" function
         * Search and partly fix bug that the xml decoder does not work

@@ -65,7 +65,7 @@ void handle_flow_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) BRANCH_FLOW_OPERATION_CYBOL_MODEL, (void*) BRANCH_FLOW_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays(p16, p10, p11, (void*) BRANCH_FLOW_OPERATION_CYBOL_MODEL, (void*) BRANCH_FLOW_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -75,7 +75,7 @@ void handle_flow_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p10, p11, (void*) LOOP_FLOW_OPERATION_CYBOL_MODEL, (void*) LOOP_FLOW_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays(p16, p10, p11, (void*) LOOP_FLOW_OPERATION_CYBOL_MODEL, (void*) LOOP_FLOW_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

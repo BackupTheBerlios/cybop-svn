@@ -129,7 +129,7 @@ void test_accessor() {
 
 //    test_accessor_size_determiner();
 //    test_accessor_assigner();
-//    test_accessor_array_setter();
+    test_accessor_array_setter();
 }
 
 /* ACCESSOR_TESTER */

@@ -28,8 +28,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
 #include "../../../executor/memoriser/size_determiner.c"

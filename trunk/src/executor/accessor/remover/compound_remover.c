@@ -413,7 +413,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                get_array_elements_index(p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, &s, WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                get_array_elements_index(&s, p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 remove_compound_element_by_index(p0, p1, p2, (void*) &i);
 
@@ -465,7 +465,7 @@ void remove_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, voi
                 // The list element separator.
                 int s = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                get_array_elements_index(p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, &s, WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                get_array_elements_index(&s, p6, p7, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 remove_compound_element_by_index(p3, p4, p5, (void*) &i);
 

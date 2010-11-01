@@ -29,10 +29,9 @@
 #include "../../../globals/constants/character/character_constants.c"
 #include "../../../globals/constants/character/numeric_character_reference_constants.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
@@ -40,7 +39,7 @@
 /**
  * Encodes a character into a numeric character reference (html escape code).
  *
- * @param p0 the destination numeric character reference (html escape code)
+ * @param p0 the destination numeric character reference (html escape code) (Hand over as reference!)
  * @param p1 the destination numeric character reference (html escape code) count
  * @param p2 the destination numeric character reference (html escape code) size
  * @param p3 the source character
@@ -97,7 +96,7 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                     }
 
                     // Add temporary value to destination.
-                    set(*d, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                    set(p0, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                     // Increase destination count.
                     *dc = *dc + tc;

@@ -27,8 +27,6 @@
 #define REALLOCATOR_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 #include "../../executor/memoriser/reallocator/array_reallocator.c"
@@ -43,6 +41,7 @@
 #include "../../executor/memoriser/reallocator/signal_memory_reallocator.c"
 #include "../../executor/memoriser/reallocator/x_window_system_reallocator.c"
 */
+#include "../../constant/model/memory/integer_memory_model.c"
 
 /**
  * Reallocates the model.

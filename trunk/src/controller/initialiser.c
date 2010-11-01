@@ -62,19 +62,16 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // All other models (and their counts and sizes) coming from knowledge memory
     // are allocated in the same way when being read from cybol sources.
 
-    // The startup model name.
+    // The startup model name, abstraction, model, details.
     void* n = *NULL_POINTER_MEMORY_MODEL;
     void* nc = *NULL_POINTER_MEMORY_MODEL;
     void* ns = *NULL_POINTER_MEMORY_MODEL;
-    // The startup model abstraction.
     void* a = *NULL_POINTER_MEMORY_MODEL;
     void* ac = *NULL_POINTER_MEMORY_MODEL;
     void* as = *NULL_POINTER_MEMORY_MODEL;
-    // The startup model model.
     void* m = *NULL_POINTER_MEMORY_MODEL;
     void* mc = *NULL_POINTER_MEMORY_MODEL;
     void* ms = *NULL_POINTER_MEMORY_MODEL;
-    // The startup model details.
     void* d = *NULL_POINTER_MEMORY_MODEL;
     void* dc = *NULL_POINTER_MEMORY_MODEL;
     void* ds = *NULL_POINTER_MEMORY_MODEL;
@@ -89,7 +86,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     // Receive and decode startup model model and -details.
     communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        (void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
+        (void*) &m, mc, ms, (void*) &d, dc, ds,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,

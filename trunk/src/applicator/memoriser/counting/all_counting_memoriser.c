@@ -41,7 +41,7 @@
 /**
  * Counts all compound parts.
  *
- * @param p0 the result
+ * @param p0 the result (Hand over as reference!)
  * @param p1 the result count
  * @param p2 the result size
  * @param p3 the compound
@@ -49,21 +49,12 @@
  */
 void memorise_counting_all(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Count all compound parts.");
 
-        void** r = (void**) p0;
-
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Count all compound parts.");
-
-        // Set result to compound count value.
-        // A loop is not needed here, since the compound count already contains
-        // the number of parts within that compound.
-        set(*r, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, INTEGER_NUMBER_CYBOL_ABSTRACTION, INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not count all compound parts. The result is null.");
-    }
+    // Set result to compound count value.
+    // A loop is not needed here, since the compound count already contains
+    // the number of parts within that compound.
+    set(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, INTEGER_NUMBER_CYBOL_ABSTRACTION, INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 }
 
 /* ALL_COUNTING_MEMORISER_SOURCE */

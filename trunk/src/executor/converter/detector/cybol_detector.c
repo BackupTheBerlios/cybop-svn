@@ -33,13 +33,13 @@
  * Detects the root node.
  *
  * @param p0 the root node flag
- * @param p1 the name (Hand over as reference!)
+ * @param p1 the name
  * @param p2 the name count
- * @param p3 the channel (Hand over as reference!)
+ * @param p3 the channel
  * @param p4 the channel count
- * @param p5 the abstraction (Hand over as reference!)
+ * @param p5 the abstraction
  * @param p6 the abstraction count
- * @param p7 the model (Hand over as reference!)
+ * @param p7 the model
  * @param p8 the model count
  */
 void detect_cybol_root_node(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {

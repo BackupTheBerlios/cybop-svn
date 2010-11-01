@@ -29,16 +29,15 @@
 #include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
 #include "../../../constant/abstraction/cybol/path_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
-#include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/comparator/array_equality_comparator.c"
 
 //
 // Forward declarations.
@@ -162,8 +161,8 @@ void get_compound_element_name_count_and_size(void* p0, void* p1, void* p2, void
                 // The meta separator index.
                 int m = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
-                get_array_elements_index(p2, p3, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) &p, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
-                get_array_elements_index(p2, p3, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) &m, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                get_array_elements_index((void*) &p, p2, p3, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                get_array_elements_index((void*) &m, p2, p3, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                 if ((p >= *NUMBER_0_INTEGER_MEMORY_MODEL) && (m == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL)) {
 
@@ -289,9 +288,9 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                 int m = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
                                 // Get position of part separator.
-                                get_array_elements_index(p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) &p, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                get_array_elements_index((void*) &p, p0, p1, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
                                 // Get position of meta separator.
-                                get_array_elements_index(p0, p1, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) &m, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                get_array_elements_index((void*) &m, p0, p1, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
 /*??
     fwprintf(stdout, L"TEST compound full nc: %i\n", *((int*) p1));
@@ -749,6 +748,12 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
                     // The comparison result.
                     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+/*??
+    fwprintf(stdout, L"\n\nTEST cc: %i\n", *cc);
+    fwprintf(stdout, L"TEST p2: %ls\n", (wchar_t*) p2);
+    fwprintf(stdout, L"TEST p3: %i\n", *((int*) p3));
+*/
+
                     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                         if (j >= *cc) {
@@ -760,15 +765,22 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
                         get_array_elements((void*) &n1, *n, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION);
                         get_array_elements((void*) &nc1, *nc, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION);
 
+/*??
+    fwprintf(stdout, L"TEST j: %i\n", j);
+    fwprintf(stdout, L"TEST n1: %ls\n", (wchar_t*) *n1);
+    fwprintf(stdout, L"TEST nc1: %i\n", **((int**) nc1));
+*/
+
                         if (*n1 != *NULL_POINTER_MEMORY_MODEL) {
 
                             if (*nc1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                                compare_equal_arrays((void*) &r, p2, p3, (void*) *n1, (void*) *nc1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                compare_equal_arrays((void*) &r, p2, p3, *n1, *nc1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                                 if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                                     *i = j;
+//??    fwprintf(stdout, L"\n\nTEST INDEX SET to: %i\n\n", *i);
 
                                     break;
                                 }
@@ -1060,11 +1072,11 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
     get_compound_element_name_and_remaining_name(p4, p5, (void*) &e, (void*) &ec, (void*) &r, (void*) &rc, (void*) &f);
 
 /*??
-    fwprintf(stdout, L"TEST e %ls\n", (wchar_t*) e);
-    fwprintf(stdout, L"TEST ec %i\n", ec);
-    fwprintf(stdout, L"TEST r %ls\n", (wchar_t*) r);
-    fwprintf(stdout, L"TEST rc %i\n", rc);
-    fwprintf(stdout, L"TEST f %i\n", f);
+    fwprintf(stdout, L"TEST e: %ls\n", (wchar_t*) e);
+    fwprintf(stdout, L"TEST ec: %i\n", ec);
+    fwprintf(stdout, L"TEST r: %ls\n", (wchar_t*) r);
+    fwprintf(stdout, L"TEST rc: %i\n", rc);
+    fwprintf(stdout, L"TEST f: %i\n", f);
 */
 
     if (f == *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -1076,11 +1088,13 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p0, p1, e, (void*) &ec, (void*) &i);
 
-//??    fwprintf(stdout, L"TEST part index %i\n", i);
+//??    fwprintf(stdout, L"TEST part index: %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             if (rc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??    fwprintf(stdout, L"TEST remaining name: %i\n", i);
 
                 // A remaining name exists.
                 // The compound element hierarchy is processed further.
@@ -1095,6 +1109,8 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
                 get_compound_element_by_name(*m, *mc, *d, *dc, r, (void*) &rc, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
 
             } else {
+
+//??    fwprintf(stdout, L"TEST call get_compound_element_by_index: %i\n", i);
 
                 // No remaining name exists. A separator could NOT be found.
                 // The name is NOT hierarchical and represents an element name directly.
@@ -1116,7 +1132,7 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
         // Incorrect examples: ".patient", "#patient"
         get_compound_element_index(p2, p3, e, (void*) &ec, (void*) &i);
 
-//??    fwprintf(stdout, L"TEST meta index %i\n", i);
+//??    fwprintf(stdout, L"TEST meta index: %i\n", i);
 
         if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

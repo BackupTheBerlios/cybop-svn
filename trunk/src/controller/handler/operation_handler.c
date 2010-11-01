@@ -65,11 +65,11 @@ void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) HANDLE_OPERATION_MESSAGE_LOG_MODEL, (void*) HANDLE_OPERATION_MESSAGE_LOG_MODEL_COUNT);
 
-fwprintf(stdout, L"TEST handle operation count: %i\n", *((int*) p11));
-fwprintf(stdout, L"TEST handle operation: %ls\n", (wchar_t*) p10);
-
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, p10);
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n");
+
+    fwprintf(stdout, L"TEST handle operation count: %i\n", *((int*) p11));
+    fwprintf(stdout, L"TEST handle operation: %ls\n", (wchar_t*) p10);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;

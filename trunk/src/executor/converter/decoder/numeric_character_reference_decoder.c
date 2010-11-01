@@ -40,7 +40,7 @@
 /**
  * Decodes a numeric character reference (html escape code) into a character.
  *
- * @param p0 the destination character
+ * @param p0 the destination character (Hand over as reference!)
  * @param p1 the destination character count
  * @param p2 the destination character size
  * @param p3 the source numeric character reference (html escape code)
@@ -2622,7 +2622,7 @@ void decode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                     }
 
                     // Add temporary value to destination.
-                    set(*d, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    set(p0, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
                     // Increase destination count.
                     *dc = *dc + tc;

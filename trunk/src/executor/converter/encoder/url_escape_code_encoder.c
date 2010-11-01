@@ -54,7 +54,7 @@
 /**
  * Encodes the character into a url escape code.
  *
- * @param p0 the destination escape code
+ * @param p0 the destination escape code (Hand over as reference!)
  * @param p1 the destination escape code count
  * @param p2 the destination escape code size
  * @param p3 the source character
@@ -361,7 +361,7 @@ void encode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     }
 
                     // Add temporary value to destination.
-                    set(*d, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                    set(p0, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
 
                     // Increase destination count.
                     *dc = *dc + tc;
