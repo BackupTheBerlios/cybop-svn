@@ -150,12 +150,13 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     // Get action.
     // It is just one of many possibly parameters that were sensed as
     // http request and added to the compound model above.
-    get_universal_compound_element_by_name(*m, p9,
-        (void*) SENSE_MODEL_ACTION_NAME, (void*) SENSE_MODEL_ACTION_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
+        *m, p9,
+        (void*) SENSE_MODEL_ACTION_NAME, (void*) SENSE_MODEL_ACTION_NAME_COUNT,
         p0, p1);
 
     fwprintf(stdout, L"TEST 3 bc: %i \n", *((int*) p29));
@@ -205,23 +206,25 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
 
         // Get actual command belonging to the command name.
         // If the name is not known, the command parameter is left untouched.
-        get_universal_compound_element_by_name(p14, p15,
-            p16, p17,
+        get_universal_compound_element_by_name(
             (void*) &n, (void*) &nc, (void*) &ns,
             (void*) &a, (void*) &ac, (void*) &as,
             (void*) &m, (void*) &mc, (void*) &ms,
             (void*) &d, (void*) &dc, (void*) &ds,
+            p14, p15,
+            p16, p17,
             p0, p1);
 
     } else {
 
         // Get default index command, since the given command is null.
-        get_universal_compound_element_by_name(p14, p15,
-            INDEX_PARAMETER, INDEX_PARAMETER_COUNT,
+        get_universal_compound_element_by_name(
             (void*) &n, (void*) &nc, (void*) &ns,
             (void*) &a, (void*) &ac, (void*) &as,
             (void*) &m, (void*) &mc, (void*) &ms,
             (void*) &d, (void*) &dc, (void*) &ds,
+            p14, p15,
+            INDEX_PARAMETER, INDEX_PARAMETER_COUNT,
             p0, p1);
     }
 */

@@ -80,16 +80,20 @@ void sense_x_window_system_mouse_command(void* p0, void* p1, void* p2, void* p3,
                 if (*t == ButtonPress) {
 
                     // Get actual command belonging to the button and event.
-                    get_universal_compound_element_by_name(p12, p13,
+                    get_universal_compound_element_by_name(
+                        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11,
+                        p12, p13,
                         (void*) LEFT_PRESS_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LEFT_PRESS_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
-                        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p16, p17);
+                        p16, p17);
 
                 } else if (*t == ButtonRelease) {
 
                     // Get actual command belonging to the button and event.
-                    get_universal_compound_element_by_name(p12, p13,
+                    get_universal_compound_element_by_name(
+                        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11,
+                        p12, p13,
                         (void*) LEFT_RELEASE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LEFT_RELEASE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
-                        p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p16, p17);
+                        p16, p17);
                 }
 
             } else if (*b == Button2) {
@@ -290,20 +294,22 @@ void sense_x_window_system_part(void* p0, void* p1, void* p2, void* p3, void* p4
                             (void*) &d, (void*) &dc, (void*) &ds);
 
                         // Get graphical part position from details.
-                        get_universal_compound_element_by_name(*d, *dc,
-                            (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+                        get_universal_compound_element_by_name(
                             (void*) &pn, (void*) &pnc, (void*) &pns,
                             (void*) &pa, (void*) &pac, (void*) &pas,
                             (void*) &pm, (void*) &pmc, (void*) &pms,
                             (void*) &pd, (void*) &pdc, (void*) &pds,
+                            *d, *dc,
+                            (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                             p19, p20);
                         // Get graphical part size from details.
-                        get_universal_compound_element_by_name(*d, *dc,
-                            (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+                        get_universal_compound_element_by_name(
                             (void*) &sn, (void*) &snc, (void*) &sns,
                             (void*) &sa, (void*) &sac, (void*) &sas,
                             (void*) &sm, (void*) &smc, (void*) &sms,
                             (void*) &sd, (void*) &sdc, (void*) &sds,
+                            *d, *dc,
+                            (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                             p19, p20);
 
                         // Determine graphical part position coordinates.
@@ -544,12 +550,13 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if (e.xexpose.count == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Get actual command belonging to the x window system expose event.
-            get_universal_compound_element_by_name(*c, *cc,
-                (void*) EXPOSE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) EXPOSE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            get_universal_compound_element_by_name(
                 (void*) &cn, (void*) &cnc, (void*) &cns,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
                 (void*) &cd, (void*) &cdc, (void*) &cds,
+                *c, *cc,
+                (void*) EXPOSE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) EXPOSE_COMMAND_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 *k, *kc);
 
     fwprintf(stdout, L"TEST expose sense t: %i\n", t);

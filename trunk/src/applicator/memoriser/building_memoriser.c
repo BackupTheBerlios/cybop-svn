@@ -95,30 +95,33 @@ void memorise_building(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** resds = NULL_POINTER_MEMORY_MODEL;
 
     // get the basisname
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) BASE_BUILD_FLOW_OPERATION_CYBOL_NAME, (void*) BASE_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &bnn, (void*) &bnnc, (void*) &bnns,
         (void*) &bna, (void*) &bnac, (void*) &bnas,
         (void*) &bnm, (void*) &bnmc, (void*) &bnms,
         (void*) &bnd, (void*) &bndc, (void*) &bnds,
+        p0, p1,
+        (void*) BASE_BUILD_FLOW_OPERATION_CYBOL_NAME, (void*) BASE_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // get the index
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME, (void*) INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &idxn, (void*) &idxnc, (void*) &idxns,
         (void*) &idxa, (void*) &idxac, (void*) &idxas,
         (void*) &idxm, (void*) &idxmc, (void*) &idxms,
         (void*) &idxd, (void*) &idxdc, (void*) &idxds,
+        p0, p1,
+        (void*) INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME, (void*) INDEX_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // get the result
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME, (void*) COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &resn, (void*) &resnc, (void*) &resns,
         (void*) &resa, (void*) &resac, (void*) &resas,
         (void*) &resm, (void*) &resmc, (void*) &resms,
         (void*) &resd, (void*) &resdc, (void*) &resds,
+        p0, p1,
+        (void*) COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME, (void*) COMPOSITION_BUILD_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     //check the abstraction for the operation element

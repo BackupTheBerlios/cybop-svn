@@ -338,12 +338,13 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             void** tds = NULL_POINTER_MEMORY_MODEL;
 
             // Get source part tag from details.
-            get_universal_compound_element_by_name(p7, p8,
-                (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT,
+            get_universal_compound_element_by_name(
                 (void*) &tn, (void*) &tnc, (void*) &tns,
                 (void*) &ta, (void*) &tac, (void*) &tas,
                 (void*) &tm, (void*) &tmc, (void*) &tms,
                 (void*) &td, (void*) &tdc, (void*) &tds,
+                p7, p8,
+                (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT,
                 p9, p10);
 
             // Encode xhtml begin tag.

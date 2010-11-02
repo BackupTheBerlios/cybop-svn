@@ -115,39 +115,43 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
     void** ads = NULL_POINTER_MEMORY_MODEL;
 
     // Get service.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
+        p0, p1,
+        (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get socket namespace.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
+        p0, p1,
+        (void*) NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) NAMESPACE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get communication style.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) STYLE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) STYLE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &stn, (void*) &stnc, (void*) &stns,
         (void*) &sta, (void*) &stac, (void*) &stas,
         (void*) &stm, (void*) &stmc, (void*) &stms,
         (void*) &std, (void*) &stdc, (void*) &stds,
+        p0, p1,
+        (void*) STYLE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) STYLE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get host address.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
+        p0, p1,
+        (void*) ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) ADDRESS_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The comparison result.

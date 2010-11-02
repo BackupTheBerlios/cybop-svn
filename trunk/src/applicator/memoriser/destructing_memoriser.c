@@ -213,12 +213,13 @@ void memorise_destructing(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** nds = NULL_POINTER_MEMORY_MODEL;
 
     // Get knowledge model name.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME, (void*) MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
+        p0, p1,
+        (void*) MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME, (void*) MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The knowledge model name, abstraction, model, details.
@@ -236,12 +237,13 @@ void memorise_destructing(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** eds = NULL_POINTER_MEMORY_MODEL;
 
     // Get knowledge model.
-    get_universal_compound_element_by_name(p2, p3,
-        (void*) *nm, (void*) *nmc,
+    get_universal_compound_element_by_name(
         (void*) &en, (void*) &enc, (void*) &ens,
         (void*) &ea, (void*) &eac, (void*) &eas,
         (void*) &em, (void*) &emc, (void*) &ems,
         (void*) &ed, (void*) &edc, (void*) &eds,
+        p2, p3,
+        (void*) *nm, (void*) *nmc,
         p2, p3);
 
     // Destroy knowledge model.

@@ -28,9 +28,9 @@
 
 #include <signal.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/accessor/setter/signal_memory_setter.c"

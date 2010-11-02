@@ -117,12 +117,13 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
             // Get source whole size from details.
-            get_universal_compound_element_by_name(p5, p6,
-                (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            get_universal_compound_element_by_name(
                 (void*) &wsn, (void*) &wsnc, (void*) &wsns,
                 (void*) &wsa, (void*) &wsac, (void*) &wsas,
                 (void*) &wsm, (void*) &wsmc, (void*) &wsms,
                 (void*) &wsd, (void*) &wsdc, (void*) &wsds,
+                p5, p6,
+                (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 p7, p8);
 
             // Determine source whole size coordinates.
@@ -293,36 +294,40 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 (void*) &d, (void*) &dc, (void*) &ds);
 
             // Get source part layout from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            get_universal_compound_element_by_name(
                 (void*) &ln, (void*) &lnc, (void*) &lns,
                 (void*) &la, (void*) &lac, (void*) &las,
                 (void*) &lm, (void*) &lmc, (void*) &lms,
                 (void*) &ld, (void*) &ldc, (void*) &lds,
+                *d, *dc,
+                (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) LAYOUT_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 p7, p8);
             // Get source part cell from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            get_universal_compound_element_by_name(
                 (void*) &cn, (void*) &cnc, (void*) &cns,
                 (void*) &ca, (void*) &cac, (void*) &cas,
                 (void*) &cm, (void*) &cmc, (void*) &cms,
                 (void*) &cd, (void*) &cdc, (void*) &cds,
+                *d, *dc,
+                (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) CELL_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 p7, p8);
             // Get source part position from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            get_universal_compound_element_by_name(
                 (void*) &pn, (void*) &pnc, (void*) &pns,
                 (void*) &pa, (void*) &pac, (void*) &pas,
                 (void*) &pm, (void*) &pmc, (void*) &pms,
                 (void*) &pd, (void*) &pdc, (void*) &pds,
+                *d, *dc,
+                (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) POSITION_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 p7, p8);
             // Get source part size from details.
-            get_universal_compound_element_by_name(*d, *dc,
-                (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+            get_universal_compound_element_by_name(
                 (void*) &sn, (void*) &snc, (void*) &sns,
                 (void*) &sa, (void*) &sac, (void*) &sas,
                 (void*) &sm, (void*) &smc, (void*) &sms,
                 (void*) &sd, (void*) &sdc, (void*) &sds,
+                *d, *dc,
+                (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) SIZE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                 p7, p8);
 
             // Get source part position coordinates.
@@ -531,20 +536,22 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 XResizeWindow(*di, **w, *smx, *smy);
 
                 // Get source part title from details.
-                get_universal_compound_element_by_name(*d, *dc,
-                    (void*) TITLE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) TITLE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+                get_universal_compound_element_by_name(
                     (void*) &tn, (void*) &tnc, (void*) &tns,
                     (void*) &ta, (void*) &tac, (void*) &tas,
                     (void*) &tm, (void*) &tmc, (void*) &tms,
                     (void*) &td, (void*) &tdc, (void*) &tds,
+                    *d, *dc,
+                    (void*) TITLE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) TITLE_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                     p7, p8);
                 // Get source part icon from details.
-                get_universal_compound_element_by_name(*d, *dc,
-                    (void*) ICON_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) ICON_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
+                get_universal_compound_element_by_name(
                     (void*) &in, (void*) &inc, (void*) &ins,
                     (void*) &ia, (void*) &iac, (void*) &ias,
                     (void*) &im, (void*) &imc, (void*) &ims,
                     (void*) &id, (void*) &idc, (void*) &ids,
+                    *d, *dc,
+                    (void*) ICON_GRAPHICAL_USER_INTERFACE_CYBOL_NAME, (void*) ICON_GRAPHICAL_USER_INTERFACE_CYBOL_NAME_COUNT,
                     p7, p8);
 
                 // The terminated title.

@@ -11,7 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Make standard examples work again
+        * Make "ui_control" standard example work again
 
         * Replace branching in "executor/" directory using flag instead of direct comparison with abstraction integer value
         * Investigate how to handle setting of destination count and size;

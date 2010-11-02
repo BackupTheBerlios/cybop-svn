@@ -99,30 +99,33 @@ void memorise_copying(void* p0, int* p1, void* p2, void* p3, void* p4) {
     void** ads = NULL_POINTER_MEMORY_MODEL;
 
     // Get source.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME, (void*) SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
+        p0, p1,
+        (void*) SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME, (void*) SOURCE_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get destination.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME, (void*) DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &dn, (void*) &dnc, (void*) &dns,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
+        p0, p1,
+        (void*) DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME, (void*) DESTINATION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // Get abstraction.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
+        p0, p1,
+        (void*) ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_COPY_TRANSFER_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The comparison result.

@@ -221,36 +221,40 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** wds = NULL_POINTER_MEMORY_MODEL;
 
     // Get name.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &nn, (void*) &nnc, (void*) &nns,
         (void*) &na, (void*) &nac, (void*) &nas,
         (void*) &nm, (void*) &nmc, (void*) &nms,
         (void*) &nd, (void*) &ndc, (void*) &nds,
+        p0, p1,
+        (void*) NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) NAME_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get abstraction.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &an, (void*) &anc, (void*) &ans,
         (void*) &aa, (void*) &aac, (void*) &aas,
         (void*) &am, (void*) &amc, (void*) &ams,
         (void*) &ad, (void*) &adc, (void*) &ads,
+        p0, p1,
+        (void*) ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get element.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &en, (void*) &enc, (void*) &ens,
         (void*) &ea, (void*) &eac, (void*) &eas,
         (void*) &em, (void*) &emc, (void*) &ems,
         (void*) &ed, (void*) &edc, (void*) &eds,
+        p0, p1,
+        (void*) ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) ELEMENT_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get whole.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &wn, (void*) &wnc, (void*) &wns,
         (void*) &wa, (void*) &wac, (void*) &was,
         (void*) &wm, (void*) &wmc, (void*) &wms,
         (void*) &wd, (void*) &wdc, (void*) &wds,
+        p0, p1,
+        (void*) WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The comparison result.

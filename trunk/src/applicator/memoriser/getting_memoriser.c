@@ -114,36 +114,40 @@ void memorise_getting(void* p0, int* p1, void* p2, void* p3, void* p4) {
     void** rds = NULL_POINTER_MEMORY_MODEL;
 
     // Get compound.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) COMPOUND_GET_FLOW_OPERATION_CYBOL_NAME, (void*) COMPOUND_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &cn, (void*) &cnc, (void*) &cns,
         (void*) &ca, (void*) &cac, (void*) &cas,
         (void*) &cm, (void*) &cmc, (void*) &cms,
         (void*) &cd, (void*) &cdc, (void*) &cds,
+        p0, p1,
+        (void*) COMPOUND_GET_FLOW_OPERATION_CYBOL_NAME, (void*) COMPOUND_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get index.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) INDEX_GET_FLOW_OPERATION_CYBOL_NAME, (void*) INDEX_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &in, (void*) &inc, (void*) &ins,
         (void*) &ia, (void*) &iac, (void*) &ias,
         (void*) &im, (void*) &imc, (void*) &ims,
         (void*) &id, (void*) &idc, (void*) &ids,
+        p0, p1,
+        (void*) INDEX_GET_FLOW_OPERATION_CYBOL_NAME, (void*) INDEX_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get description.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) DESCRIPTION_GET_FLOW_OPERATION_CYBOL_NAME, (void*) DESCRIPTION_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &dn, (void*) &dnc, (void*) &dns,
         (void*) &da, (void*) &dac, (void*) &das,
         (void*) &dm, (void*) &dmc, (void*) &dms,
         (void*) &dd, (void*) &ddc, (void*) &dds,
+        p0, p1,
+        (void*) DESCRIPTION_GET_FLOW_OPERATION_CYBOL_NAME, (void*) DESCRIPTION_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
     // Get result.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) RESULT_GET_FLOW_OPERATION_CYBOL_NAME, (void*) RESULT_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &rn, (void*) &rnc, (void*) &rns,
         (void*) &ra, (void*) &rac, (void*) &ras,
         (void*) &rm, (void*) &rmc, (void*) &rms,
         (void*) &rd, (void*) &rdc, (void*) &rds,
+        p0, p1,
+        (void*) RESULT_GET_FLOW_OPERATION_CYBOL_NAME, (void*) RESULT_GET_FLOW_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The comparison result.

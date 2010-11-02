@@ -1187,22 +1187,22 @@ void get_compound_element_by_name(void* p0, void* p1, void* p2, void* p3, void* 
  *   at first, the part name needs to be determined within the parameters;
  *   only then, that name can be used to determine the actual compound element
  *
- * @param p0 the compound model
- * @param p1 the compound model count
- * @param p2 the identifier name
- * @param p3 the identifier name count
- * @param p4 the name (Hand over as reference!)
- * @param p5 the name count (Hand over as reference!)
- * @param p6 the name size (Hand over as reference!)
- * @param p7 the abstraction (Hand over as reference!)
- * @param p8 the abstraction count (Hand over as reference!)
- * @param p9 the abstraction size (Hand over as reference!)
- * @param p10 the model (Hand over as reference!)
- * @param p11 the model count (Hand over as reference!)
- * @param p12 the model size (Hand over as reference!)
- * @param p13 the details (Hand over as reference!)
- * @param p14 the details count (Hand over as reference!)
- * @param p15 the details size (Hand over as reference!)
+ * @param p0 the name (Hand over as reference!)
+ * @param p1 the name count (Hand over as reference!)
+ * @param p2 the name size (Hand over as reference!)
+ * @param p3 the abstraction (Hand over as reference!)
+ * @param p4 the abstraction count (Hand over as reference!)
+ * @param p5 the abstraction size (Hand over as reference!)
+ * @param p6 the model (Hand over as reference!)
+ * @param p7 the model count (Hand over as reference!)
+ * @param p8 the model size (Hand over as reference!)
+ * @param p9 the details (Hand over as reference!)
+ * @param p10 the details count (Hand over as reference!)
+ * @param p11 the details size (Hand over as reference!)
+ * @param p12 the compound model
+ * @param p13 the compound model count
+ * @param p14 the identifier name
+ * @param p15 the identifier name count
  * @param p16 the knowledge
  * @param p17 the knowledge count
  */
@@ -1241,8 +1241,8 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
     void** eds = NULL_POINTER_MEMORY_MODEL;
 
     // Get compound element.
-    get_compound_element_by_name(p0, p1, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        p2, p3,
+    get_compound_element_by_name(p12, p13, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        p14, p15,
         (void*) &n, (void*) &nc, (void*) &ns,
         (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms,
@@ -1289,7 +1289,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
             // The knowledge root does not have a details container with meta
             // information, which is why a null pointer is handed over here twice.
             get_compound_element_by_name(p16, p17, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                *em, *emc, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15);
+                *em, *emc, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
         }
     }
 
@@ -1315,7 +1315,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
             // The knowledge root does not have a details container with meta
             // information, which is why a null pointer is handed over here twice.
             get_compound_element_by_name(p16, p17, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                *m, *mc, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15);
+                *m, *mc, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
         }
     }
 
@@ -1333,8 +1333,8 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
         // usage of those many additional local variables was avoided
         // and the "get_compound_element_by_name" procedure
         // is called here a second time instead.
-        get_compound_element_by_name(p0, p1, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-            p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15);
+        get_compound_element_by_name(p12, p13, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            p14, p15, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
     }
 }
 

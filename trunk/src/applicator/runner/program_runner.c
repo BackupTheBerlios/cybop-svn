@@ -65,12 +65,13 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     void** programds = NULL_POINTER_MEMORY_MODEL;
 
     // Get program option.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) PROGRAM_RUN_OPERATION_CYBOL_NAME, (void*) PROGRAM_RUN_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &programn, (void*) &programnc, (void*) &programns,
         (void*) &programa, (void*) &programac, (void*) &programas,
         (void*) &programm, (void*) &programmc, (void*) &programms,
         (void*) &programd, (void*) &programdc, (void*) &programds,
+        p0, p1,
+        (void*) PROGRAM_RUN_OPERATION_CYBOL_NAME, (void*) PROGRAM_RUN_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The arguments vector.

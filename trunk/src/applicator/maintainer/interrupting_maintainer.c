@@ -134,12 +134,13 @@ void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void** sds = NULL_POINTER_MEMORY_MODEL;
 
     // Get service.
-    get_universal_compound_element_by_name(p0, p1,
-        (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
+    get_universal_compound_element_by_name(
         (void*) &sn, (void*) &snc, (void*) &sns,
         (void*) &sa, (void*) &sac, (void*) &sas,
         (void*) &sm, (void*) &smc, (void*) &sms,
         (void*) &sd, (void*) &sdc, (void*) &sds,
+        p0, p1,
+        (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
     // The comparison result.
