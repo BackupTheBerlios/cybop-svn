@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Try to make "ui_control" standard example work again
+        * Find the reason why wide character-based abstraction constants
+            should be used instead of integer numbers (because they are used in cybol)
+
 2010-11-02  Christian Heller  <christian.heller@tuxtax.de>
         * Fix pointer bugs caused by wrong position of arguments in "get_universal_compound_element_by_name" function and -calls
         * Make "exit_text_file" and "exit_cybol_file" example applications work again

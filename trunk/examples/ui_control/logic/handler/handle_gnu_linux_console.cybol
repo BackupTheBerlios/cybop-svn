@@ -7,7 +7,7 @@
         <property name="summand_1" channel="inline" abstraction="text/plain" model=".ui_control.logic.user_interface.main_window_actions."/>
         <property name="summand_2" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.gnu_linux_console_command"/>
         <property name="sum" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.gnu_linux_console_command_model"/>
-        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
     </part>
     <part name="send" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>

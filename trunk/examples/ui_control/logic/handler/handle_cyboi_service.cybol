@@ -3,7 +3,7 @@
     <part name="copy_name" channel="inline" abstraction="operation/plain" model="copy">
         <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.name"/>
         <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.name"/>
-        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character_vector"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
     </part>
 -->
 </model>

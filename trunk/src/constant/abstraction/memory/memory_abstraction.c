@@ -30,15 +30,31 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 //
-// In earlier versions of CYBOI, these "abstraction" constants were character arrays (strings).
-// In order to gain better performance, they were later converted into simple integer numbers.
+// CAUTION! These memory abstraction constants HAVE TO BE of type "wchar_t*"!
 //
-// There is no problem with that and concerns are not necessary, because:
-// - abstractions as given in CYBOL files are represented by character arrays, e.g. "boolean" or "xdt"
-// - when reading the corresponding model data, they are converted into memory-internal structures
-// - a "boolean" becomes and "int" and an "xdt" file becomes a "compound" memory model
-// - since the models have to be converted, the corresponding abstractions have to be converted, too
-// - therefore, it is no problem to represent memory-internal abstractions with an integer instead of a character array
+// There is no problem with representing memory-internal abstractions by an integer number
+// instead of a character array as long as just cybol abstractions are processed:
+// - abstractions as given in cybol files are represented by characters, e.g. "boolean" or "xdt"
+// - while parsing the cybol file, cyboi converts them into memory-internal structures
+// - a "boolean" becomes and "int" and an "xdt" file becomes a "compound" memory model etc.
+// - since the models have to be converted, the corresponding abstractions have to be converted as well
+//
+// It is true, integer numbers would be more efficient when processed in cyboi.
+// This had been tried out and they had been applied.
+//
+// The problem, however, is, that runtime cyboi abstractions ARE ALSO USED
+// in cybol applications, e.g. in cybol operation "add", "copy", "create".
+//
+// If having integers, then cybol application developers would have to
+// learn which number references which memory abstraction (type).
+// This is not good because cybol developers should not be forced
+// to learn cyboi-internal stuff.
+//
+// Even worse, the assignment of integer numbers to abstraction constants
+// may change, e.g. due to additional abstractions having to be added to cyboi.
+//
+// Therefore, using wide character sequences (strings) for cyboi-internal
+// abstraction constants is necessary!
 //
 
 //
