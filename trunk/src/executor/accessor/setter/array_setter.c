@@ -45,7 +45,7 @@
  * @param p1 the source elements
  * @param p2 the source elements count
  * @param p3 the destination array index
- * @param p4 the abstraction
+ * @param p4 the primitive abstraction
  */
 void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -64,7 +64,7 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
             determine_size((void*) &dos, p4);
 
             // Calculate memory area (destination offset).
-            multiply_with_integer((void*) &dos, p3, (void*) INTEGER_MEMORY_ABSTRACTION);
+            multiply_with_integer((void*) &dos, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // The destination.
             // CAUTION! It HAS TO BE initialised with p0,
@@ -72,7 +72,7 @@ void set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
             void* d = p0;
 
             // Add offset to destination.
-            add_integer((void*) &d, (void*) &dos, (void*) POINTER_MEMORY_ABSTRACTION);
+            add_integer((void*) &d, (void*) &dos, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;

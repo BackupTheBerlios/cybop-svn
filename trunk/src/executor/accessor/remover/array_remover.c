@@ -46,7 +46,7 @@
  * @param p1 the destination array size
  * @param p2 the destination array index
  * @param p3 the source elements count
- * @param p4 the abstraction
+ * @param p4 the primitive abstraction
  */
 void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
@@ -73,9 +73,9 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 determine_size((void*) &sos, p4);
 
                 // Calculate memory area (destination offset).
-                multiply_with_integer((void*) &dos, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
+                multiply_with_integer((void*) &dos, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
                 // Calculate memory area (source offset).
-                multiply_with_integer((void*) &sos, p3, (void*) INTEGER_MEMORY_ABSTRACTION);
+                multiply_with_integer((void*) &sos, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // The destination.
                 // CAUTION! It HAS TO BE initialised with p0,
@@ -83,7 +83,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 void* d = p0;
 
                 // Add offset to destination.
-                add_integer((void*) &d, (void*) &dos, (void*) POINTER_MEMORY_ABSTRACTION);
+                add_integer((void*) &d, (void*) &dos, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // The source.
                 // CAUTION! It HAS TO BE initialised with d,
@@ -92,7 +92,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 void* s = d;
 
                 // Add offset to source.
-                add_integer((void*) &s, (void*) &sos, (void*) POINTER_MEMORY_ABSTRACTION);
+                add_integer((void*) &s, (void*) &sos, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // The subtrahend.
                 // CAUTION! It HAS TO BE initialised with *i,
@@ -100,7 +100,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 int sub = *i;
 
                 // Add elements count to subtrahend.
-                add_integer((void*) &sub, p3, (void*) INTEGER_MEMORY_ABSTRACTION);
+                add_integer((void*) &sub, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // The remaining elements size.
                 // CAUTION! It HAS TO BE initialised with *as,
@@ -108,7 +108,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 int r = *as;
 
                 // Subtract subtrahend from array size.
-                subtract_integer((void*) &r, (void*) &sub, (void*) INTEGER_MEMORY_ABSTRACTION);
+                subtract_integer((void*) &r, (void*) &sub, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // The loop variable.
                 int j = *NUMBER_0_INTEGER_MEMORY_MODEL;

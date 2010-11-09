@@ -132,11 +132,11 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         int tmpys = *NUMBER_4_INTEGER_MEMORY_MODEL + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                         // Create temporary null-terminated day string.
-                        allocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        allocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                         // Create temporary null-terminated month string.
-                        allocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        allocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                         // Create temporary null-terminated year string.
-                        allocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        allocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // The index.
                         int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -148,11 +148,11 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         void* syi = p3 + (*NUMBER_4_INTEGER_MEMORY_MODEL * *WIDE_CHARACTER_PRIMITIVE_SIZE);
 
                         // Copy original string to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, sdi, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpd, sdi, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                         // Copy original string to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, smi, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpm, smi, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                         // Copy original string to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, syi, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpy, syi, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // The day termination character index.
                         int dti = *NUMBER_2_INTEGER_MEMORY_MODEL;
@@ -162,11 +162,11 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         int yti = *NUMBER_4_INTEGER_MEMORY_MODEL;
 
                         // Add string termination to temporary null-terminated day string.
-                        set_array_elements((void*) tmpd, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &dti, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpd, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &dti, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                         // Add string termination to temporary null-terminated month string.
-                        set_array_elements((void*) tmpm, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &mti, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpm, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &mti, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                         // Add string termination to temporary null-terminated year string.
-                        set_array_elements((void*) tmpy, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &yti, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        set_array_elements((void*) tmpy, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &yti, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // The tail variable is useless here and only needed for the string
                         // transformation function. If the whole string array consists of
@@ -204,26 +204,26 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                             *ds = *ds * *INTEGER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Reallocate date time.
-                            reallocate(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                            reallocate(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
                         }
 
                         // Set date time integer values.
-                        set_array_elements(*d, (void*) &yv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) YEAR_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) &mv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MONTH_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, (void*) &dv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DAY_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) HOUR_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) MINUTE_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(*d, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SECOND_DATETIME_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) &yv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) YEAR_DATETIME_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) &mv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MONTH_DATETIME_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) &dv, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DAY_DATETIME_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) HOUR_DATETIME_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) MINUTE_DATETIME_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, *NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SECOND_DATETIME_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // Increase date time count by one, because of new element.
                         (*dc)++;
 
                         // Destroy temporary null-terminated day string.
-                        deallocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        deallocate_array((void*) &tmpd, (void*) &tmpds, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                         // Destroy temporary null-terminated month string.
-                        deallocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        deallocate_array((void*) &tmpm, (void*) &tmpms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                         // Destroy temporary null-terminated year string.
-                        deallocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        deallocate_array((void*) &tmpy, (void*) &tmpys, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     } else {
 

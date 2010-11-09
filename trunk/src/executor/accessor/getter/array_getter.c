@@ -44,7 +44,7 @@
  * @param p0 the destination elements (Hand over as array reference!)
  * @param p1 the source array
  * @param p2 the source index
- * @param p3 the abstraction
+ * @param p3 the primitive abstraction
  */
 void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
@@ -67,7 +67,7 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
             determine_size((void*) &o, p3);
 
             // Calculate memory area (destination offset).
-            multiply_with_integer((void*) &o, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
+            multiply_with_integer((void*) &o, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // The destination elements.
             // CAUTION! It HAS TO BE initialised with p1,
@@ -102,7 +102,7 @@ void get_array_elements(void* p0, void* p1, void* p2, void* p3) {
  * @param p2 the array count
  * @param p3 the elements
  * @param p4 the elements count
- * @param p5 the abstraction
+ * @param p5 the primitive abstraction
  */
 void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 

@@ -16,6 +16,22 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace integer-based memory abstraction constants in cyboi with wide characters;
+            see files "constant/abstraction/memory/memory_abstraction.c"
+            and "constant/abstraction/memory/primitive_memory_abstraction.c";
+            it is true, integer numbers are more efficient when processed in cyboi;
+            they have been applied, but the problem is, that runtime abstractions
+            are also used in cybol applications, e.g. in operation "add", "copy", "create";
+            if having integers, then cybol application developers would have to learn
+            which number references which abstraction (type);
+            even worse, the assignment of numbers to abstraction constants may change,
+            e.g. due to additional abstractions having to be added to cyboi;
+            therefore, using wide character sequences for abstraction constants is necessary
+        * Replace branching in "executor/" directory and elsewhere using "comparison result" flag
+            instead of direct comparison with abstraction integer value,
+            due to change from integer-based memory abstraction constants to wide characters
+
 2010-11-03  Christian Heller  <christian.heller@tuxtax.de>
         * Try to make "ui_control" standard example work again
         * Find the reason why wide character-based abstraction constants

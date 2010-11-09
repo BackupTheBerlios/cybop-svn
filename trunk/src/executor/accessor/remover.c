@@ -26,17 +26,11 @@
 #ifndef REMOVER_SOURCE
 #define REMOVER_SOURCE
 
+#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../memoriser/accessor/character_vector_accessor.c"
-#include "../../executor/accessor/getter/compound_getter.c"
-#include "../../memoriser/accessor/double_vector_accessor.c"
-#include "../../memoriser/accessor/integer_vector_accessor.c"
-#include "../../executor/accessor/getter/array_getter.c"
-#include "../../memoriser/accessor/pointer_vector_accessor.c"
-#include "../../executor/accessor/getter/signal_memory_getter.c"
-#include "../../memoriser/accessor/wide_character_vector_accessor.c"
+#include "../../executor/accessor/remover/array_remover.c"
+#include "../../executor/accessor/remover/compound_remover.c"
+#include "../../executor/accessor/remover/signal_memory_remover.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 
 /**
@@ -46,74 +40,141 @@
  * as that name is already used by libc functionality stdio.h:152.
  *
  * @param p0 the model
- * @param p1 the size
- * @param p2 the index
+ * @param p1 the model size
+ * @param p2 the model index
  * @param p3 the abstraction
+ * @param p4 the abstraction count
  */
-void remove_element(void* p0, void* p1, void* p2, void* p3) {
+void remove_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Remove.");
 
-        int* a = (int*) p3;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Remove element.");
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
+        compare_equal_arrays((void*) &r, p3, p4, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            remove_character_vector_element(p0, p1, p2);
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
+//??            remove_array_elements(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            remove_complex_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *COMPOUND_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            remove_compound_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *DATETIME_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            remove_datetime_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            remove_double_vector_element(p0, p1, p2);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            remove_array_elements(p0, p1, p2, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            remove_fraction_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            remove_integer_vector_element(p0, p1, p2);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        } else if (*a == *INTERNAL_MEMORY_MEMORY_ABSTRACTION) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            remove_array_elements(p0, p1, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            remove_internal_memory_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            remove_pointer_vector_element(p0, p1, p2);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            remove_array_elements(p0, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            remove_signal_memory_element(p0, p1, p2);
-
-        } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
-
-//??            remove_unsigned_long_vector_element(p0, p1, p2);
-
-        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
-
-            remove_wide_character_vector_element(p0, p1, p2);
-
-        } else {
-
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not remove element. The abstraction is unknown.");
         }
+    }
 
-    } else {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not remove element. The abstraction is null.");
+        compare_equal_arrays((void*) &r, p3, p4, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            remove_array_elements(p0, p1, p2, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            remove_array_elements(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not remove element. The abstraction is unknown.");
     }
 }
 

@@ -53,12 +53,12 @@ void test_accessor_size_determiner() {
     int wcs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Determine size.
-    determine_size((void*) &cs, (void*) CHARACTER_MEMORY_ABSTRACTION);
-    determine_size((void*) &ds, (void*) DOUBLE_MEMORY_ABSTRACTION);
-    determine_size((void*) &is, (void*) INTEGER_MEMORY_ABSTRACTION);
-    determine_size((void*) &ps, (void*) POINTER_MEMORY_ABSTRACTION);
+    determine_size((void*) &cs, (void*) CHARACTER_PRIMITIVE_SIZE);
+    determine_size((void*) &ds, (void*) DOUBLE_PRIMITIVE_SIZE);
+    determine_size((void*) &is, (void*) INTEGER_PRIMITIVE_SIZE);
+    determine_size((void*) &ps, (void*) POINTER_PRIMITIVE_SIZE);
     determine_size((void*) &uls, (void*) UNSIGNED_LONG_PRIMITIVE_SIZE);
-    determine_size((void*) &wcs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    determine_size((void*) &wcs, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
 
     fwprintf(stdout, L"Type size character: %i\n", cs);
     fwprintf(stdout, L"Type size double: %i\n", ds);
@@ -98,26 +98,26 @@ void test_accessor_array_setter() {
     int i2 = *NUMBER_13_INTEGER_MEMORY_MODEL;
 
     // Allocate destination array.
-    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"d string: %ls\n", (wchar_t*) d);
     fwprintf(stdout, L"s1: %ls\n", s1);
     fwprintf(stdout, L"s1c: %i\n", s1c);
     fwprintf(stdout, L"i1: %i\n", i1);
 
-    set_array_elements(d, (void*) s1, (void*) &s1c, (void*) &i1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(d, (void*) s1, (void*) &s1c, (void*) &i1, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"d string 2: %ls\n", (wchar_t*) d);
     fwprintf(stdout, L"s2: %ls\n", s2);
     fwprintf(stdout, L"s2c: %i\n", s2c);
     fwprintf(stdout, L"i2: %i\n", i2);
 
-    set_array_elements(d, (void*) s2, (void*) &s2c, (void*) &i2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(d, (void*) s2, (void*) &s2c, (void*) &i2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"d string 3: %ls\n", (wchar_t*) d);
 
     // Deallocate destination array.
-    deallocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /**

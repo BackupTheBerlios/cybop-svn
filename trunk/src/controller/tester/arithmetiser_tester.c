@@ -49,9 +49,9 @@ void test_arithmetiser_integer_adder() {
     fwprintf(stdout, L"Pointer original: %i\n", p);
 
     // Add integer to integer.
-    add_integer((void*) &i, (void*) &s, (void*) INTEGER_MEMORY_ABSTRACTION);
+    add_integer((void*) &i, (void*) &s, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Add integer to pointer.
-    add_integer((void*) &p, (void*) &s, (void*) INTEGER_MEMORY_ABSTRACTION);
+    add_integer((void*) &p, (void*) &s, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"Integer addition result: %i\n", i);
     fwprintf(stdout, L"Pointer addition result: %i\n", p);
@@ -68,7 +68,7 @@ void test_arithmetiser_multiplicator() {
     int f = *NUMBER_4_INTEGER_MEMORY_MODEL;
 
     // Multiply integer with integer.
-    multiply_with_integer((void*) &i, (void*) &f, (void*) INTEGER_MEMORY_ABSTRACTION);
+    multiply_with_integer((void*) &i, (void*) &f, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"Multiplication result: %i\n", i);
 }

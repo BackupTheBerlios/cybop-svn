@@ -41,7 +41,7 @@
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the array size
- * @param p2 the array abstraction
+ * @param p2 the primitive abstraction
  */
 void allocate_array(void* p0, void* p1, void* p2) {
 
@@ -58,7 +58,7 @@ void allocate_array(void* p0, void* p1, void* p2) {
         determine_size((void*) &ma, p2);
 
         // Calculate memory area.
-        multiply_with_integer((void*) &ma, p1, (void*) INTEGER_MEMORY_ABSTRACTION);
+        multiply_with_integer((void*) &ma, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // A minimal space in memory is always allocated,
         // even if the requested size is zero.

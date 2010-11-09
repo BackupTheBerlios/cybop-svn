@@ -67,12 +67,12 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_equal_arrays((void*) &r, p3, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays((void*) &r, p3, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Set boolean value to "true", in other words the integer value to "one".
-                        set_array_elements(*d, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // Increment destination count.
                         *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -81,12 +81,12 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_equal_arrays((void*) &r, p3, p4, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays((void*) &r, p3, p4, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         // Set boolean value to "false", in other words the integer value to "zero".
-                        set_array_elements(*d, (void*) FALSE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(*d, (void*) FALSE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // Increment destination count.
                         *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;

@@ -37,76 +37,142 @@
 /**
  * Gets the element.
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the source
- * @param p2 the index
+ * @param p0 the destination element (Hand over as reference!)
+ * @param p1 the source model
+ * @param p2 the source model index
  * @param p3 the abstraction
  * @param p4 the abstraction count
  */
 void get(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get element.");
 
-        int* a = (int*) p3;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get element.");
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
+        compare_equal_arrays((void*) &r, p3, p4, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            get_array_elements(p0, p1, p2, p3);
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        } else if (*a == *COMPLEX_MEMORY_ABSTRACTION) {
+            get_array_elements(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            get_complex_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *COMPOUND_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            get_compound_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *DATETIME_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            get_datetime_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            get_array_elements(p0, p1, p2, p3);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        } else if (*a == *FRACTION_MEMORY_ABSTRACTION) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            get_array_elements(p0, p1, p2, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            get_fraction_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            get_array_elements(p0, p1, p2, p3);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        } else if (*a == *INTERNAL_MEMORY_MEMORY_ABSTRACTION) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            get_array_elements(p0, p1, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            get_internal_memory_element(p0, p1, p2);
+        }
+    }
 
-        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            get_array_elements(p0, p1, p2, p3);
+        compare_equal_arrays((void*) &r, p3, p4, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        } else if (*a == *SIGNAL_MEMORY_MEMORY_ABSTRACTION) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            get_array_elements(p0, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
 //??            get_signal_memory_element(p0, p1, p2);
-
-        } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
-
-            get_array_elements(p0, p1, p2, p3);
-
-        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
-
-            get_array_elements(p0, p1, p2, p3);
-
-        } else {
-
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not get element. The abstraction is unknown.");
         }
+    }
 
-    } else {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get element. The abstraction is null.");
+        compare_equal_arrays((void*) &r, p3, p4, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            get_array_elements(p0, p1, p2, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            get_array_elements(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not get element. The abstraction is unknown.");
     }
 }
 

@@ -58,68 +58,64 @@
 //
 
 //
-// Count.
-//
-// This count is valid for ALL memory abstractions below,
-// as they are just integer numbers.
-//
-
-/** The memory abstraction count. */
-static int* MEMORY_ABSTRACTION_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
-
-//
 // Primitive.
-//
-// Range: 0..999
-//
-// This big range is necessary, since different platforms
-// (hardware as well as operating system) offer a plethora
-// of primitive data types, that may have to be considered here.
 //
 
 /** The character memory abstraction. */
-static int* CHARACTER_MEMORY_ABSTRACTION = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t CHARACTER_MEMORY_ABSTRACTION_ARRAY[] = {L'c', L'h', L'a', L'r', L'a', L'c', L't', L'e', L'r'};
+static wchar_t* CHARACTER_MEMORY_ABSTRACTION = CHARACTER_MEMORY_ABSTRACTION_ARRAY;
+static int* CHARACTER_MEMORY_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The double memory abstraction. */
-static int* DOUBLE_MEMORY_ABSTRACTION = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t DOUBLE_MEMORY_ABSTRACTION_ARRAY[] = {L'd', L'o', L'u', L'b', L'l', L'e'};
+static wchar_t* DOUBLE_MEMORY_ABSTRACTION = DOUBLE_MEMORY_ABSTRACTION_ARRAY;
+static int* DOUBLE_MEMORY_ABSTRACTION_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The integer memory abstraction. */
-static int* INTEGER_MEMORY_ABSTRACTION = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t INTEGER_MEMORY_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'g', L'e', L'r'};
+static wchar_t* INTEGER_MEMORY_ABSTRACTION = INTEGER_MEMORY_ABSTRACTION_ARRAY;
+static int* INTEGER_MEMORY_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The pointer memory abstraction. */
-static int* POINTER_MEMORY_ABSTRACTION = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t POINTER_MEMORY_ABSTRACTION_ARRAY[] = {L'p', L'o', L'i', L'n', L't', L'e', L'r'};
+static wchar_t* POINTER_MEMORY_ABSTRACTION = POINTER_MEMORY_ABSTRACTION_ARRAY;
+static int* POINTER_MEMORY_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The unsigned long memory abstraction. */
-static int* UNSIGNED_LONG_MEMORY_ABSTRACTION = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+/** The unsigned_long memory abstraction. */
+static wchar_t UNSIGNED_LONG_MEMORY_ABSTRACTION_ARRAY[] = {L'u', L'n', L's', L'i', L'g', L'n', L'e', L'd', L'_', L'l', L'o', L'n', L'g'};
+static wchar_t* UNSIGNED_LONG_MEMORY_ABSTRACTION = UNSIGNED_LONG_MEMORY_ABSTRACTION_ARRAY;
+static int* UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT = NUMBER_13_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The wide character memory abstraction. */
-static int* WIDE_CHARACTER_MEMORY_ABSTRACTION = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
+/** The wide_character memory abstraction. */
+static wchar_t WIDE_CHARACTER_MEMORY_ABSTRACTION_ARRAY[] = {L'w', L'i', L'd', L'e', L'_', L'c', L'h', L'a', L'r', L'a', L'c', L't', L'e', L'r'};
+static wchar_t* WIDE_CHARACTER_MEMORY_ABSTRACTION = WIDE_CHARACTER_MEMORY_ABSTRACTION_ARRAY;
+static int* WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Path.
 //
-// Range: 2000..2999
-//
 
-/** The encapsulated knowledge path memory abstraction. */
-static int* ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION = NUMBER_2000_INTEGER_MEMORY_MODEL_ARRAY;
+/** The encapsulated_knowledge_path memory abstraction. */
+static wchar_t ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_ARRAY[] = {L'e', L'n', L'c', L'a', L'p', L's', L'u', L'l', L'a', L't', L'e', L'd', L'_', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L'_', L'p', L'a', L't', L'h'};
+static wchar_t* ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION = ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_ARRAY;
+static int* ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT = NUMBER_27_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The knowledge path memory abstraction. */
-static int* KNOWLEDGE_PATH_MEMORY_ABSTRACTION = NUMBER_2001_INTEGER_MEMORY_MODEL_ARRAY;
+/** The knowledge_path memory abstraction. */
+static wchar_t KNOWLEDGE_PATH_MEMORY_ABSTRACTION_ARRAY[] = {L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L'_', L'p', L'a', L't', L'h'};
+static wchar_t* KNOWLEDGE_PATH_MEMORY_ABSTRACTION = KNOWLEDGE_PATH_MEMORY_ABSTRACTION_ARRAY;
+static int* KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Operation.
 //
-// Range: 3000..3999
-//
 
 /** The operation memory abstraction. */
-static int* OPERATION_MEMORY_ABSTRACTION = NUMBER_3000_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t OPERATION_MEMORY_ABSTRACTION_ARRAY[] = {L'o', L'p', L'e', L'r', L'a', L't', L'i', L'o', L'n'};
+static wchar_t* OPERATION_MEMORY_ABSTRACTION = OPERATION_MEMORY_ABSTRACTION_ARRAY;
+static int* OPERATION_MEMORY_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Knowledge.
-//
-// Range: 4000..4999
 //
 
 /**
@@ -128,37 +124,48 @@ static int* OPERATION_MEMORY_ABSTRACTION = NUMBER_3000_INTEGER_MEMORY_MODEL_ARRA
  * Compound models consist of other compound or primitive models.
  * CAUTION! This is also used as knowledge memory abstraction!
  */
-static int* COMPOUND_MEMORY_ABSTRACTION = NUMBER_4000_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t COMPOUND_MEMORY_ABSTRACTION_ARRAY[] = {L'c', L'o', L'm', L'p', L'o', L'u', L'n', L'd'};
+static wchar_t* COMPOUND_MEMORY_ABSTRACTION = COMPOUND_MEMORY_ABSTRACTION_ARRAY;
+static int* COMPOUND_MEMORY_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The internal memory memory abstraction. */
-static int* INTERNAL_MEMORY_MEMORY_ABSTRACTION = NUMBER_4001_INTEGER_MEMORY_MODEL_ARRAY;
+/** The internal_memory memory abstraction. */
+static wchar_t INTERNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'n', L'a', L'l', L'_', L'm', L'e', L'm', L'o', L'r', L'y'};
+static wchar_t* INTERNAL_MEMORY_MEMORY_ABSTRACTION = INTERNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY;
+static int* INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The model memory abstraction. */
-static int* MODEL_MEMORY_ABSTRACTION = NUMBER_4002_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t MODEL_MEMORY_ABSTRACTION_ARRAY[] = {L'm', L'o', L'd', L'e', L'l'};
+static wchar_t* MODEL_MEMORY_ABSTRACTION = MODEL_MEMORY_ABSTRACTION_ARRAY;
+static int* MODEL_MEMORY_ABSTRACTION_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The part memory abstraction. */
-static int* PART_MEMORY_ABSTRACTION = NUMBER_4003_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t PART_MEMORY_ABSTRACTION_ARRAY[] = {L'p', L'a', L'r', L't'};
+static wchar_t* PART_MEMORY_ABSTRACTION = PART_MEMORY_ABSTRACTION_ARRAY;
+static int* PART_MEMORY_ABSTRACTION_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The signal memory memory abstraction. */
-static int* SIGNAL_MEMORY_MEMORY_ABSTRACTION = NUMBER_4004_INTEGER_MEMORY_MODEL_ARRAY;
+/** The signal_memory memory abstraction. */
+static wchar_t SIGNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY[] = {L's', L'i', L'g', L'n', L'a', L'l', L'_', L'm', L'e', L'm', L'o', L'r', L'y'};
+static wchar_t* SIGNAL_MEMORY_MEMORY_ABSTRACTION = SIGNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY;
+static int* SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT = NUMBER_13_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Structure.
 //
-// Range: 5000..9999
-//
-// This big range is necessary to provide structures required by
-// graphical user interface frameworks or other external libraries.
-//
 
 /** The complex memory abstraction. */
-static int* COMPLEX_MEMORY_ABSTRACTION = NUMBER_5000_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t COMPLEX_MEMORY_ABSTRACTION_ARRAY[] = {L'c', L'o', L'm', L'p', L'l', L'e', L'x'};
+static wchar_t* COMPLEX_MEMORY_ABSTRACTION = COMPLEX_MEMORY_ABSTRACTION_ARRAY;
+static int* COMPLEX_MEMORY_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The datetime memory abstraction. */
-static int* DATETIME_MEMORY_ABSTRACTION = NUMBER_5001_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t DATETIME_MEMORY_ABSTRACTION_ARRAY[] = {L'd', L'a', L't', L'e', L't', L'i', L'm', L'e'};
+static wchar_t* DATETIME_MEMORY_ABSTRACTION = DATETIME_MEMORY_ABSTRACTION_ARRAY;
+static int* DATETIME_MEMORY_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The fraction memory abstraction. */
-static int* FRACTION_MEMORY_ABSTRACTION = NUMBER_5002_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t FRACTION_MEMORY_ABSTRACTION_ARRAY[] = {L'f', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
+static wchar_t* FRACTION_MEMORY_ABSTRACTION = FRACTION_MEMORY_ABSTRACTION_ARRAY;
+static int* FRACTION_MEMORY_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* MEMORY_ABSTRACTION_SOURCE */
 #endif

@@ -26,13 +26,10 @@
 #ifndef CHARACTER_ENTITY_REFERENCE_ENCODER_SOURCE
 #define CHARACTER_ENTITY_REFERENCE_ENCODER_SOURCE
 
-#include "../../../globals/constants/character/character_constants.c"
-#include "../../../globals/constants/character/html_character_entity_constants.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
@@ -71,7 +68,7 @@ void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
 /*??
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_equal_arrays((void*) &r, p3, p4, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &r, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays((void*) &r, p3, p4, (void*) SPACE_CHARACTER, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -95,11 +92,11 @@ void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
                         *ds = (*CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                        reallocate(p0, p1, p2, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
                     }
 
                     // Add temporary value to destination.
-                    set(*d, p1, (void*) t, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                    set(*d, p1, (void*) t, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                     // Increase destination count.
                     *dc = *dc + tc;

@@ -151,7 +151,7 @@ int main(int p0, char** p1) {
         int ks = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Allocate cybol knowledge file path.
-        allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // Optionalise command line argument options.
         optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
@@ -207,7 +207,7 @@ int main(int p0, char** p1) {
         deoptionalise((void*) &LOG_OUTPUT);
 
         // Deallocate cybol knowledge file path.
-        deallocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        deallocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // Shutdown global variables.
         unglobalise();

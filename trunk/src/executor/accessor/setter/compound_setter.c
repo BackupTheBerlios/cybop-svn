@@ -29,16 +29,15 @@
 #include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
 #include "../../../constant/abstraction/cybol/path_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
-#include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Sets the compound element by index.
@@ -95,18 +94,18 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                     void** ds = NULL_POINTER_MEMORY_MODEL;
 
                     // Get names, abstractions, models, details.
-                    get_array_elements((void*) &n, p0, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &nc, p0, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &ns, p0, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &a, p0, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &ac, p0, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &as, p0, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &m, p0, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &mc, p0, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &ms, p0, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &d, p0, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &dc, p0, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                    get_array_elements((void*) &ds, p0, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &n, p0, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &nc, p0, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &ns, p0, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &a, p0, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &ac, p0, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &as, p0, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &m, p0, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &mc, p0, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &ms, p0, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &d, p0, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &dc, p0, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &ds, p0, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
 //??    fwprintf(stdout, L"TEST Set compound element by index ns: %i\n", *ns);
 //??    fwprintf(stdout, L"TEST Set compound element by index nc: %i\n", *nc);
@@ -151,54 +150,54 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 //??    fwprintf(stdout, L"TEST set compound element by index 00 new cs: %i\n", *cs);
 
                                                                         // Reallocate names, abstractions, models, details.
-                                                                        reallocate_array(n, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(nc, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(ns, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(a, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(ac, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(as, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(m, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(mc, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(ms, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(d, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(dc, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(ds, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(n, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(nc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(ns, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(a, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(ac, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(as, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(m, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(mc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(ms, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(d, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(dc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        reallocate_array(ds, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                                                                         // Set new array reference.
                                                                         // CAUTION! If an array gets reallocated, a new array is
                                                                         // created and the contents of the old array gets copied.
                                                                         // Therefore, the new array reference needs to be set.
                                                                         // The old array gets destroyed automatically by reallocate.
-                                                                        set_array_elements(p0, (void*) n, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) n, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 //??    fwprintf(stdout, L"TEST set compound element by index 13 ds: %i\n", *ds);
-                                                                        set_array_elements(p0, (void*) nc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) as, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) ms, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) ds, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) nc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) as, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) ms, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(p0, (void*) ds, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
                                                                     }
 
                                                                     if (*i < *cs) {
 
                                                                         // Set name, abstraction, model, details.
-                                                                        set_array_elements(*n, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*nc, (void*) &p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*ns, (void*) &p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*a, (void*) &p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*ac, (void*) &p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*as, (void*) &p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*m, (void*) &p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*mc, (void*) &p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*ms, (void*) &p12, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*d, (void*) &p13, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*dc, (void*) &p14, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*ds, (void*) &p15, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*n, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*nc, (void*) &p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*ns, (void*) &p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*a, (void*) &p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*ac, (void*) &p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*as, (void*) &p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*m, (void*) &p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*mc, (void*) &p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*ms, (void*) &p12, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*d, (void*) &p13, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*dc, (void*) &p14, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        set_array_elements(*ds, (void*) &p15, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                                                                         // Increment count.
                                                                         (*cc)++;

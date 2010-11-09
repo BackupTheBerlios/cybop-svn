@@ -67,27 +67,27 @@ void assign(void* p0, void* p1, void* p2, void* p3) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Assign value.");
 
-            if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
+            if (*a == *CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
                 assign_character(de, se);
 
-            } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
+            } else if (*a == *DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION) {
 
                 assign_double(de, se);
 
-            } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
+            } else if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
                 assign_integer(de, se);
 
-            } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
+            } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
                 assign_pointer(de, se);
 
-            } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
+            } else if (*a == *UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION) {
 
                 assign_unsigned_long(de, se);
 
-            } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
+            } else if (*a == *WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
                 assign_wide_character(de, se);
 
@@ -124,7 +124,7 @@ void assign_with_offset(void* p0, void* p1, void* p2, void* p3) {
     determine_size((void*) &o, p3);
 
     // Calculate memory area (destination offset).
-    multiply_with_integer((void*) &o, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
+    multiply_with_integer((void*) &o, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Assign source- to destination memory area.
     assign(p0, p1, (void*) &o, p3);

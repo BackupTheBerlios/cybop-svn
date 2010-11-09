@@ -38,13 +38,13 @@
  * @param p0 the current position (Hand over as reference!)
  * @param p1 the remaining count
  * @param p2 the element count
- * @param p3 the abstraction size
+ * @param p3 the primitive type size
  */
 void detect_move_position(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* ts = (int*) p3;
+        int* ac = (int*) p3;
 
         if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -61,7 +61,7 @@ void detect_move_position(void* p0, void* p1, void* p2, void* p3) {
                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Move detector position.");
 
                     // Increment current position.
-                    *pos = *pos + (*ec * *ts);
+                    *pos = *pos + (*ec * *ac);
 
                     // Decrement remaining count.
                     *rem = *rem - *ec;
@@ -96,7 +96,7 @@ void detect_move_position(void* p0, void* p1, void* p2, void* p3) {
  * @param p3 the element
  * @param p4 the element count
  * @param p5 the abstraction
- * @param p6 the abstraction size
+ * @param p6 the primitive type size
  */
 void detect_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
@@ -173,21 +173,21 @@ void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p5, p6, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p5, p6, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_element(p0, p1, p2, p3, p4, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_PRIMITIVE_SIZE);
+            detect_element(p0, p1, p2, p3, p4, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) CHARACTER_PRIMITIVE_SIZE);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_element(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_element(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
         }
     }
 

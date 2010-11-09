@@ -66,7 +66,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 
         if (*p != *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays(p0, p1, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+            compare_equal_arrays(p0, p1, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
         }
     }
 }
