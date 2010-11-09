@@ -26,9 +26,9 @@
 #ifndef HELPER_SOURCE
 #define HELPER_SOURCE
 
+#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../constant/model/cyboi/identification_cyboi_model.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../executor/accessor/setter/array_setter.c"
 #include "../executor/comparator/array_equality_comparator.c"
@@ -50,24 +50,24 @@ void help(void* p0) {
     int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate message.
-    allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Copy message.
-    set_array_elements(m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy null termination wide character.
-    set_array_elements(m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Log message.
     log_write_terminated_message(p0, m);
 
     // Deallocate message.
-    deallocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* HELPER_SOURCE */

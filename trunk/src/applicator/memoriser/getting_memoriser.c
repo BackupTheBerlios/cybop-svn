@@ -155,7 +155,7 @@ void memorise_getting(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, *dm, *dmc, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *dm, *dmc, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL, (void*) NAME_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -166,7 +166,7 @@ void memorise_getting(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, *dm, *dmc, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, *dm, *dmc, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL, (void*) ABSTRACTION_GET_DESCRIPTION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

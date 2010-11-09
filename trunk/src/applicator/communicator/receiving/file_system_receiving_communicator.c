@@ -64,7 +64,7 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     void* es = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate encoded character array.
-    allocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Write file into encoded character array.
     receive_data((void*) &e, ec, es, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
@@ -77,7 +77,7 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
     void* ss = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate serialised wide character array.
-    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Decode encoded character array into serialised wide character array.
     decode_utf_8_unicode_character_vector((void*) &s, sc, ss, e, (void*) ec);
@@ -85,13 +85,13 @@ void communicate_receiving_file_system(void* p0, void* p1, void* p2, void* p3, v
 //??fwprintf(stdout, L"TEST w_char: %ls\n", (wchar_t*) s);
 
     // Deallocate encoded character array.
-    deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Deserialise serialised wide character array into destination knowledge model.
     decode(p0, p1, p2, p3, p4, p5, s, sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
     // Deallocate serialised wide character array.
-    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */

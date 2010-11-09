@@ -27,10 +27,10 @@
 #define FRACTION_ALLOCATOR_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Allocates the fraction.
@@ -42,7 +42,7 @@ void allocate_fraction(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate fraction.");
 
-    allocate_array(p0, p1, (void*) DOUBLE_MEMORY_ABSTRACTION);
+    allocate_array(p0, p1, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* FRACTION_ALLOCATOR_SOURCE */

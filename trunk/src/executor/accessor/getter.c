@@ -27,7 +27,6 @@
 #define GETTER_SOURCE
 
 #include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../executor/accessor/getter/array_getter.c"
 #include "../../executor/accessor/getter/compound_getter.c"

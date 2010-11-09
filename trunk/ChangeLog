@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue replacing integer-based memory abstraction constants in cyboi with wide characters
+
 2010-11-09  Christian Heller  <christian.heller@tuxtax.de>
         * Replace integer-based memory abstraction constants in cyboi with wide characters;
             see files "constant/abstraction/memory/memory_abstraction.c"

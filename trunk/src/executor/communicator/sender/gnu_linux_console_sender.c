@@ -30,7 +30,6 @@
 #include <wchar.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/character_code/ascii/ascii_character_code_model.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -69,11 +68,11 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // CAUTION! Use a standard (non-wide) character vector here,
         // because the source is handed over as utf-8 encoded multibyte characters
         // and will be forwarded as such to the gnu linux console!
-        allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // Append control sequences and null termination character.
-        append_array_elements((void*) &ts, tsc, tss, p3, p4, (void*) CHARACTER_MEMORY_ABSTRACTION);
-        append_array_elements((void*) &ts, tsc, tss, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+        append_array_elements((void*) &ts, tsc, tss, p3, p4, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        append_array_elements((void*) &ts, tsc, tss, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (*d != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -108,7 +107,7 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
 
         // Deallocate terminated control sequences.
-        deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        deallocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     } else {
 

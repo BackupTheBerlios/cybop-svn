@@ -27,10 +27,10 @@
 #define FRACTION_DEALLOCATOR_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Deallocates the fraction.
@@ -42,7 +42,7 @@ void deallocate_fraction(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate fraction.");
 
-    deallocate_array(p0, p1, (void*) DOUBLE_MEMORY_ABSTRACTION);
+    deallocate_array(p0, p1, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* FRACTION_DEALLOCATOR_SOURCE */

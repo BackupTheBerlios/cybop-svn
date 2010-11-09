@@ -28,15 +28,14 @@
 
 #include <stdio.h>
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/character_code/ascii/ascii_character_code_model.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/model/stream_model.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/encoder/utf_8_unicode_character_encoder.c"
+#include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
 
 /**
@@ -71,7 +70,7 @@ void send_file_stream(void* p0, void* p1, void* p2) {
                 }
 
                 // Read character from source array.
-                get_array_elements((void*) &c, p1, (void*) &j, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &c, p1, (void*) &j, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // Write character to file.
                 e = fputc(*c, (FILE*) p0);
@@ -126,7 +125,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_equal_arrays((void*) &r, *d, p1, (void*) STANDARD_OUTPUT_STREAM_MODEL, (void*) STANDARD_OUTPUT_STREAM_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                compare_equal_arrays((void*) &r, *d, p1, (void*) STANDARD_OUTPUT_STREAM_MODEL, (void*) STANDARD_OUTPUT_STREAM_MODEL_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -150,7 +149,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_equal_arrays((void*) &r, *d, p1, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                compare_equal_arrays((void*) &r, *d, p1, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -183,7 +182,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 int tns = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Allocate terminated file name.
-                allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // Encode wide character option into multibyte character array.
                 encode_utf_8_unicode_character_vector((void*) &tn, (void*) &tnc, (void*) &tns, *d, p1);
@@ -194,11 +193,11 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     tns = tnc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate terminated file name as multibyte character array.
-                    reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                    reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                 }
 
                 // Add null termination character to terminated file name.
-                set_array_elements(tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tnc, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                set_array_elements(tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tnc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.
@@ -232,7 +231,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
 
                 // Deallocate terminated file name.
-                deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
 
         } else {

@@ -12,7 +12,7 @@
 #
 
         * Search for "MEMORY_ABSTRACTION" and adapt constants (see description of reasons below)
-        * CONTINUE with letter "e", in search results
+        * CONTINUE with letter "i", in search results
         * Continue replacing integer-based memory abstraction constants in cyboi with wide characters
         * Make "ui_control" standard example work again
 
