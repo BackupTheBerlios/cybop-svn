@@ -63,11 +63,11 @@ void log_assign(void* p0, void* p1, void* p2, void* p3) {
             // CAUTION! DO NOT use logging functionality here!
             // The logger cannot log itself.
 
-            if (*a == *INTEGER_MEMORY_ABSTRACTION) {
+            if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
                 log_assign_integer(de, se);
 
-            } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
+            } else if (*a == *WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
                 log_assign_wide_character(de, se);
 
@@ -110,7 +110,7 @@ void log_assign_with_offset(void* p0, void* p1, void* p2, void* p3) {
     log_determine_size((void*) &o, p3);
 
     // Calculate memory area (destination offset).
-    log_multiply_with_integer((void*) &o, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
+    log_multiply_with_integer((void*) &o, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Assign source- to destination memory area.
     log_assign(p0, p1, (void*) &o, p3);

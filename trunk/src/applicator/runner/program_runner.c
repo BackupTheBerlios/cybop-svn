@@ -80,16 +80,16 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate arguments vector.
-    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Append command.
-    append((void*) &arg, (void*) &argc, (void*) &args, *programm, *programmc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    append((void*) &arg, (void*) &argc, (void*) &args, *programm, *programmc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Execute command line in shell.
     run_executing(arg, (void*) &argc);
 
     // Deallocate arguments vector.
-    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* PROGRAM_RUNNER_SOURCE */

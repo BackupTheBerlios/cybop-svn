@@ -28,8 +28,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/arithmetiser/integer_subtracter/integer_integer_subtracter.c"
 //?? #include "../../executor/arithmetiser/integer_subtracter/pointer_integer_subtracter.c"
@@ -51,11 +51,11 @@ void subtract_integer(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Subtract integer.");
 
-        if (*a == *INTEGER_MEMORY_ABSTRACTION) {
+        if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             subtract_integer_from_integer(p0, p1);
 
-        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
 //??            subtract_integer_from_pointer(p0, p1);
 

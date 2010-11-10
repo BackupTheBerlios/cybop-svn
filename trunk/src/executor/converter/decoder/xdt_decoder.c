@@ -4220,7 +4220,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             // CAUTION! Use DESCENDING order, as opposed to array allocation!
 
             // Deallocate knowledge model details.
-            deallocate((void*) &d, ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &d, ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
             deallocate((void*) &dc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
             deallocate((void*) &ds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
@@ -4395,7 +4395,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) MEDICAL_PRACTICE_DATA_RECORD_XDT_MODEL_NAME, (void*) MEDICAL_PRACTICE_DATA_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *DATA_MEDIUM_HEADER_RECORD_XDT_NAME) {
@@ -4416,7 +4416,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) PACKAGE_HEADER_RECORD_XDT_MODEL_NAME, (void*) PACKAGE_HEADER_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *DATA_PACKAGE_FOOTER_RECORD_XDT_NAME) {
@@ -4429,7 +4429,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) PACKAGE_FOOTER_RECORD_XDT_MODEL_NAME, (void*) PACKAGE_FOOTER_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *MEDICAL_TREATMENT_RECORD_XDT_NAME) {
@@ -4441,7 +4441,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_RECORD_XDT_MODEL_NAME, (void*) MEDICAL_TREATMENT_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *REFERRAL_CASE_RECORD_XDT_NAME) {
@@ -4453,7 +4453,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) REFERRAL_CASE_RECORD_XDT_MODEL_NAME, (void*) REFERRAL_CASE_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *MEDICAL_TREATMENT_WITH_COTTAGE_HOSPITAL_AFFILIATION_RECORD_XDT_NAME) {
@@ -4465,7 +4465,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_WITH_COTTAGE_HOSPITAL_AFFILIATION_RECORD_XDT_MODEL_NAME, (void*) MEDICAL_TREATMENT_WITH_COTTAGE_HOSPITAL_AFFILIATION_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *MEDICAL_EMERGENCY_SERVICE_RECORD_XDT_NAME) {
@@ -4477,7 +4477,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) MEDICAL_EMERGENCY_SERVICE_RECORD_XDT_MODEL_NAME, (void*) MEDICAL_EMERGENCY_SERVICE_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *PRIVATE_BILLING_RECORD_XDT_NAME) {
@@ -4489,7 +4489,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) PRIVATE_BILLING_RECORD_XDT_MODEL_NAME, (void*) PRIVATE_BILLING_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_BILLING_RECORD_XDT_NAME) {
@@ -4501,7 +4501,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_BILLING_RECORD_XDT_MODEL_NAME, (void*) EMPLOYERS_LIABILITY_INSURANCE_ASSOCIATION_BILLING_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *UNSTRUCTURED_CASES_RECORD_XDT_NAME) {
@@ -4513,7 +4513,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) UNSTRUCTURED_CASES_RECORD_XDT_MODEL_NAME, (void*) UNSTRUCTURED_CASES_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *PATIENT_MASTER_DATA_RECORD_XDT_NAME) {
@@ -4525,7 +4525,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) PATIENT_MASTER_DATA_RECORD_XDT_MODEL_NAME, (void*) PATIENT_MASTER_DATA_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *MEDICAL_TREATMENT_DATA_RECORD_XDT_NAME) {
@@ -4537,7 +4537,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) MEDICAL_TREATMENT_DATA_RECORD_XDT_MODEL_NAME, (void*) MEDICAL_TREATMENT_DATA_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *PATIENT_MASTER_DATA_REQUEST_RECORD_XDT_NAME) {
@@ -4549,7 +4549,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) PATIENT_MASTER_DATA_REQUEST_RECORD_XDT_MODEL_NAME, (void*) PATIENT_MASTER_DATA_REQUEST_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *PATIENT_MASTER_DATA_TRANSFER_RECORD_XDT_NAME) {
@@ -4561,7 +4561,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) PATIENT_MASTER_DATA_TRANSFER_RECORD_XDT_MODEL_NAME, (void*) PATIENT_MASTER_DATA_TRANSFER_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *EXAMINATION_REQUEST_RECORD_XDT_NAME) {
@@ -4573,7 +4573,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) EXAMINATION_REQUEST_RECORD_XDT_MODEL_NAME, (void*) EXAMINATION_REQUEST_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *EXAMINATION_DATA_TRANSFER_RECORD_XDT_NAME) {
@@ -4585,7 +4585,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) EXAMINATION_DATA_TRANSFER_RECORD_XDT_MODEL_NAME, (void*) EXAMINATION_DATA_TRANSFER_RECORD_XDT_MODEL_NAME_COUNT);
 
         } else if (*id == *EXAMINATION_DATA_DISPLAY_RECORD_XDT_NAME) {
@@ -4597,7 +4597,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
                 (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 (void*) EXAMINATION_DATA_DISPLAY_RECORD_XDT_MODEL_NAME, (void*) EXAMINATION_DATA_DISPLAY_RECORD_XDT_MODEL_NAME_COUNT);
         }
 
@@ -4621,7 +4621,7 @@ void decode_xdt_select_record(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // CAUTION! Use DESCENDING order, as opposed to array allocation!
 
             // Deallocate knowledge model details.
-            deallocate((void*) &d, ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &d, ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
             deallocate((void*) &dc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
             deallocate((void*) &ds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
@@ -4774,7 +4774,7 @@ void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4,
     decode_xdt_decode_model((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+        (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
         (void*) STANDARD_PACKAGE_XDT_NAME, (void*) STANDARD_PACKAGE_XDT_NAME_COUNT);
 
     // Process xdt package content.
@@ -4801,7 +4801,7 @@ void decode_xdt_select_package(void* p0, void* p1, void* p2, void* p3, void* p4,
         // CAUTION! Use DESCENDING order, as opposed to array allocation!
 
         // Deallocate knowledge model details.
-        deallocate((void*) &d, ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        deallocate((void*) &d, ds, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
         deallocate((void*) &dc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
         deallocate((void*) &ds, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 

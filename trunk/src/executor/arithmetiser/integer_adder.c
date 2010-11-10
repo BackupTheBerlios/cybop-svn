@@ -51,11 +51,11 @@ void add_integer(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add integer.");
 
-        if (*a == *INTEGER_MEMORY_ABSTRACTION) {
+        if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             add_integer_to_integer(p0, p1);
 
-        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             add_integer_to_pointer(p0, p1);
 

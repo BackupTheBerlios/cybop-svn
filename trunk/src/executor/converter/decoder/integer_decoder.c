@@ -36,7 +36,6 @@
 #include <wchar.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -73,13 +72,13 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int tmps = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Create temporary null-terminated string.
-        allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // Copy original string to temporary null-terminated string.
-        append_array_elements((void*) &tmp, (void*) &tmpc, (void*) &tmps, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        append_array_elements((void*) &tmp, (void*) &tmpc, (void*) &tmps, p3, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
         // Add string termination to temporary null-terminated string.
         // The source count is used as index for the termination character.
-        append_array_elements((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        append_array_elements((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // The tail variable is useless here and only needed for the string
         // transformation function. If the whole string array consists of
@@ -109,7 +108,7 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
         }
 
         // Destroy temporary null-terminated string.
-        deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     } else {
 

@@ -55,7 +55,7 @@ void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3,
     pthread_mutex_t** xmt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
 
     // Get x window system mutex.
-    get((void*) &xmt, p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    get((void*) &xmt, p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
     pthread_mutex_lock(*xmt);
 
@@ -69,7 +69,7 @@ void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3,
     void** d = NULL_POINTER_MEMORY_MODEL;
 
     // Get display.
-    get_array_elements((void*) &d, p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+    get_array_elements((void*) &d, p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
 //??    fwprintf(stdout, L"TEST send x 1: %i\n", p0);
 

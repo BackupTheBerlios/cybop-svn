@@ -314,24 +314,24 @@ void communicate_sensing_socket(void* p0, void* p1) {
 
         // Get interrupt.
         i = *base + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &irq, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &irq, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
         // Get mutex.
         i = *base + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &mt, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &mt, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
         // Get sleep time.
         i = *base + *SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &st, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &st, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
         // Get communication partner-connected socket of this system.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &ps, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &ps, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
         // Get communication partner socket address.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &pa, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &pa, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &pas, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &pas, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
         // Get original socket of this system.
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &os, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &os, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 

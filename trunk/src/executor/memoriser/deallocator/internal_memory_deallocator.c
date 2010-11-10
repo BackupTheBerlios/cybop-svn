@@ -27,11 +27,10 @@
 #define INTERNAL_MEMORY_DEALLOCATOR_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Deallocates the internal memory.
@@ -62,7 +61,7 @@ void deallocate_internal_memory(void* p0, void* p1) {
     // because the internal memory is already freed below.
 
     // Deallocate internal memory.
-    deallocate_array(p0, p1, (void*) POINTER_MEMORY_ABSTRACTION);
+    deallocate_array(p0, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* INTERNAL_MEMORY_DEALLOCATOR_SOURCE */

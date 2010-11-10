@@ -36,7 +36,6 @@
 #include <wchar.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -90,12 +89,12 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                         int cs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Allocate integer wide character.
-                        allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                             // Get first integer from vector.
-                            get(&i, p3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                            get(&i, p3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
 /*??
     fwprintf(stdout, L"TEST encode integer vector elements 0 i: %i\n", *((int*) i));
@@ -121,11 +120,11 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                                 // in order to separate from already existing elements.
 
                                 // Append comma character.
-                                append_array_elements(p0, p1, p2, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                                append_array_elements(p0, p1, p2, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                             }
 
                             // Append integer characters.
-                            append_array_elements(p0, p1, p2, c, (void*) &cc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                            append_array_elements(p0, p1, p2, c, (void*) &cc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                             // Determine remaining vector elements.
                             //
@@ -152,7 +151,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                         // Deallocate integer wide character.
                         // CAUTION! It may be deallocated here, since its content
                         // was copied in the "set_array_elements" function, further above!
-                        deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     } else {
 

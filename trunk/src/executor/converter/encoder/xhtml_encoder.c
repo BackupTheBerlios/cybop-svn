@@ -33,10 +33,10 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Encodes the xhtml indentation.
@@ -137,7 +137,7 @@ void encode_xhtml_attributes(void* p0, void* p1, void* p2, void* p3, void* p4, v
                 (void*) &m, (void*) &mc, (void*) &ms,
                 (void*) &d, (void*) &dc, (void*) &ds);
 
-            compare_equal_arrays((void*) &r, *n, *nc, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, *n, *nc, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -357,7 +357,7 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_equal_arrays((void*) &r, p3, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                compare_equal_arrays((void*) &r, p3, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -406,7 +406,7 @@ void encode_xhtml_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_equal_arrays((void*) &r, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                compare_equal_arrays((void*) &r, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -26,13 +26,13 @@
 #ifndef NUMERIC_CHARACTER_REFERENCE_ENCODER_SOURCE
 #define NUMERIC_CHARACTER_REFERENCE_ENCODER_SOURCE
 
-#include "../../../globals/constants/character/character_constants.c"
-#include "../../../globals/constants/character/numeric_character_reference_constants.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../globals/constants/character/character_constants.c"
+#include "../../../globals/constants/character/numeric_character_reference_constants.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
 
@@ -69,7 +69,7 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
 /*??
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_equal_arrays((void*) &r, p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                    compare_equal_arrays((void*) &r, p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -92,11 +92,11 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
                         *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
                     }
 
                     // Add temporary value to destination.
-                    set(p0, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+                    set(p0, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                     // Increase destination count.
                     *dc = *dc + tc;

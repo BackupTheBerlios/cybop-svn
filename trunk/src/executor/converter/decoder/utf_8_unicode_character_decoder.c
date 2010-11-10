@@ -29,9 +29,9 @@
 #include <errno.h>
 #include <locale.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/memoriser/reallocator/array_reallocator.c"
 #include "../../../logger/logger.c"
@@ -212,7 +212,7 @@ void decode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                             *ds = *dc + (*sc * *NUMBER_1_INTEGER_MEMORY_MODEL);
 
                             // Reallocate destination wide character vector.
-                            reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                            reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                             // Set locale.
                             //

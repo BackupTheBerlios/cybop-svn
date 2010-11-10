@@ -36,7 +36,6 @@
 #include <wchar.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -93,7 +92,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         int v = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Find comma character index.
-                        get_array_elements_index((void*) &i, p3, p4, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                        get_array_elements_index((void*) &i, p3, p4, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         if (i > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -124,7 +123,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // (which is 3, as needed for the length)
                         decode_integer((void*) &v, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, (void*) &fec);
 
-                        append_array_elements(p0, p1, p2, (void*) &v, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        append_array_elements(p0, p1, p2, (void*) &v, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         if (i > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -49,27 +49,27 @@ void determine_size(void* p0, void* p1) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Determine size.");
 
-        if (*a == *CHARACTER_MEMORY_ABSTRACTION) {
+        if (*a == *CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) CHARACTER_PRIMITIVE_SIZE);
 
-        } else if (*a == *DOUBLE_MEMORY_ABSTRACTION) {
+        } else if (*a == *DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) DOUBLE_PRIMITIVE_SIZE);
 
-        } else if (*a == *INTEGER_MEMORY_ABSTRACTION) {
+        } else if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) INTEGER_PRIMITIVE_SIZE);
 
-        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) POINTER_PRIMITIVE_SIZE);
 
-        } else if (*a == *UNSIGNED_LONG_MEMORY_ABSTRACTION) {
+        } else if (*a == *UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) UNSIGNED_LONG_PRIMITIVE_SIZE);
 
-        } else if (*a == *WIDE_CHARACTER_MEMORY_ABSTRACTION) {
+        } else if (*a == *WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             assign_integer(p0, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
 

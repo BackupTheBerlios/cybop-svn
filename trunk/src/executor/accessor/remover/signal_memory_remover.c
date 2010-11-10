@@ -27,14 +27,13 @@
 #define SIGNAL_MEMORY_REMOVER_SOURCE
 
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/signal_memory_memory_name.c"
-#include "../../../logger/logger.c"
-#include "../../../executor/memoriser/allocator.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
 
 /**
@@ -72,14 +71,14 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
                 void** id = NULL_POINTER_MEMORY_MODEL;
 
                 // Get abstractions, models, details, priorities, identifications.
-                get_array_elements((void*) &a, p0, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                get_array_elements((void*) &ac, p0, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                get_array_elements((void*) &m, p0, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                get_array_elements((void*) &mc, p0, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                get_array_elements((void*) &d, p0, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                get_array_elements((void*) &dc, p0, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                get_array_elements((void*) &p, p0, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-                get_array_elements((void*) &id, p0, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &a, p0, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &ac, p0, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &m, p0, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &mc, p0, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &d, p0, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &dc, p0, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &p, p0, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &id, p0, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (*a != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -102,14 +101,14 @@ void remove_signal(void* p0, void* p1, void* p2, void* p3) {
                                                     if (*i < *smc) {
 
                                                         // Remove abstraction, model, details, priority, identification.
-                                                        remove_array_elements(*a, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                        remove_array_elements(*ac, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                        remove_array_elements(*m, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                        remove_array_elements(*mc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                        remove_array_elements(*d, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                        remove_array_elements(*dc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                        remove_array_elements(*p, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                        remove_array_elements(*id, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                        remove_array_elements(*a, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                        remove_array_elements(*ac, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                        remove_array_elements(*m, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                        remove_array_elements(*mc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                        remove_array_elements(*d, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                        remove_array_elements(*dc, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                        remove_array_elements(*p, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                        remove_array_elements(*id, p1, p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                                                         // Decrement count.
                                                         (*smc)--;

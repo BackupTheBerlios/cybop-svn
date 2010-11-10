@@ -58,7 +58,7 @@ void send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         int** w = (int**) NULL_POINTER_MEMORY_MODEL;
 
         // Get x window system internals.
-        get((void*) &w, p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+        get((void*) &w, p3, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
         // CAUTION! This test is necessary to avoid a "Segmentation fault"!
         if (*d != *NULL_POINTER_MEMORY_MODEL) {

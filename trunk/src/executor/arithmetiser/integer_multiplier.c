@@ -51,11 +51,11 @@ void multiply_with_integer(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Multiply with integer.");
 
-        if (*a == *INTEGER_MEMORY_ABSTRACTION) {
+        if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             multiply_integer_with_integer(p0, p1);
 
-        } else if (*a == *POINTER_MEMORY_ABSTRACTION) {
+        } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
 //??            multiply_pointer_with_integer(p0, p1);
 

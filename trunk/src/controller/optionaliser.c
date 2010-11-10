@@ -32,7 +32,6 @@
 #include <string.h>
 #include "../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../constant/abstraction/memory/memory_abstraction.c"
-#include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../constant/model/command_argument/cyboi/log_level_cyboi_command_argument_model.c"
 #include "../constant/model/cyboi/operation_mode_cyboi_model.c"
@@ -66,7 +65,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p1, p2, (void*) OFF_LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) OFF_LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p1, p2, (void*) OFF_LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) OFF_LOG_LEVEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -77,7 +76,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p1, p2, (void*) ERROR_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) ERROR_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p1, p2, (void*) ERROR_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) ERROR_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -88,7 +87,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p1, p2, (void*) WARNING_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) WARNING_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p1, p2, (void*) WARNING_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) WARNING_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -99,7 +98,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p1, p2, (void*) INFORMATION_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) INFORMATION_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p1, p2, (void*) INFORMATION_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) INFORMATION_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -110,7 +109,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p1, p2, (void*) DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p1, p2, (void*) DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL, (void*) DEBUG_LEVEL_LOG_MODEL_CYBOI_COMMAND_ARGUMENT_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -168,7 +167,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             //
 
             // Allocate terminated file name as multibyte character array.
-            allocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            allocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Encode wide character option into multibyte character array.
             encode_utf_8_unicode_character_vector((void*) &t, (void*) &tc, (void*) &ts, p1, p2);
@@ -179,11 +178,11 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
                 ts = tc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 // Reallocate terminated file name as multibyte character array.
-                reallocate_array((void*) &t, (void*) &tc, (void*) &ts, (void*) CHARACTER_MEMORY_ABSTRACTION);
+                reallocate_array((void*) &t, (void*) &tc, (void*) &ts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
 
             // Add null termination character to terminated file name.
-            set_array_elements(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tc, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            set_array_elements(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Increase terminated file name count.
             tc++;
@@ -224,7 +223,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             }
 
             // Deallocate terminated file name as multibyte character array.
-            deallocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_MEMORY_ABSTRACTION);
+            deallocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         } else {
 
@@ -324,7 +323,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p8, p9, (void*) HELP_CYBOI_COMMAND_OPTION_NAME, (void*) HELP_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p8, p9, (void*) HELP_CYBOI_COMMAND_OPTION_NAME, (void*) HELP_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -335,12 +334,12 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p8, p9, (void*) KNOWLEDGE_CYBOI_COMMAND_OPTION_NAME, (void*) KNOWLEDGE_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p8, p9, (void*) KNOWLEDGE_CYBOI_COMMAND_OPTION_NAME, (void*) KNOWLEDGE_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Copy file path from value to cybol knowledge file path.
-                replace_array_elements(p1, p2, p3, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+                replace_array_elements(p1, p2, p3, p6, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // Set knowledge operation mode.
                 *m = *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL;
@@ -349,7 +348,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p8, p9, (void*) LOG_FILE_CYBOI_COMMAND_OPTION_NAME, (void*) LOG_FILE_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p8, p9, (void*) LOG_FILE_CYBOI_COMMAND_OPTION_NAME, (void*) LOG_FILE_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -360,7 +359,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p8, p9, (void*) LOG_LEVEL_CYBOI_COMMAND_OPTION_NAME, (void*) LOG_LEVEL_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p8, p9, (void*) LOG_LEVEL_CYBOI_COMMAND_OPTION_NAME, (void*) LOG_LEVEL_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -371,7 +370,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p8, p9, (void*) TEST_CYBOI_COMMAND_OPTION_NAME, (void*) TEST_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p8, p9, (void*) TEST_CYBOI_COMMAND_OPTION_NAME, (void*) TEST_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -382,7 +381,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p8, p9, (void*) VERSION_CYBOI_COMMAND_OPTION_NAME, (void*) VERSION_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            compare_equal_arrays((void*) &r, p8, p9, (void*) VERSION_CYBOI_COMMAND_OPTION_NAME, (void*) VERSION_CYBOI_COMMAND_OPTION_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -463,13 +462,13 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
             int vws = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Allocate option as wide character array.
-            allocate((void*) &ow, (void*) &ows, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            allocate((void*) &ow, (void*) &ows, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
             // Allocate value as wide character array.
-            allocate((void*) &vw, (void*) &vws, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            allocate((void*) &vw, (void*) &vws, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             // Get command line argument option.
             // Example: "--loglevel"
-            get_array_elements((void*) &o, p6, (void*) j, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &o, p6, (void*) j, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (*o != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -504,7 +503,7 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
 
                 // Get command line argument value, standing after the option.
                 // Example: "debug"
-                get_array_elements((void*) &v, p6, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &v, p6, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (*v != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -536,9 +535,9 @@ void optionalise_command_line_argument(void* p0, void* p1, void* p2, void* p3, v
             optionalise_option(p0, p1, p2, p3, p4, p5, vw, (void*) &vwc, ow, (void*) &owc);
 
             // Deallocate option as wide character array.
-            deallocate((void*) &ow, (void*) &ows, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &ow, (void*) &ows, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
             // Deallocate value as wide character array.
-            deallocate((void*) &vw, (void*) &vws, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &vw, (void*) &vws, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         } else {
 

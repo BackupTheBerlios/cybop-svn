@@ -27,14 +27,13 @@
 #define SIGNAL_MEMORY_GETTER_SOURCE
 
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/signal_memory_memory_name.c"
-#include "../../../logger/logger.c"
-#include "../../../executor/memoriser/allocator.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator.c"
+#include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
 
 /**
@@ -76,14 +75,14 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
             void** id = NULL_POINTER_MEMORY_MODEL;
 
             // Get abstractions, models, details, priorities, identifications.
-            get_array_elements((void*) &a, p0, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-            get_array_elements((void*) &ac, p0, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-            get_array_elements((void*) &m, p0, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-            get_array_elements((void*) &mc, p0, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-            get_array_elements((void*) &d, p0, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-            get_array_elements((void*) &dc, p0, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-            get_array_elements((void*) &p, p0, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
-            get_array_elements((void*) &id, p0, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &a, p0, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &ac, p0, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &m, p0, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &mc, p0, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &d, p0, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &dc, p0, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &p, p0, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &id, p0, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (*a != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -106,14 +105,14 @@ void get_signal(void* p0, void* p1, void* p2, void* p3, void* p4,
                                                 if (*i < *smc) {
 
                                                     // Get abstraction, model, details, priority, identification.
-                                                    get_array_elements(p3, *a, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                    get_array_elements(p4, *ac, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                    get_array_elements(p5, *m, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                    get_array_elements(p6, *mc, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                    get_array_elements(p7, *d, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                    get_array_elements(p8, *dc, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                    get_array_elements(p9, *p, p2, (void*) POINTER_MEMORY_ABSTRACTION);
-                                                    get_array_elements(p10, *id, p2, (void*) POINTER_MEMORY_ABSTRACTION);
+                                                    get_array_elements(p3, *a, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    get_array_elements(p4, *ac, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    get_array_elements(p5, *m, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    get_array_elements(p6, *mc, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    get_array_elements(p7, *d, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    get_array_elements(p8, *dc, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    get_array_elements(p9, *p, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    get_array_elements(p10, *id, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                                                 } else {
 
@@ -199,7 +198,7 @@ void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
             void** sp = NULL_POINTER_MEMORY_MODEL;
 
             // Get signal priorities.
-            get_array_elements((void*) &sp, p1, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+            get_array_elements((void*) &sp, p1, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (*sp != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -221,7 +220,7 @@ void get_highest_priority_signal_index(void* p0, void* p1, void* p2) {
                     }
 
                     // Get signal priority.
-                    get_array_elements((void*) &prio, *sp, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION);
+                    get_array_elements((void*) &prio, *sp, (void*) &j, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     if (**prio > h) {
 
@@ -378,7 +377,7 @@ void get_new_signal_identification(void* p0, void* p1, void* p2) {
         void** ids = NULL_POINTER_MEMORY_MODEL;
 
         // Get signal identifications.
-        get_array_elements((void*) &ids, p1, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &ids, p1, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (*ids != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -401,7 +400,7 @@ void get_new_signal_identification(void* p0, void* p1, void* p2) {
                 }
 
                 // Get signal identification.
-                get_array_elements((void*) &id, *ids, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION);
+                get_array_elements((void*) &id, *ids, (void*) &j, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (**id > max) {
 

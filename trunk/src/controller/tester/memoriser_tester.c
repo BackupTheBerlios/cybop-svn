@@ -52,12 +52,12 @@ void test_array_resizing() {
     int cs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate original array.
-    allocate_array((void*) &o, (void*) &os, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    allocate_array((void*) &o, (void*) &os, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Allocate copied array.
-    allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Fill original array with text.
-    set_array_elements(o, (void*) t, (void*) tc, (void*) &oc, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    set_array_elements(o, (void*) t, (void*) tc, (void*) &oc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     oc = oc + *tc;
 
     // Print original array content.
@@ -65,15 +65,15 @@ void test_array_resizing() {
 
     // Reallocate copied array.
     os = os + *NUMBER_10_INTEGER_MEMORY_MODEL;
-    reallocate_array((void*) &o, (void*) &oc, (void*) &os, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    reallocate_array((void*) &o, (void*) &oc, (void*) &os, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Print original array content.
     log_write_terminated_message((void*) stdout, t);
 
     // Deallocate original array.
-    deallocate_array((void*) &o, (void*) &os, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &o, (void*) &os, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Deallocate copied array.
-    deallocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /**

@@ -74,12 +74,12 @@ void communicate_sending_socket_get_socket_server_mode(void* p0, void* p1, void*
 
         // Get socket mutex.
         i = *base + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
-        get(p1, (void*) &i, (void*) &mt, (void*) POINTER_MEMORY_ABSTRACTION);
+        get((void*) &mt, p1, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 */
 /*??
         // Get communication partner socket.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-        get(p1, (void*) &i, p0, (void*) POINTER_MEMORY_ABSTRACTION);
+        get(p0, p1, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 */
 
     } else {
@@ -200,7 +200,7 @@ void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p5, p6, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p5, p6, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -210,7 +210,7 @@ void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p5, p6, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p5, p6, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -524,9 +524,9 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     communicate_sending_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
 */
     // Allocate http body character vector.
-    allocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
     // Allocate http message character vector.
-    allocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
 /*??
     // Initialise host address.
@@ -619,9 +619,9 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     close(*((int*) p0));
 
     // Deallocate http body character vector.
-    deallocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
     // Deallocate http message character vector.
-    deallocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
 /*??
     // Deallocate socket address.

@@ -89,12 +89,12 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
                         int summand2c = *s2c;
 
                         // Allocate temporary input operand arrays.
-                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // Set temporary input operand arrays.
-                        set_array_elements(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        set_array_elements(summand2, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        set_array_elements(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        set_array_elements(summand2, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size
@@ -114,7 +114,7 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
                         *sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Reallocate output operand array.
-                        reallocate_array(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        reallocate_array(p0, p1, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // The temporary summand 1 vector element.
                         int* tmps1 = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -132,21 +132,21 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
 
                             // The parameter p1 is the sum count, which serves as
                             // index that gets incremented in every loop cycle.
-                            get_array_elements((void*) &summand1, (void*) &tmps1, p1, (void*) INTEGER_MEMORY_ABSTRACTION);
-                            get_array_elements((void*) &summand2, (void*) &tmps2, p1, (void*) INTEGER_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &summand1, (void*) &tmps1, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &summand2, (void*) &tmps2, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                             // Calculate temporary sum.
                             tmps = *tmps1 + *tmps2;
 
                             // Set output operand array.
-                            set_array_elements(*s, (void*) &tmps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) INTEGER_MEMORY_ABSTRACTION);
+                            set_array_elements(*s, (void*) &tmps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                             (*sc)++;
                         }
 
                         // Deallocate temporary operand arrays.
-                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_MEMORY_ABSTRACTION);
-                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_MEMORY_ABSTRACTION);
+                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     } else {
 

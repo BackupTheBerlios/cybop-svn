@@ -50,7 +50,7 @@ void log_multiply_with_integer(void* p0, void* p1, void* p2) {
         // CAUTION! DO NOT use logging functionality here!
         // The logger cannot log itself.
 
-        if (*a == *INTEGER_MEMORY_ABSTRACTION) {
+        if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             log_multiply_integer_with_integer(p0, p1);
 

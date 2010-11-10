@@ -30,9 +30,9 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Sends an inline stream that was read from a byte array.
@@ -47,7 +47,7 @@ void send_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send inline.");
 
-    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* INLINE_SENDER_SOURCE */

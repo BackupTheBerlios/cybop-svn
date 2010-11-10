@@ -30,13 +30,12 @@
 #include <errno.h>
 #include <stdio.h>
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/cybol/communication_mode_cybol_model.c"
 #include "../../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Sends a byte array stream to the stream socket in server mode by doing one single transfer.
@@ -326,7 +325,7 @@ void send_stream_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p5, p6, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p5, p6, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -337,7 +336,7 @@ void send_stream_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays((void*) &r, p5, p6, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p5, p6, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

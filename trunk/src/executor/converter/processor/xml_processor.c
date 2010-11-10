@@ -320,7 +320,7 @@ void process_xml_tag_name(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
                                     append_part(p0, p1, p2,
                                         (void*) NODE_NAME_XML_CYBOL_NAME, (void*) NODE_NAME_XML_CYBOL_NAME_COUNT,
-                                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                                         tn, (void*) &tnc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                                     break;
@@ -563,7 +563,7 @@ void process_xml_attribute(void* p0, void* p1, void* p2, void* p3, void* p4, voi
                         process_xml_attribute_value((void*) &av, (void*) &avc, p5, p6);
 
                         append_part(p0, p1, p2, an, (void*) &anc,
-                            (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT,
+                            (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                             av, (void*) &avc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                         // The has attribute flag.
@@ -661,7 +661,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // Allocate destination part.
         allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
             (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-            (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT);
+            (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
         // Decode destination part name.
         // CAUTION! The pre-defined constant "part" is used as name here!
@@ -676,7 +676,7 @@ void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // as internally used by the function "allocate_part" above.
         // If an xml element is empty, the compound will just not contain any parts.
         decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-            (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
             (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
         // The destination part model and details are decoded further below,

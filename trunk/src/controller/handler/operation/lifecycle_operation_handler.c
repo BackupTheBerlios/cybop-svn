@@ -66,7 +66,7 @@ void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays(p16, p10, p11, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays(p16, p10, p11, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -79,7 +79,7 @@ void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays(p16, p10, p11, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays(p16, p10, p11, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -89,7 +89,7 @@ void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays(p16, p10, p11, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays(p16, p10, p11, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -99,7 +99,7 @@ void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays(p16, p10, p11, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+        compare_equal_arrays(p16, p10, p11, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
