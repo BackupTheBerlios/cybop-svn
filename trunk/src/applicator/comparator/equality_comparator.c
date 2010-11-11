@@ -32,6 +32,7 @@
 #include "../../applicator/comparator/equality/suffix_equality_comparator.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/model/cybol/comparison_selection_cybol_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"

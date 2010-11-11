@@ -27,6 +27,7 @@
 #define ARITHMETIC_OPERATION_HANDLER_SOURCE
 
 #include "../../../applicator/calculator/addition_calculator.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/cybol/operation/arithmetic_operation_cybol_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"

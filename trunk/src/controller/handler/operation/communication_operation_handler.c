@@ -29,6 +29,7 @@
 #include "../../../applicator/communicator/receiving_communicator.c"
 #include "../../../applicator/communicator/sending_communicator.c"
 #include "../../../applicator/communicator/sensing_communicator.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/cybol/operation/communication_operation_cybol_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"

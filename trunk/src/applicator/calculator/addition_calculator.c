@@ -29,6 +29,7 @@
 #include "../../applicator/calculator/addition/character_vector_addition_calculator.c"
 #include "../../applicator/calculator/addition/integer_vector_addition_calculator.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"

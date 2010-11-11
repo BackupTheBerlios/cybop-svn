@@ -27,6 +27,7 @@
 #define REMOVER_SOURCE
 
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../executor/accessor/remover/array_remover.c"
 #include "../../executor/accessor/remover/compound_remover.c"

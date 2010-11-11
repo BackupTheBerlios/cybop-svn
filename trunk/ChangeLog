@@ -18,6 +18,8 @@
 
 2010-11-11  Christian Heller  <christian.heller@tuxtax.de>
         * Continue replacing integer-based memory abstraction constants in cyboi with wide characters
+        * Correct compilation errors caused by new primitive abstraction constants;
+            include file "constant/abstraction/memory/primitive_memory_abstraction.c" where necessary
 
 2010-11-10  Christian Heller  <christian.heller@tuxtax.de>
         * Continue replacing integer-based memory abstraction constants in cyboi with wide characters

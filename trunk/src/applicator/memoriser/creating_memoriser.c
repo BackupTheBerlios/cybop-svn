@@ -27,6 +27,7 @@
 #define CREATING_MEMORISER_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
 #include "../../constant/model/cybol/compound_element_cybol_model.c"
 #include "../../constant/model/log/message_log_model.c"

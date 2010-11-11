@@ -32,6 +32,7 @@
 #include "../../../applicator/memoriser/creating_memoriser.c"
 #include "../../../applicator/memoriser/destructing_memoriser.c"
 #include "../../../applicator/memoriser/getting_memoriser.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/cybol/operation/memory_operation_cybol_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"

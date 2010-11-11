@@ -28,6 +28,7 @@
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 #include "../../executor/memoriser/deallocator/array_deallocator.c"

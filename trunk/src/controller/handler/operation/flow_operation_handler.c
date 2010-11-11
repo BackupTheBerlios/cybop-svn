@@ -28,6 +28,7 @@
 
 #include "../../../applicator/guider/branch_guider.c"
 #include "../../../applicator/guider/loop_guider.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/cybol/operation/flow_operation_cybol_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"

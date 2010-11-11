@@ -28,6 +28,7 @@
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/character/character_constants.c"
 #include "../../../constant/http/url_escape_code_constants.c"
 #include "../../../constant/model/log/message_log_model.c"

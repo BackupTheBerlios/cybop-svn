@@ -11,8 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue replacing integer-based memory abstraction constants in cyboi with wide characters
-        * Correct compilation errors caused by new abstraction constants
+        * Debug runtime errors
+        * Make "exit" standard example work again
         * Make "ui_control" standard example work again
 
         * Investigate how to handle setting of destination count and size;

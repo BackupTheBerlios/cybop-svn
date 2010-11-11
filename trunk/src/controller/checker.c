@@ -525,10 +525,10 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         check_get((void*) &irq, (void*) &mt, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
             (void*) &d, (void*) &dc, (void*) &p, (void*) &id, p4, p5, (void*) &i, p0);
 
-    fwprintf(stdout, L"TEST checker signal a: %i\n", **((int**) a));
     fwprintf(stdout, L"TEST checker signal ac: %i\n", **((int**) ac));
-    fwprintf(stdout, L"TEST checker signal m: %ls\n", *((wchar_t**) m));
+    fwprintf(stdout, L"TEST checker signal a: %ls\n", (wchar_t*) *a);
     fwprintf(stdout, L"TEST checker signal mc: %i\n", **((int**) mc));
+    fwprintf(stdout, L"TEST checker signal m: %ls\n", (wchar_t*) *m);
     // CAUTION! d and dc are NULL. Do NOT try to print their values here!
 /*??
     //?? p and id are not used anymore and do not always exist. So printing their value sometimes causes a crash.
@@ -571,8 +571,8 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     fwprintf(stdout, L"TEST checker irq pre reset: %i\n", *((int*) *irq));
 
-    fwprintf(stdout, L"TEST checker irq a: %ls\n", (wchar_t*) *a);
     fwprintf(stdout, L"TEST checker irq ac: %i\n", *ac);
+    fwprintf(stdout, L"TEST checker irq a: %ls\n", (wchar_t*) *a);
     //?? Signal memory interrupts do NOT have an abstraction, model, details!
 
             // Lock mutex.

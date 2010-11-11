@@ -30,6 +30,7 @@
 #include "../../applicator/communicator/sensing/socket_sensing_communicator.c"
 #include "../../applicator/communicator/sensing/x_window_system_sensing_communicator.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
+#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/channel/cybol_channel.c"
 #include "../../constant/model/log/level_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"

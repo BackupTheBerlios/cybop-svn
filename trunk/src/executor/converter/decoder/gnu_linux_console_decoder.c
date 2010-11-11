@@ -35,6 +35,7 @@
 #include <wchar.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/cybol/layout/compass_layout_cybol_model.c"
 #include "../../../constant/model/cybol/border_cybol_model.c"

@@ -29,6 +29,7 @@
 #include "../../../applicator/filer/archiving_filer.c"
 #include "../../../applicator/filer/copying_filer.c"
 #include "../../../applicator/filer/directory_contents_listing_filer.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/cybol/operation/file_operation_cybol_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"

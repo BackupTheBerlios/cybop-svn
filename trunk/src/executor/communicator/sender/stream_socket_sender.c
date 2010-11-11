@@ -30,6 +30,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/cybol/communication_mode_cybol_model.c"
 #include "../../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"

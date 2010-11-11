@@ -29,6 +29,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
 #include "../../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"

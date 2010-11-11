@@ -31,6 +31,7 @@
 #include "../../../applicator/comparator/greaterness_or_equality_comparator.c"
 #include "../../../applicator/comparator/smallerness_comparator.c"
 #include "../../../applicator/comparator/smallerness_or_equality_comparator.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/cybol/operation/comparison_operation_cybol_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"

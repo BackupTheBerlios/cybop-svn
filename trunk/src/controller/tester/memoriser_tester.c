@@ -28,6 +28,7 @@
 
 #include <wchar.h>
 
+#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../logger/logger.c"
 
 /**

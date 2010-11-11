@@ -30,6 +30,7 @@
 
 #include <termios.h>
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/internal_memory_memory_name.c"

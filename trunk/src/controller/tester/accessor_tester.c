@@ -27,6 +27,7 @@
 #define ACCESSOR_TESTER
 
 #include "../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"

@@ -26,6 +26,7 @@
 #ifndef MODEL_ALLOCATOR_SOURCE
 #define MODEL_ALLOCATOR_SOURCE
 
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../executor/accessor/setter/array_setter.c"
 #include "../../../logger/logger.c"
