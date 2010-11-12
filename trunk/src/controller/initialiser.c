@@ -85,11 +85,6 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // Copy startup model abstraction.
     replace_array_elements((void*) &a, (void*) ac, (void*) as, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    fwprintf(stdout, L"TEST init mc: %i\n", mc);
-    fwprintf(stdout, L"TEST init mc*: %i\n", *((int*) mc));
-    fwprintf(stdout, L"TEST init m: %i\n", m);
-    fwprintf(stdout, L"TEST init m*: %ls\n", (wchar_t*) m);
-
     // Receive and decode startup model model and -details.
     communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) &m, mc, ms, (void*) &d, dc, ds,
@@ -97,11 +92,6 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
         p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
-exit(0);
-    fwprintf(stdout, L"TEST init mc: %i\n", mc);
-    fwprintf(stdout, L"TEST init mc*: %i\n", *((int*) mc));
-    fwprintf(stdout, L"TEST init m: %i\n", m);
-    fwprintf(stdout, L"TEST init m*: %ls\n", (wchar_t*) m);
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add initial signal to signal memory.");

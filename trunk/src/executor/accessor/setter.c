@@ -78,7 +78,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, p6);
+                set_array_elements(*d, p3, p4, p5, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -118,7 +118,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, p6);
+                set_array_elements(*d, p3, p4, p5, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -138,7 +138,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, p6);
+                set_array_elements(*d, p3, p4, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -158,7 +158,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, p6);
+                set_array_elements(*d, p3, p4, p5, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -178,7 +178,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, p6);
+                set_array_elements(*d, p3, p4, p5, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -188,7 +188,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, p6);
+                set_array_elements(*d, p3, p4, p5, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 

@@ -11,9 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Debug runtime errors
-        * Make "exit" standard example work again
         * Make "ui_control" standard example work again
+            (CONTINUE in file "creating_memoriser.c";
+            it is unclear why a whole model is not retrieved and remains null,
+            so that the root node is always used instead)
 
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;

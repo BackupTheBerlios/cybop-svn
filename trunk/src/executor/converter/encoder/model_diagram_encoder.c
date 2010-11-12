@@ -284,7 +284,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
         encode_model_diagram_line(p0, p1, p2);
 
         // Add part abstraction to destination array.
-        encode_integer_vector(p0, p1, p2, p5, p6);
+        append_array_elements(p0, p1, p2, p5, p6, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;

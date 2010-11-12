@@ -4,13 +4,13 @@
         <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
         <property name="element" channel="inline" abstraction="text/plain" model="part"/>
     </part>
-<!--
     <part name="create_temporary" channel="inline" abstraction="operation/plain" model="create">
         <property name="name" channel="inline" abstraction="text/plain" model="temporary"/>
         <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
         <property name="element" channel="inline" abstraction="text/plain" model="part"/>
         <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
     </part>
+<!--
     <part name="create_character" channel="inline" abstraction="operation/plain" model="create">
         <property name="name" channel="inline" abstraction="text/plain" model="character"/>
         <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
@@ -170,6 +170,7 @@
         <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
         <property name="message" channel="inline" abstraction="operation/plain" model="exit"/>
     </part>
+-->
 </model>
 
 <!--

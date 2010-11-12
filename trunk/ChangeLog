@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug runtime errors
+        * Make standard application examples work again
+
 2010-11-11  Christian Heller  <christian.heller@tuxtax.de>
         * Continue replacing integer-based memory abstraction constants in cyboi with wide characters
         * Correct compilation errors caused by new primitive abstraction constants;

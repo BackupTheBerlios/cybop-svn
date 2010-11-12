@@ -83,18 +83,10 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p9, p10);
 
     // Decode part name.
-    //
-    // The OLD solution was:
-    // replace_array_elements((void*) &n, (void*) nc, (void*) ns, p5, p6, p3, p4);
-    // DELETE later!
     decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4);
 
     // Decode part abstraction.
-    //
-    // The OLD solution was:
-    // replace_array_elements((void*) &a, (void*) ac, (void*) as, p9, p10, p7, p8);
-    // DELETE later!
-    decode((void*) &a, (void*) &ac, (void*) &as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8);
+    decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p7, p8);
 
     //
     // CAUTION! Do NOT decode part model here!
@@ -108,6 +100,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     //
 
     // Add part to whole model.
+    // CAUTION! Hand over name as reference.
     append_compound_element_by_name(p0, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
 //?? TEST BEGIN
@@ -258,6 +251,11 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME, (void*) WHOLE_CREATE_MEMORY_OPERATION_CYBOL_NAME_COUNT,
         p2, p3);
 
+    fwprintf(stdout, L"TEST creating wac: %i\n", *wac);
+    fwprintf(stdout, L"TEST creating wa: %ls\n", (wchar_t*) *wa);
+    fwprintf(stdout, L"TEST creating wmc: %i\n", *wmc);
+    fwprintf(stdout, L"TEST creating wm: %ls\n", (wchar_t*) *wm);
+
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -267,7 +265,11 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+    fwprintf(stdout, L"TEST creating part r: %i\n", r);
+
             if (*wm != *NULL_POINTER_MEMORY_MODEL) {
+
+    fwprintf(stdout, L"TEST creating part whole r: %i\n", r);
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add part knowledge model to whole model.");
 
@@ -275,6 +277,8 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 create_set(*wm, *wmc, *wms, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
 
             } else {
+
+    fwprintf(stdout, L"TEST creating part root r: %i\n", r);
 
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add part knowledge model to knowledge memory root.");
 
@@ -301,6 +305,8 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+    fwprintf(stdout, L"TEST creating meta r: %i\n", r);
+
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add meta knowledge model to whole details.");
 
             create_set(*wd, *wdc, *wds, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
@@ -308,6 +314,8 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    fwprintf(stdout, L"TEST creating empty r: %i\n", r);
 
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not create knowledge model. The element model is unknown.");
     }
