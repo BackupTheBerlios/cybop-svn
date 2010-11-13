@@ -10,7 +10,6 @@
         <property name="element" channel="inline" abstraction="text/plain" model="part"/>
         <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
     </part>
-<!--
     <part name="create_character" channel="inline" abstraction="operation/plain" model="create">
         <property name="name" channel="inline" abstraction="text/plain" model="character"/>
         <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
@@ -35,6 +34,7 @@
         <property name="message" channel="inline" abstraction="text/plain" model="ui_control/application_information.cybol"/>
         <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information"/>
     </part>
+<!--
     <part name="create_settings" channel="inline" abstraction="operation/plain" model="create">
         <property name="name" channel="inline" abstraction="text/plain" model="settings"/>
         <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>

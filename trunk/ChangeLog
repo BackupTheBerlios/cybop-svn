@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug file "creating_memoriser.c", where abstraction was decoded a second time
+            and assign runtime abstraction instead
+
 2010-11-12  Christian Heller  <christian.heller@tuxtax.de>
         * Debug runtime errors
         * Make standard application examples work again

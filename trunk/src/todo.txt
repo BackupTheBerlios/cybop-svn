@@ -12,9 +12,12 @@
 #
 
         * Make "ui_control" standard example work again
-            (CONTINUE in file "creating_memoriser.c";
-            it is unclear why a whole model is not retrieved and remains null,
-            so that the root node is always used instead)
+            (CONTINUE in file "file_system_receiving_communicator.c";
+            check why source cybol file is parsed correctly but not assigned to destination model;
+            possibly problem in get_compound_by_name? --> check dot-separation!)
+
+        * Investigate if and where to use architecture-independent types,
+            e.g. "size_t" (??) instead of "int" (or similar)
 
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;

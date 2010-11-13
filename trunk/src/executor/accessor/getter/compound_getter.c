@@ -1242,6 +1242,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
     void** eds = NULL_POINTER_MEMORY_MODEL;
 
     // Get compound element.
+    // This is necessary to find out about the abstraction.
     get_compound_element_by_name(p12, p13, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         p14, p15,
         (void*) &n, (void*) &nc, (void*) &ns,

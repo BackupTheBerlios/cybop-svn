@@ -167,9 +167,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
-            void* fn = L"TEST_XML_CONVERSION_MODEL_DIAGRAM.txt";
-            int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
-            int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
+            void* fn = L"TEST_DECODER_XML.txt";
+            int fnc = *NUMBER_20_INTEGER_MEMORY_MODEL;
+            int fns = *NUMBER_21_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
             send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
@@ -207,9 +207,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // Reset file name.
-            fn = L"TEST_CYBOL_CONVERSION_MODEL_DIAGRAM.txt";
-            fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
-            fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
+            fn = L"TEST_DECODER_CYBOL.txt";
+            fnc = *NUMBER_22_INTEGER_MEMORY_MODEL;
+            fns = *NUMBER_23_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
             send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
