@@ -26,27 +26,8 @@
 #ifndef GLIBC_TYPE_SIZE_SOURCE
 #define GLIBC_TYPE_SIZE_SOURCE
 
-//
-// CAUTION! Do NOT try to assign any values here!
-// Otherwise, the compiler shows the following error:
-// "error: initializer element is not constant"
-// Therefore, the variables are only initialised in module "globaliser.c".
-//
-
-/** The mbstate_t glibc type size. */
-static int* MULTIBYTE_CHARACTER_CONVERSION_STATE_GLIBC_TYPE_SIZE;
-
-/** The pthread_t glibc type size. */
-static int* POSIX_THREAD_GLIBC_TYPE_SIZE;
-
-/** The pthread_mutex_t glibc type size. */
-static int* POSIX_THREAD_MUTEX_GLIBC_TYPE_SIZE;
-
-/** The pid_t glibc type size. */
-static int* PROCESS_IDENTIFICATION_GLIBC_TYPE_SIZE;
-
-/** The sig_atomic_t glibc type size. */
-static int* SIGNAL_ATOMIC_GLIBC_TYPE_SIZE;
+// DELETE IN SUBVERSION!
+// Content moved to several other files.
 
 /* GLIBC_TYPE_SIZE_SOURCE */
 #endif

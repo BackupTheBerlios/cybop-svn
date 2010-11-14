@@ -33,7 +33,7 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The void* primitive type size. */
+/** The void* pointer primitive type size. */
 static int* POINTER_PRIMITIVE_TYPE_SIZE;
 
 /* POINTER_PRIMITIVE_TYPE_SIZE_SOURCE */

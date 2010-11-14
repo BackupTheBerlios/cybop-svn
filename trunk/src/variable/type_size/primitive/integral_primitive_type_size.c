@@ -87,7 +87,7 @@
 static int* SIGNED_CHARACTER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The unsigned char primitive type size.
+ * The unsigned char integral primitive type size.
  *
  * Minimum allowed range: 0..+255
  * Typical allowed range: 0..+255
@@ -97,7 +97,7 @@ static int* SIGNED_CHARACTER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 static int* UNSIGNED_CHARACTER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The signed short int primitive type size.
+ * The signed short int integral primitive type size.
  *
  * Minimum allowed range: -32767..+32767
  * Typical allowed range: -32768..+32767
@@ -107,7 +107,7 @@ static int* UNSIGNED_CHARACTER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 static int* SIGNED_SHORT_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The unsigned short int primitive type size.
+ * The unsigned short int integral primitive type size.
  *
  * Minimum allowed range: 0..+65535
  * Typical allowed range: 0..+65535
@@ -117,7 +117,7 @@ static int* SIGNED_SHORT_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 static int* UNSIGNED_SHORT_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The signed int primitive type size.
+ * The signed int integral primitive type size.
  *
  * Minimum allowed range: -32767..+32767
  * Typical allowed range: -32768..+32767 (antique systems) or -2147483648..+2147483647
@@ -127,7 +127,7 @@ static int* UNSIGNED_SHORT_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 static int* SIGNED_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The unsigned int primitive type size.
+ * The unsigned int integral primitive type size.
  *
  * Minimum allowed range: 0..+65535
  * Typical allowed range: 0..+65535 (antique systems) or 0..+4294967295
@@ -137,7 +137,7 @@ static int* SIGNED_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 static int* UNSIGNED_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The signed long int primitive type size.
+ * The signed long int integral primitive type size.
  *
  * Minimum allowed range: -2147483647..+2147483647
  * Typical allowed range: -2147483648..+2147483647 or -9223372036854775808..+9223372036854775807 (64-Bit systems)
@@ -147,7 +147,7 @@ static int* UNSIGNED_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 static int* SIGNED_LONG_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The unsigned long int primitive type size.
+ * The unsigned long int integral primitive type size.
  *
  * Minimum allowed range: 0..+4294967295
  * Typical allowed range: 0..+4294967295 or 0..+18446744073709551615 (64-Bit systems)
@@ -157,7 +157,7 @@ static int* SIGNED_LONG_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 static int* UNSIGNED_LONG_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The signed long long int primitive type size.
+ * The signed long long int integral primitive type size.
  *
  * Minimum allowed range: -9223372036854775807..+9223372036854775807
  * Typical allowed range: -9223372036854775808..+9223372036854775807
@@ -167,7 +167,7 @@ static int* UNSIGNED_LONG_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 static int* SIGNED_LONG_LONG_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The unsigned long long int primitive type size.
+ * The unsigned long long int integral primitive type size.
  *
  * Minimum allowed range: 0..+18446744073709551615
  * Typical allowed range: 0..+18446744073709551615
@@ -177,7 +177,7 @@ static int* SIGNED_LONG_LONG_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 static int* UNSIGNED_LONG_LONG_INTEGER_INTEGRAL_PRIMITIVE_TYPE_SIZE;
 
 /**
- * The wchar_t primitive type size.
+ * The wchar_t integral primitive type size.
  *
  * This type is defined in the headers <stdlib.h> and <wchar.h>
  * as a typedef of a 32 Bit signed integer.
