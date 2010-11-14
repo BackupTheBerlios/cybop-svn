@@ -18,6 +18,16 @@
 
 2010-11-14  Christian Heller  <christian.heller@tuxtax.de>
         * Make "ui_control" standard example work again
+        * Investigate if and where to use architecture-independent types such as
+            "size_t" and "ptrdiff_t" instead of "int";
+            http://www.gnu.org/software/libtool/manual/libc/Important-Data-Types.html#Important-Data-Types;
+            since cyboi assigns the sizes of all primitive types
+            to special global integer variables at system startup
+            (in module "globaliser.c"), there is no need to work with type "sizt_t";
+            pointer subtractions return values of type "ptrdiff_t" in glibc;
+            since pointer arithmetics is usually done in just one line in cyboi,
+            and the resulting values are assigned to integer variables,
+            nothing had to be changed for now in cyboi (possibly later, however)
 
 2010-11-13  Christian Heller  <christian.heller@tuxtax.de>
         * Debug file "creating_memoriser.c", where abstraction was decoded a second time

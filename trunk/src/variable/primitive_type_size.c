@@ -28,27 +28,41 @@
 
 //
 // CAUTION! Do NOT try to assign any values here!
-//
-// Ideally, of course, *NULL_POINTER_MEMORY_MODEL would be assigned as initial value.
-// But then, the compiler shows the following error:
+// Otherwise, the compiler shows the following error:
 // "error: initializer element is not constant"
 //
 // Therefore, the variables are only initialised in function "globalise"
 // of module "globaliser.c".
 //
 
+//
+// CAUTION! The glibc manual states that the data type of the result
+// of the "sizeof" function may vary between compilers.
+// It therefore recommends to use type "size_t" (instead of "int")
+// as the preferred way to declare any arguments or variables
+// that hold the size of an object.
+//
+// See:
+// http://www.gnu.org/software/libtool/manual/libc/Important-Data-Types.html#Important-Data-Types
+//
+// However, cyboi assigns the sizes of all primitive types to special
+// global integer variables at system startup, in module "globaliser.c".
+// As long as these global integer variables are used, there is
+// no need to work with type "sizt_t" in cyboi source code.
+//
+
 /** The character primitive size. */
 static int* CHARACTER_PRIMITIVE_SIZE;
-/** The wide character primitive size. */
-static int* WIDE_CHARACTER_PRIMITIVE_SIZE;
-/** The pointer primitive size. */
-static int* POINTER_PRIMITIVE_SIZE;
-/** The integer primitive size. */
-static int* INTEGER_PRIMITIVE_SIZE;
-/** The unsigned long primitive size. */
-static int* UNSIGNED_LONG_PRIMITIVE_SIZE;
 /** The double primitive size. */
 static int* DOUBLE_PRIMITIVE_SIZE;
+/** The integer primitive size. */
+static int* INTEGER_PRIMITIVE_SIZE;
+/** The pointer primitive size. */
+static int* POINTER_PRIMITIVE_SIZE;
+/** The unsigned long primitive size. */
+static int* UNSIGNED_LONG_PRIMITIVE_SIZE;
+/** The wide character primitive size. */
+static int* WIDE_CHARACTER_PRIMITIVE_SIZE;
 
 /* PRIMITIVE_TYPE_SIZE_SOURCE */
 #endif

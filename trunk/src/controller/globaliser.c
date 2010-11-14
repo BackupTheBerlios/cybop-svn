@@ -63,6 +63,8 @@ void globalise() {
     //
 
     // Allocate and initialise integer primitive size.
+    // CAUTION! The INTEGER_PRIMITIVE_SIZE variable has to be set FIRST,
+    // because all other assignments below make use of it.
     // CAUTION! The sizeof operator must be used twice here, because
     // INTEGER_PRIMITIVE_SIZE cannot be used before having been initialised.
     INTEGER_PRIMITIVE_SIZE = (int*) malloc(sizeof(int));
@@ -72,21 +74,21 @@ void globalise() {
     CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *CHARACTER_PRIMITIVE_SIZE = sizeof(char);
 
-    // Allocate and initialise wide character primitive size.
-    WIDE_CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *WIDE_CHARACTER_PRIMITIVE_SIZE = sizeof(wchar_t);
-
-    // Allocate and initialise unsigned long primitive size.
-    UNSIGNED_LONG_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *UNSIGNED_LONG_PRIMITIVE_SIZE = sizeof(unsigned long);
+    // Allocate and initialise double primitive size.
+    DOUBLE_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *DOUBLE_PRIMITIVE_SIZE = sizeof(double);
 
     // Allocate and initialise pointer primitive size.
     POINTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *POINTER_PRIMITIVE_SIZE = sizeof(void*);
 
-    // Allocate and initialise double primitive size.
-    DOUBLE_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *DOUBLE_PRIMITIVE_SIZE = sizeof(double);
+    // Allocate and initialise unsigned long primitive size.
+    UNSIGNED_LONG_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *UNSIGNED_LONG_PRIMITIVE_SIZE = sizeof(unsigned long);
+
+    // Allocate and initialise wide character primitive size.
+    WIDE_CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *WIDE_CHARACTER_PRIMITIVE_SIZE = sizeof(wchar_t);
 
     //
     // Log variables.
@@ -120,18 +122,18 @@ void globalise() {
     // Thread identification variables.
     //
 
-    // Allocate and initialise gnu/linux console thread.
-    GNU_LINUX_CONSOLE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *GNU_LINUX_CONSOLE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-    // Allocate x window system thread.
-    X_WINDOW_SYSTEM_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-    // Allocate www service thread.
-    WWW_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
-    *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // Allocate cyboi service thread.
     CYBOI_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
     *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise gnu/linux console thread.
+    GNU_LINUX_CONSOLE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    *GNU_LINUX_CONSOLE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+    // Allocate www service thread.
+    WWW_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+    // Allocate x window system thread.
+    X_WINDOW_SYSTEM_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
     //
     // Service exit variables.
@@ -144,18 +146,18 @@ void globalise() {
     // Therefore, they HAVE TO be defined as GLOBAL variables here.
     //
 
-    // Allocate and initialise gnu/linux console thread exit flag.
-    GNU_LINUX_CONSOLE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *GNU_LINUX_CONSOLE_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise x window system thread exit flag.
-    X_WINDOW_SYSTEM_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *X_WINDOW_SYSTEM_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise www service thread exit flag.
-    WWW_SERVICE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *WWW_SERVICE_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Allocate and initialise cyboi service thread exit flag.
     CYBOI_SERVICE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *CYBOI_SERVICE_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise gnu/linux console thread exit flag.
+    GNU_LINUX_CONSOLE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *GNU_LINUX_CONSOLE_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise www service thread exit flag.
+    WWW_SERVICE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *WWW_SERVICE_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise x window system thread exit flag.
+    X_WINDOW_SYSTEM_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *X_WINDOW_SYSTEM_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     //
     // Reallocation factor variables.
@@ -188,33 +190,33 @@ void globalise() {
     // x - and so on
     //
 
-    // Allocate and initialise cybol file reallocation factor.
-    CYBOL_FILE_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *CYBOL_FILE_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise character vector reallocation factor.
     CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise wide character vector reallocation factor.
-    WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise integer vector reallocation factor.
-    INTEGER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *INTEGER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise unsigned long vector reallocation factor.
-    UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise double vector reallocation factor.
-    DOUBLE_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *DOUBLE_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise pointer vector reallocation factor.
-    POINTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *POINTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise compound reallocation factor.
     COMPOUND_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *COMPOUND_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise cybol file reallocation factor.
+    CYBOL_FILE_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *CYBOL_FILE_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise double vector reallocation factor.
+    DOUBLE_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *DOUBLE_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise integer vector reallocation factor.
+    INTEGER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *INTEGER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise pointer vector reallocation factor.
+    POINTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *POINTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise signal memory reallocation factor.
     SIGNAL_MEMORY_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
     *SIGNAL_MEMORY_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise unsigned long vector reallocation factor.
+    UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise wide character vector reallocation factor.
+    WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
 }
 
 /**
@@ -228,50 +230,50 @@ void unglobalise() {
     // Reallocation factor variables.
     //
 
-    // Free cybol file reallocation factor.
-    free(CYBOL_FILE_REALLOCATION_FACTOR);
     // Free character vector reallocation factor.
     free(CHARACTER_VECTOR_REALLOCATION_FACTOR);
-    // Free wide character vector reallocation factor.
-    free(WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR);
-    // Free integer vector reallocation factor.
-    free(INTEGER_VECTOR_REALLOCATION_FACTOR);
-    // Free unsigned long vector reallocation factor.
-    free(UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR);
-    // Free double vector reallocation factor.
-    free(DOUBLE_VECTOR_REALLOCATION_FACTOR);
-    // Free pointer vector reallocation factor.
-    free(POINTER_VECTOR_REALLOCATION_FACTOR);
     // Free compound reallocation factor.
     free(COMPOUND_REALLOCATION_FACTOR);
+    // Free cybol file reallocation factor.
+    free(CYBOL_FILE_REALLOCATION_FACTOR);
+    // Free double vector reallocation factor.
+    free(DOUBLE_VECTOR_REALLOCATION_FACTOR);
+    // Free integer vector reallocation factor.
+    free(INTEGER_VECTOR_REALLOCATION_FACTOR);
+    // Free pointer vector reallocation factor.
+    free(POINTER_VECTOR_REALLOCATION_FACTOR);
     // Free signal memory reallocation factor.
     free(SIGNAL_MEMORY_REALLOCATION_FACTOR);
+    // Free unsigned long vector reallocation factor.
+    free(UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR);
+    // Free wide character vector reallocation factor.
+    free(WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR);
 
     //
     // Service exit variables.
     //
 
-    // Free gnu/linux console thread exit flag.
-    free(GNU_LINUX_CONSOLE_EXIT);
-    // Free x window system thread exit flag.
-    free(X_WINDOW_SYSTEM_EXIT);
-    // Free www service thread exit flag.
-    free(WWW_SERVICE_EXIT);
     // Free cyboi service thread exit flag.
     free(CYBOI_SERVICE_EXIT);
+    // Free gnu/linux console thread exit flag.
+    free(GNU_LINUX_CONSOLE_EXIT);
+    // Free www service thread exit flag.
+    free(WWW_SERVICE_EXIT);
+    // Free x window system thread exit flag.
+    free(X_WINDOW_SYSTEM_EXIT);
 
     //
     // Thread identification variables.
     //
 
-    // Free gnu/linux console thread.
-    free(GNU_LINUX_CONSOLE_THREAD);
-    // Free x window system thread.
-    free(X_WINDOW_SYSTEM_THREAD);
-    // Free www service thread.
-    free(WWW_SERVICE_THREAD);
     // Free cyboi service thread.
     free(CYBOI_SERVICE_THREAD);
+    // Free gnu/linux console thread.
+    free(GNU_LINUX_CONSOLE_THREAD);
+    // Free www service thread.
+    free(WWW_SERVICE_THREAD);
+    // Free x window system thread.
+    free(X_WINDOW_SYSTEM_THREAD);
 
     //
     // Log variables.
@@ -306,18 +308,18 @@ void unglobalise() {
     // Instead, use malloc and similar functions directly!
     //
 
+    // Free character primitive size.
+    free(CHARACTER_PRIMITIVE_SIZE);
     // Free double primitive size.
     free(DOUBLE_PRIMITIVE_SIZE);
+    // Free integer primitive size.
+    free(INTEGER_PRIMITIVE_SIZE);
     // Free pointer primitive size.
     free(POINTER_PRIMITIVE_SIZE);
     // Free unsigned long primitive size.
     free(UNSIGNED_LONG_PRIMITIVE_SIZE);
     // Free wide character primitive size.
     free(WIDE_CHARACTER_PRIMITIVE_SIZE);
-    // Free character primitive size.
-    free(CHARACTER_PRIMITIVE_SIZE);
-    // Free integer primitive size.
-    free(INTEGER_PRIMITIVE_SIZE);
 }
 
 /* GLOBALISER_SOURCE */

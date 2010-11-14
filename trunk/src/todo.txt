@@ -11,8 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Investigate if and where to use architecture-independent types,
-            e.g. "size_t" (??) instead of "int" (or similar)
+        * Assign "sizeof" for each programming language type to a global variable just once at startup
+            and henceforth use that variable instead of each time determining "sizeof", throughout all source code
 
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;
@@ -20,10 +20,6 @@
         * Rethink basic functions such as "set", "append", "replace" etc.
             for arrays and other abstractions (types) like "compound"
         * Clean up logical errors
-
-        * Assign "sizeof" for each programming language type to a global variable just once at startup
-            and henceforth use that variable instead of each time determining "sizeof", throughout all source code
-        * Check if standard "*_ARRAY_MEMORY_ABSTRACTION" may replace "*_VECTOR_MEMORY_ABSTRACTION"
 
         * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
             Should models in cybol/ dir be one level higher?

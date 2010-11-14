@@ -54,12 +54,12 @@ void test_accessor_size_determiner() {
     int wcs = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Determine size.
-    determine_size((void*) &cs, (void*) CHARACTER_PRIMITIVE_SIZE);
-    determine_size((void*) &ds, (void*) DOUBLE_PRIMITIVE_SIZE);
-    determine_size((void*) &is, (void*) INTEGER_PRIMITIVE_SIZE);
-    determine_size((void*) &ps, (void*) POINTER_PRIMITIVE_SIZE);
-    determine_size((void*) &uls, (void*) UNSIGNED_LONG_PRIMITIVE_SIZE);
-    determine_size((void*) &wcs, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+    determine_size((void*) &cs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    determine_size((void*) &ds, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+    determine_size((void*) &is, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    determine_size((void*) &ps, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    determine_size((void*) &uls, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
+    determine_size((void*) &wcs, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"Type size character: %i\n", cs);
     fwprintf(stdout, L"Type size double: %i\n", ds);

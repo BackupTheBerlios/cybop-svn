@@ -38,12 +38,13 @@ void test_type_sizes() {
     log_write_terminated_message((void*) stdout, L"Test type sizes:\n");
 
     fwprintf(stdout, L"null: %i\n", *NULL_POINTER_MEMORY_MODEL);
-    fwprintf(stdout, L"int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
+
     fwprintf(stdout, L"char size: %i\n", *CHARACTER_PRIMITIVE_SIZE);
-    fwprintf(stdout, L"wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
-    fwprintf(stdout, L"unsigned long size: %i\n", *UNSIGNED_LONG_PRIMITIVE_SIZE);
-    fwprintf(stdout, L"void* size: %i\n", *POINTER_PRIMITIVE_SIZE);
     fwprintf(stdout, L"double size: %i\n", *DOUBLE_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"void* size: %i\n", *POINTER_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"unsigned long size: %i\n", *UNSIGNED_LONG_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
 }
 
 /**

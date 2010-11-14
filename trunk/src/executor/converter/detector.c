@@ -45,7 +45,7 @@ void detect_move_position(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* ac = (int*) p3;
+        int* s = (int*) p3;
 
         if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -62,7 +62,7 @@ void detect_move_position(void* p0, void* p1, void* p2, void* p3) {
                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Move detector position.");
 
                     // Increment current position.
-                    *pos = *pos + (*ec * *ac);
+                    *pos = *pos + (*ec * *s);
 
                     // Decrement remaining count.
                     *rem = *rem - *ec;
