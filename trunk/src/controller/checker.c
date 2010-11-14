@@ -210,11 +210,13 @@ void check_wait(void* p0, void* p1) {
                 sleep(*sl);
             }
 
+/*??
     fwprintf(stdout, L"TEST wait *signal_memory_irq: %i\n", *((int*) *sm));
     fwprintf(stdout, L"TEST wait *gnu_linux_console_irq: %i\n", *((int*) *lc));
     fwprintf(stdout, L"TEST wait *x_window_system_irq: %i\n", *((int*) *xw));
     fwprintf(stdout, L"TEST wait *www_service_irq: %i\n", *((int*) *ww));
     fwprintf(stdout, L"TEST wait *cyboi_service_irq: %i\n", *((int*) *cy));
+*/
 
             // The sleep loop above is left as soon as at least one of the
             // interrupt variables is set to a value other than zero.
@@ -516,7 +518,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-    fwprintf(stdout, L"TEST index of signal with highest priority: %i\n", i);
+//??    fwprintf(stdout, L"TEST index of signal with highest priority: %i\n", i);
 
         // A signal was found and has to be handled.
         // Handling a signal has higher priority than checking for new interrupt requests.
@@ -525,6 +527,7 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         check_get((void*) &irq, (void*) &mt, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc,
             (void*) &d, (void*) &dc, (void*) &p, (void*) &id, p4, p5, (void*) &i, p0);
 
+/*??
     fwprintf(stdout, L"TEST checker signal ac: %i\n", **((int**) ac));
     fwprintf(stdout, L"TEST checker signal a: %ls\n", (wchar_t*) *a);
     fwprintf(stdout, L"TEST checker signal mc: %i\n", **((int**) mc));
@@ -559,21 +562,24 @@ void check_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         // - handler (to be forwarded to the "handle" function below)
         check_interrupts((void*) &irq, (void*) &mt, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, p0);
 
+/*??
     fwprintf(stdout, L"TEST checker irq: %i\n", *irq);
     fwprintf(stdout, L"TEST checker handler ac: %i\n", *ac);
     fwprintf(stdout, L"TEST checker handler a: %i\n", *a);
     fwprintf(stdout, L"TEST checker handler mc: %i\n", *mc);
     fwprintf(stdout, L"TEST checker handler m: %i\n", *m);
+*/
 
         // CAUTION! These conditions have to be CONNECTED by a boolean AND operator,
         // because otherwise, the "else" branch below would not always be reached.
         if ((*irq != *NULL_POINTER_MEMORY_MODEL) && (*((int*) *irq) != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
+/*??
     fwprintf(stdout, L"TEST checker irq pre reset: %i\n", *((int*) *irq));
-
     fwprintf(stdout, L"TEST checker irq ac: %i\n", *ac);
     fwprintf(stdout, L"TEST checker irq a: %ls\n", (wchar_t*) *a);
     //?? Signal memory interrupts do NOT have an abstraction, model, details!
+*/
 
             // Lock mutex.
             pthread_mutex_lock(*mt);

@@ -74,10 +74,12 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+/*??
     fwprintf(stdout, L"TEST handle ac: %i\n", p11);
     fwprintf(stdout, L"TEST handle *ac: %i\n", *((int*) p11));
     fwprintf(stdout, L"TEST handle a: %i\n", p10);
     fwprintf(stdout, L"TEST handle *a: %ls\n", (wchar_t*) p10);
+*/
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

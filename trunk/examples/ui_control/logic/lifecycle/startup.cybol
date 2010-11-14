@@ -34,7 +34,6 @@
         <property name="message" channel="inline" abstraction="text/plain" model="ui_control/application_information.cybol"/>
         <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information"/>
     </part>
-<!--
     <part name="create_settings" channel="inline" abstraction="operation/plain" model="create">
         <property name="name" channel="inline" abstraction="text/plain" model="settings"/>
         <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
@@ -122,7 +121,6 @@
     </part>
 -->
     <!-- Write knowledge tree into file. -->
-<!--
     <part name="test_knowledge_tree" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
         <property name="language" channel="inline" abstraction="text/plain" model="text/model-diagram"/>
@@ -151,7 +149,6 @@
         <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.gui.main_window"/>
     </part>
 -->
-<!--
     <part name="sense_tui_commands" channel="inline" abstraction="operation/plain" model="sense">
         <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
         <property name="handler" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.handle_gnu_linux_console"/>
@@ -162,13 +159,6 @@
         <property name="root" channel="inline" abstraction="path/knowledge" model=".ui_control.gui"/>
         <property name="commands" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.gui_main_window_actions"/>
         <property name="blocking" channel="inline" abstraction="logicvalue/boolean" model="false"/>
-    </part>
--->
-    <!-- TEST -->
-<!--
-    <part name="startup" channel="inline" abstraction="operation/plain" model="send">
-        <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
-        <property name="message" channel="inline" abstraction="operation/plain" model="exit"/>
     </part>
 -->
 </model>

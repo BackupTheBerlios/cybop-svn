@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Make "ui_control" standard example work again
+
 2010-11-13  Christian Heller  <christian.heller@tuxtax.de>
         * Debug file "creating_memoriser.c", where abstraction was decoded a second time
             and assign runtime abstraction instead

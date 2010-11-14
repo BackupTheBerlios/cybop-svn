@@ -319,6 +319,7 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not create knowledge model. The element model is unknown.");
     }
 
+/*??
 //?? TEST BEGIN
     // The model diagram.
     void* md = *NULL_POINTER_MEMORY_MODEL;
@@ -349,6 +350,7 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Deallocate multibyte character stream.
     deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
+*/
 }
 
 /* CREATING_MEMORISER_SOURCE */

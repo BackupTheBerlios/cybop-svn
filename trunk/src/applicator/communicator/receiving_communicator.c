@@ -294,8 +294,6 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message.");
 
-    fwprintf(stdout, L"TEST receiving: %i \n", p0);
-
     // The channel name, abstraction, model, details.
     void** cn = NULL_POINTER_MEMORY_MODEL;
     void** cnc = NULL_POINTER_MEMORY_MODEL;
@@ -503,6 +501,39 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     // Receive data using the parameters determined above.
     communicate_receiving_with_parameters(p2, p3, p4, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods,
         *rm, *rmc, *rms, *com, *comc, *mm, *mmc, *mem, *memc, *lm, *lmc, *stm, *stmc, *cm, *cmc);
+
+/*??
+//?? TEST BEGIN
+    // The model diagram.
+    void* md = *NULL_POINTER_MEMORY_MODEL;
+    int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate model diagram.
+    allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Encode model into model diagram.
+    encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+        p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+    // The multibyte character stream.
+    void* mb = *NULL_POINTER_MEMORY_MODEL;
+    int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate multibyte character stream.
+    allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Encode model diagram into multibyte character stream.
+    encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+    // The file name.
+    void* fn = L"TEST_RECEIVING_COMMUNICATOR.txt";
+    int fnc = *NUMBER_27_INTEGER_MEMORY_MODEL;
+    int fns = *NUMBER_28_INTEGER_MEMORY_MODEL;
+    // Write multibyte character stream as message to file system.
+    send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+    // Deallocate model diagram.
+    deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate multibyte character stream.
+    deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
+*/
 }
 
 /* RECEIVING_COMMUNICATOR_SOURCE */

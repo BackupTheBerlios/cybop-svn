@@ -11,11 +11,6 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Make "ui_control" standard example work again
-            (CONTINUE in file "file_system_receiving_communicator.c";
-            check why source cybol file is parsed correctly but not assigned to destination model;
-            possibly problem in get_compound_by_name? --> check dot-separation!)
-
         * Investigate if and where to use architecture-independent types,
             e.g. "size_t" (??) instead of "int" (or similar)
 
