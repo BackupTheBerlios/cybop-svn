@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: service_interrupt.c,v $ $Revision: 1.2 $ $Date: 2009-01-31 16:06:34 $ $Author: christian $
+ * @version $RCSfile: primitive_type_size.c,v $ $Revision: 1.2 $ $Date: 2009-01-31 16:06:34 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SERVICE_INTERRUPT_SOURCE
-#define SERVICE_INTERRUPT_SOURCE
+#ifndef GLIBC_TYPE_SIZE_SOURCE
+#define GLIBC_TYPE_SIZE_SOURCE
 
 //
 // CAUTION! Do NOT try to assign any values here!
@@ -33,14 +33,20 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The gnu linux console exit flag. */
-static int* GNU_LINUX_CONSOLE_EXIT;
-/** The x window system exit flag. */
-static int* X_WINDOW_SYSTEM_EXIT;
-/** The www service exit flag. */
-static int* WWW_SERVICE_EXIT;
-/** The cyboi service exit flag. */
-static int* CYBOI_SERVICE_EXIT;
+/** The mbstate_t glibc type size. */
+static int* MULTIBYTE_CHARACTER_CONVERSION_STATE_GLIBC_TYPE_SIZE;
 
-/* SERVICE_INTERRUPT_SOURCE */
+/** The pthread_t glibc type size. */
+static int* POSIX_THREAD_GLIBC_TYPE_SIZE;
+
+/** The pthread_mutex_t glibc type size. */
+static int* POSIX_THREAD_MUTEX_GLIBC_TYPE_SIZE;
+
+/** The pid_t glibc type size. */
+static int* PROCESS_IDENTIFICATION_GLIBC_TYPE_SIZE;
+
+/** The sig_atomic_t glibc type size. */
+static int* SIGNAL_ATOMIC_GLIBC_TYPE_SIZE;
+
+/* GLIBC_TYPE_SIZE_SOURCE */
 #endif

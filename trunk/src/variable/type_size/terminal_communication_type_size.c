@@ -23,27 +23,18 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PRIMITIVE_TYPE_SIZE_SOURCE
-#define PRIMITIVE_TYPE_SIZE_SOURCE
+#ifndef TERMINAL_COMMUNICATION_TYPE_SIZE_SOURCE
+#define TERMINAL_COMMUNICATION_TYPE_SIZE_SOURCE
 
 //
-// CAUTION! The glibc manual states that the data type of the result
-// of the "sizeof" function may vary between compilers.
-// It therefore recommends to use type "size_t" (instead of "int")
-// as the preferred way to declare any arguments or variables
-// that hold the size of an object.
-//
-// See:
-// http://www.gnu.org/software/libtool/manual/libc/Important-Data-Types.html#Important-Data-Types
-//
-// However, cyboi assigns the sizes of all primitive types to special
-// global integer variables at system startup, in module "globaliser.c".
-// As long as these global integer variables are used, there is
-// no need to work with type "sizt_t" in cyboi source code.
+// CAUTION! Do NOT try to assign any values here!
+// Otherwise, the compiler shows the following error:
+// "error: initializer element is not constant"
+// Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The char primitive type size. */
-static int* CHARACTER_PRIMITIVE_TYPE_SIZE;
+/** The termios type size. */
+static int* TERMINAL_COMMUNICATION_TYPE_SIZE;
 
-/* PRIMITIVE_TYPE_SIZE_SOURCE */
+/* TERMINAL_COMMUNICATION_TYPE_SIZE_SOURCE */
 #endif

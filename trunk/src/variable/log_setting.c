@@ -28,13 +28,9 @@
 
 //
 // CAUTION! Do NOT try to assign any values here!
-//
-// Ideally, of course, *NULL_POINTER_MEMORY_MODEL would be assigned as initial value.
-// But then, the compiler shows the following error:
+// Otherwise, the compiler shows the following error:
 // "error: initializer element is not constant"
-//
-// Therefore, the variables are only initialised in function "globalise"
-// of module "globaliser.c".
+// Therefore, the variables are only initialised in module "globaliser.c".
 //
 
 /** The log level. */

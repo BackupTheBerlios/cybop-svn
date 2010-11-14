@@ -121,6 +121,48 @@ void manage(void* p0, void* p1) {
     // Both of these assumptions are true on all of the machines that the GNU C
     // library supports and on all known POSIX systems.
     //
+    // Why is the keyword "volatile" used here?
+    //
+    // In the following example, the code sets the value stored in "foo" to 0.
+    // It then starts to poll that value repeatedly until it changes to 255:
+    //
+    // static int foo;
+    // void bar(void) {
+    //     foo = 0;
+    //     while (foo != 255);
+    // }
+    //
+    // An optimizing compiler will notice that no other code can possibly
+    // change the value stored in "foo", and will assume that it will
+    // remain equal to "0" at all times. The compiler will therefore
+    // replace the function body with an infinite loop similar to this:
+    //
+    // void bar_optimized(void) {
+    //     foo = 0;
+    //     while (true);
+    // }
+    //
+    // However, foo might represent a location that can be changed
+    // by other elements of the computer system at any time,
+    // such as a hardware register of a device connected to the CPU.
+    // The above code would never detect such a change;
+    // without the "volatile" keyword, the compiler assumes that
+    // the current program is the only part of the system that could
+    // change the value (which is by far the most common situation).
+    //
+    // To prevent the compiler from optimising code as above,
+    // the "volatile" keyword is used:
+    //
+    // static volatile int foo;
+    // void bar (void) {
+    //     foo = 0;
+    //     while (foo != 255);
+    // }
+    //
+    // With this modification, the loop condition will not be optimised
+    // away, and the system will detect the change when it occurs.
+    //
+
     volatile sig_atomic_t* signal_memory_irq = (volatile sig_atomic_t*) *NULL_POINTER_MEMORY_MODEL;
     // The gnu/linux console interrupt request flag.
     volatile sig_atomic_t* gnu_linux_console_irq = (volatile sig_atomic_t*) *NULL_POINTER_MEMORY_MODEL;

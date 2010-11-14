@@ -53,18 +53,37 @@ void globalise() {
     //
     // Primitive type size variables.
     //
+
+    //
     // CAUTION! DO NOT use array functionality here!
     // The array functions use the logger which in turn depends on global
     // log variables set here. So this would cause circular references.
     // Instead, use malloc and similar functions directly!
     //
-    // CAUTION! The integer size needs to be initialised FIRST,
-    // BEFORE all other initialisations below.
+
+    //
+    // CAUTION! The glibc manual states that the data type of the result
+    // of the "sizeof" function may vary between compilers.
+    // It therefore recommends to use type "size_t" (instead of "int")
+    // as the preferred way to declare any arguments or variables
+    // that hold the size of an object.
+    //
+    // See:
+    // http://www.gnu.org/software/libtool/manual/libc/Important-Data-Types.html#Important-Data-Types
+    //
+    // However, cyboi assigns the sizes of all primitive types to special
+    // global integer variables at system startup, in module "globaliser.c".
+    // As long as these global integer variables are used, there is
+    // no need to work with type "sizt_t" in cyboi source code.
+    //
+
+    //
+    // CAUTION! The INTEGER_PRIMITIVE_SIZE variable needs to be
+    // initialised FIRST, BEFORE all other initialisations,
+    // because all other assignments below make use of it.
     //
 
     // Allocate and initialise integer primitive size.
-    // CAUTION! The INTEGER_PRIMITIVE_SIZE variable has to be set FIRST,
-    // because all other assignments below make use of it.
     // CAUTION! The sizeof operator must be used twice here, because
     // INTEGER_PRIMITIVE_SIZE cannot be used before having been initialised.
     INTEGER_PRIMITIVE_SIZE = (int*) malloc(sizeof(int));

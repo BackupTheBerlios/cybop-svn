@@ -11,8 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Assign "sizeof" for each programming language type to a global variable just once at startup
-            and henceforth use that variable instead of each time determining "sizeof", throughout all source code
+        * Assign global type size variables at system startup
+        * Debug errors caused by adding new type size variables
 
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;
@@ -188,9 +188,6 @@
             reallocation factor handling and also shrink memory structures appropriately
         * Include the sources of all documents into the distributable tarball cybop-0.9.0/
             --> really? This will grow it up to 500 MB in size due to the images
-
-        * Define data types with fixed length (using preprocessor #define??),
-            so that they mean the same on different platforms (see Qt library or Java's types)
 
         * Write an actual manual that is updated as necessary to reflect the current
             state of cybop; just looking at the papers, it is hard to know what is

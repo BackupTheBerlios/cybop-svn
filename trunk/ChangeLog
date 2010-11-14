@@ -28,6 +28,8 @@
             since pointer arithmetics is usually done in just one line in cyboi,
             and the resulting values are assigned to integer variables,
             nothing had to be changed for now in cyboi (possibly later, however)
+        * Add new global size variables for various data types of the glibc,
+            in order to avoid using the "sizeof" function throughout all source code
 
 2010-11-13  Christian Heller  <christian.heller@tuxtax.de>
         * Debug file "creating_memoriser.c", where abstraction was decoded a second time
