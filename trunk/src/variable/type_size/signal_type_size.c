@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE
-#define X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE
+#ifndef SIGNAL_TYPE_SIZE_SOURCE
+#define SIGNAL_TYPE_SIZE_SOURCE
 
 //
 // CAUTION! Do NOT try to assign any values here!
@@ -33,8 +33,11 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The XGCValues x window system type size. */
-static signed int* XGC_VALUES_X_WINDOW_SYSTEM_TYPE_SIZE;
+/** The sig_atomic_t signal type size. */
+static signed char* ATOMIC_SIGNAL_TYPE_SIZE;
 
-/* X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE */
+/** The volatile sig_atomic_t signal type size. */
+static signed char* VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE;
+
+/* SIGNAL_TYPE_SIZE_SOURCE */
 #endif

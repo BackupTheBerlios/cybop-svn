@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE
-#define X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE
+#ifndef CONVERSION_TYPE_SIZE_SOURCE
+#define CONVERSION_TYPE_SIZE_SOURCE
 
 //
 // CAUTION! Do NOT try to assign any values here!
@@ -33,8 +33,8 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The XGCValues x window system type size. */
-static signed int* XGC_VALUES_X_WINDOW_SYSTEM_TYPE_SIZE;
+/** The mbstate_t conversion type size. */
+static signed char* MULTIBYTE_CHARACTER_STATE_CONVERSION_TYPE_SIZE;
 
-/* X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE */
+/* CONVERSION_TYPE_SIZE_SOURCE */
 #endif

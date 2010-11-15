@@ -23,11 +23,18 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GLIBC_TYPE_SIZE_SOURCE
-#define GLIBC_TYPE_SIZE_SOURCE
+#ifndef POINTER_TYPE_SIZE_SOURCE
+#define POINTER_TYPE_SIZE_SOURCE
 
-// DELETE IN SUBVERSION!
-// Content moved to several other files.
+//
+// CAUTION! Do NOT try to assign any values here!
+// Otherwise, the compiler shows the following error:
+// "error: initializer element is not constant"
+// Therefore, the variables are only initialised in module "globaliser.c".
+//
 
-/* GLIBC_TYPE_SIZE_SOURCE */
+/** The void* pointer type size. */
+static signed char* POINTER_TYPE_SIZE;
+
+/* POINTER_TYPE_SIZE_SOURCE */
 #endif

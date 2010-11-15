@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE
-#define X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE
+#ifndef SOCKET_TYPE_SIZE_SOURCE
+#define SOCKET_TYPE_SIZE_SOURCE
 
 //
 // CAUTION! Do NOT try to assign any values here!
@@ -33,8 +33,23 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The XGCValues x window system type size. */
-static signed int* XGC_VALUES_X_WINDOW_SYSTEM_TYPE_SIZE;
+/** The in_addr socket type size. */
+static signed int* INTERNET_PROTOCOL_4_HOST_ADDRESS_SOCKET_TYPE_SIZE;
 
-/* X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE */
+/** The sockaddr_in socket type size. */
+static signed int* INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
+
+/** The in6_addr socket type size. */
+static signed int* INTERNET_PROTOCOL_6_HOST_ADDRESS_SOCKET_TYPE_SIZE;
+
+/** The sockaddr_in6 socket type size. */
+static signed int* INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
+
+/** The sockaddr_un socket type size. */
+static signed int* LOCAL_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
+
+/** The sockaddr socket type size. */
+static signed int* SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
+
+/* SOCKET_TYPE_SIZE_SOURCE */
 #endif

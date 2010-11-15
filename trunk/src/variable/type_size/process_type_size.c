@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE
-#define X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE
+#ifndef PROCESS_TYPE_SIZE_SOURCE
+#define PROCESS_TYPE_SIZE_SOURCE
 
 //
 // CAUTION! Do NOT try to assign any values here!
@@ -33,8 +33,8 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The XGCValues x window system type size. */
-static signed int* XGC_VALUES_X_WINDOW_SYSTEM_TYPE_SIZE;
+/** The pid_t process type size. */
+static signed char* IDENTIFICATION_PROCESS_TYPE_SIZE;
 
-/* X_WINDOW_SYSTEM_TYPE_SIZE_SOURCE */
+/* PROCESS_TYPE_SIZE_SOURCE */
 #endif

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef TERMINAL_COMMUNICATION_TYPE_SIZE_SOURCE
-#define TERMINAL_COMMUNICATION_TYPE_SIZE_SOURCE
+#ifndef THREAD_TYPE_SIZE_SOURCE
+#define THREAD_TYPE_SIZE_SOURCE
 
 //
 // CAUTION! Do NOT try to assign any values here!
@@ -33,8 +33,11 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The termios type size. */
-static int* TERMINAL_COMMUNICATION_TYPE_SIZE;
+/** The pthread_t thread type size. */
+static signed char* THREAD_TYPE_SIZE;
 
-/* TERMINAL_COMMUNICATION_TYPE_SIZE_SOURCE */
+/** The pthread_mutex_t thread type size. */
+static signed char* MUTEX_THREAD_TYPE_SIZE;
+
+/* THREAD_TYPE_SIZE_SOURCE */
 #endif

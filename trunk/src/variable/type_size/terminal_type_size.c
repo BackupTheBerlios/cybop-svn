@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_COMMUNICATION_TYPE_SIZE_SOURCE
-#define SOCKET_COMMUNICATION_TYPE_SIZE_SOURCE
+#ifndef TERMINAL_TYPE_SIZE_SOURCE
+#define TERMINAL_TYPE_SIZE_SOURCE
 
 //
 // CAUTION! Do NOT try to assign any values here!
@@ -33,23 +33,8 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The in_addr type size. */
-static int* INTERNET_PROTOCOL_4_HOST_ADDRESS_SOCKET_COMMUNICATION_TYPE_SIZE;
+/** The termios terminal type size. */
+static signed int* INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE;
 
-/** The sockaddr_in type size. */
-static int* INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_COMMUNICATION_TYPE_SIZE;
-
-/** The in6_addr type size. */
-static int* INTERNET_PROTOCOL_6_HOST_ADDRESS_SOCKET_COMMUNICATION_TYPE_SIZE;
-
-/** The sockaddr_in6 type size. */
-static int* INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_COMMUNICATION_TYPE_SIZE;
-
-/** The sockaddr_un type size. */
-static int* LOCAL_SOCKET_ADDRESS_SOCKET_COMMUNICATION_TYPE_SIZE;
-
-/** The sockaddr type size. */
-static int* SOCKET_ADDRESS_SOCKET_COMMUNICATION_TYPE_SIZE;
-
-/* SOCKET_COMMUNICATION_TYPE_SIZE_SOURCE */
+/* TERMINAL_TYPE_SIZE_SOURCE */
 #endif
