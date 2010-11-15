@@ -33,24 +33,12 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
+/** The array reallocation factor. */
+static signed char* ARRAY_REALLOCATION_FACTOR;
 /** The cybol file reallocation factor. */
-static int* CYBOL_FILE_REALLOCATION_FACTOR;
-/** The character vector reallocation factor. */
-static int* CHARACTER_VECTOR_REALLOCATION_FACTOR;
-/** The wide character vector reallocation factor. */
-static int* WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR;
-/** The integer vector reallocation factor. */
-static int* INTEGER_VECTOR_REALLOCATION_FACTOR;
-/** The unsigned long vector reallocation factor. */
-static int* UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR;
-/** The double vector reallocation factor. */
-static int* DOUBLE_VECTOR_REALLOCATION_FACTOR;
-/** The pointer vector reallocation factor. */
-static int* POINTER_VECTOR_REALLOCATION_FACTOR;
+static signed char* CYBOL_FILE_REALLOCATION_FACTOR;
 /** The compound reallocation factor. */
-static int* COMPOUND_REALLOCATION_FACTOR;
-/** The signal memory reallocation factor. */
-static int* SIGNAL_MEMORY_REALLOCATION_FACTOR;
+static signed char* COMPOUND_REALLOCATION_FACTOR;
 
 /* REALLOCATION_FACTOR_SOURCE */
 #endif

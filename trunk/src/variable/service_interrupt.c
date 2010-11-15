@@ -33,14 +33,14 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The gnu linux console exit flag. */
-static int* GNU_LINUX_CONSOLE_EXIT;
-/** The x window system exit flag. */
-static int* X_WINDOW_SYSTEM_EXIT;
-/** The www service exit flag. */
-static int* WWW_SERVICE_EXIT;
 /** The cyboi service exit flag. */
-static int* CYBOI_SERVICE_EXIT;
+static signed char* CYBOI_SERVICE_EXIT;
+/** The gnu linux console exit flag. */
+static signed char* GNU_LINUX_CONSOLE_EXIT;
+/** The www service exit flag. */
+static signed char* WWW_SERVICE_EXIT;
+/** The x window system exit flag. */
+static signed char* X_WINDOW_SYSTEM_EXIT;
 
 /* SERVICE_INTERRUPT_SOURCE */
 #endif

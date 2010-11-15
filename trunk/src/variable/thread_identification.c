@@ -35,14 +35,14 @@
 // Therefore, the variables are only initialised in module "globaliser.c".
 //
 
-/** The gnu linux console thread. */
-static pthread_t* GNU_LINUX_CONSOLE_THREAD;
-/** The x window system thread. */
-static pthread_t* X_WINDOW_SYSTEM_THREAD;
-/** The www service thread. */
-static pthread_t* WWW_SERVICE_THREAD;
 /** The cyboi service thread. */
 static pthread_t* CYBOI_SERVICE_THREAD;
+/** The gnu linux console thread. */
+static pthread_t* GNU_LINUX_CONSOLE_THREAD;
+/** The www service thread. */
+static pthread_t* WWW_SERVICE_THREAD;
+/** The x window system thread. */
+static pthread_t* X_WINDOW_SYSTEM_THREAD;
 
 /* THREAD_IDENTIFICATION_SOURCE */
 #endif
