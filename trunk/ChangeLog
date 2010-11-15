@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Factor out functions of file "controller/globaliser.c" into separate files
+            in new sub directories "controller/globaliser/" and "controller/unglobaliser/",
+            and move unglobalise functionality into file "controller/unglobaliser.c"
+
 2010-11-14  Christian Heller  <christian.heller@tuxtax.de>
         * Make "ui_control" standard example work again
         * Investigate if and where to use architecture-independent types such as

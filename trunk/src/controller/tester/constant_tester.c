@@ -28,6 +28,7 @@
 
 #include <stdio.h>
 
+#include "../../constant/model/memory/double_memory_model.c"
 #include "../../logger/logger.c"
 
 /**

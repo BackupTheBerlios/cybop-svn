@@ -27,6 +27,7 @@
 #define CYBOI_SOURCE
 
 #include <string.h>
+
 #include "../constant/model/cyboi/operation_mode_cyboi_model.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
@@ -38,6 +39,7 @@
 #include "../controller/optionaliser.c"
 #include "../controller/orienter.c"
 #include "../controller/tester.c"
+#include "../controller/unglobaliser.c"
 #include "../variable/log_setting.c"
 
 //

@@ -27,14 +27,15 @@
 #define MANAGER_SOURCE
 
 #include <pthread.h>
+#include "../constant/channel/cybol_channel.c"
+#include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/double_memory_model.c"
+#include "../constant/model/memory/integer_memory_model.c"
+#include "../constant/model/memory/pointer_memory_model.c"
 #include "../controller/manager/internal_memory_manager.c"
 #include "../controller/manager/system_signal_handler_manager.c"
 #include "../controller/checker.c"
 #include "../controller/initialiser.c"
-#include "../constant/channel/cybol_channel.c"
-#include "../constant/model/log/message_log_model.c"
-#include "../constant/model/memory/integer_memory_model.c"
-#include "../constant/model/memory/pointer_memory_model.c"
 #include "../executor/memoriser/allocator/model_allocator.c"
 #include "../executor/memoriser/deallocator/model_deallocator.c"
 #include "../logger/logger.c"
