@@ -306,7 +306,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
-            void* fn = L"TEST_HTTP_REQUEST_CONVERSION_MODEL_DIAGRAM.txt";
+            void* fn = L"TEST_HTTP_REQUEST_CYBOL.txt";
             int fnc = *NUMBER_37_INTEGER_MEMORY_MODEL;
             int fns = *NUMBER_38_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
@@ -345,7 +345,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // Reset file name.
-            fn = L"TEST_HTTP_REQUEST_COMPOUND_CONVERSION_MODEL_DIAGRAM.txt";
+            fn = L"TEST_HTTP_REQUEST_COMPOUND.txt";
             fnc = *NUMBER_39_INTEGER_MEMORY_MODEL;
             fns = *NUMBER_40_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.

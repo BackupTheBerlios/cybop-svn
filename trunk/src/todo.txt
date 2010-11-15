@@ -11,11 +11,22 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Simplify source code by using the function "allocate_model" wherever
+            a model (array, compound or another) with count and size gets created
+        * Adapt source code by using memory-efficient types wherever possible,
+            e.g. "signed short int" instead of just "int" (as done up to now)
+            or "signed char" for simple flags used for just two values
+
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;
             Should an extra wrapper function do this?
         * Rethink basic container functions such as "set", "append", "replace" etc.
             for arrays and other abstractions (types) like "compound"
+
+        * Adapt "*_assigner.c" modules to new primitive types/ type sizes
+        * Leave abstractions to only provide basic types like: character, integral, real, pointer
+            and map these to the corresponding basic standard type, i.e.: wchar_t, signed int, double, void*
+            (so that special types like "unsigned short int" are only used cyboi-internally, but not in cybol)
 
         * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
             Should models in cybol/ dir be one level higher?
@@ -38,11 +49,13 @@
         * Delete old files: "compound_http_name.c", "header_http_name.c", "field_xdt_model_name.c" etc.
         * Uncomment comparison block in function "select_http_request_header"
 
+        * CONTINUE in function "decode_http_request" and "process_http_request_body" ...
+            and "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
+            called by an http interrupt "resmedicinae/apps/residenz/logic/startup.cybol"
         * Only "body" is left to be processed and added to the destination model using "append_part";
             all other elements, headers etc. are completed
-
         * CONTINUE with rewriting the http_request_processor; CHECK where to use char or wchar_t
-        * Do not automatically convert to wchar_t, since http requests are byte-oriented and may contain other encodings
+        * Do NOT automatically convert to wchar_t, since http requests are byte-oriented and may contain other encodings
         * Translate ALL data formats in two steps:
             1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound; http --> http_request_compound
             2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound / http_request_compound --> ?? (action/ signal??)
@@ -71,9 +84,8 @@
             so that for each new http request, the model is initially empty, in function "receive_socket_message"
         * Adapt function "decode_http_request" accordingly
 
-        * Simplify source code by using the function "allocate_model" wherever an array with count and size gets created
-
         * Do commands of gnu/linux console still HAVE TO BE handed over (as in old solution)?
+            Hasn't this become obsolete due to the handler that gets assigned in cybol files?
         * Search for pressed key in commands
         * Wenn returned command == NULL, dann suche nach "default" in commands
             (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)
