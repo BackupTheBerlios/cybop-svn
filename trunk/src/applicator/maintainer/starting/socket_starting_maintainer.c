@@ -51,6 +51,7 @@
 #include "../../../executor/accessor/setter.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
+#include "../../../variable/type_size/socket_type_size.c"
 
 /**
  * Gets the socket- and address namespace.
@@ -367,7 +368,7 @@ void maintain_starting_socket_initialise_local_socket_address(void* p0, void* p1
                     // the unknown size of its "sun_path" field (a character array),
                     // is considered an incomplete type, so that the compiler
                     // brings an error.
-                    void* path = (void*) (*a + sizeof(short int));
+                    void* path = (void*) (*a + *SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
 
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
@@ -648,18 +649,18 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             // With the known type "short int" of the "sun_family" field and
             // a fixed size "108" of the "sun_path" field, the overall size of
             // the "sockaddr_un" structure can be calculated as sum.
-            *as = sizeof(short int) + *NUMBER_108_INTEGER_MEMORY_MODEL;
-            *pas = sizeof(short int) + *NUMBER_108_INTEGER_MEMORY_MODEL;
+            *as = *SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE + *NUMBER_108_INTEGER_MEMORY_MODEL;
+            *pas = *SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE + *NUMBER_108_INTEGER_MEMORY_MODEL;
 
         } else if (an == AF_INET) {
 
-            *as = sizeof(struct sockaddr_in);
-            *pas = sizeof(struct sockaddr_in);
+            *as = *INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
+            *pas = *INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
 
         } else if (an == AF_INET6) {
 
-            *as = sizeof(struct sockaddr_in6);
-            *pas = sizeof(struct sockaddr_in6);
+            *as = *INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
+            *pas = *INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
         }
 
         // Allocate socket address of this system.

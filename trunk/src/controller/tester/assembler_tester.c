@@ -27,7 +27,6 @@
 #define ASSEMBLER_TESTER
 
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Tests the assembler register handling.

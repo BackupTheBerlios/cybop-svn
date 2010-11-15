@@ -38,6 +38,10 @@
 #include "../executor/memoriser/allocator/model_allocator.c"
 #include "../executor/memoriser/deallocator/model_deallocator.c"
 #include "../logger/logger.c"
+#include "../variable/type_size/integral_type_size.c"
+#include "../variable/type_size/real_type_size.c"
+#include "../variable/type_size/signal_type_size.c"
+#include "../variable/type_size/thread_type_size.c"
 
 /**
  * Manages the system.
@@ -209,37 +213,37 @@ void manage(void* p0, void* p1) {
     allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
 
     // Allocate signal memory interrupt request flag.
-    signal_memory_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    signal_memory_irq = (volatile sig_atomic_t*) malloc(*VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE);
     // Allocate gnu/linux console interrupt request flag.
-    gnu_linux_console_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    gnu_linux_console_irq = (volatile sig_atomic_t*) malloc(*VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE);
     // Allocate x window system interrupt request flag.
-    x_window_system_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    x_window_system_irq = (volatile sig_atomic_t*) malloc(*VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE);
     // Allocate www service interrupt request flag.
-    www_service_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    www_service_irq = (volatile sig_atomic_t*) malloc(*VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE);
     // Allocate cyboi service interrupt request flag.
-    cyboi_service_irq = (volatile sig_atomic_t*) malloc(sizeof(volatile sig_atomic_t));
+    cyboi_service_irq = (volatile sig_atomic_t*) malloc(*VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE);
 
     // Allocate signal memory mutex.
-    signal_memory_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    signal_memory_mutex = (pthread_mutex_t*) malloc(*MUTEX_THREAD_TYPE_SIZE);
     // Allocate gnu/linux console mutex.
-    gnu_linux_console_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    gnu_linux_console_mutex = (pthread_mutex_t*) malloc(*MUTEX_THREAD_TYPE_SIZE);
     // Allocate x window system mutex.
-    x_window_system_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    x_window_system_mutex = (pthread_mutex_t*) malloc(*MUTEX_THREAD_TYPE_SIZE);
     // Allocate www service mutex.
-    www_service_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    www_service_mutex = (pthread_mutex_t*) malloc(*MUTEX_THREAD_TYPE_SIZE);
     // Allocate cyboi service mutex.
-    cyboi_service_mutex = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+    cyboi_service_mutex = (pthread_mutex_t*) malloc(*MUTEX_THREAD_TYPE_SIZE);
 
     // Allocate signal memory sleep time.
-    signal_memory_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    signal_memory_sleep_time = (double*) malloc(*DOUBLE_REAL_TYPE_SIZE);
     // Allocate gnu linux console sleep time.
-    gnu_linux_console_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    gnu_linux_console_sleep_time = (double*) malloc(*DOUBLE_REAL_TYPE_SIZE);
     // Allocate x window system sleep time.
-    x_window_system_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    x_window_system_sleep_time = (double*) malloc(*DOUBLE_REAL_TYPE_SIZE);
     // Allocate www service sleep time.
-    www_service_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    www_service_sleep_time = (double*) malloc(*DOUBLE_REAL_TYPE_SIZE);
     // Allocate cyboi service sleep time.
-    cyboi_service_sleep_time = (double*) malloc(*DOUBLE_PRIMITIVE_SIZE);
+    cyboi_service_sleep_time = (double*) malloc(*DOUBLE_REAL_TYPE_SIZE);
 
     //
     // Variable initialisation.

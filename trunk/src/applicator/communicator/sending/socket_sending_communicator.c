@@ -29,6 +29,7 @@
 //?? TEST for test file; DELETE later!
 #include <fcntl.h>
 #include <sys/stat.h>
+//?? TEST END
 
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -45,6 +46,7 @@
 #include "../../../executor/communicator/sender/stream_socket_sender.c"
 #include "../../../executor/converter/encoder.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/socket_type_size.c"
 
 /**
  * Gets the socket for server mode.
@@ -292,12 +294,12 @@ void communicate_sending_socket_allocate_host_address(void* p0, void* p1) {
             if (*n == AF_INET) {
 
                 // Allocate ipv4 socket address.
-                *a = malloc(sizeof(struct in_addr));
+                *a = malloc(*INTERNET_PROTOCOL_4_HOST_ADDRESS_SOCKET_TYPE_SIZE);
 
             } else if (*n == AF_INET6) {
 
                 // Allocate ipv6 socket address.
-                *a = malloc(sizeof(struct in6_addr));
+                *a = malloc(*INTERNET_PROTOCOL_6_HOST_ADDRESS_SOCKET_TYPE_SIZE);
             }
 
         } else {
@@ -354,7 +356,7 @@ void communicate_sending_socket_allocate_socket_address(void* p0, void* p1, void
                     // With the known type "short int" of the "sun_family" field and
                     // a fixed size "108" of the "sun_path" field, the overall size of
                     // the "sockaddr_un" structure can be calculated as sum.
-                    *as = sizeof(short int) + *NUMBER_108_INTEGER_MEMORY_MODEL;
+                    *as = *SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE + *NUMBER_108_INTEGER_MEMORY_MODEL;
 
                     // Allocate socket address.
                     *a = malloc(*as);
@@ -362,7 +364,7 @@ void communicate_sending_socket_allocate_socket_address(void* p0, void* p1, void
                 } else if (*n == AF_INET) {
 
                     // Initialise ipv4 socket address size.
-                    *as = sizeof(struct sockaddr_in);
+                    *as = *INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
 
                     // Allocate ipv4 socket address.
                     *a = malloc(*as);
@@ -370,7 +372,7 @@ void communicate_sending_socket_allocate_socket_address(void* p0, void* p1, void
                 } else if (*n == AF_INET6) {
 
                     // Initialise ipv6 socket address size.
-                    *as = sizeof(struct sockaddr_in6);
+                    *as = *INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
 
                     // Allocate ipv6 socket address.
                     *a = malloc(*as);

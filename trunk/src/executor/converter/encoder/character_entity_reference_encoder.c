@@ -90,7 +90,7 @@ void encode_character_entity_reference(void* p0, void* p1, void* p2, void* p3, v
                     if ((*dc + tc) > *ds) {
 
                         // Calculate destination size.
-                        *ds = (*CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
+                        *ds = (*ARRAY_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
                         reallocate(p0, p1, p2, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);

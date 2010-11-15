@@ -31,7 +31,6 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Tests the accessor size determiner.

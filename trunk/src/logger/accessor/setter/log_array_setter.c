@@ -29,14 +29,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/accessor/log_assigner.c"
 #include "../../../logger/arithmetiser/log_integer_adder.c"
 #include "../../../logger/arithmetiser/log_integer_multiplier.c"
 #include "../../../logger/memoriser/log_size_determiner.c"
-#include "../../../variable/primitive_type_size.c"
 
 /**
  * Sets the array elements.

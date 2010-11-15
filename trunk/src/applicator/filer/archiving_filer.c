@@ -38,7 +38,6 @@
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/memoriser/allocator.c"
 #include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
 
 /**
  * Archives the given data into a file.

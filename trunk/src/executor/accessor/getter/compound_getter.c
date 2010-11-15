@@ -38,6 +38,7 @@
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/integral_type_size.c"
 #include "../../../variable/reallocation_factor.c"
 
 //
@@ -98,9 +99,9 @@ void get_compound_element_name_without_prefix(void* p0, void* p1, void* p2, void
                             // .resmedicinae.tui.menu.entry#background
                             // is now only:
                             // resmedicinae.tui.menu.entry#background
-                            *e = p3 + (*sc * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                            *e = p3 + (*sc * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                             *ec = *fc - *sc;
-                            *es = *ec * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                            *es = *ec * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
 
                         } else {
 
@@ -171,7 +172,7 @@ void get_compound_element_name_count_and_size(void* p0, void* p1, void* p2, void
                     // The next separator is a part separator.
                     // Its index marks the end of an element name.
                     *enc = p;
-                    *ens = p * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                    *ens = p * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
 
                 } else if ((p == *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL) && (m >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
@@ -179,7 +180,7 @@ void get_compound_element_name_count_and_size(void* p0, void* p1, void* p2, void
                     // The next separator is a meta separator.
                     // Its index marks the end of an element name.
                     *enc = m;
-                    *ens = m * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                    *ens = m * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
 
                 } else if ((p >= *NUMBER_0_INTEGER_MEMORY_MODEL) && (m >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
@@ -190,14 +191,14 @@ void get_compound_element_name_count_and_size(void* p0, void* p1, void* p2, void
                         // The next separator is a part separator.
                         // Its index marks the end of an element name.
                         *enc = p;
-                        *ens = p * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        *ens = p * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
 
                     } else {
 
                         // The next separator is a meta separator.
                         // Its index marks the end of an element name.
                         *enc = m;
-                        *ens = m * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        *ens = m * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
 
                 } else {
@@ -205,7 +206,7 @@ void get_compound_element_name_count_and_size(void* p0, void* p1, void* p2, void
                     // The name does NOT contain any separators.
                     // Its count (length) marks the end of an element name.
                     *enc = *nc;
-                    *ens = *nc * *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                    *ens = *nc * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                 }
 
             } else {
@@ -370,7 +371,7 @@ void get_compound_element_name_and_remaining_name(void* p0, void* p1, void* p2, 
                                     // It starts with the separator.
                                     // Example: "hello.test"
                                     // The index of the separator is 5.
-                                    // The starting index of the remaining name ".test" is (5 * *WIDE_CHARACTER_PRIMITIVE_SIZE).
+                                    // The starting index of the remaining name ".test" is (5 * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE).
                                     *r = (void*) (n + ens);
 
                                     // The remaining name count is the full name count

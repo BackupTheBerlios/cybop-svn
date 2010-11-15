@@ -35,7 +35,6 @@
 #include "../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
 #include "../../executor/arithmetiser/integer_adder/pointer_integer_adder.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Adds the source integer to the destination of the given abstraction.

@@ -58,6 +58,7 @@
 #include "../../../executor/converter/decoder/terminal_background_decoder.c"
 #include "../../../executor/converter/decoder/terminal_foreground_decoder.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/integral_type_size.c"
 
 //
 // Forward declarations.
@@ -233,7 +234,7 @@ void decode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) 
 
                     // Initialise temporary character sequence with pointer to the
                     // first character AFTER the escape control sequence prefix.
-                    void* t = p3 + (*ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                    void* t = p3 + (*ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                     int tc = *sc - *ESCAPE_ESCAPE_CONTROL_SEQUENCE_GNU_LINUX_CONSOLE_MODEL_COUNT;
 
                     decode_gnu_linux_console_escape_control_sequence(p0, p1, p2, t, (void*) &tc);

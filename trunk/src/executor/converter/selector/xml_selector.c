@@ -33,6 +33,7 @@
 #include "../../../constant/name/xml_name.c"
 #include "../../../executor/converter/detector.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/integral_type_size.c"
 
 //
 // Forward declarations.
@@ -92,7 +93,7 @@ void select_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
 
-                    detect_move_position(p4, p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+                    detect_move_position(p4, p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                 }
 
             } else {
@@ -153,7 +154,7 @@ void select_xml_definition(void* p0, void* p1, void* p2) {
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
 
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                 }
 
             } else {
@@ -214,7 +215,7 @@ void select_xml_comment(void* p0, void* p1, void* p2) {
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
 
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                 }
 
             } else {
@@ -358,7 +359,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
 
-                    detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+                    detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                 }
 
             } else {
@@ -425,7 +426,7 @@ void select_xml_end_tag(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                 }
 
             } else {
@@ -534,7 +535,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect_move_position(p3, p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+                            detect_move_position(p3, p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                         }
 
                     } else {
@@ -609,7 +610,7 @@ void select_xml_attribute_name(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                 }
 
             } else {
@@ -676,7 +677,7 @@ void select_xml_attribute_value(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+                    detect_move_position(p1, p2, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                 }
 
             } else {

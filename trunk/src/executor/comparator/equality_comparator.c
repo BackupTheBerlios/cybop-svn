@@ -40,7 +40,6 @@
 #include "../../executor/comparator/equality/unsigned_long_equality_comparator.c"
 #include "../../executor/comparator/equality/wide_character_equality_comparator.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Compares two values for equality.

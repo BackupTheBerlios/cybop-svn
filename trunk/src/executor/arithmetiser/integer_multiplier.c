@@ -35,7 +35,6 @@
 #include "../../executor/arithmetiser/integer_multiplier/integer_integer_multiplier.c"
 //?? #include "../../executor/arithmetiser/integer_multiplier/pointer_integer_multiplier.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Multiplies the destination of the given abstraction with the source integer.

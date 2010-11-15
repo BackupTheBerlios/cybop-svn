@@ -38,6 +38,7 @@
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/x_window_system_type_size.c"
 
 //
 // CAUTION! The x window system uses a number of synonymous types:
@@ -138,7 +139,7 @@ void maintain_starting_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         allocate((void*) &r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
         allocate((void*) &w, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
         allocate((void*) &vm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
-//??        v = (struct XGCValues*) malloc(sizeof(struct XGCValues));
+//??        v = (struct XGCValues*) malloc(*XGC_VALUES_X_WINDOW_SYSTEM_TYPE_SIZE);
 
         // Initialise x window system internals.
         dn = "";

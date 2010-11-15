@@ -33,7 +33,6 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/arithmetiser/integer_multiplier/log_integer_integer_multiplier.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Multiplies the destination of the given abstraction with the source integer.

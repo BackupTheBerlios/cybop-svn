@@ -33,7 +33,6 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
 #include "../../../logger/logger.c"
-#include "../../../variable/primitive_type_size.c"
 
 /**
  * Multiplies the destination integer with the source integer.

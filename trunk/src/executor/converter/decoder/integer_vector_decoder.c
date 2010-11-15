@@ -45,7 +45,7 @@
 #include "../../../executor/converter/decoder/integer_decoder.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
-#include "../../../variable/primitive_type_size.c"
+#include "../../../variable/type_size/integral_type_size.c"
 #include "../../../variable/reallocation_factor.c"
 
 /**
@@ -142,7 +142,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                             //
                             // CAUTION! Do ONLY multiply the summand for the element pointer with the type size,
                             // but NOT the subtrahend for the element count!
-                            void* e = p3 + ((i + *NUMBER_1_INTEGER_MEMORY_MODEL) * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                            void* e = p3 + ((i + *NUMBER_1_INTEGER_MEMORY_MODEL) * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                             int ec = *sc - (i + *NUMBER_1_INTEGER_MEMORY_MODEL);
 
                             // Recursively call this function.

@@ -45,7 +45,7 @@
 #include "../../../executor/converter/encoder/integer_encoder.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
-#include "../../../variable/primitive_type_size.c"
+#include "../../../variable/type_size/integral_type_size.c"
 #include "../../../variable/reallocation_factor.c"
 
 /**
@@ -135,7 +135,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                             //
                             // CAUTION! Do ONLY multiply the summand for the element pointer with the type size,
                             // but NOT the subtrahend for the element count!
-                            void* e = p3 + (*PRIMITIVE_MEMORY_MODEL_COUNT * *INTEGER_PRIMITIVE_SIZE);
+                            void* e = p3 + (*PRIMITIVE_MEMORY_MODEL_COUNT * *SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
                             int ec = *sc - *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                             // Increment iteration count.

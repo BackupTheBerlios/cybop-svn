@@ -26,18 +26,34 @@
 #ifndef GLOBALISER_SOURCE
 #define GLOBALISER_SOURCE
 
+#include <arpa/inet.h>
+#include <netinet/in.h>
 #include <sys/stat.h>
+#include <sys/un.h>
+#include <X11/Xlib.h>
 #include <fcntl.h>
 #include <pthread.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <termios.h>
 #include <unistd.h>
+#include <wchar.h>
 #include "../constant/model/memory/double_memory_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/model/log/level_log_model.c"
+#include "../variable/type_size/conversion_type_size.c"
+#include "../variable/type_size/integral_type_size.c"
+#include "../variable/type_size/pointer_type_size.c"
+#include "../variable/type_size/process_type_size.c"
+#include "../variable/type_size/real_type_size.c"
+#include "../variable/type_size/signal_type_size.c"
+#include "../variable/type_size/socket_type_size.c"
+#include "../variable/type_size/terminal_type_size.c"
+#include "../variable/type_size/thread_type_size.c"
+#include "../variable/type_size/x_window_system_type_size.c"
 #include "../variable/log_setting.c"
-#include "../variable/primitive_type_size.c"
 #include "../variable/reallocation_factor.c"
 #include "../variable/service_interrupt.c"
 #include "../variable/thread_identification.c"
@@ -46,19 +62,15 @@
  * Allocates and initialises global variables.
  *
  * CAUTION! These global variables MUST NOT be initialised in the files
- * /globals/variables/*_variables.c because then, constant values are expected!
+ * "variable/*.c" because then, constant values are expected!
  */
 void globalise() {
-
-    //
-    // Primitive type size variables.
-    //
 
     //
     // CAUTION! DO NOT use array functionality here!
     // The array functions use the logger which in turn depends on global
     // log variables set here. So this would cause circular references.
-    // Instead, use malloc and similar functions directly!
+    // Instead, use malloc, free and similar functions directly!
     //
 
     //
@@ -78,47 +90,186 @@ void globalise() {
     //
 
     //
-    // CAUTION! The INTEGER_PRIMITIVE_SIZE variable needs to be
+    // CAUTION! The SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE variable needs to be
     // initialised FIRST, BEFORE all other initialisations,
     // because all other assignments below make use of it.
     //
 
-    // Allocate and initialise integer primitive size.
-    // CAUTION! The sizeof operator must be used twice here, because
-    // INTEGER_PRIMITIVE_SIZE cannot be used before having been initialised.
-    INTEGER_PRIMITIVE_SIZE = (int*) malloc(sizeof(int));
-    *INTEGER_PRIMITIVE_SIZE = sizeof(int);
+    //
+    // Integral type size variables.
+    //
 
-    // Allocate and initialise character primitive size.
-    CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *CHARACTER_PRIMITIVE_SIZE = sizeof(char);
+    // Allocate and initialise signed char integral type size.
+    // CAUTION! The sizeof operator must be used twice here,
+    // because SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE cannot be used
+    // before having been initialised itself.
+    SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(sizeof(signed char));
+    *SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE = sizeof(signed char);
 
-    // Allocate and initialise double primitive size.
-    DOUBLE_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *DOUBLE_PRIMITIVE_SIZE = sizeof(double);
+    // Allocate and initialise unsigned char integral type size.
+    UNSIGNED_CHARACTER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *UNSIGNED_CHARACTER_INTEGRAL_TYPE_SIZE = sizeof(unsigned char);
 
-    // Allocate and initialise pointer primitive size.
-    POINTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *POINTER_PRIMITIVE_SIZE = sizeof(void*);
+    // Allocate and initialise signed short int integral type size.
+    SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE = sizeof(signed short int);
 
-    // Allocate and initialise unsigned long primitive size.
-    UNSIGNED_LONG_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *UNSIGNED_LONG_PRIMITIVE_SIZE = sizeof(unsigned long);
+    // Allocate and initialise unsigned short int integral type size.
+    UNSIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *UNSIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE = sizeof(unsigned short int);
 
-    // Allocate and initialise wide character primitive size.
-    WIDE_CHARACTER_PRIMITIVE_SIZE = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *WIDE_CHARACTER_PRIMITIVE_SIZE = sizeof(wchar_t);
+    // Allocate and initialise signed int integral type size.
+    SIGNED_INTEGER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *SIGNED_INTEGER_INTEGRAL_TYPE_SIZE = sizeof(signed int);
+
+    // Allocate and initialise unsigned int integral type size.
+    UNSIGNED_INTEGER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *UNSIGNED_INTEGER_INTEGRAL_TYPE_SIZE = sizeof(unsigned int);
+
+    // Allocate and initialise signed long int integral type size.
+    SIGNED_LONG_INTEGER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *SIGNED_LONG_INTEGER_INTEGRAL_TYPE_SIZE = sizeof(signed long int);
+
+    // Allocate and initialise unsigned long int integral type size.
+    UNSIGNED_LONG_INTEGER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *UNSIGNED_LONG_INTEGER_INTEGRAL_TYPE_SIZE = sizeof(unsigned long int);
+
+    // Allocate and initialise signed long long int integral type size.
+    SIGNED_LONG_LONG_INTEGER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *SIGNED_LONG_LONG_INTEGER_INTEGRAL_TYPE_SIZE = sizeof(signed long long int);
+
+    // Allocate and initialise unsigned long long int integral type size.
+    UNSIGNED_LONG_LONG_INTEGER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *UNSIGNED_LONG_LONG_INTEGER_INTEGRAL_TYPE_SIZE = sizeof(unsigned long long int);
+
+    // Allocate and initialise wchar_t integral type size.
+    WIDE_CHARACTER_INTEGRAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE = sizeof(wchar_t);
+
+    //
+    // Real type size variables.
+    //
+
+    // Allocate and initialise float real type size.
+    FLOAT_REAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *FLOAT_REAL_TYPE_SIZE = sizeof(float);
+
+    // Allocate and initialise double real type size.
+    DOUBLE_REAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *DOUBLE_REAL_TYPE_SIZE = sizeof(double);
+
+    // Allocate and initialise long double real type size.
+    LONG_DOUBLE_REAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *LONG_DOUBLE_REAL_TYPE_SIZE = sizeof(long double);
+
+    //
+    // Pointer type size variables.
+    //
+
+    // Allocate and initialise void* pointer type size.
+    POINTER_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *POINTER_TYPE_SIZE = sizeof(void*);
+
+    //
+    // Conversion type size variables.
+    //
+
+    // Allocate and initialise struct mbstate_t conversion type size.
+    MULTIBYTE_CHARACTER_STATE_CONVERSION_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    // CAUTION! Do NOT use "struct mbstate_t" but ONLY "mbstate_t".
+    // Otherwise, the compiler brings the error:
+    // "invalid application of 'sizeof' to incomplete type 'struct mbstate_t'"
+    *MULTIBYTE_CHARACTER_STATE_CONVERSION_TYPE_SIZE = sizeof(mbstate_t);
+
+    //
+    // Process type size variables.
+    //
+
+    // Allocate and initialise pid_t process type size.
+    IDENTIFICATION_PROCESS_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *IDENTIFICATION_PROCESS_TYPE_SIZE = sizeof(pid_t);
+
+    //
+    // Signal type size variables.
+    //
+
+    // Allocate and initialise sig_atomic_t signal type size.
+    ATOMIC_SIGNAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *ATOMIC_SIGNAL_TYPE_SIZE = sizeof(sig_atomic_t);
+
+    // Allocate and initialise volatile sig_atomic_t signal type size.
+    VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE = sizeof(volatile sig_atomic_t);
+
+    //
+    // Socket type size variables.
+    //
+
+    // Allocate and initialise struct in_addr socket type size.
+    INTERNET_PROTOCOL_4_HOST_ADDRESS_SOCKET_TYPE_SIZE = (signed int*) malloc(*SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    *INTERNET_PROTOCOL_4_HOST_ADDRESS_SOCKET_TYPE_SIZE = sizeof(struct in_addr);
+
+    // Allocate and initialise struct sockaddr_in socket type size.
+    INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE = (signed int*) malloc(*SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    *INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE = sizeof(struct sockaddr_in);
+
+    // Allocate and initialise struct in6_addr socket type size.
+    INTERNET_PROTOCOL_6_HOST_ADDRESS_SOCKET_TYPE_SIZE = (signed int*) malloc(*SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    *INTERNET_PROTOCOL_6_HOST_ADDRESS_SOCKET_TYPE_SIZE = sizeof(struct in6_addr);
+
+    // Allocate and initialise struct sockaddr_in6 socket type size.
+    INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE = (signed int*) malloc(*SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    *INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE = sizeof(struct sockaddr_in6);
+
+    // Allocate and initialise struct sockaddr_un socket type size.
+    LOCAL_SOCKET_ADDRESS_SOCKET_TYPE_SIZE = (signed int*) malloc(*SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    *LOCAL_SOCKET_ADDRESS_SOCKET_TYPE_SIZE = sizeof(struct sockaddr_un);
+
+    // Allocate and initialise struct sockaddr socket type size.
+    SOCKET_ADDRESS_SOCKET_TYPE_SIZE = (signed int*) malloc(*SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    *SOCKET_ADDRESS_SOCKET_TYPE_SIZE = sizeof(struct sockaddr);
+
+    //
+    // Terminal type size variables.
+    //
+
+    // Allocate and initialise struct termios terminal type size.
+    INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE = (signed int*) malloc(*SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    *INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE = sizeof(struct termios);
+
+    //
+    // Thread type size variables.
+    //
+
+    // Allocate and initialise pthread_t thread type size.
+    THREAD_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *THREAD_TYPE_SIZE = sizeof(pthread_t);
+
+    // Allocate and initialise pthread_mutex_t thread type size.
+    MUTEX_THREAD_TYPE_SIZE = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *MUTEX_THREAD_TYPE_SIZE = sizeof(pthread_mutex_t);
+
+    //
+    // X window system type size variables.
+    //
+
+    // Allocate and initialise struct XGCValues x window system type size.
+    XGC_VALUES_X_WINDOW_SYSTEM_TYPE_SIZE = (signed int*) malloc(*SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    // CAUTION! Do NOT use "struct XGCValues" but ONLY "XGCValues".
+    // Otherwise, the compiler brings the error:
+    // "invalid application of 'sizeof' to incomplete type 'struct XGCValues'"
+    *XGC_VALUES_X_WINDOW_SYSTEM_TYPE_SIZE = sizeof(XGCValues);
 
     //
     // Log variables.
     //
 
     // Allocate and initialise log level.
-    LOG_LEVEL = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    LOG_LEVEL = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
     *LOG_LEVEL = *OFF_LEVEL_LOG_MODEL;
 
     // Allocate and initialise log message.
-    LOG_MESSAGE_COUNT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    LOG_MESSAGE_COUNT = (signed short int*) malloc(*SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
     *LOG_MESSAGE_COUNT = *NUMBER_10000_INTEGER_MEMORY_MODEL;
 
     // Allocate log message.
@@ -142,16 +293,16 @@ void globalise() {
     //
 
     // Allocate cyboi service thread.
-    CYBOI_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    CYBOI_SERVICE_THREAD = (pthread_t*) malloc(*THREAD_TYPE_SIZE);
     *CYBOI_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // Allocate and initialise gnu/linux console thread.
-    GNU_LINUX_CONSOLE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    GNU_LINUX_CONSOLE_THREAD = (pthread_t*) malloc(*THREAD_TYPE_SIZE);
     *GNU_LINUX_CONSOLE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // Allocate www service thread.
-    WWW_SERVICE_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    WWW_SERVICE_THREAD = (pthread_t*) malloc(*THREAD_TYPE_SIZE);
     *WWW_SERVICE_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
     // Allocate x window system thread.
-    X_WINDOW_SYSTEM_THREAD = (pthread_t*) malloc(sizeof(pthread_t));
+    X_WINDOW_SYSTEM_THREAD = (pthread_t*) malloc(*THREAD_TYPE_SIZE);
     *X_WINDOW_SYSTEM_THREAD = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
     //
@@ -166,16 +317,16 @@ void globalise() {
     //
 
     // Allocate and initialise cyboi service thread exit flag.
-    CYBOI_SERVICE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    CYBOI_SERVICE_EXIT = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
     *CYBOI_SERVICE_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Allocate and initialise gnu/linux console thread exit flag.
-    GNU_LINUX_CONSOLE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    GNU_LINUX_CONSOLE_EXIT = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
     *GNU_LINUX_CONSOLE_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Allocate and initialise www service thread exit flag.
-    WWW_SERVICE_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    WWW_SERVICE_EXIT = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
     *WWW_SERVICE_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // Allocate and initialise x window system thread exit flag.
-    X_WINDOW_SYSTEM_EXIT = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    X_WINDOW_SYSTEM_EXIT = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
     *X_WINDOW_SYSTEM_EXIT = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     //
@@ -209,94 +360,170 @@ void globalise() {
     // x - and so on
     //
 
-    // Allocate and initialise character vector reallocation factor.
-    CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
+    // Allocate and initialise array reallocation factor.
+    ARRAY_REALLOCATION_FACTOR = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    *ARRAY_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise compound reallocation factor.
-    COMPOUND_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    COMPOUND_REALLOCATION_FACTOR = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
     *COMPOUND_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
     // Allocate and initialise cybol file reallocation factor.
-    CYBOL_FILE_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
+    CYBOL_FILE_REALLOCATION_FACTOR = (signed char*) malloc(*SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
     *CYBOL_FILE_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise double vector reallocation factor.
-    DOUBLE_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *DOUBLE_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise integer vector reallocation factor.
-    INTEGER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *INTEGER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise pointer vector reallocation factor.
-    POINTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *POINTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise signal memory reallocation factor.
-    SIGNAL_MEMORY_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *SIGNAL_MEMORY_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise unsigned long vector reallocation factor.
-    UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
-    // Allocate and initialise wide character vector reallocation factor.
-    WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = (int*) malloc(*INTEGER_PRIMITIVE_SIZE);
-    *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR = *NUMBER_2_INTEGER_MEMORY_MODEL;
 }
 
 /**
  * Deallocates global variables.
  *
- * CAUTION! Use descending order, as compared to allocation.
+ * There seems to be no need to use descending order, as compared to allocation.
+ * The variables do not depend on each other and may be freed in the same order
+ * as they were allocated.
  */
 void unglobalise() {
 
     //
-    // Reallocation factor variables.
+    // CAUTION! DO NOT use array functionality here!
+    // The array functions use the logger which in turn depends on global
+    // log variables set here. So this would cause circular references.
+    // Instead, use malloc, free and similar functions directly!
     //
 
-    // Free character vector reallocation factor.
-    free(CHARACTER_VECTOR_REALLOCATION_FACTOR);
-    // Free compound reallocation factor.
-    free(COMPOUND_REALLOCATION_FACTOR);
-    // Free cybol file reallocation factor.
-    free(CYBOL_FILE_REALLOCATION_FACTOR);
-    // Free double vector reallocation factor.
-    free(DOUBLE_VECTOR_REALLOCATION_FACTOR);
-    // Free integer vector reallocation factor.
-    free(INTEGER_VECTOR_REALLOCATION_FACTOR);
-    // Free pointer vector reallocation factor.
-    free(POINTER_VECTOR_REALLOCATION_FACTOR);
-    // Free signal memory reallocation factor.
-    free(SIGNAL_MEMORY_REALLOCATION_FACTOR);
-    // Free unsigned long vector reallocation factor.
-    free(UNSIGNED_LONG_VECTOR_REALLOCATION_FACTOR);
-    // Free wide character vector reallocation factor.
-    free(WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR);
-
     //
-    // Service exit variables.
+    // Integral type size variables.
     //
 
-    // Free cyboi service thread exit flag.
-    free(CYBOI_SERVICE_EXIT);
-    // Free gnu/linux console thread exit flag.
-    free(GNU_LINUX_CONSOLE_EXIT);
-    // Free www service thread exit flag.
-    free(WWW_SERVICE_EXIT);
-    // Free x window system thread exit flag.
-    free(X_WINDOW_SYSTEM_EXIT);
+    // Free signed char integral type size.
+    free((void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+
+    // Free unsigned char integral type size.
+    free((void*) UNSIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+
+    // Free signed short int integral type size.
+    free((void*) SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
+
+    // Free unsigned short int integral type size.
+    free((void*) UNSIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
+
+    // Free signed int integral type size.
+    free((void*) SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+
+    // Free unsigned int integral type size.
+    free((void*) UNSIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+
+    // Free signed long int integral type size.
+    free((void*) SIGNED_LONG_INTEGER_INTEGRAL_TYPE_SIZE);
+
+    // Free unsigned long int integral type size.
+    free((void*) UNSIGNED_LONG_INTEGER_INTEGRAL_TYPE_SIZE);
+
+    // Free signed long long int integral type size.
+    free((void*) SIGNED_LONG_LONG_INTEGER_INTEGRAL_TYPE_SIZE);
+
+    // Free unsigned long long int integral type size.
+    free((void*) UNSIGNED_LONG_LONG_INTEGER_INTEGRAL_TYPE_SIZE);
+
+    // Free wchar_t integral type size.
+    free((void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
 
     //
-    // Thread identification variables.
+    // Real type size variables.
     //
 
-    // Free cyboi service thread.
-    free(CYBOI_SERVICE_THREAD);
-    // Free gnu/linux console thread.
-    free(GNU_LINUX_CONSOLE_THREAD);
-    // Free www service thread.
-    free(WWW_SERVICE_THREAD);
-    // Free x window system thread.
-    free(X_WINDOW_SYSTEM_THREAD);
+    // Free float real type size.
+    free((void*) FLOAT_REAL_TYPE_SIZE);
+
+    // Free double real type size.
+    free((void*) DOUBLE_REAL_TYPE_SIZE);
+
+    // Free long double real type size.
+    free((void*) LONG_DOUBLE_REAL_TYPE_SIZE);
+
+    //
+    // Pointer type size variables.
+    //
+
+    // Free void* pointer type size.
+    free((void*) POINTER_TYPE_SIZE);
+
+    //
+    // Conversion type size variables.
+    //
+
+    // Free mbstate_t conversion type size.
+    free((void*) MULTIBYTE_CHARACTER_STATE_CONVERSION_TYPE_SIZE);
+
+    //
+    // Process type size variables.
+    //
+
+    // Free pid_t process type size.
+    free((void*) IDENTIFICATION_PROCESS_TYPE_SIZE);
+
+    //
+    // Signal type size variables.
+    //
+
+    // Free sig_atomic_t signal type size.
+    free((void*) ATOMIC_SIGNAL_TYPE_SIZE);
+
+    // Free volatile sig_atomic_t signal type size.
+    free((void*) VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE);
+
+    //
+    // Socket type size variables.
+    //
+
+    // Free in_addr socket type size.
+    free((void*) INTERNET_PROTOCOL_4_HOST_ADDRESS_SOCKET_TYPE_SIZE);
+
+    // Free sockaddr_in socket type size.
+    free((void*) INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+
+    // Free in6_addr socket type size.
+    free((void*) INTERNET_PROTOCOL_6_HOST_ADDRESS_SOCKET_TYPE_SIZE);
+
+    // Free sockaddr_in6 socket type size.
+    free((void*) INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+
+    // Free sockaddr_un socket type size.
+    free((void*) LOCAL_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+
+    // Free sockaddr socket type size.
+    free((void*) SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+
+    //
+    // Terminal type size variables.
+    //
+
+    // Free termios terminal type size.
+    free((void*) INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE);
+
+    //
+    // Thread type size variables.
+    //
+
+    // Free pthread_t thread type size.
+    free((void*) THREAD_TYPE_SIZE);
+
+    // Free pthread_mutex_t thread type size.
+    free((void*) MUTEX_THREAD_TYPE_SIZE);
+
+    //
+    // X window system type size variables.
+    //
+
+    // Free XGCValues x window system type size.
+    free((void*) XGC_VALUES_X_WINDOW_SYSTEM_TYPE_SIZE);
 
     //
     // Log variables.
     //
+
+    // Free log level.
+    free((void*) LOG_LEVEL);
+    // Free log message count.
+    free((void*) LOG_MESSAGE_COUNT);
+    // Free log message.
+    free((void*) LOG_MESSAGE);
 
     // CAUTION! Do NOT try to free the log output of type FILE!
     // It was already closed in module "optionaliser.c".
@@ -309,36 +536,42 @@ void unglobalise() {
     // Hence, the following line would not make sense and is FORBIDDEN:
     // free(LOG_OUTPUT);
 
-    // Free log message.
-    free(LOG_MESSAGE);
-
-    // Free log message count.
-    free(LOG_MESSAGE_COUNT);
-
-    // Free log level.
-    free(LOG_LEVEL);
-
     //
-    // Primitive type size variables.
-    //
-    // CAUTION! DO NOT use array functionality here!
-    // The array functions use the logger which in turn depends on global
-    // log variables set here. So this would cause circular references.
-    // Instead, use malloc and similar functions directly!
+    // Thread identification variables.
     //
 
-    // Free character primitive size.
-    free(CHARACTER_PRIMITIVE_SIZE);
-    // Free double primitive size.
-    free(DOUBLE_PRIMITIVE_SIZE);
-    // Free integer primitive size.
-    free(INTEGER_PRIMITIVE_SIZE);
-    // Free pointer primitive size.
-    free(POINTER_PRIMITIVE_SIZE);
-    // Free unsigned long primitive size.
-    free(UNSIGNED_LONG_PRIMITIVE_SIZE);
-    // Free wide character primitive size.
-    free(WIDE_CHARACTER_PRIMITIVE_SIZE);
+    // Free cyboi service thread.
+    free((void*) CYBOI_SERVICE_THREAD);
+    // Free gnu/linux console thread.
+    free((void*) GNU_LINUX_CONSOLE_THREAD);
+    // Free www service thread.
+    free((void*) WWW_SERVICE_THREAD);
+    // Free x window system thread.
+    free((void*) X_WINDOW_SYSTEM_THREAD);
+
+    //
+    // Service exit variables.
+    //
+
+    // Free cyboi service thread exit flag.
+    free((void*) CYBOI_SERVICE_EXIT);
+    // Free gnu/linux console thread exit flag.
+    free((void*) GNU_LINUX_CONSOLE_EXIT);
+    // Free www service thread exit flag.
+    free((void*) WWW_SERVICE_EXIT);
+    // Free x window system thread exit flag.
+    free((void*) X_WINDOW_SYSTEM_EXIT);
+
+    //
+    // Reallocation factor variables.
+    //
+
+    // Free array reallocation factor.
+    free((void*) ARRAY_REALLOCATION_FACTOR);
+    // Free compound reallocation factor.
+    free((void*) COMPOUND_REALLOCATION_FACTOR);
+    // Free cybol file reallocation factor.
+    free((void*) CYBOL_FILE_REALLOCATION_FACTOR);
 }
 
 /* GLOBALISER_SOURCE */

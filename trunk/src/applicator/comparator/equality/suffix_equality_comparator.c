@@ -37,6 +37,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/integral_type_size.c"
 
 /**
  * Compares if the right parameter is a suffix of the left parameter.
@@ -145,7 +146,7 @@ void compare_equality_suffix(void* p0, void* p1, void* p2,
                                     // right parameter: "ing"
                                     // right parameter count: 3
                                     // left side parameter suffix pointer: 0 + (11 - 3) = 8
-                                    void* p = p3 + ((*lsmc - *rsmc) * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                    void* p = p3 + ((*lsmc - *rsmc) * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
 
                                     // CAUTION! Hand over the right side model count as count
                                     // of both, left side parameter and right side parameter!

@@ -28,7 +28,6 @@
 
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../variable/primitive_type_size.c"
 
 /**
  * Adds the source integer to the destination integer.

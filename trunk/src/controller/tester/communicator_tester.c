@@ -50,6 +50,7 @@
 #include <wchar.h>
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../logger/logger.c"
+#include "../../variable/type_size/terminal_type_size.c"
 
 /**
  * Tests the standard output and error stream.
@@ -176,8 +177,8 @@ void test_wide_character_output() {
 
     // Create gnu/linux console internals.
 //??        allocate((void*) &t, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-    to = (struct termios*) malloc(sizeof(struct termios));
-    tw = (struct termios*) malloc(sizeof(struct termios));
+    to = (struct termios*) malloc(*INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE);
+    tw = (struct termios*) malloc(*INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE);
 
     // Initialise gnu/linux console internals.
     // Set file stream.
@@ -382,8 +383,8 @@ void test_communicator_console_input() {
     struct termios* tn = (struct termios*) *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate gnu/linux console internals.
-    to = (struct termios*) malloc(sizeof(struct termios));
-    tn = (struct termios*) malloc(sizeof(struct termios));
+    to = (struct termios*) malloc(*INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE);
+    tn = (struct termios*) malloc(*INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE);
 
     // Set file stream.
     t = stdin;

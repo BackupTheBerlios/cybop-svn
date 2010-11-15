@@ -37,6 +37,7 @@
 #include "../../../constant/name/http/separator_http_name.c"
 #include "../../../executor/converter/detector.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/integral_type_size.c"
 
 //
 // An http server request delivers message data in text format (like MIME 1.0),
@@ -161,7 +162,7 @@ void select_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
@@ -227,7 +228,7 @@ void select_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
@@ -314,7 +315,7 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
@@ -382,7 +383,7 @@ void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
@@ -469,7 +470,7 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
@@ -1205,7 +1206,7 @@ void select_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {

@@ -419,8 +419,8 @@ void test_pointer_array_with_null_values() {
  * Tests the pointer addition.
  *
  * CAUTION! The following two lines calculate DIFFERENT results!
- * void* b = (void*) (m + (*NUMBER_0_INTEGER_MEMORY_MODEL * *INTEGER_PRIMITIVE_SIZE));
- * void* b = (void*) m + (*NUMBER_0_INTEGER_MEMORY_MODEL * *INTEGER_PRIMITIVE_SIZE);
+ * void* b = (void*) (m + (*NUMBER_0_INTEGER_MEMORY_MODEL * *SIGNED_INTEGER_INTEGRAL_TYPE_SIZE));
+ * void* b = (void*) m + (*NUMBER_0_INTEGER_MEMORY_MODEL * *SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
  * The first line is wrong and adds 16 instead of just 4.
  * The problem are the parentheses.
  *

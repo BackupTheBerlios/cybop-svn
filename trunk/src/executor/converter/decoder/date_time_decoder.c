@@ -38,6 +38,7 @@
 #include "../../../executor/memoriser/deallocator.c"
 #include "../../../executor/memoriser/reallocator.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/integral_type_size.c"
 #include "../../../variable/reallocation_factor.c"
 
 /**
@@ -142,11 +143,11 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         // The index.
                         int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The source day index.
-                        void* sdi = p3 + (*NUMBER_0_INTEGER_MEMORY_MODEL * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                        void* sdi = p3 + (*NUMBER_0_INTEGER_MEMORY_MODEL * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                         // The source month index.
-                        void* smi = p3 + (*NUMBER_2_INTEGER_MEMORY_MODEL * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                        void* smi = p3 + (*NUMBER_2_INTEGER_MEMORY_MODEL * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                         // The source year index.
-                        void* syi = p3 + (*NUMBER_4_INTEGER_MEMORY_MODEL * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                        void* syi = p3 + (*NUMBER_4_INTEGER_MEMORY_MODEL * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
 
                         // Copy original string to temporary null-terminated day string.
                         set_array_elements((void*) tmpd, sdi, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -202,7 +203,7 @@ void decode_ddmmyyyy_date_time(void* p0, void* p1, void* p2, void* p3, void* p4)
                         if (*dc >= *ds) {
 
                             // Calculate new date time size.
-                            *ds = *ds * *INTEGER_VECTOR_REALLOCATION_FACTOR + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            *ds = *ds * *ARRAY_REALLOCATION_FACTOR + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Reallocate date time.
                             reallocate(p0, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);

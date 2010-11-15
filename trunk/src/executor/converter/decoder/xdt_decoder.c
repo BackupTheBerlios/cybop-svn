@@ -42,6 +42,7 @@
 #include "../../../executor/converter/decoder/date_time_decoder.c"
 #include "../../../executor/converter/decoder/integer_vector_decoder.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/integral_type_size.c"
 
 //
 // The "x DatenTransfer" (xDT) is the German version of
@@ -165,29 +166,29 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
 
                             // The remaining bytes in the source byte array.
                             // They are used to check that the array border is not crossed.
-                            int rem = (*sc * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                            int rem = (*sc * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
 
-                            if (rem >= (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
+                            if (rem >= (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE)) {
 
                                 // Decode xdt field size.
                                 decode_integer(p0, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *s, (void*) XDT_FIELD_SIZE_COUNT);
 
                                 // Increment source xdt byte array index.
-                                *s = *s + (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
-                                rem = rem - (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                *s = *s + (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
+                                rem = rem - (*XDT_FIELD_SIZE_COUNT * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                             }
 
-                            if (rem >= (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
+                            if (rem >= (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE)) {
 
                                 // Decode xdt field identification.
                                 decode_integer(p1, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *s, (void*) XDT_FIELD_IDENTIFICATION_COUNT);
 
                                 // Increment source xdt byte array index.
-                                *s = *s + (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
-                                rem = rem - (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                *s = *s + (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
+                                rem = rem - (*XDT_FIELD_IDENTIFICATION_COUNT * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                             }
 
-                            if (*fs >= ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
+                            if (*fs >= ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT) * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE)) {
 
                                 // Calculate xdt field content count.
                                 //
@@ -200,7 +201,7 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                 //
                                 // It therefore has to be decremented here, so that
                                 // only the actual xdt field content count remains.
-                                *fcc = *fs - ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                *fcc = *fs - ((*XDT_FIELD_SIZE_COUNT + *XDT_FIELD_IDENTIFICATION_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT) * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
 
                                 if (rem >= *fcc) {
 
@@ -219,19 +220,19 @@ void decode_xdt_field(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
                                 *fcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
                             }
 
-                            if (rem >= ((*PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT) * *WIDE_CHARACTER_PRIMITIVE_SIZE)) {
+                            if (rem >= ((*PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT) * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE)) {
 
                                 // Verify if field end is reached (carriage return and line feed).
 
                                 if (*((wchar_t*) *s) == *CARRIAGE_RETURN_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
 
                                     // Increment source xdt byte array index.
-                                    *s = *s + (*PRIMITIVE_MEMORY_MODEL_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                    *s = *s + (*PRIMITIVE_MEMORY_MODEL_COUNT * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
 
                                     if (*((wchar_t*) *s) == *LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
 
                                         // Increment source xdt byte array index.
-                                        *s = *s + (*PRIMITIVE_MEMORY_MODEL_COUNT * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                                        *s = *s + (*PRIMITIVE_MEMORY_MODEL_COUNT * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
 
                                         // Set verification flag indicating that
                                         // the xdt field was decoded correctly.
@@ -312,9 +313,9 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
 
                     if ((j + (*PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT)) <= *ac) {
 
-                        if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE)) == *CARRIAGE_RETURN_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
+                        if (*(a + (j * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE)) == *CARRIAGE_RETURN_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
 
-                            if (*(a + (j * *WIDE_CHARACTER_PRIMITIVE_SIZE) + *PRIMITIVE_MEMORY_MODEL_COUNT) == *LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
+                            if (*(a + (j * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE) + *PRIMITIVE_MEMORY_MODEL_COUNT) == *LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL) {
 
                                 // Set next field count to the first character following
                                 // the carriage return plus line feed characters.
@@ -385,7 +386,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                         *rs = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The remaining bytes in the source byte array.
                         // They are used to check that the array border is not crossed.
-                        int rem = (*sc * *WIDE_CHARACTER_PRIMITIVE_SIZE);
+                        int rem = (*sc * *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                         // The field size.
                         int fs = *NUMBER_0_INTEGER_MEMORY_MODEL;
                         // The field identification.

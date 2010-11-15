@@ -35,7 +35,6 @@
 //?? #include "../../executor/arithmetiser/negator/double_negator.c"
 #include "../../executor/arithmetiser/negator/integer_negator.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Negates the source of the given abstraction.

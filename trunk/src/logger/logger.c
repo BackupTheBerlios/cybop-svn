@@ -58,7 +58,6 @@
 #include "../constant/model/memory_model.c"
 #include "../logger/accessor/setter/log_array_setter.c"
 #include "../variable/log_setting.c"
-#include "../variable/primitive_type_size.c"
 
 //
 // CAUTION! Following some reflexions on logging. There are two possibilities:

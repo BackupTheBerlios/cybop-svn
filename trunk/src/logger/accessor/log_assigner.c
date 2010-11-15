@@ -36,7 +36,6 @@
 #include "../../logger/accessor/assigner/log_wide_character_assigner.c"
 #include "../../logger/arithmetiser/log_integer_multiplier.c"
 #include "../../logger/memoriser/log_size_determiner.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Assigns the value.

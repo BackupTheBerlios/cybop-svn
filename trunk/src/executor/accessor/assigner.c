@@ -41,7 +41,6 @@
 #include "../../executor/arithmetiser/integer_multiplier.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Assigns the value.

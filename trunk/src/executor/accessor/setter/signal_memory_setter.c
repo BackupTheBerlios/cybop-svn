@@ -108,7 +108,7 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                                                 if (i == *sms) {
 
                                                     // Increase size.
-                                                    *sms = (*sms * *SIGNAL_MEMORY_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                                                    *sms = (*sms * *ARRAY_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                                     // Reallocate abstractions, models, details, priorities, identifications.
                                                     reallocate_array(a, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);

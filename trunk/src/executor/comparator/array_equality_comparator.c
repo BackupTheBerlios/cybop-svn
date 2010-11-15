@@ -36,7 +36,6 @@
 #include "../../executor/comparator/equality_comparator.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Compares the array elements for equality.

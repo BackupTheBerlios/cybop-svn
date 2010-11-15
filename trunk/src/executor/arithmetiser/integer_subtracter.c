@@ -35,7 +35,6 @@
 #include "../../executor/arithmetiser/integer_subtracter/integer_integer_subtracter.c"
 //?? #include "../../executor/arithmetiser/integer_subtracter/pointer_integer_subtracter.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Subtracts the source integer from the destination of the given abstraction.

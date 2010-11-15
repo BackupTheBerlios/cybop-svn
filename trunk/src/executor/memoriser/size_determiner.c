@@ -34,7 +34,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/accessor/assigner/integer_assigner.c"
 #include "../../logger/logger.c"
-#include "../../variable/primitive_type_size.c"
+#include "../../variable/type_size/integral_type_size.c"
 
 /**
  * Determines the size of the given abstraction.
@@ -52,27 +52,27 @@ void determine_size(void* p0, void* p1) {
 
         if (*a == *CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            assign_integer(p0, (void*) CHARACTER_PRIMITIVE_SIZE);
+            assign_integer(p0, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
 
         } else if (*a == *DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            assign_integer(p0, (void*) DOUBLE_PRIMITIVE_SIZE);
+            assign_integer(p0, (void*) DOUBLE_REAL_TYPE_SIZE);
 
         } else if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            assign_integer(p0, (void*) INTEGER_PRIMITIVE_SIZE);
+            assign_integer(p0, (void*) SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
 
         } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            assign_integer(p0, (void*) POINTER_PRIMITIVE_SIZE);
+            assign_integer(p0, (void*) POINTER_TYPE_SIZE);
 
         } else if (*a == *UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            assign_integer(p0, (void*) UNSIGNED_LONG_PRIMITIVE_SIZE);
+            assign_integer(p0, (void*) UNSIGNED_LONG_INTEGER_INTEGRAL_TYPE_SIZE);
 
         } else if (*a == *WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            assign_integer(p0, (void*) WIDE_CHARACTER_PRIMITIVE_SIZE);
+            assign_integer(p0, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
 
         } else {
 

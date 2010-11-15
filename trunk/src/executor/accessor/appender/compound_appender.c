@@ -159,7 +159,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 
                     // The new name character vector size.
                     // CAUTION! Append constant in case *nc is zero!
-                    *ns = (*nc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *LIST_SEPARATOR_CYBOL_NAME_COUNT + sc;
+                    *ns = (*nc * *ARRAY_REALLOCATION_FACTOR) + *LIST_SEPARATOR_CYBOL_NAME_COUNT + sc;
 
 //??    fwprintf(stdout, L"TEST append compound element 2 ns pre: %i\n", *ns);
                     // Reallocate name character vector.

@@ -35,10 +35,10 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
+#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
-#include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
  * Replaces the compound element by name.

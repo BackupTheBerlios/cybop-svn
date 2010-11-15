@@ -29,6 +29,7 @@
 #include <stdio.h>
 
 #include "../../logger/logger.c"
+#include "../../variable/type_size/integral_type_size.c"
 
 /**
  * Tests the type sizes.
@@ -37,14 +38,24 @@ void test_type_sizes() {
 
     log_write_terminated_message((void*) stdout, L"Test type sizes:\n");
 
-    fwprintf(stdout, L"null: %i\n", *NULL_POINTER_MEMORY_MODEL);
+    fwprintf(stdout, L"null pointer memory model: %i\n", *NULL_POINTER_MEMORY_MODEL);
 
-    fwprintf(stdout, L"char size: %i\n", *CHARACTER_PRIMITIVE_SIZE);
-    fwprintf(stdout, L"double size: %i\n", *DOUBLE_PRIMITIVE_SIZE);
-    fwprintf(stdout, L"int size: %i\n", *INTEGER_PRIMITIVE_SIZE);
-    fwprintf(stdout, L"void* size: %i\n", *POINTER_PRIMITIVE_SIZE);
-    fwprintf(stdout, L"unsigned long size: %i\n", *UNSIGNED_LONG_PRIMITIVE_SIZE);
-    fwprintf(stdout, L"wchar_t size: %i\n", *WIDE_CHARACTER_PRIMITIVE_SIZE);
+    fwprintf(stdout, L"pointer type size: %i\n", *POINTER_TYPE_SIZE);
+
+    fwprintf(stdout, L"signed char type size: %i\n", *SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"unsigned char type size: %i\n", *UNSIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"signed short int type size: %i\n", *SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"unsigned short int type size: %i\n", *UNSIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"signed int type size: %i\n", *SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"unsigned int type size: %i\n", *UNSIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"signed long int type size: %i\n", *SIGNED_LONG_INTEGER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"unsigned long int type size: %i\n", *UNSIGNED_LONG_INTEGER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"signed long long int type size: %i\n", *SIGNED_LONG_LONG_INTEGER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"unsigned long long int type size: %i\n", *UNSIGNED_LONG_LONG_INTEGER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"wchar_t type size: %i\n", *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
+    fwprintf(stdout, L"float type size: %i\n", *FLOAT_REAL_TYPE_SIZE);
+    fwprintf(stdout, L"double type size: %i\n", *DOUBLE_REAL_TYPE_SIZE);
+    fwprintf(stdout, L"long double type size: %i\n", *LONG_DOUBLE_REAL_TYPE_SIZE);
 }
 
 /**
@@ -57,7 +68,7 @@ void test_variable() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test variable.");
 
-//    test_type_sizes();
+    test_type_sizes();
 }
 
 /* VARIABLE_TESTER */

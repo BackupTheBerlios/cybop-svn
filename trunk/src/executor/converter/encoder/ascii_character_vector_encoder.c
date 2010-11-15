@@ -68,7 +68,7 @@ void encode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void*
 
                         // The new destination character vector size.
                         // CAUTION! Add constant in case *dc is zero!
-                        *ds = (*dc * *CHARACTER_VECTOR_REALLOCATION_FACTOR) + *sc;
+                        *ds = (*dc * *ARRAY_REALLOCATION_FACTOR) + *sc;
 
                         // Reallocate destination character vector.
                         reallocate_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);

@@ -39,7 +39,7 @@
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
-#include "../../../variable/thread_identification.c"
+#include "../../../variable/type_size/terminal_type_size.c"
 
 /**
  * Starts up the gnu/linux console.
@@ -83,8 +83,8 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
         allocate((void*) &op, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 */
         // Allocate termios settings.
-        to = (struct termios*) malloc(sizeof(struct termios));
-        tn = (struct termios*) malloc(sizeof(struct termios));
+        to = (struct termios*) malloc(*INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE);
+        tn = (struct termios*) malloc(*INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE);
 
         // Allocate character buffer.
         //

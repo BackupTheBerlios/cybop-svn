@@ -11,15 +11,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Assign global type size variables at system startup
-        * Debug errors caused by adding new type size variables
-
         * Investigate how to handle setting of destination count and size;
             see e.g.: "executor/accessor/setter.c", where both are set;
             Should an extra wrapper function do this?
-        * Rethink basic functions such as "set", "append", "replace" etc.
+        * Rethink basic container functions such as "set", "append", "replace" etc.
             for arrays and other abstractions (types) like "compound"
-        * Clean up logical errors
 
         * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
             Should models in cybol/ dir be one level higher?

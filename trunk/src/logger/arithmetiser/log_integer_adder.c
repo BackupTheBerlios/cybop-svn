@@ -29,12 +29,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/arithmetiser/integer_adder/log_integer_integer_adder.c"
 #include "../../logger/arithmetiser/integer_adder/log_pointer_integer_adder.c"
-#include "../../variable/primitive_type_size.c"
 
 /**
  * Adds the source integer to the destination of the given abstraction.

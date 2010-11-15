@@ -86,7 +86,7 @@ void encode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // Set destination string size one greater than the count
                     // to have space for the terminating null character and
                     // to avoid a zero value in case destination string size is zero.
-                    *ds = (*dc * *WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    *ds = (*dc * *ARRAY_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate destination string.
                     reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);

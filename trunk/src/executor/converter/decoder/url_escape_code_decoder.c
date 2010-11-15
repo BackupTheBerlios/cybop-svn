@@ -35,6 +35,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
+#include "../../../variable/type_size/integral_type_size.c"
 #include "../../../variable/reallocation_factor.c"
 
 //
@@ -89,7 +90,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &SPACE_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -101,7 +102,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &NUMBER_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -113,7 +114,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &DOLLAR_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -125,7 +126,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &PERCENT_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -137,7 +138,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &AMPERSAND_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -149,7 +150,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &SOLIDUS_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -161,7 +162,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &COLON_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -173,7 +174,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &SEMICOLON_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -185,7 +186,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &LESS_THAN_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -197,7 +198,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &EQUALS_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -209,7 +210,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &GREATER_THAN_SIGN_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -221,7 +222,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &QUESTION_MARK_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -233,7 +234,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &COMMERCIAL_AT_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -245,7 +246,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &LEFT_SQUARE_BRACKET_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -257,7 +258,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &REVERSE_SOLIDUS_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -269,7 +270,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &RIGHT_SQUARE_BRACKET_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -281,7 +282,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &CIRCUMFLEX_ACCENT_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -293,7 +294,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &GRAVE_ACCENT_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -305,7 +306,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &LEFT_CURLY_BRACKET_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -317,7 +318,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &VERTICAL_LINE_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -329,7 +330,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &RIGHT_CURLY_BRACKET_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -341,7 +342,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         t = (void**) &TILDE_WIDE_CHARACTER;
                         tc = *PRIMITIVE_MEMORY_MODEL_COUNT;
-                        ts = *WIDE_CHARACTER_PRIMITIVE_SIZE;
+                        ts = *WIDE_CHARACTER_INTEGRAL_TYPE_SIZE;
                     }
                 }
 
@@ -354,7 +355,7 @@ void decode_url_escape_code(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     if ((*dc + tc) > *ds) {
 
                         // Calculate destination size.
-                        *ds = (*WIDE_CHARACTER_VECTOR_REALLOCATION_FACTOR * (*dc)) + tc;
+                        *ds = (*ARRAY_REALLOCATION_FACTOR * (*dc)) + tc;
 
                         // Reallocate destination.
                         reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
