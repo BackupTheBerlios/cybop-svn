@@ -11,8 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Simplify source code by using the function "allocate_model" wherever
-            a model (array, compound or another) with count and size gets created
+        * Find bug why red selection bar is not drawn anymore since "allocate_model" changes;
+            keyboard event is catched properly, only no reaction happens;
+            probably, the handling model is missing and not assigned properly
+
         * Adapt source code by using memory-efficient types wherever possible,
             e.g. "signed short int" instead of just "int" (as done up to now)
             or "signed char" for simple flags used for just two values

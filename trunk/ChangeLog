@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Simplify source code by using the functions "allocate_model" and "deallocate_model"
+            wherever a model (array, compound or another) with count and size gets created
+
 2010-11-15  Christian Heller  <christian.heller@tuxtax.de>
         * Factor out functions of file "controller/globaliser.c" into separate files
             in new sub directories "controller/globaliser/" and "controller/unglobaliser/",

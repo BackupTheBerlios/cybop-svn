@@ -32,8 +32,8 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
-#include "../../../executor/memoriser/allocator/array_allocator.c"
-#include "../../../executor/memoriser/deallocator/array_deallocator.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../executor/memoriser/reallocator/array_reallocator.c"
 #include "../../../logger/logger.c"
 
@@ -84,14 +84,16 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
 
                         // The summand 1 vector.
                         void* summand1 = *NULL_POINTER_MEMORY_MODEL;
-                        int summand1c = *s1c;
+                        void* summand1c = *NULL_POINTER_MEMORY_MODEL;
+                        void* summand1s = *NULL_POINTER_MEMORY_MODEL;
                         // The summand 2 vector.
                         void* summand2 = *NULL_POINTER_MEMORY_MODEL;
-                        int summand2c = *s2c;
+                        void* summand2c = *NULL_POINTER_MEMORY_MODEL;
+                        void* summand2s = *NULL_POINTER_MEMORY_MODEL;
 
                         // Allocate temporary input operand arrays.
-                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        allocate_model((void*) &summand1, (void*) &summand1c, (void*) &summand1s, p4, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+                        allocate_model((void*) &summand2, (void*) &summand2c, (void*) &summand2s, p6, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
                         // Set temporary input operand arrays.
                         set_array_elements(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -102,13 +104,13 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
                         // of the summand with the SMALLER count!
                         // Otherwise, the array borders of the summand with the
                         // smaller count would be crossed.
-                        if (summand1c < summand2c) {
+                        if (*((int*) summand1c) < *((int*) summand2c)) {
 
-                            *ss = summand1c;
+                            *ss = *((int*) summand1c);
 
                         } else {
 
-                            *ss = summand2c;
+                            *ss = *((int*) summand2c);
                         }
 
                         // The sum count serves as loop count below.
@@ -146,8 +148,8 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
                         }
 
                         // Deallocate temporary operand arrays.
-                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        deallocate_model((void*) &summand1, (void*) &summand1c, (void*) &summand1s, p4, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+                        deallocate_model((void*) &summand2, (void*) &summand2c, (void*) &summand2s, p6, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
                     } else {
 

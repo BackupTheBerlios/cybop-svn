@@ -43,7 +43,8 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/converter/encoder/integer_encoder.c"
-#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/type_size/integral_type_size.c"
 #include "../../../variable/reallocation_factor.c"
@@ -86,11 +87,11 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                         void* i = *NULL_POINTER_MEMORY_MODEL;
                         // The integer wide character.
                         void* c = *NULL_POINTER_MEMORY_MODEL;
-                        int cc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                        int cs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                        void* cc = *NULL_POINTER_MEMORY_MODEL;
+                        void* cs = *NULL_POINTER_MEMORY_MODEL;
 
                         // Allocate integer wide character.
-                        allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        allocate_model((void*) &c, (void*) &cc, (void*) &cs, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                         if (*sc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -105,7 +106,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
 */
 
                             // Encode first integer.
-                            encode_integer((void*) &c, (void*) &cc, (void*) &cs, i, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+                            encode_integer((void*) &c, cc, cs, i, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
 /*??
     fwprintf(stdout, L"TEST encode integer vector elements 1 i: %i\n", *((int*) i));
@@ -125,7 +126,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                             }
 
                             // Append integer characters.
-                            append_array_elements(p0, p1, p2, c, (void*) &cc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            append_array_elements(p0, p1, p2, c, cc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                             // Determine remaining vector elements.
                             //
@@ -152,7 +153,7 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                         // Deallocate integer wide character.
                         // CAUTION! It may be deallocated here, since its content
                         // was copied in the "set_array_elements" function, further above!
-                        deallocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        deallocate_model((void*) &c, (void*) &cc, (void*) &cs, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                     } else {
 

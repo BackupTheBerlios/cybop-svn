@@ -38,6 +38,8 @@
 #include "../../../constant/name/cybol/graphical_user_interface_cybol_name.c"
 #include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../executor/accessor/getter.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 
 /**
  * Encodes the source compound model into an x window system model.
@@ -258,12 +260,12 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         // The terminated title.
         void* tt = *NULL_POINTER_MEMORY_MODEL;
-        int ttc = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-        int tts = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+        void* ttc = *NULL_POINTER_MEMORY_MODEL;
+        void* tts = *NULL_POINTER_MEMORY_MODEL;
         // The terminated icon name.
         void* ti = *NULL_POINTER_MEMORY_MODEL;
-        int tic = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-        int tis = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+        void* tic = *NULL_POINTER_MEMORY_MODEL;
+        void* tis = *NULL_POINTER_MEMORY_MODEL;
 
         // The source part position coordinates.
         int* pmx = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -371,27 +373,27 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // The terminated text.
-                    char* text = (char*) *NULL_POINTER_MEMORY_MODEL;
-                    int textc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                    int texts = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    void* text = *NULL_POINTER_MEMORY_MODEL;
+                    void* textc = *NULL_POINTER_MEMORY_MODEL;
+                    void* texts = *NULL_POINTER_MEMORY_MODEL;
 
                     // Create terminated text.
-                    allocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    allocate_model((void*) &text, (void*) &textc, (void*) &texts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                     // Encode wide character name into text, which is a multibyte character array.
-                    encode_utf_8_unicode_character_vector((void*) &text, (void*) &textc, (void*) &texts, *m, *mc);
+                    encode_utf_8_unicode_character_vector((void*) &text, textc, texts, *m, *mc);
 
-                    if (texts <= textc) {
+                    if (*((int*) texts) <= *((int*) textc)) {
 
                         // Increase character array size to have place for the termination character.
-                        texts = textc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                        *((int*) texts) = *((int*) textc) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                         // Reallocate terminated file name as multibyte character array.
-                        reallocate_array((void*) &text, (void*) &textc, (void*) &texts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        reallocate_array((void*) &text, textc, texts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                     }
 
                     // Add null termination character to text.
-                    set_array_elements(text, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &textc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    set_array_elements(text, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, textc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     //?? TODO: Create "text" as 2byte character array,
                     //?? since the xlib C library expects it that way.
@@ -402,10 +404,10 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     // CAUTION! The Xlib C Library offers a function "XDrawString16"
                     // to draw 2byte characters in a given drawable.
                     // However, standard utf-8 encoded characters are used here.
-                    XDrawString(*di, **w, *gc, *pmx, *pmy + *NUMBER_20_INTEGER_MEMORY_MODEL, text, textc);
+                    XDrawString(*di, **w, *gc, *pmx, *pmy + *NUMBER_20_INTEGER_MEMORY_MODEL, text, *((int*) textc));
 
                     // Destroy terminated text.
-                    deallocate_array((void*) &text, (void*) &texts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    deallocate_model((void*) &text, (void*) &textc, (void*) &texts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                     /*
                     In the conventional 'XFontStruct' model, an X client opens
@@ -557,45 +559,45 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 // The terminated title.
                 tt = *NULL_POINTER_MEMORY_MODEL;
-                ttc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                tts = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                ttc = *NULL_POINTER_MEMORY_MODEL;
+                tts = *NULL_POINTER_MEMORY_MODEL;
                 // The terminated icon name.
                 ti = *NULL_POINTER_MEMORY_MODEL;
-                tic = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                tis = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                tic = *NULL_POINTER_MEMORY_MODEL;
+                tis = *NULL_POINTER_MEMORY_MODEL;
 
                 // Create terminated title.
-                allocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                allocate_model((void*) &tt, (void*) &ttc, (void*) &tts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
                 // Create terminated icon name.
-                allocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                allocate_model((void*) &ti, (void*) &tic, (void*) &tis, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                 // Encode wide character name into title, which is a multibyte character array.
-                encode_utf_8_unicode_character_vector((void*) &tt, (void*) &ttc, (void*) &tts, *tm, *tmc);
+                encode_utf_8_unicode_character_vector((void*) &tt, ttc, tts, *tm, *tmc);
                 // Encode wide character name into icon name, which is a multibyte character array.
-                encode_utf_8_unicode_character_vector((void*) &ti, (void*) &tic, (void*) &tis, *im, *imc);
+                encode_utf_8_unicode_character_vector((void*) &ti, tic, tis, *im, *imc);
 
-                if (tts <= ttc) {
+                if (*((int*) tts) <= *((int*) ttc)) {
 
                     // Increase character array size to have place for the termination character.
-                    tts = ttc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    *((int*) tts) = *((int*) ttc) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate title as multibyte character array.
-                    reallocate_array((void*) &tt, (void*) &ttc, (void*) &tts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    reallocate_array((void*) &tt, ttc, tts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                 }
 
-                if (tis <= tic) {
+                if (*((int*) tis) <= *((int*) tic)) {
 
                     // Increase character array size to have place for the termination character.
-                    tis = tic + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    *((int*) tis) = *((int*) tic) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate icon name as multibyte character array.
-                    reallocate_array((void*) &ti, (void*) &tic, (void*) &tis, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    reallocate_array((void*) &ti, tic, tis, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                 }
 
                 // Add null termination character to title.
-                set_array_elements(tt, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &ttc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                set_array_elements(tt, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, ttc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                 // Add null termination character to icon name.
-                set_array_elements(ti, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tic, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                set_array_elements(ti, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tic, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // Set terminated window title.
                 //
@@ -606,9 +608,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 XSetIconName(*di, **w, (char*) ti);
 
                 // Destroy terminated title.
-                deallocate_array((void*) &tt, (void*) &tts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                deallocate_model((void*) &tt, (void*) &ttc, (void*) &tts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
                 // Destroy terminated icon name.
-                deallocate_array((void*) &ti, (void*) &tis, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                deallocate_model((void*) &ti, (void*) &tic, (void*) &tis, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
             }
 
             // Reset comparison result.
@@ -693,10 +695,12 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
             // Reset terminated title.
             tt = *NULL_POINTER_MEMORY_MODEL;
-            tts = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+//??            ttc = *NULL_POINTER_MEMORY_MODEL;
+            tts = *NULL_POINTER_MEMORY_MODEL;
             // Reset terminated icon name.
             ti = *NULL_POINTER_MEMORY_MODEL;
-            tis = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+//??            tic = *NULL_POINTER_MEMORY_MODEL;
+            tis = *NULL_POINTER_MEMORY_MODEL;
 
             // Reset comparison result.
             r = *NUMBER_0_INTEGER_MEMORY_MODEL;

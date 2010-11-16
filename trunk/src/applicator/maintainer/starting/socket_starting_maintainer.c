@@ -251,34 +251,34 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
                     // address is supposed to be the host address directly.
 
                     // The terminated address model.
-                    char* s = (char*) *NULL_POINTER_MEMORY_MODEL;
-                    int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                    int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    void* s = *NULL_POINTER_MEMORY_MODEL;
+                    void* sc = *NULL_POINTER_MEMORY_MODEL;
+                    void* ss = *NULL_POINTER_MEMORY_MODEL;
 
                     // Allocate terminated address model.
-                    allocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                     // Encode wide character name into multibyte character array.
-                    encode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, p1, p2);
+                    encode_utf_8_unicode_character_vector((void*) &s, sc, ss, p1, p2);
 
-                    if (ss <= sc) {
+                    if (*((int*) ss) <= *((int*) sc)) {
 
                         // Increase character array size to have place for the termination character.
-                        ss = sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                        *((int*) ss) = *((int*) sc) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                         // Reallocate terminated file name as multibyte character array.
-                        reallocate_array((void*) &s, (void*) &sc, (void*) &ss, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        reallocate_array((void*) &s, sc, ss, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                     }
 
                     // Add null termination character to terminated file name.
-                    set_array_elements(s, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &sc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    set_array_elements(s, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, sc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     // Convert uint16_t integer hostshort from host byte order
                     // to network byte order.
-                    inet_pton(*an, s, p0);
+                    inet_pton(*an, (char*) s, p0);
 
                     // Deallocate terminated address model.
-                    deallocate_array((void*) &s, (void*) &ss, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
                 }
 
             } else {

@@ -42,6 +42,8 @@
 #include "../constant/name/command_option/cyboi_command_option_name.c"
 #include "../executor/accessor/replacer/array_replacer.c"
 #include "../executor/accessor/setter/array_setter.c"
+#include "../executor/memoriser/allocator/model_allocator.c"
+#include "../executor/memoriser/deallocator/model_deallocator.c"
 
 /**
  * Optionalises the log level option.
@@ -158,8 +160,8 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
 
             // The terminated file name as character array.
             void* t = *NULL_POINTER_MEMORY_MODEL;
-            int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            void* tc = *NULL_POINTER_MEMORY_MODEL;
+            void* ts = *NULL_POINTER_MEMORY_MODEL;
 
             //
             // CAUTION! Do NOT use a wide character array here!
@@ -168,25 +170,25 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             //
 
             // Allocate terminated file name as multibyte character array.
-            allocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            allocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             // Encode wide character option into multibyte character array.
-            encode_utf_8_unicode_character_vector((void*) &t, (void*) &tc, (void*) &ts, p1, p2);
+            encode_utf_8_unicode_character_vector((void*) &t, tc, ts, p1, p2);
 
-            if (ts <= tc) {
+            if (*((int*) ts) <= *((int*) tc)) {
 
                 // Increase character array size to have place for the termination character.
                 ts = tc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 // Reallocate terminated file name as multibyte character array.
-                reallocate_array((void*) &t, (void*) &tc, (void*) &ts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                reallocate_array((void*) &t, tc, ts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
 
             // Add null termination character to terminated file name.
-            set_array_elements(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            set_array_elements(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Increase terminated file name count.
-            tc++;
+            (*((int*) tc))++;
 
             // Open log file for writing only.
             // If the file already exists, it is truncated to zero length.
@@ -224,7 +226,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             }
 
             // Deallocate terminated file name as multibyte character array.
-            deallocate_array((void*) &t, (void*) &ts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            deallocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         } else {
 

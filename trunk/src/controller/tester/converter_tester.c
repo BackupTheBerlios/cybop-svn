@@ -28,6 +28,8 @@
 
 #include <stdio.h>
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../executor/memoriser/allocator/model_allocator.c"
+#include "../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../logger/logger.c"
 
 /**
@@ -76,26 +78,26 @@ void test_converter_encode_integer() {
     log_write_terminated_message((void*) stdout, L"Test encode integer:\n");
 
     // The destination character array.
-    wchar_t* d = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
-    int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    void* dc = *NULL_POINTER_MEMORY_MODEL;
+    void* ds = *NULL_POINTER_MEMORY_MODEL;
 
     // An arbitrary source integer value.
     int s = *NUMBER_18_INTEGER_MEMORY_MODEL;
 
     // Allocate destination character array.
-    allocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_model((void*) &d, (void*) &dc, (void*) &ds, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Use compound count as index to create the element name suffix,
     // because the element is added at the end of the compound container.
-    encode_integer((void*) &d, (void*) &dc, (void*) &ds, (void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+    encode_integer((void*) &d, dc, ds, (void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-    fwprintf(stdout, L"Test: Destination character array: %ls\n", d);
-    fwprintf(stdout, L"Test: Destination character array count: %i\n", dc);
-    fwprintf(stdout, L"Test: Destination character array size: %i\n", ds);
+    fwprintf(stdout, L"Test: Destination character array: %ls\n", (wchar_t*) d);
+    fwprintf(stdout, L"Test: Destination character array count: %i\n", *((int*) dc));
+    fwprintf(stdout, L"Test: Destination character array size: %i\n", *((int*) ds));
 
     // Deallocate destination character array.
-    deallocate_array((void*) &d, (void*) &ds, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_model((void*) &d, (void*) &dc, (void*) &ds, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /**

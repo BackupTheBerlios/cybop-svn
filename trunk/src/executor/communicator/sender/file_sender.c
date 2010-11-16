@@ -36,6 +36,8 @@
 #include "../../../constant/model/stream_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/encoder/utf_8_unicode_character_encoder.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
 
@@ -179,26 +181,26 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 // The terminated file name.
                 void* tn = *NULL_POINTER_MEMORY_MODEL;
-                int tnc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                int tns = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                void* tnc = *NULL_POINTER_MEMORY_MODEL;
+                void* tns = *NULL_POINTER_MEMORY_MODEL;
 
                 // Allocate terminated file name.
-                allocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                allocate_model((void*) &tn, (void*) &tnc, (void*) &tns, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                 // Encode wide character option into multibyte character array.
-                encode_utf_8_unicode_character_vector((void*) &tn, (void*) &tnc, (void*) &tns, *d, p1);
+                encode_utf_8_unicode_character_vector((void*) &tn, tnc, tns, *d, p1);
 
-                if (tns <= tnc) {
+                if (*((int*) tns) <= *((int*) tnc)) {
 
                     // Increase character array size to have place for the termination character.
-                    tns = tnc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    *((int*) tns) = *((int*) tnc) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                     // Reallocate terminated file name as multibyte character array.
-                    reallocate_array((void*) &tn, (void*) &tnc, (void*) &tns, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    reallocate_array((void*) &tn, tnc, tns, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                 }
 
                 // Add null termination character to terminated file name.
-                set_array_elements(tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tnc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                set_array_elements(tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tnc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.
@@ -232,7 +234,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
 
                 // Deallocate terminated file name.
-                deallocate_array((void*) &tn, (void*) &tns, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                deallocate_model((void*) &tn, (void*) &tnc, (void*) &tns, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
             }
 
         } else {

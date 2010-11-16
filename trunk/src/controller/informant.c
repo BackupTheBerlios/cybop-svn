@@ -32,6 +32,8 @@
 #include "../constant/model/cyboi/identification_cyboi_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../executor/comparator/array_equality_comparator.c"
+#include "../executor/memoriser/allocator/model_allocator.c"
+#include "../executor/memoriser/deallocator/model_deallocator.c"
 
 /**
  * Writes cyboi information message to given output stream.
@@ -42,8 +44,11 @@ void inform(void* p0) {
 
     // The message.
     void* m = *NULL_POINTER_MEMORY_MODEL;
-    // The cyboi name + space + version + line feed + slogan + line feed + copyright + line feed + licence + line feed + termination.
-    int ms = *NAME_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
+    void* mc = *NULL_POINTER_MEMORY_MODEL;
+    void* ms = *NULL_POINTER_MEMORY_MODEL;
+
+    // The size: cyboi name + space + version + line feed + slogan + line feed + copyright + line feed + licence + line feed + termination
+    int s = *NAME_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
         + *VERSION_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
         + *SLOGAN_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
         + *COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT
@@ -52,7 +57,7 @@ void inform(void* p0) {
     int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate message.
-    allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Copy name.
     set_array_elements(m, (void*) NAME_IDENTIFICATION_CYBOI_MODEL, (void*) NAME_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -103,7 +108,7 @@ void inform(void* p0) {
     log_write_terminated_message(p0, m);
 
     // Deallocate message.
-    deallocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* INFORMANT_SOURCE */

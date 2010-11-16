@@ -32,8 +32,8 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
-#include "../../../executor/memoriser/allocator/array_allocator.c"
-#include "../../../executor/memoriser/deallocator/array_deallocator.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../executor/memoriser/reallocator/array_reallocator.c"
 #include "../../../logger/logger.c"
 
@@ -82,16 +82,18 @@ void calculate_addition_character_vector(void* p0, void* p1, void* p2, void* p3,
                         // the input operand would be overwritten at the same time,
                         // as both are pointing to the same operand.
 
-                        // The summand 1.
+                        // The summand 1 vector.
                         void* summand1 = *NULL_POINTER_MEMORY_MODEL;
-                        int summand1c = *s1c;
-                        // The summand 2.
+                        void* summand1c = *NULL_POINTER_MEMORY_MODEL;
+                        void* summand1s = *NULL_POINTER_MEMORY_MODEL;
+                        // The summand 2 vector.
                         void* summand2 = *NULL_POINTER_MEMORY_MODEL;
-                        int summand2c = *s2c;
+                        void* summand2c = *NULL_POINTER_MEMORY_MODEL;
+                        void* summand2s = *NULL_POINTER_MEMORY_MODEL;
 
                         // Allocate temporary input operand arrays.
-                        allocate_array((void*) &summand1, (void*) &summand1c, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        allocate_array((void*) &summand2, (void*) &summand2c, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        allocate_model((void*) &summand1, (void*) &summand1c, (void*) &summand1s, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                        allocate_model((void*) &summand2, (void*) &summand2c, (void*) &summand2s, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                         // Set temporary input operand arrays.
                         set_array_elements(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -103,21 +105,21 @@ void calculate_addition_character_vector(void* p0, void* p1, void* p2, void* p3,
                         // If the sum array got a greater size than needed,
                         // unpredictable results might occur when using it for
                         // comparison with other strings, for example.
-                        *ss = summand1c + summand2c;
+                        *ss = *((int*) summand1c) + *((int*) summand2c);
                         *sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Reallocate output operand array.
                         reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // Set output operand array.
-                        set_array_elements(*s, summand1, (void*) &summand1c, (void*) sc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        *sc = *sc + summand1c;
-                        set_array_elements(*s, summand2, (void*) &summand2c, (void*) sc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        *sc = *sc + summand2c;
+                        set_array_elements(*s, summand1, summand1c, (void*) sc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        *sc = *sc + *((int*) summand1c);
+                        set_array_elements(*s, summand2, summand2c, (void*) sc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        *sc = *sc + *((int*) summand2c);
 
                         // Deallocate temporary operand arrays.
-                        deallocate_array((void*) &summand1, (void*) &summand1c, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        deallocate_array((void*) &summand2, (void*) &summand2c, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        deallocate_model((void*) &summand1, (void*) &summand1c, (void*) &summand1s, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                        deallocate_model((void*) &summand2, (void*) &summand2c, (void*) &summand2s, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                     } else {
 

@@ -34,6 +34,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -91,18 +92,10 @@ void deallocate_compound(void* p0, void* p1) {
         // CAUTION! Do NOT hand over as reference!
         // The variables are of type void**.
         // The expression (&*variable) is the same like (variable).
-        deallocate_array((void*) n, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) nc, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) ns, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) a, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) ac, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) as, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) m, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) mc, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) ms, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) d, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) dc, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        deallocate_array((void*) ds, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        deallocate_model((void*) n, (void*) nc, (void*) ns, p1, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        deallocate_model((void*) a, (void*) ac, (void*) as, p1, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        deallocate_model((void*) m, (void*) mc, (void*) ms, p1, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        deallocate_model((void*) d, (void*) dc, (void*) ds, p1, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
         // Deallocate compound.
         deallocate_array(p0, (void*) COMPOUND_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);

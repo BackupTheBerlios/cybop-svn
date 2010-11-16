@@ -34,6 +34,8 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -58,23 +60,26 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode double.");
 
             // The temporary null-terminated string.
-            wchar_t* tmp = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
-            int tmps = *sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+            void* tmp = *NULL_POINTER_MEMORY_MODEL;
+            void* tmpc = *NULL_POINTER_MEMORY_MODEL;
+            void* tmps = *NULL_POINTER_MEMORY_MODEL;
+
+            int s = *sc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
             // Create temporary null-terminated string.
-            allocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            allocate_model((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             // The index.
             int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Copy original string to temporary null-terminated string.
-            set_array_elements((void*) tmp, p3, p4, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            set_array_elements(tmp, p3, p4, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // This is used as index to set the termination character.
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements((void*) tmp, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            set_array_elements(tmp, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -94,7 +99,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Again, case is ignored.
             // If chars... are provided, they are used in some unspecified fashion
             // to select a particular representation of NaN (there can be several).
-            double v = wcstod(tmp, &tail);
+            double v = wcstod((wchar_t*) tmp, &tail);
 
             //?? p0 (Hand over as reference!)
             //?? Doesn't p0 need to be reallocated from size 0 to size 1,
@@ -104,7 +109,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             set_array_elements(*d, (void*) &v, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Destroy temporary null-terminated string.
-            deallocate_array((void*) &tmp, (void*) &tmps, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            deallocate_model((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         } else {
 

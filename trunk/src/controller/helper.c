@@ -33,8 +33,8 @@
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../executor/accessor/setter/array_setter.c"
 #include "../executor/comparator/array_equality_comparator.c"
-#include "../executor/memoriser/allocator/array_allocator.c"
-#include "../executor/memoriser/deallocator/array_deallocator.c"
+#include "../executor/memoriser/allocator/model_allocator.c"
+#include "../executor/memoriser/deallocator/model_deallocator.c"
 
 /**
  * Writes cyboi help message to given output stream.
@@ -45,13 +45,16 @@ void help(void* p0) {
 
     // The message.
     void* m = *NULL_POINTER_MEMORY_MODEL;
-    // The message + line feed + termination.
-    int ms = *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
+    void* mc = *NULL_POINTER_MEMORY_MODEL;
+    void* ms = *NULL_POINTER_MEMORY_MODEL;
+
+    // The size: message + line feed + termination
+    int s = *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // The index.
     int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate message.
-    allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Copy message.
     set_array_elements(m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -68,7 +71,7 @@ void help(void* p0) {
     log_write_terminated_message(p0, m);
 
     // Deallocate message.
-    deallocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* HELPER_SOURCE */
