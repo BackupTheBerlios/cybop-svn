@@ -35,104 +35,104 @@
 // They are sorted alphabetically here.
 //
 
-/** The accept request header http name. */
-static wchar_t ACCEPT_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'a', L'c', L'c', L'e', L'p', L't'};
-static wchar_t* ACCEPT_REQUEST_HEADER_HTTP_NAME = ACCEPT_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Accept request header http name. */
+static char ACCEPT_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'A', 'c', 'c', 'e', 'p', 't'};
+static char* ACCEPT_REQUEST_HEADER_HTTP_NAME = ACCEPT_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* ACCEPT_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The accept-charset request header http name. */
-static wchar_t ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'a', L'c', L'c', L'e', L'p', L't', L'-', L'c', L'h', L'a', L'r', L's', L'e', L't'};
-static wchar_t* ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME = ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Accept-Charset request header http name. */
+static char ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'A', 'c', 'c', 'e', 'p', 't', '-', 'C', 'h', 'a', 'r', 's', 'e', 't'};
+static char* ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME = ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The accept-encoding request header http name. */
-static wchar_t ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'a', L'c', L'c', L'e', L'p', L't', L'-', L'e', L'n', L'c', L'o', L'd', L'i', L'n', L'g'};
-static wchar_t* ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME = ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Accept-Encoding request header http name. */
+static char ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'A', 'c', 'c', 'e', 'p', 't', '-', 'E', 'n', 'c', 'o', 'd', 'i', 'n', 'g'};
+static char* ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME = ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The accept-language request header http name. */
-static wchar_t ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'a', L'c', L'c', L'e', L'p', L't', L'-', L'l', L'a', L'n', L'g', L'u', L'a', L'g', L'e'};
-static wchar_t* ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME = ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Accept-Language request header http name. */
+static char ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'A', 'c', 'c', 'e', 'p', 't', '-', 'L', 'a', 'n', 'g', 'u', 'a', 'g', 'e'};
+static char* ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME = ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The authorization request header http name. */
-static wchar_t AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'a', L'u', L't', L'h', L'o', L'r', L'i', L'z', L'a', L't', L'i', L'o', L'n'};
-static wchar_t* AUTHORIZATION_REQUEST_HEADER_HTTP_NAME = AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Authorization request header http name. */
+static char AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'A', 'u', 't', 'h', 'o', 'r', 'i', 'z', 'a', 't', 'i', 'o', 'n'};
+static char* AUTHORIZATION_REQUEST_HEADER_HTTP_NAME = AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_13_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The expect request header http name. */
-static wchar_t EXPECT_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'e', L'x', L'p', L'e', L'c', L't'};
-static wchar_t* EXPECT_REQUEST_HEADER_HTTP_NAME = EXPECT_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Expect request header http name. */
+static char EXPECT_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'E', 'x', 'p', 'e', 'c', 't'};
+static char* EXPECT_REQUEST_HEADER_HTTP_NAME = EXPECT_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* EXPECT_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The from request header http name. */
-static wchar_t FROM_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'f', L'r', L'o', L'm'};
-static wchar_t* FROM_REQUEST_HEADER_HTTP_NAME = FROM_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The From request header http name. */
+static char FROM_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'F', 'r', 'o', 'm'};
+static char* FROM_REQUEST_HEADER_HTTP_NAME = FROM_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* FROM_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The host request header http name. */
-static wchar_t HOST_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'h', L'o', L's', L't'};
-static wchar_t* HOST_REQUEST_HEADER_HTTP_NAME = HOST_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Host request header http name. */
+static char HOST_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'H', 'o', 's', 't'};
+static char* HOST_REQUEST_HEADER_HTTP_NAME = HOST_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* HOST_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The if-match request header http name. */
-static wchar_t IF_MATCH_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'i', L'f', L'-', L'm', L'a', L't', L'c', L'h'};
-static wchar_t* IF_MATCH_REQUEST_HEADER_HTTP_NAME = IF_MATCH_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The If-Match request header http name. */
+static char IF_MATCH_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'I', 'f', '-', 'M', 'a', 't', 'c', 'h'};
+static char* IF_MATCH_REQUEST_HEADER_HTTP_NAME = IF_MATCH_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* IF_MATCH_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The if-modified-since request header http name. */
-static wchar_t IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'i', L'f', L'-', L'm', L'o', L'd', L'i', L'f', L'i', L'e', L'd', L'-', L's', L'i', L'n', L'c', L'e'};
-static wchar_t* IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME = IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The If-Modified-Since request header http name. */
+static char IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'I', 'f', '-', 'M', 'o', 'd', 'i', 'f', 'i', 'e', 'd', '-', 'S', 'i', 'n', 'c', 'e'};
+static char* IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME = IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The if-none-match request header http name. */
-static wchar_t IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'i', L'f', L'-', L'n', L'o', L'n', L'e', L'-', L'm', L'a', L't', L'c', L'h'};
-static wchar_t* IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME = IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The If-None-Match request header http name. */
+static char IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'I', 'f', '-', 'N', 'o', 'n', 'e', '-', 'M', 'a', 't', 'c', 'h'};
+static char* IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME = IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_13_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The if-range request header http name. */
-static wchar_t IF_RANGE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'i', L'f', L'-', L'r', L'a', L'n', L'g', L'e'};
-static wchar_t* IF_RANGE_REQUEST_HEADER_HTTP_NAME = IF_RANGE_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The If-Range request header http name. */
+static char IF_RANGE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'I', 'f', '-', 'R', 'a', 'n', 'g', 'e'};
+static char* IF_RANGE_REQUEST_HEADER_HTTP_NAME = IF_RANGE_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* IF_RANGE_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The if-unmodified-since request header http name. */
-static wchar_t IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'i', L'f', L'-', L'u', L'n', L'm', L'o', L'd', L'i', L'f', L'i', L'e', L'd', L'-', L's', L'i', L'n', L'c', L'e'};
-static wchar_t* IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME = IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The If-Unmodified-since request header http name. */
+static char IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'I', 'f', '-', 'U', 'n', 'm', 'o', 'd', 'i', 'f', 'i', 'e', 'd', '-', 'S', 'i', 'n', 'c', 'e'};
+static char* IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME = IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_19_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The max-forwards request header http name. */
-static wchar_t MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'm', L'a', L'x', L'-', L'f', L'o', L'r', L'w', L'a', L'r', L'd', L's'};
-static wchar_t* MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME = MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Max-Forwards request header http name. */
+static char MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'M', 'a', 'x', '-', 'F', 'o', 'r', 'w', 'a', 'r', 'd', 's'};
+static char* MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME = MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The proxy-authorization request header http name. */
-static wchar_t PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'p', L'r', L'o', L'x', L'y', L'-', L'a', L'u', L't', L'h', L'o', L'r', L'i', L'z', L'a', L't', L'i', L'o', L'n'};
-static wchar_t* PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME = PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Proxy-Authorization request header http name. */
+static char PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'P', 'r', 'o', 'x', 'y', '-', 'A', 'u', 't', 'h', 'o', 'r', 'i', 'z', 'a', 't', 'i', 'o', 'n'};
+static char* PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME = PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_19_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The range request header http name. */
-static wchar_t RANGE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'r', L'a', L'n', L'g', L'e'};
-static wchar_t* RANGE_REQUEST_HEADER_HTTP_NAME = RANGE_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Range request header http name. */
+static char RANGE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'R', 'a', 'n', 'g', 'e'};
+static char* RANGE_REQUEST_HEADER_HTTP_NAME = RANGE_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* RANGE_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The referer request header http name. */
-static wchar_t REFERER_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'r', L'e', L'f', L'e', L'r', L'e', L'r'};
-static wchar_t* REFERER_REQUEST_HEADER_HTTP_NAME = REFERER_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Referer request header http name. */
+static char REFERER_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'R', 'e', 'f', 'e', 'r', 'e', 'r'};
+static char* REFERER_REQUEST_HEADER_HTTP_NAME = REFERER_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* REFERER_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The te request header http name. */
-static wchar_t TE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L't', L'e'};
-static wchar_t* TE_REQUEST_HEADER_HTTP_NAME = TE_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The TE request header http name. */
+static char TE_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'T', 'E'};
+static char* TE_REQUEST_HEADER_HTTP_NAME = TE_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* TE_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The user-agent request header http name. */
-static wchar_t USER_AGENT_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'u', L's', L'e', L'r', L'-', L'a', L'g', L'e', L'n', L't'};
-static wchar_t* USER_AGENT_REQUEST_HEADER_HTTP_NAME = USER_AGENT_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The User-Agent request header http name. */
+static char USER_AGENT_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'U', 's', 'e', 'r', '-', 'A', 'g', 'e', 'n', 't'};
+static char* USER_AGENT_REQUEST_HEADER_HTTP_NAME = USER_AGENT_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* USER_AGENT_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The vary request header http name. */
-static wchar_t VARY_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {L'v', L'a', L'r', L'y'};
-static wchar_t* VARY_REQUEST_HEADER_HTTP_NAME = VARY_REQUEST_HEADER_HTTP_NAME_ARRAY;
+/** The Vary request header http name. */
+static char VARY_REQUEST_HEADER_HTTP_NAME_ARRAY[] = {'V', 'a', 'r', 'y'};
+static char* VARY_REQUEST_HEADER_HTTP_NAME = VARY_REQUEST_HEADER_HTTP_NAME_ARRAY;
 static int* VARY_REQUEST_HEADER_HTTP_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* REQUEST_HEADER_HTTP_NAME_SOURCE */

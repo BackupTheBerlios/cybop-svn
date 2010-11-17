@@ -39,8 +39,8 @@
  * @param p3 the destination details (Hand over as reference!)
  * @param p4 the destination details count
  * @param p5 the destination details size
- * @param p6 the source wide character array
- * @param p7 the source wide character array count
+ * @param p6 the source character array
+ * @param p7 the source character array count
  */
 void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 

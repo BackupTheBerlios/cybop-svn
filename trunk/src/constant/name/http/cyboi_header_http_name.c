@@ -23,20 +23,32 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef HEADER_HTTP_NAME_SOURCE
-#define HEADER_HTTP_NAME_SOURCE
+#ifndef CYBOI_HEADER_HTTP_NAME_SOURCE
+#define CYBOI_HEADER_HTTP_NAME_SOURCE
 
 #include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 //
-// The following does not seem to be part of the HTTP 1.1 RFC 2616 specification.
+// The constants defined here are copies of the standard constants
+// that may be found in files of this same directory.
+//
+// The difference is that these constants are of type "wchar_t"
+// and are prefixed with "CYBOI_".
+//
+// This duplication of constants is necessary, because names or models
+// of standard formats like HTTP or xDT are not always intuitive,
+// so that CYBOI uses its own speaking names internally.
+//
+// Examples:
+// - HTTP header names start with a capital letter, but CYBOI uses lower-case names only
+// - xDT fields are represented by numbers, but CYBOI uses speaking names (text) only
 //
 
-/** The Set-Cookie header http name. */
-static char SET_COOKIE_HEADER_HTTP_NAME_ARRAY[] = {'S', 'e', 't', '-', 'C', 'o', 'o', 'k', 'i', 'e'};
-static char* SET_COOKIE_HEADER_HTTP_NAME = SET_COOKIE_HEADER_HTTP_NAME_ARRAY;
-static int* SET_COOKIE_HEADER_HTTP_NAME_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
+/** The cyboi set cookie header http name. */
+static wchar_t CYBOI_SET_COOKIE_HEADER_HTTP_NAME_ARRAY[] = {L's', L'e', L't', L'-', L'c', L'o', L'o', L'k', L'i', L'e'};
+static wchar_t* CYBOI_SET_COOKIE_HEADER_HTTP_NAME = CYBOI_SET_COOKIE_HEADER_HTTP_NAME_ARRAY;
+static int* CYBOI_SET_COOKIE_HEADER_HTTP_NAME_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
-/* HEADER_HTTP_NAME_SOURCE */
+/* CYBOI_HEADER_HTTP_NAME_SOURCE */
 #endif

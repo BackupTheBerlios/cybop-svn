@@ -11,56 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Find bug why red selection bar is not drawn anymore since "allocate_model" changes;
-            keyboard event is catched properly, only no reaction happens;
-            probably, the handling model is missing and not assigned properly
-
-        * Adapt source code by using memory-efficient types wherever possible,
-            e.g. "signed short int" instead of just "int" (as done up to now)
-            or "signed char" for simple flags used for just two values
-
-        * Investigate how to handle setting of destination count and size;
-            see e.g.: "executor/accessor/setter.c", where both are set;
-            Should an extra wrapper function do this?
-        * Rethink basic container functions such as "set", "append", "replace" etc.
-            for arrays and other abstractions (types) like "compound"
-
-        * Adapt "*_assigner.c" modules to new primitive types/ type sizes
-        * Leave abstractions to only provide basic types like: character, integral, real, pointer
-            and map these to the corresponding basic standard type, i.e.: wchar_t, signed int, double, void*
-            (so that special types like "unsigned short int" are only used cyboi-internally, but not in cybol)
-
-        * Think about restructuring cybol constants by also considering cyboi-adapted formats like cyboi_http;
-            Should models in cybol/ dir be one level higher?
-            Isn't cybol and cyboi-adapted models (like cyboi_http) the same,
-            no matter whether in memory or serialised as cybol?
-        * Add one file with prefix "cyboi_" in parallel to constants of standard formats,
-            and put these parallel files into the same directory as the standard format, e.g.:
-            in src/constant/name/http/header/
-            "request_header_cyboi_http_name.c" in addition to "request_header_http_name.c" with
-            "ACCEPT_REQUEST_HEADER_CYBOI_HTTP_NAME" instead of "ACCEPT_REQUEST_HEADER_HTTP_NAME"
-            or:
-            in src/constant/name/xdt/
-            "field_cyboi_xdt_name.c" in addition to "field_xdt_name.c" with
-            "KBV_TEST_NUMBER_FIELD_CYBOI_XDT_NAME" instead of "KBV_TEST_NUMBER_FIELD_XDT_NAME"
-            this is necessary, because names or models of standard formats are not always intuitive,
-            so that CYBOI uses its own speaking names internally, e.g.:
-            HTTP header names start with a capital letter, but CYBOI uses lower-case names only;
-            xDT fields are represented by numbers, but CYBOI uses speaking names (text)
-        * Merge all files using old naming schemes like "memory", "model", "compound" into new format
-        * Delete old files: "compound_http_name.c", "header_http_name.c", "field_xdt_model_name.c" etc.
-        * Uncomment comparison block in function "select_http_request_header"
-
-        * CONTINUE in function "decode_http_request" and "process_http_request_body" ...
-            and "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
-            called by an http interrupt "resmedicinae/apps/residenz/logic/startup.cybol"
-        * Only "body" is left to be processed and added to the destination model using "append_part";
-            all other elements, headers etc. are completed
-        * CONTINUE with rewriting the http_request_processor; CHECK where to use char or wchar_t
-        * Do NOT automatically convert to wchar_t, since http requests are byte-oriented and may contain other encodings
-        * Translate ALL data formats in two steps:
-            1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound; http --> http_request_compound
-            2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound / http_request_compound --> ?? (action/ signal??)
+        * CONTINUE in file "http_request_processor.c" with URI processing,
+            add code from file "http_request_compound_selector.c" and delete it later
         * Receive at least the following (taken from old file "apps/residenz/wui/index_input.cybol"):
             <model>
                 <part name="method" channel="inline" abstraction="character" model=""/>
@@ -70,35 +22,47 @@
                 <part name="fragment" channel="inline" abstraction="character" model=""/>
                 <part name="action" channel="inline" abstraction="character" model=""/>
             </model>
+        * Delete old files: "compound_http_name.c"
+        * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
+        * TEST using this URL:
+            http://localhost:1971/?action=index
+            the OLD one was:
+            http://localhost:3456/resadmin/logic/send_name.cybol
+        * Translate ALL data formats in two steps:
+            1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound; http --> http_request_compound
+            2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound / http_request_compound --> ?? (action/ signal??)
         * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
-        * ?? OLD task comment:
-            Continue function "decode_http_request_method", by adding everywhere at "decode_http_request_set_parameter" the new function call like:
-            // Add fragment to given compound model.
-            set_compound_element_by_name(*d, p1, p2,
-                k, (void*) &kc, (void*) &kc,
-                (void*) CHARACTER_VECTOR_ABSTRACTION, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT, (void*) CHARACTER_VECTOR_ABSTRACTION_COUNT,
-                v, (void*) &vc, (void*) &vc,
-                *NULL_POINTER, *NULL_POINTER, *NULL_POINTER);
-        //?? TODO: The model and details content p8, p9, p10, p11, p12, p13 need to be RESET (emptied) every time since
-        //?? otherwise, new commands are just added to the "action" part entry, in "receive_socket.c"
-        * Hand over an empty cybol model? ... just like for xdt/bdt, containing no entries for: method, scheme, authority, path, fragment, action
         * Introduce new functions to delete the content of an allocated entity (for compound, integer_vector, xdt etc.),
             so that for each new http request, the model is initially empty, in function "receive_socket_message"
-        * Adapt function "decode_http_request" accordingly
+        //?? TODO: The model and details content p8, p9, p10, p11, p12, p13 need to be RESET (emptied) every time since
+        //?? otherwise, new commands are just added to the "action" part entry, in "receive_socket.c"
 
-        * Do commands of gnu/linux console still HAVE TO BE handed over (as in old solution)?
-            Hasn't this become obsolete due to the handler that gets assigned in cybol files?
-        * Search for pressed key in commands
-        * Wenn returned command == NULL, dann suche nach "default" in commands
-            (ist Aktion zum Einfuegen von Zeichen an aktueller Cursor-Position im CYBOI knowledge model)
-        * Gedruecktes Zeichen/ Taste muss mit in einem Parameter zurueckgegeben werden!
+        * Add one file with prefix "cyboi_" in parallel to each file containing
+            standard xDT constants in directory "constant/name/xdt/" and below;
+            e.g. a file "cyboi_field_xdt_name.c" with constants a la "CYBOI_KBV_TEST_NUMBER_FIELD_XDT_NAME"
+            in addition to the file "field_xdt_name.c" with standard format constants a la "KBV_TEST_NUMBER_FIELD_XDT_NAME";
+        * Merge all files using old naming schemes like "memory", "model", "compound" into new format
+        * Rename old files "field_xdt_model_name.c" etc. to "cyboi_*"
 
-        * For the following points, see example of "wide_character_vector_accessor.c", where this is already implemented!
+        * Adapt source code by using memory-efficient types wherever possible,
+            e.g. "signed short int" instead of just "int" (as done up to now)
+            or "signed char" for simple flags used for just two values
+
         * Increase count and size in "*_accessor.c" files automatically and adapt all source code accordingly
             (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.);
-        * Create new "set", "remove", "get" functions which automatically adjust the destination's count and size
-            (see modules "character_vector_accessor.c" and "wide_character_vector_accessor.c", which already have it);
-            this is to reduce the amount of source code and to take the burden of handling count and size from the developer working with arrays
+        * Create basic container functions such as "remove", "get", "set", "append", "replace" etc.
+            for arrays and other abstractions (types) like "compound",
+            which automatically adjust the destination's count and size,
+            in the manner of a "wrapper" function
+        * See example of "wide_character_vector_accessor.c", where this is already implemented;
+            also see "executor/accessor/setter.c"
+        * this is to reduce the amount of source code and to take the burden
+            of handling count and size from the developer working with arrays
+
+        * Adapt "*_assigner.c" modules to new primitive types/ type sizes
+        * Leave abstractions to only provide basic types like: character, integral, real, pointer
+            and map these to the corresponding basic standard type, i.e.: wchar_t, signed int, double, void*
+            (so that special types like "unsigned short int" are only used cyboi-internally, but not in cybol)
 
         * Rename utf-8 stuff to "decode/encode" (encoder instead of converter) and
             other conversions to "deserialise/serialise" (serialiser instead of converter)

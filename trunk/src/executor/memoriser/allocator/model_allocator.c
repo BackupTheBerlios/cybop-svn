@@ -63,19 +63,9 @@ void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
             allocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
             allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
+            // The count is set to zero, since the model does not contain any elements yet.
+            set_array_elements(*c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
             // The size is set to the value that was handed over as argument.
-            //
-            // CAUTION! The count may, by default, be either set to:
-            // - zero (the more obvious and logical solution)
-            // - the value that was handed over as argument (just like the size)
-            //
-            // Setting the count to zero, however, causes some cybol applications
-            // like e.g. "examples/ui_control/" not to work properly anymore.
-            // The red selection bar in a tui menu is not shown and events catched,
-            // but not handled. Figure this out later, if necessary!
-            // For now, the count is set to the size as well.
-//??            set_array_elements(*c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(*c, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
             set_array_elements(*s, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         } else {

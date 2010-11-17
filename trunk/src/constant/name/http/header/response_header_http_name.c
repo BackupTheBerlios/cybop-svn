@@ -35,44 +35,44 @@
 // They are sorted alphabetically here.
 //
 
-/** The accept-ranges response header http name. */
-static wchar_t ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {L'a', L'c', L'c', L'e', L'p', L't', L'-', L'r', L'a', L'n', L'g', L'e', L's'};
-static wchar_t* ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME = ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME_ARRAY;
+/** The Accept-Ranges response header http name. */
+static char ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {'A', 'c', 'c', 'e', 'p', 't', '-', 'R', 'a', 'n', 'g', 'e', 's'};
+static char* ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME = ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME_ARRAY;
 static int* ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME_COUNT = NUMBER_13_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The age response header http name. */
-static wchar_t AGE_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {L'a', L'g', L'e'};
-static wchar_t* AGE_RESPONSE_HEADER_HTTP_NAME = AGE_RESPONSE_HEADER_HTTP_NAME_ARRAY;
+/** The Age response header http name. */
+static char AGE_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {'A', 'g', 'e'};
+static char* AGE_RESPONSE_HEADER_HTTP_NAME = AGE_RESPONSE_HEADER_HTTP_NAME_ARRAY;
 static int* AGE_RESPONSE_HEADER_HTTP_NAME_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The etag response header http name. */
-static wchar_t ETAG_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {L'e', L't', L'a', L'g'};
-static wchar_t* ETAG_RESPONSE_HEADER_HTTP_NAME = ETAG_RESPONSE_HEADER_HTTP_NAME_ARRAY;
+/** The ETag response header http name. */
+static char ETAG_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {'E', 'T', 'a', 'g'};
+static char* ETAG_RESPONSE_HEADER_HTTP_NAME = ETAG_RESPONSE_HEADER_HTTP_NAME_ARRAY;
 static int* ETAG_RESPONSE_HEADER_HTTP_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The location response header http name. */
-static wchar_t LOCATION_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {L'l', L'o', L'c', L'a', L't', L'i', L'o', L'n'};
-static wchar_t* LOCATION_RESPONSE_HEADER_HTTP_NAME = LOCATION_RESPONSE_HEADER_HTTP_NAME_ARRAY;
+/** The Location response header http name. */
+static char LOCATION_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {'L', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
+static char* LOCATION_RESPONSE_HEADER_HTTP_NAME = LOCATION_RESPONSE_HEADER_HTTP_NAME_ARRAY;
 static int* LOCATION_RESPONSE_HEADER_HTTP_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The proxy-authenticate response header http name. */
-static wchar_t PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {L'p', L'r', L'o', L'x', L'y', L'-', L'a', L'u', L't', L'h', L'e', L'n', L't', L'i', L'c', L'a', L't', L'e'};
-static wchar_t* PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME = PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_ARRAY;
+/** The Proxy-Authenticate response header http name. */
+static char PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {'P', 'r', 'o', 'x', 'y', '-', 'A', 'u', 't', 'h', 'e', 'n', 't', 'i', 'c', 'a', 't', 'e'};
+static char* PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME = PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_ARRAY;
 static int* PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_COUNT = NUMBER_18_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The retry-after response header http name. */
-static wchar_t RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {L'r', L'e', L't', L'r', L'y', L'-', L'a', L'f', L't', L'e', L'r'};
-static wchar_t* RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME = RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME_ARRAY;
+/** The Retry-After response header http name. */
+static char RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {'R', 'e', 't', 'r', 'y', '-', 'A', 'f', 't', 'e', 'r'};
+static char* RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME = RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME_ARRAY;
 static int* RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The server response header http name. */
-static wchar_t SERVER_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {L's', L'e', L'r', L'v', L'e', L'r'};
-static wchar_t* SERVER_RESPONSE_HEADER_HTTP_NAME = SERVER_RESPONSE_HEADER_HTTP_NAME_ARRAY;
+/** The Server response header http name. */
+static char SERVER_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {'S', 'e', 'r', 'v', 'e', 'r'};
+static char* SERVER_RESPONSE_HEADER_HTTP_NAME = SERVER_RESPONSE_HEADER_HTTP_NAME_ARRAY;
 static int* SERVER_RESPONSE_HEADER_HTTP_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The www-authenticate response header http name. */
-static wchar_t WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {L'w', L'w', L'w', L'-', L'a', L'u', L't', L'h', L'e', L'n', L't', L'i', L'c', L'a', L't', L'e'};
-static wchar_t* WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME = WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_ARRAY;
+/** The WWW-Authenticate response header http name. */
+static char WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_ARRAY[] = {'W', 'W', 'W', '-', 'A', 'u', 't', 'h', 'e', 'n', 't', 'i', 'c', 'a', 't', 'e'};
+static char* WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME = WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_ARRAY;
 static int* WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* RESPONSE_HEADER_HTTP_NAME_SOURCE */

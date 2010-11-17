@@ -97,7 +97,9 @@ void calculate_addition_character_vector(void* p0, void* p1, void* p2, void* p3,
 
                         // Set temporary input operand arrays.
                         set_array_elements(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        *((int*) summand1c) = *((int*) p4);
                         set_array_elements(summand2, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        *((int*) summand2c) = *((int*) p6);
 
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size

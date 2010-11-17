@@ -16,6 +16,18 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Set model count to zero in "model_allocator.c", since the model does initially not contain any elements;
+            correct bug in "character_vector_addition_calculator.c" and "integer_vector_addition_calculator.c",
+            where the count was forgotten to be set
+        * Add one file with prefix "cyboi_" in parallel to each file containing http constants
+            in directory "constant/name/http/";
+            this is necessary, because names or models of standard formats
+            are not always intuitive, so that CYBOI uses its own speaking names internally,
+            e.g. HTTP header names start with a capital letter, but CYBOI uses lower-case names only;
+            fields of the xDT standard are represented by numbers, but CYBOI uses speaking names (text) etc.
+        * Continue writing of http request processor
+
 2010-11-16  Christian Heller  <christian.heller@tuxtax.de>
         * Simplify source code by using the functions "allocate_model" and "deallocate_model"
             wherever a model (array, compound or another) with count and size gets created

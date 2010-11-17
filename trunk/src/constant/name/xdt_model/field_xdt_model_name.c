@@ -29,6 +29,22 @@
 #include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
 
+//
+// The constants defined here are copies of the standard constants
+// that may be found in files of this same directory.
+//
+// The difference is that these constants are of type "wchar_t"
+// and are prefixed with "CYBOI_".
+//
+// This duplication of constants is necessary, because names or models
+// of standard formats like HTTP or xDT are not always intuitive,
+// so that CYBOI uses its own speaking names internally.
+//
+// Examples:
+// - HTTP header names start with a capital letter, but CYBOI uses lower-case names only
+// - xDT fields are represented by numbers, but CYBOI uses speaking names (text) only
+//
+
 /** The kbv test number field xdt model name. */
 static wchar_t KBV_TEST_NUMBER_FIELD_XDT_MODEL_NAME_ARRAY[] = {L'k', L'b', L'v', L'_', L't', L'e', L's', L't', L'_', L'n', L'u', L'm', L'b', L'e', L'r'};
 static wchar_t* KBV_TEST_NUMBER_FIELD_XDT_MODEL_NAME = KBV_TEST_NUMBER_FIELD_XDT_MODEL_NAME_ARRAY;

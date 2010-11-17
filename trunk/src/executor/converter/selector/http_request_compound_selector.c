@@ -74,7 +74,8 @@ void decode_http_request_compound_method(void* p0, void* p1, void* p2, void* p3,
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
-                decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+                decode_http_request_set_parameter(p0, p1, p2,
+                    (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
                     (void*) GET_REQUEST_METHOD_HTTP_MODEL, (void*) GET_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }

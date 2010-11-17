@@ -27,7 +27,7 @@
 #define SEPARATOR_HTTP_NAME_SOURCE
 
 #include <stddef.h>
-#include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/model/character_code/ascii/ascii_character_code_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 // CAUTION! Use Carriage Return (CR) AND Line Feed (LF) characters to break lines!
@@ -37,51 +37,51 @@
 // Request response line.
 //
 
-/** The request response line element end http name. */
-static char* REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME = SPACE_ASCII_CHARACTER_CODE_MODEL_ARRAY;
-static int* REQUEST_RESPONSE_LINE_ELEMENT_END_HTTP_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
+/** The request response line element end separator separator http name. */
+static char* REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME = SPACE_ASCII_CHARACTER_CODE_MODEL_ARRAY;
+static int* REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The request line ("carriage return" and "line feed") http name. */
-static char REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_ARRAY[] = {0x0D, 0x0A};
-static char* REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME = REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_ARRAY;
-static int* REQUEST_RESPONSE_LINE_FINAL_ELEMENT_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+/** The request line ("carriage return" and "line feed") separator separator http name. */
+static char REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_ARRAY[] = {0x0D, 0x0A};
+static char* REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME = REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_ARRAY;
+static int* REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Headers.
 //
 
-/** The header argument ("colon" and "space") http name. */
-static char HEADER_ARGUMENT_HTTP_NAME_ARRAY[] = {0x3A, 0x20};
-static char* HEADER_ARGUMENT_HTTP_NAME = HEADER_ARGUMENT_HTTP_NAME_ARRAY;
-static int* HEADER_ARGUMENT_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+/** The header argument ("colon" and "space") separator http name. */
+static char HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_ARRAY[] = {0x3A, 0x20};
+static char* HEADER_ARGUMENT_SEPARATOR_HTTP_NAME = HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_ARRAY;
+static int* HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The header value ("semicolon" and "space") http name. */
-static char HEADER_VALUE_HTTP_NAME_ARRAY[] = {0x3B, 0x20};
-static char* HEADER_VALUE_HTTP_NAME = HEADER_VALUE_HTTP_NAME_ARRAY;
-static int* HEADER_VALUE_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+/** The header value ("semicolon" and "space") separator http name. */
+static char HEADER_VALUE_SEPARATOR_HTTP_NAME_ARRAY[] = {0x3B, 0x20};
+static char* HEADER_VALUE_SEPARATOR_HTTP_NAME = HEADER_VALUE_SEPARATOR_HTTP_NAME_ARRAY;
+static int* HEADER_VALUE_SEPARATOR_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The header value assignment ("equals sign") http name. */
-static char* HEADER_VALUE_ASSIGNMENT_HTTP_NAME = EQUALS_SIGN_ASCII_CHARACTER_CODE_MODEL_ARRAY;
-static int* HEADER_VALUE_ASSIGNMENT_HTTP_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
+/** The header value assignment ("equals sign") separator http name. */
+static char* HEADER_VALUE_ASSIGNMENT_SEPARATOR_HTTP_NAME = EQUALS_SIGN_ASCII_CHARACTER_CODE_MODEL_ARRAY;
+static int* HEADER_VALUE_ASSIGNMENT_SEPARATOR_HTTP_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The header ("carriage return" and "line feed") http name. */
-static char HEADER_HTTP_NAME_ARRAY[] = {0x0D, 0x0A};
-static char* HEADER_HTTP_NAME = HEADER_HTTP_NAME_ARRAY;
-static int* HEADER_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+/** The header ("carriage return" and "line feed") separator http name. */
+static char HEADER_SEPARATOR_HTTP_NAME_ARRAY[] = {0x0D, 0x0A};
+static char* HEADER_SEPARATOR_HTTP_NAME = HEADER_SEPARATOR_HTTP_NAME_ARRAY;
+static int* HEADER_SEPARATOR_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Body.
 //
 
-/** The body begin (twice "carriage return" and "line feed", in other words: an empty line) http name. */
-static char BODY_BEGIN_HTTP_NAME_ARRAY[] = {0x0D, 0x0A, 0x0D, 0x0A};
-static char* BODY_BEGIN_HTTP_NAME = BODY_BEGIN_HTTP_NAME_ARRAY;
-static int* BODY_BEGIN_HTTP_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+/** The body begin (twice "carriage return" and "line feed", in other words: an empty line) separator http name. */
+static char BODY_BEGIN_SEPARATOR_HTTP_NAME_ARRAY[] = {0x0D, 0x0A, 0x0D, 0x0A};
+static char* BODY_BEGIN_SEPARATOR_HTTP_NAME = BODY_BEGIN_SEPARATOR_HTTP_NAME_ARRAY;
+static int* BODY_BEGIN_SEPARATOR_HTTP_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The body end ("carriage return" and "line feed") http name. */
-static char BODY_END_HTTP_NAME_ARRAY[] = {0x0D, 0x0A};
-static char* BODY_END_HTTP_NAME = BODY_END_HTTP_NAME_ARRAY;
-static int* BODY_END_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+/** The body end ("carriage return" and "line feed") separator http name. */
+static char BODY_END_SEPARATOR_HTTP_NAME_ARRAY[] = {0x0D, 0x0A};
+static char* BODY_END_SEPARATOR_HTTP_NAME = BODY_END_SEPARATOR_HTTP_NAME_ARRAY;
+static int* BODY_END_SEPARATOR_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SEPARATOR_HTTP_NAME_SOURCE */
 #endif

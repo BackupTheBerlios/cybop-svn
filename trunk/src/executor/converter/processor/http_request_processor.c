@@ -29,9 +29,11 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../constant/name/http/compound_http_name.c"
+#include "../../../constant/name/http/cyboi_compound_http_name.c"
 #include "../../../executor/accessor/appender/part_appender.c"
 #include "../../../executor/converter/selector/http_request_selector.c"
+#include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../logger/logger.c"
 
 //
@@ -60,9 +62,54 @@
 // #   [ISO10646] character set.
 //
 // RFC1630 does attempt to restrict URIs to iso-8859-1, but it is a well
-// known fact that HTML forms have been violating that rule for years. Similar
-// comment for HTML4's 17.13.1.
+// known fact that HTML forms have been violating that rule for years.
+// Similar comment for HTML4's 17.13.1.
 //
+
+/**
+ * Appends the header part.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source name
+ * @param p4 the source name count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source model
+ * @param p8 the source model count
+ * @param p9 the source details
+ * @param p10 the source details count
+ */
+void process_http_request_header_append_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+
+    // The serialised wide character array.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    void* sc = *NULL_POINTER_MEMORY_MODEL;
+    void* ss = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate serialised wide character array.
+    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+/*??
+    fwprintf(stdout, L"TEST process_http_request_header_append sm: %s \n", (char*) p7);
+    fwprintf(stdout, L"TEST process_http_request_header_append smc: %i \n", *((int*) p8));
+*/
+
+    // Decode encoded character array into serialised wide character array.
+    decode_utf_8_unicode_character_vector((void*) &s, sc, ss, p7, p8);
+
+/*??
+    fwprintf(stdout, L"TEST process_http_request_header_append s: %ls \n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST process_http_request_header_append sc: %i \n", *((int*) sc));
+    fwprintf(stdout, L"TEST process_http_request_header_append socket ss: %i \n", *((int*) ss));
+*/
+
+    append_part(p0, p1, p2, p3, p4, p5, p6, s, sc, p9, p10);
+
+    // Deallocate serialised wide character array.
+    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+}
 
 /**
  * Processes the http request method.
@@ -110,8 +157,8 @@ void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p
 
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        append_part(p3, p4, p5,
-                            (void*) METHOD_COMPOUND_HTTP_NAME, (void*) METHOD_COMPOUND_HTTP_NAME_COUNT,
+                        process_http_request_header_append_part(p3, p4, p5,
+                            (void*) CYBOI_METHOD_COMPOUND_HTTP_NAME, (void*) CYBOI_METHOD_COMPOUND_HTTP_NAME_COUNT,
                             (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                             rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
@@ -186,9 +233,14 @@ void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        append_part(p3, p4, p5,
-                            (void*) URI_COMPOUND_HTTP_NAME, (void*) URI_COMPOUND_HTTP_NAME_COUNT,
-                            (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                        //?? TODO: Add source code of file "http_request_compound_selector.c" to here!
+                        // Parse the URI and add the single elements as parts to the destination model.
+                        // The URI possibly has to be created as compound, before adding its
+                        // elements such as: schema, path, query, fragment ...
+                        // See also "residenz/logic/handler/handle_www_service.cybol"
+                        process_http_request_header_append_part(p0, p1, p2,
+                            (void*) CYBOI_URI_COMPOUND_HTTP_NAME, (void*) CYBOI_URI_COMPOUND_HTTP_NAME_COUNT,
+                            (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                             u, (void*) &uc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                         break;
@@ -262,8 +314,8 @@ void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void*
 
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        append_part(p3, p4, p5,
-                            (void*) PROTOCOL_COMPOUND_HTTP_NAME, (void*) PROTOCOL_COMPOUND_HTTP_NAME_COUNT,
+                        process_http_request_header_append_part(p3, p4, p5,
+                            (void*) CYBOI_PROTOCOL_COMPOUND_HTTP_NAME, (void*) CYBOI_PROTOCOL_COMPOUND_HTTP_NAME_COUNT,
                             (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                             p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
@@ -484,12 +536,20 @@ void process_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-/*??
-                        append_part(p3, p4, p5,
-                            (void*) PROTOCOL_COMPOUND_HTTP_NAME, (void*) PROTOCOL_COMPOUND_HTTP_NAME_COUNT,
-                            (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                            p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-*/
+                        // The body represents the actual http message content.
+                        // Its data are thus added to the destination MODEL (p0, p1, p2),
+                        // whilst the destination DETAILS contain meta data, i.e. the http headers.
+                        //
+                        // CAUTION! The body data may be encoded.
+                        // Therefore, use the "CHARACTER_MEMORY_ABSTRACTION" abstraction here!
+                        //
+                        // One of the http request header argument/value pairs defines the encoding,
+                        // so that the cybol application will have to decode the data,
+                        // because here, the corresponding http encoding header is not available yet.
+                        append_part(p0, p1, p2,
+                            (void*) CYBOI_BODY_COMPOUND_HTTP_NAME, (void*) CYBOI_BODY_COMPOUND_HTTP_NAME_COUNT,
+                            (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                            bo, (void*) &boc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                         break;
 

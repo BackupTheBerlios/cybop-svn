@@ -40,6 +40,11 @@
 /**
  * Adds two integer vectors.
  *
+ * Both vectors may contain no, one or many elements.
+ * All elements are calculated, one by one, always in pairs of the same index.
+ * If the element count of the two summand vectors differs,
+ * then the resulting sum vector size is set to the smaller summand vector's.
+ *
  * @param p0 the sum (Hand over as reference!)
  * @param p1 the sum count
  * @param p2 the sum size
@@ -97,7 +102,9 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
 
                         // Set temporary input operand arrays.
                         set_array_elements(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        *((int*) summand1c) = *((int*) p4);
                         set_array_elements(summand2, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        *((int*) summand2c) = *((int*) p6);
 
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size
@@ -113,7 +120,7 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
                             *ss = *((int*) summand2c);
                         }
 
-                        // The sum count serves as loop count below.
+                        // The sum count serves as loop variable below.
                         *sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Reallocate output operand array.
@@ -135,8 +142,8 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
 
                             // The parameter p1 is the sum count, which serves as
                             // index that gets incremented in every loop cycle.
-                            get_array_elements((void*) &summand1, (void*) &tmps1, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-                            get_array_elements((void*) &summand2, (void*) &tmps2, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &tmps1, summand1, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            get_array_elements((void*) &tmps2, summand2, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                             // Calculate temporary sum.
                             tmps = *tmps1 + *tmps2;

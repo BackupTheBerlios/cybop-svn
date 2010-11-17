@@ -79,57 +79,39 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive socket message.");
 
+/*??
     fwprintf(stdout, L"TEST 1 l: %s \n", (wchar_t*) p9);
     fwprintf(stdout, L"TEST 1 lc: %i \n", *((int*) p10));
+*/
 
     // The encoded character array.
     // CAUTION! Its size has to be GREATER than zero, e.g. 1024!
     // Otherwise, there will be no place for the data to be received.
     void* e = *NULL_POINTER_MEMORY_MODEL;
-    int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int es = *NUMBER_1024_INTEGER_MEMORY_MODEL;
+    void* ec = *NULL_POINTER_MEMORY_MODEL;
+    void* es = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate encoded character array.
-    allocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_1024_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Receive message from stream.
-    receive_stream_socket((void*) &e, (void*) &ec, (void*) &es, p6);
-
-    fwprintf(stdout, L"TEST receive socket e: %s \n", (char*) e);
-    fwprintf(stdout, L"TEST receive socket ec: %i \n", ec);
-    fwprintf(stdout, L"TEST receive socket es: %i \n", es);
-
-    // The serialised wide character array.
-    void* s = *NULL_POINTER_MEMORY_MODEL;
-    int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Allocate serialised wide character array.
-    allocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-
-    // Decode encoded character array into serialised wide character array.
-    decode_utf_8_unicode_character_vector((void*) &s, (void*) &sc, (void*) &ss, e, (void*) &ec);
-
-    fwprintf(stdout, L"TEST receive socket s: %ls \n", (wchar_t*) s);
-    fwprintf(stdout, L"TEST receive socket sc: %i \n", sc);
-    fwprintf(stdout, L"TEST receive socket ss: %i \n", ss);
-
-    // Deallocate encoded character array.
-    deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    receive_stream_socket((void*) &e, ec, es, p6);
 
     // Deserialise serialised wide character array into destination knowledge model.
     // The http request's parameters are written into the destination compound model.
-    decode(p0, p1, p2, p3, p4, p5, s, (void*) &sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10);
+    decode(p0, p1, p2, p3, p4, p5, e, ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10);
+
+    // Deallocate encoded character array.
+    deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_1024_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     //?? TODO: The destination compound model content needs to be RESET every time since
     //?? otherwise, new commands are just added to the "action" part entry, for example.
     //?? Instead, all values should be replaced!
 
+/*??
     fwprintf(stdout, L"TEST 2 l: %s \n", (wchar_t*) p9);
     fwprintf(stdout, L"TEST 2 lc: %i \n", *((int*) p10));
-
-    // Deallocate serialised wide character array.
-    deallocate((void*) &s, (void*) &ss, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+*/
 
 /*??
     // The action name, abstraction, model, details.
