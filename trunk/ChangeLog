@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Change http decoding so that the message header and -body are
+            separated first, while still available as ASCII characters
+        * Convert http message header into wide characters at once (not piece by piece)
+
 2010-11-17  Christian Heller  <christian.heller@tuxtax.de>
         * Set model count to zero in "model_allocator.c", since the model does initially not contain any elements;
             correct bug in "character_vector_addition_calculator.c" and "integer_vector_addition_calculator.c",

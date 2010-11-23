@@ -67,48 +67,90 @@
 //
 
 /**
- * Appends the header part.
+ * Processes the http request message header.
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source name
- * @param p4 the source name count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source model
- * @param p8 the source model count
- * @param p9 the source details
- * @param p10 the source details count
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the current position (Hand over as reference!)
+ * @param p7 the remaining count
  */
-void process_http_request_header_append_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void process_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    // The serialised wide character array.
-    void* s = *NULL_POINTER_MEMORY_MODEL;
-    void* sc = *NULL_POINTER_MEMORY_MODEL;
-    void* ss = *NULL_POINTER_MEMORY_MODEL;
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // Allocate serialised wide character array.
-    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        int* rem = (int*) p7;
 
-/*??
-    fwprintf(stdout, L"TEST process_http_request_header_append sm: %s \n", (char*) p7);
-    fwprintf(stdout, L"TEST process_http_request_header_append smc: %i \n", *((int*) p8));
-*/
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // Decode encoded character array into serialised wide character array.
-    decode_utf_8_unicode_character_vector((void*) &s, sc, ss, p7, p8);
+            void** pos = (void**) p6;
 
-/*??
-    fwprintf(stdout, L"TEST process_http_request_header_append s: %ls \n", (wchar_t*) s);
-    fwprintf(stdout, L"TEST process_http_request_header_append sc: %i \n", *((int*) sc));
-    fwprintf(stdout, L"TEST process_http_request_header_append socket ss: %i \n", *((int*) ss));
-*/
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header.");
 
-    append_part(p0, p1, p2, p3, p4, p5, p6, s, sc, p9, p10);
+            // The request header.
+            void* rh = *pos;
+            int rhc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Deallocate serialised wide character array.
-    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            // The break flag.
+            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    break;
+                }
+
+                select_http_request_header(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+
+                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    break;
+
+                } else {
+
+                    // Increment request header count.
+                    rhc++;
+                }
+            }
+
+            //
+            // The header has to be processed in any case,
+            // no matter whether its end was detected as:
+            // - body begin (b != 0)
+            // - end of the whole message (*rem <= 0)
+            //
+            // Therefore, it is placed outside the loop.
+            //
+
+            // The serialised wide character array.
+            void* s = *NULL_POINTER_MEMORY_MODEL;
+            void* sc = *NULL_POINTER_MEMORY_MODEL;
+            void* ss = *NULL_POINTER_MEMORY_MODEL;
+
+            // Allocate serialised wide character array.
+            allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+            // Decode encoded character array into serialised wide character array.
+            decode_utf_8_unicode_character_vector((void*) &s, sc, ss, rh, (void*) &rhc);
+
+            process_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &s, sc);
+
+            // Deallocate serialised wide character array.
+            deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header. The remaining count is null.");
+    }
 }
 
 /**
@@ -157,7 +199,7 @@ void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p
 
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        process_http_request_header_append_part(p3, p4, p5,
+                        append_part(p3, p4, p5,
                             (void*) CYBOI_METHOD_COMPOUND_HTTP_NAME, (void*) CYBOI_METHOD_COMPOUND_HTTP_NAME_COUNT,
                             (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                             rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -238,7 +280,7 @@ void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, 
                         // The URI possibly has to be created as compound, before adding its
                         // elements such as: schema, path, query, fragment ...
                         // See also "residenz/logic/handler/handle_www_service.cybol"
-                        process_http_request_header_append_part(p0, p1, p2,
+                        append_part(p0, p1, p2,
                             (void*) CYBOI_URI_COMPOUND_HTTP_NAME, (void*) CYBOI_URI_COMPOUND_HTTP_NAME_COUNT,
                             (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                             u, (void*) &uc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -314,7 +356,7 @@ void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void*
 
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        process_http_request_header_append_part(p3, p4, p5,
+                        append_part(p3, p4, p5,
                             (void*) CYBOI_PROTOCOL_COMPOUND_HTTP_NAME, (void*) CYBOI_PROTOCOL_COMPOUND_HTTP_NAME_COUNT,
                             (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                             p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -463,7 +505,7 @@ void process_http_request_header_value(void* p0, void* p1, void* p2, void* p3, v
 
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        select_http_request_header(p3, p4, p5, p8, p9, hv, (void*) &hvc);
+                        select_http_request_header_field(p3, p4, p5, p8, p9, hv, (void*) &hvc);
 
                         break;
 
@@ -504,75 +546,39 @@ void process_http_request_header_value(void* p0, void* p1, void* p2, void* p3, v
  */
 void process_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* rem = (int*) p7;
+        void** pos = (void**) p6;
 
-        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request body.");
 
-            void** pos = (void**) p6;
+        //
+        // CAUTION! There is NO NEED to detect the body end with a
+        // function like "select_http_request_body".
+        // All of the remaining characters are seen as body.
+        //
 
-            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
-
-                void** dd = (void**) p3;
-
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request body.");
-
-                // The body.
-                void* bo = *pos;
-                int boc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                // The break flag.
-                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        break;
-                    }
-
-                    select_http_request_body(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
-
-                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // The body represents the actual http message content.
-                        // Its data are thus added to the destination MODEL (p0, p1, p2),
-                        // whilst the destination DETAILS contain meta data, i.e. the http headers.
-                        //
-                        // CAUTION! The body data may be encoded.
-                        // Therefore, use the "CHARACTER_MEMORY_ABSTRACTION" abstraction here!
-                        //
-                        // One of the http request header argument/value pairs defines the encoding,
-                        // so that the cybol application will have to decode the data,
-                        // because here, the corresponding http encoding header is not available yet.
-                        append_part(p0, p1, p2,
-                            (void*) CYBOI_BODY_COMPOUND_HTTP_NAME, (void*) CYBOI_BODY_COMPOUND_HTTP_NAME_COUNT,
-                            (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                            bo, (void*) &boc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-
-                        break;
-
-                    } else {
-
-                        // Increment body count.
-                        boc++;
-                    }
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request body. The destination details is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request body. The current position is null.");
-        }
+        //
+        // The body represents the actual http message content.
+        // Its data are thus added to the destination MODEL (p0, p1, p2),
+        // whilst the destination DETAILS contain meta data, i.e. the http headers.
+        //
+        // CAUTION! The body data may be encoded.
+        // Therefore, use the CHARACTER_MEMORY_ABSTRACTION abstraction here
+        // (and DO NOT convert to WIDE_CHARACTER_MEMORY_ABSTRACTION by chance).
+        //
+        // One of the http request header argument/value pairs defines the encoding,
+        // so that the cybol application will have to decode the data,
+        // because here, the corresponding http encoding header is not available.
+        //
+        append_part(p0, p1, p2,
+            (void*) CYBOI_BODY_COMPOUND_HTTP_NAME, (void*) CYBOI_BODY_COMPOUND_HTTP_NAME_COUNT,
+            (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT,
+            *pos, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request body. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request body. The current position is null.");
     }
 }
 

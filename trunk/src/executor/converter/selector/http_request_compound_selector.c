@@ -268,9 +268,7 @@ void decode_http_request_compound_method(void* p0, void* p1, void* p2, void* p3,
 /**
  * Decodes uniform resource identifier (uri).
  *
- * The generic URI syntax consists of a hierarchical sequence of
- * components referred to as the scheme, authority, path, query, and
- * fragment.
+ * The generic URI syntax consists of a hierarchical sequence of components:
  *
  * URI         = scheme ":" hier-part [ "?" query ] [ "#" fragment ]
  *
@@ -278,6 +276,16 @@ void decode_http_request_compound_method(void* p0, void* p1, void* p2, void* p3,
  *             / path-absolute
  *             / path-rootless
  *             / path-empty
+ *
+ * Example URIs and their component parts:
+ *
+ * foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=ferret#nose
+ * \__/\__________________/\_________/\___/\__________/\___/\__/\__________/\__________/\___/
+ *  |            |              |       |      |         |    |          |       |        |
+ *  |         userinfo      hostname  port    dir  filename extension   parametre(s)      |
+ *  |  \__________________________________/\___________________/\______________________/  |
+ *  |                    |                            |                     |             |
+ * scheme            authority                       path                 query        fragment
  *
  * The scheme and path components are required, though the path may be
  * empty (no characters).  When authority is present, the path must
@@ -287,17 +295,22 @@ void decode_http_request_compound_method(void* p0, void* p1, void* p2, void* p3,
  * rules for a path (Section 3.3), only one of which will match any
  * given URI reference.
  *
- * The following are two example URIs and their component parts:
- *
- *   foo://example.com:8042/over/there?name=ferret#nose
- *   \_/   \______________/\_________/ \_________/ \__/
- *    |           |            |            |        |
- * scheme     authority       path        query   fragment
- *    |   _____________________|__
- *   / \ /                        \
- *   urn:example:animal:ferret:nose
- *
- * Exception:
+ * The url path specified by the client is relative to the
+ * server's root directory. Consider the following url as it
+ * would be requested by a client:
+ * http://www.example.com/path/file.html
+ * The client's web browser will translate it into a connection
+ * to www.example.com with the following http 1.1 request:
+ * GET /path/file.html HTTP/1.1
+ * host: www.example.com
+ * The Web server on www.example.com will append the given path
+ * to the path of its root directory. On Unix machines, this is
+ * commonly /var/www/htdocs.
+ * The result is the local file system resource:
+ * /var/www/htdocs/path/file.html
+ * The Web server will then read the file, if it exists, and
+ * send a response to the client's web browser. The response
+ * will describe the content of the file and contain the file itself.
  *
  * Although not defined by IETF's uri specification rfc3986, it has become
  * usual to use the characters ";" and "&" as parameter separators in a uri.
@@ -317,23 +330,6 @@ void decode_http_request_compound_method(void* p0, void* p1, void* p2, void* p3,
  * http://www.example.net/index.html?session=A54C6FE2#info
  * which should be encoded as %23 like:
  * http://www.example.net/index.html?session=A54C6FE2%23info
- *
- * The url path specified by the client is relative to the
- * server's root directory. Consider the following url as it
- * would be requested by a client:
- * http://www.example.com/path/file.html
- * The client's web browser will translate it into a connection
- * to www.example.com with the following http 1.1 request:
- * GET /path/file.html HTTP/1.1
- * host: www.example.com
- * The Web server on www.example.com will append the given path
- * to the path of its root directory. On Unix machines, this is
- * commonly /var/www/htdocs.
- * The result is the local file system resource:
- * /var/www/htdocs/path/file.html
- * The Web server will then read the file, if it exists, and
- * send a response to the client's web browser. The response
- * will describe the content of the file and contain the file itself.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count

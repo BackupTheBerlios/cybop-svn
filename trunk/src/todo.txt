@@ -11,8 +11,17 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE in file "http_request_processor.c" with URI processing,
-            add code from file "http_request_compound_selector.c" and delete it later
+        * RENAME http header constants into "http_header_field_*"
+        * Change type of most http constants towards wide character
+        * Mind the constants in file "separator_http_name.h",
+            because some of them will have to be characters, others wide characters
+        * CONTINUE in file "http_request_processor.c" with URI processing
+        * Consider code from file "http_request_compound_selector.c"
+        * Leave detectors and selectors; rename and move processors to decoders,
+            in order to use an own decoder for each http request component,
+            e.g. for the URI etc.;
+            this is important to make these reusable, e.g. in http request and http response;
+            create many new files, one for almost each select/process (decode) function
         * Receive at least the following (taken from old file "apps/residenz/wui/index_input.cybol"):
             <model>
                 <part name="method" channel="inline" abstraction="character" model=""/>
