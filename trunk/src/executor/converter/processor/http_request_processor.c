@@ -29,7 +29,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../constant/name/http/cyboi_compound_http_name.c"
+#include "../../../constant/name/http/cyboi_http_name.c"
 #include "../../../executor/accessor/appender/part_appender.c"
 #include "../../../executor/converter/selector/http_request_selector.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
@@ -140,7 +140,7 @@ void process_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p
             process_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &s, sc);
 
             // Deallocate serialised wide character array.
-            deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+//??            deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         } else {
 
@@ -200,7 +200,7 @@ void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         append_part(p3, p4, p5,
-                            (void*) CYBOI_METHOD_COMPOUND_HTTP_NAME, (void*) CYBOI_METHOD_COMPOUND_HTTP_NAME_COUNT,
+                            (void*) CYBOI_METHOD_HTTP_NAME, (void*) CYBOI_METHOD_HTTP_NAME_COUNT,
                             (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                             rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
@@ -276,12 +276,13 @@ void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, 
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         //?? TODO: Add source code of file "http_request_compound_selector.c" to here!
+
                         // Parse the URI and add the single elements as parts to the destination model.
                         // The URI possibly has to be created as compound, before adding its
                         // elements such as: schema, path, query, fragment ...
                         // See also "residenz/logic/handler/handle_www_service.cybol"
                         append_part(p0, p1, p2,
-                            (void*) CYBOI_URI_COMPOUND_HTTP_NAME, (void*) CYBOI_URI_COMPOUND_HTTP_NAME_COUNT,
+                            (void*) CYBOI_URI_HTTP_NAME, (void*) CYBOI_URI_HTTP_NAME_COUNT,
                             (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                             u, (void*) &uc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
@@ -357,7 +358,7 @@ void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void*
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                         append_part(p3, p4, p5,
-                            (void*) CYBOI_PROTOCOL_COMPOUND_HTTP_NAME, (void*) CYBOI_PROTOCOL_COMPOUND_HTTP_NAME_COUNT,
+                            (void*) CYBOI_PROTOCOL_HTTP_NAME, (void*) CYBOI_PROTOCOL_HTTP_NAME_COUNT,
                             (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                             p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
@@ -572,7 +573,7 @@ void process_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4,
         // because here, the corresponding http encoding header is not available.
         //
         append_part(p0, p1, p2,
-            (void*) CYBOI_BODY_COMPOUND_HTTP_NAME, (void*) CYBOI_BODY_COMPOUND_HTTP_NAME_COUNT,
+            (void*) CYBOI_BODY_HTTP_NAME, (void*) CYBOI_BODY_HTTP_NAME_COUNT,
             (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT,
             *pos, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 

@@ -36,53 +36,53 @@
 //
 
 /** The Allow entity header http name. */
-static char ALLOW_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'A', 'l', 'l', 'o', 'w'};
-static char* ALLOW_ENTITY_HEADER_HTTP_NAME = ALLOW_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t ALLOW_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'A', L'l', L'l', L'o', L'w'};
+static wchar_t* ALLOW_ENTITY_HEADER_HTTP_NAME = ALLOW_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* ALLOW_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The Content-Encoding entity header http name. */
-static char CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'C', 'o', 'n', 't', 'e', 'n', 't', '-', 'E', 'n', 'c', 'o', 'd', 'i', 'n', 'g'};
-static char* CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME = CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'C', L'o', L'n', L't', L'e', L'n', L't', L'-', L'E', L'n', L'c', L'o', L'd', L'i', L'n', L'g'};
+static wchar_t* CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME = CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The Content-Language entity header http name. */
-static char CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'C', 'o', 'n', 't', 'e', 'n', 't', '-', 'L', 'a', 'n', 'g', 'u', 'a', 'g', 'e'};
-static char* CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME = CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'C', L'o', L'n', L't', L'e', L'n', L't', L'-', L'L', L'a', L'n', L'g', L'u', L'a', L'g', L'e'};
+static wchar_t* CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME = CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The Content-Length entity header http name. */
-static char CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'C', 'o', 'n', 't', 'e', 'n', 't', '-', 'L', 'e', 'n', 'g', 't', 'h'};
-static char* CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME = CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'C', L'o', L'n', L't', L'e', L'n', L't', L'-', L'L', L'e', L'n', L'g', L't', L'h'};
+static wchar_t* CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME = CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The Content-Location entity header http name. */
-static char CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'C', 'o', 'n', 't', 'e', 'n', 't', '-', 'L', 'o', 'c', 'a', 't', 'i', 'o', 'n'};
-static char* CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME = CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'C', L'o', L'n', L't', L'e', L'n', L't', L'-', L'L', L'o', L'c', L'a', L't', L'i', L'o', L'n'};
+static wchar_t* CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME = CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The Content-MD5 entity header http name. */
-static char CONTENT_MD5_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'C', 'o', 'n', 't', 'e', 'n', 't', '-', 'M', 'D', '5'};
-static char* CONTENT_MD5_ENTITY_HEADER_HTTP_NAME = CONTENT_MD5_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t CONTENT_MD5_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'C', L'o', L'n', L't', L'e', L'n', L't', L'-', L'M', L'D', L'5'};
+static wchar_t* CONTENT_MD5_ENTITY_HEADER_HTTP_NAME = CONTENT_MD5_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* CONTENT_MD5_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The Content-Range entity header http name. */
-static char CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'C', 'o', 'n', 't', 'e', 'n', 't', '-', 'R', 'a', 'n', 'g', 'e'};
-static char* CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME = CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'C', L'o', L'n', L't', L'e', L'n', L't', L'-', L'R', L'a', L'n', L'g', L'e'};
+static wchar_t* CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME = CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_13_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The Content-Type entity header http name. */
-static char CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'C', 'o', 'n', 't', 'e', 'n', 't', '-', 'T', 'y', 'p', 'e'};
-static char* CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME = CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'C', L'o', L'n', L't', L'e', L'n', L't', L'-', L'T', L'y', L'p', L'e'};
+static wchar_t* CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME = CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The Expires entity header http name. */
-static char EXPIRES_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'E', 'x', 'p', 'i', 'r', 'e', 's'};
-static char* EXPIRES_ENTITY_HEADER_HTTP_NAME = EXPIRES_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t EXPIRES_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'E', L'x', L'p', L'i', L'r', L'e', L's'};
+static wchar_t* EXPIRES_ENTITY_HEADER_HTTP_NAME = EXPIRES_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* EXPIRES_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The Last-Modified entity header http name. */
-static char LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {'L', 'a', 's', 't', '-', 'M', 'o', 'd', 'i', 'f', 'i', 'e', 'd'};
-static char* LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME = LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME_ARRAY;
+static wchar_t LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME_ARRAY[] = {L'L', L'a', L's', L't', L'-', L'M', L'o', L'd', L'i', L'f', L'i', L'e', L'd'};
+static wchar_t* LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME = LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME_ARRAY;
 static int* LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME_COUNT = NUMBER_13_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* ENTITY_HEADER_HTTP_NAME_SOURCE */

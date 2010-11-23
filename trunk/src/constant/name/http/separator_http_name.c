@@ -37,43 +37,50 @@
 // Request response line.
 //
 
-/** The request response line element end separator separator http name. */
-static char* REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME = SPACE_ASCII_CHARACTER_CODE_MODEL_ARRAY;
+/** The request response line element end (space) separator separator http name. */
+static wchar_t* REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME = SPACE_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
 static int* REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The request line ("carriage return" and "line feed") separator separator http name. */
-static char REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_ARRAY[] = {0x0D, 0x0A};
-static char* REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME = REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_ARRAY;
+static wchar_t REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_ARRAY[] = {0x000D, 0x000A};
+static wchar_t* REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME = REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_ARRAY;
 static int* REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
-// Headers.
+// Header.
 //
 
 /** The header argument ("colon" and "space") separator http name. */
-static char HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_ARRAY[] = {0x3A, 0x20};
-static char* HEADER_ARGUMENT_SEPARATOR_HTTP_NAME = HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_ARRAY;
+static wchar_t HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_ARRAY[] = {0x003A, 0x0020};
+static wchar_t* HEADER_ARGUMENT_SEPARATOR_HTTP_NAME = HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_ARRAY;
 static int* HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The header value ("semicolon" and "space") separator http name. */
-static char HEADER_VALUE_SEPARATOR_HTTP_NAME_ARRAY[] = {0x3B, 0x20};
-static char* HEADER_VALUE_SEPARATOR_HTTP_NAME = HEADER_VALUE_SEPARATOR_HTTP_NAME_ARRAY;
+static wchar_t HEADER_VALUE_SEPARATOR_HTTP_NAME_ARRAY[] = {0x003B, 0x0020};
+static wchar_t* HEADER_VALUE_SEPARATOR_HTTP_NAME = HEADER_VALUE_SEPARATOR_HTTP_NAME_ARRAY;
 static int* HEADER_VALUE_SEPARATOR_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The header value assignment ("equals sign") separator http name. */
-static char* HEADER_VALUE_ASSIGNMENT_SEPARATOR_HTTP_NAME = EQUALS_SIGN_ASCII_CHARACTER_CODE_MODEL_ARRAY;
+static wchar_t* HEADER_VALUE_ASSIGNMENT_SEPARATOR_HTTP_NAME = EQUALS_SIGN_UNICODE_CHARACTER_CODE_MODEL_ARRAY;
 static int* HEADER_VALUE_ASSIGNMENT_SEPARATOR_HTTP_NAME_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The header ("carriage return" and "line feed") separator http name. */
-static char HEADER_SEPARATOR_HTTP_NAME_ARRAY[] = {0x0D, 0x0A};
-static char* HEADER_SEPARATOR_HTTP_NAME = HEADER_SEPARATOR_HTTP_NAME_ARRAY;
+static wchar_t HEADER_SEPARATOR_HTTP_NAME_ARRAY[] = {0x000D, 0x000A};
+static wchar_t* HEADER_SEPARATOR_HTTP_NAME = HEADER_SEPARATOR_HTTP_NAME_ARRAY;
 static int* HEADER_SEPARATOR_HTTP_NAME_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Body.
 //
 
-/** The body begin (twice "carriage return" and "line feed", in other words: an empty line) separator http name. */
+/**
+ * The body begin (twice "carriage return" and "line feed", in other words: an empty line) separator http name.
+ *
+ * CAUTION! This constant has to be of type "char" and NOT "wchar_t"!
+ * The reason is that cyboi parses for this separator first,
+ * while the message is still all in ASCII characters,
+ * before converting the complete message header into "wchar_t".
+ */
 static char BODY_BEGIN_SEPARATOR_HTTP_NAME_ARRAY[] = {0x0D, 0x0A, 0x0D, 0x0A};
 static char* BODY_BEGIN_SEPARATOR_HTTP_NAME = BODY_BEGIN_SEPARATOR_HTTP_NAME_ARRAY;
 static int* BODY_BEGIN_SEPARATOR_HTTP_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;

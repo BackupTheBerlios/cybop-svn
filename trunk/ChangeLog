@@ -20,6 +20,9 @@
         * Change http decoding so that the message header and -body are
             separated first, while still available as ASCII characters
         * Convert http message header into wide characters at once (not piece by piece)
+        * Replace constants files "*compound_http_name.c" with "cyboi_http_name.c"
+        * Change type of most http constants towards wide character, since the http
+            message header is converted to wide characters, before processing it further
 
 2010-11-17  Christian Heller  <christian.heller@tuxtax.de>
         * Set model count to zero in "model_allocator.c", since the model does initially not contain any elements;

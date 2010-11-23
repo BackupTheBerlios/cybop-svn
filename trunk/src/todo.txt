@@ -11,10 +11,6 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * RENAME http header constants into "http_header_field_*"
-        * Change type of most http constants towards wide character
-        * Mind the constants in file "separator_http_name.h",
-            because some of them will have to be characters, others wide characters
         * CONTINUE in file "http_request_processor.c" with URI processing
         * Consider code from file "http_request_compound_selector.c"
         * Leave detectors and selectors; rename and move processors to decoders,
@@ -31,7 +27,6 @@
                 <part name="fragment" channel="inline" abstraction="character" model=""/>
                 <part name="action" channel="inline" abstraction="character" model=""/>
             </model>
-        * Delete old files: "compound_http_name.c"
         * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
         * TEST using this URL:
             http://localhost:1971/?action=index
