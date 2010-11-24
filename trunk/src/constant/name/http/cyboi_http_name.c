@@ -52,6 +52,7 @@ static wchar_t* CYBOI_ARGUMENTS_HTTP_NAME = CYBOI_ARGUMENTS_HTTP_NAME_ARRAY;
 static int* CYBOI_ARGUMENTS_HTTP_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The cyboi body http name. */
+/*??
 static wchar_t CYBOI_BODY_HTTP_NAME_ARRAY[] = {L'b', L'o', L'd', L'y'};
 static wchar_t* CYBOI_BODY_HTTP_NAME = CYBOI_BODY_HTTP_NAME_ARRAY;
 static int* CYBOI_BODY_HTTP_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
@@ -125,11 +126,25 @@ static int* CYBOI_SERVER_HTTP_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 static wchar_t CYBOI_STATUS_CODE_HTTP_NAME_ARRAY[] = {L's', L't', L'a', L't', L'u', L's', L'_', L'c', L'o', L'd', L'e'};
 static wchar_t* CYBOI_STATUS_CODE_HTTP_NAME = CYBOI_STATUS_CODE_HTTP_NAME_ARRAY;
 static int* CYBOI_STATUS_CODE_HTTP_NAME_COUNT = NUMBER_11_INTEGER_MEMORY_MODEL_ARRAY;
+*/
 
-/** The cyboi uniform resource identifier (uri) http name. */
+/**
+ * The uri http name.
+ *
+ * URI - Uniform Resource Identifier
+ */
 static wchar_t CYBOI_URI_HTTP_NAME_ARRAY[] = {L'u', L'r', L'i'};
 static wchar_t* CYBOI_URI_HTTP_NAME = CYBOI_URI_HTTP_NAME_ARRAY;
 static int* CYBOI_URI_HTTP_NAME_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+
+/**
+ * The uri-parts http name.
+ *
+ * URI - Uniform Resource Identifier
+ */
+static wchar_t CYBOI_PARTS_URI_HTTP_NAME_ARRAY[] = {L'u', L'r', L'i', L'-', L'p', L'a', L'r', L't', L's'};
+static wchar_t* CYBOI_PARTS_URI_HTTP_NAME = CYBOI_PARTS_URI_HTTP_NAME_ARRAY;
+static int* CYBOI_PARTS_URI_HTTP_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* CYBOI_HTTP_NAME_SOURCE */
 #endif

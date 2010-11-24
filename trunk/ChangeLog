@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Start implementing URI decoding using files independent of HTTP, to make it reusable
+
 2010-11-23  Christian Heller  <christian.heller@tuxtax.de>
         * Change http decoding so that the message header and -body are
             separated first, while still available as ASCII characters

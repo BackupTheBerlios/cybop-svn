@@ -54,8 +54,8 @@
 /**
  * The text/abstraction cybol abstraction.
  *
- * This constant is necessary to translate cybol- into memory abstractions,
- * because both are not always identical.
+ * This constant is necessary to translate cybol- into cyboi
+ * runtime abstractions, because both are not always identical.
  */
 static wchar_t ABSTRACTION_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'a', L'b', L's', L't', L'r', L'a', L'c', L't', L'i', L'o', L'n'};
 static wchar_t* ABSTRACTION_TEXT_CYBOL_ABSTRACTION = ABSTRACTION_TEXT_CYBOL_ABSTRACTION_ARRAY;
@@ -147,19 +147,15 @@ static wchar_t* PLAIN_TEXT_CYBOL_ABSTRACTION = PLAIN_TEXT_CYBOL_ABSTRACTION_ARRA
 static int* PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
- * The text/plain cybol abstraction as ascii character string.
+ * The text/uri cybol abstraction.
  *
- * CAUTION! This constant is redundant with PLAIN_TEXT_CYBOL_ABSTRACTION.
- * It is necessary, because certain pieces of source code need to hand over
- * a multibyte character string as argument, which later gets decoded
- * into a wide character string.
- *
- * The "CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT" from above is used as count.
+ * CYBOL (XML) format.
+ * Defined in CYBOL specification:
+ * http://cybop.berlios.de/books/cybol/cybol.pdf
  */
-/*??
-static char PLAIN_TEXT_CYBOL_ABSTRACTION_AS_CHAR_ARRAY[] = {'t', 'e', 'x', 't', '/', 'p', 'l', 'a', 'i', 'n'};
-static char* PLAIN_TEXT_CYBOL_ABSTRACTION_AS_CHAR = PLAIN_TEXT_CYBOL_ABSTRACTION_AS_CHAR_ARRAY;
-*/
+static char URI_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {'t', 'e', 'x', 't', '/', 'u', 'r', 'i'};
+static char* URI_TEXT_CYBOL_ABSTRACTION = URI_TEXT_CYBOL_ABSTRACTION_ARRAY;
+static int* URI_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
  * The text/xdt cybol abstraction.

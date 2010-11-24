@@ -11,27 +11,14 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE in file "http_request_processor.c" with URI processing
-        * Consider code from file "http_request_compound_selector.c"
-        * Leave detectors and selectors; rename and move processors to decoders,
-            in order to use an own decoder for each http request component,
-            e.g. for the URI etc.;
-            this is important to make these reusable, e.g. in http request and http response;
-            create many new files, one for almost each select/process (decode) function
-        * Receive at least the following (taken from old file "apps/residenz/wui/index_input.cybol"):
-            <model>
-                <part name="method" channel="inline" abstraction="character" model=""/>
-                <part name="scheme" channel="inline" abstraction="character" model=""/>
-                <part name="authority" channel="inline" abstraction="character" model=""/>
-                <part name="path" channel="inline" abstraction="character" model=""/>
-                <part name="fragment" channel="inline" abstraction="character" model=""/>
-                <part name="action" channel="inline" abstraction="character" model=""/>
-            </model>
+        * CONTINUE in files "uri_processor.c" and "uri_selector.c"
+        * Move code from file "http_request_compound_selector.c" and delete this file
         * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
         * TEST using this URL:
             http://localhost:1971/?action=index
             the OLD one was:
             http://localhost:3456/resadmin/logic/send_name.cybol
+
         * Translate ALL data formats in two steps:
             1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound; http --> http_request_compound
             2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound / http_request_compound --> ?? (action/ signal??)

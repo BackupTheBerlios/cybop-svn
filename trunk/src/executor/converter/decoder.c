@@ -58,6 +58,7 @@
 #include "../../executor/converter/decoder/model_diagram_decoder.c"
 #include "../../executor/converter/decoder/terminal_background_decoder.c"
 #include "../../executor/converter/decoder/terminal_foreground_decoder.c"
+#include "../../executor/converter/decoder/uri_decoder.c"
 #include "../../executor/converter/decoder/utf_16_unicode_character_decoder.c"
 #include "../../executor/converter/decoder/utf_8_unicode_character_decoder.c"
 #include "../../executor/converter/decoder/xdt_decoder.c"
@@ -457,6 +458,47 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p10, p11, (void*) URI_TEXT_CYBOL_ABSTRACTION, (void*) URI_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            decode_uri(p0, p1, p2, p3, p4, p5, p6, p7);
+
+//?? TEST BEGIN
+            // The model diagram.
+            void* md = *NULL_POINTER_MEMORY_MODEL;
+            int mdc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate model diagram.
+            allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            // Encode model into model diagram.
+            encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                *((void**) p0), p1, *((void**) p3), p4);
+            // The multibyte character stream.
+            void* mb = *NULL_POINTER_MEMORY_MODEL;
+            int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Allocate multibyte character stream.
+            allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            // Encode model diagram into multibyte character stream.
+            encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
+            // The file name.
+            void* fn = L"TEST_URI.txt";
+            int fnc = *NUMBER_27_INTEGER_MEMORY_MODEL;
+            int fns = *NUMBER_28_INTEGER_MEMORY_MODEL;
+            // Write multibyte character stream as message to file system.
+            send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+            // Deallocate model diagram.
+            deallocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            // Deallocate multibyte character stream.
+            deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
         }
     }
 

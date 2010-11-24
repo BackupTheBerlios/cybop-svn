@@ -137,10 +137,19 @@ void process_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p
             // Decode encoded character array into serialised wide character array.
             decode_utf_8_unicode_character_vector((void*) &s, sc, ss, rh, (void*) &rhc);
 
-            process_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &s, sc);
+            // The serialised wide character array copy.
+            void* c = s;
+            int cc = *((int*) sc);
+
+            // CAUTION! Hand over a COPY of the wide character array!
+            // This is necessary, because the processing functions
+            // increment the array pointer inside, so that deallocation
+            // would fail below, as the pointer does not point to the
+            // begin of the array anymore.
+            process_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &c, (void*) &cc);
 
             // Deallocate serialised wide character array.
-//??            deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         } else {
 
@@ -175,47 +184,38 @@ void process_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p
 
             void** pos = (void**) p6;
 
-            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request method.");
 
-                void** dd = (void**) p3;
+            // The request method.
+            void* rm = *pos;
+            int rmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request method.");
+            // The break flag.
+            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                // The request method.
-                void* rm = *pos;
-                int rmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-                // The break flag.
-                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        break;
-                    }
-
-                    select_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
-
-                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        append_part(p3, p4, p5,
-                            (void*) CYBOI_METHOD_HTTP_NAME, (void*) CYBOI_METHOD_HTTP_NAME_COUNT,
-                            (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                            rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-
-                        break;
-
-                    } else {
-
-                        // Increment request method count.
-                        rmc++;
-                    }
+                    break;
                 }
 
-            } else {
+                select_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request method. The destination details is null.");
+                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    append_part(p3, p4, p5,
+                        (void*) CYBOI_METHOD_HTTP_NAME, (void*) CYBOI_METHOD_HTTP_NAME_COUNT,
+                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                        rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
+                    break;
+
+                } else {
+
+                    // Increment request method count.
+                    rmc++;
+                }
             }
 
         } else {
@@ -275,16 +275,56 @@ void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
                     if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        //?? TODO: Add source code of file "http_request_compound_selector.c" to here!
+                        //
+                        // CAUTION! The uri is added twice to the destination details:
+                        //
+                        // 1 as full text representation
+                        // 2 as compound hierarchy consisting of parts
+                        //
 
-                        // Parse the URI and add the single elements as parts to the destination model.
-                        // The URI possibly has to be created as compound, before adding its
-                        // elements such as: schema, path, query, fragment ...
-                        // See also "residenz/logic/handler/handle_www_service.cybol"
-                        append_part(p0, p1, p2,
+                        // Add uri as full text string.
+                        append_part(p3, p4, p5,
                             (void*) CYBOI_URI_HTTP_NAME, (void*) CYBOI_URI_HTTP_NAME_COUNT,
-                            (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
+                            (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                             u, (void*) &uc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
+                        // The uri part name, abstraction, model, details.
+                        void* n = *NULL_POINTER_MEMORY_MODEL;
+                        void* nc = *NULL_POINTER_MEMORY_MODEL;
+                        void* ns = *NULL_POINTER_MEMORY_MODEL;
+                        void* a = *NULL_POINTER_MEMORY_MODEL;
+                        void* ac = *NULL_POINTER_MEMORY_MODEL;
+                        void* as = *NULL_POINTER_MEMORY_MODEL;
+                        void* m = *NULL_POINTER_MEMORY_MODEL;
+                        void* mc = *NULL_POINTER_MEMORY_MODEL;
+                        void* ms = *NULL_POINTER_MEMORY_MODEL;
+                        void* d = *NULL_POINTER_MEMORY_MODEL;
+                        void* dc = *NULL_POINTER_MEMORY_MODEL;
+                        void* ds = *NULL_POINTER_MEMORY_MODEL;
+
+                        // Allocate uri part.
+                        allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+                            (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+                            (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+                        // Decode uri part name.
+                        decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+                            (void*) CYBOI_PARTS_URI_HTTP_NAME, (void*) CYBOI_PARTS_URI_HTTP_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+                            (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+                        // Decode uri part abstraction.
+                        decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+                            (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+                            (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+                        // Decode uri part model and details.
+                        decode((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
+                            u, (void*) &uc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+                            (void*) URI_TEXT_CYBOL_ABSTRACTION, (void*) URI_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+                        // Add uri as compound hierarchy consisting of parts.
+                        // CAUTION! Hand over the name as reference!
+                        append_compound_element_by_name(*dd, p4, p5, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
                         break;
 
@@ -333,47 +373,38 @@ void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void*
 
             void** pos = (void**) p6;
 
-            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request protocol.");
 
-                void** dd = (void**) p3;
+            // The protocol.
+            void* p = *pos;
+            int pc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request protocol.");
+            // The break flag.
+            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                // The protocol.
-                void* p = *pos;
-                int pc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-                // The break flag.
-                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        break;
-                    }
-
-                    select_http_request_protocol(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
-
-                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        append_part(p3, p4, p5,
-                            (void*) CYBOI_PROTOCOL_HTTP_NAME, (void*) CYBOI_PROTOCOL_HTTP_NAME_COUNT,
-                            (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                            p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-
-                        break;
-
-                    } else {
-
-                        // Increment protocol count.
-                        pc++;
-                    }
+                    break;
                 }
 
-            } else {
+                select_http_request_protocol(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request protocol. The destination details is null.");
+                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    append_part(p3, p4, p5,
+                        (void*) CYBOI_PROTOCOL_HTTP_NAME, (void*) CYBOI_PROTOCOL_HTTP_NAME_COUNT,
+                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                        p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
+                    break;
+
+                } else {
+
+                    // Increment protocol count.
+                    pc++;
+                }
             }
 
         } else {
@@ -409,42 +440,33 @@ void process_http_request_header_argument(void* p0, void* p1, void* p2, void* p3
 
             void** pos = (void**) p6;
 
-            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header argument.");
 
-                void** dd = (void**) p3;
+            // The header argument.
+            void* ha = *pos;
+            int hac = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header argument.");
+            // The break flag.
+            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                // The header argument.
-                void* ha = *pos;
-                int hac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-                // The break flag.
-                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        break;
-                    }
-
-                    select_http_request_header_argument(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7, ha, (void*) &hac);
-
-                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        break;
-
-                    } else {
-
-                        // Increment header argument count.
-                        hac++;
-                    }
+                    break;
                 }
 
-            } else {
+                select_http_request_header_argument(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7, ha, (void*) &hac);
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header argument. The destination details is null.");
+                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    break;
+
+                } else {
+
+                    // Increment header argument count.
+                    hac++;
+                }
             }
 
         } else {
@@ -482,44 +504,35 @@ void process_http_request_header_value(void* p0, void* p1, void* p2, void* p3, v
 
             void** pos = (void**) p6;
 
-            if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header value.");
 
-                void** dd = (void**) p3;
+            // The header value.
+            void* hv = *pos;
+            int hvc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header value.");
+            // The break flag.
+            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                // The header value.
-                void* hv = *pos;
-                int hvc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-                // The break flag.
-                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        break;
-                    }
-
-                    select_http_request_header_value(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
-
-                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        select_http_request_header_field(p3, p4, p5, p8, p9, hv, (void*) &hvc);
-
-                        break;
-
-                    } else {
-
-                        // Increment header value count.
-                        hvc++;
-                    }
+                    break;
                 }
 
-            } else {
+                select_http_request_header_value(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header value. The destination details is null.");
+                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    select_http_request_header_field(p3, p4, p5, p8, p9, hv, (void*) &hvc);
+
+                    break;
+
+                } else {
+
+                    // Increment header value count.
+                    hvc++;
+                }
             }
 
         } else {
@@ -572,10 +585,7 @@ void process_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4,
         // so that the cybol application will have to decode the data,
         // because here, the corresponding http encoding header is not available.
         //
-        append_part(p0, p1, p2,
-            (void*) CYBOI_BODY_HTTP_NAME, (void*) CYBOI_BODY_HTTP_NAME_COUNT,
-            (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT,
-            *pos, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+        replace_array_elements(p0, p1, p2, *pos, p7, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     } else {
 

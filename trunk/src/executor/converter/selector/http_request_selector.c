@@ -159,7 +159,7 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // CAUTION! The CHARACTER_MEMORY_ABSTRACTION is used on purpose here
+            // CAUTION! The CHARACTER_MEMORY_ABSTRACTION is used here on purpose
             // (instead of the WIDE_CHARACTER_MEMORY_ABSTRACTION).
             // The message header and -body are detected in ASCII character form,
             // YET BEFORE converting the header to wide characters.
@@ -177,6 +177,8 @@ void select_http_request_header(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+            // CAUTION! Do NOT use WIDE_CHARACTER_INTEGRAL_TYPE_SIZE here,
+            // because the source array contains char (not wchar_t) elements.
             detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
@@ -225,7 +227,7 @@ void select_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
@@ -273,7 +275,7 @@ void select_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
@@ -305,12 +307,6 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         //
         // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
-        // Before the request response line final element http name (ending with "carriage return"
-        // and "line feed") can be identified, the possibility of a body begin http name
-        // (twice "carriage return" and "line feed") indicating the message body
-        // has to be considered:
-        // - twice "carriage return" and "line feed"
-        // - "carriage return" and "line feed"
         //
 
         // The comparison result.
@@ -335,7 +331,7 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
@@ -385,7 +381,7 @@ void select_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
@@ -447,7 +443,7 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
