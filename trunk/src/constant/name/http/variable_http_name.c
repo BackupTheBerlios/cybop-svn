@@ -30,8 +30,8 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 
 /** The Charset variable http name. */
-static wchar_t CHARSET_VARIABLE_HTTP_NAME_ARRAY[] = {L'C', L'h', L'a', L'r', L's', L'e', L't'};
-static wchar_t* CHARSET_VARIABLE_HTTP_NAME = CHARSET_VARIABLE_HTTP_NAME_ARRAY;
+static char CHARSET_VARIABLE_HTTP_NAME_ARRAY[] = {'C', 'h', 'a', 'r', 's', 'e', 't'};
+static char* CHARSET_VARIABLE_HTTP_NAME = CHARSET_VARIABLE_HTTP_NAME_ARRAY;
 static int* CHARSET_VARIABLE_HTTP_NAME_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* VARIABLE_HTTP_NAME_SOURCE */

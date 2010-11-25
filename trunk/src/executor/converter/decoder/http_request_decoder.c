@@ -47,32 +47,31 @@ void decode_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode http request.");
 
     //
-    // The http request header is converted from ASCII characters
-    // to wide characters inside.
+    // An http message is expected to consist of a sequence of octets.
+    // An octet labels eight Bits forming one Byte, e.g.: 01001100
     //
-    // Alternative 1:
+    // The http header octets are supposed to represent ASCII characters.
+    // The http body, on the other hand, may be encoded by some mechanism,
+    // on which the meaning of its bytes depends.
     //
-    // Process http request as ASCII characters and convert
-    // them to wide characters for each detected piece, e.g.:
-    // request method, uri etc.
+    // One might get the idea to convert the http message header
+    // AT ONCE from ASCII- to wide characters.
+    // However, this might turn out to be problematic, since
+    // the URI sent within the http message header uses a special
+    // percent-encoding in order to escape reserved characters.
+    //
+    // Therefore, the http message has to be processed AS IS,
+    // and only PIECES OF IT may be converted to wide characters,
+    // e.g.: request method, protocol etc.
     //
     // The disadvantage is that for each conversion, a sub routine
     // has to be called (context switch) and local variables have
     // to be allocated and deallocated, which causes a delay.
     //
-    // Alternative 2:
+    // For the URI, octets have to be decoded from percent-encoding into
+    // standard octets, which then get UTF-8-decoded into wide characters.
     //
-    // Convert http request at once from ASCII- to wide characters.
-    //
-    // The disadvantage is that the header has to be processed twice:
-    // - once to find the header-body-separator, in order to know
-    //   the end of the header (the body may be encoded in a binary
-    //   format and must not be converted to wide characters)
-    // - a second time to detect the actual pieces inside the header
-    //
-    // Alternative 2 is used here, hoping that it is the more efficient one.
-    //
-    process_http_request_header(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+    process_http_request_method(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
 }
 
 /* HTTP_REQUEST_DECODER_SOURCE */

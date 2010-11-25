@@ -16,6 +16,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Change back all-at-once-conversion of http request header into wide characters,
+            because the URI may contain percent-encoded octets that first have to be decoded,
+            before decoding the therefrom resulting octets into wide characters
+        * Factor out http request processing functions to separate files
+        * Prepare decoding of percent-encoded character arrays (may be applied in a URI)
+
 2010-11-24  Christian Heller  <christian.heller@tuxtax.de>
         * Start implementing URI decoding using files independent of HTTP, to make it reusable
 

@@ -34,8 +34,8 @@
 //
 
 /** The Set-Cookie header http name. */
-static wchar_t SET_COOKIE_HEADER_HTTP_NAME_ARRAY[] = {L'S', L'e', L't', L'-', L'C', L'o', L'o', L'k', L'i', L'e'};
-static wchar_t* SET_COOKIE_HEADER_HTTP_NAME = SET_COOKIE_HEADER_HTTP_NAME_ARRAY;
+static char SET_COOKIE_HEADER_HTTP_NAME_ARRAY[] = {'S', 'e', 't', '-', 'C', 'o', 'o', 'k', 'i', 'e'};
+static char* SET_COOKIE_HEADER_HTTP_NAME = SET_COOKIE_HEADER_HTTP_NAME_ARRAY;
 static int* SET_COOKIE_HEADER_HTTP_NAME_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* HEADER_HTTP_NAME_SOURCE */

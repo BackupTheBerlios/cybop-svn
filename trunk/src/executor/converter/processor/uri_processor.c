@@ -116,6 +116,10 @@
 // which should be encoded as %23 like:
 // http://www.example.net/index.html?session=A54C6FE2%23info
 //
+// See:
+// http://tools.ietf.org/html/rfc1630
+// http://tools.ietf.org/html/rfc3986
+//
 
 /**
  * Processes the uri scheme.

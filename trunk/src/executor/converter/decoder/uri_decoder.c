@@ -33,6 +33,15 @@
 /**
  * Decodes the uri into a compound model and -details.
  *
+ * CAUTION! The source character array MUST NOT be given
+ * as percent-encoded octets. In other words, it has to
+ * have been decoded before being handed over to this function.
+ *
+ * CAUTION! The source character array MUST NOT be given
+ * as sequence of wide characters. Standard octets are expected.
+ * The detected parts will get converted to wide characters inside,
+ * yet before being added to the destination.
+ *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
  * @param p2 the destination model size
