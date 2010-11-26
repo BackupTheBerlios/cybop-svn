@@ -38,14 +38,9 @@
 #include "../../../../constant/name/http/header/general_header_http_name.c"
 #include "../../../../constant/name/http/header/request_header_http_name.c"
 #include "../../../../constant/name/http/header/response_header_http_name.c"
+#include "../../../../executor/converter/processor/http_request_processor.c"
 #include "../../../../logger/logger.c"
 #include "../../../../variable/type_size/integral_type_size.c"
-
-//
-// Forward declarations.
-//
-
-void process_http_request_append_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10);
 
 //
 // CAUTION! This comment is valid for all "select" functions below.
