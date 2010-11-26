@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Factor out http request selecting functions to separate files
+
 2010-11-25  Christian Heller  <christian.heller@tuxtax.de>
         * Change back all-at-once-conversion of http request header into wide characters,
             because the URI may contain percent-encoded octets that first have to be decoded,

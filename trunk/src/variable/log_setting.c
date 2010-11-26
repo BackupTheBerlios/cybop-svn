@@ -26,6 +26,8 @@
 #ifndef LOG_SETTING_SOURCE
 #define LOG_SETTING_SOURCE
 
+#include <stdio.h>
+
 //
 // CAUTION! Do NOT try to assign any values here!
 // Otherwise, the compiler shows the following error:

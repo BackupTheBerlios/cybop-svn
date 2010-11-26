@@ -27,8 +27,8 @@
 #define HTTP_REQUEST_DECODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/converter/processor/http_request/method_http_request_processor.c"
 #include "../../../logger/logger.c"
-#include "../../../executor/converter/processor/http_request_processor.c"
 
 /**
  * Decodes the http request into a compound model and -details.

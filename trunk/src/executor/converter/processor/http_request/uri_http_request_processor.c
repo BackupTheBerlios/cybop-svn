@@ -32,7 +32,7 @@
 #include "../../../../constant/name/http/cyboi_http_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
 #include "../../../../executor/converter/processor/http_request_processor.c"
-#include "../../../../executor/converter/selector/http_request_selector.c"
+#include "../../../../executor/converter/selector/http_request/uri_http_request_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"

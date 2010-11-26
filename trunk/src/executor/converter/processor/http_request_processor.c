@@ -31,7 +31,6 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/http/cyboi_http_name.c"
 #include "../../../executor/accessor/appender/part_appender.c"
-#include "../../../executor/converter/selector/http_request_selector.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../logger/logger.c"
