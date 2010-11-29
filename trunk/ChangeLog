@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-11-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Create new files for uri handling
+        * Add directory "executor/converter/evaluator/"
+
 2010-11-26  Christian Heller  <christian.heller@tuxtax.de>
         * Factor out http request selecting functions to separate files
 

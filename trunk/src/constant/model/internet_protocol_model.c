@@ -21,6 +21,7 @@
  *
  * @version $RCSfile: internet_protocol_model.c,v $ $Revision: 1.4 $ $Date: 2009-07-22 17:18:16 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @author Enrico Gallus <enrico.gallus@googlemail.com>
  */
 
 #ifndef INTERNET_PROTOCOL_MODEL_SOURCE

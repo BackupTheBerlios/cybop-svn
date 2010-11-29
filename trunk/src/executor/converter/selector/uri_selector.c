@@ -37,7 +37,7 @@
 #include "../../../variable/type_size/integral_type_size.c"
 
 /**
- * Decodes uniform resource identifier (uri).
+ * Selects the uri scheme.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count

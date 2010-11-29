@@ -11,11 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE in files "uri_processor.c" and "uri_selector.c"
-        * Move code from file "http_request_compound_selector.c" and delete this file
+        * CONTINUE in files "uri_processor.c" (with "evaluate_uri_scheme") and in "uri_selector.c"
         * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
         * TEST using this URL:
-            http://localhost:1971/?action=index
+            http://localhost:1971?action=index
             the OLD one was:
             http://localhost:3456/resadmin/logic/send_name.cybol
 

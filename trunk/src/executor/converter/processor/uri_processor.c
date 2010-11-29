@@ -172,6 +172,8 @@ void process_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 }
             }
 
+//??            evaluate_uri_scheme(s, (void*) &sc);
+
         } else {
 
             log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process uri scheme. The current position is null.");

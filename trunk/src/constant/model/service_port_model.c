@@ -21,6 +21,7 @@
  *
  * @version $RCSfile: service_port_model.c,v $ $Revision: 1.5 $ $Date: 2009-01-31 16:06:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
+ * @author Enrico Gallus <enrico.gallus@googlemail.com>
  */
 
 #ifndef SERVICE_PORT_MODEL_SOURCE

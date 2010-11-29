@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef HTTP_REQUEST_COMPOUND_SELECTOR_SOURCE
-#define HTTP_REQUEST_COMPOUND_SELECTOR_SOURCE
+#ifndef HTTP_REQUEST_METHOD_EVALUATOR_SOURCE
+#define HTTP_REQUEST_METHOD_EVALUATOR_SOURCE
 
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -36,15 +36,15 @@
 #include "../../../memoriser/detector.c"
 
 /**
- * Decodes http request method.
+ * Evaluates http request method.
  *
  * Examples:
  *
  * GET /wiki/Spezial:Search?search=Katzen&go=Artikel HTTP/1.1
  * POST /wiki/Spezial:Search HTTP/1.1
  *
- * CAUTION! The methods GET and HEAD MUST be supported by all general-purpose servers!
- * All other methods are OPTIONAL.
+ * CAUTION! The methods GET and HEAD MUST be supported by all
+ * general-purpose servers! All other methods are OPTIONAL.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -56,13 +56,13 @@
  * @param p7 the source request method
  * @param p8 the source request method count
  */
-void decode_http_request_compound_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void evaluate_http_request_method(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** d = (void**) p0;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request method.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Evaluate http request method.");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -256,14 +256,14 @@ void decode_http_request_compound_method(void* p0, void* p1, void* p2, void* p3,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode http request method. The source request method is unknown.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not evaluate http request method. The source request method is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request method. The destination model is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not evaluate http request method. The destination model is null.");
     }
 }
 
-/* HTTP_REQUEST_COMPOUND_SELECTOR_SOURCE */
+/* HTTP_REQUEST_METHOD_EVALUATOR_SOURCE */
 #endif
