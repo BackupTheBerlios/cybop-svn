@@ -48,20 +48,10 @@
                 <div id="navigation">
                     <h1>Order Book now at either:</h1>
                     <a href="http://www.amazon.de/Cybernetics-Oriented-Programming-Christian-Heller/dp/3981089804/sr=8-1/qid=1169666060/ref=sr_1_1/302-7558907-0519230?ie=UTF8&s=books">amazon.de (international orders)</a>
-                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/en/currency/USD/buchnum/133558906/rk/books/rsk/hitlist">jpc.de (English, USD Orders)</a>
-                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/en/currency/GBP/buchnum/133558906/rk/books/rsk/hitlist">jpc.de (English, UK GBP Orders)</a>
-                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/de/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de (Deutsch, EUR)</a>
-                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/fr/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de (en Francais, EUR)</a>
-                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/nl/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de (Nederlands, EUR)</a>
-                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/es/currency/EUR/buchnum/133558906/rk/books/rsk/hitlist">jpc.de (Espanol, EUR)</a>
-                    <a href="http://www.jpc.de/jpcng/books/detail/-/lang/pl/currency/EUR/rsk/hitlist/rk/books/buchnum/133558906">jpc.de (Polski, EUR)</a>
-                    <a href="http://kulturkaufhaus.shop-asp.de/shop/action/productDetails?aUrl=90008115&artiId=6530512">kulturkaufhaus.de (Dussmann)</a>
-                    <a href="http://www.libri.de/shop/action/productDetails/6530512/christian_heller_cybernetics_oriented_programming_cybop_3981089804.html">libri.de</a>
                     <a href="http://www.buch.de/shop/home/suchartikel/cybernetics_oriented_programming_cybop/christian_heller/ISBN3-9810898-0-4/ID14278475.html?jumpId=988428">buch.de</a>
                     <a href="http://www.bol.de/shop/bde_homestartseite/suchartikel/cybernetics_oriented_programming_cybop/christian_heller/ISBN3-9810898-0-4/ID14278475.html?jumpId=973296">bol.de</a>
-                    <a href="http://www.lob.de">lob.de (Lehmanns)</a>
-                    <a href="http://buchhandel.bvdep.com/TitelSuche.asp?Func=Detail&Caller=vlbPublic&SearchId=3104458&HierSrcId=&SerieSrcId=&DirectSearchId=&CurrentPage=0&DetailIndex=0&SrcId=0-2890156&CanBeSubmitted=true&debug=&stichwort=cybop&autor=&preis_von=&preis_bis=&schlagwort=&jahr_von=&jahr_bis=&reihentitel=&medientyp=&verlag=&isbn=&titel=">buchhandel.de (Fachhaendler)</a>
-                    <a href="mailto:info@tuxtax.de">info@tuxtax.de (per Nachnahme, in Deutschland)</a>
+                    <a href="http://www.lehmanns.de/shop/mathematik-informatik/7766977-9783981089806-cybernetics-oriented-programming-cybop">lob.de (Lehmanns)</a>
+                    <a href="mailto:info@tuxtax.de">info@tuxtax.de (Nachnahme/Vorkasse)</a>
                 </div>
             </td>
         </tr>

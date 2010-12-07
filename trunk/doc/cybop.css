@@ -115,10 +115,6 @@ div#page a:active {
 }
 
 div#navigation {
-    margin-right: 20px;
-/*
-    width: 170px;
-*/
     float: left;
     border-width: 1px;
     border-style: solid;
@@ -199,6 +195,7 @@ div#information a:active {
 }
 
 div#description {
+    margin-left: 210px;
 }
 
 div#description h1 {
