@@ -23,15 +23,15 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef HIERARCHY_URI_PROCESSOR_SOURCE
-#define HIERARCHY_URI_PROCESSOR_SOURCE
+#ifndef HIERARCHY_HTTP_URI_PROCESSOR_SOURCE
+#define HIERARCHY_HTTP_URI_PROCESSOR_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../executor/converter/selector/uri_selector.c"
+#include "../../../../executor/converter/selector/uri/hierarchy_http_uri_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
@@ -48,7 +48,7 @@
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
  */
-void process_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void process_http_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -74,7 +74,7 @@ void process_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4, voi
                     break;
                 }
 
-                select_uri_hierarchy(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+                select_http_uri_hierarchy(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -100,5 +100,5 @@ void process_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     }
 }
 
-/* HIERARCHY_URI_PROCESSOR_SOURCE */
+/* HIERARCHY_HTTP_URI_PROCESSOR_SOURCE */
 #endif

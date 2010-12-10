@@ -27,7 +27,7 @@
 #define HTTP_URI_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
-#include "../../../../executor/converter/processor/uri_processor.c"
+#include "../../../../executor/converter/processor/uri/hierarchy_http_uri_processor.c"
 #include "../../../../logger/logger.c"
 
 /**
