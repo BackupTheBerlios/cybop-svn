@@ -63,7 +63,7 @@
 // In practice, however, file: is the only URI scheme known to
 // allow an empty reg-name (in that case instead of localhost).
 //
-// Example URIs and their component parts:
+// Example URI and its component parts:
 //
 // foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=ferret#nose
 // \__/\__________________/\_________/\___/\__________/\___/\__/\__________/\__________/\___/
@@ -76,10 +76,13 @@
 //  |                                     |                                 |             |
 // scheme                             hierarchy                           query       fragment
 //
-// The scheme and path components are required, though the path may be
-// empty (no characters). When authority is present, the path must
-// either be empty or begin with a slash ("/") character. When authority
-// is not present, the path cannot begin with two slash characters ("//").
+// The scheme is required.
+// The authority component is required, but may be empty only prefixed
+// with two slash characters ("//").
+// The hostname may be given in IPv4, IPv6 or FQDN format.
+// The path may be empty.
+// The path must either be empty or begin with a slash ("/") character.
+// When authority is not present, the path cannot begin with two slash characters ("//").
 //
 // In cyboi, the uri parts are translated into the following compound hierarchy:
 //

@@ -67,9 +67,11 @@ void select_http_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4,
 /*??
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) SCHEME_END_SEPARATOR_URI_NAME, (void*) SCHEME_END_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) AUTHORITY_BEGIN_SEPARATOR_URI_NAME, (void*) AUTHORITY_BEGIN_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??                process_http_uri_authority(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -78,9 +80,11 @@ void select_http_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) SCHEME_END_SEPARATOR_URI_NAME, (void*) SCHEME_END_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            detect((void*) &r, p7, p8, (void*) xx, (void*) xx_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??                process_http_uri_path(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;

@@ -66,6 +66,10 @@ void process_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, vo
     fwprintf(stdout, L"TEST pmc: %i \n", *((int*) p4));
 */
 
+        //
+        // CAUTION! Percent-encoding may be used for all URI, including URL and URN.
+        //
+
         // Decode encoding character array into serialised wide character array.
         decode_percent_encoding_character_vector((void*) &p, pc, ps, p3, p4);
 
