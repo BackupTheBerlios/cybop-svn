@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-12-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Create new files and continue uri handling
+        * Distinguish between various http schemes using "evaluate" function
+
 2010-11-29  Christian Heller  <christian.heller@tuxtax.de>
         * Create new files for uri handling
         * Add directory "executor/converter/evaluator/"

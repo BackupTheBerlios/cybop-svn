@@ -23,21 +23,21 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef URI_PROCESSOR_SOURCE
-#define URI_PROCESSOR_SOURCE
+#ifndef HIERARCHY_URI_PROCESSOR_SOURCE
+#define HIERARCHY_URI_PROCESSOR_SOURCE
 
-#include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../constant/name/uri/cyboi_uri_name.c"
-#include "../../../executor/accessor/appender/part_appender.c"
-#include "../../../executor/converter/selector/uri_selector.c"
-#include "../../../executor/memoriser/allocator/model_allocator.c"
-#include "../../../executor/memoriser/deallocator/model_deallocator.c"
-#include "../../../logger/logger.c"
+#include "../../../../constant/model/log/message_log_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
+#include "../../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../../constant/name/uri/cyboi_uri_name.c"
+#include "../../../../executor/accessor/appender/part_appender.c"
+#include "../../../../executor/converter/selector/uri_selector.c"
+#include "../../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../../executor/memoriser/deallocator/model_deallocator.c"
+#include "../../../../logger/logger.c"
 
 /**
- * Processes the uri scheme.
+ * Processes the uri hierarchy.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -48,7 +48,7 @@
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
  */
-void process_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void process_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -58,11 +58,11 @@ void process_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             void** pos = (void**) p6;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process uri scheme.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process uri hierarchy.");
 
-            // The scheme.
-            void* s = *pos;
-            int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The hierarchy.
+            void* h = *pos;
+            int hc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -74,7 +74,7 @@ void process_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                     break;
                 }
 
-                select_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+                select_uri_hierarchy(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -83,22 +83,22 @@ void process_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 } else {
 
                     // Increment request header count.
-                    sc++;
+                    hc++;
                 }
             }
 
-            evaluate_uri_scheme(p0, p1, p2, p3, p4, p5, p6, p7, s, (void*) &sc);
+//??            evaluate_uri_scheme(p0, p1, p2, p3, p4, p5, p6, p7, s, (void*) &sc);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process uri scheme. The current position is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process uri hierarchy. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process uri scheme. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process uri hierarchy. The remaining count is null.");
     }
 }
 
-/* URI_PROCESSOR_SOURCE */
+/* HIERARCHY_URI_PROCESSOR_SOURCE */
 #endif

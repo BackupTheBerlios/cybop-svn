@@ -60,112 +60,104 @@
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
  * @param p2 the destination model size
- * @param p3 the source body
- * @param p4 the source body count
- * @param p5 the knowledge memory
- * @param p6 the knowledge memory count
- * @param p7 the source request method
- * @param p8 the source request method count
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the current position (Hand over as reference!)
+ * @param p7 the remaining count
+ * @param p8 the scheme
+ * @param p9 the scheme count
  */
-void evaluate_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void evaluate_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Evaluate uri scheme.");
 
-        void** d = (void**) p0;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Evaluate uri scheme.");
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        compare_equal_arrays((void*) &r, p8, p9, (void*) FTP_SCHEME_URI_MODEL, (void*) FTP_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p7, p8, (void*) FTP_SCHEME_URI_MODEL, (void*) FTP_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                //?? TODO
-            }
+            //?? TODO
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p7, p8, (void*) HTTP_SCHEME_URI_MODEL, (void*) HTTP_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p8, p9, (void*) HTTP_SCHEME_URI_MODEL, (void*) HTTP_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                //?? TODO
-            }
+            decode_http_uri(p0, p1, p2, p3, p4, p5, *((void**) p6), p7);
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p7, p8, (void*) LDAP_SCHEME_URI_MODEL, (void*) LDAP_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p8, p9, (void*) LDAP_SCHEME_URI_MODEL, (void*) LDAP_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                //?? TODO
-            }
+            //?? TODO
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p7, p8, (void*) MAILTO_SCHEME_URI_MODEL, (void*) MAILTO_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p8, p9, (void*) MAILTO_SCHEME_URI_MODEL, (void*) MAILTO_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                //?? TODO
-            }
+            //?? TODO
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p7, p8, (void*) NEWS_SCHEME_URI_MODEL, (void*) NEWS_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p8, p9, (void*) NEWS_SCHEME_URI_MODEL, (void*) NEWS_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                //?? TODO
-            }
+            //?? TODO
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p7, p8, (void*) TEL_SCHEME_URI_MODEL, (void*) TEL_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p8, p9, (void*) TEL_SCHEME_URI_MODEL, (void*) TEL_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                //?? TODO
-            }
+            //?? TODO
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p7, p8, (void*) TELNET_SCHEME_URI_MODEL, (void*) TELNET_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p8, p9, (void*) TELNET_SCHEME_URI_MODEL, (void*) TELNET_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                //?? TODO
-            }
+            //?? TODO
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_arrays((void*) &r, p7, p8, (void*) URN_SCHEME_URI_MODEL, (void*) URN_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_arrays((void*) &r, p8, p9, (void*) URN_SCHEME_URI_MODEL, (void*) URN_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                //?? TODO
-            }
+            //?? TODO
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode http request method. The source request method is unknown.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request method. The destination model is null.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not evaluate uri scheme. The uri scheme is unknown.");
     }
 }
 
