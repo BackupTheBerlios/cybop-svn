@@ -36,91 +36,6 @@
 #include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../logger/logger.c"
 
-//
-// The generic URI syntax consists of a hierarchical sequence of components:
-//
-// URI         = scheme ":" hier-part [ "?" query ] [ "#" fragment ]
-//
-// hier-part   = "//" authority path-abempty
-//             / path-absolute
-//             / path-rootless
-//             / path-empty
-//
-// Example URIs and their component parts:
-//
-// foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=ferret#nose
-// \__/\__________________/\_________/\___/\__________/\___/\__/\__________/\__________/\___/
-//  |            |              |       |      |         |    |          |       |        |
-//  |         userinfo      hostname  port    dir  filename extension   parametre(s)      |
-//  |  \__________________________________/\___________________/\______________________/  |
-//  |                    |                            |                     |             |
-// scheme            authority                       path                 query        fragment
-//
-// The scheme and path components are required, though the path may be
-// empty (no characters). When authority is present, the path must
-// either be empty or begin with a slash ("/") character. When
-// authority is not present, the path cannot begin with two slash
-// characters ("//"). These restrictions result in five different ABNF
-// rules for a path (Section 3.3), only one of which will match any
-// given URI reference.
-//
-// In cyboi, the uri parts are translated into the following compound hierarchy:
-//
-// (the root is the destination compound that was handed over)
-// +-scheme
-// +-authority
-// | +-username
-// | +-password
-// | +-hostname
-// | +-port
-// +-path
-// +-query
-// | +-param1
-// | +-param2
-// | +-...
-// +-fragment
-//
-// The url path specified by the client is relative to the
-// server's root directory. Consider the following url as it
-// would be requested by a client:
-// http://www.example.com/path/file.html
-// The client's web browser will translate it into a connection
-// to www.example.com with the following http 1.1 request:
-// GET /path/file.html HTTP/1.1
-// host: www.example.com
-// The Web server on www.example.com will append the given path
-// to the path of its root directory. On Unix machines, this is
-// commonly /var/www/htdocs.
-// The result is the local file system resource:
-// /var/www/htdocs/path/file.html
-// The Web server will then read the file, if it exists, and
-// send a response to the client's web browser. The response
-// will describe the content of the file and contain the file itself.
-//
-// Although not defined by IETF's uri specification rfc3986, it has become
-// usual to use the characters ";" and "&" as parameter separators in a uri.
-// These are commonly found in both, the "path" and "query" component part.
-// For cyboi, however, it is defined that parameters may only be given in the
-// "query" component part, and that parameters are separated by ampersand "&".
-//
-// Examples:
-//
-// http://localhost:1971/?exit
-// http://127.0.0.1:1971?name=close&channel=inline&abstraction=knowledge&model=.residenz.logic.exit_program
-// http://de.wikipedia.org/w/index.php?title=Uniform_Resource_Locator&action=edit
-//
-// There are a number of reserved characters, to which belong:
-// ! # $ % & ' ( )// + , / : ; = ? @ [ ]
-// The following url contains the reserved # character:
-// http://www.example.net/index.html?session=A54C6FE2#info
-// which should be encoded as %23 like:
-// http://www.example.net/index.html?session=A54C6FE2%23info
-//
-// See:
-// http://tools.ietf.org/html/rfc1630
-// http://tools.ietf.org/html/rfc3986
-//
-
 /**
  * Processes the uri scheme.
  *
@@ -172,7 +87,7 @@ void process_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                 }
             }
 
-//??            evaluate_uri_scheme(s, (void*) &sc);
+            evaluate_uri_scheme(p0, p1, p2, p3, p4, p5, p6, p7, s, (void*) &sc);
 
         } else {
 
