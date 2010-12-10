@@ -11,7 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE in files "uri_processor.c" (with "evaluate_uri_scheme") and in "uri_selector.c"
+        * CONTINUE in files "hierarchy_http_uri_selector.c"
         * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
         * TEST using this URL:
             http://localhost:1971?action=index

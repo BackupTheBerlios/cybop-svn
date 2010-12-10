@@ -23,18 +23,18 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef URI_SELECTOR_SOURCE
-#define URI_SELECTOR_SOURCE
+#ifndef SCHEME_URI_SELECTOR_SOURCE
+#define SCHEME_URI_SELECTOR_SOURCE
 
-#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../constant/name/uri/cyboi_uri_name.c"
-#include "../../../constant/name/uri/separator_uri_name.c"
-#include "../../../executor/converter/detector.c"
-#include "../../../logger/logger.c"
-#include "../../../variable/type_size/integral_type_size.c"
+#include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../../constant/model/log/message_log_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
+#include "../../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../../constant/name/uri/cyboi_uri_name.c"
+#include "../../../../constant/name/uri/separator_uri_name.c"
+#include "../../../../executor/converter/detector.c"
+#include "../../../../logger/logger.c"
+#include "../../../../variable/type_size/integral_type_size.c"
 
 /**
  * Selects the uri scheme.
@@ -82,5 +82,5 @@ void select_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
     }
 }
 
-/* URI_SELECTOR_SOURCE */
+/* SCHEME_URI_SELECTOR_SOURCE */
 #endif
