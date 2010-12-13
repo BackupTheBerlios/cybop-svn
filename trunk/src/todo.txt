@@ -11,6 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * See: http://www.w3.org/TR/html5/urls.html#urls
         * CONTINUE in file "hierarchy_http_uri_selector.c";
             find the end of main URI parts, e.g. "/" for the end of the authority,
             and then use an own "decode" function for these main parts,
