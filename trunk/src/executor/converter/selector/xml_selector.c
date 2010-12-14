@@ -79,7 +79,7 @@ void select_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p4, p5, (void*) DECLARATION_END_XML_NAME, (void*) DECLARATION_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p4, p5, (void*) DECLARATION_END_XML_NAME, (void*) DECLARATION_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -140,7 +140,7 @@ void select_xml_definition(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p1, p2, (void*) DEFINITION_END_XML_NAME, (void*) DEFINITION_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p1, p2, (void*) DEFINITION_END_XML_NAME, (void*) DEFINITION_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -201,7 +201,7 @@ void select_xml_comment(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p1, p2, (void*) COMMENT_END_XML_NAME, (void*) COMMENT_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p1, p2, (void*) COMMENT_END_XML_NAME, (void*) COMMENT_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -298,7 +298,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p7, p8, (void*) END_TAG_BEGIN_XML_NAME, (void*) END_TAG_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p7, p8, (void*) END_TAG_BEGIN_XML_NAME, (void*) END_TAG_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -312,7 +312,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p7, p8, (void*) DECLARATION_BEGIN_XML_NAME, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p7, p8, (void*) DECLARATION_BEGIN_XML_NAME, (void*) DECLARATION_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -323,7 +323,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p7, p8, (void*) COMMENT_BEGIN_XML_NAME, (void*) COMMENT_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p7, p8, (void*) COMMENT_BEGIN_XML_NAME, (void*) COMMENT_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -334,7 +334,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p7, p8, (void*) DEFINITION_BEGIN_XML_NAME, (void*) DEFINITION_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p7, p8, (void*) DEFINITION_BEGIN_XML_NAME, (void*) DEFINITION_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -345,7 +345,7 @@ void select_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p7, p8, (void*) START_TAG_BEGIN_XML_NAME, (void*) START_TAG_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p7, p8, (void*) START_TAG_BEGIN_XML_NAME, (void*) START_TAG_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -406,7 +406,7 @@ void select_xml_end_tag(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p1, p2, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p1, p2, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -499,7 +499,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect((void*) &r, p3, p4, (void*) EMPTY_TAG_END_XML_NAME, (void*) EMPTY_TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                            detect((void*) &r, p3, p4, (void*) EMPTY_TAG_END_XML_NAME, (void*) EMPTY_TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -511,7 +511,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect((void*) &r, p3, p4, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                            detect((void*) &r, p3, p4, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -523,7 +523,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect((void*) &r, p3, p4, (void*) ATTRIBUTE_BEGIN_XML_NAME, (void*) ATTRIBUTE_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                            detect((void*) &r, p3, p4, (void*) ATTRIBUTE_BEGIN_XML_NAME, (void*) ATTRIBUTE_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -592,7 +592,7 @@ void select_xml_attribute_name(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p1, p2, (void*) ATTRIBUTE_VALUE_BEGIN_XML_NAME, (void*) ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p1, p2, (void*) ATTRIBUTE_VALUE_BEGIN_XML_NAME, (void*) ATTRIBUTE_VALUE_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -657,7 +657,7 @@ void select_xml_attribute_value(void* p0, void* p1, void* p2) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p1, p2, (void*) ATTRIBUTE_VALUE_END_XML_NAME, (void*) ATTRIBUTE_VALUE_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    detect((void*) &r, p1, p2, (void*) ATTRIBUTE_VALUE_END_XML_NAME, (void*) ATTRIBUTE_VALUE_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

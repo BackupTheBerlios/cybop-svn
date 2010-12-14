@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SCHEME_URI_SELECTOR_SOURCE
-#define SCHEME_URI_SELECTOR_SOURCE
+#ifndef FRAGMENT_HTTP_URI_SELECTOR_SOURCE
+#define FRAGMENT_HTTP_URI_SELECTOR_SOURCE
 
 #include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../../constant/model/log/message_log_model.c"
@@ -37,7 +37,7 @@
 #include "../../../../variable/type_size/integral_type_size.c"
 
 /**
- * Selects the uri scheme.
+ * Selects the http uri fragment.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -49,27 +49,20 @@
  * @param p7 the current position (Hand over as reference!)
  * @param p8 the remaining count
  */
-void select_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void select_http_uri_fragment(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* b = (int*) p6;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select uri scheme.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http uri fragment.");
+
+        //
+        // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
+        //
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            detect((void*) &r, p7, p8, (void*) SCHEME_END_SEPARATOR_URI_NAME, (void*) SCHEME_END_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                // Set break flag.
-                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-            }
-        }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -78,9 +71,9 @@ void select_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select uri scheme. The break flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http uri fragment. The break flag is null.");
     }
 }
 
-/* SCHEME_URI_SELECTOR_SOURCE */
+/* FRAGMENT_HTTP_URI_SELECTOR_SOURCE */
 #endif

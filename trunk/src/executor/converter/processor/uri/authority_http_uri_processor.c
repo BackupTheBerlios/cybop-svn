@@ -23,21 +23,21 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef HIERARCHY_HTTP_URI_PROCESSOR_SOURCE
-#define HIERARCHY_HTTP_URI_PROCESSOR_SOURCE
+#ifndef AUTHORITY_HTTP_URI_PROCESSOR_SOURCE
+#define AUTHORITY_HTTP_URI_PROCESSOR_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../executor/converter/selector/uri/hierarchy_http_uri_selector.c"
+#include "../../../../executor/converter/selector/uri/authority_http_uri_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
 
 /**
- * Processes the uri hierarchy.
+ * Processes the http uri authority.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -48,7 +48,7 @@
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
  */
-void process_http_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void process_http_uri_authority(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -58,11 +58,11 @@ void process_http_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4
 
             void** pos = (void**) p6;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process uri hierarchy.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http uri authority.");
 
-            // The hierarchy.
-            void* h = *pos;
-            int hc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The element.
+            void* e = *pos;
+            int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -74,7 +74,7 @@ void process_http_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4
                     break;
                 }
 
-                select_http_uri_hierarchy(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+                select_http_uri_authority(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -82,23 +82,21 @@ void process_http_uri_hierarchy(void* p0, void* p1, void* p2, void* p3, void* p4
 
                 } else {
 
-                    // Increment request header count.
-                    hc++;
+                    // Increment element count.
+                    ec++;
                 }
             }
 
-//??            evaluate_uri_scheme(p0, p1, p2, p3, p4, p5, p6, p7, s, (void*) &sc);
-
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process uri hierarchy. The current position is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http uri authority. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process uri hierarchy. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http uri authority. The remaining count is null.");
     }
 }
 
-/* HIERARCHY_HTTP_URI_PROCESSOR_SOURCE */
+/* AUTHORITY_HTTP_URI_PROCESSOR_SOURCE */
 #endif

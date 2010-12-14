@@ -99,59 +99,72 @@ void detect_move_position(void* p0, void* p1, void* p2, void* p3) {
  * @param p4 the element count
  * @param p5 the abstraction
  * @param p6 the primitive type size
+ * @param p7 the move flag
  */
-void detect_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void detect_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* ec = (int*) p4;
+        int* m = (int*) p7;
 
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* rem = (int*) p2;
+            int* ec = (int*) p4;
 
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+            if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-                void** pos = (void**) p1;
+                int* rem = (int*) p2;
 
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+                if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                    int* r = (int*) p0;
+                    void** pos = (void**) p1;
 
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect element.");
+                    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                    if (*rem >= *ec) {
+                        int* r = (int*) p0;
 
-                        compare_equal_arrays(p0, *pos, p4, p3, p4, p5);
+                        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Detect element.");
 
-                        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                        if (*rem >= *ec) {
 
-                            detect_move_position(p1, p2, p4, p6);
+                            compare_equal_arrays(p0, *pos, p4, p3, p4, p5);
+
+                            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                                if (*m != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                                    detect_move_position(p1, p2, p4, p6);
+                                }
+                            }
+
+                        } else {
+
+                            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The remaining count is too small.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The remaining count is too small.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The comparison result is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The comparison result is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The current position is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The current position is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The remaining count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The remaining count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The element count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The element count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not detect element. The move flag is null.");
     }
 }
 
@@ -165,8 +178,9 @@ void detect_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
  * @param p4 the element count
  * @param p5 the element abstraction
  * @param p6 the element abstraction count
+ * @param p7 the move flag
  */
-void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Detect.");
 
@@ -179,7 +193,7 @@ void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_element(p0, p1, p2, p3, p4, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+            detect_element(p0, p1, p2, p3, p4, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE, p7);
         }
     }
 
@@ -189,7 +203,7 @@ void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_element(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
+            detect_element(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE, p7);
         }
     }
 
