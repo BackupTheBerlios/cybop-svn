@@ -1,0 +1,78 @@
+
+CYBOI-Java-Comparison
+=====================
+
+Comparison
+__________
+
+CYBOI function: synonymous Java methods
+
+allocate: malloc, new, constructor, create
+deallocate: free, delete, destructor, destroy
+
+get_element_by_index(container, index): element, poll, charAt, codePointAt
+get_first_element_by_index(container): element, peek
+get_last_element_by_index(container)
+
+get_first_index(container, element): indexOf, contains, find, search
+get_last_index(container, element): lastIndexOf
+
+compare_equality_all: equals
+compare_equality_all_ignore_case: equalsIgnoreCase
+compare_equality_prefix: startsWith
+compare_equality_prefix_ignore_case
+compare_equality_suffix: endsWith
+compare_equality_suffix_ignore_case
+compare_equality_part(destination container, source container): containsAll
+compare_equality_part_ignore_case
+??: compareTo (lexicographically, i.e. position in ASCII/Unicode table)
+
+append_element(container, element): add, put, offer, concat
+append_all(destination container, source container)
+
+copy: copyValueOf
+
+move_element_by_index(destination container, source container, source element index)
+move_element_by_name(destination container, source container, source element name)
+move_area(destination container, source container, source start index, source end index): drainTo
+move_all(destination container, source container): drainTo
+
+match(regular expression): matches
+
+replace_element(container, source element, index): set
+
+insert_element(container, source element, index)
+
+remove_element_by_index(index): delete
+remove_element_by_name(name)
+remove_area(start index, end index)
+remove_all(container): clear, empty
+
+sort_by_name
+
+decode: valueOf
+encode: toString
+
+encode_capitalisation_lower: toLowerCase
+encode_capitalisation_upper: toUpperCase
+
+reverse(character array) [reverse sequence]
+trim(character array): [delete all spaces preceding and following the string]
+
+Composition
+___________
+
+poll = take = get_first_element + remove_first_element
+remove_first_element(element) = get_first_index + remove_element_by_index
+remove_last_element(element) = get_last_index + remove_element_by_index
+replace_element(container, old element, new element) = loop + get_first_index + replace_element
+
+Superfluous
+___________
+
+length, capacity:
+elements are accompanied by a count and size by default
+
+subSequence, substring:
+it suffices to simply count up the pointer to the
+desired sub sequence of an array
