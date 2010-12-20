@@ -5,19 +5,34 @@ CYBOI-Java-Comparison
 Comparison
 __________
 
-CYBOI function: synonymous Java methods
-
 allocate: malloc, new, constructor, create
-reallocate: trimToSize
-clone
 deallocate: free, delete, destructor, destroy
+reallocate: trimToSize
 
-get_element_by_index(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt
-get_first_element_by_index(container): firstElement, element, peek, first, lowest
-get_last_element_by_index(container): lastElement, last, highest
+insert_element(container, source element, index)
+
+remove_element(index): delete
+remove_element_by_name(name)
+remove_area(start index, end index)
+remove_all(container): clear, empty
+
+set_element(container, source element, index): replace
+set_part(container, source element, index)
+set_part_by_name(container, source element, name): set
+set_signal(container, source element, index): set
+
+get_element(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest
+get_part_name(container, index)
+get_part_abstraction(container, index)
+get_part(container, index)
+get_part_by_name(container, name)
+get_part_details(container, index)
 
 get_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
 get_last_index(container, element): lastIndexOf
+
+clone_shallow = allocate + loop + get[pointer](old container, index) + set[pointer](new container, index)
+clone_deep = allocate + loop + get(old container, index) + loop + get(child container, index) + etc.
 
 compare_equality_all(container, array): equals, ceiling, floor, higher, lower
 compare_equality_all_ignore_case: equalsIgnoreCase
@@ -29,45 +44,33 @@ compare_equality_part(destination container, source container): containsAll
 compare_equality_part_ignore_case
 ??: compareTo (lexicographically, i.e. position in ASCII/Unicode table)
 
-append_element(container, element): add, push, put, offer, concat
-append_all(destination container, source container): putAll
-
-copy: copyValueOf
-
-move_element_by_index(destination container, source container, source element index)
-move_element_by_name(destination container, source container, source element name)
-move_area(destination container, source container, source start index, source end index): drainTo
-move_all(destination container, source container): drainTo
-
-match(regular expression): matches
-
-replace_element(container, source element, index): set
-
-insert_element(container, source element, index)
-
-remove_element_by_index(index): delete
-remove_element_by_name(name)
-remove_area(start index, end index)
-remove_all(container): clear, empty
-
-sort_by_name
-
 decode: valueOf
 encode: toString
 
 encode_capitalisation_lower: toLowerCase
 encode_capitalisation_upper: toUpperCase
 
-reverse(character array) [reverse sequence]
+sort_parts_by_name(destination container, source container)
 trim(character array): [delete all spaces preceding and following the string]
+reverse(character array) [reverse sequence]
+filter (regular expression): matches
 
 Composition
 ___________
 
 pop = poll = take = get_first_element + remove_first_element
-remove_first_element(element) = get_first_index + remove_element_by_index
-remove_last_element(element) = get_last_index + remove_element_by_index
-replace_elements(container, old element, new element) = loop + get_first_index + replace_element
+remove_first_element(element) = get_first_index + remove_element
+remove_last_element(element) = get_last_index + remove_element
+set_elements(container, old element, new element) = loop + get_first_index + set_element
+copy = copyValueOf = clone + set
+
+move: COMPOSITION? = get(old container, index) + append(new container, element) + remove(old container, index)
+move_element(destination container, source container, source element index)
+move_element_by_name(destination container, source container, source element name)
+move_area(destination container, source container, source start index, source end index): drainTo
+move_elements(destination container, source container): drainTo
+move_signals(destination container, source container): drainTo
+move_parts(destination container, source container): drainTo
 
 Superfluous
 ___________
@@ -82,3 +85,11 @@ elements are accompanied by a count and size by default
 subSequence, substring:
 it suffices to simply count up the pointer to the
 desired sub sequence of an array
+
+append: SUPERFLUOUS? = set(container, count as index)
+append_element(container, element): add, push, put, offer, concat
+append_signal(container, element): add, push, put, offer, concat
+append_part(container, element): add, push, put, offer, concat
+append_elements(destination container, source container): appendAll, putAll
+append_signals(destination container, source container): appendAll, putAll
+append_parts(destination container, source container): appendAll, putAll
