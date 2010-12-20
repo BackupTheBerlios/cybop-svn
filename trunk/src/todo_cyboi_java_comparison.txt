@@ -8,16 +8,18 @@ __________
 CYBOI function: synonymous Java methods
 
 allocate: malloc, new, constructor, create
+reallocate: trimToSize
+clone
 deallocate: free, delete, destructor, destroy
 
-get_element_by_index(container, index): element, poll, charAt, codePointAt
-get_first_element_by_index(container): element, peek
-get_last_element_by_index(container)
+get_element_by_index(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt
+get_first_element_by_index(container): firstElement, element, peek, first, lowest
+get_last_element_by_index(container): lastElement, last, highest
 
-get_first_index(container, element): indexOf, contains, find, search
+get_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
 get_last_index(container, element): lastIndexOf
 
-compare_equality_all: equals
+compare_equality_all(container, array): equals, ceiling, floor, higher, lower
 compare_equality_all_ignore_case: equalsIgnoreCase
 compare_equality_prefix: startsWith
 compare_equality_prefix_ignore_case
@@ -27,8 +29,8 @@ compare_equality_part(destination container, source container): containsAll
 compare_equality_part_ignore_case
 ??: compareTo (lexicographically, i.e. position in ASCII/Unicode table)
 
-append_element(container, element): add, put, offer, concat
-append_all(destination container, source container)
+append_element(container, element): add, push, put, offer, concat
+append_all(destination container, source container): putAll
 
 copy: copyValueOf
 
@@ -62,15 +64,19 @@ trim(character array): [delete all spaces preceding and following the string]
 Composition
 ___________
 
-poll = take = get_first_element + remove_first_element
+pop = poll = take = get_first_element + remove_first_element
 remove_first_element(element) = get_first_index + remove_element_by_index
 remove_last_element(element) = get_last_index + remove_element_by_index
-replace_element(container, old element, new element) = loop + get_first_index + replace_element
+replace_elements(container, old element, new element) = loop + get_first_index + replace_element
 
 Superfluous
 ___________
 
-length, capacity:
+hashCode:
+typically (e.g. in Java) implemented by converting the internal address of the object into an integer;
+CYBOI works with pointers anyway, so that distinct objects are identifiable
+
+getChildCount, length, capacity, isEmpty, size, setSize:
 elements are accompanied by a count and size by default
 
 subSequence, substring:

@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-12-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Investigate container classes of Java Class Framework
+            (e.g. Collections, Maps, MutableTreeNode)
+            in order to identify groups of necessary container functions
+        * Store these functions in file "todo_cyboi_java_comparison.txt"
+
 2010-12-14  Christian Heller  <christian.heller@tuxtax.de>
         * Create new files and continue uri handling
         * Extend "detect" function with flag indicating desired move of position
