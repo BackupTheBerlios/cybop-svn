@@ -39,14 +39,14 @@
 // Forward declarations.
 //
 
-void process_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4);
-void process_xml_definition(void* p0, void* p1, void* p2, void* p3, void* p4);
-void process_xml_comment(void* p0, void* p1);
-void process_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
-void process_xml_end_tag(void* p0, void* p1);
-void process_xml_attribute_name(void* p0, void* p1, void* p2, void* p3);
-void process_xml_attribute_value(void* p0, void* p1, void* p2, void* p3);
-void process_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4);
+void decode_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4);
+void decode_xml_definition(void* p0, void* p1, void* p2, void* p3, void* p4);
+void decode_xml_comment(void* p0, void* p1);
+void decode_xml_element_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
+void decode_xml_end_tag(void* p0, void* p1);
+void decode_xml_attribute_name(void* p0, void* p1, void* p2, void* p3);
+void decode_xml_attribute_value(void* p0, void* p1, void* p2, void* p3);
+void decode_xml_element(void* p0, void* p1, void* p2, void* p3, void* p4);
 
 /**
  * Selects the xml declaration.
