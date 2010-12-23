@@ -181,7 +181,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
             // Decode temporary compound memory model into cyboi knowledge compound memory model.
             // Basically, tags (structural data) and attributes (meta data) are swapped in meaning.
-            decode_cybol(p0, p1, p2, p3, p4, p5, m, mc, d, dc);
+            decode_cybol(p0, p1, p2, m, mc, d, dc);
 
             // Deallocate temporary model.
             deallocate_model((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
@@ -361,7 +361,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 //?? TEST END
 
             // Decode temporary compound memory model into cyboi knowledge compound memory model.
-            decode_cybol(p0, p1, p2, p3, p4, p5, m, (void*) &mc, d, (void*) &dc);
+            decode_cybol(p0, p1, p2, m, (void*) &mc, d, (void*) &dc);
 
             // Deallocate temporary model.
             deallocate((void*) &m, (void*) &ms, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);

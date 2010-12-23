@@ -28,7 +28,21 @@
 
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
-#include "../../../executor/converter/processor/http_response_processor.c"
+
+//
+// Many Web servers supply incorrect Content-Type headers with their
+// HTTP responses.  In order to be compatible with these Web servers,
+// Web browsers must consider the content of HTTP responses as well as
+// the Content-Type header when determining the effective mime type of
+// the response. The following document describes an algorithm for
+// determining the effective mime type of HTTP responses that balances
+// security and compatibility considerations:
+//
+// http://tools.ietf.org/html/draft-abarth-mime-sniff-00
+//
+// CAUTION! This is a draft document that, by the rules of IETF,
+// has to be referenced as "work in progress", which is hereby done.
+//
 
 /**
  * Decodes the http response into a compound model and -details.
@@ -46,7 +60,7 @@ void decode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode http response.");
 
-//??    process_http_response(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+//??    decode_http_response_xx(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
 }
 
 /* HTTP_RESPONSE_DECODER_SOURCE */
