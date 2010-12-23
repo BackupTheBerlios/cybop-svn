@@ -11,9 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Replace "process" functions with "decode" functions
         * See: http://www.w3.org/TR/html5/urls.html#urls
         * CONTINUE uri processing
-        * Use "decode" functions instead of "process" functions (replace them)
         * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
         * TEST using this URL:
             http://localhost:1971?action=index

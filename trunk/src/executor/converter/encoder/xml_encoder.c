@@ -27,7 +27,7 @@
 #define XML_ENCODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../executor/converter/processor/xml_processor.c"
+//?? #include "../../../executor/converter/processor/xml_processor.c"
 #include "../../../logger/logger.c"
 
 /**
