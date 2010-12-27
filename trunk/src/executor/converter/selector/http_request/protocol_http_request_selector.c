@@ -31,8 +31,8 @@
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/http/separator_http_name.c"
-#include "../../../../executor/converter/processor/http_request/body_http_request_processor.c"
-#include "../../../../executor/converter/processor/http_request/header_argument_http_request_processor.c"
+#include "../../../../executor/converter/decoder/http_request/body_http_request_decoder.c"
+#include "../../../../executor/converter/decoder/http_request/header_argument_http_request_decoder.c"
 #include "../../../../executor/converter/detector.c"
 #include "../../../../logger/logger.c"
 #include "../../../../variable/type_size/integral_type_size.c"
@@ -57,7 +57,7 @@
 // CAUTION! If a detection was successful, then the current position and remaining count
 // were already adapted within the corresponding "detect" function (as called below),
 // so that they now point to the first character following the detected character sequence.
-// Any "process" function called afterwards can rely on this and start processing right away.
+// Any "decode" function called afterwards can rely on this and start processing right away.
 //
 
 /**
@@ -100,7 +100,7 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                process_http_request_body(p0, p1, p2, p3, p4, p5, p7, p8);
+                decode_http_request_body(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -113,7 +113,7 @@ void select_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                process_http_request_header_argument(p0, p1, p2, p3, p4, p5, p7, p8);
+                decode_http_request_header_argument(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;

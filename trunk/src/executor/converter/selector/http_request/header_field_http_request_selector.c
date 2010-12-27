@@ -38,7 +38,6 @@
 #include "../../../../constant/name/http/header/general_header_http_name.c"
 #include "../../../../constant/name/http/header/request_header_http_name.c"
 #include "../../../../constant/name/http/header/response_header_http_name.c"
-#include "../../../../executor/converter/processor/http_request_processor.c"
 #include "../../../../logger/logger.c"
 #include "../../../../variable/type_size/integral_type_size.c"
 
@@ -62,8 +61,43 @@
 // CAUTION! If a detection was successful, then the current position and remaining count
 // were already adapted within the corresponding "detect" function (as called below),
 // so that they now point to the first character following the detected character sequence.
-// Any "process" function called afterwards can rely on this and start processing right away.
+// Any "decode" function called afterwards can rely on this and start processing right away.
 //
+
+/**
+ * Converts the given characters to wide characters and
+ * appends them to the destination.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source name
+ * @param p4 the source name count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source model
+ * @param p8 the source model count
+ * @param p9 the source details
+ * @param p10 the source details count
+ */
+void select_http_request_header_field_append_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+
+    // The serialised wide character array.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    void* sc = *NULL_POINTER_MEMORY_MODEL;
+    void* ss = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate serialised wide character array.
+    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+    // Decode encoded character array into serialised wide character array.
+    decode_utf_8_unicode_character_vector((void*) &s, sc, ss, p7, p8);
+
+    append_part(p0, p1, p2, p3, p4, p5, p6, s, sc, p9, p10);
+
+    // Deallocate serialised wide character array.
+    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+}
 
 /**
  * Selects the http request header field.
@@ -93,7 +127,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_ALLOW_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_ALLOW_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -106,7 +140,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_CONTENT_ENCODING_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -119,7 +153,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_CONTENT_LANGUAGE_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -132,7 +166,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -145,7 +179,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_CONTENT_LOCATION_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -158,7 +192,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_CONTENT_MD5_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_CONTENT_MD5_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -171,7 +205,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_CONTENT_RANGE_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -184,7 +218,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_CONTENT_TYPE_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -197,7 +231,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_EXPIRES_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_EXPIRES_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -210,7 +244,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME, (void*) CYBOI_LAST_MODIFIED_ENTITY_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -227,7 +261,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_ACCEPT_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_ACCEPT_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -240,7 +274,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_ACCEPT_CHARSET_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -253,7 +287,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_ACCEPT_ENCODING_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -266,7 +300,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_ACCEPT_LANGUAGE_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -279,7 +313,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -292,7 +326,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_EXPECT_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_EXPECT_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -305,7 +339,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_FROM_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_FROM_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -318,7 +352,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_HOST_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_HOST_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -331,7 +365,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_IF_MATCH_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_IF_MATCH_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -344,7 +378,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_IF_MODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -357,7 +391,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_IF_NONE_MATCH_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -370,7 +404,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_IF_RANGE_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_IF_RANGE_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -383,7 +417,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_IF_UNMODIFIED_SINCE_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -396,7 +430,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_MAX_FORWARDS_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -409,7 +443,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_PROXY_AUTHORIZATION_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -422,7 +456,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_RANGE_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_RANGE_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -435,7 +469,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_REFERER_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_REFERER_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -448,7 +482,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_TE_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_TE_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -461,7 +495,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_USER_AGENT_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_USER_AGENT_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -474,7 +508,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_VARY_REQUEST_HEADER_HTTP_NAME, (void*) CYBOI_VARY_REQUEST_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -491,7 +525,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME, (void*) CYBOI_ACCEPT_RANGES_RESPONSE_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -504,7 +538,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_AGE_RESPONSE_HEADER_HTTP_NAME, (void*) CYBOI_AGE_RESPONSE_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -517,7 +551,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_ETAG_RESPONSE_HEADER_HTTP_NAME, (void*) CYBOI_ETAG_RESPONSE_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -530,7 +564,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_LOCATION_RESPONSE_HEADER_HTTP_NAME, (void*) CYBOI_LOCATION_RESPONSE_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -543,7 +577,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME, (void*) CYBOI_PROXY_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -556,7 +590,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME, (void*) CYBOI_RETRY_AFTER_RESPONSE_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -569,7 +603,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_SERVER_RESPONSE_HEADER_HTTP_NAME, (void*) CYBOI_SERVER_RESPONSE_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -582,7 +616,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME, (void*) CYBOI_WWW_AUTHENTICATE_RESPONSE_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -599,7 +633,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_CACHE_CONTROL_GENERAL_HEADER_HTTP_NAME, (void*) CYBOI_CACHE_CONTROL_GENERAL_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -612,7 +646,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_CONNECTION_GENERAL_HEADER_HTTP_NAME, (void*) CYBOI_CONNECTION_GENERAL_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -625,7 +659,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_DATE_GENERAL_HEADER_HTTP_NAME, (void*) CYBOI_DATE_GENERAL_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -638,7 +672,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_PRAGMA_GENERAL_HEADER_HTTP_NAME, (void*) CYBOI_PRAGMA_GENERAL_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -651,7 +685,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_TRAILER_GENERAL_HEADER_HTTP_NAME, (void*) CYBOI_TRAILER_GENERAL_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -664,7 +698,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_TRANSFER_ENCODING_GENERAL_HEADER_HTTP_NAME, (void*) CYBOI_TRANSFER_ENCODING_GENERAL_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -677,7 +711,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_UPGRADE_GENERAL_HEADER_HTTP_NAME, (void*) CYBOI_UPGRADE_GENERAL_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -690,7 +724,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_VIA_GENERAL_HEADER_HTTP_NAME, (void*) CYBOI_VIA_GENERAL_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -703,7 +737,7 @@ void select_http_request_header_field(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            process_http_request_append_part(p0, p1, p2,
+            select_http_request_header_field_append_part(p0, p1, p2,
                 (void*) CYBOI_WARNING_GENERAL_HEADER_HTTP_NAME, (void*) CYBOI_WARNING_GENERAL_HEADER_HTTP_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                 p5, p6, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);

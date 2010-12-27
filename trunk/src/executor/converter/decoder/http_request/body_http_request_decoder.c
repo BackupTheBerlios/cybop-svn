@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef BODY_HTTP_REQUEST_PROCESSOR_SOURCE
-#define BODY_HTTP_REQUEST_PROCESSOR_SOURCE
+#ifndef BODY_HTTP_REQUEST_DECODER_SOURCE
+#define BODY_HTTP_REQUEST_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
@@ -34,7 +34,7 @@
 #include "../../../../logger/logger.c"
 
 /**
- * Processes the http request body.
+ * Decodes the http request body.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -45,13 +45,13 @@
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
  */
-void process_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void decode_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** pos = (void**) p6;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request body.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request body.");
 
         //
         // CAUTION! There is NO NEED to detect the body end with a
@@ -76,9 +76,9 @@ void process_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4,
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request body. The current position is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request body. The current position is null.");
     }
 }
 
-/* BODY_HTTP_REQUEST_PROCESSOR_SOURCE */
+/* BODY_HTTP_REQUEST_DECODER_SOURCE */
 #endif

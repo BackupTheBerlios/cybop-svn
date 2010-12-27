@@ -23,23 +23,21 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef HEADER_VALUE_HTTP_REQUEST_PROCESSOR_SOURCE
-#define HEADER_VALUE_HTTP_REQUEST_PROCESSOR_SOURCE
+#ifndef HEADER_ARGUMENT_HTTP_REQUEST_DECODER_SOURCE
+#define HEADER_ARGUMENT_HTTP_REQUEST_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/http/cyboi_http_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../executor/converter/processor/http_request_processor.c"
-#include "../../../../executor/converter/selector/http_request/header_field_http_request_selector.c"
-#include "../../../../executor/converter/selector/http_request/header_value_http_request_selector.c"
+#include "../../../../executor/converter/selector/http_request/header_argument_http_request_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
 
 /**
- * Processes the http request header value.
+ * Decodes the http request header argument.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -49,10 +47,8 @@
  * @param p5 the destination details size
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
- * @param p8 the header argument
- * @param p9 the header argument count
  */
-void process_http_request_header_value(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void decode_http_request_header_argument(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -62,11 +58,11 @@ void process_http_request_header_value(void* p0, void* p1, void* p2, void* p3, v
 
             void** pos = (void**) p6;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request header value.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request header argument.");
 
-            // The header value.
-            void* hv = *pos;
-            int hvc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The header argument.
+            void* ha = *pos;
+            int hac = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -78,31 +74,29 @@ void process_http_request_header_value(void* p0, void* p1, void* p2, void* p3, v
                     break;
                 }
 
-                select_http_request_header_value(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+                select_http_request_header_argument(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7, ha, (void*) &hac);
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    select_http_request_header_field(p3, p4, p5, p8, p9, hv, (void*) &hvc);
 
                     break;
 
                 } else {
 
-                    // Increment header value count.
-                    hvc++;
+                    // Increment header argument count.
+                    hac++;
                 }
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header value. The current position is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request header argument. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request header value. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request header argument. The remaining count is null.");
     }
 }
 
-/* HEADER_VALUE_HTTP_REQUEST_PROCESSOR_SOURCE */
+/* HEADER_ARGUMENT_HTTP_REQUEST_DECODER_SOURCE */
 #endif

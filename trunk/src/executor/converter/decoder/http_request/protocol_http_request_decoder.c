@@ -23,22 +23,56 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PROTOCOL_HTTP_REQUEST_PROCESSOR_SOURCE
-#define PROTOCOL_HTTP_REQUEST_PROCESSOR_SOURCE
+#ifndef PROTOCOL_HTTP_REQUEST_DECODER_SOURCE
+#define PROTOCOL_HTTP_REQUEST_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/http/cyboi_http_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../executor/converter/processor/http_request_processor.c"
 #include "../../../../executor/converter/selector/http_request/protocol_http_request_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
 
 /**
- * Processes the http request protocol.
+ * Converts the given characters to wide characters and
+ * appends them to the destination.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source name
+ * @param p4 the source name count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source model
+ * @param p8 the source model count
+ * @param p9 the source details
+ * @param p10 the source details count
+ */
+void decode_http_request_protocol_append_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+
+    // The serialised wide character array.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    void* sc = *NULL_POINTER_MEMORY_MODEL;
+    void* ss = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate serialised wide character array.
+    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+    // Decode encoded character array into serialised wide character array.
+    decode_utf_8_unicode_character_vector((void*) &s, sc, ss, p7, p8);
+
+    append_part(p0, p1, p2, p3, p4, p5, p6, s, sc, p9, p10);
+
+    // Deallocate serialised wide character array.
+    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+}
+
+/**
+ * Decodes the http request protocol.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -49,7 +83,7 @@
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
  */
-void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void decode_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -59,7 +93,7 @@ void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void*
 
             void** pos = (void**) p6;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request protocol.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request protocol.");
 
             // The protocol.
             void* p = *pos;
@@ -79,7 +113,7 @@ void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void*
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    process_http_request_append_part(p3, p4, p5,
+                    decode_http_request_protocol_append_part(p3, p4, p5,
                         (void*) CYBOI_PROTOCOL_HTTP_NAME, (void*) CYBOI_PROTOCOL_HTTP_NAME_COUNT,
                         (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                         p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -95,14 +129,14 @@ void process_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void*
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request protocol. The current position is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request protocol. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request protocol. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request protocol. The remaining count is null.");
     }
 }
 
-/* PROTOCOL_HTTP_REQUEST_PROCESSOR_SOURCE */
+/* PROTOCOL_HTTP_REQUEST_DECODER_SOURCE */
 #endif

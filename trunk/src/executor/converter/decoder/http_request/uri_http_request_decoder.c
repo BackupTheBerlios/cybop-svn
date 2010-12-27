@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef URI_HTTP_REQUEST_PROCESSOR_SOURCE
-#define URI_HTTP_REQUEST_PROCESSOR_SOURCE
+#ifndef URI_HTTP_REQUEST_DECODER_SOURCE
+#define URI_HTTP_REQUEST_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
@@ -32,14 +32,48 @@
 #include "../../../../constant/name/http/cyboi_http_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
 #include "../../../../executor/converter/decoder/percent_encoding_character_decoder.c"
-#include "../../../../executor/converter/processor/http_request_processor.c"
 #include "../../../../executor/converter/selector/http_request/uri_http_request_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
 
 /**
- * Processes the http request uri content.
+ * Converts the given characters to wide characters and
+ * appends them to the destination.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source name
+ * @param p4 the source name count
+ * @param p5 the source abstraction
+ * @param p6 the source abstraction count
+ * @param p7 the source model
+ * @param p8 the source model count
+ * @param p9 the source details
+ * @param p10 the source details count
+ */
+void decode_http_request_uri_append_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+
+    // The serialised wide character array.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    void* sc = *NULL_POINTER_MEMORY_MODEL;
+    void* ss = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate serialised wide character array.
+    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+    // Decode encoded character array into serialised wide character array.
+    decode_utf_8_unicode_character_vector((void*) &s, sc, ss, p7, p8);
+
+    append_part(p0, p1, p2, p3, p4, p5, p6, s, sc, p9, p10);
+
+    // Deallocate serialised wide character array.
+    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+}
+
+/**
+ * Decodes the http request uri content.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count
@@ -47,11 +81,13 @@
  * @param p3 the source uri
  * @param p4 the source uri count
  */
-void process_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** dd = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request uri content.");
 
         // The percent-decoded character array.
         void* p = *NULL_POINTER_MEMORY_MODEL;
@@ -87,7 +123,7 @@ void process_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, vo
         //
 
         // Add uri as full text string.
-        process_http_request_append_part(p0, p1, p2,
+        decode_http_request_uri_append_part(p0, p1, p2,
             (void*) CYBOI_URI_HTTP_NAME, (void*) CYBOI_URI_HTTP_NAME_COUNT,
             (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
             p, pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
@@ -135,12 +171,12 @@ void process_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, vo
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request uri. The destination details is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request uri content. The destination details is null.");
     }
 }
 
 /**
- * Processes the http request uri.
+ * Decodes the http request uri.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -151,7 +187,7 @@ void process_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, vo
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
  */
-void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -161,7 +197,7 @@ void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             void** pos = (void**) p6;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Process http request uri.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request uri.");
 
             // The uri.
             void* u = *pos;
@@ -181,7 +217,7 @@ void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    process_http_request_uri_content(p3, p4, p5, u, (void*) &uc);
+                    decode_http_request_uri_content(p3, p4, p5, u, (void*) &uc);
 
                     break;
 
@@ -194,14 +230,14 @@ void process_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request uri. The current position is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request uri. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not process http request uri. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request uri. The remaining count is null.");
     }
 }
 
-/* URI_HTTP_REQUEST_PROCESSOR_SOURCE */
+/* URI_HTTP_REQUEST_DECODER_SOURCE */
 #endif

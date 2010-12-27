@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-12-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace "process" functions with "decode" functions
+
 2010-12-23  Christian Heller  <christian.heller@tuxtax.de>
         * Replace "process" functions with "decode" functions
         * Factor out many functions into their own specific files
