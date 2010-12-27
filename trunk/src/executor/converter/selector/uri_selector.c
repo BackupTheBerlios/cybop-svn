@@ -26,15 +26,15 @@
 #ifndef URI_SELECTOR_SOURCE
 #define URI_SELECTOR_SOURCE
 
-#include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../../constant/model/log/message_log_model.c"
-#include "../../../../constant/model/memory/integer_memory_model.c"
-#include "../../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../../constant/model/uri/scheme_uri_model.c"
-#include "../../../../constant/name/cybol/xml_cybol_name.c"
-#include "../../../../constant/name/xml_name.c"
-#include "../../../../executor/converter/decoder/uri/http_uri_decoder.c"
-#include "../../../../logger/logger.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/model/uri/scheme_uri_model.c"
+#include "../../../constant/name/cybol/xml_cybol_name.c"
+#include "../../../constant/name/xml_name.c"
+#include "../../../executor/converter/decoder/uri/http_uri_decoder.c"
+#include "../../../logger/logger.c"
 
 /**
  * Selects uri.

@@ -32,7 +32,7 @@
 #include "../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
 #include "../../../../executor/converter/selector/uri/scheme_uri_selector.c"
-#include "../../../../executor/converter/selector/uri/uri_selector.c"
+#include "../../../../executor/converter/selector/uri_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
