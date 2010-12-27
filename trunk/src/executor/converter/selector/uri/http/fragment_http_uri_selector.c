@@ -26,15 +26,15 @@
 #ifndef FRAGMENT_HTTP_URI_SELECTOR_SOURCE
 #define FRAGMENT_HTTP_URI_SELECTOR_SOURCE
 
-#include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../../constant/model/log/message_log_model.c"
-#include "../../../../constant/model/memory/integer_memory_model.c"
-#include "../../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../../constant/name/uri/cyboi_uri_name.c"
-#include "../../../../constant/name/uri/separator_uri_name.c"
-#include "../../../../executor/converter/detector.c"
-#include "../../../../logger/logger.c"
-#include "../../../../variable/type_size/integral_type_size.c"
+#include "../../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../../../constant/model/log/message_log_model.c"
+#include "../../../../../constant/model/memory/integer_memory_model.c"
+#include "../../../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../../../constant/name/uri/cyboi_uri_name.c"
+#include "../../../../../constant/name/uri/separator_uri_name.c"
+#include "../../../../../executor/converter/detector.c"
+#include "../../../../../logger/logger.c"
+#include "../../../../../variable/type_size/integral_type_size.c"
 
 /**
  * Selects the http uri fragment.

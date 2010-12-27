@@ -18,6 +18,7 @@
 
 2010-12-27  Christian Heller  <christian.heller@tuxtax.de>
         * Replace "process" functions with "decode" functions
+        * Replace "evaluate" functions with "select" functions
 
 2010-12-23  Christian Heller  <christian.heller@tuxtax.de>
         * Replace "process" functions with "decode" functions

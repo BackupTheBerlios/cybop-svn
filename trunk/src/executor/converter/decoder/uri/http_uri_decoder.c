@@ -27,7 +27,7 @@
 #define HTTP_URI_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
-#include "../../../../executor/converter/processor/uri/authority_http_uri_processor.c"
+#include "../../../../executor/converter/decoder/uri/http/authority_http_uri_decoder.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -55,7 +55,7 @@ void decode_http_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode http uri.");
 
-    process_http_uri_authority(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+    decode_http_uri_authority(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
 }
 
 /* HTTP_URI_DECODER_SOURCE */
