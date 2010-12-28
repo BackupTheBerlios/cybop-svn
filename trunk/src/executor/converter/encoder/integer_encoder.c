@@ -41,6 +41,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/memory/primitive_memory_name.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CYBOI_URI_NAME_SOURCE
-#define CYBOI_URI_NAME_SOURCE
+#ifndef CYBOI_AUTHORITY_NAME_SOURCE
+#define CYBOI_AUTHORITY_NAME_SOURCE
 
 #include <stddef.h>
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -46,35 +46,25 @@
 // - xDT fields are represented by numbers, but CYBOI uses speaking names (text) only
 //
 
-/** The cyboi scheme uri name. */
-static wchar_t CYBOI_SCHEME_URI_NAME_ARRAY[] = {L's', L'c', L'h', L'e', L'm', L'e'};
-static wchar_t* CYBOI_SCHEME_URI_NAME = CYBOI_SCHEME_URI_NAME_ARRAY;
-static int* CYBOI_SCHEME_URI_NAME_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+/** The cyboi username authority name. */
+static wchar_t CYBOI_USERNAME_AUTHORITY_NAME_ARRAY[] = {L'u', L's', L'e', L'r', L'n', L'a', L'm', L'e'};
+static wchar_t* CYBOI_USERNAME_AUTHORITY_NAME = CYBOI_USERNAME_AUTHORITY_NAME_ARRAY;
+static int* CYBOI_USERNAME_AUTHORITY_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The cyboi authority uri name. */
-static wchar_t CYBOI_AUTHORITY_URI_NAME_ARRAY[] = {L'a', L'u', L't', L'h', L'o', L'r', L'i', L't', L'y'};
-static wchar_t* CYBOI_AUTHORITY_URI_NAME = CYBOI_AUTHORITY_URI_NAME_ARRAY;
-static int* CYBOI_AUTHORITY_URI_NAME_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_ARRAY;
+/** The cyboi password authority name. */
+static wchar_t CYBOI_PASSWORD_AUTHORITY_NAME_ARRAY[] = {L'p', L'a', L's', L's', L'w', L'o', L'r', L'd'};
+static wchar_t* CYBOI_PASSWORD_AUTHORITY_NAME = CYBOI_PASSWORD_AUTHORITY_NAME_ARRAY;
+static int* CYBOI_PASSWORD_AUTHORITY_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The cyboi authority-text uri name. */
-static wchar_t CYBOI_AUTHORITY_TEXT_URI_NAME_ARRAY[] = {L'a', L'u', L't', L'h', L'o', L'r', L'i', L't', L'y', L'-', L't', L'e', L'x', L't'};
-static wchar_t* CYBOI_AUTHORITY_TEXT_URI_NAME = CYBOI_AUTHORITY_TEXT_URI_NAME_ARRAY;
-static int* CYBOI_AUTHORITY_TEXT_URI_NAME_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
+/** The cyboi hostname authority name. */
+static wchar_t CYBOI_HOSTNAME_AUTHORITY_NAME_ARRAY[] = {L'h', L'o', L's', L't', L'n', L'a', L'm', L'e'};
+static wchar_t* CYBOI_HOSTNAME_AUTHORITY_NAME = CYBOI_HOSTNAME_AUTHORITY_NAME_ARRAY;
+static int* CYBOI_HOSTNAME_AUTHORITY_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The cyboi path uri name. */
-static wchar_t CYBOI_PATH_URI_NAME_ARRAY[] = {L'p', L'a', L't', L'h'};
-static wchar_t* CYBOI_PATH_URI_NAME = CYBOI_PATH_URI_NAME_ARRAY;
-static int* CYBOI_PATH_URI_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+/** The cyboi port authority name. */
+static wchar_t CYBOI_PORT_AUTHORITY_NAME_ARRAY[] = {L'p', L'o', L'r', L't'};
+static wchar_t* CYBOI_PORT_AUTHORITY_NAME = CYBOI_PORT_AUTHORITY_NAME_ARRAY;
+static int* CYBOI_PORT_AUTHORITY_NAME_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The cyboi query uri name. */
-static wchar_t CYBOI_QUERY_URI_NAME_ARRAY[] = {L'q', L'u', L'e', L'r', L'y'};
-static wchar_t* CYBOI_QUERY_URI_NAME = CYBOI_QUERY_URI_NAME_ARRAY;
-static int* CYBOI_QUERY_URI_NAME_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The cyboi fragment uri name. */
-static wchar_t CYBOI_FRAGMENT_URI_NAME_ARRAY[] = {L'f', L'r', L'a', L'g', L'm', L'e', L'n', L't'};
-static wchar_t* CYBOI_FRAGMENT_URI_NAME = CYBOI_FRAGMENT_URI_NAME_ARRAY;
-static int* CYBOI_FRAGMENT_URI_NAME_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
-
-/* CYBOI_URI_NAME_SOURCE */
+/* CYBOI_AUTHORITY_NAME_SOURCE */
 #endif

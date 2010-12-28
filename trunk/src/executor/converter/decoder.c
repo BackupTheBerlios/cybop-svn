@@ -42,6 +42,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 #include "../../executor/converter/decoder/abstraction_decoder.c"
+#include "../../executor/converter/decoder/authority_decoder.c"
 #include "../../executor/converter/decoder/ascii_character_vector_decoder.c"
 #include "../../executor/converter/decoder/boolean_decoder.c"
 #include "../../executor/converter/decoder/complex_decoder.c"
@@ -101,6 +102,16 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             decode_abstraction(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p10, p11, (void*) AUTHORITY_TEXT_CYBOL_ABSTRACTION, (void*) AUTHORITY_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            decode_authority(p0, p1, p2, p3, p4, p5, p6, p7);
         }
     }
 
@@ -463,6 +474,26 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        compare_equal_arrays((void*) &r, p10, p11, (void*) TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION, (void*) TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            decode_terminal_background(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p10, p11, (void*) TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION, (void*) TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            decode_terminal_foreground(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
         compare_equal_arrays((void*) &r, p10, p11, (void*) URI_TEXT_CYBOL_ABSTRACTION, (void*) URI_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -499,26 +530,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Deallocate multibyte character stream.
             deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 //?? TEST END
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p10, p11, (void*) TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION, (void*) TERMINAL_BACKGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            decode_terminal_background(p0, p1, p2, p6, p7);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p10, p11, (void*) TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION, (void*) TERMINAL_FOREGROUND_COLOUR_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            decode_terminal_foreground(p0, p1, p2, p6, p7);
         }
     }
 

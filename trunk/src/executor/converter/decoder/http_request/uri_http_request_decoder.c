@@ -38,41 +38,6 @@
 #include "../../../../logger/logger.c"
 
 /**
- * Converts the given characters to wide characters and
- * appends them to the destination.
- *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source name
- * @param p4 the source name count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source model
- * @param p8 the source model count
- * @param p9 the source details
- * @param p10 the source details count
- */
-void decode_http_request_uri_append_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
-
-    // The serialised wide character array.
-    void* s = *NULL_POINTER_MEMORY_MODEL;
-    void* sc = *NULL_POINTER_MEMORY_MODEL;
-    void* ss = *NULL_POINTER_MEMORY_MODEL;
-
-    // Allocate serialised wide character array.
-    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-
-    // Decode encoded character array into serialised wide character array.
-    decode_utf_8_unicode_character_vector((void*) &s, sc, ss, p7, p8);
-
-    append_part(p0, p1, p2, p3, p4, p5, p6, s, sc, p9, p10);
-
-    // Deallocate serialised wide character array.
-    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-}
-
-/**
  * Decodes the http request uri content.
  *
  * @param p0 the destination compound (Hand over as reference!)
@@ -115,6 +80,20 @@ void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, voi
     fwprintf(stdout, L"TEST ps: %i \n", *((int*) ps));
 */
 
+        // The serialised wide character array.
+        void* s = *NULL_POINTER_MEMORY_MODEL;
+        void* sc = *NULL_POINTER_MEMORY_MODEL;
+        void* ss = *NULL_POINTER_MEMORY_MODEL;
+
+        // Allocate serialised wide character array.
+        allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+        // Decode encoded character array into serialised wide character array.
+        decode_utf_8_unicode_character_vector((void*) &s, sc, ss, p, pc);
+
+        // Deallocate percent-decoded character array.
+        deallocate_model((void*) &p, (void*) &pc, (void*) &ps, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
         //
         // CAUTION! The uri is added twice to the destination details:
         //
@@ -123,10 +102,10 @@ void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, voi
         //
 
         // Add uri as full text string.
-        decode_http_request_uri_append_part(p0, p1, p2,
-            (void*) CYBOI_URI_HTTP_NAME, (void*) CYBOI_URI_HTTP_NAME_COUNT,
+        append_part(p0, p1, p2,
+            (void*) CYBOI_URI_TEXT_HTTP_NAME, (void*) CYBOI_URI_TEXT_HTTP_NAME_COUNT,
             (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-            p, pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+            s, sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
         // The uri part name, abstraction, model, details.
         void* n = *NULL_POINTER_MEMORY_MODEL;
@@ -149,7 +128,7 @@ void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, voi
 
         // Decode uri part name.
         decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-            (void*) CYBOI_PARTS_URI_HTTP_NAME, (void*) CYBOI_PARTS_URI_HTTP_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            (void*) CYBOI_URI_HTTP_NAME, (void*) CYBOI_URI_HTTP_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
             (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
         // Decode uri part abstraction.
@@ -159,11 +138,11 @@ void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, voi
 
         // Decode uri part model and details.
         decode((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
-            p, pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            s, sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
             (void*) URI_TEXT_CYBOL_ABSTRACTION, (void*) URI_TEXT_CYBOL_ABSTRACTION_COUNT);
 
-        // Deallocate percent-decoded character array.
-        deallocate_model((void*) &p, (void*) &pc, (void*) &ps, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        // Deallocate serialised wide character array.
+        deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // Add uri as compound hierarchy consisting of parts.
         // CAUTION! Hand over the name as reference!

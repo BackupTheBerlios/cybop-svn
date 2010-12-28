@@ -86,7 +86,7 @@
 //
 // In cyboi, the uri parts are translated into the following compound hierarchy:
 //
-// (the root is the destination compound that was handed over)
+// root (destination compound that was handed over)
 // +-scheme
 // +-authority
 // | +-username

@@ -37,6 +37,80 @@
 #include "../../../../../logger/logger.c"
 
 /**
+ * Decodes the http request uri content.
+ *
+ * @param p0 the destination compound (Hand over as reference!)
+ * @param p1 the destination compound count
+ * @param p2 the destination compound size
+ * @param p3 the source uri
+ * @param p4 the source uri count
+ */
+void decode_http_uri_authority_content(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** dd = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http uri authority content.");
+
+        //
+        // CAUTION! The uri is added twice to the destination details:
+        //
+        // 1 as full text representation
+        // 2 as compound hierarchy consisting of parts
+        //
+
+        // Add authority as full text string.
+        append_part(p0, p1, p2,
+            (void*) CYBOI_AUTHORITY_TEXT_URI_NAME, (void*) CYBOI_AUTHORITY_TEXT_URI_NAME_COUNT,
+            (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+            p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
+        // The authority name, abstraction, model, details.
+        void* n = *NULL_POINTER_MEMORY_MODEL;
+        void* nc = *NULL_POINTER_MEMORY_MODEL;
+        void* ns = *NULL_POINTER_MEMORY_MODEL;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        void* ac = *NULL_POINTER_MEMORY_MODEL;
+        void* as = *NULL_POINTER_MEMORY_MODEL;
+        void* m = *NULL_POINTER_MEMORY_MODEL;
+        void* mc = *NULL_POINTER_MEMORY_MODEL;
+        void* ms = *NULL_POINTER_MEMORY_MODEL;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+        void* dc = *NULL_POINTER_MEMORY_MODEL;
+        void* ds = *NULL_POINTER_MEMORY_MODEL;
+
+        // Allocate authority.
+        allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
+            (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
+            (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+        // Decode authority name.
+        decode((void*) &n, (void*) nc, (void*) ns, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            (void*) CYBOI_AUTHORITY_URI_NAME, (void*) CYBOI_AUTHORITY_URI_NAME_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+        // Decode authority abstraction.
+        decode((void*) &a, (void*) ac, (void*) as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+        // Decode authority model and details.
+        decode((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
+            p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+            (void*) AUTHORITY_TEXT_CYBOL_ABSTRACTION, (void*) AUTHORITY_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+        // Add authority as compound hierarchy consisting of parts.
+        // CAUTION! Hand over the name as reference!
+        append_compound_element_by_name(*dd, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request uri content. The destination details is null.");
+    }
+}
+
+/**
  * Decodes the http uri authority.
  *
  * @param p0 the destination model (Hand over as reference!)
@@ -77,6 +151,8 @@ void decode_http_uri_authority(void* p0, void* p1, void* p2, void* p3, void* p4,
                 select_http_uri_authority(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    decode_http_uri_authority_content(p0, p1, p2, e, (void*) &ec);
 
                     break;
 

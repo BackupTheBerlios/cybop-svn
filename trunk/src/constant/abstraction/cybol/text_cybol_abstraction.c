@@ -62,6 +62,17 @@ static wchar_t* ABSTRACTION_TEXT_CYBOL_ABSTRACTION = ABSTRACTION_TEXT_CYBOL_ABST
 static int* ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
+ * The text/authority cybol abstraction.
+ *
+ * CYBOL (XML) format.
+ * Defined in CYBOL specification:
+ * http://cybop.berlios.de/books/cybol/cybol.pdf
+ */
+static wchar_t AUTHORITY_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {'t', L'e', L'x', L't', L'/', L'a', L'u', L't', L'h', L'o', L'r', L'i', L't', L'y'};
+static wchar_t* AUTHORITY_TEXT_CYBOL_ABSTRACTION = AUTHORITY_TEXT_CYBOL_ABSTRACTION_ARRAY;
+static int* AUTHORITY_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_14_INTEGER_MEMORY_MODEL_ARRAY;
+
+/**
  * The text/css cybol abstraction.
  *
  * Cascading Style Sheets.
@@ -153,8 +164,8 @@ static int* PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_
  * Defined in CYBOL specification:
  * http://cybop.berlios.de/books/cybol/cybol.pdf
  */
-static char URI_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {'t', 'e', 'x', 't', '/', 'u', 'r', 'i'};
-static char* URI_TEXT_CYBOL_ABSTRACTION = URI_TEXT_CYBOL_ABSTRACTION_ARRAY;
+static wchar_t URI_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {'t', L'e', L'x', L't', L'/', L'u', L'r', L'i'};
+static wchar_t* URI_TEXT_CYBOL_ABSTRACTION = URI_TEXT_CYBOL_ABSTRACTION_ARRAY;
 static int* URI_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**

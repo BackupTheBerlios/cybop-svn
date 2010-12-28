@@ -23,22 +23,20 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SCHEME_URI_DECODER_SOURCE
-#define SCHEME_URI_DECODER_SOURCE
+#ifndef PASSWORD_AUTHORITY_DECODER_SOURCE
+#define PASSWORD_AUTHORITY_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../executor/converter/selector/uri/scheme_uri_selector.c"
-#include "../../../../executor/converter/selector/uri_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
 
 /**
- * Decodes the uri scheme.
+ * Decodes the authority password.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -49,7 +47,7 @@
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
  */
-void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void decode_authority_password(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -59,53 +57,27 @@ void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
             void** pos = (void**) p6;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode uri scheme.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode authority password.");
 
-            // The element.
-            void* e = *pos;
-            int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // An own file was created to decode the password,
+            // since it might be encrypted and need special handling.
+            // Add special source code here, if necessary.
 
-            // The break flag.
-            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    break;
-                }
-
-                select_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
-
-                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    // Add scheme as full text string.
-                    append_part(p0, p1, p2,
-                        (void*) CYBOI_SCHEME_URI_NAME, (void*) CYBOI_SCHEME_URI_NAME_COUNT,
-                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                        e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-
-                    break;
-
-                } else {
-
-                    // Increment element count.
-                    ec++;
-                }
-            }
-
-            select_uri(p0, p1, p2, p3, p4, p5, p6, p7, e, (void*) &ec);
+            append_part(p0, p1, p2,
+                (void*) CYBOI_PASSWORD_AUTHORITY_NAME, (void*) CYBOI_PASSWORD_AUTHORITY_NAME_COUNT,
+                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                *pos, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri scheme. The current position is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode authority password. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri scheme. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode authority password. The remaining count is null.");
     }
 }
 
-/* SCHEME_URI_DECODER_SOURCE */
+/* PASSWORD_AUTHORITY_DECODER_SOURCE */
 #endif

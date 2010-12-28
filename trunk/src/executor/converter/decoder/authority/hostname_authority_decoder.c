@@ -23,22 +23,21 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SCHEME_URI_DECODER_SOURCE
-#define SCHEME_URI_DECODER_SOURCE
+#ifndef HOSTNAME_AUTHORITY_DECODER_SOURCE
+#define HOSTNAME_AUTHORITY_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../executor/converter/selector/uri/scheme_uri_selector.c"
-#include "../../../../executor/converter/selector/uri_selector.c"
+#include "../../../../executor/converter/selector/authority/hostname_authority_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
 
 /**
- * Decodes the uri scheme.
+ * Decodes the authority hostname.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -49,7 +48,7 @@
  * @param p6 the current position (Hand over as reference!)
  * @param p7 the remaining count
  */
-void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void decode_authority_hostname(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -59,7 +58,7 @@ void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
             void** pos = (void**) p6;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode uri scheme.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode authority hostname.");
 
             // The element.
             void* e = *pos;
@@ -72,16 +71,29 @@ void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+                    // The hostname-port separator : was NOT found.
+                    // That is, no port was given.
+                    //
+                    // The source represents a hostname only.
+                    append_part(p0, p1, p2,
+                        (void*) CYBOI_HOSTNAME_AUTHORITY_NAME, (void*) CYBOI_HOSTNAME_AUTHORITY_NAME_COUNT,
+                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                        e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
                     break;
                 }
 
-                select_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+                select_authority_hostname(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Add scheme as full text string.
+                    // The hostname-port separator : WAS found.
+                    // That is, a port was given.
+                    //
+                    // In this case, the port was already decoded
+                    // inside the "select_authority_hostname" function.
                     append_part(p0, p1, p2,
-                        (void*) CYBOI_SCHEME_URI_NAME, (void*) CYBOI_SCHEME_URI_NAME_COUNT,
+                        (void*) CYBOI_HOSTNAME_AUTHORITY_NAME, (void*) CYBOI_HOSTNAME_AUTHORITY_NAME_COUNT,
                         (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
                         e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
@@ -94,18 +106,16 @@ void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                 }
             }
 
-            select_uri(p0, p1, p2, p3, p4, p5, p6, p7, e, (void*) &ec);
-
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri scheme. The current position is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode authority hostname. The current position is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri scheme. The remaining count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode authority hostname. The remaining count is null.");
     }
 }
 
-/* SCHEME_URI_DECODER_SOURCE */
+/* HOSTNAME_AUTHORITY_DECODER_SOURCE */
 #endif

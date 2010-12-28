@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-12-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue uri authority handling
+
 2010-12-27  Christian Heller  <christian.heller@tuxtax.de>
         * Replace "process" functions with "decode" functions
         * Replace "evaluate" functions with "select" functions
