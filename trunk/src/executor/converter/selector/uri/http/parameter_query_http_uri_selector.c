@@ -37,6 +37,12 @@
 #include "../../../../../logger/logger.c"
 #include "../../../../../variable/type_size/integral_type_size.c"
 
+//
+// Forward declarations.
+//
+
+void decode_http_uri_query_parameter(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
+
 /**
  * Selects the http uri query parameter.
  *

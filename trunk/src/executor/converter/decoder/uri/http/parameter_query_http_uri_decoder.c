@@ -31,80 +31,11 @@
 #include "../../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../../executor/converter/selector/uri/http/query_http_uri_selector.c"
+#include "../../../../../executor/converter/decoder/uri/http/name_parameter_query_http_uri_decoder.c"
+#include "../../../../../executor/converter/selector/uri/http/parameter_query_http_uri_selector.c"
 #include "../../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../../logger/logger.c"
-
-/**
- * Decodes the http uri query parameter content.
- *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count
- * @param p2 the destination model size
- * @param p3 the destination details (Hand over as reference!)
- * @param p4 the destination details count
- * @param p5 the destination details size
- * @param p6 the current position (Hand over as reference!)
- * @param p7 the remaining count
- */
-void decode_http_uri_query_parameter_content(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* rem = (int*) p7;
-
-        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
-
-            void** pos = (void**) p6;
-
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http uri query parameter content.");
-
-            // The name.
-            void* n = *pos;
-            int nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The value.
-            void* v = *NULL_POINTER_MEMORY_MODEL;
-            int vc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-            // The break flag.
-            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    break;
-                }
-
-                select_http_uri_query_parameter_name(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7, (void*) &v, (void*) &vc);
-
-                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    break;
-
-                } else {
-
-                    // Increment name count.
-                    nc++;
-                }
-            }
-
-            append_part(p0, p1, p2,
-                n, (void*) &nc,
-                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                v, (void*) &vc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http uri query parameter content. The current position is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http uri query parameter content. The remaining count is null.");
-    }
-}
 
 /**
  * Decodes the http uri query parameter.
