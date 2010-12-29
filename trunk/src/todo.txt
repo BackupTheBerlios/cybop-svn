@@ -11,6 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Think about how to handle "assign" in "select_http_uri_query_parameter_name" function
+        * CHECK character or wide_character in "detect" of "select" functions
+            for http request, uri, authority!
+
         * CONTINUE uri processing (authority is already finished)
         * See: http://www.w3.org/TR/html5/urls.html#urls
         * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"

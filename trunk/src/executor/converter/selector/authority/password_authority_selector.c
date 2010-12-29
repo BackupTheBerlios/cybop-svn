@@ -23,22 +23,21 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef QUERY_HTTP_URI_SELECTOR_SOURCE
-#define QUERY_HTTP_URI_SELECTOR_SOURCE
+#ifndef PASSWORD_AUTHORITY_SELECTOR_SOURCE
+#define PASSWORD_AUTHORITY_SELECTOR_SOURCE
 
-#include "../../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../../../constant/model/log/message_log_model.c"
-#include "../../../../../constant/model/memory/integer_memory_model.c"
-#include "../../../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../../../constant/name/uri/cyboi_uri_name.c"
-#include "../../../../../constant/name/uri/separator_uri_name.c"
-#include "../../../../../executor/converter/detector.c"
-#include "../../../../../executor/converter/decoder/uri/http/fragment_http_uri_decoder.c"
-#include "../../../../../logger/logger.c"
-#include "../../../../../variable/type_size/integral_type_size.c"
+#include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../../constant/model/log/message_log_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
+#include "../../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../../constant/name/uri/cyboi_uri_name.c"
+#include "../../../../constant/name/uri/separator_uri_name.c"
+#include "../../../../executor/converter/detector.c"
+#include "../../../../logger/logger.c"
+#include "../../../../variable/type_size/integral_type_size.c"
 
 /**
- * Selects the http uri query.
+ * Selects the authority password.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -50,13 +49,13 @@
  * @param p7 the current position (Hand over as reference!)
  * @param p8 the remaining count
  */
-void select_http_uri_query(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void select_authority_password(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* b = (int*) p6;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http uri query.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select authority password.");
 
         //
         // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
@@ -67,27 +66,14 @@ void select_http_uri_query(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) FRAGMENT_BEGIN_SEPARATOR_URI_NAME, (void*) FRAGMENT_BEGIN_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                decode_http_uri_fragment(p0, p1, p2, p3, p4, p5, p7, p8);
-
-                // Set break flag.
-                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
             detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http uri query. The break flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select authority password. The break flag is null.");
     }
 }
 
-/* QUERY_HTTP_URI_SELECTOR_SOURCE */
+/* PASSWORD_AUTHORITY_SELECTOR_SOURCE */
 #endif

@@ -178,9 +178,9 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request uri.");
 
-            // The uri.
-            void* u = *pos;
-            int uc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The element.
+            void* e = *pos;
+            int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -196,14 +196,14 @@ void decode_http_request_uri(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_http_request_uri_content(p3, p4, p5, u, (void*) &uc);
+                    decode_http_request_uri_content(p3, p4, p5, e, (void*) &ec);
 
                     break;
 
                 } else {
 
                     // Increment uri count.
-                    uc++;
+                    ec++;
                 }
             }
 

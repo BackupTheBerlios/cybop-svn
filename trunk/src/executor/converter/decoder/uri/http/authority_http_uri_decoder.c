@@ -37,7 +37,7 @@
 #include "../../../../../logger/logger.c"
 
 /**
- * Decodes the http request uri content.
+ * Decodes the http uri authority content.
  *
  * @param p0 the destination compound (Hand over as reference!)
  * @param p1 the destination compound count
@@ -106,7 +106,7 @@ void decode_http_uri_authority_content(void* p0, void* p1, void* p2, void* p3, v
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http request uri content. The destination details is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http uri authority content. The destination details is null.");
     }
 }
 
@@ -152,8 +152,6 @@ void decode_http_uri_authority(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    decode_http_uri_authority_content(p0, p1, p2, e, (void*) &ec);
-
                     break;
 
                 } else {
@@ -162,6 +160,14 @@ void decode_http_uri_authority(void* p0, void* p1, void* p2, void* p3, void* p4,
                     ec++;
                 }
             }
+
+            // The authority is always added, independent from whether
+            // or not a path or query or fragment separator was found.
+            //
+            // If a path or query or fragment was found right at
+            // the first position, then no authority was given.
+            // In this case, an authority with empty value is added.
+            decode_http_uri_authority_content(p0, p1, p2, e, (void*) &ec);
 
         } else {
 

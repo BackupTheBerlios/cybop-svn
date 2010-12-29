@@ -31,6 +31,7 @@
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
+#include "../../../../executor/converter/selector/authority/port_authority_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
@@ -59,12 +60,37 @@ void decode_authority_port(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode authority port.");
 
-            // Add special source code here, if necessary.
+            // The element.
+            void* e = *pos;
+            int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            // The break flag.
+            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    break;
+                }
+
+                select_authority_port(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
+
+                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    break;
+
+                } else {
+
+                    // Increment element count.
+                    ec++;
+                }
+            }
 
             append_part(p0, p1, p2,
                 (void*) CYBOI_PORT_AUTHORITY_NAME, (void*) CYBOI_PORT_AUTHORITY_NAME_COUNT,
                 (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                *pos, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+                e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
         } else {
 

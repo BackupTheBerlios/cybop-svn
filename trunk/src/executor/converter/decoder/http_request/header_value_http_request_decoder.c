@@ -63,9 +63,9 @@ void decode_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request header value.");
 
-            // The header value.
-            void* hv = *pos;
-            int hvc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The element.
+            void* e = *pos;
+            int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -81,14 +81,14 @@ void decode_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    select_http_request_header_field(p3, p4, p5, p8, p9, hv, (void*) &hvc);
+                    select_http_request_header_field(p3, p4, p5, p8, p9, e, (void*) &ec);
 
                     break;
 
                 } else {
 
                     // Increment header value count.
-                    hvc++;
+                    ec++;
                 }
             }
 

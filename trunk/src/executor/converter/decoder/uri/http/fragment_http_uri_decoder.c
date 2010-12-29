@@ -87,6 +87,13 @@ void decode_http_uri_fragment(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 }
             }
 
+            // The fragment is always added, independent from
+            // whether or not a separator was found.
+            append_part(p0, p1, p2,
+                (void*) CYBOI_FRAGMENT_URI_NAME, (void*) CYBOI_FRAGMENT_URI_NAME_COUNT,
+                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
         } else {
 
             log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode http uri fragment. The current position is null.");

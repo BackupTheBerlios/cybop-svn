@@ -71,31 +71,12 @@ void decode_authority_hostname(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // The hostname-port separator : was NOT found.
-                    // That is, no port was given.
-                    //
-                    // The source represents a hostname only.
-                    append_part(p0, p1, p2,
-                        (void*) CYBOI_HOSTNAME_AUTHORITY_NAME, (void*) CYBOI_HOSTNAME_AUTHORITY_NAME_COUNT,
-                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                        e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-
                     break;
                 }
 
                 select_authority_hostname(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    // The hostname-port separator : WAS found.
-                    // That is, a port was given.
-                    //
-                    // In this case, the port was already decoded
-                    // inside the "select_authority_hostname" function.
-                    append_part(p0, p1, p2,
-                        (void*) CYBOI_HOSTNAME_AUTHORITY_NAME, (void*) CYBOI_HOSTNAME_AUTHORITY_NAME_COUNT,
-                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                        e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                     break;
 
@@ -105,6 +86,21 @@ void decode_authority_hostname(void* p0, void* p1, void* p2, void* p3, void* p4,
                     ec++;
                 }
             }
+
+            //
+            // If the hostname-port separator : was NOT found,
+            // then no port was given.
+            // In this case, the source represents a hostname only.
+            //
+            // If the hostname-port separator : WAS found,
+            // then a port was given.
+            // In this case, the port was already decoded
+            // inside the "select_authority_hostname" function.
+            //
+            append_part(p0, p1, p2,
+                (void*) CYBOI_HOSTNAME_AUTHORITY_NAME, (void*) CYBOI_HOSTNAME_AUTHORITY_NAME_COUNT,
+                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
         } else {
 

@@ -60,9 +60,9 @@ void decode_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request header argument.");
 
-            // The header argument.
-            void* ha = *pos;
-            int hac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The element.
+            void* e = *pos;
+            int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -74,7 +74,7 @@ void decode_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
                     break;
                 }
 
-                select_http_request_header_argument(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7, ha, (void*) &hac);
+                select_http_request_header_argument(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7, e, (void*) &ec);
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -83,7 +83,7 @@ void decode_http_request_header_argument(void* p0, void* p1, void* p2, void* p3,
                 } else {
 
                     // Increment header argument count.
-                    hac++;
+                    ec++;
                 }
             }
 

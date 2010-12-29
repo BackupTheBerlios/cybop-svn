@@ -71,31 +71,12 @@ void decode_authority_username(void* p0, void* p1, void* p2, void* p3, void* p4,
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // The username-password separator : was NOT found.
-                    // That is, no password was given.
-                    //
-                    // The source represents a username only.
-                    append_part(p0, p1, p2,
-                        (void*) CYBOI_USERNAME_AUTHORITY_NAME, (void*) CYBOI_USERNAME_AUTHORITY_NAME_COUNT,
-                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                        e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-
                     break;
                 }
 
                 select_authority_username(p0, p1, p2, p3, p4, p5, (void*) &b, p6, p7);
 
                 if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    // The username-password separator : WAS found.
-                    // That is, a password was given.
-                    //
-                    // In this case, the password was already decoded
-                    // inside the "select_authority_username" function.
-                    append_part(p0, p1, p2,
-                        (void*) CYBOI_USERNAME_AUTHORITY_NAME, (void*) CYBOI_USERNAME_AUTHORITY_NAME_COUNT,
-                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                        e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                     break;
 
@@ -105,6 +86,21 @@ void decode_authority_username(void* p0, void* p1, void* p2, void* p3, void* p4,
                     ec++;
                 }
             }
+
+            //
+            // If the username-password separator : was NOT found,
+            // then no password was given.
+            // In this case, the source represents a username only.
+            //
+            // If the username-password separator : WAS found,
+            // then a password was given.
+            // In this case, the password was already decoded
+            // inside the "select_authority_username" function.
+            //
+            append_part(p0, p1, p2,
+                (void*) CYBOI_USERNAME_AUTHORITY_NAME, (void*) CYBOI_USERNAME_AUTHORITY_NAME_COUNT,
+                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
         } else {
 

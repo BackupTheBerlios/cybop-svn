@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef QUERY_HTTP_URI_SELECTOR_SOURCE
-#define QUERY_HTTP_URI_SELECTOR_SOURCE
+#ifndef PARAMETER_QUERY_HTTP_URI_SELECTOR_SOURCE
+#define PARAMETER_QUERY_HTTP_URI_SELECTOR_SOURCE
 
 #include "../../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../../../constant/model/log/message_log_model.c"
@@ -38,7 +38,7 @@
 #include "../../../../../variable/type_size/integral_type_size.c"
 
 /**
- * Selects the http uri query.
+ * Selects the http uri query parameter.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -50,13 +50,13 @@
  * @param p7 the current position (Hand over as reference!)
  * @param p8 the remaining count
  */
-void select_http_uri_query(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void select_http_uri_query_parameter(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* b = (int*) p6;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http uri query.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select http uri query parameter.");
 
         //
         // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
@@ -67,11 +67,11 @@ void select_http_uri_query(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) FRAGMENT_BEGIN_SEPARATOR_URI_NAME, (void*) FRAGMENT_BEGIN_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+            detect((void*) &r, p7, p8, (void*) QUERY_PARAMETER_BEGIN_SEPARATOR_URI_NAME, (void*) QUERY_PARAMETER_BEGIN_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                decode_http_uri_fragment(p0, p1, p2, p3, p4, p5, p7, p8);
+                decode_http_uri_query_parameter(p0, p1, p2, p3, p4, p5, p7, p8);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -85,9 +85,9 @@ void select_http_uri_query(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http uri query. The break flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select http uri query parameter. The break flag is null.");
     }
 }
 
-/* QUERY_HTTP_URI_SELECTOR_SOURCE */
+/* PARAMETER_QUERY_HTTP_URI_SELECTOR_SOURCE */
 #endif

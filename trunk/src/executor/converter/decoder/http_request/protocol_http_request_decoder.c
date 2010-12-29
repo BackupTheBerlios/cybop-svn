@@ -95,9 +95,9 @@ void decode_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode http request protocol.");
 
-            // The protocol.
-            void* p = *pos;
-            int pc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The element.
+            void* e = *pos;
+            int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -116,14 +116,14 @@ void decode_http_request_protocol(void* p0, void* p1, void* p2, void* p3, void* 
                     decode_http_request_protocol_append_part(p3, p4, p5,
                         (void*) CYBOI_PROTOCOL_HTTP_NAME, (void*) CYBOI_PROTOCOL_HTTP_NAME_COUNT,
                         (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                        p, (void*) &pc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+                        e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
                     break;
 
                 } else {
 
                     // Increment protocol count.
-                    pc++;
+                    ec++;
                 }
             }
 
