@@ -32,8 +32,9 @@
 #include "../../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../../constant/name/uri/separator_uri_name.c"
-#include "../../../../../executor/converter/detector.c"
+#include "../../../../../executor/accessor/assigner.c"
 #include "../../../../../executor/converter/decoder/uri/http/fragment_http_uri_decoder.c"
+#include "../../../../../executor/converter/detector.c"
 #include "../../../../../logger/logger.c"
 #include "../../../../../variable/type_size/integral_type_size.c"
 
@@ -73,7 +74,14 @@ void select_http_uri_query_parameter_name(void* p0, void* p1, void* p2, void* p3
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??                assign(p9, p10, p7, p8);
+                //
+                // The separator = was found.
+                // It serves as delimiter for the parameter name,
+                // so that the calling function knows its count (length).
+                // The remaining data represent the parameter value,
+                // which was handed over to here and can now be assigned.
+                assign(p9, p7, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                assign(p10, p8, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
