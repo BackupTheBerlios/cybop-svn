@@ -145,35 +145,32 @@ void decode_percent_encoding_character_vector(void* p0, void* p1, void* p2, void
 
                             log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode percent-encoding character vector.");
 
-/*??
+                            //
+                            // CAUTION! Do NOT operate with WIDE CHARACTERS here!
+                            // The percent-encoding is based upon ASCII characters with just one byte!
+                            //
+
                             // The new destination wide character vector size.
                             //
                             // CAUTION! The "worst case" is assumed, i.e. that each source character
-                            // represents an ascii character encoded by utf-8 with ONE single byte.
+                            // represents a percent-encoded ascii character sequence with THREE bytes:
+                            // one for the % sign and two for the hexadecimal digits.
                             // Therefore, the destination size is adjusted accordingly.
-                            // In case not all source characters are ascii characters -- even better,
-                            // since then more than just one source character were used for encoding,
-                            // and the destination wide character array will have LESS entries (count)
+                            //
+                            // In case not all source characters are percent-encoded -- even better,
+                            // since then one destination character represents one source character
+                            // and the destination character array will have LESS entries (count)
                             // than the destination size that was set before.
-                            // In this case, the destination size will be too big, but can be reduced
-                            // to the actual destination count below, if so wanted.
-                            *ds = *dc + (*sc * *NUMBER_1_INTEGER_MEMORY_MODEL);
+                            // In this case, the destination size will be too big, but can be
+                            // reduced to the actual destination count later, if so wanted.
+                            *ds = *dc + (*sc * *NUMBER_3_INTEGER_MEMORY_MODEL);
 
                             // Reallocate destination wide character vector.
-                            reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            reallocate_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-                            // Converts the multibyte character string into a wide character string.
-                            //
-                            // Returns the number of wide characters converted.
-//??                            int n = mbsnrtowcs(*d, &s, *sc, *ds, &st);
-                            int n = mbsnrtowcs(*d, (const char**) &s, *sc, *ds, *NULL_POINTER_MEMORY_MODEL);
+                            // Convert percent-encoded characters into ASCII characters.
 
-                            if (n >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                                // Increment destination count by the number of wide characters converted.
-                                *dc = *dc + n;
-                            }
-*/
+                            //?? TODO: Add decoding here! Map % encoding sequences to characters!
 
                         } else {
 

@@ -62,10 +62,8 @@ void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, voi
         // Allocate percent-decoded character array.
         allocate_model((void*) &p, (void*) &pc, (void*) &ps, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
-/*??
-    fwprintf(stdout, L"TEST pm: %s \n", (char*) p3);
-    fwprintf(stdout, L"TEST pmc: %i \n", *((int*) p4));
-*/
+    fwprintf(stdout, L"TEST p3: %s \n", (char*) p3);
+    fwprintf(stdout, L"TEST p4: %i \n", *((int*) p4));
 
         //
         // CAUTION! Percent-encoding may be used for all URI, including URL and URN.
@@ -74,11 +72,9 @@ void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, voi
         // Decode encoding character array into serialised wide character array.
         decode_percent_encoding_character_vector((void*) &p, pc, ps, p3, p4);
 
-/*??
     fwprintf(stdout, L"TEST p: %s \n", (char*) p);
     fwprintf(stdout, L"TEST pc: %i \n", *((int*) pc));
     fwprintf(stdout, L"TEST ps: %i \n", *((int*) ps));
-*/
 
         // The serialised wide character array.
         void* s = *NULL_POINTER_MEMORY_MODEL;
@@ -90,6 +86,10 @@ void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, voi
 
         // Decode encoded character array into serialised wide character array.
         decode_utf_8_unicode_character_vector((void*) &s, sc, ss, p, pc);
+
+    fwprintf(stdout, L"TEST s: %ls \n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST sc: %i \n", *((int*) sc));
+    fwprintf(stdout, L"TEST ss: %i \n", *((int*) ss));
 
         // Deallocate percent-decoded character array.
         deallocate_model((void*) &p, (void*) &pc, (void*) &ps, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);

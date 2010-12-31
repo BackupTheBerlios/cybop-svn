@@ -281,8 +281,20 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+            append_part(p3, p4, p5,
+                (void*) L"test_0_decoder_pre", (void*) NUMBER_18_INTEGER_MEMORY_MODEL,
+                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                (void*) L"blubla", (void*) NUMBER_6_INTEGER_MEMORY_MODEL,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
             // Decode source message into cyboi knowledge compound memory model.
             decode_http_request(p0, p1, p2, p3, p4, p5, p6, p7);
+
+            append_part(p3, p4, p5,
+                (void*) L"test_0_decoder_post", (void*) NUMBER_19_INTEGER_MEMORY_MODEL,
+                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                (void*) L"blubla", (void*) NUMBER_6_INTEGER_MEMORY_MODEL,
+                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
 //?? TEST BEGIN
             // The model diagram.
@@ -304,9 +316,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
-            void* fn = L"TEST_HTTP_REQUEST_CYBOL.txt";
-            int fnc = *NUMBER_27_INTEGER_MEMORY_MODEL;
-            int fns = *NUMBER_28_INTEGER_MEMORY_MODEL;
+            void* fn = L"TEST_DECODER_HTTP_REQUEST.txt";
+            int fnc = *NUMBER_29_INTEGER_MEMORY_MODEL;
+            int fns = *NUMBER_30_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
             send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.
@@ -520,9 +532,9 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             // Encode model diagram into multibyte character stream.
             encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, md, (void*) &mdc);
             // The file name.
-            void* fn = L"TEST_URI.txt";
-            int fnc = *NUMBER_27_INTEGER_MEMORY_MODEL;
-            int fns = *NUMBER_28_INTEGER_MEMORY_MODEL;
+            void* fn = L"TEST_DECODER_URI.txt";
+            int fnc = *NUMBER_20_INTEGER_MEMORY_MODEL;
+            int fns = *NUMBER_21_INTEGER_MEMORY_MODEL;
             // Write multibyte character stream as message to file system.
             send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
             // Deallocate model diagram.

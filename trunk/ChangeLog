@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2010-12-31  Christian Heller  <christian.heller@tuxtax.de>
+        * Figure out problem with uri handling (percent-decoding missing)
+
 2010-12-30  Christian Heller  <christian.heller@tuxtax.de>
         * Continue uri handling
 

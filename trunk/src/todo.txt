@@ -11,8 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE uri processing: method and uri are not added to result model yet
-        * MIND the LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
+        * CONTINUE uri processing: percent_encoding_character_decoder.c, uri_http_request_decoder.c
+        * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
         * See: http://www.w3.org/TR/html5/urls.html#urls
         * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
         * TEST using this URL:

@@ -92,7 +92,8 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     void* es = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate encoded character array.
-    allocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_1024_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+//??    allocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_1024_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_10000_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Receive message from stream.
     receive_stream_socket((void*) &e, ec, es, p6);
@@ -102,7 +103,8 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     decode(p0, p1, p2, p3, p4, p5, e, ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10);
 
     // Deallocate encoded character array.
-    deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_1024_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+//??    deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_1024_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_10000_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     //?? TODO: The destination compound model content needs to be RESET every time since
     //?? otherwise, new commands are just added to the "action" part entry, for example.
