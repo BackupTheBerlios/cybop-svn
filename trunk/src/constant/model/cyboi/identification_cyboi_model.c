@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2010. Christian Heller.
+ * Copyright (C) 1999-2011. Christian Heller.
  *
  * This file is part of the Cybernetics Oriented Interpreter (CYBOI).
  *
@@ -45,7 +45,7 @@ static wchar_t* SLOGAN_IDENTIFICATION_CYBOI_MODEL = SLOGAN_IDENTIFICATION_CYBOI_
 static int* SLOGAN_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_21_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The copyright identification cyboi model. */
-static wchar_t COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'C', L'o', L'p', L'y', L'r', L'i', L'g', L'h', L't', L' ', L'(', L'C', L')', L' ', L'1', L'9', L'9', L'9', L'-', L'2', L'0', L'1', L'0', L'.', L' ', L'C', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L' ', L'H', L'e', L'l', L'l', L'e', L'r', L'.'};
+static wchar_t COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {L'C', L'o', L'p', L'y', L'r', L'i', L'g', L'h', L't', L' ', L'(', L'C', L')', L' ', L'1', L'9', L'9', L'9', L'-', L'2', L'0', L'1', L'1', L'.', L' ', L'C', L'h', L'r', L'i', L's', L't', L'i', L'a', L'n', L' ', L'H', L'e', L'l', L'l', L'e', L'r', L'.'};
 static wchar_t* COPYRIGHT_IDENTIFICATION_CYBOI_MODEL = COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_ARRAY;
 static int* COPYRIGHT_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_42_INTEGER_MEMORY_MODEL_ARRAY;
 
