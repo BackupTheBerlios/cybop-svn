@@ -142,10 +142,30 @@ void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, voi
             (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
             (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
+    fwprintf(stdout, L"TEST a: %ls\n", (wchar_t*) a);
+    fwprintf(stdout, L"TEST ac: %i\n", *((int*) ac));
+    fwprintf(stdout, L"TEST as: %i\n", *((int*) as));
+    fwprintf(stdout, L"TEST m: %i\n", m);
+    fwprintf(stdout, L"TEST mc: %i\n", *((int*) mc));
+    fwprintf(stdout, L"TEST ms: %i\n", *((int*) ms));
+    fwprintf(stdout, L"TEST d: %i\n", d);
+    fwprintf(stdout, L"TEST dc: %i\n", *((int*) dc));
+    fwprintf(stdout, L"TEST ds: %i\n", *((int*) ds));
+
         // Decode uri part model and details.
         decode((void*) &m, (void*) mc, (void*) ms, (void*) &d, (void*) dc, (void*) ds,
             s, sc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
             (void*) URI_TEXT_CYBOL_ABSTRACTION, (void*) URI_TEXT_CYBOL_ABSTRACTION_COUNT);
+
+    fwprintf(stdout, L"TEST a: %ls\n", (wchar_t*) a);
+    fwprintf(stdout, L"TEST ac: %i\n", *((int*) ac));
+    fwprintf(stdout, L"TEST as: %i\n", *((int*) as));
+    fwprintf(stdout, L"TEST m: %i\n", m);
+    fwprintf(stdout, L"TEST mc: %i\n", *((int*) mc));
+    fwprintf(stdout, L"TEST ms: %i\n", *((int*) ms));
+    fwprintf(stdout, L"TEST d: %i\n", d);
+    fwprintf(stdout, L"TEST dc: %i\n", *((int*) dc));
+    fwprintf(stdout, L"TEST ds: %i\n", *((int*) ds));
 
         // Deallocate serialised wide character array.
         deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);

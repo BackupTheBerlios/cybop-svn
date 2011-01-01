@@ -11,7 +11,15 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE uri processing: percent_encoding_character_decoder.c, uri_http_request_decoder.c
+        * CONTINUE uri processing in file "scheme_uri_decoder.c":
+            percent_encoding works, but addition to compound uri not yet!
+        * Possibly, the file "model_diagram_encoder.c" does not properly
+            generate meta properties with "compound" abstraction
+            --> check comparison with tree level in model_diagram functions,
+            which possibly causes details not to be added to the model diagram,
+            if the tree level does not consider meta properties and is too small
+
+        * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
         * See: http://www.w3.org/TR/html5/urls.html#urls
         * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
@@ -19,6 +27,8 @@
             http://localhost:1971?action=index
             the OLD one was:
             http://localhost:3456/resadmin/logic/send_name.cybol
+
+        * Adapt file "primitive_memory_abstraction.c" to actually necessary types
 
         * Translate ALL data formats in two steps:
             1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound; http --> http_request_compound
