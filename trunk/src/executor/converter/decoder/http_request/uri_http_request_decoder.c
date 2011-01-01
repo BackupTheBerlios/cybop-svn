@@ -31,7 +31,7 @@
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/http/cyboi_http_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../executor/converter/decoder/percent_encoding_character_decoder.c"
+#include "../../../../executor/converter/decoder/percent_encoding_vector_decoder.c"
 #include "../../../../executor/converter/selector/http_request/uri_http_request_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
@@ -69,8 +69,8 @@ void decode_http_request_uri_content(void* p0, void* p1, void* p2, void* p3, voi
         // CAUTION! Percent-encoding may be used for all URI, including URL and URN.
         //
 
-        // Decode encoding character array into serialised wide character array.
-        decode_percent_encoding_character_vector((void*) &p, pc, ps, p3, p4);
+        // Decode percent-encoded character array into character array.
+        decode_percent_encoding_vector((void*) &p, pc, ps, p3, p4);
 
     fwprintf(stdout, L"TEST p: %s \n", (char*) p);
     fwprintf(stdout, L"TEST pc: %i \n", *((int*) pc));

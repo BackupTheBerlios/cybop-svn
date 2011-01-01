@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Implement decoding of percent-encoded ASCII character arrays
+
 2010-12-31  Christian Heller  <christian.heller@tuxtax.de>
         * Figure out problem with uri handling (percent-decoding missing)
 

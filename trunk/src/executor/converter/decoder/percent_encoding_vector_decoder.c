@@ -23,20 +23,13 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PERCENT_ENCODING_CHARACTER_DECODER_SOURCE
-#define PERCENT_ENCODING_CHARACTER_DECODER_SOURCE
+#ifndef PERCENT_ENCODING_VECTOR_DECODER_SOURCE
+#define PERCENT_ENCODING_VECTOR_DECODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/converter/decoder/percent_encoding_decoder.c"
+#include "../../../executor/converter/selector/percent_encoding_vector_element_selector.c"
 #include "../../../logger/logger.c"
-/*??
-#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/memoriser/reallocator/array_reallocator.c"
-#include "../../../variable/type_size/conversion_type_size.c"
-*/
 
 //
 // Reflexions on character set conversion.
@@ -107,7 +100,85 @@
 //
 
 /**
- * Decodes a percent-encoded character array into a non-percent-encoded character array.
+ * Decodes the percent-encoded character array element into
+ * a non-percent-encoded character array element.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the source current position (Hand over as reference!)
+ * @param p4 the source remaining count
+ */
+void decode_percent_encoding_vector_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* rem = (int*) p4;
+
+        if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+            void** pos = (void**) p3;
+
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode percent-encoding vector element.");
+
+            // The unreserved characters.
+            void* u = *pos;
+            int uc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            // The break flag.
+            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    break;
+                }
+
+                select_percent_encoding_vector_element(p0, p1, p2, (void*) &b, p3, p4);
+
+                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    break;
+
+                } else {
+
+                    // Increment unreserved characters count.
+                    uc++;
+                }
+            }
+
+            // Append any unreserved characters found up to here,
+            // no matter whether an unreserved character follows
+            // or no unreserved character at all was found.
+            append_array_elements(p0, p1, p2, u, (void*) &uc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // A % sign was found that indicates a reserved character.
+                decode_percent_encoding(p0, p1, p2, p3, p4);
+
+                // Process further characters by calling decode function recursively.
+                //
+                // CAUTION! Only call this function if a reserved character was found.
+                // Otherwise, the loop was left due to no more remaining characters,
+                // so that nothing is left to be processed here.
+                decode_percent_encoding_vector_element(p0, p1, p2, p3, p4);
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding vector element. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding vector element. The remaining count is null.");
+    }
+}
+
+/**
+ * Decodes the percent-encoded character array into a non-percent-encoded character array.
  *
  * All percent-encoded (escaped) characters are resolved,
  * no matter whether or not they are reserved characters
@@ -119,7 +190,7 @@
  * @param p3 the percent-encoded source character array
  * @param p4 the percent-encoded source character array count
  */
-void decode_percent_encoding_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_percent_encoding_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -143,65 +214,59 @@ void decode_percent_encoding_character_vector(void* p0, void* p1, void* p2, void
 
                         if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode percent-encoding character vector.");
+                            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode percent-encoding vector.");
 
                             //
                             // CAUTION! Do NOT operate with WIDE CHARACTERS here!
                             // The percent-encoding is based upon ASCII characters with just one byte!
                             //
 
-                            // The new destination wide character vector size.
+                            // Adjust destination character vector size.
                             //
-                            // CAUTION! The "worst case" is assumed, i.e. that each source character
-                            // represents a percent-encoded ascii character sequence with THREE bytes:
-                            // one for the % sign and two for the hexadecimal digits.
-                            // Therefore, the destination size is adjusted accordingly.
+                            // Whilst a percent-encoded character is represented by 3 Byte
+                            // (one for the % sign and two for the hexadecimal digits),
+                            // the corresponding decoded ASCII character needs just 1 Byte.
                             //
-                            // In case not all source characters are percent-encoded -- even better,
-                            // since then one destination character represents one source character
-                            // and the destination character array will have LESS entries (count)
-                            // than the destination size that was set before.
-                            // In this case, the destination size will be too big, but can be
-                            // reduced to the actual destination count later, if so wanted.
-                            *ds = *dc + (*sc * *NUMBER_3_INTEGER_MEMORY_MODEL);
+                            // Therefore, the destination size is set to the source count,
+                            // since it can never be larger.
+                            *ds = *dc + *sc;
 
-                            // Reallocate destination wide character vector.
+                            // Reallocate destination character vector.
                             reallocate_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-                            // Convert percent-encoded characters into ASCII characters.
-
-                            //?? TODO: Add decoding here! Map % encoding sequences to characters!
+                            // CAUTION! Hand over p3 as reference.
+                            decode_percent_encoding_vector_element(p0, p1, p2, (void*) &p3, p4);
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding character stream. The destination count is negative.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding vector. The destination count is negative.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding character stream. The destination is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding vector. The destination is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding character stream. The destination count is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding vector. The destination count is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding character stream. The destination size is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding vector. The destination size is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding character stream. The source is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding vector. The source is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding character stream. The source count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode percent-encoding vector. The source count is null.");
     }
 }
 
-/* PERCENT_ENCODING_CHARACTER_DECODER_SOURCE */
+/* PERCENT_ENCODING_VECTOR_DECODER_SOURCE */
 #endif
