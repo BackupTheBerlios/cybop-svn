@@ -166,6 +166,7 @@ void decode_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode uri.");
 
+    // CAUTION! Hand over p6 as reference!
     decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
 }
 

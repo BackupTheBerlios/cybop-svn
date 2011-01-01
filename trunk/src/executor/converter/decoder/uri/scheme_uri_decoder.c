@@ -68,6 +68,8 @@ void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+    fwprintf(stdout, L"TEST uri 0: %ls\n", (wchar_t*) *pos);
+
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -94,6 +96,7 @@ void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                 }
             }
 
+            // Decode uri depending on given scheme (http, ftp etc.).
             select_uri(p0, p1, p2, p3, p4, p5, p6, p7, e, (void*) &ec);
 
         } else {
