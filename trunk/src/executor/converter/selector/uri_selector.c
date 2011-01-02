@@ -44,11 +44,15 @@
  *
  * Request-URI = "*" | absoluteURI | abs_path | authority
  *
+ * (1) No resource
+ *
  * The asterisk "*" means that the request does not apply to a particular
  * resource, but to the server itself, and is only allowed when the method
  * used does not necessarily apply to a resource. Example:
  *
  * OPTIONS * HTTP/1.1
+ *
+ * (2) Absolute URI
  *
  * The absoluteURI form is REQUIRED when the request is being made to
  * a proxy. The proxy is requested to forward the request or service it
@@ -58,7 +62,19 @@
  *
  * GET http://www.w3.org/pub/WWW/TheProject.html HTTP/1.1
  *
- * The authority form is only used by the CONNECT method.
+ * (3) Authority Form
+ *
+ * The authority form is only used by the CONNECT method. If a client
+ * connects to a proxy using the CONNECT method, it has to specify
+ * the hostname and, separated by a colon, the port number. Both of them
+ * have to be specified. The host:port part is followed by a space and
+ * a string specifying the HTTP version number. Example:
+ *
+ * CONNECT home.netscape.com:443 HTTP/1.0
+ * User-agent: Mozilla/1.1N
+ * Proxy-authorization: basic aGVsbG86d29ybGQ=
+ *
+ * (4) Absolute Path
  *
  * The most common form is that used to identify a resource on an
  * origin server or gateway. In this case, the absolute path of the
@@ -100,23 +116,16 @@ void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-/*??
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             detect((void*) &r, p7, p8, (void*) SCHEME_END_SEPARATOR_URI_NAME, (void*) SCHEME_END_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // Reset comparison result.
-                r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                detect((void*) &r, p7, p8, (void*) //_NAME, (void*) SCHEME_END_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-
                 // Set break flag.
                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
             }
         }
-*/
 
     } else {
 
