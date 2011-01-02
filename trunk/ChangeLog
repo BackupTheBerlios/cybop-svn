@@ -19,6 +19,7 @@
 2011-01-01  Christian Heller  <christian.heller@tuxtax.de>
         * Implement decoding of percent-encoded ASCII character arrays
         * Change copyright year to 2011 in all CYBOI source code files
+        * Prepare distinction of request uri types (server "*", absolute, authority, path)
 
 2010-12-31  Christian Heller  <christian.heller@tuxtax.de>
         * Figure out problem with uri handling (percent-decoding missing)

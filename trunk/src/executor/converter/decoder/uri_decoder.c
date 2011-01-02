@@ -148,10 +148,8 @@
  * as percent-encoded octets. In other words, it has to
  * have been decoded before being handed over to this function.
  *
- * CAUTION! The source character array MUST NOT be given
- * as sequence of wide characters. Standard octets are expected.
- * The detected parts will get converted to wide characters inside,
- * yet before being added to the destination.
+ * CAUTION! The source character array HAS TO BE given
+ * as sequence of wide characters.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -164,10 +162,84 @@
  */
 void decode_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode uri.");
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // CAUTION! Hand over p6 as reference!
-    decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+        int* rem = (int*) p7;
+
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+
+            // CAUTION! Use p6 as reference!
+            void** pos = &p6;
+
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode uri.");
+
+            //
+            // Do comparisons below in parallel, because:
+            // - the uri types do not depend on each other
+            // - each detection has to start with the first character
+            //
+
+/*??
+            // The server uri flag.
+            int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The absolute uri flag.
+            int u = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The authority uri flag.
+            int a = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The absolute path flag.
+            int p = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    break;
+                }
+
+                select_server_uri(p0, p1, p2, p3, p4, p5, (void*) &s, (void*) pos, p7);
+
+                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+
+                    break;
+
+                } else {
+
+                    select_uri(p0, p1, p2, p3, p4, p5, (void*) &b, (void*) pos, p7);
+
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+
+                        break;
+
+                    } else {
+
+                        select_uri(p0, p1, p2, p3, p4, p5, (void*) &b, (void*) pos, p7);
+
+                        if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                            decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+
+                            break;
+
+                        } else {
+                        }
+                    }
+                }
+            }
+*/
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri. The current position is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri. The remaining count is null.");
+    }
 }
 
 /* URI_DECODER_SOURCE */

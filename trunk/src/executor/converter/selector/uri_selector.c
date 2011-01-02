@@ -39,23 +39,41 @@
 /**
  * Selects uri.
  *
- * Examples:
+ * The request uri identifies the resource upon which to apply a request.
+ * There are four options to specify a request uri:
  *
- * ftp://ftp.is.co.za/rfc/rfc1808.txt
- * http://www.ietf.org/rfc/rfc2396.txt
- * ldap://[2001:db8::7]/c=GB?objectClass?one
- * mailto:John.Doe@example.com
- * news:comp.infosystems.www.servers.unix
- * tel:+1-816-555-1212
- * telnet://192.0.2.16:80/
- * urn:oasis:names:specification:docbook:dtd:xml:4.1.2
+ * Request-URI = "*" | absoluteURI | abs_path | authority
  *
- * CAUTION! Each URI begins with a scheme name that refers to a
- * specification for assigning identifiers within that scheme.
- * As such, the URI syntax is a federated and extensible
- * naming system wherein each scheme's specification may
- * further restrict the syntax and semantics of identifiers
- * using that scheme.
+ * The asterisk "*" means that the request does not apply to a particular
+ * resource, but to the server itself, and is only allowed when the method
+ * used does not necessarily apply to a resource. Example:
+ *
+ * OPTIONS * HTTP/1.1
+ *
+ * The absoluteURI form is REQUIRED when the request is being made to
+ * a proxy. The proxy is requested to forward the request or service it
+ * from a valid cache, and return the response. Note that the proxy MAY
+ * forward the request on to another proxy or directly to the server
+ * specified by the absoluteURI. Example:
+ *
+ * GET http://www.w3.org/pub/WWW/TheProject.html HTTP/1.1
+ *
+ * The authority form is only used by the CONNECT method.
+ *
+ * The most common form is that used to identify a resource on an
+ * origin server or gateway. In this case, the absolute path of the
+ * uri MUST be transmitted as the request uri, and the network location
+ * of the uri (authority) MUST be transmitted in a Host header field.
+ * For example, a client wishing to retrieve the resource above directly
+ * from the origin server would create a TCP connection to port 80 of
+ * the host "www.w3.org" and send the lines:
+ *
+ * GET /pub/WWW/TheProject.html HTTP/1.1
+ * Host: www.w3.org
+ *
+ * followed by the remainder of the request.
+ * Note that the absolute path cannot be empty; if none is present
+ * in the original URI, it MUST be given as "/" (the server root).
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -63,101 +81,46 @@
  * @param p3 the destination details (Hand over as reference!)
  * @param p4 the destination details count
  * @param p5 the destination details size
- * @param p6 the current position (Hand over as reference!)
- * @param p7 the remaining count
- * @param p8 the scheme
- * @param p9 the scheme count
+ * @param p6 the break flag
+ * @param p7 the current position (Hand over as reference!)
+ * @param p8 the remaining count
  */
-void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select uri.");
+    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int* b = (int*) p6;
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select uri.");
 
-        compare_equal_arrays((void*) &r, p8, p9, (void*) FTP_SCHEME_URI_MODEL, (void*) FTP_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        //
+        // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
+        //
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            //?? TODO
+/*??
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            detect((void*) &r, p7, p8, (void*) SCHEME_END_SEPARATOR_URI_NAME, (void*) SCHEME_END_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // Reset comparison result.
+                r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                detect((void*) &r, p7, p8, (void*) //_NAME, (void*) SCHEME_END_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            }
         }
-    }
+*/
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    } else {
 
-        compare_equal_arrays((void*) &r, p8, p9, (void*) HTTP_SCHEME_URI_MODEL, (void*) HTTP_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            decode_http_uri(p0, p1, p2, p3, p4, p5, *((void**) p6), p7);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p8, p9, (void*) LDAP_SCHEME_URI_MODEL, (void*) LDAP_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            //?? TODO
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p8, p9, (void*) MAILTO_SCHEME_URI_MODEL, (void*) MAILTO_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            //?? TODO
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p8, p9, (void*) NEWS_SCHEME_URI_MODEL, (void*) NEWS_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            //?? TODO
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p8, p9, (void*) TEL_SCHEME_URI_MODEL, (void*) TEL_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            //?? TODO
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p8, p9, (void*) TELNET_SCHEME_URI_MODEL, (void*) TELNET_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            //?? TODO
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p8, p9, (void*) URN_SCHEME_URI_MODEL, (void*) URN_SCHEME_URI_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            //?? TODO
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not select uri. The uri scheme is unknown.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select uri. The break flag is null.");
     }
 }
 

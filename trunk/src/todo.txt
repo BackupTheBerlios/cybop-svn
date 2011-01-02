@@ -11,8 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE uri processing in file "scheme_uri_decoder.c":
-            percent_encoding works, but addition to compound uri not yet!
+        * CONTINUE uri processing in files "uri_decoder.c" and "uri_selector.c"
+        * Distinguish four kinds of request uri (server "*", absolute, authority, path)
         * Possibly, the file "model_diagram_encoder.c" does not properly
             generate meta properties with "compound" abstraction
             --> check comparison with tree level in model_diagram functions,
