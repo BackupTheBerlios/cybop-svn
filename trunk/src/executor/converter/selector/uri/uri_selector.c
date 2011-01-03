@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ABSOLUTE_URI_SELECTOR_SOURCE
-#define ABSOLUTE_URI_SELECTOR_SOURCE
+#ifndef URI_SELECTOR_SOURCE
+#define URI_SELECTOR_SOURCE
 
 #include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../../constant/model/log/message_log_model.c"
@@ -37,7 +37,7 @@
 #include "../../../../logger/logger.c"
 
 /**
- * Selects absolute uri.
+ * Selects uri.
  *
  * Examples:
  *
@@ -68,9 +68,9 @@
  * @param p8 the scheme
  * @param p9 the scheme count
  */
-void select_absolute_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select absolute uri.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select uri.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -157,9 +157,9 @@ void select_absolute_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not select absolute uri. The uri scheme is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not select uri. The uri scheme is unknown.");
     }
 }
 
-/* ABSOLUTE_URI_SELECTOR_SOURCE */
+/* URI_SELECTOR_SOURCE */
 #endif

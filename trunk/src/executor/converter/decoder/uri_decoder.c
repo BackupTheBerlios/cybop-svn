@@ -27,6 +27,12 @@
 #define URI_DECODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/converter/decoder/http_request_uri/absolute_path_http_request_uri_decoder.c"
+#include "../../../executor/converter/decoder/http_request_uri/absolute_uri_http_request_uri_decoder.c"
+#include "../../../executor/converter/decoder/http_request_uri/authority_form_http_request_uri_decoder.c"
+#include "../../../executor/converter/decoder/http_request_uri/no_resource_http_request_uri_decoder.c"
+#include "../../../executor/converter/decoder/uri/http/authority_http_uri_decoder.c"
+#include "../../../executor/converter/decoder/uri/http/path_http_uri_decoder.c"
 #include "../../../executor/converter/decoder/uri/scheme_uri_decoder.c"
 #include "../../../logger/logger.c"
 
@@ -162,83 +168,85 @@
  */
 void decode_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode uri.");
 
-        int* rem = (int*) p7;
+    //
+    // Do comparisons below in parallel, because:
+    // - the uri types do not depend on each other
+    // - each detection has to start with the first character
+    //
 
-        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+    //
+    // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
+    //
 
-            // CAUTION! Use p6 as reference!
-            void** pos = &p6;
+    // The source.
+    void* s = p6;
+    void* sc = p7;
 
-            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode uri.");
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            //
-            // Do comparisons below in parallel, because:
-            // - the uri types do not depend on each other
-            // - each detection has to start with the first character
-            //
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-/*??
-            // The server uri flag.
-            int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The absolute uri flag.
-            int u = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The authority uri flag.
-            int a = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The absolute path flag.
-            int p = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // Reset source.
+        s = p6;
+        sc = p7;
 
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        decode_no_resource_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, sc);
 
-                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    break;
-                }
-
-                select_server_uri(p0, p1, p2, p3, p4, p5, (void*) &s, (void*) pos, p7);
-
-                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
-
-                    break;
-
-                } else {
-
-                    select_uri(p0, p1, p2, p3, p4, p5, (void*) &b, (void*) pos, p7);
-
-                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
-
-                        break;
-
-                    } else {
-
-                        select_uri(p0, p1, p2, p3, p4, p5, (void*) &b, (void*) pos, p7);
-
-                        if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                            decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
-
-                            break;
-
-                        } else {
-                        }
-                    }
-                }
-            }
-*/
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri. The current position is null.");
+            // Do nothing, since the http request uri is empty "*",
+            // which means that it points to nowhere, i.e. no resource is given.
         }
+    }
 
-    } else {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri. The remaining count is null.");
+        // Reset source.
+        s = p6;
+        sc = p7;
+
+        decode_absolute_uri_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, sc);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        // Reset source.
+        s = p6;
+        sc = p7;
+
+        decode_authority_form_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, sc);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            decode_http_uri_authority_content(p0, p1, p2, (void*) &p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        // Reset source.
+        s = p6;
+        sc = p7;
+
+        decode_absolute_path_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, sc);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            decode_http_uri_path(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode uri. The uri is invalid.");
     }
 }
 

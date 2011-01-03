@@ -31,8 +31,8 @@
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../executor/converter/selector/uri/absolute_uri_selector.c"
 #include "../../../../executor/converter/selector/uri/scheme_uri_selector.c"
+#include "../../../../executor/converter/selector/uri/uri_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../../logger/logger.c"
@@ -70,14 +70,6 @@ void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
     fwprintf(stdout, L"TEST uri 0: %ls\n", (wchar_t*) *pos);
 
-/*??
-            // Add scheme as full text string.
-            append_part(p0, p1, p2,
-                (void*) L"test", (void*) NUMBER_5_INTEGER_MEMORY_MODEL,
-                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                e, (void*) &ec, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-*/
-
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -110,8 +102,8 @@ void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
     fwprintf(stdout, L"TEST uri 3: %ls\n", (wchar_t*) *pos);
 
-            // Decode absolute uri depending on given scheme (http, ftp etc.).
-            select_absolute_uri(p0, p1, p2, p3, p4, p5, p6, p7, e, (void*) &ec);
+            // Decode uri depending on given scheme (http, ftp etc.).
+            select_uri(p0, p1, p2, p3, p4, p5, p6, p7, e, (void*) &ec);
 
         } else {
 

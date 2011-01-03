@@ -11,8 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE uri processing in files "uri_decoder.c" and "uri_selector.c"
-        * Distinguish four kinds of request uri (server "*", absolute, authority, path)
+        * CONTINUE uri processing; parts are not added yet to destination uri compound
+            --> double slash at beginning of authority is not sufficient;
+                think about better way to detect authority form uri
         * Possibly, the file "model_diagram_encoder.c" does not properly
             generate meta properties with "compound" abstraction
             --> check comparison with tree level in model_diagram functions,
