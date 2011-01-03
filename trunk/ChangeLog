@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix file "uri_decoder.c" and others, to make uri parsing work correctly
+
 2011-01-02  Christian Heller  <christian.heller@tuxtax.de>
         * Distinguish four kinds of http request uri (no resource, absolute uri, authority form, absolute path)
 

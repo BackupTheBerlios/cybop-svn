@@ -168,85 +168,145 @@
  */
 void decode_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode uri.");
+    if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
-    //
-    // Do comparisons below in parallel, because:
-    // - the uri types do not depend on each other
-    // - each detection has to start with the first character
-    //
+        int sc = *((int*) p7);
 
-    //
-    // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
-    //
+        if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The source.
-    void* s = p6;
-    void* sc = p7;
+            void* s = p6;
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode uri.");
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            //
+            // Do comparisons below in parallel, because:
+            // - the uri types do not depend on each other
+            // - each detection has to start with the first character
+            //
 
-        // Reset source.
-        s = p6;
-        sc = p7;
+            //
+            // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
+            //
 
-        decode_no_resource_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, sc);
+/*??
+    fwprintf(stdout, L"TEST decode uri 0 s: %ls\n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST decode uri 0 sc: %i\n", sc);
+*/
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            // Do nothing, since the http request uri is empty "*",
-            // which means that it points to nowhere, i.e. no resource is given.
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // Reset source.
+                s = p6;
+                sc = *((int*) p7);
+
+                decode_no_resource_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, (void*) &sc);
+
+/*??
+    fwprintf(stdout, L"TEST decode uri 1 s: %ls\n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST decode uri 1 sc: %i\n", sc);
+*/
+
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // Do nothing, since the http request uri is empty "*",
+                    // which means that it points to nowhere, i.e. no resource is given.
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // Reset source.
+                s = p6;
+                sc = *((int*) p7);
+
+/*??
+    fwprintf(stdout, L"TEST decode uri RESET s: %ls\n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST decode uri RESET sc: %i\n", sc);
+*/
+
+                decode_absolute_uri_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, (void*) &sc);
+
+/*??
+    fwprintf(stdout, L"TEST decode uri 2 s: %ls\n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST decode uri 2 sc: %i\n", sc);
+*/
+
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // Reset source.
+                s = p6;
+                sc = *((int*) p7);
+
+                decode_authority_form_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, (void*) &sc);
+
+/*??
+    fwprintf(stdout, L"TEST decode uri 3 s: %ls\n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST decode uri 3 sc: %i\n", sc);
+*/
+
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // Add scheme as full text string.
+                    // The scheme is handed over as http request "protocol" header.
+                    // Add scheme as uri part here, because the authority does not contain one.
+                    append_part(p0, p1, p2,
+                        (void*) CYBOI_SCHEME_URI_NAME, (void*) CYBOI_SCHEME_URI_NAME_COUNT,
+                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                        (void*) HTTP_SCHEME_URI_MODEL, (void*) HTTP_SCHEME_URI_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
+                    decode_http_uri_authority_content(p0, p1, p2, (void*) &p6, p7);
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // Reset source.
+                s = p6;
+                sc = *((int*) p7);
+
+                decode_absolute_path_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, (void*) &sc);
+
+/*??
+    fwprintf(stdout, L"TEST decode uri 4 s: %ls\n", (wchar_t*) s);
+    fwprintf(stdout, L"TEST decode uri 4 sc: %i\n", sc);
+*/
+
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // Add scheme as full text string.
+                    // The scheme is handed over as http request "protocol" header.
+                    // Add scheme as uri part here, because the path does not contain one.
+                    append_part(p0, p1, p2,
+                        (void*) CYBOI_SCHEME_URI_NAME, (void*) CYBOI_SCHEME_URI_NAME_COUNT,
+                        (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
+                        (void*) HTTP_SCHEME_URI_MODEL, (void*) HTTP_SCHEME_URI_MODEL_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
+
+                    decode_http_uri_path(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
+                }
+            }
+
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode uri. The uri is invalid.");
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri. The source is null.");
         }
-    }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    } else {
 
-        // Reset source.
-        s = p6;
-        sc = p7;
-
-        decode_absolute_uri_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, sc);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            decode_uri_scheme(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        // Reset source.
-        s = p6;
-        sc = p7;
-
-        decode_authority_form_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, sc);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            decode_http_uri_authority_content(p0, p1, p2, (void*) &p6, p7);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        // Reset source.
-        s = p6;
-        sc = p7;
-
-        decode_absolute_path_http_request_uri(p0, p1, p2, p3, p4, p5, (void*) &r, (void*) &s, sc);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            decode_http_uri_path(p0, p1, p2, p3, p4, p5, (void*) &p6, p7);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode uri. The uri is invalid.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode uri. The source count is null.");
     }
 }
 

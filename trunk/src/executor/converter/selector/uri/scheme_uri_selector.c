@@ -57,8 +57,34 @@ void select_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select uri scheme.");
 
+        //
+        // CAUTION! The order of the comparisons is IMPORTANT! Do NOT change it easily!
+        //
+
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        // This detection of (colon, solidus, solidus) is necessary,
+        // in order to move the position pointer to the beginning of
+        // the authority starting AFTER the two slashes.
+        // All functions processing the authority afterwards do
+        // expect it WITHOUT double slash at the beginning.
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            detect((void*) &r, p7, p8, (void*) SCHEME_WITH_AUTHORITY_SEPARATOR_URI_NAME, (void*) SCHEME_WITH_AUTHORITY_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // Set break flag.
+                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            }
+        }
+
+        // Only if the sequence (colon, solidus, solidus) could not be found,
+        // try detecting the scheme end separator (colon) alone.
+        // The scheme "file", for example, may be given without authority,
+        // but with path.
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
