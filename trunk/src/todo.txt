@@ -11,12 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Possibly, the file "model_diagram_encoder.c" does not properly
-            generate meta properties with "compound" abstraction
-            --> check comparison with tree level in model_diagram functions,
-            which possibly causes details not to be added to the model diagram,
-            if the tree level does not consider meta properties and is too small
-
+        * Continue with residenz "handle_www_service.cybol" file
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
         * See: http://www.w3.org/TR/html5/urls.html#urls
