@@ -51,6 +51,7 @@
 #include "../../executor/converter/decoder/double_vector_decoder.c"
 #include "../../executor/converter/decoder/fraction_decoder.c"
 #include "../../executor/converter/decoder/gnu_linux_console_decoder.c"
+#include "../../executor/converter/decoder/html_decoder.c"
 #include "../../executor/converter/decoder/http_request_decoder.c"
 #include "../../executor/converter/decoder/http_response_decoder.c"
 #include "../../executor/converter/decoder/integer_decoder.c"
@@ -63,7 +64,6 @@
 #include "../../executor/converter/decoder/utf_16_unicode_character_decoder.c"
 #include "../../executor/converter/decoder/utf_8_unicode_character_decoder.c"
 #include "../../executor/converter/decoder/xdt_decoder.c"
-#include "../../executor/converter/decoder/xhtml_decoder.c"
 #include "../../executor/converter/decoder/xml_decoder.c"
 #include "../../executor/converter/decoder/x_window_system_decoder.c"
 #include "../../executor/memoriser/allocator/model_allocator.c"
@@ -277,24 +277,22 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        compare_equal_arrays((void*) &r, p10, p11, (void*) HTML_TEXT_CYBOL_ABSTRACTION, (void*) HTML_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            decode_html(p0, p1, p2, p6, p7);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
         compare_equal_arrays((void*) &r, p10, p11, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_REQUEST_MESSAGE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append_part(p3, p4, p5,
-                (void*) L"test_0_decoder_pre", (void*) NUMBER_18_INTEGER_MEMORY_MODEL,
-                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                (void*) L"blubla", (void*) NUMBER_6_INTEGER_MEMORY_MODEL,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
-
             // Decode source message into cyboi knowledge compound memory model.
             decode_http_request(p0, p1, p2, p3, p4, p5, p6, p7);
-
-            append_part(p3, p4, p5,
-                (void*) L"test_0_decoder_post", (void*) NUMBER_19_INTEGER_MEMORY_MODEL,
-                (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT,
-                (void*) L"blubla", (void*) NUMBER_6_INTEGER_MEMORY_MODEL,
-                *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL);
 
 //?? TEST BEGIN
             // The model diagram.
@@ -575,18 +573,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             decode_xdt(p0, p1, p2, p3, p4, p5, p6, p7);
         }
     }
-
-/*??
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p10, p11, (void*) XHTML_APPLICATION_CYBOL_ABSTRACTION, (void*) XHTML_APPLICATION_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            decode_xhtml(p0, p1, p2, p6, p7);
-        }
-    }
-*/
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

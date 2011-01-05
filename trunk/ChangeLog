@@ -19,6 +19,7 @@
 2011-01-05  Christian Heller  <christian.heller@tuxtax.de>
         * Factor out model diagram encoder functions to separate files in sub directory
         * Fix error that uri details were not displayed in model diagram (wrong constant count)
+        * Make html encoder work again
 
 2011-01-03  Christian Heller  <christian.heller@tuxtax.de>
         * Fix file "uri_decoder.c" and others, to make uri parsing work correctly

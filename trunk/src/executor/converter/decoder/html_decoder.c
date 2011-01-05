@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef XHTML_DECODER_SOURCE
-#define XHTML_DECODER_SOURCE
+#ifndef HTML_DECODER_SOURCE
+#define HTML_DECODER_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
@@ -39,16 +39,16 @@
 #include "../../../executor/comparator/array_equality_comparator.c"
 
 /**
- * Decodes an xhtml format into a compound model.
+ * Decodes an html format into a compound model.
  *
- * @param p0 the destination part (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source xhtml byte array
- * @param p4 the source count
+ * @param p0 the destination compound (Hand over as reference!)
+ * @param p1 the destination compound count
+ * @param p2 the destination compound size
+ * @param p3 the source html data
+ * @param p4 the source html data count
  */
-void decode_xhtml(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_html(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
-/* XHTML_DECODER_SOURCE */
+/* HTML_DECODER_SOURCE */
 #endif

@@ -49,6 +49,7 @@
 #include "../../executor/converter/encoder/double_vector_encoder.c"
 #include "../../executor/converter/encoder/fraction_encoder.c"
 #include "../../executor/converter/encoder/gnu_linux_console_encoder.c"
+#include "../../executor/converter/encoder/html_encoder.c"
 #include "../../executor/converter/encoder/http_request_encoder.c"
 #include "../../executor/converter/encoder/http_response_encoder.c"
 #include "../../executor/converter/encoder/integer_encoder.c"
@@ -60,7 +61,6 @@
 #include "../../executor/converter/encoder/utf_16_unicode_character_encoder.c"
 #include "../../executor/converter/encoder/utf_8_unicode_character_encoder.c"
 #include "../../executor/converter/encoder/xdt_encoder.c"
-#include "../../executor/converter/encoder/xhtml_encoder.c"
 #include "../../executor/converter/encoder/xml_encoder.c"
 #include "../../executor/converter/encoder/x_window_system_encoder.c"
 
@@ -161,6 +161,16 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             encode_date_time(p0, p1, p2, p7, p8);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, p13, p14, (void*) HTML_TEXT_CYBOL_ABSTRACTION, (void*) HTML_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            encode_html(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
         }
     }
 
@@ -461,16 +471,6 @@ void encode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             encode_xdt(p0, p1, p2, p7, p8);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_arrays((void*) &r, p13, p14, (void*) XHTML_APPLICATION_CYBOL_ABSTRACTION, (void*) XHTML_APPLICATION_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            encode_xhtml(p0, p1, p2, p5, p6, p7, p8, p9, p10, p11, p12);
         }
     }
 

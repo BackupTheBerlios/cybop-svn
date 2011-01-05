@@ -11,7 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue with residenz "handle_www_service.cybol" file
+        * Continue with residenz "logic.cybol" file "send_wui_index" via http (post)
+
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
         * See: http://www.w3.org/TR/html5/urls.html#urls
@@ -59,22 +60,9 @@
             and map these to the corresponding basic standard type, i.e.: wchar_t, signed int, double, void*
             (so that special types like "unsigned short int" are only used cyboi-internally, but not in cybol)
 
-        * Rename utf-8 stuff to "decode/encode" (encoder instead of converter) and
-            other conversions to "deserialise/serialise" (serialiser instead of converter)
-
         * Rename several things in CYBOL files and CYBOI:
-            --> the XML tag descriptions (part, property, constraint) in a CYBOL file are special cases with the
-                exception that "create" and "receive" information are mixed, in order to serialise models easily;
             --> rename "abstraction" attribute to "language" for all CYBOL tags!
             --> rename "model" attribute to "message" for all CYBOL tags!
-            --> a "model" attribute (with new meaning as knowledge model to store received data) is not needed,
-                as it gets created internally
-            --> an "element" attribute is not needed, as the CYBOL structure determines parts and properties
-            --> a "whole" attribute is not needed, as due to the CYBOL structure it is clear that
-                    parts belong to the compound in whose file they stand
-            --> a "receiver" attribute is not needed as it is clear that this cyboi system itself is the receiver
-        * Add a new CYBOL XML attribute named "encoding" and possibly one more named "repertoire" (or "set", or "code");
-            currently, only the Unicode character repertoire/set with UTF-8 encoding may be processed
 
         * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
             knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
