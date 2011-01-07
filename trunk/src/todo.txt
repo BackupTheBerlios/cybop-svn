@@ -11,12 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Change copyright year in resmedicinae/apps/
-
-        * Continue with residenz "logic.cybol" file "send_wui_index" via http (post)
-        * file "socket_sending_communicator.c"
-        * (1) Convert cyboi compound into html
-        * (2) Convert html as body + message headers as details into an http response
+        * Continue with residenz "send_wui_index.cybol" --> comment in step-by-step
+        * part "test_html" does not work; null pointer on console;
+            probably, ".residenz.wui.message" model does not get created at startup (but part exists in residenz model tree file)
+        * Convert html as body + message headers as details into http response
 
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
