@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-07  Christian Heller  <christian.heller@tuxtax.de>
+        * Prepare http response encoding
+
 2011-01-05  Christian Heller  <christian.heller@tuxtax.de>
         * Factor out model diagram encoder functions to separate files in sub directory
         * Fix error that uri details were not displayed in model diagram (wrong constant count)

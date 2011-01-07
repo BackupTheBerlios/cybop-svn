@@ -291,7 +291,6 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Decode source message into cyboi knowledge compound memory model.
             decode_http_request(p0, p1, p2, p3, p4, p5, p6, p7);
 
 //?? TEST BEGIN

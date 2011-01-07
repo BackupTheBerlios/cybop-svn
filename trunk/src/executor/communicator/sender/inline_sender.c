@@ -30,12 +30,13 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/accessor/appender.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
- * Sends an inline stream that was read from a byte array.
+ * Sends an inline stream that was read from an array.
  *
  * @param p0 the destination wide character array (Hand over as reference!)
  * @param p1 the destination wide character array count

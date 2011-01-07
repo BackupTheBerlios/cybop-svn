@@ -27,8 +27,8 @@
 #define SOCKET_SENDING_COMMUNICATOR_SOURCE
 
 //?? TEST for test file; DELETE later!
-#include <fcntl.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 //?? TEST END
 
 #include <netinet/in.h>
@@ -497,12 +497,12 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     int sas = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The http body character vector as encoded (serialised) model.
     void* b = *NULL_POINTER_MEMORY_MODEL;
-    int bc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int bs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    void* bc = *NULL_POINTER_MEMORY_MODEL;
+    void* bs = *NULL_POINTER_MEMORY_MODEL;
     // The http message character vector to be sent to the socket.
     void* m = *NULL_POINTER_MEMORY_MODEL;
-    int mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int ms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    void* mc = *NULL_POINTER_MEMORY_MODEL;
+    void* ms = *NULL_POINTER_MEMORY_MODEL;
 
 /*??
     // Get socket- and address namespace.
@@ -526,10 +526,10 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     // Allocate socket address.
     communicate_sending_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
 */
-    // Allocate http body character vector.
-    allocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-    // Allocate http message character vector.
-    allocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Allocate http body character array.
+    allocate_model((void*) &b, (void*) &bc, (void*) &bs, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Allocate http message character array.
+    allocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
 /*??
     // Initialise host address.
@@ -540,19 +540,19 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
 
     // Encode http body.
     //
-    // The compound model is encoded depending on the given language, e.g. into xhtml format.
-    encode((void*) &b, (void*) &bc, (void*) &bs, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
+    // The compound model is encoded depending on the given language, e.g. into html format.
+    encode((void*) &b, bc, bs, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20);
 
     // Encode http response.
-    encode((void*) &m, (void*) &mc, (void*) &ms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        b, (void*) &bc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+    encode((void*) &m, mc, ms, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        b, bc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION, (void*) HTTP_RESPONSE_MESSAGE_CYBOL_ABSTRACTION_COUNT);
 
-    log_write_terminated_message(stdout, L"SUCCESS! Generated http message with xhtml file as body.\n");
+    log_write_terminated_message(stdout, L"SUCCESS! Generated http message with html file as body.\n");
 
 //?? -- START TEST
     // The log file name.
-    char* n = "send.xhtml";
+    char* n = "send.html";
     // The log file status flags.
     int status = O_TRUNC | O_CREAT | O_WRONLY;
     // The log file.
@@ -577,14 +577,14 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
         // Set file access rights.
         chmod(n, r);
 
-        // Log xhtml to output.
-        write(f, m, mc);
+        // Log html to output.
+        write(f, m, *((int*) mc));
 
     } else {
 
         // CAUTION! DO NOT use logging functionality here!
         // The logger will not work before these global variables are set.
-        log_write_terminated_message(stdout, L"Error: Could open xhtml log file. A file error occured.\n");
+        log_write_terminated_message(stdout, L"Error: Could not open html log file. A file error occured.\n");
     }
 //?? -- END TEST
 
@@ -606,11 +606,11 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
 /*??
     // Send message via socket in server mode.
     //?? TEST: For testing reasons, the internal memory parameter p0 is misused as client socket here!
-    write_socket(p0, m, (void*) &mc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, (void*) &st);
+    write_socket(p0, m, mc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, (void*) &st);
 */
 
     // Send message via socket in client mode.
-//??    write_socket((void*) *s, m, (void*) &mc, (void*) &sa, (void*) &sas, p9, p10, (void*) &st);
+//??    write_socket((void*) *s, m, mc, (void*) &sa, (void*) &sas, p9, p10, (void*) &st);
 
     // Close socket.
     //
@@ -621,10 +621,10 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     //?? TEST: temporary as long as p0 is used as client socket parameter!
     close(*((int*) p0));
 
-    // Deallocate http body character vector.
-    deallocate((void*) &b, (void*) &bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-    // Deallocate http message character vector.
-    deallocate((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate http body character array.
+    deallocate_model((void*) &b, (void*) &bc, (void*) &bs, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate http message character array.
+    deallocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
 /*??
     // Deallocate socket address.

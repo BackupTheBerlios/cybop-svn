@@ -699,8 +699,11 @@ static int* TCP_POP3S_SERVICE_PORT_MODEL = NUMBER_995_INTEGER_MEMORY_MODEL_ARRAY
 /** The udp pop3 over ssl service port model. */
 static int* UDP_POP3S_SERVICE_PORT_MODEL = NUMBER_995_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The cybernetics oriented interpreter (cyboi) service port model. */
-static int* CYBOI_SERVICE_PORT_MODEL = NUMBER_1971_INTEGER_MEMORY_MODEL_ARRAY;
+/** The tcp cybernetics oriented interpreter (cyboi) service port model. */
+static int* TCP_CYBOI_SERVICE_PORT_MODEL = NUMBER_1971_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The udp cybernetics oriented interpreter (cyboi) service port model. */
+static int* UDP_CYBOI_SERVICE_PORT_MODEL = NUMBER_1971_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* SERVICE_PORT_MODEL_SOURCE */
 #endif

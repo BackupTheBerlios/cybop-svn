@@ -217,7 +217,7 @@ void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
             if (*s == *NULL_POINTER_MEMORY_MODEL) {
 
                 // Startup server socket if it does not already exist.
-                maintain_starting_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) CYBOI_SERVICE_PORT_MODEL, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
+                maintain_starting_socket(p5, *nm, *nmc, *stm, *stmc, *am, *amc, (void*) TCP_CYBOI_SERVICE_PORT_MODEL, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, p2, p3, p4);
 
             } else {
 

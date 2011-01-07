@@ -62,6 +62,19 @@ static wchar_t* ABSTRACTION_TEXT_CYBOL_ABSTRACTION = ABSTRACTION_TEXT_CYBOL_ABST
 static int* ABSTRACTION_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
+ * The text/ascii cybol abstraction.
+ *
+ * CYBOL (XML) format.
+ * Defined in CYBOL specification:
+ * http://cybop.berlios.de/books/cybol/cybol.pdf
+ *
+ * It is used for single-byte-characters in CYBOL.
+ */
+static wchar_t ASCII_TEXT_CYBOL_ABSTRACTION_ARRAY[] = {L't', L'e', L'x', L't', L'/', L'a', L's', L'c', L'i', L'i'};
+static wchar_t* ASCII_TEXT_CYBOL_ABSTRACTION = ASCII_TEXT_CYBOL_ABSTRACTION_ARRAY;
+static int* ASCII_TEXT_CYBOL_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
+
+/**
  * The text/authority cybol abstraction.
  *
  * CYBOL (XML) format.

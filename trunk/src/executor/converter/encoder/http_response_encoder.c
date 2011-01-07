@@ -32,15 +32,23 @@
 /**
  * Encodes the compound into an http response.
  *
- * @param p0 the destination wide character array (Hand over as reference!)
- * @param p1 the destination wide character array count
- * @param p2 the destination wide character array size
- * @param p3 the source compound
- * @param p4 the source compound count
- * @param p5 the source compound
- * @param p6 the source compound count
+ * @param p0 the destination character array (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source message abstraction
+ * @param p4 the source message abstraction count
+ * @param p5 the source message model
+ * @param p6 the source message model count
+ * @param p7 the source message details
+ * @param p8 the source message details count
+ * @param p9 the source message abstraction
+ * @param p10 the source message abstraction count
+ * @param p11 the source message model
+ * @param p12 the source message model count
+ * @param p13 the source message details
+ * @param p14 the source message details count
  */
-void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode http response.");
 }

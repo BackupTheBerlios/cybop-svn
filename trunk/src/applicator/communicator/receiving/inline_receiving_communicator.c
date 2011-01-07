@@ -53,29 +53,29 @@ void communicate_receiving_inline(void* p0, void* p1, void* p2, void* p3, void* 
 
     // The read model.
     void* rm = *NULL_POINTER_MEMORY_MODEL;
-    int rmc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int rms = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    void* rmc = *NULL_POINTER_MEMORY_MODEL;
+    void* rms = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate read model.
-    allocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    allocate_model((void*) &rm, (void*) &rmc, (void*) &rms, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Read persistent byte stream over channel.
-    receive_data((void*) &rm, (void*) &rmc, (void*) &rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT);
+    receive_data((void*) &rm, rmc, rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT);
 
     // CAUTION! Do NOT try to decode from UTF-8 or other formats here!
     // In other words, do NOT call a function such as this:
     // decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, rm, (void*) &rmc);
     //
-    // The reason is that each file is already decoded when being read,
-    // from a multibyte character array into a wide character array.
+    // The reason is that each cybol file is already decoded from a multibyte
+    // character array into a wide character array at once when being read.
     // Therefore, data do NOT have to be decoded once more when being
     // evaluated as inline wide character array.
 
     // Decode byte stream according to given document type.
-    decode(p0, p1, p2, p3, p4, p5, rm, (void*) &rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+    decode(p0, p1, p2, p3, p4, p5, rm, rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
     // Deallocate read model.
-    deallocate((void*) &rm, (void*) &rms, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    deallocate_model((void*) &rm, (void*) &rmc, (void*) &rms, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* INLINE_RECEIVING_COMMUNICATOR_SOURCE */

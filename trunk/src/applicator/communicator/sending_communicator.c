@@ -29,6 +29,7 @@
 #include "../../applicator/communicator/sending/cyboi_system_sending_communicator.c"
 #include "../../applicator/communicator/sending/file_system_sending_communicator.c"
 #include "../../applicator/communicator/sending/gnu_linux_console_sending_communicator.c"
+#include "../../applicator/communicator/sending/inline_sending_communicator.c"
 #include "../../applicator/communicator/sending/latex_sending_communicator.c"
 #include "../../applicator/communicator/sending/shell_sending_communicator.c"
 #include "../../applicator/communicator/sending/socket_sending_communicator.c"
@@ -344,11 +345,9 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            communicate_sending_socket(p2, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
-
-            //?? TEST: For testing reasons, the p2 was replaced with p9 here!
+            //?? TEST: For testing reasons, the first parameter (which should be p2) was replaced with p9 here!
             //?? The signal id serves as client socket to which this cyboi system has to reply.
-            communicate_sending_socket(p9, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) CYBOI_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+            communicate_sending_socket(p9, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) TCP_CYBOI_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 
@@ -369,6 +368,16 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             communicate_sending_gnu_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_arrays((void*) &r, *cm, *cmc, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            communicate_sending_inline(*rm, *rmc, *rms, *ma, *mac, *mm, *mmc, *md, *mdc, *lm, *lmc);
         }
     }
 

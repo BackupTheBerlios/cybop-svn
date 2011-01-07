@@ -11,7 +11,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Change copyright year in resmedicinae/apps/
+
         * Continue with residenz "logic.cybol" file "send_wui_index" via http (post)
+        * file "socket_sending_communicator.c"
+        * (1) Convert cyboi compound into html
+        * (2) Convert html as body + message headers as details into an http response
 
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
@@ -21,70 +26,6 @@
             http://localhost:1971?action=index
             the OLD one was:
             http://localhost:3456/resadmin/logic/send_name.cybol
-
-        * Adapt file "primitive_memory_abstraction.c" to actually necessary types
-
-        * Translate ALL data formats in two steps:
-            1 deserialiser (searches tokens of syntax), e.g.: xml --> cybol_compound; xdt --> xdt_compound; http --> http_request_compound
-            2 evaluator (identifies known names of semantics), e.g.: cybol_compound --> knowledge; xdt_compound / http_request_compound --> ?? (action/ signal??)
-        * Use an OR || and compare for numeric character reference and character entity reference, when parsing http requests
-        * Introduce new functions to delete the content of an allocated entity (for compound, integer_vector, xdt etc.),
-            so that for each new http request, the model is initially empty, in function "receive_socket_message"
-        //?? TODO: The model and details content p8, p9, p10, p11, p12, p13 need to be RESET (emptied) every time since
-        //?? otherwise, new commands are just added to the "action" part entry, in "receive_socket.c"
-
-        * Add one file with prefix "cyboi_" in parallel to each file containing
-            standard xDT constants in directory "constant/name/xdt/" and below;
-            e.g. a file "cyboi_field_xdt_name.c" with constants a la "CYBOI_KBV_TEST_NUMBER_FIELD_XDT_NAME"
-            in addition to the file "field_xdt_name.c" with standard format constants a la "KBV_TEST_NUMBER_FIELD_XDT_NAME";
-        * Merge all files using old naming schemes like "memory", "model", "compound" into new format
-        * Rename old files "field_xdt_model_name.c" etc. to "cyboi_*"
-
-        * Adapt source code by using memory-efficient types wherever possible,
-            e.g. "signed short int" instead of just "int" (as done up to now)
-            or "signed char" for simple flags used for just two values
-
-        * Increase count and size in "*_accessor.c" files automatically and adapt all source code accordingly
-            (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.);
-        * Create basic container functions such as "remove", "get", "set", "append", "replace" etc.
-            for arrays and other abstractions (types) like "compound",
-            which automatically adjust the destination's count and size,
-            in the manner of a "wrapper" function
-        * See example of "wide_character_vector_accessor.c", where this is already implemented;
-            also see "executor/accessor/setter.c"
-        * this is to reduce the amount of source code and to take the burden
-            of handling count and size from the developer working with arrays
-
-        * Adapt "*_assigner.c" modules to new primitive types/ type sizes
-        * Leave abstractions to only provide basic types like: character, integral, real, pointer
-            and map these to the corresponding basic standard type, i.e.: wchar_t, signed int, double, void*
-            (so that special types like "unsigned short int" are only used cyboi-internally, but not in cybol)
-
-        * Rename several things in CYBOL files and CYBOI:
-            --> rename "abstraction" attribute to "language" for all CYBOL tags!
-            --> rename "model" attribute to "message" for all CYBOL tags!
-
-        * Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
-            knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
-
-        * stop thread if irq has already been set to 1; only continue sensing if irq is 0,
-            e.g. in function "sense_gnu_linux_console"
-        * possibly also wait some time while irq is 0, not only while irq is 1
-
-        * Set "receive" model in internal memory to NULL in "interrupt" (stop sensing) function,
-            but do NOT destroy, since it belongs to the knowledge model tree
-        * Edit "receive_message" function:
-            ?? The following is possibly NOT correct anymore, as the handler is already represented by a receive operation!
-            - Call the "handle" function handing over the command determined before
-                (do this DIRECTLY, just like the "loop" and "branch" functions do,
-                and NOT in form of an encapsulating signal)
-
-        * Does the logger need an own mutex? ... because it is accessed by all threads!
-
-        * Possible Bug? in function "set_compound_element_by_index":
-            set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-            --> the "(void*) &p4" does possibly lead to errors, since a reference to the
-                local variable p4 is stored, which gets destroyed as soon as the function is left
 
         * Create three different sockets (local, inet, inet6)? distinguish at socket startup?
             and store as different entries in internal memory?
@@ -138,6 +79,63 @@
                 --> close socket after having sent a reply to the requesting client
         * It was decided that "send" operations do NOT run in an own thread (for now and the near future, at least),
             also if querying a server via http, since this would mix up the signal handling mechanism
+
+        * Introduce new functions to delete (clear, empty) the content of an allocated compound,
+            so that for each new http request, the receiving model is initially empty
+        //?? TODO: The model and details content p8, p9, p10, p11, p12, p13 need to be RESET (emptied) every time since
+        //?? otherwise, new commands are just added to the "action" part entry, in "receive_socket.c"
+
+        * Add one file with prefix "cyboi_" in parallel to each file containing
+            standard xDT constants in directory "constant/name/xdt/" and below;
+            e.g. a file "cyboi_field_xdt_name.c" with constants a la "CYBOI_KBV_TEST_NUMBER_FIELD_XDT_NAME"
+            in addition to the file "field_xdt_name.c" with standard format constants a la "KBV_TEST_NUMBER_FIELD_XDT_NAME";
+        * Merge all files using old naming schemes like "memory", "model", "compound" into new format
+        * Rename old files "field_xdt_model_name.c" etc. to "cyboi_*"
+
+        * Adapt "*_assigner.c" modules to new primitive types/ type sizes
+        * Leave abstractions to only provide basic types like: character, integral, real, pointer
+            and map these to the corresponding basic standard type, i.e.: wchar_t, signed int, double, void*
+            (so that special types like "unsigned short int" are only used cyboi-internally, but not in cybol)
+        * Adapt file "primitive_memory_abstraction.c" to actually necessary types
+        * Adapt source code by using memory-efficient types wherever possible,
+            e.g. "signed short int" instead of just "int" (as done up to now)
+            or "signed char" for simple flags used for just two values
+
+        * Increase count and size in "*_accessor.c" files automatically and adapt all source code accordingly
+            (e.g. "set_compound_element_by_name" increases count and size; do likewise for "integer_vector" etc.);
+        * Create basic container functions such as "remove", "get", "set", "append", "replace" etc.
+            for arrays and other abstractions (types) like "compound",
+            which automatically adjust the destination's count and size,
+            in the manner of a "wrapper" function
+        * See example of "wide_character_vector_accessor.c", where this is already implemented;
+            also see "executor/accessor/setter.c"
+        * this is to reduce the amount of source code and to take the burden
+            of handling count and size from the developer working with arrays
+
+        * Rename several things in CYBOL files and CYBOI:
+            --> rename "abstraction" attribute to "language" for all CYBOL tags!
+            --> rename "model" attribute to "message" for all CYBOL tags!
+
+        * TUI: Check why the escape code sequence (e.g. ESC[B for arrow left) is added to the
+            knowledge tree TEST_SHUTDOWN, instead of the decoded string "arrow_left"
+        * stop thread if irq has already been set to 1; only continue sensing if irq is 0,
+            e.g. in function "sense_gnu_linux_console"
+        * possibly also wait some time while irq is 0, not only while irq is 1
+
+        * Set "receive" model in internal memory to NULL in "interrupt" (stop sensing) function,
+            but do NOT destroy, since it belongs to the knowledge model tree
+        * Edit "receive_message" function:
+        * ?? The following is possibly NOT correct anymore, as the handler is already represented by a receive operation!
+        * ?? Call the "handle" function handing over the command determined before
+            (do this DIRECTLY, just like the "loop" and "branch" functions do,
+            and NOT in form of an encapsulating signal)
+
+        * Does the logger need an own mutex? ... because it is accessed by all threads!
+
+        * Possible Bug? in function "set_compound_element_by_index":
+            set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
+            --> the "(void*) &p4" does possibly lead to errors, since a reference to the
+                local variable p4 is stored, which gets destroyed as soon as the function is left
 
         * Enable multiple abstractions like "character|UTF-32|gzip", separated by
             a "pipe" character and processed one-by-one, in the given order
