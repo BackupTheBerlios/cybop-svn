@@ -36,6 +36,7 @@
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/communicator/receiver.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/converter/decoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../executor/memoriser/deallocator/model_deallocator.c"
 #include "../../../logger/logger.c"

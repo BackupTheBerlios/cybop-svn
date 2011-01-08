@@ -72,7 +72,10 @@ void communicate_sending_file_system(void* p0, void* p1, void* p2, void* p3, voi
     allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Serialise source knowledge model into serialised wide character array.
-    encode((void*) &s, sc, ss, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
+    encode((void*) &s, sc, ss,
+        p1, p2, p3, p4, p5, p6, p7, p8,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        p9, p10, p11, p12);
 
     // The encoded character array.
     void* e = *NULL_POINTER_MEMORY_MODEL;

@@ -43,16 +43,23 @@
  * @param p0 the destination receiving wide character array (Hand over as reference!)
  * @param p1 the destination receiving wide character array count
  * @param p2 the destination receiving wide character array size
- * @param p3 the source abstraction
- * @param p4 the source abstraction count
- * @param p5 the source model
- * @param p6 the source model count
- * @param p7 the source details
- * @param p8 the source details count
- * @param p9 the language
- * @param p10 the language count
+ * @param p3 the source message abstraction
+ * @param p4 the source message abstraction count
+ * @param p5 the source message model
+ * @param p6 the source message model count
+ * @param p7 the source message details
+ * @param p8 the source message details count
+ * @param p9 the source metadata abstraction
+ * @param p10 the source metadata abstraction count
+ * @param p11 the source metadata model
+ * @param p12 the source metadata model count
+ * @param p13 the source metadata details
+ * @param p14 the source metadata details count
+ * @param p15 the language
+ * @param p16 the language count
  */
-void communicate_sending_inline(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void communicate_sending_inline(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+    void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send inline message.");
 
@@ -65,16 +72,23 @@ void communicate_sending_inline(void* p0, void* p1, void* p2, void* p3, void* p4
     allocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Encode source knowledge model into array.
-    encode((void*) &a, ac, as, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4, p5, p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10);
+    encode((void*) &a, ac, as,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, p4, p5, p6, p7, p8,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, p11, p12, p13, p14,
+        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p15, p16);
 
+/*??
     fwprintf(stdout, L"TEST sending inline a: %ls\n", (wchar_t*) a);
     fwprintf(stdout, L"TEST sending inline ac: %i\n", *((int*) ac));
+*/
 
     // Write encoded array into destination array.
     send_data(p0, p1, p2, a, ac, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT);
 
-    fwprintf(stdout, L"TEST sending inline p0: %ls\n", (wchar_t*) p0);
+/*??
+    fwprintf(stdout, L"TEST sending inline p0: %ls\n", *((wchar_t**) p0));
     fwprintf(stdout, L"TEST sending inline p1: %i\n", *((int*) p1));
+*/
 
     // Deallocate array.
     deallocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);

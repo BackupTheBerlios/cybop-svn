@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue http response encoding
+
 2011-01-07  Christian Heller  <christian.heller@tuxtax.de>
         * Prepare http response encoding
 

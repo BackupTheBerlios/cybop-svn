@@ -186,6 +186,19 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     void** md = NULL_POINTER_MEMORY_MODEL;
     void** mdc = NULL_POINTER_MEMORY_MODEL;
     void** mds = NULL_POINTER_MEMORY_MODEL;
+    // The metadata name, abstraction, model, details.
+    void** mdn = NULL_POINTER_MEMORY_MODEL;
+    void** mdnc = NULL_POINTER_MEMORY_MODEL;
+    void** mdns = NULL_POINTER_MEMORY_MODEL;
+    void** mda = NULL_POINTER_MEMORY_MODEL;
+    void** mdac = NULL_POINTER_MEMORY_MODEL;
+    void** mdas = NULL_POINTER_MEMORY_MODEL;
+    void** mdm = NULL_POINTER_MEMORY_MODEL;
+    void** mdmc = NULL_POINTER_MEMORY_MODEL;
+    void** mdms = NULL_POINTER_MEMORY_MODEL;
+    void** mdd = NULL_POINTER_MEMORY_MODEL;
+    void** mddc = NULL_POINTER_MEMORY_MODEL;
+    void** mdds = NULL_POINTER_MEMORY_MODEL;
     // The area name, abstraction, model, details.
     void** an = NULL_POINTER_MEMORY_MODEL;
     void** anc = NULL_POINTER_MEMORY_MODEL;
@@ -306,6 +319,16 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
+    // Get metadata.
+    get_universal_compound_element_by_name(
+        (void*) &mdn, (void*) &mdnc, (void*) &mdns,
+        (void*) &mda, (void*) &mdac, (void*) &mdas,
+        (void*) &mdm, (void*) &mdmc, (void*) &mdms,
+        (void*) &mdd, (void*) &mddc, (void*) &mdds,
+        p0, p1,
+        (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+        p3, p4);
+
     // Get area.
     get_universal_compound_element_by_name(
         (void*) &an, (void*) &anc, (void*) &ans,
@@ -377,7 +400,8 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            communicate_sending_inline(*rm, *rmc, *rms, *ma, *mac, *mm, *mmc, *md, *mdc, *lm, *lmc);
+            // CAUTION! Hand over first parameter as reference!
+            communicate_sending_inline(rm, *rmc, *rms, *ma, *mac, *mm, *mmc, *md, *mdc, *mda, *mdac, *mdm, *mdmc, *mdd, *mddc, *lm, *lmc);
         }
     }
 
