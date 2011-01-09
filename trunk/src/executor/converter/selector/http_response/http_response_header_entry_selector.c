@@ -37,6 +37,35 @@
 #include "../../../../logger/logger.c"
 
 /**
+ * Converts the given wide characters to characters and
+ * appends them to the destination.
+ *
+ * @param p0 the destination (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source
+ * @param p4 the source count
+ */
+void select_http_response_header_entry_append(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    // The character array.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    void* ac = *NULL_POINTER_MEMORY_MODEL;
+    void* as = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate character array.
+    allocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+    // Encode wide character array into multibyte character array.
+    encode_utf_8_unicode_character_vector((void*) &a, ac, as, p3, p4);
+
+    append_array_elements(p0, p1, p2, a, ac, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Deallocate character array.
+    deallocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+}
+
+/**
  * Selects http response header entry.
  *
  * @param p0 the destination character array (Hand over as reference!)
@@ -64,12 +93,11 @@ void select_http_response_header_entry(void* p0, void* p1, void* p2, void* p3, v
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            //?? TODO: encode to UTF-8 yet BEFORE adding below!
-
-            // CAUTION! Use standard http constants here (mostly starting with capital first letter).
+            // CAUTION! Use standard http constants as name here
+            // (mostly starting with capital first letter).
             append_array_elements(p0, p1, p2, (void*) SET_COOKIE_HEADER_HTTP_NAME, (void*) SET_COOKIE_HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             append_array_elements(p0, p1, p2, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            append_array_elements(p0, p1, p2, p7, p8, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            select_http_response_header_entry_append(p0, p1, p2, p7, p8);
             append_array_elements(p0, p1, p2, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
         }
     }
