@@ -17,10 +17,10 @@
 #
 
 2011-01-08  Christian Heller  <christian.heller@tuxtax.de>
-        * Continue http response encoding
+        * Continue http response encoder
 
 2011-01-07  Christian Heller  <christian.heller@tuxtax.de>
-        * Prepare http response encoding
+        * Prepare http response encoder
 
 2011-01-05  Christian Heller  <christian.heller@tuxtax.de>
         * Factor out model diagram encoder functions to separate files in sub directory

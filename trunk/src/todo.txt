@@ -11,8 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue with "http_response_encoder.c": html as body + message headers as details into http response
-        * Continue with residenz "send_wui_index.cybol"
+        * Continue with "http_response_header_entry_selector.c":
+            encode to UTF-8 yet BEFORE adding; add more cyboi constants for comparison
+        * Continue with residenz "send_wui_index.cybol" and "wui/metadata.cybol"
 
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
