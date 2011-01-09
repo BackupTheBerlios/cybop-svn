@@ -45,8 +45,9 @@
  * @param p3 the source metadata model
  * @param p4 the source metadata model count
  * @param p5 the source metadata model index
+ * @param p6 the source message model count
  */
-void encode_http_response_header_entry(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void encode_http_response_header_entry(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode http response header entry.");
 
@@ -71,7 +72,7 @@ void encode_http_response_header_entry(void* p0, void* p1, void* p2, void* p3, v
         (void*) &m, (void*) &mc, (void*) &ms,
         (void*) &d, (void*) &dc, (void*) &ds);
 
-    select_http_response_header_entry(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc);
+    select_http_response_header_entry(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, p6);
 }
 
 /* HEADER_ENTRY_HTTP_RESPONSE_ENCODER_SOURCE */

@@ -48,8 +48,9 @@
  * @param p6 the source metadata model count
  * @param p7 the source metadata details
  * @param p8 the source metadata details count
+ * @param p9 the source message model count
  */
-void encode_http_response_header(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void encode_http_response_header(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -67,7 +68,7 @@ void encode_http_response_header(void* p0, void* p1, void* p2, void* p3, void* p
                 break;
             }
 
-            encode_http_response_header_entry(p0, p1, p2, p5, p6, (void*) &j);
+            encode_http_response_header_entry(p0, p1, p2, p5, p6, (void*) &j, p9);
 
             // Increment loop variable.
             j++;

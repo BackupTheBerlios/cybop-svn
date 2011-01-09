@@ -26,10 +26,10 @@
 #ifndef PROTOCOL_HTTP_RESPONSE_ENCODER_SOURCE
 #define PROTOCOL_HTTP_RESPONSE_ENCODER_SOURCE
 
+#include "../../../../constant/model/http/protocol_version_http_model.c"
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../../constant/name/http/cyboi_http_name.c"
 #include "../../../../executor/accessor/appender/part_appender.c"
 #include "../../../../executor/converter/selector/http_request/protocol_http_request_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"

@@ -27,6 +27,10 @@
 #define HTTP_RESPONSE_ENCODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/converter/encoder/http_response/body_http_response_encoder.c"
+#include "../../../executor/converter/encoder/http_response/header_http_response_encoder.c"
+#include "../../../executor/converter/encoder/http_response/protocol_http_response_encoder.c"
+#include "../../../executor/converter/encoder/http_response/status_code_http_response_encoder.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -68,13 +72,15 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
     // Encode body wide character array into body multibyte character array.
     encode_utf_8_unicode_character_vector((void*) &a, ac, as, p5, p6);
 
+    //?? add body length here
+
     encode_http_response_protocol(p0, p1, p2, p9, p10, p11, p12, p13, p14);
     append_array_elements(p0, p1, p2, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     encode_http_response_status_code(p0, p1, p2, p9, p10, p11, p12, p13, p14);
     append_array_elements(p0, p1, p2, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    encode_http_response_header(p0, p1, p2, p9, p10, p11, p12, p13, p14);
+    encode_http_response_header(p0, p1, p2, p9, p10, p11, p12, p13, p14, ac);
 
     //
     // CAUTION! Do NOT add the BODY_BEGIN_SEPARATOR_HTTP_NAME
@@ -89,7 +95,8 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
     append_array_elements(p0, p1, p2, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     //?? This function is commented out, since it is not needed for now.
-    //?? Its content was moved to here.
+    //?? Its content was moved directly into here (see above),
+    //?? since the body count (length) needs to be determined.
     //?? encode_http_response_body(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 
     // CAUTION! Append body ONLY here and NOT before,

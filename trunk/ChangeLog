@@ -16,8 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue http response encoder (header entries)
+
 2011-01-08  Christian Heller  <christian.heller@tuxtax.de>
-        * Continue http response encoder
+        * Continue http response encoder (general structure)
 
 2011-01-07  Christian Heller  <christian.heller@tuxtax.de>
         * Prepare http response encoder

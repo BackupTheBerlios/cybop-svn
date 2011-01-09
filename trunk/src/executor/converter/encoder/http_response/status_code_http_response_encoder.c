@@ -26,6 +26,7 @@
 #ifndef STATUS_CODE_HTTP_RESPONSE_ENCODER_SOURCE
 #define STATUS_CODE_HTTP_RESPONSE_ENCODER_SOURCE
 
+#include "../../../../constant/model/http/status_code_http_model.c"
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
