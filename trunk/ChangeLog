@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug http response encoder (resulting character array is empty)
+
 2011-01-09  Christian Heller  <christian.heller@tuxtax.de>
         * Continue http response encoder (header entries)
 

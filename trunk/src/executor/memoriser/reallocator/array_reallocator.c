@@ -69,36 +69,55 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
                 // Calculate memory area.
                 multiply_with_integer((void*) &ma, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-                // Create a new array with extended size.
-                *a = (void*) realloc(*a, (size_t) ma);
+                if (ma > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // The NEW memory area to be initialised.
-                int nma = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                    //
+                    // CAUTION! The memory area (new array size)
+                    // MUST NOT be zero or smaller!
+                    // If it were equal to zero, then the "realloc"
+                    // function call would be equivalent to "free" --
+                    // an unwanted side effect that would destroy
+                    // allocated memory areas and lead to errors.
+                    // Therefore, that case is excluded by this condition.
+                    //
 
-                if (*as >= *ac) {
+                    // Create a new array with extended size.
+                    // CAUTION! The "ma" variable MAY NOT be casted to "size_t",
+                    // because it is NOT a pointer, but an integer value!
+                    *a = realloc(*a, ma);
 
-                    // CAUTION! Do NOT change this value if the size is
-                    // smaller than the count, because this will result
-                    // in a negative value and cause the new array elements
-                    // pointer further below to cross the array's boundary!
+                    if (*as > *ac) {
 
-                    // Calculate extra array size, which is the given array size
-                    // reduced by the existing element count.
-                    int eas = *as - *ac;
+                        // CAUTION! Do NOT change this value if the size is
+                        // smaller than the count, because this will result
+                        // in a negative value and cause the new array elements
+                        // pointer further below to cross the array's boundary!
 
-                    // Determine abstraction (type) size.
-                    determine_size((void*) &nma, p3);
+                        // The NEW memory area to be initialised.
+                        int nma = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    // Calculate memory area.
-                    multiply_with_integer((void*) &nma, (void*) &eas, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        // Calculate extra array size, which is the given array size
+                        // reduced by the existing element count.
+                        int eas = *as - *ac;
+
+                        // Determine abstraction (type) size.
+                        determine_size((void*) &nma, p3);
+
+                        // Calculate memory area.
+                        multiply_with_integer((void*) &nma, (void*) &eas, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+                        // The new array elements.
+                        void* na = *a + (ma - nma);
+
+                        // Initialise ONLY NEW array elements (new memory area)
+                        // with null pointer. Leave existing elements untouched.
+                        memset(na, *NUMBER_0_INTEGER_MEMORY_MODEL, nma);
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not reallocate array. The memory area is not greater than zero.");
                 }
-
-                // The new array elements.
-                void* na = *a + (ma - nma);
-
-                // Initialise ONLY NEW array elements (new memory area)
-                // with null pointer. Leave existing elements untouched.
-                memset(na, *NUMBER_0_INTEGER_MEMORY_MODEL, nma);
 
             } else {
 
