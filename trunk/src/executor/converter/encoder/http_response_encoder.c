@@ -58,7 +58,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
     //
     // CAUTION! The body is encoded to UTF-8 first, so that its count
-    // can be determined, as it has to be given as header value in http.
+    // can be determined, since it has to be given as header value in http.
     //
 
     // The body character array.
@@ -75,21 +75,9 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
     encode_http_response_protocol(p0, p1, p2, p9, p10, p11, p12, p13, p14);
     append_array_elements(p0, p1, p2, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-/*??
-    encode_http_response_protocol((void*) &a, ac, as, p9, p10, p11, p12, p13, p14);
-
-    fwprintf(stdout, L"TEST encode http response p5: %ls\n", (wchar_t*) p5);
-    fwprintf(stdout, L"TEST encode http response p6: %i\n", *((int*) p6));
-    fwprintf(stdout, L"TEST encode http response a: %s\n", (char*) a);
-    fwprintf(stdout, L"TEST encode http response ac: %i\n", *((int*) ac));
-    fwprintf(stdout, L"TEST encode http response p0: %s\n", *((char**) p0));
-    fwprintf(stdout, L"TEST encode http response p1: %i\n", *((int*) p1));
-*/
-
     encode_http_response_status_code(p0, p1, p2, p9, p10, p11, p12, p13, p14);
     append_array_elements(p0, p1, p2, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-/*??
     encode_http_response_header(p0, p1, p2, p9, p10, p11, p12, p13, p14, ac);
 
     //
@@ -104,15 +92,14 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
     //
     append_array_elements(p0, p1, p2, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    //?? This function is commented out, since it is not needed for now.
-    //?? Its content was moved directly into here (see above),
-    //?? since the body count (length) needs to be determined.
-    //?? encode_http_response_body(p0, p1, p2, p3, p4, p5, p6, p7, p8);
+    // This function is commented out, since it is not needed for now.
+    // Its content was moved directly into here (see above),
+    // since the body count (length) needs to be determined.
+    // encode_http_response_body(p0, p1, p2, p3, p4, p5, p6, p7, p8);
 
     // CAUTION! Append body ONLY here and NOT before,
     // since it has to stand at the end of the http message.
     append_array_elements(p0, p1, p2, a, ac, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-*/
 
     // Deallocate body character array.
     deallocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);

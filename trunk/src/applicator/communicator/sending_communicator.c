@@ -326,7 +326,7 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         (void*) &mdm, (void*) &mdmc, (void*) &mdms,
         (void*) &mdd, (void*) &mddc, (void*) &mdds,
         p0, p1,
-        (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
+        (void*) METADATA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METADATA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
         p3, p4);
 
     // Get area.

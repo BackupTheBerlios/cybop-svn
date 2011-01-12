@@ -65,12 +65,28 @@ void encode_http_response_header_entry(void* p0, void* p1, void* p2, void* p3, v
     void** dc = NULL_POINTER_MEMORY_MODEL;
     void** ds = NULL_POINTER_MEMORY_MODEL;
 
+//??    fwprintf(stdout, L"TEST encode http response header entry p6: %i\n", *((int*) p6));
+
     // Get source part at index.
     get_compound_element_by_index(p3, p4, p5,
         (void*) &n, (void*) &nc, (void*) &ns,
         (void*) &a, (void*) &ac, (void*) &as,
         (void*) &m, (void*) &mc, (void*) &ms,
         (void*) &d, (void*) &dc, (void*) &ds);
+
+/*??
+    fwprintf(stdout, L"TEST encode http response header entry nc: %i\n", *nc);
+    fwprintf(stdout, L"TEST encode http response header entry n: %i\n", *n);
+    fwprintf(stdout, L"TEST encode http response header entry n: %ls\n", (wchar_t*) *n);
+    fwprintf(stdout, L"TEST encode http response header entry ac: %i\n", *ac);
+    fwprintf(stdout, L"TEST encode http response header entry a: %i\n", *a);
+    fwprintf(stdout, L"TEST encode http response header entry a: %ls\n", (wchar_t*) *a);
+    fwprintf(stdout, L"TEST encode http response header entry mc: %i\n", *mc);
+    fwprintf(stdout, L"TEST encode http response header entry m: %i\n", *m);
+    fwprintf(stdout, L"TEST encode http response header entry m: %ls\n", (wchar_t*) *m);
+    fwprintf(stdout, L"TEST encode http response header entry dc: %i\n", *dc);
+    fwprintf(stdout, L"TEST encode http response header entry d: %i\n", *d);
+*/
 
     select_http_response_header_entry(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, p6);
 }

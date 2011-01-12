@@ -37,6 +37,38 @@
 #include "../../../../logger/logger.c"
 
 /**
+ * Encodes the http response header content length.
+ *
+ * @param p0 the destination character array (Hand over as reference!)
+ * @param p1 the destination character array count
+ * @param p2 the destination character array size
+ * @param p3 the source message model count (content length)
+ */
+void encode_http_response_header_content_length(void* p0, void* p1, void* p2, void* p3) {
+
+    // The wide character array.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    void* ac = *NULL_POINTER_MEMORY_MODEL;
+    void* as = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate character array.
+    allocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+    // Encode wide character array into multibyte character array.
+    encode_integer((void*) &a, ac, as, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+
+    append_array_elements(p0, p1, p2, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    append_array_elements(p0, p1, p2, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // CAUTION! Use the message count (content length) integer value
+    // that was handed over as parameter!
+    select_http_response_header_entry_append(p0, p1, p2, a, ac);
+    append_array_elements(p0, p1, p2, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Deallocate character array.
+    deallocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+}
+
+/**
  * Encodes the http response header.
  *
  * @param p0 the destination character array (Hand over as reference!)
@@ -73,6 +105,10 @@ void encode_http_response_header(void* p0, void* p1, void* p2, void* p3, void* p
             // Increment loop variable.
             j++;
         }
+
+        // The content length is currently always added
+        // (but this solution may change later).
+        encode_http_response_header_content_length(p0, p1, p2, p9);
 
     } else {
 

@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Make http response encoding work
+
 2011-01-10  Christian Heller  <christian.heller@tuxtax.de>
         * Debug http response encoder (resulting character array is empty)
 

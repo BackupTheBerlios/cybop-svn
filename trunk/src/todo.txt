@@ -11,15 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue with finding bug that http_response content is not visible:
-            (1) in "send_wui_index.cybol", the send via "file" channel to http_response
-            possibly converts wchar_t automatically into char; but the response
-            is already available as char --> so, do NOT convert again!
-            (2) in "send_wui_index.cybol", make "test_http_response_on_shell" work;
-            text/ascii is not understood for sending to shell somehow
-        * Continue with "http_response_header_entry_selector.c":
-            encode to UTF-8 yet BEFORE adding; add more cyboi constants for comparison
-        * Continue with residenz and "wui/metadata.cybol"
+        * Continue with "socket_sending_communicator.c" and "send_wui_index.cybol"
 
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
