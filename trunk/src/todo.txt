@@ -11,58 +11,20 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue with "socket_sending_communicator.c" and "send_wui_index.cybol"
+        * Continue with ...
 
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
         * See: http://www.w3.org/TR/html5/urls.html#urls
         * See also file "resmedicinae/apps/residenz/logic/handler/handle_www_service.cybol"
-        * TEST using this URL:
-            http://localhost:1971?action=index
-            the OLD one was:
-            http://localhost:3456/resadmin/logic/send_name.cybol
 
         * Create three different sockets (local, inet, inet6)? distinguish at socket startup?
             and store as different entries in internal memory?
         * move and rename "set_new_signal_identification" to e.g. /globals/references/integer_references.c
             and name function e.g. "get_integer_reference"
         * Implement session on application level (Res Medicinae)
-        * Add the following comment to a matching source code file:
 
-            Since http is a stateless protocol, it does not provide a possibility to
-            find out whether or not several consequent http requests belong together.
-
-            Therefore, the application on the next higher level of abstraction has to
-            care about that, by opening a "session" for each request from an unknown user.
-            Every such session gets a unique identifier called "session id".
-
-            Whenever the client now sends an http request to the server,
-            it also sends the session id, so that data already stored on the
-            server can be assigned to the correct user.
-
-            There are several ways to transfer a session id:
-            1 as cookie
-            2 within the uri
-                2.1 GET
-                    2.1.1 in the query, e.g.:
-                        http://domain.tld/index.php?sid=3Dedb0e8665db4e9042fe0176a89aade16
-                    2.1.2 in the path
-                        http://domain.tld/edb0e8665db4e9042fe0176a89aade16/index.php
-                2.2 POST (within html forms, using input elements of type ?hidden")
-
-            Problems:
-            1 Many users have cookies deactivated in their browsers.
-            However, an application may request to activate cookies.
-            2 Each uri of a (generated) webpage has to be modified to contain the session id.
-            2.2 All navigation has to occur via html forms (buttons etc.); simple links do not suffice
-
-            In order to avoid users manipulating and using the session id of another user,
-            a session id has to be generated from a range of values that is large enough to
-            minimise the probability of guessing another user's session id.
-
-        * The following might be SUPERFLUOUS, since now, a CYBOL operation hands over
-            special properties, e.g. to store the socket number etc.!
-        * Store socket of a client, in order to be able to reply to it:
+        * Store socket number of clients, in order to be able to reply to them:
             1 hand over a cybol property, to store the socket in the knowledge tree
                 --> no, since low-level sockets should not be known to cybol applications
             2 store many sockets in a special socket container or in internal memory, respectively

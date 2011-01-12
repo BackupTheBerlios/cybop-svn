@@ -54,7 +54,7 @@
  * Server mode means that this system was asked by a client system,
  * that it now needs to reply to.
  *
- * @param p0 the socket of this system (Hand over as reference!)
+ * @param p0 the communication partner socket (Hand over as reference!)
  * @param p1 the internal memory
  * @param p2 the base internal
  */
@@ -68,21 +68,21 @@ void communicate_sending_socket_get_socket_server_mode(void* p0, void* p1, void*
 
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-        // The socket mutex.
-        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
+
+        // Get communication partner socket.
+        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
+        get(p0, p1, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
 /*??
         ONLY necessary when writing or deleting a socket from internal memory.
-        This may become necessary if many sockets are hold in a queue, soon to be implemented.
+        This may become necessary if many sockets are held in a queue.
+
+        // The socket mutex.
+        pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
 
         // Get socket mutex.
         i = *base + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
         get((void*) &mt, p1, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-*/
-/*??
-        // Get communication partner socket.
-        i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-        get(p0, p1, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 */
 
     } else {
@@ -186,7 +186,7 @@ void communicate_sending_socket_get_socket_client_mode(void* p0, void* p1, void*
  * In server mode, an existing socket of this system is read from the internal memory.
  * In client mode, a completely new socket is created.
  *
- * @param p0 the socket of this system (Hand over as reference!)
+ * @param p0 the communication partner socket (Hand over as reference!)
  * @param p1 the internal memory
  * @param p2 the base internal
  * @param p3 the socket namespace
@@ -248,7 +248,7 @@ void communicate_sending_socket_set_nonblocking_mode(void* p0) {
         // need to be considered and their file descriptors handed over as
         // parameter.
         // A simple "sleep" procedure is considered to be a more simple and
-        // clean solution here.
+        // clean solution here. See file "controller/checker/wait_checker.c"!
 
         // Get file status flags.
         int fl = fcntl(*s, F_GETFL, NUMBER_0_INTEGER_MEMORY_MODEL);
@@ -480,53 +480,7 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10,
     void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send message via socket.");
-
-    // The communication style.
-    int st = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-    // The socket namespace.
-    int sn = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-    // The address namespace.
-    int an = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-    // The socket of this system.
-    int** s = (int**) NULL_POINTER_MEMORY_MODEL;
-    // The host address of the communication partner.
-    void* ha = *NULL_POINTER_MEMORY_MODEL;
-    // The socket address of the communication partner.
-    void* sa = *NULL_POINTER_MEMORY_MODEL;
-    int sas = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-/*??
-    // Get socket- and address namespace.
-    maintain_starting_socket_memorise_getting_namespace((void*) &sn, (void*) &an, p5, p6);
-*/
-    // Get socket communication style.
-    maintain_starting_socket_get_style((void*) &st, p7, p8);
-/*??
-    // Get socket.
-    communicate_sending_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
-
-    fwprintf(stdout, L"TEST: send socket: %i \n", **s);
-*/
-
-    // Set non-blocking mode for socket.
-//??    communicate_sending_socket_set_nonblocking_mode((void*) *s);
-
-/*??
-    // Allocate host address.
-    communicate_sending_socket_allocate_host_address((void*) &ha, (void*) &an);
-    // Allocate socket address.
-    communicate_sending_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
-*/
-
-/*??
-    // Initialise host address.
-    maintain_starting_socket_get_host_address(ha, p2, p3, (void*) &an);
-    // Initialise socket address.
-    communicate_sending_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
-*/
-
-//?? -- START TEST
+    //?? --- START TEST ---
     // The log file name.
     char* n = "http_response";
     // The log file status flags.
@@ -562,12 +516,57 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
         // The logger will not work before these global variables are set.
         log_write_terminated_message(stdout, L"Error: Could not open socket sending http_response file. A file error occured.\n");
     }
-//?? -- END TEST
+    //?? --- END TEST ---
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send message via socket.");
+
+    // The communication style.
+    int st = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+    // The socket namespace.
+    int sn = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+    // The address namespace.
+    int an = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+    // The communication partner socket.
+    int** s = (int**) NULL_POINTER_MEMORY_MODEL;
+    // The host address of the communication partner.
+    void* ha = *NULL_POINTER_MEMORY_MODEL;
+    // The socket address of the communication partner.
+    void* sa = *NULL_POINTER_MEMORY_MODEL;
+    int sas = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Get socket- and address namespace.
+    maintain_starting_socket_memorise_getting_namespace((void*) &sn, (void*) &an, p5, p6);
+    fwprintf(stdout, L"TEST: send socket sn: %i \n", sn);
+    fwprintf(stdout, L"TEST: send socket an: %i \n", an);
+    // Get socket communication style.
+    maintain_starting_socket_get_style((void*) &st, p7, p8);
+    fwprintf(stdout, L"TEST: send socket st: %i \n", st);
+    // Get communication partner socket.
+    communicate_sending_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
+    fwprintf(stdout, L"TEST: send socket s: %i \n", **s);
+
+    // Set non-blocking mode for socket.
+    communicate_sending_socket_set_nonblocking_mode((void*) *s);
+    fwprintf(stdout, L"TEST: send socket s non-blocking: %i \n", **s);
+
+    // Allocate host address.
+    communicate_sending_socket_allocate_host_address((void*) &ha, (void*) &an);
+    fwprintf(stdout, L"TEST: send socket ha: %i \n", ha);
+    // Allocate socket address.
+    communicate_sending_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
+    fwprintf(stdout, L"TEST: send socket sa: %i \n", sa);
+
+    // Initialise host address.
+    maintain_starting_socket_get_host_address(ha, p2, p3, (void*) &an);
+    fwprintf(stdout, L"TEST: send socket ha init: %i \n", ha);
+    // Initialise socket address.
+    communicate_sending_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
+    fwprintf(stdout, L"TEST: send socket sa init: %i \n", sa);
 
     // One might think that a deadlock may occur if this system
     // sends a message to itself. However, this could only occur if
     // the socket of this system got locked when a message is sent
-    // AND ALSO when a message is received. Once the lock is set by
+    // AND ALSO when a message is received. Once the lock got set by
     // the "send" procedure, the "receive" procedure would wait
     // endlessly for an unlock, since the "send" in turn would wait
     // for the "receive" procedure to finish.
@@ -579,30 +578,20 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     // identical. As a consequence, socket locking using a mutex is
     // not necessary here!
 
-/*??
     // Send message via socket in server mode.
-    //?? TEST: For testing reasons, the internal memory parameter p0 is misused as client socket here!
-    write_socket(p0, m, mc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p9, p10, (void*) &st);
-*/
-
-    // Send message via socket in client mode.
-//??    write_socket((void*) *s, m, mc, (void*) &sa, (void*) &sas, p9, p10, (void*) &st);
+    send_stream_socket((void*) *s, p13, p14, (void*) &sa, (void*) &sas, p9, p10);
 
     // Close socket.
     //
     // CAUTION! The socket is always closed, no matter whether it was created in:
-    // - this "send_socket" operation (client mode)
-    // - the "receive_socket" operation (server mode) and retrieved from internal memory here
-//??    close(**s);
-    //?? TEST: temporary as long as p0 is used as client socket parameter!
-    close(*((int*) p0));
+    // - this "send_socket" operation right here (client mode)
+    // - the "receive_socket" operation (server mode) and retrieved from internal memory right here
+    close(**s);
 
-/*??
     // Deallocate socket address.
     free(sa);
     // Deallocate host address.
     free(ha);
-*/
 }
 
 /* SOCKET_SENDING_COMMUNICATOR_SOURCE */

@@ -29,6 +29,39 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../logger/logger.c"
 
+//
+// Since http is a stateless protocol, it does not provide a possibility to
+// find out whether or not several consequent http requests belong together.
+//
+// Therefore, the application on the next higher level of abstraction has to
+// care about that, by opening a "session" for each request from an unknown user.
+// Every such session gets a unique identifier called "session id".
+//
+// Whenever the client now sends an http request to the server,
+// it also sends the session id, so that data already stored on the
+// server can be assigned to the correct user.
+//
+// There are several ways to transfer a session id:
+// 1 as cookie
+// 2 within the uri
+// 2.1 GET
+// 2.1.1 in the query, e.g.:
+// http://domain.tld/index.php?sid=3Dedb0e8665db4e9042fe0176a89aade16
+// 2.1.2 in the path
+// http://domain.tld/edb0e8665db4e9042fe0176a89aade16/index.php
+// 2.2 POST (within html forms, using input elements of type ?hidden")
+//
+// Problems:
+// 1 Many users have cookies deactivated in their browsers.
+//   However, an application may request to activate cookies.
+// 2 Each uri of a (generated) webpage has to be modified to contain the session id.
+// 2.2 All navigation has to occur via html forms (buttons etc.); simple links do not suffice
+//
+// In order to avoid users manipulating and using the session id of another user,
+// a session id has to be generated from a range of values that is large enough
+// to minimise the probability of guessing another user's session id.
+//
+
 /**
  * Encodes the compound into an http request.
  *

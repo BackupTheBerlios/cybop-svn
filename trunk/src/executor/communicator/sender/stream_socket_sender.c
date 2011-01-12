@@ -41,7 +41,7 @@
 /**
  * Sends a byte array stream to the stream socket in server mode by doing one single transfer.
  *
- * @param p0 the destination socket of this system
+ * @param p0 the destination communication partner socket
  * @param p1 the source byte array
  * @param p2 the source byte array count
  * @param p3 the number of bytes transferred
@@ -145,7 +145,7 @@ void send_stream_socket_server_mode_single_transfer(void* p0, void* p1, void* p2
 /**
  * Sends a byte array stream to the stream socket in server mode.
  *
- * @param p0 the destination socket of this system
+ * @param p0 the destination communication partner socket
  * @param p1 the source byte array
  * @param p2 the source byte array count
  */
@@ -206,7 +206,7 @@ void send_stream_socket_server_mode(void* p0, void* p1, void* p2) {
  *
  * Connects this system whose socket is given to another system whose address is given.
  *
- * @param p0 the destination socket of this system
+ * @param p0 the destination communication partner socket
  * @param p1 the receiver socket address (Hand over as reference!)
  * @param p2 the receiver socket address size
  */
@@ -309,11 +309,11 @@ void send_stream_socket_client_mode(void* p0, void* p1, void* p2) {
 /**
  * Sends a byte array stream to the stream socket.
  *
- * @param p0 the destination socket of this system
+ * @param p0 the destination communication partner socket
  * @param p1 the source byte array
- * @param p2 the source count
- * @param p3 the receiver socket address (Hand over as reference!)
- * @param p4 the receiver socket address size
+ * @param p2 the source byte array count
+ * @param p3 the receiver socket address of the communication partner (Hand over as reference!)
+ * @param p4 the receiver socket address of the communication partner size
  * @param p5 the communication mode
  * @param p6 the communication mode count
  */
@@ -351,7 +351,7 @@ void send_stream_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not send to stream socket. The communication mode is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not send to stream socket. The communication mode is unknown.");
     }
 }
 

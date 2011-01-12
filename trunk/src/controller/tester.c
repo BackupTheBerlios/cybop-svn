@@ -48,6 +48,50 @@
 // fwprintf(stdout, L"TEST string literal: %ls\n", "string");
 //
 
+//
+// Write some character data into a test file.
+//
+
+/*
+    // --- START TEST ---
+    // The log file name.
+    char* n = "http_response";
+    // The log file status flags.
+    int status = O_TRUNC | O_CREAT | O_WRONLY;
+    // The log file.
+    int f = open(n, status);
+
+    if (f >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        // The file owner.
+        int o = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+
+        // The file group.
+        int g = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+
+        // Set file owner.
+        chown(n, o, g);
+
+        // The file access rights.
+        //?? TODO: When trying to cross-compile cyboi for windows,
+        //?? the two S_IRGRP and S_IWGRP were not recognised by mingw.
+        int r = S_IRUSR | S_IWUSR; //?? | S_IRGRP | S_IWGRP;
+
+        // Set file access rights.
+        chmod(n, r);
+
+        // Log html to output.
+        write(f, p13, *((int*) p14));
+
+    } else {
+
+        // CAUTION! DO NOT use logging functionality here!
+        // The logger will not work before these global variables are set.
+        log_write_terminated_message(stdout, L"Error: Could not open socket sending http_response file. A file error occured.\n");
+    }
+    // --- END TEST ---
+*/
+
 /**
  * The main test procedure.
  *

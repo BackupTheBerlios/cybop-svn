@@ -109,6 +109,11 @@ void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, voi
                 }
             }
 
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not get startup socket namespace. The namespace model is not known.");
+            }
+
         } else {
 
             log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get startup socket namespace. The socket namespace is null.");
@@ -166,6 +171,11 @@ void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
 
                 *s = SOCK_RAW;
             }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get startup socket style. The communication style model is not known.");
         }
 
     } else {

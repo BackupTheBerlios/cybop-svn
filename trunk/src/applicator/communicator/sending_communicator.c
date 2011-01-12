@@ -368,9 +368,7 @@ void communicate_sending(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            //?? TEST: For testing reasons, the first parameter (which should be p2) was replaced with p9 here!
-            //?? The signal id serves as client socket to which this cyboi system has to reply.
-            communicate_sending_socket(p9, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) TCP_CYBOI_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+            communicate_sending_socket(p2, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) TCP_CYBOI_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 

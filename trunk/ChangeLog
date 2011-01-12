@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Make http communication work fully
+
 2011-01-11  Christian Heller  <christian.heller@tuxtax.de>
         * Make http response encoding work
 
