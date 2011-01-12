@@ -1,0 +1,125 @@
+<model>
+    <part name="create_presence" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="presence"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+    </part>
+    <part name="create_record" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="record"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".presence"/>
+    </part>
+    <part name="create_temporary_variables" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="temporary"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".presence"/>
+    </part>
+    <part name="receive_temporary_variables" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="presence/temporary.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".presence.temporary"/>
+    </part>
+    <part name="create_wui" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="wui"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".presence"/>
+    </part>
+    <part name="receive_wui" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="presence/wui.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".presence.wui"/>
+    </part>
+    <!-- TEST http encoding; delete later! -->
+    <part name="create_wui_response" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="response"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="character"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".presence.wui"/>
+    </part>
+    <part name="create_logic" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="logic"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".presence"/>
+    </part>
+    <part name="receive_logic" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="presence/logic.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".presence.logic"/>
+    </part>
+    <part name="create_logic_www_index_input" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="www_index_input"/>
+        <!--
+            CAUTION! Do use character and NOT wide_character here!
+            The http message body may be encoded and has to be read as plain characters.
+        -->
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="character"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".presence.logic.handler"/>
+    </part>
+    <part name="create_wui_index_actions" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="wui_index_actions"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".presence.logic.user_interface"/>
+    </part>
+    <part name="receive_wui_index_actions" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="presence/wui/index/actions.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".presence.logic.user_interface.wui_index_actions"/>
+    </part>
+    <!-- Write knowledge tree into file. -->
+    <part name="test_knowledge_tree" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/model-diagram"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".presence"/>
+        <property name="receiver" channel="inline" abstraction="text/plain" model="TEST_RESIDENZ.txt"/>
+    </part>
+    <part name="startup_www_service" channel="inline" abstraction="operation/plain" model="startup">
+        <property name="service" channel="inline" abstraction="text/plain" model="cyboi"/>
+        <property name="namespace" channel="inline" abstraction="text/plain" model="ipv4"/>
+        <property name="style" channel="inline" abstraction="text/plain" model="stream"/>
+        <property name="address" channel="inline" abstraction="text/plain" model="any"/>
+    </part>
+    <part name="sense_http_client_requests" channel="inline" abstraction="operation/plain" model="sense">
+        <property name="channel" channel="inline" abstraction="text/plain" model="cyboi"/>
+        <property name="handler" channel="inline" abstraction="path/knowledge" model=".presence.logic.handler.handle_www_service"/>
+    </part>
+<!--
+    <part name="import_xdt" channel="inline" abstraction="path/knowledge" model=".presence.logic.import.xdt"/>
+-->
+</model>
+
+<!--
+    Copyright (C) 1999-2011. Christian Heller.
+
+    This file is part of the Res Medicinae medical software.
+    It represents a knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    Res Medicinae is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Res Medicinae is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Res Medicinae.  If not, see <http://www.gnu.org/licenses/>.
+
+    Res Medicinae <http://www.resmedicinae.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: startup.cybol,v $ $Revision: 1.18 $ $Date: 2009-02-08 13:15:19 $ $Author: chrissy $
+    @author Christian Heller <christian.heller@tuxtax.de>
+-->
