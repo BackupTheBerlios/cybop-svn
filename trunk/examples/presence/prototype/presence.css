@@ -1,0 +1,153 @@
+/*
+ * Legende:
+ * außer Haus: #FFFFFF
+ * auf Dienstreise: #FFCCCC
+ * im Urlaub: #FFFFCC
+ * im Hause: #E6FFCC
+ */
+
+@media screen {
+
+body {
+    background-color: #FFFFFF;
+    margin: 0px;
+    /* Minimum width avoids line feed and display errors in modern browsers. */
+    width: 1000px;
+}
+
+}
+
+@media print {
+
+body {
+    background-color: #FFFFFF;
+}
+
+}
+
+div#page {
+    margin: 20px;
+    text-align: left;
+    font-family: "DejaVu Sans", "Bitstream Vera Sans", "Nimbus", "Andale", "Courier", "Prestige";
+    font-size: 0.8em;
+    color: #000000;
+}
+
+* html div#page {
+    /* The workaround for the 3 pixel bug of Internet Explorer up to version 6. */
+    height: 1em;
+}
+
+div#page h1 {
+    color: #000000;
+    font-size: 2.0em;
+}
+
+div#page h2 {
+    color: #000000;
+    font-size: 1.0em;
+}
+
+div#page h3 {
+    color: #000000;
+    font-size: 0.8em;
+}
+
+div#page p {
+    color: #000000;
+}
+
+div#page a {
+    text-decoration: none;
+    color: #000000;
+}
+
+div#page a:link {
+}
+
+div#page a:visited {
+}
+
+div#page a:hover {
+    background-color: #E0E0E0;
+    color: #000000;
+}
+
+div#page a:active {
+    background-color: #FFCCCC;
+    color: #000000;
+}
+
+div#overview table {
+    background-color: #000000;
+    width: 700px;
+    float: left;
+    border-spacing: 1px;
+}
+
+div#overview tr {
+    text-align: left;
+}
+
+div#overview th {
+    padding: 2px;
+    background-color: #E0E0E0;
+}
+
+div#overview td {
+    padding: 2px;
+}
+
+div#overview img {
+    border-width: 0px;
+    float: left;
+    height: 20px;
+}
+
+div#legend {
+    margin-left: 800px;
+    color: #000000;
+}
+
+div#legend h1 {
+    color: #000000;
+    font-size: 1.0em;
+}
+
+div#footer {
+    /* The "clear" resets the element flow. */
+    clear: both;
+    padding: 0.1em;
+    text-align: left;
+    font-size: 0.8em;
+}
+
+div#footer hr {
+    /*
+        Both, colour and background colour are set here
+        to make old browsers display the colour properly.
+    */
+    background-color: #000000;
+    color: #000000;
+}
+
+div#footer img {
+    float: left;
+    height: 20px;
+}
+
+.absence {
+    background-color: #FFFFFF;
+}
+
+.businesstrip {
+    background-color: #FFCCCC;
+}
+
+.holiday {
+    background-color: #FFFFCC;
+}
+
+.presence {
+    background-color: #E6FFCC;
+}

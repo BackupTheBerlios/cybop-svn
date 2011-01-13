@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Add prototype website for application "presence"
+
 2011-01-12  Christian Heller  <christian.heller@tuxtax.de>
         * Make http communication work fully
         * Create new cybol example application "presence"
