@@ -104,8 +104,21 @@ div#overview img {
     height: 20px;
 }
 
+div#login {
+    float: right;
+    width: 160px;
+    height: 20px;
+    margin-top: 10px;
+}
+
+div#login button {
+    clear: both;
+    margin-top: 20px;
+}
+
 div#legend {
-    margin-left: 800px;
+    margin-top: 100px;
+    float: right;
     color: #000000;
 }
 

@@ -5,15 +5,36 @@
     <meta name="date" content="2011-01-13T12:00:00+01:00"/>
     <meta name="author" content="Christian Heller &lt;christian.heller@tuxtax.de&gt;"/>
     <meta name="robots" content="noindex"/>
-    <link rel="stylesheet" type="text/css" href="presence.css"/>
+    <link rel="stylesheet" media="all" type="text/css" href="presence.css"/>
     <title>Anwesenheit Mitarbeiter</title>
 </head>
 <body>
     <div id="page">
         <div id="header">
             <img src="ba-leipzig.png" alt="BA Leipzig"/>
-            <h1>Anwesenheit Mitarbeiter</h1>
         </div>
+        <div id="login">
+            <form action="https://www.xing.com/app/user" method="post" name="loginform" id="headlogin">
+                <fieldset>
+                    <input type="hidden" name="op" value="login">
+                    <input type="hidden" name="dest" value="/de/">
+                    <div id="username">
+                        <label id="username-label" for="username-field">Benutzername:</label>
+                        <input id="username-field" class="text focus-on-load" type="text" name="username" value="" maxlength="80"  tabindex="201"/>
+                    </div>
+                    <div id="password">
+                        <label id="password-label" for="password-field">Passwort:</label>
+                        <input id="password-field" type="password" name="login_password" value="" maxlength="80" tabindex="202" class="text"/>
+                    </div>
+                    <label id="remember-label" for="remember-login"/>
+                    <input id="remember-login" type="checkbox" name="perm" tabindex="203"> Angemeldet bleiben
+                    <button id="login-button" type="submit" value="login" tabindex="204" class="button cancel-button">
+                        <span><em>Anmelden</em></span>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+        <h1>Anwesenheit Mitarbeiter</h1>
         <div id="overview">
             <table>
                 <thead>
