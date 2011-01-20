@@ -84,10 +84,10 @@ div#page a:active {
 }
 
 div#overview table {
-    background-color: #000000;
-    width: 700px;
     float: left;
+    width: 600px;
     border-spacing: 1px;
+    background-color: #000000;
 }
 
 div#overview tr {
@@ -109,11 +109,31 @@ div#overview img {
     height: 20px;
 }
 
-#login {
-    margin-top: 10px;
-    float: right;
+div#overview .edit {
     width: 200px;
-    height: 20px;
+}
+
+div#legend {
+    float: left;
+    margin-left: 50px;
+    color: #000000;
+}
+
+div#legend h1 {
+    color: #000000;
+    font-size: 1.0em;
+}
+
+#login {
+    float: right;
+    margin-right: 10px;
+    width: 200px;
+}
+
+#login fieldset {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #000000;
 }
 
 #login #username-label, #login #password-label {
@@ -145,17 +165,6 @@ div#overview img {
     border-color: #E0E0E0;
     font-size: 10px;
     font-weight: bold;
-}
-
-div#legend {
-    margin-top: 100px;
-    float: right;
-    color: #000000;
-}
-
-div#legend h1 {
-    color: #000000;
-    font-size: 1.0em;
 }
 
 div#footer {
