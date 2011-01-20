@@ -1,0 +1,33 @@
+<model>
+    <part name="startup" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
+        <property name="message" channel="file" abstraction="text/cybol" model="http_communication/logic/startup.cybol"/>
+    </part>
+</model>
+
+<!--
+    Copyright (C) 1999-2011. Christian Heller.
+
+    This file is part of the Res Medicinae medical software.
+    It represents a knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    Res Medicinae is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Res Medicinae is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Res Medicinae.  If not, see <http://www.gnu.org/licenses/>.
+
+    Res Medicinae <http://www.resmedicinae.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: run.cybol,v $ $Revision: 1.8 $ $Date: 2009-02-07 00:42:58 $ $Author: chrissy $
+    @author Christian Heller <christian.heller@tuxtax.de>
+-->

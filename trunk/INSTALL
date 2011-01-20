@@ -64,7 +64,11 @@ ___________________________
     /home/cybop/src/controller/cyboi --knowledge program_execution/run.cybol
     /home/cybop/src/controller/cyboi --knowledge helloworld/run.cybol
     /home/cybop/src/controller/cyboi --knowledge ui_control/run.cybol
+    /home/cybop/src/controller/cyboi --knowledge http_communication/run.cybol
 
+To make the client-server communication work in the "http_communication" example,
+type the following URL into a web browser after having started the application:
+http://localhost:1971/?action=index
 
 You may also want to have a look at the Res Medicinae project, where more CYBOL
 application modules for the healthcare domain will be provided over the coming years:
