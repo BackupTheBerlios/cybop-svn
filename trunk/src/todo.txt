@@ -11,6 +11,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Fix errors caused by using "append" instead of "replace" function
+            (e.g. html file http response was generated twice as long as wanted;
+            only first action was received and added properly to uri internal model,
+            all following actions were appended but only the first is considered)
+
         * Continue with example application "presence"
 
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file

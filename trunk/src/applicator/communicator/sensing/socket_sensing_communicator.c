@@ -78,7 +78,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
 
             if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-                unsigned int* st = (unsigned int*) p2;
+                double* st = (double*) p2;
 
                 if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -171,6 +171,8 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
 
                             // Unlock socket mutex.
                             pthread_mutex_unlock(mt);
+
+    fwprintf(stdout, L"TEST: sense wait st: %g \n", *st);
 
                             while (*irq != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -344,7 +346,11 @@ void communicate_sensing_socket(void* p0, void* p1) {
             // and processed in the system signal handler procedure
             // (situated in the controller/checker.c module).
 
+    fwprintf(stdout, L"TEST: sensing socket pre os: %i \n", *((int*) *os));
+    fwprintf(stdout, L"TEST: sensing socket pre ps: %i \n", *((int*) *ps));
             communicate_sensing_socket_message(*irq, *mt, *st, *ps, *pa, *pas, *os);
+    fwprintf(stdout, L"TEST: sensing socket post os: %i \n", *((int*) *os));
+    fwprintf(stdout, L"TEST: sensing socket post ps: %i \n", *((int*) *ps));
         }
 
     } else {

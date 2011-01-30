@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Identify problem that html file http response was created twice and
+            only first action was executed, but not later ones;
+            the reason is the usage of "append" instead of "replace",
+            so that all html models or uri actions were appended to previous ones
+
 2011-01-20  Christian Heller  <christian.heller@tuxtax.de>
         * Complete prototype website for application "presence"
         * Add example application "http_communication"
