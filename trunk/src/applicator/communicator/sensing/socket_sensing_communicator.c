@@ -55,6 +55,39 @@
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 
+//
+// An alternative approach to speed up communication would be to keep
+// all accepted client sockets open, for example by storing them
+// in a "socket memory" container. This container would have to be
+// allocated at server socket startup and deallocated at shutdown.
+// It would have to be accessed using a special mutex. Further, it would
+// be stored in the internal memory, just like the knowledge- and signal memory.
+// However, there will be no need to handle many sockets,
+// if each connection is treated like a new request.
+//
+// There would have to be two threads: one for "accept" and another for "recv".
+// The reason is that "recv" might still be busy receiving data while new
+// connection requests are to be accepted. The second thread would contain
+// a loop trying to sense data from all client sockets stored in the socket memory.
+//
+// However, this approach was NOT realised due to various difficulties:
+// - http is a stateless protocol, so each request is considered independently anyway
+// - after a request has been accepted and a reply sent to the client, a new request
+//   of the same client would be accepted and sensed independently;
+//   it would be complicated to find out (via comparison of the socket addresses)
+//   if the client socket already exists in the socket memory
+// - it would be unclear when to close the client socket, since it was
+//   actually stored in the socket memory to be ready for multiple
+//   data exchanges and to avoid steady accept/close cycles
+// - many modern applications written in other programming languages
+//   open and close each socket after just one request-response cycle
+//   and do NOT keep the connexion open
+//
+// Not useful is the idea to hand over the socket as cybol property,
+// in order to store it in the knowledge tree. Low-level sockets
+// should not be known to higher-level cybol applications.
+//
+
 /**
  * Senses socket message.
  *
@@ -129,27 +162,6 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
                         // because it has some overhead in that other sockets need to be considered
                         // and their file descriptors handed over as parameter.
                         //
-                        // An alternative approach to speed up communication would be to keep
-                        // all accepted client sockets open, for example by storing them
-                        // in a "socket memory" container. This container would have to be
-                        // allocated at server socket startup and deallocated at shutdown.
-                        // It would have to be accessed using a special mutex. Further, it would
-                        // be stored in the internal memory, just like the knowledge- and signal memory.
-                        //
-                        // There would have to be two threads: one for "accept" and another for "recv".
-                        // The reason is that "recv" might still be busy receiving data while new
-                        // connection requests are to be accepted. The second thread would contain
-                        // a loop trying to sense data from all client sockets stored in the socket memory.
-                        //
-                        // However, this approach was NOT realised due to various difficulties:
-                        // - http is a stateless protocol, so each request has to be considered independently anyway
-                        // - after a request has been accepted and a reply sent to the client, a new request
-                        //   of the same client would be accepted and sensed independently;
-                        //   it would be complicated to find out (via comparison of the socket addresses)
-                        //   if the client socket already exists in the socket memory
-                        // - it would be unclear when to close the client socket, since it was
-                        //   actually stored in the socket memory to be ready for multiple
-                        //   data exchanges and to avoid steady accept/close cycles
                         *ps = accept(*os, (struct sockaddr*) p4, (socklen_t*) p5);
 
                         if (*ps >= *NUMBER_0_INTEGER_MEMORY_MODEL) {

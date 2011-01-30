@@ -1,38 +1,49 @@
 
-CYBOI-Java-Comparison
+CYBOI-Java Comparison
 =====================
 
 Comparison
 __________
 
-allocate: malloc, new, constructor, create
-deallocate: free, delete, destructor, destroy
-reallocate: trimToSize
+MEMORISER
 
-insert_element(container, source element, index)
+allocate: malloc, new, constructor, create
+reallocate: trimToSize
+deallocate: free, delete, destructor, destroy
+
+MODIFIER
+
+insert_element(container, source element, index) = reallocate + replace
 
 remove_element(index): delete
 remove_element_by_name(name)
 remove_area(start index, end index)
 remove_all(container): clear, empty
 
-set_element(container, source element, index): replace
-set_part(container, source element, index)
-set_part_by_name(container, source element, name): set
-set_signal(container, source element, index): set
+replace_element(container, source element, index): set, replace, copy, assign
+replace_part(container, source element, index)
+replace_part_by_name(container, source element, name)
+replace_signal(container, source element, index)
 
-get_element(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest
-get_part_name(container, index)
-get_part_abstraction(container, index)
-get_part(container, index)
-get_part_by_name(container, name)
-get_part_details(container, index)
+sort_parts_by_name(destination container, source container)
+trim(character array): [delete all spaces preceding and following the string]
+reverse(character array) [reverse sequence]
 
-get_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
-get_last_index(container, element): lastIndexOf
+ACCESSOR
 
-clone_shallow = allocate + loop + get[pointer](old container, index) + set[pointer](new container, index)
-clone_deep = allocate + loop + get(old container, index) + loop + get(child container, index) + etc.
+retrieve_element(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest
+retrieve_part_name(container, index)
+retrieve_part_abstraction(container, index)
+retrieve_part(container, index)
+retrieve_part_by_name(container, name)
+retrieve_part_details(container, index)
+
+find_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
+find_last_index(container, element): lastIndexOf
+
+filter(regular expression): matches
+
+COMPARATOR
 
 compare_equality_all(container, array): equals, ceiling, floor, higher, lower
 compare_equality_all_ignore_case: equalsIgnoreCase
@@ -44,27 +55,28 @@ compare_equality_part(destination container, source container): containsAll
 compare_equality_part_ignore_case
 ??: compareTo (lexicographically, i.e. position in ASCII/Unicode table)
 
-decode: valueOf
-encode: toString
+CONVERTER
 
+decode: valueOf
+many, many further decode functions
+encode: toString
+many, many further encode functions
 encode_capitalisation_lower: toLowerCase
 encode_capitalisation_upper: toUpperCase
-
-sort_parts_by_name(destination container, source container)
-trim(character array): [delete all spaces preceding and following the string]
-reverse(character array) [reverse sequence]
-filter (regular expression): matches
+[duplication is the same as 1:1 conversion; therefore, duplicate belongs here]
+duplicate_deep: copy, copyValueOf, clone + replace, = allocate + loop + retrieve(old container, index) + loop + retrieve(child container, index) + replace() etc.
+duplicate_shallow = allocate + loop + retrieve[pointer](old container, index) + replace[pointer](new container, index)
+--> duplicate_shallow might not be useful in cyboi!
 
 Composition
 ___________
 
-pop = poll = take = get_first_element + remove_first_element
-remove_first_element(element) = get_first_index + remove_element
-remove_last_element(element) = get_last_index + remove_element
-set_elements(container, old element, new element) = loop + get_first_index + set_element
-copy = copyValueOf = clone + set
+remove_first_element(element) = find_first_index + remove_element
+remove_last_element(element) = find_last_index + remove_element
+pop = poll = take = retrieve_first_element + remove_first_element
+replace_elements(container, old element, new element) = loop + find_first_index + replace_element
 
-move: COMPOSITION? = get(old container, index) + append(new container, element) + remove(old container, index)
+move: COMPOSITION? = retrieve(old container, index) + append(new container, element) + remove(old container, index)
 move_element(destination container, source container, source element index)
 move_element_by_name(destination container, source container, source element name)
 move_area(destination container, source container, source start index, source end index): drainTo
@@ -83,10 +95,9 @@ getChildCount, length, capacity, isEmpty, size, setSize:
 elements are accompanied by a count and size by default
 
 subSequence, substring:
-it suffices to simply count up the pointer to the
-desired sub sequence of an array
+it suffices to simply count up the pointer to the desired sub sequence of an array
 
-append: SUPERFLUOUS? = set(container, count as index)
+append: SUPERFLUOUS? syntactic sugar? just convenience! = replace(container, count as index)
 append_element(container, element): add, push, put, offer, concat
 append_signal(container, element): add, push, put, offer, concat
 append_part(container, element): add, push, put, offer, concat

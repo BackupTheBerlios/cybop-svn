@@ -16,7 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-01-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Add files "compound_reallocator" and "signal_memory_reallocator"
+
 2011-01-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix wrong cast to int instead of double for wait time in socket sensing service
         * Identify problem that html file http response was created twice and
             only first action was executed, but not later ones;
             the reason is the usage of "append" instead of "replace",
