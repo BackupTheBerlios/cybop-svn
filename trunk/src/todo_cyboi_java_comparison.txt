@@ -7,9 +7,9 @@ __________
 
 MEMORISER
 
-allocate: malloc, new, constructor, create
-reallocate: trimToSize
-deallocate: free, delete, destructor, destroy
+DONE allocate: malloc, new, constructor, create
+DONE reallocate: trimToSize
+DONE deallocate: free, delete, destructor, destroy
 
 MODIFIER
 

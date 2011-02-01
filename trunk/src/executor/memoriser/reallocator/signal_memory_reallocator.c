@@ -45,33 +45,115 @@
  */
 void reallocate_signal_memory(void* p0, void* p1, void* p2) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* sms = (int*) p2;
+        void** sm = (void**) p0;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Reallocate signal memory.");
 
-            int* smc = (int*) p1;
+        // The abstractions, models, details, priorities, identifications.
+        void** a = NULL_POINTER_MEMORY_MODEL;
+        void** ac = NULL_POINTER_MEMORY_MODEL;
+        void** m = NULL_POINTER_MEMORY_MODEL;
+        void** mc = NULL_POINTER_MEMORY_MODEL;
+        void** d = NULL_POINTER_MEMORY_MODEL;
+        void** dc = NULL_POINTER_MEMORY_MODEL;
+        void** p = NULL_POINTER_MEMORY_MODEL;
+        void** id = NULL_POINTER_MEMORY_MODEL;
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        // Get abstractions, models, details, priorities, identifications.
+        get_array_elements((void*) &a, *sm, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &ac, *sm, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &m, *sm, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &mc, *sm, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &d, *sm, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &dc, *sm, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &p, *sm, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        get_array_elements((void*) &id, *sm, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-                void** sm = (void**) p0;
+        if (*a != *NULL_POINTER_MEMORY_MODEL) {
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Reallocate signal memory.");
+            if (*ac != *NULL_POINTER_MEMORY_MODEL) {
+
+                if (*m != *NULL_POINTER_MEMORY_MODEL) {
+
+                    if (*mc != *NULL_POINTER_MEMORY_MODEL) {
+
+                        if (*d != *NULL_POINTER_MEMORY_MODEL) {
+
+                            if (*dc != *NULL_POINTER_MEMORY_MODEL) {
+
+                                if (*p != *NULL_POINTER_MEMORY_MODEL) {
+
+                                    if (*id != *NULL_POINTER_MEMORY_MODEL) {
+
+                                        // Reallocate abstractions, models, details, priorities, identifications.
+                                        reallocate_array(a, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        reallocate_array(ac, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        reallocate_array(m, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        reallocate_array(mc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        reallocate_array(d, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        reallocate_array(dc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        reallocate_array(p, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        reallocate_array(id, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+                                        // Set new array reference.
+                                        // CAUTION! If an array gets reallocated, a new array is
+                                        // created and the contents of the old array gets copied.
+                                        // Therefore, the new array reference needs to be set.
+                                        // The old array gets destroyed automatically by reallocate.
+                                        set_array_elements(*sm, (void*) a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        set_array_elements(*sm, (void*) ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        set_array_elements(*sm, (void*) m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        set_array_elements(*sm, (void*) mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        set_array_elements(*sm, (void*) d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        set_array_elements(*sm, (void*) dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        set_array_elements(*sm, (void*) p, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                        set_array_elements(*sm, (void*) id, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+                                    } else {
+
+                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The identifications is null.");
+                                    }
+
+                                } else {
+
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The priorities is null.");
+                                }
+
+                            } else {
+
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The details counts is null.");
+                            }
+
+                        } else {
+
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The details is null.");
+                        }
+
+                    } else {
+
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The models counts is null.");
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The models is null.");
+                }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The signal memory is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The abstractions counts is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The signal memory count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The abstractions is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The signal memory size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate signal memory. The signal memory is null.");
     }
 }
 

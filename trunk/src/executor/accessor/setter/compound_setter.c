@@ -36,7 +36,7 @@
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
-#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/memoriser/reallocator/compound_reallocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
 
@@ -112,10 +112,10 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
 //??    fwprintf(stdout, L"TEST Set compound element by index nc: %i\n", *nc);
 //??    fwprintf(stdout, L"TEST Set compound element by index n: %i\n", *n);
 
+/*??
                     // CAUTION! If a compound model was properly allocated, then all arrays should exist!
                     // Therefore, check all arrays for null pointers here.
 
-/*??
                     if (*n != *NULL_POINTER_MEMORY_MODEL) {
 
                         if (*nc != *NULL_POINTER_MEMORY_MODEL) {
@@ -150,38 +150,8 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                                                                         *cs = (*cs * *COMPOUND_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 //??    fwprintf(stdout, L"TEST set compound element by index 00 new cs: %i\n", *cs);
 
-                                                                        // Reallocate names, abstractions, models, details.
-                                                                        reallocate_array(n, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(nc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(ns, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(a, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(ac, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(as, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(m, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(mc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(ms, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(d, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(dc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        reallocate_array(ds, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                                                                        // Set new array reference.
-                                                                        // CAUTION! If an array gets reallocated, a new array is
-                                                                        // created and the contents of the old array gets copied.
-                                                                        // Therefore, the new array reference needs to be set.
-                                                                        // The old array gets destroyed automatically by reallocate.
-                                                                        set_array_elements(p0, (void*) n, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-//??    fwprintf(stdout, L"TEST set compound element by index 13 ds: %i\n", *ds);
-                                                                        set_array_elements(p0, (void*) nc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NAMES_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) as, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) ms, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(p0, (void*) ds, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_SIZES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        //?? CAUTION! Does this reference &p0 cause an error? Check!
+                                                                        reallocate_compound((void*) &p0, p1, p2);
                                                                     }
 
                                                                     if (*i < *cs) {

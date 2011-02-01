@@ -33,7 +33,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/signal_memory_memory_name.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
-#include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/memoriser/reallocator/signal_memory_reallocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
 
@@ -110,29 +110,7 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                                                     // Increase size.
                                                     *sms = (*sms * *ARRAY_REALLOCATION_FACTOR) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                                                    // Reallocate abstractions, models, details, priorities, identifications.
-                                                    reallocate_array(a, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    reallocate_array(ac, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    reallocate_array(m, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    reallocate_array(mc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    reallocate_array(d, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    reallocate_array(dc, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    reallocate_array(p, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    reallocate_array(id, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                                                    // Set new array reference.
-                                                    // CAUTION! If an array gets reallocated, a new array is
-                                                    // created and the contents of the old array gets copied.
-                                                    // Therefore, the new array reference needs to be set.
-                                                    // The old array gets destroyed automatically by reallocate.
-                                                    set_array_elements(p0, (void*) a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) p, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(p0, (void*) id, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    reallocate_signal_memory((void*) &p0, p1, p2);
                                                 }
 
                                                 if (i < *sms) {
