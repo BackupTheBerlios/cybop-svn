@@ -97,7 +97,7 @@ void replace_compound_element_by_name(void* p0, void* p1, void* p2,
         // DO USE the name, name count and name size that were
         // handed over as parameters to this procedure!
         // They were allocated by a translator while parsing CYBOL files.
-        set_compound_element_by_index(p0, p1, p2, p1, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
+        replace_compound_by_index(p0, p1, p2, p1, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17);
     }
 */
 }

@@ -46,7 +46,7 @@
  * @param p4 the source count
  * @param p5 the abstraction
  */
-void replace_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void replace_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -92,7 +92,7 @@ void replace_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     // Replace destination- with source array elements.
                     //
                     // CAUTION! Use an index with value zero, so that all elements get replaced.
-                    set_array_elements(*d, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5);
+                    replace_array(*d, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p5);
 
                     // Set destination count to the same value as the -size.
                     *dc = *ds;
