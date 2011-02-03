@@ -53,7 +53,7 @@
 #include "../../../constant/name/memory/vector_memory_name.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../executor/accessor/setter.c"
+#include "../../../executor/modifier/replacer.c"
 #include "../../../executor/converter/encoder/integer_vector_encoder.c"
 #include "../../../executor/converter/encoder/terminal_background_encoder.c"
 #include "../../../executor/converter/encoder/terminal_foreground_encoder.c"

@@ -7,100 +7,97 @@ __________
 
 MEMORISER
 
-DONE allocate: malloc, new, constructor, create
-DONE reallocate: trimToSize
-DONE deallocate: free, delete, destructor, destroy
++ allocate: malloc, new, constructor, create
++ reallocate: trimToSize
++ deallocate: free, delete, destructor, destroy
 
 MODIFIER
 
-insert_element(container, source element, index) = reallocate + replace
++ assign
 
-remove_element(index): delete
-remove_element_by_name(name)
-remove_area(start index, end index)
-remove_all(container): clear, empty
++ replace(container, source element, index): set, replace, copy, overwrite
 
-replace_element(container, source element, index): set, replace, copy, assign
-replace_part(container, source element, index)
-replace_part_by_name(container, source element, name)
-replace_signal(container, source element, index)
+- insert_element(container, source element, index) = reallocate + replace
 
-sort_parts_by_name(destination container, source container)
-trim(character array): [delete all spaces preceding and following the string]
-reverse(character array) [reverse sequence]
+- remove_element(index): delete
+- remove_element_by_name(name)
+- remove_area(start index, end index)
+- remove_all(container): clear, empty
+
+- sort_parts_by_name(destination container, source container)
+- trim(character array): [delete all spaces preceding and following the string]
+- reverse(character array) [reverse sequence]
 
 ACCESSOR
 
-retrieve_element(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest
-retrieve_part_name(container, index)
-retrieve_part_abstraction(container, index)
-retrieve_part(container, index)
-retrieve_part_by_name(container, name)
-retrieve_part_details(container, index)
+- find_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
+- find_last_index(container, element): lastIndexOf
 
-find_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
-find_last_index(container, element): lastIndexOf
+- retrieve_element(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest
+- retrieve_part_name(container, index)
+- retrieve_part_abstraction(container, index)
+- retrieve_part(container, index)
+- retrieve_part_by_name(container, name)
+- retrieve_part_details(container, index)
 
-filter(regular expression): matches
+- filter(regular expression): matches
 
 COMPARATOR
 
-compare_equality_all(container, array): equals, ceiling, floor, higher, lower
-compare_equality_all_ignore_case: equalsIgnoreCase
-compare_equality_prefix: startsWith
-compare_equality_prefix_ignore_case
-compare_equality_suffix: endsWith
-compare_equality_suffix_ignore_case
-compare_equality_part(destination container, source container): containsAll
-compare_equality_part_ignore_case
-??: compareTo (lexicographically, i.e. position in ASCII/Unicode table)
+- compare_equality_all(container, array): equals, ceiling, floor, higher, lower
+- compare_equality_all_ignore_case: equalsIgnoreCase
+- compare_equality_prefix: startsWith
+- compare_equality_prefix_ignore_case
+- compare_equality_suffix: endsWith
+- compare_equality_suffix_ignore_case
+- compare_equality_part(destination container, source container): containsAll
+- compare_equality_part_ignore_case
+- ??: compareTo (lexicographically, i.e. position in ASCII/Unicode table)
 
 CONVERTER
 
-decode: valueOf
-many, many further decode functions
-encode: toString
-many, many further encode functions
-encode_capitalisation_lower: toLowerCase
-encode_capitalisation_upper: toUpperCase
+- decode: valueOf
+- encode: toString
+- encode_capitalisation_lower: toLowerCase
+- encode_capitalisation_upper: toUpperCase
 [duplication is the same as 1:1 conversion; therefore, duplicate belongs here]
-duplicate_deep: copy, copyValueOf, clone + replace, = allocate + loop + retrieve(old container, index) + loop + retrieve(child container, index) + replace() etc.
-duplicate_shallow = allocate + loop + retrieve[pointer](old container, index) + replace[pointer](new container, index)
+- duplicate_deep: copy, copyValueOf, clone + replace, = allocate + loop + retrieve(old container, index) + loop + retrieve(child container, index) + replace() etc.
+- duplicate_shallow = allocate + loop + retrieve[pointer](old container, index) + replace[pointer](new container, index)
 --> duplicate_shallow might not be useful in cyboi!
 
 Composition
 ___________
 
-remove_first_element(element) = find_first_index + remove_element
-remove_last_element(element) = find_last_index + remove_element
-pop = poll = take = retrieve_first_element + remove_first_element
-replace_elements(container, old element, new element) = loop + find_first_index + replace_element
+- remove_first_element(element) = find_first_index + remove_element
+- remove_last_element(element) = find_last_index + remove_element
+- pop = poll = take = retrieve_first_element + remove_first_element
+- replace_elements(container, old element, new element) = loop + find_first_index + replace_element
 
-move: COMPOSITION? = retrieve(old container, index) + append(new container, element) + remove(old container, index)
-move_element(destination container, source container, source element index)
-move_element_by_name(destination container, source container, source element name)
-move_area(destination container, source container, source start index, source end index): drainTo
-move_elements(destination container, source container): drainTo
-move_signals(destination container, source container): drainTo
-move_parts(destination container, source container): drainTo
+- move: COMPOSITION? = retrieve(old container, index) + append(new container, element) + remove(old container, index)
+- move_element(destination container, source container, source element index)
+- move_element_by_name(destination container, source container, source element name)
+- move_area(destination container, source container, source start index, source end index): drainTo
+- move_elements(destination container, source container): drainTo
+- move_signals(destination container, source container): drainTo
+- move_parts(destination container, source container): drainTo
 
 Superfluous
 ___________
 
-hashCode:
-typically (e.g. in Java) implemented by converting the internal address of the object into an integer;
-CYBOI works with pointers anyway, so that distinct objects are identifiable
+- hashCode:
+  typically (e.g. in Java) implemented by converting the internal address of the object into an integer;
+  CYBOI works with pointers anyway, so that distinct objects are identifiable
 
-getChildCount, length, capacity, isEmpty, size, setSize:
-elements are accompanied by a count and size by default
+- getChildCount, length, capacity, isEmpty, size, setSize:
+  elements are accompanied by a count and size by default
 
-subSequence, substring:
-it suffices to simply count up the pointer to the desired sub sequence of an array
+- subSequence, substring:
+  it suffices to simply count up the pointer to the desired sub sequence of an array
 
-append: SUPERFLUOUS? syntactic sugar? just convenience! = replace(container, count as index)
-append_element(container, element): add, push, put, offer, concat
-append_signal(container, element): add, push, put, offer, concat
-append_part(container, element): add, push, put, offer, concat
-append_elements(destination container, source container): appendAll, putAll
-append_signals(destination container, source container): appendAll, putAll
-append_parts(destination container, source container): appendAll, putAll
+- append: SUPERFLUOUS? syntactic sugar? just convenience! = replace(container, count as index)
+- append_element(container, element): add, push, put, offer, concat
+- append_signal(container, element): add, push, put, offer, concat
+- append_part(container, element): add, push, put, offer, concat
+- append_elements(destination container, source container): appendAll, putAll
+- append_signals(destination container, source container): appendAll, putAll
+- append_parts(destination container, source container): appendAll, putAll

@@ -32,7 +32,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/accessor/assigner.c"
+#include "../../../executor/modifier/assigner.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
 #include "../../../executor/arithmetiser/integer_subtracter.c"

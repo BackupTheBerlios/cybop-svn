@@ -28,7 +28,7 @@
 
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../executor/accessor/setter/array_setter.c"
+#include "../../../executor/modifier/replacer/array_replacer.c"
 #include "../../../logger/logger.c"
 
 //
@@ -64,9 +64,9 @@ void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
             allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
             // The count is set to zero, since the model does not contain any elements yet.
-            set_array_elements(*c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(*c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
             // The size is set to the value that was handed over as argument.
-            set_array_elements(*s, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(*s, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         } else {
 

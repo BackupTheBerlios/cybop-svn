@@ -83,7 +83,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
         (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
     // Copy startup model abstraction.
-    replace_array_elements((void*) &a, (void*) ac, (void*) as, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array((void*) &a, (void*) ac, (void*) as, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Receive and decode startup model model and -details.
     communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
@@ -103,7 +103,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     get_new_signal_identification((void*) &id, p0, p1);
 
     // Add startup model as signal to signal memory.
-    set_signal(p0, p1, p2, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
+    replace_signal_memory(p0, p1, p2, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)

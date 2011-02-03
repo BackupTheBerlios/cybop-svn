@@ -35,7 +35,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
-#include "../../../executor/accessor/setter/compound_setter.c"
+#include "../../../executor/modifier/replacer/compound_replacer.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../executor/memoriser/deallocator/model_deallocator.c"
@@ -82,7 +82,7 @@ void append_compound_element_by_name(void* p0, void* p1, void* p2,
 
         // CAUTION! Use compound count as index for appending new elements.
         // CAUTION! Use DEREFERENCED name, as it was handed over as reference!
-        set_compound_element_by_index(p0, p1, p2, p1, *n, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+        replace_compound_by_index(p0, p1, p2, p1, *n, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
 
     } else {
 
@@ -180,7 +180,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 
                 // Append list element separator characters "_$" to element name.
                 // Use name count as index to append the new characters.
-                set_array_elements(*n, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(*n, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                 *nc = *nc + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
 //??    fwprintf(stdout, L"TEST append compound element 4 ns: %i\n", *ns);
@@ -189,7 +189,7 @@ void append_compound_element_by_name_with_suffix(void* p0, void* p1, void* p2,
 
                 // Set new element name by appending the index determined above.
                 // Use name count as index to append the new characters.
-                set_array_elements(*n, s, sc, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(*n, s, sc, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                 *nc = *nc + *((int*) sc);
 
 //??    fwprintf(stdout, L"TEST append compound element 5 ns: %i\n", *ns);

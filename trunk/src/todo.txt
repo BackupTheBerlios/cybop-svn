@@ -11,6 +11,15 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Solve conflict between old and new "replace" (formerly "set") functions
+        * formerly, the "replace_array_elements" function was called to
+            adjust the count and size; inside, the "set_array_elements" function was called;
+        * now, the old "set_array_elements" function was renamed to "replace_array",
+            which causes errors due to a wrong number of parametres
+        * put reallocation of count/size into "replace" function; see:
+            http://svn.berlios.de/viewvc/cybop/trunk/src/executor/accessor/replacer/array_replacer.c?revision=1383&view=markup
+            and the rest into specific functions like "replace_array"
+
         * CONTINUE WITH: container functions ("reallocate" already done)
         * Create basic container functions as described in file "todo_cyboi_java_comparison.txt"
         * Adjust destination's count and size automatically, like a "wrapper" function;

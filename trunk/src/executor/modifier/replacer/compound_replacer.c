@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COMPOUND_SETTER_SOURCE
-#define COMPOUND_SETTER_SOURCE
+#ifndef COMPOUND_REPLACER_SOURCE
+#define COMPOUND_REPLACER_SOURCE
 
 #include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
 #include "../../../constant/abstraction/cybol/path_cybol_abstraction.c"
@@ -41,7 +41,7 @@
 #include "../../../variable/reallocation_factor.c"
 
 /**
- * Sets the compound element by index.
+ * Replaces the compound element by index.
  *
  * @param p0 the compound
  * @param p1 the compound count
@@ -78,7 +78,7 @@ void replace_compound_by_index(void* p0, void* p1, void* p2, void* p3,
 
                 if (*i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set compound element by index.");
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Replace compound element by index.");
 
                     // The names, abstractions, models, details.
                     void** n = NULL_POINTER_MEMORY_MODEL;
@@ -175,94 +175,94 @@ void replace_compound_by_index(void* p0, void* p1, void* p2, void* p3,
 
                                                                     } else {
 
-                                                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The index exceeds the size.");
+                                                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The index exceeds the size.");
                                                                     }
 
 /*??
                                                                 } else {
 
-                                                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The details sizes is null.");
+                                                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The details sizes is null.");
                                                                 }
 
                                                             } else {
 
-                                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The details counts is null.");
+                                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The details counts is null.");
                                                             }
 
                                                         } else {
 
-                                                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The details is null.");
+                                                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The details is null.");
                                                         }
 
                                                     } else {
 
-                                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The models sizes is null.");
+                                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The models sizes is null.");
                                                     }
 
                                                 } else {
 
-                                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The models counts is null.");
+                                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The models counts is null.");
                                                 }
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The models is null.");
+                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The models is null.");
                                             }
 
                                         } else {
 
-                                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The abstractions sizes is null.");
+                                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The abstractions sizes is null.");
                                         }
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The abstractions counts is null.");
+                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The abstractions counts is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The abstractions is null.");
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The abstractions is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The names sizes is null.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The names sizes is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The names counts is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The names counts is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The names is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The names is null.");
                     }
 */
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The index is negative.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The index is negative.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The compound count is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The compound count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The compound sizes is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The compound sizes is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by index. The index is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by index. The index is null.");
     }
 }
 
 /**
- * Sets the compound element by name.
+ * Replaces the compound element by name.
  *
  * @param p0 the compound
  * @param p1 the compound count
@@ -284,7 +284,7 @@ void replace_compound_by_name(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set compound element by name.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace compound element by name.");
 
     // The element name index.
     int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
@@ -300,7 +300,7 @@ void replace_compound_by_name(void* p0, void* p1, void* p2,
 
     if (i >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not set compound element by name. A compound element with that name does already exist.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not replace compound element by name. A compound element with that name does already exist.");
 
     } else {
 
@@ -309,9 +309,9 @@ void replace_compound_by_name(void* p0, void* p1, void* p2,
         // Therefore, add compound element by name here.
 
         // CAUTION! Use compound count as index for adding new elements.
-        replace_compound_by_index(p0, p1, p2, p1, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+        replace_compound_element_by_index(p0, p1, p2, p1, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
     }
 }
 
-/* COMPOUND_SETTER_SOURCE */
+/* COMPOUND_REPLACER_SOURCE */
 #endif

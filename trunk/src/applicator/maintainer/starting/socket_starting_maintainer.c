@@ -48,7 +48,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../executor/accessor/setter.c"
+#include "../../../executor/modifier/replacer.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../variable/type_size/socket_type_size.c"
@@ -281,7 +281,7 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
                     }
 
                     // Add null termination character to terminated file name.
-                    set_array_elements(s, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, sc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    replace_array(s, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, sc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     // Convert uint16_t integer hostshort from host byte order
                     // to network byte order.
@@ -382,8 +382,8 @@ void maintain_starting_socket_initialise_local_socket_address(void* p0, void* p1
 
                     // Set terminated file name by first copying the actual name
                     // and then adding the null termination character.
-                    set_array_elements(path, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                    set_array_elements(path, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    replace_array(path, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    replace_array(path, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 } else {
 
@@ -735,50 +735,50 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         if (an == AF_LOCAL) {
 
             i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p0, (void*) &la, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p0, (void*) &la, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p0, (void*) &pla, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p0, (void*) &pla, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         } else if (an == AF_INET) {
 
             i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p0, (void*) &ia4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p0, (void*) &ia4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p0, (void*) &pia4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p0, (void*) &pia4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         } else if (an == AF_INET6) {
 
             i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p0, (void*) &ia6, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p0, (void*) &ia6, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p0, (void*) &pia6, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p0, (void*) &pia6, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
         }
 
         // Set socket address size of this system.
         i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        set_array_elements(p0, (void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
         // Set communication partner socket address size.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        set_array_elements(p0, (void*) &pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) &pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
         // Set socket of this system.
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-        set_array_elements(p0, (void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
         // Set communication partner socket.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-        set_array_elements(p0, (void*) &ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) &ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
         // Set character buffer.
         i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL_MEMORY_MEMORY_NAME;
-        set_array_elements(p0, (void*) &b, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) &b, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
         i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-        set_array_elements(p0, (void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        set_array_elements(p0, (void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
 /*??
         // Set signal ids.
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 */
 
         // Initialise error number.

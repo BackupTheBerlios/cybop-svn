@@ -156,11 +156,11 @@ void test_character_array_single_element() {
     // Create character array.
     allocate_array((void*) &c, (void*) &cs, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    set_array_elements(c, (void*) LATIN_CAPITAL_LETTER_A_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    set_array_elements(c, (void*) LATIN_CAPITAL_LETTER_B_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    set_array_elements(c, (void*) LATIN_CAPITAL_LETTER_C_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    set_array_elements(c, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    set_array_elements(c, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(c, (void*) LATIN_CAPITAL_LETTER_A_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(c, (void*) LATIN_CAPITAL_LETTER_B_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(c, (void*) LATIN_CAPITAL_LETTER_C_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(c, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(c, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Print out array contents.
     log_write_terminated_message((void*) stdout, (wchar_t*) c);
@@ -206,7 +206,7 @@ void test_character_array_multiple_elements() {
     int* ss = ssa;
 
     // The destination index to which to copy the source array.
-    set_array_elements(d, (void*) s, (void*) ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(d, (void*) s, (void*) ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     log_write_terminated_message((void*) stdout, (wchar_t*) d);
 
@@ -216,7 +216,7 @@ void test_character_array_multiple_elements() {
     int ossa[] = {14};
     int* oss = ossa;
 
-    set_array_elements(d, (void*) os, (void*) oss, (void*) NUMBER_8_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(d, (void*) os, (void*) oss, (void*) NUMBER_8_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     log_write_terminated_message((void*) stdout, (wchar_t*) d);
 
@@ -286,9 +286,9 @@ void test_integer_array() {
 */
 
     // Set test values.
-    set((void*) &m, (void*) mc, (void*) ms, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) mc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-    set((void*) &m, (void*) mc, (void*) ms, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) mc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-    set((void*) &m, (void*) mc, (void*) ms, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) mc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    replace((void*) &m, (void*) mc, (void*) ms, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) mc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    replace((void*) &m, (void*) mc, (void*) ms, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) mc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    replace((void*) &m, (void*) mc, (void*) ms, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) mc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
     // The result values read out from the integer vector.
     int* result0 = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -351,7 +351,7 @@ void test_pointer_array() {
 
     // Set character array in pointer array.
     // Hand over character array as reference, because pointer array is expected!
-    set_array_elements(p, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(p, (void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"p[0] after set: %i\n", p[0]);
     fwprintf(stdout, L"p[1] after set: %i\n", p[1]);
@@ -384,11 +384,11 @@ void test_pointer_array_with_null_values() {
 
     allocate_array((void*) &a, (void*) &as, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    set_array_elements(a, (void*) &COMMERCIAL_AT_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    set_array_elements(a, (void*) (void*) &NUMBER_333_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    set_array_elements(a, (void*) (void*) NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    set_array_elements(a, (void*) (void*) NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    set_array_elements(a, (void*) (void*) &COMMERCIAL_AT_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(a, (void*) &COMMERCIAL_AT_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(a, (void*) (void*) &NUMBER_333_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(a, (void*) (void*) NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(a, (void*) (void*) NULL_POINTER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(a, (void*) (void*) &COMMERCIAL_AT_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // The result values.
     char** r0 = (char**) NULL_POINTER_MEMORY_MODEL;
@@ -427,7 +427,7 @@ void test_pointer_array_with_null_values() {
  * The following addition adds 8 instead of just 2.
  * int* m = (int*) *NULL_POINTER_MEMORY_MODEL;
  * allocate((void*) &m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
- * set(m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_10_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+ * replace(m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_10_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
  * int* c = m + 2;
  * should be: = 10 + 2 = 12
  * but it is: = 10 + (2 * sizeof(int)) = 10 + 8 = 18

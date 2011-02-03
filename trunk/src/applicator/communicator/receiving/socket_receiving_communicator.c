@@ -241,7 +241,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     fwprintf(stdout, L"TEST: receive socket signal sock: %i \n", **((int**) s));
 
     // Set signal into signal memory.
-    set_signal(p3, p4, p5, a, ac, m, mc, d, dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) s);
+    replace_signal_memory(p3, p4, p5, a, ac, m, mc, d, dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) s);
 */
 
 /*??

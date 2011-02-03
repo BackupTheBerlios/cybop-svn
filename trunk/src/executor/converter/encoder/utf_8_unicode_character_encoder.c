@@ -247,7 +247,7 @@ void encode_utf_8_unicode_character_vector(void* p0, void* p1, void* p2, void* p
                     // state object in any specific state. The rules are that
                     // the object should always represent the initial state
                     // before the first use and this is achieved here.
-                    memset((void*) &st, '\0', *MULTIBYTE_CHARACTER_STATE_CONVERSION_TYPE_SIZE);
+                    memreplace((void*) &st, '\0', *MULTIBYTE_CHARACTER_STATE_CONVERSION_TYPE_SIZE);
 
                     // Initialise error number.
                     // It is a global variable/ function and other operations

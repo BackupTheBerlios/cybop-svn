@@ -200,7 +200,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 }
 
                 // Add null termination character to terminated file name.
-                set_array_elements(tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tnc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tnc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.

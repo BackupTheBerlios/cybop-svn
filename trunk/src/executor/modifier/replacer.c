@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SETTER_SOURCE
-#define SETTER_SOURCE
+#ifndef REPLACER_SOURCE
+#define REPLACER_SOURCE
 
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -35,8 +35,27 @@
 #include "../../executor/comparator/array_equality_comparator.c"
 #include "../../executor/memoriser/reallocator.c"
 
+//
+// CAUTION! The destination array needs to be resized not only
+// if the source array is greater, but also if it is smaller!
+// If this is not done, false results may occur.
+//
+// Example: A colour gets copied from source to destination.
+// The source colour is "red" with a count of 3.
+// The destination colour is "green" with a count of 5.
+// If the source colour gets copied to the destination,
+// the resulting destination array is "reden" with a count of 5.
+// This colour value does not exist and will cause errors!
+//
+// Therefore, the destination array count and size ALWAYS
+// have to be adapted to the source array count and size.
+// If this had been done in the example, the resulting
+// destination array would have been "red" with a count of 3,
+// which is correct.
+//
+
 /**
- * Sets the element.
+ * Replaces the element.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -47,13 +66,13 @@
  * @param p6 the abstraction
  * @param p7 the abstraction count
  */
-void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** d = (void**) p0;
 
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set element.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace element.");
 
         // Adjust destination size.
         add_integer(p2, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -78,7 +97,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(*d, p3, p4, p5, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -118,7 +137,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(*d, p3, p4, p5, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -138,7 +157,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(*d, p3, p4, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -158,7 +177,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(*d, p3, p4, p5, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -178,7 +197,7 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(*d, p3, p4, p5, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
@@ -188,20 +207,20 @@ void set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                set_array_elements(*d, p3, p4, p5, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(*d, p3, p4, p5, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not set element. The abstraction is unknown.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not replace element. The abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not set element. The destination is null.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not replace element. The destination is null.");
     }
 }
 
-/* SETTER_SOURCE */
+/* REPLACER_SOURCE */
 #endif

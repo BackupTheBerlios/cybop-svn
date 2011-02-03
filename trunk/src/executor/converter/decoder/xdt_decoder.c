@@ -36,7 +36,7 @@
 #include "../../../constant/name/xdt/record_xdt_name.c"
 #include "../../../constant/name/xdt_model/field_xdt_model_name.c"
 #include "../../../constant/name/xdt_model/record_xdt_model_name.c"
-#include "../../../executor/accessor/setter/compound_setter.c"
+#include "../../../executor/modifier/replacer/compound_replacer.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/decoder/ascii_character_vector_decoder.c"
 #include "../../../executor/converter/decoder/date_time_decoder.c"
@@ -4212,7 +4212,7 @@ void decode_xdt_select_field(void* p0, void* p1, void* p2, void* p3, void* p4, v
             && (a != *NULL_POINTER_MEMORY_MODEL) && (ac != *NULL_POINTER_MEMORY_MODEL) && (as != *NULL_POINTER_MEMORY_MODEL)) {
 
             // Add xdt field to xdt record.
-            set_compound_element_by_name(p0, p1, p2, n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
+            replace_compound_by_name(p0, p1, p2, n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
 
         } else {
 

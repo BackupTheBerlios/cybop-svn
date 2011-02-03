@@ -40,8 +40,8 @@
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/name/command_option/cyboi_command_option_name.c"
-#include "../executor/accessor/replacer/array_replacer.c"
-#include "../executor/accessor/setter/array_setter.c"
+#include "../executor/modifier/replacer/array_replacer.c"
+#include "../executor/modifier/replacer/array_replacer.c"
 #include "../executor/memoriser/allocator/model_allocator.c"
 #include "../executor/memoriser/deallocator/model_deallocator.c"
 
@@ -185,7 +185,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             }
 
             // Add null termination character to terminated file name.
-            set_array_elements(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Increase terminated file name count.
             (*((int*) tc))++;
@@ -342,7 +342,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Copy file path from value to cybol knowledge file path.
-                replace_array_elements(p1, p2, p3, p6, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_array(p1, p2, p3, p6, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 // Set knowledge operation mode.
                 *m = *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL;

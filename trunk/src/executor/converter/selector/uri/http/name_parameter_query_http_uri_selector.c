@@ -32,7 +32,7 @@
 #include "../../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../../constant/name/uri/cyboi_uri_name.c"
 #include "../../../../../constant/name/uri/separator_uri_name.c"
-#include "../../../../../executor/accessor/assigner.c"
+#include "../../../../../executor/modifier/assigner.c"
 #include "../../../../../executor/converter/decoder/uri/http/fragment_http_uri_decoder.c"
 #include "../../../../../executor/converter/detector.c"
 #include "../../../../../logger/logger.c"

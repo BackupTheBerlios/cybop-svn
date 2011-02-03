@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-02-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Move "assign" and "set" functionality from "executor/accessor/" into "executor/modifier/"
+        * Rename "set" functions into "replace"
+
 2011-02-01  Christian Heller  <christian.heller@tuxtax.de>
         * Complete "compound_reallocator" and "signal_memory_reallocator"
         * Adapt "compound_setter" and "signal_memory_setter" accordingly

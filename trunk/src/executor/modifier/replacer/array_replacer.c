@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ARRAY_SETTER_SOURCE
-#define ARRAY_SETTER_SOURCE
+#ifndef ARRAY_REPLACER_SOURCE
+#define ARRAY_REPLACER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -32,14 +32,14 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/accessor/assigner.c"
+#include "../../../executor/modifier/assigner.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
 #include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
 
 /**
- * Sets the array elements.
+ * Replaces the array elements.
  *
  * @param p0 the destination array
  * @param p1 the source elements
@@ -55,7 +55,7 @@ void replace_array(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set array elements.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Replace array elements.");
 
             // The destination offset.
             int dos = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -91,14 +91,14 @@ void replace_array(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set array elements. The array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace array elements. The array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set array elements. The elements count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace array elements. The elements count is null.");
     }
 }
 
-/* ARRAY_SETTER_SOURCE */
+/* ARRAY_REPLACER_SOURCE */
 #endif

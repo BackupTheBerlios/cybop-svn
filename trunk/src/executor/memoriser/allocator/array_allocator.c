@@ -66,7 +66,7 @@ void allocate_array(void* p0, void* p1, void* p2) {
         *a = (void*) malloc((size_t) ma);
 
         // Initialise array elements with null pointer.
-        memset(*a, *NUMBER_0_INTEGER_MEMORY_MODEL, ma);
+        memreplace(*a, *NUMBER_0_INTEGER_MEMORY_MODEL, ma);
 
     } else {
 

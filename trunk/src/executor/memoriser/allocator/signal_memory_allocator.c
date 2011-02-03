@@ -77,14 +77,14 @@ void allocate_signal_memory(void* p0, void* p1) {
         //
         // CAUTION! The p0 parameter needs to be dereferenced since it is
         // handed over as reference, but this procedure expects a normal array.
-        set_array_elements(*s, (void*) &a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(*s, (void*) &ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(*s, (void*) &m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(*s, (void*) &mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(*s, (void*) &d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(*s, (void*) &dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(*s, (void*) &p, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(*s, (void*) &id, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(*s, (void*) &a, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(*s, (void*) &ac, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) ABSTRACTIONS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(*s, (void*) &m, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(*s, (void*) &mc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODELS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(*s, (void*) &d, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(*s, (void*) &dc, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) DETAILS_COUNTS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(*s, (void*) &p, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIORITIES_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(*s, (void*) &id, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) IDENTIFICATIONS_SIGNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     } else {
 

@@ -141,7 +141,7 @@ void handle_compound_part(void* p0, void* p1, void* p2, void* p3, void* p4, void
                                 // Lock signal memory mutex.
                                 pthread_mutex_lock(*mt);
 
-                                set_signal(p4, p5, p6, a, ac, m, mc, d, dc, p12, p13);
+                                replace_signal_memory(p4, p5, p6, a, ac, m, mc, d, dc, p12, p13);
 
                                 // Set interrupt request flag, in order to notify the signal checker
                                 // that a new signal has been placed in the signal memory.

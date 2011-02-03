@@ -46,7 +46,7 @@
  * @param p3 the destination array index
  * @param p4 the abstraction
  */
-void log_set_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void log_replace_array(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 

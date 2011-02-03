@@ -569,7 +569,7 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
             get_new_signal_identification((void*) &id, *s, *sc);
 
             // Add signal to signal memory.
-//??            set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
+//??            replace_signal_memory(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
             // Set interrupt request flag, in order to notify the signal checker
             // that a new signal has been placed in the signal memory.
@@ -708,7 +708,7 @@ void receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
         get_new_signal_identification((void*) &id, *s, *sc);
 
         // Add signal to signal memory.
-//??        set_signal(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
+//??        replace_signal_memory(*s, *sc, *ss, ca, cac, cm, cmc, cd, cdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
 
         // Set interrupt request flag, in order to notify the signal checker
         // that a new signal has been placed in the signal memory.

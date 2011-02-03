@@ -56,7 +56,7 @@
  * @param p9 the abstraction model
  * @param p10 the abstraction model count
  */
-void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void create_replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Create and set part.");
 
@@ -92,7 +92,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // CAUTION! The abstraction arriving here has already been converted
     // from a cybol- to a cyboi abstraction, e.g. "text/plain" into "wide_character".
     // Therefore, decoding is not needed here.
-    set((void*) &n, nc, ns, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4);
+    replace((void*) &n, nc, ns, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p3, p4);
 /*??
     fwprintf(stdout, L"TEST creating post nm: %ls\n", (wchar_t*) n);
     fwprintf(stdout, L"TEST creating post nmc: %i\n", nc);
@@ -108,7 +108,7 @@ void create_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     // CAUTION! The abstraction arriving here has already been converted
     // from a cybol- to a cyboi abstraction, e.g. "text/plain" into "wide_character".
     // Therefore, decoding is not needed here.
-    set((void*) &a, ac, as, p9, p10, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, p8);
+    replace((void*) &a, ac, as, p9, p10, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p7, p8);
 /*??
     fwprintf(stdout, L"TEST creating post am: %ls\n", (wchar_t*) a);
     fwprintf(stdout, L"TEST creating post amc: %i\n", ac);
@@ -273,7 +273,7 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add part knowledge model to whole model.");
 
                 // Use the determined whole model, if it exists.
-                create_set(*wm, *wmc, *wms, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
+                create_replace(*wm, *wmc, *wms, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
 
             } else {
 
@@ -293,7 +293,7 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // knowledge tree, so that it can be deallocated properly at system shutdown
                 // and is not lost somewhere in Random Access Memory (RAM). So, if the determined
                 // whole model is null, the knowledge memory root has to be used instead.
-                create_set(p2, p3, p4, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
+                create_replace(p2, p3, p4, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
             }
         }
     }
@@ -308,7 +308,7 @@ void memorise_creating(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add meta knowledge model to whole details.");
 
-            create_set(*wd, *wdc, *wds, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
+            create_replace(*wd, *wdc, *wds, *na, *nac, *nm, *nmc, *aa, *aac, *am, *amc);
         }
     }
 

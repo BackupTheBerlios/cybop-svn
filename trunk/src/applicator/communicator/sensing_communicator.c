@@ -379,12 +379,12 @@ void communicate_sensing(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set handler abstraction, model, details.
-            set_array_elements(p2, (void*) ha, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hd, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) ha, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hd, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Sense incoming message.
             communicate_sensing_message(p2, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) &communicate_sensing_gnu_linux_console);
@@ -398,12 +398,12 @@ void communicate_sensing(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Set handler abstraction, model, details.
-            set_array_elements(p2, (void*) ha, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hd, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            set_array_elements(p2, (void*) hdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) ha, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hd, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Sense incoming message.
             communicate_sensing_message(p2, (void*) X_WINDOW_SYSTEM_THREAD, (void*) &communicate_sensing_x_window_system);
@@ -418,17 +418,17 @@ void communicate_sensing(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
             // Set handler abstraction, model, details.
             i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) ha, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) ha, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hd, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hd, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Sense incoming message (http request or response).
             communicate_sensing_message(p2, (void*) WWW_SERVICE_THREAD, (void*) &communicate_sensing_www_socket);
@@ -446,17 +446,17 @@ void communicate_sensing(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
             // Set handler abstraction, model, details.
             i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_ABSTRACTION_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) ha, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) ha, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_ABSTRACTION_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_MODEL_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_MODEL_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hmc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hd, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hd, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
             i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-            set_array_elements(p2, (void*) hdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(p2, (void*) hdc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Sense incoming message (http request or response).
             communicate_sensing_message(p2, (void*) CYBOI_SERVICE_THREAD, (void*) &communicate_sensing_cyboi_socket);

@@ -33,7 +33,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../executor/accessor/setter/signal_memory_setter.c"
+#include "../../../executor/modifier/replacer/signal_memory_replacer.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -69,7 +69,7 @@ void communicate_sending_cyboi_system(void* p0, void* p1, void* p2, void* p3, vo
     // Lock signal memory mutex.
     pthread_mutex_lock(*mt);
 
-    set_signal(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
+    replace_signal_memory(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
 
     // Set interrupt request flag, in order to notify the signal checker
     // that a new signal has been placed in the signal memory.

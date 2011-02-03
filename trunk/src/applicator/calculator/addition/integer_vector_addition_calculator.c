@@ -101,9 +101,9 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
                         allocate_model((void*) &summand2, (void*) &summand2c, (void*) &summand2s, p6, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
                         // Set temporary input operand arrays.
-                        set_array_elements(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        replace_array(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
                         *((int*) summand1c) = *((int*) p4);
-                        set_array_elements(summand2, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        replace_array(summand2, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
                         *((int*) summand2c) = *((int*) p6);
 
                         // CAUTION! In order to achieve correct results,
@@ -149,7 +149,7 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
                             tmps = *tmps1 + *tmps2;
 
                             // Set output operand array.
-                            set_array_elements(*s, (void*) &tmps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            replace_array(*s, (void*) &tmps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                             (*sc)++;
                         }

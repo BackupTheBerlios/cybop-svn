@@ -31,7 +31,7 @@
 #include "../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../constant/model/cyboi/identification_cyboi_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../executor/accessor/setter/array_setter.c"
+#include "../executor/modifier/replacer/array_replacer.c"
 #include "../executor/comparator/array_equality_comparator.c"
 #include "../executor/memoriser/allocator/model_allocator.c"
 #include "../executor/memoriser/deallocator/model_deallocator.c"
@@ -57,15 +57,15 @@ void help(void* p0) {
     allocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Copy message.
-    set_array_elements(m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT;
     // Copy line feed control wide character.
-    set_array_elements(m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Increment index.
     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
     // Copy null termination wide character.
-    set_array_elements(m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Log message.
     log_write_terminated_message(p0, m);

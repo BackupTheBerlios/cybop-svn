@@ -74,7 +74,7 @@ void append_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, voi
                     // CAUTION! Do NOT set the destination count above
                     // (together with the destination size),
                     // because it is used here as index!
-                    set_array_elements(*d, p3, p4, p1, p5);
+                    replace_array(*d, p3, p4, p1, p5);
 
                     // Set destination count to the same value as the -size.
                     *dc = *ds;

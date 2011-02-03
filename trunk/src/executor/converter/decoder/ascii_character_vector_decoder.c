@@ -76,7 +76,7 @@ void decode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void*
                         if (*dc <= (*ds - *sc)) {
 
                             // Set source into destination character vector.
-                            set_array_elements(*d, p3, p4, p1, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            replace_array(*d, p3, p4, p1, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                             // Increment count.
                             // Example:

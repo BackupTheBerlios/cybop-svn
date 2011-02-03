@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SIGNAL_MEMORY_SETTER_SOURCE
-#define SIGNAL_MEMORY_SETTER_SOURCE
+#ifndef SIGNAL_MEMORY_REPLACER_SOURCE
+#define SIGNAL_MEMORY_REPLACER_SOURCE
 
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -38,7 +38,7 @@
 #include "../../../variable/reallocation_factor.c"
 
 /**
- * Sets the signal memory element (signal).
+ * Replaces the signal memory element.
  *
  * @param p0 the signal memory
  * @param p1 the signal memory count
@@ -62,7 +62,7 @@ void replace_signal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
             int* smc = (int*) p1;
 
-            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set signal.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace signal memory element.");
 
             // The abstractions, models, details, priorities, identifications.
             void** a = NULL_POINTER_MEMORY_MODEL;
@@ -130,64 +130,64 @@ void replace_signal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 
                                                 } else {
 
-                                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The index exceeds the size.");
+                                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The index exceeds the size.");
                                                 }
 
                                             } else {
 
-                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The index is negativ.");
+                                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The index is negativ.");
                                             }
 
                                         } else {
 
-                                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The identifications is null.");
+                                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The identifications is null.");
                                         }
 
                                     } else {
 
-                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The priorities is null.");
+                                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The priorities is null.");
                                     }
 
                                 } else {
 
-                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The details counts is null.");
+                                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The details counts is null.");
                                 }
 
                             } else {
 
-                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The details is null.");
+                                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The details is null.");
                             }
 
                         } else {
 
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The models counts is null.");
+                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The models counts is null.");
                         }
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The models is null.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The models is null.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The abstractions counts is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The abstractions counts is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The abstractions is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The abstractions is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The signal memory count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The signal memory count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set signal. The signal memory size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace signal memory element. The signal memory size is null.");
     }
 }
 
-/* SIGNAL_MEMORY_SETTER_SOURCE */
+/* SIGNAL_MEMORY_REPLACER_SOURCE */
 #endif

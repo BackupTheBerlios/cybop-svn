@@ -261,8 +261,8 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
         allocate_array((void*) &p, (void*) &pc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // Set prefix as concatenation of base name and list separator.
-        set_array_elements(p, p2, p3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array_elements(p, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p, p2, p3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_array(p, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         //create integer model for the index
         void* indexstr = *NULL_POINTER_MEMORY_MODEL;

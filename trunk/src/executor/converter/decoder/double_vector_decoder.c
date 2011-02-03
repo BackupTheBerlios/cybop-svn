@@ -73,13 +73,13 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Copy original string to temporary null-terminated string.
-            set_array_elements(tmp, p3, p4, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(tmp, p3, p4, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // This is used as index to set the termination character.
             i = *sc;
 
             // Add string termination to temporary null-terminated string.
-            set_array_elements(tmp, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(tmp, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // The tail variable is useless here and only needed for the string
             // transformation function. If the whole string array consists of
@@ -106,7 +106,7 @@ void decode_double(void* p0, void* p1, void* p2, void* p3, void* p4) {
             //?? to be able to take the double value?
 
             // Set double value.
-            set_array_elements(*d, (void*) &v, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_array(*d, (void*) &v, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Destroy temporary null-terminated string.
             deallocate_model((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
@@ -201,9 +201,9 @@ void decode_double_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 int x = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Set elements.
-                set_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
-                set_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
-                set_array_elements(p0, (void*) INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
+                replace_array(p0, (void*) INTEGER_ARRAY, (void*) &X_INDEX, (void*) &x);
+                replace_array(p0, (void*) INTEGER_ARRAY, (void*) &Y_INDEX, (void*) &y);
+                replace_array(p0, (void*) INTEGER_ARRAY, (void*) &Z_INDEX, (void*) &z);
 */
 
 /*??

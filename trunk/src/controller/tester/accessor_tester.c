@@ -105,14 +105,14 @@ void test_accessor_array_setter() {
     fwprintf(stdout, L"s1c: %i\n", s1c);
     fwprintf(stdout, L"i1: %i\n", i1);
 
-    set_array_elements(d, (void*) s1, (void*) &s1c, (void*) &i1, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(d, (void*) s1, (void*) &s1c, (void*) &i1, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"d string 2: %ls\n", (wchar_t*) d);
     fwprintf(stdout, L"s2: %ls\n", s2);
     fwprintf(stdout, L"s2c: %i\n", s2c);
     fwprintf(stdout, L"i2: %i\n", i2);
 
-    set_array_elements(d, (void*) s2, (void*) &s2c, (void*) &i2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    replace_array(d, (void*) s2, (void*) &s2c, (void*) &i2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     fwprintf(stdout, L"d string 3: %ls\n", (wchar_t*) d);
 

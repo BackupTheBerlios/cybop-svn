@@ -111,7 +111,7 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
                         // Initialise ONLY NEW array elements (new memory area)
                         // with null pointer. Leave existing elements untouched.
-                        memset(na, *NUMBER_0_INTEGER_MEMORY_MODEL, nma);
+                        memreplace(na, *NUMBER_0_INTEGER_MEMORY_MODEL, nma);
                     }
 
                 } else {
