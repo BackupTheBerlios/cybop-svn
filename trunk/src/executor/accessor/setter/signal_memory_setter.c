@@ -52,7 +52,7 @@
  * @param p9 the signal priority (Hand over as reference!)
  * @param p10 the signal identification (Hand over as reference!)
  */
-void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
+void replace_signal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -116,14 +116,14 @@ void set_signal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                                                 if (i < *sms) {
 
                                                     // Set abstraction, model, details, priority, identification.
-                                                    set_array_elements(*a, (void*) p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*ac, (void*) p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*m, (void*) p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*mc, (void*) p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*d, (void*) p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*dc, (void*) p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*p, (void*) p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                    set_array_elements(*id, (void*) p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    replace_array(*a, (void*) p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    replace_array(*ac, (void*) p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    replace_array(*m, (void*) p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    replace_array(*mc, (void*) p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    replace_array(*d, (void*) p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    replace_array(*dc, (void*) p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    replace_array(*p, (void*) p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                    replace_array(*id, (void*) p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) &i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                                                     // Increment count.
                                                     (*smc)++;

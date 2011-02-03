@@ -60,7 +60,7 @@
  * @param p14 the details count
  * @param p15 the details size
  */
-void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
+void replace_compound_by_index(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9,
     void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
 
@@ -157,18 +157,18 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
                                                                     if (*i < *cs) {
 
                                                                         // Set name, abstraction, model, details.
-                                                                        set_array_elements(*n, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*nc, (void*) &p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*ns, (void*) &p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*a, (void*) &p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*ac, (void*) &p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*as, (void*) &p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*m, (void*) &p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*mc, (void*) &p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*ms, (void*) &p12, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*d, (void*) &p13, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*dc, (void*) &p14, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        set_array_elements(*ds, (void*) &p15, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*n, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*nc, (void*) &p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*ns, (void*) &p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*a, (void*) &p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*ac, (void*) &p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*as, (void*) &p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*m, (void*) &p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*mc, (void*) &p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*ms, (void*) &p12, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*d, (void*) &p13, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*dc, (void*) &p14, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        replace_array(*ds, (void*) &p15, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                                                                         // Increment count.
                                                                         (*cc)++;
@@ -280,7 +280,7 @@ void set_compound_element_by_index(void* p0, void* p1, void* p2, void* p3,
  * @param p13 the details count
  * @param p14 the details size
  */
-void set_compound_element_by_name(void* p0, void* p1, void* p2,
+void replace_compound_by_name(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
@@ -309,7 +309,7 @@ void set_compound_element_by_name(void* p0, void* p1, void* p2,
         // Therefore, add compound element by name here.
 
         // CAUTION! Use compound count as index for adding new elements.
-        set_compound_element_by_index(p0, p1, p2, p1, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+        replace_compound_by_index(p0, p1, p2, p1, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
     }
 }
 
