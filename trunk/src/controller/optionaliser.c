@@ -342,7 +342,7 @@ void optionalise_option(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Copy file path from value to cybol knowledge file path.
-                replace_array(p1, p2, p3, p6, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                replace_adjust(p1, p2, p3, p6, p7, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                 // Set knowledge operation mode.
                 *m = *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL;

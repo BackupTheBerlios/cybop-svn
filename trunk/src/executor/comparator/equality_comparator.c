@@ -101,7 +101,7 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3) {
  * @param p3 the abstraction
  * @param p4 the offset
  */
-void compare_equal_with_offreplace(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void compare_equal_with_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // The left element.
     // CAUTION! It HAS TO BE initialised with p1,

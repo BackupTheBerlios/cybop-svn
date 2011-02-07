@@ -66,7 +66,7 @@ void memorise_counting_prefix(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // Set result to compound count value.
             // A loop is not needed here, since the compound count already contains
             // the number of parts within that compound.
-            replace(*r, NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+            replace_adjust(*r, NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 
     fwprintf(stdout, L"TEST r: %i\n", **r);
     fwprintf(stdout, L"TEST rc: %i\n", *((int*) rc));

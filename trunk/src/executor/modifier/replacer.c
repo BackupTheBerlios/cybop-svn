@@ -36,26 +36,213 @@
 #include "../../executor/memoriser/reallocator.c"
 
 //
-// CAUTION! The destination array needs to be resized not only
-// if the source array is greater, but also if it is smaller!
-// If this is not done, false results may occur.
+// Example 1: Replacement WITHOUT adjustment of size and count:
 //
-// Example: A colour gets copied from source to destination.
-// The source colour is "red" with a count of 3.
-// The destination colour is "green" with a count of 5.
-// If the source colour gets copied to the destination,
-// the resulting destination array is "reden" with a count of 5.
-// This colour value does not exist and will cause errors!
+// d = "Have a nice day"
+// dc = 15
+// ds = 15
+// s = "fine"
+// sc = 4
+// index = 7
+// replace(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+// ns = 0 // Add index
+// ns = 7 // Add sc
+// ns = 11
+// ns < ds
+// --> ds is NOT changed
+// --> resulting d = "Have a fine day"
 //
-// Therefore, the destination array count and size ALWAYS
-// have to be adapted to the source array count and size.
-// If this had been done in the example, the resulting
-// destination array would have been "red" with a count of 3,
-// which is correct.
+// Example 2: Replacement WITH adjustment of size and count (sc < dc):
+//
+// d = "green"
+// dc = 5
+// ds = 5
+// s = "red"
+// sc = 3
+// index = 0
+// replace(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+// ns = 0 // Add index
+// ns = 0 // Add sc
+// ns = 3
+// ns < ds
+// --> ds IS changed from 5 to 3 and d reallocated
+// --> resulting d = "red"
+// --> if ds was not made smaller, the resulting d would be
+//     "reden" with a count of 5, representing a non-existing
+//     colour value, which would cause errors
+//
+// Example 3: Replacement WITH adjustment of size and count (sc < dc):
+//
+// d = "Have a nice day"
+// dc = 15
+// ds = 15
+// s = "daydream"
+// sc = 8
+// index = 12
+// replace(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+// ns = 0 // Add index
+// ns = 12 // Add sc
+// ns = 20
+// ns > ds
+// --> ds IS changed from 15 to 20 and d reallocated
+// --> resulting d = "Have a nice daydream"
 //
 
 /**
- * Replaces the element.
+ * Replaces the elements at the given index.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the source element
+ * @param p2 the source element count
+ * @param p3 the index
+ * @param p4 the abstraction
+ * @param p5 the abstraction count
+ */
+void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** d = (void**) p0;
+
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace elements.");
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                replace_array(*d, p1, p2, p3, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    //??            set_complex_element(*d, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    //??            set_compound_element(*d, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    //??            set_datetime_element(*d, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                replace_array(*d, p1, p2, p3, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    //??            set_fraction_element(*d, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                replace_array(*d, p1, p2, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    //??            set_internal_memory_element(*d, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                replace_array(*d, p1, p2, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+    //??            set_signal_memory_element(*d, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                replace_array(*d, p1, p2, p3, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                replace_array(*d, p1, p2, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not replace elements. The abstraction is unknown.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace elements. The destination is null.");
+    }
+}
+
+/**
+ * Replaces the elements at the given index and adjusts (grows or shrinks)
+ * the destination size.
  *
  * @param p0 the destination model (Hand over as reference!)
  * @param p1 the destination model count
@@ -66,160 +253,40 @@
  * @param p6 the abstraction
  * @param p7 the abstraction count
  */
-void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void replace_adjust(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace elements and adjust size.");
 
-        void** d = (void**) p0;
+    // The new destination size.
+    int ns = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace element.");
+    // Add destination index to new destination size.
+    add_integer((void*) &ns, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        // Adjust destination size.
-        add_integer(p2, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Add source count to new destination size.
+    add_integer((void*) &ns, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        // Reallocate destination.
-        reallocate(p0, p1, p2, p6, p7);
+    //
+    // CAUTION! The destination array needs to be resized not only
+    // if the source array is greater, but also if it is smaller!
+    // If this was not done, false results might occur.
+    //
 
-        // Adjust destination count.
-        //
-        // CAUTION! Only adjust destination count AFTER having
-        // reallocated the destination, because the "reallocate"
-        // functions relies on the previous count when copying
-        // elements to the new allocated destination.
-        add_integer(p1, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Assign destination size.
+    assign(p2, (void*) &ns, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Reallocate destination.
+    reallocate(p0, p1, p2, p6, p7);
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    // Adjust destination count.
+    //
+    // CAUTION! Only adjust destination count AFTER having
+    // reallocated the destination, because the "reallocate"
+    // function relies on the previous count when copying
+    // elements to the new allocated destination.
+    assign(p1, (void*) &ns, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            compare_equal_arrays((void*) &r, p6, p7, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                replace_array(*d, p3, p4, p5, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-    //??            set_complex_element(*d, p1, p2);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-    //??            set_compound_element(*d, p1, p2);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-    //??            set_datetime_element(*d, p1, p2);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                replace_array(*d, p3, p4, p5, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-    //??            set_fraction_element(*d, p1, p2);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                replace_array(*d, p3, p4, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-    //??            set_internal_memory_element(*d, p1, p2);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                replace_array(*d, p3, p4, p5, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-    //??            set_signal_memory_element(*d, p1, p2);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                replace_array(*d, p3, p4, p5, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            compare_equal_arrays((void*) &r, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                replace_array(*d, p3, p4, p5, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not replace element. The abstraction is unknown.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not replace element. The destination is null.");
-    }
+    replace(p0, p3, p4, p5, p6, p7);
 }
 
 /* REPLACER_SOURCE */

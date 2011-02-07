@@ -309,7 +309,7 @@ void replace_compound_by_name(void* p0, void* p1, void* p2,
         // Therefore, add compound element by name here.
 
         // CAUTION! Use compound count as index for adding new elements.
-        replace_compound_element_by_index(p0, p1, p2, p1, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
+        replace_compound_by_index(p0, p1, p2, p1, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
     }
 }
 

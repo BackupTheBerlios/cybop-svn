@@ -77,11 +77,12 @@ void receive_file_stream(void* p0, void* p1, void* p2, void* p3) {
                             break;
                         }
 
-                        if (*ds <= *dc) {
+                        if (*dc >= *ds) {
 
                             // Increase size.
                             // CAUTION! Adding one is necessary to avoid a zero size, if the count is zero!
-                            *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+//??                            *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            *ds = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             // Reallocate array.
                             reallocate_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);

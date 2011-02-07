@@ -55,7 +55,7 @@ void memorise_counting_all(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Set result to compound count value.
     // A loop is not needed here, since the compound count already contains
     // the number of parts within that compound.
-    replace(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, INTEGER_NUMBER_CYBOL_ABSTRACTION, INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    replace_adjust(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, INTEGER_NUMBER_CYBOL_ABSTRACTION, INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 }
 
 /* ALL_COUNTING_MEMORISER_SOURCE */

@@ -86,7 +86,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_array(p0, p1, p2, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_adjust(p0, p1, p2, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_UP_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -96,7 +96,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_array(p0, p1, p2, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_adjust(p0, p1, p2, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_DOWN_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -106,7 +106,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_array(p0, p1, p2, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_adjust(p0, p1, p2, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_LEFT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -116,7 +116,7 @@ void decode_gnu_linux_console_escape_control_sequence(void* p0, void* p1, void* 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_array(p0, p1, p2, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_adjust(p0, p1, p2, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME, (void*) ARROW_RIGHT_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -158,7 +158,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_array(p0, p1, p2, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_adjust(p0, p1, p2, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME, (void*) ENTER_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -168,7 +168,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_array(p0, p1, p2, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace_adjust(p0, p1, p2, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME, (void*) ESCAPE_KEYBOARD_KEY_CYBOL_NAME_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
         }
     }
 
@@ -181,7 +181,7 @@ void decode_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3, 
 
         // None of the control characters above matched.
         // Pass along character without modification.
-        replace_array(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_adjust(p0, p1, p2, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
     }
 }
 

@@ -72,7 +72,7 @@ void decode_http_request_body(void* p0, void* p1, void* p2, void* p3, void* p4, 
         // so that the cybol application will have to decode the data,
         // because here, the corresponding http encoding header is not available.
         //
-        replace_array(p0, p1, p2, *pos, p7, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        replace_adjust(p0, p1, p2, *pos, p7, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     } else {
 

@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-02-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Solve conflict between old and new "replace" (formerly "set") functions
+
 2011-02-03  Christian Heller  <christian.heller@tuxtax.de>
         * Move "assign" and "set" functionality from "executor/accessor/" into "executor/modifier/"
         * Rename "set" functions into "replace"

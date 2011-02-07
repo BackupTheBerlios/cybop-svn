@@ -166,11 +166,11 @@ void startup_system_signal_handler() {
 
     // Initialise signal set (mask) to exclude all of the defined signals.
     // Specify the set of signals to be blocked while the handler runs.
-    sigemptyreplace(&mask);
+    sigemptyset(&mask);
 
     // All sigaddset does is to modify the signal set (mask);
     // it does not block or unblock any signals.
-    sigaddreplace(&mask, SIGIO);
+    sigaddset(&mask, SIGIO);
 
     // Establish signal handler.
     // The interrupt_request_handler procedure is located in module:
