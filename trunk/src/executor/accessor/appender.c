@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef APPENDER_SOURCE
-#define APPENDER_SOURCE
+#ifndef APPENDER_OLD_SOURCE
+#define APPENDER_OLD_SOURCE
 
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -80,5 +80,5 @@ void append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     }
 }
 
-/* APPENDER_SOURCE */
+/* APPENDER_OLD_SOURCE */
 #endif
