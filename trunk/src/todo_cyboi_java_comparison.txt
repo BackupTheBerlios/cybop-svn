@@ -94,10 +94,5 @@ ___________
 - subSequence, substring:
   it suffices to simply count up the pointer to the desired sub sequence of an array
 
-- append: SUPERFLUOUS? syntactic sugar? just convenience! = replace(container, count as index)
-- append_element(container, element): add, push, put, offer, concat
-- append_signal(container, element): add, push, put, offer, concat
-- append_part(container, element): add, push, put, offer, concat
-- append_elements(destination container, source container): appendAll, putAll
-- append_signals(destination container, source container): appendAll, putAll
-- append_parts(destination container, source container): appendAll, putAll
+- append(container, element): add, push, put, offer, concat; = replace(container, count as index)
+- append_content(destination container, source container): appendAll, putAll
