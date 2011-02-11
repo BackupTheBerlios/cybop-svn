@@ -282,9 +282,6 @@ void replace_adjust(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     // Reallocate destination.
     reallocate(p0, p1, p2, p6, p7);
 
-    // Replace (set) the actual elements.
-    replace(p0, p3, p4, p5, p6, p7);
-
     // Adjust destination count.
     //
     // CAUTION! Only adjust destination count AFTER having
@@ -292,6 +289,9 @@ void replace_adjust(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     // function relies on the previous count when copying
     // elements to the new allocated destination.
     assign(p1, (void*) &ns, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Replace (set) the actual elements.
+    replace(p0, p3, p4, p5, p6, p7);
 }
 
 /* REPLACER_SOURCE */
