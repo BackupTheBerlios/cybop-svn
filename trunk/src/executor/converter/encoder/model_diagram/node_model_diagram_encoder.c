@@ -33,7 +33,6 @@
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../../executor/accessor/appender/array_appender.c"
 #include "../../../../executor/converter/encoder/model_diagram/compound_model_diagram_encoder.c"
 #include "../../../../executor/converter/encoder/model_diagram/indentation_model_diagram_encoder.c"
 #include "../../../../executor/converter/encoder/model_diagram/line_model_diagram_encoder.c"

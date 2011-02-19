@@ -36,7 +36,6 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/accessor/appender/array_appender.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/decoder/utf_8_unicode_character_decoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"

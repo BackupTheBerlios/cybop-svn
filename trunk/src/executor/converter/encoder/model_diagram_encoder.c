@@ -33,7 +33,6 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/accessor/appender/array_appender.c"
 #include "../../../executor/converter/encoder/model_diagram/node_model_diagram_encoder.c"
 #include "../../../executor/converter/encoder/integer_vector_encoder.c"
 #include "../../../executor/converter/encoder/double_vector_encoder.c"
