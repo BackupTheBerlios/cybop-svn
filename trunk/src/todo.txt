@@ -11,11 +11,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Rename "model" (containing count and size) to "attribute"
         * Provide modifier functions for "part" that expect just one pointer with count and size
             and not as many parameters as was the case up to now
+        * Replace old functions named "append_part..." with new "append" or "replace"
         * Provide modifier functions for "compound"
-        * Replace old functions named "append" (yet for "part" and "compound") with new "append" or "replace"
+        * Replace old functions named "append_compound..." with new "append" or "replace"
+        * Rename "model" (containing count and size) to "attribute"
 
         * CONTINUE WITH: container functions as described in file "todo_cyboi_java_comparison.txt"
         * Adjust destination's count and size automatically, like a "wrapper" function;
