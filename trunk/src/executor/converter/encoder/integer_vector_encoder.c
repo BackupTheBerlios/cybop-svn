@@ -45,6 +45,7 @@
 #include "../../../executor/converter/encoder/integer_encoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../executor/memoriser/deallocator/model_deallocator.c"
+#include "../../../executor/modifier/appender.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/type_size/integral_type_size.c"
 #include "../../../variable/reallocation_factor.c"
@@ -122,11 +123,11 @@ void encode_integer_vector_elements(void* p0, void* p1, void* p2, void* p3, void
                                 // in order to separate from already existing elements.
 
                                 // Append comma character.
-                                append_array_elements(p0, p1, p2, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                append(p0, p1, p2, (void*) COMMA_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
                             }
 
                             // Append integer characters.
-                            append_array_elements(p0, p1, p2, c, cc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            append(p0, p1, p2, c, cc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                             // Determine remaining vector elements.
                             //

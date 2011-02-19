@@ -36,7 +36,7 @@
 #include "../../executor/memoriser/reallocator.c"
 
 //
-// Example 1: Replacement WITHOUT adjustment of size and count:
+// Example 1: Replacement WITHOUT adjustment (replace) of size and count (ds remains as is):
 //
 // d = "Have a nice day"
 // dc = 15
@@ -45,14 +45,14 @@
 // sc = 4
 // index = 7
 // replace(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-// ns = 0 // Add index
-// ns = 7 // Add sc
-// ns = 11
+// ns = 0 // The new size
+// ns = 7 // Added index
+// ns = 11 // Added sc
 // ns < ds
 // --> ds is NOT changed
 // --> resulting d = "Have a fine day"
 //
-// Example 2: Replacement WITH adjustment of size and count (sc < dc):
+// Example 2: Replacement WITH adjustment (replace_adjust) of size and count (ds gets shrinked):
 //
 // d = "green"
 // dc = 5
@@ -60,10 +60,10 @@
 // s = "red"
 // sc = 3
 // index = 0
-// replace(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-// ns = 0 // Add index
-// ns = 0 // Add sc
-// ns = 3
+// replace_adjust(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+// ns = 0 // The new size
+// ns = 0 // Added index
+// ns = 3 // Added sc
 // ns < ds
 // --> ds IS changed from 5 to 3 and d reallocated
 // --> resulting d = "red"
@@ -71,7 +71,7 @@
 //     "reden" with a count of 5, representing a non-existing
 //     colour value, which would cause errors
 //
-// Example 3: Replacement WITH adjustment of size and count (sc < dc):
+// Example 3: Replacement WITH adjustment (replace_adjust) of size and count (ds gets enlarged):
 //
 // d = "Have a nice day"
 // dc = 15
@@ -79,10 +79,10 @@
 // s = "daydream"
 // sc = 8
 // index = 12
-// replace(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-// ns = 0 // Add index
-// ns = 12 // Add sc
-// ns = 20
+// replace_adjust(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+// ns = 0 // The new size
+// ns = 12 // Added index
+// ns = 20 // Added sc
 // ns > ds
 // --> ds IS changed from 15 to 20 and d reallocated
 // --> resulting d = "Have a nice daydream"
@@ -263,9 +263,11 @@ void replace_adjust(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     // Add destination index to new destination size.
     add_integer((void*) &ns, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    // Add number one to new destination size, because an index was added above,
-    // which is always one lower than the actual and necessary element count.
-    add_integer((void*) &ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // CAUTION! Do NOT add number one in addition to index to new destination size!
+    // The index added above points to the next element.
+    // Therefore, the count of existing characters to be preserved is correct.
+    // Hence, do NOT uncomment or activate the following line:
+    // add_integer((void*) &ns, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Add source count to new destination size.
     add_integer((void*) &ns, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -282,16 +284,22 @@ void replace_adjust(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     // Reallocate destination.
     reallocate(p0, p1, p2, p6, p7);
 
+    // Replace (set) the actual elements.
+    replace(p0, p3, p4, p5, p6, p7);
+
     // Adjust destination count.
     //
     // CAUTION! Only adjust destination count AFTER having
-    // reallocated the destination, because the "reallocate"
-    // function relies on the previous count when copying
-    // elements to the new allocated destination.
+    // reallocated the destination! The "reallocate" function
+    // relies on the previous count when copying elements
+    // to the new allocated destination.
+    //
+    // CAUTION! Only adjust destination count AFTER having
+    // replaced the elements! Other "sensing" threads may
+    // access the destination and cause a memory error if
+    // the count is higher than the actual number of valid elements.
+    //
     assign(p1, (void*) &ns, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-    // Replace (set) the actual elements.
-    replace(p0, p3, p4, p5, p6, p7);
 }
 
 /* REPLACER_SOURCE */

@@ -36,11 +36,11 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/accessor/appender/array_appender.c"
 #include "../../../executor/communicator/receiver/gnu_linux_console_receiver.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/decoder/utf_8_unicode_character_decoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/modifier/appender.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -109,7 +109,7 @@ void receive_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3,
                                 *csi = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                                 // Copy source character to destination character array.
-                                append_array_elements(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                append(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                                 // Set loop break flag.
                                 // An escape character followed by a left square bracket character
@@ -133,7 +133,7 @@ void receive_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3,
                                     *csi = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                     // Copy source character to destination character array.
-                                    append_array_elements(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                    append(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                                 } else {
 
@@ -160,7 +160,7 @@ void receive_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3,
                                 *esc = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                                 // Copy source character to destination character array.
-                                append_array_elements(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                append(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                             } else if (*c == WEOF) {
 
@@ -174,7 +174,7 @@ void receive_gnu_linux_console_character(void* p0, void* p1, void* p2, void* p3,
                             } else {
 
                                 // Copy source character to destination character array.
-                                append_array_elements(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                append(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                                 // Set loop break flag.
                                 *b = *NUMBER_1_INTEGER_MEMORY_MODEL;

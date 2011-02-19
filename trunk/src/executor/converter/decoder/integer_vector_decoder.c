@@ -44,6 +44,7 @@
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/converter/decoder/integer_decoder.c"
 #include "../../../executor/memoriser/allocator.c"
+#include "../../../executor/modifier/appender.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/type_size/integral_type_size.c"
 #include "../../../variable/reallocation_factor.c"
@@ -124,7 +125,7 @@ void decode_integer_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         // (which is 3, as needed for the length)
                         decode_integer((void*) &v, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p3, (void*) &fec);
 
-                        append_array_elements(p0, p1, p2, (void*) &v, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        append(p0, p1, p2, (void*) &v, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
                         if (i > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

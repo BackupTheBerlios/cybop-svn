@@ -40,6 +40,7 @@
 #include "../../../executor/comparator/array_equality_comparator.c"
 #include "../../../executor/converter/decoder/utf_8_unicode_character_decoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
+#include "../../../executor/modifier/appender.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -72,8 +73,8 @@ void send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4) {
         allocate_model((void*) &ts, (void*) &tsc, (void*) &tss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // Append control sequences and null termination character.
-        append_array_elements((void*) &ts, tsc, tss, p3, p4, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        append_array_elements((void*) &ts, tsc, tss, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        append((void*) &ts, tsc, tss, p3, p4, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        append((void*) &ts, tsc, tss, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         if (*d != *NULL_POINTER_MEMORY_MODEL) {
 

@@ -34,6 +34,7 @@
 #include "../../../../executor/converter/selector/http_request/protocol_http_request_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
+#include "../../../../executor/modifier/appender.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -53,7 +54,7 @@ void encode_http_response_protocol(void* p0, void* p1, void* p2, void* p3, void*
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode http response protocol.");
 
-    append_array_elements(p0, p1, p2, (void*) NUMBER_1_1_PROTOCOL_VERSION_HTTP_MODEL, (void*) NUMBER_1_1_PROTOCOL_VERSION_HTTP_MODEL_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    append(p0, p1, p2, (void*) NUMBER_1_1_PROTOCOL_VERSION_HTTP_MODEL, (void*) NUMBER_1_1_PROTOCOL_VERSION_HTTP_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* PROTOCOL_HTTP_RESPONSE_ENCODER_SOURCE */

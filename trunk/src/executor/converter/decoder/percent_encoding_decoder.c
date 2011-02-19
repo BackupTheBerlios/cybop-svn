@@ -28,6 +28,7 @@
 
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../executor/converter/detector.c"
+#include "../../../executor/modifier/appender.c"
 #include "../../../logger/logger.c"
 
 //
@@ -90,10 +91,10 @@ void decode_percent_encoding(void* p0, void* p1, void* p2, void* p3, void* p4) {
         allocate_model((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // Copy original string to temporary null-terminated string.
-        append_array_elements((void*) &tmp, tmpc, tmps, *pos, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        append((void*) &tmp, tmpc, tmps, *pos, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
         // Add string termination to temporary null-terminated string.
         // The source count is used as index for the termination character.
-        append_array_elements((void*) &tmp, tmpc, tmps, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        append((void*) &tmp, tmpc, tmps, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // The tail variable is useless here and only needed for the string
         // transformation function. If the whole string array consists of
@@ -132,7 +133,7 @@ void decode_percent_encoding(void* p0, void* p1, void* p2, void* p3, void* p4) {
         //?? --- The code above is temporary and should be moved into an own file!
         //
 
-        append_array_elements(p0, p1, p2, (void*) &v, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        append(p0, p1, p2, (void*) &v, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         detect_move_position(p3, p4, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
 

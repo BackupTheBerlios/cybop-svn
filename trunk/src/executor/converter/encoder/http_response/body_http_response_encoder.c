@@ -34,6 +34,7 @@
 #include "../../../../executor/converter/selector/http_request/protocol_http_request_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
+#include "../../../../executor/modifier/appender.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -64,7 +65,7 @@ void encode_http_response_body(void* p0, void* p1, void* p2, void* p3, void* p4,
     // Encode wide character array into multibyte character array.
     encode_utf_8_unicode_character_vector((void*) &a, ac, as, p5, p6);
 
-    append_array_elements(p0, p1, p2, a, ac, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    append(p0, p1, p2, a, ac, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Deallocate character array.
     deallocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);

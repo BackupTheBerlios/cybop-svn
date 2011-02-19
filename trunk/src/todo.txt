@@ -11,7 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Replace all functions named "append" with "replace" (the former is just a synonym)
+        * Replace old functions named "append" with new "append" or "replace"
         * CONTINUE WITH: container functions as described in file "todo_cyboi_java_comparison.txt"
         * Adjust destination's count and size automatically, like a "wrapper" function;
             examples: "wide_character_vector_accessor.c", "executor/accessor/setter.c", "set_compound_element_by_name"

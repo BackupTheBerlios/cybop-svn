@@ -73,7 +73,7 @@ ___________
 - pop = poll = take = retrieve_first_element + remove_first_element
 - replace_elements(container, old element, new element) = loop + find_first_index + replace_element
 
-- move: COMPOSITION? = retrieve(old container, index) + append(new container, element) + remove(old container, index)
+- move: COMPOSITION? = retrieve(old container, index) + replace(new container, element, index at end) + remove(old container, index)
 - move_element(destination container, source container, source element index)
 - move_element_by_name(destination container, source container, source element name)
 - move_area(destination container, source container, source start index, source end index): drainTo

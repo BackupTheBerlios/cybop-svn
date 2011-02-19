@@ -34,6 +34,7 @@
 #include "../../../../executor/accessor/appender/array_appender.c"
 #include "../../../../executor/converter/encoder/html/attributes_html_encoder.c"
 #include "../../../../executor/converter/encoder/html/indentation_html_encoder.c"
+#include "../../../../executor/modifier/appender.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -58,15 +59,15 @@ void encode_html_begin_tag(void* p0, void* p1, void* p2,
     // Encode indentation.
     encode_html_indentation(p0, p1, p2, p9);
     // Encode less than character.
-    append_array_elements(p0, p1, p2, (void*) LESS_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    append(p0, p1, p2, (void*) LESS_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
     // Encode html tag.
-    append_array_elements(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
     // Encode html tag properties.
     encode_html_attributes(p0, p1, p2, p5, p6);
     // Encode greater than character.
-    append_array_elements(p0, p1, p2, (void*) GREATER_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    append(p0, p1, p2, (void*) GREATER_THAN_SIGN_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
     // Encode line feed character, for better source reading.
-    append_array_elements(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    append(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* BEGIN_TAG_HTML_ENCODER_SOURCE */

@@ -39,6 +39,7 @@
 #include "../../../../executor/converter/encoder/model_diagram/line_model_diagram_encoder.c"
 #include "../../../../executor/converter/encoder/integer_vector_encoder.c"
 #include "../../../../executor/converter/encoder/double_vector_encoder.c"
+#include "../../../../executor/modifier/appender.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -70,13 +71,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
         encode_model_diagram_indentation(p0, p1, p2, p11, p12);
 
         // Add part name to destination array.
-        append_array_elements(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        append(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // Add line.
         encode_model_diagram_line(p0, p1, p2);
 
         // Add part abstraction to destination array.
-        append_array_elements(p0, p1, p2, p5, p6, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        append(p0, p1, p2, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -104,7 +105,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 encode_model_diagram_line(p0, p1, p2);
-                append_array_elements(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
             }
         }
 
@@ -137,7 +138,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 encode_model_diagram_line(p0, p1, p2);
-                append_array_elements(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
             }
         }
 
@@ -148,7 +149,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 encode_model_diagram_line(p0, p1, p2);
-                append_array_elements(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
             }
         }
 
@@ -159,7 +160,7 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 encode_model_diagram_line(p0, p1, p2);
-                append_array_elements(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
             }
         }
 
