@@ -31,6 +31,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/modifier/appender.c"
 #include "../../../logger/logger.c"
 
 /**
