@@ -5,7 +5,7 @@
     <!--
         $RCSfile: 0.9.0.0.shtml,v $
 
-        Copyright (c) 2002-2009. Christian Heller and the CYBOP developers.
+        Copyright (C) 1999-2011. Christian Heller.
 
         Permission is granted to copy, distribute and/or modify this document
         under the terms of the GNU Free Documentation License, Version 1.1
@@ -26,70 +26,66 @@
 <body>
     <div id="page">
         <!--#include virtual="../menu.inc" -->
-        <h1>CYBOP 0.9.0.0</h1>
-        <table>
+        <div id="content">
+            <h1>CYBOP 0.9.0.0</h1>
+            <table>
             <tr>
+                <th width="10"/>
+                <th>
+                    Features
+                </th>
+                <th width="250">
+                    Developer
+                </th>
+            </tr>
+            <tr>
+                <td class="done"/>
                 <td>
-                    <table>
-                    <tr>
-                        <th width="10"/>
-                        <th>
-                            Features
-                        </th>
-                        <th width="250">
-                            Developer
-                        </th>
-                    </tr>
-                    <tr bgcolor="#000000">
-                        <td bgcolor="#FF8080"/>
-                        <td align="left" valign="top">
-                            <h2>CYBOI</h2>
-                            <ul>
-                                <li>Complete interrupt mechanism and sleeping for different communication channels
-                                    (CYBOI-internal signal, text- or graphical user interface, socket)</li>
-                                <li>Use Unicode (instead of formerly ASCII-) character code, UTF-8 encoding, wide characters</li>
-                                <li>Restructure constants into four categories: "name", "channel", "abstraction", "model"</li>
-                                <li>Change abstraction constants to follow MIME type-like style</li>
-                                <li>Replace "libxml2" with a self-written XML parser</li>
-                                <li>Add a corresponding CYBOL parser, to be called right after the XML parser
-                                    (like two filters called in a sequence)</li>
-                            </ul>
-                        </td>
-                        <td align="left" valign="top">
-                            Christian Heller<br>
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
-                        </td>
-                    </tr>
-                    <tr bgcolor="#000000">
-                        <td bgcolor="#FF8080"/>
-                        <td align="left" valign="top">
-                            <h2>CYBOL</h2>
-                            <ul>
-                                <li>Use MIME type-like values for the "abstraction" xml attribute</li>
-                            </ul>
-                        </td>
-                        <td align="left" valign="top">
-                            Christian Heller<br>
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
-                        </td>
-                    </tr>
-                    <tr bgcolor="#000000">
-                        <td bgcolor="#FFFFC0"/>
-                        <td align="left" valign="top">
-                            <h2>Project</h2>
-                            <ul>
-                                <li>Switch from 32 Bit- to 64 Bit architecture by adapting autoconf/ make files</li>
-                            </ul>
-                        </td>
-                        <td align="left" valign="top">
-                            Didier Link<br>
-                            &lt;<a href="mailto:didier@famille-link.fr">didier@famille-link.fr</a>&gt;<br>
-                        </td>
-                    </tr>
-                    </table>
+                    <h2>CYBOI</h2>
+                    <ul>
+                        <li>Complete interrupt mechanism and sleeping for different communication channels
+                            (CYBOI-internal signal, text- or graphical user interface, socket)</li>
+                        <li>Use Unicode (instead of formerly ASCII-) character code, UTF-8 encoding, wide characters</li>
+                        <li>Restructure constants into four categories: "name", "channel", "abstraction", "model"</li>
+                        <li>Change abstraction constants to follow MIME type-like style</li>
+                        <li>Replace "libxml2" with a self-written XML parser</li>
+                        <li>Add a corresponding CYBOL parser, to be called right after the XML parser
+                            (like two filters called in a sequence)</li>
+                    </ul>
+                </td>
+                <td>
+                    Christian Heller<br>
+                    &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
                 </td>
             </tr>
-        </table>
+            <tr>
+                <td class="done"/>
+                <td>
+                    <h2>CYBOL</h2>
+                    <ul>
+                        <li>Use MIME type-like values for the "abstraction" xml attribute</li>
+                    </ul>
+                </td>
+                <td>
+                    Christian Heller<br>
+                    &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
+                </td>
+            </tr>
+            <tr>
+                <td class="done"/>
+                <td>
+                    <h2>Project</h2>
+                    <ul>
+                        <li>Switch from 32 Bit- to 64 Bit architecture by adapting autoconf/ make files</li>
+                    </ul>
+                </td>
+                <td>
+                    Didier Link<br>
+                    &lt;<a href="mailto:didier@famille-link.fr">didier@famille-link.fr</a>&gt;<br>
+                </td>
+            </tr>
+            </table>
+        </div>
         <!--#include virtual="../footer.inc" -->
     </div>
 </body>

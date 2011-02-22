@@ -39,9 +39,8 @@ body {
     background-color: #000000;
     margin: 0cm;
     /* Minimum width avoids line feed and display errors in modern browsers. */
-    min-width: 800px;
+    min-width: 1000px;
     width: 1000px;
-    max-width: 1200px;
 }
 
 div#page {
@@ -112,6 +111,10 @@ div#page a:active {
 * html div#page {
     /* The workaround for the 3 pixel bug of Internet Explorer up to version 6. */
     height: 1em;
+}
+
+div#content {
+    margin-left: 240px;
 }
 
 div#navigation {
@@ -250,4 +253,19 @@ div#footer {
     padding: 0.1em;
     text-align: left;
     font-size: 0.8em;
+}
+
+.todo {
+    background-color: #FF8080;
+    color: #000000;
+}
+
+.doing {
+    background-color: #FFFFC0;
+    color: #000000;
+}
+
+.done {
+    background-color: #C0FFC0;
+    color: #000000;
 }

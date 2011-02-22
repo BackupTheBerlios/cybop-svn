@@ -5,7 +5,7 @@
     <!--
         $RCSfile: index.shtml,v $
 
-        Copyright (c) 2002-2009. Christian Heller and the CYBOP developers.
+        Copyright (C) 1999-2011. Christian Heller.
 
         Permission is granted to copy, distribute and/or modify this document
         under the terms of the GNU Free Documentation License, Version 1.1
@@ -72,6 +72,14 @@
         <div id="news">
             <h1>News</h1>
             <table>
+<!--
+            <tr>
+                <th>2011-02-27</th>
+                <td>
+                    Released <a href="http://developer.berlios.de/project/showfiles.php?group_id=669">CYBOP 0.10.0</a>.
+                </td>
+            </tr>
+-->
             <tr>
                 <th>2009-02-01</th>
                 <td>

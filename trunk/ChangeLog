@@ -16,12 +16,15 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-02-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Update project plan on website
+
 2011-02-19  Christian Heller  <christian.heller@tuxtax.de>
         * Fix error that size was set one too large in function "replace_adjust"
         * Fix error that count was increased before replacing elements in function "replace_adjust",
             which may cause memory errors when "sensing" threads access the destination
             because the count is higher than the actual number of valid elements
-        * Replace old "append..." functions with new and delete directory "executor/accessor/appender/"
+        * Replace old "append..." functions with new ones and delete directory "executor/accessor/appender/"
 
 2011-02-06  Christian Heller  <christian.heller@tuxtax.de>
         * Solve conflict between old and new "replace" (formerly "set") functions

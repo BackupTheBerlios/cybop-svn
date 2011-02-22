@@ -26,320 +26,331 @@
 <body>
     <div id="page">
         <!--#include virtual="../menu.inc" -->
-        <h1>Project Plan</h1>
-        <table>
-        <tr>
-            <td>
-                <table>
-                    <tr>
-                        <th>Planned Version</th>
-                        <th>Date</th>
-                        <th>Features</th>
-                        <th>Release Master</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            1.0.0.0
-                        </td>
-                        <td>
-                            2020 ;-)
-                        </td>
-                        <td>
-                            <a href="1.0.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-        <!--
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-        /-->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.10.0.0
-                        </td>
-                        <td>
-                            circa 2010
-                        </td>
-                        <td>
-                            <a href="0.10.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                </table>
-                <br>
-                <table>
-                    <tr>
-                        <th>Released Version</th>
-                        <th>Date</th>
-                        <th>Features</th>
-                        <th>Release Master</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.9.0.0
-                        </td>
-                        <td>
-                            2009-02-01
-                        </td>
-                        <td>
-                            <a href="0.9.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.8.0.0
-                        </td>
-                        <td>
-                            2007-05-31
-                        </td>
-                        <td>
-                            <a href="0.8.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.7.0.0
-                        </td>
-                        <td>
-                            2006-09-09
-                        </td>
-                        <td>
-                            <a href="0.7.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.6.0.0
-                        </td>
-                        <td>
-                            2005-08-29
-                        </td>
-                        <td>
-                            <a href="0.6.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.5.0.0
-                        </td>
-                        <td>
-                            2005-06-28
-                        </td>
-                        <td>
-                            <a href="0.5.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.4.0.0
-                        </td>
-                        <td>
-                            2005-03-01
-                        </td>
-                        <td>
-                            <a href="0.4.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Dennis Reichenbach
-                            &lt;<a href="mailto:dennis.reichenbach@gmx.net">dennis.reichenbach@gmx.net</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.3.1.1
-                        </td>
-                        <td>
-                            2004-12-06
-                        </td>
-                        <td>
-                            <a href="0.3.1.1.shtml">Features</a>
-                        </td>
-                        <td>
-                            Dennis Reichenbach
-                            &lt;<a href="mailto:dennis.reichenbach@gmx.net">dennis.reichenbach@gmx.net</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.3.1.0
-                        </td>
-                        <td>
-                            2004-11-23
-                        </td>
-                        <td>
-                            <a href="0.3.1.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Dennis Reichenbach
-                            &lt;<a href="mailto:dennis.reichenbach@gmx.net">dennis.reichenbach@gmx.net</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.3.0.0
-                        </td>
-                        <td>
-                            2004-09-13
-                        </td>
-                        <td>
-                            <a href="0.3.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.2.2.0
-                        </td>
-                        <td>
-                            2004-06-23
-                        </td>
-                        <td>
-                            <a href="0.2.2.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.2.1.0
-                        </td>
-                        <td>
-                            2004-06-11
-                        </td>
-                        <td>
-                            <a href="0.2.1.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.2.0.0
-                        </td>
-                        <td>
-                            2004-04-29
-                        </td>
-                        <td>
-                            <a href="0.2.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.1.0.0
-                        </td>
-                        <td>
-                            2003-09-11
-                        </td>
-                        <td>
-                            <a href="0.1.0.0.shtml">Features</a>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.0.7.0
-                        </td>
-                        <td>
-                            2003-06-23
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.0.6.0
-                        </td>
-                        <td>
-                            2003-04-28
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            0.0.5.0
-                        </td>
-                        <td>
-                            2003-03-15
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            Christian Heller
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
-                        </td>
-                    </tr>
-                </table>
-                <table>
+        <div id="content">
+            <h1>Project Plan</h1>
+            <table>
                 <tr>
-                    <th align="right">Status</th>
-                    <th align="left">Legend</th>
+                    <th>Planned Version</th>
+                    <th>Date</th>
+                    <th>Features</th>
+                    <th>Release Master</th>
                 </tr>
                 <tr>
-                    <td align="right">to be implemented</td>
-                    <td align="center" bgcolor="#FF8080"><font color="#000000">todo</font></td>
+                    <td>
+                        1.0.0.0
+                    </td>
+                    <td>
+                        2020 ;-)
+                    </td>
+                    <td>
+                        <a href="1.0.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+    <!--
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+    /-->
+                    </td>
                 </tr>
                 <tr>
-                    <td align="right">in progress</td>
-                    <td align="center" bgcolor="#FFFFC0"><font color="#000000">doing</font></td>
+                    <td>
+                        0.11.0.0
+                    </td>
+                    <td>
+                        circa 2011
+                    </td>
+                    <td>
+                        <a href="0.11.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
                 </tr>
                 <tr>
-                    <td align="right">completed</td>
-                    <td align="center" bgcolor="#C0FFC0"><font color="#000000">done</font></td>
+                    <td>
+                        0.10.0.0
+                    </td>
+                    <td>
+                        2011-02-27
+                    </td>
+                    <td>
+                        <a href="0.10.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
                 </tr>
-                </table>
-                <p>
-                    More feature topics in <a href="http://resmedicinae.sourceforge.net/plan/index.shtml">Res Medicinae</a>!
-                </p>
-            </td>
-        </tr>
-        </table>
+            </table>
+            <br>
+            <table>
+                <tr>
+                    <th>Released Version</th>
+                    <th>Date</th>
+                    <th>Features</th>
+                    <th>Release Master</th>
+                </tr>
+                <tr>
+                    <td>
+                        0.9.0.0
+                    </td>
+                    <td>
+                        2009-02-01
+                    </td>
+                    <td>
+                        <a href="0.9.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.8.0.0
+                    </td>
+                    <td>
+                        2007-05-31
+                    </td>
+                    <td>
+                        <a href="0.8.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.7.0.0
+                    </td>
+                    <td>
+                        2006-09-09
+                    </td>
+                    <td>
+                        <a href="0.7.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.6.0.0
+                    </td>
+                    <td>
+                        2005-08-29
+                    </td>
+                    <td>
+                        <a href="0.6.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.5.0.0
+                    </td>
+                    <td>
+                        2005-06-28
+                    </td>
+                    <td>
+                        <a href="0.5.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.4.0.0
+                    </td>
+                    <td>
+                        2005-03-01
+                    </td>
+                    <td>
+                        <a href="0.4.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Dennis Reichenbach
+                        &lt;<a href="mailto:dennis.reichenbach@gmx.net">dennis.reichenbach@gmx.net</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.3.1.1
+                    </td>
+                    <td>
+                        2004-12-06
+                    </td>
+                    <td>
+                        <a href="0.3.1.1.shtml">Features</a>
+                    </td>
+                    <td>
+                        Dennis Reichenbach
+                        &lt;<a href="mailto:dennis.reichenbach@gmx.net">dennis.reichenbach@gmx.net</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.3.1.0
+                    </td>
+                    <td>
+                        2004-11-23
+                    </td>
+                    <td>
+                        <a href="0.3.1.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Dennis Reichenbach
+                        &lt;<a href="mailto:dennis.reichenbach@gmx.net">dennis.reichenbach@gmx.net</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.3.0.0
+                    </td>
+                    <td>
+                        2004-09-13
+                    </td>
+                    <td>
+                        <a href="0.3.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.2.2.0
+                    </td>
+                    <td>
+                        2004-06-23
+                    </td>
+                    <td>
+                        <a href="0.2.2.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.2.1.0
+                    </td>
+                    <td>
+                        2004-06-11
+                    </td>
+                    <td>
+                        <a href="0.2.1.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.2.0.0
+                    </td>
+                    <td>
+                        2004-04-29
+                    </td>
+                    <td>
+                        <a href="0.2.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.1.0.0
+                    </td>
+                    <td>
+                        2003-09-11
+                    </td>
+                    <td>
+                        <a href="0.1.0.0.shtml">Features</a>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.0.7.0
+                    </td>
+                    <td>
+                        2003-06-23
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.0.6.0
+                    </td>
+                    <td>
+                        2003-04-28
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        0.0.5.0
+                    </td>
+                    <td>
+                        2003-03-15
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        Christian Heller
+                        &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                    </td>
+                </tr>
+            </table>
+            <table>
+            <tr>
+                <th align="right">Status</th>
+                <th align="left">Legend</th>
+            </tr>
+            <tr>
+                <td align="right">to be implemented</td>
+                <td align="center" bgcolor="#FF8080"><font color="#000000">todo</font></td>
+            </tr>
+            <tr>
+                <td align="right">in progress</td>
+                <td align="center" bgcolor="#FFFFC0"><font color="#000000">doing</font></td>
+            </tr>
+            <tr>
+                <td align="right">completed</td>
+                <td align="center" bgcolor="#C0FFC0"><font color="#000000">done</font></td>
+            </tr>
+            </table>
+            <p>
+                More feature topics in <a href="http://resmedicinae.sourceforge.net/plan/index.shtml">Res Medicinae</a>!
+            </p>
+        </div>
         <!--#include virtual="../footer.inc" -->
     </div>
 </body>

@@ -5,7 +5,7 @@
     <!--
         $RCSfile: 0.10.0.0.shtml,v $
 
-        Copyright (c) 2002-2007. Christian Heller and the CYBOP developers.
+        Copyright (C) 1999-2011. Christian Heller.
 
         Permission is granted to copy, distribute and/or modify this document
         under the terms of the GNU Free Documentation License, Version 1.1
@@ -26,61 +26,66 @@
 <body>
     <div id="page">
         <!--#include virtual="../menu.inc" -->
-        <table>
+        <div id="content">
+            <h1>CYBOP 0.10.0.0</h1>
+            <table>
             <tr>
+                <th width="10"/>
+                <th>
+                    Features
+                </th>
+                <th width="250">
+                    Developer
+                </th>
+            </tr>
+            <tr>
+                <td class="doing"/>
                 <td>
-                    <h1>CYBOP 0.10.0.0</h1>
-                    <table>
-                    <tr>
-                        <th width="10"/>
-                        <th>
-                            Features
-                        </th>
-                        <th width="250">
-                            Developer
-                        </th>
-                    </tr>
-                    <tr bgcolor="#000000">
-                        <td bgcolor="#FF8080"/>
-                        <td align="left" valign="top">
-                            <h2>CYBOI</h2>
-                            <ul>
-                                <li>Complete tcp socket handling for web user interfaces</li>
-                                <li>Complete xdt (German medical exchange format) parser</li>
-                                <li>Improve X-Windows graphics drawing routines (xlibs)</li>
-                            </ul>
-                        </td>
-                        <td align="left" valign="top">
-                            Christian Heller<br>
-                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
-                        </td>
-                    </tr>
-                    <tr bgcolor="#000000">
-                        <td bgcolor="#FF8080"/>
-                        <td align="left" valign="top">
-                            <h2>CYBOL</h2>
-                            <ul>
-                                <li></li>
-                            </ul>
-                        </td>
-                        <td align="left" valign="top">
-                        </td>
-                    </tr>
-                    <tr bgcolor="#000000">
-                        <td bgcolor="#FFFFC0"/>
-                        <td align="left" valign="top">
-                            <h2>Project</h2>
-                            <ul>
-                                <li></li>
-                            </ul>
-                        </td>
-                        <td align="left" valign="top">
-                        </td>
-                    </tr>
-                    </table>
+                    <h2>CYBOI</h2>
+                    <ul>
+                        <li>Provide more specific global variables of primitive data type sizes</li>
+                        <li>Add new primitive functions (assign, compare, add)</li>
+                        <li>Unify array functions for all primitive data types</li>
+                        <li>Restructure and clean up various container functions (append, replace etc.)</li>
+                        <li>Factor out some controller functionality into sub directories (globaliser, checker etc.)</li>
+                        <li>Restructure test functions</li>
+                        <li>Complete tcp socket handling for web user interfaces</li>
+                        <li>Optimise xml decoder functions</li>
+                        <li>Add http request decoder</li>
+                        <li>Add uri decoder (including percent-encoded characters)</li>
+                        <li>Add html encoder</li>
+                        <li>Add http response encoder</li>
+                    </ul>
+                </td>
+                <td>
+                    Christian Heller<br>
+                    &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
                 </td>
             </tr>
-        </table>
+            <tr>
+                <td class="done"/>
+                <td>
+                    <h2>CYBOL</h2>
+                    <ul>
+                        <li>Add cybol example application <i>http_communication</i></li>
+                    </ul>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td class="done"/>
+                <td>
+                    <h2>Project</h2>
+                    <ul>
+                        <li>Convert source code repository from Concurrent Versions System (CVS) to Subversion (SVN)</li>
+                    </ul>
+                </td>
+                <td>
+                </td>
+            </tr>
+            </table>
+        </div>
         <!--#include virtual="../footer.inc" -->
     </div>
 </body>
