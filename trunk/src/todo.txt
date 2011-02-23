@@ -90,19 +90,15 @@
         * Does the logger need an own mutex? ... because it is accessed by all threads!
             Alternative: Do NOT use the logger in sensing threads at all
 
-        * Include the sources of all documents into the distributable tarball cybop-0.9.0/
+        * Include the sources of all documents into the distributable tarball cybop-0.12.0/
             --> really? This will grow it up to 500 MB in size due to the images
         * Write an actual manual that is updated as necessary to reflect the current
-            state of cybop; just looking at the papers, it is hard to know what is
-            current and what is not; in the meantime, one thing that would help is some
-            kind of brief overview of the papers -- especially which ones should be read
-            first if someone was trying to use the system; also cautioning about ones
-            that are partly outdated, etc.; the list of purported "tutorials" doesn't
-            really make sense to beginners either
+            state of cybop; brief overview which ones should be read first
+            if someone was trying to use the system
 
         * Search for "??" (places that are left TODO) and clean up source code
 
-        * Check out handling of "super" property:
+        * Check out handling of "super" property. Is it necessary at all?
             ==> use "prototype programming" paradigm-like behaviour, i.e.:
                 templates are just templates for initial creation of a model at runtime;
                 later on, each model has to keep ALL its parts with properties itself/ alone

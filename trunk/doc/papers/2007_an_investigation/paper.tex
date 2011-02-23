@@ -1,0 +1,47 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+% The document class specifying the type of document.
+\documentclass[a4paper,10pt]{llncs}
+
+% Graphics.
+\usepackage{graphicx}
+
+%
+% This document is a scientific article to be handed in to a journal.
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+\begin{document}
+    \twocolumn
+    \input{title}
+    \maketitle
+    \input{abstract}
+    \input{introduction}
+    \input{existing_problems}
+    \input{reflexions_on_concepts}
+    \input{practical_proof}
+    \input{related_work}
+    \input{summary_and_outlook}
+    \bibliographystyle{plain}
+    \bibliography{references}
+\end{document}

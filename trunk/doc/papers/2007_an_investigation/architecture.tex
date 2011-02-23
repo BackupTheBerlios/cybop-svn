@@ -1,0 +1,65 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Architecture}
+\label{architecture_heading}
+
+To what concerns its inner architecture, there are two basic structures
+underlying CYBOI:
+
+\begin{enumerate}
+    \item \emph{Knowledge Container:} An array-based structure usable for
+        storing static knowledge in form of primitive- and compound models, and
+        capable of representing a map, collection, list and tree
+    \item \emph{Signal Checker:} A loop-based structure usable for dynamically
+        reading signals from a queue, and capable of processing them after
+        their priority, in a special handler
+\end{enumerate}
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.2]{vector/architecture.eps}
+        \caption{CYBOI Architecture}
+        \label{architecture_figure}
+    \end{center}
+\end{figure}
+
+All modules, into which CYBOI is subdivided, are built around these two core
+structures. Not unlike John von Neumann's model of a computing machine
+\cite{selflinux}, which distinguishes \emph{Memory}, \emph{Control Unit},
+\emph{Algorithmic Logic Unit} (ALU) and \emph{Input/ Output} (i/o), CYBOI's
+modules are grouped into four architectural parts, as illustrated in figure
+\ref{architecture_figure}. These have the following functionality:
+
+\begin{itemize}
+    \item \emph{Memoriser:} data creation, -destruction and -access (after
+        Neumann, it contains not only data, but also the operations that are
+        applied to them)
+    \item \emph{Controller:} lifecycle management, signal handling, i/o filters
+    \item \emph{Applicator:} operation application (comparison, logic,
+        arithmetic and more)
+    \item \emph{Globals:} basic constants and variables, as well as a logger
+\end{itemize}
+
+The i/o data handling is not separated out here (as opposed to von Neumann's
+model); it is managed by the controller modules. The i/o data themselves,
+representing states, are stored in memory.

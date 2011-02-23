@@ -26,11 +26,13 @@
 <body>
     <div id="page">
         <!--#include virtual="../menu.inc" -->
-        <h1>Credits</h1>
-        <p>
-            Our CYBOP logo was designed by <i>Thomas Saur</i> of
-            <a href="http://www.tsamedien.com">TSAMEDIEN</a>.
-        </p>
+        <div id="content">
+            <h1>Credits</h1>
+            <p>
+                Our CYBOP logo was designed by <i>Thomas Saur</i> of
+                <a href="http://www.tsamedien.com">TSAMEDIEN</a>.
+            </p>
+        </div>
         <!--#include virtual="../footer.inc" -->
     </div>
 </body>

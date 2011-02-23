@@ -26,44 +26,47 @@
 <body>
     <div id="page">
         <!--#include virtual="../menu.inc" -->
-        <h1>Books</h1>
-        <p>
-            All books on this page are published under the terms of the <i>GNU Free Documentation License</i> (FDL).
-        </p>
-        <table>
-        <tr>
-            <th>Title</th>
-            <th>Authors</th>
-            <th>Information</th>
-        </tr>
-        <tr>
-            <td>
-                Cybernetics Oriented Language (CYBOL)</br>
-                Specification, Version 2.0, Draft 2007-07-31
-            </td>
-            <td>
-                <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
-            </td>
-            <td>
-                <a href="cybol/cybol.pdf">
-                    <img src="../logo.png" alt="Logo" align="left" valign="top" border="0"/>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Cybernetics Oriented Programming (CYBOP)
-            </td>
-            <td>
-                <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
-            </td>
-            <td>
-                <a href="cybop/index.shtml">
-                    <img src="cybop/cover_small.jpeg"/>
-                </a>
-            </td>
-        </tr>
-        </table>
+        <div id="content">
+            <h1>Books</h1>
+            <p>
+                All books on this page are published under the terms of the <i>GNU Free Documentation License</i> (FDL).
+            </p>
+            <table>
+            <tr>
+                <th>Title</th>
+                <th>Authors</th>
+                <th>Information</th>
+            </tr>
+            <tr>
+                <td>
+                    Cybernetics Oriented Language (CYBOL)<br/>
+                    Specification, Version 2.0<br/>
+                    2007-07-31
+                </td>
+                <td>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
+                </td>
+                <td>
+                    <a href="cybol/cybol.pdf">
+                        <img src="../logo.png" alt="Logo" align="left" valign="top" border="0"/>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Cybernetics Oriented Programming (CYBOP).<br/>Ilmenau: Tux Tax, 2006
+                </td>
+                <td>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
+                </td>
+                <td>
+                    <a href="cybop/index.shtml">
+                        <img width="100px" src="cybop/cover_small.jpeg"/>
+                    </a>
+                </td>
+            </tr>
+            </table>
+        </div>
         <!--#include virtual="../footer.inc" -->
     </div>
 </body>

@@ -26,91 +26,94 @@
 <body>
     <div id="page">
         <!--#include virtual="../menu.inc" -->
-        <h1>Presentations</h1>
-        <p>
-            All presentations on this page are published under the terms of the <i>GNU Free Documentation License</i> (FDL).<br>
-            <font color="#FF8080">Older presentations may not represent the current design philosophy behind CYBOP anymore!</font>
-        </p>
-        <table>
-        <tr>
-            <th>Presentation</th>
-            <th>Title</th>
-            <th>Authors</th>
-        </tr>
-        <tr>
-            <td>
-                <a href="http://www.linuxtag.org/2007/de/conf/events/vp-samstag.html">LinuxTag Conference</a>
-                (<a href="2007-05_linuxtag_berlin/presentation.pdf">PDF</a>)<br>
-                Berlin<br>
-                2007-06-02
-            </td>
-            <td>
-                Cybernetics Oriented Programming (CYBOP)
-            </td>
-            <td>
-                <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
-                (<a href="2007-05_linuxtag_berlin/photo.jpeg">Photo</a>)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a href="http://www.linuxworldexpo.de">Linux World Conference and Expo</a>
-                (<a href="2005_linux_world/poster.pdf">PDF</a>)<br>
-                Frankfurt am Main<br>
-                November 2005
-            </td>
-            <td>
-                Cybernetics Oriented Programming (CYBOP) Poster
-            </td>
-            <td>
-                <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
-                (<a href="2005_linux_world/photo.jpeg">Photo</a>)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Diploma Presentation [German]
-                (<a href="2005_cyboi_as_webserver/praesentation.pdf">PDF</a>)<br>
-                Technical University of Ilmenau<br>
-                July 2005
-            </td>
-            <td>
-                Untersuchung der Realisierungsmoeglichkeiten von CYBOL-Webfrontends,
-                unter Verwendung von Konzepten des Cybernetics Oriented Programming (CYBOP)
-            </td>
-            <td>
-                <a href="mailto:rolf.holzmueller@gmx.de">Rolf Holzmueller</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                OSHCA Conference
-                (<a href="2002_oshca/index.html">HTML</a>)<br>
-                Los Angeles<br>
-                November 2002
-            </td>
-            <td>
-                Cybernetics Oriented Programming (CYBOP) in Res Medicinae
-            </td>
-            <td>
-                <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Internal Presentation
-                (<a href="2002_internal/index.html">HTML</a>)<br>
-                Technical University of Ilmenau<br>
-                April 2002
-            </td>
-            <td>
-                Res Medicinae / CYBOP (ResMedLib) Architecture
-            </td>
-            <td>
-                <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
-            </td>
-        </tr>
-        </table>
+        <div id="content">
+            <h1>Presentations</h1>
+            <p>
+                The documents on this page are sorted chronologically.
+                They are mostly <i>outdated</i> (!) and published only for archiving reasons.
+                All documents are available under the terms of the <i>GNU Free Documentation License</i> (FDL).<br/>
+            </p>
+            <table>
+            <tr>
+                <th>Presentation</th>
+                <th>Title</th>
+                <th>Authors</th>
+            </tr>
+            <tr>
+                <td>
+                    <a href="http://www.linuxtag.org/2007/de/conf/events/vp-samstag.html">LinuxTag Conference</a>
+                    (<a href="2007-05_linuxtag_berlin/presentation.pdf">PDF</a>)<br>
+                    Berlin<br>
+                    2007-06-02
+                </td>
+                <td>
+                    Cybernetics Oriented Programming (CYBOP)
+                </td>
+                <td>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
+                    (<a href="2007-05_linuxtag_berlin/photo.jpeg">Photo</a>)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="http://www.linuxworldexpo.de">Linux World Conference and Expo</a>
+                    (<a href="2005_linux_world/poster.pdf">PDF</a>)<br>
+                    Frankfurt am Main<br>
+                    November 2005
+                </td>
+                <td>
+                    Cybernetics Oriented Programming (CYBOP) Poster
+                </td>
+                <td>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
+                    (<a href="2005_linux_world/photo.jpeg">Photo</a>)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Diploma Presentation [German]
+                    (<a href="2005_cyboi_as_webserver/praesentation.pdf">PDF</a>)<br>
+                    Technical University of Ilmenau<br>
+                    July 2005
+                </td>
+                <td>
+                    Untersuchung der Realisierungsmoeglichkeiten von CYBOL-Webfrontends,
+                    unter Verwendung von Konzepten des Cybernetics Oriented Programming (CYBOP)
+                </td>
+                <td>
+                    <a href="mailto:rolf.holzmueller@gmx.de">Rolf Holzmueller</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    OSHCA Conference
+                    (<a href="2002_oshca/index.html">HTML</a>)<br>
+                    Los Angeles<br>
+                    November 2002
+                </td>
+                <td>
+                    Cybernetics Oriented Programming (CYBOP) in Res Medicinae
+                </td>
+                <td>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Internal Presentation
+                    (<a href="2002_internal/index.html">HTML</a>)<br>
+                    Technical University of Ilmenau<br>
+                    April 2002
+                </td>
+                <td>
+                    Res Medicinae / CYBOP (ResMedLib) Architecture
+                </td>
+                <td>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
+                </td>
+            </tr>
+            </table>
+        </div>
         <!--#include virtual="../footer.inc" -->
     </div>
 </body>

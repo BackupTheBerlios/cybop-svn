@@ -43,6 +43,7 @@
                 <td>
                     <h2>CYBOI</h2>
                     <ul>
+                        <li>Add constants for various file formats / protocols / specifications</li>
                         <li>Restructure and clean up more container functions</li>
                         <li>Improve usage of x window system graphics drawing routines (xlibs)</li>
                         <li>Adapt source code (using pre-processor defines) to become compilable on Windows OS</li>
@@ -77,6 +78,7 @@
                     <h2>Project</h2>
                     <ul>
                         <li>Update cybop Debian package</li>
+                        <li>Create manual for beginners</li>
                     </ul>
                 </td>
                 <td>

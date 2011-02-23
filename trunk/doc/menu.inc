@@ -22,17 +22,20 @@
                 Credits
             </a>
             <h1>Documentation</h1>
+            <a href="/manual/index.shtml">
+                Beginner Manual
+            </a>
             <a href="/books/index.shtml">
-                Books
+                Specification Books
             </a>
             <a href="/presentations/index.shtml">
-                Presentations
+                Developer Presentations
             </a>
             <a href="/papers/index.shtml">
-                Papers
+                Developer Papers
             </a>
             <a href="/tutorials/index.shtml">
-                Tutorials
+                Developer Tutorials
             </a>
             <h1>Development</h1>
             <a href="http://developer.berlios.de/bugs/?group_id=669">

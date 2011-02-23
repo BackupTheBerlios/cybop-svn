@@ -1,0 +1,63 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Related Work}
+\label{related_work_heading}
+
+There exists a plethora of -- partly \emph{Open Source Software} (OSS) -- projects
+promoting XML-based programming, using the \emph{Extensible Markup Language}
+(XML) as replacement for a programming language. Many of these in fact follow
+the principles of \emph{Structured- and Procedural Programming} (SPP) or
+\emph{Object Oriented Programming} (OOP) with just another syntax, and try to
+map the corresponding constructs to XML. They are far away from the system
+control/ knowledge separation that CYBOP wants to reach.
+
+Further, XML is often used for specifying user interfaces or workflows, the
+latter mostly in commercial systems. These approaches come closer to what CYBOP
+does with its language CYBOL, only that CYBOL can express not only user
+interfaces and workflows, but also domain knowledge and algorithms.
+
+The idea of separating system control and knowledge is used in the \emph{OpenEHR}
+project \cite{openehr}, which inspired CYBOP in its beginnings. OpenEHR follows
+a meta model approach (which it calls \emph{Dual Model}) that is based on
+Fowler's \emph{Analysis Patterns} \cite{fowler1997} describing a kind of ad hoc
+two-level modelling, using a \emph{Knowledge Level} and \emph{Operational Level}
+-- as described by the \emph{Reflection} pattern, which calls the two levels
+\emph{Meta Level} and \emph{Base Level}, respectively. The difference between
+the dual model approach and classical meta architectures is that the latter
+implement both, meta- and base level using the same technology (language).
+OpenEHR, on the other hand, uses so-called \emph{Archetypes} for specifying
+knowledge, written in a special language. Besides obvious benefits of OpenEHR's
+approach in constraining domain knowledge, there are a number of weaknesses:
+
+\begin{itemize}
+    \item[-] mix of meta information (properties, constraints) and hierarchical whole-part structure
+    \item[-] incomplete domain knowledge lacking logic (algorithms/ workflows) and user interfaces
+    \item[-] inflexible structures due to runtime-dependency of instances from archetypes
+    \item[-] use of object-oriented concepts with all their limits
+\end{itemize}
+
+Although the \emph{OpenEHR} project claims archetypes to be both:
+\emph{domain-empowered} and \emph{future-proof}, the above-mentioned issues
+prevent them from being so. The dual model approach in conjunction with
+archetypes only partly fulfills the expectations of independent and complete
+knowledge structures.

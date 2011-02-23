@@ -1,0 +1,47 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2002-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Platform Specific and -Independent}
+\label{platform_specific_and_independent_heading}
+
+The \emph{Model Driven Architecture} (MDA) \cite{mda} took a first step into
+the right direction, by distinguishing \emph{Platform Independent Models}
+(PIM), that is domain- and application logic, and \emph{Platform Specific Models}
+(PSM), that is implementation technology. It encourages the use of automated
+tools for defining and transforming these models.
+
+While the definition, organisation and management of architectures (PIM) mostly
+happen in the analysis- and design phase of a \emph{Software Engineering Process}
+(SEP) (section \ref{abstraction_gaps_heading}), the generation of source code
+(PSM) can be assigned to the implementation phase. The approach still has
+weaknesses, and tools which can truly generate running systems are rare or not
+existent, at least to what concerns more complex software systems -- not to
+talk of the so-called \emph{Roundtrip Engineering}, which is managed by even
+less tools.
+
+Nevertheless, the trend clearly goes towards more model-centric approaches. The
+aim of this work was to supply domain experts and application developers with a
+\emph{Model Only} technology, allowing to create application systems that do
+\emph{not} have to be transformed into classical implementation code any longer,
+whereby the SEP abstraction gap number \emph{2} (figure \ref{gaps_figure})
+could be closed conclusively. The knowledge schema introduced in section
+\ref{knowledge_schema_heading} is a necessary prerequisite therefor.
