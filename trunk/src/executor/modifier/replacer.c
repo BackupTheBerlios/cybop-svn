@@ -34,6 +34,10 @@
 #include "../../executor/accessor/getter/signal_memory_getter.c"
 #include "../../executor/comparator/array_equality_comparator.c"
 #include "../../executor/memoriser/reallocator.c"
+#include "../../executor/modifier/replacer/array_replacer.c"
+#include "../../executor/modifier/replacer/compound_replacer.c"
+#include "../../executor/modifier/replacer/part_replacer.c"
+#include "../../executor/modifier/replacer/signal_memory_replacer.c"
 
 //
 // Example 1: Replacement WITHOUT adjustment (replace) of size and count (ds remains as is):
@@ -186,6 +190,16 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
     //??            set_internal_memory_element(*d, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_equal_arrays((void*) &r, p4, p5, (void*) PART_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                replace_part(*d, p1, p2, p3);
             }
         }
 

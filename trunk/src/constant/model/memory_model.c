@@ -32,6 +32,7 @@
 static int* COMPLEX_MEMORY_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The compound memory model count. */
+//?? static int* COMPOUND_MEMORY_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 static int* COMPOUND_MEMORY_MODEL_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The datetime memory model count. */
@@ -43,14 +44,17 @@ static int* FRACTION_MEMORY_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 /** The internal memory memory model count. */
 static int* INTERNAL_MEMORY_MEMORY_MODEL_COUNT = NUMBER_1000_INTEGER_MEMORY_MODEL_ARRAY;
 
+/** The model memory model count. */
+static int* MODEL_MEMORY_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The part memory model count. */
+static int* PART_MEMORY_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+
 /** The primitive memory model count. */
 static int* PRIMITIVE_MEMORY_MODEL_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The signal memory memory model count. */
 static int* SIGNAL_MEMORY_MEMORY_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
-
-// CAUTION! The vector count is not fixed here, since the vector size is undetermined.
-// Vectors get allocated at runtime, using a size that depends on the context.
 
 /* MEMORY_MODEL_SOURCE */
 #endif

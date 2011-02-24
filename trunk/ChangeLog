@@ -16,6 +16,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-02-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Add file "part_replacer.c" and some constants
+
+2011-02-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Update website
+        * Add old scientific article "An Investigation ..." from February 2006
+
 2011-02-22  Christian Heller  <christian.heller@tuxtax.de>
         * Update project plan on website
 

@@ -11,6 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Continue "part_replacer.c"
         * Provide modifier functions for "part" that expect just one pointer with count and size
             and not as many parameters as was the case up to now
         * Replace old functions named "append_part..." with new "append" or "replace"
