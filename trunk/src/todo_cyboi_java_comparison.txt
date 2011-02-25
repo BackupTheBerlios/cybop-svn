@@ -16,6 +16,10 @@ MODIFIER
 + assign
 
 + replace(container, source element, index): set, replace, copy, overwrite
++ replace_container(destination container, source container): replace all elements in destination with those of source
+
++ append(container, element): add, push, put, offer, concat; = replace(container, count as index)
+- append_content(destination container, source container): appendAll, putAll
 
 - insert_element(container, source element, index) = reallocate + replace
 
@@ -30,6 +34,7 @@ MODIFIER
 
 ACCESSOR
 
+- find: links to "find_first" by default
 - find_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
 - find_last_index(container, element): lastIndexOf
 
@@ -41,8 +46,6 @@ ACCESSOR
 - retrieve_part_details(container, index)
 
 - filter(regular expression): matches
-
-COMPARATOR
 
 - compare_equality_all(container, array): equals, ceiling, floor, higher, lower
 - compare_equality_all_ignore_case: equalsIgnoreCase
@@ -93,6 +96,3 @@ ___________
 
 - subSequence, substring:
   it suffices to simply count up the pointer to the desired sub sequence of an array
-
-- append(container, element): add, push, put, offer, concat; = replace(container, count as index)
-- append_content(destination container, source container): appendAll, putAll

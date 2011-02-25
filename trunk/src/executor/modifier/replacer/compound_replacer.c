@@ -94,6 +94,13 @@ void replace_compound_by_index(void* p0, void* p1, void* p2, void* p3,
                     void** dc = NULL_POINTER_MEMORY_MODEL;
                     void** ds = NULL_POINTER_MEMORY_MODEL;
 
+/*??
+                    replace_part(name);
+                    replace_part(abstraction);
+                    replace_part(model);
+                    replace_part(details);
+*/
+
                     // Get names, abstractions, models, details.
                     get_array_elements((void*) &n, p0, (void*) NAMES_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
                     get_array_elements((void*) &nc, p0, (void*) NAMES_COUNTS_COMPOUND_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);

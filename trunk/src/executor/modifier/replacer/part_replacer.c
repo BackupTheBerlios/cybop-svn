@@ -59,6 +59,7 @@ void replace_part(void* p0, void* p1, void* p2, void* p3) {
             log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace part element.");
 
             replace(MODEL);
+            replace_array(*n, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         } else {
 
