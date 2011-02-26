@@ -35,6 +35,8 @@
 #include "../../executor/modifier/assigner/integer_assigner.c"
 #include "../../logger/logger.c"
 #include "../../variable/type_size/integral_type_size.c"
+#include "../../variable/type_size/pointer_type_size.c"
+#include "../../variable/type_size/real_type_size.c"
 
 /**
  * Determines the size of the given abstraction.

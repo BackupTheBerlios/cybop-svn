@@ -28,6 +28,7 @@
 
 #include <X11/Xlib.h>
 #include <pthread.h>
+#include <signal.h>
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"

@@ -41,6 +41,29 @@
 #include "../../logger/logger.c"
 #include "../../variable/thread_identification.c"
 
+//
+// Forward declarations.
+//
+// The following functions HAVE TO BE declared here since
+// otherwise, the compiler will report errors like:
+//
+// error: 'communicate_sensing_gnu_linux_console' undeclared
+//
+// The reason is (probably) that the functions are forwarded
+// as reference (function pointer), for example:
+//
+// &communicate_sensing_gnu_linux_console
+//
+// The compiler does not seem to be able to recognise them
+// as functions that way. Therefore, the following explicit
+// declarations of the functions are necessary.
+//
+
+void communicate_sensing_gnu_linux_console(void* p0);
+void communicate_sensing_cyboi_socket(void* p0);
+void communicate_sensing_www_socket(void* p0);
+void communicate_sensing_x_window_system(void* p0);
+
 /**
  * Senses message.
  *

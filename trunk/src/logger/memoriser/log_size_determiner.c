@@ -34,6 +34,8 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/accessor/assigner/log_integer_assigner.c"
 #include "../../variable/type_size/integral_type_size.c"
+#include "../../variable/type_size/pointer_type_size.c"
+#include "../../variable/type_size/real_type_size.c"
 
 /**
  * Determines the size of the given abstraction.

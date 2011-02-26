@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-02-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up some minor issues in preparations of release CYBOP 0.10.0
+
 2011-02-25  Christian Heller  <christian.heller@tuxtax.de>
         * Experiment with a few new container functions
 
