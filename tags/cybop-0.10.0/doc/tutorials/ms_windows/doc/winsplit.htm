@@ -1,0 +1,249 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Splitbar">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Splitbar">
+<TITLE>Windows Programmierung: Splitbar</TITLE>
+</HEAD>
+<BODY>
+<a name="top" index="Windows-Splitbar selbst programmiert">
+<table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Windows Programmierung: Splitbar</font></H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+Der Splitbar ist der verschiebbare Balken, der im Windows-Explorer
+seit Windows 95 die Baumdarstellung der Verzeichnisse von der
+Liste der Dateien auf der rechten Seite trennt.
+Leider ist dieser kein Kontrollelement der Win32-API, sondern muss
+vollst&auml;ndig selbst programmiert werden, was aber gar nicht so 
+schwer ist. Als Nebeneffekt kann man ihn auch leicht f&uuml;r 
+Programme unter Windows 3.x verwenden, da er nicht auf Spezialit&auml;ten
+der Win32 aufsetzt.
+
+<H2>Grundgedanke</H2>
+
+Im Anwendungsfenster befinden sich zwei Kontrollelemente. Im Explorer ist das
+Baum und ListView. In meinem Beispiel Baum und Edit.
+Es wird ein Spalt zwischen beiden Elementen frei gelassen. 
+Die Fensterfunktion merkt sich die x-Position dieses Spaltes in der
+Variablen <tt>VBarPos</tt>.
+<p>
+Bewegt sich die Maus &uuml;ber diesen Spalt, wird die Mauszeiger auf einen 
+Doppelpfeil umgeschaltet.
+Wird die Maus niedergedr&uuml;ckt und verschoben, wird damit die VBarPos
+ge&auml;ndert.
+Beim Loslassen der Maus werden die Kontrollelemente neu positioniert.
+<p>
+Zur optischen R&uuml;ckmeldung wird ein invertierter Streifen beim Verschieben
+durch das Bild geschoben. Die Technik ist die gleiche wie beim 
+<a href="wincapt.htm">Aufspannen eines Markierungsrechtecks</a>,
+des sogenannten Gummibandes.
+
+<a name="maus" index="Mausereignisse unter Windows">
+<H2>Ereignisse in der Fensterfunktion</H2>
+
+Zun&auml;chst sind die Nachrichten der Fensterfunktion abzufangen.
+Dabei interessieren die Mausereignisse Bewegung, Tastendruck und Loslassen.
+Aber auch das Ereignis zur Gr&ouml;ssen&auml;nderung WM_SIZE muss
+angepasst werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+static HWND hEdit;
+static HWND hToolbar;
+static HWND hListe;
+static int VBarPos = 0;
+POINTS pos;	// for mouse operations
+static bool TrackSplit = false;
+
+	...
+	case WM_SIZE:
+		reSize(hWnd, hToolbar, hEdit, hListe, VBarPos);
+		break;
+
+	case WM_MOUSEMOVE:
+		pos = MAKEPOINTS(lParam);
+		if (TrackSplit) {
+			drawCapture(hWnd, VBarPos);
+			VBarPos = pos.x;
+			drawCapture(hWnd, VBarPos);
+		}
+		if (pos.x&lt;=VBarPos+2 && pos.x&gt;=VBarPos-2) {
+			SetCursor(LoadCursor(0, IDC_SIZEWE));
+		}
+		break;
+
+	case WM_LBUTTONDOWN:
+		pos = MAKEPOINTS(lParam);
+		if (pos.x&lt;=VBarPos+2 && pos.x&gt;=VBarPos-2) {
+			TrackSplit = true;
+			SetCapture(hWnd);
+			VBarPos = pos.x;
+			drawCapture(hWnd, VBarPos);
+			SetCursor(LoadCursor(0, IDC_SIZEWE));
+		}
+		break;
+
+	case WM_LBUTTONUP:
+		pos = MAKEPOINTS(lParam);
+		if (TrackSplit) {
+			TrackSplit = false;
+			drawCapture(hWnd, pos.x);
+			VBarPos = pos.x;
+			ReleaseCapture();
+			
+			reSize(hWnd, hToolbar, hEdit, hListe, VBarPos);
+		}
+		break;
+</pre></td></tr></table><p>
+
+<H3>Maustaste nach unten</H3>
+
+Beim Druck der Taste im Bereich des Schiebebalken wird in der Statusvariablen 
+<tt>TrackSplit</tt> festgehalten,
+dass die Taste unten ist. Die Funktion <tt>SetCapture</tt> wird gebraucht, damit
+man nun den Kontakt zur Maus solange nicht verliert, bis die Taste wieder losgelassen
+wird. Die selbstgeschriebene Funktion <tt>drawCapture</tt> soll die optische 
+R&uuml;ckmeldung &uuml;bernehmen. In der Variablen VBarPos wird die x-Position
+des Schiebebalkens festgehalten.
+
+<H3>Mausbewegung</H3>
+
+Eine Mausbewegung bei festgehaltenem Balken muss die VBarPos aktualisieren und die
+Position des Phantombalkens (drawCapture) ver&auml;ndern. Des weiteren muss
+der Mauszeiger im Bereich des Balkens immer auf Doppelpfeil stehen, damit der
+Anwender merkt, was er ver&auml;ndert.
+
+<H3>Maustaste loslassen</H3>
+
+Erst wenn die Taste losgelassen wird, findet das Neupositionieren der Fenster
+statt. Dazu kann leicht die Befehlsfolge der Nachricht WM_SIZE verwendet werden.
+Ansonsten sind Aufr&auml;umarbeiten f&auml;llig. <tt>TrackSplit</tt> ist nun
+wieder false, der letzte Phantombalken wird entfernt und mit <tt>ReleaseCapture</tt>
+wird die Maus auch f&uuml;r andere Fenster wieder frei.
+
+<H2>Gr&ouml;ssen&auml;nderung</H2>
+
+Bei einer WM_SIZE-Nachricht werden die beiden Kontrollelemente in ihrer
+Position anhand der Gr&ouml;sse des Clientfensters korrigiert. Die Variable
+VBarPos enth&auml;lt die x-Position des Schiebebalkens und bestimmt damit
+einen weiteren Parameter der Aussengrenze der Kontrollelemente.
+<p>
+Ein Sonderfall kann eintreten, wenn das Fenster &uuml;ber den Schiebebalken hinweg
+verkleinert wird. Der Schiebebalken muss in jedem Fall in das Fenster hinein, damit
+er weiter zugreifbar bleibt.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#define BARWIDTH 4
+
+void reSize(HWND hWnd, HWND hToolbar, HWND hEdit, HWND hListe, int &VBarPos)
+{
+RECT rcl, win;
+
+  GetClientRect(hWnd, &win);	// get (new) window size
+  // Get the size of the toolbar
+  SendMessage(hToolbar, TB_AUTOSIZE, 0L, 0L);
+  GetWindowRect(hToolbar, &rcl);
+
+  int xSize = win.right;
+  int ySize = win.bottom;
+
+  if (VBarPos==0)	VBarPos = xSize/4;
+  if (VBarPos &lt; BARWIDTH) VBarPos=5;
+  if (VBarPos &gt; xSize-BARWIDTH) VBarPos = xSize;
+  if (VBarPos&lt;0) VBarPos=0;
+  // Size the rich edit control to the right
+  MoveWindow(hEdit, VBarPos+BARWIDTH/2, rcl.bottom - rcl.top, 
+             xSize - VBarPos - BARWIDTH/2, ySize, TRUE );
+  // Size the tree control to the left
+  MoveWindow(hListe, 0, rcl.bottom - rcl.top, VBarPos-BARWIDTH/2, ySize, TRUE );
+}
+</pre></td></tr></table><p>
+
+<a name="optrueck" index="Phantomlinien durch Invertierung">
+<H2>Optische R&uuml;ckmeldung</H2>
+
+Damit der Anwender das Gef&uuml;hl vermittelt bekommt, er verschiebe etwas,
+ist es notwendig den Balken zumindest andeutungsweise an der aktuellen Position
+zu zeichnen.
+Damit diese R&uuml;ckmeldung flott geht, wird der Balken hier wie beim Explorer auch
+durch ein invertiertes Rechteck stilisiert. Durch die Intervertierung erreicht
+man, dass das Rechteck verschwindet, wenn man es ein zweites Mal zeichnet.
+Also wird einmal beim Niederdr&uuml;cken der Maustaste gezeichnet. Bei jeder
+Bewegung wird zun&auml;chst mit der alten Position noch einmal gezeichnet, um
+den alten Balken zu l&ouml;schen und ein weiteres Mal an der neuen Position,
+damit der Eindruck entsteht, der Balken bewege sich.
+Beim Loslassen der Maustaste muss mit der alten Position ein letztes Mal
+gezeichnet werden, damit der Phantombalken wieder verschwindet.
+Die zentrale Funktion dazu ist <tt>drawCapture</tt>.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+void drawCapture(HWND hWnd, int x)
+{
+RECT r;
+
+	GetClientRect(hWnd, &r);
+	int y = r.bottom;
+	HDC hDC = GetDC(hWnd);
+	SetROP2(hDC, R2_NOT);
+	MoveToEx(hDC, x-BARWIDTH/2, 0, 0);
+	LineTo(hDC, x-BARWIDTH/2, y);
+	LineTo(hDC, x+BARWIDTH/2, y);
+	LineTo(hDC, x+BARWIDTH/2, 0);
+	LineTo(hDC, x-BARWIDTH/2, 0);
+	ReleaseDC(hWnd, hDC);
+}
+</pre></td></tr></table><p>
+
+Hier wird die Gr&ouml;sse des Fensters f&uuml;r die H&ouml;he des Balkens
+berechnet. Mit SetROP2 und R2_NOT wird invertierendes Zeichnen eingestellt
+und anschliessend das Rechteck um den Balken gezeichnet.
+Will man das Verhalten des Explorers komplett kopieren, m&uuml;sste man an
+dieser Stelle die x-Position der linken oberen Ecke auf 0 setzen. Dass auch
+Microsoft dieses Verfahren im Visual Studio &auml;ndert, zeigt, dass das 
+Umrahmen des Balkens die optisch naheliegendere L&ouml;sung ist.
+<p>
+Etwas unsch&ouml;n ist noch, dass der Balken durch die Toolbar geht.
+Dies ist mit den ersten Zeilen aus reSize leicht zu &auml;ndern und ist hier
+der &Uuml;bersichtlichkeit halber weggelassen.
+
+
+<H2> Hintergr&uuml;ndig </H2>
+
+Bisher erscheint der Schiebebalken in weiss. Das ist die Hintergrundfarbe
+des Fensters. Der Anwender wird aber einen grauen Schiebebalken erwarten,
+also in der Farbe der Rahmenelemente.
+Das k&ouml;nnte man auch zeichnen. Einfacher ist es jedoch, den
+Hintergrund des Fensters wird auf grau zu setzen, indem er
+bei der Registrierung <tt>hbr.Background</tt> auf COLOR_WINDOW gesetzt wird.
+Der Hintergrund ist sp&auml;ter sowieso nur im Splitbalken zu sehen.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+WNDCLASSEX wcex;
+
+  wcex.cbSize = sizeof(WNDCLASSEX); 
+  ...
+  wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW);//(COLOR_WINDOW+1);
+  ...
+  RegisterClassEx(&wcex);
+</pre></td></tr></table><p>
+
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

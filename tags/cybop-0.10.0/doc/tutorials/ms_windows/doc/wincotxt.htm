@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Eingabefeld">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Kontextmenü, Windows, Programmierung, Informatik">
+<TITLE>Windows-Programmierung: Kontextmenü
+</TITLE>
+</HEAD>
+<BODY>
+<a name="top" index=""><a name="kontext">
+<table width=100%><tr><td bgcolor=yellow align=center>
+<H1 align=center>Windows Programmierung: Kontextmenü</H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+Das Kontextmen&uuml; erscheint auf den Klick mit der rechten Maustaste.
+
+<h3>Die Ressourcendefinition</h3>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+POPUPMENU MENUEX 
+CHARACTERISTICS 1
+{
+ POPUP "Dies ist ein Test", 123
+ {
+  MENUITEM "&Erledigt", PM_ERLEDIGT
+  MENUITEM "&Neuer Arbeitsgang", PM_NEWTASK
+  MENUITEM SEPARATOR
+  MENUITEM "E&igenschaften", PM_PROP
+ }
+}
+</pre></td></tr></table><p>
+
+
+<h3>Fensterfunktion</h3>
+
+In der Fensterfunktion wird das Ereignis WM_CONTEXTMENU gefangen
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+  case WM_CONTEXTMENU:
+     POINT pt;
+
+     pt.x = LOWORD(lParam);
+     pt.y = HIWORD(lParam);
+     ScreenToClient(hWnd, &pt);
+
+     if (popupContext(hWnd, POPUPMENU, pt))  {
+</pre></td></tr></table><p>
+
+Im Gegensatz zu WM_LBUTTONDBLCLK kommen hier die Koordinaten der
+Maus in Screen- und nicht in Client-koordinaten. F&uuml;r unsere
+Zwecke wird sie mit der Windowsfunktion ScreenToClient umgewandelt.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+BOOL popupContext(HWND hwnd, int ResID, POINT pt)
+{
+RECT rc;
+
+   GetClientRect(hwnd, &rc);
+   if (PtInRect(&rc, pt)) {
+        ClientToScreen(hwnd, &pt);
+        popupDisplay(hwnd, ResID, pt);
+        return TRUE;
+    }
+    return FALSE; // no menu is displayed.
+}
+</pre></td></tr></table><p>
+
+Nachdem gepr&uuml;ft ist, ob der Cursor auch im Clientbereich des Fensters ist,
+kann nun das Men&uuml; erzeugt und bearbeitet werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+static void popupDisplay(HWND hwnd, int ResID, POINT pt)
+{
+HMENU hmenu;            // top-level menu
+HMENU hmenuTrackPopup;  // pop-up menu
+
+   hmenu = LoadMenu(GlobalInstance, MAKEINTRESOURCE(ResID));
+   if (hmenu == NULL) return;
+
+   hmenuTrackPopup = GetSubMenu(hmenu, 0);
+   TrackPopupMenu(hmenuTrackPopup, TPM_RIGHTBUTTON | TPM_LEFTBUTTON,
+            pt.x, pt.y, 0, hwnd, NULL);
+   DestroyMenu(hmenu);
+}
+</pre></td></tr></table><p>
+
+Mit LoadMenu wird das in der Ressource definierte Men&uuml; geladen.
+TrackPopupMenu kann nicht das Toplevel-Men&uuml; anzeigen. Dieses wird
+nur als Dummy ben&ouml;tigt. Stattdessen wird mit GetSubMenu der erste
+Men&uuml;punkt f&uuml;r die weitere Bearbeitung ermittelt.
+Nach der Verfolgung der Maus wird das Men&uuml; wieder zerst&ouml;rt.
+<p>
+In der weiteren Bearbeitung wird durch das Ausw&auml;hlen eines Punktes ein
+WM_COMMAND ausgel&ouml;st.
+
+<H4>Literatur</H4>
+
+<a name="cluts" index="">Nancy Cluts</a>: Programmierung f&uuml;r die Benutzeroberfl&auml;che
+von Windows 95, Microsoft Press, 1995. Seite 247-248.
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY>
+</HTML>

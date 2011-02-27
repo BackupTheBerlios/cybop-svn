@@ -1,0 +1,97 @@
+%
+% $RCSfile: domain_specific_language.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Domain Specific Language}
+\label{domain_specific_language_heading}
+\index{Domain Specific Language}
+\index{DSL}
+\index{General Purpose Language}
+\index{GPL}
+\index{Little Language}
+\index{Application Language}
+\index{Macro}
+\index{Very High Level Language}
+\index{GraphViz DOT}
+\index{Mathematica}
+\index{Yet Another Compiler Compiler}
+\index{YACC}
+\index{Universal Interactive Executive}
+\index{UNIX}
+\index{UNIX Shell Script}
+\index{Lisp}
+\index{Smalltalk}
+\index{In-Language DSL}
+\index{C++}
+\index{Ruby}
+
+While a \emph{General Purpose Language} (GPL), no matter if in form of a
+scripting- or compiled programming language, can be used for performing a
+variety of different tasks, a (usually declarative) \emph{Domain Specific Language}
+(DSL), though less comprehensive, is more expressive in a special domain
+context \cite{deursen}. After \cite{wikipedia}, DSLs may: \textit{enhance the
+productivity, reliability, maintainability, portability and reusability of
+software.} In Czarnecki's words \cite{czarnecki}, DSLs: \textit{increase the
+abstraction level for a particular problem domain} and, being highly
+intentional: \textit{allow users to work closely with domain concepts.}
+
+Several synonyms are used to label a DSL, for example: \emph{Little Language},
+\emph{Application Language}, \emph{Macro} or \emph{Very High Level Language}
+\cite{wikipedia}. To the numerous representatives belong simple spreadsheet
+\emph{Macros} as well as graph definition languages like \emph{GraphViz}'s
+\emph{DOT} \cite{graphviz}, languages for numerical and symbolic computation as
+used in \emph{Mathematica} \cite{mathematica}, or parser generator languages
+like \emph{Yet Another Compiler Compiler} (YACC), found on
+\emph{Universal Interactive Executive} (UNIX) systems. Even UNIX
+\emph{Shell Scripts} can be considered a DSL, with emphasis on data
+organisation. Further DSLs exist, yet are the boundaries between the concepts
+of domain specific- and other languages quite blurry \cite{wikipedia}.
+
+Martin Fowler \cite{fowlerdsl} mentions that the \emph{Lisp} \cite{commonlisp}
+and \emph{Smalltalk} \cite{smalltalk} communities, rather than defining a new
+language, frequently morph the GPL into a DSL, in a \emph{bottom-up} manner.
+Such \emph{In-Language} DSLs, as he calls them, use constructs of the
+programming language itself. Wondering why, programming in Smalltalk, he never
+really felt the need to use a separate language, while, programming in C++/
+Java/ C\#, quite often he did, he concludes \cite{fowlerdsl} that: \textit{the
+more suitable languages (are) minimalist ones with a single basic idea that's
+deeper and simpler than traditional languages (function application for lisp,
+objects and messages for smalltalk)}, and finds that it is the
+\textit{friendliness towards in-language DSLs} rather than \textit{static
+versus dynamic typing} that let many software developers \textit{enjoy
+programming in Smalltalk or Ruby so much more than in Java or C\#}.
+
+Besides their limited usability outside the special domain they were created
+for, to the problems that the usage of DSLs brings with belong after
+\cite{menzies}:
+
+\begin{itemize}
+    \item[-] High cost of designing, implementing, and maintaining a DSL
+    \item[-] Difficult finding of the proper scope
+    \item[-] Difficult balancing between domain-specificity and GPL constructs
+    \item[-] Potential loss of efficiency when compared with hand-coded software
+\end{itemize}
+
+The language introduced in chapter \ref{cybernetics_oriented_language_heading}
+is simple and just because of that flexible enough to be applicable for
+modelling the knowledge of arbitrary domains. It might have the potential to
+replace some of the existing DSLs, the investigation of what is out of the
+scope of this work, though.

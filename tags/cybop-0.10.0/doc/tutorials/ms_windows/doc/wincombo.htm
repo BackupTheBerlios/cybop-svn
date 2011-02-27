@@ -1,0 +1,108 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Combobox">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Combobox, Informatik">
+<TITLE>Windows Programmierung: Combobox</TITLE>
+</HEAD>
+<BODY>
+<a name="top">
+<table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Windows Programmierung: Combobox</font></H1>
+</td></tr></table>
+
+<p><font face="Helvetica" size=3">
+<a href="wincontr.htm#top">Einf&uuml;hrende Informationen</a>
+ &uuml;ber die Programmierung von Kontrollelementen werden hier vorausgesetzt.
+</font><p>
+
+Die Combobox verh&auml;lt sich wie eine Listbox mit angeschlossenem
+Editfeld.
+
+<H2>Stile: Grundformen der Combobox</H2>
+
+Man kann zwischen drei Stilen w&auml;hlen:
+<p>
+<dl>
+<dt>CBS_SIMPLE</dt><dd>
+  Die Liste befindet sich st&auml;ndig aufgeklappt unter dem Editfeld.
+</dd>
+<dt>CBS_DROPDOWN</dt><dd>
+  Hier klappt die Liste auf Knopfdruck aus. Ansonsten ist nur das Editfeld
+  und die Schaltfl&auml;che zum Aufklappen zu sehen.
+</dd>
+<dt>CBS_DROPDOWNLIST</dt><dd>
+  Das Editfeld ist nicht editierbar, sondern nur mit Werten zu f&uuml;llen,
+  die sich in der Liste befinden.
+</dd>
+</dl>
+
+<H2>Ereignisse der Combobox</H2>
+
+<table border>
+<tr><th>Ereignis</th><th>Eintritt</th></tr>
+<tr><td> CBN_EDITCHANGE </td>
+  <td rowspan=2> erscheint bei jedem Zeichen, das ins Editfeld 
+  getippt wird</td></tr>
+<tr><td> CBN_EDITUPDATE </td></tr>
+<tr><td> CBN_CLOSEUP    </td><td> Immer, wenn die Liste wieder hochschnappt </td></tr>
+<tr><td> CBN_DROPDOWN   </td><td> immer, wenn die Liste herunterklappt </td></tr>
+<tr><td> CBN_DBLCLK     </td><td> nur bei der statischen Liste auf Doppelklick </td></tr>
+<tr><td> CBN_KILLFOCUS  </td><td> wenn die Combobox aktiviert wird </td></tr>
+<tr><td> CBN_SETFOCUS   </td><td> wenn die Combobox deaktiviert wird </td></tr>
+<tr><td> CBN_SELCHANGE  </td><td rowspan=2> wenn ein Element der Liste gew&auml;hlt wurde, bevor es in das Editfeld &uuml;bernommen wird. </td></tr>
+<tr><td> CBN_SETFOCUS   </td></tr>
+
+
+</table>
+
+
+<H2>Aktionen</H2>
+
+<H3>Hinzuf&uuml;gen und Entfernen von Eintr&auml;gen</h3>
+
+<p><table border>
+<tr><th>Nachricht</th><th>wParam</th><th>lParam</th><th>R&uuml;ckgabe</th></tr>
+<tr><td>CB_ADDSTRING </td><td>  0 </td><td>Zeiger auf den String</td><td>Index des neuen Items, bei Fehler LB_ERR</td></tr>
+<tr><td>CB_INSERTSTRING </td><td> Zielindex des Items, -1 f&uuml;r hinten</td><td> Zeiger auf den String </td><td> bei Fehler LB_ERR </td></tr>
+<tr><td>CB_DELETESTRING </td><td> Index des Items</td><td> 0 </td><td> bei Fehler LB_ERR </td></tr>
+<tr><td>CB_RESETCONTENT </td><td> 0 </td><td> 0 </td><td> bei Fehler LB_ERR </td></tr>
+</table><p>
+
+AddString h&auml;ngt Eintr&auml;ge hinten an. ResetContent l&ouml;scht alle Eintr&auml;ge.
+
+<H3>Daten hinterlegen</H3>
+
+Damit man den Listbox-Eintr&auml;gen Programmdaten eindeutig zuordnen kann,
+ist es m&ouml;glich, jedem Eintrag einen 4-Byte-Wert hinzuzuf&uuml;gen: genug
+f&uuml;r einen Zeiger auch auf gr&ouml;&szlig;ere Datenobjekte.
+
+<p><table border>
+<tr><th>Nachricht</th><th>wParam</th><th>lParam</th><th>R&uuml;ckgabe</th></tr>
+<tr><td>CB_SETITEMDATA </td><td> Index des Items</td><td>4-Byte-Data</td><td>Bei Fehler LB_ERR</td></tr>
+<tr><td>CB_GETITEMDATA </td><td> Index des Items</td><td> NULL </td><td>4-Byte-Data</td></tr>
+</table><p>
+
+<H3>Sonstige Aktionen</H3>
+
+<H4>Selektion eines Strings</H4>
+<table border width=100%><tr><td bgcolor=lightblue>
+  SendMessage(hWndCombo, CB_SELECTSTRING, nIndex, (ULONG)SelString);
+</td></tr></table><p>
+
+Sucht und selektiert aus der Liste den Eintrag, der mit SelString beginnt.
+Die Sucher beginnt <i>hinter</i> dem
+Element nIndex. Soll die komplette Liste durchsucht werden, ist nIndex=-1.
+Der String wird im Editfeld eingetragen.
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

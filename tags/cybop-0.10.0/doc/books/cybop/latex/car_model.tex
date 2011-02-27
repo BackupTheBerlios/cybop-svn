@@ -1,0 +1,66 @@
+%
+% $RCSfile: car_model.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Car Model}
+\label{car_model_heading}
+\index{Car Model as Ontology}
+\index{Computer Aided Design}
+\index{CAD}
+\index{Computer Aided Manufacturing}
+\index{CAM}
+\index{Unidirectional Relation}
+\index{Layers of an Abstract Model}
+\index{Levels of an Abstract Model}
+
+A \emph{Computer Aided Design} (CAD)/ \emph{Computer Aided Manufacturing} (CAM)
+system of a car manufacturer will have a \emph{Car} model like the one shown in
+table \ref{car_table}.
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{footnotesize}
+        \begin{tabular}{| p{105mm} |}
+            \hline
+            \textbf{Model Category}\\
+            \hline
+            Car\\
+            \hline
+            Body, Chassis, Engine, Transmission\\
+            \hline
+            Door, Axle, Wheel, Cylinder\\
+            \hline
+            Window, Suspension, Plunger\\
+            \hline
+        \end{tabular}
+        \end{footnotesize}
+        \caption{Car Model}
+        \label{car_table}
+    \end{center}
+\end{table}
+
+The ontology contains multiple categories of models which are composed of each
+other. An \emph{Engine} consists of a \emph{Cylinder} which consists of a
+\emph{Plunger} and so on. That is why people speak of different \emph{Layers}
+or \emph{Levels} of abstract models. An \emph{Axle} belongs to one level and a
+\emph{Chassis} belongs to another, higher level. In a good ontology, the
+relations between models are always \emph{unidirectional}, that is a chassis
+can link to axles but not the other way.

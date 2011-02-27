@@ -1,0 +1,117 @@
+%
+% $RCSfile: x_data_carrier.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{x Data Carrier}
+\label{x_data_carrier_heading}
+\index{x Data Carrier}
+\index{x Datentr\"{a}ger}
+\index{xDT}
+\index{EDI}
+\index{Datentr\"{a}ger}
+\index{DT}
+\index{German College of Community Physicians}
+\index{Kassen\"{a}rztliche Bundesvereinigung}
+\index{KBV}
+\index{Behandlungs Datentr\"{a}ger}
+\index{BDT}
+\index{Labor Datentr\"{a}ger}
+\index{LDT}
+\index{Abrechnungs Datentr\"{a}ger}
+\index{ADT}
+\index{Ambulant Operieren Datentr\"{a}ger}
+\index{AODT}
+\index{Geraete Datentr\"{a}ger}
+\index{GDT}
+\index{Kommunikations Datentr\"{a}ger}
+\index{KDT}
+\index{Kassenaerztliche Vereinigung Datentr\"{a}ger}
+\index{KVDT}
+\index{Practice Management System}
+\index{PMS}
+\index{General Practitioners}
+\index{GP}
+\index{Hospital Information System}
+\index{HIS}
+\index{HL7}
+\index{KV Nordrhein}
+\index{Zentralinstitut f\"{u}r die Kassen\"{a}rztliche Versorgung}
+\index{ZI}
+\index{Deutsches Institut f\"{u}r Medizinische Dokumentation und Information}
+\index{DIMDI}
+\index{Bundesvereinigung Deutscher Apotheker Verb\"{a}nde}
+\index{ABDA}
+\index{Verband der Hersteller von IT L\"{o}sungen f\"{u}r das Gesundheitswesen}
+\index{VHitG}
+\index{Verband Deutscher Arztpraxis Softwarehersteller}
+\index{VDAP}
+\index{Qualit\"{a}tsring Medizinische Software}
+\index{QMS}
+\index{Standardisation of Communication between Information Systems in Physician's Offices and Hospitals using XML}
+\index{SCIPHOX}
+\index{XML}
+\index{CDA}
+\index{Robert Koch Institut}
+\index{RKI}
+\index{Studienzentrum G\"{o}ttingen (Allgemeinmedizin)}
+
+Various national standards for medical software exist. In Germany, a widely
+used de facto standard for EDI in healthcare is the \emph{x Datentr\"{a}ger}
+(xDT) \cite{xdt}, a family of formats specifying data packets. The German word
+\emph{Datentr\"{a}ger} (DT) means something like \emph{Data Container}. The
+\emph{German College of Community Physicians}, called \emph{Kassen\"{a}rztliche
+Bundesvereinigung} (KBV), is initiator and maintainer of xDT, to which belong,
+for example:
+
+\begin{itemize}
+    \item[-] \emph{Behandlungs DT} (BDT): EHR interchange between systems
+        (was ADT and developed to the current BDT)
+    \item[-] \emph{Labor DT} (LDT): laboratory data format
+        (predecessor: \emph{Bonner Modell})
+    \item[-] \emph{Abrechnungs DT} (ADT): reimbursement data format
+    \item[-] \emph{Ambulant Operieren DT} (AODT): outpatient/ minor surgery
+        data format
+    \item[-] \emph{Ger\"{a}te DT} (GDT): medical device interfacing
+        (predecessor: \emph{M\"{u}nchener Protokoll})
+    \item[-] \emph{Kommunikations DT} (KDT): communications data format
+        (referrral letters)
+    \item[-] \emph{Kassen\"{a}rztliche Vereinigung DT} (KVDT): all sorts of
+        reimbursement data (container format to wrap the others)
+\end{itemize}
+
+After Karsten Hilbert \cite{openhealth}, xDT were mostly used in
+\emph{Practice Management Systems} (PMS) of \emph{General Practitioners} (GP).
+Most \emph{Hospital Information Systems} (HIS) weren't using it. Some lab
+software being part of a HIS and servicing PMS apparently would use it.
+
+Besides the KBV, institutions and groups like HL7, \emph{KV Nordrhein},
+\emph{Zentralinstitut f\"{u}r die Kassen\"{a}rztliche Versorgung} (ZI),
+\emph{Deutsches Institut f\"{u}r Medizinische Dokumentation und Information}
+(DIMDI), \emph{Bundesvereinigung Deutscher Apotheker Verb\"{a}nde} (ABDA),
+\emph{Verband der Hersteller von IT L\"{o}sungen f\"{u}r das Gesundheitswesen}
+(VHitG), \emph{Verband Deutscher Arztpraxis Softwarehersteller} (VDAP) and
+\emph{Qualit\"{a}tsring Medizinische Software} (QMS) are currently working on
+converting xDT into an XML-based standard, called \emph{Standardisation of
+Communication between Information Systems in Physician's Offices and Hospitals
+using XML} (SCIPHOX) \cite{sciphox}, which originates in HL7's CDA. Accompanying
+projects \cite{medvip} include the \emph{Robert Koch Institut} (RKI),
+\emph{Studienzentrum G\"{o}ttingen} (Allgemeinmedizin) and others, as further
+partners.

@@ -1,0 +1,36 @@
+#include "resource.h"
+#include "windows.h"
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+
+IDI_RAHMEN       ICON    DISCARDABLE     "Rahmen.ICO"
+IDI_SMALL        ICON    DISCARDABLE     "SMALL.ICO"
+
+
+IDC_RAHMEN MENU DISCARDABLE
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "G&ray",		 IDM_GRAY
+	MENUITEM "A&ktiv",		 IDM_AKTIV
+	MENUITEM "E&xit",                IDM_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",           IDM_ABOUT
+    END
+END
+
+IDC_RAHMEN ACCELERATORS MOVEABLE PURE
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+   IDC_RAHMEN    "RAHMEN"
+   IDS_APP_TITLE "Rahmen"
+   IDS_HELLO     "Hello World!"
+END

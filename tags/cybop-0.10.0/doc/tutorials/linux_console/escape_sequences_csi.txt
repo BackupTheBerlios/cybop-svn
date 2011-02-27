@@ -1,0 +1,68 @@
+Escape-Sequenzen z.B. \033[31m fuer rot.
+
+Such einfach nach CSI-Sequenzen (Control Sequence Introducer)
+
+PS:
+      [ <parameters> m sets display attributes.
+       Several attributes can be set in the same sequence.
+
+       par   result
+       0     reset all attributes to their defaults
+       1     set bold
+       2     set half-bright (simulated with color on a color
+ 		display)
+       4     set underscore (simulated with color on a color display)
+     		(the colors used to simulate dim or underline are set
+     		using ESC ] ...)
+       5     set blink
+       7     set reverse video
+       10    reset selected mapping, display control flag,
+     		and toggle meta flag.
+
+       11    select null mapping, set display control flag,
+     		reset toggle meta flag.
+       12    select null mapping, set display control flag,
+     		set toggle meta flag. (The toggle meta flag
+     		causes the high bit of a byte to be toggled
+     		before the mapping table translation is done.)
+       21    set normal intensity (this is not compatible with ECMA-48)
+       22    set normal intensity
+       24    underline off
+       25    blink off
+       27    reverse video off
+       30    set black foreground
+       31    set red foreground
+       32    set green foreground
+       33    set brown foreground
+       34    set blue foreground
+       35    set magenta foreground
+       36    set cyan foreground
+       37    set white foreground
+       38    set underscore on, set default foreground color
+       39    set underscore off, set default foreground color
+       40    set black background
+       41    set red background
+       42    set green background
+       43    set brown background
+       44    set blue background
+       45    set magenta background
+       46    set cyan background
+       47    set white background
+       49    set default background color
+> So etwas wie "_settextcolor(RED)" unter QuickC scheint es wohl nicht
+> zu geben?
+
+> #include <stdio.h>
+
+> #define RED "\033[31m"
+> #define DEFAULT "\033[37m"
+> #define _settextcolor(c) printf ("%s",c)
+
+> int main (int argc, char *argv[])
+> {
+>     printf ("Weiss ");
+>     _settextcolor (RED);
+>     printf ("rot ");
+>     _settextcolor (DEFAULT);
+>     printf ("weiss\n");
+> }

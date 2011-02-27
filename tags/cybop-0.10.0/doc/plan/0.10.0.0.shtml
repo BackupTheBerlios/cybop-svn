@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--
+        $RCSfile: 0.10.0.0.shtml,v $
+
+        Copyright (C) 1999-2011. Christian Heller.
+
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+        Texts. A copy of the license is included in the section entitled
+        "GNU Free Documentation License".
+
+        http://www.cybop.net
+        - Cybernetics Oriented Programming -
+    /-->
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="date" content="$Revision: 1.2 $ $Date: 2009-01-24 12:02:12 $ $Author: christian $">
+    <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
+    <link rel="stylesheet" type="text/css" href="../cybop.css"/>
+    <title>CYBOP 0.10.0.0</title>
+</head>
+<body>
+    <div id="page">
+        <!--#include virtual="../menu.inc" -->
+        <div id="content">
+            <h1>CYBOP 0.10.0.0</h1>
+            <table>
+            <tr>
+                <th width="10"/>
+                <th>
+                    Features
+                </th>
+                <th width="250">
+                    Developer
+                </th>
+            </tr>
+            <tr>
+                <td class="doing"/>
+                <td>
+                    <h2>CYBOI</h2>
+                    <ul>
+                        <li>Provide more specific global variables of primitive data type sizes</li>
+                        <li>Add new primitive functions (assign, compare, add)</li>
+                        <li>Unify array functions for all primitive data types</li>
+                        <li>Restructure and clean up various container functions (append, replace etc.)</li>
+                        <li>Factor out some controller functionality into sub directories (globaliser, checker etc.)</li>
+                        <li>Restructure test functions</li>
+                        <li>Complete tcp socket handling for web user interfaces</li>
+                        <li>Optimise xml decoder functions</li>
+                        <li>Add http request decoder</li>
+                        <li>Add uri decoder (including percent-encoded characters)</li>
+                        <li>Add html encoder</li>
+                        <li>Add http response encoder</li>
+                    </ul>
+                </td>
+                <td>
+                    Christian Heller<br>
+                    &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
+                </td>
+            </tr>
+            <tr>
+                <td class="done"/>
+                <td>
+                    <h2>CYBOL</h2>
+                    <ul>
+                        <li>Add cybol example application <i>http_communication</i></li>
+                    </ul>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td class="done"/>
+                <td>
+                    <h2>Project</h2>
+                    <ul>
+                        <li>Convert source code repository from Concurrent Versions System (CVS) to Subversion (SVN)</li>
+                    </ul>
+                </td>
+                <td>
+                </td>
+            </tr>
+            </table>
+        </div>
+        <!--#include virtual="../footer.inc" -->
+    </div>
+</body>
+</html>

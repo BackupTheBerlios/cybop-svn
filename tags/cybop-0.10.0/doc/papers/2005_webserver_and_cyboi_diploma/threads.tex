@@ -1,0 +1,220 @@
+\section{Prozesse und Threads}
+
+  Da die Implementierung des Webservers mit blockierenden Sockets erfolgt, ist
+  es erforderlich, parallele bzw. nebenläufige Programme in CYBOI zu starten, 
+  da ansonsten die blockierenden Socketoperationen den gesamten
+  Interpreter CYBOI lahm legen. Es gibt zwei Möglichkeiten parallele bzw. nebenläufige 
+  Programme zu starten, entweder als eigenständiger Prozess oder 
+  als Thread. Für die Auswahl sind beide Varianten zu erklären und Vor- und Nachteile 
+  gegenüberzustellen. 
+     
+  \subsection{Prozess}
+   
+    Ein Prozess aus Betriebssystemsicht ist ein in Ausführung befindliches Programm,
+    welches sequentiell abgearbeitet wird. Es wird immer nur
+    eine Instruktion zu einer bestimmten Zeit ausgeführt. Ein Prozess besteht
+    aus dem Programm und der Programmumgebung und er verfügt über einen
+    eigenen Adressraum. Zu der Programmumgebung gehören Programmzähler, 
+    alle Registerinhalte, Stack (temporäre Daten) und der Datenbereich (globale Variablen).
+    Da das Betriebssystem mehrere Prozesse
+    gleichzeitig verwaltet und es so aussieht, als ob die Prozesse parallel ablaufen, 
+    müssen diese Prozesse verschieden Zustände annehmen können. Folgendes Bild veranschaulicht die
+    Prozesszustände und welche Wechsel zwischen den Prozesszuständen möglich sind.
+  
+    \begin{figure}[H]
+      \centering
+        \includegraphics{images/prozeszustaende.eps}
+      \caption{Prozesszustände}
+      \label{fig:prozeszustaende}
+    \end{figure}
+
+    Als erstes wird ein Prozess initiiert. Dazu werden alle Initialbetriebsmittel
+    alloziiert (1). Danach ist der Prozess in dem Zustand \emph{bereit}. In diesem Zustand kann der Prozess
+    noch nichts machen, da ihm noch keine Prozessorzeit zugeordnet ist. Dies wird durch
+    den Prozessscheduler des Betriebssystems realisiert (2). Dieser Scheduler kann den Prozess
+    auch wieder in den Zustand \emph{bereit} zurückversetzen (5). Dies kann z.B. durch Ablauf der Zeitscheibe 
+    oder durch Prioritätensteuerung passieren. Wird von einem aktiven Prozess ein
+    Betriebsmittel angefordert und dieses ist zurzeit nicht verfügbar, so wird der Prozess 
+    in den Zustand blockiert gesetzt (3). Liegt ein Signal an, dass das erwartete Betriebsmittel 
+    zur Verfügung steht,
+    so wechselt der Status des Prozesses in den Zustand \emph{bereit} (4).
+    Am Ende wird der Prozess abgeschlossen und alle Betriebsmittel und Ressourcen werden freigegeben. 
+    
+    Um zwischen den Prozessen umschalten zu können, müssen Informationen des Prozesses gesichert werden.
+    Dazu dienen so genannte Prozess-Kontroll-Blöcke (PKB). Diese beinhalten folgende Informationen:
+    \begin{itemize}
+      \item Prozesszustand
+      \item Zeiger auf Prozess
+      \item Prozess-Id
+      \item Programmumgebung
+      \begin{itemize}
+        \item Programmzähler
+        \item Prozessorregister
+        \item I\/O Statusinformationen
+         \item Speicherverwaltungsinformationen
+      \end{itemize}
+    \end{itemize}
+    Um nun von einen zum anderen Prozess zu wechseln, wird der gesamte PKB gesichert 
+    und der PKB vom aktivierten Prozess geladen. Diese Art von Prozessen wird auch als 
+    Single-Thread-Prozessor-Modell bezeichnet.
+    \begin{figure}[H]
+      \centering
+        \includegraphics{images/singlethreadprozess.eps}
+      \caption{Single-Thread-Prozess-Modell}
+      \label{fig:singlethreadprozess}
+    \end{figure}
+    
+   Ein Prozess kann weitere Unterprozesse
+   generieren, so dass eine Baumstruktur von Prozessen und ihren Unterprozessen
+   entsteht. Die Umschaltung zwischen den Prozessen (siehe vorheriges Kapitel) erfordert
+   die Sicherung und das Laden des gesamten Prozess-Kontroll-Block und der Stacks. 
+   
+  \subsection{Parallele und nebenläufige Prozesse}
+  
+   Ein Prozess wird sequentiell im Prozessor abgearbeitet. Richtige parallele
+   Arbeitung von Prozessen gibt es nur in Mehrprozessorrechnern. In 
+   Einprozessormaschinen gibt es keine echte parallele Verarbeitung, sondern
+   nur eine nebenläufige (quasi parallel) Abarbeitung von Prozessen. 
+   Dies wird durch das Betriebssystem intern geregelt. 
+   Da es für den 
+   Endanwender keinen Unterschied bedeutet, ob nebenläufige oder parallele Abarbeitung vorliegt, 
+   wird nur noch auf nebenläufige Prozesse eingegangen.
+
+\newpage  
+   Hier eine Definition für nebenläufige Prozesse:
+   \begin{quotation}
+     Zwei oder mehrere Prozesse werden als nebenläufig bezeichnet, wenn sie weitgehend unabhängig 
+     vom Betriebssystem bearbeitet werden können. Dabei spielt es keine Rolle, 
+     ob sie von einem Multiprozessor-System parallel bearbeitet werden oder ihre 
+     Abarbeitung sequentialisiert werden, d.h. sie werden in einer durch 
+     das Betriebssystem bestimmten Reihenfolge abgearbeitet. Dabei ist es auch möglich, 
+     dass ein Prozess während der Bearbeitung unterbrochen wird, dann ein anderer 
+     bearbeitet und der abgebrochene erst nach einer Verweildauer fortgesetzt wird. 
+     Man muss zwischen unabhängigen nebenläufigen Prozessen, bei denen das Ergebnis 
+     nicht von der Abarbeitungsreihenfolge abhängig ist, und abhängigen nebenläufigen Prozessen, 
+     bei denen eine Synchronisation notwendig ist, unterscheiden. Betriebssysteme gehen in 
+     der Regel davon aus, dass die Prozesse unabhängig von einander sind. Sind Prozesse von einander
+     abhängig, so müssen sie synchronisiert werden.  
+   \end{quotation}
+   
+     
+   \subsection{Threads}
+ 
+     Als Thread wird ein leichtgewichtiger Prozess bezeichnet, der nur die wichtigsten Kontextinformationen 
+     mit sich führt. Im Prinzip werden innerhalb eines Prozesses mehrere Threads gehalten. Diese
+     Threads teilen sich den Benutzer-Adressraum. Dadurch 
+     wird ein Wechsel zwischen verschiedenen Threads leichter. So können innerhalb einer 
+     Anwendung mehrere Teilprozesse nebenläufig ausgeführt werden. 
+     Die Abbildung \ref{fig:multithreadprozess} verdeutlicht die gemeinsame Nutzung vom 
+     Benutzer-Adressraum und das Ausführen von mehreren Threads innerhalb eines Prozesses.
+    \begin{figure}[H]
+      \centering
+        \includegraphics[width=10cm]{images/multithreadprozess.eps}
+      \caption{Multi-Thread-Prozess-Modell}
+      \label{fig:multithreadprozess}
+    \end{figure}
+    Der Interpreter CYBOI wird in C geschrieben. Dieser Quelltext wird unter Linux kompiliert 
+    und ausgeführt. Eine Möglichkeit für Windows wäre \emph{cygwin}, das die kompletten GNU-Tools
+    und Bibliotheken auch für Windows zur Verfügung stellt. Die C-Bibliothek pthread 
+    hat sich für die Threadbehandlung etabliert. In dieser Bibliothek sind Möglichkeiten zur 
+    Erzeugung, Beendung und Synchronisation von Threads vorhanden.
+     
+  \subsection{Vergleich Threads und Prozesse}
+   
+    Für die Integration des Webservers in CYBOI wurden die leichtgewichtigen Prozesse
+    (Threads) ausgewählt. Da Threads innerhalb eines Prozesses von sich aus den gleichen Adressraum
+    verwenden, ist eine direkte Kommunikation zwischen CYBOI und den Webserver über den
+    gleichen Adressraum möglich, womit bei Threads die Kommunikation über andere aufwendigere
+    Kommunikationskanäle entfällt. Ein weiterer Vorteil ist die Geschwindigkeit der Operationen von Threads.
+    Da weniger Informationen involviert sind, sind die Operationen für Threads
+    auch schneller als bei Prozessen. Dies betrifft sowohl die normalen Operationen, wie z.B. Aktivieren,
+    Erzeugen, Blockieren als auch den Kontextwechsel zwischen den Threads. 
+    Die Nachteile von Threads sind, dass dem Betriebssystem die Kontrolle über die Threads
+    entzogen ist. Der Entwickler muss selbst darauf achten, dass sich diese nicht gegenseitig
+    blockieren. Weiterhin ist durch die Benutzung des gleichen Adressraumes nicht der Schutz
+    vor anderen Threads gesichert. Dieser ist ebenfalls vom Entwickler sicherzustellen. 
+    
+\section{Synchronisation von Threads}
+
+  Die Kommunikation von Threads erfolgt üblichweise über den gemeinsamen 
+  Benutzer-Adressraum. Da Threads nebenläufig arbeiten, müssen die Zugriffe auf gemeinsame Variablen 
+  synchronisiert werden, da es ansonsten zu Kollisionen beim gleichzeitigen Zugriff 
+  auf den gemeinsamen Speicherbereich kommen kann. Die pthread-Bibliothek stellt dafür 
+  zwei Möglichkeiten zur Verfügung, entweder über Mutex oder mit Bedingungsvariablen.
+
+
+  \subsection{Threadsynchronisation mit Mutex}
+
+    Mutex ist ein Kunstwort, welches sich aus den Wörtern MUTual und EXclusions (gegenseitiger Ausschluss) 
+    zusammensetzt. Sie dienen dazu, Ressourcen für Threads exklusiv zu reservieren. 
+    Dabei kann ein Mutex immer nur von einem Thread belegt sein. Versuchen weitere Threads diesen Mutex für 
+    sich zu beanspruchen, werden diese blockiert, bis der aktuelle Besitzer den Mutex wieder freigibt. 
+    Da die Belegung atomar erfolgt, ist auch sichergestellt, dass immer nur ein Thread einen Mutex 
+    zur selben Zeit belegt. Mutex liegt das Semaphoren-Konzept zu Grunde.
+    
+    Semaphor im Allgemeinen bedeutet, dass ein Zugriff auf einen kritischen Bereich (Shared memory) 
+    geschützt wird. Dazu besteht ein Semaphor aus zwei Elementen, dem Semaphor-Wert s(ganzzahlig) 
+    und einer Warteschlange. Ist der Semaphoren-Wert größer Null, so bedeutet dies, 
+    dass der kritische Abschnitt 
+    betreten werden kann. Ansonsten ist der Abschnitt durch einen anderen Prozess belegt. 
+    Die Warteschlange dient zur Speicherung aller Prozesse, die nicht den kritischen Abschnitt 
+    betreten konnten.
+    Zum weiteren sind für Semaphoren zwei Operationen P(s) und V(s) folgendermaßen definiert.
+    \\ \\
+    \verb|    P(s):  s = 0 | $\rightarrow$ Prozess in Warteschlange schlafen legen
+    \\
+    \verb|           s > 0 | $\rightarrow$ s um eins erniedrigen
+    \\
+    \verb|    V(s): | $\rightarrow$ s um eins erhöhen
+    \\
+    \verb|          | $\rightarrow$ falls Warteschlange nicht leer ist, so nächsten Prozess aufwecken
+    \\ \\
+    Ein binärer Semaphore ist ein normaler Semaphor mit Initialisierung der 
+    Semaphoren-Variable auf eins. Mutexe stellen binäre Semaphoren dar, wobei die 
+    Implementierung ohne die Warteschlange realisiert wurde.  
+    
+    Das Prinzip von Mutex ist einfach. Ein Thread arbeitet mit einer globalen oder 
+    statischen Variable, die für allen anderen Threads während einer Operation 
+    von einem Mutex blockiert 
+    (gesperrt) wird. Benötigt der Thread diese Variable nicht mehr, gibt er diese frei.
+    Durch das Setzen der Sperren im Programm liegt die Verantwortung einer 
+    Verklemmungsfreiheit  beim Programmierer.
+    Dadurch können aber bei unsauberer Programmierung Deadlocks auftreten, falls
+    ein Thread die Sperrung nicht ordnungsgemäß freigibt oder es Ressourcen anfordert, 
+    obwohl es schon Ressourcen bekommen hat.
+     
+  \subsection{Threads synchronisieren mit Bedingungsvariablen}
+  
+  
+    Die Bedingungsvariablen dienen dazu, den Eintritt bestimmter Bedingungen abzuwarten 
+    beziehungsweise deren Erfüllung anzuzeigen und können dazu genutzt werden
+    Threads zu synchronisieren. Bedingungsvariablen sind an Mutexe gekoppelt um 
+    sicherzustellen, dass die Bedingungen immer nur von einem Thread zu einer 
+    Zeit geändert werden können. 
+    In der folgenden Abbildung ist das Prinzip der \emph{Condition Variable} zu erkennen.
+    Dies ist aus dem Buch \cite{linuxprog} entnommen.
+    \begin{figure}[H]
+      \centering
+        \includegraphics[width=10cm]{images/condvar.eps}
+      \caption{Condition Variable}
+      \label{fig:condvar}
+    \end{figure}
+    Am Anfang wird ein Mutex für einen kritischen Bereich gesetzt. Kann der Thread 
+    nicht weiter arbeiten, weil zum Beispiel die benötigen Daten nicht anliegen, so
+    wird dieser stillgelegt. Der Mutex wird freigegeben, es wird gewartet 
+    bis diese Bedingung (Daten vorhanden) eintrifft und danach der Mutex wieder belegt. 
+    Dies ist alles in einer Funktion der pthread-Bibliothek gekapselt. 
+    Danach kann der Thread ganz normal seinen kritischen Bereich abarbeiten 
+    und den Mutex wieder freigeben.
+
+  \subsection{Fazit der Synchronisation}
+  
+    Die zwei vorgestellten Synchronisationsarten schließen sich nicht aus, sondern ergänzen sich.
+    Mutex ist für den einfachen gegenseitigen Ausschluss da. Dieser Mechanismus wird bei den 
+    Bedingungsvariablen auch genutzt. Welche Form der Synchronisation ist für
+    die Integration vom Webserver in CYBOI notwendig? Dazu ist die zu lösende Aufgabe
+    näher zu betrachten. Wird im Webserver eine Anfrage vom Client gestellt, so ist ein Signal im
+    \emph{Signal Memeory} zu erstellen. Dieses Signal ist die Umwandlung der Anfrage vom Client
+    in die interne Repräsentation von Signalen in CYBOI. Dazu ist es einfach nur notwendig, 
+    die Variable \emph{Signal Memory} für den gegenseitigen Ausschluss zu sichern. Also ist 
+    es ausreichend, die Synchronisation mit Mutex zu realisieren. 

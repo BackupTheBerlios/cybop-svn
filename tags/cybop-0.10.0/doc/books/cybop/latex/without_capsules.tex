@@ -1,0 +1,61 @@
+%
+% $RCSfile: without_capsules.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Without Capsules?}
+\label{without_capsules_heading}
+\index{Without Capsules}
+\index{Side Effect}
+\index{Knowledge Tree}
+\index{Encapsulation}
+\index{Well-Defined Knowledge Paths}
+\index{Call by Reference}
+\index{Call by Value}
+
+Once again it has to be said that all this becomes possible only because all
+domain/ application knowledge is stored together in one single tree structure
+which is hold and managed by the \emph{Cybernetics Oriented Interpreter}
+(CYBOI) (chapter \ref{cybernetics_oriented_interpreter_heading}). What was
+traditionally criticised as \emph{Side Effect}, is now a \emph{wanted} effect.
+Low-level system procedures within CYBOI forward just one pointer -- the root
+of the knowledge tree, which they all may access and manipulate. Data values do
+\emph{not} get copied among procedures; they exist just once in the knowledge
+tree and may be used by any procedure. Of course, this also means that any
+application has access to the knowledge of any other application. Ways ensuring
+sufficient security have to be found here (section \ref{future_works_heading}).
+
+Besides the \emph{Encapsulation} of data through \emph{Procedures}, there are
+other forms of encapsulating data, such as the \emph{Class} (section
+\ref{object_oriented_programming_heading}). One of its purposes was to preserve
+transient data in memory, another to restrict access to certain data. In CYBOP,
+both tasks are taken care of by CYBOI. It holds the singular knowledge tree and
+manages access to it, through well-defined low-level procedures.
+
+There are a number of advantages to this style of programming: An application
+developer has no chance of accessing memory areas directly, which prevents
+memory leaks and wrong pointers. Because all knowledge can be accessed through
+well-defined paths into the knowledge tree only, arbitrary security mechanisms
+may be applied and switched as needed, at runtime. Since all algorithms (logic
+knowledge) work with references to data in the knowledge tree
+(\emph{Call by Reference}), no more data values need to be copied locally
+(\emph{Call by Value}), which ensures efficient memory usage. Errors are not to
+be expected, because nonexisting knowledge references are simply ignored by
+CYBOI.

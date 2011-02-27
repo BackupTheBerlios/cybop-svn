@@ -1,0 +1,88 @@
+%
+% $RCSfile: tex_and_latex.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{TeX and LaTeX}
+\label{tex_and_latex_heading}
+\index{Tex}
+\index{Lamport TeX}
+\index{LaTeX}
+\index{LaTeXe}
+\index{Device Independent Format}
+\index{DVI}
+\index{PDFTeX}
+\index{Portable Document Format}
+\index{PDF}
+\index{TeX User Group}
+\index{TUG}
+\index{Desktop Publishing}
+\index{DTP}
+
+The special-purpose \TeX\ \cite{tex} language is the centre-piece of a
+typesetting system which, due to its well-formatted output of complex
+mathematical formulas and generally high-quality typesetting, is especially
+popular among academic circles of mathematicians, physicists and computer
+scientists \cite{latextutorial}. The Wikipedia encyclopedia \cite{wikipedia}
+writes:
+
+\begin{quote}
+    \TeX\ is a macro and token based language: many commands, including most
+    user-defined ones, are expanded on the fly until only unexpandable tokens
+    remain which get executed. Expansion itself is practically side-effect free.
+    Tail recursion of macros takes no memory, and if-then-else constructs are
+    available. \ldots
+
+    The \TeX\ system has precise knowledge of the sizes of all characters and
+    symbols, and using this information, it computes the optimal arrangement of
+    letters per line and lines per page. It then produces a \emph{Device Independent}
+    (DVI) file containing the final locations of all characters. The DVI file
+    can be printed directly given an appropriate printer driver, or it can be
+    converted to other formats.
+\end{quote}
+
+The \emph{PDFTeX} translator program is often used to bypass all DVI generation,
+by creating \emph{Portable Document Format} (PDF) files directly.
+
+Nowadays, \TeX\ is mostly used with a template extension called \emph{Lamport \TeX}
+(\LaTeX, \LaTeXe) \cite{latex}. The Indian \emph{\TeX\ Users Group} (TUG) writes
+\cite{latextutorial}: \textit{\LaTeX\ is a document preparation system which
+adds a set of functions that make the \TeX\ language friendlier than using
+the primitives provided by it.} It offers programmable \emph{Desktop Publishing}
+(DTP) features and extensive facilities for automating most aspects of
+typesetting. \cite{wikipedia}
+
+The most important feature of \TeX\ for this work is its kind of relating meta-
+with structural information. Two examples may help here:
+
+\begin{scriptsize}
+    \begin{verbatim}
+    \documentclass[a4paper,12pt]{book}
+    \includegraphics[scale=0.3]{path/file.pdf}
+    \end{verbatim}
+\end{scriptsize}
+
+The first statement determines \emph{book} as document class for a document to
+be written. It contains additional information such as paper- and font size, in
+square brackets. The second statement refers to a graphics file to be included.
+The additional information given in square brackets here is the scale factor.
+With a different syntax, but in a comparable manner, the knowledge modelling
+language introduced in chapter \ref{cybernetics_oriented_language_heading} does
+relate structural- with meta information.

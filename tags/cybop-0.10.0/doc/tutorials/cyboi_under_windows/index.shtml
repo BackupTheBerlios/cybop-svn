@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>CYBOI under Windows</title>
+    <!--
+        $RCSfile: index.shtml,v $
+
+        Copyright (c) 2004. Christian Heller. All rights reserved.
+
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+        Texts. A copy of the license is included in the section entitled
+        "GNU Free Documentation License".
+
+        http://www.cybop.net
+        - Cybernetics Oriented Programming -
+    /-->
+    <meta name="date" content="$Revision: 1.2 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $">
+    <meta name="author" content="Christian Heller <christian.heller@tuxtax.de>">
+    <link rel="stylesheet" type="text/css" href="../../cybop.css"/>
+</head>
+<body>
+    <div id="page">
+        <!--#include virtual="../../menu.inc" -->
+        <table>
+            <tr>
+                <td>
+                    <h1>CYBOI under Windows</h1>
+                    <p>
+                        Teodora Kikova<br>
+                        <<a href="mailto:teodora.kikova@stud.tu-ilmenau.de">teodora.kikova@stud.tu-ilmenau.de</a>>
+                    </p>
+                    <h2>Aufgabestellung</h2>
+                    <p>
+                        CYBOI (Interpreter Programm, in der Sprache C geschrieben)
+                        unter Windows zum Laufen zu bringen, konkret:
+                    </p>
+                    <ul>
+                        <li>Batch Files fr die Compilierung schreiben und GNU gcc verwenden</li>
+                        <li>Windows Funktionen zum Zeichnen von GUIs in den CYBOI hinzufgen</li>
+                    </ul>
+                    <p>
+                        Dafuer braucht man:
+                    </p>
+                    <ul>
+                        <li>Concurrent Versions System (CVS) Client</li>
+                    </ul>
+                    <h2>Quellen</h2>
+                    <ol>
+                        <li>cyboi-source.tar.bz2 F http://developer.berlios.de/project/showfiles.php?group_id=669</li>
+                        <li>exclude.txt</li>
+                        <li>Makefile.txt</li>
+                        <li>od. src.zip (Source ohne X11-Bibliotheck) und admin.zip (Makefile.txt und exclude.txt ohne X11-Bibliotheck)</li>
+                    </ol>
+                    <h2>Programm unter Linux starten</h2>
+                    <p>
+                        Das Programm macht weiter nichts, als sich selbst wieder zu beenden.
+                        CYBOL Dateien braucht man nicht; diese knnen noch nicht gelesen werden.
+                        Unter Linux wird das Programm mit folgendem Befehl gestartet:
+                        cyboi exit
+                        In der Linux Shell sieht das z.B. so aus:
+                        christian@chris:~/tmp/admin$ ../bin/cyboi exit
+                        wait i: 0
+                        wait s: 134581736
+                        wait p: 0
+                        wait a: 134555664
+                        wait astr: operation
+                        wait as: 9
+                        TEST param0: exit
+                        TEST param0s: 4
+                        Wenn man das Programm ohne "exit" Parameter startet, sieht das so aus:
+                        christian@chris:~/tmp/bin$ ./cyboi
+                        Usage: cyboi signal
+                        Example: cyboi cybop.sample.hello_world.dynamics.startup
+                    </p>
+                    <h2>DJGPP  gcc - Compiler fr Dos</h2>
+                    <p>
+                        DJGPP is a complete 32-bit C/C++ development system for Intel 80386 (and higher) PCs running DOS. It includes ports of many GNU development utilities. The development tools require a 80386 or newer computer to run, as do the programs they produce. In most cases, the programs it produces can be sold commercially without license or royalties.
+                        You cannot install GCC by itself on MSDOS; it will not compile under any MSDOS compiler except itself. You need to get the complete compilation package DJGPP, which includes binaries as well as sources, and includes all the necessary compilation tools and libraries.
+                        http://www.mathematik.uni-ulm.de/sai/ws00/soft/gccwin/gccwindos.html
+                        http://www.delorie.com/djgpp/
+                    </p>
+                    <h2>MinGW  gcc-Compiler fr Windows, oder Umgebung MSyst</h2>
+                    <p>
+                        etwa das gleiche wie MinGW, nur etwas kompakter, d.h. eine  krzere Version davon.
+                        MinGW ("Minimalistic GNU for Windows")
+                        MinGW basiert auf dem populren Gnu-Compiler GCC, erweitert um eine Reihe von Header- und Include-Dateien um native Windows-Applikationen erstellen zu knnen.
+                        MinGW besteht aus eine Ansammlung von Header Files und Import
+                        Libraries welche es ermglichen GCC zu benutzen um Windows
+                        Programme zu erstellen. Im gegensatz zu Cygwin wird keine Dll
+                        bentigt. Die verfgbaren Tool umfassen aktuell die GNU Compiler
+                        Collection (GCC), GNU Binary Utilities (Binutils), GNU debugger (Gdb), GNU make, und noch einiges mehr. (Siehe Homepage)
+                        Early in 2002 the MinGW team delivered a package they had dubbed MSYS. This is a Minimal SYStem providing a self hosted mingw32 target POSIX style environment. The updates to this package and it's utilities are more controlled as the entire package (which uses subsets of many smaller packages) is considered to be one package. This package is also delivered in a Win32 style setup installation binary for better control of the installation.
+                    </p>
+                    <ul>
+                        <li>https://prodigy.informatik.uni-tuebingen.de/Info1-WS02/software_gcc_win.html</li>
+                        <li>http://www.google.de/search?q=cache:4CVjb5mLzJwJ:www.trivadis.ch/Images/externprozedur_de_tcm10-5278.pdf+gcc+unter+Windows&hl=de&lr=lang_de&ie=UTF-8</li>
+                        <li>http://wikibooks.org/wiki/Programmierkurs_C-Plusplus:_Informationen_zu_verschiedenen_Compilern</li>
+                        <li>http://www.smial.de/mingw/</li>
+                    </ul>
+                    <h2>gcc mit Cygwin</h2>
+                    <p>
+                        Cygwin is a Linux-like environment for Windows. It consists of two parts:
+                        A DLL (cygwin1.dll) which acts as a Linux emulation layer providing substantial Linux API functionality.
+                        A collection of tools, which provide Linux look and feel.
+                        The Cygwin DLL works with all non-beta, non "release candidate", ix86 32 bit versions of Windows since Windows 95, with the exception of Windows CE.
+                    </p>
+                    <p>
+                        Cygwin is not a way to run native linux apps on Windows. You have to rebuild your application from source if you want to get it running on Windows. Cygwin is not a way to magically make native Windows apps aware of UNIX functionality, like signals, ptys, etc. Again, you need to build your apps from source if you want to take advantage of Cygwin functionality.
+                    </p>
+                    <ul>
+                        <li>http://cygwin.com/ml/cygwin/</li>
+                        <li>http://tutorials.tanmar.de/cygwin.php</li>
+                        <li>http://tutorials.tanmar.de/cygwin_lokal.php</li>
+                        <li>http://www.pl-berichte.de/t_system/cygwin.html</li>
+                        <li>http://www.manpage.ch/cygwin.html</li>
+                        <li>http://www.uni-giessen.de/hrz/software/cygwin/xfree86/install-anleit.html</li>
+                        <li>http://www.tu-freiberg.de/urz/anleitungen/cygwin/cygwin.html</li>
+                        <li>http://www.pl-berichte.de/t_system/print/cygwin.html</li>
+                        <li>http://www.kfa-juelich.de/zam/docs/tki/tki_html/t0375/t0375.html</li>
+                    </ul>
+                    <p>
+                        Informationen zu GCC (gcc und g++):
+                    </p>
+                    <ul>
+                        <li>http://www.uni-bayreuth.de/departments/math/serv/cip/prog/gcc_compiler.html</li>
+                        <li>http://www.gnu.org/directory/GNU/gcc.html</li>
+                        <li>http://members.surfeu.de/matthias.prinke/computers/misc.html</li>
+                        <li>http://www.uni-bayreuth.de/departments/math/serv/cip/prog/gcc_compiler.html</li>
+                        <li>http://www.plt.rwth-aachen.de/ov/cygwin.html</li>
+                    </ul>
+                    <h2>Entscheidung welche Compiler-Lsung fr die Aufgabe am besten passt, durchgefhrte Tests, begleitende Probleme</h2>
+                    <p>
+                        Ich habe erst mal DJGPP (mit gcc 2.95) heruntergeladen und installiert.
+                    </p>
+                    <p>
+                        1. Problem: Das Programm benutzt X11 Bibliothek, die nur unter Linux zu finden sind, d.h. das Kompilieren war nicht mglich.
+                    </p>
+                    <p>
+                        2. Problem: Wenn man dann den Source ohne X-11-Bibliotheck nimmt, dann hat der Compiler Problem mit den Source-Dateien, weil diese mit gcc 3.3 unter Linux kompiliert worden sind. Das Kompilieren ist mir wieder nicht gelungen, da eine lange Reihe von Fehlern aufgetreten ist. Ich habe manche davon geprft, weil ich ungefhr sehen wollte, wo das Problem liegt. Es hat sich festgestellt, dass die meisten Fehlermeldungen von der Quellkode kommen.
+                        Der Compiler (Version 2.95 gcc-Dos) kann nicht mit dem Source umgehen, da die Variablendeklarationen auch nach dem Aufruf von Funktionen gemacht worden sind. Es gibt auch andere Fehlermeldungen, aber die oben genannte kommt am hufigsten vor, d.h. es mssen dann alle Quellkode-Dateien verndert werden und dies ist nicht so praktisch und zeitaufwendig.
+                        Das Programm ist wirklich rein Funktional, aber benutzt teilweise den Syntax von c++. Die Kommentare sind wie bei c++ mit "//" definiert und die Variablendeklarationen nach dem Funktionsaufruf zu finden, ansonsten habe ich selber nicht so viel Ahnung von c++, was ich schlecht beurteilen kann. Auf jeden Fall gcc 2.95 kommt damit nicht zurecht. Wenn ich gcc -x c++ benutze, dann kann ich wiederum nicht kompilieren, da gcc c++ bestimmte Typen aus der C-Sparche nicht kennt, also in beiden Fllen, wre die Kode zu ndern. Auch kommt noch dazu, dass ich keine neuere Version z. B. gcc 3.3 fr DJGPP gefunden habe, somit ist gcc 2.95 in Moment schon alt und fr die Zukunft noch lter und nutzloser. Aus diesem Grund ist die Lsung mit der DJGPP nicht effizient und wurde verworfen.
+                    </p>
+                    <p>
+                        Die Variante 2, d.h. MinGW wurde nicht getestet, aus dem Grund, dass ich mich nach langem Lesen, durchgefhrten Tests und Internet-Literatur-Informationen gleich fr die dritte Variante gcc mit Cygwin entschieden habe.
+                    </p>
+                    <p>
+                        Zu der dritten Variante gcc mit Cygwin
+                    </p>
+                    <p>
+                        Ich habe nochmals alles mit Cygwin kompiliert und geprft. Das Kompilieren geht problemlos, sogar die Source-Kode mit X11-Bibliothek. Es hat sich festgestellt, dass das Programm nur 2 Bibliotheken braucht, um die erzeugte Exe-Datei nach dem Kompilieren unter irgendeinem Windows-Rechner zum Laufen zu bringen Dies sind cygwin1.dll und cygX11-6.dll.
+                        Diese kann man auch statisch zu der Exe-Datei binden, sodass eine grere Exe-Datei entsteht, was problemlos ohne Cygwin-Umgebung gestartet werden kann, aber in Prinzip geht auch, wenn die Exe-Datei und die
+                        2 Bibliotheken in einem Verzeichnis zu finden sind, also statisches Binden ist auch nicht unbedingt notwendig.
+                        Wenn man alle drei Dateien zippt, dann kommen wir auf ungefhr 1 MB Grsse, was sogar auf eine Diskette passt.
+                    </p>
+                    <p>
+                        Ich glaube, dass dies die beste Variante wre, das Programm unter Windows-Rechner zum Laufen zu bringen, da man weiterhin an der Kode arbeiten kann, ohne irgendwelche Vernderungen od. Compiler-Anpassungen, noch brauchen wir zum Kompilieren unter Windows keine Kode-Umstellungen (die
+                        eigentlich immer nur mit einer bestimmten Compiler-Version fehlerfrei laufen knnten, was uns immer an einer bestimmten Compiler anbindet), noch ist nicht mehr notwendig auf jedem Windows-Nutzer-Rechner, den selben
+                        Compiler zu installieren usw. Nchsten Vorteil wre, dass wir fr das Kompilieren nicht die vollstndige Version von Cygwin brauchen. Ich habe eine Teilversion vom Netzt heruntergeladen und installiert. Das Kompilieren ging problemlos, also dies spart uns auch Zeit, da die vollstndige Cygwin Version sehr gro ist und herunterladen von Netz vor allem durch Modem extrem lange dauert und auch noch danach beim Installieren viel Platz nimmt.
+                        Nchstes Vorteil ist, dass wir die selbe Makefile, was unter Linix zum Kompilieren gebraucht worden ist, hier auch nutzen knnen, ohne irgendwelchen Vernderungen od. Anpassungen. Also, wir brauchen in diesem Falle keine separate Batch-Datei, die das Programm unter Windows kompiliert. Sobald die Source-Kode entpackt ist und im Cygwin-Umgebung das Kommando Make angeben worden ist, kompliliert Cygwin problemlos die Source-Dateien und erzeugt eine Exe-Datei, die zusammen mit den oben genannten 2 Bibliotheken(cygwin1.dll und cygX11-6.dll.) wiederum problemlos auf irgendeinen Windows-Rechner gestartet werden kann, ohne Cygwin-Umgebung installieren zu mssen. Also, wenn das Programm mit Cygwin kompiliert ist und die Exe-Datei erzeugt worden ist, brauchen wir auf dem Nutzer-Rechner keine Cygwin-Umgebung zu installieren, das Programm kann mit Windows-Eingabekonsole bearbeitet werden, braucht nur die oben genannten 2 Bibliotheken. Man spart wirklich viel Arbeit und rger und das ganze luft vllig unabhngig von Cygwin. Dies ist der nchste Vorteil, der fr die Cygwin-Lsung gesprochen hat. Also, diese Lsung hatte am meisten Vorteile und bezogen auf die oben gestellte Aufgabe die schnellste, effiziente, problemlosigste, zeitsparernste und die unkompliziertste Lsung.
+                    </p>
+                    <h2>Kompilieren von CYBOI unter Windows mit Hilfe von Cygwin:</h2>
+                    <p>
+                        Cygwin installieren (Internet-Adresse: http://cygwin.com/ml/cygwin/)
+                        Achtung: Prinzipiell ist Cygwin nun installiert. Bei mir war das XFree86-System direkt nach der Installation leider noch nicht benutzbar, weil einige Dlls nicht gefunden wurden. Die betreffenden Dateien liegen im
+                        Unterverzeichnis "bin" des Cygwin Ordners. Die saubere Lsung ist, den Pfad um einen Eintrag zum Verzeichnis "bin" im Cygwin-Verzeichnis zu erweitern. Unter Windows 98/ME mu man dazu die Datei "c:\autoexec.bat" editieren und den Eintrag "SET PATH=..." um
+                        den Text "C:\Programme\Cygwin\bin" erweiten. Die verschiedenen Verzeichnisse, die im Pfad stehen, werden dabei durch ein Semikolon getrennt. Hat man Cygwin in ein anderen Verzeichnis installiert, mu der Text natrlich entsprechend angepasst werden. Der fertige Eintrag sieht dann in etwa so aus:
+                        SET PATH=C:\Windows;C:\Programme\Cygwin\bin
+                        Unter Windows NT/2000/XP wird die Einstellung des Pfads in der Systemsteuerung vorgenommen. Man whlt dazu das Icon "System" und wechselt auf den Reiter "Erweitert". Dort gibt es denn Button "Umgebungsvariablen". Im Feld "Systemvariablen" findet sich dann der Eintrag "Path": ber "Bearbeiten" kann man den bestehenden Eintrag um ein Semikolon und das Cygwin-Verzeichnis
+                        erweitern: Damit die nderung aktiv wird empfiehlt es sich, das System entweder neu zu starten oder alle Windows-Explorer zu beenden und neu zu ffnen.
+                    </p>
+                    <p>
+                        Die vollstndige Version von Cygwin ist nicht ntig.
+                        Die Source-Dateien entpacken (z. B. in Cygwin: tar xzf cybol-tar.gz)
+                        Beim Entpacken werden automatisch zwei Verzeichnisse erzeugt: src und admin
+                        Das src-Verzeichnis enthlt die folgende Unterverzeichnisse: cvs, symbol, dynamics, model, logger, sygnal, statics, test, x_windwows, die alle Quellkode-Dateien enthalten.
+                        Das admin-Verzeichnis enthlt die Makefile-Datei und die Exclude-Datei, die alle Kommandos und Anweisungen fr das Kompilieren enthalten.
+                        Dieses gilt sowohl fr die Kode, die mit X-11-Bibliothecken kompiliert worden ist, als auch fr die Kode ohne X-11-Bibliothecken
+                        Keine Batch-Datei ist ntig, wir knnen die Makefile-Datei, die man fr das Kompilieren unter Linux benutzt, hier ohne irgendwelchen Anpassungen anwenden.
+                        Starten der Cygwin-Konsole
+                        Wechseln in das Verzeichnis, wo sich die Makefile-Datei befindet (Wenn die Makefile sich nicht in admin-Verzeichnis befindet, dann knnen wir die Datei einfach in dem src-Verzeichnis kopieren)
+                        Eingeben das Kommando Make
+                        Cygwin startet das Kompilieren-Prozess
+                        Es werden neue Verzeichnisse erzeugt: obj- und bin-Verzeichnis
+                        Im bin-Verzeichnis wird die Exe-Datei geschrieben (bei uns ist dies die cyboi.exe). Im obj-Verzeichnis werden alle  .o -Dateien eingelegt, die von den Source-Dateien  .c  erzeugt werden.
+                        Um die Exe-Datei unabhngig von Cygwin zu starten brauchen wir die folgenden zwei Bibliotheken: cygwin1.dll und cygX11-6.dll
+                        Diese kann man auch statisch beim Kompilieren an die cyboi.exe-Datei anbinden, wobei eine grere cyboi.exe-Datei entsteht, die man problemlos auf irgendeinen Windows-Rechner selbstndig und unabhngig von Cygwin gestartet werden kann
+                        Man kann genauso gut danach die cyboi.exe-Datei von der Windows-Eingabekonsole gestartet werden. (od. eventuell per Doppeltklick, in diesem Falle mssen die Bibliotheken in dem selben Verzeichnis sein, wo die cyboi.exe ist)
+                        Cygwin-Umgebung mu auf dem Nutzer-Rechner nicht unbedingt installiert werden
+                        Man kann auch die Pfade einstellen, wenn man die cyboi.exe starten will, ohne man sich direkt in dem Verzeichnis befinden zu mssen, wo diese steht. In diesem Falle mu man der Umgebungsvariable Path einen neuen Eintag setzen, nmlich das Verzeichnis wo sich die cyboi.exe-Datei befindet.
+                    </p>
+                    <h2>Weiterfuehrende Links</h2>
+                    <ul>
+                        <li>http://tutorial.schornboeck.net/windows_comp.htm</li>
+                        <li>http://www.c-worker.ch/compiler/</li>
+                        <li>http://www.thomas-guettler.de/vortraege/oss4win/oss4win.html</li>
+                        <li>http://gcc.gnu.org/lists.html</li>
+                        <li>http://packman.links2linux.de/?action=097</li>
+                        <li>http://www.cpp-tutor.de/cpp/le01/le01_01.htm</li>
+                        <li>http://home.eplus-online.de/alfred/alfred/f0056.htm#M576</li>
+                        <li>http://tutorials.tanmar.de/cygwin_netz.php</li>
+                        <li>http://www.linux-magazin.de/Artikel/ausgabe/2002/12/cygwin/cygwin.html</li>
+                        <li>http://www.oscg.ch/rsc/tools/standalone/cygwin.html</li>
+                        <li>http://cplus.kompf.de/artikel/cygwin.html</li>
+                        <li>http://www.theorie.physik.uni-wuppertal.de/comphys/Ausbildung/Lehrer/programm_beschreibung/node10.phtml.de</li>
+                        <li>http://www.wire.tu-bs.de/ADV/texte/inf3text/node7.html</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <!--#include virtual="../../footer.inc" -->
+    </div>
+</body>
+</html>

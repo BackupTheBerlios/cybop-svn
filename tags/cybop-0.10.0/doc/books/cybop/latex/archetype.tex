@@ -1,0 +1,139 @@
+%
+% $RCSfile: archetype.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Archetype}
+\label{archetype_heading}
+\index{Archetype}
+\index{Electronic Health Record}
+\index{EHR}
+\index{Good European/ EHR}
+\index{GEHR}
+\index{Open EHR}
+\index{SNOMED CT}
+\index{Archetype Definition Language}
+\index{ADL}
+\index{Constraint Form of ADL}
+\index{cADL}
+\index{Data Definition Form of ADL}
+\index{dADL}
+\index{Template Form of ADL}
+\index{tADL}
+\index{First Order Predicate Logic}
+\index{FOPL}
+
+With the aim of providing the means to build usable, maintainable, extensible
+\emph{Electronic Health Records} (EHR), the \emph{Archetype} as design concept
+was introduced in the \emph{Design Principles} document of the
+\emph{Good European/ EHR} (GEHR) project, which was later renamed into
+\emph{Open EHR} \cite{openehr}. Their website states: \textit{An archetype is a
+re-usable, formal model of a domain concept.} Archetypes adhere to ontological
+principles; they can be composed of other archetypes or atomic elements. Their
+use is not limited to EHR building, despite OpenEHR's focus on the medical
+domain.
+
+Comparing archetypes with terminologies, Beale \cite{openehrtechnical} writes
+that a terminology like for example SNOMED Clinical Terms (SNOMED CT) had the
+form of a semantic network, i.e. \ldots\ with an ontological flavour. However,
+because rigorous design principles were not always applied, they tended to be
+internally inconsistent and had a lot of pre-coordination in them, while what
+was really needed was a generative/ compositional terminology. Further, SNOMED
+could tell what the meanings of the parts of e.g. a complete blood count test
+are, but it were not going to provide a model of an actual blood test. This is
+where archetypes \ldots\ would come in; they were about information
+\emph{in use}, not definitions of reality (as terminologies). \ldots\ So --
+even if SNOMED was perfect, it wouldn't do everything. It were a knowledge
+support part of the environment, and it could be used to name things and
+perform inferencing (\textit{draw a conclusion/ deduction} \cite{websters}).
+
+An \emph{Archetype Definition Language} (ADL) \cite{adl} was created for the
+specification of archetypes. A corresponding ADL document has the following
+structure:
+
+\begin{scriptsize}
+    \begin{verbatim}
+    archetype_id = <"some.archetype.id">
+    adl_version = <"2.0">
+    is_controlled = <True>
+    parent_archetype_id = <"some.other.archetype.id">
+    concept = <[concept_code]>
+    original_language = <"lang">
+    translations = <
+    ...
+    >
+    description = <
+    ...
+    >
+    definition = <
+    cADL structural section
+    >
+    invariant = <
+    assertions
+    >
+    ontology = <
+    ...
+    >
+    revision_history = <
+    ...
+    >
+    \end{verbatim}
+\end{scriptsize}
+
+Many separate sections can be identified in this archetype structure, and
+various syntaxes are used for them. Table \ref{adl_table} gives an overview of
+the structural elements of an ADL archetype. In addition to the single
+sections, it mentions two further syntaxes, for templates and constraints on
+data instances.
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{footnotesize}
+        \begin{tabular}{| p{30mm} | p{30mm} | p{45mm} |}
+            \hline
+            \textbf{Element} & \textbf{Syntax} & \textbf{Purpose}\\
+            \hline
+            archetype structure & \emph{Archetype Definition Language} (ADL) & glue syntax\\
+            \hline
+            definition section & \emph{Constraint Form of ADL} (cADL) &
+                constraints definition\\
+            \hline
+            description, ontology and other sections & \emph{Data Definition Form of ADL} (dADL) &
+                data definition\\
+            \hline
+            template & \emph{Template Form of ADL} (tADL) &
+                formalism to compose archetypes into larger constraint structures, used in particular contexts at runtime\\
+            \hline
+            data instances & \emph{First Order Predicate Logic} (FOPL) &
+                constraints on data which are instances of some information model (e.g. expressed in UML)\\
+            \hline
+        \end{tabular}
+        \end{footnotesize}
+        \caption{Structural Elements of an ADL-defined Archetype \cite{adl}}
+        \label{adl_table}
+    \end{center}
+\end{table}
+
+Chapter \ref{cybernetics_oriented_language_heading} will define a new language
+that is based on just one syntax: the \emph{Extensible Markup Language} (XML)
+(section \ref{extensible_markup_language_heading}), an easy-to-grasp pure text
+format. Despite its limited vocabulary of just four tags and four attributes,
+that language may encode a rich set of knowledge constructs, including meta
+information and constraints.

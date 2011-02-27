@@ -1,0 +1,45 @@
+%
+% $RCSfile: user_interface_modelling.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{User Interface Modelling}
+\label{user_interface_modelling_heading}
+
+- GUIs bisher nie einheitlich beschrieben wie RDB mit ERM und DDL/SQL
+- jetzt erst erreichen GUIs mit der UIML den Stand von DDL/SQL
+- so wie RDBMS durch OODBMS ersetzt wurden und damit entfielen,
+OODBMS mit OO Domain Layer verschmolzen ist, kann evtl. auch das GUI
+mit der Domain verschmolzen werden! ==> NEIN! weil Domain Daten unterschiedlich
+im GUI dargestellt werden koennen (Edit, Liste, Tabelle, Tree) und Anwender
+verschiedene Wuensche und Anforderungen an das GUI haben, weswegen die Entwickler
+die GUIs flexibel erstellen und handhaben muessen, was nicht gegeben waere,
+wenn das GUI vom DomainModel fest vorgegeben waere
+
+Common libraries used for data display design are the \emph{GIMP Toolkit} (GTK)
+of the \emph{General (GNU) Image Manipulation Program} (GIMP) and the \emph{Qt Toolkit},
+both written in C++, as well as the \emph{Abstract Window Toolkit} (AWT)/ \emph{Swing}
+for Java.
+
+mention and shortly describe \emph{GUI Renderer} (section pattern_merger refers to here)
+
+\input{bean}
+\input{xml_user_interface_language}
+\input{user_interface_markup_language}

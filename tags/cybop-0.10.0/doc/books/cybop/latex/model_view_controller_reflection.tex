@@ -1,0 +1,56 @@
+%
+% $RCSfile: model_view_controller_reflection.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Model View Controller Reflection}
+\label{model_view_controller_reflection_heading}
+\index{Model View Controller Pattern}
+\index{MVC}
+\index{Frontend}
+\index{Graphical User Interface}
+\index{GUI}
+\index{Domain Model}
+\index{User Interface Model}
+\index{UI Model}
+
+After having had a closer look at two common software patterns for persistence
+and communication, this section finally considers the so-called \emph{Frontend}
+of an application, which is often realised in form of a
+\emph{Graphical User Interface} (GUI). Nowadays, the well-known
+\emph{Model View Controller} (MVC) pattern is used by a majority of standard
+applications. Its principle is to have the \emph{Model} holding domain data,
+the \emph{View} accessing and displaying these data and the \emph{Controller}
+providing the workflow of the application by handling any signals (events/
+actions) appearing on the view.
+
+Since the view serves as means of communication between a software system and
+its user (\emph{Human Being} as system), it is in fact just another kind of
+communication model that should be assembled by a special \emph{Translator}.
+Because there are many ways in which domain data can be displayed, different
+types of user interfaces exist (textual, graphical, web, vocal, Braille). Each
+of them has to have its very own translator that knows how to map data both
+ways, from the \emph{Domain} model to the \emph{User Interface} (UI) model and
+vice-versa.
+
+Signalling and related mechanisms, as well as hardware-driving functionality
+such as graphics adapter access belong into \emph{System Control} modules; UI
+translators, on the other hand, are application-specific models containing
+\emph{Logic Knowledge}.

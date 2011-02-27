@@ -1,0 +1,95 @@
+%
+% $RCSfile: terminology.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Terminology}
+\label{terminology_heading}
+\index{Terminology}
+\index{Lexicon}
+\index{Vocabulary}
+\index{Nomenclature}
+\index{Hierarchy}
+\index{Semantic Link}
+\index{Directed Acyclic Graph}
+\index{DAG}
+
+While a \emph{Lexicon} is a list of pure words, a \emph{Terminology} (sometimes
+called \emph{Vocabulary}) can also contain phrases. Because it is a fixed list
+of lots of terms, a terminology should exclude any link to a separate list of
+concepts. When a terminology contains additional instructions describing how to
+interpret each term, or dictating when to choose one over another
+(prioritisation), it may be called a \emph{Nomenclature}. The knowledge schema
+proposed in this work (chapter \ref{knowledge_schema_heading}) shall be capable
+of storing codes of various terminology systems.
+
+Lexicon and terminology stand for a \emph{Set} of words or terms, respectively.
+To bring some structure into such a set, terms or concepts need to be ordered,
+that is organised through a system of links, into a \emph{Hierarchy}, which
+Rogers \cite{rogers} defines as a:
+
+\begin{quote}
+    \ldots\ tree-like structure, where things at the top of the tree are in some
+    way more general or abstract than the things lower down. The nature of each
+    link between each level in the tree may be explicit or only implied, and
+    more than one flavour of semantic link can be used to build the tree (in
+    which case it may be called a \emph{Mixed Hierarchy}).
+\end{quote}
+
+Kinds of hierarchies, as means of organisation, are:
+
+\begin{itemize}
+    \item[-] \emph{Subsumption Hierarchy} (Classification, Taxonomy): only
+        \emph{is-a} relationships exist between parent-child pairs in the tree
+    \item[-] \emph{Uniaxial Hierarchy:} each concept only ever has one parent,
+        though it can have more than one child
+    \item[-] \emph{Multiaxial Hierachy:} each concept can have more than one
+        parent as well as more than one child
+    \item[-] \emph{Exhaustive Multiaxial Hierarchy:} all concepts have all the
+        parents as well as all the children they should have
+\end{itemize}
+
+As organisation \emph{Rules} count:
+
+\begin{itemize}
+    \item[-] \emph{Formalism}: an explicitly expressed set of rules, like the
+        specification for how to tell what should (not) be a parent of a concept
+    \item[-] \emph{Concept System} (Model): a system of \emph{Symbols} that
+        stand in for concepts and/ or the links between them, and which may or
+        may not be intended to be processed with reference to some formalism
+    \item[-] \emph{Partonomy} (Mereology): a system of concepts and links
+        intended to represent whole-part relationships specifically
+\end{itemize}
+
+On a yet higher abstract level, a \emph{Data Structure} may hold organisations
+of concepts. Various types of data structures are:
+
+\begin{itemize}
+    \item[-] \emph{Network}: a mesh-like structure that connects terms or concepts
+        using links; a hierarchy can be thought of as simple case of a network
+    \item[-] \emph{Graph}: a network
+    \item[-] \emph{Directed Graph}: a network in which each link has a \emph{Direction}
+    \item[-] \emph{Directed Acyclic Graph} (DAG): a directed graph free of loops
+\end{itemize}
+
+A knowledge template expressed in the language that will be defined in chapter
+\ref{cybernetics_oriented_language_heading} describes an uniaxial hierarchy,
+that is its sub concepts have just one parent node. Its structure follows the
+partonomy (mereology) organisation rules and represents a DAG.

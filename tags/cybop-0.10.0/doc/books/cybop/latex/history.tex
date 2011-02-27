@@ -1,0 +1,328 @@
+%
+% $RCSfile: history.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.3 $ $Date: 2009-02-07 00:39:21 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{History}
+\label{history_heading}
+
+For those who are interested in how I came to develop the concepts introduced
+in this book, I have created this small history of events and enlightening ideas.
+
+\begin{itemize}
+    \item[1986] Although having difficulties, my father manages to cross the
+        border to West-Germany by visiting some relatives. He also manages to
+        come back into the East :-) and a present I get is a brand-new
+        \emph{Commodore 64} home computer. I mostly play games on it but also
+        do my first steps in programming with \emph{BASIC}.
+    \item[1988] In the late days of East Germany, new computer subjects are
+        introduced at schools. So I take part in them and continue learning
+        \emph{BASIC} and some \emph{dBASE}.
+    \item[1990] At the \emph{Technical University of Ilmenau}, one of the first
+        subjects in my study is \emph{Algorithms and Programming} where we learn
+        structural programming in \emph{Turbo Pascal}.
+    \item[1993] During my year abroad at \emph{Sussex University} in Brighton,
+        England, I come in touch with the \emph{Internet} (email) and
+        \emph{UNIX machines}.
+    \item[1994] Back in Germany, I start \emph{administrating} the information
+        infrastructure in my parents' medical practice, learn about
+        \emph{Computer Hardware} and wonder about how doctors are cheated with
+        overpriced products and services.
+    \item[1995] In the German \emph{c't} computer magazine, I develop an
+        announcement of a new operating system called \emph{Linux}. I order and
+        install my first distribution, \emph{SuSE November 1995}.
+    \item[1995] We have a quite theoretical lecture on
+        \emph{Object Oriented Programming} in \emph{Smalltalk}. However, that
+        is the first time I hear about those (then still new) programming
+        concepts.
+    \item[1996] During my student's research project and diploma work, I
+        implement parts of a \emph{Neural Network} in \emph{Object Pascal}
+        (Delphi).
+    \item[1998] First steps in \emph{C++} at my first employer
+        \emph{HM Informatics}.
+    \item[1999] At \emph{OWiS Software}, I learn to change my thinking away
+        from only the source code -- towards the actual \emph{Concepts} and
+        \emph{Architecture} behind a software. I also learn how to use the
+        \emph{Unified Modeling Language} (UML).
+    \item[2000] Recognising the opening of the \emph{SourceForge} developer
+        portal in 1999, I set up the \emph{Res Medicinae} project in April 2000.
+        It aims at creating a \emph{Medical Software} for physicians.
+        Preparation, website, investigation on similar projects and so on take
+        months.
+    \item[2000] My \emph{Java} knowledge can be manifested at
+        \emph{Intershop Communications} where we are building solutions for
+        e-commerce (Web Client-Server Applications).
+    \item[2001] I visit my first \emph{Free and Open Source Software Developers'
+        Meeting} (FOSDEM) in Brussels, Belgium, where Richard M. Stallman of
+        the \emph{Free Software Foundation} (GNU project) holds a talk.
+    \item[2001] Returned to my former university, I start active coding on
+        \emph{Res Medicinae} in April 2001. It takes some time to handle the
+        \emph{Concurrent Versions System} (CVS).
+    \item[2001] Following the standard approach and several Java Tutorials,
+        my first application is nothing more than a \emph{main} method which
+        creates a Java Swing \emph{JFrame}.
+    \item[2001] Stepwise, I start moving out code into special classes, like
+        for example all \emph{GUI} code into a class \emph{Frame}.
+    \item[2001] Soon I loose overview and realise the need for some clearer
+        structure. I remember the \emph{Design Patterns} applied at my former
+        employers and start using the \emph{Model View Controller} (MVC) and
+        further patterns.
+    \item[2001] Since flexibility is one of the most important aims of my
+        efforts, I realise the shortcomings of \emph{MVC} and the
+        \emph{Observer} pattern (bidirectional dependencies), especially when
+        it comes to web applications. A good solution I find is the
+        \emph{Hierarchical Model View Controller} (HMVC) design pattern,
+        applied by the \emph{Scope} free software project.
+    \item[2002] My disposedness to style guides, clean and well-documented code
+        lets me structure and order every method and attribute and check them
+        all for \emph{NULL} pointer errors and other exceptions. I find out
+        that every attribute not only needs a \emph{set} and \emph{get} method,
+        but also a \emph{create} and \emph{destroy} method. Class names as type
+        information are handed over to the create method in form of a string.
+    \item[2002] Following the idea of \emph{create} and \emph{destroy} methods,
+        I come across the \emph{Component Lifecycle}, described by the
+        \emph{Apache-Jakarta} project. I change all code by applying
+        \emph{Lifecycle Methods}.
+    \item[2002] Having read the \emph{OpenEHR Design Document}, I know that
+        classes should be grouped in layers with clear dependencies, called an
+        \emph{Ontology}. Higher-layer objects consist of objects from lower-level
+        layers, but not the other way. I restructure my code by moving all
+        classes into new packages (directories), each representing an
+        \emph{Ontological Level}.
+    \item[2002] Apache's lifecycle \emph{Concerns} turn out to be useless. They
+        only break the ontology rack and violate its dependency rules by
+        connecting otherwise strictly separated system parts. Moreover, concerns
+        encourage the inheritance of redundant or overlapping properties. The
+        same counts for variations like \emph{Aspects} and \emph{Interfaces} in
+        general. I replace them all by pure \emph{Classes}, following the
+        ontology structure.
+    \item[2002] I begin to realise that not only \emph{View} (MVC) and
+        \emph{Controller} (HMVC) are \emph{hierarchical}, but also the
+        \emph{Model} (Knowledge/ Domain) is. In many days and weeks of intensive
+        thinking I find that -- as in Universe -- actually \emph{every} other
+        software component is hierarchical, too. Consequently, I introduce one
+        top-most super (meta) class \emph{Item} that represents a simple
+        \emph{Tree} (\emph{Map} container). Inheriting classes do not need to
+        implement \emph{create}, \emph{destroy}, \emph{set} or \emph{get}
+        methods any longer since they inherit them from \emph{Item}. This saves
+        me hundreds of lines of code, at once, and improves clearness a lot.
+\end{itemize}
+
+And this is my personal \textbf{Break-Through}. From now on, I first think
+about nature and its concepts and then implement software source code.
+Suddenly, everything seems easier, I have an \emph{Example}, a
+\emph{Way-to-go}: \emph{Nature}. There aren't less (rather more) tasks to solve
+now, but at least the direction is clear.
+
+\begin{itemize}
+    \item[2002] By applying the new concepts, one difference gets very clear:
+        \emph{System Control-} and \emph{Domain Model} code are both
+        hierarchical, but different ontologies need to be defined for them.
+        An \emph{active} system works on a \emph{passive} model, that is it
+        depends on it. While a system provides the means for \emph{input} and
+        \emph{output} and \emph{controls} the \emph{Action} (\emph{Workflow}),
+        a model just represents domain data. Searching for parallels in nature,
+        I find that \emph{Human Body} and \emph{Human Brain} correspond to
+        \emph{System} and \emph{Model}. What humans (possibly unconsciously)
+        want to do is to imitate themselves, with robots as with computers as
+        with other machines, tools or abstractions.
+    \item[2002] The overall structure of the \emph{Framework} seems clear now.
+        There will be three major parts, \emph{Basic}, \emph{Model} and
+        \emph{System}. \emph{Model} and \emph{System} both depend on the
+        fundamental abstractions of the \emph{Basic} package which encapsulates
+        programming language types. In addition, \emph{System} depends on
+        \emph{Model}.
+    \item[2003] Encountering difficulties in synchronising \emph{Frontend} and
+        \emph{Backend}, I come to the conclusion that they are actually the
+        same, passive data models that have to be translated into each other.
+        It is not necessary -- even badly wrong -- to apply different design
+        patterns for their implementation. I change inheritances and
+        dependencies of many of my framework classes so that finally
+        \emph{Knowledge-}/ \emph{Domain-}, \emph{Backend-}, \emph{Communication-}
+        and \emph{Frontend} models are of the same super type. This decision
+        opens unforeseen new possibilities. All kinds of frontends, all
+        communication and backend mechanisms can now be implemented
+        \emph{modular} and \emph{flexible}.
+    \item[2003] Java's event handling using \emph{ActionListener} interfaces
+        ignores the dependencies between ontological layers and is thus improper
+        (just like the concern interfaces mentioned above). I implement a new
+        \emph{Signal Handling} mechanism which is oriented on parts of a
+        sentence in human language like \emph{Subject}, \emph{Predicate},
+        \emph{Object}.
+    \item[2003] I realise how far I have moved away from my original aim of
+        writing a small medical application. While implementing the new signal
+        handling mechanism it gets clear that I move more and more towards the
+        operating system and its hardware input/ output handling code which
+        scares me a bit. But there seems to be no other way to go when aiming
+        at the creation of clear, easy, modular, flexible, correct systems.
+    \item[2003] \emph{Exceptions} are system-internal \emph{Signals}. It is not
+        necessary to use an extra signalling mechanism for exception handling.
+        And it is dangerous for security if an instance knows about its parent
+        to bubble up an exception. For now, I remove all exceptions besides the
+        standard one, which again saves me many lines of unnecessary code.
+    \item[2003] An abstract model has multiple properties. Not only it keeps
+        references to its parts (attributes) and procedures (methods), but also
+        it knows about the \emph{Model} and \emph{Position} (and possibly more
+        \emph{Meta} properties) of each part.
+    \item[2003] After difficulties with the item meta model, I realise that I
+        actually want to replace the standard \emph{Class Concept} offered by
+        Java and other Object Oriented languages. It takes me some weeks of
+        thinking to find the reason and way out: Traditional programming mixes
+        \emph{Knowledge} with the \emph{Handling} of its instances. Both need
+        to be separated. I move most classes to XML-based \emph{Model} files and
+        call their specification \emph{Cybernetics Oriented Language} (CYBOL).
+\end{itemize}
+
+Here begins a \emph{New Era}. From now on, business domain \emph{Knowledge}
+and hardware-close \emph{System Control} code are stored separately and treated
+differently. The concepts to store \emph{static} knowledge are very different
+from those that are used to \emph{dynamically} control a system's hardware.
+
+\begin{itemize}
+    \item[2003] Later comparisons with biology support my theory. The genetic
+        information is static knowledge that gets forwarded from one cell to
+        another, during \emph{Cell Separation}. The dynamic processing of that
+        knowledge, that is the creation and functioning of organelles is a
+        completely different issue. In a similar manner, application knowledge
+        has to become transportable between different platforms and absolutely
+        independent from hardware.
+    \item[2003] Since the time when I first experimented with lifecycle methods
+        \`a la \emph{Apache Jakarta}, I had used a \emph{configure} method in
+        my code which could read external configuration files and configure
+        internal items accordingly. Nothing different was needed to read CYBOL
+        files. They represented the whole application configuration knowledge
+        and only had to be interpreted correctly. The remaining Java code
+        therefore not only had to contain system control functionality, but
+        also had to be able to read and write knowledge in form of CYBOL files.
+        For that reason, it was called \emph{Cybernetics Oriented Interpreter}
+        (CYBOI).
+    \item[2003] In search for new concepts and ideas, I also read about a
+        number of philosophical theories from Aristotle, Leibnitz and others
+        and can identify a mistake in my thinking: the important separation is
+        not between \emph{Body} and \emph{Brain} as presumed before, it is
+        between \emph{Body/Brain} and \emph{Mind}! \emph{Neural Networks} try
+        to imitate the functioning of the physical brain, but what I wanted to
+        do is to imitate concepts of the logical mind, of human thinking.
+    \item[2003] Reading a magazine about psychology and neurology, I come to
+        reflect the principles of \emph{Human Thinking}. I see parallels to
+        basic concepts of software modelling and try to connect them. As result,
+        I can identify three fundamental kinds of abstraction that our brain
+        uses to understand its real-world environment: \emph{Discrimination},
+        \emph{Categorisation} and \emph{Composition}. Software developers apply
+        these concepts all the time.
+    \item[2003] From previous reflections I recall that a \emph{Whole} item
+        knows about the properties of its \emph{Part} items. I try to identify
+        such meta properties, read about \emph{Shape}, \emph{Depth},
+        \emph{Movement} as well as \emph{Colour} in my Psychology literature
+        and finally stumble about \emph{Dimensions} as known from physics. The
+        position and extension that part items span up within their whole item
+        do not only exist in \emph{Space} and \emph{Time}, but possibly also in
+        other kinds of dimensions like \emph{Mass} or \emph{Force}.
+    \item[2003] Since CYBOL contains all concepts that are necessary to model
+        knowledge, including \emph{Categorisation} (inheritance), a CYBOI written
+        in \emph{Java} causes unnecessary overhead. The interpreter's main tasks
+        (input/ output- and memory handling as well as processing instructions)
+        are anyway situated close to hardware so that I start to reimplement
+        CYBOI in the \emph{C} programming language.
+    \item[2004] An open problem that had caused me many headaches was the
+        handling of instructions. I remember the unification of communication
+        models which represented \emph{States} that could be transformed into
+        each other by help of \emph{Translators}. Journeys into
+        \emph{Systems Theory} and a consideration of the \emph{Black Box}
+        concept show the solution: \emph{State} and \emph{Logic} knowledge need
+        to be separated! The logic contains the rules (algorithms, operations)
+        after which an input state is translated into an output state. It takes
+        considerable thinking to figure out a common CYBOL structure capable of
+        representing states as well as logic.
+    \item[2004] The early CYBOL definition turns out to be insufficient. In hot
+        but constructive discussions with Rolf Holzmueller, one of my students,
+        the reason gets clearer and clearer to me: CYBOL must consider \emph{two}
+        different hierarchies in just \emph{one} model. One \emph{Model Hierarchy}
+        represents the compound model as such. A second \emph{Meta Hierarchy}
+        holds meta information that a \emph{Whole} knows about its \emph{Parts}.
+        The old CYBOL tried to put everything into XML attributes. The new CYBOL
+        uses XML attributes to link to parts and XML tags to model meta
+        information such as \emph{Properties} and \emph{Constraints}.
+    \item[2004] A lot of time goes into the implementation of CYBOI. Techniques
+        that have to be considered are, among others: signalling, threads,
+        UNIX and TCP/IP sockets.
+    \item[2005] While implementing a CYBOL prototype application, standard
+        programming constructs such as for \emph{Branching} and \emph{Looping}
+        are badly missing. It takes some reflexion to decompose these into
+        their actual elements and to provide the corresponding CYBOL operations
+        by using simple flags.
+    \item[2005] A further problem is the automatic indexing of \emph{Parts}
+        belonging to a common list within a \emph{Whole} model, for which a
+        special \emph{Name Structure} has to be defined and additional CYBOI
+        routines have to be written.
+    \item[2005] It turns out to be problematic to use existing
+        \emph{Graphical User Interface} (GUI) frameworks for input/ output
+        (i/o). Many of them base on OOP principles; all require the adoption of
+        special structures. Since the first version of CYBOI is developed under
+        the \emph{Linux} \emph{Operating System} (OS), low-level
+        \emph{X Window System Libraries} (Xlibs) functions are used instead of
+        a toolkit.
+    \item[2005] The reception of signals (input) is moved into special threads,
+        one for graphical-, one for textual user interfaces, one for sockets
+        etc. But how can CYBOI handle these signals, if it has no application
+        knowledge? The solution is to, as property of the \emph{receive}
+        operation, hand over a node of the knowledge tree containing possible
+        commands to react to, which are mapped to their corresponding handler
+        operations, in CYBOL.
+    \item[2005] The CYBOP theory is handed in as dissertation thesis.
+\end{itemize}
+
+The \emph{Theoretical Basis} seems pretty clear now. Future work will focus
+on the architecture and implementation of the \emph{CYBOI Interpreter}.
+
+\begin{itemize}
+    \item[2006] Within two months of being unemployed, I review the CYBOI
+        implementation of input/ output (i/o) threads, and can correct open
+        conflicts by using \emph{Mutual Exclusion} (Mutex) flags.
+        Also, \emph{Central Processing Unit} (CPU) busy states are now avoided.
+    \item[2006] Branches of the runtime knowledge tree are pointed to in CYBOL
+        by dot-separated names. Since sometimes, it is necessary to address meta
+        information (such as the colour of a menu item) directly, the knowledge
+        path gets extended by a second separation character, which allows to
+        distinguish between whole-part and meta elements.
+    \item[2007] The CYBOP theory is published in form of a book.
+    \item[2008] One mistake leading to conflicts with CYBOI memory handling was
+        that too much functionality had been put into the thread functions,
+        e.g. the handling of a signal, reception and conversion of data.
+        All that is now done in the main thread instead. What remains for the
+        input/ output threads is just the setting of an interrupt flag in a
+        "sense" function, whenever data arrive.
+    \item[2008] All CYBOI source code gets adapted to using wide characters/ Unicode.
+    \item[2008] CYBOL abstraction constants now follow the MIME type schema.
+        All constants, no matter for which kind of model or format,
+        get categorised into "abstraction", "channel", "model", "name".
+        This was not easy to figure out, since at the beginning,
+        it was not obvious to me that all kinds of formats (xdt, html etc.)
+        and even composed primitive structures (fraction, complex etc.):
+        use some kind of name/ index/ key/ identification to identify the parts;
+        know about the abstraction/ type of their parts (even a file system knows
+        about whether it deals with a directory or file, and which kind of file);
+        contain the actual model/ data/ value.
+    \item[20xx] Open issues yet to be implemented are, for example:
+        compiling CYBOI under \emph{Windows} OS and making use of their GUI
+        functionality; improving the GUI layout and providing a GUI theme
+        infrastructure; specifying serialisation in more detail.
+        For further tasks, see section \ref{call_for_developers_heading}!
+\end{itemize}

@@ -1,0 +1,174 @@
+%
+% $RCSfile: workflow.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Workflow}
+\label{workflow_heading}
+
+\input{pipeline_and_pipelet}
+\input{open_infrastructure_for_outcomes}
+many UNIX commands which are connected by many pipes and such form a pipeline
+
+http://openflow.sourceforge.net/index.html
+"Welcome to the home page of the OpenFlow Project. OpenFlow aims to
+build a workflow and document flow management system for the Italian
+Public Administration."
+They don't seem to have any code available yet and some of the dates
+stem from 1993!
+
+wftk: Open-source workflow toolkit http://www.vivtek.com/wftk/
+this work was paid for via collabnet.  This is a C implementation.
+
+Micro-Workflow: http://micro-workflow.com/Research/  Started off as an
+academic project, the example on this page is medically oriented.  Open
+source might be coming however as the author states: "My plan is to give
+out the framework under the terms of the GNU General Public License.
+Currently I am working on cleaning up the code. As soon as I'm through I
+will make it available from these Web pages."
+
+I can't really verify this, but at one time I read the the OMG jFlow
+workflow service was being added to  the open source real-time ORB
+project TAO here:
+http://www.cs.wustl.edu/~schmidt/TAO-status.html
+
+DSTC's Elvin project: http://elvin.dstc.edu.au/intro/overview.html
+While described as \textit{a content-based routing service}, there are workflow
+aspects to this software.  I would think that content-based routing
+would be very interesting to medical software folks.  My plan is to
+start experimenting with Elvin after our content managment system comes
+on-line (the RFP mentioned above).
+
+Bud P. Bruegger \cite{openoutcomesgeneral}
+Thanks for the pointer to the overview paper on PROforma--definitely the
+best of all I've seen.
+
+At 01:24 PM 14-03-01 -0800, Andrew po-jung Ho wrote:
+>In summary, PROforma looks promising and not overly complex. It could be a
+>good standard for Openflow and OIO to consider adopting. Since I don't
+>have much experience with workflow systems, I look forward to you, Paolo,
+>and other list member's guidance.
+
+In the following are some thoughts on PROforma and workflow models in
+general.  They are based on a still incomplete understanding of the
+situation, but maybe it can help bring the discussion further.
+
+It seems to me that PROforma is highly specialized and far from a general
+purpose workflow model.  Also, apart from workflow, it deals a lot with
+decision support.  Something that general purpose workflow systems usually
+have but that I didn't find in PROforma (did I miss it?) is a description
+of how work flows withing a group of people.  A typical example in an
+administrative organisation would be a document/application/etc. to flow
+between people of different roles, each of whom add their contribution...
+
+PROforma seems so specialized to clinical decision support that I wonder
+whether it would be applicable as a workflow component in a LIMS.
+
+So what workflow model/component to use???  A difficult question.  I looked
+around quite a bit so far and haven't found a single thing that convinces
+me all the way (obviously for my purposes).
+
+On the standard side, I'm not convinced that the WfMC or OMG standards are
+really the way to go  (look at the critique by the former IETF SWAP leader
+that I sent you earlier--I don't think these things have really been
+addressed by WfMG's new wf-XML that does not seem to break with the
+problematic reference model).
+
+I spent quite some time reading agent-technology workflow papers and non of
+these people seems to even look at the WfMG standards.  It seems they use
+petri-nets and similar as models and some use some other process
+description standards (that probably are mostly relevant to manufacturing).
+
+So unless there is a strong need for interoperation with a WfMG standard
+complient external workflow system, I'm not sure wether it's worth the
+effort of adding the effort and complexity that comes with the standard.
+
+Other features that are not standardised seem much more important to
+me.  For example, the possibility to negotiate as it is typical for
+agent-based approaches. (As mentioned in section 8.2 of
+http://www.acl.icnet.uk/PUBLICATIONS/ms364.pdf that you pointed
+out).  Also, a peer-to-peer architecture that allows collaboration and
+scalability way beyond the boundaries of a singe administrative
+control.  Such features seems to be almost incompatible with the current
+standards.
+
+Going to actually available systems, my impression is that there are
+roughly three categories of systems that call themselves "workflow" systems:
+
+1. Task-Management systems such as those used in Ticket tracking and
+help-desk systems.  Their basic entity is a task.  The notion of "flow"
+comes in through the possibility of defining task dependencies.  But this
+is very cumbersome and way too limited for many kinds of workflow needs.
+
+Typically, these systems assign human resources to tasks (who is
+responsible for execution, who created the task), but lack any notion of
+other resources, such as for example documents that "flow" around in the
+work process.  (To be fair, some deal with descriptions of the task coming
+via e-mail etc.--but that's very specialized and not general at all).
+
+2. Workflow systems that model an actual flow of tasks by connecting tasks
+in some kind of a graph.  Most serious workflow systems and the WfMG model
+fall into this category.
+
+There is probably a major difference of how systems deal with resources
+that are relevant to work processes.  All systems probably model human
+resources.  Most systems (but not all) allow you that tasks reference their
+input and output resources.  IMO, the mechanism of referencing resources
+from task makes it difficult to understand the flow of resources
+(documents, data) in the workflow.  I personally believe that models that
+emphasise tasks at the cost of resources can be rather limited in some
+kinds of workflow applications (such as LIMS) where resources (eg. samples
+and specimen in a LIMS) are first class citizens.
+
+3. There seems to be a few workflow systems that model workflow as complete
+graphs and also treat resources as first class citizens.  This was my naive
+idea (before I looked into workflow systems in more detail) of a workflow
+component for a LIMS (see
+http://www.sistema.it/labinfo/single.html#Relationships between Entities)
+but also seems to be used by systems such as PIPER
+(http://bioinformatics.org/piper/) and Khoros
+(http://www.khoral.com/ideas/technology/cantata.pdf).
+
+Piper actually looks VERY interesting but it seems too early to be used
+(still alpha).  Interesting that Piper does not seem to bother about any
+workflow standard.  I suppose that treating resources as first-class
+citizens may be incompatible with the WfMG approach.  (Interesting for the
+OIO folks is that the upper layers of Piper are written in Python).
+
+Another product that may be able to manage workflows is the Narval software
+agent (http://www.logilab.org/narval/).  <quote>Narval is the acronym of
+"Network Assistant Reasoning with a Validating Agent Language". It is a
+personal network assistant based on artificial intelligence and agent
+technologies. It executes recipes (sequences of actions) to perform tasks.
+It is easy to specify a new action using XML and to implement it using
+Python. Recipes can be built and debugged using a graphical
+interface.  </quote>
+
+It has been used to automate some special workflows (eg the translation of
+Linux Gazette to French
+http://www.linuxgazette.com/issue59/chauvat.html).  It is written in Python
+and seems to be quite user-friendly and easy to program  (as compared to
+some Java agent systems).  I think it may be worth while to look into
+Narval (and a different paradigm of thinking) to see how that would be
+applicable to workflow in healthcare applications.  My gutt feeling is
+quite positive...
+
+Workflow
+http://sourceforge.net/projects/tikiwiki/

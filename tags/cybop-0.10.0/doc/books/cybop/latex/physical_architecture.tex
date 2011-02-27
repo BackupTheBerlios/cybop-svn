@@ -1,0 +1,82 @@
+%
+% $RCSfile: physical_architecture.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\chapter{Physical Architecture}
+\label{physical_architecture_heading}
+\index{Physical Architecture}
+\index{Communication}
+\index{Autonomous Systems}
+\index{Interaction and Cooperation}
+\index{Technical Systems}
+\index{Computer}
+\index{Client}
+\index{Server}
+\index{Communication Partners}
+\index{System Constellations}
+\index{Communication Languages}
+\index{Information Technology Environment}
+\index{IT}
+
+\begin{flushright}
+    \textsl{Simplicity is the Result of Maturity.}\\
+    \textsc{Johann Christoph Friedrich von Schiller}
+\end{flushright}
+
+Software provides the functionality through which robots act and computers
+represent and process information. Both are special kinds of machines which only
+get useful for humans if they can be controlled and communicated with.
+\emph{Communication} is an essential ability for almost any kind of system.
+\emph{Autonomous} systems exist and may well be useful, but is it nearly always
+the \emph{Interaction} and \emph{Cooperation} that makes technical systems (from
+now on called \emph{Computer} in this work) so interesting and helpful to humans.
+
+In many cases, systems are limited to one role: \emph{Client} or \emph{Server}.
+Clients ask questions which servers answer. But both are able to send as well
+as to receive information. One-way communication without any feedback is rarely
+useful. Besides the mentioned client- and server-, there are other roles that a
+computer system can take on when talking with so-called
+\emph{Communication Partners}.
+
+The following sections will stepwise build up- and briefly investigate some
+examples of well-known system constellations and possible communication
+languages that are commonly used in a general \emph{Information Technology}
+(IT) environment. Because physical systems and their interactions are
+considered without any knowledge about their inside, one also talks of this as
+the \emph{Physical Architecture} of an IT environment. Its understanding is
+important for later reflections on the inner architecture of software systems
+(chapter \ref{logical_architecture_heading}). Also will chapter
+\ref{state_and_logic_heading} come back to system communication principles and
+introduce a translator architecture for universal communication.
+
+\input{process}
+\input{application_server}
+\input{database_server}
+\input{presentation_client}
+\input{web_client_and_server}
+\input{local_process}
+\input{human_user}
+\input{peer_node}
+\input{remote_server}
+\input{legacy_host}
+\input{systems_interconnection}
+\input{scalability}
+\input{misleading_tiers}

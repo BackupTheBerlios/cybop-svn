@@ -1,0 +1,53 @@
+%
+% $RCSfile: corrected_c.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Corrected C}
+\label{corrected_c_heading}
+\index{C Programming Language Correction}
+\index{Array with Meta Information}
+\index{Termination Character-less Arrays}
+
+Moreover, there is at least one incorrect implementation solution used in the C
+standard libraries (\emph{libc}) and various traditional systems. Arrays are
+all too often forwarded without necessary meta information like their
+\emph{size} and \emph{count} of elements. But a pointer without additional
+information about the size of the memory area (array) it points to is really
+worthless. The introduction of \emph{Types} with defined size makes array
+\emph{elements} countable, but does not solve the array size problem. A special
+workaround, to what concerns \emph{string} arrays at least, was therefore
+thought out. It requires that a null character ('$\backslash$0') be added as
+termination to every character array which is to be interpreted as string.
+
+But this is not a clean solution. For large systems, it pollutes a computer's
+memory with thousands and thousands of termination suffixes, to compensate for
+the missing size information. Recalling a recommendation on knowledge modelling
+given in chapter \ref{knowledge_schema_heading}, meta information is that
+\emph{about} other information (like an array) and should thus \emph{not} be
+stored inside, but \emph{outside} the same (array). A further implementation
+guideline made out and considered in CYBOI, is therefore:
+
+\begin{itemize}
+    \item[-] Use (character) arrays only together with their \emph{size} and
+        \emph{count} of elements, not as \emph{null-terminated} strings! (Array
+        references accompanied by necessary meta information make termination
+        characters superfluous.)
+\end{itemize}

@@ -1,0 +1,47 @@
+<model>
+    <part name="heading" channel="inline" abstraction="text/plain" model="HTTP Example Application">
+        <property name="tag" channel="inline" abstraction="text/plain" model="h1"/>
+        <property name="align" channel="inline" abstraction="text/plain" model="center"/>
+    </part>
+    <part name="heading_break" channel="inline" abstraction="text/plain" model="">
+        <property name="tag" channel="inline" abstraction="text/plain" model="br"/>
+    </part>
+    <part name="patient_list_link" channel="inline" abstraction="text/plain" model="Do Something">
+        <property name="tag" channel="inline" abstraction="text/plain" model="a"/>
+        <property name="href" channel="inline" abstraction="text/plain" model="http://localhost:1971/?action=do_something"/>
+    </part>
+    <part name="patient_list_link_line_break" channel="inline" abstraction="text/plain" model="">
+        <property name="tag" channel="inline" abstraction="text/plain" model="br"/>
+    </part>
+    <part name="shutdown_link" channel="inline" abstraction="text/plain" model="Shutdown System">
+        <property name="tag" channel="inline" abstraction="text/plain" model="a"/>
+        <property name="href" channel="inline" abstraction="text/plain" model="http://localhost:1971/?action=shutdown"/>
+    </part>
+</model>
+
+<!--
+    Copyright (C) 1999-2011. Christian Heller.
+
+    This file is part of the Res Medicinae medical software.
+    It represents a knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    Res Medicinae is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Res Medicinae is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Res Medicinae.  If not, see <http://www.gnu.org/licenses/>.
+
+    Res Medicinae <http://www.resmedicinae.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: body.cybol,v $ $Revision: 1.4 $ $Date: 2009-02-07 00:42:59 $ $Author: chrissy $
+    @author Christian Heller <christian.heller@tuxtax.de>
+-->

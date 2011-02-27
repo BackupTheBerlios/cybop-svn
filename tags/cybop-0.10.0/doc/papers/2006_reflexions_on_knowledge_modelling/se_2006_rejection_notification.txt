@@ -1,0 +1,142 @@
+--- Ursprüngliche Nachricht --- 
+Datum: 15.12.2005 19:17
+Von: Matthias Book <book@ebus.informatik.uni-leipzig.de>
+An: Christian Heller <christian.heller@tuxtax.de>
+Betreff: SE 2006: Notification
+
+> Dear Christian,
+> 
+> Thank you for your submission to Software Engineering 2006. We
+> regret to inform you that your paper "Reflexions on Knowledge
+> Modelling" (C8) has not been accepted for publication.
+> 
+> All papers went through a rigorous reviewing process. Below you will
+> find the reviewers' comments on your paper. We hope that you find
+> them helpful, and encourage you to submit to this conference series
+> again in the future.
+> 
+> We anticipate a very interesting and varied programme for Software
+> Engineering 2006 and hope that you will join us in Leipzig in March.
+> 
+> With best regards,
+> 
+> Matthias
+> 
+> =====================================
+> Review Comment for the Paper's Author:
+> The paper attempts to give an overview of the underlying ideas
+> of Cybop.
+> 
+> However, in this form several basic things should be improved:
+> 
+> - What is the research question? Claiming to collect ideas
+> from several disciplines is not sufficient enough as scientific
+> question. It seems clear that Cybop attempts to give the
+> progrrammer domain-specific concepts in which she can think,
+> express herself, design and program. However, domain-specific
+> languages (DSL) is a well-elaborated field of research, which
+> however, is not cited.
+> 
+> - how do you evaluate the research question? Arguing that
+> XML, because it is a language specification language, based
+> on contextfree grammars, demonstrates that the hierarchy principle
+> of Cybop is excellent, is an argumentation loop. Please, think
+> about a better evaluation here.
+> 
+> - In deed, representing knowledge in a compiler or a program
+> and deriving code from it is meta-programming. There are several
+> forms which is not compared to: static metaprogramming (Chiba
+> OpenC++),
+> staged metaprogramming (Sheard MetaML), meta-object protocols
+> (Kiczales).
+> 
+> - the concept of hierarchic structure stems from Simon's "the
+> Science
+> of the Artificial", but is not correctly cited. I also believe that
+> Simon does not want to say that everything has to be in hierarchic
+> form (as I have understood from Cybop), so why is this really
+> necessary?
+> 
+> - the concept of a double hierarchy is not clear from the text.
+> In Fig. 9, what is metainformation, what is information? Attributes
+> in C# or Java 1.5 clearly contain metainformation, XML is for
+> metainformation (because it is a markup language). So, how
+> does your approach compare to these?
+> 
+> - In the abstract, it is stated that "it solves many
+> of the problems existing in classical programming paradigms."
+> If an article starts with such a claim, I would expect that some
+> classical problems are presented and solved. The ones which are
+> presented are not solved.
+> 
+> =====================================
+> Review Comment for the Paper's Author:
+> Der Titel ist falsch es geht hier nicht um Wissensmodellierung
+> sondern um deren Anwendung im Software-Engineering. Die
+> Fragestellung ist sehr spannend, allerdings sollte statt zu
+> (über)generalisieren mehr domänenspezifisch diskutiert werden. Es
+> fehlt eine Auseinandersetzung mit lightweight und heavyweight
+> Ansätzen im Software-Engineering. Diskussionen wie um Abbildung 4
+> sind unnötig.
+> 
+> =====================================
+> Review Comment for the Paper's Author:
+> First of all, the terminology used in this paper is rather
+> confusing. Some established terms like "meta information" (ch. 1.3,
+> 4.2.1) are used in a rather unorthodox way (a property like the
+> colour of an object is NOT meta information, but information).
+> Other, "new" terms like static knowledge, state and logic knowledge
+> are not explained really well and not related to established terms
+> like structural/behavioral model or model/instance levels.
+> 
+> Secondly, the problem analysis seems wrong or at least unclear in a
+> lot of details:
+> 
+> - 1.2 Misleading Tiers: The "problems" outlined in the 3-tier and
+> DMBS example don't appear problematic to us either conceptually or
+> for implementation. The concluding step from "differences in
+> [special] design solutions" to "inter-dependencies" remains
+> unmotivated and unclear, as does the solution you propose to this
+> problem.
+> 
+> - 1.3 Modelling Mistakes and 2 Architectural Troubles: It is
+> incorrect that OO does not consider composition. While the
+> implementation remains the responsibility of the programmer in most
+> languages, OO has the concept of aggregation to model whole-part
+> relationships. Thus the problem of properties expressing "has-a" vs.
+> "is-of" relationships and the double hierarchy of ch.4.2.2 seems
+> irrelevant.
+> 
+> - 4.1 Statics & Dynamics: The described "Mixup of responsibilities"
+> is not (as it appears to be presented) an inherent problem of the
+> modelling method but a matter of bad design. It doesn't become
+> clear, how your solution averts this or similar kinds of bad design.
+> Furthermore, viewing the UI as part of the domain model instead of
+> the application seems rather unorthodox and requires at least some
+> motivation.
+> 
+> - 4.3 State and Logic: The motivation why bundling of attributes and
+> methods leads to unwanted dependencies is not motivated and again
+> doesn't seem to be an inherent OO problem, rather than bad design,
+> should it occur as a problem at all.
+> 
+> Third, you fail to compare your work to other work that appears to
+> solve the same problem (or at least parts of it):
+> 
+> The separation of dynamic behaviour (Logic) and static structure
+> (statics/state knowledge?) can be well expressed in the UML (class
+> diagrams vs. state charts/activity diagrams).
+> 
+> And closing the gap from architectural models to implementation is
+> also the topic of the MDD approach, which is still a "hot topic" in
+> software engineering. Therefore a comparison between your approach
+> and MDD would seem necessary.
+> 
+> Last but not least it remains largely unclear to us how your
+> proposed programming philosophy can close that gap and solve many of
+> the problems outlined by you. The "Hello world" program doesn't make
+> it clear at all how a system model would look like in practice with
+> your approach (and looks rather confusing for a simple hello world).
+> 
+> =====================================
+> 

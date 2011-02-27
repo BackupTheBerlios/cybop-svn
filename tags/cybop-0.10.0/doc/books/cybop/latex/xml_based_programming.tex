@@ -1,0 +1,80 @@
+%
+% $RCSfile: xml_based_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{XML Based Programming}
+\label{xml_based_programming_heading}
+
+\input{user_interface_modelling}
+\input{workflow}
+
+- in Microsoft Windows "Longhorn": Win-FX XAML (YAML??)
+http://www.ondotnet.com/pub/a/dotnet/2004/01/19/longhorn.html
+http://www.codeproject.com/csharp/treemaps.asp
+\cite{xaml}
+http://www.xaml.net/
+
+- ebXML (with OWL support??, by Sun Microsystems)
+- W3C XForms
+
+Extensible Programming for the 21st Century/ XML Based Programming \cite{wilson}:
+- suggests to put an additional layer of abstraction (in XML) on top of current
+programming languages
+- programmers would be able to customise their "views" of software without
+modifying the underlying model
+
+"We believe that next-generation programming systems will store source code as XML,
+rather than as flat text. Programmers will not see or edit XML tags; instead, their
+editors will render these models to create human-friendly views, just as web browsers
+render HTML. For example, a program might be stored on disk like this:"
+
+<doc>Only replace below threshold</doc>
+<cond>
+  <test>
+    <compare-expr operator="less">
+      <field-expr field="age"><evaluate>record</evaluate></field-expr>
+      <evaluate>threshold</evaluate>
+    </compare-expr>
+  </test>
+  <body>
+    <invoke-expr method="release"><evaluate>record</evaluate></invoke-expr>
+  </body>
+</cond>
+
+- would be viewed and edited like this:
+
+// Only replace below threshold
+if (record.age < threshold) {
+    record.release();
+}
+
+or:
+
+if (record.age < threshold)    /* Only replace below threshold */
+{
+        record.release();
+}
+
+or even this (Scheme language):
+
+;;; Only replace below threshold
+(if (< (record 'age) threshold)
+    (record 'release))

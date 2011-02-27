@@ -1,0 +1,176 @@
+From SCI04.System@iiis.org Sun Feb 22 00:24:45 2004
+Return-Path: <SCI04.System@iiis.org>
+Received: from rudy.rz.tu-ilmenau.de (rudy.rz.tu-ilmenau.de [141.24.4.15])
+	by ernie.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id i1LNP1xh029967
+	for hidden; Sun, 22 Feb 2004 00:25:01 +0100 (MET)
+Received: from elmo.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by rudy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id i1LNJP7P012175
+	for <ai008@ernie.rz.tu-ilmenau.de>; Sun, 22 Feb 2004 00:19:25 +0100 (MET)
+Received: from localhost (localhost [127.0.0.1])
+	by elmo.rz.tu-ilmenau.de (8.12.9/8.12.9/Debian-5) with ESMTP id i1LN9vAp013454
+	for <ai008@ernie.rz.tu-ilmenau.de>; Sun, 22 Feb 2004 00:09:57 +0100
+Received: from elmo.rz.tu-ilmenau.de ([127.0.0.1])
+	by localhost (elmo [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 13295-06 for <ai008@ernie.rz.tu-ilmenau.de>;
+	Sun, 22 Feb 2004 00:09:55 +0100 (CET)
+Received: from piggy.rz.tu-ilmenau.de (piggy.rz.tu-ilmenau.de [141.24.4.8])
+	by elmo.rz.tu-ilmenau.de (8.12.9/8.12.9/Debian-5) with ESMTP id i1LN9p3j013436
+	for <ai008@ernie.rz.tu-ilmenau.de>; Sun, 22 Feb 2004 00:09:51 +0100
+Received: from rs25s9.datacenter.cha.cantv.net (rs25s9.datacenter.cha.cantv.net [200.44.33.10])
+	by piggy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id i1LNOmCb028409
+	for finalrecipients; Sun, 22 Feb 2004 00:24:48 +0100 (MET)
+Received: from hppav (hat-01-057.ccs.ras.cantv.net [200.44.87.57])
+	by rs25s9.datacenter.cha.cantv.net (8.12.9/8.12.6/3.0) with SMTP id i1LNGa9t025152
+	for <christian.heller@tu-ilmenau.de>; Sat, 21 Feb 2004 19:24:45 -0400
+Date: Sat, 21 Feb 2004 19:24:45 -0400
+X-Matched-Lists: []
+Message-ID: <044d01c3f8d2$dd3710e0$39572cc8@hppav>
+From: "SCI 2004 System" <SCI04.System@iiis.org>
+To: <christian.heller@tu-ilmenau.de>
+Subject: SCI 2004 Paper Acceptance
+MIME-Version: 1.0
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook Express 5.50.4133.2400
+X-MimeOLE: Produced By Microsoft MimeOLE V5.50.4133.2400
+Status: RO
+X-Status: O
+X-KMail-EncryptionState: N
+X-KMail-SignatureState: N
+
+  *** PLEASE DO NOT REPLY TO THIS E-MAIL ADDRESS ***
+This is a system e-mail account. So, this mailbox is not monitored for =
+responses. Mail sent to this address cannot be answered.
+
+
+Dear Christian HELLER,
+
+On behalf of the Organizing Committee, I am glad to inform you that your =
+paper entitled: "Cybernetics Oriented Language (CYBOL)", has been =
+accepted for presentation at the 8th World Multiconference on Systemics, =
+Cybernetics and Informatics (SCI 2004) to be held in Orlando, USA, in =
+July 18-21, 2004. We will inform you about the conference program, =
+including your presentation, when the timetable is finalized.
+
+You can download the authors' kit (PDF format) from the conference web =
+site (http://www.iiisci.org/sci2004). It includes the following: the =
+Instructions for Authors, the Author Guide for Preparing a Proceedings =
+Paper, the Copyright Transfer Form, the Speaker's Biographical Sketch =
+and Hotel information.
+
+To submit the electronic version of your camera-ready paper, via the =
+conference web site, you will need to enter the paper ID number and a =
+password. To send the electronic version of the paper being accepted in =
+this e-mail use the following:
+
+Paper ID number: S234EH
+Password:  S3464
+
+If you, or some of your co-authors, receive another acceptation =
+notification e-mail about the same paper but with a different ID number, =
+this is because you submitted your paper several times. In this case, =
+please, send an e-mail to the following address: =
+informationSCI2004@iiis.org, stating clearly:
+
+1. Which of these different ID numbers (related to the same paper) you =
+are asking to use in order to identify your paper.
+
+2. What other ID number(s) you received that should be removed. Notice =
+that you should inform us about all the ID numbers that should be =
+removed, because only one ID number will identify your paper. Otherwise, =
+your paper might not be included in the Conference Proceedings and/or in =
+the Conference Program.=20
+
+Looking forward to see you at SCI 2004, next July.
+
+Best Regards,
+
+Nagib Callaos
+General Chair
+
+=3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =3D =
+=3D =3D =3D =3D =3D =3D =3D=20
+
+------------------------------------
+SUBMISSION CHECKLIST
+------------------------------------
+Authors contributing to SCI 2004 should send, no later than their =
+camera-ready deadline: March 31st  (for papers accepted before or on =
+February 22nd) or April 28th (for papers accepted after February 22nd), =
+the following five items:
+
+Submission by postal mail:
+--------------------------------
+1) Two printed copies of the final camera-ready copy of your paper, =
+according to the "Author Guide for Preparing a Proceedings Paper", in =
+order to include it in the hard copy  (paper) version of the =
+Proceedings. Please write lightly, using a soft pencil, at the upper =
+right-hand corners in the back of all your paper's pages: (a) your =
+registration ID number, which was provided to you in the page title "SCI =
+2004 - Your Registration Acknowledgement", at the end of your online =
+registration, and (b) the paper ID number you were informed about in the =
+acceptation notification e-mail and you indicated during the online =
+registration process.
+
+2) The Copyright Transfer Form adequately filled and signed.
+
+3) A Speaker's Biographical Sketch according to the format included in =
+the Authors' Kit (This biographical sketch will be given to the chairman =
+of the author's session in order to support him/her when presenting the =
+author).
+
+Use a traceable express mail service. Protect your package with =
+cardboard and mail it to the following address:=20
+
+Nagib Callaos
+PMB-115
+3956 Town Center Blvd.
+Orlando, Florida 32837, U.S.A
+
+Submission via conference web site: http://www.iiisci.org/sci2004
+-------------------------------------------------------------------------=
+-------
+4) The Conference Registration Form. Remember that registration of at =
+least one author per paper and the payment (or the signed commitment of =
+on-site payment) of the conference fees are a necessary condition for =
+the paper to be included in the Conference Proceedings and/or in the =
+Conference Program. Only one paper will be published and included in the =
+conference program for presentation, for each registration fee. For =
+registering click on the "Online Registration" link, included in the =
+conference web site.
+
+5) Electronic version of the paper in one of the following file formats: =
+Acrobat PDF or PostScript, in order to include it in the CD-ROM version =
+of the Proceedings. If web site submission is impossible, send the =
+electronic version of your paper, as an attachment to an e-mail, to one =
+of the following addresses: sci2004@iiis.org, sci2004@telcel.net.ve, =
+sci2004@cantv.net .  We are providing you with three addresses to give =
+you alternatives in the case you get a delivery failure message.
+
+For more detailed information, download the authors' kit (PDF format) =
+from the conference web site (http://www.iiisci.org/sci2004) To access =
+the authors' kit, select the option "Guidelines" from the Main Menu.=20
+=20
+FAILURE TO SUBMIT ALL FIVE ITEMS SHOWN ABOVE BY THE DEADLINE WILL RESULT =
+IN NOT BEING ABLE TO INCLUDE YOUR PAPER IN THE CONFERENCE PROCEEDINGS =
+AND, CONSEQUENTLY, NOT TO SCHEDULE YOUR PAPER PRESENTATION IN THE =
+CONFERENCE PROGRAM
+
+----------------------------------------
+AUDIOVISUAL EQUIPMENT
+----------------------------------------
+The only audiovisual equipment provided for most meetings will be an =
+overhead projector and a screen. Video projection or any other =
+equipment, if needed, will have to be supplied by the presenter.
+
+
+NOTE: Please, do not reply to this e-mail address. It is a system e-mail =
+account. So, this mailbox is not monitored. For further information or =
+assistance e-mail to one of these addresses: sci2004@iiis.org, =
+sci2004@telcel.net.ve, sci2004@cantv.net
+
+
+
+
+

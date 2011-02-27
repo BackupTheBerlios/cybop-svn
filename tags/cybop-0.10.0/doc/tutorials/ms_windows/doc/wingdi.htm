@@ -1,0 +1,173 @@
+<HTML><HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: GDI">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, GDI, zeichnen, Grafik">
+<TITLE>Windows Programmierung: GDI</TITLE>
+</HEAD>
+<BODY>
+<a name="top" index="Windows Bitmaps">
+<table width=100%><tr><td bgcolor=yellow  align=center>
+<H1>Windows Programmierung: GDI </H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+Das GDI (Graphics Device Interface) ist die Komponente des Windows f&uuml;r
+die Grafikprimitive. Es steht zwischen Applikation und Grafik Hardwaretreibern.
+<p>
+<H2>Device Context (DC)</H2>
+
+Die grafischen Operationen haben einen Devicekontext als Ziel. Dieser Kontext
+kennt die physikalischen Eigenschaften der Grafikeinheit.
+So hat ein Drucker beispielsweise höhere Auflösung, aber weniger Farben als
+der Bildschirm.
+<p>
+<H3>Zeichnen im Fenster</H3>
+
+Wird mit Fenstern gearbeitet, muss das Programm jederzeit den Fensterinhalt 
+wiederherstellen k&ouml;nnen, wenn ein anderes Fenster den Inhalt zwischenzeitlich
+verdeckt hatte.
+Um die Zeichenroutinen nicht doppelt zu schreiben, geht man beim Zeichnen so vor,
+dass man die Rekonstruktion des neuen Bildes vorbereitet und anschliessend dem
+System vort&auml;uscht, es m&uuml;sse das Fenster neu zeichnen. Zu diesem Zweck
+gibt es die Funktion <tt>InvalidateRect</tt>. Es l&ouml;st die Nachricht WM_PAINT
+aus. Das Zeichnen in einem Windowsprogramm erfolgt also typischerweise als Reaktion
+auf die Nachricht WM_PAINT.
+Speziell f&uuml;r diese Situation gibt es das Funktionspaar BeginPaint und EndPaint.
+<p>
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HDC hdc;
+ ...
+	case WM_PAINT:
+		hdc = BeginPaint(hWnd, &ps);
+		// hier wird gezeichnet
+		EndPaint(hWnd, &ps);
+		break;
+</pre></td></tr></table><p>
+
+<H3>Zeichnen mit dem Drucker</H3>
+
+Das Drucken wird an <a href="windruck.htm">anderer Stelle</a> ausf&uuml;hrlich
+behandelt. Prinzipiell wird in diesem Fall ein DC vom Druckdialog geliefert.
+
+<H2>GDI Objekte</H2>
+
+Objekte des GDI sind Pen, Brush, <a href="winfont.htm">Font</a>, Palette, Region und Bitmap.
+Sie werden jeweils mit einem speziellen Create-Aufruf erzeugt und parametrisiert.
+Durch SelectObject wird das Objekt an den Devicekontext gebunden und aktiviert.
+Nach Abschluss der Arbeiten sollte genau darauf geachtet werden, dass das Objekt
+per DeleteObject wieder freigegeben wird.
+<p>
+
+<H3>PEN</H3>
+
+HPEN ist das Handle auf einen Pen (engl. Stift), das man durch Aufruf der
+Funktion CreatePen erh&auml;lt. Der Stift bestimmt das Aussehen der Linien.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HPEN CreatePen(int Stil, int LinienBreite, COLORREF Farbe);
+</pre></td></tr></table><p>
+
+<dl>
+<dt> Stil </dt><dd>
+  <table border>
+  <tr><td> PS_SOLID </td><td> durchgehende Linie </td></tr>
+  <tr><td> PS_DASH </td><td> unterbrochene Linie </td></tr>
+  <tr><td> PS_DOT </td><td> gepunktete Linie </td></tr>
+  <tr><td> PS_DASHDOT </td><td> Strich-Punkt Linie </td></tr>
+  <tr><td> PS_DASHDOTDOT </td><td> Strich-Punkt-Punkt Linie </td></tr>
+  <tr><td> PS_NULL </td><td> unsichtbare Linie </td></tr>
+  </table>  
+  PS_INSIDEFRAME hat eine Sonderstellung. Wird dieser Pen beim Zeichnen umrahmender
+  Rechtecke verwendet, wird die Linie innerhalb des Rechtecks gezeichnet.
+  </dd>
+<dt> LinienBreite </dt><dd>
+  in logischen Einheiten.
+  </dd>
+<dt> Farbe </dt><dd>
+  kann durch das RGB(BYTE rot, BYTE gruen, BYTE blau)-Makro festgelegt werden.
+  </dd>
+</dl>
+
+<H3>BRUSH</H3>
+
+W&auml;hrend der Pen die Linien festlegt, beschreibt der Brush (engl. Pinsel) die
+F&uuml;llfl&auml;chen.
+<p>
+<H4>CreateSolidBrush</H4>
+
+Mit dieser Funktion wird eine Einf&auml;rbung der F&uuml;llfl&auml;chen ohne Muster
+erreicht.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HBRUSH CreateSolidBrush(COLORREF Farbe);
+</pre></td></tr></table><p>
+
+<H4>CreateHatchBrush</h4>
+
+Der hier erzeugte Brush hat eine Musterung.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HBRUSH CreateHatchBrush(int Stil, COLORREF Farbe);
+</pre></td></tr></table><p>
+
+Der Stil wird durch eine der folgenden Konstanten bestimmt:
+<table border>
+<tr><td> HS_BDIAGONAL </td><td> 45 Grad von links nach rechts abfallende Diagonalen</td></tr>
+<tr><td> HS_CROSS </td><td> gekreuzte horizontale und vertikale Linien </td></tr>
+
+<tr><td> HS_DIAGCROSS </td><td> wie HS_CROSS, nur 45 Grad </td></tr>
+<tr><td> HS_FDIAGONAL </td><td> 45 Grad von links nach rechts steigende Diagonalen</td></tr>
+<tr><td> HS_HORIZONTAL </td><td> horizontale Linien </td></tr> 
+<tr><td> HS_VERTICAL </td><td> vertikale Linien </td></tr>
+</table>
+
+
+<H4>CreatePatternBrush</H4>
+
+Es kann auch eine <a href="winbmp.htm">Bitmap</a> als Musterung f&uuml;r F&uuml;llungen 
+verwendet werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HBRUSH CreatePatternBrush(HBITMAP hbmp);
+</pre></td></tr></table><p>
+
+<H2>Zeichenoperationen</H2>
+
+<p>
+<table border>
+<tr><td> Linie </td><td> MoveToEx, dann LineTo </td></tr>
+<tr><td> Rechteck (gef&uuml;llt) </td><td> BOOL Rectangle(HDC hdc, int links, int oben, int rechts, int unten); </td></tr>
+<tr><td> Polygon </td><td> BOOL PolyDraw(HDC hdc, POINT *PunktArray, BYTE *TypArray, int PunktZahl); </td></tr>
+<tr><td> Kreisausschnitt </td><td> Arc und AngleArc </td></tr>
+<tr><td> Text </td><td> TextOut und DrawTextEx (formatiert im Rechteck)</td></tr>
+</table><p>
+
+Die Funktionen mit dem Ex am Ende sind in Win32 hinzugekommen und ersetzen
+die bisherigen Aufrufe, sind also nicht unter Windows 3.x verf&uuml;gbar.
+In den meisten F&auml;llen liegt der Unterschied in den 32bit-Zeichenkoordinaten, die
+unter Windows 3.x noch 16 Bit breit waren.
+<p>
+Alle Linien halten sich an den geltenden Pen.
+Die gef&uuml;llten Elemente werden mit dem aktuell f&uuml;r den DC geltenden Brush gef&uuml;llt.
+<p>
+Anders sind die Textroutinen. Hier werden die Farben durch SetTextColor bzw. SetBkColor gesetzt.
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 2000 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</body>
+</html>
+

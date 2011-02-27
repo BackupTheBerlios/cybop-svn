@@ -1,0 +1,103 @@
+ %
+ % $RCSfile: ZusUndAusblick.tex,v $
+ %
+ % Copyright (c) 1999-2002. Jens Bohl. All rights reserved.
+ %
+ % This software is published under the GPL GNU General Public License.
+ % This program is free software; you can redistribute it and/or
+ % modify it under the terms of the GNU General Public License
+ % as published by the Free Software Foundation; either version 2
+ % of the License, or (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program; if not, write to the Free Software
+ % Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ %
+ % http://www.resmedicinae.org
+ % - Information in Medicine -
+
+ %A chapter giving an abstract and perspective on further works.
+
+\chapter{Zusammenfassung und Ausblick}
+    Unter steter Bezugnahme auf die zugrundeliegende praktische Umsetzung im Projekt {\it Res Medicinae}, sind in dieser Arbeit
+    seit Jahren existierende
+    Konzepte der Softwaretechnik miteinander kombiniert und um eigene Ideen erweitert worden.\\
+    Mit den ersten beiden Kapiteln wurde versucht, dem Leser die Motivation dieser Diplomarbeit darzulegen
+    und ihm einen Zugang zu diesem Thema zu ermöglichen.
+    Angefangen bei sehr allgemeinen Betrachtungen zu Präsentationsschichten, konkretisierten sich die Gedanken
+    bei der Behandlung von grafischen Oberflächen. In diesem Zusammenhang wurde es als notwendig erachtet, neben den
+    technischen Gesichtspunkten des Entwurfes dieser Nutzerschnittstellen auch die ergonomischen zu berücksichtigen.
+    Die Präsentationsschicht bzw. grafische Oberfläche des Softwaresystems {\it Res Medicinae} stellte den praktischen Bezug dazu her.
+    Das zweite Kapitel
+    fällt damit inhaltlich etwas aus der Reihe, wurde aber als Einstieg gewählt, um dem Leser den Ort der Realisierung
+    der in den darauffolgenden Kapiteln beschriebenen Konzepte vorzustellen: die Präsentations- bzw. Darstellungsschicht.\\
+    Muster, ihre Kategorisierung und Anwendung bildeten den Inhalt des dritten Kapitels. Auch hier richtete sich der Fokus
+    auf die Umsetzung von Entwurfs- und Architekturmustern, speziell in Präsentationsschichten. Letztere Musterart
+    fand in der Vorstellung des {\it Model-View-Controller}-Paradigmas sowie der hierfür existierenden Erweiterung in Form des
+    HMVC besondere Aufmerksamkeit.\\
+    Ideen der komponentenbasierten Softwareentwicklung sind -- wie Muster -- nicht nur für die Konzeption und Umsetzung
+    grafischer Oberflächen geeignet. Das vierte Kapitel behandelte daher den Begriff der {\it Softwarekomponente} und den
+    damit verbundenen Lebenszyklus als eine von der grafischen Oberfläche unabhängig entwickelte Idee.
+    Natürliche Lebensvorgänge und Organisationsstrukturen dienten den Komponenten ebenso wie dem {\it Res
+    Medicinae}-Framework {\it ResMedLib}
+    als Vorbild.
+    Dieses wurde in Kapitel fünf vorgestellt und auf Besonderheiten und Vorteile einer solchen
+    ontologischen Hierarchie eingegangen.\\
+    Den Abschluss der Diplomarbeit bildete mit Kapitel sechs die Präsentation des Prototypen, in dem alle in den
+    vorhergehenden Kapiteln beschriebenen Denk-Modelle eine praktische Realisierung fanden.
+    \par
+    Der erweiterte Komponentenlebenszyklus und die Ontologien erfuhren mit der Entwicklung dieses Prototypen eine der
+    ersten praktischen Anwendungen. Dementsprechend ist die entstandene Software also auch als Mittel zur Evaluation
+    dieser theoretischen
+    Ideen anzusehen.\\
+    Aber der entwickelte Prototyp bedarf einer stetigen Verbesserung und Weiterentwicklung -- hierfür einige abschließende
+    Anregungen:
+    \paragraph{Fehlerbehandlung}
+        Die Einhaltung der Reihenfolge des Aufrufs der einzelnen Operationen des Komponentenlebenszyklus' ({\tt globalize},
+        {\tt initialize}, {\tt link} usw.) ist für die
+        Vermeidung von Laufzeitfehlern von besonderer Wichtigkeit. Ein Objekt darf erst benutzt werden, wenn es
+        ordnungsgemäß initialisiert und konfiguriert worden ist. Deshalb wäre die Entwicklung geeigneter Fehlerklassen
+        hilfreich, die sich entweder in die System-Ontologie einfügen, oder ihrerseits eine eigene Ontologie bilden ({\it
+        Exception\footnote{Exception ({\it engl.}): Ausnahme (im Sinne eines aufgetretenen Fehlers)}-Ontologie}).\\Das Gleiche gilt für die Verletzung der angesprochenen Kreisfreiheit der Objektbeziehungen
+        innerhalb einer Ontologie. Dieser Verstoß gegen die Regeln des Frameworks sollte ebenfalls durch eine
+        geeignete Fehlerbehandlung -- nach Möglichkeit schon zu Compile-Zeit -- angezeigt werden.
+    \paragraph{Erweiterung des Komponentenlebenszyklus}
+        Inwieweit die bisher gefundenen Methoden zur Verwirklichung des Lebenszyklus von Softwarekomponenten praktikabel
+        sind, ist nur durch praktische Anwendung zu ermitteln. Daher kann eine Erweiterung des Zyklus notwendig
+        werden, die jetzt noch nicht absehbar ist. Ob die Reihenfolge der Aufrufe {\tt globalize},
+        {\tt initialize}, {\tt link} usw. genügend Granularität aufweist und auch immer auf alle Komponenten gleich
+        angewandt werden muss, wird also ebenfalls Inhalt zukünftiger Arbeiten sein.
+    \paragraph{Erhöhung der Granularität von ontologischen Hierarchien}
+        Dasselbe gilt auch für das ontologische Framework. Sollte sich beispielsweise die Trennung der Ontologie für
+        Systeme ({\it Family}, {\it Block}, {\it Region} usw.) als zu abstrakt erweisen, kann man durch die Einführung
+        weiterer Schichten die Granularität der Hierarchie an die Erfordernisse der konkret zu implementierenden Anwendung anpassen.
+    \paragraph{Kopplung ontologischen Hierarchien}
+        Das Ziel weiterer Untersuchen könnte darin bestehen, die drei Ontologien ({\it System}, {\it Model} und {\it
+        Language}) in geeigneter Weise zu kombinieren und Beziehungen zwischen diesen aufzubauen.
+    \paragraph{Darstellung der Episoden auf Zeitachse}
+        Um die Episoden, ähnlich wie in Abbildung \ref{Probleme und Episoden}, auf einer Zeitachse darzustellen, wäre
+        die Entwicklung einer weiteren Grafik in Form eines Balkendiagrammes denkbar. Dieses würde die zeitlichen
+        Zusammenhänge zwischen Problemen bzw. Episoden verdeutlichen.
+    \paragraph{Web-basierte Steuerung}
+        Das XML-Datenformat der Overlays eignet sich nicht nur für einen Einsatz unter Java Swing.
+        Die darin vorhandenen Informationen können durch XSL/XSLT in alternative Formate wie HTML umgewandelt werden,
+        wodurch eine Publikation über das Internet möglich wird (siehe Abschnitt 2.4.2: XML/XSL). Durch die Wahl von XML als Datenformat für die
+        Repräsentation des {\it Homunculus} ist also implizit der Grundstein für eine web-basierte Steuerung gelegt worden.
+    \paragraph{Versendung von Overlays per Email}
+        Auch ist eine Versendung solcher Overlays via Email und anschließende Weiterverarbeitung und -verwendung des XML-Formats
+        in anderen Programmen denkbar.
+    \paragraph{Erweiterung des Homunculus}
+        Im Rahmen dieser Diplomarbeit wurde
+        lediglich ein Skelett-{\it Homunculus} umgesetzt. Aufgabe zukünftiger Arbeiten könnte es also sein, weitere Ansichten des
+        Körpers wie Weichteile, Blutgefäß- oder Nervensystem einfließen zu lassen. Der Overlay-Editor bietet dabei die
+        Möglichkeit einer einfachen Erweiterung des Bildbestandes und die Pflege der Overlays. Dadurch ist die Verwaltung
+        einer großen Menge anatomischer Bilder möglich und kann auch bei Bedarf von den Medizinern selbst vorgenommen werden.
+    \paragraph{Konfiguration der Steuerung}
+        Neben einer Steuerung des Prototypen per Maus ist es ebenfalls möglich, alle Funktionen über die Tastatur abzurufen.
+        Jedoch ist es noch nicht vorgesehen, den Nutzer selbst über die Wahl der Tastenbelegung entscheiden zu lassen. Auch
+        dieser Punkt wäre als verbesserungswürdig zu betrachten.

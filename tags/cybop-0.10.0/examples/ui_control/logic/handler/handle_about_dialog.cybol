@@ -1,0 +1,43 @@
+<model>
+    <part name="receive" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.gnu_linux_console_command"/>
+    </part>
+    <part name="assemble_command_model" channel="inline" abstraction="operation/plain" model="add">
+        <property name="summand_1" channel="inline" abstraction="text/plain" model=".ui_control.logic.user_interface.about_dialogue_actions."/>
+        <property name="summand_2" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.gnu_linux_console_command"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.gnu_linux_console_command_model"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+    <part name="send" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
+        <property name="message" channel="inline" abstraction="path/encapsulated" model=".ui_control.logic.handler.gnu_linux_console_command_model"/>
+    </part>
+</model>
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: handle_about_dialog.cybol,v $ $Revision: 1.2 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

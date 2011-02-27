@@ -1,0 +1,130 @@
+%
+% $RCSfile: compound.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Compound}
+\label{compound_heading}
+\index{Compound}
+\index{Composition}
+\index{Tree}
+\index{Hierarchy}
+\index{Artificial Intelligence}
+\index{AI}
+\index{Concept}
+\index{Schema}
+\index{Monades Theory}
+\index{Parent Item}
+\index{Child Item}
+\index{Whole}
+\index{Part}
+\index{Container}
+\index{Element}
+\index{Genealogy}
+\index{Unidirectional Relation}
+\index{Hierarchical State}
+\index{Hierarchical Procedure}
+\index{Microcosm}
+\index{Macrocosm}
+\index{Particle}
+
+\emph{Composition} is the third kind of abstraction that humans use to
+understand their environment. It is an important instrument for the human mind
+to associate information, that is to acquire, store and recall \emph{Knowledge}.
+Every item can be recognised as a \emph{Compound} of smaller items and can
+therefore also be called \emph{Tree} or \emph{Hierarchy}. The subject of
+\emph{Artificial Intelligence} (AI) talks of \emph{Concept} or \emph{Schema}
+\cite{sowa}.
+
+The great philosopher and mathematician Gottfried Wilhelm Leibnitz (1646-1716)
+made extensive use of the principle of hierarchy. His entire theory of
+\emph{Monades} \cite{leibnitz} is based on it.
+
+In software design, the terms \emph{Parent} and \emph{Child} are often used to
+describe both, the items in a composition relation and the items in a
+categorisation (inheritance) relationship. To avoid misunderstandings, this
+work sticks to the terms \emph{Super} and \emph{Sub} for categorisation and to
+the terms \emph{Whole} and \emph{Part} for composition. Yet other terms to
+describe items of a composition would be \emph{Container} and \emph{Element}.
+
+One obvious analogy comes from \emph{Genealogy} where parents have children who
+become parents of their own children and so forth. Displaying these relations
+between family members in a graph, leads to a tree which may represent both,
+a category tree (for property inheritance) as well as a composition tree (for
+children ownership).
+
+Taking the example of a \emph{Human Being}, one could say that it is composed
+of organs such as \emph{Eye}, \emph{Ear}, \emph{Heart}, \emph{Brain},
+\emph{Arm} and further, also smaller parts. John F. Sowa \cite[p. 109]{sowa}
+writes on this:
+
+\begin{quote}
+    From different viewpoints, the human body can be considered an aggregate of
+    organs, an aggregate of cells, or an aggregate of molecules. Each viewpoint
+    affects the terminology used to talk about the body, but not the body itself.
+\end{quote}
+
+That is, one and the same real world object may be represented in many
+different ways. It is important to note the \emph{unidirectional} kind of
+relations: A human being is composed of organs but an organ is never composed
+of a human being! Another example is that of a \emph{Book}: physically, it may
+be composed of a \emph{Paperback Cover} and \emph{Paper Pages}; logically,
+however, it is usually separated into \emph{Part}, \emph{Chapter},
+\emph{Section}, \emph{Paragraph}, \emph{Sentence}, \emph{Word} and
+\emph{Character}. Obviously, knowledge representation always depends on what
+one wants to express in which context. Philippe Ameline who works in the
+\emph{Nautilus-Odyssee} project \cite{nautilus}, writes in \cite{openhealth}:
+
+\begin{quote}
+    Lets take a comparison with \emph{Geography}: you can build an ontology
+    (which consists of compound structures) in order to describe natural
+    objects (mountains, rivers, \ldots). But if you build artificial frontiers
+    and call them \emph{Countries}, you cannot semantically include these
+    concepts inside the geographical domain. -- That is the very reason why
+    human beings, very frustrated, had to invent the political domain ;-)
+    \ldots\ I think that there (are similar differences) in medicine (as in)
+    the geographical domain.
+\end{quote}
+
+Not only \emph{States} may be represented as compound; \emph{Procedures} may be
+hierarchical as well. The process \emph{Take Book from Library}, for example,
+may have the following structure:
+
+\begin{itemize}
+    \item[-] Check Catalogue
+    \begin{itemize}
+        \item[-] Investigate suitable Books
+        \item[-] Note Registration Number
+    \end{itemize}
+    \item[-] Obtain Book
+    \begin{itemize}
+        \item[-] Look for Shelf
+        \item[-] Take off Book
+    \end{itemize}
+    \item[-] Borrow Book
+\end{itemize}
+
+Returning to human thinking, one realises that in the end, everything in
+universe can be put into variable hierarchical models, that is consists of
+smaller items and belongs to a bigger item. From the physical point of view,
+nobody knows where this hierarchy really stops, towards \emph{Microcosm} as
+well as towards \emph{Macrocosm}. There is no \emph{absolute}, \emph{basic}
+item. A \emph{Particle} as concept exists only in the human mind, placed
+somewhere between micro- and macrocosm, with hypothetic borders.

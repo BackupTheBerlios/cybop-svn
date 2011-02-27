@@ -1,0 +1,116 @@
+\chapter{Zusammenfassung}
+
+%diese Zusammenfassung sollte auch eine Evaluierung Deiner Arbeit
+%im Vergleich zu der anfangs gestellten Aufgabe enthalten
+  Ziel dieser Arbeit war es, CYBOP für Webanwendungen zu erweitern. Dafür musste
+  untersucht werden, inwieweit die Beschreibungssprache CYBOL dafür geeignet ist, welche 
+  Änderungen an dieser nötig sind, um ein Webanwendungsfähigkeit zu erreichen
+  und mit welcher Architektur diese im Interpreter integriert werden kann. 
+  Weiterhin war für den praktischen Teil der Interpreter CYBOI anzupassen und in CYBOL eine
+  kleiner Prototyp einer Webanwendung zu realisieren.
+  
+  Als Ergebnis dieser Untersuchung stellte sich heraus, dass CYBOL die Belange einer Webanwendung
+  abdeckt. Es mussten keine Strukturänderungen an CYBOL vorgenommen werden. Die allgemeinen
+  Strukturen für die Beschreibung von Sachverhalten (Domain, Logik, Repräsentation) sind 
+  auch für Webanwendungen ausreichend. Als Ergänzung für die XHTML-Darstellung mussten nur zwei 
+  verschiedene Properties definiert werden.   
+  Problematisch bei der Erstellung des Prototypen war das Nichtvorhandensein von 
+  unterstützenden Editoren. XML-Editoren konnten nur die XML-Syntax prüfen, aber nicht 
+  die spezifischen Anforderungen zur Entwicklung von CYBOP-Anwendungen unterstützen.
+  Dazu wären spezielle Editoren (siehe Ausblick) notwendig. Als Vorteil für die Entwicklung ist
+  die einfache Beschreibung von CYBOL zu nennen. Durch den hierarchischen Ansatz können
+  schnell verständliche Programme erzeugt werden. Der große Nachteil zurzeit ist die 
+  Unstrukturiertheit der Anwendungsentwicklung. Es ist aus dem 
+  Quelltext (CYBOL-Dateien) auf den ersten Blick nicht erkennbar, welche Hierarchie 
+  die CYBOL-Dateien aufbauen. Dieser Nachteil würde aber durch unterstützende 
+  Editoren verschwinden. 
+  
+  Die Integration des erstellten Webservers in CYBOI erwies sich als das Hauptproblem. 
+  Wegen der eingeschränkten Kommunikationsmöglichkeiten zwischen Client und Server
+  einer Webanwendung (nur GET- und POST-Operationen) musste eine Schnittstelle 
+  zu CYBOI definiert werden. Dies geschah durch die Syntax-Definition der Parameterübergabe
+  bei diesen Operationen. 
+  
+  Ein weiterer wichtiger Punkt war die Entscheidung für die Verwendung 
+  von blockierenden oder nicht blockierenden Socketkommunikationen. Durch die Verwendung von Threads 
+  konnten für die Kommunikation  zwischen Client und Server blockierende TCP-Sockets 
+  verwendet werden. Dies bedeutet, dass keine Ressourcen
+  des Computers verbraucht werden, solange der Webserver auf eine Anfrage des Clients wartet. 
+  Die Kombination von Thread und blockierenden Kommunikationskanälen sind auch bei
+  anderen Services denkbar. 
+  
+  Der Vorteil bei der Integration des Webserver ist die Verwendung der Hauptstruktur 
+  von CYBOI. Der Webserver nimmt nur die Anfragen an, ermittelt die Übergabeparameter 
+  der Anfrage und reiht das Setzen der Parameter und die Anfrage des Clients in die 
+  Signalwarteschlange ein. Dann bearbeitet CYBOI diese Signale und am Ende wird 
+  der Webserver veranlasst, eine Antwort an den Client zu schicken. Es werden 
+  die Strukturen von CYBOI genutzt und nur die Socket-Kommunikation ist ausgelagert.  
+  
+\chapter{Ausblick}
+
+  %Vererbung
+  In der Programmierung versucht man Redundanzen zu vermeiden. Dies geschieht durch eine 
+  sinnvolle Zerkleinerung von Funktionen, so dass man diese an mehreren Stellen
+  verwenden kann  oder durch Vererbung, wie in der Objektorientierten Programmierung. 
+  Wie kann man diese Gedanken in CYBOP umsetzten? Die Zerkleinerung von Funktionen erfolgt
+  in CYBOP durch die Aufteilung auf mehrere Dateien. Diese können an mehreren Stellen verwendet 
+  werden. Für den zweiten Teil ist anzumerken, das 
+  Vererbung in CYBOP nur Sinn macht, wenn von einem Part aus dem Knowledge Memory 
+  vererbt wird. Dieser Part ist aber nur eine hierarchische Struktur. Vererbung würde bedeuten, 
+  dass man diese Struktur unter einen anderen Part nochmal darunter hängen möchte. 
+  Dies kann aber auch über normale Operationen, wie \emph{copy\_part} oder \emph{move\_part}
+  realisiert werden. Darum ist eine separate Vererbungsnotation in CYBOL nicht nötig.
+  
+  %Persistenz
+  Ein weiterer wichtiger Schritt für die Entwicklung von CYBOL ist die Abspeicherung der Daten. 
+  Dies ist ein sehr weitläufiges Thema, da die Daten in verschiedenen Formaten abgespeichert werden können. 
+  Vorstellbar wären in Datenbanken, XML-Dateien oder auch verschiedenen Binärformate. 
+  Der Fantasie sind hier keine Grenzen gesetzt. Ein interessanter Ansatz wäre auch die Daten, in dem 
+  CYBOL-Format zu speichern. Dabei ist zu beachten, dass CYBOL ein XML-Format ist und eventuelle nicht
+  XML konforme Datenelemente entsprechend den XML-Regeln maskiert werden müssen.
+  
+  %Modelllierung
+  Für die Modellierung von Anwendungen gibt es verschiedene Ansätze. Am nahe liegensten, da CYBOL
+  im XML-Format vorliegt, wäre die Verwendung eines XML-Editors. Dies würde aber nur 
+  die Syntax von CYBOL kontrollieren. Weitere Punkte, die ein Entwicklungswerkzeug 
+  für CYBOL besitzen sollte, wäre die hierarchische Modellierung der Templates sowie 
+  die hierarchische Darstellung des Modells (Knowledge Memory). Das erste wäre zur Modellierung von 
+  CYBOL-Dateien gedacht, um die Kompositbeziehungen der Templates zu modellieren. Der zweite Teil ist 
+  zur Veranschaulichung des aktuellen Laufzeitmodells geeignet.
+  
+  %Performance
+
+  %Benutzerbezogen Variablen
+  In CYBOI gibt es noch keine benutzerbezogene Variablen. Für die Umsetzung, auch in Hinblick von
+  Webanwendungen, gibt es verschiedene Lösungsmöglichkeiten. Eine davon wäre die Speicherung 
+  im Knowledge Memory unter einem benutzerdefinierten Zweig. Dies wäre z.B. der Login-Name
+  von der Betriebssystemanmeldung. Bei Webanwendungen ist dies etwas schwieriger. Normalerweise 
+  kann der Web-Client nicht auf die Betriebssystemebene zugreifen. Der Client bekommt nicht die Information 
+  des angemeldeten Benutzers. In Webanwendungen gibt es dafür sessiongebunden Variablen. 
+  Eine Session bedeutet eine 
+  zeitweise bestehende Verbindung zwischen Server und Client. Diese Sessionvariablen dienen dazu, 
+  Informationen für eine Session zu merken. Diesw sind temporäre Variablen, die nach Beenden 
+  der Session nicht mehr existieren. In Standardwebanwendungen können die Sessionvariablen auch
+  länger über Cookies gespeichert werden. Für benutzerbezogene Daten müsste eine Sessionverwaltung
+  in CYBOI und dessen Webserver integriert werden. Eine weitere Möglichkeit für Webanwendungen 
+  wäre die Umsetzung eines SSO (Single Sign On), wo die Anmeldung des Betriebssystems an
+  die Webanwendung durchgereicht wird.  
+  
+  %Sicherheit und Robbustheit CYBOI
+  Ein Problem ist zurzeit noch die Robustheit des Systems. 
+  Beendet sich CYBOI aus irgendeinen Grund, sei es durch Hardwarefehler, 
+  durch Softwarefehler oder einfach durch Stromausfall, so sind die Daten
+  seit der letzten Speicherung, da sie sich nur im Speicher befinden, einfach weg.
+  Das System ist ist so zu erweitert, dass im Prinzip die Daten fortdauernd in
+  einem bestimmten Format auf dauerhafte Speichermedien geschrieben werden. Bei einem Absturz 
+  können nach dem Neustart des Systems die Daten aus dem temporären Dauerspeicher wieder rekonstruiert
+  werden.
+  
+  
+  
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,86 @@
+%
+% $RCSfile: persistent_and_transient.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Persistent and Transient}
+\label{persistent_and_transient_heading}
+\index{Integrated Circuit}
+\index{IC}
+\index{Read Only Memory}
+\index{ROM}
+\index{Basic Input/ Output System}
+\index{BIOS}
+\index{Personal Digital Assistant}
+\index{PDA}
+\index{Electrically Erasable Programmable ROM}
+\index{EEPROM}
+\index{Flash ROM}
+\index{Hard Disk Drive}
+\index{HDD}
+\index{Random Access Memory}
+\index{RAM}
+\index{Persistent Data}
+\index{Transient Data}
+\index{Volatile Data}
+\index{Central Processing Unit}
+\index{CPU}
+
+In the science of \emph{Informatics}, there are a few \emph{Integrated Circuits}
+(IC) -- so-called \emph{Read Only Memories} (ROM) -- containing unchangeable
+programs. The \emph{Basic Input/ Output System} (BIOS) of a computer is one
+example for such programs, software of \emph{Personal Digital Assistants} (PDA)
+or \emph{Mobile Phones} are others. Often, the BIOS is stored in
+\emph{Electrically Erasable Programmable ROM} (EEPROM) or its later form called
+\emph{Flash ROM}. It thereby gets writable. When writing it, the complete old
+BIOS gets overwritten. Most software programs, however, reside on a
+\emph{Hard Disk Drive} (HDD) as permanent storage medium.
+
+In order to use them, such \emph{persistent} programs often need to be loaded
+into an IC called \emph{Random Access Memory} (RAM) which, other than a ROM,
+can be both read from and written to. Most RAMs are \emph{volatile} which means
+that the data they store -- to which also belong programs -- are
+\emph{transient}, that is get lost in case the computer is powered down. The
+ability to manipulate data in memory is a pre-requisite to usefully work with a
+computer.
+
+One surely could, with some effort, rearchitect computers so to let the
+\emph{Central Processing Unit} (CPU) communicate directly with persistent
+memory (like a HDD), instead of RAM. One reason for not doing this is the
+\emph{Performance} of computer systems -- RAM can be accessed much faster than a
+HDD. Another reason is the independence from differing HDD designs.
+
+What this section by its remarks tries to show is that \emph{static} software
+becomes \emph{dynamic}, that is changeable over time, when being loaded into a
+RAM whose data (represented by its state) can be processed (manipulated)
+through a CPU. Although not being so new, this statement has importance for
+some considerations later in this chapter.
+
+While some kinds of software (like standard- or business applications) mainly
+\emph{contain} static knowledge of a special domain, other kinds do mainly
+\emph{use} that knowledge to dynamically control hardware. The point is that
+traditionally, both kinds of software are mixed up. A business application has
+to care about memory allocation, graphical input and output (even when using a
+framework for that), communication mechanisms and more, although these are not
+in its original interest. On the other hand, an operating system often contains
+configuration knowledge about its structure or available devices that does not
+actually belong into it. In order to achieve a clearer structure with less
+dependencies and more flexibility, it is necessary to treat both kinds of
+software differently.

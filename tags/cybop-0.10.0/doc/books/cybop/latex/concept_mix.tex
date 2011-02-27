@@ -1,0 +1,35 @@
+%
+% $RCSfile: concept_mix.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\paragraph{Concept Mix}
+\label{concept_mix_heading}
+\index{Concept Mix}
+
+Further, specialised domain concepts identified during requirements analysis
+(such as a \emph{Patient} being a kind of \emph{Person}) are often mixed up
+with more general concepts as found during design (for example the application
+of a proper \emph{Role} architecture instead of simple inheritance for the
+person-patient relation). The lack of a proper separation between pure domain
+knowledge (like a patient receiving a medication) and system control software
+(like logging facilities or persistence mechanisms) was already explained in
+detail in the previous chapter \ref{statics_and_dynamics_heading}. It frequently
+leads to strong coupling between system layers and complicates software design.

@@ -1,0 +1,662 @@
+\chapter{Cybernetics Oriented Language (CYBOL)} 
+
+  \section{Überblick}
+    
+    CYBOL ist die Beschreibungssprache von CYBOP für das Anwendungswissen, die
+    Anwendungslogik und die Oberflächenbeschreibung. 
+    CYBOL ist eine hierarchische Beschreibungssprache. Darum eignet sich für CYBOL
+    das XML-Format, da XML genau für hierarchische Abbildungen gedacht ist.
+    Dies hat den Vorteil, das vorhandene XML-Parser verwendet werden können.
+    Weiterhin stehen XML-Editoren zur
+    Erstellung und Überprüfung der CYBOL-Dateien zur Verfügung.
+    In diesem Kapitel wird zuerst XML näher erläutert, danach wird CYBOL 
+    in der XML-Syntax beschrieben und als letztes erfolgen
+    die formellen Beschreibungen von CYBOL in DTD, XML-Schema und EBNF.
+
+  \section{XML - Grundlage der Beschreibung von CYBOL}
+
+    \subsection{Geschichtliches}
+    
+      Die Grundlage von CYBOL ist XML. XML ist ein Projekt der W3C und wird seit 
+      Juli 1996 entwickelt. Ursprünglich war XML als Alternative zur 
+      Hypertext Markup Language (HTML), der Auszeichnungssprache für
+      Internetseiten, gedacht. Es wurde jedoch schnell erkannt, das XML als 
+      eine universelle Sprache zur Verwaltung und zum Austausch semantisch 
+      qualifizierter Daten genutzt werden kann. Im November 1996 wurde 
+      XML als Entwurf vorgestellt und hat seit Februar 
+      1998 in der Version XML 1.0 den Status "`Empfehlung des W3C"'. XML stellt
+      eine Teilmenge der Standard Generalized Markup Language (SGML) dar.
+
+    \subsection{Definition von XML}
+    
+      Hier folgt nun eine kurze Erläuterung, was XML eigentlich ist \cite[Seite 618]{defxml}.
+      \begin{quotation}
+        Der Inhalt eines XML-Dokuments besteht aus strukturierten Elementen,
+        die hierarchisch geschachtelt sind. Dazwischen befindet sich der Inhalt,
+        der aus weiteren Elementen (daher hierarchisch) und reinen Text bestehen kann.
+        Die Elemente können Attribute enthalten, die zusätzliche Informationen
+        in einem Element ablegen.
+      \end{quotation}
+      Ein weiterer Begriff in Zusammenhang mit XML ist die Wohlgeformtheit eines Dokumentes. 
+      Jedes XML-Dokument muss der Wohlgeformtheit genügen, das bedeutet dass jedes 
+      XML-Dokument einer speziellen Spezifikationen entspricht.
+      Diese Spezifikation ist im Detail hier aufgelistet:
+      \begin{itemize}
+        \item Jedes Element besteht aus einem Begin-Tag und einem End-Tag.
+        \item Es gibt genau ein Wurzelelement, unter dem sich ein hierarchischer Baum aufbaut.
+        \item Elemente müssen sauber ineinander eingebettet sein. Es darf 
+              keine Überdeckungen geben.
+        \item Alle Attributwerte müssen in Anführungsstrichen stehen.
+        \item Der Name eines Attributs kommt innerhalb eines Elements nicht mehr als einmal vor.
+        \item Ein Attributwert darf keinen Verweis auf ein externes Entity enthalten.
+      \end{itemize}
+      
+    \subsection{Syntax von XML}
+    
+      Die folgenden Ausführungen beziehen sich auf die XML-Spezifikation des W3C \cite{w3c}.
+      Dabei werden nur die Teile beschrieben, die auch in CYBOL verwendet werden. 
+
+      \textbf{Struktur von XML-Dokumenten} \\
+        Ein XML-Dokument besteht aus einem optionalen Prolog, einem Rumpf sowie aus einem
+        optionalen Epilog. Ein Dokument kann wohlgeformt sein, ohne einen Prolog oder Epilog 
+        zu haben. 
+        
+        Der Prolog kann die XML-Deklaration, die Informationen 
+        über die verwendete XML-Spezifikation, die Zeichenkodierung, sowie die verwendeten 
+        Entities enthalten. Hier ist ein Beispiel für einen Prolog, so wie er auch in 
+        CYBOP verwendet wird, zu sehen:
+\begin{verbatim}
+          <?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+\end{verbatim}
+
+        Der Rumpf ist der wichtigste Teil des XML-Dokumentes, da hier die eigentlichen
+        Informationen abgelegt werden. Er besteht aus einem Element oder mehreren ineinander
+        verschachtelten, Elementen.
+
+        Der Epilog eines Dokumentes ist der Abschnitt nach dem Rumpf und steht für 
+        Kommentare und Verarbeitungsanweisungen zur 
+        Verfügung. Die Verwendung dieses Abschnittes ist bisher nicht klar definiert, 
+        deshalb ist eine sinnvolle Nutzung nur mit eigenen Applikationen möglich.
+        %Der Epilog wird in CYBOL nicht verwendet.
+      
+      \textbf{Elemente} \\
+        Elemente sind die Grundbausteine eines XML-Dokumentes. Ein Element ist ein Container
+        für beliebige Inhalte, wie zum Beispiel verschiedene Zeichen, weitere Elemente sowie andere
+        Informationen. Begin-Tag und End-Tag begrenzen ein Element. Sie bestehen aus dem Namen
+        des Elementyps, der in spitzen Klammern eingeschlossen wird. 
+\begin{verbatim}
+          <Elementname> Elementinhalt </Elementname>
+\end{verbatim}
+        Elemente ohne Inhalt werden als leere Elemente bezeichnet und können durch eine
+        spezielle Schreibweise angegeben werden.
+\begin{verbatim}
+          <Leerelement />
+\end{verbatim}
+        Soll ein Dokument wohlgeformt sein, muss es eine baumartige Struktur aufweisen. In
+        jedem Dokument darf es nur genau einen Baum geben, dessen Wurzel als \emph{document root}
+        bezeichnet wird. Dieses Element ist das Elternelement aller anderen
+        enthaltenen Elemente (Kinderelemente). Jede Wurzel eines Kinderelements muss 
+        mindestens in einen Teilbaum enthalten sein, dessen Wurzel das \emph{document root} ist. 
+        Die Verschachtelung der Elemente ist strikt
+        einzuhalten, das heißt ein Element muss seine Begin-Tags und End-Tags auf derselben
+        Verschachtelungsebene haben.
+      
+      \textbf{Attribute} \\
+        Attribute sind Teile von Elementen, die Informationen über deren Inhalt enthalten und
+        nicht selbst zum Inhalt gehören. Attribute können in Begin-Tags von Elementen und
+        Leerelementen angegeben werden und haben immer die Form:
+\begin{verbatim}
+          Attributname="Attributwert"
+\end{verbatim}
+        Die Attributwerte müssen immer Text-Literale sein. 
+        Text-Literale sind ganz normale Zeichenketten, die von Begrenzungszeichen 
+        (\verb|" oder '|) eingeschlossen
+        werden. Dabei ist darauf zu achten, dass am Anfang und Ende dasselbe
+        Begrenzungszeichen steht und das dieses nicht in der Zeichenkette
+        verwendet wird.
+      
+      \textbf{Kommentare} \\
+        Sämtliche Anmerkungen in Dokumenten, die nicht zum Inhalt gehören, werden als
+        Kommentare gekennzeichnet. Die Syntax von XML für Kommentare ist
+\begin{verbatim}
+          <!-- Hier steht ein Kommentar -->
+\end{verbatim}
+        Diese ermöglichen es, Anmerkungen aufzunehmen,
+        Entwicklungsschritte zu dokumentieren oder verschiedene andere Informationen
+        einzufügen, die nur für den Leser des Quelltextes bestimmt sind.
+
+      Weiter Informationen zu XML sind direkt auf den Seiten des W3C \cite{w3c} 
+      bzw. in der deutschen Übersetzung \cite{w3cger} zu finden.
+
+  \section{Beschreibung von CYBOL}
+  
+    Nachdem XML und ihre Syntax geklärt ist, kann die spezielle Syntax von CYBOL 
+    dargelegt werden. 
+    Ein wichtiger Aspekt
+    von CYBOL ist die Einfachheit der Beschreibung. Darum werden alle Modelle
+    nach dem gleichen Schema beschrieben, egal, ob es sich um die Anwendungslogik,
+    die Oberflächenbeschreibung oder die Domainbeschreibung handelt. Diese CYBOL-Dateien
+    werden auch Templates genannt, da aus diesen die Laufzeitmodelle in CYBOI 
+    aufgebaut werden. 
+    
+    \subsection{Aufbau von CYBOL}   
+      Eine CYBOL-Datei ist immer ein XML-Dokument. Es besteht aus dem Prolog und dem Rumpf. 
+      Der Epilog wird in CYBOL nicht verwendet. Der Prolog
+      setzt sich aus der XML-Deklaration und einer Beschreibung zusammen. 
+\begin{verbatim}
+        <?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+        <!--
+          Copyright and Description for the CYBOL file
+        /-->
+\end{verbatim}
+      Der Rumpf von CYBOL ist hierarchisch mit Elementen und den dazugehörigen Attributen 
+      aufgebaut.
+      Ein Rumpf sieht beispielhaft folgendermaßen aus:
+\begin{verbatim}
+        <model>
+          <part name="addresses" ...">
+            <property name="whole" ..." >
+              <constraint name="color" ... />
+              ...
+            </property>
+            ...
+          </part>
+          ...
+        </model>
+\end{verbatim}
+
+    \subsection{Elemente von CYBOL}
+
+      In dem Rumpf können bis zu vier Elementtypen verwendet werden. Diese Elementtypen
+      sind hierarchisch aufgebaut.
+\begin{verbatim}
+        model --> part --> property --> constraint
+\end{verbatim}
+      Die Elementtypen haben folgende Bedeutung:
+      %\begin{table}[H]
+          \begin{longtable}{|l|p{10cm}|}
+%            \centering
+            \hline
+            \textbf{Elementtyp} & \textbf{Beschreibung}
+            \\ \hline
+            model & 
+            Dieses Element ist das Wurzelelement. Alle anderen Elemente sind ihm untergeordnet.
+            \\ \hline
+            part & 
+            Jedes Modell besteht aus einem oder mehreren \emph{parts}. Dies kann zum Beispiel ein
+            Datenelement sein oder auch eine Operation. Voneinander abhängige \emph{parts}
+            werden hierarchisch aufgebaut (siehe dazu \ref{abbhierarchie}).
+            \\ \hline
+            property & 
+            Beschreibt die Eigenschaften zu den \emph{parts}. Ein Beispiel wäre zu einer
+            Sendeoperation die Eigenschaften des Senders und des Empfängers 
+            zu definieren.
+            \\ \hline
+            constraint & 
+            Unterliegen die \emph{properties} bestimmten Bedingungen, 
+            die z.B. einen eingeschränkten Wertebereich 
+            darstellen könnten, so werden diese hier definiert.
+            \\ \hline
+            \caption{Elemente von CYBOL}
+            \label{tab:ElementeVonCYBOL}
+          \end{longtable}
+      %\end{table}
+      Andere Elementtypen sind in CYBOL nicht erlaubt. 
+      Die Elementtypen \emph{property} und \emph{constraint} müssen
+      nicht immer angegeben werden, sondern nur, wenn es im Kontext zu den Elementtyp \emph{part} sinnvoll ist. 
+
+    \subsection{Attribute der Elemente von CYBOL}
+      Für die vollständige Beschreibung wird nun auf die Attribute der Elemente eingegangen.
+      Auch hier gibt es immer die gleichen Attribute, egal um welche Beschreibung es sich handelt.
+      Die Attribute in den Elementen haben folgende Bedeutung:
+      
+%      \begin{table}[H]
+%        \centering
+          \begin{longtable}{|l|p{10cm}|}
+            \hline
+            \textbf{Attribut} & \textbf{Beschreibung}
+            \\ \hline
+            name & 
+            Das Attribut \emph{name} ist die Bezeichnung für den Eintrag. In Abhängigkeit 
+            von dem zu beschreibenden Element ist dieser frei wählbar (bei Element part) 
+            oder durch den Kontext
+            bestimmt. Ein Beispiel für einen Name mit einer bestimmten Bedeutung wäre 
+            für das Element \emph{property} der Name \emph{color} für die Farbe des \emph{part}.
+            \\ \hline
+            channel & 
+            Dieses Attribut beschreibt, wie der Eintrag im Attribut \emph{model} zu lesen ist.
+            Dies könnte \emph{inline} sein,
+            wenn die Beschreibung im Attribut \emph{model} enthalten ist oder es 
+            könnte \emph{file}
+            annehmen, wenn im  Attribut \emph{model} auf eine weitere CYBOL-Datei 
+            verwiesen wird.
+            \\ \hline
+            abstraction & 
+            Dies entspricht im herkömmlichen Sinne dem Datentyp. Bei einfachen Datentypen wäre dies 
+            \emph{string}, \emph{integer}, \emph{float} oder \emph{vector}. Bei zusammengesetzten 
+            Datentypen würde dies \emph{cybol} entsprechen. Für eine primitive
+            Operation der Anwendungslogik würde der Wert \emph{operation} heißen.  
+            \\ \hline
+            model & 
+            Dies ist abhängig von der \emph{abstraction}. Bei einfachen Datentypen kann im 
+            Attribut \emph{model} ein Wert zugewiesen werden.
+            Bei Operationen wird hier die auszuführende Operation definiert. Ist die \emph{abstraction}
+            gleich \emph{cybol}, so wird im \emph{model} auf eine weitere CYBOL-Datei verwiesen.
+            \\ \hline
+            \caption{Attribute der Elemente von CYBOL}
+            \label{tab:AttributeDerElementeVonCYBOL}
+          \end{longtable}
+%      \end{table}
+      Dies ist die allgemeine Beschreibung von CYBOL. Was jetzt noch fehlt, ist die Definition,
+      welche Werte die einzelnen Attribute der Elemente annehmen können und in welcher Kombination
+      sie sinnvoll sind. CYBOL ist noch in der Anfangsphase der Entwicklung und wird
+      systematisch weiter ausgestaltet. Bei  der Beispielanwendung, die im Rahmen der Diplomarbeit entsteht, 
+      werden diese Werte für die einzelnen Attribute der Elemente beschrieben.
+      
+    \subsection{Abbildung von Hierarchien}
+      \label{abbhierarchie}
+      Nicht nur der Aufbau der Beschreibungssprache ist hierarchisch, sondern auch die Abbildungen
+      der \emph{part}. Ein Teil setzt sich aus mehreren Teilen zusammen. Dies wird in 
+      CYBOL über mehrere Dateien gelöst. 
+      Innerhalb des Elements part kann keine Hierarchie abgebildet werden, sondern dies geschieht über 
+      die Einbindung weiterer CYBOL-Dateien mit den  Attributen     
+      \verb|channel="file"|, \verb|abstraction="cybol"| und 
+      \verb|model="?model?"|, wobei \verb|?model?| für das entsprechende hierarchisch 
+      untergeordnete CYBOL-Modell steht.
+      Ein kleines Beispiel könnte so aussehen:
+\begin{verbatim}
+        <model>
+          <part name="table" channel="file" 
+                abstraction="cybol" model="part_of_table.cybol" />
+        </model>
+\end{verbatim}
+      Hier wird der \emph{part} Tisch definiert. In der Datei part\_of\_table.cybol sind die parts Tischplatte
+      und die 4 Tischbeine definiert.
+\begin{verbatim}
+        <model>
+          <part name="tabletop" channel="inline" 
+                abstraction="vector" model="50,50,5" />
+          <part name="tableleg1" channel="inline" 
+                abstraction="vector" model="5,5,30" />
+          ...
+        </model>
+\end{verbatim}
+
+  \section{Formelle Beschreibungen von CYBOL}
+      
+    Für die formelle Beschreibung von CYBOL gibt es verschiedene Möglichkeiten. Da
+    CYBOL in XML beschrieben wird, sind die Meta-Beschreibungen von XML als formelle
+    Beschreibung möglich. Dies beinhaltet die  Document Type Definition, kurz DTD, und
+    die XML-Schemata. Eine weitere Möglichkeit für die formelle Beschreibung besteht in der 
+    Backus-Naur-Form (BNF) bzw. in der erweiterten Backus-Naur-Form (EBNF). 
+    
+    \subsection{Document Type Definition (DTD)}
+
+      Eine Document Type Definition, kurz DTD, beschreibt den strukturellen Aufbau und die
+      logischen Elemente einer Klasse von Dokumenten, genannt Dokumententyp. Die DTD ist
+      eine Mustervorlage für eine Sammlung gleichartiger Dokumente. Ein Editor kann dieses
+      Muster schon beim Schreiben mit dem aktuellen Dokument vergleichen und auf
+      strukturelle Fehler, z.B. fehlende Elemente, hinweisen. Ohne DTD kann kein Programm
+      entscheiden, welche Elemente zu einem Dokument gehören und ob sie zwingend
+      notwendig sind.
+      
+      Die Angabe der DTD erfolgt in einem XML-Dokument mit der DOCTYPE-Deklaration. Dabei
+      wird zwischen interner und externer Deklaration unterschieden. Bei einer internen
+      Deklaration wird die DTD innerhalb der DOCTYPE-Deklaration angegeben, bei der
+      externen Deklaration wird auf eine separate DTD verwiesen. CYBOL verwendet
+      die DOCTYPE-Deklaration für die DTD nicht. Darum brauchen sie in CYBOL-Dateien 
+      weder intern noch extern referenziert werden.
+
+      \textbf{Elemente}\\
+      Elemente sind das Kernstück von XML-Dokumenten. Sie werden in der DTD durch das
+      Tag \verb|<!ELEMENT name (wert) >| definiert. Dabei steht 'name' für den Namen des 
+      Elements und für 'wert' können die Werte 'EMPTY', 'ANY', 'PCDATA' (als Datentyp)
+      oder weitere untergeordnete Elemente eingetragen sein. Bei untergeordneten 
+      Elementen kann noch unterschieden werden, wie oft diese Elemente
+      vorkommen dürfen (? einmal oder gar nicht, * keinmal, einmal oder beliebig oft, 
+      + mindestens einmal). Weiterhin besteht die Möglichkeit, 
+      Sequenzen von Elementen ( ',' zwischen den
+      Elementen) oder Alternativen von Elementen ('|' zwischen den Elementen) zu definieren.
+      
+      \textbf{Attribute} \\
+      Attribute bieten die Möglichkeit, Elemente zu erweitern und zu modifizieren. Mit ihrer
+      Hilfe können zum Element gehörende Informationen angegeben werden. Diese Attribute
+      werden auch innerhalb der DTD definiert. Alle Elemente, denen Attribute zugeordnet sind,
+      erhalten in der DTD eine Attributliste mit dem Tag 
+      \verb|<!ATTLIST name typ vorgabewert >|. Jede
+      Attributdefinition besteht aus einem Namen, dem Typ und einem optionalen Vorgabewert.
+      Typ ist im einfachsten Fall CDATA, für Vorgabewerte können z.B. \#REQUIRED (erforderlich)
+      oder \#IMPLIED (optional) eingetragen werden.
+
+      \textbf{DTD für CYBOL}\\
+      Hier folgt nur die komplette DTD für CYBOL. Da sie nicht in den CYBOL-Dateien referenziert wird,
+      ist dies nur eine formale Beschreibung von CYBOL.
+\begin{verbatim}
+        <!ELEMENT model (part*)>
+        <!ELEMENT part (property*)>
+        <!ELEMENT property (constraint*)>
+        <!ELEMENT constraint EMPTY>
+        
+        <!ATTLIST part
+            name CDATA #REQUIRED
+            channel CDATA #REQUIRED
+            abstraction CDATA #REQUIRED
+            model CDATA #REQUIRED>
+        
+        <!ATTLIST property
+            name CDATA #REQUIRED
+            channel CDATA #REQUIRED
+            abstraction CDATA #REQUIRED
+            model CDATA #REQUIRED>
+        
+        <!ATTLIST constraint
+            name CDATA #REQUIRED
+            channel CDATA #REQUIRED
+            abstraction CDATA #REQUIRED
+            model CDATA #REQUIRED>
+\end{verbatim}
+
+    \subsection{XML - Schema}
+
+      XML-Schema ist ein neuer Ansatz zur Definition von Dokumententypen. Mit der
+      Entwicklung von XML hatte sich zunächst die von der SGML übernommene DTD als
+      Format zur Beschreibung konkreter Dokumententypen etabliert. Mit der zunehmenden
+      Verbreitung von XML in der Praxis machten sich zunehmend die Grenzen und Nachteile
+      der DTD bemerkbar. Besonders die dokumentenzentrierte Sichtweise der DTD unter
+      Vernachlässigung von Datentypen erwies sich als Problem. So ließen
+      DTD weder die Beschreibung bestimmter semantischer Bedingungen noch die Festlegung
+      von Wertebereichen zu. Gerade die zunehmende Verbreitung verteilter Anwendungen
+      erfordert es, Daten in einem einheitlichen, aber flexiblen und leicht modifizierbaren
+      Format, das sich einfach parsen lässt, zu transportieren. Für die Lösung des Problems sollte
+      eine XML-basierte Sprache genutzt werden. Daraus entstand das XML-Schema.
+
+      Die komplette Beschreibung von XML - Schema würde den Rahmen dieser Arbeit sprengen. 
+      Darum wird nur auf die Elemente eingegangen, die in der Beschreibung für CYBOL notwendig sind. 
+      Weitere Informationen zu XML-Schemata sind unter \cite{xsd} zu finden.  \\
+
+      \textbf{Namensraum} \\
+        Im Wurzelelement des Schemas wird der aktuelle Namensraum für Schemata nach W3C
+        Version 1.0, bezogen auf die dort definierten Strukturen, angegeben:
+\begin{verbatim}
+          xmlns:xs="http://www.w3.org/2001/XMLSchema"
+\end{verbatim}
+        Der Namensraum wird nun durch den Alias \verb|xs| repräsentiert.
+        Der definierte Alias wird im Dokument dann vor allen Elementen, Attributen und
+        Datentypen mit angegeben, so das die Beschreibung innerhalb des Namensraums eindeutig ist.
+      \textbf{Komplexe Elementtypen} \\
+        Das Element complexType dient zur Definition eines Elementtyps, welcher weitere
+        Unterelemente beinhalten kann. Das Attribut name definiert den Bezeichner dieses
+        Elementtyps. Die Reihenfolge und Auswahl der Unterelemente kann durch folgende Kompositoren
+        angegeben werden:  
+        \begin{table}[H]
+          \centering
+            \begin{tabular}{|l|l|} 
+              \hline
+              \textbf{Kompositor} & \textbf{Bedeutung} \\ \hline
+              sequence & Vorgegebene Reihenfolge de Subelemente \\ \hline
+              choice & Auswahl eines der Subelemente \\ \hline
+              all & Alle Subelemente oder keines, Reihenfolge ist egal \\ \hline
+            \end{tabular}
+          \caption{Kompositoren komplexer Elemente}
+          \label{tab:KompositorenKomplexerElemente}
+        \end{table}
+      \textbf{Elemente} \\
+        Zur Deklaration eines Elementes in einem XML-Schema reichen die Angabe eines Namens und
+        eines Typs als Attribute des Elementes <element>. Durch die Attribute minOccurs 
+        und maxOccurs kann zusätzlich angegeben werden,
+        wie oft das Element mindestens bzw. maximal hintereinander auftreten darf.
+\begin{verbatim}
+          <xs:element name="MyElement" type="xs:string"/>
+\end{verbatim}
+      \textbf{Attribute} \\
+        Attributdeklarationen erscheinen am Schluss einer Elementbeschreibung. Ihre Angabe
+        erfolgt durch das Element <attribute>, das die Attribute name und type hat. 
+        Mit dem Attribut use kann angeben werden, ob das entsprechende Attribut definiert werden muss.
+        Folgende Deklaration beschreibt ein Attribut:
+\begin{verbatim}
+          <xs:attribute name="MyAttribute" type="xs:string"/>
+\end{verbatim}
+\newpage
+      \textbf{XML-Schema für CYBOL} \\
+      Hier folgt nun das komplette XML-Schema für CYBOL. Da dieses Schema, wie auch die DTD nicht
+      in den CYBOL-Dateien referenziert wird, ist dies auch nur eine formelle Beschreibung von CYBOL.
+\begin{verbatim}
+<xs:schema 
+  xmlns:xs='http://www.w3.org/2001/XMLSchema'
+  targetNamespace='http://www.cybop.net'
+  xmlns='http://www.cybop.net'
+  elementFormDefault='qualified'>
+  <xs:element name='model'>
+    <xs:complexType>
+      <xs:sequence>
+         <xs:element ref='part' minOccurs='0' maxOccurs='unbounded'/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name='part'>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref='property' minOccurs='0' maxOccurs='unbounded'/>
+      </xs:sequence>
+      <xs:attribute name='name' type='xs:string' use='required'/>
+      <xs:attribute name='channel' type='xs:string' use='required'/>
+      <xs:attribute name='abstraction' type='xs:string' use='required'/>
+      <xs:attribute name='model' type='xs:string' use='required'/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name='property'>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref='constraint' minOccurs='0' maxOccurs='unbounded'/>
+      </xs:sequence>
+      <xs:attribute name='name' type='xs:string' use='required'/>
+      <xs:attribute name='channel' type='xs:string' use='required'/>
+      <xs:attribute name='abstraction' type='xs:string' use='required'/>
+      <xs:attribute name='model' type='xs:string' use='required'/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name='constraint'>
+    <xs:complexType>
+      <xs:attribute name='name' type='xs:string' use='required'/>
+      <xs:attribute name='channel' type='xs:string' use='required'/>
+      <xs:attribute name='abstraction' type='xs:string' use='required'/>
+      <xs:attribute name='model' type='xs:string' use='required'/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema
+\end{verbatim}
+
+    \subsection{Erweiterte Backus-Naur-Form (EBNF)}
+    
+      Die Grammatik einer formalen Sprache regelt die Rechtschreibung. Sie legt die korrekte 
+      Syntax fest. Es gibt unterschiedliche Notationen für Grammatiken. Eine 
+      einfache und ausdrucksstarke Form ist die Erweiterte 
+      Backus-Naur-Form (EBNF). Seltener verwendet wird die ursprüngliche, 
+      einfache Backus-Naur-Form (BNF). Dieser fehlen gegenüber der EBNF ein paar 
+      bequeme, abkürzende Schreibweisen. Mit beiden Formen lassen sich aber dieselben 
+      Grammatiken wiedergeben.
+      
+      Mit EBNF lassen sich Grammatiken vom Typ 2 der Chomsky-Hierarchie darstellen.
+      Dies sind kontextfreie Grammatiken, das bedeutet das die Grammatik 
+      $G=\left( N, \Sigma, P, S \right)$ mit N gleich Menge der Nichtterminalsymbole,
+      $\Sigma$ gleich Menge der Terminalsymbole, P gleich die Menge von Regeln und 
+      S gleich das Startsymbol, folgenden Einschränkungen unterliegen:
+      \begin{displaymath}      
+        \forall ( w_1 \rightarrow w_2 ) \in P : \left| w_1 \right| \le \left| w_2 \right|
+      \end{displaymath}
+      \begin{displaymath}      
+        \forall ( w_1 \rightarrow w_2 ) \in P : w_1 \in N
+      \end{displaymath}
+      CYBOL ist eine kontextfreie Grammatik und kann somit in der EBNF
+      notiert werden. 
+
+      Mit EBNF lassen sich auch Grammatiken vom Typ 3 der Chomsky-Hierachie darstellen.
+      Dazu müssen zusätzlich
+      die folgenden Bedingungen eingehalten werden:
+      \begin{displaymath} 
+        \forall (w_1 \rightarrow w_2) \in P : w_1 \in N 
+      \end{displaymath} 
+      \begin{displaymath} 
+        w_2 \in \Sigma \cup \Sigma \cdot N \cup \{ \epsilon \}
+      \end{displaymath} 
+      
+      Schon die erste Regel in der EBNF von CYBOL widerspricht der zusätzlichen Regel.
+\begin{verbatim}
+        CYBOL   = '<model>' 
+                    {part}
+                  '</model>';
+\end{verbatim}
+      Auf der rechten Seite der Regel dürfen nur Terminalsymbole oder Terminalsymbole gefolgt von einem
+      Nichtterminalsymbol stehen. Somit entspricht CYBOL keine Grammatik vom Typ 3 der 
+      Chomsky-Hierarchie.
+      
+      \textbf{Syntax von EBNF} \\
+        Die folgende Übersicht gibt die verwendeten Beschreibungskonstrukte von EBNF \cite{ebnf}
+        wieder:
+%        \begin{table}[H]
+%          \centering
+            \begin{longtable}{|l|l|} 
+              \hline
+              \textbf{Zeichen} & \textbf{Bedeutung} 
+              \\ \hline
+              \endhead
+              = & Definition \\ \hline
+              ; & Endezeichen \\ \hline
+              | & Logisches Oder \\ \hline
+              [...]  & Option \\ \hline
+              {...}  & Optionale Wiederholung \\ \hline
+              (...)  & Gruppierung \\ \hline
+              "..."  & Anführungszeichen, 1. Variante \\ \hline
+              '...'  & Anführungszeichen, 2. Variante \\ \hline
+              (*...*)  & Kommentar \\ \hline
+              \caption{Syntax von EBNF}
+              \label{tab:SyntaxVonEBNF}
+            \end{longtable}
+%        \end{table}
+      
+      \textbf{EBNF für CYBOL} \\
+      Hier folgt die vollständige Notation von CYBOL in der EBNF. 
+\begin{verbatim}
+CYBOL   = '<model>' 
+              {part}
+          '</model>';
+          
+part    = '<part ' all_attribute '\>' |
+          '<part ' all_attribute '>'
+              {property}
+          '</part>';
+
+property    = '<property ' all_attribute '\>' |
+              '<property ' all_attribute '>'
+                  {constraint}
+              '</property>';
+
+constraint  = '<constraint ' all_attribute '\>';
+
+all_attribute          = attribute_name attribute_channel 
+                         attribute_abstraction attribute_model
+
+attribute_name          = 'name="' name '"';
+attribute_channel       = 'channel="' channel '"';
+attribute_abstraction   = 'abstraction="' abstraction '"';
+attribute_model         = 'model="' model '"';
+
+name            = description_sign;
+channel         = description_sign;
+abstraction     = description_sign;
+model           = value_sign;
+
+description_sign    = { ( letter | number ) } ;
+value_sign          = { ( letter | number | other_sign ) } ;
+
+letter          = small_letter | big_letter;
+small_letter    = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' |
+                  'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' |
+                  'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' |
+                  'v' | 'w' | 'x' | 'y' | 'z';
+big_letter      = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' |
+                  'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' |
+                  'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' |
+                  'V' | 'W' | 'X' | 'Y' | 'Z';     
+other_sign      = ',' | '.' | '/', '+', '-', '*';                  
+number          = '0' | '1' | '2' | '3' | '4' | 
+                  '5' | '6' | '7' | '8' | '9';   
+\end{verbatim}
+
+  \section{Logik von CYBOL}
+  
+    Mit der Beschreibungssprache CYBOL wird das statische und dynamische Verhalten 
+    einer Anwendung dargestellt. Dazu bedarf es der folgenden Grundkonstrukte, um 
+    das Wissen und die Logik einer Anwendung zu beschreiben.
+    \begin{enumerate}
+      \item Sequential
+      \item Selection
+      \item Iteration
+    \end{enumerate}
+    In den weiteren Abschnitten wird die Darstellung dieser Konstrukte 
+    für CYBOL beschrieben.
+    
+    \subsection{Sequential}
+      
+      Die Ausführung von mehreren Befehlen hintereinander wird 
+      als sequentielle Abarbeitung bezeichnet. Im ersten Schritt 
+      wird dies durch die 
+      Reihenfolge in den CYBOL-Beschreibungsdateien bestimmt.
+      In Zukunft könnte auch die Reihenfolge über ein Property \emph{position}
+      innerhalb der CYBOL-Datei gesteuert werden. 
+      Dies hätte den Vorteil, dass unabhängig von der Position innerhalb 
+      der CYBOL-Datei die Abarbeitungsreihenfolge festgelegt werden kann. Für
+      diese Flexibilität würde aber die CYBOL-Datei unübersichtlicher,
+      da die Reihenfolge der Abarbeitung nicht der Reihenfolge der 
+      Position in der CYBOL-Datei entsprechend würde.
+
+    \subsection{Selection}
+    
+      Eine weitere wichtige Funktion zur Ablaufsteuerung ist die \emph{selection}. Dies 
+      ermöglicht Verzweigungen innerhalb der Programmausführung. Dafür gibt es in CYBOL
+      die Operation \emph{selection} mit den Properties \emph{comparison}, 
+      \emph{true\_model} und \emph{false\_model}. Die Eigenschaft \emph{comparison} 
+      ist vom Typ Boolean und dient als Vergleichs-Flag zur Unterscheidung, welches Modell 
+      ausgeführt werden soll. Eine Verzweigung wird in CYBOL folgendermaßen definiert:
+\begin{verbatim}      
+<part name="selection" channel="inline" 
+      abstraction="operation" model="selection">
+    <property name="comparison" channel="inline" 
+              abstraction="knowledge" model="domain.comparisonflag"/>
+    <property name="true_model" channel="file" 
+              abstraction="cybol" model="true_model.cybol"/>
+    <property name="false_model" channel="file" 
+              abstraction="cybol" model="false_model.cybol"/>
+</part>
+\end{verbatim}      
+    
+
+    \subsection{Iteration}
+    
+      Iteration ist eine Schleifenkonstrukt. In der prozeduralen  
+      Programmierung gibt es bis zu drei verschiedene Schleifentypen, die \emph{repeat until},
+      die \emph{for} und die \emph{while do} Schleife. Diese Schleifentypen sind alle 
+      ineinander umwandelbar. Darum gibt es in CYBOL nur eine Iterationsform. 
+      Diese ist folgendermaßen definiert.
+      
+\begin{verbatim}      
+<part name="creat_table_body" channel="inline" 
+      abstraction="operation" model="loop">
+    <property name="break" channel="inline" 
+              abstraction="knowledge" model="domain.loop_breakflag"/>
+    <property name="index" channel="inline" 
+              abstraction="knowledge" model="domain.loop_index"/>
+    <property name="model" channel="file" 
+              abstraction="cybol" model="create_table_rows.cybol"/>
+</part>
+\end{verbatim}      
+      Es gibt eine Operation \emph{loop}, die die Eigenschaften \emph{break}, \emph{index}
+      und \emph{model} hat. 
+      Das \emph{model} wird solange ausgeführt,
+      bis die Eigenschaft \emph{break} wahr ist. Das Modell für \emph{break} 
+      ist vorher anzulegen, damit die Schleifenoperation das Breakflag auch auswerten kann.
+      Weiterhin muss, soll keine Endlosschleife entstehen,  
+      in dem \emph{model} die Eigenschaft \emph{break} manipuliert werden, so dass die Schleife
+      eine Chance hat, sich zu beenden. In der Eigenschaft \emph{index}
+      wird eine Zählvariable mitgezählt.
+ 

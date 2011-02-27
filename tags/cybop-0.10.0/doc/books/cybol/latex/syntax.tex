@@ -1,0 +1,61 @@
+%
+% $RCSfile: syntax.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Syntax}
+\label{syntax_heading}
+\index{Syntax}
+\index{Grammar}
+\index{Extensible Markup Language}
+\index{XML}
+\index{XML Tag}
+\index{XML Attribute}
+
+CYBOL's syntax (grammar with rules for combining terms and symbols) is based on
+the well-known \emph{Extensible Markup Language} (XML) \cite{xml}. It has a
+clear text representation, is flexible, extensible and easy to use.
+
+To mention just two of the syntactical elements of XML, \emph{Tag} and
+\emph{Attribute} are considered here shortly. Tags are special, arbitrary
+keywords that have to be defined by the system working with an XML document.
+Attributes keep additional information about the contents enclosed by two tags.
+Two examples:
+
+\begin{scriptsize}
+    \begin{verbatim}
+    <tag attribute="value">
+        contents
+    </tag>
+    \end{verbatim}
+\end{scriptsize}
+
+\begin{scriptsize}
+    \begin{verbatim}
+    <tag attribute1="value" attribute2="content"/>
+    \end{verbatim}
+\end{scriptsize}
+
+A CYBOL knowledge template (XML document) carries a name and can thus represent
+a \emph{Discrete Item}. Being a \emph{Compound}, the template consists of parts
+-- and, it can link to other templates (files) treated as its parts. That way,
+a whole hierarchy can be formed. Tag attributes can keep additional information
+about the linked parts. Most importantly, the hierarchical structure is based
+on tags, which may be used to store meta data about a part.
+
+CYBOL, finally, is XML \emph{plus} a defined set of tags, attributes and values
+used to structure and link documents meaningfully.

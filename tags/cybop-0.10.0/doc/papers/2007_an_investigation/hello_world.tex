@@ -1,0 +1,58 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Hello World}
+\label{hello_world_heading}
+
+The well-known \emph{Hello, World!} program printing just two words shall be
+given as minimal example application. It consists of only two operations:
+\emph{send} and \emph{exit}. The string message to be displayed on screen is
+handed over as \emph{property} to the \emph{send} operation, before the
+\emph{exit} shuts down the system:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="send_model_to_output"
+        channel="inline"
+        abstraction="operation"
+        model="send">
+        <property name="language"
+            channel="inline"
+            abstraction="string"
+            model="tui"/>
+        <property name="receiver"
+            channel="inline"
+            abstraction="string"
+            model="user"/>
+        <property name="message"
+            channel="inline"
+            abstraction="string"
+            model="Hello, World!"/>
+    </part>
+    <part name="exit_application"
+        channel="inline"
+        abstraction="operation"
+        model="exit"/>
+</model>
+    \end{verbatim}
+\end{scriptsize}

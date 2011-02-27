@@ -1,0 +1,78 @@
+%
+% $RCSfile: inversion_of_control.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Inversion of Control}
+\label{inversion_of_control_heading}
+\index{Inversion of Control Pattern}
+\index{IoC}
+\index{Component}
+\index{Application Programming Interface}
+\index{API}
+\index{Framework}
+\index{Observer Pattern}
+\index{Chain of Responsibility Pattern}
+\index{Bidirectional Dependency}
+\index{Strong Coupling}
+\index{Dependency Injection}
+\index{Unidirectional Dependency}
+\index{Security by Design}
+\index{Container}
+\index{Component Isolation}
+\index{Component Lifecycle}
+
+The \emph{Avalon} documentation \cite{avalon} defines a \emph{Component} as
+\emph{a passive entity that performs a specific role}. According to this
+definition, a passive entity has to employ a \emph{passive}
+\emph{Application Programming Interface} (API) which, after \cite{avalon}, were
+one that is acted upon, versus one that acts itself.
+
+As could be seen in section \ref{framework_heading}, it is often desirable to
+let a framework play the role of the main program coordinating and sequencing
+events and application activity. \emph{Observers} (section \ref{observer_heading})
+are applied to realise a callback mechanism; a \emph{Chain of Responsibility}
+(section \ref{chain_of_responsibility_heading}) is often set up among objects
+so that they can react to certain messages in a delegation hierarchy. Both
+patterns rely on bidirectional dependencies whose negative effects such as
+\emph{Strong Coupling} were mentioned before (section
+\ref{bidirectional_dependency_heading}).
+
+The \emph{Inversion of Control} (IoC) pattern \cite{avalon}, in a recent
+article of Martin Fowler also called \emph{Dependency Injection}
+\cite{fowlerioc}, shows a way out. It is mentioned here (and was not in the
+pattern section \ref{pattern_heading}) because of its importance to COP. The
+pattern refers to a major semantic detail: a parent object controlling child
+objects (components) through their passive API, but \emph{not} vice-versa,
+which results in solely \emph{unidirectional} dependencies. As a side-effect,
+this principle enforces \emph{Security by Design} in that the flow of control
+(object access) is always directed \emph{top-to-bottom}. A parent instantiates
+its child components, hands over important parameters (which were configured by
+the parent), and then calls the component's methods. Components are not
+autonomous. They have no state apart from the parent and also have no way of
+obtaining a reference to implementations of parent parameters without the
+parent giving them the implementation they need.
+
+Parent objects that have the ability to host child objects are often called
+\emph{Container}. A container can provide a passive API itself which allows yet
+other containers to control that container. A hierarchical container example
+can be found in the \emph{Pico Container} project \cite{picocontainer}. The
+container manages things like loading of configuration files, resolution of
+dependencies, component handling and isolation, and lifecycle support.

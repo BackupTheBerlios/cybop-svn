@@ -1,0 +1,52 @@
+%
+% $RCSfile: related_work.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Related Work}
+\label{related_work_heading}
+
+There are a number of efforts that go into a similar direction like CYBOP \cite{cybop}.
+Basically, every application that stores configuration data (colours, fonts)
+does use some kind of knowledge model for the file or database to save in.
+However, they all are limited to their corresponding field. What this paper
+proposes is, in short, to store complete systems in special configuration files
+in CYBOL format. CYBOP wants to show an overall approach and provide the means
+(CYBOL/ CYBOI) to build abstract software models for any possible application layer,
+may it be a domain, user interface, workflow, data transfer object or storage.
+
+The two projects mentioned following do related work, with focus on the medical
+domain.
+
+\subsubsection{Open Infrastructure for Outcomes} (OIO) \cite{oio} is a Web-based
+data management system that uses forms (and workflows) which are defined in XML.
+Its most critical point is that OIO forms mix user interface with domain model
+data. Moreover, it misses a clear theory behind and does not distinguish static
+and dynamic models.
+
+\subsubsection{Open Electronic Health Record} (OpenEHR) \cite{openehr} is a
+standardization effort that arose from a European initiative. Its \emph{Dual Model
+Approach} also influenced CYBOP. The project's main aim is the creation of knowledge
+templates (which it calls \emph{Archetypes}), for which an own \emph{Archetype
+Definition Language} (ADL) was defined. A lot of emphasis is placed on constraint
+inclusion, to ensure correct models. However, OpenEHR's model concepts are not
+based on abstraction as it happens in the human mind. They do not clearly
+distinguish between constraints, positions and the actual model information.
+There is no facility for translating between archetypes \cite{openhealth}.
+It offers only static archetype models, no dynamic workflows. ADL seems overly
+complex and difficult to understand. The whole project still lacks implementation
+experiences and practical proof of workability.

@@ -1,0 +1,59 @@
+\section{Web-Architektur}
+  \subsection{Überblick}
+    In diesem Abschnitt wird eine einfache Hardwarearchitektur
+    für die Webanwendung beschrieben. Die Web-Architektur gehört
+    zu den Client-Server-Architekturen. Da für eine Webanwendung 
+    verschiedene 
+    Komponenten zusammenarbeiten, werden diese Komponenten hier vorgestellt
+    und das Zusammenwirken der Komponenten beschrieben. Da es eine Vielzahl 
+    von Möglichkeiten und Kombinationen der Komponenten gibt, kann dies hier 
+    nicht umfassend dargestellt, sondern nur angerissen werden. 
+
+	\subsection{Client-Server-Architektur}
+		
+		Hier ist die Definition aus dem Buch \cite{hwinf}
+		\begin{quotation}
+			"`Unter der Client-Server-Architektur (engl.: client-server architecture) 
+			versteht man eine kooperative Informationsverarbeitung, bei der die 
+			Aufgaben zwischen Programmen auf verbundenen Rechnern aufgeteilt werden. 
+			In einem solchen Verbundsystem können Rechner aller Art zusammenarbeiten. 
+			Server (= Dienstleister; Backend) bieten über das Netz Dienstleistungen 
+			an, Clients (= Kunden; Frontend) fordern diese bei Bedarf an. Die 
+			Kommunikation zwischen einem Client-Programm und dem Server-Programm 
+			basiert auf Transaktionen, die vom Client generiert und dem Server 
+			zur Verarbeitung überstellt werden. Eine Transaktion (engl.: transaction) 
+			ist eine Folge logisch zusammengehöriger Aktionen, beispielsweise 
+			zur Verarbeitung eines Geschäftsvorfalls. Client und Server können über 
+			ein lokales Netz verbunden sein oder sie können über große Entfernungen 
+			hinweg, zum Beispiel über eine Satellitenverbindung, miteinander kommunizieren. 
+			Dabei kann es sich um Systeme jeglicher Größenordnung handeln; das 
+			Leistungsvermögen des Clients kann das des Servers also durchaus übersteigen. 
+			Grundidee der Client-Server-Architektur ist eine optimale Ausnutzung der 
+			Ressourcen der beteiligten Systeme."'
+		\end{quotation}
+  
+  \subsection{Verwendetet Komponenten}
+    Ein Server ist ein Prozess, Programm oder Computer zur Bearbeitung 
+    der Anforderungen eines Clients bzw. zur Bereitstellung von Diensten, 
+    die von einem Client genutzt werden können.
+    
+    Um die typische Webanwendung umzusetzen, bedarf es folgender Komponenten:
+    \begin{enumerate}
+      \item Webserver
+      \item Applicationserver 
+      \item Datenbankserver
+      \item eMail-Server
+      \item Browser
+    \end{enumerate}
+    
+    \input{TabelleWebkomponenten}
+
+    \subsection{Zusammenspiel der Komponenten}
+      Dies ist nur eine Beispielarchitektur. In dem Bild wird für jeden Server ein
+      eigener Rechner verwendet. Dies wird in den meisten Fällen nicht so sein. 
+      Es können auch mehrere Server (z.B. Webserver und Applicationserver) auf 
+      einem Rechner betrieben werden.
+      
+    \begin{center}
+      \includegraphics{Hardware-Architektur}
+    \end{center}

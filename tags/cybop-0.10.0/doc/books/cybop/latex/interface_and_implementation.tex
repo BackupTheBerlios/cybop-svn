@@ -1,0 +1,83 @@
+%
+% $RCSfile: interface_and_implementation.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Interface and Implementation}
+\label{interface_and_implementation_heading}
+\index{Separation of Interface and Implementation}
+\index{Java}
+\index{Interface}
+\index{Interface Pattern}
+\index{Class}
+\index{Decoupling of Components}
+\index{Java Development Kit}
+\index{JDK}
+
+The \emph{Separation of Interface and Implementation} is a core concept of many
+programming languages. \emph{Java}, for example, distinguishes \emph{Interface}
+and \emph{Class} (section \ref{classification_heading}). Mark Grand's book
+\emph{Patterns in Java} \cite{grand} refers to that separation simply as
+\emph{Interface} pattern, one of whose uses, after him, were to
+\emph{encapsulate components}, that is to:
+
+\begin{itemize}
+    \item[-] Force decoupling of different components
+    \item[-] Ensure easy changes of interface implementations
+    \item[-] Enable users to read interface documentations without having the
+        implementation details clutter up their perception
+    \item[-] Increase the reuse possibility in larger applications
+\end{itemize}
+
+The Java source code example below shows how the \emph{sayHello} method whose
+header is declared in the \emph{HelloWorld} interface can be used as
+\emph{Application Programming Interface} (API) without knowing anything about
+the underlying implementation. Depending on the instance, the method may be
+processed on a local or a remote system.
+
+\begin{scriptsize}
+    \begin{verbatim}
+    package helloworld;
+    public interface HelloWorld {
+        void sayHello(String greeting);
+    }
+
+    package helloworld.impl.default;
+    public class DefaultHelloWorld implements HelloWorld {
+        void sayHello(String greeting) {
+            System.out.println("HelloWorld Greeting: " + greeting);
+        }
+    }
+
+    package helloworld.impl.remote;
+    public class RemoteHelloWorld implements HelloWorld {
+        private RemoteMessager remoteMessager;
+        public RemoteHelloWorld(RemoteMessager rm) {
+            remoteMessager = rm;
+        }
+        void sayHello(String greeting) {
+            rm.sendMessage("HelloWorld Greeting: " + greeting);
+        }
+    }
+    \end{verbatim}
+\end{scriptsize}
+
+Further details and recommendations for using interfaces, on examples specific
+to the \emph{Java Development Kit} (JDK) \cite{java}, are given in \cite{avalon}.

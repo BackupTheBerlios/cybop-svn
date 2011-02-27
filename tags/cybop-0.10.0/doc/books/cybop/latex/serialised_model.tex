@@ -1,0 +1,77 @@
+%
+% $RCSfile: serialised_model.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Serialised Model}
+\label{serialised_model_heading}
+\index{CYBOL Serialised Model Example}
+
+A possible (but not necessarily recommended) alternative to the linking of
+external resources is to store such information (as binary code) \emph{inline}
+in the CYBOL knowledge template. One case in which it is necessary to store all
+information inline in the model is \emph{Serialisation}.
+
+A CYBOL address management application that does not rely on the existence of a
+\emph{Database Management System} (DBMS) probably has to store addresses in
+form of serialised files, such as the one shown following. It contains two
+parts representing dynamically extensible lists, one for \emph{phone\_numbers}
+and another one for \emph{addresses}:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="honorific_prefix" channel="inline" abstraction="string" model="Dr."/>
+    <part name="given_name" channel="inline" abstraction="string" model="Tux"/>
+    <part name="family_name" channel="inline" abstraction="string" model="Penguin"/>
+    <part name="phone_numbers" channel="inline" abstraction="cybol" model="(
+        <part name="home" channel="inline" abstraction="string" model="123"/>
+        <part name="work" channel="inline" abstraction="string" model="456"/>
+        <part name="mobile" channel="inline" abstraction="string" model="789"/>
+    )"/>
+    <part name="addresses" channel="inline" abstraction="cybol" model="(
+        ...
+    )"/>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+The serialisation of CYBOL models causes one problem: Due to the double
+hierarchy (section \ref{double_hierarchy_heading}) to which belong
+\emph{Whole-Part} relations (stored in XML attributes) and
+\emph{Meta Information} (stored in XML tags), it is not possible to store CYBOL
+models in an XML-conform manner. Instead of referencing external files
+containing the corresponding CYBOL \emph{Part} models, a serialised
+\emph{Whole} model has to contain these inline.
+
+While XML tags were invented as pairs consisting of a \emph{begin} and an
+\emph{end} tag, XML attribute values are enclosed by simple quotation marks.
+Hence, the beginning markup of an attribute value does not look any different
+than its ending markup. This is a true problem, because serialised whole-part
+hierarchies of CYBOL models, with attribute values containing complete sub
+models with their own attributes, would get completely mixed up in pure XML
+notation.
+
+It was therefore inevitable to break XML-conformity and introduce two
+additional markup tokens \emph{"(} and \emph{)"}, indicating the beginning and
+end of an XML attribute value. The tokens are extensions of the quotation marks
+of standard XML attributes, with one left/ right parenthesis, respectively.
+That way, the degree to which attributes are nested becomes countable and it is
+always clear to which tag an attribute belongs.

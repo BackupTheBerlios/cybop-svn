@@ -1,0 +1,183 @@
+%
+% $RCSfile: receive.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Receive}
+\label{receive_heading}
+\index{Receive}
+
+This operation receives data from the given data source.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="receive_patients" channel="inline" abstraction="operation" model="receive">
+    <property name="channel" channel="inline" abstraction="character" model="file"/>
+    <property name="language" channel="inline" abstraction="character" model="xdt"/>
+    <property name="message" channel="inline" abstraction="character" model="import/1.bde"/>
+    <property name="model" channel="inline" abstraction="knowledge" model=".app.xdt"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Channel Property}
+
+The channel via which to receive the message.
+
+\emph{required}
+
+name=\texttt{'channel'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'inline' \vline\ 'file'}
+
+\subsubsection{Language Property}
+
+This is the language (abstraction, type, structure) of the data received.
+
+\emph{required}
+
+name=\texttt{'language'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{
+    % Primitive.
+    'boolean'
+    \vline\ 'character'
+    \vline\ 'wide\_character'
+    \vline\ 'integer'
+    \vline\ 'unsigned\_long'
+    \vline\ 'double'
+    \vline\ 'fraction'
+    \vline\ 'complex'
+    \vline\ 'date\_time'
+    \vline\ 'yyyy-mm-dd\_date\_time'
+    % Knowledge.
+    \vline\ 'cybol'
+    % User Interface.
+    \vline\ 'tui'
+    \vline\ 'gui'
+    \vline\ 'wui'
+    % Audio.
+    \vline\ 'ogg'
+    \vline\ 'mp3'
+    % Image.
+    \vline\ 'jpeg'
+    \vline\ 'png'
+    \vline\ 'gif'
+    \vline\ 'bmp'
+    % Text.
+    \vline\ 'cybop\_model\_diagram'
+    \vline\ 'xdt'
+    \vline\ 'hxp'
+    \vline\ 'latex'
+    \vline\ 'rtf'
+    \vline\ 'sgml'
+    \vline\ 'tex'
+    \vline\ 'xhtml'
+    % Video.
+    \vline\ 'mpeg'
+    \vline\ 'avi'
+    \vline\ 'qt'
+    % Compression.
+    \vline\ 'tar'
+    \vline\ 'tgz'
+    \vline\ 'zip'
+    \vline\ 'rar'
+    % Application.
+    \vline\ 'kwd'
+    \vline\ 'odt'
+    \vline\ 'sxw'
+    % Network.
+    \vline\ 'http'
+    \vline\ 'https'
+    \vline\ 'ftp'
+}
+
+\subsubsection{Message Property}
+
+This is the source (knowledge template) from where to receive data.
+
+\emph{required}
+
+name=\texttt{'message'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{path to a file}
+
+\subsubsection{Model Property}
+
+This is the compound model to be filled with the data received.
+
+\emph{required}
+
+name=\texttt{'model'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{knowledge model path}
+
+\subsubsection{Details Property}
+
+This is the compound details to be filled with the data received.
+
+\emph{required}
+
+name=\texttt{'details'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{knowledge model path}
+
+\subsubsection{Root Property}
+
+This property specifies the knowledge model that will serve as the root.
+
+\emph{required}
+
+name=\texttt{'root'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}
+model=\texttt{root model knowledge path}
+
+\subsubsection{Style Property}
+
+This is the style of socket communication.
+
+\emph{required}
+
+name=\texttt{'style'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}
+model=\texttt{'stream' \vline\ 'datagram' \vline\ 'raw'}
+
+\subsubsection{Commands Property}
+
+This property specifies the knowledge model containing the commands that the
+user interface should react to.
+
+\emph{optional}, only if a user interface thread is to react to certain commands
+
+name=\texttt{'commands'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}
+model=\texttt{commands model knowledge path}
+
+\subsubsection{Blocking Property}
+
+This property specifies whether the receive process should be blocking. If it
+is, then application signals will not be processed while the receive operation
+is waiting for some message to arrive. Only if a message is actually received,
+the application will process it in form of a signal and then continue to wait.
+
+\emph{optional}
+
+name=\texttt{'blocking'}\\
+abstraction=\texttt{'boolean'}
+model=\texttt{'true' \vline\ 'false'}

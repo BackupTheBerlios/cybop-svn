@@ -1,0 +1,125 @@
+\chapter{Zusammenfassung und Ausblick}
+\section{Zusammenfassung}
+Mit dem Einsatz von Software-Mustern in Applikationen bieten sich dem Entwickler eine Vielzahl an
+Möglichkeiten, Programmcode besser zu strukturieren. Das äußert sich in einer zugleich flexiblen
+Erweiterbarkeit der Funktionalität aber auch in Robustheit gegenüber Änderungen. In Kapitel
+\ref{Muster in der Softwaretechnik} wurden einige dieser Muster vorgestellt. Ihr Einsatz zur
+Modellierung einer unabhängigen Domain-Schicht beschrieb Abschnitt \ref{Die Gesamtarchitektur}. Die
+Geschäftslogik kann auf die Domain-Daten zugreifen, sie laden, modifizieren und speichern, ohne
+über eine direkte Abhängigkeit zu den verwendeten Persistenzmechanismen zu verfügen.\\
+Die Sicherung der Geschäftsdaten kann entweder lokal in XML-Dateien oder in einer Datenbank
+erfolgen. Erst die Kombination mehrerer dieser Möglichkeiten erfüllt das Maß an notwendiger
+Zuverlässigkeit für heutige Softwaresysteme. JDBC als Kommunikationsprotokoll für die Interaktion
+zwischen der objektorientierten Programmiersprache Java und einem Datenbankmanagementsystem bietet
+eine sichere und leicht implementierbare Variante für die Speicherung von Informationen in einer
+zentralen und entfernten Datenbank.\\
+Wie für Persistenzmechanismen existieren für die Optimierung der Interprozesskommunikation bereits
+verschiedene Strukturmuster. Sie ermöglichen es die Anzahl der Interprozessaufrufe zu minimieren
+und somit Lauf- und Antwortzeiten einzusparen. Wird die Methodik zur Verwaltung der Kommunikation
+ebenfalls in eine transparente Zwischenschicht verlagert, ist eine leicht modifizierbare Struktur
+realisierbar, die eine andernfalls notwendige Anpassung von Geschäfts- und Präsentationslogik
+überflüssig macht.\\
+Diese Zwischenschicht bildet \emph{Layer PerCom}. Sie enthält als wesentliche Verbesserung
+gegenüber bekannten Ansätzen, die Möglichkeit nicht nur einen, sondern mehrere
+Persistenzmechanismen und gleichzeitig mehrere Kommunikationsparadigmen in einer dem Anwender
+transparenten Schicht zu vereinigen. Auf vertikaler Ebene ist eine Trennung in Persistenz und
+Kommunikation durchaus sinnvoll und wird auch in dem entwickelten Modell vorgenommen. So werden
+zwei verschiedene, spezialisierte Assembler (\emph{PersistanceAssembler},
+\emph{DataTransferAssembler}) verwendet.
+
+\section{Ausblick}
+In Abschnitt \ref{Kunden, Dienstleister und Schichtenmodelle} wurde ausgeführt, dass es häufig aus
+Kostengründen nicht möglich ist, eine Middleware zur Verwaltung der Datenbankzugriffe zu erwerben.
+Jedoch wäre zu überlegen, ob es nicht sinnvoll ist, eine eigene Middleware zu entwerfen. Sie müsste
+zunächst nicht in allen Einzelheiten vollständig sein und auch nicht von Anfang an mehrere
+Datenbank-Treiber unterstützen.
+\begin{figure}
+    \begin{center}
+       \includegraphics[bb=0 0 500 615,scale=1.0]{Bilder/Resmedicinae_3Tier.eps}
+       \caption{Res Medicinae als Dreischichtenmodell}
+       \label{fig:Dreischichtenmodell von Res Medicinae}
+    \end{center}
+\end{figure}
+Vielmehr genügt es, wenn sie den Anforderungen entsprechend erweiterbar ist und vorerst die
+Grundoperationen realisiert. Da eine Kommunikation mit CORBA und RMI im Projekt vorgesehen ist,
+wäre nach deren Implementierung das Einfügen dieses neu angepassten Data Mappers ein gute Lösung,
+um die momentan sehr umfangreichen Fat-Clients in ihrer Komplexität etwas herunterzuskalieren, so
+dass hauptsächlich nur noch Domain- und Präsentationslogik enthalten wären (siehe Abbildung
+\ref{fig:Dreischichtenmodell von Res Medicinae}). Das würde dem Anwender auch die Konfiguration der
+Datenbankserveranbindung ersparen und mögliche Lokationswechsel und Portierungen der Datenbank
+vereinfachen.\\
+Im Vergleich mit Abbildung \ref{fig:Resmedicinae_2Tier} erkennt man, dass im speziellen der Teil
+der Mapping-Schicht ausgelagert wurde, welcher sich mit der Verwaltung der Daten in der Datenbank
+befasst. Deshalb können der \emph{ERAssembler} und das SQL-Package aus der Komponente entfernt und
+angepasst als Bestandteile des Data Mappers auf einem entfernten Rechner eingesetzt werden.
+%\clearpage
+Während eine lokale Interprozesskommunikation aus Komplexitäts- und Aufwandsgründen über JMS
+erfolgt, basiert der Datenaustausch zwischen Komponenten und Data Mapper auf RMI und CORBA,
+wobei die Daten in einem DTO verpackt und übertragen werden.\\
+Data Mapper und DBMS können durchaus auch auf dem selben Remote-Rechner eingesetzt werden. Das
+reduziert allerdings die Flexibilität des Dreischichtenmodells.\\
+Wie in der vorangegangenen Abbildung ersichtlich ist, wird durch diese Umsetzung eine reine
+Client-/ Server-Kommunikation möglich.\\
+Dennoch kann nicht der gesamte Data Mapper auf einen entfernten Rechner verlagert werden. Wenigsten
+die lokale XML-Dateiverwaltung muss in den einzelnen Komponenten enthalten bleiben.
+
+\vspace{1cm}
+
+In Abschnitt \ref{Das Datenbankmodell} wurde erwähnt, dass sich die augenblickliche
+Tabellenstruktur der Datenbank dem aktuelle Entwicklungsstand der Applikation entsprechend noch in
+ihrer Anfangsphase befindet. Zusätzliche Tabellen könnten für die Speicherung von Daten im
+Zusammenhang mit anderen Modulen, wie beispielsweise Record, notwendig werden.
+
+Formulare zu programmieren und sie entsprechend den Wünschen der Ärzte anzupassen ist eine Aufgabe,
+die nach Möglichkeit automatisiert ablaufen sollte. Zumal von Zeit zu Zeit Aktualisierungen oder
+neue Formulare erscheinen. Deshalb wäre es günstig, über einen Formulardesigner zu verfügen, mit
+dessen Hilfe und unter Vorgabe spezifischer graphischer Komponenten, View-Objekte auf einfache
+Weise erstellt werden können.
+
+\vspace{1cm}
+
+%\subsection{Zwei mögliche Einsatzgebiete von Res Medicinae}
+Eine wesentliche Neuerung bei \emph{Res Medicinae} ist, die Vorteile des Internets und verteilter
+Anwendungen auch für Patientenkarteien nutzbar zu machen.
+\begin{figure}[h]
+    \begin{center}
+       \includegraphics[scale=0.8]{Bilder/Anwendungen1_Internet.eps}
+       \caption{Einsatz von Res Medicinae im Internet}
+       \label{fig:Einsatz von Resmedicinae im Internet}
+    \end{center}
+\end{figure}
+Patientendaten ein und der selben Person könnten an verschiedenen Stellen der Welt gleichzeitig
+abgerufen und bearbeitet werden. So entfielen lange Wartezeiten beim Überweisen eines Patienten an
+einen Facharzt, da das Versenden der Patientenakte per Post überflüssig wäre. Alle notwendigen
+Informationen würden in einer zentralen Datenbank abgespeichert. Die Transaktionen erfolgten unter
+Beachtung des Datenschutzgesetz (DSG 2000), wobei der Einsatz zuverlässiger Verschlüsselungs- und
+Zertifizierungsmechanismen notwendig werden würde. Die anzustellenden Untersuchungen könnten
+ebenfalls Bestandteile weiterführender Teilprojekte werden.
+
+Eine andere Möglichkeit wäre, \emph{Res Medicinae} einrichtungsintern, beschränkt zu nutzen,
+beispielsweise innerhalb eines Krankenhauses, um lediglich interne Daten zu verwalten. Diese Daten
+könnten aber ebenso wie im ersten Beispiel von jedem Arzt an einem Terminal abgerufen und
+modifiziert werden.
+\begin{figure}[h]
+    \begin{center}
+       \includegraphics[scale=0.8]{Bilder/Anwendungen2_Krankenhaus.eps}
+       \caption{Einsatz von Res Medicinae einrichtungsintern}
+       \label{fig:Einrichtungsinterner Einsatz von Resmedicinae}
+    \end{center}
+\end{figure}
+Denkbar wäre auch, die Mediziner mit einer Art Handheld oder Tablet PC (einer tragbaren
+Rechnerversion) auszustatten, der über Funk mit der Datenbank des Krankenhauses verbunden ist.
+Dabei dürfte das Sende-/ Empfangssignal energetisch nur ein sehr niedriges Niveau erreichen, um die
+empfindlichen medizinischen Apparaturen nicht zu beeinflussen, wie es beispielsweise bei Handys der
+Fall sein kann. Es wären jedoch nur sehr kurze Distanzen innerhalb der Einrichtung zu überwinden
+und deshalb keine starken Signale notwendig.\\
+Somit bestünde im Bereich des Funknetzes eine Ortsunabhängigkeit. Die Installation mit den
+Apparaturen am Krankenbett würden eine Funkverbindung gänzlich überflüssig machen. Dem Arzt bliebe
+es erspart, nach einzelnen Patientenbesuchen einen Terminal oder eine Workstation aufzusuchen. Er
+könnte seine elektronischen Akten gleich an Ort und Stelle verwalten.\\
+Es gilt noch anzumerken, dass selbst innerhalb einer Einrichtung nicht alle Personen
+uneingeschränkten Zugriff auf sämtliche Daten erhalten dürften. Über ein Login könnte man sich an
+der Datenbank anmelden und entsprechend seiner zugewiesenen Rolle im Rechte-System der Datenbank
+lediglich die frei gegebenen Informationen abfragen und modifizieren.
+
+\cleardoublepage

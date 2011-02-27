@@ -1,0 +1,146 @@
+%
+% $RCSfile: pattern.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Pattern}
+\label{pattern_heading}
+\index{Pattern}
+\index{Design Technique}
+\index{Software Pattern}
+\index{Object Oriented Programming}
+\index{OOP}
+\index{Gang of Four}
+\index{GoF}
+\index{Anti Pattern}
+\index{Amelioration Pattern}
+\index{Pattern Language}
+\index{Pattern System}
+\index{Software Pattern Classification}
+\index{Architectural Pattern}
+\index{Design Pattern}
+\index{Idiomatic Pattern}
+\index{Creational Design Pattern}
+\index{Structural Design Pattern}
+\index{Behavioural Design Pattern}
+\index{Fundamental Pattern}
+\index{Concurrency Pattern}
+\index{Real Time Pattern}
+\index{Analysis Pattern}
+\index{Meta Model Pattern}
+
+The previous sections investigated basic concepts offered by today's
+programming languages and -paradigms. The following and all later sections of
+this chapter describe design techniques that belong to a higher conceptual
+level. \emph{Patterns}, in a more correct form called \emph{Software Patterns},
+are the first technique dealt with. They became popular through
+\emph{Object Oriented Programming} (OOP), but their use is not limited to OOP
+languages. Patterns represent solutions for recurring software design problems
+and can be understood as recommendations for how to build software in an
+elegant and efficient way. In the past, more detailed definitions have been
+given by meanwhile well-known authors.
+
+Christopher Alexander, an architect and urban planner, writes \cite{alexander}:
+\textit{Each pattern describes a problem which occurs over and over again in
+our environment, and then describes the core of the solution to that problem,
+in such a way that you can use this solution a million times over, without ever
+doing it the same way twice.} He gave this definition primarily for problems
+occuring in architecture, construction, and urban/regional planning, but it can
+be applied in the same manner to software design, as done first by Ward
+Cunningham and others \cite{portland}.
+
+The systems designer Swift \cite{designmatrix} sees a pattern as:
+\textit{essentially a morphological law, a relationship among parts (pattern
+components) within a particular context. Specifically, a pattern expresses a
+relationship among parts that resolves problems that would exist if the
+relationship were missing. As patterns express these relationships, they are
+not formulae or algorithms, but rather loose rules of thumb or heuristics.}
+
+The \emph{Gang of Four} (GoF) (Erich Gamma et al.) applied Alexander's
+definition to object oriented software and created a whole catalogue of design
+patterns \cite{gamma1995}. After them, patterns are: \textit{Structured models
+of thinking that represent reusable solutions for one-and-the-same design
+problem. They shall support the development, maintenance and extension of large
+software systems, while being independent from concrete implementation
+languages.} The experts identified four basic elements of each pattern:
+\emph{Name}, \emph{Problem}, \emph{Solution} and \emph{Consequences}
+(advantages and disadvantages).
+
+For Frank Buschmann et al., software patterns contain the knowledge of
+experienced software engineers and help to improve the quality of decision
+making \cite{buschmann}. In his opinion, they are basic solutions for problems
+that already occurred in a similar way before. Therefore, the author talks of
+\emph{Problem Solution Pairs}.
+
+Martin Fowler means that: \textit{A pattern is some idea that already was
+helpful in a practical context and will probably be useful in other contexts,
+too.} \cite{fowler1997}. After him, patterns, however they are written, have
+four essential parts: \emph{Context}, \emph{Problem}, \emph{Forces} and
+\emph{Solution}.
+
+Depending on their experience, software developers can produce good or bad
+solutions, in every domain. One possibility to improve less well-done designs or
+to extend legacy systems are the so-called \emph{Anti-Patterns} (telling how to go
+from a problem to a bad solution), or the contrasting \emph{Amelioration Patterns}
+(telling how to go from a bad solution to a good solution) \cite{portland}.
+Both help finding patterns in wrong-designed systems and give advice for their
+improvement.
+
+There are efforts to combine patterns to form a \emph{Pattern Language}, also
+called \emph{Pattern System} \cite{buschmann}. Such systems describe
+dependencies between patterns, specify rules for pattern combination and show
+how patterns can be implemented and used in software development practice.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphic/pattern.pdf}
+        \caption{Software Pattern Classification}
+        \label{pattern_figure}
+    \end{center}
+\end{figure}
+
+Several schemes of \emph{Pattern Classification} exist. One possible is shown in
+figure \ref{pattern_figure}. Considering the level of abstraction (granularity),
+it distinguishes between \emph{Architectural-}, \emph{Design-} and \emph{Idiomatic}
+patterns \cite{buschmann}. Design patterns, in turn, are divided after their
+functionality (problem category) into \emph{Creational-}, \emph{Structural-}
+and \emph{Behavioural} patterns \cite{gamma1995}. The Wikipedia Encyclopedia
+\cite{wikipedia} mentions three further problem categories: \emph{Fundamental-},
+\emph{Concurrency-} and \emph{Real-time} patterns. Other criteria (dimensions) of
+classification exist. Fowler introduces a completely different category which he
+calls \emph{Analysis Patterns} \cite{fowler1997}. These are applicable early in the
+software engineering process (chapter \ref{software_engineering_process_heading}).
+And he defines patterns that are more often used for describing the modelling
+\emph{Language} than the actual \emph{Models} as \emph{Meta Model Patterns}.
+
+In the following sections, a greater number of known patterns will be described
+briefly. They form the scientific basis for the ideas following in part
+\ref{contribution_heading} of this work and some of them appear in a modified
+form in the language and interpreter introduced in part \ref{proof_heading}.
+Chapter \ref{knowledge_schema_heading} moreover introduces a new pattern
+systematics for which it references common patterns as introduced here.
+However, since the next sections do not want to copy the work accomplished by
+the above-mentioned authors, they refer to the corresponding literaric source
+for more detailed explanation.
+
+\input{architectural}
+\input{design}
+\input{idiomatic}
+\input{framework}

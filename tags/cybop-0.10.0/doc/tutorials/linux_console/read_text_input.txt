@@ -1,0 +1,52 @@
+
+hallo,
+
+eine Möglichkeit:
+
+#include <stdio.h>
+#include <termios.h>
+#include <unistd.h>
+
+int main()
+{
+struct termios alt,neu;
+char eingabe;
+tcgetattr(fileno(stdin),&alt);
+neu=alt;
+neu.c_lflag &= ~ICANON;
+neu.c_lflag &= ~ECHO;
+tcsetattr(fileno(stdin),TCSANOW,&neu);
+printf("Ein taste drücken\n");
+eingabe=getc(stdin);
+printf("Taste %c gedrückt\n" ,eingabe);
+tcsetattr(fileno(stdin),TCSANOW,&alt);
+}
+
+man kann natürlich auch ncurses benutzen
+
+gruß
+
+
+Ich habe frueher, in der alten DOS-Zeit, mal ein
+Framework fuer solche Applikationen gebaut -- in
+Turbo Vision wollte ich mich nicht einarbeiten.
+Da konnte man noch direkt auf den Frame Buffer
+der Textanzeige zugreifen und das funktionierte
+recht einfach.
+
+Fuer die Linux-Textkonsole wuerde ich das
+folgendermassen angehen: zwei char-Matritzen,
+quasi als Pseudo-Frame-Buffer, einer haelt den
+aktuellen Stand, die auf der Konsole tatsaechlich
+angezeigt wird, die andere wird von der
+Applikation mit dem gefuellt, was angezeigt werden
+soll. Dann muss sie nur noch bei Bedarf eine
+Update-Funktion aufrufen, die die Anzeige auf den
+gewuenschten Sollzustand bringt. Mit der Methode
+hast du auch alle Moeglichkeiten offen, die zu
+sendenden Escape-Sequenzen so zu optimieren, dass
+die Ausgabe selbst ueber eine lahme Modem-Verbindung
+noch fluessig ist.
+
+Ich hoffe, das hilft dir ein wenig weiter.
+

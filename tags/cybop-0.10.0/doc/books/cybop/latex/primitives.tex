@@ -1,0 +1,94 @@
+%
+% $RCSfile: primitives.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Primitives}
+\label{primitives_heading}
+\index{Primitive}
+\index{State Primitive}
+\index{Binary Digit}
+\index{Bit}
+\index{Byte}
+\index{Word}
+\index{Double Word}
+\index{File}
+\index{Hard Disk Drive}
+\index{HDD}
+\index{Random Access Memory}
+\index{RAM}
+\index{Multipurpose Internet Mail Extension}
+\index{MIME}
+\index{Text MIME Type}
+\index{Image MIME Type}
+\index{Audio MIME Type}
+\index{Video MIME Type}
+\index{Application MIME Type}
+
+All software is based on the final two states called \emph{one} \& \emph{zero},
+or \emph{on} \& \emph{off}, or \emph{true} \& \emph{false}, or similarly. A
+\emph{Binary Digit} (Bit) can take on the values \emph{zero} or \emph{one}; it
+represents the final abstraction of any software model and can be easily mapped
+to hardware. A second unit, the \emph{Byte}, consists of eight Bits. One
+\emph{Word} is made up of two Bytes, one \emph{Double Word} of four Bytes and
+so forth. Data in a \emph{File} on a \emph{Harddisk Drive} (HDD) partition or
+another storage medium are saved in form of Bit sequences, just like data in
+\emph{Random Access Memory} (RAM). It is up to a program to interpret these
+data correctly, in the desired manner.
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{footnotesize}
+        \begin{tabular}{| p{70mm} | p{35mm} |}
+            \hline
+            \textbf{Primitivum} & \textbf{Size} [Byte]\\
+            \hline
+            Date, Time, Complex, Fraction, Term & many\\
+            \hline
+            Double, Float, Vector, String & 8, 12, 16 or more\\
+            \hline
+            Integer, Pointer, Word, Short, Byte, Character & 1, 2, 4, 7, 8 or more\\
+            \hline
+            Bit, Boolean & 0 or 1 Bit\\
+            \hline
+        \end{tabular}
+        \end{footnotesize}
+        \caption{State Primitives sorted after their Granularity}
+        \label{primitives_table}
+    \end{center}
+\end{figure}
+
+Many programming languages offer a number of basic types, also called
+\emph{Primitives}, which are combinations of different numbers of Bits. Table
+\ref{primitives_table} shows some of them, together with their possible memory
+usage. Besides the primitive types that are included in a programming language,
+there are other forms of storing data. Section \ref{language_heading} said that
+not only a \emph{String}, but also an \emph{Image} or a \emph{Sound} can
+represent a \emph{Quality}, that is a \emph{Term} with special meaning. The
+format of such data sequences is often defined as
+\emph{Multipurpose Internet Mail Extension} (MIME) type, for example:
+
+\begin{itemize}
+    \item[-] \emph{text:} sgml, xml, html, rtf, tex, txt
+    \item[-] \emph{image:} jpeg, png, gif, bmp
+    \item[-] \emph{audio:} ogg, mp3, wav
+    \item[-] \emph{video:} mpeg, qt, avi
+    \item[-] \emph{application:} kword, sxw
+\end{itemize}

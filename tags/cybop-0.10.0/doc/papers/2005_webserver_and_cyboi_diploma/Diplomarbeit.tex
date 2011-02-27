@@ -1,0 +1,118 @@
+\documentclass[12pt,a4paper]{diplom}
+\usepackage{float}
+\usepackage[ps2pdf]{hyperref}
+\usepackage{longtable}
+%\usepackage[html]{tex4ht}
+
+\setlength{\hoffset}{-1,3in} \setlength{\voffset}{-1in}
+\setlength{\oddsidemargin}{3,5cm} \setlength{\topmargin}{1,3cm}
+\setlength{\headwidth}{16,5cm} \setlength{\textwidth}{16,5cm}
+\setlength{\textheight}{23,2cm} \setlength{\headheight}{0cm}
+
+\def\heute{\number\day.\space\ifcase\month\or Januar\or Februar\or
+März\or April\or Mai\or Juni\or Juli\or August\or September\or Oktober\or
+November\or Dezember\fi\space\number\year}
+
+\def\Abgabetermin{23. Juni 2005}
+
+
+\renewcommand{\footnoterule}{\rule{5cm}{0.1mm}\vspace{0.3cm}}
+
+
+\begin{document}
+
+
+
+\begin {titlepage}
+
+  \title{\large
+  {Untersuchung der Realisierungsmöglichkeiten von \\
+  CYBOL - Webfrontends,
+   unter Verwendung von Konzepten des
+   Cybernetics Oriented Programming (CYBOP)}
+  \\
+  \vspace {3cm}\small Diplomarbeit zur Erlangung des akademischen Grades Diplominformatiker,\\
+  vorgelegt der Fakultät für Informatik und Automatisierung\\
+  der Technischen Universität Ilmenau}
+  
+  \vfill \normalsize
+  
+  \author{
+  \small von: Rolf Holzmüller\\
+  \small Betreuer: Dipl.-Ing. Christian Heller\\
+  \small verantwortlicher Hochschullehrer: Prof. Dr.-Ing. habil. Ilka Philippow\\
+  \small Inventarisierungsnummer: 2005-04-01/032/JN93/2232
+  \date{\small eingereicht am: \Abgabetermin} 
+  }
+  
+\end {titlepage}
+
+\setFooter
+\maketitle
+
+  \pagenumbering{Roman}
+
+  
+  \vspace*{\fill}
+  \noindent
+
+    Copyright\,\copyright\,2004-2005. Rolf Holzmüller.\\
+    {\it Cybernetics Oriented Programming -- \(<\)www.cybop.org\(>\)}\\
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.2
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+    A copy of the license is included in the section entitled "`GNU
+    Free Documentation License"'.
+
+
+  \newpage
+
+  \tableofcontents
+  \newpage
+  \listoffigures
+  \newpage
+  \listoftables
+  \cleardoublepage
+  \pagenumbering{arabic}
+
+  \input{Einfuehrung}
+  
+  \input{GrundlagenCybopHumanThinking}
+
+  \input{CYBOL}
+
+  \input{CYBOI}
+  
+  \input{Webanwendung}
+
+  \input{Webserver}
+
+  \input{UmsetzungPraktAufagbe}
+
+  \input{Ausblick}
+
+  \newpage
+
+  \begin{appendix}
+
+
+  \bibliographystyle{geralpha}
+  \bibliography{literatur}  
+  
+  
+  \newpage
+
+
+  \input{Thesen}
+
+  \input{eidesstattlicheErklaerung}
+
+  %\input{gnu_license}    
+  
+
+
+  \end{appendix}
+       
+\end{document}
+

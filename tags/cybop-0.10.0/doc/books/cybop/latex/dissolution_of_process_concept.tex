@@ -1,0 +1,56 @@
+%
+% $RCSfile: dissolution_of_process_concept.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\paragraph{The Dissolution of the Process Concept}
+\label{dissolution_of_process_concept_heading}
+
+Because all resources belonging to an application are situated under the
+corresponding branch of the knowledge tree carrying the application's name, a
+\emph{Process Table} (sometimes called \emph{Process Control Block}) as found
+in classical \emph{Operating Systems} (OS) might not be necessary anymore.
+
+After Tanenbaum \cite{tanenbaum2001}, an entry in the process table of an OS
+contained information about the process' state, its program counter, stack
+pointer, memory allocation, the status of its open files, its accounting and
+scheduling information, and everything else about the process that must be
+saved when the process is switched from \emph{running} to \emph{ready} or
+\emph{blocked} state so that it can be restarted later as if it had never been
+stopped.
+
+see: \cite[p. 81]{tanenbaum2001}
+
+- if there are no processes, there is no state information
+- program counter: ?? (real time)
+- a stack is not needed ??, since all states belong to the one knowledge tree
+- CYBOP application system keeps all resources under one knowledge tree branch;
+no \emph{wild} memory allocation --> no memory allocation information to keep
+--> no context switches necessary when changing from one process to another
+- open files: ?? (must not be accessed in parallel)
+- accounting: ??
+- scheduling: ??
+
+- Operations are low-level and belong to CYBOI.
+- The interruption of long-lasting executions of operations is a low-level issue
+that must be solved within CYBOI, but \emph{not} by dividing application models
+in RAM up into abstract processes.
+- The investigation of concepts applicable for this interruption, however, are
+an own topic that does not originally belong to this work.

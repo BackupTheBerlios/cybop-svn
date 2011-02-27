@@ -1,0 +1,33 @@
+%
+% $RCSfile: syntax.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Syntax}
+\label{syntax_heading}
+
+An XML document carries a name and can such represent a \emph{Discrete Item}. It
+can also link to other documents, such as one being a \emph{Super Category} to
+the item currently considered. Most importantly, XML documents have a hierarchical
+structure based on \emph{Tags} which may be used to model \emph{Parts} of a
+\emph{Compound}. Tag \emph{Attributes} keep \emph{Meta Information} about the tag
+contents.
+
+Considering these properties of XML, it seems predestinated for formally
+representing abstract models using the CYBOP concepts. CYBOL, finally, is XML
+\emph{plus} a defined set of tags and attributes used to structure and link
+models meaningfully. The tags are: \(<\)model\(>\), \(<\)super\(>\), \(<\)part\(>\).

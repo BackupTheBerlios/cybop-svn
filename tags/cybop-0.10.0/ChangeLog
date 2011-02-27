@@ -1,0 +1,1871 @@
+#
+# This file records the changes that are made to cybop.
+#
+# The format of this file is quite strict. Here are some tips for ChangeLog writing:
+# - make one entry per person
+# - group logical changes together
+# - separate logically distinct changes (change sets) by a single blank line
+# - entries should be brief
+# - an entry should not explain why a change was made, but rather what the change was
+#   (the explanation of why belongs in the source code itself)
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# @version $RCSfile: ChangeLog,v $ $Revision: 1.147 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
+# @author Christian Heller <christian.heller@tuxtax.de>
+#
+
+2011-02-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up some minor issues in preparations of release CYBOP 0.10.0
+
+2011-02-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Experiment with a few new container functions
+
+2011-02-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Add file "part_replacer.c" and some constants
+
+2011-02-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Update website
+        * Add old scientific article "An Investigation ..." from February 2006
+
+2011-02-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Update project plan on website
+
+2011-02-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix error that size was set one too large in function "replace_adjust"
+        * Fix error that count was increased before replacing elements in function "replace_adjust",
+            which may cause memory errors when "sensing" threads access the destination
+            because the count is higher than the actual number of valid elements
+        * Replace old "append..." functions with new ones and delete directory "executor/accessor/appender/"
+
+2011-02-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Solve conflict between old and new "replace" (formerly "set") functions
+
+2011-02-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Move "assign" and "set" functionality from "executor/accessor/" into "executor/modifier/"
+        * Rename "set" functions into "replace"
+
+2011-02-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Complete "compound_reallocator" and "signal_memory_reallocator"
+        * Adapt "compound_setter" and "signal_memory_setter" accordingly
+
+2011-01-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Add files "compound_reallocator.c" and "signal_memory_reallocator.c"
+
+2011-01-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix wrong cast to int instead of double for wait time in socket sensing service
+        * Identify problem that html file http response was created twice and
+            only first action was executed, but not later ones;
+            the reason is the usage of "append" instead of "replace",
+            so that all html models or uri actions were appended to previous ones
+
+2011-01-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Complete prototype website for application "presence"
+        * Add example application "http_communication"
+
+2011-01-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Add prototype website for application "presence"
+
+2011-01-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Make http communication work fully
+        * Create new cybol example application "presence"
+
+2011-01-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Make http response encoding work
+
+2011-01-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug http response encoder (resulting character array is empty)
+
+2011-01-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue http response encoder (header entries)
+
+2011-01-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue http response encoder (general structure)
+
+2011-01-07  Christian Heller  <christian.heller@tuxtax.de>
+        * Prepare http response encoder
+
+2011-01-05  Christian Heller  <christian.heller@tuxtax.de>
+        * Factor out model diagram encoder functions to separate files in sub directory
+        * Fix error that uri details were not displayed in model diagram (wrong constant count)
+        * Make html encoder work again
+
+2011-01-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix file "uri_decoder.c" and others, to make uri parsing work correctly
+
+2011-01-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Distinguish four kinds of http request uri (no resource, absolute uri, authority form, absolute path)
+
+2011-01-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Implement decoding of percent-encoded ASCII character arrays
+        * Change copyright year to 2011 in all CYBOI source code files
+        * Prepare distinction of request uri types (server "*", absolute, authority, path)
+
+2010-12-31  Christian Heller  <christian.heller@tuxtax.de>
+        * Figure out problem with uri handling (percent-decoding missing)
+
+2010-12-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue uri handling
+
+2010-12-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue uri handling
+
+2010-12-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue uri authority handling
+
+2010-12-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace "process" functions with "decode" functions
+        * Replace "evaluate" functions with "select" functions
+
+2010-12-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace "process" functions with "decode" functions
+        * Factor out many functions into their own specific files
+
+2010-12-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Investigate container classes of Java Class Framework
+            (e.g. Collections, Maps, MutableTreeNode)
+            in order to identify groups of necessary container functions
+        * Store these functions in file "todo_cyboi_java_comparison.txt"
+
+2010-12-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Create new files and continue uri handling
+        * Extend "detect" function with flag indicating desired move of position
+
+2010-12-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Create new files and continue uri handling
+        * Distinguish between various http schemes using "evaluate" function
+
+2010-11-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Create new files for uri handling
+        * Add directory "executor/converter/evaluator/"
+
+2010-11-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Factor out http request selecting functions to separate files
+
+2010-11-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Change back all-at-once-conversion of http request header into wide characters,
+            because the URI may contain percent-encoded octets that first have to be decoded,
+            before decoding the therefrom resulting octets into wide characters
+        * Factor out http request processing functions to separate files
+        * Prepare decoding of percent-encoded character arrays (may be applied in a URI)
+
+2010-11-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Start implementing URI decoding using files independent of HTTP, to make it reusable
+
+2010-11-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Change http decoding so that the message header and -body are
+            separated first, while still available as ASCII characters
+        * Convert http message header into wide characters at once (not piece by piece)
+        * Replace constants files "*compound_http_name.c" with "cyboi_http_name.c"
+        * Change type of most http constants towards wide character, since the http
+            message header is converted to wide characters, before processing it further
+
+2010-11-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Set model count to zero in "model_allocator.c", since the model does initially not contain any elements;
+            correct bug in "character_vector_addition_calculator.c" and "integer_vector_addition_calculator.c",
+            where the count was forgotten to be set
+        * Add one file with prefix "cyboi_" in parallel to each file containing http constants
+            in directory "constant/name/http/";
+            this is necessary, because names or models of standard formats
+            are not always intuitive, so that CYBOI uses its own speaking names internally,
+            e.g. HTTP header names start with a capital letter, but CYBOI uses lower-case names only;
+            fields of the xDT standard are represented by numbers, but CYBOI uses speaking names (text) etc.
+        * Continue writing of http request processor
+
+2010-11-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Simplify source code by using the functions "allocate_model" and "deallocate_model"
+            wherever a model (array, compound or another) with count and size gets created
+
+2010-11-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Factor out functions of file "controller/globaliser.c" into separate files
+            in new sub directories "controller/globaliser/" and "controller/unglobaliser/",
+            and move unglobalise functionality into file "controller/unglobaliser.c"
+        * Factor out functions of file "controller/checker.c" into separate files
+            in new sub directory "controller/checker/"
+
+2010-11-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Make "ui_control" standard example work again
+        * Investigate if and where to use architecture-independent types such as
+            "size_t" and "ptrdiff_t" instead of "int";
+            http://www.gnu.org/software/libtool/manual/libc/Important-Data-Types.html#Important-Data-Types;
+            since cyboi assigns the sizes of all primitive types
+            to special global integer variables at system startup
+            (in module "globaliser.c"), there is no need to work with type "sizt_t";
+            pointer subtractions return values of type "ptrdiff_t" in glibc;
+            since pointer arithmetics is usually done in just one line in cyboi,
+            and the resulting values are assigned to integer variables,
+            nothing had to be changed for now in cyboi (possibly later, however)
+        * Add new global size variables for various data types of the glibc,
+            in order to avoid using the "sizeof" function throughout all source code
+        * Assign new type size variables at system startup, in file "globaliser.c"
+        * Adapt all source code
+
+2010-11-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug file "creating_memoriser.c", where abstraction was decoded a second time
+            and assign runtime abstraction instead
+
+2010-11-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug runtime errors
+        * Make standard application examples work again
+
+2010-11-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue replacing integer-based memory abstraction constants in cyboi with wide characters
+        * Correct compilation errors caused by new primitive abstraction constants;
+            include file "constant/abstraction/memory/primitive_memory_abstraction.c" where necessary
+
+2010-11-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue replacing integer-based memory abstraction constants in cyboi with wide characters
+
+2010-11-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace integer-based memory abstraction constants in cyboi with wide characters;
+            see files "constant/abstraction/memory/memory_abstraction.c"
+            and "constant/abstraction/memory/primitive_memory_abstraction.c";
+            it is true, integer numbers are more efficient when processed in cyboi;
+            they have been applied, but the problem is, that runtime abstractions
+            are also used in cybol applications, e.g. in operation "add", "copy", "create";
+            if having integers, then cybol application developers would have to learn
+            which number references which abstraction (type);
+            even worse, the assignment of numbers to abstraction constants may change,
+            e.g. due to additional abstractions having to be added to cyboi;
+            therefore, using wide character sequences for abstraction constants is necessary
+        * Replace branching in "executor/" directory and elsewhere using "comparison result" flag
+            instead of direct comparison with abstraction integer value,
+            due to change from integer-based memory abstraction constants to wide characters
+
+2010-11-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Try to make "ui_control" standard example work again
+        * Find the reason why wide character-based abstraction constants
+            should be used instead of integer numbers (because they are used in cybol)
+
+2010-11-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix pointer bugs caused by wrong position of arguments in "get_universal_compound_element_by_name" function and -calls
+        * Make "exit_text_file" and "exit_cybol_file" example applications work again
+
+2010-11-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix pointer bugs caused by wrong position of arguments in "get_compound_element_index" function calls
+        * Fix pointer bugs caused by passing plain argument instead of its reference to "set" function calls
+        * Fix pointer bugs caused by passing result argument's reference instead of just argument in "*_operation_handler.c" functions
+        * Make "exit" example application work again
+
+2010-10-31  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix bugs caused by wrong position of result argument in "compare_equal_arrays" function
+        * Search and partly fix bug that the xml decoder does not work
+
+2010-10-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix linking bug by adding "encode" function forward declaration to "compound_appender.c"
+        * Update "architecture.odp" document
+
+2010-10-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt all function calls of "set_array_elements" and "get_array_elements"
+            to new order of arguments, to solve a couple of "Segmentation fault" errors
+
+2010-10-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Search bug causing "Segmentation fault" at destruction of memory models
+
+2010-10-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug "controller/manager.c"
+        * Optimise allocation and deallocation by using "allocate_model"
+
+2010-10-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Make logging work again, in either test mode or knowledge mode
+
+2010-10-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Figure out why logging does not produce any message in log file
+
+2010-10-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Add test functions
+
+2010-10-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Restructure test function directory
+
+2010-10-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up logical errors
+        * Adapt "set" function to try to make it work with "tester.c"
+
+2010-09-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up logical errors
+        * Make cyboi runnable showing help message
+
+2010-09-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+        * Correct linking errors
+        * Make cyboi fully compilable and linkable again
+
+2010-09-04  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+        * Correct linking errors
+
+2010-09-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+        * Correct linking errors
+
+2010-08-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+        * CAUTION! Parameter values such as *_MEMORY_ABSTRACTION should always be handed over together with MEMORY_ABSTRACTION_COUNT,
+            but NOT for array functions, to avoid cyclic calls when evaluating an "ABSTRACTION" constant
+            which is currently of type "integer" but might become a "wide_character" again in future
+
+2010-08-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+
+2010-08-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+
+2010-08-10  Enrico Gallus  <enrico.gallus@googlemail.com>
+        * Extend files constant/model/internet_protocol_model.c and constant/model/service_port_model.c
+
+2010-08-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+
+2010-06-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct include paths since some files are in a deeper directory now, after having restructured
+        * Clean up errors stemming from previously implemented changes,
+            in "applicator/" sub directories "maintainer", "memoriser" and "runner"
+
+2010-03-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors stemming from previously implemented changes
+        * Remove superfluous "vector" files, e.g. "character_vector_allocator.c" etc.
+
+2010-02-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace "compare_arrays" with "compare_equal_arrays" and correct order of parameters
+        * Clean up compilation errors stemming from previously implemented changes
+        * Remove superfluous "vector" files, e.g. "character_vector_getter.c" etc.
+        * Remove further superfluous files, e.g. "character_vector_appender.c"
+            and replace them with just one neutral file, e.g. "array_appender.c",
+            since they differed only in their abstraction (type), but not their logic
+
+2010-02-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up errors in "executor/" directory stemming from previously implemented changes
+
+2010-02-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up errors in "executor/" directory stemming from previously implemented changes
+
+2010-01-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt various files to use new integer-based "_MEMORY_ABSTRACTION" constants
+
+2010-01-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Change copyright year to 2010 in all CYBOI source code files
+        * Adapt branching files in "executor" directory (e.g. "appender.c") to use
+            new integer-based "_MEMORY_ABSTRACTION" constants
+        * Adapt source code by cleaning up errors stemming from
+            previously implemented changes in arrays, abstraction constants, model constants etc.
+
+2009-12-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Restructure "executor/comparator/" directory for distinguishing between "equality", "greaterness" etc.
+        * Move content of "comparator.c" into this directory and delete the file from "executor/" directory
+
+2009-12-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Distinguish between unary and binary operations in "executor/calculator/" directory
+            (for unary operations it suffices to distinguish abstractions like "integer", "double" etc.
+            and to offer a corresponding module and function for each such abstraction;
+            for binary operations, the two operands may have different abstractions, so that
+            different main modules have to be used, e.g. "integer_adder.c" instead of just "adder.c"
+        * Rename "adder.c" file into "integer_adder.c" and create equally named sub directory
+            with files "integer_integer_adder.c" and "pointer_integer_adder.c" (more are possible)
+        * Keep structure extensible, since other files like "double_adder.c" or
+            "wide_character_adder.c" may be added later on
+        * Delete file "calculator.c"
+        * Add new file "size_determiner.c" returning the size of a primitive type
+        * Adapt files "array_allocator.c" and "array_reallocator.c"
+
+2009-12-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Split file "assigner.c" and put resulting files into "executor/accessor/assigner/" directory
+
+2009-11-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Extract comparison functions from "comparator.c" into extra files, e.g. "character_comparator.c"
+
+2009-11-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt files in "executor" directory to new structure
+
+2009-11-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Update architecture document in OpenOffice and PDF format
+
+2009-11-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug source code by cleaning up errors stemming from previously implemented array changes
+        * Spread array functions to different files
+        * Rename "memoriser" directory into "executor"
+        * Restructure and partly rename files in "executor" directory
+
+2009-10-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert source code repository from Concurrent Versions System (CVS) to Subversion (SVN)
+
+2009-10-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert memory abstraction constants from strings to numbers,
+            for arrays, primitives vectors, compound types etc.
+        * Merge array abstraction constants into file "memory_abstraction.c"
+        * Add primitive operations for adding, multiplying, comparing values
+        * Simplify and unify array functions by introducing NEW files with functions
+            to "assign", "compare", "add" values of primitive data types;
+            that way, the type handling is outsourced and redundancies are avoided
+        * Add reworked array files (assigner, comparator, multiplier etc.) into directory "memoriser"
+        * Delete now outdated directory "memoriser/array/"
+
+2009-07-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new file "integer_assigner.c" starting extraction of source code
+            handling primitives (assign, compare etc.)
+
+2009-07-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct the names of a few constants in various files
+
+2009-07-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Sort http constants alphabetically where useful
+        * Add further http header constants, taken from the HTTP 1.1 RFC 2616 specification
+        * Add further comparisons in function "select_http_request_header"
+
+2009-03-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue handling of http headers in files "http_request_processor.c" and "http_request_selector.c"
+
+2009-02-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt file "xml_processor.c" to using the new function "append_part"
+
+2009-02-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Add file "compound_http_name.c" for storing parsed http elements in one compound model
+        * Add file "part_accessor.c"
+        * Continue http request parser
+
+2009-02-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Readd files "http_request_converter.c" and "http_response_converter.c"
+
+2009-02-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Delete files "http_request_converter.c" and "http_response_converter.c"
+        * Add file "http_request_compound_selector.c"
+
+2009-02-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Add files "http_response_processor.c" and "http_response_selector.c"
+        * Investigate detection of content type in http messages and add corresponding
+            comments and WWW resource links
+
+2009-02-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Rename and move file "separator_http_model.c" to "separator_http_name.c"
+        * Add files "http_request_processor.c" and "http_request_selector.c"
+        * Start implementing http request parsing functionality, to soon replace the old file "http_request_converter.c"
+        * Move directory "constant/name/cybol/xdt/" to "constant/name/xdt_model/"
+
+2009-02-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Reactivate socket functionality
+        * Add new file "detector.c" which replaces the now removed file "xml_detector.c";
+            adapt file "xml_selector.c" to changed function calls;
+            the new file "detector.c" simplifies implementing parsers for various
+            data structure types and thereby files
+
+2009-02-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt and correct minor things in project files
+        * Remove log messages from threaded functions, since they:
+            a) produced huge log files in the thread's endless loop
+            b) could (possibly) cause strange behaviour as logging is not guaranteed to be thread-safe
+
+2009-01-31  Christian Heller  <christian.heller@tuxtax.de>
+        * Edit example application "ui_control":
+            - adapt menu entries
+            - translate user interface into English
+            - fix bug that prevented switching the actions from main window to about dialogue
+        * Change copyright year to 2009 in all CYBOI source code files
+        * Release CYBOP 0.9.0
+
+2009-01-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Change terminal attributes in file "gnu_linux_console_starting_maintainer.c",
+            so that pressing a button causes an immediate reaction and does not wait for the next input
+            (before that, the application did only react to the escape button when pressing it twice or yet another button);
+            the terminal attribute "c_cc[VMIN]" had to be set to zero as value
+
+2009-01-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Reactivate storage and manipulation of terminal settings at console startup, so that pressing
+            the <enter> button is not required for input; restore settings at console shutdown
+        * Investigate signal processing, which does not work reliably
+        * Add mutex lock to functions "read_gnu_linux_console_character", wherever "fgetwc" or "ungetwc" are called;
+            this is to prevent errors due to different threads manipulating gnu/linux console characters at the same time;
+            this was leading to wrong behaviour, because (unpredictably) only some actions were accepted on gnu/linux console
+        * Make CYBOL example application "ui_control" work
+
+2009-01-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Investigate signal processing, which does not work reliably
+
+2009-01-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Simplify file "checker.c"
+        * Investigate why only the first interrupt signal, but not following interrupts
+            are detected on gnu/linux console
+
+2009-01-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct a few pointer issues in file "checker.c"
+        * Search bug that not all interrupts arrive correctly in functions "check_interrupts" and "check_signal"
+
+2009-01-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Factor out handling of encapsulated- and knowledge logic into new files
+            "encapsulated_handler.c" and "knowledge_handler.c"
+        * Let both handle not only compound logic, but also operation logic
+            (the latter was missing up to now, which is why some example application functions did not work)
+        * Add tests for null pointer in file "x_window_system_communicator.c" to avoid
+            a "Segmentation fault", if the X Window System was not started
+
+2009-01-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Prepare "project plan" web page for coming 0.9.0 release
+        * Search and fix "Bus error" bug appearing since the autoconf/ make files were adapted to 64 Bit architecture:
+            the reason was that "INTEGER_ARRAY_MEMORY_ABSTRACTION" instead of "POINTER_ARRAY_MEMORY_ABSTRACTION"
+            was handed over to function calls of "get_array_elements" of file "compound_handler.c"
+        * Fix bug causing tui input actions to bring a segmentation fault:
+            the reason was superfluous function calls of "decode_utf_8_unicode_character_vector" in function "read_gnu_linux_console"
+
+2009-01-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt file "configure.ac" to using 64 Bit compilation mode and "x86_64" architecture
+        * Remove "libxml" dependency from files "configure.ac" and "src/controller/Makefile.am"
+        * Fix bug in xml parsing files where "POINTER_PRIMITIVE_SIZE" was used instead of "WIDE_CHARACTER_PRIMITIVE_SIZE"
+            (this bug became obvious because the 32-bit environment set int, long and pointer to 32 bits,
+            but the now valid 64-bit environment sets int to 32 bits and long and pointer to 64 bits)
+        * Prepare file "NEWS" for coming 0.9.0 release
+
+2009-01-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix bad bug in all arrays' function "reallocate": the new memory area to be allocated
+            was always set, even if the new array size was smaller than the old array count,
+            which caused the pointer to the new array to cross the array's boundary
+        * Fix bug in file "gnu_linux_console_converter.c" that caused the content of
+            compound parts to be painted even though it does not represent valid characters;
+            this caused wrong characters or question marks to appear on screen;
+            a null pointer is handed over instead of a compound model now
+
+2009-01-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Investigate and fix gnu linux console input sensing mechanism
+
+2009-01-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace last remaining Unicode character in "ascii" border or file "gnu_linux_console_converter.c"
+            with ASCII vertical line (the non-ASCII pipe caused a wrong text user interface output)
+        * Eliminate bug in file "cybol_detector.c" where || was used instead of && for CYBOL root node detection
+        * Correct copying of strings; rename one of two redundant CYBOL operations (for memory and file) into "copy_file"
+
+2009-01-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt CYBOL example application "ui_control" to new MIME-type-like abstractions
+        * Search bug that text user interface of CYBOL example application "ui_control"
+            does not get displayed properly
+        * Change several minor things related to Unicode and UTF-8 handling
+        * Investigate three possible ways for character conversion in GNU C library documentation:
+            - "Non-reentrant Conversion"
+            - "Restartable Multibyte Conversion"
+            - "Generic Charset Conversion"
+            currently, "Restartable Multibyte Conversion" functions are used in CYBOI,
+            but since all of the above functions have drawbacks, CYBOI may have to
+            implement its very own conversion functions in the future
+
+2009-01-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct minor bugs in files "integer_converter.c" and "integer_vector_converter.c"
+        * Review file "gnu_linux_console_converter.c" and adapt as well as simplify many pieces
+        * Correct files "terminal_background_converter.c" and "terminal_foreground_converter.c"
+        * Make CYBOL example "helloworld" work when sending to gnu_linux_console
+        * Adapt several gnu linux console files for: startup, shutdown, conversion, writing
+        * Simplify variable declaration and allocation using the file "model_allocator.c"
+
+2009-01-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Prepare project plan on website for coming release
+        * Make CYBOL example "helloworld" work when sending to shell or a file
+
+2009-01-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Search error in CYBOI when processing CYBOL example "helloworld"
+        * Replace wrong constants in function "get_universal_compound_element_by_name"
+            (e.g. "KNOWLEDGE_PATH_CYBOL_ABSTRACTION" with "KNOWLEDGE_PATH_MEMORY_ABSTRACTION")
+        * Delete unused redundant constants in file "constant/abstraction/memory/memory_abstraction.c"
+            (e.g. "wide_character" since "wide_character_vector" is used everywhere)
+        * Correct handling of compound element names in "compound_accessor.c"
+            (forgotten to multiply indices with "*WIDE_CHARACTER_PRIMITIVE_SIZE",
+            when determining name length; error stemed from changing to wide characters still)
+
+2009-01-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix minor things to make CYBOL "create" operation work in CYBOL example "helloworld"
+
+2009-01-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Make CYBOL example application "program_execution" work
+        * Uncomment function calls in all files of directory "controller/handler/operation/";
+            adapt some files in directory "applicator/" and some constants
+        * Add file "constant/abstraction/cybol/memory_cybol_abstraction.c",
+            which contains constants for the creation of memory models
+
+2009-01-07  Christian Heller  <christian.heller@tuxtax.de>
+        * Delete files like "runner.c" etc. in directory "applicator/";
+            they are replaced by the files in directory "controller/handler/operation/"
+        * Add new category of operations called "file", within directory "filer";
+            move "archive", "copy" and "list_directory_contents" from "runner" to "filer"
+        * Make CYBOL example application "shell_command_execution" work
+
+2009-01-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Readd remaining old files from CVS in directory "controller/handler/operation/"
+        * Adapt file "operation_handler.c"
+        * Add forgotten null pointer test in function "deoptionalise_log_file",
+            which caused a segmentation fault at system shutdown, if no log file was given at startup
+        * Adapt year to 2009 and copyright to GPL 3 in all example CYBOL files belonging to CYBOI
+        * Make CYBOL example applications work by correcting minor things in CYBOI
+            (file system- and shell sending and -receiving)
+
+2008-12-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Comment out call to "communicate_receiving_inline" to avoid processing meta data
+            in function "communicate_receiving_with_parameters", at "inline" and "file" channel;
+            this call caused a null pointer to be returned for the destination details;
+            it is not needed for inline data as they are not accompanied with meta data;
+            it may be needed later for data received through the file channel,
+            as some file formats may deliver additional meta information; figure out later
+        * Optimise and add some types to file "model_diagram_converter.c"
+        * Fix bug that cut off part of an operation's model, so that no operation was processed;
+            the reason was an old UTF-8 decoding call for inline data that could be deleted
+        * Fix bug that the LOG_OUTPUT variable was not set to null in function "deoptionalise",
+            so that subsequent logger calls caused segmentation faults at system shutdown,
+            because the null pointer test within the logger was successful, even though the pointer was invalid
+        * Readd old files from CVS in directory "controller/handler/operation/"
+        * Adapt file "operation_handler.c"
+        * Add new CYBOL code example named "signal"
+        * Make CYBOI work again, just before the end of the year; the following was done in 2008:
+            - complete interrupt mechanism and sleeping for different communication channels;
+            - change from ASCII to UNICODE and UTF-8 CYBOL files;
+            - restructure all constants following a MIME type-like style;
+            - implement a self-written XML-and-CYBOL parser and skip the one from libxml2
+
+2008-12-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Delete files "xml_node_allocator.c" and "xml_property_allocator.c"
+        * Adapt many abstraction constants used in several converters; the original cybol abstraction
+            gets converted into a runtime abstraction, because both are often not identical
+            (for example, a cybol file gets converted into a cyboi memory compound);
+            a runtime abstraction such as "KNOWLEDGE_PATH_MEMORY_ABSTRACTION" in turn may get interpreted
+            differently, for example as "WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION" in file "allocator.c"
+
+2008-12-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue cybol converter
+        * Correct files "converter.c" and "abstraction_converter.c" using the function "replace_wide_character_vector"
+        * Delete file "cybol_selector.c"
+
+2008-12-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue cybol converter
+        * Call function "process_cybol_node" recursively
+
+2008-12-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Start implementing cybol converter in file "cybol_converter.c"
+        * Add files "cybol_processor.c", "cybol_selector.c", "cybol_detector.c"
+        * Add file "inline_receiving_communicator.c"
+
+2008-12-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Introduce function "add_compound_element_by_name_with_suffix" in file "compound_accessor.c",
+            in order to be able to add element names with or without number suffix
+
+2008-12-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug xml conversion and make it work fully
+        * Make tag- and attribute xml nodes receive a name in function "process_xml_element"
+            (use "PLAIN_TEXT_CYBOL_ABSTRACTION" instead of "WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION")
+        * Use "COMPOUND_MEMORY_ABSTRACTION" instead of "WIDE_CHARACTER_VECTOR_MEMORY_ABSTRACTION"
+            in function call to "allocate_part" in function "process_xml_element",
+            because a part gets converted into a compound; only tag- and attribute names are wide character arrays
+
+2008-12-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Search bug in xml conversion -- parent node is null when adding element nodes
+
+2008-12-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug xml conversion
+
+2008-11-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug xml conversion
+
+2008-11-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug logger which called array functionality that called the logger in turn,
+            thereby causing a circular reference and endless loop
+
+2008-11-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace all usages of "stderr" stream with "stdout",
+            on the search for some bug in the logger
+        * Debug "stream_socket_communicator.c" and "datagram_socket_communicator.c"
+            by replacing "=" with "==" for comparison (found by chance)
+
+2008-11-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug xml conversion
+        * Fix file "model_diagram_converter.c"; do not convert integer etc. from multibyte;
+            instead, convert multibyte into wide character altogether, the complete cybol file,
+            before calling the model diagram converter; only afterwards, convert (decode)
+            the single wide characters into integer etc.
+        * Add new functions append, replace, insert, overwrite to file "wide_character_vector_accessor.c"
+
+2008-11-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug integer_converter.c, compound_accessor.c
+
+2008-11-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug xml conversion, compound_accessor.c, integer_vector_converter.c
+
+2008-11-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug xml conversion
+
+2008-11-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Implement new test function "test_decode_utf8" in file "tester.c"
+        * Debug file "file_communicator.c" from a wrong destination size setting
+            (forgot to add one, so that the first character of a file was not read
+            and the utf-8 decoding did not work afterwards)
+        * Debug files "xml_converter.c", "xml_processor.c", "xml_selector.c", "xml_detector.c"
+
+2008-10-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Search bug that utf-8 decoding does not work for a CYBOL/ XML file
+            (it does work if handing over an internal ASCII character sequence; not found yet)
+
+2008-10-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug file "xml_converter.c" and related files
+        * Split file "xml_converter.c" into many files
+        * Add new "memoriser" sub directories "detector", "processor", "selector"
+
+2008-10-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct wide- into normal character array in function "communicate_receiving_file_system"
+            of file "file_system_receiving_communicator.c"
+        * Adapt "decode" function in module "converter.c", to first
+            convert cybol into xml and only afterwards into a cyboi compound
+
+2008-10-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug source code to the point where the "initialiser.c" calls the
+            function "communicate_receiving_file_system" in file "file_system_receiving_communicator.c"
+
+2008-10-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Start adapting website "http://www.cybop.org" to using modern CSS layout
+
+2008-10-05  Christian Heller  <christian.heller@tuxtax.de>
+        * Clean up compilation errors
+        * Clean up linking errors
+
+2008-10-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Finish implementing XML parser in file "xml_converter.c"
+        * Replace "libxml2" parser with this own solution
+        * Add file "xml_cybol_name.c"
+
+2008-09-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue implementing XML parser in file "xml_converter.c"
+
+2008-09-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue implementing XML parser in file "xml_converter.c"
+
+2008-09-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue implementing XML parser in file "xml_converter.c"
+
+2008-09-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue implementing XML parser in file "xml_converter.c"
+
+2008-09-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue implementing CYBOL parser in file "cybol_converter.c"
+        * Add file "model_allocator.c"; a "model" is a memory structure together
+            with its "count" and "size" as meta information about that memory structure
+        * Add file "part_allocator.c"; a "part" is a memory structure of arbitrary abstraction;
+            a part may be added as entry to a compound, but it is not to be mixed up with the "compound" structure itself;
+            a part contains information ("name" and "abstraction") about the "model" it contains,
+            and optionally further meta information ("details) which is also called properties
+        * Add file "xml_converter.c", so that all kinds of XML files can now be translated into a compound tree,
+            which afterwards can be converted in a second step into an arbitrary memory structure;
+            this is comparable to the well-known Document Object Model (DOM) approach;
+            a Simple API for XML (SAX)-like approach was intended first as it could be faster,
+            but then special, largely redundant converters would have to be written for each XML-based format
+            (Of course, the possibility of callback-like functions was considered.
+            These can be realised in a non-OOP language by just forwarding an "abstraction" and then doing
+            if-else comparisons -- just like the Virtual Machine (VM) of any OOP language does internally --,
+            to finally call a matching function that would convert a specific XML-based format.
+            However, since the number of attributes of an arbitrary XML element is unknown,
+            but CYBOI relies on "name", "channel", "abstraction" and "model",
+            in order to be able to create a memory structure -- depending on the "abstraction" attribute --,
+            a DOM-like approach seems the clearer solution, even if it is a bit slower in performance.
+            Anyway, it brings more flexibility and saves redundant code when parsing other XML formats besides CYBOL.)
+
+2008-09-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue implementing CYBOL parser in file "cybol_converter.c"
+
+2008-09-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue implementing CYBOL parser in file "cybol_converter.c"
+
+2008-09-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+
+2008-09-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+        * Add files with MIME type constants in directory "constant/abstraction/mime/";
+            their values are partly redundant to the CYBOL abstraction constants
+            in directory "constant/abstraction/cybol/", but have been introduced
+            to allow source code files (e.g. converters) to reference MIME constants
+            independently of CYBOL constants
+        * Rename files and directory "linux_console" into "gnu_linux_console"
+        * Move files "xdt_field_cyboi_name.c" and "xdt_record_cyboi_name.c"
+            from directory "constant/name/xdt/" into directory "constant/name/cybol/xdt/"
+        * Rename file "keyboard_cybol_name.c" into "keyboard_key_cybol_name.c"
+
+2008-09-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt automake files to new directory structure
+        * Remove xml declaration (first line) from all CYBOL example files;
+            when no such declaration exists, a Unicode encoding is assumed,
+            as defined by a Unicode Byte Order Mark before the document's first character;
+            if the mark does not exist, UTF-8 encoding is assumed;
+            CYBOL files are UTF-8 encoded, so the declaration is not needed
+        * Start implementing a CYBOL parser in file "cybol_converter.c"
+
+2008-09-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+
+2008-09-09  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+
+2008-09-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+
+2008-09-07  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+        * Move file "builder.c" as "building_memoriser.c" to directory "applicator/memoriser/"
+        * Remove directory "controller/handler/operation" and merge
+            its files' functionality into those in directory "applicator/";
+            adapt file "controller/handler/operation_handler.c"
+
+2008-09-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+        * Add new files in directory controller/handler/operation/
+
+2008-09-04  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+
+2008-09-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to match new constants
+        * Rename files in directory variable/
+
+2008-08-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Finish adapting files in directory constant/model/
+        * Finish adapting files in directory constant/name/
+
+2008-08-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Check in LaTeX source files and graphics of CYBOP book to CVS
+
+2008-08-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Finish adapting file in directory constant/channel/
+
+2008-08-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Finish adapting files in directory constant/abstraction/
+
+2008-08-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue to restructure directory "constants/" and rename its files
+
+2008-07-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Restructure complete directory "globals/constants/" and move/ rename to just "constant/"
+
+2008-07-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Rename all files and sub directories of directory "applicator/" from verbs into nouns,
+            e.g. "add.c" into "adder.c", "count/" into "counter/" etc.
+
+2008-07-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Apply GPL version 3 licence to CYBOI source code
+
+2008-07-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Split module "cybol_language_constants.c" into many files residing in new directory "globals/constants/cybol/language/"
+        * Remove module "cybol_language_constants.c"
+        * Split module "cybol_model_constants.c" into many files residing in new directory "globals/constants/cybol/message/"
+        * Remove module "cybol_model_constants.c"
+
+2008-07-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Remove module "cybol_constants.c", after having moved its constants into the modules
+            "cybol_attribute_constants.c", "cybol_markup_constants.c" and "cybol_separator_constants.c"
+
+2008-07-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt constants in modules "cybol_language_constants.c", "memory_structure_constants.c" and
+            "memory_abstraction_constants.c", which are used when decoding CYBOL into memory;
+            the "language" constants of cybol and runtime memory "abstraction" constants
+            need to be distinguished, because they are not always identical, e.g.
+            a cybol "path/knowledge" abstraction gets converted into an in-memory "wide_character" abstraction;
+            a cybol "text/plain" abstraction gets converted into an in-memory "wide_character" abstraction;
+            a cybol "wide_character" abstraction does not exist at all,
+            because the cybol "text/plain" abstraction is always expected to be utf-8 encoded
+            (other encodings might get implemented later into CYBOI)
+        * Remove module "cybol_abstraction_constants.c"
+
+2008-07-11  Christian Heller  <christian.heller@tuxtax.de>
+        * Use Internet media types (mime types, content types), which became known as
+            Multipurpose Internet Mail Extensions (MIME) as new CYBOL "language" constants
+            (formerly called "abstraction" constants), in module "cybol_language_constants.c"
+        * Add CYBOL-specific language (media) types, e.g. "number", (knowledge) "path" etc.
+        * Adhere to ISO/EN/DIN standards for date and time
+
+2008-07-07  Christian Heller  <christian.heller@tuxtax.de>
+        * Restructure and rename files in directory "src/globals/constants/character/" and add more constants
+
+2008-07-05  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix module "initialiser.c" temporarily by using "decode_utf_8_unicode_character_vector"
+            instead of "decode" for abstraction of initial signal
+
+2008-07-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Add temporary attribute constants to module "cybol_constants.c", e.g. NAME_ATTRIBUTE_AS_CHAR in addition to NAME_ATTRIBUTE
+            (this is necessary for string comparison in module "compound_converter.c", since the libxml2 parser returns UTF-8 strings)
+        * Correct character (string) errors in module "compound_converter.c", which prevented proper decoding of cybol values
+        * Adapt modules "converter.c", "inline_communicator.c"
+
+2008-06-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Rollback changes from 2008-06-06, because function "optionalise" already returns wide character parameters
+        * Hand over "&k" instead of just "k" in function call "optionalise" of function "main"
+
+2008-06-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix bug in module "initialiser.c" by handing over multibyte character strings
+            instead of wide character strings in function call "decode"
+
+2008-05-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace function calls to "strlen" with "wcslen", where suitable
+        * Convert files from "char" to "wchar_t" in directory "applicator/"
+        * Finish adapting all source code to 32 Bit wide characters
+        * Convert CYBOL files to UTF-8 Unicode character encoding
+
+2008-05-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert files from "char" to "wchar_t" in directory "memoriser/converter/"
+
+2008-05-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert files from "char" to "wchar_t" in directory "memoriser/converter/character/"
+
+2008-05-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Verify that no conversion is necessary for files in directories "memoriser/array/", "memoriser/allocator/"
+        * Convert files from "char" to "wchar_t" in directories "memoriser/", "memoriser/accessor/", "memoriser/communicator/"
+
+2008-05-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Convert files from "char" to "wchar_t" in directory "globals/"
+
+2008-05-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Remove function calls of "allocate_array" etc. from module "logger.c"
+            and use the global log message array "LOG_MESSAGE" instead, in order to assure thread safety
+        * Add global variables "LOG_MESSAGE" and "LOG_MESSAGE_COUNT" in module "log_variables.c" and
+            allocate/ initialise them in module "globaliser.c"
+        * Replace function calls of "fputws" with "log_write_terminated_message", everywhere;
+            this has the advantage that changes such as from character to wide character only have to be done in one place
+
+2008-05-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Remove initial values for all variables in modules of directory "globals/variables/"
+            and only initialise variables in function "globalise" of module "globaliser.c"
+            (this avoids compiler errors a la "initializer element is not constant"
+            and also avoids runtime errors, because a proper *NULL_POINTER value can be
+            assigned as initial value, so that variables can be compared to it later)
+        * Revise modules "cyboi.c" and "optionaliser.c" to using wide characters,
+            assuming that the char** received by the "main" function is a pointer array
+            containing multibyte strings, which have to be converted into wide character strings
+        * Change the type of variable "LOG_LEVEL" from "int" to "int*" and
+            the type of variable "LOG_OUTPUT" from "int" to "FILE*"
+            and adapt all affected source code files
+
+2008-05-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace "write" function call in module "logger.c" with "log_write_terminated_message"
+        * Assemble complete log message in one array before writing it to console
+        * Add new functions "log_write_message" and "log_write_terminated_message" to module "logger.c"
+        * Add new files "helper.c" and "informant.c", in order to bundle special output messages
+        * Add an extra function call to "orient" for all streams, also the log file,
+            in "main" function of module "cyboi.c"
+        * Remove sub directory "controller/checker/", the functionality of whose files
+            is now filled by function "check_interrupts" in module "checker.c"
+        * Clean up module "checker.c" by removing old code that was commented out
+        * Correct parameter casts in function "check_signal" of module "checker.c"
+        * Add encoding test files
+
+2008-05-12  Christian Heller  <christian.heller@tuxtax.de>
+        * Rollback function "main" in module "cyboi.c" to using standard ascii characters,
+            since the command line arguments array of the "main" function uses the "char" type
+        * Rollback function "open" in module "optionaliser.c" to using standard ascii characters
+        * Continue converting all source code to wide character
+        * Finish module "utf_8_unicode_character_converter.c"
+
+2008-05-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Move character conversion modules into new directory memoriser/converter/character/
+        * Prepare module "utf_8_unicode_character_converter.c" (not complete yet)
+
+2008-05-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt source code to wide character, by replacing
+            "static char* " with "static wchar_t* "
+            "static char " with "static wchar_t "
+            "', '" with "', L'"
+            "= {'" with "= {L'"
+            "%s" with "%ls"
+            "CHARACTER_ARRAY" with "WIDE_CHARACTER_ARRAY"
+
+2008-05-04  Christian Heller  <christian.heller@tuxtax.de>
+        * Extend module "test.c" with function "test_wide_character_wprintf" to figure out
+            how to properly define and handle wide character arrays
+
+2008-05-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Update year 2007 to 2008 in copyright notice of each source code file
+        * Adapt all source code to wide character, by replacing
+            "LOG_LEVEL, (void*) "" with ""
+            "stderr, "" with "stderr, L""
+            "fprintf(" with "fwprintf("
+            "fputs("" with "fputws(L""
+        * Add new module "controller/orienter.c" with function "orient" for setting
+            standard stream orientation for "stdout", "stdin" and "stderr" to "wide character"
+        * Investigate problem that wide characters are not printed on standard output stream --
+            each stream has a fixed orientation, either for wide or for (narrow) characters;
+            the orientation is set upon first output of characters or via the function "fwide"
+        * Start adapting source code from "character" to "wide character"
+            (this seems to be necessary to properly catch keyboard events via gnu/linux console)
+
+2008-05-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Find a way to detect a simple escape character (key press input),
+            but also escape control sequences, using the glibc function "ungetc"
+
+2008-05-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix bug in function "read_gnu_linux_console" where
+            only one character was read due to uncomplete loop
+
+2008-04-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new functions "set" and "set_character" automatically adjusting the destination's count and size
+        * Complete function "decode_gnu_linux_console_character" using new "set" function
+        * Correct function "receive_gnu_linux_console";
+            the command is now not determined within the "receive" operations anymore,
+            but instead has to be assembled in CYBOL knowledge files with the advantages:
+            1 avoid problems with two calls of the function "get_universal_compound_element_by_name"
+              (once for the operation's "commands" parameter and another time for determining the actual command)
+            2 more flexibility since the knowledge path of a command can be manipulated in CYBOL
+            3 no "commands" parameter has to be handed over to the CYBOL "receive" operation anymore
+        * Make example application "ui_control" work with at least "exit" operation
+
+2008-04-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug functions "receive_gnu_linux_console" and "decode_gnu_linux_console"
+
+2008-04-25  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct pointer values in function "check_interrupts" of module "checker.c"
+        * Make example application "ui_control" work with at least "exit" operation
+            in knowledge file "handle_gnu_linux_console.cybol"
+
+2008-04-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Correct parameters and bugs in module "checker.c" and others
+
+2008-04-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Set handler abstraction, model, details in function "sense"
+        * Assign correct handler (receive function) in function "check_interrupts" of module "checker.c"
+
+2008-04-13  Christian Heller  <christian.heller@tuxtax.de>
+        * Get handler variables "gnu_linux_console_handler" etc. in function "check"
+        * Hand over handler variables to function "check_signal" and further to "check_interrupts",
+            in order to get returned the correct handler corresponding to the detected interrupt channel,
+            whereby the handler gets forwarded as signal and handled by the cyboi system
+        * Adapt module "sense.c" introducing new function "sense_handler"
+        * Adapt modules "receive.c" and "receive_gnu_linux_console.c"
+        * Add necessary system-wide constants
+        * Adapt CYBOL application "examples/ui_control/"
+        * Add new "logic/handler/*" files containing "receive" operations
+        * Hand over knowledge model representing CYBOL "receive" operation,
+            as property of "sense" operation in file "startup.cybol"
+
+2008-03-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace old character-based handling using escape character mode and escape control sequence mode
+            in function "decode_gnu_linux_console" with simple character array comparisons
+            (this has become possible because the input stream is read at once in function "read_gnu_linux_console" now)
+
+2008-03-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue and adapt function "receive_gnu_linux_console" and others
+
+2008-03-27  Christian Heller  <christian.heller@tuxtax.de>
+        * Add sleep time variables (existing for all threads/ interrupts) to internal memory
+        * Delete global sleep time variables
+
+2008-03-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug "checker.c" by correcting a number of double-referenced pointer variables
+        * Make "User Interface" example display the TUI again; key presses are not detected yet
+
+2008-03-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Make "Hello, World!" example work again
+
+2008-02-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Fix or temporarily commented out bugs in source code to make cyboi compilable again
+
+2008-02-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Continue functions "receive_gnu_linux_console.c" and "gnu_linux_console_communicator.c"
+
+2008-01-26  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt modules "checker.c", "receive_gnu_linux_console.c",
+            "read_gnu_linux_console.c", "decode_gnu_linux_console.c"
+
+2007-12-28  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt and optimise new functions in "applicator/sense"
+
+2007-12-08  Christian Heller  <christian.heller@tuxtax.de>
+        * Move suitable functions away from "sense_gnu_linux_console.c" into "gnu_linux_console_communicator.c"
+            and add "ungetc" function right after "fgetc", to unread a detected character in the input stream,
+            in order to make it available again to "read_gnu_linux_console"
+        * Move suitable functions away from "sense_x_window_system.c" into "x_window_system_communicator.c"
+            and only leave one function "XEventsQueued" to get notified of a key/ mouse event
+
+2007-12-01  Christian Heller  <christian.heller@tuxtax.de>
+        * Move suitable functions away from "sense_socket.c" into special communicator files, e.g.:
+            "memoriser/communicator/datagram_socket_communicator.c"
+        * Add warning log message to all top-level files containing only conditions, if no comparison matched:
+            "accessor.c", "allocator.c", "communicator.c" etc.
+
+2007-11-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Prepare merging of files in directory "controller/checker/" and remove directory again
+        * Create files in new directory "applicator/sense/", by copying thread-specific content from "applicator/receive/"
+
+2007-11-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new sub directory "controller/checker/" containing the new files
+            "gnu_linux_console_interrupt_checker.c", "x_window_system_interrupt_checker.c",
+            "www_service_interrupt_checker.c", "cyboi_service_interrupt_checker.c"
+
+2007-11-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new interrupt variables for gnu/linux console, x window system, www service and cyboi service
+            and store these in internal memory; these irqs are set when some signal arrives via tui, gui, wui
+        * Adapt files "manager.c", "initialiser.c", "checker.c"
+
+2007-10-30  Christian Heller  <christian.heller@tuxtax.de>
+        * Determine body count at first, before adding it to http header in "http_response_converter.c"
+        * Delete a number of outdated functions
+        * Add temporary "dirty" changes to make http request and response back to the same client socket run for the first time
+            (e.g. misuse the signal id to forward the client socket as parameter attached to the signal)
+        * Merge all "applicator/interrupt/interrupt_*.c" files into "applicator/interrupt.c"
+        * Adapt "applicator/shutdown/shutdown_*.c" files accordingly
+        * Delete directory "applicator/interrupt/" recursively
+
+2007-10-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug "startup_socket.c" so that buffer size is initialised first,
+            before allocating the buffer; this bug caused the following error
+            when deallocating the character buffer in "shutdown_socket.c":
+            *** glibc detected *** free(): invalid next size (fast): 0x080d6198 ***
+                Aborted
+
+2007-10-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Hand over thread identification and thread interrupt as parameters,
+            in all shutdown- and interrupt functions
+
+2007-10-03  Christian Heller  <christian.heller@tuxtax.de>
+        * Add correct LOG_LEVEL constant to all log messages of all source code files,
+            so that the correct prefix (information, warning, error, debug) appears
+        * Delete "Information: " etc. which were sometimes written directly into the log message
+        * Rename "log_message_debug" function to "log_terminated_message" and require
+            the log level as additional parameter
+        * Eliminate "malloc" function from "logger.c", since the logger is also called from threads
+            and memory allocation would result in an error like:
+                *** glibc detected *** malloc(): memory corruption (fast): 0x080e0470 ***
+                Aborted
+
+2007-10-02  Christian Heller  <christian.heller@tuxtax.de>
+        * Extract loop body of "check" function in module "checker.c" and split it into the four functions:
+            "check", "check_signal", "check_handle", "check_wait", in order to gain more clearity
+
+2007-09-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Add file "cyboi_identification_constants.c" and insert some renamed constants, taken from "log_message_constants.c"
+
+2007-09-19  Christian Heller  <christian.heller@tuxtax.de>
+        * Add new files: "unicode_character_encoding_constants.c", "utf_8_unicode_character_converter.c",
+            "utf_16_unicode_character_converter.c" and adapt "converter.c" accordingly
+
+2007-09-18  Christian Heller  <christian.heller@tuxtax.de>
+        * Replace value "(int*) NULL_POINTER_ARRAY" in initialisation of global variables with "NUMBER_0_INTEGER_ARRAY";
+            the old initialisation was actually a void** casted to an int* and therefore not correct, even if it was working
+
+2007-09-17  Christian Heller  <christian.heller@tuxtax.de>
+        * Rename "get_new_signal_id" to "get_new_signal_identification"
+        * Clean up "get_new_signal_identification" and add "set_new_signal_identification" function in "signal_memory_accessor.c"
+        * Correct wrong references to local variables like &p3, that get destroyed when a function is left, in function "set_signal"
+        * Forward signal priority and -identification as references in functions:
+            handle, handle_compound, handle_operation, loop, branch etc.
+        * Eliminate signal identification creation wherever a new signal is generated,
+            and use integer constants instead; the reason is that allocations are not
+            allowed in threads (linux console, x window system, tcp sockets with http requests etc.);
+            if the threads allocated a "signal identification" value, this would result in an error like:
+                *** glibc detected *** malloc(): memory corruption (fast): 0x080e0470 ***
+                Aborted
+        * Remove special "prefix key" that had been introduced accidentially some days ago;
+            the "get_universal_compound_element_by_name" function uses the full name given,
+            if it does not contain the prefixes "." or "#"; therefore, a special prefix
+            variable does not have to be created at socket startup, nor be handed over to the thread
+
+2007-09-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Use an extra http receive model part (defined as cybol name constant) for
+            (1) http request "method" and (2) "action" parameter in "http_request_converter.c"
+
+2007-09-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Debug "http_request_converter.c"
+        * Add new cybol name- and cybol model constants for http request
+        * Add a "prefixed key" parameter that is necessary to add a prefix "." or "#" to the parameter name;
+            it is created at socket startup and forwarded to the "receive_socket.c" thread
+
+2007-09-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Mention parameters (as defined in CYBOL specification) in comment block of all operations in "applicator" directory
+        * Debug "http_request_converter.c"
+
+2007-09-10  Christian Heller  <christian.heller@tuxtax.de>
+        * Synchronise xdt fields in "xdt_field_constants.c" and "xdt_converter.c"
+            (function "decode_xdt_select_field" at "decode_xdt_decode_model" function calls)
+        * Set correct abstractions in "xdt_converter.c"
+            (function "decode_xdt_select_field" at "decode_xdt_decode_model" function calls)
+        * Add new autoconf/ automake files prepared by Didier Link <didier@famille-link.fr>
+
+2007-09-06  Christian Heller  <christian.heller@tuxtax.de>
+        * Add xDT/GDT constants to files "xdt_record_constants.c", "xdt_record_name_constants.c",
+            "xdt_field_constants.c", "xdt_field_name_constants.c", "xdt_converter.c"
+
+2007-09-05  Christian Heller  <christian.heller@tuxtax.de>
+        * Split file "xdt_field_name_constants.c" and create new files "xdt_record_name_constants.c" and "xdt_package_name_constants.c"
+        * Add yet missing constants to file "xdt_field_name_constants.c"
+        * Add yet missing conditions with new constants in "xdt_converter.c"
+
+2007-08-31  Christian Heller  <christian.heller@tuxtax.de>
+        * Add yet missing constants to "xdt_field_constants.c", taken from specification "BDT-Satzbeschreibung"
+
+2007-08-29  Christian Heller  <christian.heller@tuxtax.de>
+        * Add "uri_separator_constants.c"
+        * Continue "receive_socket.c"
+        * Complete first working version of "http_request_converter.c":
+            Decode http request line, headers and body, and add the entries to the given model
+
+2007-08-24  Christian Heller  <christian.heller@tuxtax.de>
+        * Complete "html_character_entity_constants.c"
+        * Replace hard-coded characters with their hexadecimal code in "character_constants.c"
+        * Continue "http_request_converter.c"
+
+2007-08-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Use new http separator constants instead of hard-coded characters in "http_response_converter.c"
+
+2007-08-22  Christian Heller  <christian.heller@tuxtax.de>
+        * Add "http_separator_constants.c"
+        * Continue "http_response_converter.c" and "http_request_converter.c" and adapt "send_socket.c" to changes
+
+2007-08-21  Christian Heller  <christian.heller@tuxtax.de>
+        * Adapt "receive.c" and "receive_socket.c" by handing over new parameters: model, details, language
+
+2007-08-20  Christian Heller  <christian.heller@tuxtax.de>
+        * Create:
+            "html_character_entity_reference_constants.c"
+            "xml_character_entity_reference_constants.c"
+            "character_entity_reference_converter.c"
+        * Rename:
+            "html_character_constants.c" to "numeric_character_reference_constants.c"
+            "html_character_converter.c" to "numeric_character_reference_converter.c"
+
+2007-08-16  Christian Heller  <christian.heller@tuxtax.de>
+        * Delete "memoriser/mapper" directory and move/rename all files into "memoriser/converter"
+        * Replace converter's "parse" and "serialise" function names with more neutral "decode" and "encode"
+        * Introduce new global variables for setting the "sleep" loop times in "checker.c" and "receive_x_window_system.c"
+        * Delete "variables.c" and move its content into new files:
+            "primitive_type_size_variables.c", "thread_identification_variables.c",
+            "service_interrupt_variables.c", "reallocation_factor_variables.c",
+            "log_variables.c", "sleep_time_variables.c"
+
+2007-08-15  Christian Heller  <christian.heller@tuxtax.de>
+        * Delete "cyboi_constants.c" and move its content into new files:
+            "cyboi_operation_mode_constants.c", "cyboi_signal_priority_constants.c"
+        * Delete "system_constants.c" and move its content into new files:
+            "system_file_name_constants.c" and "system_executable_constants.c"
+        * Replace "INVALID_VALUE" constant in all source code with "NUMBER_MINUS_1_INTEGER",
+            since that value is always context-related anyway
+        * Make variables of array- and file reallocation factors, that were formerly
+            defined as constants in "memory_structure_constants";
+            move new variables into "variables.c";
+            adapt file "globaliser.c" with variable initialisations accordingly
+
+2007-08-14  Christian Heller  <christian.heller@tuxtax.de>
+        * Complete "url_escape_code_mapper.c" and "html_character_mapper.c"
+
+2007-08-13  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Replace all integer numbers like 0, 1 etc. with the corresponding constant *NUMBER_0_INTEGER, *NUMBER_1_INTEGER etc.
+        * Remove "get_index_in_array" function and replace with "get_array_elements_index" function, wherever it was used
+        * Clean up source code a bit, deleting outdated comments etc.
+
+2007-08-12  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "url_escape_code_constants.c", "url_escape_code_mapper.c", "url_escape_code_converter.c"
+        * Add "http_request_converter.c", "http_response_converter.c"
+        * Add "html_character_constants.c", "html_character_mapper.c"
+        * Add "lcid_language_constants.c" (just for the future)
+
+2007-08-04  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue to work through and update file "applicator/receive/receive_socket.c"
+        * Comment out "#include <GL/freeglut.h>" in file "controller/tester.c",
+            as including "glut.h" of the official xorg glut package suffices
+            (hint from  Didier Link <didier@famille-link.fr>)
+
+2007-08-03  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt "applicator/send/send_socket.c" to wrap xhtml messages as http body with http protocol, status code and headers
+        * Add "globals/constants/character/character_set_constants.c" file
+        * Add "globals/constants/file_extension/" directory with one file containing text file extension constants
+        * Add "globals/constants/http/http_header_constants.c" file
+        * Add "globals/constants/http/http_header_variable_constants.c" file
+        * Add "globals/constants/mime_type/" directory with 15 files containing mime type constants
+
+2007-07-31  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "meta" property (a CYBOL model containing details) to "receive" operation, which is needed for creating HTML tags from CYBOL
+
+2007-07-30  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt all example applications to property name changes
+        * Fix forgotten casts of parameters handed over to "receive_file_system", in function "receive_message"
+        * Fix forgotten model allocation in workaround section of function "parse_compound_cybol_node"
+        * Split function "parse_compound_cybol_properties" by extracting loop body
+        * Split function "parse_compound_cybol_nodes" by extracting loop body
+
+2007-07-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Clean up and correct "receive_file_system" function
+        * Put loop body of "parse_compound_cybol_node" into extra function
+        * Put loop body of "handle_compound" into extra function "handle_compound_part"
+
+2007-07-23  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt applicator/create.c function
+        * Move some constants from globals/constants/cybol/cybol_abstraction_constants.c
+            to globals/constants/memory_structure/array_constants.c and globals/constants/memory_structure/memory_abstraction_constants.c
+        * Add "memoriser/mapper/abstraction_mapper.c"
+        * Change "receive_file_system_model" into "parse" function, in compound_converter.c
+        * Delete xml_converter.c, translator.c, cybol_translator.c, xdt_translator.c
+        * Merge cybol_translator.c into compound_converter.c
+        * Merge xml_converter.c into compound_converter.c
+        * Adapt properties of "receive" operation: rename "abstraction" into "language", add "message" and delete superfluous ones;
+            mind the change in meaning of the "model" property, which now labels an existing,
+            empty model that was created before and is to be filled in the "receive" operation
+
+2007-07-19  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename "abstraction" property of "create" operation into "language" and delete superfluous property constants
+        * Implement checks in "compound_accessor.c" to avoid segmentation fault when trying to retrieve
+            a compound element with empty name and abstraction "knowledge" or "encapsulated"
+
+2007-07-15  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Remove reading of "enable" property in handler.c again;
+            the CYBOL "branch" operation may now be used to branch the program flow (conditional execution);
+            it is NOT necessary anymore to have an "enable" property for logic models (operations)
+            in order to be executed only if that property is set to "true"
+        * Adapt example CYBOL applications accordingly
+
+2007-07-12  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Extend applicator/receive/receive_file_system.c so that details may be given as parameter
+            (for example, this is necessary when creating an HTML table row of a web user interface,
+            because the HTML tag has to be given as property = meta data in this case)
+
+2007-06-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename controller/manager/initial_signal_manager.c into controller/initialiser.c
+            and move source code for initial signal there
+        * Read "enable" property for all operations in handler.c;
+            CAUTION! ALL logic models (operations) have to have an "enable" property
+            now and are only executed, if that property is set to "true";
+            this is necessary for using conditional execution, depending on a flag
+
+2007-06-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add new cybol operations for comparing strings: all, prefix, suffix, part
+        * Implement enable flag for all signals (operations), in order to handle conditional execution
+
+2007-06-24  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add new operation 'get'
+        * Rename equally named function in accessor.c and all code to 'get_element'
+        * Rename 'set' function to 'set_element' in all code, in order to be uniform
+
+2007-06-22  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Replace "Linux" symbol names in all project and source files with "GNU/Linux"; see:
+            http://www.gnu.org/gnu/linux-and-gnu.html
+
+2007-06-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add new or extend operations like copy, count, compare etc.
+        * Extend send_shell function with line_feed option
+        * Update loop function
+
+2007-05-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cybop 0.8.0, including: CYBOP theory documentation, CYBOL specification and examples, CYBOI interpreter program
+
+2007-05-26  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Restructure cyboi command line argument handling to allow for dynamic log file, log level etc.
+        * Move log_message_constants.c to new directory and split away log_level_constants.c and log_level_name_constants.c; adapt all source code files
+        * Add opengl startup and shutdown
+
+2007-05-24  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add opengl/ mesa libraries to makefile
+
+2007-05-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Update cybol example applications
+        * Move away NULL_POINTER from "variables.c" into an own file "pointer_constants.c"
+        * Change NULL_POINTER so that it is now a void**, pointing to an array containing just a null void pointer;
+            Change NULL_POINTER values in all source code into *NULL_POINTER
+            Change &NULL_POINTER values in all source code into NULL_POINTER
+
+2007-05-15  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Fix error in gnu_linux_console_converter serialisation that caused the tui to crash (integer vector elements were read as pointers, not integers)
+        * Start searching error that null pointers do not keep their value in pointer arrays; included debug log messages
+
+2007-05-10  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Fix bug with integer parsing and -serialisation
+
+2007-05-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add name, name count, name size to functions "get_compound_element_by_name" and "get_universal_compound_element_by_name"
+        * Adjust all source code by adding name parameters to these function calls
+        * Fix bug that pointer vector instead of integer vector was used
+        * Adjust comma characters to be added only if one element already exists in the destination array
+
+2007-05-08  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "fflush" wherever a stream is output to a file, in order to not delay the output to an arbitrary system event
+
+2007-05-01  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct bug that details model was not always created when reading a part from a CYBOL file that did not have details;
+            but a details compound ALWAYS has to be allocated, because at runtime, properties might be added as details to a part model;
+            this was changed in the cybol_translator.c file
+
+2007-04-26  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete "model_diagram_converter.c"
+        * Add "name" parameters to "get_compound_element_by_index" function and adapt all code
+        * Replace some integer values with constants of the kind NUMBER_X_INTEGER
+
+2007-04-24  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Fix bug that no compound was created for "xdt" abstraction in "receive_file_system"
+        * Continued model_diagram_converter.c
+
+2007-04-23  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue shell output of text
+        * Prepare file output of text
+
+        * Add configure.ac and Makefile.am files to root- and source directory
+
+2007-04-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Move "tester.c" into controller/ directory
+        * Add "optionaliser.c" source file
+        * Move command line option evaluating into new optionaliser
+        * Recognise command line options: version, help, test
+
+        * Restructure globals/constants/ directory
+
+2007-04-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename all ASCII character constants to just "CHARACTER"
+        * Rename wide character constants to "_WIDE_CHARACTER"
+
+2007-04-07  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Prepare printing of application knowledge tree as structured model diagram into file or onto shell
+        * Add shell input, output, error output
+        * Continue shell output
+        * Prepare file output
+
+2007-04-04  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Implement rudimentary shell output
+
+2007-03-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "add_compound_element_by_name" and "replace_compound_element_by_name" functions to "compound_accessor.c"
+        * Make compound element names in "add_compound_element_by_name" function receive an enumerated index suffix
+        * Adapt "xdt_converter.c" accordingly, using the "add_compound_element_by_name" function
+
+2007-03-18  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete xdt_converter
+        * Fix xdt parsing problem
+
+2007-03-17  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct some bugs in xdt parser (for example, temporary pointers local to function
+            were returned and of course null as soon as the function was left)
+
+2007-03-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename "bdt" into "xdt"
+        * Complete first (buggy) version of xdt_converter
+
+2007-03-11  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "integer_converter.c"
+        * Correct integer and integer_vector conversion
+        * Add three new test procedures in tester.c
+        * Continue bdt_converter (parser)
+
+2007-03-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue bdt parser
+        * Make receive_file_system ... hand over part details to the "parse" operation of the converter
+        * Extend the "parse" operation's number of parameters
+
+2007-03-04  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Change minor things for bdt parsing
+
+2007-02-07  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Prepare xdt (bdt) import
+
+2007-02-01  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct bug in "character_converter.c", that caused arrays not to be extended
+        * Generate formatted xhtml code, with tags and attributes, from CYBOL
+
+2007-01-30  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct socket handling in send_socket operation
+        * Start xhtml_converter
+
+2007-01-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue socket functionality
+
+2007-01-26  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "communication_partner" socket, address, address_size to internal memory
+        * Add some temporary debugging messages for finding a bug at socket shutdown/ interrupt
+
+2007-01-21  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add information about cybop book to website
+
+2007-01-18  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Make "close" command work in http server when sent from a web browser
+        * Add http constants
+
+2007-01-14  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Make ipv4 socket send/ receive connections work not only among two processes, e.g. from shell to shell,
+            but also from a web browser sending a request to a cyboi service;
+            the problem was that port numbers had not been converted from host- into network byte order;
+            host addresses were already converted properly
+
+        * Change year in copyright statement of all source code files
+
+2007-01-11  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue socket send procedure
+        * Test functionality
+        * Fix bugs
+
+2007-01-07  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue send socket functionality
+
+2006-12-30  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Start implementing send_socket
+        * Add errno handling
+        * Make socket non-blocking
+        * Add sleep call to receive_socket procedure
+
+2006-12-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Debug "receive_socket" operation
+        * Continue receive socket procedure
+        * Implement more clever handling of different socket services
+
+2006-12-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete startup_socket.c
+        * Finish socket address handling
+        * Continue implementing unified socket handling
+        * Remove unix socket everywhere
+        * Rename tcp socket into www service
+        * Unify unix- and tcp socket files into just "socket" source files
+
+2006-12-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Extend and rename socket handling
+
+2006-09-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.7.0
+        * Add <i>libpthread</i> library to Makefile, for linking
+        * Add minor things to Makefile, for GNU/Linux-Windows platform compilations,
+            so that conditional preprocessor directives like:
+            <i>#ifdef LINUX_OPERATING_SYSTEM</i> can be used in the source code
+        * Implement x window system gui event handling
+        * Update and add more things for wide character handling
+        * Investigate CPU idle mechanisms including: <i>pause</i>, <i>sleep</i> and system signals
+            --> the decision fell on a simple <i>sleep</i> loop for reasons explained in the code;<br>
+            change signal <i>wait</i> loop to become blocking, that is to react only to interrupts;
+            this avoids wasting system resources (CPU activity) as it happened up to now
+        * Implement threads using mutexes (atomic flags) for reception of signals via x window system and gnu linux console (terminal)
+        * Exit threads using the USR1 operating system signal
+        * Prepare access to meta elements of a compound double hierarchy and completely restructure
+            <i>memoriser/accessor/compound_accessor.c</i><br>
+            two knowledge tree separators are now possible: the part separator <i>.</i> and the meta separator <i>#</i>
+        * Restructure "memoriser/accessor/compound_accessor.c" once more; the three procedures:<br>
+            1 set_compound_element_by_name<br>
+            2 remove_compound_element_by_name<br>
+            3 get_compound_element_by_name<br>
+            do now not only get handed over the <i>compound model</i>,
+            but also the corresponding <i>compound details</i> (meta information)
+            -- that way, meta properties can be determined properly
+            (which was done wrong before, as the properties were searched
+            in the <i>compound model</i> instead of in the <i>compound details</i>
+        * Merge two procedures "get_compound_element_by_encapsulated_name" and "get_real_compound_element_by_name"<br>
+            - rename this new, merged procedure to "get_universal_compound_element_by_name"<br>
+            - adapt all source code to new procedure<br>
+            - change all places where logic parameters were retrieved with "get_compound_element_by_name" to the new "get_universal_compound_element_by_name"<br>
+            - this means that from now on, CYBOL knowledge templates can be written much more flexibly, since models can be given as<br>
+            1 hard-coded inline value<br>
+            2 hierarchical name to a model (= encapsulated model)<br>
+            3 hierarchical name pointing to another hierarchical name containing a model (= double-encapsulated model)
+        * Add unix shell command processing from within CYBOL
+        * Factor out <i>copy</i> procedures for single types into an own <i>applicator/copy/</i> directory
+        * Fix hard-to-find bug that colour values were not always copied correctly for the textual user interface (tui);
+            the reson is that, when copying a colour value, the destination array ALWAYS has to be resized,
+            no matter whether it is greater or smaller than the source array;
+            otherwise, some suffixes may be left at the end of a newly copied colour and make that colour unknown/ unusable
+        * Rework textual user interface (tui) handling; introduce windowing technique
+        * Correct bug that tui is walking right and down when sending it several times:<br>
+            the reason was that the original value coming from cybol was manipulated,
+            when calculating the coordinates according to the given layout;
+            copies are used instead now, so that the original tui parameters are stable
+        * Implement selective repaint; small areas instead of the whole textual user interface (tui) can be repainted now
+        * Implement <i>clear</i> as property to the <i>send</i> operation, so that the tui is not cleared every time, only if wanted
+        * Add <i>enter</i> (carriage return, line feed) and <i>escape</i> character handling for tui
+        * Decrease sleep time from 1 to 0.1 --> much better performance, but processor is more busy now :-|
+        * Comment out my own implementation of fork/ execv/ wait, which did not work reliably for running external processes;<br>
+            probably, there are some conflicts with the threads/ mutexes/ signal checker loop used in CYBOI;<br>
+            for now, the <i>system</i> function is used to run external commands/ programs in an own child process;<br>
+            this even has the advantage of better portability between platforms :-)
+        * Rename <i>create</i> function to "<i>receive_file_system</i> function;<br>
+            prepare <i>receive_file_system</i> procedure for receiving various file formats:<br>
+            this is to foresee coming file format conversions when receiving (loading) or sending (saving) files;<br>
+            this may be done on the local file system or over a remote connection
+        * Eliminate bug that <i>compound</i> logic models were not processed;
+            --> the reason was that <i>cybol</i> was given as abstraction in CYBOL
+            so that the abstraction at runtime still was <i>cybol</i> instead of <i>compound</i>;
+            therefore, rename/ merge all <i>cybol</i> abstractions into <i>compound</i>
+        * Eliminate bug at shutdown: when shutting down the x window system service,
+            CYBOI tried to remove some entries from the internal memory,
+            which moved all other entries one place forward in that memory,
+            so that none of the pointers pointed to the correct place anymore
+        * Extend signal handler by enabling processing of signals with abstractions <i>encapsulated_knowledge</i>
+            and <i>knowledge</i>, in addition to the already existing abstractions <i>compound</i> and <i>operation</i>
+        * Check and correct interrupting (exiting) of <i>receive</i> service threads
+        * Interrupt (exit) and free resources of all <i>receive</i> service threads automatically at
+            system shutdown, which is necessary in case a CYBOL application developer forgot to do that
+        * Factor out some manager code into the new procedures <i>startup_internal_memory</i> and <i>startup_system_signal_handler</i>
+        * Check for an existing thread first, before creating a new one;<br>
+            when a <i>receive</i> procedure is called more than once,
+            for example to hand over a new command set to wait for and receive,
+            a new thread MUST NOT be created every time
+        * Add a number of new model constants (boolean operations, bit manipulation operations etc.)
+        * Remove CYBOL_ABSTRACTION everywhere and replace with COMPOUND_ABSTRACTION, which existed in parallel
+
+        * Release cybol 1.1.0
+        * Add EBNF and XSD schema files
+        * Add new CYBOL example applications
+
+        * Release cybop 1.1.0
+        * Add "Linux World" 2005 poster
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Reflexions on Knowledge Modelling" 2006 paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+
+2005-08-30  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.6.0
+        * Update debian package files using multi-binary packages
+        * Prepare terminal handling of Textual User Interfaces (TUI); (see Zemljanka and TurboVision)
+        * Debug many errors caused by NULL_POINTER checks which tested the variables instead of their dereferenced values
+            wrong: if (a != NULL_POINTER)
+            right: if (*a != NULL_POINTER)
+            this caused knowledge models not to be created/ added to the knowledge root/ whole model
+        * Replace NULL_POINTER with &NULL_POINTER, where a local void** variable is initialised
+        * Remove all const keywords before static variables and before parameters in headers of procedures, for less code, improved readability and because the const keyword is considered useless now:
+            pointers that were handed over do mostly not get manipulated directly anyway, only pointers within the array pointed to
+            arrays defined with = {} are constant anyway
+        * Delete all character counts and replace them with just one count constant
+        * Change and unify all comparisons, so that their if expressions now compare for equality with 0 instead of 1
+        * Replace constant count variables with the already existing integer counts, to save redundant code and also some memory, e.g.:
+            static const int COMMA_CHARACTER_COUNT_ARRAY[] = {1};
+            static const int* COMMA_CHARACTER_COUNT = COMMA_CHARACTER_COUNT_ARRAY;
+            replaced with:
+            static const int* COMMA_CHARACTER_COUNT = NUMBER_1_INTEGER_ARRAY;
+        * Delete superfluous source files for primitives; only vectors are used now everywhere
+        * Rename string to character vector
+        * Simplify source code by replacing POINTER_NULL_POINTER, INTEGER_NULL_POINTER, FILE_NULL_POINTER etc. in all source files with just NULL_POINTER
+        * Replace allocate_integer and others with more general procedure allocate
+        * Prepare send_terminal procedure for tui output
+        * Rename low-level receive/ send into read/ write, to better distinguish them from the high-level receive/ send CYBOL operations
+        * Rename low-level create/ destroy into allocate/ deallocate, to better distinguish them from the high-level create/ destroy CYBOL operations
+        * Rename file set.c to copy.c
+        * Add knowledge memory and signal memory to internal memory; this HAS TO BE DONE, because when using threads, ONLY ONE parameter (the internal memory) can be handed over to these
+        * Hand over internal memory, knowledge memory and signal memory as parameters, instead of reading them every time from internal_memory
+        * Rename internals_memory to internal_memory
+        * Adapt some include paths and procedure names after restructuring
+        * Delete memory managers and put code into general manager.c
+        * Write log messages to a file instead of to console
+        * Replace all American English (e.g. lize suffixes) with British (Commonwealth) English (e.g. lise) which is now consistently used throughout all source code
+        * Move directories communicator, converter and translator from parent directory controller to parent directory memoriser
+        * Rename directory computer to applicator
+        * Restructure source code directories in relation to von Neumann computer architecture, i.e. consisting of the parts:
+            memoriser (Memory, containing states)
+            controller (Control Unit, coordinating flow)
+            applicator (Algorithmic Logic Unit = ALU, containing logic)
+            globals (additional, global constants and variables)
+            tester (additional, for testing)
+
+        * Release cybol 1.0.0
+        * Change package structure to better comply with debian maintainer guidelines
+
+2005-06-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.5.0.0
+        * Add Makefile and exclude file for compilation
+        * Move some paragraphs and change a few formulations in documentation
+        * Complete implementation of the loop operation
+        * Correct bug in get_new_signal_id of signal_memory_accessor.c
+        * Implement Web User Interface (WUI) handling by generating (translating) HTML from CYBOL (comparable to XUL/ UIML)
+        * Extend sources for handing over string parameters in URL, using escape code sequences
+        * Add url_refresh operation
+        * Implement post operation for web communication
+        * Add new abstraction knowledge for runtime access to knowledge model
+        * Enable dynamically created logic models
+        * Generalise handling of services using startup/ shutdown operations
+        * Run tcp service in an own thread
+        * Synchronise signal memory using Mutex
+        * Use send operation for placing runtime signals read from a CYBOL source into the signal memory
+        * Restructure source directories, following von Neumann architecture (controller, memory, computer, globals)
+        * Remove /web directory (tcp procedures are now in receive_tcp_socket.c; client socket and signal numbers are in internals_memory_accessor.c)
+        * Remove input_output_activator.c (now done by startup/ shutdown and receive/ interrupt/ send service calls in CYBOL)
+        * Remove input_output_handler.c (activation/ blocking flags etc. are now created/ destroyed in corresponding startup/ shutdown procedure)
+
+        * Release cybop 1.0.0
+        * Add "Untersuchung der Realisierungsmoeglichkeiten von CYBOL-Webfrontends,
+            unter Verwendung von Konzepten des Cybernetics Oriented Programming (CYBOP)"
+            paper and presentation
+            Authors: Rolf Holzmueller <rolf.holzmueller@gmx.de>
+
+        * Release cybop 0.1.0.0
+        * Create CYBOP meta package
+        * Add "Res Medicinae / CYBOP (ResMedLib) Architecture" presentation
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Cybernetics Oriented Programming (CYBOP) in Res Medicinae" presentation
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Medizinische Informatik: Open Source erreicht die Medizin" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Res Medicinae Design Paper (Outdated!!)" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "An Extended Component Lifecycle" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "Moeglichkeiten der Gestaltung flexibler Softwarearchitekturen fuer Praesentationsschichten, dargestellt anhand episodenbasierter medizinischer Dokumentation unter Einbeziehung topologischer Befundung" paper
+            Authors: Jens Bohl <info@jens-bohl.de>
+        * Add "Untersuchung zur Realisierbarkeit einer technologieneutralen Mapping-Schicht für den Datenaustausch am Beispiel einer Anwendung zum medizinischen Formulardruck als integrativer Bestandteil eines Electronic Health Record (EHR)" paper
+            Authors: Torsten Kunze <info@torstenkunze.de>
+        * Add "Erstellen eines Backup Moduls unter Verwendung gaengiger Design Patterns aus dem ResMedLib Framework" paper
+            Authors: Dirk Behrendt <behrendt.dirk@web.de>
+        * Add "Erstellung intuitiver Web Frontends zur Terminplanung und Verwaltung administrativer Daten, basierend auf einem Webserver mit JSP Technologie sowie Anbindung an ein Medizinisches Informationssystem" paper
+            Authors: Rolf Holzmueller <rolf.holzmueller@gmx.de>
+        * Add "Erstellung und Anbindung intuitiver Frontends an eine Anwendung zur Verwaltung administrativer Personendaten unter Beachtung von Aspekten der Internationalisierung" paper
+            Authors: Kumanan Kanagasabapathy <kumanan@uni.de>
+        * Add "A flexible Software Architecture for Presentation Layers demonstrated on Medical Documentation with Episodes and Inclusion of Topological Report" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>,
+            Jens Bohl <info@jens-bohl.de>,
+            Torsten Kunze <info@torstenkunze.de>,
+            Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+        * Add "Ein Beitrag zur Evaluierung von Komponententechnologien im Umfeld von Software zur medizinischen Bildbearbeitung" paper
+            Authors: Jens Kleinschmidt <jens.kleinschmidt@gmx.de>
+        * Add "A new Concept for System Communication" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>,
+            Torsten Kunze <info@torstenkunze.de>,
+            Jens Bohl <info@jens-bohl.de>,
+            Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+        * Add "Cybernetics Oriented Language (CYBOL)" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>
+        * Add "A new Pattern Systematics" paper
+            Authors: Christian Heller <christian.heller@tuxtax.de>,
+            Detlef Streitferdt <detlef.streitferdt@tu-ilmenau.de>,
+            Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+
+2005-02-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.4.0.0
+        * Add first minimal CYBOI documentation manual (simple text file)
+        * Move global variables and constants into special files
+        * Use encapsulated primitives so that pointers
+            can be handed through the system, instead of
+            copies of char, int, double etc.;
+            encapsulation is also necessary to preserve a
+            primitive's value in memory -- otherwise, their value
+            gets lost as soon as a parser procedure is left
+        * Complete system lifecycle and waiting loop
+        * Simplify configuration file which now consists
+            of solely key-value pairs, on just one level,
+            NOT hierarchically
+        * Store configuration values internally in a simple
+            pointer array instead of an extra data structure;
+            it is not necessary to store additional type information
+            in a second column of the internals memory, because
+            internals are ALWAYS simple pointers to some date
+            structure that was created outside the internals memory
+        * Adapt whole system to new configuration handling
+        * Factor out code from cyboi main function into separate
+            files and procedures, for better overview
+        * Change all get procedures in arrays, so that only references,
+            but NOT copies are delivered back; change system accordingly
+        * Change complete CYBOI system from unnecessary triple-referenced
+            pointers to simple ones
+        * Only hand over those variables as double reference which:
+            * will carry a result to be delivered back
+            * have to be treated as array
+        * Remove signal from signal_memory only AFTER
+            the signal has been handled
+        * Correct A LOT OF bugs causing segmentation faults at runtime
+        * Get Hello, World! application running
+
+        * Release cybol 1.0.0.0
+        * Add example application "helloworld_dynamic_logic"
+        * Add "addition" application
+        * Prepare empty Debian packages "core" and "healthcare"
+        * Add example applications "exit", "exit_text_file", "exit_cybol_file", "helloworld"
+        * Add Document Type Definition (DTD)
+        * Add XML Schema Definition (XSD)
+
+2004-12-06  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.3.1.1
+        * marked /etc/cyboi/config.cybol as conffile
+        * added manpage cyboi.1.gz
+
+2004-11-23  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.3.1.0
+        * changed handling of Internals
+        * prepared TCP/IP Sockets
+
+2004-09-13  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.3.0.0
+        * Communication over Sockets
+        * Reimplement compound model, according to new CYBOL structure
+        * Continue XML parser, using libxml2 as temporary solution
+
+2004-06-23  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.2.2.0
+        * Fix several bugs in model handling
+        * Create transient copies of all persistent sources, instead of pointing to persistent sources which get freed after some time which resulted in null pointers
+        * Extend number of command line parameters, providing more options for running CYBOI
+        * Enable reading of sources from inline and file location
+
+2004-06-11  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.2.1.0
+        * Correct determination of highest priority index in signal memory
+        * Restructure project directories: /constants --> /constant; /model --> /array; /model --> /state; /statics --> /state; /dynamics --> /logic
+        * Move operation (being state knowledge) to /state
+        * Bundle all constants in just one place
+        * Use more constants, instead of hard-coded values
+        * Introduce constants for log messages
+        * Improve logger; removed all dependencies from other project parts (like array)
+        * Hand over size and count as parameters; do not keep them in one array with pointers
+        * Prepare processing of compound signals
+        * Factor out two procedures handle_create_model_signal and handle_send_signal from handle_operation_signal
+        * Adapt create_model procedure to read cybol sources from several locations like inline|file|ftp
+        * Add test procedures in an own testing module
+        * Prepare processing of compound signals
+
+2004-04-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.2.0.0
+        * Rewrite CYBOI in C programming language
+        * Start writing or using an existing XML parser (like libxml)
+        * Insert first graphics drawing routines (xlibs)
+
+2003-09-11  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Release cyboi 0.1.0.0
+        * CYBOI is an interpreter that can read CYBOL files and create systems
+        * Write CYBOI in Java
+        * Catch events from Java AWT event queue
+        * Use the Apache Xerces XML parser
+        * Create static structures of instances in memory
+        * Run dynamic loop catching signals from internal signal memory (queue)
+        * Create GUI using Java Swing (as temporary workaround)
+        * Create CYBOI by renaming and altering the ResMedLib base library of the Res Medicinae project

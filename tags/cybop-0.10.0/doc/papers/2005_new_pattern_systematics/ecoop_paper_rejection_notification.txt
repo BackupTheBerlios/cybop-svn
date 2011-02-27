@@ -1,0 +1,144 @@
+ECOOP 2005 Technical Papers Notification
+From: "Andrew P. Black" <ecoop@cs.pdx.edu>
+To: christian.heller@tu-ilmenau.de, detlef.streitferdt@tu-ilmenau.de, ilka.philippow@tu-ilmenau.de
+CC: ecoop2005-papers-webadmin@borbala.com
+Date: 22.02.2005 00:39
+
+Dear Christian, Detlef and Ilka,
+
+It is with regret that I write to inform you that your paper
+"A new Pattern Systematics"
+has not been accepted for presentation at ECOOP 2005.
+
+The selection process was highly competitive; out of 172 submissions,
+the committee accepted only 24 papers, a little less than 14 per
+cent.  Over 500 reviews were written by members of the committee and
+by outside reviewers.  I believe that these reviews will provide you
+with useful information to improve your paper.
+
+Your reviews are included below.
+
+Although I am sure that you will be disappointed that this paper was
+not accepted, I believe that ECOOP 2005 will be a strong conference,
+and hope that you will be able to attend, hear the selected papers,
+and enjoy camaraderie of the conference and the sights of the city of
+Glasgow.
+
+        Andrew P. Black (Prof)
+        ECOOP 2005 Programme Chair
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=
+
+First reviewer's review:
+
+          >>> Summary of the submission <<<
+
+The paper tries to propose a new organization of design patterns
+
+          >>> Evaluation <<<
+
+I will try to help you the paper:
+
+- Patterns are about naming and tradeoffs.
+- I do not understand why you want to eliminate the repetition of patterns
+if this is needed this is needed.
+
+- what is exactly the goal of section 2.3? What is the point to repeat these
+patterns? And summarizing patterns is reducing the essence of patterns (the
+tradeoffs) to useless information.
+
+- Problems section arrives faaaaar too late page 9!
+
+- I suggest you to read the ObjVlisp paper of Pierre Cointe OOPSLA 87
+to understand the metaclass architecture
+
+- I do not understand the section 3.1 and what is the point of the section on
+the JVM
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*
+
+Second reviewer's review:
+
+          >>> Summary of the submission <<<
+
+A way to categorize or think about software patterns, based on the way human
+cognition works.
+
+The paper consists of an analysis of what software patterns are and a
+recapitulation of a number of well-known ones.
+
+Finally, the systematics is introduced.
+
+          >>> Evaluation <<<
+
+This work may one day be ready for ECOOP, but not yet. The authors are in the
+midst of trying to make sense of the concept of patterns as described by
+writers in the area while looking at a fairly large slice of a certain branch
+of the realm. The theory as explained so far is immature - the authors need to
+take the work deeper and also show why their new systematics makes a
+difference. What is the insight and what are its benefits. What is the
+significant contribution and whom does it benefit? These questions should be
+used to lead the research deeper.
+
+The authors need to dig deeper into the literature on meta-objects and
+meta-classes. Brian Smith, Patti Maes are good starting points. Or the
+Metaobject Protocol book by Kiczales.
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*
+
+Third reviewer's review:
+
+          >>> Summary of the submission <<<
+
+This pattern presents a schema for organising design patterns, based
+on analysis of existing patterns and cybernetic theory.
+
+          >>> Evaluation <<<
+
+This paper makes a courageous attempt at a difficult problem - how to
+organise and classify design patterns. The bulk of the paper (section
+2.3) presents brief tour through many existing patterns.
+
+Section 3 then discusses some general software engineering issues:
+it's not clear what role this section plays in the argument being
+developed by the paper.
+
+Section 4 presents the new systematics for patterns. This starts with
+an ad-hoc classification developed in section 2, and then includes a
+number of other axes apparently based on the authors'cybernetic
+theories.
+
+I have three main issues with the classification. First, the
+classification seems quite ad-hoc. The categories introduced in
+section 2 seem arbitrary, and the paper presents no basis for the
+"Human Thinking" in section 4.1 - for example, the paper needs
+citations to the cognitive, philosophical, or psychological literature
+to substantiate the basis of the classification.
+
+Second, the classification treats patterns primarily as solution
+structures. A pattern is more than just a solution and list of
+participants (as the paper states in section 2). It should include the
+problem the pattern solves, the important forces acting within the
+problem, the dynamics of the solution (as well as its static
+structure), the way the pattern resolves the problem forces or exposes
+new forces (its benefits or liabilities). The presented
+classification, however, focuses on the implementation techniques of
+the patterns, neglecting these other important aspects.
+
+Finally, the paper does not critically engage with prior existing
+classifications of patterns, including Alexander's concept of a
+pattern language (see e.g. Coplien's 1996 white paper on design
+patterns, Alexander in IEEE SW 1999); Pree's metapatterns (AW, 1994);
+Tichy's 1997 and Zimmer's (PLOPD1) classifications of patterns; more
+academic analysis in terms of symmetry (Coplien; Zhao; Winn); language
+dependence (OOPSLA 98); and semiotics (ECOOP 02).
+
+Please note that this paper was not submitted in the correct
+Springer-Verlag LNCS format for publication at ECOOP.
+
+
+(To encourage accountability, I am signing all my reviews in 2005,
+positive or negative. For the record, I am James Noble,
+kjx@mcs.vuw.ac.nz)
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*

@@ -1,0 +1,477 @@
+<html>
+<head>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Grundlagen der Programmierung grafischer Oberflächen">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="GUI,Grundlagen,grafische Oberflächen,Informatik,EDV">
+<TITLE>Willemers Informatik-Ecke: Grundlagen der GUI-Programmierung</TITLE>
+</head>
+<body>
+<H1>Die Anatomie grafischer Oberfl&auml;chen</H1>
+
+<ul>
+<li><a href="#betriebssystem">Betriebssystem</a>
+<li><a href="#grafiktreiber">Grafische Treiber</a>
+<li><a href="#grafikschicht">Grafikschicht</a>
+<li><a href="#objekt">Objektverwaltung</a>
+<li><a href="#desktop">Desktop</a>
+<li><a href="#xanatomie">Anatomie des X Window Systems</a>
+  <ul>
+  <li>X-Server
+  <li>Xlib
+  <li>X Toolkit Intrinsics
+  <li>Widget-Sets
+  </ul>
+<li><a href="#beachtung">Beachtung der Systemhierarchie</a>
+</ul>
+
+Aus Programmierersicht ist eine grafische Oberfl&auml;che eine
+bibliotheksartige Sammlung von Funktionen. Diese sind
+schichtweise angeordnet, wobei h&ouml;here Schichten selbst auf Funktionen
+niederer Schichten zugreifen. Die Kenntnis dieser Strukturen
+hilft bei der Programmierung, einen &Uuml;berblick &uuml;ber die Vielzahl der
+Funktionen zu erhalten. Die Namensgebung ist in den verschiedenen
+Oberfl&auml;chen sehr unterschiedlich.
+Die folgende Unterteilung ist etwas grob und die Namen sind allgemein
+gehalten.
+
+<p>
+<table width=100%>
+<tr><td width=40%>
+
+<table width=100% border>
+<tr><td width=100% align=center> Desktop</td></tr>
+</table>
+
+</td><td width=20%>
+
+
+</td><td width=40%>
+
+<table width=100% border>
+<tr><td width=100% align=center> Applikation</td></tr>
+</table>
+
+</td></tr>
+</table>
+<p>
+<table border width=100%>
+<tr><td align=center>Objektverwaltung</td></tr>
+<tr><td align=center>Grafikschicht</td></tr>
+<tr><td align=center>grafische Treiber</td></tr>
+<tr><td align=center>Betriebssystem</td></tr>
+</table>
+<p>
+Unter dem Stichwort Nomenklatur werden im Folgenden die Namen der 
+vergleichbaren
+Schichten der verschiedenen Oberfl&auml;chen genannt. Manche Systeme versehen
+die Funktionen mit einem Pr&auml;fix, der kennzeichnet, aus welcher Schicht sie
+stammt. Da dies f&uuml;r das Lesen der Beispielprogramme sehr
+hilfreich sein kann, sind diese hier angef&uuml;hrt.
+
+<a name="betriebssystem"><H2>Betriebssystem</H2>
+<!-- \index{Betriebssystem} -->
+<!-- \index{MS-DOS} \index{MS-Windows} \index{Macintosh} \index{UNIX} -->
+Das Betriebssystem dient vor allem als Lieferant von Ressourcen f&uuml;r
+die Schichten der grafischen Oberfl&auml;che. So wird die Verwaltung des
+Speichers, des Druckers, der Tastatur oder der Maus durch das
+Betriebssystem erledigt. Der Einflu&szlig; des eigentlichen Betriebssystems
+ist unterschiedlich stark. W&auml;hrend bei MS-Windows die Schw&auml;chen des
+zugrunde liegenden MS-DOS durch die grafische Oberfl&auml;che ausgeb&uuml;gelt
+werden sollen, ist beim Macintosh das Betriebssystem auf
+die grafische Oberfl&auml;che hin konzipiert worden. Der R&uuml;ckgriff auf das
+zugrunde liegende Betriebssystem ist demzufolge bei unterschiedlichen
+Systemen unterschiedlich zu werten. W&auml;hrend bei MS-Windows ein Zugriff
+auf MS-DOS sp&auml;testens in der Zukunft Probleme bringen wird und beim
+X Window System das Problem besteht, da&szlig; dieses nicht unbedingt auf einer
+UNIX-Basis realisiert sein mu&szlig;, ist zum Beispiel beim Macintosh kein
+Grund zu sehen, warum man die Funktionalit&auml;t des Betriebssystems nicht
+nutzen sollte.
+Als Faustregel kann man davon ausgehen, da&szlig; wenn eine Funktionalit&auml;t
+des Betriebssystems von einer h&ouml;heren Schicht angeboten wird, in jedem
+Falle die Verwendung der h&ouml;heren Schicht Priorit&auml;t haben sollte.
+
+<H4>Nomenklatur</H4>
+
+Unter OS/2 sind alle Aufrufe an das Betriebssystem mit dem Pr&auml;fix Dos
+versehen. Beim Macintosh gilt die Regel, da&szlig; alle Systemaufrufe und
+-variablen mit einem Gro&szlig;buchstaben anfangen. Der Programmierer ist dazu
+aufgefordert, die applikationseigenen Namen mit Kleinbuchstaben zu
+beginnen.
+
+<a name="grafiktreiber"><H2>Grafische Treiber</H2>
+<!-- \index{Grafiktreiber}  \index{Drucker} -->
+
+Grafische Treiber sind eine interne Schicht der grafischen Oberfl&auml;chen.
+Wie die Treiber in Betriebssytemen bilden sie die Verbindung zwischen der
+Hardware und dem System. Sie verbergen die Besonderheiten der
+zugrundeliegenden Grafikbausteine des Bildschirms bzw. die
+Ansteuerung des Druckers gegen&uuml;ber dem System und bieten diesem
+meist einfache grafische Primitive, aus denen dann die eigentliche
+Grafikschicht des Systems die dem Programmierer
+angebotene Grafikschnittstelle zusammenstellt. 
+Die grafischen Treiber im Gegensatz zu
+den Einheitentreibern nicht den Betriebssystemen untergeordnet, sondern
+fordern selbst Leistungen des Betriebssystem an.
+
+<p><!-- \index{Line-A} \index{Exception} \index{Motorola} -->
+Den Zugriff auf diese Schicht, der in einigen Systemen m&ouml;glich ist,
+sollte man bei der Entwicklung von Applikationen, wenn irgend m&ouml;glich,
+vermeiden. Man ger&auml;t zu leicht in die Abh&auml;ngigkeit von
+Versions&auml;nderungen oder Besonderheiten der Hardware.
+Beispielsweise wurde beim Atari der grafische Treiber durch die
+sogenannte Line-A Bibliothek realisiert. Dabei handelt es sich um
+CPU-Opcodes, die nicht verwendet werden, sondern eine
+Softwareunterbrechung (Exception) ausl&ouml;st. Ihren Namen erhalten diese
+Opcodes dadurch, da&szlig; sie in ihrer hexadezimalen Darstellung mit einem A
+beginnen. Motorola hat diese exceptionausl&ouml;senden Opcodes z. B. f&uuml;r die
+Einbindung von Coprozessoren vorgesehen. Die Line-A Grafikbibliothek ist
+gut dokumentiert und wurde von einigen Programmierern als die
+M&ouml;glichkeit gefeiert, ihre grafischen Ausgaben erheblich zu
+beschleunigen. Da aber die einfachen Funktionen der dar&uuml;berliegenden
+Grafikschicht mehr oder weniger nur an die Grafiktreiber direkt
+durchgereicht werden, ist der Geschwinigkeitsgewinn zumindest bei
+neueren Versionen des GEM nur gering.
+Daf&uuml;r handelten sich diese Programme erhebliche Probleme mit neueren
+Grafikkarten ein, die diesen Mechanismus nicht verwenden.
+Schlie&szlig;lich unterst&uuml;tzte Atari bei Erscheinen des
+TT-Modells dieses Verfahren selbst nicht mehr. Die Konsequenzen sind
+leicht vorstellbar.
+
+<a name="grafikschicht"><H2>Grafikschicht</H2>
+<!-- \index{Grafikschicht} -->
+
+Die Grafikschicht stellt dem Programmierer Funktionen zur Ausgabe
+von grafischen Elementen und Text zur Verf&uuml;gung. Sie basiert auf den
+grafischen Treibern. Die h&ouml;heren Schichten verwenden sie, um die von ihnen
+verwalteten Objekte darzustellen.
+
+<!-- \index{Treiber} -->
+Ihre besondere Bedeutung liegt in der Standardisierung von
+Grafikausgaben. Gegen&uuml;ber dem Programm werden alle
+Hardwareabh&auml;ngigkeiten verdeckt. Damit ist die
+Treibervielfalt, die fr&uuml;her bei grafischen Applikationen mitgeliefert
+werden mu&szlig;te, gestoppt worden.
+
+<!-- \index{Vektorgrafik} -->
+Die Grafikschicht bietet in erster Linie Funktionen zur Darstellung von
+Text, Linien, Rechtecken, Kreisen und Polygonen. Die geschlossenen
+Figuren sind gef&uuml;llt oder als Rahmenlinie verf&uuml;gbar. Insgesamt sind es
+haupts&auml;chlich Funktionen, die man von anderen Grafikbibliotheken her
+kennt. Durch die Orientierung an
+der Vektorgrafik ist eine Vergr&ouml;&szlig;erung oder Verkleinerung leicht
+ m&ouml;glich.
+Ein weiterer Vorteil liegt in der M&ouml;glichkeit, h&ouml;here Aufl&ouml;sungen
+ optimal
+unterst&uuml;tzen zu k&ouml;nnen.
+
+<!-- \index{Pixelgrafik} \index{Fenster} -->
+Daneben werden auch Pixelgrafiken unterst&uuml;tzt. Diese wird zur
+Darstellung von Piktogrammen ben&ouml;tigt.
+Eine weitere wichtige Funktion ist das Verschieben und Kopieren von
+Rechtecken, die bei Fenstermanipulationen gebraucht werden.
+Dazu bieten die Grafikschichten an, einen gew&ouml;hnlichen Speicherbereich
+als Bildschirmbereich interpretieren zu k&ouml;nnen.
+
+Neben den Zeichenfunktionen stellt die grafische Schicht Funktionen zur
+Einstellung der Darstellungsart zur Verf&uuml;gung. Diese betreffen
+Linienst&auml;rke, Muster und Farbe bei grafischen Objekten oder Schriftart,
+Schriftstil und Gr&ouml;&szlig;e bei Texten.
+
+<!-- \index{Grafikaufl\&ouml;sung} -->
+Ein wichtiger Bereich sind die Anfragefunktionen. Damit sind
+Parameter der Grafikumgebung zu ermitteln. Hier finden sich
+wichtige Informationen wie die der Bildschirmdimension (bzw.
+Druckeraufl&ouml;sung), die Anzahl der verf&uuml;gbaren Farben und das
+Gr&ouml;&szlig;enverh&auml;ltnis von X- und Y-Punkten, damit ein Quadrat immer wie
+ein Quadrat aussieht.
+
+<H4>Nomenklatur</H4>
+
+<table border>
+<tr><th>System     </th><th>Name der vergleichbaren Schicht </th><th> Pr&auml;fix</th></tr>
+<tr><td>Macintosh  </td><td> QuickDraw </td><td> </td></tr>
+<tr><td>GEM        </td><td> Virtual Device Interface (VDI) </td><td> v </td></tr>
+<tr><td>MS-Windows </td><td> Graphic Device Interface (GDI) </td><td> </td></tr>
+<tr><td>OS/2       </td><td> Graphics Programming Interface </td><td> Gpi </td></tr>
+<tr><td>X          </td><td> Xlib                           </td><td> X  </td></tr>
+</table>
+<p>
+
+<a name="objekt"><H2>Objektverwaltung</H2>
+<!-- \index{Objektverwaltung} -->
+
+W&auml;hrend die Grafikschicht lediglich daf&uuml;r zust&auml;ndig ist, geometrische
+Gebilde darzustellen, befa&szlig;t sich die n&auml;chste Schicht mit der Verwaltung
+von Objekten wie Applikationen, Fenstern, Symbolen, Kn&ouml;pfen, Men&uuml;s und
+anderen Elementen. Sie verwaltet also abstrakte Gebilde und bestimmt bei
+sichtbaren Objekten deren Aussehen. Dazu bedient sie sich der
+Zeichenfunktionen der Grafikschicht.
+
+In dieser Schicht werden die Applikationen und Fenster angemeldet und
+die Nachrichten bez&uuml;glich der diversen Ereignisse verteilt.
+
+Die Ereignisse werden empfangen, interpretiert und
+weitergeleitet. So empf&auml;ngt diese Schicht zum Beispiel vom
+Betriebssystem die Interrupts,
+die die Maus ausl&ouml;st. Bei einem Maustastenklick stellt sie die
+Bildschirmposition fest und pr&uuml;ft, welches Objekt an dieser Stelle
+vorliegt. War dies zum Beispiel ein Druckknopf einer Dialogbox, wird die
+Applikation ermittelt, die diesen Druckknopf auf den Bildschirm gebracht
+hat, und ihr das Ereignis, da&szlig; der Druckknopf angew&auml;hlt wurde,
+ mitgeteilt.
+In den meisten F&auml;llen erf&auml;hrt die Anwendung nicht, ob dieser durch die
+Maus oder durch die Tastatur gew&auml;hlt wurde. Befinden sich zum Beispiel
+mehrere Fenster
+verschiedener Applikationen auf dem Bildschirm und ein zu unterst
+liegendes Fenster ist angeklickt worden, wird ein Taskwechsel ausgef&uuml;hrt.
+Die bisherige Applikation verliert die Kontrolle, das aktivierte Programm
+erh&auml;lt eine Nachricht dar&uuml;ber, da&szlig; das Fenster nach vorn gekommen ist
+ und
+das der Inhalt restauriert werden mu&szlig;. Das Restaurieren des Rahmens wird
+direkt ausgel&ouml;st.
+
+An diesen Beispielen ist erkennbar, da&szlig; dies die Schicht ist, die das
+Herzst&uuml;ck einer grafischen Oberfl&auml;che bildet.
+
+<H4>Nomenklatur</H4>
+
+<table border>
+<tr><th>System     </th><th>Name der vergleichbaren Schicht </th><th> Pr&auml;fix</th></tr>
+<tr><td>Macintosh  </td><td> Control Manager / Window Manager </td><td> </td></tr>
+<tr><td>GEM        </td><td> Application Environment System (AES) </td><td> je nach Aufgabe </td></tr>
+<tr><td>OS/2       </td><td> Presentation Manager </td><td> Gpi </td></tr>
+<tr><td>X          </td><td> X Toolkit Intrinsics </td><td> Xt  </td></tr>
+</table>
+<p>
+
+Unter GEM sind die Funktionen des AES nach folgenden Aufgabengebieten
+unterteilt:
+<p>
+<table border>
+<tr><th>Pr&auml;fix     </th><th> Aufgabengebiet </th></tr>
+<tr><td>appl </td><td> Applikationsverwaltung  </th></tr>
+<tr><td>evnt </td><td> Ereignisabfrage  </th></tr>
+<tr><td>form </td><td> Dialogboxhandhabung  </th></tr>
+<tr><td>graf </td><td> Grafikelemente des AES  </th></tr>
+<tr><td>menu </td><td> Men&uuml;verwaltung  </th></tr>
+<tr><td>objc </td><td> Objektzugriffe  </th></tr>
+<tr><td>rsrc </td><td> Handhabung der Ressourcen  </th></tr>
+<tr><td>scrp </td><td> Clipboard  </th></tr>
+<tr><td>wind </td><td> Fensterverwaltung  </th></tr>
+</table><p>
+
+<a name="desktop"><H2>Desktop</H2>
+<!-- \index{Desktop} -->
+
+Der Desktop ist die Oberfl&auml;che, auf der alle Applikationen optisch
+aufsetzen. Allerdings stehen seine Funktionen dem Programmierer nicht
+bibliotheksartig zur Verf&uuml;gung. Vielmehr handelt es sich um eine
+eigenst&auml;ndige Anwendung. Die Besonderheit des Desktops liegt darin,
+da&szlig; es das erste Applikationsprogramm ist, das gestartet wird und damit
+die grafische Oberfl&auml;che initialisiert. Ferner wird der physikalische
+Bildschirm mehr oder weniger deutlich als Fenster des Desktops betrachtet,
+in dem s&auml;mtliche Applikationen ihre Fenster quasi als Unterfenster
+aufbauen.
+
+In seiner Funktion als Elternproze&szlig; aller Applikationen hat der Desktop
+zus&auml;tzlich eine wichtige Funktion als Kommunikationspartner der Anwendung.
+
+<p><!-- \index{Window-Manager} -->
+Eine Sonderstellung hat der Desktop des X Window Systems, wo er
+Window-Manager
+genannt wird. Dieser &uuml;bernimmt die Rahmengestaltung der Fenster,
+die damit nicht direkt durch das Programm beeinflu&szlig;t werden kann. Da es
+unterschiedliche Window-Manager 
+<!-- \index{Window-Manager} -->
+ gibt,
+ist die Unterst&uuml;tzung der Rahmenelemente verschieden.
+Wegen der Austauschbarkeit des Window-Managers gibt es sogar die
+M&ouml;glichkeit, da&szlig; der X-Server nur ein Anwendungsprogramm eines anderen
+Systems ist. F&uuml;r OS/2 wird ein solches Programm mit dem
+TCP/IP-Kommunikationspaket mitgeliefert. Dabei &uuml;bernimmt der Presentation
+Manager die Aufgaben des Window-Managers. Damit laufen
+X-Window-Programme parallel zu PM-Anwendungen in einem gew&ouml;hnlichen
+PM-Fensterrahmen.
+
+<p>
+<!-- \index{Datei-Manager} -->
+Bei Macintosh und GEM ist der Desktop vergleichbar mit der Shell unter
+UNIX. Von ihm aus werden die Programme gestartet. Zus&auml;tzlich integriert er
+einen Datei-Manager, mit dem die allt&auml;glichen Arbeiten, wie Kopieren und
+L&ouml;schen von Dateien ausgef&uuml;hrt werden.
+
+<a name="xanatomie"><H2>Anatomie des X Window Systems</H2>
+<!-- \index{X Window System} -->
+
+Die Anatomie des X Window Systems unterscheidet sich an einigen Stellen
+nicht unerheblich von denen der anderen Oberfl&auml;chen. Der Grund liegt
+einmal in der Netzwerkf&auml;higkeit von X und andererseits in der Verwendung
+der Widget-Sets.
+
+<H3>X-Server</H3>
+<!-- \index{X-Server} \index{X-Terminal} \index{X-Client} \index{Betriebssystem} -->
+
+Der X-Server ist ein eigenst&auml;ndiges Programm, das die
+Hardware-Abh&auml;ngigkeiten eines X-Terminals verbirgt und &uuml;ber das
+X-Protokoll angesprochen wird. Dieses Protokoll kann auf einer
+Interproze&szlig;-Kommunikation oder auf einem Netzwerkprotokoll basieren.
+Der X-Server erh&auml;lt alle Anforderungen zur Ausgabe &uuml;ber das X-Protokoll
+von der Anwendung, die in diesem Zusammenhang als X-Client bezeichnet
+wird. Neben dem Bildschirm verwaltet der X-Server die Tastatur und die
+Maus. Jede der Aktionen, die von dort ausgehen, sendet der X-Server
+wiederum an den Client. Da alle Aktionen &uuml;ber das Protokoll erfolgen, kann
+der X-Server sowohl auf der gleichen Maschine wie der X-Client laufen oder
+auf einem beliebigen anderen Computer im Netzwerk. Dabei mu&szlig; der X-Server
+nicht einmal das gleiche Betriebssystem benutzen wie der X-Client.
+
+<H3>Xlib</H3>
+<!-- \index{Xlib} \index{Grafikschicht} -->
+
+Eine Anwendung unter X mu&szlig; das X-Protokoll selbst gar nicht
+beherrschen. Typischerweise wendet es sich dazu an die Xlib. Die Xlib
+enth&auml;lt alle Bestandteile, die zu einer normalen Grafikschicht geh&ouml;ren.
+Alle Grafikausgaben werden &uuml;ber das X-Protokoll an den X-Server versandt.
+Die Xlib verf&uuml;gt aber auch &uuml;ber einige Objekte. So kennt die Xlib
+beispielsweise Fenster und Mauszeiger. Die Xlib empf&auml;ngt auch die
+Ereignisse vom X-Server und verteilt diese bereits auf die angemeldeten
+Fenster. Es ist m&ouml;glich, Applikationen zu schreiben, die allein auf der
+Xlib basieren. Ein Beispiel daf&uuml;r ist xcalc, der Taschenrechner, der bei
+jeder X-Auslieferung zum Standardumfang geh&ouml;rt.
+
+<H3>X Toolkit Intrinsics</H3>
+<!-- \index{X Toolbox Intrinsics} \index{Xlib} \index{Widget} \index{Widget-Set} -->
+
+Die Intrinsics ist eine Bibliothek, die auf der Xlib aufsetzt und die
+Verwaltung von Widgets &uuml;bernimmt. Sie stellt selbst keinen Widget-Set zur
+Verf&uuml;gung, sondern nur die Grundwidgets und die Grundfunktionen zur
+Erstellung eines Sets. Daneben verwaltet sie die Eigenschaften der Widgets
+und stellt dem Anwendungsprogrammierer die Funktionen zum Erzeugen,
+Darstellen und Entfernen von Widgets zur Verf&uuml;gung.
+
+<!-- \index{Ressourcen} -->
+Eine besondere Aufgabe liegt in der Verwaltung der Widget-Eigenschaften,
+der sogenannten
+
+<a href="#ressourcen">Ressourcen</a>.
+Die Eigenschaften der Widgets, wie Farbe, Ausdehnung, Beschriftung und
+Ereignisausl&ouml;sung, k&ouml;nnen durch frei editierbare Dateien, die
+sogenannten Ressourcedateien, ver&auml;ndert
+werden. Die Verwaltung dieser Einstellungen wird durch die Intrinsics
+&uuml;bernommen.
+
+<H3>Widget-Sets</H3>
+<!-- \index{Widget-Set} \index{Widget} -->
+
+Bei X findet der Programmierer noch eine weitere Schicht in Form der
+Widgets vor. Diese bestehen aus Datenstrukturen und eingebauten
+Funktionen. W&auml;hrend die Kontrollelemente bei den meisten
+Oberfl&auml;chen
+eng mit dem restlichen System verkn&uuml;pft sind, werden diese bei X aus einem
+Rechteck aufgebaut, das die in seinem Geltungsbereich auftretenden
+Ereignisse empf&auml;ngt. Durch Zusatz von Eigenschaften wie Aussehen und
+Reaktion auf die Ereignisse k&ouml;nnen neue Objekte erstellt werden. Dazu
+erhalten diese zus&auml;tzliche Datenstrukturen, um zum Beispiel das ge&auml;nderte
+Aussehen festzulegen, und zus&auml;tzliche Routinen, die die hinzugekommene
+Funktionalit&auml;t realisieren. Auf diese Weise ``kennt'' jedes Widget sein
+Aussehen und kann es jederzeit rekonstruieren.
+Zu den Kontrollelementen kommen noch Management Objekte hinzu, die
+Kontrollelemente und untergeordnete Management Widgets nach verschiedenen
+Strategien
+anordnen. All diese Objekte werden zu einer Widgetklasse zusammengenommen
+und bilden die Schnittstelle des Anwendungsprogrammierers.
+
+<p><!-- \index{Men\&uuml;} -->
+Zum Beispiel kann man einen Men&uuml;balken als eine Leiste
+von Kn&ouml;pfen betrachten. Bei Dr&uuml;cken eines solchen Knopfes wird dann
+wiederum eine diesmal senkrechte Leiste erstellt, in der sich wiederum
+Kn&ouml;pfe befinden. Nat&uuml;rlich kommen ein paar Besonderheiten hinzu, wie zum
+Beispiel die Frage, wann das Klappmen&uuml; wieder verschwindet. Aber
+prinzipiell ist ein Men&uuml; nicht viel mehr als die Zusammenstellung von
+Druckkn&ouml;pfen.
+<p>
+Die ungeheure Flexibilit&auml;t dieses Ansatzes hat mehrere solcher
+Objektklassen entstehen lassen. Lange Zeit schien sich OSF/Motif als
+Widgetklasse durchzusetzen. Es gibt daneben aber auch andere Klassen, wie
+etwa die 
+<!-- \index{Athena Widget Set} -->
+ Athena Widget Class, die zum
+Standardlieferumfang von X geh&ouml;rt.
+Ein Programm unter X basiert im Normalfall
+auf einer solchen Objektklasse, die damit zum wichtigen Bestandteil der
+Schnittstelle wird.
+Da aber Motif lizenzpflichtig ist, setzte es im unter Linux nie durch.
+Aus diesem Grund litt Linux lange unter der Unklarheit seiner grafischen
+API, die das Entstehen von Anwendungsprogrammen nachhaltig verz&ouml;gerte.
+Man kann sicher sein, da&szlig; die Festlegung, die nun unter Linux getroffen
+wird, auch bald Standard bei anderen UNIX-Systemen sein wird.
+
+<H4>Nomenklatur</H4>
+
+Die Widgetklassen bestehen in erster Linie aus Datenobjekten, die nicht
+immer einer besonderen Nomenklatur folgen. Die von au&szlig;en zugreifbaren
+Funktionen werden &uuml;blicherweise nach ihren
+Widgetklassen benannt. So haben Objekte und Funktionen des OSF/Motif den
+Pr&auml;fix Xm und
+Funktionen des Athena Widget Set 
+<!-- \index{Athena Widget Set} ->
+ den Pr&auml;fix Xaw.
+Zum Bearbeiten werden allerdings meist Funktionen des Toolkit mit dem
+Pr&auml;fix Xt verwendet.
+
+<a name="beachtung"><H2>Beachtung der Systemhierarchie</H2>
+
+Die Kenntnis der Hierarchie ist bei der Wahl der richtigen Funktionen
+wichtig. Oftmals treten Funktionen &auml;hnlichen Inhalts mehrfach auf.
+Da die Schichten aufeinander aufbauen, kann man davon ausgehen, da&szlig; sich
+die Programmierer der Systemschicht etwas dabei gedacht haben, wenn sie
+eine Funktionalit&auml;t ein zweites Mal realisieren. Der Griff in eine
+darunter liegende Schicht kann zu diversen Problemen f&uuml;hren.
+
+<p><!-- \index{XBIOS} -->
+Das Thema Farbe bietet ein gutes Beispiel f&uuml;r die Verwendung der falschen
+Systemebene. Der Atari bietet eine XBIOS-Funktion <tt>Getrez</tt> an, die
+die Aufl&ouml;sung des Bildschirms liefert. Dabei bedeutet
+der R&uuml;ckgabewert 0 eine Aufl&ouml;sung von 320 x 200 Pixel in 16 Farben, 1
+eine Aufl&ouml;sung von 640 x 200 Pixeln  in 4 Farben und 2 eine Aufl&ouml;sung
+von 640 x 400 Pixeln monochrom.
+Im Modus 1 verzerrt die Bildschirmausgabe, so da&szlig; ein Quadrat entsteht,
+wenn die Waagerechten doppelt so lang sind wie die Senkrechten. Die
+neueren Modelle von Atari haben inzwischen wesentlich leistungsf&auml;higere
+Bildschirmmodi und selbst bei &auml;lteren Ger&auml;ten ist eine
+Grafikerweiterung f&uuml;r wenig Geld erh&auml;ltlich, die den Monochrommodus
+auf ca. 700 x 440 - je nach Leistung des Monitors - erweitert. Wendet sich
+das Programm an die Grafikschicht, wird es die genaue Aufl&ouml;sung,
+die Farbtiefe und das Gr&ouml;&szlig;enverh&auml;ltnis zwischen X- und Y-Achse pr&auml;zise
+erfahren k&ouml;nnen. Entgegen der XBIOS-Routine sind diese Informationen nach
+wie vor f&uuml;r alle Ger&auml;te g&uuml;ltig.
+
+<p><!-- \index{MS-DOS} \index{MS-Windows} -->
+Ein weiteres typisches Beispiel ist die Verwendung der MS-DOS-Funktionen
+zur Speicherverwaltung aus MS-Windows-Programmen. Da MS-DOS selbst nur den
+Speicher innerhalb der unteren 640KByte verwalten kann, stellt MS-Windows
+eigene Funktionen zur Verf&uuml;gung, die auch auf den Rest des Speichers
+zugreifen kann. Damit eine vern&uuml;nftige Speicherauslastung stattfinden
+kann, sollten die Speicheranforderungen an MS-Windows gerichtet werden.
+
+Das Vorhandensein von gleichartigen Funktionen auf verschiedenen Ebenen
+sollte den erfahrenen
+Programmierer dazu verleiten, die Funktion der h&ouml;heren Ebene zu verwenden.
+
+<hr align=left width=30%>
+<a name="ressourcen">Der Begriff <i>Ressourcen </i> wird
+      wird von den anderen Oberfl&auml;chen anders belegt. Dort beschreiben
+      die Ressourcen in erster Linie den Aufbau von Dialogboxen und
+      Men&uuml;s.
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - 
+<a href="index.htm">Inhaltsverzeichnis</a>
+</td>
+<td align=right>
+<font size=2>(C) Copyright 1993-1999 Arnold Willemer</font>
+</td></tr></table>
+</body>
+</html>

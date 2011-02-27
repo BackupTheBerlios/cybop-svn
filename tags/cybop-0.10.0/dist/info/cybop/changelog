@@ -1,0 +1,63 @@
+cybop (1.1.0-1) unstable; urgency=low
+
+  * Add "Linux World" 2005 poster
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+  * Add "Reflexions on Knowledge Modelling" 2006 paper
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+
+ -- Christian Heller <christian.heller@tuxtax.de>  Sat, 09 Sep 2006 18:00:00 +0200
+
+
+cybop (1.0.0-1) unstable; urgency=low
+
+  * Add "Untersuchung der Realisierungsmoeglichkeiten von CYBOL-Webfrontends,
+    unter Verwendung von Konzepten des Cybernetics Oriented Programming (CYBOP)"
+    paper and presentation
+    Authors: Rolf Holzmueller <rolf.holzmueller@gmx.de>
+
+ -- Christian Heller <christian.heller@tuxtax.de>  Mon, 27 Jun 2005 09:30:00 +0200
+
+
+cybop (0.1.0.0) unstable; urgency=low
+
+  * Create CYBOP meta package
+  * Add "Res Medicinae / CYBOP (ResMedLib) Architecture" presentation
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+  * Add "Cybernetics Oriented Programming (CYBOP) in Res Medicinae" presentation
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+  * Add "Medizinische Informatik: Open Source erreicht die Medizin" paper
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+  * Add "Res Medicinae Design Paper (Outdated!!)" paper
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+  * Add "An Extended Component Lifecycle" paper
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+  * Add "Moeglichkeiten der Gestaltung flexibler Softwarearchitekturen fuer Praesentationsschichten, dargestellt anhand episodenbasierter medizinischer Dokumentation unter Einbeziehung topologischer Befundung" paper
+    Authors: Jens Bohl <info@jens-bohl.de>
+  * Add "Untersuchung zur Realisierbarkeit einer technologieneutralen Mapping-Schicht für den Datenaustausch am Beispiel einer Anwendung zum medizinischen Formulardruck als integrativer Bestandteil eines Electronic Health Record (EHR)" paper
+    Authors: Torsten Kunze <info@torstenkunze.de>
+  * Add "Erstellen eines Backup Moduls unter Verwendung gaengiger Design Patterns aus dem ResMedLib Framework" paper
+    Authors: Dirk Behrendt <behrendt.dirk@web.de>
+  * Add "Erstellung intuitiver Web Frontends zur Terminplanung und Verwaltung administrativer Daten, basierend auf einem Webserver mit JSP Technologie sowie Anbindung an ein Medizinisches Informationssystem" paper
+    Authors: Rolf Holzmueller <rolf.holzmueller@gmx.de>
+  * Add "Erstellung und Anbindung intuitiver Frontends an eine Anwendung zur Verwaltung administrativer Personendaten unter Beachtung von Aspekten der Internationalisierung" paper
+    Authors: Kumanan Kanagasabapathy <kumanan@uni.de>
+  * Add "A flexible Software Architecture for Presentation Layers demonstrated on Medical Documentation with Episodes and Inclusion of Topological Report" paper
+    Authors: Christian Heller <christian.heller@tuxtax.de>,
+    Jens Bohl <info@jens-bohl.de>,
+    Torsten Kunze <info@torstenkunze.de>,
+    Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+  * Add "Ein Beitrag zur Evaluierung von Komponententechnologien im Umfeld von Software zur medizinischen Bildbearbeitung" paper
+    Authors: Jens Kleinschmidt <jens.kleinschmidt@gmx.de>
+  * Add "A new Concept for System Communication" paper
+    Authors: Christian Heller <christian.heller@tuxtax.de>,
+    Torsten Kunze <info@torstenkunze.de>,
+    Jens Bohl <info@jens-bohl.de>,
+    Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+  * Add "Cybernetics Oriented Language (CYBOL)" paper
+    Authors: Christian Heller <christian.heller@tuxtax.de>
+  * Add "A new Pattern Systematics" paper
+    Authors: Christian Heller <christian.heller@tuxtax.de>,
+    Detlef Streitferdt <detlef.streitferdt@tu-ilmenau.de>,
+    Ilka Philippow <ilka.philippow@tu-ilmenau.de>
+
+ -- Christian Heller <christian.heller@tuxtax.de>  Mon, 27 Jun 2005 09:30:00 +0200

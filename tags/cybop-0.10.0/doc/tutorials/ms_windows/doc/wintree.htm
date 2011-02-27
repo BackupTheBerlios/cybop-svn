@@ -1,0 +1,253 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Baumdiagramm">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, Tree View, Baumdiagramm, Informatik">
+<TITLE>Windows-Programmierung: Baumdiagramm
+</TITLE>
+</HEAD>
+<BODY>
+<a name="top"><table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Windows Programmierung: Baumdiagramm</font></H1>
+</td></tr></table>
+<p><font face="Helvetica" size=3">
+<a href="wincontr.htm#top">Einf&uuml;hrende Informationen</a>
+ &uuml;ber die Programmierung von Kontrollelementen werden hier vorausgesetzt.
+</font><p>
+
+<H2>Stile</H2>
+
+Man kann mit Hilfe der Funktionen <tt>GetWindowLong</tt> und <tt>SetWindowLong</tt>
+nach der Erzeugung des Kontrollelementes Stile &auml;ndern oder anfragen.
+<p>
+<dl>
+<dt>TVS_HASLINES</dt><dd>
+  durch Linien zwischen Eltern und Kindern wird die Hierarchie besser sichtbar gemacht.
+</dd>
+<dt>TVS_LINESATROOT</dt><dd>
+  Auch die Wurzelelemente bekommen eine Linie, die zum linken Rand f&uuml;hrt.
+</dd>
+<dt>TVS_HASBUTTONS</dt><dd>
+  Durch Doppelklicken auf das Elternelement kann der Anwender zwar auf- und zuklappen.
+  Deutlicher wird es durch Voranstellen einer Schaltfl&auml;che, die dann auch nur einmal 
+  geklickt werden mu&szlig;.
+
+  Es mu&szlig; neben <tt>TVS_HASLINES</tt> auch <tt>TVS_LINESATROOT</tt> und <tt>TVS_HASBUTTONS</tt>
+  gesetzt werden.
+
+</dd>
+<dt>TVS_EDITLABELS</dt><dd>
+  Dies erm&ouml;glicht dem Anwender das Editieren der Labels
+</dd>
+<dt>TVS_SHOWSELALWAYS</dt><dd>
+  Die Selektion wird aufrecht erhalten, wenn das Element seinen Fokus verliert.
+</dd>
+</dl>
+
+<H2>Ansteuerung</H2>
+
+<H3>Erzeugung eines Kontollelements</H3>
+
+Ein Tree View wird mit der Funktion <tt>CreateWindowEx</tt>
+erzeugt. 
+Die einfache <tt>CreateWindow</tt> funktioniert nicht.
+Als Fensterklasse wird die Konstante <tt>WC_TREEVIEW</tt> verwendet.
+Dazu mu&szlig; die Common Control Header Datei eingebunden werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#include "commctrl.h"
+
+  InitCommonControls();
+  hTree = CreateWindowEx(0, WC_TREEVIEW , "Tree", 
+          WS_VISIBLE|WS_CHILD|WS_BORDER| TVS_HASLINES|TVS_LINESATROOT|TVS_HASBUTTONS,
+          1, 1, 300, 100, // Positionen auf dem Elternfenster
+          hWnd, (HMENU)ID_TREE, hInst, 0);
+</pre></td></tr></table><p>
+
+Im Dialog wird sie einfach in der Ressource definiert.
+<p>
+
+Kommt es zu nicht aufgel&ouml;sten Externals, sollte man pr&uuml;fen,
+ob die Library f&uuml;r die Common Controls (<tt>comctl32.lib</tt>) eingebunden wird.
+
+<H3>Hinzuf&uuml;gen eines Elements</H3>
+
+Eine <tt>TVITEM</tt>-Struktur beschreibt ein Element.
+F&uuml;r das Einf&uuml;gen wird die <tt>TVINSERTSTRUCT</tt>-Struktur
+ben&ouml;tigt. Sie beschreibt das Eltern-Element und das Element, hinter dem
+das neue Element einsortiert werden soll.
+Die Adresse der Einf&uuml;gestruktur wird dem Tree View mit der Nachricht
+TVM_INSERTITEM zugesandt.
+<p>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HTREEITEM AddItemToTree(HWND hwndTV, LPSTR lpszItem, HTREEITEM parent, HTREEITEM brother)
+{ 
+TVITEM tvi;
+TVINSERTSTRUCT tvins; 
+HTREEITEM hItem; 
+
+  tvi.mask = TVIF_TEXT;
+  tvi.pszText = lpszItem; 
+  tvi.cchTextMax = lstrlen(lpszItem);  
+
+  // die Insert-Struktur wird vorbereitet
+  tvins.item = tvi;
+  if (brother) {
+    tvins.hInsertAfter = brother;
+  } else {
+    tvins.hInsertAfter = TVI_FIRST;
+  }
+  if (parent==0) {
+    tvins.hParent = TVI_ROOT;
+  } else {
+    tvins.hParent = parent;
+  }
+
+  // Nachricht zum Einbinden an das Kontrollelement versenden
+  hItem = (HTREEITEM)SendMessage(hwndTV, TVM_INSERTITEM, 0, (LPARAM)&tvins);  
+  return hItem;
+} 
+ . . .
+  HTREEITEM opa,papa,onkel,bruder, ich;
+
+  opa = AddItemToTree(hTree, "Opa", 0,0);
+  papa = AddItemToTree(hTree, "Papa", opa,0);
+  onkel = AddItemToTree(hTree, "Onkel", opa, papa);
+  bruder = AddItemToTree(hTree, "Bruder", papa, 0);
+  ich = AddItemToTree(hTree, "ich", papa, 0);
+</pre></td></tr></table><p>
+
+Zwei Parameter bestimmen die Position des neuen Element. Das Elternelement und der direkte
+Nachbar, hier als brother bezeichnet. Beides wird in der Insert-Struktur festgelegt.
+
+ 
+<H3>Verschieben eines Elements (Dragging)</H3>
+
+Um das Verschieben eines Elementes zu verfolgen, werden die Nachrichten TVN_BEGINDRAG oder 
+TVN_BEGINRDRAG, WM_MOUSEMOVE und WM_LBUTTONUP oder WM_RBUTTONUP beobachtet.
+Hat das Item ein Image, mu&szlig; es gezeichnet werden, wenn es verschoben wird.
+<p>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+static HWND hTree=0;
+static int g_fDragging = FALSE;
+POINTS Pos;
+static HTREEITEM hItem;
+HTREEITEM htiTarget;  // handle to target item 
+TVHITTESTINFO tvht;  // hit test information
+ . . .
+	case WM_NOTIFY: 
+		switch (((LPNMHDR) lParam)->code) {
+		case TVN_BEGINDRAG:
+			// lParam wird auf LPNMTREEVIEW gecastet und weiterverarbeitet
+			LPNMTREEVIEW lpnmtv = (LPNMTREEVIEW) lParam;
+			hTree = lpnmtv->hdr.hwndFrom; 
+			HIMAGELIST himl;
+
+			RECT rcItem;
+			himl = TreeView_CreateDragImage(hTree, lpnmtv->itemNew.hItem);
+			TreeView_GetItemRect(hTree, lpnmtv->itemNew.hItem, &rcItem, TRUE); 
+			ImageList_BeginDrag(himl, 0, 0, 0); 
+
+			ShowCursor(FALSE); 
+			SetCapture(GetParent(lpnmtv->hdr.hwndFrom)); 
+			g_fDragging = TRUE; 
+			break; 
+		}
+		break; 
+		
+	case WM_MOUSEMOVE:
+		if (g_fDragging) { 
+			Pos = MAKEPOINTS(lParam);
+			ImageList_DragMove(Pos.x, Pos.y);
+
+			tvht.pt.x = Pos.x; 
+			tvht.pt.y = Pos.y; 
+			if ((htiTarget = TreeView_HitTest(hTree, &tvht)) != NULL) { 
+				TreeView_SelectDropTarget(hTree, htiTarget); 
+			} 
+		} 
+		break;
+	case WM_LBUTTONUP:
+		if (g_fDragging) {
+			ImageList_EndDrag();
+			ReleaseCapture();
+			ShowCursor(TRUE);
+			g_fDragging = FALSE;
+		}
+		break;
+</pre></td></tr></table><p>
+
+<p>
+
+<H3>Editieren der Labels</H3>
+
+Das Tree View mu&szlig; mit dem Stil <tt>TVS_EDITLABELS</tt> erzeugt worden sein. 
+Dann kann bereits ein Label angeklickt werden und Eingaben werden entgegengenommen.
+Allerdings wird die Eingabe direkt anschlie&szlig;end wieder verworfen.
+Um &Auml;nderungen im Label zu gestatten, braucht man nur die WM_NOTIFY mit dem
+Code TVN_ENDLABELEDIT zu fangen und return TRUE zu geben. 
+Um dazwischen auf den eingegebenen Text zuzugreifen,
+wird ein Zugriff auf den Text des Items durchgef&uuml;hrt. Das Beispiel zeigt
+die Eingabe in einer Messagebox.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+	case WM_NOTIFY: 
+		switch (((LPNMHDR) lParam)->code) {
+		case TVN_ENDLABELEDIT:
+			pItem = (LPNMTVDISPINFO) lParam;
+			MessageBox(hWnd, pItem->item.pszText, "entry", MB_OK);
+			return TRUE;
+</pre></td></tr></table><p>
+
+Wurde das Editieren abgebrochen, wird das pszText-Element 0 sein.
+<p>
+Das Element pItem->item ist nicht das Original TV_ITEM des Baumes, aber die
+Elemente hItem, lParam und pszText stimmen mit dem Original &uuml;berein.
+F&uuml;r das normale Editieren des Titels reicht das normalerweise auch.
+Wird aber beispielsweise das Image in Abh&auml;ngigkeit des Textes ver&auml;ndert,
+m&uuml;sste man das Element explizit mit TreeView_GetItem holen.
+<p>
+Soll das Editieren komplett verhindert werden, wird die Nachricht <tt>TVN_BEGINLABELEDIT</tt> gefangen
+und TRUE zur&uuml;ckgegeben. Auch hier kann &uuml;ber lParam in gleicher Weise auf das Item
+zugegriffen werden und so beispielsweise eine bestimmte Itemgruppe ausgegrenzt werden.
+
+<H2>Ereignisse</H2>
+
+Das TreeView sendet WM_NOTIFY-Nachrichten an das Elternfenster. Der <tt>code</tt> kann folgende Werte
+annehmen:
+
+<p>
+<table border>
+<tr><th>Nachricht</th><th> Beschreibung  </th></tr>
+<tr><td>TVN_BEGINDRAG </td><td> Start einer Drag-And-Drop Aktion </td></tr>
+<tr><td>TVN_BEGINRDRAG </td><td> Start einer Drag-And-Drop Aktion &uuml;ber rechte Maustaste </td></tr>
+
+<tr><td>TVN_BEGINLABELEDIT </td><td> Start Editieren eines Labels </td></tr>
+<tr><td>TVN_ENDLABELEDIT </td><td> Ende Editieren eines Labels </td></tr>
+
+<tr><td>TVN_DELETEITEM </td><td> Item wird gel&ouml;scht </td></tr>
+
+<tr><td>TVN_GETDISPINFO </td><td> Das Kontrollelement erfragt Informationen zur Darstellung vom Elternfenster </td></tr>
+<tr><td>TVN_SETDISPINFO </td><td> Die Information des Elternfensters f&uuml;r das Item mu&szlig; erneuert werden </td></tr>
+
+<tr><td>TVN_ITEMEXPANDED </td><td> Eine Liste von Kind-Items ist auseinandergezogen oder zusammengeklappt worden </td></tr>
+<tr><td>TVN_ITEMEXPANDING </td><td> Eine Liste von Kind-Items ist kurz davor, auseinandergezogen oder zusammengeklappt zu werden </td></tr>
+<tr><td>TVN_KEYDOWN </td><td> Taste wurde gedr&uuml;ckt </td></tr>
+<tr><td>TVN_SELCHANGED </td><td> Selektion zwischen den Items hat gewechselt </td></tr>
+<tr><td>TVN_SELCHANGING </td><td> Selektion zwischen den Items vor dem Wechsel  </td></tr>
+</table>
+<p>
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY>
+</HTML>

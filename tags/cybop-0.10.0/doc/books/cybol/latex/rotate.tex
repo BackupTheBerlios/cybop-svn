@@ -1,0 +1,78 @@
+%
+% $RCSfile: rotate.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Rotate}
+\label{rotate_heading}
+\index{Rotate}
+
+This operation rotates the bits within the number by the given positions.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="rotate_bits" channel="inline" abstraction="operation" model="rotate">
+    <property name="number" channel="inline" abstraction="knowledge" model=".app.number"/>
+    <property name="direction" channel="inline" abstraction="character" model="left"/>
+    <property name="position" channel="inline" abstraction="integer" model="1"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Number Property}
+
+This property specifies the number whose bits are to be rotated.
+
+\emph{required}
+
+name=\texttt{'number'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{the actual number (or knowledge model)}
+
+\subsubsection{Direction Property}
+
+The direction in which to rotate.
+
+\emph{required}
+
+name=\texttt{'direction'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'left' \vline\ 'right'}
+
+\subsubsection{Position Property}
+
+The number of positions by which the bits of the given number are to be rotated.
+
+\emph{required}
+
+name=\texttt{'position'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{number of positions to rotate by}
+
+\subsubsection{Result Property}
+
+This is the result knowledge model in which to store the number whose bits were
+rotated.
+
+\emph{required}
+
+name=\texttt{'result'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{result knowledge model}

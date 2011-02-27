@@ -1,0 +1,57 @@
+%
+% $RCSfile: paper.tex,v $
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2006-01-03 08:21:45 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+% The document class specifying the type of document.
+% Possible tags for headings are: section, subsection, subsubsection, paragraph.
+%\documentclass[forInclusion,english]{lni}
+\documentclass[english]{lni}
+
+% Use paper format and font.
+%\usepackage{a4,times}
+
+% Graphics.
+\usepackage{graphicx}
+
+% The hyphenation list.
+\input{hyphenation}
+
+%
+% This document is a scientific paper to be handed in for a conference.
+%
+% @version $Revision: 1.1 $ $Date: 2006-01-03 08:21:45 $ $Author: christian $
+% @author Christian Heller <christian.heller@tuxtax.de>
+% @author Christian Heller <christian.heller@tu-ilmenau.de>
+% @see http://www.jr-x.de/publikationen/latex/tipps/index.html
+%
+\begin{document}
+    \twocolumn
+    \input{title}
+    \maketitle
+    \input{abstract}
+    \input{introduction}
+    \input{architectural_troubles}
+    \input{approach}
+    \input{inter-disciplinary_ideas}
+    \input{practical_proof}
+    \input{summary}
+    \bibliography{references}
+\end{document}

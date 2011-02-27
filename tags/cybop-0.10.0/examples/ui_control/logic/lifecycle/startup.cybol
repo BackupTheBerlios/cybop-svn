@@ -1,0 +1,191 @@
+<model>
+    <part name="create_ui_control" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="ui_control"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+    </part>
+    <part name="create_temporary" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="temporary"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
+    </part>
+    <part name="create_character" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="character"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control.temporary"/>
+    </part>
+    <part name="create_integer" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control.temporary"/>
+    </part>
+    <part name="create_application_information" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="application_information"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
+    </part>
+    <part name="receive_application_information" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="ui_control/application_information.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information"/>
+    </part>
+    <part name="create_settings" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="settings"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
+    </part>
+    <part name="receive_settings" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="ui_control/settings.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.settings"/>
+    </part>
+    <part name="create_tui" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="tui"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
+    </part>
+    <part name="receive_tui" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="ui_control/tui.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.tui"/>
+    </part>
+    <part name="create_gui" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="gui"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
+    </part>
+    <part name="receive_gui" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="ui_control/gui.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.gui"/>
+    </part>
+    <part name="create_logic" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="logic"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
+    </part>
+    <part name="receive_logic" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="ui_control/logic.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.logic"/>
+    </part>
+    <part name="create_tui_main_window_actions" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="main_window_actions"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface"/>
+    </part>
+    <part name="receive_tui_main_window_actions" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="ui_control/tui/main_window/actions.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.main_window_actions"/>
+    </part>
+    <part name="create_tui_about_dialogue_actions" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="about_dialogue_actions"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface"/>
+    </part>
+    <part name="receive_tui_about_dialogue_actions" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="ui_control/tui/about_dialogue/actions.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.about_dialogue_actions"/>
+    </part>
+<!--
+    <part name="create_gui_main_window_actions" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="gui_main_window_actions"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface"/>
+    </part>
+    <part name="receive_gui_main_window_actions" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="ui_control/gui/main_window/actions.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.gui_main_window_actions"/>
+    </part>
+-->
+    <!-- Write knowledge tree into file. -->
+    <part name="test_knowledge_tree" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/model-diagram"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control"/>
+        <property name="receiver" channel="inline" abstraction="text/plain" model="TEST_UI_CONTROL.txt"/>
+    </part>
+    <part name="startup_tui" channel="inline" abstraction="operation/plain" model="startup">
+        <property name="service" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
+    </part>
+    <part name="startup_gui" channel="inline" abstraction="operation/plain" model="startup">
+        <property name="service" channel="inline" abstraction="text/plain" model="x-window-system"/>
+    </part>
+    <part name="select_current_menu_item" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.select_current_part"/>
+    </part>
+    <part name="send_tui" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.main_window"/>
+        <property name="clean" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    </part>
+<!--
+    <part name="send_gui" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="x-window-system"/>
+        <property name="receiver" channel="inline" abstraction="text/plain" model="user"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".ui_control.gui.main_window"/>
+    </part>
+-->
+    <part name="sense_tui_commands" channel="inline" abstraction="operation/plain" model="sense">
+        <property name="channel" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
+        <property name="handler" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.handler.handle_gnu_linux_console"/>
+    </part>
+<!--
+    <part name="sense_gui_commands" channel="inline" abstraction="operation/plain" model="sense">
+        <property name="channel" channel="inline" abstraction="text/plain" model="x-window-system"/>
+        <property name="root" channel="inline" abstraction="path/knowledge" model=".ui_control.gui"/>
+        <property name="commands" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.user_interface.gui_main_window_actions"/>
+        <property name="blocking" channel="inline" abstraction="logicvalue/boolean" model="false"/>
+    </part>
+-->
+</model>
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: startup.cybol,v $ $Revision: 1.20 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

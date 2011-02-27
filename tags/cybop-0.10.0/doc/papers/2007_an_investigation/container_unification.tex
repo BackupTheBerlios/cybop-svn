@@ -1,0 +1,60 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2002-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Container Unification}
+\label{container_unification_heading}
+
+Section \ref{motivation_heading} mentioned container inheritance as one problem
+of current software. Due to polymorphism, it may cause unpredictable behaviour
+possibly leading to \emph{falsified} container contents \cite{javaiaq}. The
+previous sections introduced a knowledge schema which they claimed to be
+\emph{general}. But that also means that all kinds of containers must be
+representable by the suggested schema. But why are there so many different
+kinds of containers? What actually is a container?
+
+It is a concept expressing that some model \emph{contains} some other model(s).
+Types of containers are, for example: \emph{Collections} (Array, Vector, Stack,
+Set, List), \emph{Maps} (Hash Map, Hash Table) and the \emph{Tree}. They all
+are containers. What differs, is just the meta information they store about
+their elements. A list, for example, holds position information about each of
+its elements. A map relates the name of an element to its model (1:1). A tree
+links one model to many others (1:n).
+
+But does the different meta information a container holds about its elements
+justify the existence of different container models? If a knowledge schema was
+general enough to represent a container structure on one hand, and to express
+different kinds of meta information on the other, it might be able to behave
+like any of the known container types.
+
+The schema proposed in this work claims to be this kind of knowledge schema. It
+has a container structure by default, and can thus hold many parts in a
+\emph{Tree}-like manner. It holds standard meta information about its parts:
+their \emph{Name}, \emph{Model}, kind of \emph{Abstraction} and further meta
+information called \emph{Details} -- and is therefore able to link the name of
+an element to its model, in a \emph{Map}-like manner. To the additional meta
+information (details) may belong the \emph{Position} of an element within its
+model, in a \emph{List}-like manner. A \emph{Table} structure can be represented
+as well, by splitting it into a hierarchical (tree-like) representation, as
+known from markup languages like the \emph{Hypertext Markup Language} (HTML).
+
+Section \ref{cybol_heading} will introduce a language capable of expressing all
+aspects of the knowledge schema as proposed here.

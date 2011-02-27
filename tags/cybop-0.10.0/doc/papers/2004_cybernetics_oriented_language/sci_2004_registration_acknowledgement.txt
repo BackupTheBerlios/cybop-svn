@@ -1,0 +1,243 @@
+From informationsci2004@iiis.org Mon Mar 15 15:37:35 2004
+Return-Path: <informationsci2004@iiis.org>
+Received: from rudy.rz.tu-ilmenau.de (rudy.rz.tu-ilmenau.de [141.24.4.15])
+	by ernie.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id i2FEaXSr021519
+	for hidden; Mon, 15 Mar 2004 15:36:33 +0100 (MET)
+Received: from elmo.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by rudy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id i2FEUm7P012076
+	for <ai008@ernie.rz.tu-ilmenau.de>; Mon, 15 Mar 2004 15:30:48 +0100 (MET)
+Received: from localhost (localhost [127.0.0.1])
+	by elmo.rz.tu-ilmenau.de (8.12.9/8.12.9/Debian-5) with ESMTP id i2FEZ074028619
+	for <ai008@ernie.rz.tu-ilmenau.de>; Mon, 15 Mar 2004 15:35:01 +0100
+Received: from elmo.rz.tu-ilmenau.de ([127.0.0.1])
+	by localhost (elmo [127.0.0.1]) (amavisd-new, port 10024) with ESMTP
+	id 28483-01-4 for <ai008@ernie.rz.tu-ilmenau.de>;
+	Mon, 15 Mar 2004 15:34:59 +0100 (CET)
+Received: from piggy.rz.tu-ilmenau.de (piggy.rz.tu-ilmenau.de [141.24.4.8])
+	by elmo.rz.tu-ilmenau.de (8.12.9/8.12.9/Debian-5) with ESMTP id i2FEX56U028360
+	for <ai008@ernie.rz.tu-ilmenau.de>; Mon, 15 Mar 2004 15:33:05 +0100
+Received: from ragnarok.iiisci.org (host-200-75-139-138.net-uno.net [200.75.139.138] (may be forged))
+	by piggy.rz.tu-ilmenau.de (8.12.10/8.12.10) with ESMTP id i2FEYPm9019723
+	for finalrecipients; Mon, 15 Mar 2004 15:34:26 +0100 (MET)
+Received: from mail pickup service by ragnarok.iiisci.org with Microsoft SMTPSVC;
+	 Mon, 15 Mar 2004 10:37:35 -0400
+From: <informationsci2004@iiis.org>
+To: <christian.heller@tu-ilmenau.de>
+Subject: SCI 2004 Registration Acknowledgement
+Date: Mon, 15 Mar 2004 10:37:35 -0400
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+  boundary="----=_NextPart_000_3528_01C40A79.8755E350"
+X-MimeOLE: Produced By Microsoft MimeOLE V5.50.4927.1200
+Message-ID: <RAGNAROKYIcVqeavxhg00000d4b@ragnarok.iiisci.org>
+X-OriginalArrivalTime: 15 Mar 2004 14:37:35.0312 (UTC) FILETIME=[0E867D00:01C40A9B]
+Status: R 
+X-Status: N
+X-KMail-EncryptionState:  
+X-KMail-SignatureState:  
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_3528_01C40A79.8755E350
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+*** PLEASE DO NOT REPLY TO THIS AUTO-ANSWER MESSAGE ***
+This e-mail address is a system e-mail account. So, this mailbox is not
+monitored for responses.
+Mail sent to this address cannot be answered.
+
+Dear Christian HELLER,
+
+Thank you for registering in SCI 2004. Your registration ID number is:
+47401S. 
+
+Receipts for all fees paid will be provided on check-in time at the
+conference registration 
+desk. 
+
+The Conference Registration Office will post, on the Registration Status
+web page, the confirmation of 
+your registration. Please, check your registration status.
+
+We would like to remind you that: 
+
+* Registration fee includes: one (1) volume of the hard copy version of
+the Conference Proceedings, 
+a CD-ROM version of the Proceedings, coffee breaks and a welcome
+reception. 
+
+* Only one (1) paper will be published and included in the Conference
+Program for presentation, for 
+each registration fee.
+
+* The registration fee does not include any post-conference services.
+There will be additional 
+shipping and handling costs to be paid for those registered authors who,
+for unforeseen reasons, 
+could not go to SCI 2004 and, after the Conference, will ask us to send
+them the proceedings. Any 
+post-conference administrative requirements will be charged at a rate of
+US$20 per staff hour 
+required to elaborate such a requirement, with a minimum of US$10.
+Post-conference requirements 
+will have their own deadline, which, in no case, will be more than three
+(3) months counted 
+from the last day of the Conference.
+
+* All refund requests must be in writing and postmarked no later than
+May 15th, 2004. No e-mail 
+requests will be processed. A cancellation fee of US$50 will be applied.
+Request for refunds 
+postmarked after May 15th, 2004 will not be accepted.
+
+* No-shows are not refundable and are liable for the full registration
+fee. 
+
+* Registration may be transferred to a colleague by giving him/her a
+signed written authorization. 
+It may be faxed to +1 (407) 856-6274 or it may be brought on check-in
+time at the conference 
+registration desk. Since we cannot securely receive the signature or
+other authentication 
+information, through e-mail, we cannot accept transfer of registrations
+via e-mail. 
+
+* The conference organizers cannot accept liability for personal
+injuries, or for loss or damage 
+to property belonging to conference delegates (or their accompanying
+persons), either during or 
+as a result of the conference. Please check the validity of your own
+insurance. 
+
+For additional information about the registration consult, please, the
+Registration Guide published 
+in the web site of the Conference.
+
+Details of your registration appear below. Please save this e-mail as a
+confirmation of your 
+registration.
+
+Thank you for registering.
+
+We look forward to see you at the Conference!
+
+----------------------------------------
+GENERAL INFORMATION
+----------------------------------------
+Registration ID Number: 47401S
+Registration Date: Monday, March 15, 2004
+Registration Status: Confirmed 
+
+----------------------------------------
+REGISTRANT INFORMATION
+----------------------------------------
+First/Given Name: Christian
+Middle Initial: 
+Last/Family Name: Heller
+Organization/Institution: Technical University of Ilmenau
+Country: Germany 
+Home Phone Number: + () 
+Office Phone Number: + 49 (3677) 691230
+Fax Phone Number: + 49 (3677) 691220
+E-mail: christian.heller@tu-ilmenau.de
+Paper's Title to be Published/Presented: Cybernetics Oriented Language
+(CYBOL) 
+Paper ID Number: S234EH
+
+----------------------------------------
+PAYMENT INFORMATION
+----------------------------------------
+Method of Payment: Credit Card 
+Cardholder's Name: Christian Heller
+Cardholder's E-mail: christian.heller@tu-ilmenau.de
+
+CONFERENCE FEES TO PAY
+Registration Fee: US$ 380
+Extra Pages Fee: US$ 150
+Total Amount: US$ 530
+
+*** PLEASE DO NOT REPLY TO THIS AUTO-ANSWER MESSAGE ***
+This e-mail address is a system e-mail account. So, this mailbox is not
+monitored for responses.
+For further information or assistance e-mail to one of these addresses:
+sci2004@iiis.org, sci2004@telcel.net.ve, sci2004@cantv.net
+
+
+
+------=_NextPart_000_3528_01C40A79.8755E350
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+*** PLEASE DO NOT REPLY TO THIS AUTO-ANSWER MESSAGE ***<br>This e-mail =
+address is a system e-mail account. So, this mailbox is not monitored =
+for responses.<br>Mail sent to this address cannot be =
+answered.<br><br>Dear Christian HELLER,<br><br>Thank you for registering =
+in SCI 2004. Your registration ID number is: 47401S. <br><br>Receipts =
+for all fees paid will be provided on check-in time at the conference =
+registration  <br>desk. <br><br>The Conference Registration Office will =
+post, on the Registration Status web page, the confirmation of <br>your =
+registration. Please, check your registration status.<br><br>We would =
+like to remind you that: <br><br>* Registration fee includes: one (1) =
+volume of the hard copy version of the Conference Proceedings, <br>  a =
+CD-ROM version of the Proceedings, coffee breaks and a welcome =
+reception. <br><br>* Only one (1) paper will be published and included =
+in the Conference Program for presentation, for  <br>  each registration =
+fee.<br><br>* The registration fee does not include any post-conference =
+services. There will be additional <br>  shipping and handling costs to =
+be paid for those registered authors who, for unforeseen reasons, <br>  =
+could not go to SCI 2004 and, after the Conference, will ask us to send =
+them the proceedings. Any <br>  post-conference administrative =
+requirements will be charged at a rate of US$20 per staff hour <br>  =
+required to elaborate such a requirement, with a minimum of US$10. =
+Post-conference requirements <br>  will have their own deadline, which, =
+in no case, will be more than three (3) months counted <br>  from the =
+last day of the Conference.<br><br>* All refund requests must be in =
+writing and postmarked no later than May 15th, 2004. No e-mail <br>  =
+requests will be processed. A cancellation fee of US$50 will be applied. =
+Request for refunds <br>  postmarked after May 15th, 2004 will not be =
+accepted.<br><br>* No-shows are not refundable and are liable for the =
+full registration fee. <br><br>* Registration may be transferred to a =
+colleague by giving him/her a signed written authorization. <br>  It may =
+be faxed to +1 (407) 856-6274 or it may be brought on check-in time at =
+the conference <br>  registration desk. Since we cannot securely receive =
+the signature or other authentication <br>  information, through e-mail, =
+we cannot accept transfer of registrations via e-mail. <br><br>* The =
+conference organizers cannot accept liability for personal injuries, or =
+for loss or damage <br>  to property belonging to conference delegates =
+(or their accompanying persons), either during or <br>  as a result of =
+the conference. Please check the validity of your own insurance. =
+<br><br>For additional information about the registration consult, =
+please, the Registration Guide published <br>in the web site of the =
+Conference.<br><br>Details of your registration appear below. Please =
+save this e-mail as a confirmation of your  =
+<br>registration.<br><br>Thank you for registering.<br><br>We look =
+forward to see you at the =
+Conference!<br><br>----------------------------------------<br>GENERAL =
+INFORMATION<br>----------------------------------------<br>Registration =
+ID Number: 47401S<br>Registration Date: Monday, March 15, =
+2004<br>Registration Status: Confirmed =
+<br><br>----------------------------------------<br>REGISTRANT =
+INFORMATION<br>----------------------------------------<br>First/Given =
+Name: Christian<br>Middle Initial: <br>Last/Family Name: =
+Heller<br>Organization/Institution: Technical University of =
+Ilmenau<br>Country: Germany <br>Home Phone Number: +  () <br>Office =
+Phone Number: + 49 (3677) 691230<br>Fax Phone Number: + 49 (3677) =
+691220<br>E-mail: christian.heller@tu-ilmenau.de<br>Paper's Title to be =
+Published/Presented: Cybernetics Oriented Language (CYBOL)
+<br>Paper ID Number: =
+S234EH<br><br>----------------------------------------<br>PAYMENT =
+INFORMATION<br>----------------------------------------<br>Method of =
+Payment: Credit Card <br>Cardholder's Name: Christian =
+Heller<br>Cardholder's E-mail: =
+christian.heller@tu-ilmenau.de<br><br>CONFERENCE FEES TO =
+PAY<br>Registration Fee: US$ 380<br>Extra Pages Fee:  US$ 150<br>Total =
+Amount:  US$ 530<br><br>*** PLEASE DO NOT REPLY TO THIS AUTO-ANSWER =
+MESSAGE ***<br>This e-mail address is a system e-mail account. So, this =
+mailbox is not monitored for responses.<br>For further information or =
+assistance e-mail to one of these addresses:<br> sci2004@iiis.org, =
+sci2004@telcel.net.ve, sci2004@cantv.net<br><br>
+------=_NextPart_000_3528_01C40A79.8755E350--
+

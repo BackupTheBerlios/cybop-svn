@@ -1,0 +1,39 @@
+%
+% $RCSfile: distribution_and_installation.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Distribution and Installation}
+\label{distribution_and_installation_heading}
+\index{CYBOI Distribution and Installation}
+
+The current version of CYBOI, as well as already existing CYBOL applications,
+are distributed in form of \emph{Debian GNU/Linux Packages} (DEB). Future
+versions may be provided in \emph{RPM/ Red Hat Package Manager} (RPM) format as
+well. Also, installation files for other OS like Windows might be available
+then.
+
+One question that had to be answered was where to put the CYBOI binary, but
+also CYBOL application files in UNIX \emph{Filesystem Hierarchy Standard} (FHS)
+\cite{fhs} directories. The \emph{/usr/bin} directory for CYBOI is obvious.
+CYBOL files, on the other hand, are the source + executable + configuration of
+an application, at the same time, all in one. A mailing list discussion
+\cite[June 2005]{debiandevel} finally suggested a practicable way, namely to
+put all CYBOL applications to the \emph{/usr/share/} directory.

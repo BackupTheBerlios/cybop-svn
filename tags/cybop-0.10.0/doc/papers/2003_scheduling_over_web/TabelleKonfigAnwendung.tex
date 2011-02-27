@@ -1,0 +1,170 @@
+\begin{table}[hbtp!]
+  \caption{Einträge der Konfigurationsdatei Sektion "`logging"'}
+  \centering
+
+  \begin{tabular} {|p{3.6cm}|p{10cm}|} 
+
+    \hline
+    
+    \textbf{Schlüssel}  & \textbf{Beschreibung} \\ \hline\hline
+
+    log\_level          & Loglevel der Application (1..15)      \\ \hline
+    log\_file           & Datei der Logeinträge                 \\ \hline
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[hbtp!]
+  \caption{Einträge der Konfigurationsdatei Sektion "`database"'}
+  \centering
+  \begin{tabular} {|p{3.6cm}|p{10cm}|} 
+
+    \hline
+    
+    \textbf{Schlüssel}  & \textbf{Beschreibung} \\ \hline\hline
+
+    driver              & 
+    Treiber der JDBC-Verbindung
+    (org.gjt.mm.mysql.Driver)             \\ \hline
+    url                 & 
+    Verwendungs-URL für die JDBC-Verbing 
+    (jdbc:mysql://localhost/resdata)                             \\ \hline
+    user                & 
+    Verwendete Benutzer der Datenbank   
+    (resdata)                                                   \\ \hline
+    pwd                 & 
+    Verwendetes Paßwort der Datenbank  
+    (resdata)                                                   \\ \hline
+  \end{tabular}
+\end{table}
+
+    
+\begin{table}[hbtp!]
+  \caption{Einträge der Konfigurationsdatei Sektion "`mail"'}
+  \centering
+  \begin{tabular} {|p{3.6cm}|p{10cm}|} 
+
+    \hline
+    
+    \textbf{Schlüssel}  & \textbf{Beschreibung} \\ \hline\hline
+
+    protocol            & 
+    Protokoll der eMail-Verschickung  
+    (smtp)                                                       \\ \hline
+    host                & 
+    Host für die eMail-Verschickung   
+    (mail.gmx.de)                                               \\ \hline
+    user                & 
+    Login für das eMail-Konto   
+    (xxx)                                                       \\ \hline
+    pwd                 & 
+    Paßwort für das eMail-Konto   
+    (???)                                                       \\ \hline
+    fromadresse         & 
+    Absenderadresse für die eMail-Verschickung  
+    (xxx@yyy.net)                                               \\ \hline
+    subject\_desired    & 
+    Betreff für eMail-Verschickung Terminwunsch   
+    (Web Terminwunsch)                                           \\ \hline
+    subject\_confirm    & 
+    Betreff für eMail-Verschickung Terminbestätigung 
+    (Terminbestätigung)                                           \\ \hline
+    subject\_cancel     & 
+    Betreff für eMail-Verschickung Terminabsage  
+    (Terminabsage)                                               \\ \hline
+  \end{tabular}
+\end{table}
+
+    
+\begin{table}[hbtp!]
+  \caption{Einträge der Konfigurationsdatei Sektion "`path"'}
+  \centering
+  \begin{tabular} {|p{3.6cm}|p{10cm}|} 
+
+    \hline
+    
+    \textbf{Schlüssel}  & \textbf{Beschreibung} \\ \hline\hline
+
+    servlet\_path       & 
+    Pfad für das Servlet \newline
+    (http://localhost:8080/resdata/servlet/
+    org.resmedicinae.application.healthcare.resdata.controller)\\ \hline
+    jsp\_path           & 
+    Pfad für JSP-Dateien  
+    (/jsp/)                                                     \\ \hline
+    css\_path           & 
+    Pfad für CSS-Dateien \newline  
+    (http://servername:8080/resdata/css/)                         \\ \hline
+    image\_path         & 
+    Pfad für Bild-Dateien \newline  
+    (http://servername:8080/resdata/images/)                     \\ \hline
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[hbtp!]
+  \caption{Einträge der Konfigurationsdatei Sektion "`navigation"'}
+  \centering
+  \begin{tabular} {|p{3.6cm}|p{10cm}|} 
+
+    \hline
+    
+    \textbf{Schlüssel}  & \textbf{Beschreibung} \\ \hline\hline
+
+    resmedicinae\_home  & 
+    URL der Home-Seite für Resmedicinae  \newline
+    (http://resmedicinae.sourceforge.net/index.html)             \\ \hline
+    resdata\_home       & 
+    URL der Home-Seite für ResData \newline 
+    (http://servername:8080/resdata/jsp/ResDataStart.jsp)         \\ \hline
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[hbtp!]
+  \caption{Einträge der Konfigurationsdatei Sektion "`parameter"'}
+  \centering
+  \begin{tabular} {|p{3.6cm}|p{10cm}|} 
+
+    \hline
+    
+    \textbf{Schlüssel}  & \textbf{Beschreibung} \\ \hline\hline
+
+    control\_param      & 
+    Instanzbezeichnung für den Controller 
+    (myController)                                               \\ \hline
+    loginmodel\_param   & 
+    Instanzbezeichnung für das Modell Login  
+    (myModelLogin)                                              \\ \hline
+    doctormodel\_param  & 
+    Instanzbezeichnung für das Modell Doctor 
+    (myModelDoctor)                                             \\ \hline
+    datemodel\_param    & 
+    Instanzbezeichnung für das Modell Date  
+    (myModeldate)                                               \\ \hline
+    mailmodel\_param    & 
+    Instanzbezeichnung für das Modell Mail  
+    (myModelMail)                                               \\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[hbtp!]
+  \caption{Einträge der Konfigurationsdatei Sektion "`color"'}
+  \centering
+  \begin{tabular} {|p{3.6cm}|p{10cm}|} 
+
+    \hline
+    
+    \textbf{Schlüssel}  & \textbf{Beschreibung} \\ \hline\hline
+
+    status\_no          & 
+    Farbe für freie Termine  
+    (blue)                                                       \\ \hline
+    status\_request     & 
+    Farbe für angeforderte Termine
+    (red)                                                       \\ \hline
+    status\_confirmed   & 
+    Farbe für bestätigte Termine   
+    (yellow)                                                     \\ \hline    
+  \end{tabular}
+\end{table}

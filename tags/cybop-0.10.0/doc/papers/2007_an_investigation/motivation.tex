@@ -1,0 +1,63 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2002-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Motivation}
+\label{motivation_heading}
+
+To the issues that the work described in this article had with some
+state-of-the-art solutions belong three things:
+
+\begin{enumerate}
+    \item \emph{Abstraction Gaps} in Software Engineering Process (section
+        \ref{abstraction_gaps_heading})
+    \item \emph{Misleading Tiers} in Physical Architecture (section
+        \ref{misleading_tiers_heading})
+    \item \emph{Modelling Mistakes} in Logical Architecture (section
+        \ref{modelling_mistakes_heading})
+\end{enumerate}
+
+The traversing of abstraction gaps in a software engineering process belongs to
+the main difficulties in software development, and causes considerable cost-
+and time effort. It necessitates a steady synchronisation between domain
+experts and application system developers, because their responsibilities
+cannot be clearly separated and interests often clash. A first objective was
+therefore to contribute to closing these gaps, especially the one existing
+between a designed system architecture and the implemented source code.
+
+The misinterpretation of the physical tiers in an information technology
+environment often leads to wrong-designed software architectures. Logical
+layers are adapted to physical tiers (frontend, business logic and backend) and
+differing patterns are used to implement them. Instead, systems should be
+designed in a way that allows the usage of a unified translator architecture,
+so to give every application system the capability to communicate universally
+by default, which was the second objective.
+
+Several well-known issues exist with the modelling of logical system
+architectures, for example: fragile base class problem, container inheritance,
+bidirectional dependencies, global data access. These and others more result
+from using wrong principles of knowledge abstraction, like the bundling of
+attributes and methods in one class, as suggested by
+\emph{Object Oriented Programming} (OOP), or the equalising of
+structural- and meta information in a model. A third aim was therefore to
+closer investigate the basic principles and concepts after which current
+software systems are created, and to search for new concepts, with the
+objective of finding a universal type structure (knowledge schema).

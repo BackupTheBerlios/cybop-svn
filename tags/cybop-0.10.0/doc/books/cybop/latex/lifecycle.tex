@@ -1,0 +1,121 @@
+%
+% $RCSfile: lifecycle.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Lifecycle}
+\label{lifecycle_heading}
+\index{Lifecycle of a System}
+\index{System Lifecycle}
+\index{Startup of a System}
+\index{Shutdown of a System}
+\index{Main Entry Procedure}
+\index{Running of a System}
+\index{Component Lifecycle}
+\index{Component Oriented Programming}
+\index{COP}
+\index{Knowledge Template}
+\index{Knowledge Model}
+\index{Hard Disk Drive}
+\index{HDD}
+\index{Random Access Memory}
+\index{RAM}
+\index{Instantiating Knowledge}
+\index{Serialising Knowledge}
+\index{Graphical User Interface}
+\index{GUI}
+\index{Performance of a System}
+
+Before the memories and control loops described before can fulfill their tasks
+of storing and processing knowledge, respectively, they have to be created and
+activated, which happens at system \emph{Startup} (figure \ref{system_figure}).
+The startup needs to be initiated by some \emph{main} entry procedure. At
+system \emph{Shutdown}, just the opposite needs to happen, that is control
+loops and memories have to be deactivated and destroyed. In between startup and
+shutdown, the system lives, it is \emph{running}. The whole procedure of
+starting up, running and shutting down a system is called
+\emph{System Lifecycle} -- not to be mixed up with the lifecycle of software,
+which refers to its analysis, design, implementation and subsequent growing
+old. The term \emph{System Lifecycle} in this work is used in relation to the
+component lifecycle of \emph{Component Oriented Programming} (COP), described
+in section \ref{component_oriented_programming_heading}. It dictates the order
+in which creation and destruction of system parts (in memory) need to happen.
+
+Once the startup phase has reached the endless signal waiting loop, it relies
+on the presence of an initial signal, to get some main application running,
+that is instantiate given knowledge templates. The signal has to contain a
+corresponding (logic) knowledge model describing an operation activity. It must
+be added to the signal memory during system startup. More details are given in
+chapter \ref{cybernetics_oriented_interpreter_heading}.
+
+The difference between \emph{Knowledge Templates} and \emph{Knowledge Models}
+-- as used in this work -- is that templates contain static knowledge stored
+persistently in something like a file on a \emph{Hard Disk Drive} (HDD);
+models, on the other hand, represent instantiated, dynamic knowledge that
+resides transiently in a computer's \emph{Random Access Memory} (RAM). The
+process of \emph{Instantiating} knowledge involves cloning a persistent template
+in order to receive a transient model, which can then be freely manipulated in
+RAM. Likewise, transient knowledge models can be made persistent, if so desired,
+by \emph{Serialising} and writing them onto some persistent memory like a HDD.
+
+Besides the knowledge that gets instantiated by the lifecycle at system startup,
+there has to be a possibility to create and destroy knowledge instances at a
+later point in system runtime. The decision whether to create a transient model
+at system startup or only later as the need arises, can have great effect. An
+application with \emph{Graphical User Interface} (GUI), for example, may contain
+100 dialogues. If there is enough RAM in the system, all dialogues could get
+created at startup, so that one would only have to switch them visible or
+invisible, at runtime. In this case, high dialogue \emph{Performance} (a
+non-functional requirement) would be guaranteed.
+
+Not all systems will have enough RAM; not all developers will want to allocate
+(and thereby block) large parts of memory -- especially not for those dialogues
+in the example, which are rarely used. Knowledge models must therefore be
+creatable anytime after system startup, using signals containing special logic.
+(More on that in chapter \ref{state_and_logic_heading}.) Creating a knowledge
+model only when it is needed is less well-performing but saves a lot of memory.
+The decision which instantiation paradigm to use finally falls to the
+developer. She or he has to consider concrete application needs, runtime
+requirements and the environment.
+
+Again, parallels to biology can be drawn but differences are obvious, too.
+Persistent knowledge templates represent the \emph{Configuration} after which a
+system gets created in form of transient knowledge models in memory. This is
+similar to a \emph{Desoxy Ribo Nucleic Acid} (DNA) providing the building plan
+for a biological cell. Yet can one not simply create knowledge instances in
+memory and leave them on their own. Contrary to biological cells which develop
+and copy themselves, knowledge instances in a software system have to be
+\emph{referenced}. This is necessary in order to be able to work with them and
+later to properly destroy them, since forgotten, unfreed memory areas are one
+main reason for system crashes. Traditional systems lacking a central management
+of instances had to invent special mechanisms like \emph{Garbage Collectors}
+(GC), to find and destroy forgotten instances which are not referenced anymore.
+GCs are known from programming environments like \emph{Smalltalk}
+\cite{smalltalk} or \emph{Java} \cite{java}. The knowledge processing system
+proposed in this work manages all knowledge instances \emph{centrally}, so that
+workarounds like GCs become superfluous.
+
+The destruction of biological- and software systems differs, though. While
+biological systems molder in a diffuse manner over time, a knowledge instance
+tree representing a software system can be properly folded in the opposite way
+it was unfolded at creation time. Since, in the proposed system, all knowledge
+\emph{hangs} on one single root node (section \ref{memory_heading}), forgotten
+instances can be easily identified and destroyed at system shutdown, to clean
+up the memory.

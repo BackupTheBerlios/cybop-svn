@@ -1,0 +1,47 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2002-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Base- and Meta Level}
+\label{base_and_meta_level_heading}
+
+Reflective techniques as described in \cite{heller2005} make use of one
+so-called \emph{Base Level} and one or more \emph{Meta Levels}. The reason for
+splitting a system's architecture in this way is the hope to be able to move
+rather general \emph{System Functionality} into a meta level, while leaving
+domain-specific \emph{Application Functionality} in the base level. (Well, in
+his book \emph{Analysis Patterns -- Reusable Object Models} \cite{fowler1997},
+Fowler used meta levels to model general classes containing not exclusively
+system- but also domain-specific functionality.) The conflicts a design
+decision of that kind can bring with were described in \cite{heller2005}, which
+-- above all -- criticised the bidirectional dependencies.
+
+However, what the proposition of reflective software patterns shows, is the
+existence of a wish among software developers, to separate general system- from
+more specific application functionality. And nature does exactly that. Yet
+while reflective mechanisms use the same implementation techniques for system-
+as well as for application-specific functionality, nature always treats passive
+knowledge strictly separate from active system control. The best example
+therefor is the biological cell division, where passive genetic information
+situated in a \emph{Desoxy Ribo Nucleic Acid} (DNA) is read and transmitted
+into proteins by an active mechanism involving \emph{Ribo Nucleic Acid} (RNA)
+molecules \cite{heller2004}. Bidirectional dependencies do not exist between
+the both.

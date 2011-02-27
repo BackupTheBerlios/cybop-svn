@@ -1,0 +1,73 @@
+%
+% $RCSfile: structured_and_procedural_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Structured- and Procedural Programming}
+\label{structured_and_procedural_programming_heading}
+\index{Structured- and Procedural Programming}
+\index{SPP}
+\index{Control Structure}
+\index{Sequenced Step}
+\index{Procedure}
+\index{Subroutine}
+\index{Wild Jump, Goto}
+\index{Recursion}
+\index{Hierarchical Modularisation of Control Structures}
+\index{Entrance and Exit of a Control Structure}
+\index{Module}
+\index{Library}
+\index{Program Flow Chart}
+\index{Structure Chart}
+
+Computer history has produced a whole plethora of high-level languages (an
+overview is given in section \ref{language_history_heading}). They are to ease
+the programming of applications which solve problems of an arbitrary domain.
+Nearly all of them make use of a number of techniques that stem from the
+so-called \emph{Structured- and Procedural Programming} (SPP).
+
+These techniques arise from firstly the reduction of \emph{Control Structures} to a
+minimal set of elements which can be combined arbitrarily in \emph{Sequenced Steps}.
+Secondly, repeating algorithms can be defined as \emph{Procedure} and called as
+subroutine. That way, wild \emph{Jumps} from one part of a program to another
+are avoided. A procedure can also call itself which is known as \emph{Recursion}
+\cite{philippow}.
+
+It is possible to \emph{hierarchically modularise} all control structures, with
+each structure having a defined \emph{Entrance} and \emph{Exit}. When
+procedures are grouped together in a separate file, then this file is often
+called \emph{Module} or \emph{Library}. Modules can contribute greatly to the
+reuse and creation of clear program code.
+
+Two kinds of diagrams are typically used to describe a (part of a) procedural
+program semi-formally: \emph{Program Flow Chart} and \emph{Structure Chart}.
+Both representations are based on sequences of control structures. The former
+differs from the latter in the existence and appearance of certain graphical
+elements; \emph{GoTo} instructions, for example, do not exist in structure
+charts.
+
+Following is a brief description of the most important control elements of SPP,
+given in form of both, diagrams \cite{schiedermeier} and C program code
+\cite{gcc}. These basic control techniques are: \emph{Assignment},
+\emph{Branching} and \emph{Looping}.
+
+\input{assignment}
+\input{branching}
+\input{looping}

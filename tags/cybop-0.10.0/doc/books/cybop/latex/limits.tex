@@ -1,0 +1,74 @@
+%
+% $RCSfile: limits.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Limits}
+\label{limits_heading}
+\index{CYBOP Limits}
+
+Naturally, there are \emph{Limits} to CYBOP. For instance, it:
+
+\begin{itemize}
+    \item[-] does not claim to be \emph{the} approach for all kinds of
+        programming problems, although it thinks to contribute suitable
+        concepts for at least standard business application development.
+        However, its usability for hardware-close systems with Real Time (RT)
+        requirements, or for control engineering is questionnable and yet to be
+        investigated;
+    \item[-] depends on the existence of a system with knowledge-processing
+        capabilities, which current \emph{Operating Systems} (OS) are not. The
+        CYBOI delivered with it is quite mature, but still lacks functionality
+        like different \emph{User Interfaces} (UI), various \emph{import/ export}
+        (i/e) filters/ translators, better error handling, prioritising and
+        further OS features. Only functionality already implemented in CYBOI can
+        also be used in CYBOL. But because CYBOI is free software, continuously
+        developed in an open project, new features shall be implementable shortly;
+    \item[-] has no type-checking features like classical compilers. This is
+        the cost of flexibility. The knowledge schema is the only type
+        structure provided by CYBOI. All domain- and application knowledge is
+        hold externally, in CYBOL knowledge templates, and interpreted only at
+        runtime;
+    \item[-] will have performance problems when using UI models, especially
+        graphical ones, because these are sent in complete to the graphics
+        adapter card, whenever a minor change is made. Techniques have to be
+        found, that update only clips of a UI model, in graphics memory. The
+        difficulty herein is that CYBOL application knowledge has \emph{no}
+        direct access to system-level functionality;
+    \item[-] does not eliminate all abstraction gaps in a SEP. Requirements
+        described informally by an analysis document have to be mapped to CYBOL
+        knowledge templates, which then represent the application to be created.
+        Although analysts and experts may create CYBOL models right from the
+        project start, there will probably never be a true replacement for the
+        written requirements analysis document, as one form of abstraction.
+        However, if not the informal descriptions of its models, the document
+        itself may be created in CYBOL, since it represents knowledge.
+\end{itemize}
+
+%\input{persistency}
+%Ein Haupt-Denkproblem habe ich immer noch mit persistent gemachten
+%Laufzeit-Modellen. Z.B. koennte man in einer Personalverwaltung die
+%personenbezogenen Daten in einer CYBOL Datei speichern und die
+%Adressdaten in einer anderen CYBOL Datei, aehnlich, wie man Datensaetze
+%in verschiedenen Tabellen einer relationalen DB ablegt. Jede CYBOL Datei
+%wuerde als Namen eine eindeutige ID bekommen und im Datensatz einer
+%Person wuerde als Adressfeld lediglich die ID der Adresse als Verweis
+%stehen. Doch wie sage ich einem System, welche Daten es zusammen, und
+%welche in getrennten Dateien speichern soll?

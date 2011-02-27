@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="date" content="2011-01-13T12:00:00+01:00"/>
+    <meta name="author" content="Christian Heller &lt;christian.heller@tuxtax.de&gt;"/>
+    <meta name="robots" content="noindex"/>
+    <link rel="stylesheet" media="all" type="text/css" href="presence.css"/>
+    <title>Anwesenheit Mitarbeiter</title>
+</head>
+<body>
+    <div id="page">
+        <div id="header">
+            <img src="ba-leipzig.png" alt="BA Leipzig"/>
+        </div>
+        <h1>Anwesenheit Mitarbeiter</h1>
+        <div id="overview">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mitarbeiter</th>
+                        <th>Bearbeiten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="businesstrip">
+                        <td>Prof. Dr. habil. Ulrike Gr&#246;ckel</td>
+                        <td class="edit">
+                            <a href=""><img src="absence.png" alt="Absence" title="au&#223;er Haus"/></a>
+                            <a href=""><img src="businesstrip.png" alt="Business Trip" title="auf Dienstreise"/></a>
+                            <a href=""><img src="holiday.png" alt="Holiday" title="im Urlaub"/></a>
+                            <a href=""><img src="presence.png" alt="Presence" title="im Hause"/></a>
+                        </td>
+                    </tr>
+                    <tr class="holiday">
+                        <td>Prof. Dr. habil. Kerry-U. Brauer</td>
+                        <td>
+                            <a href=""><img src="absence.png" alt="Absence" title="au&#223;er Haus"/></a>
+                            <a href=""><img src="businesstrip.png" alt="Business Trip" title="auf Dienstreise"/></a>
+                            <a href=""><img src="holiday.png" alt="Holiday" title="im Urlaub"/></a>
+                            <a href=""><img src="presence.png" alt="Presence" title="im Hause"/></a>
+                        </td>
+                    </tr>
+                    <tr class="absence">
+                        <td>Prof. Ingolf Brunner</td>
+                        <td>
+                            <a href=""><img src="absence.png" alt="Absence" title="au&#223;er Haus"/></a>
+                            <a href=""><img src="businesstrip.png" alt="Business Trip" title="auf Dienstreise"/></a>
+                            <a href=""><img src="holiday.png" alt="Holiday" title="im Urlaub"/></a>
+                            <a href=""><img src="presence.png" alt="Presence" title="im Hause"/></a>
+                        </td>
+                    </tr>
+                    <tr class="presence">
+                        <td>Dr.-Ing. Christian Heller</td>
+                        <td>
+                            <a href=""><img src="absence.png" alt="Absence" title="au&#223;er Haus"/></a>
+                            <a href=""><img src="businesstrip.png" alt="Business Trip" title="auf Dienstreise"/></a>
+                            <a href=""><img src="holiday.png" alt="Holiday" title="im Urlaub"/></a>
+                            <a href=""><img src="presence.png" alt="Presence" title="im Hause"/></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="legend">
+            <h1>Legende</h1>
+            <table>
+                <tr>
+                    <td class="absence">
+                        au&#223;er Haus
+                    </td>
+                </tr>
+                <tr>
+                    <td class="businesstrip">
+                        auf Dienstreise
+                    </td>
+                </tr>
+                <tr>
+                    <td class="holiday">
+                        im Urlaub
+                    </td>
+                </tr>
+                <tr>
+                    <td class="presence">
+                        im Hause
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="login">
+            <form action="http://www.ba-leipzig.de/?action=presence" method="post" name="loginform" id="headlogin">
+                <fieldset>
+                    <input type="hidden" name="op" value="login">
+                    <input type="hidden" name="dest" value="/de/">
+                    <div id="username">
+                        <label id="username-label" for="username-field">Benutzername:</label><br/>
+                        <input id="username-field" type="text" name="login_username" value="" maxlength="80"  tabindex="1"/>
+                    </div>
+                    <div id="password">
+                        <label id="password-label" for="password-field">Passwort:</label><br/>
+                        <input id="password-field" type="password" name="login_password" value="" maxlength="80" tabindex="2"/>
+                    </div>
+                    <input id="remember-field" type="checkbox" name="permanent" tabindex="3"/>
+                    <label id="remember-label" for="remember-field">Angemeldet bleiben</label>
+                    <button id="login-button" type="submit" value="login" tabindex="4">
+                        Anmelden
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+        <div id="footer">
+            <hr noshade size="1"/>
+            <img src="sachsen.png" alt="Wappen Sachsen"/>
+            Copyright (c) 2010-2011. <a href="http://www.ba-leipzig.de/">Staatliche Studienakademie Leipzig</a>. All rights reserved. <a href="http://www.ba-leipzig.de/1314.0.html">Impressum</a>. <a href="mailto:christian.heller@ba-leipzig.de">Webmaster</a>. Last Update: 2011-01-13
+        </div>
+    </div>
+</body>
+</html>

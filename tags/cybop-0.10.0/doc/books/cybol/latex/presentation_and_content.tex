@@ -1,0 +1,76 @@
+%
+% $RCSfile: presentation_and_content.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Presentation and Content}
+\label{presentation_and_content_heading}
+\index{Presentation and Content Example}
+\index{Mathematical Markup Language}
+\index{MathML}
+
+The \emph{Mathematical Markup Language} (MathML) \cite{mathml} provides means
+for representing mathematical expressions, that is \emph{Content} as well as
+\emph{Presentation} of data. Both are discrete models, comparable to the
+\emph{Domain} and \emph{User Interface} (UI) of a software application, which
+can be translated into each other.
+
+CYBOL uses just four tags (section \ref{semantics_heading}) but can represent
+mathematical expressions as well. What MathML calls \emph{Content}, becomes a
+\emph{Logic} knowledge template in CYBOL. The mathematical content of the
+formula $(a + b)^{2}$ would be modelled as follows:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="addition" channel="inline" abstraction="operation" model="add">
+        <property name="abstraction" channel="inline" abstraction="character" model="integer"/>
+        <property name="summand_1" channel="inline" abstraction="knowledge" model=".domain.a"/>
+        <property name="summand_2" channel="inline" abstraction="knowledge" model=".domain.b"/>
+        <property name="sum" channel="inline" abstraction="knowledge" model=".domain.c"/>
+    </part>
+    <part name="exponentiation" channel="inline" abstraction="operation" model="power">
+        <property name="base" channel="inline" abstraction="knowledge" model=".domain.c"/>
+        <property name="power" channel="inline" abstraction="integer" model="2"/>
+        <property name="result" channel="inline" abstraction="knowledge" model=".domain.r"/>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+And the formula's \emph{Presentation} would be defined by the following two
+CYBOL \emph{State} knowledge templates, of which the second one represents the
+\emph{Base} that is referenced by the first one:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="base" channel="file" abstraction="compound" model="domain/base.cybol">
+        <property name="fence" channel="inline" abstraction="boolean" model="true"/>
+    </part>
+    <part name="power" channel="inline" abstraction="integer" model="2">
+        <property name="superscript" channel="inline" abstraction="boolean" model="true"/>
+    </part>
+</model>
+
+<model>
+    <part name="summand_$1" channel="inline" abstraction="character" model="a"/>
+    <part name="operator" channel="inline" abstraction="character" model="+"/>
+    <part name="summand_$2" channel="inline" abstraction="character" model="b"/>
+</model>
+    \end{verbatim}
+\end{scriptsize}

@@ -1,0 +1,74 @@
+%
+% $RCSfile: episode_based.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Episode Based}
+\label{episode_based_heading}
+\index{Episode Based EHR}
+\index{Patient Centered Medical Record}
+\index{Health Issue of an Episode Based EHR}
+\index{Clinical Episode of an Episode Based EHR}
+\index{Clinical Encounter of an Episode Based EHR}
+\index{Clinical Item of an Episode Based EHR}
+\index{Partial Contact of an Episode Based EHR}
+\index{Problem Oriented Medical Record}
+\index{POMR}
+
+Historically, it took a long time until the concept of a modern EHR crystalised
+out. An early form of a time-oriented medical record stems from Hippocrates
+(5th century BC) who wanted to accurately reflect the course of a disease and
+indicate its possible causes. In 1907, the \emph{Mayo Clinic} (formed by the
+American surgeon William Mayo) adopted one separate file for each patient, to
+be able to obtain a better overview of his complete disease history. This
+innovation was the origin of the \emph{Patient Centered Medical Record} as
+known today, as \cite{mihandbook} means.
+
+The discussion on how to model an ideal EHR already lasts for decades and has
+not finished. Recent proposals brought in some new perspectives and ideas. One
+of them turns around the so-called \emph{Episode-based} EHR \cite{westerhof}.
+In the centre of these considerations stands a structure that is described in a
+more pragmatic way by Karsten Hilbert of GNUmed \cite{gnumed}. He sees a
+complex EHR as hierarchical composition of the following items:
+
+\begin{itemize}
+    \item[-] Health Issue
+    \item[-] Clinical Episode
+    \item[-] Clinical Encounter
+    \item[-] Clinical Item
+\end{itemize}
+
+The additional concept of a \emph{Partial Contact} as known from the Dutch
+\emph{Episode Model} does not integrate into this hierarchy. But after Hilbert,
+\emph{Partial Contacts} could be easily derived from existing EHR data by
+aggregating all \emph{Clinical Items} that belong to the same
+\emph{Clinical Encounter} and the same \emph{Clinical Episode}.
+
+\emph{Clinical Items} are typically elements in the \emph{SOAP} format of
+progress notes, as known from the \emph{Problem Oriented Medical Record} (POMR)
+\cite{weed} that was introduced by Lawrence L. Weed in the 1960s. SOAP stands
+for:
+
+\begin{itemize}
+    \item[-] \emph{Subjective:} Complaints as phrased by the patient
+    \item[-] \emph{Objective:} Findings of physicians and nurses
+    \item[-] \emph{Assessment:} Test results and conclusions, such as a diagnosis
+    \item[-] \emph{Plan:} Medical plan, for example treatment or policy
+\end{itemize}

@@ -1,0 +1,78 @@
+%
+% $RCSfile: health_level_seven.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Health Level Seven}
+\label{health_level_seven_heading}
+\index{Health Level Seven}
+\index{HL7}
+\index{Reference Information Model}
+\index{RIM}
+\index{Clinical Document Architecture}
+\index{CDA}
+\index{XML}
+\index{Common Message Element Type}
+\index{CMET}
+\index{Refined Message Information Model}
+\index{RMIM}
+\index{Hospital Information System}
+\index{HIS}
+\index{Practice Management System}
+\index{PMS}
+
+\emph{Health Level Seven} (HL7), as it describes itself \cite{hl7}, is:
+\textit{a not-for-profit, ANSI-accredited standards developing organization
+dedicated to providing a comprehensive framework and related standards for the
+exchange, integration, sharing, and retrieval of electronic health information
+that supports clinical practice and the management, delivery and evaluation of
+health services.} The more than 2000 individuals representing over 500
+corporate members, world-wide, do for a great part belong to healthcare
+industry, implementing its interests. Accordingly, HL7's endeavors are
+sponsored, in part, by that industry. Its name \emph{Level Seven}, after
+\cite{rogers}, refers to the highest level of the ISO OSI communication model
+(section \ref{systems_interconnection_heading}).
+
+Besides the mentioned framework called \emph{Reference Information Model} (RIM),
+the organisation worked out a number of specifications for the exchange of messages
+and documents, newer formats being the \emph{Clinical Document Architecture} (CDA),
+an XML-only specification, and the \emph{Common Message Element Type} (CMET)
+\cite{marley}, a reusable component.
+
+Thomas Beale criticised in \cite{openhealth}, that CDA did not have very strong
+semantics for some of its detailed parts, since they were derived from XHTML,
+and that it tended to mix presentation and representation concerns somewhat.
+Furthermore, CDA had recently incorporated some RIM classes into its content
+level, via the creation of a \emph{Refined Message Information Model} (RMIM)
+which were a pity, because it reduced its genericness and made it dependend on
+the RIM, which were essentially an analysis pattern of domain relationships,
+not a model of recording.
+
+Instead, as Beale writes in a later message to \cite{openhealth}, they (HL7)
+might start thinking about generic solutions, which incorporate clinical
+models, separated from their XML schemas, for a start. \ldots\ Single level XML
+approaches didn't have much long term future in his opinion, because they
+didn't properly separate clinical models from information representation, which
+were required to allow compositional clinical models and specialisable clinical
+models to be built independently from the software.
+
+HL7's recommendations found partly application in a greater number of
+\emph{Hospital Information Systems} (HIS), but rarely in smaller or
+medium-sized \emph{Practice Management Systems} (PMS).

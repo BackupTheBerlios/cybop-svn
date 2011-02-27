@@ -1,0 +1,140 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Markierungsrechteck unter Windows aufspannen">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, API, Markierung, Mausereignis">
+<TITLE>Markierungsrechteck unter Windows aufspannen</TITLE>
+</HEAD>
+<BODY BGCOLOR=white>
+<a name="top"><table width=100%><tr><td bgcolor=yellow  align=center>
+<H1>Windows Programmierung: Markierungsrechteck aufspannen</H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+
+Soll ein Bereich mit der Maustaste markiert werden,
+empfielt sich eine grafische R&uuml;ckmeldung f&uuml;r
+den Benutzer. Dazu spannt beispielsweise der Desktop
+ein Rechteck auf.
+
+<H2>Vorgehen</H2>
+
+In der Fensterfunktion werden drei Ereignisse
+der Maus gefangen: das Dr&uuml;cken der Maustaste,
+das Schieben der Maus und das Loslassen der Taste.
+Das Schieben interessiert allerdings nur dann,
+wenn die Taste gedr&uuml;ckt ist!
+<p>
+Einige Informationen merkt sich die Fensterfunktion.
+Zun&auml;chst steht in einer boolschen Variablen,
+ob die Maustaste unten ist. Diese Information steht in der
+Variablen <tt>dragging</tt>. Der Anfang des Aufspannens wird
+als Ecke des Rechtecks ben&ouml;tigt. Sie steht in
+<tt>StartPos</tt>. Schlie&szlig;lich wird die letzte
+Mausposition als die andere Ecke gebraucht (<tt>MousePos</tt>).
+Alle diese Variablen sind als static angelegt.
+<P>
+<a name="capture" index="SetCapture (Windows)">
+<H2>SetCapture und ReleaseCapture</H2>
+
+Die Mausaktionen empf&auml;ngt ein Programm nur &uuml;ber dem 
+eigenen Fenster. Beim Aufspannen ist es aber notwendig, da&szlig;
+auch die Mausbewegung au&szlig;erhalb notiert wird, solange die Maustaste
+gedr&uuml;ckt wird. Dies erreicht SetCapture. Um die Wirkung
+wieder aufzuheben, wird ReleaseCapture aufgerufen. Sinnigerweise
+geschieht das bei Loslassen der Maustaste.
+
+<H2>Maustaste unten</H2>
+
+Hier beginnt das Aufspannen. Es wird <tt>dragging</tt> gesetzt
+und SetCapture aufgerufen. Die Mausposition wird unter StartPos
+und MousePos abgelegt.
+
+<H2>Mausbewegung</H2>
+
+Bei einer Bewegung wird, sofern die Maustaste
+gedr&uuml;ckt ist, das alte Rechteck gel&ouml;scht
+und das neue gezeichnet.
+Beim allerersten Mal ist StartPos und MousePos gleich.
+Ein Rechteck wird so nicht gezeichnet und bedarf keiner
+Sonderbehandlung.
+
+<H2>Loslassen der Maustaste</H2>
+
+Hier beginnen die Aufr&auml;umarbeiten. Das Gummiband
+wird entfernt und mit ReleaseCapture wird die Maus
+f&uuml;r andere Fenster freigegeben. Auch das
+Flag, das feststellt, ob die Maustaste gedr&uuml;ckt
+ist, mu&szlig; freigegeben werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+HDC hDC;
+static POINTS MousePos, StartPos;
+static bool dragging = false;
+
+     . . .
+
+		case WM_LBUTTONDOWN:
+			dragging = true;
+			SetCapture(hWnd);
+			StartPos = MAKEPOINTS(lParam);
+			MousePos = StartPos;
+			break;
+		case WM_MOUSEMOVE:
+			if (dragging) {
+				hDC = GetDC(hWnd);
+				drawCapture(hDC, StartPos, MousePos);
+				MousePos = MAKEPOINTS(lParam);
+				drawCapture(hDC, StartPos, MousePos);
+				ReleaseDC(hWnd, hDC);
+			}
+			break;
+		case WM_LBUTTONUP:
+			MousePos = MAKEPOINTS(lParam);
+			ReleaseCapture();
+			hDC = GetDC(hWnd);
+			drawCapture(hDC, StartPos, MousePos);
+			ReleaseDC(hWnd, hDC);
+			dragging = false;
+			break;
+</pre></td></tr></table><p>
+
+<a name="invert" index="Invertiert zeichnen (Windows)">
+<H2>Zeichnen des invertierenden Rechtecks</H2>
+
+Die Funktion <tt>drawCapture</tt> zeichnet das inverse Rechteck.
+Es basiert auf ein paar LineTo-Befehlen und dem SetROP2(hDC, R2_NOT),
+der bewirkt, da&szlig; der Hintergrund invertiert wird. So wird
+erreicht, da&szlig; ein zweifaches Zeichnen des gleichen Rechtecks
+ein Ausl&ouml;schen bewirkt.
+
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+void drawCapture(HDC hDC, POINTS pa, POINTS pe)
+{
+	SetROP2(hDC, R2_NOT);
+	MoveToEx(hDC, pa.x, pa.y, 0);
+	LineTo(hDC, pa.x, pe.y);
+	LineTo(hDC, pe.x, pe.y);
+	LineTo(hDC, pe.x, pa.y);
+	LineTo(hDC, pa.x, pa.y);
+}
+</pre></td></tr></table><p>
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY></HTML>

@@ -1,0 +1,53 @@
+<model>
+    <part name="tabbed_pages" channel="inline" abstraction="text/plain" model="Tabbed Pages">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="north"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="mouse_over_action" channel="inline" abstraction="path/knowledge" model=".select"/>
+        <property name="mouse_click_action" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.show_tabbed_pages"/>
+    </part>
+    <part name="internal_windows" channel="inline" abstraction="text/plain" model="Internal Windows">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="north"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="mouse_over_action" channel="inline" abstraction="path/knowledge" model=".select"/>
+        <property name="mouse_click_action" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.show_internal_windows"/>
+    </part>
+    <part name="external_windows" channel="inline" abstraction="text/plain" model="External Windows">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="north"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="mouse_over_action" channel="inline" abstraction="path/knowledge" model=".select"/>
+        <property name="mouse_click_action" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.show_external_windows"/>
+    </part>
+</model>
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: view_menu.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

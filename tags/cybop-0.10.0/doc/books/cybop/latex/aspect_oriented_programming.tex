@@ -1,0 +1,167 @@
+%
+% $RCSfile: aspect_oriented_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Aspect Oriented Programming}
+\label{aspect_oriented_programming_heading}
+\index{Aspect Oriented Programming}
+\index{AOP}
+\index{Object Oriented Programming}
+\index{OOP}
+\index{Concern Interface}
+\index{Aspect}
+\index{Meta Object Protocol}
+\index{MOP}
+\index{Mixin Programming Concept}
+\index{Crosscutting Concern}
+\index{Common Concern}
+\index{Aspect Marker Interface}
+\index{Component Oriented Programming}
+\index{COP}
+\index{Development Aspect}
+\index{Production Aspect}
+\index{Join Point}
+\index{Pointcut}
+\index{Advice}
+\index{Inter-Type Declaration}
+\index{Aspect Oriented Software Development}
+\index{AOSD}
+\index{Aspect Weaver}
+\index{Join Point Representation}
+\index{Join Point Model}
+\index{JPM}
+\index{Singleton Pattern}
+\index{Lifecycle Method}
+
+Another alternative avoiding redundant code caused by the implementation of
+concern interfaces (section \ref{separation_of_concerns_heading}) is the
+so-called \emph{Aspect Oriented Programming} (AOP), which is an extension to
+\emph{Object Oriented Programming} (OOP). \emph{Aspects} are a possibility to
+separate and define concern areas addressed in program code. Wikipedia
+\cite{wikipedia} writes that:
+
+\begin{quote}
+    Aspects emerged out of object-oriented programming and have functionality
+    similar to using a meta-object protocol (section \ref{reflection_heading}).
+    Aspects relate closely to programming concepts like subjects, mixins, and
+    delegation.
+\end{quote}
+
+The Avalon documentation \cite{avalon} means that AOP were: \textit{the next
+logical step after separation of concerns}. Many concerns could not be
+centrally addressed using the standard mechanisms of programming. Using AOP, it
+were possible to do so in a simple fashion.
+
+The AspectJ documentation \cite{aspectj} writes that the motivation for AOP had
+been the realisation that there are issues or concerns (like a security policy)
+that cut across many of the natural units of modularity of an application and
+are not well captured by traditional programming methodologies. For
+\emph{Object Oriented Programming} (OOP) languages, the natural unit of
+modularity were the \emph{Class}. But in these languages, some concerns were
+not easily turned into classes because they'd \emph{cut across} classes. So
+these weren't reusable, couldn't be refined or inherited, were spread
+throughout the program in an undisciplined way and, in short, were difficult to
+work with. AOP were a way of modularising \emph{Crosscutting Concerns} much
+like OOP were a way of modularising \emph{Common Concerns}. The later chapter
+\ref{statics_and_dynamics_heading} will come back to these two kinds of
+concerns in short.
+
+As shown in the previous sections, the \emph{Avalon} project \cite{avalon} uses
+concern interfaces (sometimes called \emph{Aspect Marker Interfaces}) and
+\emph{Component Oriented Programming} (COP) to define its concerns, what
+frequently leads to redundant implementations. Other projects, for instance
+\emph{AspectJ} \cite{aspectj} and \emph{AspectWerkz} \cite{aspectwerkz},
+provide AOP facilities whose aim is the clean modularisation of crosscutting
+concerns such as those in the following list, which AspectJ divides into
+\emph{Development Aspects}:
+
+\begin{itemize}
+    \item[-] Tracing
+    \item[-] Profiling and Logging
+    \item[-] Pre- and Post-Conditions
+    \item[-] Contract Enforcement
+    \item[-] Configuration Management
+\end{itemize}
+
+and \emph{Production Aspects}:
+
+\begin{itemize}
+    \item[-] Change Monitoring
+    \item[-] Context Passing
+    \item[-] Providing Consistent Behaviour
+\end{itemize}
+
+The AspectJ project as an implementation of AOP for Java adds just one new
+concept to that language -- the \emph{Join Point}, which is a well-defined
+point in the program flow. A number of new constructs are introduced as well: A
+\emph{Pointcut} picks out certain join points and values at those points; an
+\emph{Advice} is a piece of code that is executed when a join point is reached.
+Both do dynamically affect the program flow. \emph{Inter-Type Declarations}, on
+the other hand, statically affect a program's class hierarchy, namely the
+members of its classes and the relationships between classes. AspectJ's
+\emph{Aspect}, finally, is the unit of modularity for crosscutting concerns. It
+behaves somewhat like a Java class, summarising the constructs described
+before, that is pointcuts, advices and inter-type declarations.
+
+\emph{Aspect Oriented Software Development} (AOSD) is about developing programs
+that rely on AOP principles and languages -- or language extensions,
+respectively. Such programs get compiled slightly differently than usual. An
+\emph{Aspect Weaver} generates a \emph{Join Point Representation} of the
+program, by merging code and aspects. Only afterwards, the program is compiled
+into an executable.
+
+Although AOP seems to successfully address the problem of crosscutting concerns,
+it also brings with yet another programming paradigm that application developers
+have to get familiar with. The new concepts and constructs further complicate
+software development. The source code gets further fractured because of AOP's
+additional modules. It is harder to follow the program flow and one has less
+control on the behaviour of classes, so that the usage of development tools
+becomes inevitable. But besides this rather general criticism, there is more
+specific ones: The \emph{Join Point Model} (JPM), for example, is reviewed in
+\cite{huttenhuis} which points out some unsolved issues in AOP, while
+investigating the following properties of join points:
+
+\begin{itemize}
+    \item[-] \emph{Granularity:} only some locations in program code are
+        suitable as join points
+    \item[-] \emph{Encapsulation:} there is no effective way to protect join
+        points from aspect-imposed modification
+    \item[-] \emph{Semantics:} low-level join point identification leads to
+        tight coupling between aspects and join points
+    \item[-] \emph{Jumping Aspects:} context-sensitive join points execute
+        different aspect code
+    \item[-] \emph{Sharing:} dependencies and order of execution are unclear
+        when having several pieces of advice at the same join point
+\end{itemize}
+
+At least some of the concerns that AOP addresses could be implemented with
+lifecycle-techniques as well. A logger, for example, could be created once at
+system startup. But instead of accessing it across static methods, as suggested
+by the \emph{Singleton} pattern (section \ref{singleton_heading}), or executing
+an aspect-oriented \emph{Advice} when a join point is reached, the reference to
+the logger instance could simply be forwarded from component to component,
+using a special \emph{globalise} lifecycle method, so that each would be able
+to access the logger. However, also this solution becomes tedious with a
+growing number of objects to be forwarded. The new kind of programming
+introduced in part \ref{contribution_heading} of this work therefore suggests
+to put general functionality (concerns, aspects) into an interpreter program
+acting close to hardware and providing the general functionality to application
+systems executed by it.

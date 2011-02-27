@@ -1,0 +1,229 @@
+ %
+ % $RCSfile: frameworks.tex,v $
+ %
+ % Copyright (c) 1999-2002. Jens Bohl. All rights reserved.
+ %
+ % This software is published under the GPL GNU General Public License.
+ % This program is free software; you can redistribute it and/or
+ % modify it under the terms of the GNU General Public License
+ % as published by the Free Software Foundation; either version 2
+ % of the License, or (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program; if not, write to the Free Software
+ % Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ %
+ % http://www.resmedicinae.org
+ % - Information in Medicine -
+
+ %A chapter about frameworks in general and the ResMedLib framework.
+
+\chapter{Frameworks}
+    In diesem Kapitel wird das Konzept der Frameworks vorgestellt und deren typische Eigenschaften sowie die damit
+    verbundenen Vor- und Nachteile
+    dargelegt. Das Softwareprojekt {\it Res Medicinae} besitzt ebenfalls ein solches ''Grundgerüst'' namens {\it ResMedLib}, auf
+    das im letzten Abschnitt des Kapitels eingegangen wird.
+
+    \section{Einordnung}
+        In der Softwaretechnik versteht man unter einem Framework eine Menge untereinander kooperierender Klassen, die
+        Elemente eines wiederverwendbaren Entwurfes darstellen \cite{ch:entwurfsmuster}. Sie sind
+        unvollständige Softwaresysteme, die durch Instanziierung und Spezialisierung ihrer Klassen von einem abstrakten
+        Status in den Zustand einer funktionsfähigen und ausführbaren Anwendung gehoben werden.\\
+        Ein Framework legt die Grundarchitektur für eine Familie von Anwendungen fest. So existieren beispielsweise
+        Frameworks für grafische Darstellungsprogramme, die einmal für die Implementierung eines
+        Bildbearbeitungsprogrammes und ein anderes Mal für die Realisierung einer CAD\footnote{Unter CAD ({\it Computer Aided
+        Design}) werden Konstruktionsanwendungen für Maschinenbau, Bauingenieurwesen usw. zusammengefasst.}-Anwendung eingesetzt werden können.\\
+        Nach Pree \cite{ch:pree} besteht ein Framework aus statischen und veränderbaren Bereichen. Statische Elemente
+        eines Frameworks bleiben in jeder Instanziierung gleich. Sie bilden eine Art Grundstruktur einer jeden von dem
+        Framework abgeleiteten Anwendung. Dem gegenüber stehen die veränderlichen Teile eines Frameworks, die für das
+        jeweilige Softwaresystem spezifisch sind. Diese werden entsprechend den Bedürfnissen und
+        Anforderungen an das System spezialisiert. Die Flexibilität eines Frameworks wird dabei nicht nur durch die Anwendung
+        von objektorientierten Prinzipien wie Vererbung oder Polymorphie erreicht - viele Frameworks implementieren
+        {\it Factory}- oder Befehlsmuster, um eine Anpassung zu ermöglichen. Oft werden gerade Entwurfsmuster als elementare
+        Bausteine von Frameworks verstanden.\\
+        Ein Framework besitzt einen ''umgekehrten'' Aufrufmechanismus. Verwendet
+        man eine herkömmliche Bibliothek, die bestimmte Funktionalitäten bereitstellt, so nutzt man diese, indem man die
+        betreffenden Klassen bzw. die von ihr bereitgestellten Methoden aufruft. Der Hauptteil der Anwendung wird also vom Programmierer
+        entworfen und realisiert, spezielle Operationen nach dem Prinzip der Wiederverwendung genutzt. Frameworks hingegen
+        stellen den eigentlichen Hauptteil eines Systems dar. Die vom Entwickler programmierten Teile werden durch
+        das Framework aufgerufen und in den Dienst der Anwendung gestellt.\\
+
+    \section{Vor- und Nachteile}
+            Frameworks gewinnen zunehmend an Bedeutung. Objektorientierte Systeme erreichen durch ihren Einsatz einen
+            sehr hohen Grad an Wiederverwendbarkeit.
+            Sie bestimmen Entwurfsparameter, um die sich der Entwickler nicht mehr kümmern muss. Vielmehr kann sich
+            sein Augenmerk auf die Umsetzung der spezifischen Details der zu entwickelnden Anwendung richten. Zwar
+            muss sich der Programmierer an vorgegebene Operationsschnittstellen halten, jedoch befreit ihn
+            dieser Umstand von möglicherweise langwierigen Entwurfsentscheidungen.
+            Programme können so entschieden schneller entwickelt werden. Desweiteren besitzen Anwendung, die mit Hilfe
+            ein und desselben Frameworks implementiert wurden, ähnliche
+            Strukturen, was dem Aspekt der Konsistenz und Wartung entgegen kommt.\\
+            Nachteilig ist aber, dass Anwendungen der Evolution des zugrundeliegenden Frameworks unterworfen sind.
+            Auch der durch sie verursachte
+            Einarbeitungsaufwand ist nicht zu unterschätzen -- jedoch kann er durch sinnvollen Einsatz von Entwurfsmustern verringert
+            werden. Dieser Fakt impliziert wiederum ein hohes Maß an Dokumentation.\\
+            Frameworks sind weniger abstrakt als Entwurfsmuster. Sie können in den Code einer
+            Programmiersprache überführt werden und somit im Gegensatz zu Entwurfsmustern nicht nur theoretisch
+            untersucht, sondern auch praktisch angewandt und getestet werden.
+
+            Im Anschluss an diese theoretischen Ausführungen soll nun auf ein konkretes Beispiel
+            eingegangen werden.
+
+    \section{ResMedLib Framework}
+            \subsection{Grundlegende Idee}
+                Eine sogenannte {\it Ontologie} als strenge Hierarchie von Typen bildet die Grundlage des {\it Res
+                Medicinae}-Frameworks {\it ResMedLib}.
+                Das aus dem Griechischen stammende Wort {\it Ontologie}\footnote{Der Begriff {\it Ontologie} setzt sich
+                zusammen aus {\it ontos} (Sein) und {\it logos} (Wort) und diente in
+                der Antike als Bezeichnung für die {\it Wissenschaft des Seienden} oder {\it Lehre von der Natur der Realität}.}
+                wird in vielen Veröffentlichungen unterschiedlich
+                gebraucht und auf die verschiedensten Arten definiert.
+                Im Kontext dieser Arbeit steht der Begriff für die {\bf systematische} Beschreibung von komplexen fachlichen
+                Zusammenhängen unter Einführung einer konkreten {\bf Terminologie} und entsprechender Begriffsbestimmungen.\\
+                Auch hier wurde
+                wieder einmal die Natur zu Rate gezogen. Ausgehend von der einfachen Idee, jedes denkbare Element des
+                Universums in die Hierarchie eines ''Großen Ganzen'' einordnen zu können, ist bei der Konzeption dieses
+                Frameworks eine Strukturierung vorgenommen worden, die zwischen den Komponenten eine strikte
+                ''Teil-Ganzes''-Beziehung vorsieht. Durch diese Aufteilung steigt die Granularität der Komponenten von Ebene zu
+                Ebene.
+            \subsection{Struktur}
+                Die oberste Wurzelklasse {\it Item} spielt innerhalb des Frameworks eine besondere Rolle. Sie stellt elementare Eigenschaften
+                und Operationen bereit, die durch Vererbung  an jede andere Klasse des Frameworks weitergegeben werden.
+                In
+                der momentan aktuellen Version sind noch viele Klassen direkte Subtypen von {\it Object}\footnote{{\it
+                Object}
+                ist die Superklasse jeder anderen Java-Klasse des Java Development Kits und aller weiteren Bibliotheken.}.
+                {\it Item} bildet als zukünftig einzig erlaubte direkte Unterklasse von {\it Object}
+                die Wurzel in einer hierarchischen Klassenstruktur (vgl. Abb. \ref{Klasse Item}). Diese
+                bislang nur teilweise umgesetzte Idee soll die Grundlage für eine spätere Anwendung des Frameworks
+                auf alle Klassen des JDK schaffen.
+                \includepicture{8}{eps/item.eps}{Klasse Item}{Klasse Item}{Klasse Item}
+
+
+                Eine der wichtigsten Eigenschaften ist hierbei die
+                Möglichkeit, jedes Objekt von {\it Item} zu einem Bestandteil eines Baumes bestehend aus einer
+                beliebigen Anzahl von Instanzen der Klasse {\it Item} werden zu lassen. Dies entspricht
+                der Realisierung des {\it Composite}-Musters, wie es in Abschnitt 2.2 besprochen wurde.\\
+                Alle Klassen innerhalb des Frameworks sind direkte oder indirekte Subtypen
+                von {\it Item} und ihrerseits wiederum in hierarchische Schichten gegliedert. Diesem Modell
+                entsprechend setzen sich Objekte von Klassen aus einer oberen Schicht immer aus Instanzen derselben oder
+                darunterliegender Schichten zusammen.\\
+                Die Idee, ein Framework als geordnete Baumstruktur zu gestalten, impliziert eine einfache Kontrolle der
+                existierenden Objektreferenzen. Diese Aussage stützt sich auf folgende Überlegungen:\\
+                Ein Baum ist in der theoretischen Informatik nichts anderes, als ein
+                Graph mit speziellen Eigenschaften. Die wichtigste ist dabei die {\it Kreisfreiheit}\footnote{Ein Graph
+                ist kreisfrei, wenn zu jedem Knoten genau ein Weg existiert. Dieser ist dann auch gleichzeitig der
+                kürzeste.}. Eine weiteres Merkmal ergibt sich aus der Kreisfreiheit selbst: Besitzt ein Baum {\it m}
+                Knoten, so enthält er exakt {\it m-1} Kanten. Im Kontext dieses Dokumentes sind also die Knoten Objekte und
+                Kanten die Referenzen bzw. Assoziationen zwischen diesen.\\
+                Entlang jedem Pfad dieses Baumes sind die Operationen des Lebenszyklus, wie sie in
+                Abschnitt 3.1 beschrieben wurden, strikt anzuwenden. Die dazu benutzten Assoziationen stellen
+                dementsprechend {\bf existenzielle Eltern-Kind-Relationen} zwischen diesen Objekten dar.
+                Äste\footnote{Ein Ast ist eine Aneinanderreihung von Objektreferenzen.}
+                dieses Baumes entstehen durch Konstruktion neuer Objekte oder ganzer Komponenten. Ein Kindobjekt wird immer nur durch ein Elternobjekt erzeugt und nimmt so am
+                Lebenszyklus der Komponenten teil. Nicht zuletzt basiert das Entfernen von Ästen dieses Baumes auf demselben
+                Prinzip: Komponenten, die nicht mehr benötigt werden, treten aus dem Lebenszyklus aus, indem sie durch ihre
+                Elternkomponenten zerstört werden.\\
+                In Abbildung \ref{Objektbeziehungen in Res Medicinae} wird im linken Baum durch {\it Kind 2} ein neues Objekt
+                \includepicture{15}{eps/objektbaum.eps}{Objektbeziehungen in Res Medicinae}{Objektbeziehungen in Res Medicinae}{Objektbeziehungen in Res Medicinae}{Objektbeziehungen in Res Medicinae}
+                erzeugt (Konstruktoraufruf {\tt new}). Nach der Übergabe von Konfigurationsparametern durch {\tt globalize}
+                und der Initialisierung durch {\tt initialize} werden mit {\tt link} Assoziationen zu Objekten
+                derselben Ebene erzeugt (siehe Assoziation 1, Abb. \ref{Objektbeziehungen in Res Medicinae}).
+                Dabei ist zu beachten, dass Assoziation 1 {\bf keine} existentielle
+                Eltern-Kind-Relation darstellt, und daher nicht das Prinzip der Kreisfreiheit verletzt. Auf diese Art
+                und Weise enstehen neue Äste des Baumes.\\
+                Der beschriebene Vorgang kann auch wieder rückgängig gemacht werden, indem die Assoziation zwischen dem Elternobjekt {\it Kind 2}
+                und dem Kindobjekt {\it Kind 4} entfernt wird. Zuvor werden die Operationen zur Beseitigung der
+                existierenden Objektbeziehungen aufgerufen ({\tt unlink}, {\tt finalize} und {\tt deglobalize}). Dabei
+                entfernt {\tt unlink} im Speziellen die Referenz auf {\it Kind 3} (Assoziation 1).
+                Durch das finale Beseitigen der Assoziation 0 existiert nun keine Referenz mehr auf
+                {\it Kind 4}, was dazu führt, dass dieses Objekt aus dem Speicher entfernt
+                wird (z. B. in Java durch {\it Garbage Collection}).
+                Diese beiden Eigenschaften, Separation in eine Hierarchie von Schichten und Komposition durch strikte Einhaltung einer Baumstruktur
+                sind die charakteristischen Merkmale einer Ontologie.\\
+                Im Rahmen des {\it Res Medicinae}-Frameworks unterscheidet man zwischen insgesamt drei solcher Ontologien \cite{cybop}:\\
+                Mit der {\it System-Ontologie} ist der Entwurf von Softwaresystemen und der
+                in ihnen vorhandenen Funktionalität bzw. Fachlichkeit möglich. Eine {\it Model-Ontologie} dient der Modellierung der zugehörigen
+                Domain-Informationen. Beiden liegt eine {\it Language-Ontologie} zugrunde, durch welche alle komplexen
+                auf primitive Datentypen und somit letztlich 0 und 1 zur Verarbeitung im Rechner abstrahiert werden.\\
+                Die im Folgenden gezeigten Abbildungen sind in UML-Notation zu lesen, wobei die Darstellung von Klassen
+                aus Platzgründen vereinfacht wurde.%\clearpage
+                \subsubsection{System-Ontologie}
+                Natürliches Vorbild eines solchen Denkmodelles ist die oben erwähnte Organisation allen natürlichen Lebens.
+                \begin{center}
+                \begin{table}[h]
+                    \caption[System-Ontologie mit Analogien]{System-Ontologie mit Analogien}
+                    \label{System-Ontologie mit Analogien}
+                    \begin{center}
+                    \begin{tabular}{|c||l|l|}
+                        \hline
+                        \bf{Schicht} & \bf{Klasse} & \bf{Vergleich} \\\hline \hline
+                        1 & Family & Familie, Team \\  \hline
+                        2 & System & Mensch, Tier \\  \hline
+                        3 & Block & Organ: Gehirn, Muskel, Augen \\  \hline
+                        4 & Region & Gehirnregion, Muskelfaser, Netzhaut \\  \hline
+                        5 & Component& Neuron, Muskelzelle, Netzhautzelle \\  \hline
+                        6 & Part & Zellorganellen (Zellkern, Plasma usw.) \\  \hline
+                        7 & Chain & Chromosom, DNA \\ \hline
+                    \end{tabular}
+                    \end{center}
+                    \end{table}
+                \end{center}
+                Basierend auf dieser grundsätzlichen Idee wurden bisher sieben Unterklassen von {\it Item}
+                als Grundlage einer System-Ontologie festgelegt, welche zusammen mit ihrem ''natürlichen'' Pendant in Tabelle \ref{System-Ontologie mit Analogien} aufgeführt sind.
+                \includepicture{11}{eps/ontologyUML.eps}{System-Ontologie mit konkreten Unterklassen und Beispiel}{System-Ontologie mit konkreten Unterklassen und Beispiel}{System-Ontologie mit konkreten Unterklassen und Beispiel}{System-Ontologie mit konkreten Unterklassen und Beispiel}
+                Die oberste Ebene bildet {\it Family}. Sie ist die Stufe niedrigster Granularität. Darunter folgt
+                {\it System} als Klasse direkter Unterobjekte. Diese Gliederung nimmt von Stufe zu Stufe einen höheren
+                Detailgrad an, wobei {\it Chain} die momentan unterste Ebene höchster Granularität darstellt. Eine
+                dieser Ordnung entgegengesetzt verlaufende Vererbungshierarchie besitzt {\it Chain} als einzige direkte
+                Unterklasse von {\it Item} (vgl. Abb. \ref{System-Ontologie mit konkreten Unterklassen und Beispiel}).
+                Ein Objekt einer in der Schichtenarchitektur
+                untergeordneten Klasse darf nie ein Objekt der darüberliegenden Abstraktionsstufen
+                referenzieren. Diese Regel entspricht der bereits besprochenen Kreisfreiheit eines Baumes.
+                Die in der Tabelle angeführten Vergleiche sind lediglich ein Mittel, um die Analogien zwischen
+                diesem Framework
+                und der Organisation des Lebens in der Natur aufzuzeigen; sie stellen keine Vorschläge zur
+                Modellierung natürlicher Prozesse dar.\\
+                Alle sieben Klassen sind ihrerseits wiederum Oberklassen für eine bestimmte Art von Objekten.
+                Beispielsweise können Client oder Server als Spezialisierung von {\it System} und grafische
+                Komponenten wie Buttons oder Textfelder als Kindklassen von {\it Component} abgeleitet werden.
+                \subsubsection{Model-Ontologie}
+                Genau wie die oben beschriebene Organisation von Systemen folgt auch die Model-Ontologie einer
+                hierarchischen Schichten-Struktur. Die oberste Ebene bildet {\it Record}. In der medizinischen Datenverarbeitung könnte dies ein
+                {\it Electronic Health Record} (EHR)\footnote{Als {\it Electronic Health Record} bezeichnet man die elektronische Patientenakte.
+                Diese beinhaltet die Gesamtheit aller Informationen bezüglich eines Patienten. Andere Bezeichnungen sind
+                {\it Electronic Medical Record} (EMR) oder {\it Electronic Patient Record} (EPR).} \cite{openehr} sein, im Bereich der
+                Versicherungssoftware eine Versichertenakte.
+                 Die weitere Abstufung innerhalb dieser Ontologie
+                vollzieht sich ähnlich der System-Ontologie: Objekte höherer Schichten referenzieren stets nur Objekte der gleichen
+                oder niederer Ebenen.
+                \includepicture{11}{eps/ModelontologyUML.eps}{Model-Ontologie und konkrete Unterklassen}{Model-Ontologie und konkrete Unterklassen}{Model-Ontologie und konkrete Unterklassen}{Model-Ontologie und konkrete Unterklassen}
+                Ein EHR beispielsweise setzt sich neben Stammdaten\footnote{Stammdaten sind allgemeine Patientendaten wie Name, Adresse usw.}
+                auch aus Dokumentationen der einzelnen
+                Konsultationen zusammen, die wiederum Befunde ({\it Objective}) mit Werten für den Blutdruck ({\it BloodPressure}) etc. beinhalten können.\\
+                Die Struktur mit einer sehr einfachen Beispiel-Hierarchie
+                ist Abbildung \ref{Model-Ontologie und konkrete Unterklassen} zu entnehmen. Diese Ontologie ist jedoch nicht nur zur
+                Modellierung medizinischer Aspekte geeignet. Sie ist unabhängig von der zugrundeliegenden Domäne und kann für den Entwurf beliebiger
+                Daten-Modelle herangezogen werden.
+                \subsubsection{Language-Ontologie}
+                Jeder Softwareentwickler, der mit einer Programmiersprache arbeitet, verwendet (häufig unbewusst)
+                bereits eine Ontologie, nämlich die von der Sprache zur Verfügung gestellten Typen. Diese unterliegen
+                natürlich ebenfalls einer Hierarchie. So besteht z.B. eine Zeichenkette ({\it String}) aus einzelnen Zeichen
+                ({\it Character}).\\
+                Eine konkrete Modellierung von Klassen dieser Ontologie ist Teil zukünftiger Arbeiten.
+            \paragraph{Zusammenfassung}
+            Der grosse Vorteil dieses Frameworks liegt in seiner sehr einfachen und intuitiven Struktur.
+            Objektrelationen werden dadurch transparent und leicht nachvollziehbar.
+            Das liegt vor allem daran, dass man den gesamten Aufbau des Frameworks von {\it Res Medicinae} als Konglomerat
+            verschiedenster Architektur- und
+            Entwurfsmuster betrachten kann. Die aus Abbildung \ref{Objektbeziehungen in Res Medicinae} nachvollziehbare {\it Chain
+            of responsibility} mit der typischen Weiterleitung von Zuständigkeiten und die ebenfalls ersichtliche
+            {\it Layer}-Struktur sowie  die Realisierung eines {\it Composite} durch die Klasse {\it Item}  sind dabei nur die
+            drei wichtigsten verwendeten Muster.\\
+            Zum anderen besitzt das Framework keinen dogmatischen Charakter und lässt genug Freiheiten für die Implementation
+            zusätzlicher Ideen entsprechend der gewünschten Anwendung.

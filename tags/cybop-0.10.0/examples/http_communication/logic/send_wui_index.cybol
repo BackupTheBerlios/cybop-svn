@@ -1,0 +1,61 @@
+<model>
+    <part name="test_conversion" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/html"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".http_communication.wui.index"/>
+        <property name="receiver" channel="inline" abstraction="text/plain" model="conversion.html"/>
+    </part>
+    <part name="translate_into_html" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="inline"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/html"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".http_communication.wui.index"/>
+        <property name="receiver" channel="inline" abstraction="path/knowledge" model=".http_communication.wui.message"/>
+    </part>
+    <part name="test_html" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/plain"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".http_communication.wui.message"/>
+        <property name="receiver" channel="inline" abstraction="text/plain" model="test.html"/>
+    </part>
+    <part name="translate_into_http_response" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="inline"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="message/http-response"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".http_communication.wui.message"/>
+        <property name="metadata" channel="inline" abstraction="path/knowledge" model=".http_communication.wui.metadata"/>
+        <property name="receiver" channel="inline" abstraction="path/knowledge" model=".http_communication.wui.response"/>
+    </part>
+    <part name="send" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="cyboi"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".http_communication.wui.response"/>
+        <property name="namespace" channel="inline" abstraction="text/plain" model="ipv4"/>
+        <property name="style" channel="inline" abstraction="text/plain" model="stream"/>
+        <property name="mode" channel="inline" abstraction="text/plain" model="server"/>
+    </part>
+</model>
+
+<!--
+    Copyright (C) 1999-2011. Christian Heller.
+
+    This file is part of the Res Medicinae medical software.
+    It represents a knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    Res Medicinae is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Res Medicinae is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Res Medicinae.  If not, see <http://www.gnu.org/licenses/>.
+
+    Res Medicinae <http://www.resmedicinae.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: translation.cybol,v $ $Revision: 1.7 $ $Date: 2009-02-07 00:42:58 $ $Author: chrissy $
+    @author Christian Heller <christian.heller@tuxtax.de>
+-->

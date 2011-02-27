@@ -1,0 +1,71 @@
+%
+% $RCSfile: agent_with_mental_state.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Agent with Mental State}
+\label{agent_with_mental_state_heading}
+\index{Agent Oriented Programming}
+\index{AGOP}
+\index{Agent}
+\index{Mental State of an Agent}
+\index{Formal Knowledge Representation Language of AGOP}
+\index{Agent Programming Language of AGOP}
+\index{Conversion Method of AGOP}
+
+One design paradigm that early recognised the advantages of splitting software
+into low-level system control and high-level knowledge, is
+\emph{Agent Oriented Programming} (AGOP) (section
+\ref{agent_oriented_programming_heading}). \emph{Agents}, as active software
+components (which in this work means: \emph{running in an own process}), have
+a \emph{Mental State} representing their knowledge, which they are able to
+interpret and manipulate. This approach was copied in CYBOP.
+
+Of the three elements \emph{Formal Knowledge Representation Language},
+\emph{Agent Programming Language} and \emph{Conversion Method}, which an AGOP
+system, after section \ref{agent_oriented_programming_heading}, needs in order
+to be complete, this work provides the first two in form of the
+\emph{Cybernetics Oriented Language} (CYBOL) and the
+\emph{Cybernetics Oriented Interpreter} (CYBOI), described in sections
+\ref{cybernetics_oriented_language_heading} and
+\ref{cybernetics_oriented_interpreter_heading}, respectively. Thereby, CYBOI
+itself is not a language, but represents a ready system, written in the
+\emph{C} programming language. A method for converting traditional applications
+into agents is not provided, since methodologies are clearly \emph{not} a topic
+of this work.
+
+Of course, there are differences distinguishing
+\emph{Cybernetics Oriented Programming} (CYBOP) from traditional AGOP systems.
+CYBOP needs an own interpreter, because of its new knowledge representation
+philosophy and -language, which are the topic of chapters
+\ref{knowledge_schema_heading} and \ref{cybernetics_oriented_language_heading}.
+One reason for the difficult handling and intransparency of many traditional
+knowledge representation languages is that they mix two kinds of knowledge:
+\emph{State-} and \emph{Logic} descriptions. More on how this is avoided in
+CYBOP in chapter \ref{state_and_logic_heading}.
+
+One may wonder why such a supposedly advantageous architecture is not used by
+all of today's systems? One reason may be that AGOP is still a rather young
+technology lacking the necessary popularity. Another reason may be the bad
+reputation of AGOP systems (and just about everything that has to do with
+knowledge representation) among average developers -- partly because of their
+immaturity, but mostly because of their complicated knowledge models and
+-handling. Looking at the often quite cryptic appearance of the corresponding
+languages, one tends to understand the developers' dislike.

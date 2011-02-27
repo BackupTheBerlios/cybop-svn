@@ -1,0 +1,48 @@
+%
+% $RCSfile: summary.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1
+% or any later version published by the Free Software Foundation;
+% with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+% @author Jens Bohl <info@jens-bohl.de>
+%
+
+\section{Summary}
+\label{summary_heading}
+
+Software patterns are essential elements of frameworks. This paper showed how they
+can be combined to comprise their advantages and to realize hierarchical structures
+with unidirectional dependencies.\\
+These structures can be created and properly destroyed using the lifecycle of
+components. In that lifecycle, object relations become more transparent and are
+easier to control and to maintain. As an extension, this paper introduced the
+\emph{globalize} method by which references to globally needed objects can be
+forwarded through a system which eliminates the need for static methods or objects.\\
+Ontologies can help to model particular domains and to layer software. Every level
+of these ontologies has a particular supertype, whereby these types depend on each
+other by inheritance. This concept supports the modelling and logical separation
+of software into hierarchical architectures. The granularity of the ontology
+(number of ontological levels) can be adapted to particular needs.\\
+In the course of this document, it turned out that hierarchies are not only ideal
+for structuring domain knowledge but also for structuring whole systems (applications).
+As essential design decision to take, this paper proposed to introduce a top-most
+super class (called \emph{Item} here) which represents a \emph{Map} container.
+Thousands of lines of code in form of \emph{set} and \emph{get} methods can such
+be eliminated which leads to a tremendous code reduction and improved clarity.\\
+By applying the new concepts introduced in this document, the quality of software
+can hopefully be increased. The time for building systems might get reduced.
+The clear architecture should avoid common confusion as the systems grow.
+

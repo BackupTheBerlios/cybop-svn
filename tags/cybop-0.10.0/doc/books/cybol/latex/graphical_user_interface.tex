@@ -1,0 +1,206 @@
+%
+% $RCSfile: graphical_user_interface.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Graphical User Interface}
+\label{graphical_user_interface_heading}
+\index{Graphical User Interface}
+
+A \emph{Graphical User Interface} (GUI) is mostly based on so-called graphical
+\emph{Windows} which may overlap, or be ordered side-by-side on a screen.
+Figure \ref{graphical_user_interface_figure} illustrates a typical GUI.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphics/graphical_user_interface.pdf}
+        \caption{Graphical User Interface}
+        \label{graphical_user_interface_figure}
+    \end{center}
+\end{figure}
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="menu_bar" channel="file" abstraction="compound" model="gui/menu_bar.cybol">
+    <property name="shape" channel="inline" abstraction="character" model="rectangle"/>
+    <property name="layout" channel="inline" abstraction="character" model="compass"/>
+    <property name="cell" channel="inline" abstraction="character" model="north"/>
+    <property name="size" channel="inline" abstraction="integer" model="600,40,1"/>
+    <property name="foreground" channel="inline" abstraction="rgb" model="0,0,0"/>
+    <property name="right_press" channel="inline" abstraction="knowledge" model=".app.logic.action"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Shape Property}
+
+This property specifies the geometrical shape of the GUI.
+
+\emph{required}
+
+name=\texttt{'shape'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'rectangle' \vline\ 'circle' \vline\ 'polygon'}
+
+\subsubsection{Layout Property}
+
+This property specifies the kind of layout of the GUI.
+
+\emph{required}
+
+name=\texttt{'layout'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'root' \vline\ 'coordinates' \vline\ 'compass'}
+
+\subsubsection{Cell Property}
+
+This property specifies the cell ordering, if \emph{compass} layout is used.
+
+\emph{optional}, only if \emph{layout} property is \emph{compass}
+
+name=\texttt{'cell'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'north' \vline\ 'south' \vline\ 'west' \vline\ 'east' \vline\ 'centre'}
+
+\subsubsection{Position Property}
+
+This property specifies the GUI element's origin.
+
+\emph{optional}, only if \emph{layout} property is \emph{root} or \emph{coordinates}
+
+name=\texttt{'position'}\\
+abstraction=\texttt{'integer'}\\
+model=\texttt{x, y, z coordinates}
+
+\subsubsection{Size Property}
+
+This property specifies the GUI element's extension.
+
+\emph{required}
+
+name=\texttt{'size'}\\
+abstraction=\texttt{'integer'}\\
+model=\texttt{x, y, z extensions}
+
+\subsubsection{Background Property}
+
+This property specifies the background colour of the GUI.
+
+\emph{optional}
+
+name=\texttt{'background'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'black' \vline\ 'red' \vline\ 'green' \vline\ 'yellow' \vline\ 'blue' \vline\ 'magenta' \vline\ 'cobalt' \vline\ 'white'}
+
+\subsubsection{Foreground Property}
+
+This property specifies the foreground colour of the GUI.
+
+\emph{optional}
+
+name=\texttt{'foreground'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'black' \vline\ 'red' \vline\ 'green' \vline\ 'yellow' \vline\ 'blue' \vline\ 'magenta' \vline\ 'cobalt' \vline\ 'white'}
+
+\subsubsection{Title Property}
+
+This property specifies the GUI element's (window's) title.
+
+\emph{optional}, only if \emph{layout} property is \emph{root}
+
+name=\texttt{'title'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{window title}
+
+\subsubsection{Icon Property}
+
+This property specifies the GUI element's (window's) icon.
+
+\emph{optional}, only if \emph{layout} property is \emph{root}
+
+name=\texttt{'icon'}\\
+abstraction=\texttt{'bmp' \vline\ 'jpeg' \vline\ 'png' \vline\ 'gif' \vline\ etc.}\\
+model=\texttt{graphic file}
+
+\subsubsection{Expose Property}
+
+This property specifies the logic knowledge model to be executed if the GUI
+element is exposed, for example shown again after having been hidden before.
+
+\emph{optional}, only if GUI element should react to expose event
+
+name=\texttt{'expose'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+\subsubsection{Mouse Over Property}
+
+This property specifies the logic knowledge model to be executed if the mouse
+is moved over the GUI element.
+
+\emph{optional}, only if GUI element should react to mouse event
+
+name=\texttt{'mouse\_over'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+\subsubsection{Mouse Wheel Property}
+
+This property specifies the logic knowledge model to be executed if the mouse
+wheel is scrolled while the mouse pointer is over the GUI element.
+
+\emph{optional}, only if GUI element should react to mouse event
+
+name=\texttt{'mouse\_wheel'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+\subsubsection{Left Press Property}
+
+This property specifies the logic knowledge model to be executed if the left
+mouse button is pressed.
+
+\emph{optional}, only if GUI element should react to mouse event
+
+name=\texttt{'left\_press'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+\subsubsection{Left Release Property}
+
+This property specifies the logic knowledge model to be executed if the left
+mouse button is released.
+
+\emph{optional}, only if GUI element should react to mouse event
+
+name=\texttt{'left\_release'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}
+
+\subsubsection{Left Click Property}
+
+This property specifies the logic knowledge model to be executed if the left
+mouse button is clicked. A mouse click is the combination of a mouse press- and
+release event.
+
+\emph{optional}, only if GUI element should react to mouse event
+
+name=\texttt{'left\_click'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{logic knowledge model}

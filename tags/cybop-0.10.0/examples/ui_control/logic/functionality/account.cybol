@@ -1,0 +1,65 @@
+<model>
+<!--
+    <part name="start_check_module" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="cd /home/praxis/c/a/xpm20063/kvdt; ./xpm.sh"/>
+    </part>
+    <part name="change_capital_into_small_letters" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="cd /home/praxis/c/a/xpm20063/kvdt/Daten; rename 'y/A-Z/a-z/' *"/>
+    </part>
+    <part name="copy_check_module_result_into_crypto_module_directory" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="cd /home/praxis/c/a; cp xpm20063/kvdt/Daten/*.con KKMLIN/original"/>
+    </part>
+    <part name="change_small_into_capital_letters" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="cd /home/praxis/c/a/KKMLIN/original; rename 'y/a-z/A-Z/' *"/>
+    </part>
+    <!-- The crypto module puts the encrypted file into the /codiert/*.coc directory. -->
+    <part name="start_crypto_module" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="cd /home/praxis/c/a/KKMLIN; ./kkm.sh"/>
+    </part>
+    <part name="mount_floppy" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="mount /media/floppy"/>
+    </part>
+    <part name="copy_encrypted_file" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="cd /home/praxis/c/a/KKMLIN; cp codiert/*.* /media/floppy"/>
+    </part>
+    <part name="check_copied_file_on_floppy" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="cd /home/praxis/c/a/KKMLIN; ./dec.sh /media/floppy"/>
+    </part>
+    <part name="unmount_floppy" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="umount /media/floppy"/>
+    </part>
+    <part name="show_check_result_on_screen" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="cd /home/praxis/c/a/KKMLIN; kedit VBericht.txt"/>
+    </part>
+    <part name="show_cases_overview_on_screen" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="cd /home/praxis/c/a/xpm20063/kvdt/Listen; gv FallStatistik.pdf"/>
+    </part>
+-->
+</model>
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: account.cybol,v $ $Revision: 1.9 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

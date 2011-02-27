@@ -1,0 +1,76 @@
+%
+% $RCSfile: knowledge_split.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Knowledge Split}
+\label{knowledge_split_heading}
+
+refer back to section \ref{input_output_and_rules_heading}
+
+The \emph{Knowledge Query and Manipulation Language} (KQML) (section
+\ref{knowledge_query_and_manipulation_language_heading}), a popular means of
+communication in \emph{Agent Oriented Programming} (section
+\ref{agent_oriented_programming_heading}), relies on \emph{Speech Act Theory}
+developed by Searle 1960 and enhanced by Winograd and Flores in the 70s.
+\cite{wikipedia} http://en.wikipedia.org/wiki/Agent\_communication\_language
+
+- describe some language differences: CYBOL in comparison to Agent0:
+http://www.cs.caltech.edu/~bond/courses/cs101c/agents16/node13.html
+(states=believes, logic=capabilities, signal=commitment)
+Do Agent0 and others provide the most suitable format to represent knowledge?
+
+Two Comparison Tables:
+
+1 with Agent0
+
+http://www.cs.caltech.edu/~bond/courses/cs101c/agents16/node3.html
+
+Mental State
+    Beliefs (= Facts)
+        ?? State Knowledge
+    Commitments (to act, are grounded, that is do not contain variables)
+        pre-defined actions are: DO, INFORM, REQUEST, UNREQUEST, REFRAIN, IF
+        ?? Signal (signal removal is called "Release of a Commitment")
+    Capabilities (= Actions; Commitments to oneself are special capabilities called Decision or Choice)
+        ?? Logic Knowledge
+
+Goals?
+Intentions?
+Time is treated as realtime; it is expressed explicitly, that is by adding it
+to statements.
+Action is represented by the fact that it happened at a given time;
+since actions are facts they are also instantaneous.
+Messages are passed by agents to each other, by message name.
+
+2 with Kuehnel
+
+- can all the different vocabulary (see Kuehnel: action, plan, assumption, aim/goal)
+be simplified/unified into an easier system?
+- Agents know about the environment and their own expertise
+- add table for comparison between CYBOP and AGOP, for example:
+    state knowledge = beliefs: capabilities (knowledge about itself)
+        + constraints (knowledge about environment)
+    logic knowledge = actions + plans
+    signal = goal (aim)
+- this is a comparison \emph{Trial} -- terms of AGOP are anyway not used uniformly in science
+
+- ideas to split knowledge itself into state- and logic (action/ plan) knowledge
+- see \cite[p. 95 ff., p. 125 ff.]{kuehnel}

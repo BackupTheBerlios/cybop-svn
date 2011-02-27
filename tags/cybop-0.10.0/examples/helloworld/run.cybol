@@ -1,0 +1,42 @@
+<model>
+    <part name="startup" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="signal"/>
+        <property name="message" channel="file" abstraction="text/cybol" model="helloworld/startup.cybol"/>
+    </part>
+</model>
+
+<!--
+    This example creates a small, hierarchical domain model consisting
+    of a compound called "domain" and its part called "greeting".
+    The greeting model contains the famous "Hello, World!" character.
+
+    As next step, the greeting model is sent to (printed on) the console.
+    Finally, an "exit" operation shuts down the application.
+/-->
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: run.cybol,v $ $Revision: 1.14 $ $Date: 2009-01-09 00:36:13 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

@@ -1,0 +1,63 @@
+%
+% $RCSfile: vocabulary.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Vocabulary}
+\label{vocabulary_heading}
+\index{CYBOL Vocabulary}
+\index{Terms of a Language}
+\index{Symbols of a Language}
+\index{Syntax of a Language}
+\index{Document Type Definition}
+\index{DTD}
+\index{XML Schema Definition}
+\index{XSD}
+\index{Extended Backus Naur Form}
+\index{EBNF}
+
+The \emph{Vocabulary} is what fills a language with life. It delivers the
+\emph{Terms} and \emph{Symbols} that are combined after the rules of a syntax.
+
+XML allows to define and exchange the whole vocabulary of a language. It offers
+two ways in which a list of legal elements can be defined: The traditional
+\emph{Document Type Definition} (DTD) and the more modern
+\emph{XML Schema Definition} (XSD). Besides the vocabulary, DTD and XSD define
+the structure of an XML document and allow to typify, constrain and validate
+items. In addition to DTD and XSD, the \emph{Extended Backus Naur Form} (EBNF)
+of CYBOL is given following.
+
+The language definitions were not added as appendix to this work, because
+firstly, they are not too long and secondly, an understanding of the CYBOL
+elements is necessary to be able to grasp the constructs and examples given in
+later sections.
+
+\input{document_type_definition}
+\clearpage
+\input{xml_schema_definition}
+\input{extended_backus_naur_form}
+\clearpage
+
+%\input{self_definition}
+%Model and Metamodel \cite{sowa}, p. 431 and (for UML): p.436
+%- UML needs a meta model describing its graphical model elements
+%(Class, Association etc. are treated as classes themselves)
+%- XML needs special definition languages (DTD, XSD)
+%--> Show that CYBOL is its own meta model and can describe itself!

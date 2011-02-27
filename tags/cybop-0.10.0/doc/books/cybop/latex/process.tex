@@ -1,0 +1,119 @@
+%
+% $RCSfile: process.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Process}
+\label{process_heading}
+\index{Process}
+\index{Resource Grouping}
+\index{Execution}
+\index{Address Space}
+\index{Thread of Execution}
+\index{Central Processing Unit}
+\index{CPU}
+\index{Program Counter}
+\index{Registers}
+\index{Stack}
+\index{Abstract System Concepts}
+\index{Operating System}
+\index{OS}
+\index{Session}
+\index{Process Group}
+\index{Job}
+\index{System}
+\index{Application}
+\index{Task}
+\index{Lightweight Process}
+\index{Work Queue}
+\index{Task Farm}
+\index{Task Bag}
+
+The most common word used to describe a running computer program is
+\emph{Process}. Tanenbaum \cite{tanenbaum2001} defines it as an abstract model
+based on two independent concepts: \emph{Resource Grouping} (space) and
+\emph{Execution} (time).
+
+He writes that \emph{Resource Grouping} meant that a process had an address
+space containing program text and data, as well as other resources. A
+\emph{Thread of Execution}, on the other hand, were the entity scheduled for
+execution on the \emph{Central Processing Unit} (CPU). It had a program counter
+(keeping track of which instruction to execute next), registers (holding its
+current working variables) and a stack (containing the execution history, with
+one frame for each procedure called but not yet returned from). Although a
+thread would have to execute in some process, the thread and its process were
+different concepts and could be treated separately.
+
+A slightly different explanation is given in \cite{iseries}:
+
+\begin{quote}
+    A thread is the path a program takes while it runs, the steps it performs,
+    and the order in which it performs the steps. A thread runs code from its
+    starting location in an ordered, predefined sequence for a given set of
+    inputs. The term \emph{Thread} is shorthand for \emph{Thread of Control}.
+    (One) can use multiple threads to improve application performance by
+    running different application tasks simultaneously.
+\end{quote}
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{footnotesize}
+        \begin{tabular}{| p{25mm} | p{45mm} | p{35mm} |}
+            \hline
+            \textbf{Abstract Concept} & \textbf{Explanation} & \textbf{Synonyms}\\
+            \hline
+            Session & Bundle of processes of one user &\\
+            \hline
+            Process Group & Collection of one or more processes & Job\\
+            \hline
+            Process & Container for related Resources & System, Application, Task\\
+            \hline
+            Thread & Schedulable Entity & Lightweight Process\\
+            \hline
+        \end{tabular}
+        \end{footnotesize}
+        \caption{Systematics of Abstract System Concepts}
+        \label{concepts_table}
+    \end{center}
+\end{table}
+
+There are other abstract concepts which are of importance, especially in an
+\emph{Operating System} (OS) context. A terminal in the \emph{Linux} OS
+\cite{johnson}, for example, may control a \emph{Session} consisting of
+\emph{Process Groups} which in turn contain many \emph{Processes} providing
+resources for the threads running in them. Table \ref{concepts_table} shows one
+possible systematics of these concepts.
+
+Some ambiguities exist, however. The term \emph{Job} which, some decades ago,
+still stood for a program or set of programs, is nowadays used to label a
+process group in \emph{Windows 2000} \cite[p. 7, 796]{tanenbaum2001} and
+similarly in \emph{Linux} \cite[p. 125, 237]{johnson}. The notion of a
+\emph{Task} is sometimes used equivalent to thread \cite{daene}, but other
+times refers to a process or even process group \cite[p. 113]{johnson}.
+Additionally, some sources use the term in the meaning of a signal or event
+belonging to a work queue called \emph{Task Farm} or \emph{Task Bag}
+\cite[p. 548, 606]{tanenbaum1999}.
+
+This document uses the more general word \emph{System} to write about a process
+that manages the input, storage, processing and output of data in a computer.
+This is contrary to some other works which mean a whole computer, including its
+hardware and software programs running on it, when talking about systems. In
+the understanding of this work, once again, a \emph{System} is a \emph{Process}
+(software system) running on a \emph{Computer} (hardware system).

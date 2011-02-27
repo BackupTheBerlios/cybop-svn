@@ -1,0 +1,88 @@
+%
+% $RCSfile: implication.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Implication}
+\label{implication_heading}
+\index{Medical Informatics Standards in Res Medicinae}
+
+The number of standards for medical informatics is huge. The fields covered by
+these standards are manifold. Popular standardisation efforts dealing with the
+EHR structure are \emph{Open EHR} and \emph{CEN 13606}.
+
+The borders to messaging and communication standards are blurred. Although
+\emph{HL7}'s focus lies on message exchange, it created data structures in form
+of its \emph{RIM} framework, too; a newer result for document exchange is their
+\emph{CDA} specification. The former two standards (\emph{CEN 13606} and
+\emph{Open EHR}), on the other hand, focus on the EHR structure but offer a
+communication format as well; it is called \emph{Transaction} or
+\emph{Composition}, respectively. Beale concludes in \cite{openhealth}:
+\textit{\ldots\ all efforts have converged independently on at least one solid
+concept -- the unit of change and committal in the EHR.}
+
+OMG's \emph{HDTF} defines interfaces for the exchange of messages, which are
+grouped into special services. Some national efforts have defined their own
+data exchange formats, like the \emph{xDT} standard (to become \emph{SCIPHOX})
+in Germany. Yet other standards recommendations for electronic data interchange
+in medicine are \emph{EDIFACT}, worked out by the UN, and \emph{HXP}, defined
+by a number of medical OSS projects.
+
+To what concerns the field of medical terminology, there exist longer-lasting
+efforts like \emph{ICD}, \emph{LOINC}, \emph{SNOMED CT}, \emph{OpenGALEN} or
+\emph{UMLS}. Depending on their scheme of organisation, they may be grouped
+into the three categories: \emph{enumerative}, \emph{compositional} and
+\emph{lexical}. A lot of time and money has been invested into them, yet only
+recently, their results have been adopted by increasingly more systems. Good
+acceptance and popularity was reached for the \emph{ICD} codes classification
+system.
+
+Other standards for related fields exist, among them being \emph{DICOM} for
+clinical imaging and -device communication, \emph{NCPDP} for the transmission
+of pharmacy data, \emph{CLSI} for clinical laboratory testing, \emph{ADA}
+delivering guidelines for dental informatics or \emph{CDISC} for the exchange
+of large amounts of various data between information systems.
+
+For the purpose of this work, with a minimalistic implementation of a prototype
+application, the considered (de facto) standards specifications mainly had a
+helper function, giving some architectural guidance. Concerning the record
+architecture, CYBOL applications follow the purely compositional principles of
+CYBOP anyway, so that record modelling advices had only few implications.
+CYBOI's architecture, however, is flexible enough to support many messaging
+standards in the future, by simply adding the corresponding translator modules.
+Existing terminologies can partly be used by associating terms appearing in
+CYBOL knowledge templates with their pendants in common terminology systems.
+
+A promising trial, in this context, would be to use CYBOL for building up new,
+or structuring existing terminologies. CYBOL innately supports compositional
+structures, which makes it a perfect match for compositional schemes. Further,
+it allows to add meta information as well as to integrate constraints. The meta
+information, which is contained in so-called \emph{property} tags of a term
+(chapter \ref{cybernetics_oriented_language_heading}), at system runtime called
+\emph{details}, may link to more than one superior (parent) category, thereby
+placing the term simultaneously under different categories that are valid.
+Thus, some problems of current terminologies (section \ref{schemes_heading})
+\emph{might} get solved. But this remains to be figured out in future works
+(chapter \ref{summary_and_outlook_heading}).
+
+Standards for imaging, pharmacy- or laboratory data transfer, guidelines for
+dental informatics, health card usage and related specifications will be
+considered closer as soon as more application modules are developed within
+\emph{Res Medicinae}.

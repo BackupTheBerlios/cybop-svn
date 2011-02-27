@@ -1,0 +1,101 @@
+%
+% $RCSfile: owl.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{OWL}
+\label{owl_heading}
+\index{Web Ontology Language}
+\index{OWL}
+\index{CYBOL-OWL Comparison}
+
+Since the \emph{Web Ontology Language} (OWL) described in section
+\ref{web_ontology_language_heading} is a vocabulary extension to RDF, the
+points explained in the context of RDF before do count for OWL as well. Further
+considerations are done using the following OWL code example representing an
+\emph{incomplete} extract of a description of \emph{Wine} (potable liquid)
+\cite{owlguide}:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<rdf:RDF ...
+    <owl:Class rdf:ID="Wine">
+        <rdfs:subClassOf rdf:resource="&food;PotableLiquid"/>
+        <rdfs:label xml:lang="en">wine</rdfs:label>
+        <rdfs:label xml:lang="fr">vin</rdfs:label>
+        ...
+    </owl:Class>
+    ...
+    <owl:Class rdf:ID="WineColour">
+        <rdfs:subClassOf rdf:resource="#WineDescriptor"/>
+        <owl:oneOf rdf:parseType="Collection">
+            <owl:Thing rdf:about="#White"/>
+            <owl:Thing rdf:about="#Rose"/>
+            <owl:Thing rdf:about="#Red"/>
+        </owl:oneOf>
+    </owl:Class>
+    ...
+    <owl:Class rdf:ID="Vintage">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#vintageOf"/>
+                <owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">
+                    1
+                </owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+</rdf:RDF>
+    \end{verbatim}
+\end{scriptsize}
+
+A class \emph{Wine} inheriting from a super class \emph{PotableLiquid} is
+defined first. Labels in several languages are given. Further, two classes
+\emph{WineColour} and \emph{Vintage} are defined. Properties referring to the
+\emph{WineColour} class may take on one out of a collection of three colour
+values. The \emph{Vintage} class has the restriction that at least one property
+\emph{vintageOf} must exist. If the \emph{Wine} class or one of its sub classes
+is connected to the \emph{WineColour} or \emph{Vintage} class (what is not
+shown here to keep the code example simple), it has to consider their possible
+restrictions.
+
+An approximated CYBOL pendant to the OWL example above is shown following:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="wine" channel="http" abstraction="cybol" model="example">
+        <property name="super" channel="file" abstraction="cybol" model="food/potable.cybol"/>
+        <property name="label" channel="file" abstraction="cybol" model="terminology/wine.cybol"/>
+        <property name="colour" channel="inline" abstraction="string" model="">
+            <constraint name="choice" channel="inline" abstraction="string" model="red,white"/>
+        </property>
+        <property name="vintage" channel="inline" abstraction="integer" model="">
+            <constraint name="requirement" channel="inline" abstraction="boolean" model="true"/>
+        </property>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+\emph{Wine} as one part of a greater model (such as a catalogue) is described.
+Its properties are equivalent to those in the OWL example above. The values of
+the \emph{colour} property are constrained to a choice of two colours, and the
+\emph{vintage} property is required to exist, i.e. it is not deletable.

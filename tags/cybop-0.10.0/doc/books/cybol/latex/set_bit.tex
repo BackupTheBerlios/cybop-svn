@@ -1,0 +1,68 @@
+%
+% $RCSfile: set_bit.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Set Bit}
+\label{set_bit_heading}
+\index{Set Bit}
+
+This operation sets the bit at the given position within the given number.
+\emph{Set} means setting the bit to \emph{true}.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="set_some_bit" channel="inline" abstraction="operation" model="set_bit">
+    <property name="number" channel="inline" abstraction="knowledge" model=".app.number"/>
+    <property name="position" channel="inline" abstraction="knowledge" model=".app.pos"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Number Property}
+
+This property specifies the number of which one bit is to be set.
+
+\emph{required}
+
+name=\texttt{'number'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{the actual number (or knowledge model)}
+
+\subsubsection{Position Property}
+
+The position of the bit whose value is to be set (set to \emph{true}).
+
+\emph{required}
+
+name=\texttt{'position'}\\
+abstraction=\texttt{'integer' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{position of the bit}
+
+\subsubsection{Result Property}
+
+This is the result knowledge model in which to store the number of which one
+bit was set (to \emph{true}).
+
+\emph{required}
+
+name=\texttt{'result'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{result knowledge model}

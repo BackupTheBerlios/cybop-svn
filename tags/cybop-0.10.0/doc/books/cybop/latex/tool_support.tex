@@ -1,0 +1,50 @@
+%
+% $RCSfile: tool_support.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Tool Support}
+\label{tool_support_heading}
+\index{CYBOL Tool Support}
+
+When proposing a new theory of computing, or a new programming language, it is
+common to provide a suitable \emph{Integrated Development Environment} (IDE)
+supporting the application of that theory or language. If not the tools
+themselves, a recommendation for how they may look like should be given at
+least. This is what the following sections try to achieve.
+
+\input{template_editor}
+\input{knowledge_designer}
+\input{model_viewer}
+
+To what concerns the usage of existing UML tools for modelling CYBOL
+applications, it has to be said that they are most likely not able to support
+CYBOP models, nor can they be easily adapted. Even though the diagram
+specifications may be similar, the underlying programming principles and model
+repositories are just too different. It might be possible, however, to create
+interfaces partly translating CYBOL-encoded (XML) models into UML models,
+possibly using the \emph{XML Metadata Interchange} (XMI) standard or the like.
+It will presumably be easier to translate CYBOL- into UML models, than vice
+versa, because CYBOL is very expressive. While CYBOL knowledge templates
+distinguish between whole-part- and meta elements, for example, UML models do
+not. Another point is that CYBOL holds state- and logic knowledge in separate
+templates, that would have to be merged into common classes when being
+translated into UML. But the investigation and evaluation of further details
+concerning the tool support is left for future works.

@@ -1,0 +1,206 @@
+/*
+ * Farben:
+ * - Tabellenüberschrift: #E0E0E0
+ * - außer Haus: #FFFFFF
+ * - auf Dienstreise: #FFCCCC
+ * - im Urlaub: #FFFFCC
+ * - im Hause: #E6FFCC
+ */
+
+@media screen {
+
+body {
+    background-color: #FFFFFF;
+    margin: 0px;
+    /* Minimum width avoids line feed and display errors in modern browsers. */
+    /*
+        The header image has a width of 1000px. The page uses a margin of 20px.
+        Therefore, use 1050px and not only 1000px here!
+    */
+    width: 1050px;
+}
+
+}
+
+@media print {
+
+body {
+    background-color: #FFFFFF;
+}
+
+}
+
+div#page {
+    margin: 20px;
+    text-align: left;
+    font-family: "DejaVu Sans", "Bitstream Vera Sans", "Nimbus", "Andale", "Courier", "Prestige";
+    font-size: 10px;
+    color: #000000;
+}
+
+* html div#page {
+    /* The workaround for the 3 pixel bug of Internet Explorer up to version 6. */
+    height: 1em;
+}
+
+div#page h1 {
+    color: #000000;
+    font-size: 14px;
+}
+
+div#page h2 {
+    color: #000000;
+    font-size: 12px;
+}
+
+div#page h3 {
+    color: #000000;
+    font-size: 10px;
+}
+
+div#page p {
+    color: #000000;
+}
+
+div#page a {
+    text-decoration: none;
+    color: #000000;
+}
+
+div#page a:link {
+}
+
+div#page a:visited {
+}
+
+div#page a:hover {
+    background-color: #E0E0E0;
+    color: #000000;
+}
+
+div#page a:active {
+    background-color: #FFCCCC;
+    color: #000000;
+}
+
+div#overview table {
+    float: left;
+    width: 600px;
+    border-spacing: 1px;
+    background-color: #000000;
+}
+
+div#overview tr {
+    text-align: left;
+}
+
+div#overview th {
+    padding: 1px;
+    background-color: #E0E0E0;
+}
+
+div#overview td {
+    padding: 1px;
+}
+
+div#overview img {
+    border-width: 0px;
+    float: left;
+    height: 20px;
+}
+
+div#overview .edit {
+    width: 200px;
+}
+
+div#legend {
+    float: left;
+    margin-left: 50px;
+    color: #000000;
+}
+
+div#legend h1 {
+    color: #000000;
+    font-size: 1.0em;
+}
+
+#login {
+    float: right;
+    margin-right: 10px;
+    width: 200px;
+}
+
+#login fieldset {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #000000;
+}
+
+#login #username-label, #login #password-label {
+    height: 14px;
+    padding: 2px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+#login #username-field, #login #password-field {
+    height: 14px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #E0E0E0;
+    padding: 2px;
+    font-size: 10px;
+}
+
+#login #remember-field {
+    font-size: 10px;
+    color: #E0E0E0;
+}
+
+#login button {
+    clear: both;
+    margin-top: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #E0E0E0;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+div#footer {
+    /* The "clear" resets the element flow. */
+    clear: both;
+    padding: 0.1em;
+    text-align: left;
+    font-size: 0.8em;
+}
+
+div#footer hr {
+    /*
+        Both, colour and background colour are set here
+        to make old browsers display the colour properly.
+    */
+    background-color: #000000;
+    color: #000000;
+}
+
+div#footer img {
+    float: left;
+    height: 20px;
+}
+
+.absence {
+    background-color: #FFFFFF;
+}
+
+.businesstrip {
+    background-color: #FFCCCC;
+}
+
+.holiday {
+    background-color: #FFFFCC;
+}
+
+.presence {
+    background-color: #E6FFCC;
+}

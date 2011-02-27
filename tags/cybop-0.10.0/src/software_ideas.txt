@@ -1,0 +1,17 @@
+
+Ideas for CYBOP-Software
+========================
+
+Anwesenheit Mitarbeiter
+_______________________
+
+- tagesaktuelle Registrierung der Anwesenheit von Mitarbeitern über eine Web-Seite
+- farbige Hervorhebung: Anwesenheit, Abwesenheit, Urlaub, Krankheit
+
+Gutachtersystem
+_______________
+
+- Studenten bewerten Vorträge ihrer Kommilitonen über das Web
+- daraus wird eine Durchschnittsnote gebildet
+- auch der Dozent vergibt eine Note
+- Endnote wird gebildet aus dem Mittel beider Noten

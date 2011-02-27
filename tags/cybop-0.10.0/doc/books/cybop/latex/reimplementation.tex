@@ -1,0 +1,110 @@
+%
+% $RCSfile: reimplementation.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Reimplementation}
+\label{reimplementation_heading}
+\index{CYBOP}
+\index{Itemisation}
+\index{Composition}
+\index{Bundling of Attributes and Methods}
+\index{Container Inheritance}
+\index{CYBOL}
+\index{CYBOI}
+\index{OOP}
+\index{Java Programming Language}
+\index{C++ Programming Language}
+\index{C Programming Language}
+\index{Operating System}
+\index{OS}
+\index{XML}
+\index{Graphical User Interface}
+\index{GUI}
+\index{empty}
+\index{Abstract Windowing Toolkit}
+\index{AWT}
+\index{Swing}
+\index{Qt}
+\index{wxWindows}
+\index{Gimp Toolkit}
+\index{GTK}
+\index{GNU/Linux}
+\index{XFree86}
+\index{X-Library}
+\index{Xlib}
+\index{Textual User Interfaces}
+\index{TUI}
+\index{Web User Interfaces}
+\index{WUI}
+\index{Socket Communication Mechanisms}
+
+The architecture-advanced prototype of the \emph{Record} module had \emph{much}
+less functionality than earlier ones, in fact not much more than starting a
+graphical frame with menu bar and exiting the application again. This was so,
+because yet before all domain knowledge could be extracted into CYBOL, another
+issue turned up:
+
+CYBOP modelling concepts like \emph{Itemisation} or \emph{Composition} are an
+integral part of the CYBOL knowledge representation language. Other concepts
+like the \emph{Bundling} of attributes and methods, property- and container
+\emph{Inheritance}, as known from \emph{Object Oriented Programming} (OOP),
+were considered unfavourable (section \ref{object_oriented_programming_heading})
+and neither to be used in CYBOL, nor in the CYBOI interpreter. Consequently,
+OOP languages like Java or C++ were not suitable for CYBOI any longer. A slim
+and fast language, close to hardware and fast in processing CYBOL was needed.
+
+Having such requirements, one of the first candidates coming to mind was the
+\emph{C} programming language. It is \emph{high-level} enough to permit fast
+programming and \emph{low-level} enough to connect efficiently to hardware or
+an \emph{Operating System} (OS). Many OS are written in C themselves, anyway.
+CYBOI was therefore reimplemented in C, which hasn't changed since. What has
+changed and is changing all the time is its functionality, an overview of which
+was given in chapter \ref{cybernetics_oriented_interpreter_heading}.
+
+CYBOL sticks to the XML specification and standard XML parsers can be used to
+process and validate it. However, for reasons of performance and better
+integration, and due to the very limited vocabulary (set of possible tags and
+attributes), special parsing procedures were written and adapted to CYBOI.
+
+Another problem that had to be solved was \emph{Graphical User Interface} (GUI)
+handling. While the Java-implemented CYBOI could make use of the
+\emph{Abstract Windowing Toolkit} (AWT)/ Swing, the C-implemented CYBOI did not
+have such functionality at first. Toolkit candidates like \emph{Qt} \cite{qt}
+or \emph{wxWindows} \cite{wxwidgets}, being implemented in C++, were out. Other
+GUI frameworks like the \emph{Gimp Toolkit} (GTK) \cite{gtk}, written in C,
+were considered cumbersome to cope with so that finally, the decision was taken
+to use low-level graphics drawing routines. For CYBOI, being developed on a
+\emph{GNU/Linux} OS \cite{linux}, that meant using \emph{XFree86's}
+\cite{xfree86} \emph{X-Library} (Xlib) functionality directly. The necessary
+effort for transforming hierarchical CYBOL models into GTK- or other toolkit
+structures was estimated to be equal or even higher than translating them into
+Xlib functionality right away. At the time of writing this work, implementation
+is in progress but not completed.
+
+Similar implementations are necessary for \emph{Textual User Interfaces} (TUI),
+\emph{Web User Interfaces} (WUI) and \emph{Socket Communication Mechanisms},
+the latter two being already finished in a first version. Further development
+activities may for instance enable CYBOI to run on other platforms and integrate
+more hardware-driving functionality, to get independent from underlying OS.
+
+While the CYBOL specification can be considered quite mature, CYBOI, as could
+be seen, will need plenty of extensions and additions in future, in order to
+leave its prototype stage and become fully usable.

@@ -1,0 +1,134 @@
+%
+% $RCSfile: framework.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Framework}
+\label{framework_heading}
+\index{Framework}
+\index{Software Framework}
+\index{Pattern}
+\index{Base Architecture}
+\index{Library}
+\index{Callback Mechanism}
+\index{Inheritance}
+\index{Polymorphism}
+\index{Static Constraints of a Framework}
+\index{Dynamic Parts of a Framework}
+\index{Frozen Spot}
+\index{Hot Spot}
+\index{Contract}
+\index{Vertical Market Framework}
+\index{Horizontal Market Framework}
+\index{Java Development Kit}
+\index{JDK}
+\index{Collection Framework}
+\index{Input Method Framework}
+\index{Bidirectional Dependency}
+\index{Observer Pattern}
+\index{Manager Class}
+\index{Singleton Pattern}
+
+In the past decade, \emph{Software Frameworks} have gained in importance.
+Patterns are considered their elementary building blocks. Yet while patterns
+are solutions for recurring design problems, frameworks represent the base
+architecture for a family of systems \cite{pree}. Because both concepts depend
+on each other, frameworks are described within the main section \emph{Patterns}.
+
+A \emph{Framework} essentially is a reusable collection of a number of
+cooperating abstract and concrete classes, in a special constellation. It
+represents an imcomplete software system which still needs to be extended and
+instantiated, to be executable. A conventional \emph{Library} is used by
+calling the procedures provided by it; the main part of each application is
+then designed and realised by the developer. A \emph{Framework} already
+represents the actual main part of a system. Functionality added by the
+application developer is reversely called and used by the framework itself.
+This principle carries the name \emph{Callback Mechanism}. Extensions are
+mostly realised through \emph{Inheritance} and \emph{Polymorphism} (section
+\ref{object_oriented_programming_heading}).
+
+But not all parts of a framework are intended to be extended. After W. Pree
+\cite{pree}, there are \emph{Static Constraints} and \emph{Dynamic Parts}.
+Buschmann \cite{buschmann} calls them \emph{Frozen Spots} and \emph{Hot Spots};
+the \emph{Apache Jakarta Avalon} framework \cite{avalon} labels static parts
+\emph{Contracts}. When the abstract state of a framework is turned into a
+functioning application by instantiating its classes, static elements remain
+unchanged. They form the basic structure for all derived applications.
+Application-specific behaviour, on the other hand, is determined by
+specialising adaptable framework parts.
+
+The \emph{Jakarta Avalon} documentation \cite{avalon} defines a framework as:
+
+\begin{enumerate}
+    \item A supporting or enclosing structure.
+    \item A basic system or arrangement as of ideas.
+\end{enumerate}
+
+It distinguishes between \emph{Vertical Market Frameworks} which focused on a
+single industry like medical systems or telecommunications and would not work
+well in other industries, and \emph{Horizontal Market Frameworks} which were
+generic enough to be used across multiple industries. Vertical market frameworks
+could be built on top of horizontal market frameworks.
+
+Just like patterns, frameworks provide higher flexibility to software components,
+prevent code duplication and lower development efforts \cite{pree}. Developers
+are freed from frequently reinventing the same solutions and can concentrate on
+actual application development. The similar structure of applications that base
+on the same framework ensures consistency and eases their maintenance, and also
+reduces the time it takes for a developer to learn how the software works. Of
+course, the necessary adjustment for new developers should not be underestimated;
+comprehensive documentation is necessary. But once the principles behind a
+framework are understood, one will be able to comprehend any system built upon it.
+
+The \emph{Java Development Kit} (JDK) \cite{java}, for example, offers a number of
+special \emph{Collection} containers (section \ref{container_heading}) which it
+calls \emph{Collection Framework}; there is also an \emph{Input Method Framework}
+and so on. Over the years, however, the framework definition has become a bit
+fuzzy here-and-there.
+
+The price of framework reusability is \emph{Lower Flexibility}, which is due to
+the above-mentioned static parts. Besides this, applications are subject to the
+evolution of the underlying framework. However, that disadvantage shouldn't be
+too bold, if the framework is designed general and clever enough.
+
+Framework callback mechanisms rely on \emph{Bidirectional Dependencies} and bring
+with all their disadvantages (section \ref{bidirectional_dependency_heading}). To
+explain this briefly: Instances that want to be called by the framework need to
+register at a caller before, as was explained in section \ref{observer_heading},
+on the example of the \emph{Observer} pattern. In order to be able to register
+themselves, callees need to know about the caller. Once callees are registered,
+the caller knows about them in turn.
+
+Frequently, statically accessible classes, also called \emph{Managers}, have to
+be introduced to a framework, mostly due to unforeseen requirements. They often
+use the \emph{Singleton} pattern (section \ref{singleton_heading}) to become
+unique within a system. Managers of that kind serve as gateway to certain areas
+of the framework that are not easily reachable anymore through normal navigation
+along object associations. A number of negative effects related to static object
+access were already mentioned (section \ref{global_access_heading}).
+
+Chapter \ref{knowledge_schema_heading} introduces a structure called
+\emph{Knowledge Schema} which, although being static, is capable of
+representing general knowledge, thus allowing the creation of flexible
+application systems. Bidirectional dependencies and global model (object)
+access are not an issue in the new language and interpreter introduced in
+chapters \ref{cybernetics_oriented_language_heading} and
+\ref{cybernetics_oriented_interpreter_heading}, because any runtime knowledge
+model may be accessed along well-defined paths in a simple tree-like structure.

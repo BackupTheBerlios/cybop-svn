@@ -1,0 +1,90 @@
+From ivaldes@hal-pc.org Mon Jun  9 16:22:52 2003
+X-Envelope-From: <ivaldes@hal-pc.org>
+X-Envelope-To: <christian.heller@tuxtax.de>
+X-Delivery-Time: 1055168576
+Received: from mail.hal-pc.org (mail.hal-pc.org [206.180.145.133])
+	by mailin.webmailer.de (8.12.8/8.8.7) with ESMTP id h59EMtrD026866
+	for <christian.heller@tuxtax.de>; Mon, 9 Jun 2003 16:22:56 +0200 (MEST)
+Received: from [206.180.154.121] (HELO hal-pc.org)
+  by mail.hal-pc.org (CommuniGate Pro SMTP 3.5.9)
+  with ESMTP id 49514526 for christian.heller@tuxtax.de; Mon, 09 Jun 2003 09:22:53 -0500
+Message-ID: <3EE4983C.4070906@hal-pc.org>
+Date: Mon, 09 Jun 2003 09:22:52 -0500
+From: Ignacio Valdes <ivaldes@hal-pc.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2.1) Gecko/20030225
+X-Accept-Language: en-us, en
+MIME-Version: 1.0
+To: Christian Heller <christian.heller@tuxtax.de>
+Subject: [Fwd: Re: a submission to JOSMC!]
+Content-Type: text/plain;
+  charset=us-ascii;
+  format=flowed
+Content-Transfer-Encoding: 7bit
+Status: RO
+X-Status: F
+
+Christian, this is one of the referees comments:
+
+Ignacio Valdes wrote:
+
+> Dear member of the editorial board for the Journal of Open Source 
+> Medical Computing,
+>
+> It has been a long time in coming, but I'm proud to attach the 1st 
+> submission to the Journal of Open Source Medical Computing. This is in 
+> PDF format as well as text format for annotations if you have any.  If 
+> I could have your reviews by Monday of next week, June 9th, I would 
+> appreciate it. Score card is as follows:
+>
+> Comments to the author:
+>
+>
+> 1) Clarity of writing: 1 excellent 2 good 3 neutral 4 poor 5 very poor 
+
+3 - A lot of familiarity with object oriented programming concepts is 
+required to understand the paper.
+Changes in terms (perhaps to avoid repetition?) might be confusing.  For 
+example:  Chain of repsonsibility is described as message passing.  When 
+it all comes together in the Hierarchial Model-View-Controller, the 
+message passing is described as "communicate with each other by relating 
+over the controller object".  I think I figured this out or did I?
+
+>
+> 2) Quality of references (author has researched previous work 
+> adequately): 1 excellent 2 good 3 neutral 4 poor
+
+> 5 very poor 
+
+3 - One reference is incomplete, JC00 is given a title and authors, but 
+no publishing source.  Some of the  concepts are described as "often 
+used" or a "very approved way", while others are just asserted.  It 
+would be good to have some references which establish these concepts.
+
+>
+> 3) Novelty/impact of idea: 1 excellent 2 good 3 neutral 4 poor 5 very 
+> poor
+
+3 - Hard to tell.  I think more exposistion is needed  on two fronts.
+
+First the technical front.  Since most of the components of CYBOP seem 
+to come from the OO literature, what is it that CYBOP adds?  It appears 
+to be the extension to the concept of Hierarchial Model-View-Controller, 
+whose reference (JC00)  is incomplete as noted above.
+
+The use of CYBOP to implement the EHR architecture from OpenEHR.   How 
+does this approach differ from the approach used in the OpenEHR 
+project?  Is CYBOP able to implent OpenEHR because it is so general it 
+can implement anything or does it bring some advantage to an OpenEHR 
+implementation?
+
+
+
+
+
+-- 
+-- Ignacio Valdes,MD,MS Editor: Linux Medical News
+http://www.linuxmednews.com
+'Revolutionizing Medical Education and Practice'
+
+
+

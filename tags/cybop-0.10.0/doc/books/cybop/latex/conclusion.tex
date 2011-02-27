@@ -1,0 +1,52 @@
+%
+% $RCSfile: conclusion.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Conclusion}
+\label{conclusion_heading}
+\index{OOP Innovations}
+\index{Object Oriented Programming}
+\index{OOP}
+\index{Structured and Procedural Programming}
+\index{SPP}
+
+As could be seen in the previous sections, OOP contributed many new concepts
+to software design, thus trying to improve SPP. Most importantly, SPP data
+structures (struct, record) got extended towards the \emph{Class} which does
+not only hold data (attributes), but also operations (methods). This brought
+with the concept of \emph{Encapsulation}, which permits only special methods of
+an \emph{Object} (class instance) to access the data (properties) of that same
+object. The next innovation was \emph{Inheritance}, which allows a class to
+reuse the attributes and methods of its super class(es). Finally, inheritance
+was used to introduce the concept of \emph{Polymorphism}, which lets objects
+react differently, depending on the class they were instantiated with.
+
+All of these concepts were true innovations as compared with traditional SPP
+techniques. However, they have their own drawbacks: growth of the number of
+dependencies within a system (links between classes), caused by the bundling of
+attributes and methods; fragile base class problem; falsified container
+contents with container inheritance. This work will not just revise these
+concepts, but turn them upside down. Data (attributes) and operations/
+algorithms (methods) are not bundled any longer; the resolution of inheritance
+relationships at runtime gets eliminated and with it polymorphism; container
+inheritance is not necessary any longer, since only one global container
+structure (knowledge container) is used in a system. More on that in part
+\ref{contribution_heading} of this work.

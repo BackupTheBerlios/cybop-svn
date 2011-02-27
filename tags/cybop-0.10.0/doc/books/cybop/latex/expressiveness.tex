@@ -1,0 +1,124 @@
+%
+% $RCSfile: expressiveness.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Expressiveness}
+\label{expressiveness_heading}
+
+- show how the issues criticised in \ref{extensible_markup_language_heading} are addressed
+- for example, the semantics is not contained in tags/attributes, but \emph{inherent}
+in the hierarchical meta structure of CYBOL
+
+Q: Why doesn't CYBOL use the standard structure as intended by XML,
+that is tags for parts and attributes for meta information (properties)?
+
+A1: The parts belonging to one knowledge template may have an unpredictable
+number of properties (meta information). If attributes were used to model
+these, thousands, may be millions of attribute names of all knowledge templates
+ever to be created would have to be known beforehand. But this would break
+CYBOL's flexibility and would not be future-proof.
+
+A2: The CYBOP knowledge schema relies on the fixed numbers of four different
+tags and four different attributes. Only because these numbers are fixed, it
+was possible at all to create a general schema covering all kinds of knowledge.
+
+A3: Properties (meta information) are themselves models that have a name,
+channel, abstraction (type) and primitive or compound value. If properties were
+put into XML attributes, these information could not be given.
+
+A4: Moreover, it is possible to keep meta information, namely constraints,
+about properties, too. This wouldn't be possible with properties as attributes.
+
+- merger of all classes into just one (knowledge schema) in CYBOI
+OOP Klassen merge meta information and actual content (part models)
+- big disadvantage since information is not expressive (semantic info is missing)
+- therefore so many efforts are dealing with this problem (semantic web, ontologies etc.)
+
+==
+
+\cite{w3c}
+An XSLT stylesheet specifies the presentation of a class of XML documents by
+describing how an instance of the class is transformed into an XML document
+that uses a formatting vocabulary, such as (X)HTML or XSL-FO.
+
+XSL is a language for expressing style sheets. An XSL style sheet is, like
+with CSS, a file that describes how to display an XML document of a given type.
+XSL shares the functionality and is compatible with CSS2 (although it uses a
+different syntax). It also adds:
+- A transformation language for XML documents: XSLT. Originally intended to
+perform complex styling operations, like the generation of tables of contents
+and indexes, it is now used as a general purpose XML processing language.
+XSLT is thus widely used for purposes other than XSL, like generating HTML web
+pages from XML data.
+- Advanced styling features, expressed by an XML document type which defines a
+set of elements called Formatting Objects, and attributes (in part borrowed from
+CSS2 properties and adding more complex ones.
+
+XML for Ontology:
+XML is widely predicted to improve the degree of interoperation between commerce
+agents on the Internet. Yet XML does not address ontology and provides only a
+syntactic representation of knowledge. For this reason, many Internet commerce
+initiatives are developing taxonomies to support XML-based interoperation.
+These developments mostly focus upon the identification of standard "tags",
+and not the underlying ontology. Interoperation is therefore dependent upon
+each trading partner agreeing to use particular tag sets and using these
+consistently. It is not clear that this strategy will achieve the degree of
+interoperation and flexibility sought by Ontology.Org.
+
+>"x++ is the world's first object-oriented language that is entirely
+>based on XML's syntactical structure. x++ conforms with the XML version
+>1.0 specification..."
+>
+>  http://xplusplus.sourceforge.net/index.htm
+
+http://avalon.apache.org/sandbox/merlin/meta/
+- XML partly used for description/ specification/ configuration of components
+- compare meta model to CYBOP!
+- also: Intershop
+- XML in general used by configuration/ property files of more and more applications
+
+http://www.ontology.org/main/papers/faq.html
+How does ontology relate to the eXtensible Markup Language (XML)?
+
+\emph{Extensible Stylesheet Language} (XSL) is a family of recommendations for
+defining XML document transformation and presentation. It consists of three parts:
+\emph{XSL Transformations} (XSLT), \emph{XML Path Language} (XPath) and
+\emph{XSL Formatting Objects} (XSL-FO).
+
+%http://www.oasis-open.org/committees/tc\_home.php?wg_abbrev=cam
+%see document /edu/grad/tmp/oasis\_cam\_technical\_brochure.pdf
+%for short description (on first page) of XSD, XSLT, XPath, RDF, OWL
+
+FORMATS: XML, DTD, SGML, DOCBOOK, RELAX NG, Schematron, XML Schema, XSLT
+%\cite{} [http://xml.ascc.net/resource/schematron/schematron.html]
+%The Schematron (description + code example)
+
+Q: How to put required relations into CYBOL models (see \ref{feature_model_heading})?
+Example: If the application has GUI capabilities, then use graphical dialogues
+to report log messages!
+A: It does not make sense to put this constraint into the GUI model.
+It should be stored in the user configuration settings instead.
+At system startup, a logic model would then normally read the user settings
+and set a flag for the logger to use graphical dialogues instead of textual messages.
+--> That means, as a recommendation to application developers, that not all
+constraints should be put into the \emph{constraint} tag! Rather, the developer
+should take some time to bethink, and sort all information where it actually belongs,
+leaving the single knowledge models as independent from each other as possible.

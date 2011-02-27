@@ -1,0 +1,67 @@
+%
+% $RCSfile: and.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{AND}
+\label{and_heading}
+\index{AND}
+
+This operation applies the logic AND operator to the given boolean operands.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="apply_and" channel="inline" abstraction="operation" model="and">
+    <property name="operand_1" channel="inline" abstraction="knowledge" model=".app.value"/>
+    <property name="operand_2" channel="inline" abstraction="boolean" model="false"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Operand 1 Property}
+
+This is the first operand of the boolean operation.
+
+\emph{required}
+
+name=\texttt{'operand\_1'}\\
+abstraction=\texttt{'boolean' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{boolean value or knowledge model}
+
+\subsubsection{Operand 2 Property}
+
+This is the second operand of the boolean operation.
+
+\emph{required}
+
+name=\texttt{'operand\_2'}\\
+abstraction=\texttt{'boolean' \vline\ 'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{boolean value or knowledge model}
+
+\subsubsection{Result Property}
+
+This is the result of the boolean operation. It may be either \emph{true} or
+\emph{false}.
+
+\emph{required}
+
+name=\texttt{'result'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{knowledge model}

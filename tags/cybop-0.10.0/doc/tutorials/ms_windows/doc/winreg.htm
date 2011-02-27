@@ -1,0 +1,113 @@
+<html>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: Registry und INI-Dateien">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, API, Hilfe, Informatik, EDV">
+<TITLE>Windows Programmierung: Registry und INI-Dateien</TITLE>
+</HEAD>
+<BODY>
+<a name="top">
+<table width=100%><tr><td bgcolor=yellow align=center>
+<H1>Registry und INI-Dateien</H1>
+</td></tr></table>
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+<H2>INI oder Registry</H2>
+
+Wenn man in seinem Programm Zust&auml;nde sichern m&ouml;chte, die beim n&auml;chsten
+Programmstart erhalten bleiben sollen, gibt es zwei APIs, um dies zu erreichen: die 
+althergebrachten INI-Dateien und die neue Registry.
+<p>
+Die INI-Datei ist eine normale Textdatei, die mit einem Editor bearbeitbar ist.
+Die Registry ist eine Art Datenbank, die mit dem Programm REGEDIT bearbeitet werden
+kann, aber nicht mehr mit einem einfachen Editor. Aufgrund des Datenbank-Charakters
+ist die Registry nat&uuml;rlich effizienter und es ist auch die Instanz, die von
+Microsoft empfohlen wird.
+Die INI-Datei wird gern verwendet, wenn es um Kompatibilit&auml;t zu Windows 3.x oder
+OS/2 geht.
+
+<a name="registry"><H2>Registry</H2>
+
+Die Registry enth&auml;lt die Konfigurationsparameter von Windows und den Applikationen,
+die sich hier eintragen. Sie kann mit dem Programm REGEDIT bearbeitet werden.
+
+
+<H3>Auslesen der Registry</H3>
+
+<pre>
+DWORD dType = REG_SZ;
+	
+if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,"SOFTWARE\\Programm\\Thema", 
+                 0, KEY_READ, &hKey)==ERROR_SUCCESS ) {
+    if( !RegQueryValueEx(hKey,"StringValue", 0, &dType, 
+                         (LPBYTE)String, &lStringLen) ) {
+        // verarbeite den Wert in String
+    }
+    RegCloseKey(hKey);
+</pre>
+
+<H2>INI-Dateien</H2>
+
+Der Aufbau einer INI-Datei ist den meisten Windows-Anwendern bekannt. Es ist eine
+maximal 64&nbsp;KB gro&szlig;e Textdatei, die mit einem Editor bearbeitet werden kann.
+Die Datei ist in Sektionen unterteilt, in denen jeweils Schl&uuml;sselvariablen mit
+Werten vorbesetzt werden.
+
+<pre>
+[section1]
+  key1=value1
+  key2=value2
+[section2]
+  key1=value1
+  key2=value2
+</pre>
+
+<H3>Arbeiten mit der WIN.INI</H3>
+
+Das Hinterlegen in der WIN.INI ist die einfachste Art, Informationen abzustellen.
+Da aber die WIN.INI als zentrale Datei sehr schnell sehr un&uuml;bersichtlich wird,
+sollte man sich bei den 32-Bit-Varianten dazu entschliessen, die Registry zu verwenden.
+<p>
+
+<pre>
+BOOL WriteProfileString(char *section, char *key, char *value);
+DWORD GetProfileString(char *section, char *key, char *default, 
+                       char *value, DWORD size);
+</pre>
+
+<H3>Arbeiten mit eigenen INI-Dateien</H3>
+
+Das Abstellen in privaten INI-Dateien funktioniert exakt wie der Zugriff auf die WIN.INI.
+Allerdings muss hier zus&auml;tzlich der Dateiname angegeben werden.
+Wird nur der Dateiname ohne Pfad angegeben, wird die Datei im Windows-Verzeichnis
+abgestellt. Es k&ouml;nnen so zentrale, applikationsspezifische Dateien erstellt werden,
+ohne die WIN.INI aufzubl&auml;hen.
+<p>
+Gibt man aber den gesamten Pfad an, wie man ihn bei der Verwendung der 
+<a href="winsel.htm">Standard Dateiauswahlbox</a> bekommt, kann man sich viel Arbeit
+mit der Bearbeitung eigener Dateiformate sparen, indem man eine INI-Datei verwendet.
+
+<pre>
+BOOL WritePrivateProfileString(char *section, char *key, 
+                               char *value, char *filename);
+DWORD GetPrivateProfileString(char *section, char *key, char *default, 
+                              char *value, DWORD size, char *filename);
+</pre>
+
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 2000 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+</body></html>

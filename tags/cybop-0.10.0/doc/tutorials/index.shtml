@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--
+        $RCSfile: index.shtml,v $
+
+        Copyright (C) 1999-2011. Christian Heller.
+
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+        Texts. A copy of the license is included in the section entitled
+        "GNU Free Documentation License".
+
+        http://www.cybop.net
+        - Cybernetics Oriented Programming -
+    /-->
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="date" content="$Revision: 1.4 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $">
+    <meta name="author" content="Christian Heller christian.heller@tuxtax.de">
+    <link rel="stylesheet" type="text/css" href="../cybop.css"/>
+    <title>Tutorials</title>
+</head>
+<body>
+    <div id="page">
+        <!--#include virtual="../menu.inc" -->
+        <div id="content">
+            <h1>Tutorials</h1>
+            <p>
+                These tutorials are intended to be used by CYBOP developers!
+                They deal with low-level programming issues like Sockets, Linux Console, X Window System etc.
+            </p>
+            </br>
+            <table>
+            <tr>
+                <th>Tutorial</th>
+                <th>Authors</th>
+                <th>Resources</th>
+            </tr>
+            <tr>
+                <td>
+                    Code Conventions Style Guide for writing CYBOI (C) and CYBOL (XML)
+                </td>
+                <td>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
+                </td>
+                <td>
+                    <a href="conventions/index.shtml">index.shtml</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    X11 Architecture and XLib Functionality [German]
+                </td>
+                <td>
+                    <a href="mailto:martin.fache@myrbel.de">Martin Fache</a>
+                </td>
+                <td>
+                    <a href="x11_and_xlib/hauptseminar_arbeit.pdf">hauptseminar_arbeit.pdf</a></br>
+                    <a href="x11_and_xlib/hauptseminar_arbeit.doc">hauptseminar_arbeit.doc</a></br>
+                    <a href="x11_and_xlib/main.c">main.c</a></br>
+                    <a href="x11_and_xlib/paint2">paint2</a> (binary executable)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    CYBOI Compilation in MS Windows [German]
+                </td>
+                <td>
+                    <a href="mailto:teodora.kikova@stud.tu-ilmenau.de">Teodora Kikova</a>
+                </td>
+                <td>
+                    <a href="cyboi_under_windows/index.shtml">index.shtml</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Debian Paketerstellung [German]
+                </td>
+                <td>
+                    <a href="mailto:dennis.reichenbach@gmx.net">Dennis Reichenbach</a>
+                </td>
+                <td>
+                    <a href="debian_packaging/paketerstellung.html">paketerstellung.html</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    GNU/Linux Konsole Programming for Textual User Interfaces (TUI)
+                </td>
+                <td>
+                    <a href="mailto:dennis.reichenbach@gmx.net">Dennis Reichenbach</a>
+                </td>
+                <td>
+                    <a href="linux_console/shell_script_tui.sh">shell_script_tui.sh</a></br>
+                    <a href="linux_console/shell_script_using_dialog.sh">shell_script_using_dialog.sh</a></br>
+                    <a href="linux_console/simple_tui.c">simple_tui.c</a></br>
+                    <a href="linux_console/simple_tui">simple_tui</a> (binary executable)</br>
+                    <a href="linux_console/tui_held_in_arrays.c">tui_held_in_arrays.c</a></br>
+                    <a href="linux_console/tui_held_in_arrays">tui_held_in_arrays</a> (binary executable)</br>
+                    <a href="linux_console/Makefile">Makefile</a></br>
+                    <a href="linux_console/ascii_control.h">ascii_control.h</a></br>
+                    <a href="linux_console/escape_sequences.txt">escape_sequences.txt</a></br>
+                    <a href="linux_console/escape_sequences_csi.txt">escape_sequences_csi.txt</a></br>
+                    <a href="linux_console/read_text_input.txt">read_text_input.txt</a></br>
+                    <a href="linux_console/ansi_steuersequenzen.pdf">ansi_steuersequenzen.pdf</a> [German]</br>
+                    <a href="linux_console/terminal_kodes.pdf">terminal_kodes.pdf</a> [German]</br>
+                    <a href="http://vt100.net/">http://vt100.net/</a></br>
+                    <a href="http://en.tldp.org/HOWTO/Text-Terminal-HOWTO.html">http://en.tldp.org/HOWTO/Text-Terminal-HOWTO.html</a></br>
+                    <a href="http://pronix.linuxdelta.de/C/Linuxprogrammierung/index.shtml">http://pronix.linuxdelta.de/C/Linuxprogrammierung/index.shtml</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    MS Windows GDI [German]
+                </td>
+                <td>
+                    <a href="mailto:fonziex@freenet.de">Stefan Zeisler</a>
+                </td>
+                <td>
+                    <a href="ms_windows/example_1/window.c">window.c</a> (simple window)</br>
+                    <a href="ms_windows/example_1/window.bat">window.bat</a></br>
+                    <a href="ms_windows/example_1/window.exe">window.exe</a></br>
+                    <a href="ms_windows/example_2/window.c">window.c</a> (window with button)</br>
+                    <a href="ms_windows/example_2/window.bat">window.bat</a></br>
+                    <a href="ms_windows/example_2/window.exe">window.exe</a></br>
+                    <a href="ms_windows/example_3/source.c">source.c</a> (window with menubar and actions/ events/ signals)</br>
+                    <a href="ms_windows/example_3/resource.h">resource.h</a></br>
+                    <a href="ms_windows/example_3/resource.rc">resource.rc</a></br>
+                    <a href="ms_windows/example_3/window.bat">window.bat</a></br>
+                    <a href="ms_windows/example_3/window.exe">window.exe</a></br>
+                    <a href="ms_windows/gui-befehle.txt">gui-befehle.txt</a> (description of prototype)</br>
+                    <a href="ms_windows/doc/winprg.html">winprg.html</a> (external GDI tutorial)</br>
+                    <a href="ms_windows/windows.html">windows.html</a> (windows programming)</br>
+                    <a href="ms_windows/gpanatom.html">gpanatom.html (user interface guidelines)</a>
+                </td>
+            </tr>
+            </table>
+        </div>
+        <!--#include virtual="../footer.inc" -->
+    </div>
+</body>
+</html>

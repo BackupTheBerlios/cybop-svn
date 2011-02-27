@@ -1,0 +1,168 @@
+From carolyn_wong@javaworld.com Fri Jul 18 03:01:51 2003
+Return-Path: <carolyn_wong@javaworld.com>
+Received: from virusgate.rz.tu-ilmenau.de (virusgate.rz.tu-ilmenau.de [141.24.4.19])
+	by ernie.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h6I0x6qJ020736
+	for hidden; Fri, 18 Jul 2003 02:59:06 +0200 (MET DST)
+Received: from piggy.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by virusgate.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h6I0x3hQ008103
+	for hidden; Fri, 18 Jul 2003 02:59:03 +0200 (MEST)
+Received: from macworld.com (host-63-150-38-10.macpublishing.net [63.150.38.10] (may be forged))
+	by piggy.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h6I0x1CP029623
+	for <christian.heller@tu-ilmenau.de>; Fri, 18 Jul 2003 02:59:02 +0200 (MET DST)
+Received: from CAROLYN (192.168.100.232) by macworld.com with ESMTP (Eudora
+ Internet Mail Server 3.1.3) for <christian.heller@tu-ilmenau.de>;
+ Thu, 17 Jul 2003 17:58:58 -0700
+Message-ID: <00cf01c34cc8$2ce967d0$1db7ac40@CAROLYN>
+From: "Carolyn Wong" <carolyn_wong@javaworld.com>
+To: "Christian Heller" <christian.heller@tu-ilmenau.de>
+References: <200306301724.03401.christian.heller@tu-ilmenau.de>
+Subject: Re: Article: "A new Concept for System Communication"
+Date: Thu, 17 Jul 2003 18:01:51 -0700
+MIME-Version: 1.0
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 5.50.4133.2400
+X-MimeOLE: Produced By Microsoft MimeOLE V5.50.4133.2400
+Status: R 
+X-Status: N
+
+Hi Christian,
+
+The JavaWorld editors met recently to discuss your article submission.
+Unfortunately, we have decided not to pursue your proposal. Please
+understand that we receive a very large number of submissions, and we are
+limited in what we can publish.
+
+Thank you for your interest in writing for JavaWorld.
+
+Best regards,
+Carolyn
+
+Carolyn Wong
+Editor in Chief, JavaWorld
+Phone: 415-267-4518
+Fax: 415-267-4558
+----- Original Message -----
+From: "Christian Heller" <christian.heller@tu-ilmenau.de>
+To: <jwedit@javaworld.com>
+Sent: Monday, June 30, 2003 8:24 AM
+Subject: Article: "A new Concept for System Communication"
+
+
+> Title:
+> A new Concept for System Communication
+>
+> Word Count:
+> 2800-3000
+>
+> Mission/Scope:
+> Readers of this article will be able to better see similarities between
+> different communication mechanisms, in the applications they currently
+> work on. The article helps to understand essential architectural software
+> patterns.
+> (From Summary):
+> Persistence, communication and user interface mechanisms have common
+> properties. Classical system architectures treat them as Backend,
+DataTransfer
+> and Frontend and use different methods and design patterns (DataMapper,
+> DataTransferObject, ModelViewController) to implement them.
+> This paper proposes to sum up their common properties and behaviour in
+parent
+> classes and to merge them all into one architecture, avoiding redundant
+parts.
+> The resulting design is a good solution for the implementation of highly
+> flexible, easily extensible and maintainable, reusable source code. The
+> interdependency of domain data, persistence layer, communication layer and
+> user interface is abolished.
+> The time needed to create such an architecture (like in form of the CYBOP
+> framework) is more than for the classical way. But once the architecture
+is
+> there -- it can save a tremendous amount of time when deriving modules
+being
+> capable of communicating across various mechanisms. Due to its flexibility
+and
+> low dependencies, it also ensures that extensions (e.g. new communication
+> mechanisms) and modifications can be done anytime later without destroying
+> already existing solutions.
+>
+> Delivery Date:
+> Yesterday :-)
+>
+> Supportive Materials:
+> "Describe the applet(s), code sample(s), graphic(s), and other elements
+> you will include."
+> Sorry, I do not understand this requirement and what I should describe
+here.
+> Graphics are explained in the article text, externals are properly
+referenced.
+>
+> Abstract:
+> This document describes how existing design patterns can be extended and
+> combined to merge their advantages into one, domain- and
+language-independent
+> software framework. This framework, called Cybernetics Oriented
+Programming
+> (CYBOP), is characterized by flexibility and extensibility. Further, the
+> concept of Ontology is used to structure the software architecture as well
+as
+> to keep it maintainable. A Component Lifecycle ensures the proper startup
+and
+> shutdown of any systems built on top of CYBOP.
+> One core component of the framework is an advanced architecture for
+seemless
+> integration of communication paradigms and persistence mechanisms.
+Overcoming
+> the classical scheme of thinking in terms of Domain, Frontend, Backend and
+> Communication, this architecture treats them all similar, as passive data
+> models which can be translated into each other -- as opposed to the
+classical
+> approach that unnecessarily complicates their design.
+> The practical proof of this combined architectural approach was
+accomplished
+> within an (ongoing) effort to design and develop a module called ReForm,
+for
+> the Open Source Software (OSS) project Res Medicinae. The main task for
+this
+> module is to provide a user interface for printing medical forms. It was
+used
+> to examine the communication between modules and to find a structure for
+> effective implementation and easy expansion.
+>
+> Keywords:
+> CYBOP, Res Medicinae, Framework, Design Pattern, Persistence,
+Communication,
+> User Interface, Frontend, Backend
+>
+> Representative samples of your published work:
+> http://www.josmc.org/bohl2003.pdf
+>
+> Background/Biographical information:
+> Christian Heller has studied Electrotechnics (Biomedical Engineering and
+> Medical Informatics) at the Technical University of Ilmenau (TUI).
+> He has worked in several projects at small to large-sized companies,
+including
+> OWiS (OTW UML tool), Intershop (e-commerce) and HUK Coburg (German
+insurance
+> company) where he did OO Analysis/ Design using UML and developed in
+> ObjectPascal, C++ and Java.
+> Besides, he is the founder of the "CYBOP Framework" and the "Res
+Medicinae"
+> Free Software Project -- aiming to implement a Medical Information
+System --
+> and active developer of the Free/ Open Source Software (FOSS) Community.
+> In 2001, he returned to his former university where he plans to earn a
+> doctorate.
+>
+>
+> Sincerely,
+> Christian Heller
+>
+> --
+> Dipl.-Ing. Ch. Heller
+> <christian.heller@tu-ilmenau.de>
+>
+
+

@@ -1,0 +1,73 @@
+%
+% $RCSfile: hardware_description_language.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Hardware Description Language}
+\label{hardware_description_language_heading}
+\index{Hardware Description Language}
+\index{HDL}
+\index{Electronic Circuit}
+\index{Application Specific Integrated Circuit}
+\index{ASIC}
+\index{Field Programmable Gate Array}
+\index{FPGA}
+\index{Very High Speed Integrated Circuit}
+\index{VHSIC}
+\index{VHDL}
+\index{Verilog HDL}
+\index{SystemC}
+\index{Electronic Data Interchange Format}
+\index{EDIF}
+\index{Joint Electron Device Engineering Council}
+\index{JEDEC}
+\index{Programmable Logic Device}
+\index{PLD}
+
+\emph{Hardware Description Language} (HDL) is an umbrella term for any computer
+language formally describing \emph{Electronic Circuits}, that is their design and
+operation, as well as tests to verify their operation by means of \emph{Simulation}
+\cite{wikipedia}. HDLs used for the design of digital circuits like
+\emph{Application Specific Integrated Circuits} (ASIC) or
+\emph{Field Programmable Gate Arrays} (FPGA) include:
+
+\begin{itemize}
+    \item[-] \emph{Very High Speed Integrated Circuit} (VHSIC) HDL (VHDL) \cite[standard 1164]{ieee}
+    \item[-] \emph{Verilog HDL} \cite[standard 1364-2001]{ieee}
+    \item[-] \emph{SystemC} \cite{doulos}
+\end{itemize}
+
+Although being similar, HDLs are not programming languages. \textit{HDL's syntax
+and semantics include explicit notations for expressing time and concurrency which
+are the primary attributes of hardware}, as \cite{wikipedia} writes and adds:
+
+\begin{quote}
+    An HDL compiler often works in several stages, first producing a logic
+    description file in a proprietary format, then converting that to a logic
+    description file in the industry-standard
+    \emph{Electronic Data Interchange Format} (EDIF), then converting that to a
+    \emph{Joint Electron Device Engineering Council} (JEDEC) format file. The
+    JEDEC file contains instructions to a \emph{Programmable Logic Device} (PLD)
+    programmer for building logic. On the other hand, a software (programming
+    language) compiler generates instructions to a microprocessor for moving data.
+\end{quote}
+
+The following sections of this chapter will be about programming-, not hardware
+description concepts.

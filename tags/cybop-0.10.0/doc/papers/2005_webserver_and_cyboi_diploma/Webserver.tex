@@ -1,0 +1,38 @@
+\chapter{Webserver und dessen Integration in CYBOI}
+
+  \section{Hintergrund}
+  
+    
+    Zur Beantwortung einer Anfrage eines Clients an einen Server über das  
+    Http-Protokoll ist ein Webserver nötig.
+    Dies kann durch einen vorhandenen Webserver, wie z.B. Apache, oder durch einen selbst 
+    programmierten Webserver realisiert werden. Dieser Webserver muss für CYBOL
+    angepasst werden. Bei einem bestehenden Webserver ist eine Erweiterung 
+    z.B. durch ein CYBOI-Plugin möglich. Der Vorteil der Erweiterung eines bestehenden Webservers
+    ist die Verwendung der ganzen Funktionalität, wie z.B. die Session-Verwaltung und 
+    die Skalierbarkeit. Das Hauptproblem bei der Integration
+    wäre die Anpassung der verschiedenen Softwarearchitekturen (bestehender Webserver und CYBOI).   
+    Ein weiterer Nachteil ist die Abhängigkeit des Plugins zu einem bestehenden 
+    Webserver, das bedeutet dass bei Änderungen des Webservers auch das Plugin anzupassen ist.
+    Die Kontrolle würde nicht allein beim CYBOP-Projekt liegen. 
+
+    Da die Implementierung für CYBOL insgesamt als Prototyp geplant ist, reicht es aus,
+    einen kleinen Webserver selbst zu programmieren, so dass man 
+    die gesamte Verfügungsgewalt über das Projekt 
+    und dessen Quelltext hat. Weiterhin kann im Softwaredesign eine bessere Homogenität erreicht werden.
+    Änderungen am Webserver sind somit leichter zu realisieren. Der Nachteil ist hier, das die
+    Standardfunktionalität von Webservern, wie z.B. die Session-Verwaltung, in CYBOI 
+    programmiert werden muss. 
+    
+    Die Vorraussetzungen für einen Webserver sind die Sockets. Diese stellen die 
+    Kommunikationsschnittstelle zwischen den einzelnen Komponenten dar. Wichtiger 
+    Bestandteile für die Integration des Webserver-Prototyps in CYBOI
+    sind Prozesse und Threads. Da bei der Implementierung der Sockets blockierende
+    Sockets verwendet werden, 
+    %\(siehe Abschnitt ref{{blocksocktets}), 
+    ist es notwendig
+    den Webserver in einem eigenen Prozess bzw. Thread laufen zu lassen. 
+    
+    \input{sockets}
+    
+    \input{threads}

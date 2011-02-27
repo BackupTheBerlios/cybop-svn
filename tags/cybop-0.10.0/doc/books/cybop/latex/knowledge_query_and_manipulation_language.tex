@@ -1,0 +1,72 @@
+%
+% $RCSfile: knowledge_query_and_manipulation_language.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Knowledge Query and Manipulation Language}
+\label{knowledge_query_and_manipulation_language_heading}
+\index{Knowledge Query and Manipulation Language}
+\index{KQML}
+\index{Common Lisp}
+\index{CL}
+
+The \emph{Knowledge Query and Manipulation Language} (KQML) \cite{kqml} is a:
+\textit{language and associated protocol by which intelligent software agents
+can communicate to share information and knowledge}, as Tim Finin et al.
+\cite{finin} write. Its syntax were based on a balanced parenthesis list,
+because initial implementations had been done in Common Lisp (CL)
+\cite{commonlisp}. After Finin et al., the initial element of the list were the
+\emph{Performative} and the remaining elements were the performative's
+\emph{Arguments} as keyword/ value pairs. The Free Wikipedia Encyclopedia
+\cite{wikipedia} explains:
+
+\begin{quote}
+    The KQML message format and protocol can be used to interact with an
+    intelligent system, either by an application program, or by another
+    intelligent system. KQML's \emph{Performatives} are operations that agents
+    perform on each other's \emph{Knowledge} and \emph{Goal} stores.
+    Higher-level interactions such as \emph{Contract Nets} and
+    \emph{Negotiation} are built using these. KQML's
+    \emph{Communication Facilitators} coordinate the interactions of other
+    agents to support \emph{Knowledge Sharing}.
+\end{quote}
+
+An example message representing a query about the price of a share of IBM stock
+might be encoded as \cite{finin}:
+
+\begin{scriptsize}
+    \begin{verbatim}
+    (ask-one
+    :content (PRICE IBM ?price)
+    :receiver stock-server
+    :language LPROLOG
+    :ontology NYSE-TICKS)
+    \end{verbatim}
+\end{scriptsize}
+
+System communication and its elements like \emph{Sender}, \emph{Receiver},
+\emph{Language} or \emph{Message Content} will be further investigated in
+chapter \ref{state_and_logic_heading}. The new language introduced in chapter
+\ref{cybernetics_oriented_language_heading} defines communication operations
+(logic) accompanied by properties (meta information), much the same way
+performatives have arguments. Also, that new language may not only be used to
+encode knowledge for communication, but to represent knowledge of arbitrary
+domains. By combining pre-defined, primitive operations, it may be used to
+create more complex (higher-level) algorithms.

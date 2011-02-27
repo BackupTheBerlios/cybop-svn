@@ -1,0 +1,96 @@
+%
+% $RCSfile: knowledge_engineering.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Knowledge Engineering}
+\label{knowledge_engineering_heading}
+\index{Knowledge Engineering}
+\index{KE}
+\index{Data (Definition)}
+\index{Information (Definition)}
+\index{Knowledge (Definition)}
+\index{Explicit Knowledge}
+\index{Implicit Knowledge}
+\index{Knowledge Representation}
+\index{Date and Rule}
+
+In order to correctly perform information input, memorising, processing and
+output, systems need to know about the structure of the data they are
+processing. While pure \emph{Data} abstract the real world in form of (mostly
+machine-readable) characters (quality) and numbers (quantity) (more on this in
+chapter \ref{knowledge_schema_heading}), their interpretation in a semantic
+context may yield \emph{Information}. What coincides across the many different
+definitions \cite{wikipedia} of the term \emph{Information}, are two
+statements: it has to be recognisable and: it has to contain something new.
+Organised information available in form of specific structures with
+inter-relations is often called \emph{Knowledge}.
+
+Quite often, knowledge gets shared into two kinds: \emph{explicit} (codified)
+and \emph{implicit} (tacit). While the former, after \cite{nonaka}, referred to
+knowledge that is transmittable in formal, systematic language, the latter had
+a personal quality, which made it hard to formalise and communicate. This work
+is about explicit knowledge; it wants to provide concepts and schemata for
+expressing it as completely as possible (part \ref{contribution_heading}).
+
+Over the years, many different \emph{Knowledge Representation} models have been
+proposed. In software engineering, they represent different kinds of user
+interfaces (textual, graphical, web), workflows, persistent- or transient data.
+The biggest importance, however, models experience when representing a complete
+\emph{Domain} (section \ref{domain_model_heading}), that is the special
+business field an application system was developed for. After John F. Sowa
+\cite{sowa}, \emph{Knowledge Engineering} (KE) could be defined as: \textit{the
+branch of engineering that analyses knowledge about some subject and transforms
+it to a computable form for some purpose.}
+
+It has to be mentioned that the borders between \emph{Domain Engineering} (DE)
+(section \ref{domain_engineering_heading}) and \emph{Knowledge Engineering} are
+quite blurry. The \emph{Feature Model} (section \ref{feature_model_heading}),
+although described as part of DE, can of course also be seen as one form of
+knowledge representation, just like many other models. Both, DE as well as KE
+specify formal languages and investigate how different models can be translated
+into each other. This work, however, makes a split between DE and KE, because:
+
+\begin{itemize}
+    \item[-] their topics are usually treated as different fields of science
+    \item[-] KE's focus is almost exclusively on representing (domain)
+        knowledge in models
+    \item[-] DE also considers their relation to the applications working on
+        them
+    \item[-] DE distinguishes models belonging to different phases in a
+        \emph{Software Engineering Process} (SEP)
+    \item[-] DE describes concrete implementation techniques
+\end{itemize}
+
+The following sections try to give a brief overview of the rather wide field of
+knowledge representation and -engineering, raising only a few topics. Their
+main intention is to show the existence of two different kinds of knowledge:
+\emph{Date and Rule}, both of which can be structured according to an ontology,
+what will be dealt with in the later chapters \ref{knowledge_schema_heading}
+and \ref{state_and_logic_heading}.
+
+%\input{undeterministic_knowledge}
+\input{representation_principles}
+\input{date_and_rule}
+%\input{data_model}
+%\input{knowledge_map}
+\input{agent_communication_language}
+\input{semantic_web}
+%\input{temporary_section_summary}

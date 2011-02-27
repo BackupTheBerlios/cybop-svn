@@ -1,0 +1,80 @@
+%
+% $RCSfile: count.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Count}
+\label{count_heading}
+\index{Count}
+
+This operation counts those parts of the given whole (compound), that match the
+given filter criteria.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="count_addresses" channel="inline" abstraction="operation" model="count">
+    <property name="compound" channel="inline" abstraction="encapsulated" model=".app.name"/>
+    <property name="selection" channel="inline" abstraction="character" model="prefix"/>
+    <property name="filter" channel="inline" abstraction="character" model="address"/>
+    <property name="result" channel="inline" abstraction="knowledge" model=".app.result"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Compound Property}
+
+The compound whose parts are to be counted.
+
+\emph{required}
+
+name=\texttt{'compound'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{compound knowledge model}
+
+\subsubsection{Selection Property}
+
+This property selects the kind of filter to be applied for counting the
+compound's parts.
+
+\emph{required}
+
+name=\texttt{'selection'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{'full' \vline\ 'prefix' \vline\ 'suffix' \vline\ 'part'}
+
+\subsubsection{Filter Property}
+
+The filter to compare the compound parts' names with. Only those parts will be
+counted whose name (full, prefix, suffix, part) matches the filter string.
+
+\emph{required}
+
+name=\texttt{'filter'}\\
+abstraction=\texttt{'character'}\\
+model=\texttt{filter string}
+
+\subsubsection{Result Property}
+
+The knowledge model in which to store the result.
+
+\emph{required}
+
+name=\texttt{'result'}\\
+abstraction=\texttt{'knowledge' \vline\ 'encapsulated'}\\
+model=\texttt{knowledge model}

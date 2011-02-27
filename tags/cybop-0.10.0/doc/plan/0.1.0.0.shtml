@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <!--
+        $RCSfile: 0.1.0.0.shtml,v $
+
+        Copyright (C) 1999-2011. Christian Heller.
+
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+        Texts. A copy of the license is included in the section entitled
+        "GNU Free Documentation License".
+
+        http://www.resmedicinae.org
+        - Information in Medicine -
+    /-->
+    <meta name="date" content="$Revision: 1.3 $ $Date: 2009-01-16 16:42:36 $">
+    <meta name="author" content="$Author: christian $">
+    <link rel="stylesheet" type="text/css" href="../cybop.css"/>
+    <title>CYBOP 0.1.0.0</title>
+</head>
+<body>
+    <div id="page">
+        <!--#include virtual="../menu.inc" -->
+        <h1>CYBOP 0.1.0.0</h1>
+        <table>
+            <tr>
+                <td>
+                    <table>
+                    <tr>
+                        <th width="10"/>
+                        <th>
+                            Features
+                        </th>
+                        <th width="200">
+                            Developer
+                        </th>
+                    </tr>
+                    <tr bgcolor="#000000">
+                        <td bgcolor="#C0FFC0"/>
+                        <td align="left" valign="top">
+                            <h2>Project</h2>
+                            <ul>
+                                <li>Split java sources into CYBOL and CYBOI</li>
+                            </ul>
+                        </td>
+                        <td align="left" valign="top">
+                            Christian Heller<br>
+                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                        </td>
+                    </tr>
+                    <tr bgcolor="#000000">
+                        <td bgcolor="#C0FFC0"/>
+                        <td align="left" valign="top">
+                            <h2>CYBOI</h2>
+                            <ul>
+                                <li>CYBOI is an interpreter that can read CYBOL files and create systems</li>
+                                <li>Write CYBOI in Java</li>
+                                <li>Catch events from Java AWT event queue</li>
+                                <li>Use the Apache Xerces XML parser</li>
+                                <li>Create static structures of instances in memory</li>
+                                <li>Run dynamic loop catching signals from internal signal memory (queue)</li>
+                                <li>Create GUI using Java Swing (as temporary workaround)</li>
+                            </ul>
+                        </td>
+                        <td align="left" valign="top">
+                            Christian Heller<br>
+                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                        </td>
+                    </tr>
+                    <tr bgcolor="#000000">
+                        <td bgcolor="#C0FFC0"/>
+                        <td align="left" valign="top">
+                            <h2>CYBOL Core</h2>
+                            <ul>
+                                <li>CYBOL is based on XML syntax</li>
+                                <li>One file represents an abstract item/ category/ class/ hierarchy</li>
+                                <li>Other files can be linked as complex data types</li>
+                                <li>Primitive data types are treated as final abstraction</li>
+                                <li>Include inheritance</li>
+                            </ul>
+                        </td>
+                        <td align="left" valign="top">
+                            Christian Heller<br>
+                            &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!--#include virtual="../footer.inc" -->
+    </div>
+</body>
+</html>

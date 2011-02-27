@@ -1,0 +1,75 @@
+%
+% $RCSfile: knowledge_interchange_format.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Knowledge Interchange Format}
+\label{knowledge_interchange_format_heading}
+\index{Knowledge Interchange Format}
+\index{KIF}
+\index{PostScript}
+\index{PS}
+
+The \emph{Knowledge Interchange Format} (KIF), as described in \cite{kif}, is:
+
+\begin{itemize}
+    \item[-] a language designed for use in the interchange of knowledge among
+        disparate computer systems
+    \item[-] not intended as a primary language for interaction with human users
+    \item[-] not intended as an internal representation for knowledge within
+        computer systems
+    \item[-] in its purpose, roughly analogous to \emph{PostScript} (PS)
+        (section \ref{page_description_language_heading})
+    \item[-] not as efficient as a specialised representation for knowledge,
+        but more general and programmer-readable
+\end{itemize}
+
+The idea behind KIF is that \cite{kif}: \textit{a computer system reads a
+knowledge base in KIF, (and) converts the data into its own internal form
+(pointer structures, arrays, etc.). All computation is done using these
+internal forms. When the computer system needs to communicate with another
+computer system, it maps its internal data structures into KIF.} KIF's design
+is characterised by three features:
+
+\begin{enumerate}
+    \item \emph{Declarative Semantics:} independent from specific interpreters,
+        as opposed to e.g. \emph{Prolog}
+    \item \emph{Logically Comprehensive:} may express arbitrary logical
+        sentences, as opposed to \emph{SQL} or \emph{Prolog}
+    \item \emph{Meta Knowledge:} permits the introduction of new knowledge
+        representation constructs, without changing the language
+\end{enumerate}
+
+The following syntax example \cite{kif} shows a logical term involving the
+\emph{if} operator. If the object constant \emph{a} denotes a number, then the
+term denotes the absolute value of that number:
+
+\begin{scriptsize}
+    \begin{verbatim}
+    (if (> a 0) a (- a))
+    \end{verbatim}
+\end{scriptsize}
+
+The language introduced in chapter \ref{cybernetics_oriented_language_heading}
+may not only serve as interchange format between systems, but also for the
+definition of user interfaces, workflows and domain models, altogether. It
+treats state- and logic models as separate, composable concepts (chapter
+\ref{state_and_logic_heading}), which KIF does not. Further, it provides the
+means to express meta knowledge.

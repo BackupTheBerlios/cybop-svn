@@ -1,0 +1,78 @@
+#
+# $RCSfile: source_structure.txt,v $
+#
+# Copyright (c) 1999-2007. Christian Heller and the CYBOP developers.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# @version $Revision: 1.10 $ $Date: 2007-05-31 22:11:22 $ $Author: christian $
+# @author Christian Heller <christian.heller@tuxtax.de>
+#
+
+Introduction
+____________
+
+The "Cybernetics Oriented Interpreter" (CYBOI) works on a rather low
+system level. It manages the storage of knowledge (data = states and
+operations = logic) in memory, contains input/ output (i/o) mechanisms,
+handles signals and more.
+
+Because of CYBOI's closeness to hardware, the "von Neumann" model was chosen
+to structure its source code. Von Neumann's original model suggests three
+main parts, which are listed together with their pendants in CYBOI, below:
+
+------------------------------------------------------------------------
+von Neumann                         | CYBOI
+------------------------------------------------------------------------
+Control Unit                        | controller (coordinates program flow)
+Memory                              | executor (low-level states and logic)
+Algorithmic Logic Unit (ALU)        | applicator (applies logic to states)
+------------------------------------------------------------------------
+
+The logic operations used by the applicator serve as interface to CYBOL.
+In other words, CYBOL knowledge templates may only use operations offered
+by the applicator. The names of files containing an operation are VERBS.
+Internally used files of CYBOI carry a NOUN as their name.
+
+
+Overview
+________
+
+applicator
+    compare
+    interrupt
+    receive
+    send
+    shutdown
+    startup
+    suspend
+controller
+    handler
+    manager
+executor
+    accessor
+    allocator
+    array
+    communicator
+    converter
+    mapper
+    translator
+globaliser
+    constants
+    logger
+    variables

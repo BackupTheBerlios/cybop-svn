@@ -1,0 +1,43 @@
+%
+% $RCSfile: applicability_of_cybop.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\paragraph{The Applicability of CYBOP in Low-Level Systems}
+\label{applicability_of_cybop_heading}
+
+The focus of CYBOP is standard business application development. Knowledge
+provided in form of CYBOL templates has a rather high abstraction level. It
+would be interesting to know in how far CYBOP concepts, the CYBOL language and
+the CYBOI interpreter are applicable in the development of \emph{Real Time}
+(RT) systems, of control units in \emph{Automation Engineering} (AE), and
+others more.
+
+Surely, CYBOI's signal scheduling mechanism would have to be touched in such an
+investigation. In addition to the position property of a logic compound model's
+part, being used to place part signals in the correct order into the signal
+memory, a \emph{Timestamp} (current time) could be used for this. It could
+determine the scheduled execution time. Possibly, such a timestamp could also
+serve as signal id.
+
+In case CYBOI does not match RT requirements and -performance, at least CYBOL
+might be suitable for representing configuration knowledge appropriately. This
+may also count for the knowledge encoded by \emph{Hardware Description Languages}
+(HDL).

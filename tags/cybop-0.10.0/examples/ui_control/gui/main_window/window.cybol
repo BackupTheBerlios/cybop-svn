@@ -1,0 +1,59 @@
+<model>
+    <part name="menu_bar" channel="file" abstraction="text/cybol" model="ui_control/gui/main_window/menu_bar.cybol">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="north"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="780,20,1"/>
+        <property name="left_release" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.exit_program"/>
+    </part>
+<!--
+    <part name="tool_bar" channel="file" abstraction="text/cybol" model="ui_control/gui/main_window/tool_bar.cybol">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="north"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="780,20,1"/>
+    </part>
+    <part name="contents_panel" channel="file" abstraction="text/cybol" model="ui_control/gui/main_window/contents_panel.cybol">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="centre"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="780,500,1"/>
+    </part>
+-->
+    <part name="status_bar" channel="file" abstraction="text/cybol" model="ui_control/gui/main_window/status_bar.cybol">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="south"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,20,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="780,20,1"/>
+    </part>
+<!--
+    <part name="resizable_flag" channel="inline" abstraction="logicvalue/boolean" model="false"/>
+/-->
+</model>
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: window.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

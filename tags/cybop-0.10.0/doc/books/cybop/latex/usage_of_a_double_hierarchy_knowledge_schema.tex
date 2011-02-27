@@ -1,0 +1,87 @@
+%
+% $RCSfile: usage_of_a_double_hierarchy_knowledge_schema.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Usage of a Double-Hierarchy Knowledge Schema}
+\label{usage_of_a_double_hierarchy_knowledge_schema_heading}
+\index{CYBOP Usage of a Double-Hierarchy Knowledge Schema}
+
+A further problem that was identified in this work is the missing concept of
+hierarchy, which is not inherent in types of the corresponding languages.
+Moreover, knowledge structures are mixed up with meta information leading to:
+
+\begin{itemize}
+    \item[a] Inflexible static typing in system programming languages (section
+        \ref{system_programming_heading})
+    \item[b] Fragile base class problem when using inheritance (section
+        \ref{fragile_base_class_heading})
+    \item[c] Overly large source code due to encapsulation without sense
+        (section \ref{encapsulation_heading})
+    \item[d] Unpredictable behaviour and falsified contents due to container
+        inheritance (section \ref{falsifying_polymorphism_heading})
+    \item[e] Redundant code caused by concerns and difficult application of an
+        ontological structure (section \ref{spread_functionality_heading})
+    \item[f] Complicated, partly impossible serialisation of knowledge models
+\end{itemize}
+
+Chapter \ref{knowledge_schema_heading} therefore proposed a new knowledge
+schema which considers structural- as well as meta information, in two
+different hierarchies.
+
+\paragraph{a}
+
+Since type information is not fixed statically, it gets dynamically
+configurable at runtime, leading to highly flexible application systems. There
+is only one static data structure -- the standardised knowledge schema. It
+holds meta information about the kind of abstraction (type) of the data
+contained in it.
+
+\paragraph{b}
+
+Since runtime knowledge models in CYBOI rely on composition only, the fragile
+base class problem caused by runtime type inheritance in object-oriented systems
+does not occur.
+
+\paragraph{c}
+
+Since the CYBOI-internal knowledge structure is a container by default, it
+also provides all necessary access procedures. Thousands of useless access
+methods as known from object-oriented programming are avoided. The partial
+security they provided can be replaced with other mechanisms. Since all
+knowledge resides in just one instance tree, it is easy to apply any kind of
+security checks, whenever a part of the knowledge tree gets accessed.
+
+\paragraph{d}
+
+Since each CYBOP knowledge template or -model is constructed as hierarchy, so
+that containers of any kind can be emulated, problematic container inheritance
+belongs to the past.
+
+\paragraph{e}
+
+Since CYBOP knowledge models are purely hierarchical, it gets easier to apply
+ontological structures which bundle functionality, instead of spreading it in a
+concern-like manner.
+
+\paragraph{f}
+
+Since all knowledge is modelled hierarchically, it is easily serialisable and
+hence exchangeable.

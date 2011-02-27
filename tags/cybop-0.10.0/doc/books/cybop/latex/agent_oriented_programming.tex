@@ -1,0 +1,167 @@
+%
+% $RCSfile: agent_oriented_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Agent Oriented Programming}
+\label{agent_oriented_programming_heading}
+\index{Agent Oriented Programming}
+\index{AGOP}
+\index{Component Oriented Programming}
+\index{COP}
+\index{Inversion of Control Pattern}
+\index{IoC}
+\index{Application Programming Interface}
+\index{API}
+\index{Active Component}
+\index{Passive Component}
+\index{Agent}
+\index{Multi Agent System}
+\index{MAS}
+\index{Agent Communication Language}
+\index{ACL}
+\index{Language Paradigm}
+\index{Ontology}
+\index{Mobility of an Agent}
+\index{Object Oriented Programming}
+\index{OOP}
+\index{Speech Act Theory}
+\index{Belief of an Agent}
+\index{Capability of an Agent}
+\index{Decision of an Agent}
+\index{Mental State of an Agent}
+\index{Knowledge Base of an Agent}
+\index{Agent0 Language}
+
+Components created after the principles of \emph{Component Oriented Programming}
+(COP) are \emph{passive}, because they follow the \emph{Inversion of Control}
+(IoC) pattern. The functionality, or \emph{Service}, they offer is called by a
+surrounding container, via a well-defined \emph{Application Programming Interface}
+(API). \emph{Active} components, on the other hand, act alone. An \emph{Agent}
+is a self-acting component. It runs \emph{autonomically} or
+\emph{semi-autonomically}, is \emph{proactive}, \emph{reactive} and
+\emph{social} \cite[p. 330]{sowa}. Many individual communicative software
+agents may form a \emph{Multi Agent System} (MAS) \cite{wikipedia}.
+Communication happens by some \emph{Agent Communication Language} (ACL)
+(section \ref{agent_communication_language_heading}). David Parks, who calls
+\emph{Agent Oriented Programming} (AGOP) a \emph{Language Paradigm}, writes
+\cite{parks}:
+
+\begin{quote}
+    In AGOP, objects known as agents interact to achieve individual goals.
+    Agents can exist in a structure as complex as a global internet or one as
+    simple as a module of a common program. Agents can be autonomous entities,
+    deciding their next step without the interference of a user, or they can be
+    controllable, serving as a mediary between the user and another agent.
+\end{quote}
+
+In search for a uniform definition of the term \emph{Agent}, Ralf Kuehnel
+investigated numerous sources of literature but finally comes to the conclusion
+\cite[p. 203]{kuehnel} that the term is just a \emph{Metaphor} standing for
+different properties, depending on the field it is used in. Typically mentioned
+means of agents, however, are \cite[p. 11]{kuehnel}: \emph{Distribution}, common
+\emph{Language} and \emph{Ontology} (section \ref{conceptual_network_heading}),
+\emph{Cooperation} and \emph{Coordination}, \emph{Security} and \emph{Mobility}.
+
+Comparing \emph{Agents} of AGOP with \emph{Objects} known from OOP, Parks
+\cite{parks} writes: \textit{It is not clear, for example, what the concepts of
+inheritance and dynamic dispatch mean when discussing an agent.} He points out
+the following significant differences:
+
+\begin{itemize}
+    \item[-] The fields of an agent are restricted. The state of an agent is
+        described in terms of \emph{Beliefs}, \emph{Capabilities} and
+        \emph{Decisions} (\emph{Obligation} / \emph{Commitment}). These ideas
+        are built into the syntax of the language.
+    \item[-] Each message is also defined in terms of mental activities. An agent
+        may engage another (or itself) with messaging activities from a restricted
+        class of categories. In Shoham's formalism \cite{shoham}, the categories
+        of messages are taken from \emph{Speech-Act Theory}; they are:
+        \emph{Informing}, \emph{Requesting}, \emph{Offering}, \emph{Accepting},
+        \emph{Rejecting}, \emph{Competing} and \emph{Assisting}.
+\end{itemize}
+
+Yoav Shoham, who presented AGOP as a new way to describe intelligent agents
+\cite{shoham}, suggests that an AGOP system needs three elements to be
+complete, a:
+
+\begin{enumerate}
+    \item[-] \emph{Formal Language} with clear syntax for describing the mental state
+    \item[-] \emph{Programming Language} in which to define agents
+    \item[-] \emph{Method} for converting neutral applications into agents
+\end{enumerate}
+
+To the \emph{Mental State} of an agent belong information \cite{kuehnel} about its:
+
+\begin{itemize}
+    \item[-] \emph{Environment} (constraints)
+    \item[-] \emph{Expertise} (capabilities) and \emph{Motivations} (aims)
+    \item[-] \emph{Actions} and \emph{Plans}
+\end{itemize}
+
+Tim Finin et al. \cite{kqml} classify the statements in a knowledge base into
+two categories: \emph{Beliefs} and \emph{Goals}. After them, an agent's beliefs
+encoded information it has about itself (capabilities) and its external
+environment (constraints), including the knowledge bases of other agents. An
+agent's goals encoded states of its external environment that the agent would
+act to achieve.
+
+To a running \emph{Agent} system belong the following modules \cite{kuehnel}:
+
+\begin{itemize}
+    \item[-] \emph{Knowledge Base:} mental state, as described above
+    \item[-] \emph{Controller:} task controller, scheduler and option selection algorithm
+    \item[-] \emph{Executor:} task runner and security
+    \item[-] \emph{Interaction:} communication handler, sender and receiver
+    \item[-] \emph{Management:} lifecycle manager, startup and shutdown
+\end{itemize}
+
+While early research in AGOP used special languages like Shoham's \emph{Agent0}
+\cite{shoham}, agent-oriented systems created later were also built upon OOP-
+and other contemporary programming paradigms \cite[p. 237]{kuehnel}. Ralf
+Kuehnel \cite{kuehnel} calls \emph{Agent0} alone a \textit{very limited
+programming language} and takes this as evidence for supporting both, the
+development of agents and the representation of knowledge with a framework based
+on OOP principles. For the implementation of this framework, his choice fell on
+Java as system programming language (section \ref{system_programming_heading}).
+
+That is, although AGOP suggests the separation of a system's \emph{Knowledge}
+(mental state) from its internal runtime processing and \emph{Control} (agent)
+and sees them both as separate elements that should be implemented in
+\emph{different} languages (\emph{formal} vs. \emph{programming}), as mentioned
+by Shoham (see above), many agent-oriented systems use just \emph{one} language
+for implementing both. Even if they are kept in different modules, the conceptual
+differences between \emph{high-level} application knowledge and \emph{low-level}
+system control cannot be honoured sufficiently. This \emph{Mix-up} puts them on
+the same level like traditional systems. \emph{Cybernetics Oriented Programming}
+(CYBOP) as described in this work therefore defines a knowledge modelling
+language (chapter \ref{cybernetics_oriented_language_heading}) which is
+independent from the implementation language of its underlying interpreter.
+
+Furthermore, if OO concepts like \emph{Composition} or \emph{Inheritance} were
+present in knowledge models, the usage of an OOP language to implement the actual
+agent system could \emph{not} be justified any longer. In such a case, lower-level
+\emph{Structured and Procedural Programming} (SPP) languages would suffice, and
+work much more efficiently. Chapter \ref{cybernetics_oriented_interpreter_heading}
+of this work introduces a knowledge interpreter that is written in the \emph{C}
+programming language. The interpreter owns a knowledge base keeping all
+application knowledge, and it has modules for lifecycle management, signal
+(event) processing, communication etc., just like the definition of an agent
+(see above) suggests.

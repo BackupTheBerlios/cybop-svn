@@ -1,0 +1,79 @@
+%
+% $RCSfile: model_view_controller.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Model View Controller}
+\label{model_view_controller_heading}
+\index{Model View Controller Pattern}
+\index{MVC}
+\index{Graphical User Interface}
+\index{GUI}
+\index{Observer Pattern}
+\index{Strategy Pattern}
+\index{Wrapper Pattern}
+\index{Composite Pattern}
+\index{Java Foundation Classes}
+\index{JFC}
+\index{Microsoft Foundation Classes}
+\index{MFC}
+\index{Document View MVC Variant}
+\index{Translator Architecture}
+
+After having had a closer look at design patterns for persistence
+(\emph{Data Mapper}) and communication (\emph{Data Transfer Object}), this
+section considers the presentation layer of an application (figure
+\ref{logical_figure}), which is often realised in form of a
+\emph{Graphical User Interface} (GUI). Nowadays, the well-known
+\emph{Model View Controller} (MVC) pattern \cite{buschmann, fowler2002} is used
+by a majority of standard business applications. Its principle is to have the
+\emph{Model} holding domain data, the \emph{View} accessing and displaying
+these data and the \emph{Controller} providing the workflow of the application
+by handling any action events happening on the view (figure \ref{mvc_figure}).
+This separation eases the creation of applications with many synchronous views
+on the same data. Internally, the MVC may consist of design patterns like:
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphic/mvc.pdf}
+        \caption{Model View Controller Pattern}
+        \label{mvc_figure}
+    \end{center}
+\end{figure}
+
+\begin{itemize}
+    \item[-] \emph{Observer} (section \ref{observer_heading}) which notifies
+        the views about data model changes
+    \item[-] \emph{Strategy} \cite{gamma1995} which encapsulates exchangeable
+        functionality of the controller
+    \item[-] \emph{Wrapper} (section \ref{wrapper_heading}) which delegates
+        controller functionality to the \emph{Strategy}
+    \item[-] \emph{Composite} (section \ref{composite_heading}) which equips
+        graphical views with a hierarchical structure
+\end{itemize}
+
+Some MVC implementations like parts of the \emph{Java Foundation Classes} (JFC)
+use a simplified version not separating controllers from their views. The
+\emph{Microsoft Foundation Classes} (MFC) C++ library calls its implementation
+\emph{Document-View}.
+
+Besides the above-mentioned patterns \emph{Data Mapper} and DTO, MVC is the
+third one getting merged into a common \emph{Translator} architecture, in
+chapter \ref{state_and_logic_heading}.

@@ -1,0 +1,93 @@
+<model>
+    <part name="title" channel="inline" abstraction="text/plain" model="Menu">
+        <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_title"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="30,1,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="4,1,1"/>
+    </part>
+    <part name="mc_item" channel="inline" abstraction="text/plain" model="m - Start Midnight Commander (MC)">
+        <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_item"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="1,3,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="68,1,1"/>
+        <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.exit_item"/>
+        <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.dosemu_item"/>
+        <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.functionality.start_mc"/>
+        <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
+        <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
+        <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    </part>
+    <part name="dosemu_item" channel="inline" abstraction="text/plain" model="d - Start DOS Emulator (DOSemu)">
+        <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_item"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="1,4,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="68,1,1"/>
+        <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.mc_item"/>
+        <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.x_window_item"/>
+        <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.functionality.start_dosemu"/>
+        <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
+        <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
+        <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    </part>
+    <part name="x_window_item" channel="inline" abstraction="text/plain" model="x - Open an X Window">
+        <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_item"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="1,5,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="60,1,1"/>
+        <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.dosemu_item"/>
+        <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.about_item"/>
+        <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.functionality.show_x_window"/>
+        <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
+        <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
+        <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    </part>
+    <part name="about_item" channel="inline" abstraction="text/plain" model="a - Show About Information">
+        <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_item"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="1,7,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="60,1,1"/>
+        <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.x_window_item"/>
+        <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.exit_item"/>
+        <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.user_interface.show_about_information"/>
+        <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
+        <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
+        <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    </part>
+    <part name="exit_item" channel="inline" abstraction="text/plain" model="e - Exit Programme">
+        <property name="super" channel="inline" abstraction="path/knowledge" model=".ui_control.settings.tui.menu_item"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="1,8,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="60,1,1"/>
+        <property name="previous" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.about_item"/>
+        <property name="next" channel="inline" abstraction="text/plain" model=".ui_control.tui.main_window.menu.mc_item"/>
+        <property name="button_press_action" channel="inline" abstraction="text/plain" model=".ui_control.logic.lifecycle.exit_program"/>
+        <property name="background" channel="inline" abstraction="text/plain" model="blue"/>
+        <property name="foreground" channel="inline" abstraction="text/plain" model="white"/>
+        <property name="bold" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    </part>
+    <!--??
+        Delete the "background", "foreground" and "bold" properties later, since they are already part of the standard setting!
+        But as long as CYBOI does not handle super templates at creation time, they must be added explicitly here.
+    -->
+</model>
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: menu.cybol,v $ $Revision: 1.8 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

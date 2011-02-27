@@ -1,0 +1,71 @@
+#
+# This file represents a record of user-visible changes to cybop.
+#
+# The format is not strict, but the changes to the most recent version
+# should appear at the top of the file.
+#
+# http://www.cybop.net
+# - Cybernetics Oriented Programming -
+#
+# @version $RCSfile: NEWS,v $ $Revision: 1.5 $ $Date: 2009-02-07 00:39:21 $ $Author: christian $
+# @author Christian Heller <christian.heller@tuxtax.de>
+#
+
+CYBOP 0.10.0, 2011-02-27, Christian Heller  <christian.heller@tuxtax.de>
+        * CYBOI:
+            - Provide more specific global variables of primitive data type sizes
+            - Add new primitive functions (assign, compare, add)
+            - Unify array functions for all primitive data types
+            - Restructure and clean up various container functions (append, replace etc.)
+            - Factor out some controller functionality into sub directories (globaliser, checker etc.)
+            - Restructure test functions
+            - Complete tcp socket handling for web user interfaces
+            - Optimise xml decoder functions
+            - Add http request decoder
+            - Add uri decoder (including percent-encoded characters)
+            - Add html encoder
+            - Add http response encoder
+        * CYBOL:
+            - Add cybol example application http_communication
+        * Project:
+            - Convert source code repository from Concurrent Versions System (CVS) to Subversion (SVN)
+
+CYBOP 0.9.0, 2009-02-07, Christian Heller  <christian.heller@tuxtax.de>
+        * CYBOI:
+            - Complete interrupt mechanism and sleeping for different communication channels
+                (CYBOI-internal signal, text- or graphical user interface, socket)
+            - Use Unicode (instead of formerly ASCII-) character code, UTF-8 encoding, wide characters
+            - Restructure constants into four categories: "name", "channel", "abstraction", "model"
+            - Change abstraction constants to follow MIME type-like style
+            - Replace "libxml2" with a self-written XML parser
+            - Add a corresponding CYBOL parser, to be called right after the XML parser
+                (like two filters called in a sequence)
+        * CYBOL:
+            - Use MIME type-like values for the "abstraction" xml attribute
+        * Project:
+            - Switch from 32 Bit- to 64 Bit architecture by adapting autoconf/ make files
+
+CYBOP 0.8.0, 2007-05-28, Christian Heller  <christian.heller@tuxtax.de>
+        * Internal improvements and bugfixes
+        * A first version of web user interfaces (wui) using tcp socket (not usable yet)
+        * A parser converting the German X Datentraeger (xDT) medical exchange format into cybop knowledge models
+            (structure complete, but more keywords need to be added)
+        * A serialiser converting cybop knowledge models into xhtml
+        * A serialiser converting cybop knowledge models into structured text output
+            (good for debugging cybop knowledge models)
+        * Shell output
+        * File output
+
+CYBOP 0.7.0, 2006-09-09, Christian Heller  <christian.heller@tuxtax.de>
+        * X window system gui event handling
+        * Wide character handling in textual user interface (tui)
+        * Windowing technique for textual user interface (tui)
+        * Selective repaint in textual user interface (tui)
+        * Better handling of cpu idle times
+        * Threads using mutexes (atomic flags) for reception of signals via
+            x window system and gnu_linux console (terminal)
+        * Access to meta hierarchy elements via the "#" separator character
+            (and to the whole-part hierarchy via the "." character, as before)
+        * Unified "get_universal_compound_element_by_name" function for compound element retrieval
+        * Use of the "system" function to run external commands/ programs in an own child process
+        * Unix shell command processing to be able to use CYBOL for scripting

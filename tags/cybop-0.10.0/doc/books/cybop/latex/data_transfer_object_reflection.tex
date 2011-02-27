@@ -1,0 +1,41 @@
+%
+% $RCSfile: data_transfer_object_reflection.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Data Transfer Object Reflection}
+\label{data_transfer_object_reflection_heading}
+\index{Data Transfer Object Pattern}
+\index{DTO}
+\index{Domain Model}
+\index{Assembler}
+\index{Translator Model}
+
+The \emph{Data Transfer Object} (DTO) pattern proposes to bundle domain data
+before sending/ receiving them among systems. An \emph{Assembler} packs/
+unpacks needed domain data into/ from a flat data structure called DTO.
+
+Comparing with the data mapper described before, the assembler's task of
+translating between data models seems quite similar. Wouldn't it be possible,
+hence, to use \emph{Translator} models (logic knowledge) similar to those
+suggested for persistence, also for inter-system communication? Different types
+of translator models could be provided for different communication protocols.
+Again, communication mechanisms would be put into the \emph{System Control}
+layer, and translator logic into application-related \emph{Knowledge} models.

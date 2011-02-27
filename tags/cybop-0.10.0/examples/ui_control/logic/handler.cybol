@@ -1,0 +1,36 @@
+<model>
+    <part name="handle_gnu_linux_console" channel="file" abstraction="text/cybol" model="ui_control/logic/handler/handle_gnu_linux_console.cybol"/>
+    <part name="handle_about_dialog" channel="file" abstraction="text/cybol" model="ui_control/logic/handler/handle_about_dialog.cybol"/>
+    <part name="handle_x_window_system" channel="file" abstraction="text/cybol" model="ui_control/logic/handler/handle_x_window_system.cybol"/>
+    <part name="handle_www_service" channel="file" abstraction="text/cybol" model="ui_control/logic/handler/handle_www_service.cybol"/>
+    <part name="handle_cyboi_service" channel="file" abstraction="text/cybol" model="ui_control/logic/handler/handle_cyboi_service.cybol"/>
+    <part name="gnu_linux_console_command" channel="inline" abstraction="text/plain" model=""/>
+    <part name="gnu_linux_console_command_model" channel="inline" abstraction="text/plain" model=""/>
+</model>
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: handler.cybol,v $ $Revision: 1.10 $ $Date: 2009-01-31 16:06:29 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

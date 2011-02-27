@@ -1,0 +1,79 @@
+%
+% $RCSfile: meta_constraints.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Meta Constraints}
+\label{meta_constraints_heading}
+\index{CYBOL Meta Constraints Example}
+\index{Debian GNU/Linux Package Definition}
+
+The example of this section shows a possible \emph{Debian GNU/Linux}
+\cite{debian} \emph{Package} definition, written in CYBOL:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="name" channel="inline" abstraction="string" model="resmedicinae"/>
+    <part name="version" channel="inline" abstraction="string" model="0.1.0.0"/>
+    <part name="section" channel="inline" abstraction="string" model="science"/>
+    <part name="priority" channel="inline" abstraction="string" model="optional"/>
+    <part name="architecture" channel="inline" abstraction="string" model="all"/>
+    <part name="packages" channel="file" abstraction="cybol" model="resmedicinae-packages"/>
+    <part name="files" channel="file" abstraction="cybol" model="resmedicinae-files"/>
+    <part name="maintainer" channel="inline" abstraction="string" model="Happy Coder"/>
+    <part name="description" channel="inline" abstraction="string" model="Medical System"/>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+The part called \emph{packages} in the example above references an external
+CYBOL knowledge template, which is displayed below. It represents a list of
+packages having different versions and varying strengths of dependency. The
+\emph{strength} property of the last of these packages has the model value
+\emph{suggests} and, it contains meta information about that property, namely
+a \emph{constraint}. Constraints can be, for example: minima, maxima or a
+choice of possible values, as in this case.
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="cyboi" channel="inline" abstraction="string" model="cyboi">
+        <property name="strength" channel="inline" abstraction="string" model="depends"/>
+        <property name="version" channel="inline" abstraction="string" model=">= 1.0.0.0"/>
+        <property name="conflicts" channel="inline" abstraction="string" model="< 1.0.0.0"/>
+    </part>
+    <part name="cybol-healthcare" channel="inline" abstraction="string" model="cybol-healthcare">
+        <property name="strength" channel="inline" abstraction="string" model="depends"/>
+        <property name="version" channel="inline" abstraction="string" model=">= 0.1.0.0"/>
+    </part>
+    <part name="resadmin" channel="inline" abstraction="string" model="resadmin">
+        <property name="strength" channel="inline" abstraction="string" model="recommends"/>
+        <property name="version" channel="inline" abstraction="string" model=">= 0.8.0.0"/>
+    </part>
+    <part name="resmedicinae-doc" channel="inline" abstraction="string" model="resmedicinae-doc">
+        <property name="strength" channel="inline" abstraction="string" model="suggests">
+            <constraint name="choice" channel="inline" abstraction="set" model="suggests,recommends"/>
+        </property>
+        <property name="version" channel="inline" abstraction="string" model=">= 0.1.0.0"/>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}

@@ -1,0 +1,75 @@
+%
+% $RCSfile: meta_properties.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.1 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Meta Properties}
+\label{meta_properties_heading}
+\index{Meta Property Example}
+\index{Graphical User Interface}
+\index{GUI}
+\index{Java Swing Framework}
+\index{GUI Layouts}
+
+When modelling \emph{Graphical User Interfaces} (GUI), a speciality to take
+care about is the \emph{Position} of GUI elements within their surrounding
+container. GUI components may have very different orderings and positions. The
+\emph{Java Swing} framework \cite{java}, for example, offers \emph{BorderLayout},
+\emph{BoxLayout}, \emph{CardLayout}, \emph{FlowLayout}, \emph{GridBagLayout} etc.
+
+The following example of a GUI \emph{Dialogue} assumes that an interpreter
+knows how to handle \emph{Compass} layouts, which are the pendant of the
+above-mentioned \emph{BorderLayout}:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="title" channel="inline" abstraction="string" model="Prescription Dialogue"/>
+    <part name="menu_bar" channel="file" abstraction="cybol" model="menu_bar.cybol">
+        <property name="position" channel="inline" abstraction="string" model="north"/>
+    </part>
+    <part name="tool_bar" channel="file" abstraction="cybol" model="tool_bar.cybol">
+        <property name="position" channel="inline" abstraction="string" model="west"/>
+    </part>
+    <part name="contents_panel" channel="file" abstraction="cybol" model="contents_panel.cybol">
+        <property name="position" channel="inline" abstraction="string" model="centre"/>
+    </part>
+    <part name="status_bar" channel="file" abstraction="cybol" model="status_bar.cybol">
+        <property name="position" channel="inline" abstraction="string" model="south"/>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+Further meta information such as the \emph{Colour} or \emph{Size} of a GUI
+component may be given. The following example shows how a GUI \emph{Button} may
+be modelled as part of some GUI panel. Again, properties like \emph{size} are
+not modelled as part, because the button does not \emph{consist} of them, in a
+structural way of thinking:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="exit_button" channel="file" abstraction="cybol" model="exit_button.cybol">
+        <property name="position" channel="inline" abstraction="integer" model="0"/>
+        <property name="size" channel="inline" abstraction="vector" model="80,20,1"/>
+        <property name="colour" channel="inline" abstraction="rgb" model="127,127,127"/>
+        <property name="action" channel="inline" abstraction="string" model="exit.cybol"/>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}

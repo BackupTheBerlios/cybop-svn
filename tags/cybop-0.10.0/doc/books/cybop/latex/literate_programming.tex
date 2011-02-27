@@ -1,0 +1,83 @@
+%
+% $RCSfile: literate_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Literate Programming}
+\label{literate_programming_heading}
+\index{Literate Programming}
+\index{Token Character}
+\index{Commercial At @}
+\index{Re-ordering of Code}
+\index{Typeset Code and Documentation}
+\index{Cross Referencing}
+\index{Source Code Documentation}
+\index{JavaDoc}
+\index{Doxygen}
+\index{DOC++}
+
+Ross Williams writes in \cite[section 1.1]{williams}:
+
+\begin{quote}
+    A traditional computer program consists of a text file containing program
+    code. Scattered in amongst the program code are comments which describe the
+    various parts of the code. In \emph{Literate Programming}, the emphasis is
+    reversed. Instead of writing code containing documentation, the literate
+    programmer writes documentation containing code.
+\end{quote}
+
+In other words, \emph{Literate Programming} pays more attention to proper source
+code documentation than classical programming languages do. It mostly offers
+special \emph{Token} characters like the \emph{Commercial At} character \emph{@}
+for example, which serve as code delimiters. The delimited blocks are determined
+by particular tools such as a preprocessor that filters out program code to be
+processed further. All source information together (input document, commentaries,
+program code) is used to generate typeset documentation files in one or more
+formats.
+
+Williams \cite{williams} means that the literate programming system provided
+far more than: \textit{just a reversal of the priority of comments and code.}
+In its full-blown form, a good literate programming facility could provide:
+
+\begin{itemize}
+    \item[-] \emph{Re-ordering of Code:} Some programming languages force the
+        programmer to give the various program parts in a particular order.
+    \item[-] \emph{Typeset Code and Documentation:} Because a literate programming
+        utility sees all the code, it can use its knowledge of the programming
+        language and the features of the typesetting language to typeset the
+        program code as if it were appearing in a technical journal.
+    \item[-] \emph{Cross referencing:} Because a literate tool sees all the code
+        and documentation, it is able to generate extensive cross referencing
+        information in the typeset documentation, which makes the printed program
+        document more easy to navigate and partially compensates for the lack of
+        an automatic searching facility when reading printed documentation.
+\end{itemize}
+
+It is true, the actual instructions and algorithms in between commentaries are
+written in (or translated into) a system programming- or other kind of language.
+But literate programming places its focus on source code \emph{Documentation}
+for which it uses \emph{Markup} tokens, which is why it was classified under
+\emph{Markup Language} in this work.
+
+Although literate programming itself has not gained that much popularity, its
+idea of using markup tokens to generate more expressive source code documentation
+has. Several up-to-date programming environments make use of it. A well-known
+example is the \emph{JavaDoc} tool \cite{javadoc}; other systems are
+\emph{Doxygen} \cite{doxygen} or \emph{DOC++} \cite{docpp}.

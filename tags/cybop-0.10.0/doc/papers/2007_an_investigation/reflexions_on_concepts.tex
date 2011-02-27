@@ -1,0 +1,77 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Reflexions on Concepts}
+\label{reflexions_on_concepts_heading}
+
+Although many of the ideas and solutions presented here, in a \emph{bottom-up}
+manner, stem from writing source code in practice (following the
+\emph{Constructive Development} method of research as announced in section
+\ref{method_heading}), the overall approach and explanation of results follow a
+\emph{top-down} path. High-level concepts are considered first, before moving
+on to an implementation and proof in practice. Because of the steady comparison
+to principles of nature and other sciences, this approach is called
+\emph{cybernetics-oriented}, as explained in section \ref{idea_heading}. Figure
+\ref{approach_figure} shows in which order the elements of CYBOP will be
+considered.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.2]{vector/approach.eps}
+        \caption{Consideration of CYBOP}
+        \label{approach_figure}
+    \end{center}
+\end{figure}
+
+A first observation, when looking at human beings from a philosophical
+perspective, is the separation of \emph{Mind} and \emph{Brain} (Body).
+Accordingly, CYBOP treats computers as \emph{Systems} owning and processing
+\emph{Knowledge}. This is not unlike the idea of \emph{Agent} systems owning a
+\emph{Knowledge Base} \cite{parks,kuehnel}. All abstract knowledge that humans
+make up belongs to their mind. The brain is merely a physical carrier of
+knowledge. Similarly, there are actually two kinds of software: one
+representing \emph{passive} knowledge and the other \emph{actively} controlling
+a system's hardware.
+
+Secondly, attention is payed to the concepts of \emph{Human Thinking}
+\cite{heller2004}, as investigated by psychology. Through their application,
+knowledge becomes \emph{hierarchical}. Moreover, this work tried to embed
+knowledge models in an environment of \emph{Dimensions}, as known from physics.
+Every model keeps a number of \emph{Meta Information} about its parts.
+\emph{Positions} in space or time are one such example.
+
+Thirdly, \emph{State-} gets distinguished from \emph{Logic} knowledge. It is
+known from neurological research that the human brain has special communication
+regions that, simply spoken, do nothing else than translating data, i.e. an
+input- into an output \emph{State}, according to rules of \emph{Logic}. Systems
+theory uses similar abstractions. When talking about states, this work means a
+composed \emph{Set} of states.
+
+In CYBOP (figure \ref{approach_figure}), all knowledge (states and logic),
+belongs to a system's \emph{Statics}, and is described by CYBOL language
+templates (section \ref{cybol_heading}). The processing of knowledge at
+runtime, to control a system, is \emph{Dynamics} and happens in the CYBOI
+interpreter (section \ref{cyboi_heading}).
+
+\input{statics_and_dynamics}
+\input{knowledge_schema}
+\input{state_and_logic}

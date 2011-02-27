@@ -1,0 +1,109 @@
+%
+% $RCSfile: statics_and_dynamics.tex,v $
+%
+% Copyright (c) 2005-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2006-01-03 08:21:45 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Statics and Dynamics}
+\label{statics_and_dynamics_heading}
+
+Over the years, it has turned out to be helpful in software design, to separate
+\emph{Domain Knowledge} from \emph{Application Functionality}. In
+one-or-another form, the architectural\\software patterns \cite{heller2005}
+\emph{Layers}, \emph{Domain Model} and \emph{Model View Controller} (MVC) all
+suggest to apply this principle.
+
+The \emph{Tools \& Materials} approach \cite{tandm}\\talks of \emph{active}
+applications (tools) working on \emph{passive} domain data (material). And also
+\emph{System Family Engineering} (section \ref{architectural_troubles_heading})
+bases on a separate treatment of domain and application, in form of
+\emph{Domain Engineering} (DE) and \emph{Application Engineering} (AE).
+
+An often neglected fact of these approaches is that not only the domain, but
+also the application contains important business knowledge (figure
+\ref{separation_figure}). The \emph{User Interface} (UI), for example, is
+tailored for a specific business domain. And the logic behind, if not
+contained in the UI itself, is often put in a \emph{Controller} which belongs
+to the application$-$, not the domain layer.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.2]{vector/separation.eps}
+        \caption{Different Knowledge Separations}
+        \label{separation_figure}
+    \end{center}
+\end{figure}
+
+Similarly, the domain often contains functionality which actually does belong
+into the application process: \emph{Database} (DB) access is handled by help of
+patterns like the \emph{Data Mapper} \cite{heller2005}, in which the mapper\\
+objects contain \emph{Structured Query Language} (SQL) code to connect to a
+\emph{Database Management System} (DBMS); \emph{Enterprise Java Beans} (EJB),
+which should better be pure domain objects, imitate a \emph{Middleware}
+providing persistence- or communication mechanisms, which originally have
+nothing to do with the business knowledge they contain.
+
+It is precisely this \emph{Mixup} of responsibilities between an application
+system and its domain knowledge, that leads to multiple inter-dependencies and
+hence unflexibility within a system. Instead, a separation should be made
+between active \emph{System Control} and passive \emph{Knowledge}. A UI's
+appearance would then be treated as domain knowledge, just as the logic of the
+functions called through it. A data mapper would be transformed into a simple
+\emph{Translator} -- similar to a \emph{Data Transfer Object} (DTO)
+\cite{heller2005} -- that knows how to convert data from one domain model into
+another; its DBMS access functionality, however, would be extracted and put
+into the application system. Monstrosities like EJBs would likewise be opened
+up and parted into their actual domain knowledge, and all other mechanisms
+around -- the latter being moved into the application system.
+
+To sum up this thought: The essential realisation here is that hardware-close
+mechanisms like the ones necessary for data input/ output (i/o), enabling
+inter-system communication, should be handled in an active application system
+layer which was started as process on a computer, and \emph{not} be merged with
+pure, passive domain knowledge. User interfaces and other data models which are
+traditionally hold in the application layer, should rather belong to the domain
+layer, together with all other business knowledge.
+
+Now, if a distinction of high-level knowledge from low-level system control
+software is considered to be useful, the next question must be: \textit{How,
+that is in which form, best to store knowledge in a system?}
+
+One possible structure called \emph{Data Garden} \cite{holland} was proposed by
+Wau Holland of the \emph{Chaos Computer Club} (CCC). Although being a
+non-academic organisation, his ideas on knowledge modelling are interesting to
+this work. He dreamt of whole \emph{Forests}, \emph{Parks} or -- as the name
+says -- \emph{Gardens} of \emph{Knowledge Trees} and \emph{Data Bushes} (figure
+\ref{garden_figure}).
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.2]{vector/garden.eps}
+        \caption{Data Garden}
+        \label{garden_figure}
+    \end{center}
+\end{figure}
+
+The interpreter created in the work described in this article stores all its
+knowledge in \emph{one single} tree, whose root node it references. The single
+concepts (data bushes) are represented by branches of that knowledge tree.
+
+Further arguments in favour of a distinction of statics and dynamics are: mind
+\& body (philosophy), cerebral cortex \& communication regions (neurology),
+genetic information \& cell body (biology), long- \& short-term memory
+(psychology), and more.

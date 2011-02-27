@@ -1,0 +1,44 @@
+%
+% $RCSfile: bundling.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:05 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Bundling}
+\label{bundling_heading}
+
+OOP
+\emph{Classes} as known from \emph{Object Oriented Programming} (OOP) bundle
+attributes and methods which often causes additional inter-dependencies in a
+system because classes do not only have to relate to other classes for accessing
+their attributes but also for using the methods offered by them.
+
+Bean/ Enterprise Java Bean (EJB)
+
+- JMS Eigenschaften werden in EJBs eingebaut, so dass diese selbststaendig
+andere EJBs aufrufen koennen.
+- Verlagerung eines Teils der Application Logic into domain
+--> bliebe nur noch 1 Schicht uebrig, die Domain (Gehirn)
+--> Unguenstig, da mehrere verschiedene Sichten auf Domain gewuenscht und notwendig;
+daher immer nur Domain-Extracts in Application dargestellt!
+- How about adding a GUI to every EJB so that it can be displayed automatically?
+--> useless: users want different guis and EJB data need to be displayed in
+different contexts
+==> the concept of merging more and more functionality into components a la EJB
+is not arbitrarily continuable, nor always desired (different views on domain)

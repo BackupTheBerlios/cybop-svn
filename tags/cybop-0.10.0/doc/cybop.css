@@ -1,0 +1,271 @@
+/*
+ * $RCSfile: cybop.css,v $
+ *
+ * Copyright (c) 2002-2009. Christian Heller. All rights reserved.
+ *
+ * This software is published under the GPL GNU General Public License.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * http://www.cybop.net
+ * - Cybernetics Oriented Programming -
+ *
+ * This style sheet file defines layout information for the website.
+ *
+ * Colours:
+ * - yellow: #FFFFC0
+ * - blue: #C0C0FF
+ * - red: #FF8080
+ * - green: #C0FFC0
+ * - orange: #FFDCA8
+ *
+ * @version $Revision: 1.12 $ $Date: 2009-02-01 02:00:29 $ $Author: christian $
+ * @author Christian Heller <christian.heller@tuxtax.de>
+ */
+
+body {
+
+    background-color: #000000;
+    margin: 0cm;
+    /* Minimum width avoids line feed and display errors in modern browsers. */
+    min-width: 1000px;
+    width: 1000px;
+}
+
+div#page {
+    margin: 20px;
+    background-color: #000000;
+    text-align: left;
+    font-family: "Monospace", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Lucida Console", "FreeMono", "Nimbus Mono L", "Andale Mono", "Consolas", "Everson Mono", "Courier", "Prestige";
+    color: #FFFFC0;
+}
+
+div#page h1 {
+    color: #C0C0FF;
+    font-size: 1.4em;
+}
+
+div#page h2 {
+    color: #C0C0FF;
+    font-size: 0.9em;
+}
+
+div#page p {
+    color: #FFFFC0;
+    font-size: 0.9em;
+}
+
+div#page table {
+    margin: 5px;
+    max-width: 600;
+    padding: 0.2em;
+    font-size: 0.9em;
+}
+
+div#page tr {
+    text-align: left;
+    vertical-align: top;
+}
+
+div#page th {
+    background-color: #C0C0FF;
+    color: #000000;
+}
+
+div#page td {
+    margin: 5px;
+}
+
+div#page a {
+    padding: 0.2em;
+    text-decoration: none;
+}
+
+div#page a:link {
+    color: #C0C0FF;
+}
+
+div#page a:visited {
+    color: #808080;
+}
+
+div#page a:hover {
+}
+
+div#page a:active {
+    background-color: #FFFFC0;
+    color: #000000;
+}
+
+* html div#page {
+    /* The workaround for the 3 pixel bug of Internet Explorer up to version 6. */
+    height: 1em;
+}
+
+div#content {
+    margin-left: 240px;
+}
+
+div#navigation {
+    float: left;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #FFFFC0;
+    background-color: #FFFFC0;
+    color: #000000;
+    font-size: 0.8em;
+}
+
+div#navigation h1 {
+    display: block;
+    margin: 0px;
+    padding: 0.2em;
+    background-color: #FF8080;
+    color: #000000;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+div#navigation a {
+    display: block;
+    padding: 0.2em;
+    text-decoration: none;
+}
+
+div#navigation a:link {
+    background-color: #FFFFC0;
+    color: #000000;
+}
+
+div#navigation a:visited {
+    background-color: #FFFFC0;
+    color: #808080;
+}
+
+div#navigation a:hover {
+    background-color: #C0C0FF;
+    color: #000000;
+}
+
+div#navigation a:active {
+    background-color: #000000;
+    color: #C0C0FF;
+}
+
+div#information {
+    width: 100%;
+    border-width: 0px;
+    background-color: #000000;
+    color: #FFFFC0;
+    text-align: center;
+}
+
+div#information a {
+    display: block;
+    padding: 0.2em;
+    text-decoration: none;
+}
+
+div#information a:link {
+    background-color: #000000;
+    color: #FFFFC0;
+}
+
+div#information a:visited {
+    background-color: #000000;
+    color: #808080;
+}
+
+div#information a:hover {
+    background-color: #C0C0FF;
+    color: #000000;
+}
+
+div#information a:active {
+    background-color: #000000;
+    color: #C0C0FF;
+}
+
+div#description {
+    margin-left: 210px;
+}
+
+div#description h1 {
+    color: #C0C0FF;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+div#news {
+    margin-left: 200px;
+    margin-top: 50px;
+    margin-right: 200px;
+}
+
+div#news h1 {
+    margin: 2px;
+    padding: 0.2em;
+    background-color: #C0C0FF;
+    color: #000000;
+    font-size: 1.0em;
+}
+
+div#news table {
+    margin: 2px;
+    padding: 0.2em;
+    font-size: 0.9em;
+}
+
+div#news tr {
+    text-align: left;
+    vertical-align: top;
+}
+
+div#news th {
+    width: 90px;
+    background-color: #000000;
+    color: #FFFFC0;
+}
+
+div#advertisement {
+    margin-left: 20px;
+    float: right;
+    width: 180px;
+    color: #FFFFC0;
+    text-align: center;
+    vertical-align: top;
+}
+
+div#footer {
+    /* The "clear" resets the element flow. */
+    clear: both;
+    padding: 0.1em;
+    text-align: left;
+    font-size: 0.8em;
+}
+
+.todo {
+    background-color: #FF8080;
+    color: #000000;
+}
+
+.doing {
+    background-color: #FFFFC0;
+    color: #000000;
+}
+
+.done {
+    background-color: #C0FFC0;
+    color: #000000;
+}

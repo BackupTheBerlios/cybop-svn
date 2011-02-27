@@ -1,0 +1,109 @@
+%
+% $RCSfile: macrocosm_and_microcosm.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:07 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Macrocosm and Microcosm}
+\label{macrocosm_and_microcosm_heading}
+\index{Macrocosm as Part of an Ontology}
+\index{Microcosm as Part of an Ontology}
+\index{Astronomical Particles as Ontology}
+\index{Universe}
+\index{Top Level Model}
+\index{Concept}
+\index{Electronic Health Record}
+\index{EHR}
+\index{Electronic Insurance Record}
+\index{EIR}
+
+Table \ref{astronomical_table} lists \emph{Astronomical Particles}
+\cite{fernandezdavid, arnett}. It ends with the \emph{Universe} and an
+undefinable \emph{Macrocosm}.
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{footnotesize}
+        \begin{tabular}{| p{40mm} | p{65mm} |}
+            \hline
+            \textbf{Category} & \textbf{Example Model}\\
+            \hline
+            Macrocosm & (Infinity)\\
+            \hline
+            Universe & Our Universe with its Laws of Nature\\
+            \hline
+            Heap of Galaxies & Local Group, Heap of Virgo\\
+            \hline
+            Galaxy & Milky Way (our), Andromeda, Magellan's Clouds\\
+            \hline
+            Planetary (Solar) System & Sol (Sun), 51 Pegasi\\
+            \hline
+            Star/ Planet & Beta Pictoris, Mercury, Venus, Earth, Mars\\
+            \hline
+        \end{tabular}
+        \end{footnotesize}
+        \caption{Astronomical Particles}
+        \label{astronomical_table}
+    \end{center}
+\end{table}
+
+When trying to abstract things (in software), there has to be some limit, a
+kind of \emph{Top Level Model}. It represents the \emph{Concept} to be
+described. For a medical information system, one such top level model will be
+the \emph{Electronic Health Record} (EHR); for an insurance application, it
+will be the \emph{Electronic Insurance Record} (EIR); and so on.
+
+Models do not only have to be limited \emph{upwards}; the same holds true for
+modelling towards \emph{Microcosm}. Table \ref{physical_table} organises
+particles, as used by natural sciences, into several categories.
+
+\begin{table}[ht]
+    \begin{center}
+        \begin{footnotesize}
+        \begin{tabular}{| p{50mm} | p{55mm} |}
+            \hline
+            \textbf{Category} & \textbf{Example Model}\\
+            \hline
+            Physical Compound & Air, Water, Fire, Ground\\
+            \hline
+            Chemical Compound/ Molecule & H$_{2}$, O$_{2}$, O$_{3}$, H$_{2}$O\\
+            \hline
+            Crystal & C (Diamond)\\
+            \hline
+            Atom (Chemical Element) & H, He, O\\
+            \hline
+            Elementary Particle & Quark, Lepton (Electron, Neutrino)\\
+            \hline
+            Urelement & (Primary Particle)\\
+            \hline
+            Microcosm & (Infinity)\\
+            \hline
+        \end{tabular}
+        \end{footnotesize}
+        \caption{Physical Particles}
+        \label{physical_table}
+    \end{center}
+\end{table}
+
+Although the real world seems to be built like that (infinite, nobody knowing
+what comes beneath the \emph{Quark} particles) -- in software modelling it
+makes no sense (and is actually impossible) to neverendingly introduce lower
+and lower levels, towards \emph{Microcosm}. On some point, the hierarchy has to
+be stopped, to be able to abstract it in software. The later chapter
+\ref{state_and_logic_heading} gives an overview of common knowledge primitives.

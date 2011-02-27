@@ -1,0 +1,86 @@
+<model>
+    <part name="copy_name" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.name"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.name"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+    <part name="copy_version" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.version"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.version"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+    <part name="copy_date" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.date"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.date"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+    <part name="copy_slogan" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.slogan"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.slogan"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+<!--
+    <part name="copy_logo" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.logo"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.logo"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+-->
+    <part name="copy_copyright" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.copyright"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.copyright"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+    <part name="copy_contact" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.contact"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.contact"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+    <part name="copy_description" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.description"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.description"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+    <part name="copy_authors" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.authors"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.authors"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+    <part name="copy_helpers" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.helpers"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.helpers"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+    <part name="copy_licence" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="source" channel="inline" abstraction="path/knowledge" model=".ui_control.application_information.licence"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".ui_control.tui.about_dialogue.licence"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="wide_character"/>
+    </part>
+</model>
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: translate_application_information_to_about_dialogue.cybol,v $ $Revision: 1.8 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

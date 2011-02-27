@@ -1,0 +1,68 @@
+%
+% $RCSfile: list_file.tex,v $
+%
+% Copyright (c) 2002-2007. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% Version: $Revision: 1.2 $ $Date: 2007-08-01 13:59:00 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{List File}
+\label{list_file_heading}
+\index{List File}
+
+This operation lists the file content of the given directory. Internally, it
+just uses the corresponding shell command functionality.
+
+\subsubsection{Example}
+
+\begin{scriptsize}
+    \begin{verbatim}
+<part name="list_contents" channel="inline" abstraction="operation" model="list_file">
+    <property name="directory" channel="inline" abstraction="character" model="/home/cybop"/>
+    <property name="all" channel="inline" abstraction="boolean" model="true"/>
+    <property name="long_listing" channel="inline" abstraction="boolean" model="true"/>
+</part>
+    \end{verbatim}
+\end{scriptsize}
+
+\subsubsection{Directory Property}
+
+This is the flag specifying whether or not to list the entire directory contents.
+
+\emph{required}
+
+name=\texttt{'all'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+\subsubsection{All Property}
+
+This is the flag specifying whether or not to list the entire directory contents.
+
+\emph{required}
+
+name=\texttt{'all'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}
+
+\subsubsection{Long Listing Property}
+
+This property specifies whether or not to display the contents in form of a
+long listing, which also shows access rights etc.
+
+\emph{required}
+
+name=\texttt{'long\_listing'}\\
+abstraction=\texttt{'boolean'}\\
+model=\texttt{'true' \vline\ 'false'}

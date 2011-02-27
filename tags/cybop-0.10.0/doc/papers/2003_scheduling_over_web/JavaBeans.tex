@@ -1,0 +1,74 @@
+\section{JavaBeans}
+  
+	\subsection{Überblick}  	
+
+    Spricht man von Java Beans, so ist die komponentenbasierte
+    Anwendungsentwicklung in der Sprache von SUN Microsystems gemeint. 
+    Ausgehend von der von JavaSoft vorgestellten Programmiersprache "`JAVA"'
+    wurde die Objektorientierung zu einer Komponentenorientierung
+    weiter entwickelt.
+    
+    Grundidee des Übergangs zu Komponenten ist der verstärkte Wunsch 
+    nach einer Wiederverwendung bestimmter, allgemeingültiger
+    Programmteile. So schreibt M. Morrieson: "`Eine Komponente
+    ist ein wiederverwendbares Stück Software, das leicht mit anderen 
+    zusammengebaut werden kann, um auf diese Weise Anwendungen
+    viel effizienter zu erstellen."' \cite{mmjavabeans} 
+    Ziel der Wiederverwendung ist also 
+    eine schnellere kostengünstigere Softwareentwicklung.
+  
+  \subsection{Beschreibung}
+    Beans wurden vor allem für die visuelle Softwareentwicklung
+    entwickelt. Die wichtigsten Konzepte von JavaBeans sind 
+    Ereignisse (events) und Eigenschaften (properties). 
+    Diese werden hier im folgenden kurz beschrieben.
+
+    \begin{itemize}
+      \item Ereignisse \\
+				    JavaBeans definiert ein Standardmodell zur Kommunikation von 
+				    Komponenten über einen Ereignismechanismus. Der Ereignismechanismus erlaubt
+				    die weitgehende Entkopplung von Sender- und Empfängerkomponenten. 
+				    Die Sender definieren eine Ereignisschnittstelle, welche die Anmeldung
+				    von Empfängern für ein Ereignis erlaubt. 
+				    Empfänger definieren Methodenschnittstellen, die bei Auftreten der
+				    Ereignisse angesprochen werden.
+      \item Eigenschaften \\
+						Eigenschaften sind benannte Attribute eines Beans, 
+						die das Erscheinungsbild und/oder das Verhalten 
+						beeinflussen können. Sie sind Teil des Zustands von Beans.     
+		\end{itemize}
+		
+    Um auf die JavaBeans zugreifen zu können, müssen Informationen
+    zu diesen ermittelbar sein. Dies geschieht durch ein 
+    Introspektionsmechanismus. Das kann bei Einhaltung der
+    Namenskonvention durch den Reflectionmechanismus von Java oder bei 
+    Nichteinhaltung über die BeanInfo-Schnittstelle geschehen.
+    
+    Weitergehende Informationen zu JavaBeans sind z. B. unter \cite{dfjava} 
+    und \cite{afbeans} nachzulesen.
+    
+ 
+	\subsection{Konventionen}
+    JavaBeans folgen im allgemeinen einem speziellen 
+    Design- und Namensmuster. Für Java Server Pages 
+    sind vor allem die Eigenschaften von JavaBeans
+    von Bedeutung. 
+    Für die Verwendung von JavaBeans in den Java
+    Server Pages sind folgende 
+    Konventionen einzuhalten: 
+    \begin{itemize}
+      \item müssen im Package sein
+      \item Default-Konstruktor (Konstruktor ohne Parameter)
+      \item Definieren einer Menge von Properties
+      \item für den lesenden und schreibenden Zugriff auf die
+            Properties werden get- und set-Methoden definiert 
+    \end{itemize}
+		Werden die get- bzw. set-Methoden weggelassen, so hat man entweder 
+		nur lesend oder nur schreibend auf die Eigenschaften (Properties) 
+		Zugriff.
+
+		Weitere Informationen zu Konventionen zu JavaBeans entnehmen Sie bitte
+		der Spezifikation von Sun. Diese ist unter
+		 http://java.sun.com/beans/spec.html 
+		erreichbar.
+    

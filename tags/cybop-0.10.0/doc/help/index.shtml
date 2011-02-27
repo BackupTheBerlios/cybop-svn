@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>How to help</title>
+    <!--
+        $RCSfile: index.shtml,v $
+
+        Copyright (c) 1999-2005. Christian Heller and the CYBOP developers.
+
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        or any later version published by the Free Software Foundation;
+        with no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+        Texts. A copy of the license is included in the section entitled
+        "GNU Free Documentation License".
+
+        http://www.resmedicinae.org
+        - Information in Medicine -
+    /-->
+    <meta name="date" content="$Revision: 1.5 $ $Date: 2008-10-17 23:08:32 $ $Author: christian $">
+    <meta name="author" content="Christian Heller <christian.heller@tuxtax.de>">
+    <link rel="stylesheet" type="text/css" href="../cybop.css"/>
+</head>
+<body>
+    <div id="page">
+        <!--#include virtual="../menu.inc" -->
+        <div id="content">
+            <h1>How to help</h1>
+            <h2>Tasks</h2>
+            <p>
+                Any kind of help is always very welcome!
+                <i>Help</i> doesn't necessarily mean <i>Programming</i>.
+                There is plenty of ways you can contribute to our work, for example:
+            </p>
+            <ul>
+                <li>Participate in our mainling lists</li>
+                <li>Test, play with and (one day in the future) use our software</li>
+                <li>Report bugs and share your knowledge to bring forward our requirements (feature) analysis</li>
+                <li>Develop source code</li>
+                <li>Design graphics (icons etc.)</li>
+                <li>Maintain and update our homepage</li>
+                <li>Translate texts into your native language</li>
+                <li>Moderate a mailing list</li>
+                <li>Coordinate the release plans</li>
+                <li>Promote and advertise our project</li>
+            </ul>
+            <p>
+                For more concrete development tasks, read the
+                <a href="../plan/index.shtml">project plan</a>!
+            </p>
+            <h2>Support</h2>
+            <p>
+                The software of this project is free in use and also its source code is.
+                The whole project is run on resources and funds that are supplied
+                lead by pure idealism. If you would like to support our work financially
+                or by supplying materials, please use
+                <a href="http://www.tuxtax.de/en/profile/contact/index.html">this information</a>.
+            </p>
+            <h2>Advertisement</h2>
+            <p>
+                If you use CYBOP technology, please add one of the following logos to your website
+                and link it to: <a href="http://www.cybop.net">http://www.cybop.net</a>:
+            </p>
+            <br/>
+            <a href="cybop.png">
+                <img src="cybop.png" alt="CYBOP" align="center" valign="middle" border="0"/>
+            </a>
+            <a href="cybop3d.png">
+                <img src="cybop3d.png" alt="CYBOP" align="center" valign="middle" border="0"/>
+            </a>
+        </div>
+        <!--#include virtual="../footer.inc" -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+%
+% $RCSfile$
+%
+% Copyright (c) 2002-2006. Christian Heller. All rights reserved.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision$ $Date$ $Author$
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Interacting Systems}
+\label{interacting_systems_heading}
+
+Figure \ref{communication_figure} shows a simplified example
+\emph{Information Technology} (IT) environment (\emph{Physical Architecture}),
+containing many interacting systems: server and client, local and remote, human
+and artificial. In (object oriented) software design, special patterns are used
+to architect a system such that it is able to communicate with other systems
+across various mechanisms (\emph{Logical Architecture}). To these patterns
+count the \emph{Data Mapper}, \emph{Data Transfer Object} and
+\emph{Model View Controller} \cite{fowler2002}.
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.2]{vector/communication.eps}
+        \caption{IT Environment with Patterns}
+        \label{communication_figure}
+    \end{center}
+\end{figure}
+
+Although software development has become a lot easier in the last decades, it is
+still a big effort that should not be underestimated. One thing that application
+developers have to care about much of their time is the \emph{Conversion}
+between various kinds of (communication) models that a system has:
+
+\begin{itemize}
+    \item[-] Frontend (with Human User)
+    \item[-] Backend (with Data Source)
+    \item[-] Remote (with Server)
+    \item[-] Domain (with own Knowledge)
+\end{itemize}
+
+The different mechanisms and patterns that have to be considered for such model
+conversion often need to be implemented repeatedly, for each new application.
+Some trials to unify all backend communication in a common \emph{Persistence Layer}
+exist \cite{ambler}, but are remote- and frontend communication seldom considered
+in a comparable way. Obviously, no current effort treats the frontend as just
+another communication model that has to be \emph{sent} to the human user as
+just another system.

@@ -1,0 +1,536 @@
+<HTML>
+<HEAD>
+<META NAME="description" CONTENT="Willemers Informatik-Ecke: Windows Programmierung: ListView">
+<META NAME="author" CONTENT="Arnold Willemer">
+<META NAME="keywords" CONTENT="Windows, Programmierung, List View, Informatik">
+<TITLE>Windows-Programmierung: List View
+</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<a name="top"><table width=100%><tr><td bgcolor=yellow  align=center>
+<H1><font color=black>Windows Programmierung: List View</font></H1>
+</td></tr></table>
+
+<center>
+<font size=3 face="Helvetica,Arial,Helv">
+<a href="http://www.willemer.de/informatik">
+Willemers Informatik-Ecke
+</a>
+</font>
+</center>
+<p>
+
+<p><font face="Helvetica" size=3">
+<a href="wincontr.htm#top">Einf&uuml;hrende Informationen</a>
+ &uuml;ber die Programmierung von Kontrollelementen werden hier vorausgesetzt.
+</font><p>
+
+<ul>
+<LI><a href="#allg">Allgemein</a>
+<LI><a href="#stil">Stile</a>
+  <UL>
+  <LI><a href="#typ">Typen</a>
+  <LI><a href="#darstellung">Darstellung</a>
+  <LI><a href="#stilchange">Nachtr&auml;gliches Ver&auml;ndern der Stile</a>
+  </UL>
+<LI><a href="#control">Ansteuerung des ListView-Controls</a>
+  <UL>
+  <LI><a href="#create">Erzeugung einer Liste</a>
+  <LI><a href="#column">Spalten des ListViews</a>
+  <LI><a href="#insertitem">Einf&uuml;gen einer Zeile</a>
+  <LI><a href="#weitereSpalten">Die weiteren Spalten eines Reports</a>
+  <LI><a href="#lvitem">Die Struktur LVITEM</a>
+  <LI><a href="#action">Aktionen mit Elementen</a>
+  <LI><a href="#selected">Bearbeiten selektierter Elemente</a>
+  </UL>
+<LI><a href="#event">Ereignisse</a>
+  <UL>
+  <LI><a href="#editlabel">Editieren der Labels</a>
+  <LI><a href="#colclick">Anklicken des Spaltenkopfs im ListView</a>
+  </UL>
+</ul>
+
+<H2><a name="allg" index="ListView, Allgemein">Allgemein</H2>
+
+Das ListView geh&ouml;rt zu den Common Controls. In C-Programmen ist das Einbinden
+der Datei COMMCTRL.H notwendig und die comctl32.lib muss zum Programm gelinkt werden.
+<p>
+Ein ListView unterscheidet sich von der bisher bekannten 
+<a href="winlistb.htm">Listbox</a> in diversen Details. W&auml;hrend die Listbox
+typischerweise eine Liste von Textzeilen repr&auml;sentiert, ist das ListView
+eher die Darstellung von Objekten.
+Beide Elemente k&ouml;nnen mehrere Spalten darstellen. Das ListView erm&ouml;glicht
+eine &Uuml;berschrift und die Verwendung dieser als Schaltleiste.
+
+<H2><a name="stil" index="ListView, Stil">Stile</H2>
+
+<H3><a name="typ" index="">Typen</H3>
+
+Die grundlegenden Stile eines ListView sind die unterschiedlichen Erscheinungsformen
+des Elements, wie man es aus dem Explorer kennt.
+<p>
+<dl>
+<dt>LVS_ICON</dt><dd>
+
+Jedes Element erscheint als ein gro&szlig;es Icon.
+Es kann vom Anwender frei verschoben werden.
+
+</dd>
+<dt> LVS_SMALLICON </dt><dd>
+
+Jedes Element wird mit einem kleinen Icon dargestellt und einem Textlabel
+an seiner rechten Seite. Auch diese k&ouml;nnen frei verschoben werden.
+
+</dd>
+<dt> LVS_LIST </dt><dd>
+
+Die Listendarstellung unterscheidet sich im Aussehen nicht von SMALLICON,
+die Elemente sind allerdings nicht verschiebbar und werden spaltenweise
+angeordnet.
+
+</dd>
+<dt> LVS_REPORT </dt><dd>
+
+Jedes Element erscheint in einer eigenen Zeile mit mehreren Spalten. Die
+linke Spalte stellt dabei den Ankerpunkt dar. Hier kann auch ein kleines Icon
+stehen. Die Spalte ist immer linksb&uuml;ndig.
+Die weiteren Spalten werden als Subitem angesprochen. Jede Spalte besitzt
+einen Header, sofern LVS_NOCOLUMNHEADER nicht als Stil angegeben wurde. 
+
+</dd>
+</dl>
+
+Alle Anzeigen mit Icons verwenden eine Image-Liste, die vom Programmierer anzulegen ist.
+
+<H3><a name="darstellung" index="">Darstellung</H3>
+
+
+<p><table border>
+<tr><td>
+LVS_ALIGNLEFT 
+</td><td>
+Linksb&uuml;ndig (ICON und SMALLICON)
+</td></tr>
+<tr><td>
+LVS_ALIGNTOP 
+</td><td>
+Obenb&uuml;ndig (ICON und SMALLICON)
+</td></tr>
+<tr><td>
+LVS_AUTOARRANGE 
+</td><td>
+Elemente richten sich automatisch selbst aus (ICON und SMALLICON)
+</td></tr>
+<tr><td>
+LVS_EDITLABELS 
+</td><td>
+Die Labels sind direkt editierbar.
+</td></tr>
+<tr><td>
+LVS_NOCOLUMNHEADER 
+</td><td>
+Spalten&uuml;berschriften sind nicht sichtbar (REPORT)
+</td></tr>
+<tr><td>
+LVS_NOLABELWRAP 
+</td><td>
+Das Label bricht bei langen Zeilen nicht um. (ICON)
+</td></tr>
+<tr><td>
+LVS_NOSCROLL 
+</td><td>
+Das Scrollen ist abgeschaltet. Alle Elemente m&uuml;ssen innerhalb der Clientfl&auml;che dargestellt
+werden. (ICON und SMALLICON)
+</td></tr>
+<tr><td>
+LVS_NOSORTHEADER 
+</td><td>
+Die Spalten&uuml;berschriften arbeiten nicht als Schaltfl&auml;chen.
+Sinnvoll, wenn Sortierung o. &auml;. nicht unterst&uuml;tzt wird.
+</td></tr>
+<tr><td>
+LVS_OWNERDATA 
+</td><td>
+Version 4.70. Specifiziert ein virtuelles ListView. 
+</td></tr>
+<tr><td>
+LVS_OWNERDRAWFIXED 
+</td><td>
+Die Anwendung zeichnet die Elemente.
+Sie erh&auml;lt dazu die WM_DRAWITEM-Nachricht. (REPORT)
+</td></tr>
+<tr><td>
+LVS_SHAREIMAGELISTS 
+</td><td>
+Die Imageliste wird nicht gel&ouml;scht, wenn das ListView zerst&ouml;rt wird.
+</td></tr>
+<tr><td>
+LVS_SHOWSELALWAYS 
+</td><td>
+Die Selektion bleibt auch erhalten, wenn das Element den Fokus verliert.
+</td></tr>
+<tr><td>
+LVS_SINGLESEL 
+</td><td>
+Es kann nur ein Element gleichzeitig selektiert werden. Standard ist die Multiselektierbarkeit.
+</td></tr>
+<tr><td>
+LVS_SORTASCENDING 
+</td><td>
+Die Item Indizes werden in aufsteigender Folge anhand ihrer Texte sortiert.
+</td></tr>
+<tr><td>
+LVS_SORTDESCENDING 
+</td><td>
+Die Item Indizes werden in absteigender Folge anhand ihrer Texte sortiert.
+</td></tr>
+</table><p>
+
+
+LVS_SORTASCENDING und LVS_SORTDESCENDING werden bei LIST und REPORT sofort sichtbar,
+da sie nach der Reihenfolge ihrer Indizes angezeigt werden. Dagegen ist die Position
+der Icons bei ICON und SMALLICON vom Index unabh&auml;ngig.
+
+<H3><a name="stilchange" index="">Nachtr&auml;gliches Ver&auml;ndern der Stile</H3>
+
+Der Stil eines ListView kann nach der Erzeugung ge&auml;ndert werden.
+Dazu werden die Funktionen <tt>GetWindowLong</tt> and <tt>SetWindowLong</tt> verwendet.
+&Uuml;ber Masken k&ouml;nnen verschiedene Stile abgegrenzt werden.
+<p>
+<p><table border>
+<tr><th> Maske </td><td> Maskierte Stile </td></tr>
+<tr><td> LVS_TYPEMASK </td><td> LVS_ICON, LVS_LIST, LVS_REPORT und LVS_SMALLICON </td></tr>
+<tr><td> LVS_ALIGNMASK </td><td> LVS_ALIGNLEFT und LVS_ALIGNTOP </td></tr>
+<tr><td> LVS_TYPESTYLEMASK </td><td>  LVS_ALIGNLEFT und LVS_ALIGNTOP aber auch LVS_NOCOLUMNHEADER und LVS_NOSORTHEADER </td></tr>
+</table><p>
+
+Bei der folgenden Sequenz enth&auml;lt dwView den Stil, in den gewechselt werden soll,
+beispielsweise LVS_REPORT oder LVS_ICON.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+  DWORD dwStyle = GetWindowLong(hwndLV, GWL_STYLE);  // hole aktuellen Stil
+  if ((dwStyle & LVS_TYPEMASK) != dwView)            // nur bei Aenderung
+    SetWindowLong(hwndLV, GWL_STYLE, (dwStyle & ~LVS_TYPEMASK) | dwView); 	} 
+</pre></td></tr></table><p>
+
+
+
+<H2><a name="control" index="ListView, Ansteuerung">Ansteuerung des ListView-Controls</H2>
+
+<H3><a name="create" index="Erzeugen eines ListViews">Erzeugung einer Liste</H3>
+
+Ein List View wird mit der Funktion <tt>CreateWindow</tt>
+erzeugt. 
+Als Fensterklasse wird die Konstante <tt>WC_LISTVIEW</tt> verwendet.
+Dazu mu&szlig; die Common Control Header Datei eingebunden werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+#include "commctrl.h"
+
+  InitCommonControls();
+  hwndList = CreateWindow(WC_LISTVIEW, "", 
+             WS_VISIBLE|WS_BORDER|WS_CHILD | LVS_REPORT | LVS_EDITLABELS, 
+             10, 10, 300, 100, 
+             hWnd, (HMENU)ID_LIST, hInst, 0); 
+</pre></td></tr></table><p>
+
+Im Dialog wird sie einfach in der Ressource definiert.
+<p>
+
+Kommt es zu nicht aufgel&ouml;sten Externals, sollte man pr&uuml;fen,
+ob die Library f&uuml;r die Common Controls (<tt>comctl32.lib</tt>) eingebunden wird.
+
+
+<H3><a name="column">Spalten des ListViews</H3>
+
+Bevor in einem REPORT etwas eingef&uuml;gt werden kann, m&uuml;ssen die Spalten
+definiert werden.
+Beschrieben wird eine Spalte durch die Struktur LVCOLUMN. Die folgende Routine
+erzeugt eine Spalte.
+<p>
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+int CreateColumn(HWND hwndLV, int iCol, char *Text, int iBreite)
+{
+LVCOLUMN lvc;
+
+	lvc.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
+	lvc.fmt = LVCFMT_LEFT;
+	lvc.cx = iBreite;
+	lvc.pszText = Text;  
+	lvc.iSubItem = iCol;
+	return ListView_InsertColumn(hwndLV, iCol, &lvc);
+}
+</pre></td></tr></table><p>
+
+Die Spalten k&ouml;nnen per Nachricht an das ListView ge&auml;dert werden oder durch
+Aufruf von Makros, die letztlich ein SendMessage ausf&uuml;hren.
+
+<p><table border>
+<tr><th> Nachricht </th><th> Makro-Aufruf </th><th> Funktion </th></tr>
+<tr><td> LVM_INSERTCOLUMN </td><td> ListView_InsertColumn(HWND, int, LVCOLUMN *) </td><td> Spalte einf&uuml;gen </td></tr>
+<tr><td> LVM_DELETECOLUMN </td><td> ListView_DeleteColumn(HWND, int) </td><td> Spalte l&ouml;schen </td></tr>
+<tr><td> LVM_GETCOLUMN  </td><td> ListView_GetColumn(HWND, int, LVCOLUMN *) </td><td> Eigenschaften der Spalte holen </td></tr>
+<tr><td> LVM_SETCOLUMN  </td><td> ListView_SetColumn(HWND, int, LVCOLUMN *) </td><td> Eigenschaften der Spalte &auml;ndern</td></tr>
+<tr><td> LVM_GETCOLUMNWIDTH  </td><td> ListView_GetColumnWidth(HWND, int) </td><td> Ermittle Spaltenbreite </td></tr>
+<tr><td> LVM_SETCOLUMNWIDTH  </td><td> ListView_SetColumnWidth(HWND, int, int) </td><td> Setze Spaltenbreite </td></tr>
+</table><p>
+
+<H3><a name="insertitem" index="ListView, Zeile einf&uuml;gen">Einf&uuml;gen einer Zeile</H3>
+
+Ein Element des ListView wird durch die Struktur LVITEM beschrieben. 
+Jedes Element kann als ICON, SMALLICON, LIST-Element oder als linke Spalte einer
+REPORT-Zeile dargestellt werden.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+int CreateItem(HWND hwndList, char *Text)
+{ 
+LVITEM lvi = {0};
+
+    lvi.mask = LVIF_TEXT;
+    lvi.pszText = Text;
+    return ListView_InsertItem(hwndList, &lvi);
+} 
+</pre></td></tr></table><p>
+
+Das Feld <tt>mask</tt> bestimmt, welche Elemente der <a href="#lvitem"><tt>LVITEM</tt>-Struktur</a>
+wirklich verwendet werden.
+Da es oft sinnvoll ist, einen Zeiger auf das Speicherobjekt mitzuf&uuml;hren,
+das die Daten h&auml;lt, die hinter dem Objekt stehen, bietet sich das lParam-Feld
+an. Damit dies aber auch verwendet wird, muss <tt>LVIF_TEXT|LVIF_PARAM</TT> als Maske
+gesetzt werden.
+<p>
+Die Konstanten von <tt>mask</tt> und die Felder, die sie aktivieren:
+
+<p><table border>
+<tr><td> LVIF_IMAGE </td><td> iImage </td></tr>
+<tr><td> LVIF_INDENT </td><td> iIndent </td></tr>
+<tr><td> LVIF_PARAM </td><td> lParam </td></tr>
+<tr><td> LVIF_STATE </td><td> state </td></tr>
+<tr><td> LVIF_TEXT </td><td> pszText </td></tr>
+</table><p>
+
+<H3><a name="weitereSpalten" index="ListView, weitere Spalten">Die weiteren Spalten eines Reports</H3>
+
+Das Element selbst steht in der Reportansicht immer links und ist allein selektierbar.
+Um weitere Spalten zu f&uuml;llen, wird ein Text dem Element hinzugef&uuml;gt.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+int Create2ColItem(HWND hwndList, char *Text1, char *Text2)
+{ 
+LVITEM lvi = {0};
+int Ret;
+
+    // Initialize LVITEM members that are common to all items. 
+    lvi.mask = LVIF_TEXT;
+    lvi.pszText = Text1;
+    Ret = ListView_InsertItem(hwndList, &lvi);
+    if (Ret>=0) {
+        ListView_SetItemText(hwndList, Ret, 1, Text2);
+    }
+    return Ret;
+}
+</pre></td></tr></table><p>
+
+<H3><a name="lvitem" index="LVITEM-Struktur (ListView-Control)">Die Struktur LVITEM</H3>
+
+Die Struktur LVITEM beschreibt ein Element der ListView.
+Die wichtigsten Elemente werden hier kurz beschrieben.
+Zun&auml;chst die Definition:
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+typedef struct _LVITEM { 
+    UINT mask; 
+    int iItem; 
+    int iSubItem; 
+    UINT state; 
+    UINT stateMask; 
+    LPTSTR pszText; 
+    int cchTextMax; 
+    int iImage; 
+    LPARAM lParam;
+#if (_WIN32_IE >= 0x0300)
+    int iIndent;
+#endif
+} LVITEM, FAR *LPLVITEM; 
+</pre></td></tr></table><p>
+
+Mit den Nachrichten LVM_GETITEM und LVM_SETITEM werden die Attribute eines Elements
+ge&auml;ndert. Sie erhalten als Parameter neben dem HWND des ListViews einen Zeiger
+auf eine LVITEM-Struktur, die vorher zu besetzen ist.
+<p>
+Die Strukturelemente im Einzelnen:
+<p>
+
+<dl>
+<dt> mask </dt><dd>
+  Spezifiziert, welche Elemente verwendet werden. Eine Oderung der folgenden Flags ist m&ouml;glich:
+  <table border width=60%>
+  <tr><td> LVIF_IMAGE </td><td> iImage </td></tr>
+  <tr><td> LVIF_INDENT </td><td> iIndent </td></tr>
+  <tr><td> LVIF_PARAM </td><td> lParam </td></tr>
+  <tr><td> LVIF_STATE </td><td> state  </td></tr>
+  <tr><td> LVIF_TEXT </td><td> pszText </td></tr>
+  </table>
+  </dd>
+<dt> iItem </dt><dd>
+  Index (0-basierend) des Items, auf das sich die Struktur bezieht.
+  </dd>
+<dt> iSubItem </dt><dd>
+  Index (1-basierend) des Subitems, auf das sich die Struktur bezieht.
+  0, wenn sich die Struktur auf ein Item statt auf ein Subitem bezieht.
+  </dd>
+<dt> pszText </dt><dd>
+  zeigt auf einen nullterminierten String.
+  Ist der Wert LPSTR_TEXTCALLBACK, ist es ein Callback-Item.
+  Wenn sich dieser &auml;ndert, mu&szlig; pszText auf LPSTR_TEXTCALLBACK 
+  gesetzt werden und das ListView durch 
+  LVM_SETITEM oder LVM_SETITEMTEXT informiert werden.
+  <p>
+  pszText darf nicht auf LPSTR_TEXTCALLBACK gesetzt werden, wenn das ListView den Stil
+  LVS_SORTASCENDING oder LVS_SORTDESCENDING hat.
+  </dd>
+<dt>cchTextMax </dt><dd>
+  Gr&ouml;&szlig;e des Puffers, wenn der Text ausgelesen wird.
+  </dd>
+<dt> iImage </dt><dd>
+  Index des Icons dieses Elements aus der Imageliste.
+  </dd>
+<dt> lParam </dt><dd>
+  32-bit Wert, der spezifisch f&uuml;r dieses Element ist.
+  </dd>
+</dl>
+
+
+<H3><a name="action" index="ListView, Aktionen">Aktionen mit Elementen</H3>
+
+
+<table border>
+<tr><td> LVM_INSERTITEM </td><td>Einf&uuml;gung eines Elementes </td></tr>
+<tr><td> LVM_DELETEITEM </td><td> L&ouml;schen eines Elementes </td></tr>
+<tr><td> LVM_DELETEALLITEMS  </td><td> L&ouml;schen aller Elemente </td></tr>
+<tr><td> LVM_GETITEM </td><td> Eigenschaften des Elementes lesen </td></tr>
+<tr><td> LVM_GETITEMTEXT </td><td> Text des Elementes lesen </td></tr>
+<tr><td> LVM_SETITEM </td><td>&Auml;nderung </td></tr>
+<tr><td> LVM_SETITEMTEXT </td><td>&Auml;nderung am Text</td></tr>
+</table>
+
+<p>
+Vor dem Einf&uuml;gen mehrerer Items wird dem ListView eine LVM_SETITEMCOUNT Nachricht gesendet werden,
+die angibt, wieviele Elemente letztlich enthalten wird. Dies erm&ouml;glicht es dem ListView seine
+Speicherreservierung und -freigabe zu optimieren.
+Wieviele Elemente ein ListView enth&auml;lt, ist mit LVM_GETITEMCOUNT zu ermitteln.
+<p>
+
+<H3><a name="selected" index="ListView, Selektiert">Bearbeiten selektierter Elemente</H3>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+int Pos = -1;
+LVITEM Item;
+
+    Pos = ListView_GetNextItem(hwndList, Pos, LVNI_SELECTED);
+    while (Pos>=0) {
+        Item.iItem = Pos;
+        Item.iSubItem = 0;
+        ListView_GetItem(hwndList, &Item);
+        TuWasMitElement((ElementType*)Item.lParam);
+        Pos = ListView_GetNextItem(hwndList, Pos, LVNI_SELECTED);
+    }
+</pre></td></tr></table><p>
+
+
+<H2><a name="event" index="ListView, Ereignisse">Ereignisse</H2>
+
+Das ListView sendet WM_NOTIFY-Nachrichten an das Elternfenster. Der <tt>code</tt> kann folgende Werte
+annehmen:
+
+<p>
+<table border>
+<tr><th>Nachricht</th><th> Beschreibung  </th></tr>
+<tr><td>LVN_BEGINDRAG </td><td> Start einer Drag-And-Drop Aktion </td></tr>
+<tr><td>LVN_BEGINRDRAG </td><td> Start einer Drag-And-Drop Aktion &uuml;ber rechte Maustaste </td></tr>
+
+<tr><td>LVN_BEGINLABELEDIT </td><td> Start Editieren eines Labels </td></tr>
+<tr><td>LVN_ENDLABELEDIT </td><td> Ende Editieren eines Labels </td></tr>
+
+<tr><td>LVN_DELETEITEM </td><td> Meldet, da&szlig; das Item gel&ouml;scht wird </td></tr>
+<tr><td>LVN_DELETEALLITEMS </td><td> Meldet, da&szlig; alle Items gel&ouml;scht werden </td></tr>
+
+<tr><td>LVN_COLUMNCLICK </td><td> Zeigt an, da&szlig; der Anwendet in den Header einer Reportdarstellung klickte</td></tr>
+
+<tr><td>LVN_GETDISPINFO </td><td> Das Kontrollelement erfragt Informationen zur Darstellung vom Elternfenster </td></tr>
+<tr><td>LVN_SETDISPINFO </td><td> Die Information des Elternfensters f&uuml;r das Item mu&szlig; erneuert werden </td></tr>
+
+<tr><td> LVN_INSERTITEM   </td><td> Zeigt das Einf&uuml;gen eines Items an </td></tr>
+<tr><td> LVN_ITEMCHANGED   </td><td> Zeigt an, da&szlig; ein Item ge&auml;ndert wurde </td></tr>
+<tr><td> LVN_ITEMCHANGING   </td><td> Zeigt die beabsichtigte &Auml;nderung eines Items an </td></tr>
+
+<tr><td>LVN_KEYDOWN </td><td> Taste wurde gedr&uuml;ckt </td></tr>
+</table>
+<p>
+
+<H3><a name="editlabel" index="ListView, Editieren">Editieren der Labels</H3>
+
+Das List View mu&szlig; mit dem Stil <tt>LVS_EDITLABELS</tt> erzeugt worden sein. Dann kann bereits
+ein Label angeklickt werden und Eingaben werden entgegengenommen.
+Allerdings wird die Eingabe direkt anschlie&szlig;end wieder verworfen.
+Um &Auml;nderungen im Label zu gestatten, braucht man nur die WM_NOTIFY zu fangen
+und return TRUE zu geben. Um dazwischen auf den eingegebenen Text zuzugreifen,
+wird ein Zugriff auf den Text des Items durchgef&uuml;hrt. Das Beispiel zeigt
+die Eingabe in einer Messagebox.
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+    case WM_NOTIFY: 
+        switch (((LPNMHDR) lParam)->code) {
+        case LVN_ENDLABELEDIT:
+            pItem = (NMLVDISPINFO) lParam;
+            MessageBox(hWnd, pItem->item.pszText, "entry", MB_OK);
+            return TRUE;
+</pre></td></tr></table><p>
+
+Wurde das Editieren abgebrochen, wird das pszText-Element 0 sein.
+<p>
+
+Soll das Editieren verhindert werden, wird die Nachricht <tt>LVN_BEGINLABELEDIT</tt> gefangen
+und TRUE zur&uuml;ckgegeben. Auch hier kann &uuml;ber lParam in gleicher Weise auf das Item
+zugegriffen werden und so beispielsweise eine bestimmte Itemgruppe ausgegrenzt werden.
+
+<H3><a name="colclick">Anklicken des Spaltenkopfs im ListView</H3>
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+    case WM_NOTIFY: 
+        switch (((LPNMHDR) lParam)->code) {
+        case LVN_COLUMNCLICK:
+            SpalteNr = ((LPNMLISTVIEW) lParam)->iSubItem;
+</pre></td></tr></table><p>
+
+<H3><a name="selitem"> Selektionsereignis </H3>
+
+Das Ereignis LVN_ITEMACTIVATE wird gesendet, wenn der Anwender
+ein Item aktiviert. Wie bei den anderen ListView Ereignissen
+erreicht es die Fensterfunktion im Rahmen einer WM_NOTIFY Nachricht. 
+
+
+<p><table border=1 width=100%><tr><td bgcolor=lightblue><pre>
+    case WM_NOTIFY: 
+        switch (((LPNMHDR) lParam)->code) {
+        case LVN_ITEMACTIVATE:
+            HWND hwndFrom = (HWND)((LPNMHDR) lParam)->hwndFrom;
+            MarkedItemIndex = ListView_GetNextItem(hwndFrom,-1,LVNI_SELECTED); 
+</pre></td></tr></table><p>
+
+Mit Hilfe der LVM_GETSELECTEDCOUNT-Nachricht kann ermittelt werden,
+wieviele Items aktiviert wurden.
+Die LVM_GETNEXTITEM Nachricht wird mit dem Attribut LVNI_SELECTED
+gesendet bist alle Items bearbeitet wurden.
+
+<hr>
+<table width=100%>
+<tr><td>
+<a href="../index.htm">Homepage</a>
+ - <a href="winprg.htm">Windows-API-Programmierung</a>
+</td><td align=right>
+(C) Copyright 1999, 2001 <a href="mailto:arnold@willemer.de">Arnold Willemer</a>
+</td></tr></table>
+
+</BODY>
+</HTML>

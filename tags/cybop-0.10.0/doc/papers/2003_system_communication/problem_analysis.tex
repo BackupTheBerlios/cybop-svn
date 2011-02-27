@@ -1,0 +1,49 @@
+%
+% $RCSfile: problem_analysis.tex,v $
+%
+% Copyright (c) 2001-2004. Christian Heller. All rights reserved.
+%
+% No copying, altering, distribution or any other actions concerning this
+% document, except after explicit permission by the author!
+% At some later point in time, this document is planned to be put under
+% the GNU FDL license. For now, _everything_ is _restricted_ by the author.
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% @author Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Problem Analysis}
+\label{problem_analysis_heading}
+
+Quality of software is often defined by its maintainability, extensibility and
+flexibility. In the past decades, \emph{Procedural (Structured) Programming},
+then \emph{Object Oriented Programming} (OOP) and more recently \emph{Component
+Oriented Programming} (COP) provided a number of helpful paradigms to help to
+achieve these goals. A major improvement was the extension of data \emph{Type}
+to \emph{Class}, owning inheritable properties and methods.\\
+But still, design problems are evident, in nearly every software product.
+It is the \emph{false combination and grouping} of classes that still keeps us
+away from clear and effective solutions. As a system grows, the interdependencies
+between its single parts grow with. Why does this happen? Simply because a clear
+architecture is missing. Even if developers really try to follow a such --
+on some point in the software's life, compromises have to be made due to
+unforeseen requirements and dependencies:
+\begin{itemize}
+    \item[-] \emph{Interfaces} are used to realize new properties by
+        \emph{multiple inheritance} (\emph{Mix-In})
+    \item[-] \emph{Static manager objects} accessible by any other objects in a
+        system are introduced
+    \item[-] New software layers are plugged in with \emph{varying mechanisms}
+    \item[-] \emph{Redundant code} needs to be written (per copy \& paste),
+        to avoid too many unwanted interdependencies
+\end{itemize}
+
+Can this be avoided at all and if, then how? The author's opinion is \emph{yes}
+and the new concept introduced in this document can hopefully contribute a small
+part to this, and show ways out of the misery.
+

@@ -1,0 +1,157 @@
+From edoc-pc-chairs@dstc.edu.au Sat May 10 23:59:19 2003
+Return-Path: <www@obsolete.dstc.edu.au>
+Received: from virusgate.rz.tu-ilmenau.de (virusgate.rz.tu-ilmenau.de [141.24.4.19])
+	by ernie.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h4AM1P1t028861
+	for hidden; Sun, 11 May 2003 00:01:25 +0200 (MET DST)
+Received: from piggy.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by virusgate.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h4AM0kxc005246
+	for hidden; Sun, 11 May 2003 00:00:48 +0200 (MEST)
+Received: from piglet.dstc.edu.au (piglet.dstc.edu.au [130.102.176.1])
+	by piggy.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h4AM0i8j005117
+	for hidden; Sun, 11 May 2003 00:00:45 +0200 (MET DST)
+Received: from obsolete.dstc.edu.au (www.dstc.edu.au [130.102.181.60])
+	by piglet.dstc.edu.au (8.12.9/8.12.8) with ESMTP id h4ALxOZV008790;
+	Sun, 11 May 2003 07:59:24 +1000 (EST)
+Received: (from www@localhost)
+	by obsolete.dstc.edu.au (8.9.3+Sun/8.8.8) id HAA18359;
+	Sun, 11 May 2003 07:59:19 +1000 (EST)
+Date: Sun, 11 May 2003 07:59:19 +1000 (EST)
+Message-Id: <200305102159.HAA18359@obsolete.dstc.edu.au>
+To: christian.heller@tu-ilmenau.de
+From: EDOC PC Chairs <edoc-pc-chairs@dstc.edu.au>
+Reply-To: EDOC PC Chairs <edoc-pc-chairs@dstc.edu.au>
+Cc: edoc-pc-chairs@edocconference.org
+Subject: EDOC 2003: result of review
+X-Spam-Checked: SPAMASSASSIN: This message probably not SPAM
+X-Spam-Score: -0.5, Required: 5
+X-Virus-Scanned: Message: ok
+X-Scanned-By: MIMEDefang 2.9 (www dot roaringpenguin dot com slash mimedefang)
+Status: R 
+X-Status: N
+
+Dear Christian Heller,
+
+thank you for your submission to EDOC 2003. Unfortunately, we have to inform
+you that your paper
+
+TITLE  : A flexible Software Architecture for Communication
+AUTHORS: Christian Heller, Torsten Kunze, Jens Bohl, Ilka Philippow
+
+could not be accepted.
+
+We had to be quite selective, because the average quality of the submissions was exceptionally high this year. 
+
+We appreciate your contribution and hope that the attached comments of the reviewers will help you to improve the quality of your paper.
+
+We invite you to attend EDOC 2003 in September. The program will be published soon and sent to you by e-mail.
+
+Best regards,
+
+Maarten Steen & Barrett Bryant
+EDOC 2003 PC Chairs
+edoc-pc-chairs@edocconference.org
+
+
+
+------------------------ Reviewers Comments -----------------------------
+
+Reviewers Familiarity:               8
+Evaluation of work and contribution: 5
+Significance to theory and practice: 5
+Originality and novelty:             4
+Relevance for EDOC 2003:               7
+Readability and organization:        5
+Overall recommendation:              4
+
+**(0 = no mark set by reviewer)**
+
+Summary: 
+ 			      
+
+Comments to the author: 
+	      
+
+
+---------------------------------------
+
+
+Reviewers Familiarity:               7
+Evaluation of work and contribution: 5
+Significance to theory and practice: 5
+Originality and novelty:             5
+Relevance for EDOC 2003:               6
+Readability and organization:        5
+Overall recommendation:              5
+
+**(0 = no mark set by reviewer)**
+
+Summary: 
+ 			      This paper tries to propose a common abstract model for three situations currently found in software architecture: Backend, DataTransfer and FrontEnd.
+
+Comments to the author: 
+	      impossible to read data from Figure 5.
+Figure 6 is not better.
+Difficult to completely evaluate the paper in these conditions.
+
+Section 8 (about the authors) need to be deleted.
+An additional section about related work needs to be added.
+
+The idea of building an abstract model of three situations commonly found in software architecture is much appealing. Two remarks however:
+1. This is more a pattern paper than a classical EDOC paper. I would recommend sending it to a Pattern conference.
+
+2. The paper stays much tool general. We need to have some concrete example of how the 3 schemes are performed.
+
+Furthermore generalities like Fig. 4 should be skipped in this kind of conference paper.
+
+
+
+
+---------------------------------------
+
+
+Reviewers Familiarity:               0
+Evaluation of work and contribution: 0
+Significance to theory and practice: 0
+Originality and novelty:             0
+Relevance for EDOC 2003:               0
+Readability and organization:        0
+Overall recommendation:              0
+
+**(0 = no mark set by reviewer)**
+
+Summary: 
+ 			      
+
+Comments to the author: 
+	      
+
+
+---------------------------------------
+
+
+Reviewers Familiarity:               7
+Evaluation of work and contribution: 4
+Significance to theory and practice: 3
+Originality and novelty:             2
+Relevance for EDOC 2003:               5
+Readability and organization:        5
+Overall recommendation:              3
+
+**(0 = no mark set by reviewer)**
+
+Summary: 
+ 			      The paper describes a software framework and its application 
+in an open source software project. The framework provides support
+on persistence and communication pattern mappings. 
+
+Comments to the author: 
+	      - remove references from the abstract
+- well done, in terms of applying existing knowledge
+
+
+---------------------------------------
+
+
+============== END OF REVIEWS ===============
+
+

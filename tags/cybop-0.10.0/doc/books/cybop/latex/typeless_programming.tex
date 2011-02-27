@@ -1,0 +1,73 @@
+%
+% $RCSfile: typeless_programming.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:09 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsection{Typeless Programming}
+\label{typeless_programming_heading}
+\index{Typeless Programming}
+\index{Scripting Language}
+\index{Job Control Language}
+\index{Batch Language}
+\index{Perl}
+\index{Python}
+\index{Rexx}
+\index{Tcl}
+\index{Visual Basic}
+\index{VB}
+\index{Universal Interactive Executive}
+\index{UNIX}
+\index{Script Oriented Programming}
+\index{SOP}
+\index{Dynamic Typing}
+\index{System Integration Language}
+\index{Glue Language}
+
+\emph{Scripting Languages} (formerly also called \emph{Job Control-} or
+\emph{Batch Languages} \cite{wikipedia}) such as Perl \cite{wall}, Python
+\cite{lutz}, Rexx \cite{ohara}, Tcl \cite{ousterhout1994}, \emph{Visual Basic}
+(VB) and the \emph{Universal Interactive Executive} (UNIX) shells overcome the
+disadvantages of system programming languages (section
+\ref{system_programming_heading}) by being \emph{typeless} and
+\emph{interpreted}. The paradigm behind them is sometimes called
+\emph{Script Oriented Programming} (SOP).
+
+Ousterhout \cite{ousterhout1998} writes that modern computers were fundamentally
+typeless: any word in memory could hold any kind of value, such as an integer, a
+floating-point number, a pointer, or an instruction. The meaning of a value were
+determined by how it is used: if the program counter pointed at a word of memory
+then it were treated as an instruction; if a word were referenced by an integer
+\emph{add} instruction then it were treated as an integer; and so on. The same
+word could be used in different ways at different times (what is also called
+\emph{Dynamic Typing}).
+
+Because scripting languages are intended primarily for plugging together existing
+components, they are also referred to as \emph{System Integration Languages} or
+\emph{Glue Languages}. They provide a higher level of programming than assembly-
+or system programming languages. Through their usage, integrated applications,
+after \cite{ousterhout1998}, could be developed five to ten times faster than
+with system programming languages. Scripting languages sacrifice execution speed
+to improve development speed.
+
+The interpreter described in chapter \ref{cybernetics_oriented_interpreter_heading}
+is able to handle data (knowledge) without knowing about their type (kind of
+abstraction) in advance, that is at compilation time. Although itself written
+in the system programming language \emph{C}, the interpreter is very flexible
+when it comes to processing knowledge.

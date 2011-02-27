@@ -1,0 +1,72 @@
+WinMain
+int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
+Die Funktion WinMain ist das Äquivalent der Funktion main in Konsolenanwendungen. Sie wird vom System aufgerufen, wenn die Anwendung gestartet wird.
+Parameter:
+hInstance:	Handler der aktuellen Instanz der Anwendung
+hPrevInstance:	Handler der vorherigen Instanz der Anwendung (bei Win32 immer NULL)
+lpCmdLine:	Die Kommandozeile (ohne den Anwendungsnamen)
+nCmdShow:	Bestimmt, wie das Fenster angezeigt werden soll
+
+
+CreateWindow
+HWND CreateWindow(LPCTSTR lpClassName, LPCTSTR lpWindowName, DWORD dwStyle, int x, int y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HANDLE hInstance, LPVOID lpParam )
+Erzeugt ein Fenster nach den entsprechenden Parameter-Vorgaben. Gibt das Handel des Fensters zurück.
+lpClassName: 	Name der Fensterklasse
+lpWindowName: 	Name des Fensters
+dwStyle 	Ein oder meherer Style-Angaben, mit ODER verknüpft
+x 		Horizontale Fensterposition
+y 		Vertikale Fensterposition
+nWidth 		Breite des Fensters
+nHeight 	Höhe des Fensters
+hWndParent 	Handler für ein unter- oder übergeordnetes Fenster (kann NULL sein)
+hMenu 	Handler für eine Menü-Resource (kann NULL sein)
+hInstance 	Handler der aktuellen Applikations-Instanz
+lpParam 	Spezieller Parameter für MDI-Anwendungen
+
+
+GetMessage
+GetMessage( MSG msg, HWND hwnd, UINT wFilterMin, UINT wFilterMax )
+Liest eine Nachricht aus der Nachrichtenwarteschlange für den aufrufenden Thread. Liefert FALSE, wenn die Nachricht WM_QUIT war, sonst TRUE.
+msg: 	Referenz auf eine Nachrichtenstruktur
+hwnd: 	Handler des Fensters, für das die Nachricht gelesen werden soll
+wFilterMin: 	Erste zu lesende Nachricht
+wFilterMax: 	Letzte zu lesende Nachricht
+Über die Filterwerte kann man bestimmen, dass man zum Beispiel nur Nachrichten zwischen WM_PAINT und WM_TIMER lesen möchte. Dazu muss man natürlich wissen, welche Nachricht welchen Wert hat. Folgender Aufruf liefert zum Beispiel nur Nachrichten vom Typ WM_PAINT: GetMessage( &msg, NULL, WM_PAINT, WM_PAINT );
+Hwnd ist der Handler für das Fenster, für das wir eine Naschricht lesen wollen. Wenn der Thread nur ein Fenster hat, kann der Parameter NULL sein.
+
+
+DestroyWindow
+BOOL DestroyWindow( HWND hwnd )
+Schliesst das unter hwnd angegebene Fenster. Liefert FALSE, falls das Fenster nicht geschlossen werden konnte.
+
+
+PostQuitMessage
+void PostQuitMessage( int nExitCode )
+Setzt die Nachricht WM_QUIT in die Nachrichtenwarteschlange, um dem System anzuzeigen, das die Anwendung beendet werden soll. Als Parameter wird der ExitCode der Anwendung (meist 0) übergeben. Wird als Reaktion auf die Nachricht WM_DESTROY in der Nachrichtenschleife der Anwendung aufgerufen.
+
+
+DispatchMessage
+LONG DispatchMessage( MSG msg)
+Gibt die Nachricht msg an die Nachrichtenwarteschlange weiter. Bekommt vom bearbeitenden Programm einen Rückgabewert zurück, der im Normalfall ignoriert wird.
+
+
+DefWindowProc
+LRESULT DefWindowProc( HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam );
+Die Standart-Nachrichtenfunktion. Wird von der eigenen Nachrichtenbehandlungs-Routiene aufgerufen für alle Nachrichten, die das eigene Programm nicht behandelt hat. Die Parameter sind die selben, wie sie auch an die eigene Nachrichtenbehandlungs-Routiene übergeben werden. Siehe dazu auch die Funktion WndProc in diesem Beispiel.
+
+
+RegisterClass
+ATOM RegisterClass( CONST WNDCLASS *wndClass );
+Registriert eine selbstdefinierte Fensterklasse beim System. Dazu müssen zunächst die Membervariablen eines Objektes von WNDCLASS gesetzt werden. Siehe dazu auch die Funktion WinMain in diesem Beispiel. Der Rückgabewert ist ein eindeutiger Identifier der Klasse oder 0, falls die Registrierung fehlschlägt. Seit Windows 95 kann auch auf RegisterClassEx zugegriffen werden, die ein Objekt der Klasse WNDCLASSEX registriert, in dem zusätzlich noch ein "small Icon" für die Klasse registriert wird. Dann muss aber ein Fenster nicht mit CreateWindow, sondern mit CreateWindowEx erstellt werden.
+
+
+ShowWindow
+BOOL ShowWindow( HWND hWnd, int nCmdShow );
+Zeigt ein durch CreateWindow erstelltes Fenster an. Der nächste Befehl sollte UpdateWindow sein, um die Fensterdaten neu zu zeichnen.
+hWnd 	Handle, dass von CreateWindow zurückgegeben wird
+nCmdShow 	Anzeigeparameter; wird schon an WinMain als Parameter übergeben
+
+
+UpdateWindow
+BOOL UpdateWindow( HWND hWnd );
+Sendet eine WM_PAINT - Nachricht, damit der Client-Bereich des Fensters hWnd neu gezeichnet wird.

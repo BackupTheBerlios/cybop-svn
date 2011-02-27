@@ -1,0 +1,92 @@
+%
+ % $RCSfile: kurzueberblick.tex,v $
+ %
+ % Copyright (c) 1999-2002. Jens Bohl. All rights reserved.
+ %
+ % This software is published under the GPL GNU General Public License.
+ % This program is free software; you can redistribute it and/or
+ % modify it under the terms of the GNU General Public License
+ % as published by the Free Software Foundation; either version 2
+ % of the License, or (at your option) any later version.
+ %
+ % This program is distributed in the hope that it will be useful,
+ % but WITHOUT ANY WARRANTY; without even the implied warranty of
+ % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ % GNU General Public License for more details.
+ %
+ % You should have received a copy of the GNU General Public License
+ % along with this program; if not, write to the Free Software
+ % Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ %
+ % http://www.resmedicinae.org
+ % - Information in Medicine -
+
+ %A preface.
+\newpage
+\chapter*{Vorwort}
+    Das vorliegende Dokument stellt die Diplomarbeit von Jens Bohl zur Erlangung des Diplomtitels der Studienrichtung
+    Informatik der Technischen Universität Ilmenau dar. \\
+    Es ist das Ergebnis einer mehrmonatigen, intensiven, theoretischen wie auch praktischen Auseinandersetzung mit
+    einem Thema, welches sich aufgrund seines interdisziplinären Charakters nicht nur einem konkreten
+    wissenschaftlichen Forschungsbereich zuordnen lässt.
+    Vielmehr umfasst der Inhalt dieser Arbeit mehrere unterschiedliche Aspekte der Informatik:
+    Komponentenbasierte Softwareentwicklung, Entwurfsmuster und Softwarearchitekturen, Medizinische Informatik und
+    Softwareergonomie. Dieses breite Spektrum an Betrachtungen, bestehend aus den verschiedensten Bereichen der
+    Informatik, zeichnet den vielseitigen Charakter dieser Arbeit aus.\\
+    Die Wahl des Themas der Diplomarbeit liegt in den unterschiedlichen Interessen des Autors begründet. Zum Einen sind
+    diese klar im Bereich der Informationstechnologie -- genauer des Softwareentwurfes und -design  -- angesiedelt. Zum
+    Anderen stand nach Erlangung der Allgemeinen Hochschulreife die Entscheidung zwischen einem Studium der Informatik
+     -- oder der Medizin. Trotz des Entschlusses, Informatik den Vorzug zu geben, ist das Interesse an medizinischen Sachverhalten
+    seitdem nicht verloren gegangen und spiegelt sich nun im praktischen Abschnitt dieser Diplomarbeit wider.\\
+    Der Kern des theoretischen Teils manifestiert sich in neuesten Ideen und Forschungsergebnissen auf dem
+    Gebiet der komponentenbasierten Softwareentwicklung, und hierbei im Speziellen im Entwurf eines ontologischen
+    Software-Frameworks. Dieses Framework basiert auf der Idee, jedes Element eines Softwaresystems einer streng
+    hierarchischen Struktur unterzuordnen. Es gleicht einem Schichtensystem, wobei die Granularität von Ebene zu Ebene
+    zunimmt. Jede objektorientierte Klasse einer Anwendung kann in eine dieser Schichten eingeordnet werden.\\
+    Ein solches Framework bezeichnet man als {\it Ontologie}.\\
+    Existentielle Objektbeziehungen werden dabei durch den erweiterten Lebenszyklus von Softwarekomponenten
+    beschrieben. Ein solcher Kreislauf stützt sich auf die Festlegung, dass jede Instanz
+    genau ein Elternobjekt besitzt, durch das es initialisiert wird und von dem es existenziell abhängt.
+    Dabei wurden bereits bestehende Konzepte wie bekannte Architekturmuster oder der {\it Component Lifecycle}
+     von Apache \cite{avalon} um eigene Ideen erweitert.\\
+    All diese theoretischen Betrachtungen vereinigen sich im praktischen Teil dieser
+    Diplomarbeit.
+    Vor dem Hintergrund der Entwicklung einer medizinischen Software fanden die beschriebenen theoretischen
+    Konzepte eine anwendungsorientierte Umsetzung.
+    Das entstandene Programm ist ein Prototyp, da es weder komplett in Funktionsumfang, noch voll einsetzbar ist.
+    Dennoch läuft es keineswegs Gefahr, nach relativ kurzer Zeit in Vergessenheit zu
+    geraten. Die Software ist Teil eines klinischen Informationssystems namens {\it Res Medicinae}\footnote{Res Medicinae ({\it lat.}):
+    die Medizin betreffend, Sache der Medizin}, welches in der Zukunft einzigartig in Umfang und
+    Umsetzung sein wird und längerfristig eine Alternative zu existierenden kommerziellen Produkten darstellen soll.
+    Dabei ist nicht nur die konkrete Realisierung des Prototypen, sondern auch die in ihm vorhandene Umsetzung neuester
+    medizinischer Modelle zur Diagnostik und Befundung von Interesse. Letzteres spielt in dieser technischen Diplomarbeit
+    zwar eine eher untergeordnete Rolle, wird aber im Kontext des vorliegenden Dokumentes aus Gründen des besseren Verständnisses
+    fachlicher Zusammenhänge nicht unerwähnt bleiben.\par
+    Die Struktur und Reihenfolge der folgenden Kapitel ist so angelegt, dass dem Leser ein unkomplizierter Zugang
+    zum Thema geboten und er dann Schritt für Schritt über die softwaretheoretischen Grundlagen der Arbeit
+    zu den enthaltenen eigenen Ideen und ihrer Umsetzung geführt wird.\\
+    Kapitel zwei bildet im Anschluss an die Einleitung mit Betrachtungen zur Gestaltung von Präsentationsschichten
+    den Einstieg in diese Arbeit. Nach einer kurzen Vorstellung der unterschiedlichen Arten von Benutzerschnittstellen
+    werden ergonomische Gesichtspunkte bei der Konzeption von grafischen Oberflächen dargelegt und
+    technische Möglichkeiten der Programmierung solcher Schnittstellen gezeigt.\\
+    Im Anschluss an das zweite folgen drei Kapitel, die das Kernstück der theoretischen Arbeit darstellen: Muster, Frameworks
+    und komponentenbasierte Softwareentwicklung werden vorgestellt, um diese ''State-Of-The-Art''-Technologien als
+    Ausgangspunkt der selbsterarbeiteten Konzepte zu betrachten. Diese eigenen Ideen werden
+    auch an passender Stelle in den drei Kapiteln dargelegt -- und das immer in Bezug auf den praktischen Teil
+    dieser Diplomarbeit.\\ Diesem ist dann auch mit Kapitel sechs ein eigener Abschnitt gewidmet, dessen Inhalt
+    zunächst noch einmal die Darlegung der Ziele dieser Arbeit ist.
+    Daraufhin werden die zugrundeliegenden medizinischen Modelle präsentiert und dann die praktische Umsetzung im Rahmen des bereits
+    erwähnten Prototypen besprochen.\\
+    Das letzte Kapitel
+    enthält abschließende Bemerkungen und gibt einen Ausblick auf zukünftige Arbeiten zu diesem Thema.\par
+    Auszüge aus dem Programmcode werden in der Schriftart {\tt Typewriter Typeface},
+    fremdsprachige Bezeichnungen sowie Eigennamen und Zitate
+    {\it kursiv} dargestellt.
+    Begriffe, die einer zusätzlichen Erläuterung bedürfen, sind lediglich als Fußnoten
+    angeführt, da ein Glossar den Lesefluss der Arbeit beeinträchtigen würde. Wichtige Abkürzungen und Übersetzungen
+    finden sich im Anhang wieder.
+    \par
+    \vspace{2cm}
+
+    Ilmenau, den \today
+    \hfill Jens Bohl\\

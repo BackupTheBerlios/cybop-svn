@@ -1,0 +1,52 @@
+%
+% $RCSfile: simple_assignment.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:08 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\subsubsection{Simple Assignment}
+\label{simple_assignment_heading}
+\index{CYBOL Simple Assignment Example}
+
+CYBOL does not know \emph{Variables} as used in classical languages. All states
+a system may take on are represented by just one \emph{Knowledge Tree} (compare
+chapter \ref{statics_and_dynamics_heading}), which applications may access in a
+defined manner (dot-separated knowledge paths). Consequently, \emph{Assignments}
+are done differently in CYBOL than in classical programming languages. All
+kinds of state changes go back to a manipulation of the one knowledge tree:
+
+\begin{scriptsize}
+    \begin{verbatim}
+<model>
+    <part name="copy_value" channel="inline" abstraction="operation" model="copy">
+        <property name="source" channel="inline" abstraction="knowledge" model="domain.name"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model="gui.name"/>
+    </part>
+    <part name="move_branch" channel="inline" abstraction="operation" model="move">
+        <property name="source" channel="inline" abstraction="knowledge" model="address_1.phone"/>
+        <property name="destination" channel="inline" abstraction="knowledge" model="address_2"/>
+    </part>
+</model>
+    \end{verbatim}
+\end{scriptsize}
+
+The first operation in the example above copies a value between two branches of
+the tree. Only primitive values can be copied. The second operation removes a
+whole tree branch (referenced by the \emph{source} property) from one parent
+node, and adds it to another (referenced by the \emph{destination} property).

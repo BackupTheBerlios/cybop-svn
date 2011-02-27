@@ -1,0 +1,50 @@
+<model>
+    <part name="module_menu" channel="inline" abstraction="text/plain" model="Module">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="west"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="100,20,1"/>
+        <property name="left_release" channel="inline" abstraction="path/knowledge" model=".ui_control.logic.exit_program"/>
+    </part>
+<!--
+    <part name="view_menu" channel="inline" abstraction="text/plain" model="View">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="east"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="0,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="0,0,0"/>
+    </part>
+-->
+    <part name="help_menu" channel="inline" abstraction="text/plain" model="Help">
+        <property name="layout" channel="inline" abstraction="text/plain" model="compass"/>
+        <property name="cell" channel="inline" abstraction="text/plain" model="east"/>
+        <property name="position" channel="inline" abstraction="number/integer" model="200,0,0"/>
+        <property name="size" channel="inline" abstraction="number/integer" model="100,20,1"/>
+    </part>
+</model>
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: menu_bar.cybol,v $ $Revision: 1.6 $ $Date: 2009-01-18 02:08:30 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

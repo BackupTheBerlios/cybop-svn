@@ -1,0 +1,248 @@
+From psi03@iis.nsk.su Thu May 15 08:33:12 2003
+Return-Path: <psi03@iis.nsk.su>
+Received: from virusgate.rz.tu-ilmenau.de (virusgate.rz.tu-ilmenau.de [141.24.4.19])
+	by ernie.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h4F6ahQe012288
+	for hidden; Thu, 15 May 2003 08:36:44 +0200 (MET DST)
+Received: from piggy.rz.tu-ilmenau.de (localhost [127.0.0.1])
+	by virusgate.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h4F6a4oq028939
+	for hidden; Thu, 15 May 2003 08:36:05 +0200 (MEST)
+Received: from mx.iis.nsk.su (mx.iis.nsk.su [194.226.177.121])
+	by piggy.rz.tu-ilmenau.de (8.12.9/8.12.9) with ESMTP id h4F6a18j003877
+	for hidden; Thu, 15 May 2003 08:36:03 +0200 (MET DST)
+Received: from shera (onti.iis.nsk.su [194.226.177.131])
+	by mx.iis.nsk.su (8.12.8/8.12.8) with ESMTP id h4F6Zj1q030436
+	for <christian.heller@tu-ilmenau.de>; Thu, 15 May 2003 13:35:46 +0700 (NOVST)
+	(envelope-from psi03@iis.nsk.su)
+From: psi03@iis.nsk.su
+To: christian.heller@tu-ilmenau.de
+Date: Thu, 15 May 2003 13:33:12 +0700
+MIME-Version: 1.0
+Content-type: text/plain;
+  charset=US-ASCII
+Content-transfer-encoding: 7BIT
+Subject: PSI03
+Message-ID: <3EC39718.1443.B069B7@localhost>
+Priority: normal
+X-mailer: Pegasus Mail for Win32 (v3.12c)
+Status: R 
+X-Status: N
+
+Dear Dr. Heller,
+
+I regret to inform you that your paper
+has not been selected for the presentation at the
+Fourth International Conference "Perspectives of Systems 
+Informatics".
+In April we sent this information to the first author, Jens Bohl.
+Seemingly he has failed to receive the letter.
+Please find below the referees' reports on your paper.
+
+      Sincerely yours,
+      Alexandre Zamulin,
+      Conference PC co-chair 
+
+
+------------------------------------------------------------
+
+
+Kind of the paper: REGULAR 
+Paper No : 72 
+Author(s):   Jens Bohl  et al. 
+Title: Flexible Software Architectures 
+
+              (estimation range 1...7) 
+Validity: 4 
+Appropriateness for PSI03: 5 
+Significance of the work: 2 
+Quality of presentation: 3 
+Originality: 3 
+References to relevant work: 2 
+
+My opinion in terms of an overall score:  (1-7) 
+
+1. Acceptance as a regular paper: 2 
+
+1: strong   reject   
+2: reject   
+3: weak  reject   
+4: neutral 
+5: weak  accept 
+6: accept 
+7: strong accept 
+
+2. Acceptance as a short paper 
+(if it cannot be accepted as a regular paper): 4 
+
+  1        2       3       4        5       6       7 
+
+Competence  of the reviewer: 3 
+
+1-week, 2- medium, 3-strong 
+
+Comments for authors : 
+- In the abstract you use the term "domain-independent 
+software framework" which is either a sloppy use of the term 
+or even a contradiction in itself. A software framework is 
+always domain-specific. This is the essence of frameworks. 
+- Some figures (e.g. 3, 4, 5) are not referenced in the text. 
+- Page 2: The hierarchical MVC is not well explained. How does 
+the communication of the MVC triads via the controllers work? 
+- The essence of Section 3 (Fig.6) seems to be that the  
+steps for component creation have to be undone in the reverse  
+order during component deletion. This does not become clear 
+from your text. BTW: I don't understand what this has to do 
+with whole-part relations. Section 3 is not clear at all. 
+- Fig. 7 still contains german text. 
+- In Section 4 (and also before) you speak of episodes without 
+explaining them. 
+- Page 4, line 3: There is no such thing as a "standard application". 
+- Fig.8: This is not an example of the Composite pattern. It is a 
+node that could be part of a list, tree or graph. 
+- What is the message of Section 5? That CYBOP builds on 3 design 
+patterns? What is novel in this case? 
+- I don't see how Section 6 is related to the previous sections. 
+It just says that you have developed a medical documentation system. 
+How does it rely on the architecture described above? 
+
+
+Kind of the paper: REGULAR
+Paper No : 72
+Author(s):   Jens Bohl  et al.
+Title: Flexible Software Architectures
+
+Validity:6
+Appropriateness for PSI03:6
+Significance of the work:5
+Quality of presentation:4
+Originality:6
+References to relevant work:4
+
+My opinion in terms of an overall score:  (1-7) 6
+
+1. Acceptance as a regular paper: 6
+
+1: strong   reject
+2: reject
+3: weak  reject
+4: neutral
+5: weak  accept
+6: accept
+7: strong accept
+
+2. Acceptance as a short paper
+(if it cannot be accepted as a regular paper):
+
+   1        2       3       4        5       6       7
+
+Competence  of the reviewer:
+
+1-week, 2- medium, 3-strong
+
+Comments for authors :
+
+This is an interesting approach to a new problem. It would be 
+interesting to know if the technique can be reused in other software 
+paradigms. Can you for example always identify the ontologies and are 
+problems suitable for classification as a hierarchy? Even if they are 
+not the approach is still sound for some classes of problem.
+
+Will the paper is well written they are still some grammatical errors 
+which could be corrected. The formatting of the paper is also not 
+consistent.
+
+Kind of the paper: REGULAR
+Paper No : 72
+Author(s):   Jens Bohl  et al.
+Title: Flexible Software Architectures
+
+              (estimation range 1...7)
+ Validity: 5
+Appropriateness for PSI03: 5
+Significance of the work: 3
+Quality of presentation: 2
+Originality: 2
+References to relevant work: 4
+
+My opinion in terms of an overall score:  (1-7) 3
+
+1. Acceptance as a regular paper: 3
+
+1: strong   reject  
+2: reject  
+3: weak  reject  
+4: neutral
+5: weak  accept
+6: accept
+7: strong accept
+
+2. Acceptance as a short paper
+(if it cannot be accepted as a regular paper): 3
+
+  1        2       3       4        5       6       7
+
+Competence  of the reviewer:
+
+1-week, 2- medium, 3-strong
+
+Comments for authors :
+
+Give more background on Res Medicinae (what the project is about, what
+were the requirements, whether/how they were achieved).
+Provide concrete examples of how the use of the described design
+patterns promotes flexibility and extensibility.
+Have the text proofread.
+Enlarge the screenshot.
+---------------------------------------------------------------------
+
+
+> Kind of the paper: REGULAR
+> Paper No : 72
+> Author(s):   Jens Bohl  et al.
+> Title: Flexible Software Architectures
+>
+>               (estimation range 1...7)
+> Validity:    5
+> Appropriateness for PSI03:    4
+> Significance of the work:    3
+> Quality of presentation:    4
+> Originality:    4
+> References to relevant work:    4
+>
+> My opinion in terms of an overall score:  (1-7)
+>
+> 1. Acceptance as a regular paper:    3
+>
+> 1: strong   reject
+> 2: reject
+> 3: weak  reject
+> 4: neutral
+> 5: weak  accept
+> 6: accept
+> 7: strong accept
+>
+> 2. Acceptance as a short paper
+> (if it cannot be accepted as a regular paper):    5
+>
+>   1        2       3       4        5       6       7
+>
+> Competence  of the reviewer:
+>
+> 1-week, 2- medium, 3-strong    2
+>
+> Comments for authors :
+
+This paper spends too much for presentation of concrete example,
+so concept as whole is not clear enough.
+I recommend to decrease illustrations and improve conceptual part and
+re-write as short paper.
+
+
+
+                PSI03
+5th International  A.P.Ershov Conference
+   PERSPECTIVES OF SYSTEM INFORMATICS
+Novosibirsk, 630090, pr. Acad. Lavrentjev,6
+e-mail: psi03@iis.nsk.su fax: 7-3832-323494
+ 
+
+

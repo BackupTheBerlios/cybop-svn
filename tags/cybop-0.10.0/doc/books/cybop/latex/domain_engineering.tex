@@ -1,0 +1,124 @@
+%
+% $RCSfile: domain_engineering.tex,v $
+%
+% Copyright (C) 2002-2008. Christian Heller.
+%
+% Permission is granted to copy, distribute and/or modify this document
+% under the terms of the GNU Free Documentation License, Version 1.1 or
+% any later version published by the Free Software Foundation; with no
+% Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+% Texts. A copy of the license is included in the section entitled
+% "GNU Free Documentation License".
+%
+% http://www.cybop.net
+% - Cybernetics Oriented Programming -
+%
+% http://www.resmedicinae.org
+% - Information in Medicine -
+%
+% Version: $Revision: 1.1 $ $Date: 2008-08-19 20:41:06 $ $Author: christian $
+% Authors: Christian Heller <christian.heller@tuxtax.de>
+%
+
+\section{Domain Engineering}
+\label{domain_engineering_heading}
+\index{Domain Engineering}
+\index{DE}
+\index{Software Engineering Process}
+\index{SEP}
+\index{Object Oriented Analysis}
+\index{OOA}
+\index{Object Oriented Design}
+\index{OOD}
+\index{Six Pack Model}
+\index{System Family Engineering}
+\index{Application Engineering}
+\index{AE}
+\index{Analysis Phase}
+\index{Design Phase}
+\index{Implementation Phase}
+\index{Development for Reuse}
+\index{Feature Oriented Domain Analysis}
+\index{FODA}
+\index{Reuse driven Software Engineering Business}
+\index{RSEB}
+\index{Feature RSEB}
+\index{FeatuRSEB}
+\index{Unified Modelling Language}
+\index{UML}
+\index{Feature Model}
+
+Undoubtedly, \emph{Object Oriented Programming} (OOP) (section
+\ref{object_oriented_programming_heading}) is one of the most popular programming
+paradigms in use today. Its application within a \emph{Software Engineering Process}
+(SEP) (chapter \ref{software_engineering_process_heading}) requires two preliminary
+phases called \emph{Object Oriented Analysis} (OOA) and \emph{Object Oriented Design}
+(OOD).
+
+\begin{figure}[ht]
+    \begin{center}
+        \includegraphics[scale=0.3,angle=-90]{graphic/sixpack.pdf}
+        \caption{Six Pack Model of System Family Development \cite{domainengg, esaps}}
+        \label{sixpack_figure}
+    \end{center}
+\end{figure}
+
+The area of \emph{System Family Engineering} applies a so-called \emph{Six-Pack}
+approach (figure \ref{sixpack_figure}) which is based on the separation of
+\emph{Domain Engineering} (DE) and \emph{Application Engineering} (AE).
+\textit{The focus of AE is a single system whereas the focus of DE is on
+multiple related systems within a domain}, as \cite{domainengg} defines. Both of
+them consist of analysis-, design- and implementation phases. The results of
+each DE phase are \emph{fed in} as foundation for the work to be done in AE.
+Most of the topics described in the previous sections
+(\ref{paradigm_and_language_heading}, \ref{pattern_heading} and
+\ref{component_oriented_programming_heading}) turned around techniques which
+are applicable to both, DE as well as AE.
+
+In Krzysztof Czarnecki's opinion \cite{czarnecki}, the only SEPs adequately
+addressing the issue of \emph{Development for Reuse} were DE methodologies,
+most of which had essentially the same structure. He writes:
+
+\begin{quote}
+    \emph{Domain Engineering} is the activity of \emph{collecting},
+    \emph{organizing}, and \emph{storing} past experience in building systems or
+    parts of systems in a particular domain in the form of reusable assets (i.e.
+    reusable work-products), as well as providing an adequate means for
+    \emph{reusing} these assets (i.e. retrieval, qualification, dissemination,
+    adaptation, assembly, etc.) when building new systems.
+\end{quote}
+
+After him, the main difference between traditional OOA/ OOD- and DE methods
+were that the former focus on developing \emph{Single} systems, the latter
+though on developing \emph{Families} of systems. Combined with the definition
+stated above (\cite{domainengg}), this means that OOA/ OOD methods may be used
+for application-, but not domain engineering. Different methods and techniques
+exist for DE. Many are given in \cite{wartik, arrango, fere}. Just a few of
+them shall be mentioned here:
+
+\begin{itemize}
+    \item{\emph{Feature Oriented Domain Analysis} (FODA)}
+    \item{\emph{Reuse driven Software Engineering Business} (RSEB)}
+    \item{\emph{Feature RSEB} (FeatuRSEB)}
+\end{itemize}
+
+The RSEB methodology \cite{jacobson1997} places emphasis on purely
+\emph{Object Oriented} (OO) techniques which it uses together with the
+\emph{Unified Modelling Language} (UML). \emph{Features} and \emph{Feature Models}
+(section \ref{feature_model_heading}), as concept, were introduced by the FODA
+\cite{foda}. The combination of RSEB and FODA results in the FeatuRSEB approach
+\cite{griss}. It permits a separate treatment of domain knowledge and system
+functionality.
+
+However, this work is less interested in the details of DE software development
+\emph{Methods}, but rather in their \emph{Knowledge Abstraction-} and
+\emph{Implementation} techniques. Some of them are investigated in the
+following sections.
+
+\input{tool_and_material}
+\input{generics}
+\input{domain_specific_language}
+\input{specification_language}
+\input{generative_programming}
+\input{model_driven_architecture}
+\input{model_and_code}
