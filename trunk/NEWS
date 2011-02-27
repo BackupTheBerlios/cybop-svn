@@ -11,6 +11,25 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+CYBOP 0.10.0, 2011-02-27, Christian Heller  <christian.heller@tuxtax.de>
+        * CYBOI:
+            - Provide more specific global variables of primitive data type sizes
+            - Add new primitive functions (assign, compare, add)
+            - Unify array functions for all primitive data types
+            - Restructure and clean up various container functions (append, replace etc.)
+            - Factor out some controller functionality into sub directories (globaliser, checker etc.)
+            - Restructure test functions
+            - Complete tcp socket handling for web user interfaces
+            - Optimise xml decoder functions
+            - Add http request decoder
+            - Add uri decoder (including percent-encoded characters)
+            - Add html encoder
+            - Add http response encoder
+        * CYBOL:
+            - Add cybol example application http_communication
+        * Project:
+            - Convert source code repository from Concurrent Versions System (CVS) to Subversion (SVN)
+
 CYBOP 0.9.0, 2009-02-07, Christian Heller  <christian.heller@tuxtax.de>
         * CYBOI:
             - Complete interrupt mechanism and sleeping for different communication channels

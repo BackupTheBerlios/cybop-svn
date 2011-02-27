@@ -8,37 +8,33 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-1 Cybernetics Oriented Programming (CYBOP)
+Cybernetics Oriented Programming (CYBOP)
+        * Christian Heller <christian.heller@tuxtax.de> (software development theory)
 
-Christian Heller <christian.heller@tuxtax.de> (software development theory)
+Cybernetics Oriented Language (CYBOL)
+        * Christian Heller <christian.heller@tuxtax.de> (language definition)
+        * Rolf Holzmueller <rolf.holzmueller@gmx.de> (help in creating xsd and ebnf files in 2005)
 
-2 Cybernetics Oriented Language (CYBOL)
+Cybernetics Oriented Interpreter (CYBOI)
+        * Christian Heller <christian.heller@tuxtax.de> (overall design and implementation of cyboi)
+        * Rolf Holzmueller <rolf.holzmueller@gmx.de> (first implementation of tcp sockets/ web service)
+        * Torsten Kunze <info@torstenkunze.de> (persistence using xml in old java version of cyboi)
+        * Jens Bohl <info@jens-bohl.de> (health record with topological documentation in old java version of cyboi)
+        * Dirk Behrendt <behrendt.dirk@web.de> (backup module in old java version of cyboi)
+        * Kumanan Kanagasabapathy <kumanan@uni.de> (internationalisation in old java version of cyboi)
+        * Jens Kleinschmidt <jens.kleinschmidt@gmx.de> (corba and soap tutorial with java prototype)
 
-Christian Heller <christian.heller@tuxtax.de> (language definition)
-Rolf Holzmueller <rolf.holzmueller@gmx.de> (help in creating xsd and ebnf files)
+CYBOP Project
+        * Christian Heller <christian.heller@tuxtax.de> (administration, website, releases, debian packaging)
+        * Martin Fache <martin.fache@myrbel.de> (x window system tutorial)
+        * Marcel Kiesling <makie2001@web.de> (socket tutorial)
+        * Michael Simon <michael.simon@gmx.net> (makefile)
+        * Karsten Tellhelm <hrlm22@yahoo.de> (xml parser tutorial)
+        * Teodora Kikova <teodora.kikova@stud.tu-ilmenau.de> (windows port using cygwin)
+        * Dennis Reichenbach <dennis.reichenbach@gmx.net> (debian packaging)
+        * Gregory Woodhouse <gregory.woodhouse@sbcglobal.net> (hints on gnu/linux process forking)
 
-3 Cybernetics Oriented Interpreter (CYBOI)
-
-Christian Heller <christian.heller@tuxtax.de> (overall design and implementation of cyboi)
-Rolf Holzmueller <rolf.holzmueller@gmx.de> (first implementation of tcp sockets/ web service)
-Torsten Kunze <info@torstenkunze.de> (persistence using xml in old java version of cyboi)
-Jens Bohl <info@jens-bohl.de> (health record with topological documentation in old java version of cyboi)
-Dirk Behrendt <behrendt.dirk@web.de> (backup module in old java version of cyboi)
-Kumanan Kanagasabapathy <kumanan@uni.de> (internationalisation in old java version of cyboi)
-Jens Kleinschmidt <jens.kleinschmidt@gmx.de> (corba and soap tutorial with java prototype)
-
-4 CYBOP Project
-
-Christian Heller <christian.heller@tuxtax.de> (administration, website, releases, debian packaging)
-Martin Fache <martin.fache@myrbel.de> (x window system tutorial)
-Marcel Kiesling <makie2001@web.de> (socket tutorial)
-Michael Simon <michael.simon@gmx.net> (makefile)
-Karsten Tellhelm <hrlm22@yahoo.de> (xml parser tutorial)
-Teodora Kikova <teodora.kikova@stud.tu-ilmenau.de> (windows port using cygwin)
-Dennis Reichenbach <dennis.reichenbach@gmx.net> (debian packaging)
-Gregory Woodhouse <gregory.woodhouse@sbcglobal.net> (hints on gnu/linux process forking)
-
-5 Help
-Karl Berry <karl@freefriends.org> (feedback on improving project infrastructure and documentation)
-Didier Link <didier@famille-link.fr> (Autotools file creation)
-Allan "TheForkOfJustice" <theforkofjustice@gmail.com> of Linux for Clinics (Ubuntu/ Debian Packaging)
+Help and Support
+        * Karl Berry <karl@freefriends.org> (feedback on improving project infrastructure and documentation)
+        * Didier Link <didier@famille-link.fr> (Autotools file creation)
+        * Allan "TheForkOfJustice" <theforkofjustice@gmail.com> of Linux for Clinics (Ubuntu/ Debian Packaging)
