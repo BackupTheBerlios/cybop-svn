@@ -119,3 +119,13 @@ __________________
 - Produce the archives (cybop-x.x.x.tar.gz and cybop-x.x.x.tar.bz2) to be distributed:
 
     make dist
+
+Tagging SVN
+___________
+
+Tagging and branching are very simple in SVN.
+The root node of the trunk/ directory is just copied.
+The graphical kdesvn applications does not provide this functionality.
+Therefore, adapt and use the following command line:
+
+svn copy https://christian@svn.berlios.de/svnroot/repos/cybop/trunk https://christian@svn.berlios.de/svnroot/repos/cybop/tags/cybop-0.10.0 -m "Tag the cybop-0.10.0 release"
