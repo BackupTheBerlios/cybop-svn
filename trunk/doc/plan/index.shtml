@@ -27,6 +27,26 @@
     <div id="page">
         <!--#include virtual="../menu.inc" -->
         <div id="content">
+            <div align="right">
+                <table>
+                <tr>
+                    <th align="right">Status</th>
+                    <th align="left">Legend</th>
+                </tr>
+                <tr>
+                    <td align="right">to be implemented</td>
+                    <td align="center" bgcolor="#FF8080"><font color="#000000">todo</font></td>
+                </tr>
+                <tr>
+                    <td align="right">in progress</td>
+                    <td align="center" bgcolor="#FFFFC0"><font color="#000000">doing</font></td>
+                </tr>
+                <tr>
+                    <td align="right">completed</td>
+                    <td align="center" bgcolor="#C0FFC0"><font color="#000000">done</font></td>
+                </tr>
+                </table>
+            </div>
             <h1>Project Plan</h1>
             <table>
                 <tr>
@@ -65,6 +85,15 @@
                         <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
                     </td>
                 </tr>
+            </table>
+            <br>
+            <table>
+                <tr>
+                    <th>Released Version</th>
+                    <th>Date</th>
+                    <th>Features</th>
+                    <th>Release Master</th>
+                </tr>
                 <tr>
                     <td>
                         0.10.0.0
@@ -78,15 +107,6 @@
                     <td>
                         <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
                     </td>
-                </tr>
-            </table>
-            <br>
-            <table>
-                <tr>
-                    <th>Released Version</th>
-                    <th>Date</th>
-                    <th>Features</th>
-                    <th>Release Master</th>
                 </tr>
                 <tr>
                     <td>
@@ -324,24 +344,6 @@
                         <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
                     </td>
                 </tr>
-            </table>
-            <table>
-            <tr>
-                <th align="right">Status</th>
-                <th align="left">Legend</th>
-            </tr>
-            <tr>
-                <td align="right">to be implemented</td>
-                <td align="center" bgcolor="#FF8080"><font color="#000000">todo</font></td>
-            </tr>
-            <tr>
-                <td align="right">in progress</td>
-                <td align="center" bgcolor="#FFFFC0"><font color="#000000">doing</font></td>
-            </tr>
-            <tr>
-                <td align="right">completed</td>
-                <td align="center" bgcolor="#C0FFC0"><font color="#000000">done</font></td>
-            </tr>
             </table>
         </div>
         <!--#include virtual="../footer.inc" -->

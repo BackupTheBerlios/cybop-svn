@@ -39,7 +39,7 @@
                 </th>
             </tr>
             <tr>
-                <td class="doing"/>
+                <td class="done"/>
                 <td>
                     <h2>CYBOI</h2>
                     <ul>
@@ -58,8 +58,7 @@
                     </ul>
                 </td>
                 <td>
-                    Christian Heller<br>
-                    &lt;<a href="mailto:christian.heller@tuxtax.de">christian.heller@tuxtax.de</a>&gt;<br>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
                 </td>
             </tr>
             <tr>
@@ -71,6 +70,7 @@
                     </ul>
                 </td>
                 <td>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
                 </td>
             </tr>
             <tr>
@@ -82,6 +82,7 @@
                     </ul>
                 </td>
                 <td>
+                    <a href="mailto:christian.heller@tuxtax.de">Christian Heller</a>
                 </td>
             </tr>
             </table>
