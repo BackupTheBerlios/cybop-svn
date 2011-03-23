@@ -130,6 +130,8 @@ void guide_loop(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
+    fwprintf(stdout, L"TEST loop: %i\n", **bm);
+
         // Check if break flag is set to true.
         if (**bm != *FALSE_BOOLEAN_MEMORY_MODEL) {
 

@@ -155,10 +155,12 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
     // The result parameter comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+/*??
     // Compare result parameter abstraction. It must be a boolean.
     compare_equal_arrays((void*) &r, *ra, *rac, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+*/
 
         // The left side parameter comparison result.
         int lr;
@@ -243,10 +245,12 @@ void compare_greaterness_or_equality(void* p0, void* p1, void* p2, void* p3, voi
             }
         }
 
+/*??
     } else {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare if one parameter is greater than or equal to the other. The result parameter is not a boolean.");
     }
+*/
 }
 
 /* GREATERNESS_OR_EQUALITY_COMPARATOR_SOURCE */

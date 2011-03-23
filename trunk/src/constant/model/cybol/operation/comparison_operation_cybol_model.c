@@ -44,12 +44,12 @@ static wchar_t GREATER_COMPARISON_OPERATION_CYBOL_MODEL_ARRAY[] = {L'g', L'r', L
 static wchar_t* GREATER_COMPARISON_OPERATION_CYBOL_MODEL = GREATER_COMPARISON_OPERATION_CYBOL_MODEL_ARRAY;
 static int* GREATER_COMPARISON_OPERATION_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The smaller or equal comparison operation cybol model. */
+/** The smaller_or_equal comparison operation cybol model. */
 static wchar_t SMALLER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L'm', L'a', L'l', L'l', L'e', L'r', L'_', L'o', L'r', L'_', L'e', L'q', L'u', L'a', L'l'};
 static wchar_t* SMALLER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL = SMALLER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_ARRAY;
 static int* SMALLER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The greater or equal comparison operation cybol model. */
+/** The greater_or_equal comparison operation cybol model. */
 static wchar_t GREATER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_ARRAY[] = {L'g', L'r', L'e', L'a', L't', L'e', L'r', L'_', L'o', L'r', L'_', L'e', L'q', L'u', L'a', L'l'};
 static wchar_t* GREATER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL = GREATER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_ARRAY;
 static int* GREATER_OR_EQUAL_COMPARISON_OPERATION_CYBOL_MODEL_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;

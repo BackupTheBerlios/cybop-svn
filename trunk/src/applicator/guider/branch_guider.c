@@ -155,12 +155,12 @@ void guide_branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        // The criterion is true.
+        // The criterion is true. Use true model.
         handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *ta, *tac, *tm, *tmc, *td, *tdc, p12, p13, (void*) &x);
 
     } else {
 
-        // The criterion is false.
+        // The criterion is false. Use false model.
         handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *fa, *fac, *fm, *fmc, *fd, *fdc, p12, p13, (void*) &x);
     }
 }
