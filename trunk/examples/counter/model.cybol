@@ -35,6 +35,11 @@
         <property name="summand_2" channel="inline" abstraction="number/integer" model="1"/>
         <property name="sum" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
     </part>
+    <part name="TEST_break_1" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="1"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
+    </part>
 </model>
 
 <!--
