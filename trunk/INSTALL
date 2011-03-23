@@ -62,6 +62,11 @@ ___________________________
     /home/cybop/src/controller/cyboi --knowledge shell_output/run.cybol
     /home/cybop/src/controller/cyboi --knowledge shell_command_execution/run.cybol
     /home/cybop/src/controller/cyboi --knowledge program_execution/run.cybol
+    /home/cybop/src/controller/cyboi --knowledge addition/run.cybol
+    /home/cybop/src/controller/cyboi --knowledge addition_dynamic_model/run.cybol
+    /home/cybop/src/controller/cyboi --knowledge addition_dynamic_model_with_root/run.cybol
+    /home/cybop/src/controller/cyboi --knowledge addition_static_model/run.cybol
+    /home/cybop/src/controller/cyboi --knowledge counter/run.cybol
     /home/cybop/src/controller/cyboi --knowledge helloworld/run.cybol
     /home/cybop/src/controller/cyboi --knowledge ui_control/run.cybol
     /home/cybop/src/controller/cyboi --knowledge http_communication/run.cybol

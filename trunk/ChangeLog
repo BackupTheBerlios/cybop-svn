@@ -18,6 +18,7 @@
 
 2011-03-23  Christian Heller  <christian.heller@tuxtax.de>
         * Make example application "counter" work fully
+        * Add new example applications "addition", "addition_dynamic_model", "addition_dynamic_model_with_root", "addition_static_model"
 
 2011-03-22  Christian Heller  <christian.heller@tuxtax.de>
         * Add new example application "counter"

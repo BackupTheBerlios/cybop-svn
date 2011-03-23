@@ -1,0 +1,86 @@
+<model>
+    <part name="create_addition_application" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="addition_application"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+    </part>
+    <part name="create_summand_1" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="summand_1"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".addition_application"/>
+    </part>
+    <part name="create_summand_2" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="summand_2"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".addition_application"/>
+    </part>
+    <part name="create_sum" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="sum"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".addition_application"/>
+    </part>
+    <part name="initialise_summand_1" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="3"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".addition_application.summand_1"/>
+    </part>
+    <part name="initialise_summand_2" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="4"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".addition_application.summand_2"/>
+    </part>
+    <part name="initialise_sum" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="0"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".addition_application.sum"/>
+    </part>
+    <part name="add" channel="inline" abstraction="operation/plain" model="add">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".addition_application.summand_1"/>
+        <property name="summand_2" channel="inline" abstraction="path/knowledge" model=".addition_application.summand_2"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".addition_application.sum"/>
+    </part>
+    <part name="print_result" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".addition_application.sum"/>
+        <property name="new_line" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    </part>
+    <part name="exit_application" channel="inline" abstraction="operation/plain" model="exit"/>
+</model>
+
+<!--
+    This example is identical to the "addition_dynamic_model" example,
+    only that a root node named "addition_application" is created first,
+    to which all other values are added (by using the "whole" property).
+/-->
+
+<!--
+    Copyright (C) 1999-2011. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: run.cybol,v $ $Revision: 1.18 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

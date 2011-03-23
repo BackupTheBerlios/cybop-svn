@@ -1,26 +1,37 @@
 <model>
-    <part name="create_result" channel="inline" abstraction="operation/plain" model="create">
-        <property name="name" channel="inline" abstraction="text/plain" model="result"/>
-        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+    <part name="create_domain" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="domain"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
         <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+    </part>
+    <part name="initialise_domain" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="addition_static_model/domain.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".domain"/>
     </part>
     <part name="add" channel="inline" abstraction="operation/plain" model="add">
         <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
-        <property name="summand_1" channel="inline" abstraction="number/integer" model="1"/>
-        <property name="summand_2" channel="inline" abstraction="number/integer" model="2"/>
-        <property name="sum" channel="inline" abstraction="path/knowledge" model=".result"/>
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".domain.summand_1"/>
+        <property name="summand_2" channel="inline" abstraction="path/knowledge" model=".domain.summand_2"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".domain.sum"/>
     </part>
     <part name="print_result" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
         <property name="language" channel="inline" abstraction="text/plain" model="integer"/>
-        <property name="message" channel="inline" abstraction="path/knowledge" model=".result"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".domain.sum"/>
         <property name="new_line" channel="inline" abstraction="logicvalue/boolean" model="true"/>
     </part>
     <part name="exit_application" channel="inline" abstraction="operation/plain" model="exit"/>
 </model>
 
 <!--
-    This example adds two integer values and prints the resulting sum on screen.
+    This example uses a small domain model that contains three integer values,
+    which are needed for the addition operation.
+    The domain model resides externally, in an own cybol file.
+    It gets created and added to the runtime knowledge tree automatically,
+    when using the "receive" operation and specifying "text/cybol" as data format.
+    Then follows the addition and result printing on screen.
 /-->
 
 <!--
