@@ -35,7 +35,7 @@
     </part>
     <part name="initialise_count" channel="inline" abstraction="operation/plain" model="copy">
         <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
-        <property name="source" channel="inline" abstraction="number/integer" model="0"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="1"/>
         <property name="destination" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
     </part>
     <part name="initialise_maximum" channel="inline" abstraction="operation/plain" model="copy">
@@ -50,12 +50,14 @@
         <property name="model" channel="inline" abstraction="path/knowledge" model=".counter.model"/>
     </part>
     <!-- TEST: Write knowledge tree into file. -->
+<!--
     <part name="test_knowledge_tree" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
         <property name="language" channel="inline" abstraction="text/plain" model="text/model-diagram"/>
         <property name="message" channel="inline" abstraction="path/knowledge" model=".counter"/>
         <property name="receiver" channel="inline" abstraction="text/plain" model="TEST_COUNTER.txt"/>
     </part>
+-->
     <part name="print_numbers" channel="inline" abstraction="operation/plain" model="loop">
         <property name="break" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
         <property name="model" channel="inline" abstraction="path/knowledge" model=".counter.model"/>

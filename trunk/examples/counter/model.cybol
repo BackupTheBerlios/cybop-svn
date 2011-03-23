@@ -1,27 +1,8 @@
 <model>
-    <part name="compare_count" channel="inline" abstraction="operation/plain" model="compare">
-        <property name="comparison" channel="inline" abstraction="text/plain" model="greater_or_equal"/>
+    <part name="compare_count" channel="inline" abstraction="operation/plain" model="greater_or_equal">
         <property name="left" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
         <property name="right" channel="inline" abstraction="path/knowledge" model=".counter.maximum"/>
         <property name="result" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
-    </part>
-    <part name="TEST_print_break" channel="inline" abstraction="operation/plain" model="send">
-        <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
-        <property name="language" channel="inline" abstraction="text/plain" model="integer"/>
-        <property name="message" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
-        <property name="new_line" channel="inline" abstraction="logicvalue/boolean" model="true"/>
-    </part>
-    <part name="check_break" channel="inline" abstraction="operation/plain" model="branch">
-        <property name="criterion" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
-        <!-- The empty true model. CAUTION! Do NOT use abstraction "path/knowledge" here, as it somehow causes cyboi to crash. -->
-        <property name="true" channel="inline" abstraction="operation/plain" model="exit"/>
-<!--
-        <property name="true" channel="inline" abstraction="text/plain" model=""/>
--->
-        <!-- The false model. This model calls itself if it has to be repeated in the loop again. -->
-<!--
-        <property name="false" channel="inline" abstraction="path/knowledge" model=".counter.model"/>
--->
     </part>
     <part name="print_number" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
@@ -34,11 +15,6 @@
         <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
         <property name="summand_2" channel="inline" abstraction="number/integer" model="1"/>
         <property name="sum" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
-    </part>
-    <part name="TEST_break_1" channel="inline" abstraction="operation/plain" model="copy">
-        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
-        <property name="source" channel="inline" abstraction="number/integer" model="1"/>
-        <property name="destination" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
     </part>
 </model>
 

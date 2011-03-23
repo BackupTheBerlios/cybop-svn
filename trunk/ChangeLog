@@ -16,6 +16,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-03-23  Christian Heller  <christian.heller@tuxtax.de>
+        * Make example application "counter" work fully
+
 2011-03-22  Christian Heller  <christian.heller@tuxtax.de>
         * Add new example application "counter"
 
