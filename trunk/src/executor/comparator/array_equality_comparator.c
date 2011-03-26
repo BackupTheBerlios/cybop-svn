@@ -33,8 +33,8 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/comparator/equality_comparator.c"
 #include "../../executor/memoriser/size_determiner.c"
+#include "../../executor/comparator.c"
 #include "../../logger/logger.c"
 
 /**
@@ -98,7 +98,7 @@ void compare_equal_array_elements(void* p0, void* p1, void* p2, void* p3, void* 
 
                         // CAUTION! This function does not change the result flag, if unequal.
                         // Therefore, the result flag always has to be initialised with zero before!
-                        compare_equal_with_offset((void*) &r2, p1, p2, p4, (void*) &o);
+                        compare_with_offset((void*) &r2, p1, p2, p4, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) &o);
 
                         if (r2 == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

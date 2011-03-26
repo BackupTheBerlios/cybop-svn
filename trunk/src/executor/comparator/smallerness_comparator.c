@@ -23,73 +23,72 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef EQUALITY_COMPARATOR_SOURCE
-#define EQUALITY_COMPARATOR_SOURCE
+#ifndef SMALLERNESS_COMPARATOR_SOURCE
+#define SMALLERNESS_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_adder.c"
-#include "../../executor/comparator/equality/character_equality_comparator.c"
-#include "../../executor/comparator/equality/double_equality_comparator.c"
-#include "../../executor/comparator/equality/integer_equality_comparator.c"
-#include "../../executor/comparator/equality/pointer_equality_comparator.c"
-#include "../../executor/comparator/equality/unsigned_long_equality_comparator.c"
-#include "../../executor/comparator/equality/wide_character_equality_comparator.c"
+#include "../../executor/comparator/smallerness/character_smallerness_comparator.c"
+#include "../../executor/comparator/smallerness/double_smallerness_comparator.c"
+#include "../../executor/comparator/smallerness/integer_smallerness_comparator.c"
+#include "../../executor/comparator/smallerness/pointer_smallerness_comparator.c"
+#include "../../executor/comparator/smallerness/unsigned_long_smallerness_comparator.c"
+#include "../../executor/comparator/smallerness/wide_character_smallerness_comparator.c"
 #include "../../logger/logger.c"
 
 /**
- * Compares two values for equality.
+ * Compares two values for smallerness.
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left value
  * @param p2 the right value
  * @param p3 the abstraction
  */
-void compare_equal(void* p0, void* p1, void* p2, void* p3) {
+void compare_smaller(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* a = (int*) p3;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare for equality.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare for smallerness.");
 
         if (*a == *CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            compare_equal_character(p0, p1, p2);
+            compare_smaller_character(p0, p1, p2);
 
         } else if (*a == *DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            compare_equal_double(p0, p1, p2);
+            compare_smaller_double(p0, p1, p2);
 
         } else if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            compare_equal_integer(p0, p1, p2);
+            compare_smaller_integer(p0, p1, p2);
 
         } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            compare_equal_pointer(p0, p1, p2);
+            compare_smaller_pointer(p0, p1, p2);
 
         } else if (*a == *UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            compare_equal_unsigned_long(p0, p1, p2);
+            compare_smaller_unsigned_long(p0, p1, p2);
 
         } else if (*a == *WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            compare_equal_wide_character(p0, p1, p2);
+            compare_smaller_wide_character(p0, p1, p2);
 
         } else {
 
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare for equality. The abstraction is unknown.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare for smallerness. The abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare for equality. The abstraction is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare for smallerness. The abstraction is null.");
     }
 }
 
-/* EQUALITY_COMPARATOR_SOURCE */
+/* SMALLERNESS_COMPARATOR_SOURCE */
 #endif

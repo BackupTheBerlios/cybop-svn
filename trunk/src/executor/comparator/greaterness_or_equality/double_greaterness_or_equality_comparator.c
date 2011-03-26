@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_EQUALITY_COMPARATOR_SOURCE
-#define CHARACTER_EQUALITY_COMPARATOR_SOURCE
+#ifndef DOUBLE_GREATERNESS_OR_EQUALITY_COMPARATOR_SOURCE
+#define DOUBLE_GREATERNESS_OR_EQUALITY_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -34,48 +34,48 @@
 #include "../../../logger/logger.c"
 
 /**
- * Compares two character values for equality.
+ * Compares two double values for greaterness or equality.
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left value
  * @param p2 the right value
  */
-void compare_equal_character(void* p0, void* p1, void* p2) {
+void compare_greater_or_equal_double(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        char* rv = (char*) p2;
+        double* rv = (double*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            char* lv = (char*) p1;
+            double* lv = (double*) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                 int* r = (int*) p0;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare character values for equality.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare double values for greaterness or equality.");
 
-                if (*lv == *rv) {
+                if (*lv >= *rv) {
 
                     *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare character values for equality. The result is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare double values for greaterness or equality. The result is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare character values for equality. The left value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare double values for greaterness or equality. The left value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare character values for equality. The right value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare double values for greaterness or equality. The right value is null.");
     }
 }
 
-/* CHARACTER_EQUALITY_COMPARATOR_SOURCE */
+/* DOUBLE_GREATERNESS_OR_EQUALITY_COMPARATOR_SOURCE */
 #endif

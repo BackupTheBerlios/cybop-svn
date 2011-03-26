@@ -20,6 +20,7 @@
         <property name="result" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
     </part>
 
+        * Delete function "compare_equal_with_offset" in file "equality_comparator.c"
         * Use "route/sequence" abstraction instead of "send" model + "signal" property to execute a compound model as algorithm
 
         * Rename "arithmetiser" to "calculator" with function "calculate" and

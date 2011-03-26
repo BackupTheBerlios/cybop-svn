@@ -34,9 +34,9 @@
 #include "../../../logger/logger.c"
 
 /**
- * Compares the integers for equality.
+ * Compares two integer values for equality.
  *
- * @param p0 the result (number 1 if equal; unchanged otherwise)
+ * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left value
  * @param p2 the right value
  */
@@ -54,27 +54,26 @@ void compare_equal_integer(void* p0, void* p1, void* p2) {
 
                 int* r = (int*) p0;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare integers for equality.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare integer values for equality.");
 
                 if (*lv == *rv) {
 
-                    // Set result to number one only if areas are equal.
                     *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integers for equality. The result is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integer values for equality. The result is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integers for equality. The left value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integer values for equality. The left value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integers for equality. The right value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integer values for equality. The right value is null.");
     }
 }
 

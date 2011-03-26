@@ -31,11 +31,12 @@
 #include "../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../executor/comparator/equal_comparator.c"
-#include "../executor/comparator/greater_comparator.c"
-#include "../executor/comparator/greater_or_equal_comparator.c"
-#include "../executor/comparator/smaller_comparator.c"
-#include "../executor/comparator/smaller_or_equal_comparator.c"
+#include "../executor/arithmetiser/integer_adder.c"
+#include "../executor/comparator/equality_comparator.c"
+#include "../executor/comparator/greaterness_comparator.c"
+#include "../executor/comparator/greaterness_or_equality_comparator.c"
+#include "../executor/comparator/smallerness_comparator.c"
+#include "../executor/comparator/smallerness_or_equality_comparator.c"
 #include "../logger/logger.c"
 
 /**
@@ -84,6 +85,35 @@ void compare(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare. The comparison is null.");
     }
+}
+
+/**
+ * Compares two values found at the given offset.
+ *
+ * @param p0 the result (number 1 if equal; unchanged otherwise)
+ * @param p1 the left value
+ * @param p2 the right value
+ * @param p3 the abstraction
+ * @param p4 the comparison
+ * @param p5 the offset
+ */
+void compare_with_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    // The left element.
+    // CAUTION! It HAS TO BE initialised with p1,
+    // since an offset is added to it below.
+    void* le = p1;
+    // The right element.
+    // CAUTION! It HAS TO BE initialised with p2,
+    // since an offset is added to it below.
+    void* re = p2;
+
+    // Add offset to left element.
+    add_integer((void*) &le, p5, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Add offset to right element.
+    add_integer((void*) &re, p5, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    compare(p0, le, re, p3, p4);
 }
 
 /* COMPARATOR_SOURCE */
