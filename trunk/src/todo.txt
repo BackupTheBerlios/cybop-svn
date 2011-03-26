@@ -11,6 +11,21 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Use MIME types to categorise operations in "abstraction" attribute, e.g.:
+
+    <part name="compare_count" channel="inline" abstraction="comparison/greater_or_equal" model="">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="left" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+        <property name="right" channel="inline" abstraction="path/knowledge" model=".counter.maximum"/>
+        <property name="result" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
+    </part>
+
+        * Use "route/sequence" abstraction instead of "send" model + "signal" property to execute a compound model as algorithm
+
+        * Rename "arithmetiser" to "calculator" with function "calculate" and
+            distinguish operation first (add, subtract etc.) and then primitive types
+        * Implement "comparator" with function "compare" and
+            distinguish operation first (equality, smallerness etc.) and then primitive types
         * Implement in this order: comparator, finder, retriever (getter), replacer, appender
         * Continue then with "part_replacer.c"
         * Provide modifier functions for "part" that expect just one pointer with count and size
@@ -76,6 +91,7 @@
         * Adapt all places in source code where reallocation is used to new
             reallocation factor handling and also shrink memory structures appropriately
 
+        * Separate files of directory "constant/abstraction/cybol/" into "state" and "logic"
         * Rename several things in CYBOL files and CYBOI:
             --> rename "abstraction" attribute to "language" for all CYBOL tags?!
             --> rename "model" attribute to "message" for all CYBOL tags?!

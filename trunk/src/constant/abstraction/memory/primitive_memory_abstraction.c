@@ -52,29 +52,29 @@
 // as they are just integer numbers.
 //
 
-/** The memory abstraction count. */
+/** The primitive memory abstraction count. */
 static int* PRIMITIVE_MEMORY_ABSTRACTION_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Primitive.
 //
 
-/** The character memory abstraction. */
+/** The character primitive memory abstraction. */
 static int* CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The double memory abstraction. */
+/** The double primitive memory abstraction. */
 static int* DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The integer memory abstraction. */
+/** The integer primitive memory abstraction. */
 static int* INTEGER_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The pointer memory abstraction. */
+/** The pointer primitive memory abstraction. */
 static int* POINTER_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The unsigned long memory abstraction. */
+/** The unsigned long primitive memory abstraction. */
 static int* UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The wide character memory abstraction. */
+/** The wide character primitive memory abstraction. */
 static int* WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* PRIMITIVE_MEMORY_ABSTRACTION_SOURCE */
