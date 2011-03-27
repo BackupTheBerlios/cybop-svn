@@ -18,7 +18,7 @@
 
 2011-03-26  Christian Heller  <christian.heller@tuxtax.de>
 
-        * Add file "comparator.c" to directory "executor/"
+        * Add many kinds of comparator files to directory "executor/comparator/"
         * Add files "calculate_cybol_abstraction.c", "compare_cybol_abstraction.c", "route_cybol_abstraction.c"
             to directory "constant/abstraction/cybol/"
         * Add files "primitive_operation_abstraction.c", "operation_abstraction.c"

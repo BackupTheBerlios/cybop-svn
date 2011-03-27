@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GREATERNESS_COMPARATOR_SOURCE
-#define GREATERNESS_COMPARATOR_SOURCE
+#ifndef GREATERNESS_COMPARATOR_APPLICATOR_SOURCE
+#define GREATERNESS_COMPARATOR_APPLICATOR_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -249,5 +249,5 @@ void compare_greaterness(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* GREATERNESS_COMPARATOR_SOURCE */
+/* GREATERNESS_COMPARATOR_APPLICATOR_SOURCE */
 #endif
