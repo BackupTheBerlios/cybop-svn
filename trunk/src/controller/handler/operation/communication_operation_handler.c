@@ -33,7 +33,7 @@
 #include "../../../constant/model/cybol/operation/communication_operation_cybol_model.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/comparator/equality/array_equality_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -67,7 +67,7 @@ void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays(p16, p10, p11, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_array(p16, p10, p11, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -77,7 +77,7 @@ void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays(p16, p10, p11, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_array(p16, p10, p11, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -91,7 +91,7 @@ void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void
 
     if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_arrays(p16, p10, p11, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_array(p16, p10, p11, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

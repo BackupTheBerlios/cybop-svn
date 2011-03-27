@@ -115,6 +115,9 @@
             state of cybop; brief overview which ones should be read first
             if someone was trying to use the system
 
+        * Use recursion instead of loop at several places in source code,
+            in order to improve runtime speed
+
         * Search for "??" (places that are left TODO) and clean up source code
 
         * Check out handling of "super" property. Is it necessary at all?

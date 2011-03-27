@@ -58,96 +58,92 @@
 // abstraction constants is necessary!
 //
 
-//??
-//?? CAUTION! These constants are possibly NOT needed.
-//?? Similar ones are specified in directory "constant/abstraction/cybol/"
-//?? Until this is sure, however, the constants are commented out.
-//?? They may be deleted later.
-//??
-
 //
 // Compare.
 //
 
 /** The equal operation abstraction. */
-/*??
 static wchar_t EQUAL_OPERATION_ABSTRACTION_ARRAY[] = {L'e', L'q', L'u', L'a', L'l'};
 static wchar_t* EQUAL_OPERATION_ABSTRACTION = EQUAL_OPERATION_ABSTRACTION_ARRAY;
 static int* EQUAL_OPERATION_ABSTRACTION_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The greater operation abstraction. */
-/*??
 static wchar_t GREATER_OPERATION_ABSTRACTION_ARRAY[] = {L'g', L'r', L'e', L'a', L't', L'e', L'r'};
 static wchar_t* GREATER_OPERATION_ABSTRACTION = GREATER_OPERATION_ABSTRACTION_ARRAY;
 static int* GREATER_OPERATION_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The greater_or_equal operation abstraction. */
-/*??
 static wchar_t GREATER_OR_EQUAL_OPERATION_ABSTRACTION_ARRAY[] = {L'g', L'r', L'e', L'a', L't', L'e', L'r', L'_', L'o', L'r', L'_', L'e', L'q', L'u', L'a', L'l'};
 static wchar_t* GREATER_OR_EQUAL_OPERATION_ABSTRACTION = GREATER_OR_EQUAL_OPERATION_ABSTRACTION_ARRAY;
 static int* GREATER_OR_EQUAL_OPERATION_ABSTRACTION_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
 
+/** The equal-part operation abstraction. */
+static wchar_t PART_EQUAL_OPERATION_ABSTRACTION_ARRAY[] = {L'e', L'q', L'u', L'a', L'l', L'-', L'p', L'a', L'r', L't'};
+static wchar_t* PART_EQUAL_OPERATION_ABSTRACTION = PART_EQUAL_OPERATION_ABSTRACTION_ARRAY;
+static int* PART_EQUAL_OPERATION_ABSTRACTION_COUNT = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The equal-prefix operation abstraction. */
+static wchar_t PREFIX_EQUAL_OPERATION_ABSTRACTION_ARRAY[] = {L'e', L'q', L'u', L'a', L'l', L'-', L'p', L'r', L'e', L'f', L'i', L'x'};
+static wchar_t* PREFIX_EQUAL_OPERATION_ABSTRACTION = PREFIX_EQUAL_OPERATION_ABSTRACTION_ARRAY;
+static int* PREFIX_EQUAL_OPERATION_ABSTRACTION_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
+
 /** The smaller operation abstraction. */
-/*??
 static wchar_t SMALLER_OPERATION_ABSTRACTION_ARRAY[] = {L's', L'm', L'a', L'l', L'l', L'e', L'r'};
 static wchar_t* SMALLER_OPERATION_ABSTRACTION = SMALLER_OPERATION_ABSTRACTION_ARRAY;
 static int* SMALLER_OPERATION_ABSTRACTION_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The smaller_or_equal operation abstraction. */
-/*??
 static wchar_t SMALLER_OR_EQUAL_OPERATION_ABSTRACTION_ARRAY[] = {L's', L'm', L'a', L'l', L'l', L'e', L'r', L'_', L'o', L'r', L'_', L'e', L'q', L'u', L'a', L'l'};
 static wchar_t* SMALLER_OR_EQUAL_OPERATION_ABSTRACTION = SMALLER_OR_EQUAL_OPERATION_ABSTRACTION_ARRAY;
 static int* SMALLER_OR_EQUAL_OPERATION_ABSTRACTION_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The equal-suffix operation abstraction. */
+static wchar_t SUFFIX_EQUAL_OPERATION_ABSTRACTION_ARRAY[] = {L'e', L'q', L'u', L'a', L'l', L'-', L's', L'u', L'f', L'f', L'i', L'x'};
+static wchar_t* SUFFIX_EQUAL_OPERATION_ABSTRACTION = SUFFIX_EQUAL_OPERATION_ABSTRACTION_ARRAY;
+static int* SUFFIX_EQUAL_OPERATION_ABSTRACTION_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Calculate.
 //
 
 /** The add operation abstraction. */
-/*??
 static wchar_t ADD_OPERATION_ABSTRACTION_ARRAY[] = {L'a', L'd', L'd'};
 static wchar_t* ADD_OPERATION_ABSTRACTION = ADD_OPERATION_ABSTRACTION_ARRAY;
 static int* ADD_OPERATION_ABSTRACTION_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The divide operation abstraction. */
-/*??
-static wchar_t ADD_OPERATION_ABSTRACTION_ARRAY[] = {L'd', L'i', L'v', L'i', L'd', L'e'};
-static wchar_t* ADD_OPERATION_ABSTRACTION = ADD_OPERATION_ABSTRACTION_ARRAY;
-static int* ADD_OPERATION_ABSTRACTION_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t DIVIDE_OPERATION_ABSTRACTION_ARRAY[] = {L'd', L'i', L'v', L'i', L'd', L'e'};
+static wchar_t* DIVIDE_OPERATION_ABSTRACTION = DIVIDE_OPERATION_ABSTRACTION_ARRAY;
+static int* DIVIDE_OPERATION_ABSTRACTION_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The multiply operation abstraction. */
-/*??
-static wchar_t ADD_OPERATION_ABSTRACTION_ARRAY[] = {L'm', L'u', L'l', L't', L'i', L'p', L'l', L'y'};
-static wchar_t* ADD_OPERATION_ABSTRACTION = ADD_OPERATION_ABSTRACTION_ARRAY;
-static int* ADD_OPERATION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t MULTIPLY_OPERATION_ABSTRACTION_ARRAY[] = {L'm', L'u', L'l', L't', L'i', L'p', L'l', L'y'};
+static wchar_t* MULTIPLY_OPERATION_ABSTRACTION = MULTIPLY_OPERATION_ABSTRACTION_ARRAY;
+static int* MULTIPLY_OPERATION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The subtract operation abstraction. */
-/*??
-static wchar_t ADD_OPERATION_ABSTRACTION_ARRAY[] = {L's', L'u', L'b', L't', L'r', L'a', L'c', L't'};
-static wchar_t* ADD_OPERATION_ABSTRACTION = ADD_OPERATION_ABSTRACTION_ARRAY;
-static int* ADD_OPERATION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t SUBTRACT_OPERATION_ABSTRACTION_ARRAY[] = {L's', L'u', L'b', L't', L'r', L'a', L'c', L't'};
+static wchar_t* SUBTRACT_OPERATION_ABSTRACTION = SUBTRACT_OPERATION_ABSTRACTION_ARRAY;
+static int* SUBTRACT_OPERATION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 //
 // Route.
 //
 
 /** The branch operation abstraction. */
-/*??
-static wchar_t ADD_OPERATION_ABSTRACTION_ARRAY[] = {L'b', L'r', L'a', L'n', L'c', L'h'};
-static wchar_t* ADD_OPERATION_ABSTRACTION = ADD_OPERATION_ABSTRACTION_ARRAY;
-static int* ADD_OPERATION_ABSTRACTION_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t BRANCH_OPERATION_ABSTRACTION_ARRAY[] = {L'b', L'r', L'a', L'n', L'c', L'h'};
+static wchar_t* BRANCH_OPERATION_ABSTRACTION = BRANCH_OPERATION_ABSTRACTION_ARRAY;
+static int* BRANCH_OPERATION_ABSTRACTION_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The loop operation abstraction. */
-/*??
-static wchar_t ADD_OPERATION_ABSTRACTION_ARRAY[] = {L'l', L'o', L'o', L'p'};
-static wchar_t* ADD_OPERATION_ABSTRACTION = ADD_OPERATION_ABSTRACTION_ARRAY;
-static int* ADD_OPERATION_ABSTRACTION_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t LOOP_OPERATION_ABSTRACTION_ARRAY[] = {L'l', L'o', L'o', L'p'};
+static wchar_t* LOOP_OPERATION_ABSTRACTION = LOOP_OPERATION_ABSTRACTION_ARRAY;
+static int* LOOP_OPERATION_ABSTRACTION_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The sequence operation abstraction. */
-/*??
-static wchar_t ADD_OPERATION_ABSTRACTION_ARRAY[] = {L's', L'e', L'q', L'u', L'e', L'n', L'c', L'e'};
-static wchar_t* ADD_OPERATION_ABSTRACTION = ADD_OPERATION_ABSTRACTION_ARRAY;
-static int* ADD_OPERATION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
+static wchar_t SEQUENCE_OPERATION_ABSTRACTION_ARRAY[] = {L's', L'e', L'q', L'u', L'e', L'n', L'c', L'e'};
+static wchar_t* SEQUENCE_OPERATION_ABSTRACTION = SEQUENCE_OPERATION_ABSTRACTION_ARRAY;
+static int* SEQUENCE_OPERATION_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* OPERATION_ABSTRACTION_SOURCE */
 #endif

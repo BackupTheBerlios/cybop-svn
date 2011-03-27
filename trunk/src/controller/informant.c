@@ -31,7 +31,7 @@
 #include "../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../constant/model/cyboi/identification_cyboi_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../executor/comparator/array_equality_comparator.c"
+#include "../executor/comparator/equality/array_equality_comparator.c"
 #include "../executor/memoriser/allocator/model_allocator.c"
 #include "../executor/memoriser/deallocator/model_deallocator.c"
 

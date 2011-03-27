@@ -38,7 +38,7 @@
 #include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/communicator/sender.c"
-#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/comparator/equality/array_equality_comparator.c"
 #include "../../../executor/converter/decoder.c"
 #include "../../../executor/converter/encoder/gnu_linux_console_encoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"

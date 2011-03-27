@@ -23,38 +23,38 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef EQUALITY_COMPARATOR_SOURCE
-#define EQUALITY_COMPARATOR_SOURCE
+#ifndef PRIMITIVE_EQUALITY_COMPARATOR_SOURCE
+#define PRIMITIVE_EQUALITY_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_adder.c"
-#include "../../executor/comparator/equality/character_equality_comparator.c"
-#include "../../executor/comparator/equality/double_equality_comparator.c"
-#include "../../executor/comparator/equality/integer_equality_comparator.c"
-#include "../../executor/comparator/equality/pointer_equality_comparator.c"
-#include "../../executor/comparator/equality/unsigned_long_equality_comparator.c"
-#include "../../executor/comparator/equality/wide_character_equality_comparator.c"
-#include "../../logger/logger.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/arithmetiser/integer_adder.c"
+#include "../../../executor/comparator/equality/character_equality_comparator.c"
+#include "../../../executor/comparator/equality/double_equality_comparator.c"
+#include "../../../executor/comparator/equality/integer_equality_comparator.c"
+#include "../../../executor/comparator/equality/pointer_equality_comparator.c"
+#include "../../../executor/comparator/equality/unsigned_long_equality_comparator.c"
+#include "../../../executor/comparator/equality/wide_character_equality_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
- * Compares two values for equality.
+ * Compares two primitive values for equality.
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left value
  * @param p2 the right value
  * @param p3 the abstraction
  */
-void compare_equal(void* p0, void* p1, void* p2, void* p3) {
+void compare_equal_primitive(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* a = (int*) p3;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare for equality.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare primitives for equality.");
 
         if (*a == *CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
@@ -82,14 +82,14 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3) {
 
         } else {
 
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare for equality. The abstraction is unknown.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare primitives for equality. The abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare for equality. The abstraction is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare primitives for equality. The abstraction is null.");
     }
 }
 
-/* EQUALITY_COMPARATOR_SOURCE */
+/* PRIMITIVE_EQUALITY_COMPARATOR_SOURCE */
 #endif

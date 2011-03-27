@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-03-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Completely redesign comparison modules in directory "executor/comparator/"
+
 2011-03-26  Christian Heller  <christian.heller@tuxtax.de>
 
         * Add many kinds of comparator files to directory "executor/comparator/"

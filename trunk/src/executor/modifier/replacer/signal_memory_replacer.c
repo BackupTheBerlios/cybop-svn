@@ -32,7 +32,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/signal_memory_memory_name.c"
-#include "../../../executor/comparator/array_equality_comparator.c"
+#include "../../../executor/comparator/equality/array_equality_comparator.c"
 #include "../../../executor/memoriser/reallocator/signal_memory_reallocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"

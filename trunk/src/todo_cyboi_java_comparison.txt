@@ -34,9 +34,11 @@ MODIFIER
 
 ACCESSOR
 
-- find: links to "find_first" by default
+- find: links to "find_first" by default, same as "find_part"
 - find_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
 - find_last_index(container, element): lastIndexOf
+- find_prefix (find that begins at index 0)
+- find_suffix (find that begins at last index and counts backward)
 
 - retrieve_element(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest
 - retrieve_part_name(container, index)
