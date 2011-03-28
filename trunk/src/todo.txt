@@ -11,6 +11,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Implement compare_part or compare_compound
+        * Find out if it is possible to optimise source code by moving
+            container functionality (compound, array) into separate files
+            and distinguish the primitive operation only inside
+
         * Adapt example applications to new operation cybol mime types and new comparison functions
         * Use MIME types to categorise operations in "abstraction" attribute, e.g.:
 
