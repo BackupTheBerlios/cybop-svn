@@ -11,6 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Replace function "compare_equal_array_element" with "get_array_elements"?
         * Implement compare_part or compare_compound
         * Find out if it is possible to optimise source code by moving
             container functionality (compound, array) into separate files
