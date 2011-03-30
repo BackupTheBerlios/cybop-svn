@@ -21,6 +21,18 @@ __________________
     tar -xvzf cybop-0.9.0.tar.gz
     tar -xvjf cybop-0.9.0.tar.bz2
 
+Package and Library Installation
+________________________________
+
+The following (Debian) packages are needed to execute CYBOL applications:
+xorg
+
+The following (Debian) packages are needed to compile CYBOI:
+xorg-dev
+xlibs-dev
+glut
+mesa
+
 CYBOI Compilation
 _________________
 
