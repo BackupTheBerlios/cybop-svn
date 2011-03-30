@@ -18,8 +18,8 @@ __________________
 
 - Extract the cybop-x.x.x.tar.gz or cybop-x.x.x.tar.bz2 file, respectively, e.g.:
 
-    tar -xvvzf cybop-0.9.0.tar.gz
-
+    tar -xvzf cybop-0.9.0.tar.gz
+    tar -xvjf cybop-0.9.0.tar.bz2
 
 CYBOI Compilation
 _________________
@@ -28,8 +28,9 @@ _________________
 
     cd /home/cybop
 
-- Execute the configure file with:
-
+- Execute the configure files with:
+    
+    ./autogen.sh
     ./configure
 
 - Clean the object files of any previous compilation (this is optional):
