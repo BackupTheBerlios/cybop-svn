@@ -12,14 +12,14 @@
         <property name="model" channel="inline" abstraction="path/knowledge" model=".greeting"/>
     </part>
     <!-- Write knowledge tree into file. This is only for testing reasons and can also be deleted. -->
-<!--
+
     <part name="test_knowledge_tree" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
         <property name="language" channel="inline" abstraction="text/plain" model="text/model-diagram"/>
         <property name="message" channel="inline" abstraction="path/knowledge" model=".greeting"/>
         <property name="receiver" channel="inline" abstraction="text/plain" model="TEST_HELLOWORLD.txt"/>
     </part>
--->
+
     <part name="startup_gnu_linux_console" channel="inline" abstraction="operation/plain" model="startup">
         <property name="service" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
     </part>
@@ -31,9 +31,11 @@
         <property name="message" channel="inline" abstraction="path/knowledge" model=".greeting"/>
         <property name="clean" channel="inline" abstraction="logicvalue/boolean" model="true"/>
     </part>
+<!--
     <part name="shutdown_gnu_linux_console" channel="inline" abstraction="operation/plain" model="shutdown">
         <property name="service" channel="inline" abstraction="text/plain" model="gnu-linux-console"/>
     </part>
+-->
 <!--
     <part name="destroy_greeting" channel="inline" abstraction="operation/plain" model="destroy">
         <property name="model" channel="inline" abstraction="path/knowledge" model=".greeting"/>

@@ -1,6 +1,6 @@
 <model>
     <part name="test" channel="inline" abstraction="operation/plain" model="run">
-        <property name="program" channel="inline" abstraction="text/plain" model="xdosemu"/>
+        <property name="program" channel="inline" abstraction="text/plain" model="mc"/>
     </part>
     <part name="exit" channel="inline" abstraction="operation/plain" model="exit"/>
 </model>
