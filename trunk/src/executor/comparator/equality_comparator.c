@@ -29,16 +29,9 @@
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
-#include "../../executor/comparator/equality/array_equality_comparator.c"
-/*??
-#include "../../executor/comparator/equality/complex_equality_comparator.c"
-#include "../../executor/comparator/equality/compound_equality_comparator.c"
-#include "../../executor/comparator/equality/date_time_equality_comparator.c"
-#include "../../executor/comparator/equality/fraction_equality_comparator.c"
-#include "../../executor/comparator/equality/model_equality_comparator.c"
-#include "../../executor/comparator/equality/part_equality_comparator.c"
-*/
+#include "../../executor/comparator/container_comparator.c"
 
 /**
  * Compares two models for equality.
@@ -48,8 +41,8 @@
  * @param p2 the left model count
  * @param p3 the right model
  * @param p4 the right model count
- * @param p5 the operand abstraction
- * @param p6 the operand abstraction count
+ * @param p5 the model abstraction
+ * @param p6 the model abstraction count
  */
 void compare_equal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
@@ -64,7 +57,7 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_array(p0, p1, p2, p3, p4, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_container(p0, p1, p2, p3, p4, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
         }
     }
 
@@ -104,7 +97,7 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_array(p0, p1, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_container(p0, p1, p2, p3, p4, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
         }
     }
 
@@ -124,7 +117,7 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_array(p0, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_container(p0, p1, p2, p3, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
         }
     }
 
@@ -154,7 +147,7 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_array(p0, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_container(p0, p1, p2, p3, p4, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
         }
     }
 
@@ -164,7 +157,7 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_array(p0, p1, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_container(p0, p1, p2, p3, p4, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
         }
     }
 
@@ -174,7 +167,7 @@ void compare_equal(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_equal_array(p0, p1, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_container(p0, p1, p2, p3, p4, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
         }
     }
 

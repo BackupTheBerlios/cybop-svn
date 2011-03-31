@@ -11,11 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Implement compare_part or compare_compound
-        * Find out if it is possible to optimise source code by moving
-            container functionality (compound, array) into separate files
-            and distinguish the primitive operation only inside
-
+        * Continue in "executor/comparator/" with compare_part or compare_compound etc.
+        * Delete file "array_equality_comparator.c" which was replaced by "container_comparator.c"
         * Adapt example applications to new operation cybol mime types and new comparison functions
         * Use MIME types to categorise operations in "abstraction" attribute, e.g.:
 
@@ -26,13 +23,10 @@
         <property name="result" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
     </part>
 
-        * Delete function "compare_equal_with_offset" in file "equality_comparator.c"
         * Use "route/sequence" abstraction instead of "send" model + "signal" property to execute a compound model as algorithm
 
         * Rename "arithmetiser" to "calculator" with function "calculate" and
             distinguish operation first (add, subtract etc.) and then primitive types
-        * Implement "comparator" with function "compare" and
-            distinguish operation first (equality, smallerness etc.) and then primitive types
         * Implement in this order: comparator, finder, retriever (getter), replacer, appender
         * Continue then with "part_replacer.c"
         * Provide modifier functions for "part" that expect just one pointer with count and size
@@ -57,6 +51,8 @@
             all following actions were appended but only the first is considered)
 
         * Continue with example application "presence"
+            (it already works for one client request, but due to the missing container function "replace_part"
+            answers to following client request are appended to the same model leading to false results)
 
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!

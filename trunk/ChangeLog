@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-03-31  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Split container- and element-related functionality into separate files in "executor/comparator/"
+
 2011-03-27  Christian Heller  <christian.heller@tuxtax.de>
 
         * Completely redesign comparison modules in directory "executor/comparator/"

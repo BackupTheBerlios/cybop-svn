@@ -32,7 +32,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/comparator/equality/primitive_equality_comparator.c"
+#include "../../../executor/comparator/element_equality_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -74,7 +74,7 @@ void compare_equal_array_element(void* p0, void* p1, void* p2, void* p3, void* p
     // Add offset to right element.
     add_integer((void*) &re, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    compare_equal_primitive(p0, le, re, p4);
+    compare_equal_element(p0, le, re, p4);
 }
 
 /**
@@ -158,8 +158,8 @@ void compare_equal_array_elements(void* p0, void* p1, void* p2, void* p3, void* 
 /**
  * Compares two arrays for equality.
  *
- * This procedure compares only the element counts of both arrays.
- * The actual elements comparison happens in compare_equal_array_elements.
+ * This procedure compares only the element counts.
+ * The actual elements comparison happens in another function.
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left array
