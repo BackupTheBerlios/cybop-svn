@@ -19,6 +19,7 @@
 2011-03-31  Christian Heller  <christian.heller@tuxtax.de>
 
         * Split container- and element-related functionality into separate files in "executor/comparator/"
+        * Start reimplementation of "executor/accessor/getter/"
 
 2011-03-27  Christian Heller  <christian.heller@tuxtax.de>
 

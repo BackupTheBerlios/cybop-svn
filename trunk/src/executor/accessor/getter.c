@@ -40,8 +40,8 @@
  * @param p0 the destination element (Hand over as reference!)
  * @param p1 the source model
  * @param p2 the source model index
- * @param p3 the abstraction
- * @param p4 the abstraction count
+ * @param p3 the element abstraction
+ * @param p4 the element abstraction count
  */
 void get(void* p0, void* p1, void* p2, void* p3, void* p4) {
 

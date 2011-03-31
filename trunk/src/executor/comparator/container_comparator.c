@@ -35,6 +35,26 @@
 #include "../../executor/comparator/equality/primitive_equality_comparator.c"
 #include "../../logger/logger.c"
 
+//
+// Models of abstraction "complex" or "fraction" are not
+// considered as container, since the comparison of their
+// elements follows special rules.
+//
+// Example:
+//
+// The two fractions 4 / 2 and 2 / 1 are identical even though
+// their numerators and denominators differ. If the fractions
+// were treated as containers and their elements compared one by one,
+// then neither the numerators 4 and 2 nor the denominators 2 and 1
+// would be equal.
+//
+// Therefore, such constructs are static and NOT treated as
+// dynamic containers. The number of their elements is fixed.
+// The fraction has two elements: numerator and denominator.
+// It needs a special comparison function that knows how to
+// treat fractions correctly.
+//
+
 /**
  * Compares one element of the left with one of the right container.
  *
@@ -52,8 +72,8 @@ void compare_container_element(void* p0, void* p1, void* p2, void* p3, void* p4,
     // The right element.
     void** r = NULL_POINTER_MEMORY_MODEL;
 
-    get_element((void*) &l, (void*) &lc, (void*) &ls, p3, p4);
-    get_element((void*) &r, (void*) &rc, (void*) &rs, p3, p4);
+    get_element((void*) &l, (void*) &lc, (void*) &ls, p1, p3, p4);
+    get_element((void*) &r, (void*) &rc, (void*) &rs, p2, p3, p4);
 
     compare_element(p0, *l, *r, p4, p5);
 }

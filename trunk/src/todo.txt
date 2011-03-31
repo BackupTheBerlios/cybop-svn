@@ -11,6 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Continue in "executor/accessor/getter/"
         * Continue in "executor/comparator/" with compare_part or compare_compound etc.
         * Delete file "array_equality_comparator.c" which was replaced by "container_comparator.c"
         * Adapt example applications to new operation cybol mime types and new comparison functions

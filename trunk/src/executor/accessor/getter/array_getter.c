@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ARRAY_GETTER_SOURCE
-#define ARRAY_GETTER_SOURCE
+#ifndef OLD_ARRAY_GETTER_SOURCE
+#define OLD_ARRAY_GETTER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -175,5 +175,5 @@ void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, 
     }
 }
 
-/* ARRAY_GETTER_SOURCE */
+/* OLD_ARRAY_GETTER_SOURCE */
 #endif
