@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-04-01  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Implement and investigate fraction operations
+
 2011-03-31  Christian Heller  <christian.heller@tuxtax.de>
 
         * Split container- and element-related functionality into separate files in "executor/comparator/"
