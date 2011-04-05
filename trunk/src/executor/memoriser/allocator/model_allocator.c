@@ -28,7 +28,9 @@
 
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/name/memory/model_memory_name.c"
 #include "../../../executor/modifier/replacer/array_replacer.c"
+#include "../../../executor/modifier/replacer.c"
 #include "../../../logger/logger.c"
 
 //
@@ -77,6 +79,35 @@ void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The destination model size is null.");
     }
+}
+
+/**
+ * Allocates the model.
+ *
+ * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
+ */
+void allocate_model_NEW(void* p0, void* p1) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate model.");
+
+/*??
+    // The data, count, size.
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate data, count, size.
+    allocate(p0, p1, p2, p3);
+//??    allocate((void*) &d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+
+    // Replace data, count, size.
+    replace(p0, d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    replace(p0, c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    replace(p0, s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+*/
 }
 
 /* MODEL_ALLOCATOR_SOURCE */

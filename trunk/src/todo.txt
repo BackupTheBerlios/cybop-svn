@@ -56,6 +56,8 @@
             (it already works for one client request, but due to the missing container function "replace_part"
             answers to following client request are appended to the same model leading to false results)
 
+        * Use htons for socket transfer
+        * Empty buffer with bzero(buffer, 300) in each socket transfer cycle? (See socket examples in tmp/)
         * Replace temporary workaround in file "percent_encoding_decoder.c" with proper decoder file
         * Figure out necessary LIMITATION of the socket receive buffer in function "communicate_receiving_socket" to 1024!
         * See: http://www.w3.org/TR/html5/urls.html#urls

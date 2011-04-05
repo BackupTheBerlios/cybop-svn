@@ -54,5 +54,16 @@ void deallocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     deallocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 }
 
+/**
+ * Deallocates the model.
+ *
+ * @param p0 the model (Hand over as reference!)
+ * @param p1 the model size
+ */
+void deallocate_model_NEW(void* p0, void* p1) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate model.");
+}
+
 /* MODEL_DEALLOCATOR_SOURCE */
 #endif

@@ -36,14 +36,38 @@
 /**
  * Deallocates the fraction.
  *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
+ * @param p0 the fraction (Hand over as reference!)
+ * @param p1 the fraction size
  */
 void deallocate_fraction(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate fraction.");
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-    deallocate_array(p0, p1, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+        void** f = (void**) p0;
+
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deallocate fraction.");
+
+/*??
+        // The numerator and denominator.
+        void** n = NULL_POINTER_MEMORY_MODEL;
+        void** d = NULL_POINTER_MEMORY_MODEL;
+
+        // Retrieve numerator and denominator.
+        retrieve((void*) &n, p0, (void*) NUMERATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        retrieve((void*) &d, p0, (void*) DENOMINATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+        // Deallocate numerator and denominator.
+        deallocate((void*) &n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        deallocate((void*) &d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+
+        // Deallocate fraction.
+        deallocate(p0, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+*/
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate fraction. The fraction is null.");
+    }
 }
 
 /* FRACTION_DEALLOCATOR_SOURCE */

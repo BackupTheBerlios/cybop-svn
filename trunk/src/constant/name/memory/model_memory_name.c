@@ -28,8 +28,8 @@
 
 #include "../../../constant/model/memory/integer_memory_model.c"
 
-/** The pointer model memory name. */
-static int* POINTER_MODEL_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
+/** The data model memory name. */
+static int* DATA_MODEL_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The count model memory name. */
 static int* COUNT_MODEL_MEMORY_NAME = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;

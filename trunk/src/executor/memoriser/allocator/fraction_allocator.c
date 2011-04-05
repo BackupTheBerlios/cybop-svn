@@ -30,20 +30,34 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/name/memory/fraction_memory_name.c"
 #include "../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../executor/modifier/replacer.c"
 #include "../../../logger/logger.c"
 
 /**
  * Allocates the fraction.
  *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
+ * @param p0 the fraction (Hand over as reference!)
+ * @param p1 the fraction size
  */
 void allocate_fraction(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate fraction.");
 
-    allocate_array(p0, p1, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+/*??
+    // The numerator and denominator.
+    void* n = *NULL_POINTER_MEMORY_MODEL;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate numerator and denominator.
+    allocate((void*) &n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+
+    // Replace numerator and denominator.
+    replace(p0, n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMERATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    replace(p0, d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DENOMINATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+*/
 }
 
 /* FRACTION_ALLOCATOR_SOURCE */

@@ -65,5 +65,16 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     deallocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 }
 
+/**
+ * Deallocates the part.
+ *
+ * @param p0 the part (Hand over as reference!)
+ * @param p1 the part size
+ */
+void deallocate_part_NEW(void* p0, void* p1) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate part.");
+}
+
 /* PART_DEALLOCATOR_SOURCE */
 #endif
