@@ -27,6 +27,7 @@
 #define PART_ALLOCATOR_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/name/memory/part_memory_name.c"
 #include "../../../logger/logger.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 
@@ -70,10 +71,30 @@ void allocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
  *
  * @param p0 the part (Hand over as reference!)
  * @param p1 the part size
+ * @param p2 the element abstraction
+ * @param p3 the element abstraction count
  */
-void allocate_part_NEW(void* p0, void* p1) {
+void allocate_part_NEW(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate part.");
+
+    // The name, abstraction, model, details.
+    void* n = *NULL_POINTER_MEMORY_MODEL;
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate name, abstraction, model, details.
+    allocate((void*) &n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &a, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &m, p1, p2, p3);
+    allocate((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+
+    // Replace name, abstraction, model, details.
+    replace(p0, n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAME_PART_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    replace(p0, a, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTION_PART_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    replace(p0, m, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODEL_PART_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    replace(p0, d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_PART_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* PART_ALLOCATOR_SOURCE */
