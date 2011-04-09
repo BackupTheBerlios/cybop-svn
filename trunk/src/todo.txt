@@ -12,6 +12,7 @@
 #
 
         * Continue in "allocate"
+        * Rename "model" (with count and size) into "item"
         * Continue in "executor/arithmetiser/fraction*"
         * Continue in "executor/accessor/getter/"
         * Continue in "executor/comparator/" with compare_part or compare_compound etc.

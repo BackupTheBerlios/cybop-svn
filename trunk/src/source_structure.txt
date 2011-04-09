@@ -24,6 +24,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+Hierarchy
+_________
+
+array
+item = data + count + size (all of type array)
+part = name + abstraction + model + details (all of type item)
+
 Introduction
 ____________
 
