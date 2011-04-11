@@ -7,9 +7,9 @@ __________
 
 MEMORISER
 
-+ allocate: malloc, new, constructor, create, SQL CREATE
++ allocate: malloc, new, constructor, create, DDL CREATE TABLE
 + reallocate: trimToSize
-+ deallocate: free, delete, destructor, destroy
++ deallocate: free, delete, destructor, destroy, DDL DROP TABLE
 
 MODIFIER
 
@@ -21,9 +21,9 @@ MODIFIER
 + append(container, element): add, push, put, offer, concat; = replace(container, count as index)
 - append_content(destination container, source container): appendAll, putAll
 
-- insert_element(container, source element, index) = reallocate + replace, SQL INSERT
+- insert_element(container, source element, index) = reallocate + replace, SQL INSERT, DDL ALTER TABLE
 
-- remove_element(index): delete, SQL DELETE
+- remove_element(index): delete, SQL DELETE, DDL ALTER TABLE
 - remove_element_by_name(name)
 - remove_area(start index, end index)
 - remove_all(container): clear, empty
