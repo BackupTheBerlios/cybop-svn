@@ -7,7 +7,7 @@ __________
 
 MEMORISER
 
-+ allocate: malloc, new, constructor, create
++ allocate: malloc, new, constructor, create, SQL CREATE
 + reallocate: trimToSize
 + deallocate: free, delete, destructor, destroy
 
@@ -15,15 +15,15 @@ MODIFIER
 
 + assign
 
-+ replace(container, source element, index): set, replace, copy, overwrite
++ replace(container, source element, index): set, replace, copy, overwrite, SQL UPDATE
 + replace_container(destination container, source container): replace all elements in destination with those of source
 
 + append(container, element): add, push, put, offer, concat; = replace(container, count as index)
 - append_content(destination container, source container): appendAll, putAll
 
-- insert_element(container, source element, index) = reallocate + replace
+- insert_element(container, source element, index) = reallocate + replace, SQL INSERT
 
-- remove_element(index): delete
+- remove_element(index): delete, SQL DELETE
 - remove_element_by_name(name)
 - remove_area(start index, end index)
 - remove_all(container): clear, empty
@@ -40,7 +40,7 @@ ACCESSOR
 - find_prefix (find that begins at index 0)
 - find_suffix (find that begins at last index and counts backward)
 
-- retrieve_element(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest
+- retrieve_element(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
 - retrieve_part_name(container, index)
 - retrieve_part_abstraction(container, index)
 - retrieve_part(container, index)
