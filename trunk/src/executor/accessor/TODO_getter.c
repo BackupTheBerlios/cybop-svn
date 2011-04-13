@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GETTER_SOURCE
-#define GETTER_SOURCE
+#ifndef RETRIEVER_SOURCE
+#define RETRIEVER_SOURCE
 
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -35,7 +35,7 @@
 #include "../../executor/comparator/equality/array_equality_comparator.c"
 
 /**
- * Gets the element at position index.
+ * Retrieves the element at position index.
  *
  * @param p0 the destination element (Hand over as reference!)
  * @param p1 the destination element count (Hand over as reference!)
@@ -46,7 +46,7 @@
  * @param p6 the source model abstraction
  * @param p7 the source model abstraction count
  */
-void get(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void retrieve(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -56,7 +56,7 @@ void get(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
 
             int* sc = (int*) p4;
 
-            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get element.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Retrieve element.");
 
             if (*i < *sc) {
 
@@ -204,5 +204,5 @@ void get(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, v
     }
 }
 
-/* GETTER_SOURCE */
+/* RETRIEVER_SOURCE */
 #endif
