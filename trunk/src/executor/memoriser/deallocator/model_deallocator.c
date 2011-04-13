@@ -27,6 +27,7 @@
 #define MODEL_DEALLOCATOR_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/accessor/retriever.c"
 #include "../../../logger/logger.c"
 
 //
@@ -59,10 +60,39 @@ void deallocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model size
+ * @param p2 the element abstraction
+ * @param p3 the element abstraction count
  */
-void deallocate_model_NEW(void* p0, void* p1) {
+void deallocate_model_NEW(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate model.");
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** m = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate model.");
+
+        // The data, count, size.
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+        void* c = *NULL_POINTER_MEMORY_MODEL;
+        void* s = *NULL_POINTER_MEMORY_MODEL;
+
+        // Retrieve data, count, size.
+        retrieve((void*) &d, *m, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        retrieve((void*) &c, *m, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        retrieve((void*) &s, *m, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+        // Deallocate data, count, size.
+        deallocate((void*) &d, p1, p2, p3);
+        deallocate((void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        deallocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+
+        // Deallocate model.
+        deallocate(p0, (void*) MODEL_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate model. The model is null.");
+    }
 }
 
 /* MODEL_DEALLOCATOR_SOURCE */

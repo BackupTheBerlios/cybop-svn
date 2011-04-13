@@ -93,12 +93,12 @@
 //
 
 /**
- * Replaces the elements at the given index.
+ * Replaces the container elements at the given index.
  *
- * @param p0 the destination model (Hand over as reference!)
+ * @param p0 the destination container (Hand over as reference!)
  * @param p1 the source element
  * @param p2 the source element count
- * @param p3 the index
+ * @param p3 the destination container index
  * @param p4 the abstraction
  * @param p5 the abstraction count
  */
@@ -108,7 +108,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         void** d = (void**) p0;
 
-        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace elements.");
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace container elements.");
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -245,17 +245,17 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not replace elements. The abstraction is unknown.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not replace container elements. The abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace elements. The destination is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not replace container elements. The destination is null.");
     }
 }
 
 /**
- * Replaces the elements at the given index and adjusts (grows or shrinks)
+ * Replaces the container elements at the given index and adjusts (grows or shrinks)
  * the destination size.
  *
  * @param p0 the destination model (Hand over as reference!)
@@ -269,7 +269,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
  */
 void replace_adjust(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace elements and adjust size.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Replace container elements and adjust size.");
 
     // The new destination size.
     int ns = *NUMBER_0_INTEGER_MEMORY_MODEL;

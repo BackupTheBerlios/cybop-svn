@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ARRAY_GETTER_SOURCE
-#define ARRAY_GETTER_SOURCE
+#ifndef ARRAY_RETRIEVER_SOURCE
+#define ARRAY_RETRIEVER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -40,14 +40,14 @@
 #include "../../../logger/logger.c"
 
 /**
- * Gets the destination element from the source array at index.
+ * Retrieves the element at position index.
  *
  * @param p0 the destination element (Hand over as array reference!)
  * @param p1 the source array
- * @param p2 the source index
+ * @param p2 the source array index
  * @param p3 the element abstraction
  */
-void get_array(void* p0, void* p1, void* p2, void* p3) {
+void retrieve_array(void* p0, void* p1, void* p2, void* p3) {
 
     // CAUTION! This test is important!
     // The destination is initialised with the source below.
@@ -59,7 +59,7 @@ void get_array(void* p0, void* p1, void* p2, void* p3) {
 
             void** d = (void**) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get array element.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Retrieve array element.");
 
             // The offset.
             int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -82,14 +82,14 @@ void get_array(void* p0, void* p1, void* p2, void* p3) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get array elements. The destination element is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not retrieve array element. The destination element is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get array elements. The source array is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not retrieve array element. The source array is null.");
     }
 }
 
-/* ARRAY_GETTER_SOURCE */
+/* ARRAY_RETRIEVER_SOURCE */
 #endif

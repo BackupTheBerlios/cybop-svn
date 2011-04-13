@@ -29,6 +29,8 @@
 
         * Use "route/sequence" abstraction instead of "send" model + "signal" property to execute a compound model as algorithm
 
+        * Try to increase performance by commenting out "memset" in array allocation
+
         * Rename "arithmetiser" to "calculator" with function "calculate" and
             distinguish operation first (add, subtract etc.) and then primitive types
         * Implement in this order: comparator, finder, retriever (getter), replacer, appender

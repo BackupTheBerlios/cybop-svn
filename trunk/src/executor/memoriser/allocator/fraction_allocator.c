@@ -39,25 +39,39 @@
  * Allocates the fraction.
  *
  * @param p0 the fraction (Hand over as reference!)
- * @param p1 the fraction size
+ * @param p1 the fraction size (This value is ignored.)
  */
 void allocate_fraction(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate fraction.");
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-/*??
-    // The numerator and denominator.
-    void* n = *NULL_POINTER_MEMORY_MODEL;
-    void* d = *NULL_POINTER_MEMORY_MODEL;
+        void** f = (void**) p0;
 
-    // Allocate numerator and denominator.
-    allocate((void*) &n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-    allocate((void*) &d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Allocate fraction.");
 
-    // Replace numerator and denominator.
-    replace(p0, n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMERATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    replace(p0, d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DENOMINATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-*/
+        // Allocate fraction.
+        allocate(p0, (void*) FRACTION_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+        // The numerator and denominator.
+        void* n = *NULL_POINTER_MEMORY_MODEL;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+
+        // Allocate numerator and denominator.
+        allocate((void*) &n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+
+        // Initialise numerator and denominator.
+        replace(n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        replace(d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+
+        // Replace numerator and denominator.
+        replace(*f, n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMERATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        replace(*f, d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DENOMINATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate fraction. The fraction is null.");
+    }
 }
 
 /* FRACTION_ALLOCATOR_SOURCE */

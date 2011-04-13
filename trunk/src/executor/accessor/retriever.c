@@ -19,34 +19,31 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: allocator.c,v $ $Revision: 1.34 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
+ * @version $RCSfile: accessor.c,v $ $Revision: 1.24 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef REALLOCATOR_SOURCE
-#define REALLOCATOR_SOURCE
+#ifndef RETRIEVER_SOURCE
+#define RETRIEVER_SOURCE
 
-#include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
+#include "../../executor/accessor/retriever/array_retriever.c"
 #include "../../executor/comparator/equality/array_equality_comparator.c"
-#include "../../executor/memoriser/reallocator/array_reallocator.c"
-#include "../../executor/memoriser/reallocator/compound_reallocator.c"
-#include "../../executor/memoriser/reallocator/signal_memory_reallocator.c"
 
 /**
- * Reallocates the container.
+ * Retrieves the element at position index.
  *
- * @param p0 the container (Hand over as reference!)
- * @param p1 the container count
- * @param p2 the container size
- * @param p3 the container element abstraction
- * @param p4 the container element abstraction count
+ * @param p0 the destination element (Hand over as reference!)
+ * @param p1 the source container
+ * @param p2 the source container index
+ * @param p3 the destination element abstraction
+ * @param p4 the destination element abstraction count
  */
-void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void retrieve(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Reallocate.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Retrieve element.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -57,7 +54,17 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            retrieve_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_array((void*) &r, p3, p4, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            get_complex_element(p0, p1, p2);
         }
     }
 
@@ -67,7 +74,17 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_compound(p0, p1, p2);
+//??                        get_array(p0, p3, p5, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_array((void*) &r, p3, p4, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+//??            get_datetime_element(p0, p1, p2);
         }
     }
 
@@ -77,17 +94,17 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_array(p0, p1, p2, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
+            retrieve_array(p0, p1, p2, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_array((void*) &r, p3, p4, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??            get_fraction_element(p0, p1, p2);
         }
     }
 
@@ -97,27 +114,17 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_array(p0, p1, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            retrieve_array(p0, p1, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_equal_array((void*) &r, p3, p4, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_array((void*) &r, p3, p4, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??            get_internal_memory_element(p0, p1, p2);
         }
     }
 
@@ -127,7 +134,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_array(p0, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            retrieve_array(p0, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
         }
     }
 
@@ -137,7 +144,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_signal_memory(p0, p1, p2);
+//??            get_signal_memory_element(p0, p1, p2);
         }
     }
 
@@ -147,7 +154,7 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_array(p0, p1, p2, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
+            retrieve_array(p0, p1, p2, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
         }
     }
 
@@ -157,15 +164,15 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            retrieve_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not reallocate. The container element abstraction is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not retrieve element. The destination element abstraction is unknown.");
     }
 }
 
-/* REALLOCATOR_SOURCE */
+/* RETRIEVER_SOURCE */
 #endif

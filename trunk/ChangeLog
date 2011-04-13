@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-04-13  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Redesign container functions
+
 2011-04-05  Christian Heller  <christian.heller@tuxtax.de>
 
         * Experiment with allocation- and other container functions

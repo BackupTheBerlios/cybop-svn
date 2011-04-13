@@ -40,7 +40,7 @@
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/name/command_option/cyboi_command_option_name.c"
-#include "../executor/modifier/replacer/array_replacer.c"
+#include "../executor/accessor/retriever.c"
 #include "../executor/modifier/replacer/array_replacer.c"
 #include "../executor/memoriser/allocator/model_allocator.c"
 #include "../executor/memoriser/deallocator/model_deallocator.c"
@@ -158,37 +158,42 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             // Comment out this function call to avoid disturbing messages at system startup!
             // log_write_terminated_message((void*) stdout, L"Debug: Optionalise log file.\n");
 
-            // The terminated file name as character array.
+            // The terminated file name model.
             void* t = *NULL_POINTER_MEMORY_MODEL;
-            void* tc = *NULL_POINTER_MEMORY_MODEL;
-            void* ts = *NULL_POINTER_MEMORY_MODEL;
 
             //
             // CAUTION! Do NOT use a wide character array here!
             //
-            // The glibc file stream functions expect standard (multibyte) character arrays.
+            // The glibc file stream functions below expect standard (multibyte) character arrays.
             //
 
             // Allocate terminated file name as multibyte character array.
-            allocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+//??            allocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            allocate_model_NEW((void*) &t, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+            int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            retrieve((void*) &tc, t, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            retrieve((void*) &ts, t, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
             // Encode wide character option into multibyte character array.
-            encode_utf_8_unicode_character_vector((void*) &t, tc, ts, p1, p2);
+            encode_utf_8_unicode_character_vector((void*) &t, (void*) &tc, (void*) &ts, p1, p2);
 
-            if (*((int*) ts) <= *((int*) tc)) {
+            if (ts <= tc) {
 
                 // Increase character array size to have place for the termination character.
                 ts = tc + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 // Reallocate terminated file name as multibyte character array.
-                reallocate_array((void*) &t, tc, ts, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                reallocate((void*) &t, (void*) &tc, (void*) &ts, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
             }
 
             // Add null termination character to terminated file name.
-            replace_array(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            replace(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tc, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             // Increase terminated file name count.
-            (*((int*) tc))++;
+            tc++;
 
             // Open log file for writing only.
             // If the file already exists, it is truncated to zero length.
@@ -226,7 +231,8 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             }
 
             // Deallocate terminated file name as multibyte character array.
-            deallocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+//??            deallocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            deallocate_model_NEW((void*) &t, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         } else {
 
