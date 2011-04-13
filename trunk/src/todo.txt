@@ -11,6 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Rename NEW model to item
         * Continue in "allocate"
         * Rename "model" (with count and size) into "item"
         * Continue in "executor/arithmetiser/fraction*"
@@ -30,6 +31,8 @@
         * Use "route/sequence" abstraction instead of "send" model + "signal" property to execute a compound model as algorithm
 
         * Try to increase performance by commenting out "memset" in array allocation
+
+        * Optimise "replace_array" function by replacing offset with constantly growing variable (less addition in loop necessary)
 
         * Rename "arithmetiser" to "calculator" with function "calculate" and
             distinguish operation first (add, subtract etc.) and then primitive types

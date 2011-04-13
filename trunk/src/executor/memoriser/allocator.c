@@ -43,12 +43,12 @@
 #include "../../executor/memoriser/allocator/x_window_system_allocator.c"
 
 /**
- * Allocates the model.
+ * Allocates the container.
  *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
- * @param p2 the abstraction
- * @param p3 the abstraction count
+ * @param p0 the container (Hand over as reference!)
+ * @param p1 the container size
+ * @param p2 the container element abstraction
+ * @param p3 the container element abstraction count
  */
 void allocate(void* p0, void* p1, void* p2, void* p3) {
 

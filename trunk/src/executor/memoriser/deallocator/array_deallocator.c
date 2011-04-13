@@ -38,7 +38,7 @@
  *
  * @param p0 the array (Hand over as reference!)
  * @param p1 the array size
- * @param p2 the array abstraction
+ * @param p2 the array element abstraction
  */
 void deallocate_array(void* p0, void* p1, void* p2) {
 

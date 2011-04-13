@@ -92,6 +92,7 @@ void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
  */
 void allocate_model_NEW(void* p0, void* p1, void* p2, void* p3) {
 
+/*??
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** m = (void**) p0;
@@ -113,19 +114,20 @@ void allocate_model_NEW(void* p0, void* p1, void* p2, void* p3) {
 
         // Initialise data, count, size.
         // The count is set to zero, since the model does not contain any elements yet.
-        replace(c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        replace_NEW(c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
         // The size is set to the value that was handed over as argument.
-        replace(s, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        replace_NEW(s, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
         // Replace data, count, size.
-        replace(*m, d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        replace(*m, c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        replace(*m, s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        replace_NEW(*m, (void*) &d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        replace_NEW(*m, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        replace_NEW(*m, (void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
     } else {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The model is null.");
     }
+*/
 }
 
 /* MODEL_ALLOCATOR_SOURCE */

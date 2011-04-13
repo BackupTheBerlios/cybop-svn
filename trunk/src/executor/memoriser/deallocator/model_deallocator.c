@@ -65,6 +65,7 @@ void deallocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
  */
 void deallocate_model_NEW(void* p0, void* p1, void* p2, void* p3) {
 
+/*??
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
         void** m = (void**) p0;
@@ -77,14 +78,21 @@ void deallocate_model_NEW(void* p0, void* p1, void* p2, void* p3) {
         void* s = *NULL_POINTER_MEMORY_MODEL;
 
         // Retrieve data, count, size.
+    fwprintf(stdout, L"TEST deallocate model 0 d: %i\n", d);
         retrieve((void*) &d, *m, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    fwprintf(stdout, L"TEST deallocate model 1 d: %i\n", d);
         retrieve((void*) &c, *m, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    fwprintf(stdout, L"TEST deallocate model 2 d: %i\n", d);
         retrieve((void*) &s, *m, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
         // Deallocate data, count, size.
+    fwprintf(stdout, L"TEST deallocate model 3 d: %i\n", d);
         deallocate((void*) &d, p1, p2, p3);
+    fwprintf(stdout, L"TEST deallocate model 4 d: %i\n", d);
         deallocate((void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    fwprintf(stdout, L"TEST deallocate model 5 d: %i\n", d);
         deallocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    fwprintf(stdout, L"TEST deallocate model 6 d: %i\n", d);
 
         // Deallocate model.
         deallocate(p0, (void*) MODEL_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
@@ -93,6 +101,7 @@ void deallocate_model_NEW(void* p0, void* p1, void* p2, void* p3) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate model. The model is null.");
     }
+*/
 }
 
 /* MODEL_DEALLOCATOR_SOURCE */

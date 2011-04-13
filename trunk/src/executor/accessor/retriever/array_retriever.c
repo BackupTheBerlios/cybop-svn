@@ -42,7 +42,7 @@
 /**
  * Retrieves the element at position index.
  *
- * @param p0 the destination element (Hand over as array reference!)
+ * @param p0 the destination element (Hand over as reference!)
  * @param p1 the source array
  * @param p2 the source array index
  * @param p3 the element abstraction

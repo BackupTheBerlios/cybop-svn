@@ -13,10 +13,9 @@ MEMORISER
 
 MODIFIER
 
-+ assign
-
-+ replace(container, source element, index): set, replace, copy, overwrite, SQL UPDATE
-+ replace_container(destination container, source container): replace all elements in destination with those of source
+place_value (assign value to value): assign, set, replace, copy, overwrite, SQL UPDATE
+place_element (assign element to container)
+place_container (assign container content to container)
 
 + append(container, element): add, push, put, offer, concat; = replace(container, count as index)
 - append_content(destination container, source container): appendAll, putAll

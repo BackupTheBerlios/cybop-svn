@@ -24,8 +24,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-Hierarchy
-_________
+Container Hierarchy
+___________________
 
 array
 item = data + count + size (all of type array)
@@ -53,33 +53,4 @@ Algorithmic Logic Unit (ALU)        | applicator (applies logic to states)
 
 The logic operations used by the applicator serve as interface to CYBOL.
 In other words, CYBOL knowledge templates may only use operations offered
-by the applicator. The names of files containing an operation are VERBS.
-Internally used files of CYBOI carry a NOUN as their name.
-
-
-Overview
-________
-
-applicator
-    compare
-    interrupt
-    receive
-    send
-    shutdown
-    startup
-    suspend
-controller
-    handler
-    manager
-executor
-    accessor
-    allocator
-    array
-    communicator
-    converter
-    mapper
-    translator
-globaliser
-    constants
-    logger
-    variables
+by the applicator.

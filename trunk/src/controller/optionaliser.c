@@ -145,6 +145,7 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
  */
 void optionalise_log_file(void* p0, void* p1, void* p2) {
 
+/*??
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* nc = (int*) p2;
@@ -169,32 +170,46 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
 
             // Allocate terminated file name as multibyte character array.
 //??            allocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+    fwprintf(stdout, L"TEST optionaliser 0: %i\n", t);
             allocate_model_NEW((void*) &t, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
-            int tc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            int ts = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    fwprintf(stdout, L"TEST optionaliser 1: %i\n", t);
+            void* td = *NULL_POINTER_MEMORY_MODEL;
+            void* tc = *NULL_POINTER_MEMORY_MODEL;
+            void* ts = *NULL_POINTER_MEMORY_MODEL;
 
+            retrieve((void*) &td, t, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
             retrieve((void*) &tc, t, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
             retrieve((void*) &ts, t, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
+    fwprintf(stdout, L"TEST optionaliser 2 tc: %i\n", *((int*) tc));
+    fwprintf(stdout, L"TEST optionaliser 2 ts: %i\n", *((int*) ts));
             // Encode wide character option into multibyte character array.
-            encode_utf_8_unicode_character_vector((void*) &t, (void*) &tc, (void*) &ts, p1, p2);
+            encode_utf_8_unicode_character_vector((void*) &td, tc, ts, p1, p2);
+            //?? temporary
+            replace(t, td, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-            if (ts <= tc) {
+    fwprintf(stdout, L"TEST optionaliser 3 tc: %i\n", *((int*) tc));
+    fwprintf(stdout, L"TEST optionaliser 3 ts: %i\n", *((int*) ts));
+            if (*((int*) ts) <= *((int*) tc)) {
 
                 // Increase character array size to have place for the termination character.
-                ts = tc + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                *((int*) ts) = *((int*) tc) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
+    fwprintf(stdout, L"TEST optionaliser 4 ts: %i\n", *((int*) ts));
                 // Reallocate terminated file name as multibyte character array.
-                reallocate((void*) &t, (void*) &tc, (void*) &ts, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                reallocate((void*) &td, tc, ts, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
             }
 
+    fwprintf(stdout, L"TEST optionaliser 5 tc: %i\n", *((int*) tc));
             // Add null termination character to terminated file name.
-            replace(t, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tc, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            replace(td, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tc, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             // Increase terminated file name count.
-            tc++;
+            (*((int*) tc))++;
 
+    fwprintf(stdout, L"TEST optionaliser 6 tc: %i\n", *((int*) tc));
             // Open log file for writing only.
             // If the file already exists, it is truncated to zero length.
             // Otherwise a new file is created.
@@ -203,7 +218,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             // library functions. The library creates objects of type FILE.
             // Programs should deal only with pointers to these objects (FILE* values),
             // rather than the objects themselves.
-            *f = fopen((char*) t, "w");
+            *f = fopen((char*) td, "w");
 
             if (*f != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -213,7 +228,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
                 int g = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
                 // Set file owner.
-                chown((char*) t, o, g);
+                chown((char*) td, o, g);
 
                 // The file access rights.
                 //?? TODO: When trying to cross-compile cyboi for windows,
@@ -221,7 +236,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
                 int r = S_IRUSR | S_IWUSR; //?? | S_IRGRP | S_IWGRP;
 
                 // Set file access rights.
-                chmod((char*) t, r);
+                chmod((char*) td, r);
 
             } else {
 
@@ -230,9 +245,11 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
                 log_write_terminated_message((void*) stdout, L"Error: Could not optionalise log file. An error occured when trying to open or create the file for writing.\n");
             }
 
+    fwprintf(stdout, L"TEST optionaliser 7 tc: %i\n", *((int*) tc));
             // Deallocate terminated file name as multibyte character array.
 //??            deallocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
             deallocate_model_NEW((void*) &t, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    fwprintf(stdout, L"TEST optionaliser 8: %i\n", t);
 
         } else {
 
@@ -247,6 +264,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
         // The logger will not work before its options are set.
         log_write_terminated_message((void*) stdout, L"Error: Could not optionalise log file. The file name count is null.\n");
     }
+*/
 }
 
 /**
