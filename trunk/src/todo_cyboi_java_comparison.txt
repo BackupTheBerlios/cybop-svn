@@ -11,16 +11,38 @@ MEMORISER
 + reallocate: trimToSize
 + deallocate: free, delete, destructor, destroy, DDL DROP TABLE
 
-MODIFIER
+REFERENCER
 
-place_value (assign value to value): assign, set, replace, copy, overwrite, SQL UPDATE
-place_element (assign element to container)
-place_container (assign container content to container)
+--> cyboi works with references/pointers only
+--> even for primitive values an array with just one element exists
+--> after allocation, only references are passed around using set/get
+--> set copies values
+--> get returns only a reference
 
-+ append(container, element): add, push, put, offer, concat; = replace(container, count as index)
+- get_element(container, index): element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
+- get_part_name(container, index)
+- get_part_abstraction(container, index)
+- get_part(container, index)
+- get_part_by_name(container, name)
+- get_part_details(container, index)
+- get_container (fill destination container with elements of source container)
+
+- set_value (assign value to value): assign, place, replace, copy, overwrite, SQL UPDATE
+- set_element (assign element to container)
+- set_container (assign container content to container)
+--> set is the same as copy, since it copies values
+- copy_value = allocate + loop + get[pointer](old container, index) + set[pointer](new container, index)
+- copy_container_shallow = allocate + loop + get[pointer](old container, index) + set[pointer](new container, index)
+- copy_container_deep: duplicate, copyValueOf, clone + set = allocate + loop + get(old container, index) + loop + get(child container, index) + set() etc.
+--> copy_shallow might not be useful in cyboi
+--> copying is the same as 1:1 conversion (decode/encode)
+
++ append(container, element): add, push, put, offer, concat; = set(container, count as index)
 - append_content(destination container, source container): appendAll, putAll
 
-- insert_element(container, source element, index) = reallocate + replace, SQL INSERT, DDL ALTER TABLE
+MODIFIER
+
+- insert_element(container, source element, index) = reallocate + set, SQL INSERT, DDL ALTER TABLE
 
 - remove_element(index): delete, SQL DELETE, DDL ALTER TABLE
 - remove_element_by_name(name)
@@ -31,7 +53,7 @@ place_container (assign container content to container)
 - trim(character array): [delete all spaces preceding and following the string]
 - reverse(character array) [reverse sequence]
 
-ACCESSOR
+FINDER
 
 - find: links to "find_first" by default, same as "find_part"
 - find_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
@@ -39,14 +61,9 @@ ACCESSOR
 - find_prefix (find that begins at index 0)
 - find_suffix (find that begins at last index and counts backward)
 
-- retrieve_element(container, index): get, element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
-- retrieve_part_name(container, index)
-- retrieve_part_abstraction(container, index)
-- retrieve_part(container, index)
-- retrieve_part_by_name(container, name)
-- retrieve_part_details(container, index)
-
 - filter(regular expression): matches
+
+COMPARATOR
 
 - compare_equality_all(container, array): equals, ceiling, floor, higher, lower
 - compare_equality_all_ignore_case: equalsIgnoreCase
@@ -64,20 +81,16 @@ CONVERTER
 - encode: toString
 - encode_capitalisation_lower: toLowerCase
 - encode_capitalisation_upper: toUpperCase
-[duplication is the same as 1:1 conversion; therefore, duplicate belongs here]
-- duplicate_deep: copy, copyValueOf, clone + replace, = allocate + loop + retrieve(old container, index) + loop + retrieve(child container, index) + replace() etc.
-- duplicate_shallow = allocate + loop + retrieve[pointer](old container, index) + replace[pointer](new container, index)
---> duplicate_shallow might not be useful in cyboi!
 
 Composition
 ___________
 
 - remove_first_element(element) = find_first_index + remove_element
 - remove_last_element(element) = find_last_index + remove_element
-- pop = poll = take = retrieve_first_element + remove_first_element
-- replace_elements(container, old element, new element) = loop + find_first_index + replace_element
+- pop = poll = take = get_first_element + remove_first_element
+- replace_elements(container, old element, new element) = loop + find_first_index + set_element
 
-- move: COMPOSITION? = retrieve(old container, index) + replace(new container, element, index at end) + remove(old container, index)
+- move: COMPOSITION? = get(old container, index) + set(new container, element, index at end) + remove(old container, index)
 - move_element(destination container, source container, source element index)
 - move_element_by_name(destination container, source container, source element name)
 - move_area(destination container, source container, source start index, source end index): drainTo

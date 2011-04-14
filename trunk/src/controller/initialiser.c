@@ -39,6 +39,7 @@
 #include "../executor/accessor/getter/signal_memory_getter.c"
 #include "../executor/memoriser/allocator/model_allocator.c"
 #include "../executor/memoriser/deallocator/model_deallocator.c"
+#include "../executor/memoriser/deallocator/part_deallocator.c"
 #include "../logger/logger.c"
 
 /**

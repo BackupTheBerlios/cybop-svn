@@ -37,8 +37,6 @@
 #include "../../executor/memoriser/deallocator/date_time_deallocator.c"
 #include "../../executor/memoriser/deallocator/fraction_deallocator.c"
 #include "../../executor/memoriser/deallocator/internal_memory_deallocator.c"
-#include "../../executor/memoriser/deallocator/model_deallocator.c"
-#include "../../executor/memoriser/deallocator/part_deallocator.c"
 #include "../../executor/memoriser/deallocator/signal_memory_deallocator.c"
 #include "../../executor/memoriser/deallocator/x_window_system_deallocator.c"
 
@@ -159,35 +157,11 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p2, p3, (void*) MODEL_MEMORY_ABSTRACTION, (void*) MODEL_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-/*??
-            deallocate_model_NEW(p0, p1);
-*/
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
         compare_equal_array((void*) &r, p2, p3, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             deallocate_array(p0, p1, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_equal_array((void*) &r, p2, p3, (void*) PART_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-/*??
-            deallocate_part_NEW(p0, p1);
-*/
         }
     }
 

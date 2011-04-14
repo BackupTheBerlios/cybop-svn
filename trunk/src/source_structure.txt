@@ -29,7 +29,9 @@ ___________________
 
 array
 item = data + count + size (all of type array)
-part = name + abstraction + model + details (all of type item)
+part = name + abstraction + model + detail/property (all of type item)
+
+compound = names + abstractions + models + details/properties (all of type item)
 
 Introduction
 ____________

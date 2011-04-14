@@ -37,8 +37,6 @@
 #include "../../executor/memoriser/allocator/date_time_allocator.c"
 #include "../../executor/memoriser/allocator/fraction_allocator.c"
 #include "../../executor/memoriser/allocator/internal_memory_allocator.c"
-#include "../../executor/memoriser/allocator/model_allocator.c"
-#include "../../executor/memoriser/allocator/part_allocator.c"
 #include "../../executor/memoriser/allocator/signal_memory_allocator.c"
 #include "../../executor/memoriser/allocator/x_window_system_allocator.c"
 
