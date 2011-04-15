@@ -45,8 +45,9 @@
  * @param p1 the source value
  * @param p2 the index
  * @param p3 the abstraction
+ * @param p4 the abstraction count
  */
-void set_value_offset(void* p0, void* p1, void* p2, void* p3) {
+void set_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set value offset.");
 
@@ -54,7 +55,7 @@ void set_value_offset(void* p0, void* p1, void* p2, void* p3) {
     int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Determine abstraction (type) size.
-    determine_size((void*) &o, p3);
+    determine_size_NEW((void*) &o, p3, p4);
 
     // Calculate offset (memory area).
     multiply_with_integer((void*) &o, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -65,7 +66,7 @@ void set_value_offset(void* p0, void* p1, void* p2, void* p3) {
     void* s = p1 + o;
 
     // Set source- to destination value (memory area).
-    set_value(d, s, p3);
+    set_value(d, s, p3, p4);
 }
 
 /* OFFSET_VALUE_SETTER_SOURCE */

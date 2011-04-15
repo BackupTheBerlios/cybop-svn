@@ -28,6 +28,8 @@
 
 #include "../../../constant/model/memory/integer_memory_model.c"
 
+//?? DELETE this file later!
+
 /** The name part memory name. */
 static int* NAME_PART_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
 

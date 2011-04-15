@@ -39,16 +39,20 @@
 #include "../../../logger/logger.c"
 
 /**
- * Sets source count source array elements into the destination array
+ * Sets count source array elements into the destination array
  * at position index.
+ *
+ * CAUTION! The size of the destination has to be adjusted BEFORE calling
+ * this function. The validity of the given index is NOT tested here.
  *
  * @param p0 the destination item
  * @param p1 the source item
  * @param p2 the count
  * @param p3 the destination item index
  * @param p4 the abstraction
+ * @param p5 the abstraction count
  */
-void set_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set item.");
 
@@ -60,14 +64,14 @@ void set_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void* sc = *NULL_POINTER_MEMORY_MODEL;
 
     // Get destination data, count.
-    get((void*) &dd, p0, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &dc, p0, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    get((void*) &dd, p0, (void*) DATA_ITEM_MEMORY_NAME , (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    get((void*) &dc, p0, (void*) COUNT_ITEM_MEMORY_NAME , (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
     // Get source data, count.
-    get((void*) &sd, p1, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &sc, p1, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    get((void*) &sd, p1, (void*) DATA_ITEM_MEMORY_NAME , (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    get((void*) &sc, p1, (void*) COUNT_ITEM_MEMORY_NAME , (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
     // Set source- to destination data.
-    set_array(dd, sd, p2, p3, p4);
+    set_array(dd, sd, p2, p3, p4, p5);
 
     // Add source- to destination count.
     add_integer(dc, sc, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);

@@ -47,8 +47,9 @@
  * @param p2 the count
  * @param p3 the destination array index
  * @param p4 the abstraction
+ * @param p5 the abstraction count
  */
-void set_array(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -67,7 +68,7 @@ void set_array(void* p0, void* p1, void* p2, void* p3, void* p4) {
             int dos = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             // Determine abstraction (type) size.
-            determine_size((void*) &dos, p4);
+            determine_size((void*) &dos, p4, p5);
 
             // Calculate destination offset.
             multiply_with_integer((void*) &dos, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -85,7 +86,7 @@ void set_array(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     break;
                 }
 
-                copy_offset(d, p1, (void*) &j, p4);
+                set_value_offset(d, p1, (void*) &j, p4, p5);
 
                 j++;
             }

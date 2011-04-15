@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-04-15  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue new container functions
+        * Adapt "setter" modules according to CYBOP knowledge schema:
+            merge "compound" and "part" into "model"; rename "model" into "item"
+
 2011-04-14  Christian Heller  <christian.heller@tuxtax.de>
 
         * Redesign container functions

@@ -11,12 +11,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Rename NEW model to item
+        * Continue in "executor/comparator/" with merging part and compound into new model;
+            implement comparison for | model | item | array
         * Continue in "allocate"
-        * Rename "model" (with count and size) into "item"
         * Continue in "executor/arithmetiser/fraction*"
         * Continue in "executor/accessor/getter/"
-        * Continue in "executor/comparator/" with compare_part or compare_compound etc.
         * Delete file "array_equality_comparator.c" which was replaced by "container_comparator.c"
         * Adapt example applications to new operation cybol mime types and new comparison functions
         * Use MIME types to categorise operations in "abstraction" attribute, e.g.:

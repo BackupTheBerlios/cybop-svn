@@ -39,6 +39,7 @@
 #include "../../executor/copier/value_setter/unsigned_long_value_setter.c"
 #include "../../executor/copier/value_setter/wide_character_value_setter.c"
 #include "../../executor/arithmetiser/integer_multiplier.c"
+#include "../../executor/comparator/equality/array_equality_comparator.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"
 
@@ -48,47 +49,78 @@
  * @param p0 the destination value
  * @param p1 the source value
  * @param p2 the abstraction
+ * @param p3 the abstraction count
  */
-void set_value(void* p0, void* p1, void* p2) {
+void set_value(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set value.");
 
-        int* a = (int*) p2;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set value.");
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        if (*a == *CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
+        compare_equal_array((void*) &r, p2, p3, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set_value_character(p0, p1);
+        }
+    }
 
-        } else if (*a == *DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_array((void*) &r, p2, p3, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set_value_double(p0, p1);
+        }
+    }
 
-        } else if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_array((void*) &r, p2, p3, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set_value_integer(p0, p1);
+        }
+    }
 
-        } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_array((void*) &r, p2, p3, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set_value_pointer(p0, p1);
+        }
+    }
 
-        } else if (*a == *UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_array((void*) &r, p2, p3, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set_value_unsigned_long(p0, p1);
+        }
+    }
 
-        } else if (*a == *WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_array((void*) &r, p2, p3, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             set_value_wide_character(p0, p1);
-
-        } else {
-
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not set value. The abstraction is unknown.");
         }
+    }
 
-    } else {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set value. The abstraction is null.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not set value. The abstraction is unknown.");
     }
 }
 

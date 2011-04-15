@@ -29,9 +29,18 @@ ___________________
 
 array
 item = data + count + size (all of type array)
-part = name + abstraction + model + detail/property (all of type item)
+model = name + abstraction + model + details (all of type item)
 
-compound = names + abstractions + models + details/properties (all of type item)
+A model contains a model, that is one model may reference another
+model, just like one database table may reference another.
+
+Old CYBOI Names
+_______________
+
+item: formerly called model
+
+model: formerly split into compound and part; both are now merged,
+as suggested by the CYBOP knowledge schema
 
 Introduction
 ____________
