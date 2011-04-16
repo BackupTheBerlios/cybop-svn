@@ -34,7 +34,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/separator_cybol_name.c"
-#include "../../../constant/name/memory/compound_memory_name.c"
+#include "../../../constant/name/memory/model_memory_name.c"
 #include "../../../executor/comparator/equality/array_equality_comparator.c"
 #include "../../../executor/memoriser/reallocator/compound_reallocator.c"
 #include "../../../logger/logger.c"
@@ -51,9 +51,9 @@
  * @param p2 the count
  * @param p3 the destination model index
  */
-void set_compound(void* p0, void* p1, void* p2, void* p3) {
+void set_model(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set compound.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set model.");
 
     // The destination names, abstractions, models, details.
     void* dn = *NULL_POINTER_MEMORY_MODEL;
@@ -89,7 +89,7 @@ void set_compound(void* p0, void* p1, void* p2, void* p3) {
     set_item(dn, sn, p2, p3, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
     set_item(da, sa, p2, p3, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
     set_item(dm, sm, p2, p3, sad, sac);
-    set_item(dd, sd, p2, p3, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    set_item(dd, sd, p2, p3, (void*) MODEL_MEMORY_ABSTRACTION, (void*) MODEL_MEMORY_ABSTRACTION_COUNT);
 }
 
 /**

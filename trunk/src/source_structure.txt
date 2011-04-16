@@ -27,9 +27,17 @@
 Container Hierarchy
 ___________________
 
+value
+offset_value
 array
 item = data + count + size (all of type array)
 model = name + abstraction + model + details (all of type item)
+
+value
+offset_value
+array
+fraction
+structure
 
 A model contains a model, that is one model may reference another
 model, just like one database table may reference another.

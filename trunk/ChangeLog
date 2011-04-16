@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-04-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue new container functions "setter"
+
 2011-04-15  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue new container functions

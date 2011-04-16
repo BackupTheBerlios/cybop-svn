@@ -48,33 +48,35 @@ void compare_equal_fraction(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare fractions for equality.");
 
-        // The left numerator.
-        int ln = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The left denominator.
-        int ld = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The right numerator.
-        int rn = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The right denominator.
-        int rd = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The left numerator, denominator.
+        void* ln = *NULL_POINTER_MEMORY_MODEL;
+        void* ld = *NULL_POINTER_MEMORY_MODEL;
+        // The right numerator, denominator.
+        void* rn = *NULL_POINTER_MEMORY_MODEL;
+        void* rd = *NULL_POINTER_MEMORY_MODEL;
 
-        // Get left numerator.
+        // Get left numerator, denominator.
         get((void*) &ln, p1, (void*) NUMERATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        // Get left denominator.
         get((void*) &ld, p1, (void*) DENOMINATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        // Get right numerator.
+        // Get right numerator, denominator.
         get((void*) &rn, p2, (void*) NUMERATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        // Get right denominator.
         get((void*) &rd, p2, (void*) DENOMINATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-        // The expanded left numerator.
-        int eln = ln * rd;
-        // The expanded right numerator.
-        int ern = rn * ld;
+        // The expanded left numerator, right numerator.
+        int eln = *((int*) ln);
+        int ern = *((int*) rn);
 
+        // Calculate expanded left numerator, right numerator.
+        multiply_with_integer((void*) &eln, (void*) &rd, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        multiply_with_integer((void*) &ern, (void*) &ld, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+/*
         if (eln == ern) {
 
             *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
         }
+*/
+        compare_array(p0, (void*) &eln, (void*) &ern, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
     } else {
 
