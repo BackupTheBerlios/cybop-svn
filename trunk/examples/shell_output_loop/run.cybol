@@ -1,0 +1,57 @@
+<model>
+    <part name="create_application" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="shell_output_loop"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+    </part>
+    <part name="create_break" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="break"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".shell_output_loop"/>
+    </part>
+    <part name="create_count" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="count"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".shell_output_loop"/>
+    </part>
+    <part name="startup" channel="inline" abstraction="operation/plain" model="loop">
+        <property name="break" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.break"/>
+        <property name="model" channel="file" abstraction="text/cybol" model="shell_output_loop/model.cybol"/>
+    </part>
+    <part name="shutdown" channel="inline" abstraction="operation/plain" model="exit"/>
+</model>
+
+<!--
+    This example prints the famous "Hello, World!" string on the shell (standard output device).
+    It repeatedly calls an external model and executes its commands.
+    Finally, an "exit" operation shuts down the application.
+/-->
+
+<!--
+    Copyright (C) 1999-2009. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile: run.cybol,v $ $Revision: 1.9 $ $Date: 2009-01-03 01:24:53 $ $Author: christian $
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

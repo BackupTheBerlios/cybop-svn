@@ -2,15 +2,9 @@
     <part name="output" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
         <property name="language" channel="inline" abstraction="text/plain" model="text/plain"/>
-        <property name="message" channel="inline" abstraction="text/plain" model="Hello, World!"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="Hello, World A!"/>
     </part>
-    <part name="shutdown" channel="inline" abstraction="operation/plain" model="exit"/>
 </model>
-
-<!--
-    This example prints the famous "Hello, World!" string on the shell (standard output device).
-    Finally, an "exit" operation shuts down the application.
-/-->
 
 <!--
     Copyright (C) 1999-2009. Christian Heller.

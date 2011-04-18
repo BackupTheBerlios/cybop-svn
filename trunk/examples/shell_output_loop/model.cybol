@@ -1,16 +1,22 @@
 <model>
+    <part name="compare_count" channel="inline" abstraction="operation/plain" model="greater_or_equal">
+        <property name="left" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.count"/>
+        <property name="right" channel="inline" abstraction="number/integer" model="5"/>
+        <property name="result" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.break"/>
+    </part>
     <part name="output" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
         <property name="language" channel="inline" abstraction="text/plain" model="text/plain"/>
         <property name="message" channel="inline" abstraction="text/plain" model="Hello, World!"/>
+        <property name="new_line" channel="inline" abstraction="logicvalue/boolean" model="true"/>
     </part>
-    <part name="shutdown" channel="inline" abstraction="operation/plain" model="exit"/>
+    <part name="increment_loop_count" channel="inline" abstraction="operation/plain" model="add">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.count"/>
+        <property name="summand_2" channel="inline" abstraction="number/integer" model="1"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.count"/>
+    </part>
 </model>
-
-<!--
-    This example prints the famous "Hello, World!" string on the shell (standard output device).
-    Finally, an "exit" operation shuts down the application.
-/-->
 
 <!--
     Copyright (C) 1999-2009. Christian Heller.

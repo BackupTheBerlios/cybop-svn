@@ -16,6 +16,14 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-04-18  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "sequence" control flow operation in parallel to "loop" and "branch"
+        * Fix shell output error in "file_sender.c" (when sending byte streams to "stdout",
+            the output has to be done in "wchar_t" anyway, since "stdout" was configured
+            for wide characters at cyboi startup; therefore, use fwprintf in this case)
+        * Add new "shell_output" cybol example applications for "sequence", "branch" and "loop"
+
 2011-04-16  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue new container functions "setter"

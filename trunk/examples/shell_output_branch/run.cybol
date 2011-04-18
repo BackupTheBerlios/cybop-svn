@@ -1,8 +1,8 @@
 <model>
-    <part name="output" channel="inline" abstraction="operation/plain" model="send">
-        <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
-        <property name="language" channel="inline" abstraction="text/plain" model="text/plain"/>
-        <property name="message" channel="inline" abstraction="text/plain" model="Hello, World!"/>
+    <part name="startup" channel="inline" abstraction="operation/plain" model="branch">
+        <property name="criterion" channel="inline" abstraction="path/knowledge" model=".shell_output_branch.criterion"/>
+        <property name="true" channel="file" abstraction="text/cybol" model="shell_output_branch/model_a.cybol"/>
+        <property name="false" channel="file" abstraction="text/cybol" model="shell_output_branch/model_b.cybol"/>
     </part>
     <part name="shutdown" channel="inline" abstraction="operation/plain" model="exit"/>
 </model>

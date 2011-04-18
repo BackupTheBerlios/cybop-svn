@@ -28,6 +28,7 @@
 
 #include "../../../applicator/guider/branch_guider.c"
 #include "../../../applicator/guider/loop_guider.c"
+#include "../../../applicator/guider/sequence_guider.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/cybol/operation/flow_operation_cybol_model.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -81,6 +82,16 @@ void handle_flow_operation(void* p0, void* p1, void* p2, void* p3, void* p4, voi
         if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             guide_loop(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
+        }
+    }
+
+    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_equal_array(p16, p10, p11, (void*) SEQUENCE_FLOW_OPERATION_CYBOL_MODEL, (void*) SEQUENCE_FLOW_OPERATION_CYBOL_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            guide_sequence(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15);
         }
     }
 }

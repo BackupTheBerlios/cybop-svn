@@ -42,13 +42,102 @@
 #include "../../../variable/reallocation_factor.c"
 
 /**
+ * Sends a character to file.
+ *
+ * @param p0 the destination file stream
+ * @param p1 the source array
+ * @param p2 the source array index
+ * @param p3 the break flag
+ */
+void send_file_character(void* p0, void* p1, void* p2, void* p3) {
+
+    // The character.
+    char* c = (char*) *NULL_POINTER_MEMORY_MODEL;
+
+    // Read character from source array.
+    get_array_elements((void*) &c, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Write character to file.
+    char e = fputc(*c, (FILE*) p0);
+
+    // Test error value.
+    if (e == EOF) {
+
+        // Set break flag, so that the loop can be left in the next cycle.
+        replace_array(p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    }
+}
+
+/**
+ * Sends a wide character to file.
+ *
+ * @param p0 the destination file stream
+ * @param p1 the source array
+ * @param p2 the source array index
+ * @param p3 the break flag
+ */
+void send_file_wide_character(void* p0, void* p1, void* p2, void* p3) {
+
+    // The character.
+    char* c = (char*) *NULL_POINTER_MEMORY_MODEL;
+
+    // Read character from source array.
+    get_array_elements((void*) &c, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Write character to file.
+    //
+    // CAUTION! Do NOT use the "fputwc" function here, but "fwprintf" instead.
+    // The input is char, but the stdout output is set to wide character mode at cyboi startup.
+    // Therefore, fwprintf is used to convert char to wchar_t output.
+    int e = fwprintf((FILE*) p0, L"%s", c);
+
+    // Test error value.
+    if (e != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        // Set break flag, so that the loop can be left in the next cycle.
+        replace_array(p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    }
+}
+
+/**
+ * Sends an element to file.
+ *
+ * @param p0 the destination file stream
+ * @param p1 the source array
+ * @param p2 the source array index
+ * @param p3 the break flag
+ * @param p4 the wide character flag (0 - char; 1 - wchar_t)
+ */
+void send_file_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* w = (int*) p4;
+
+        if (*w == NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            send_file_character(p0, p1, p2, p3);
+
+        } else {
+
+            send_file_wide_character(p0, p1, p2, p3);
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not send file element. The wide character flag is null.");
+    }
+}
+
+/**
  * Sends a file stream.
  *
  * @param p0 the destination file stream
  * @param p1 the source byte array
  * @param p2 the source byte array count
+ * @param p3 the wide character flag (0 - char; 1 - wchar_t)
  */
-void send_file_stream(void* p0, void* p1, void* p2) {
+void send_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -60,32 +149,18 @@ void send_file_stream(void* p0, void* p1, void* p2) {
 
             // The loop variable.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The character.
-            char* c = (char*) *NULL_POINTER_MEMORY_MODEL;
-            // The error value.
-            char e = EOF;
+            // The break flag.
+            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
             while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-                if (j >= *sc) {
+                if ((j >= *sc) || (b != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                     break;
                 }
 
-                // Read character from source array.
-                get_array_elements((void*) &c, p1, (void*) &j, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                send_file_element(p0, p1, (void*) &j, (void*) &b, p3);
 
-                // Write character to file.
-                e = fputc(*c, (FILE*) p0);
-
-                if (e == EOF) {
-
-                    // Set loop variable to source count, so that the
-                    // loop can be left in the next cycle.
-                    j = *sc;
-                }
-
-                // Increment loop variable.
                 j++;
             }
 
@@ -135,7 +210,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                     // The given string is not a file name, but specifies the "standard_output".
                     f = stdout;
 
-                    send_file_stream((void*) f, p3, p4);
+                    send_file_stream((void*) f, p3, p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     // Flush any buffered output on the stream to the file.
                     //
@@ -157,9 +232,9 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     // The given string is not a file name, but specifies the "standard_error_output".
-                    f = stdout;
+                    f = stderr;
 
-                    send_file_stream((void*) f, p3, p4);
+                    send_file_stream((void*) f, p3, p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     // Flush any buffered output on the stream to the file.
                     //
@@ -211,7 +286,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (f != *NULL_POINTER_MEMORY_MODEL) {
 
-                    send_file_stream((void*) f, p3, p4);
+                    send_file_stream((void*) f, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
                     // Flush any buffered output on the stream to the file.
                     //
