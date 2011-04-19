@@ -16,6 +16,16 @@
         <property name="element" channel="inline" abstraction="text/plain" model="part"/>
         <property name="whole" channel="inline" abstraction="path/knowledge" model=".shell_output_loop"/>
     </part>
+    <part name="initialise_break" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="0"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.break"/>
+    </part>
+    <part name="initialise_count" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="0"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.count"/>
+    </part>
     <part name="startup" channel="inline" abstraction="operation/plain" model="loop">
         <property name="break" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.break"/>
         <property name="model" channel="file" abstraction="text/cybol" model="shell_output_loop/model.cybol"/>

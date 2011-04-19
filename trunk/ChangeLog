@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-04-19  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct new "shell_output" cybol example applications for "sequence", "branch" and "loop"
+
 2011-04-18  Christian Heller  <christian.heller@tuxtax.de>
 
         * Add "sequence" control flow operation in parallel to "loop" and "branch"

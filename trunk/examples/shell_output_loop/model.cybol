@@ -1,7 +1,7 @@
 <model>
     <part name="compare_count" channel="inline" abstraction="operation/plain" model="greater_or_equal">
         <property name="left" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.count"/>
-        <property name="right" channel="inline" abstraction="number/integer" model="5"/>
+        <property name="right" channel="inline" abstraction="number/integer" model="4"/>
         <property name="result" channel="inline" abstraction="path/knowledge" model=".shell_output_loop.break"/>
     </part>
     <part name="output" channel="inline" abstraction="operation/plain" model="send">

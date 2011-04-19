@@ -1,6 +1,11 @@
 <model>
-    <part name="startup" channel="inline" abstraction="operation/plain" model="branch">
-        <property name="criterion" channel="inline" abstraction="path/knowledge" model=".shell_output_branch.criterion"/>
+    <part name="simulate_first_case" channel="inline" abstraction="operation/plain" model="branch">
+        <property name="criterion" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+        <property name="true" channel="file" abstraction="text/cybol" model="shell_output_branch/model_a.cybol"/>
+        <property name="false" channel="file" abstraction="text/cybol" model="shell_output_branch/model_b.cybol"/>
+    </part>
+    <part name="simulate_second_case" channel="inline" abstraction="operation/plain" model="branch">
+        <property name="criterion" channel="inline" abstraction="logicvalue/boolean" model="false"/>
         <property name="true" channel="file" abstraction="text/cybol" model="shell_output_branch/model_a.cybol"/>
         <property name="false" channel="file" abstraction="text/cybol" model="shell_output_branch/model_b.cybol"/>
     </part>
@@ -9,6 +14,7 @@
 
 <!--
     This example prints the famous "Hello, World!" string on the shell (standard output device).
+    It calls one of two external models, depending on a condition, and executes its commands.
     Finally, an "exit" operation shuts down the application.
 /-->
 

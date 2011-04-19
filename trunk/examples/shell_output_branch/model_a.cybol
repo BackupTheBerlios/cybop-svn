@@ -2,7 +2,8 @@
     <part name="output" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
         <property name="language" channel="inline" abstraction="text/plain" model="text/plain"/>
-        <property name="message" channel="inline" abstraction="text/plain" model="Hello, World A!"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="Hello, A World!"/>
+        <property name="new_line" channel="inline" abstraction="logicvalue/boolean" model="true"/>
     </part>
 </model>
 
