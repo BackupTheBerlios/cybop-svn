@@ -138,7 +138,7 @@ int main(int p0, char** p1) {
         // They will also get converted into wide characters of type "wchar_t" there.
         orient((void*) stdin, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
         orient((void*) stdout, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
-        orient((void*) stdout, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+        orient((void*) stderr, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
         // The operation mode.
         //
