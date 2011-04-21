@@ -97,7 +97,7 @@
  *
  * @param p0 the destination array
  * @param p1 the source array
- * @param p2 the count
+ * @param p2 the array count
  * @param p3 the destination array index
  * @param p4 the abstraction
  * @param p5 the abstraction count
