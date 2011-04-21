@@ -78,19 +78,17 @@ void compare_equal_array_element(void* p0, void* p1, void* p2, void* p3, void* p
 }
 
 /**
- * Compares the left- with the right array.
+ * Compares left and right array.
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left array
  * @param p2 the right array
- * @param p3 the array count
- * @param p4 the array index
- * @param p5 the operand abstraction
- * @param p6 the operand abstraction count
- * @param p7 the operation abstraction
- * @param p8 the operation abstraction count
+ * @param p3 the array index
+ * @param p4 the array count
+ * @param p5 the abstraction
+ * @param p6 the abstraction count
  */
-void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -175,47 +173,6 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
     } else {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array. The array count is null.");
-    }
-}
-
-/**
- * Compares two arrays for equality.
- *
- * This procedure compares only the element counts.
- * The actual elements comparison happens in another function.
- *
- * @param p0 the result (number 1 if true; unchanged otherwise)
- * @param p1 the left array
- * @param p2 the left array count
- * @param p3 the right array
- * @param p4 the right array count
- * @param p5 the primitive abstraction
- */
-void compare_equal_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* rc = (int*) p4;
-
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* lc = (int*) p2;
-
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare arrays for equality.");
-
-            if (*lc == *rc) {
-
-                compare_equal_array_elements(p0, p1, p3, p4, p5);
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays for equality. The left array count is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare arrays for equality. The right array count is null.");
     }
 }
 

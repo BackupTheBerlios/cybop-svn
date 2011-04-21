@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-04-21  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add files "item_comparator.c" and "model_comparator.c"
+
 2011-04-19  Christian Heller  <christian.heller@tuxtax.de>
 
         * Correct new "shell_output" cybol example applications for "sequence", "branch" and "loop"
