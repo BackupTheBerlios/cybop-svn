@@ -44,10 +44,12 @@
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left item
  * @param p2 the right item
- * @param p3 the abstraction
- * @param p4 the abstraction count
+ * @param p3 the index
+ * @param p4 the count
+ * @param p5 the abstraction
+ * @param p6 the abstraction count
  */
-void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare item.");
 
@@ -70,12 +72,12 @@ void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
     int cr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Compare left and right count.
-    compare_array((void*) &cr, lc, rc, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    compare_array((void*) &cr, lc, rc, p3, p4, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
     if (cr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         // Compare left and right data.
-        compare_array((void*) &dr, ld, rd, p3, p4);
+        compare_array((void*) &dr, ld, rd, p3, p4, p5, p6);
 
         if (dr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

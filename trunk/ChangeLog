@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-04-26  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue new files in "executor/comparator/"
+
 2011-04-21  Christian Heller  <christian.heller@tuxtax.de>
 
         * Add files "item_comparator.c" and "model_comparator.c"

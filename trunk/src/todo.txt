@@ -11,8 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue in "executor/comparator/" with merging part and compound into new model;
-            implement comparison for | model | item | array
+        * Continue in "executor/comparator/" | NEW_array_comparator.c | compare_array
+            determine abstraction as int value (within a new function?) and
+            forward it to following functions
+
         * Continue in "allocate"
         * Continue in "executor/arithmetiser/fraction*"
         * Continue in "executor/accessor/getter/"

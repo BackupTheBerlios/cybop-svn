@@ -46,8 +46,10 @@
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left model
  * @param p2 the right model
+ * @param p3 the index
+ * @param p4 the count
  */
-void compare_model(void* p0, void* p1, void* p2) {
+void compare_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare model.");
 
@@ -85,16 +87,24 @@ void compare_model(void* p0, void* p1, void* p2) {
     int mr = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int dr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+    //
     // Compare left- with right model.
-    compare_item((void*) &ar, la, ra, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    //
+
+    // Compare abstractions.
+    compare_item((void*) &ar, la, ra, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     if (ar != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_item((void*) &mr, lm, rm, rad, rac);
+        // Compare models.
+        // The right model's abstraction is used here,
+        // but the left model's abstraction may be used as well.
+        compare_item((void*) &mr, lm, rm, p3, p4, rad, rac);
 
         if (mr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_item((void*) &dr, ld, rd, (void*) MODEL_MEMORY_ABSTRACTION, (void*) MODEL_MEMORY_ABSTRACTION_COUNT);
+            // Compare details.
+            compare_item((void*) &dr, ld, rd, p3, p4, (void*) MODEL_MEMORY_ABSTRACTION, (void*) MODEL_MEMORY_ABSTRACTION_COUNT);
 
             if (dr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

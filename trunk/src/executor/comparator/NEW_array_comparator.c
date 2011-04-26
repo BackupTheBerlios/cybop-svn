@@ -36,63 +36,21 @@
 #include "../../../logger/logger.c"
 
 /**
- * Compares one element of the left with one of the right array for equality.
- *
- * @param p0 the result (number 1 if true; unchanged otherwise)
- * @param p1 the left array
- * @param p2 the right array
- * @param p3 the index
- * @param p4 the primitive abstraction
- */
-void compare_equal_array_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    // The type size.
-    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Determine type size.
-    determine_size((void*) &s, p4);
-
-    // The offset.
-    // Initialise offset with type size, since it is used as
-    // first factor and result of the multiplication below.
-    int o = s;
-
-    // Calculate offset.
-    multiply_with_integer((void*) &o, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-    // The left element.
-    // CAUTION! It HAS TO BE initialised with p1,
-    // since an offset is added to it below.
-    void* le = p1;
-    // The right element.
-    // CAUTION! It HAS TO BE initialised with p2,
-    // since an offset is added to it below.
-    void* re = p2;
-
-    // Add offset to left element.
-    add_integer((void*) &le, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Add offset to right element.
-    add_integer((void*) &re, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-    compare_equal_element(p0, le, re, p4);
-}
-
-/**
  * Compares left and right array.
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left array
  * @param p2 the right array
- * @param p3 the array index
- * @param p4 the array count
+ * @param p3 the index
+ * @param p4 the count
  * @param p5 the abstraction
  * @param p6 the abstraction count
  */
 void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* c = (int*) p3;
+        int* c = (int*) p4;
 
         if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -117,7 +75,7 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
                     determine_size((void*) &os, p5, p6);
 
                     // Calculate offset.
-                    multiply_with_integer((void*) &os, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    multiply_with_integer((void*) &os, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     // Add offset to left array, right array.
                     add_integer((void*) &l, (void*) &os, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);

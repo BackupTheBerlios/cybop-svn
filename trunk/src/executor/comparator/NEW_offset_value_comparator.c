@@ -63,12 +63,17 @@ void compare_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void
     // Calculate offset (memory area).
     multiply_with_integer((void*) &o, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    // Determine destination.
-    void* l = p1 + o;
-    // Determine source.
-    void* r = p2 + o;
+    // The left value, right value.
+    // CAUTION! They HAVE TO BE initialised with p1 and p2,
+    // since an offset is added below.
+    void* l = p1;
+    void* r = p2;
 
-    // Set source- to destination value (memory area).
+    // Add offset to left value, right value.
+    add_integer((void*) &l, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    add_integer((void*) &r, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Compare left value, right value.
     compare_value(p0, l, r, p4, p5, p6, p7);
 }
 
