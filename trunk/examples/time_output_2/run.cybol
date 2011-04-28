@@ -1,0 +1,92 @@
+<model>
+    <part name="create_counter_application_root_node" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="counter"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+    </part>
+    <part name="create_loop_break_flag" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="break"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".counter"/>
+    </part>
+    <part name="create_loop_count_variable" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="count"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".counter"/>
+    </part>
+    <part name="create_loop_count_maximum" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="maximum"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".counter"/>
+    </part>
+    <part name="create_loop_model" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="model"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".counter"/>
+    </part>
+    <part name="initialise_break_with_0" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="0"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
+    </part>
+    <part name="initialise_count_with_1" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="1"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+    </part>
+    <part name="initialise_maximum_with_10" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="10"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".counter.maximum"/>
+    </part>
+    <part name="initialise_model_receiving_from_file" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="time_output_2/model.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".counter.model"/>
+    </part>
+    <part name="call_loop" channel="inline" abstraction="operation/plain" model="loop">
+        <property name="break" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".counter.model"/>
+    </part>
+    <part name="exit_application" channel="inline" abstraction="operation/plain" model="exit"/>
+</model>
+
+<!--
+    This example uses a loop to repeatedly print the current time.
+    A shell command is applied to store the current time in a file.
+    Afterwards, the file content is printed on the shell.
+/-->
+
+<!--
+    Copyright (C) 1999-2011. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile$ $Revision$ $Date$ $Author$
+    @author Patrick Sperl
+    @author Jens Rudek
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

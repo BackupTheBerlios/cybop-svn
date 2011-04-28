@@ -1,0 +1,45 @@
+<model>
+    <part name="compare_count" channel="inline" abstraction="operation/plain" model="greater_or_equal">
+        <property name="left" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+        <property name="right" channel="inline" abstraction="path/knowledge" model=".counter.maximum"/>
+        <property name="result" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
+    </part>
+    <part name="increment_loop_count" channel="inline" abstraction="operation/plain" model="add">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+        <property name="summand_2" channel="inline" abstraction="number/integer" model="1"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+    </part>
+    <part name="print_number" channel="inline" abstraction="operation/plain" model="run">
+        <property name="program" channel="inline" abstraction="text/plain" model="date +%X"/>
+    </part>
+</model>
+
+<!--
+    Copyright (C) 1999-2011. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile$ $Revision$ $Date$ $Author$
+    @author Patrick Sperl
+    @author Jens Rudek
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->
