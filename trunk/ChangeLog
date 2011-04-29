@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-04-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue new files in "executor/comparator/"
+
 2011-04-28  Christian Heller  <christian.heller@tuxtax.de>
 
         * Add udp socket presentation created by students to "tmp" directory

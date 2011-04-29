@@ -95,6 +95,7 @@ void determine_size(void* p0, void* p1) {
  * @param p1 the abstraction
  * @param p2 the abstraction count
  */
+/*??
 void determine_size_NEW(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Determine size.");
@@ -167,6 +168,7 @@ void determine_size_NEW(void* p0, void* p1, void* p2) {
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not determine size. The abstraction is unknown.");
     }
 }
+*/
 
 /* SIZE_DETERMINER_SOURCE */
 #endif

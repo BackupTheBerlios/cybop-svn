@@ -40,32 +40,120 @@
  * @param p1 the left value
  * @param p2 the right value
  * @param p3 the operation abstraction
- * @param p4 the operation abstraction count
  */
-void compare_value_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void compare_value_character(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        char* r = (char*) p2;
+        int* a = (int*) p3;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-            char* l = (char*) p1;
+            char* rv = (char*) p2;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value character.");
+            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            // Compare left- with right value.
-            compare_value_character_equal(p0, p1, p2);
-            *l == *r;
+                char* lv = (char*) p1;
+
+                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+                    int* res = (int*) p0;
+
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value character.");
+
+                    // The comparison result.
+                    // CAUTION! It is used instead of if-else statements.
+                    // May be one day, this is useful when using assembler or implementing cyboi as hardware chip.
+                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        if (*a == *EQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            if (*lv == *rv) {
+
+                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            }
+                        }
+                    }
+
+                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        if (*a == *SMALLER_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            if (*lv < *rv) {
+
+                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            }
+                        }
+                    }
+
+                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        if (*a == *GREATER_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            if (*lv > *rv) {
+
+                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            }
+                        }
+                    }
+
+                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        if (*a == *SMALLER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            if (*lv <= *rv) {
+
+                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            }
+                        }
+                    }
+
+                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        if (*a == *GREATER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                            if (*lv >= *rv) {
+
+                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                            }
+                        }
+                    }
+
+                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The operation abstraction is unknown.");
+                    }
+
+                } else {
+
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The result is null.");
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The left value is null.");
+            }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The left value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The right value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The right value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The operation abstraction is null.");
     }
 }
 

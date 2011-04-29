@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef VALUE_COMPARATOR_SOURCE
-#define VALUE_COMPARATOR_SOURCE
+#ifndef WIDE_CHARACTER_ABSTRACTION_DECODER_SOURCE
+#define WIDE_CHARACTER_ABSTRACTION_DECODER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -44,97 +44,93 @@
 #include "../../logger/logger.c"
 
 /**
- * Compares the left- with the right value.
+ * Decodes the wide character abstraction into an integer abstraction.
  *
- * @param p0 the result (number 1 if true; unchanged otherwise)
- * @param p1 the left value
- * @param p2 the right value
- * @param p3 the operand abstraction
- * @param p4 the operation abstraction
+ * @param p0 the destination integer abstraction (Hand over as reference!)
+ * @param p1 the source wide character abstraction
+ * @param p2 the source wide character abstraction count
  */
-void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_wide_character_abstraction(void* p0, void* p1, void* p2) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* a = (int*) p3;
+        int* d = (int*) p0;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode wide character abstraction.");
 
         // The comparison result.
-        // CAUTION! It is used instead of if-else statements.
-        // May be one day, this is useful when using assembler or implementing cyboi as hardware chip.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            if (*a == *CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
+            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
-                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_value_character(p0, p1, p2, p4);
+                *d = CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION;
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            if (*a == *DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION) {
+            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT);
 
-                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_value_double(p0, p1, p2, p5, p6);
+                *d = DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION;
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
+            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
-                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_value_integer(p0, p1, p2, p5, p6);
+                *d = INTEGER_PRIMITIVE_MEMORY_ABSTRACTION;
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
+            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_value_pointer(p0, p1, p2, p5, p6);
+                *d = POINTER_PRIMITIVE_MEMORY_ABSTRACTION;
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            if (*a == *UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION) {
+            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
 
-                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_value_unsigned_long(p0, p1, p2, p5, p6);
+                *d = UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION;
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            if (*a == *WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
+            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
-                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_value_wide_character(p0, p1, p2, p5, p6);
+                *d = WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION;
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare value. The operand abstraction is unknown.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode wide character abstraction. The source wide character abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value. The operand abstraction is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode wide character abstraction. The destination integer abstraction is null.");
     }
 }
 
-/* VALUE_COMPARATOR_SOURCE */
+/* WIDE_CHARACTER_ABSTRACTION_DECODER_SOURCE */
 #endif
