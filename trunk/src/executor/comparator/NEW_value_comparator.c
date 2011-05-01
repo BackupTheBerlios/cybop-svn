@@ -32,15 +32,12 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/copier/value_setter/character_value_setter.c"
-#include "../../executor/copier/value_setter/double_value_setter.c"
-#include "../../executor/copier/value_setter/integer_value_setter.c"
-#include "../../executor/copier/value_setter/pointer_value_setter.c"
-#include "../../executor/copier/value_setter/unsigned_long_value_setter.c"
-#include "../../executor/copier/value_setter/wide_character_value_setter.c"
-#include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/comparator/equality/array_equality_comparator.c"
-#include "../../executor/memoriser/size_determiner.c"
+#include "../../executor/comparator/value_comparator/character_value_comparator.c"
+#include "../../executor/comparator/value_comparator/double_value_comparator.c"
+#include "../../executor/comparator/value_comparator/integer_value_comparator.c"
+#include "../../executor/comparator/value_comparator/pointer_value_comparator.c"
+#include "../../executor/comparator/value_comparator/unsigned_long_value_comparator.c"
+#include "../../executor/comparator/value_comparator/wide_character_value_comparator.c"
 #include "../../logger/logger.c"
 
 /**
@@ -49,14 +46,14 @@
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left value
  * @param p2 the right value
- * @param p3 the operand abstraction
- * @param p4 the operation abstraction
+ * @param p3 the operation abstraction
+ * @param p4 the operand abstraction
  */
 void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* a = (int*) p3;
+        int* a = (int*) p4;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value.");
 
@@ -71,7 +68,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_character(p0, p1, p2, p4);
+                compare_value_character(p0, p1, p2, p3);
             }
         }
 
@@ -81,7 +78,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_double(p0, p1, p2, p5, p6);
+                compare_value_double(p0, p1, p2, p3);
             }
         }
 
@@ -91,7 +88,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_integer(p0, p1, p2, p5, p6);
+                compare_value_integer(p0, p1, p2, p3);
             }
         }
 
@@ -101,7 +98,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_pointer(p0, p1, p2, p5, p6);
+                compare_value_pointer(p0, p1, p2, p3);
             }
         }
 
@@ -111,7 +108,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_unsigned_long(p0, p1, p2, p5, p6);
+                compare_value_unsigned_long(p0, p1, p2, p3);
             }
         }
 
@@ -121,7 +118,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_wide_character(p0, p1, p2, p5, p6);
+                compare_value_wide_character(p0, p1, p2, p3);
             }
         }
 
