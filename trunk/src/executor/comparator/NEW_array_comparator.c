@@ -62,11 +62,14 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare array.");
 
+                    //?? MOVE the following source code lines to the file calling this function!
+/*??
                     // The primitive abstraction.
                     int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
                     // Decode primitive abstraction.
-//??                    decode_primitive_abstraction((void*) &a, p5, p6);
+                    decode_primitive_abstraction((void*) &a, p5, p6);
+*/
 
                     // The left array, right array.
                     // CAUTION! They HAVE TO BE initialised with p1 and p2,
@@ -78,7 +81,7 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
                     int os = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Determine abstraction (type) size.
-                    determine_size((void*) &os, (void*) &a);
+                    determine_size((void*) &os, p6);
 
                     // Calculate offset.
                     multiply_with_integer((void*) &os, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -96,7 +99,8 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
                         if (j >= *c) {
 
-                            // All elements have been compared.
+                            // All elements have been compared successfully.
+                            // The comparison of all element pairs delivered "true".
                             *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             break;
@@ -107,12 +111,13 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
                         // CAUTION! This function does not change the result flag, if unequal.
                         // Therefore, the result flag always has to be initialised with zero before!
-                        compare_value_offset((void*) &vr, l, r, (void*) &j, (void*) &a, p7, p8);
+                        compare_value_offset((void*) &vr, l, r, (void*) &j, p5, p6);
 
                         if (vr == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            // Stop comparison if two elements are not equal,
-                            // because then the two arrays are not equal.
+                            // Stop comparison if two elements do not match the
+                            // criteria, i.e. the comparison delivered "false".
+                            // Because then, the comparison of the two arrays is "false".
                             break;
                         }
 
@@ -136,7 +141,7 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array. The array count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array. The count is null.");
     }
 }
 
