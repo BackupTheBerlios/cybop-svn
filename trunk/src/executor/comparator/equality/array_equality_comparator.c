@@ -29,10 +29,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/comparator/element_equality_comparator.c"
+#include "../../../executor/comparator/value_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -74,7 +75,7 @@ void compare_equal_array_element(void* p0, void* p1, void* p2, void* p3, void* p
     // Add offset to right element.
     add_integer((void*) &re, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    compare_equal_element(p0, le, re, p4);
+    compare_value(p0, le, re, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, p4);
 }
 
 /**

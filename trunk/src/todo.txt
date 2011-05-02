@@ -11,8 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue in "executor/comparator/" | character_value_comparator.c
-            determine operation abstraction and add corresponding functions
+        * Stepwise delete old files in "executor/comparator/"
 
         * Continue in "allocate"
         * Continue in "executor/arithmetiser/fraction*"

@@ -33,6 +33,7 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/arithmetiser/integer_multiplier.c"
+#include "../../executor/comparator/value_comparator.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../executor/referencer/setter/value_setter.c"
 #include "../../logger/logger.c"
@@ -45,12 +46,10 @@
  * @param p1 the left value
  * @param p2 the right value
  * @param p3 the index
- * @param p4 the operand abstraction
- * @param p5 the operand abstraction count
- * @param p6 the operation abstraction
- * @param p7 the operation abstraction count
+ * @param p4 the operation abstraction
+ * @param p5 the operand abstraction
  */
-void compare_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void compare_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value offset.");
 
@@ -58,7 +57,7 @@ void compare_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void
     int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Determine abstraction (type) size.
-    determine_size_NEW((void*) &o, p4, p5);
+    determine_size((void*) &o, p5);
 
     // Calculate offset (memory area).
     multiply_with_integer((void*) &o, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -74,7 +73,7 @@ void compare_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void
     add_integer((void*) &r, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Compare left value, right value.
-    compare_value(p0, l, r, p4, p5, p6, p7);
+    compare_value(p0, l, r, p4, p5);
 }
 
 /* OFFSET_VALUE_COMPARATOR_SOURCE */

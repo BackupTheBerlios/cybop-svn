@@ -32,7 +32,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/comparator/element_equality_comparator.c"
+#include "../../../executor/comparator/NEW_offset_value_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -43,8 +43,8 @@
  * @param p2 the right array
  * @param p3 the index
  * @param p4 the count
- * @param p5 the abstraction
- * @param p6 the abstraction count
+ * @param p5 the operation abstraction
+ * @param p6 the operand abstraction
  */
 void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
@@ -66,7 +66,7 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
                     int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
                     // Decode primitive abstraction.
-                    decode_primitive_abstraction((void*) &a, p5, p6);
+//??                    decode_primitive_abstraction((void*) &a, p5, p6);
 
                     // The left array, right array.
                     // CAUTION! They HAVE TO BE initialised with p1 and p2,

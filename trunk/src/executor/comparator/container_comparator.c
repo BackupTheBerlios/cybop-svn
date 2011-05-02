@@ -75,7 +75,7 @@ void compare_container_element(void* p0, void* p1, void* p2, void* p3, void* p4,
     get_element((void*) &l, (void*) &lc, (void*) &ls, p1, p3, p4);
     get_element((void*) &r, (void*) &rc, (void*) &rs, p2, p3, p4);
 
-    compare_element(p0, *l, *r, p4, p5);
+    compare_value(p0, *l, *r, p5, p4);
 }
 
 /**

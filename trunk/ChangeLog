@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-05-01  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue new files and delete old ones in "executor/comparator/"
+
 2011-04-29  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue new files in "executor/comparator/"

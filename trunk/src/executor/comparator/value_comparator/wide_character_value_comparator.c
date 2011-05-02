@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_VALUE_COMPARATOR_SOURCE
-#define CHARACTER_VALUE_COMPARATOR_SOURCE
+#ifndef WIDE_CHARACTER_VALUE_COMPARATOR_SOURCE
+#define WIDE_CHARACTER_VALUE_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -35,14 +35,14 @@
 #include "../../../logger/logger.c"
 
 /**
- * Compares the left- with the right character.
+ * Compares the left- with the right wide character.
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left value
  * @param p2 the right value
  * @param p3 the operation abstraction
  */
-void compare_value_character(void* p0, void* p1, void* p2, void* p3) {
+void compare_value_wide_character(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -50,17 +50,17 @@ void compare_value_character(void* p0, void* p1, void* p2, void* p3) {
 
         if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-            char* rv = (char*) p2;
+            wchar_t* rv = (wchar_t*) p2;
 
             if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                char* lv = (char*) p1;
+                wchar_t* lv = (wchar_t*) p1;
 
                 if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
                     int* res = (int*) p0;
 
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value character.");
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value wide character.");
 
                     // The comparison result.
                     // CAUTION! It is used instead of if-else statements.
@@ -134,29 +134,29 @@ void compare_value_character(void* p0, void* p1, void* p2, void* p3) {
 
                     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The operation abstraction is unknown.");
+                        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare value wide character. The operation abstraction is unknown.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The result is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value wide character. The result is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The left value is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value wide character. The left value is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The right value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value wide character. The right value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value character. The operation abstraction is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value wide character. The operation abstraction is null.");
     }
 }
 
-/* CHARACTER_VALUE_COMPARATOR_SOURCE */
+/* WIDE_CHARACTER_VALUE_COMPARATOR_SOURCE */
 #endif
