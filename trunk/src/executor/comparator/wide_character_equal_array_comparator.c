@@ -225,7 +225,7 @@ void compare_array_equal_wide_character_elements(void* p0, void* p1, void* p2, v
  * @param p3 the right array
  * @param p4 the right array count
  */
-void compare_array_equal_wide_character(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void compare_array_count(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
