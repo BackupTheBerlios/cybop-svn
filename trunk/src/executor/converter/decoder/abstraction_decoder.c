@@ -38,7 +38,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -59,7 +59,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) ASCII_TEXT_CYBOL_ABSTRACTION, (void*) ASCII_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) ASCII_TEXT_CYBOL_ABSTRACTION, (void*) ASCII_TEXT_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -69,7 +69,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -79,7 +79,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION, (void*) CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION, (void*) CARTESIAN_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -89,7 +89,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -99,7 +99,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) DECIMAL_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -109,7 +109,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -119,7 +119,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -129,7 +129,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) GREATER_COMPARE_CYBOL_ABSTRACTION, (void*) GREATER_COMPARE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) GREATER_COMPARE_CYBOL_ABSTRACTION, (void*) GREATER_COMPARE_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -139,7 +139,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) GREATER_OR_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) GREATER_OR_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) GREATER_OR_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) GREATER_OR_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -149,7 +149,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) HH_MM_SS_DATETIME_CYBOL_ABSTRACTION, (void*) HH_MM_SS_DATETIME_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) HH_MM_SS_DATETIME_CYBOL_ABSTRACTION, (void*) HH_MM_SS_DATETIME_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -159,7 +159,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION, (void*) INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -169,7 +169,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION, (void*) KNOWLEDGE_PATH_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -179,7 +179,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) PART_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) PART_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) PART_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) PART_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -190,7 +190,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
     //?? Delete "plain operation" later, as it was replaced with cybol mime types like compare/equal etc.
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) PLAIN_OPERATION_CYBOL_ABSTRACTION, (void*) PLAIN_OPERATION_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) PLAIN_OPERATION_CYBOL_ABSTRACTION, (void*) PLAIN_OPERATION_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -200,7 +200,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION, (void*) PLAIN_TEXT_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -210,7 +210,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION, (void*) POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION, (void*) POLAR_COMPLEX_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -220,7 +220,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) PREFIX_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) PREFIX_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) PREFIX_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) PREFIX_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -230,7 +230,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) SMALLER_COMPARE_CYBOL_ABSTRACTION, (void*) SMALLER_COMPARE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) SMALLER_COMPARE_CYBOL_ABSTRACTION, (void*) SMALLER_COMPARE_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -240,7 +240,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) SMALLER_OR_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) SMALLER_OR_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) SMALLER_OR_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) SMALLER_OR_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -250,7 +250,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) SUFFIX_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) SUFFIX_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) SUFFIX_EQUAL_COMPARE_CYBOL_ABSTRACTION, (void*) SUFFIX_EQUAL_COMPARE_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -260,7 +260,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION, (void*) VULGAR_FRACTION_NUMBER_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -270,7 +270,7 @@ void decode_abstraction(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, p3, p4, (void*) XDT_TEXT_CYBOL_ABSTRACTION, (void*) XDT_TEXT_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, p3, p4, (void*) XDT_TEXT_CYBOL_ABSTRACTION, (void*) XDT_TEXT_CYBOL_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

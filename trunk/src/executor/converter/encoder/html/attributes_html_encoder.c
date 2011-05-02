@@ -34,7 +34,7 @@
 #include "../../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../../executor/accessor/getter/compound_getter.c"
 #include "../../../../executor/accessor/getter.c"
-#include "../../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../../../executor/modifier/appender.c"
 #include "../../../../logger/logger.c"
 
@@ -76,7 +76,7 @@ void encode_html_attribute(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_equal_array((void*) &r, *n, *nc, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    compare_array_equal_wide_character((void*) &r, *n, *nc, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME, (void*) TAG_WEB_USER_INTERFACE_CYBOL_NAME_COUNT);
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

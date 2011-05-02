@@ -34,7 +34,7 @@
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/communicator/receiver.c"
-#include "../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../../executor/converter/decoder.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
@@ -128,7 +128,7 @@ void memorise_counting_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
                             r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                            compare_equal_array(&r, compstring, &compstring_count, *cen, &compstring_count, WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            compare_array_equal_wide_character(&r, compstring, &compstring_count, *cen, &compstring_count);
 
                             //if teh begiining of the two arrays ident, then
                             //the compound element is a part of the list

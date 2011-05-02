@@ -31,7 +31,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../../executor/modifier/appender.c"
 #include "../../../logger/logger.c"
 

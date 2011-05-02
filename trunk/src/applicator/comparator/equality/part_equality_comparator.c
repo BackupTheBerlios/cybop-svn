@@ -35,7 +35,7 @@
 #include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -97,7 +97,7 @@ void compare_equality_part(void* p0, void* p1, void* p2,
                 int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                 // Compare result parameter abstraction. It must be a boolean.
-                compare_equal_array((void*) &r, p18, p19, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_array_equal_wide_character((void*) &r, p18, p19, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -115,8 +115,8 @@ void compare_equality_part(void* p0, void* p1, void* p2,
                     rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                     // Compare parameter abstractions.
-                    compare_equal_array((void*) &lr, p0, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                    compare_equal_array((void*) &rr, p9, p10, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    compare_array_equal_wide_character((void*) &lr, p0, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    compare_array_equal_wide_character((void*) &rr, p9, p10, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                     if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 

@@ -32,12 +32,12 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/comparator/value_comparator/character_value_comparator.c"
-#include "../../executor/comparator/value_comparator/double_value_comparator.c"
-#include "../../executor/comparator/value_comparator/integer_value_comparator.c"
-#include "../../executor/comparator/value_comparator/pointer_value_comparator.c"
-#include "../../executor/comparator/value_comparator/unsigned_long_value_comparator.c"
-#include "../../executor/comparator/value_comparator/wide_character_value_comparator.c"
+#include "../../executor/comparator/value/character_value_comparator.c"
+#include "../../executor/comparator/value/double_value_comparator.c"
+#include "../../executor/comparator/value/integer_value_comparator.c"
+#include "../../executor/comparator/value/pointer_value_comparator.c"
+#include "../../executor/comparator/value/unsigned_long_value_comparator.c"
+#include "../../executor/comparator/value/wide_character_value_comparator.c"
 #include "../../logger/logger.c"
 
 /**

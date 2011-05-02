@@ -29,13 +29,15 @@
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/boolean_memory_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/flow/branch_flow_operation_cybol_name.c"
 #include "../../executor/accessor/getter/compound_getter.c"
-#include "../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../executor/comparator/count_array_comparator.c"
+#include "../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../logger/logger.c"
 
 //
@@ -148,7 +150,7 @@ void guide_branch(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_equal_array(&r, *cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    compare_array_count(&r, *cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // The direct execution flag.
     int x = *NUMBER_0_INTEGER_MEMORY_MODEL;

@@ -32,10 +32,7 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_adder.c"
-#include "../../executor/arithmetiser/integer_multiplier.c"
 #include "../../executor/comparator/offset_value_comparator.c"
-#include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"
 
 /**
@@ -44,16 +41,15 @@
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left array
  * @param p2 the right array
- * @param p3 the index
- * @param p4 the count
- * @param p5 the operation abstraction
- * @param p6 the operand abstraction
+ * @param p3 the operation abstraction
+ * @param p4 the operand abstraction
+ * @param p5 the count
  */
-void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* c = (int*) p4;
+        int* c = (int*) p5;
 
         if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -64,34 +60,6 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
                     int* r = (int*) p0;
 
                     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare array.");
-
-                    //?? MOVE the following source code lines to the file calling this function!
-/*??
-                    // The primitive abstraction.
-                    int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-
-                    // Decode primitive abstraction.
-                    decode_primitive_abstraction((void*) &a, p5, p6);
-*/
-
-                    // The left array, right array.
-                    // CAUTION! They HAVE TO BE initialised with p1 and p2,
-                    // since an offset is added below.
-                    void* la = p1;
-                    void* ra = p2;
-
-                    // The offset (memory area).
-                    int os = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                    // Determine abstraction (type) size.
-                    determine_size((void*) &os, p6);
-
-                    // Calculate offset.
-                    multiply_with_integer((void*) &os, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                    // Add offset to left array, right array.
-                    add_integer((void*) &la, (void*) &os, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                    add_integer((void*) &ra, (void*) &os, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     // The loop variable.
                     int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -114,7 +82,7 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
                         // CAUTION! This function does not change the result flag, if unequal.
                         // Therefore, the result flag always has to be initialised with zero before!
-                        compare_value_offset((void*) &vr, la, ra, (void*) &j, p5, p6);
+                        compare_value_offset((void*) &vr, p1, p2, p3, p4, (void*) &j);
 
                         if (vr == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

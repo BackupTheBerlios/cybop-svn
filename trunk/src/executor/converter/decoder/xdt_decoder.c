@@ -37,7 +37,7 @@
 #include "../../../constant/name/xdt_model/field_xdt_model_name.c"
 #include "../../../constant/name/xdt_model/record_xdt_model_name.c"
 #include "../../../executor/modifier/replacer/compound_replacer.c"
-#include "../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../../executor/converter/decoder/ascii_character_vector_decoder.c"
 #include "../../../executor/converter/decoder/date_time_decoder.c"
 #include "../../../executor/converter/decoder/integer_vector_decoder.c"

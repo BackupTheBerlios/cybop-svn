@@ -33,7 +33,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../controller/handler/compound_handler.c"
 #include "../../controller/handler/operation_handler.c"
-#include "../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../logger/logger.c"
 
 /**
@@ -124,7 +124,7 @@ void handle_encapsulated(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, *la, *lac, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, *la, *lac, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -134,7 +134,7 @@ void handle_encapsulated(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_equal_array((void*) &r, *la, *lac, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_array_equal_wide_character((void*) &r, *la, *lac, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

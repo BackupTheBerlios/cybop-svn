@@ -12,6 +12,8 @@
 #
 
         * Stepwise delete old files in "executor/comparator/"
+        * Replace function "compare_array_equal_wide_character" through "compare_array_count"
+            and delete file "wide_character_equal_array_comparator.c"
 
         * Continue in "allocate"
         * Continue in "executor/arithmetiser/fraction*"

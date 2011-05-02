@@ -37,7 +37,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/communicator/receiver/gnu_linux_console_receiver.c"
-#include "../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../../executor/converter/decoder/utf_8_unicode_character_decoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../executor/modifier/appender.c"

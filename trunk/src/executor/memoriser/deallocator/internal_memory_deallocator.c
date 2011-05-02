@@ -30,7 +30,7 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../../logger/logger.c"
 
 /**

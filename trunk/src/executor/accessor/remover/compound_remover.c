@@ -36,7 +36,7 @@
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
 #include "../../../executor/accessor/remover/array_remover.c"
-#include "../../../executor/comparator/equality/array_equality_comparator.c"
+#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
@@ -290,7 +290,7 @@ void reindex_compound_elements_forming_list(void* p0, void* p1, void* p2, int* p
                     // Reset comparison result.
                     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    compare_equal_array(&r, p, &pc, *n, &pc, WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    compare_array_equal_wide_character(&r, p, &pc, *n, &pc);
 
                     if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
