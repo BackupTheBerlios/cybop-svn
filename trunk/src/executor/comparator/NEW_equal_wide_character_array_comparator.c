@@ -223,7 +223,7 @@ void compare_array_wide_character_equal(void* p0, void* p1, void* p2, void* p3, 
 
             if (*lc == *rc) {
 
-                compare_array_equal_elements(p0, p1, p3, p4);
+                compare_array_wide_character_equal_elements(p0, p1, p3, p4);
             }
 
         } else {
