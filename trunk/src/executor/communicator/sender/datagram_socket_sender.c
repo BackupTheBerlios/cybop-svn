@@ -35,7 +35,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 
 /**
  * Sends a byte array stream to the datagram socket.

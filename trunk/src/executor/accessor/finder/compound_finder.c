@@ -32,7 +32,7 @@
 #include "../../executor/accessor/getter/array_getter.c"
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/accessor/getter/signal_memory_getter.c"
-#include "../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../executor/comparator/count_array_comparator.c"
 
 /**
  * Finds the compound element.
@@ -91,7 +91,7 @@ void find_compound(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                             if (*nc1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                                compare_array_equal_wide_character((void*) &r, p2, p3, *n1, *nc1);
+                                compare_array_count((void*) &r, p2, p3, *n1, *nc1);
 
                                 if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 

@@ -39,7 +39,7 @@
 #include "../../../executor/converter/encoder/ascii_character_vector_encoder.c"
 #include "../../../executor/converter/encoder/date_time_encoder.c"
 #include "../../../executor/converter/encoder/integer_vector_encoder.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 #include "../../../logger/logger.c"
 
 //

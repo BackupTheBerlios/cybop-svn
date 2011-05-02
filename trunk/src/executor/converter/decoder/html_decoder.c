@@ -36,7 +36,7 @@
 #include "../../../logger/logger.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 
 /**
  * Decodes an html format into a compound model.

@@ -31,7 +31,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../logger/logger.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 
 /**
  * Inserts the source- into the destination wide character vector, at the index.

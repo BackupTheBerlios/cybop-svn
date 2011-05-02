@@ -37,7 +37,7 @@
 #include "../../../executor/arithmetiser/integer_adder/pointer_integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
 #include "../../../executor/comparator/count_array_comparator.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 #include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
 

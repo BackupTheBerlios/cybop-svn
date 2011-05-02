@@ -32,7 +32,7 @@
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/communicator/receiver.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 #include "../../../executor/converter/decoder.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"

@@ -27,6 +27,7 @@
 #define HTTP_REQUEST_SELECTOR_SOURCE
 
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
@@ -69,7 +70,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) GET_REQUEST_METHOD_HTTP_MODEL, (void*) GET_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) GET_REQUEST_METHOD_HTTP_MODEL, (void*) GET_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -82,7 +83,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) POST_REQUEST_METHOD_HTTP_MODEL, (void*) POST_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) POST_REQUEST_METHOD_HTTP_MODEL, (void*) POST_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -100,7 +101,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -112,7 +113,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) PUT_REQUEST_METHOD_HTTP_MODEL, (void*) PUT_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) PUT_REQUEST_METHOD_HTTP_MODEL, (void*) PUT_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -124,7 +125,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -136,7 +137,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -148,7 +149,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -160,7 +161,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -172,7 +173,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -184,7 +185,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -196,7 +197,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -208,7 +209,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -220,7 +221,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -232,7 +233,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -244,7 +245,7 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p7, p8, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
+            compare_array_count((void*) &r, p7, p8, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

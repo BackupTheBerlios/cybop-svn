@@ -39,6 +39,7 @@
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/cybol/address_cybol_model.c"
 #include "../../../constant/model/cybol/communication_style_cybol_model.c"
@@ -49,7 +50,7 @@
 #include "../../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/modifier/replacer.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../variable/type_size/socket_type_size.c"
 
@@ -78,7 +79,7 @@ void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, voi
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_array_equal_wide_character((void*) &r, p2, p3, (void*) LOCAL_NAMESPACE_CYBOL_MODEL, (void*) LOCAL_NAMESPACE_CYBOL_MODEL_COUNT);
+                compare_array_count((void*) &r, p2, p3, (void*) LOCAL_NAMESPACE_CYBOL_MODEL, (void*) LOCAL_NAMESPACE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -89,7 +90,7 @@ void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, voi
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_array_equal_wide_character((void*) &r, p2, p3, (void*) INET_NAMESPACE_CYBOL_MODEL, (void*) INET_NAMESPACE_CYBOL_MODEL_COUNT);
+                compare_array_count((void*) &r, p2, p3, (void*) INET_NAMESPACE_CYBOL_MODEL, (void*) INET_NAMESPACE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -100,7 +101,7 @@ void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, voi
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_array_equal_wide_character((void*) &r, p2, p3, (void*) INET6_NAMESPACE_CYBOL_MODEL, (void*) INET6_NAMESPACE_CYBOL_MODEL_COUNT);
+                compare_array_count((void*) &r, p2, p3, (void*) INET6_NAMESPACE_CYBOL_MODEL, (void*) INET6_NAMESPACE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -145,7 +146,7 @@ void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p1, p2, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT);
+            compare_array_count((void*) &r, p1, p2, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -155,7 +156,7 @@ void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p1, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT);
+            compare_array_count((void*) &r, p1, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -165,7 +166,7 @@ void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_equal_wide_character((void*) &r, p1, p2, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT);
+            compare_array_count((void*) &r, p1, p2, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -223,7 +224,7 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_equal_wide_character((void*) &r, p1, p2, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL_COUNT);
+                    compare_array_count((void*) &r, p1, p2, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -240,7 +241,7 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_equal_wide_character((void*) &r, p1, p2, (void*) ANY_ADDRESS_CYBOL_MODEL, (void*) ANY_ADDRESS_CYBOL_MODEL_COUNT);
+                    compare_array_count((void*) &r, p1, p2, (void*) ANY_ADDRESS_CYBOL_MODEL, (void*) ANY_ADDRESS_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

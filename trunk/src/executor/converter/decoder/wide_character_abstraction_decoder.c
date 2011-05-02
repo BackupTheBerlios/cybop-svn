@@ -39,7 +39,7 @@
 #include "../../executor/copier/value_setter/unsigned_long_value_setter.c"
 #include "../../executor/copier/value_setter/wide_character_value_setter.c"
 #include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../executor/comparator/count_array_comparator.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"
 

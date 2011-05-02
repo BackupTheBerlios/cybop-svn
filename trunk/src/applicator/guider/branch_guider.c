@@ -37,7 +37,7 @@
 #include "../../constant/name/cybol/operation/flow/branch_flow_operation_cybol_name.c"
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/comparator/count_array_comparator.c"
-#include "../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../executor/comparator/count_array_comparator.c"
 #include "../../logger/logger.c"
 
 //

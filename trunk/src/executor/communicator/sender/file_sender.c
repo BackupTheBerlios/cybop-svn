@@ -36,7 +36,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/model/stream_model.c"
 #include "../../../executor/comparator/count_array_comparator.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 #include "../../../executor/converter/encoder/utf_8_unicode_character_encoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../executor/memoriser/deallocator/model_deallocator.c"

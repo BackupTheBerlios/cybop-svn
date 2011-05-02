@@ -31,7 +31,7 @@
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/name/memory/fraction_memory_name.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 #include "../../../executor/modifier/replacer.c"
 #include "../../../logger/logger.c"
 

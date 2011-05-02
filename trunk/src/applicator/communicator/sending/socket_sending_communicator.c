@@ -36,6 +36,7 @@
 #include "../../../applicator/maintainer/starting/socket_starting_maintainer.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../../constant/model/cybol/communication_mode_cybol_model.c"
 #include "../../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -203,7 +204,7 @@ void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_equal_wide_character((void*) &r, p5, p6, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT);
+        compare_array_count((void*) &r, p5, p6, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -213,7 +214,7 @@ void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_equal_wide_character((void*) &r, p5, p6, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT);
+        compare_array_count((void*) &r, p5, p6, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

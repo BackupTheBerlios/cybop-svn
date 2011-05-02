@@ -35,7 +35,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/accessor/getter.c"
 #include "../../../executor/communicator/sender/x_window_system_sender.c"
-#include "../../../executor/comparator/wide_character_equal_array_comparator.c"
+#include "../../../executor/comparator/count_array_comparator.c"
 #include "../../../executor/converter/encoder/x_window_system_encoder.c"
 #include "../../../logger/logger.c"
 
