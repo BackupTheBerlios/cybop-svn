@@ -40,6 +40,26 @@
 #include "../../executor/comparator/value/wide_character_value_comparator.c"
 #include "../../logger/logger.c"
 
+//
+// Models of abstraction "complex" or "fraction" are not
+// considered as container, since the comparison of their
+// elements follows special rules.
+//
+// Example:
+//
+// The two fractions 4 / 2 and 2 / 1 are identical even though
+// their numerators and denominators differ. If the fractions
+// were treated as containers and their elements compared one by one,
+// then neither the numerators 4 and 2 nor the denominators 2 and 1
+// would be equal.
+//
+// Therefore, such constructs are static and NOT treated as
+// dynamic containers. The number of their elements is fixed.
+// The fraction has two elements: numerator and denominator.
+// It needs a special comparison function that knows how to
+// treat fractions correctly.
+//
+
 /**
  * Compares the left- with the right value.
  *

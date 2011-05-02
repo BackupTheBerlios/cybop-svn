@@ -37,27 +37,41 @@
 /**
  * Compares left and right item.
  *
+ * The left- and right count ALWAYS have to be EQUAL in order to
+ * be able to compare all elements successfully one by one.
+ * Even if the comparison operator is not "equals" (==), but
+ * something else, e.g. "smaller" (<), both counts have to be equal.
+ *
+ * Example 1:
+ *
+ * first item: "blu" (count: 3)
+ * second item: "bla" (count: 3)
+ * --> comparison is possible and depends on the given operation (operator)
+ * --> result parametre might be set to "true" or remain unchanged,
+ *     depending on the given operator and actual contained elements
+ *
+ * Example 2:
+ *
+ * first item: "blu" (count: 3)
+ * second item: "blue" (count: 4)
+ * --> comparison is always "false", since the counts are not the same
+ * --> result parametre remains unchanged
+ *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left item
  * @param p2 the right item
- * @param p3 the index
- * @param p4 the count
- * @param p5 the abstraction
- * @param p6 the abstraction count
+ * @param p3 the operation abstraction
+ * @param p4 the operand abstraction
+ * @param p5 the count
+ * @param p6 the index
  */
 void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare item.");
 
-/*??
-    //?? MOVE the following source code lines to the file calling this function!
-
-    // The primitive abstraction.
-    int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-
-    // Decode primitive abstraction.
-    decode_primitive_abstraction((void*) &a, p5, p6);
-*/
+    // CAUTION! The sizes do NOT have to be identical,
+    // since they just represent allocated memory.
+    // For comparison, only the actual number of elements is of interest.
 
     // The left data, count.
     void* ld = *NULL_POINTER_MEMORY_MODEL;
@@ -78,12 +92,12 @@ void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     int cr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Compare left and right count.
-    compare_array((void*) &cr, lc, rc, p3, p4, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    compare_array_offset((void*) &cr, lc, rc, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, p5, p6);
 
     if (cr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         // Compare left and right data.
-        compare_array((void*) &dr, ld, rd, p3, p4, p5, p6);
+        compare_array_offset((void*) &dr, ld, rd, p3, p4, p5, p6);
 
         if (dr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -91,6 +105,16 @@ void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             set_array(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
         }
     }
+
+/*??
+    //?? MOVE the following source code lines to the file calling this function!
+
+    // The primitive abstraction.
+    int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+
+    // Decode primitive abstraction.
+    decode_primitive_abstraction((void*) &a, p5, p6);
+*/
 }
 
 /* ITEM_COMPARATOR_SOURCE */
