@@ -33,128 +33,8 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/comparator/value_comparator.c"
+#include "../../../executor/comparator/array_comparator.c"
 #include "../../../logger/logger.c"
-
-/**
- * Compares one element of the left with one of the right array for equality.
- *
- * @param p0 the result (number 1 if true; unchanged otherwise)
- * @param p1 the left array
- * @param p2 the right array
- * @param p3 the index
- * @param p4 the primitive abstraction
- */
-void compare_equal_array_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    // The type size.
-    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Determine type size.
-    determine_size((void*) &s, p4);
-
-    // The offset.
-    // Initialise offset with type size, since it is used as
-    // first factor and result of the multiplication below.
-    int o = s;
-
-    // Calculate offset.
-    multiply_with_integer((void*) &o, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-    // The left element.
-    // CAUTION! It HAS TO BE initialised with p1,
-    // since an offset is added to it below.
-    void* le = p1;
-    // The right element.
-    // CAUTION! It HAS TO BE initialised with p2,
-    // since an offset is added to it below.
-    void* re = p2;
-
-    // Add offset to left element.
-    add_integer((void*) &le, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Add offset to right element.
-    add_integer((void*) &re, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-    compare_value(p0, le, re, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, p4);
-}
-
-/**
- * Compares all elements of the given arrays for equality.
- *
- * @param p0 the result (number 1 if true; unchanged otherwise)
- * @param p1 the left array
- * @param p2 the right array
- * @param p3 the array count
- * @param p4 the primitive abstraction
- */
-void compare_equal_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
-
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* ac = (int*) p3;
-
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
-
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    int* r = (int*) p0;
-
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare array elements for equality.");
-
-                    // The loop variable.
-                    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
-                    // The element comparison result.
-                    int er = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                        if (j >= *ac) {
-
-                            // All elements have been compared and are equal.
-                            *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                            break;
-                        }
-
-                        // Reset comparison result.
-                        er = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                        // CAUTION! This function does not change the result flag, if unequal.
-                        // Therefore, the result flag always has to be initialised with zero before!
-                        compare_equal_array_element((void*) &er, p1, p2, (void*) &j, p4);
-
-                        if (er == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                            // Stop comparison if two elements are not equal,
-                            // because then the two arrays are not equal.
-                            break;
-                        }
-
-                        j++;
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements for equality. The result is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements for equality. The left array is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements for equality. The right array is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array elements for equality. The array count is null.");
-    }
-}
 
 /**
  * Compares two arrays for equality.
@@ -183,7 +63,7 @@ void compare_equal_array(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
             if (*lc == *rc) {
 
-                compare_equal_array_elements(p0, p1, p3, p4, p5);
+                compare_array(p0, p1, p3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p4, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, p5);
             }
 
         } else {

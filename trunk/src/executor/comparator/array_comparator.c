@@ -28,12 +28,15 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/comparator/NEW_offset_value_comparator.c"
-#include "../../../logger/logger.c"
+#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../executor/arithmetiser/integer_adder.c"
+#include "../../executor/arithmetiser/integer_multiplier.c"
+#include "../../executor/comparator/offset_value_comparator.c"
+#include "../../executor/memoriser/size_determiner.c"
+#include "../../logger/logger.c"
 
 /**
  * Compares left and right array.
@@ -74,8 +77,8 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
                     // The left array, right array.
                     // CAUTION! They HAVE TO BE initialised with p1 and p2,
                     // since an offset is added below.
-                    void* l = p1;
-                    void* r = p2;
+                    void* la = p1;
+                    void* ra = p2;
 
                     // The offset (memory area).
                     int os = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -87,8 +90,8 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
                     multiply_with_integer((void*) &os, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     // Add offset to left array, right array.
-                    add_integer((void*) &l, (void*) &os, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                    add_integer((void*) &r, (void*) &os, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    add_integer((void*) &la, (void*) &os, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    add_integer((void*) &ra, (void*) &os, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     // The loop variable.
                     int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -111,7 +114,7 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, v
 
                         // CAUTION! This function does not change the result flag, if unequal.
                         // Therefore, the result flag always has to be initialised with zero before!
-                        compare_value_offset((void*) &vr, l, r, (void*) &j, p5, p6);
+                        compare_value_offset((void*) &vr, la, ra, (void*) &j, p5, p6);
 
                         if (vr == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
