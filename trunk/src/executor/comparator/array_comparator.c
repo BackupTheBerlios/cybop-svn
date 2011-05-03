@@ -72,6 +72,10 @@ void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
                             // All elements have been compared successfully.
                             // The comparison of all element pairs delivered "true".
+                            //
+                            // CAUTION! The arrays are expected to be equal,
+                            // even if the count is zero. This is important, because
+                            // the details of many otherwise equal models are empty.
                             *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                             break;

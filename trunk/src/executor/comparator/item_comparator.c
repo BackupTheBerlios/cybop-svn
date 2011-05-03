@@ -62,10 +62,8 @@
  * @param p2 the right item
  * @param p3 the operation abstraction
  * @param p4 the operand abstraction
- * @param p5 the count
- * @param p6 the index
  */
-void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare item.");
 
@@ -91,13 +89,16 @@ void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     int dr = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int cr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Compare left and right count.
-    compare_array_offset((void*) &cr, lc, rc, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, p5, p6);
+    // Compare left- with right count.
+    // CAUTION! Use the equal operation to compare both counts.
+    compare_array((void*) &cr, lc, rc, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
     if (cr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         // Compare left and right data.
-        compare_array_offset((void*) &dr, ld, rd, p3, p4, p5, p6);
+        // CAUTION! The right item's count is used here,
+        // but the left item's count may be used as well.
+        compare_array((void*) &dr, ld, rd, p3, p4, rc);
 
         if (dr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -105,16 +106,6 @@ void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
             set_array(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
         }
     }
-
-/*??
-    //?? MOVE the following source code lines to the file calling this function!
-
-    // The primitive abstraction.
-    int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-
-    // Decode primitive abstraction.
-    decode_primitive_abstraction((void*) &a, p5, p6);
-*/
 }
 
 /* ITEM_COMPARATOR_SOURCE */
