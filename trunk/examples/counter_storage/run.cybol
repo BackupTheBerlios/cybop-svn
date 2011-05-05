@@ -1,0 +1,79 @@
+<model>
+
+    <part name="create_app" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="counter"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+    </part>
+
+    <part name="create_count" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="count"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".counter"/>
+    </part>
+
+    <part name="initialise_count" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="file" abstraction="number/integer" model="counter_storage/count.txt"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+    </part>
+
+    <part name="print_count" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+        <property name="new_line" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+    </part>
+
+    <part name="increment_count" channel="inline" abstraction="operation/plain" model="add">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="summand_1" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+        <property name="summand_2" channel="inline" abstraction="number/integer" model="1"/>
+        <property name="sum" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+    </part>
+
+    <part name="store_count" channel="inline" abstraction="operation/plain" model="send">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="message" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+        <property name="receiver" channel="inline" abstraction="text/plain" model="counter_storage/count.txt"/>
+    </part>
+
+    <part name="exit_application" channel="inline" abstraction="operation/plain" model="exit"/>
+
+
+</model>
+
+<!--
+    This example reads a previously set count value from a text file,
+    increments the count by one and writes the result back into the text file.
+/-->
+
+<!--
+    Copyright (C) 1999-2011. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile$ $Revision$ $Date$ $Author$
+    @author Andy Röhr <andy_roehr@gmx.de>
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->

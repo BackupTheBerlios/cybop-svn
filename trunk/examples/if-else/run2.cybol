@@ -1,0 +1,82 @@
+<model>
+    <part name="create_domain" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="domain"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+    </part>
+    <part name="create_flag" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="flag"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="boolean"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".domain"/>
+    </part>
+    <part name="create_true_model" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="true_model"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".domain"/>
+    </part>
+    <part name="create_false_model" channel="inline" abstraction="operation/plain" model="create">
+        <property name="name" channel="inline" abstraction="text/plain" model="false_model"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="element" channel="inline" abstraction="text/plain" model="part"/>
+        <property name="whole" channel="inline" abstraction="path/knowledge" model=".domain"/>
+    </part>
+   <part name="initialise_flag" channel="inline" abstraction="operation/plain" model="copy">
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+        <property name="source" channel="inline" abstraction="logicvalue/boolean" model="true"/>
+        <property name="destination" channel="inline" abstraction="path/knowledge" model=".domain.flag"/>
+    </part>
+    <part name="initialise_true_model" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="if-else/true.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".domain.true_model"/>
+    </part>
+    <part name="initialise_false_model" channel="inline" abstraction="operation/plain" model="receive">
+        <property name="channel" channel="inline" abstraction="text/plain" model="file"/>
+        <property name="language" channel="inline" abstraction="text/plain" model="text/cybol"/>
+        <property name="message" channel="inline" abstraction="text/plain" model="if-else/false.cybol"/>
+        <property name="model" channel="inline" abstraction="path/knowledge" model=".domain.false_model"/>
+    </part>
+    <part name="if-then-else" channel="inline" abstraction="operation/plain" model="branch">
+        <property name="criterion" channel="inline" abstraction="path/knowledge" model=".domain.flag"/>
+        <property name="true" channel="inline" abstraction="path/knowledge" model=".domain.true_model"/>
+        <property name="false" channel="inline" abstraction="path/knowledge" model=".domain.false_model"/>
+    </part>
+    <part name="exit_application" channel="inline" abstraction="operation/plain" model="exit"/>
+</model>
+
+<!--
+    This example demonstrates the usage of if-then-else statements.
+    It creates both, the "true" and the "false" model as nodes of the runtime knowledge tree,
+    before accessing them in the "branch" operation.
+/-->
+
+<!--
+    Copyright (C) 1999-2011. Christian Heller.
+
+    This file is part of the Cybernetics Oriented Interpreter (CYBOI).
+    It represents an example knowledge model,
+    and is written in the Cybernetics Oriented Language (CYBOL).
+
+    CYBOI is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    CYBOI is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CYBOI.  If not, see <http://www.gnu.org/licenses/>.
+
+    Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
+    Christian Heller <christian.heller@tuxtax.de>
+
+    @version $RCSfile$ $Revision$ $Date$ $Author$
+    @author Andy Röhr <andy_roehr@gmx.de>
+    @author Christian Heller <christian.heller@tuxtax.de>
+/-->
