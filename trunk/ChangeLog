@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-05-05  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete file "model_comparator.c"
+
 2011-05-03  Christian Heller  <christian.heller@tuxtax.de>
 
         * Prepare shallow and deep comparison in "executor/comparator/"

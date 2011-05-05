@@ -77,5 +77,17 @@ static int* UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_4_INTEGER_MEMORY
 /** The wide character primitive memory abstraction. */
 static int* WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
+//
+// Knowledge.
+//
+
+/**
+ * The model primitive memory abstraction.
+ *
+ * Models are compounds that consist of parts, which may be
+ * other models or primitive values.
+ */
+static int* MODEL_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
+
 /* PRIMITIVE_MEMORY_ABSTRACTION_SOURCE */
 #endif

@@ -11,6 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Test and use new files like e.g. "model_comparator.c"
         * Stepwise delete old files in "executor/comparator/"
         * Continue in "allocate"
         * Continue in "executor/arithmetiser/fraction*"

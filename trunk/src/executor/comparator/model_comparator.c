@@ -41,86 +41,170 @@
 #include "../../../variable/reallocation_factor.c"
 
 /**
- * Compares left and right model.
+ * Compares left- with right model models deep.
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left model
  * @param p2 the right model
  * @param p3 the operation abstraction
- * @param p4 the deep comparison flag (number 0 for shallow comparison; number 1 for deep comparison)
- */
-void compare_model_models_deep_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
-}
-
-/**
- * Compares left and right model.
- *
- * @param p0 the result (number 1 if true; unchanged otherwise)
- * @param p1 the left model
- * @param p2 the right model
- * @param p3 the operation abstraction
- * @param p4 the deep comparison flag (number 0 for shallow comparison; number 1 for deep comparison)
+ * @param p4 the count
  */
 void compare_model_models_deep(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* c = (int*) p4;
+
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+            int* r = (int*) p0;
+
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare model models deep.");
+
+            // The loop variable.
+            int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The left, right part model.
+            void* lp = *NULL_POINTER_MEMORY_MODEL;
+            void* rp = *NULL_POINTER_MEMORY_MODEL;
+            // The model comparison result.
+            int mr = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                if (j >= *c) {
+
+                    // All part models have been compared successfully.
+                    // The comparison of all part model pairs delivered "true".
+                    //
+                    // CAUTION! The part models are expected to be equal,
+                    // even if the count is zero. This is important, because
+                    // many otherwise equal models contain empty parts.
+                    *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                    break;
+                }
+
+                // Get left, right part model.
+                get((void*) &lp, p1, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+                get((void*) &rp, p2, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+                // Reset model comparison result.
+                mr = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+                // CAUTION! This function does not change the result flag, if unequal.
+                // Therefore, the result flag always has to be reset to zero before!
+                compare_model((void*) &mr, lp, rp, p3);
+
+                if (mr == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                    // Stop comparison if two part models do not match the
+                    // criteria, i.e. the comparison delivered "false".
+                    // Because then, the comparison of the two part models is "false".
+                    break;
+                }
+
+                j++;
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare model models deep. The result is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare model models deep. The count is null.");
+    }
 }
 
 /**
- * Compares left and right model.
+ * Compares left- with right model models.
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left model
  * @param p2 the right model
  * @param p3 the operation abstraction
  * @param p4 the operand abstraction
- * @param p5 the deep comparison flag (number 0 for shallow comparison; number 1 for deep comparison)
  */
-void compare_model_models(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void compare_model_models(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* d = (int*) p4;
+        int* a = (int*) p4;
 
-        // The shallow, deep comparison results.
-        int sr = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        int dr = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare model models.");
 
-        // Compare left- with right model (shallow).
-        compare_item((void*) &sr, p1, p2, p3, p4);
+        if (*a != *MODEL_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            // Use shallow comparison for primitive data like:
+            // integer array, double array, fraction.
 
-            if (*d != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            // Compare left- with right model (shallow).
+            compare_item(p0, p1, p2, p3, p4);
 
-                // Deep comparison.
+        } else {
 
-                // Compare left- with right model elements (deep).
-                compare_model_elements((void*) &mdr, lm, rm, p3, p4);
+            // Use deep comparison for compound data with abstraction (type) "model".
+            //
+            // CAUTION! Do NOT use shallow comparison here!
+            // It might seem useful to compare the items' counts.
+            // However, since it also compares their data,
+            // false results will occur, because the data is just
+            // a reference (pointer) to the actual compound model.
+            // Instead of comparing these pointers, a comparison
+            // of the compound models' parts (child nodes) is needed.
 
-                // Both, the shallow- and the deep comparison have to be successful.
-                if ((msr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (mdr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+            // CAUTION! The sizes do NOT have to be identical,
+            // since they just represent allocated memory.
+            // For comparison, only the actual number of elements is of interest.
 
-                    // Set result to true only if all comparisons have been true.
-                    set_array(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-                }
+            // The left, right count.
+            void* lc = *NULL_POINTER_MEMORY_MODEL;
+            void* rc = *NULL_POINTER_MEMORY_MODEL;
+
+            // Get left, right count.
+            get((void*) &lc, p1, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            get((void*) &rc, p2, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+            // The count comparison result.
+            int cr = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+            // Compare left- with right count.
+            // CAUTION! Use the equal operation to compare both counts.
+            compare_array((void*) &cr, lc, rc, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+
+            if (cr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // Compare left- with right model (deep).
+                // CAUTION! The right model's count is used here,
+                // but the left model's count may be used as well.
+                compare_model_models_deep(p0, p1, p2, p3, rc);
             }
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare model models. The deep comparison flag is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare model models. The operand abstraction is null.");
     }
 }
 
 /**
- * Compares left and right model.
+ * Compares left- with right model.
+ *
+ * A distinction between shallow- and deep comparison does not make sense.
+ * If just the pointers to two models are to be compared,
+ * then the knowledge path string may be used to achieve this.
+ * In all other cases, the user expects the models to be compared in every detail.
+ * In other words: A deep comparison is ALWAYS applied here.
+ * Note, that deep comparisons are only applicable for models
+ * with abstraction "model" (formerly "compound").
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left model
  * @param p2 the right model
  * @param p3 the operation abstraction
- * @param p4 the deep comparison flag (number 0 for shallow comparison; number 1 for deep comparison)
  */
-void compare_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void compare_model(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare model.");
 
@@ -178,10 +262,7 @@ void compare_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if (dr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Compare left- with right model.
-            compare_model_models((void*) &mr, lm, rm, p3, p4, (void*) &a);
-
-            // Count the tree depth here!
-            // Only set p0 below, if root level has been reached again!
+            compare_model_models((void*) &mr, lm, rm, p3, (void*) &a);
 
             if (mr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

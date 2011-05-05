@@ -35,7 +35,7 @@
 #include "../../../logger/logger.c"
 
 /**
- * Compares left and right item.
+ * Compares left- with right item.
  *
  * The left- and right count ALWAYS have to be EQUAL in order to
  * be able to compare all elements successfully one by one.
@@ -95,7 +95,7 @@ void compare_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (cr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        // Compare left and right data.
+        // Compare left- with right data.
         // CAUTION! The right item's count is used here,
         // but the left item's count may be used as well.
         compare_array((void*) &dr, ld, rd, p3, p4, rc);
