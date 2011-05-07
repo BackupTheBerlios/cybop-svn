@@ -3,8 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <!--
-        $RCSfile: index.shtml,v $
-
         Copyright (C) 1999-2011. Christian Heller.
 
         Permission is granted to copy, distribute and/or modify this document
@@ -29,8 +27,30 @@
         <div id="content">
             <h1>Manuals</h1>
             <p>
-                We are working to offer a beginner's manual here.
+                All manuals on this page are published under the terms of the <i>GNU Free Documentation License</i> (FDL).
             </p>
+            <table>
+            <tr>
+                <th>Title</th>
+                <th>Authors</th>
+                <th>Information</th>
+            </tr>
+            <tr>
+                <td>
+                    Einsteiger Tutorial (German Beginner's Manual)<br/>
+                    2011-04-20
+                </td>
+                <td>
+                    <a href="mailto:enrico.nipper@it2008.ba-leipzig.de">Enrico Nipper</a><br/>
+                    <a href="mailto:stefan.bebber@it2008.ba-leipzig.de">Stefan Bebber</a><br/>
+                </td>
+                <td>
+                    <a href="tutorial-de.pdf">
+                        <img src="../logo.png" alt="Logo" align="left" valign="top" border="0"/>
+                    </a>
+                </td>
+            </tr>
+            </table>
         </div>
         <!--#include virtual="../footer.inc" -->
     </div>

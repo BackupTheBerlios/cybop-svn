@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-05-07  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add (German language) beginner's manual written by two students
+
 2011-05-05  Christian Heller  <christian.heller@tuxtax.de>
 
         * Complete file "model_comparator.c"
