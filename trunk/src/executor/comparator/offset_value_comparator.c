@@ -71,7 +71,7 @@ void compare_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void
     add_integer((void*) &l, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
     add_integer((void*) &r, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    // Compare left value, right value.
+    // Compare left value with right value.
     compare_value(p0, l, r, p3, p4);
 }
 

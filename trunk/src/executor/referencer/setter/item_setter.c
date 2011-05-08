@@ -38,6 +38,59 @@
 #include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
 
+//
+// Example 1: Replacement WITHOUT adjustment (set) of size and count (ds remains as is):
+//
+// d = "Have a nice day"
+// dc = 15
+// ds = 15
+// s = "fine"
+// sc = 4
+// index = 7
+// set(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+// ns = 0 // The new size
+// ns = 7 // Added index
+// ns = 11 // Added sc
+// ns < ds
+// --> ds is NOT changed
+// --> resulting d = "Have a fine day"
+//
+// Example 2: Replacement WITH adjustment (set_adjust) of size and count (ds gets shrinked):
+//
+// d = "green"
+// dc = 5
+// ds = 5
+// s = "red"
+// sc = 3
+// index = 0
+// set_adjust(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+// ns = 0 // The new size
+// ns = 0 // Added index
+// ns = 3 // Added sc
+// ns < ds
+// --> ds IS changed from 5 to 3 and d reallocated
+// --> resulting d = "red"
+// --> if ds was not made smaller, the resulting d would be
+//     "reden" with a count of 5, representing a non-existing
+//     colour value, which would cause errors
+//
+// Example 3: Replacement WITH adjustment (set_adjust) of size and count (ds gets enlarged):
+//
+// d = "Have a nice day"
+// dc = 15
+// ds = 15
+// s = "daydream"
+// sc = 8
+// index = 12
+// set_adjust(d, dc, ds, s, sc, index, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+// ns = 0 // The new size
+// ns = 12 // Added index
+// ns = 20 // Added sc
+// ns > ds
+// --> ds IS changed from 15 to 20 and d reallocated
+// --> resulting d = "Have a nice daydream"
+//
+
 /**
  * Sets count source item elements into the destination item
  * at position index.
@@ -47,12 +100,11 @@
  *
  * @param p0 the destination item
  * @param p1 the source item
- * @param p2 the count
- * @param p3 the destination item index
- * @param p4 the abstraction
- * @param p5 the abstraction count
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the index
  */
-void set_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void set_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set item.");
 
@@ -71,7 +123,7 @@ void set_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     get((void*) &sc, p1, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
     // Set source- to destination data.
-    set_array(dd, sd, p2, p3, p4, p5);
+    set_array_offset(dd, sd, p2, p3, p4);
 
     // Add source- to destination count.
     add_integer(dc, sc, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);

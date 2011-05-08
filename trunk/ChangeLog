@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-05-08  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Clean up old files in "executor/comparator/"
+        * Start refactoring files in "executor/referencer/setter/"
+
 2011-05-07  Christian Heller  <christian.heller@tuxtax.de>
 
         * Add (German language) beginner's manual written by two students

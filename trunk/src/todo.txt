@@ -11,37 +11,16 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Test and use new files like e.g. "model_comparator.c"
-        * Stepwise delete old files in "executor/comparator/"
-        * Continue in "allocate"
-        * Continue in "executor/arithmetiser/fraction*"
-        * Continue in "executor/accessor/getter/"
-        * Delete file "array_equality_comparator.c" which was replaced by "container_comparator.c"
-        * Adapt example applications to new operation cybol mime types and new comparison functions
-        * Use MIME types to categorise operations in "abstraction" attribute, e.g.:
-
-    <part name="compare_count" channel="inline" abstraction="comparison/greater_or_equal" model="">
-        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
-        <property name="left" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
-        <property name="right" channel="inline" abstraction="path/knowledge" model=".counter.maximum"/>
-        <property name="result" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
-    </part>
-
-        * Try to increase performance by commenting out "memset" in array allocation
-
-        * Optimise "replace_array" function by replacing offset with constantly growing variable (less addition in loop necessary)
-
-        * Rename "arithmetiser" to "calculator" with function "calculate" and
-            distinguish operation first (add, subtract etc.) and then primitive types
+        * Continue with executor/referencer/setter/model_setter.c (deep setting/copying)
+        * Handle get/set equally and call it "copy"?
+            They are identical, only that source- and destination parametres are swapped.
+        * Continue getter, allocator
         * Implement in this order: comparator, finder, retriever (getter), replacer, appender
         * Continue then with "part_replacer.c"
         * Provide modifier functions for "part" that expect just one pointer with count and size
             and not as many parameters as was the case up to now
         * Replace old functions named "append_part..." with new "append" or "replace"
-        * Provide modifier functions for "compound"
         * Replace old functions named "append_compound..." with new "append" or "replace"
-        * Rename "model" (containing count and size) to "attribute"
-
         * CONTINUE WITH: container functions as described in file "todo_cyboi_java_comparison.txt"
         * Adjust destination's count and size automatically, like a "wrapper" function;
             examples: "wide_character_vector_accessor.c", "executor/accessor/setter.c", "set_compound_element_by_name"
@@ -49,13 +28,29 @@
             set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
             --> the "(void*) &p4" does possibly lead to errors, since a reference to the
                 local variable p4 is stored, which gets destroyed as soon as the function is left
+
+        * Continue in "executor/arithmetiser/fraction*"
+        * Rename "arithmetiser" to "calculator" with function "calculate" and
+            distinguish operation first (add, subtract etc.) and then primitive types
+
+        * Adapt example applications to new operation cybol mime types and new comparison functions
+        * Use MIME types to categorise operations in "abstraction" attribute, e.g.:
+            <part name="compare_count" channel="inline" abstraction="comparison/greater_or_equal" model="">
+                <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
+                <property name="left" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
+                <property name="right" channel="inline" abstraction="path/knowledge" model=".counter.maximum"/>
+                <property name="result" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
+            </part>
+
+        * Try to increase performance by commenting out "memset" in array allocation
+        * Optimise "replace_array" function by replacing offset with constantly growing variable (less addition in loop necessary)
+
         * Remove model and details content of receiving compound for each new http request;
             otherwise, new commands are just added to the "action" part entry in "receive_socket.c";
             this fixes the errors caused by using "append" instead the "replace" function
             (e.g. html file http response was generated twice as long as wanted;
             only first action was received and added properly to uri internal model,
             all following actions were appended but only the first is considered)
-
         * Continue with example application "presence"
             (it already works for one client request, but due to the missing container function "replace_part"
             answers to following client request are appended to the same model leading to false results)

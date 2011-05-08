@@ -41,7 +41,7 @@
 #include "../../../variable/reallocation_factor.c"
 
 /**
- * Sets the source model into the destination model at position index.
+ * Sets the source model to the destination model at position index.
  *
  * CAUTION! The size of the destination has to be adjusted BEFORE calling
  * this function. The validity of the given index is NOT tested here.
@@ -49,7 +49,7 @@
  * @param p0 the destination model
  * @param p1 the source model
  * @param p2 the count
- * @param p3 the destination model index
+ * @param p3 the index
  */
 void set_model(void* p0, void* p1, void* p2, void* p3) {
 
@@ -85,11 +85,19 @@ void set_model(void* p0, void* p1, void* p2, void* p3) {
     get((void*) &sad, sa, (void*) DATA_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
     get((void*) &sac, sa, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
+    // The primitive operand abstraction.
+    int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+
+    // Decode primitive abstraction.
+    // CAUTION! The source model's abstraction is used here,
+    // but the destination model's abstraction may be used as well.
+    decode_primitive_abstraction((void*) &a, sad, sac);
+
     // Set source model into destination model.
-    set_item(dn, sn, p2, p3, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-    set_item(da, sa, p2, p3, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-    set_item(dm, sm, p2, p3, sad, sac);
-    set_item(dd, sd, p2, p3, (void*) MODEL_MEMORY_ABSTRACTION, (void*) MODEL_MEMORY_ABSTRACTION_COUNT);
+    set_item(dn, sn, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, p3);
+    set_item(da, sa, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, p3);
+    set_item(dm, sm, (void*) &a, p2, p3);
+    set_item(dd, sd, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION, p2, p3);
 }
 
 /**
@@ -111,7 +119,8 @@ void set_model(void* p0, void* p1, void* p2, void* p3) {
  * @param p13 the details count
  * @param p14 the details size
  */
-void replace_compound_by_name(void* p0, void* p1, void* p2,
+/*??
+    void replace_compound_by_name(void* p0, void* p1, void* p2,
     void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
@@ -143,6 +152,7 @@ void replace_compound_by_name(void* p0, void* p1, void* p2,
         replace_compound_by_index(p0, p1, p2, p1, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14);
     }
 }
+*/
 
 /* MODEL_SETTER_SOURCE */
 #endif
