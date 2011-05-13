@@ -43,7 +43,13 @@
 /**
  * Sets the source model to the destination model at position index.
  *
- * CAUTION! The size of the destination has to be adjusted BEFORE calling
+ * CAUTION! The destination already HAS TO EXIST and has to have a NAME.
+ * The source name is NOT copied into the destination name.
+ *
+ * CAUTION! The source abstraction has to be IDENTICAL to the
+ * destination abstraction. Their equality is NOT tested here.
+ *
+ * CAUTION! The size of the destination model has to be adjusted BEFORE calling
  * this function. The validity of the given index is NOT tested here.
  *
  * @param p0 the destination model
@@ -55,47 +61,43 @@ void set_model(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set model.");
 
-    // The destination names, abstractions, models, details.
-    void* dn = *NULL_POINTER_MEMORY_MODEL;
+    // CAUTION! The name and abstraction are NOT copied.
+
+    // The destination abstractions.
+    // It is needed only as parametre for copying the actual model.
+    // The source abstraction might be used as well.
     void* da = *NULL_POINTER_MEMORY_MODEL;
+    // The destination models, details.
     void* dm = *NULL_POINTER_MEMORY_MODEL;
     void* dd = *NULL_POINTER_MEMORY_MODEL;
-    // The source names, abstractions, models, details.
-    void* sn = *NULL_POINTER_MEMORY_MODEL;
-    void* sa = *NULL_POINTER_MEMORY_MODEL;
+    // The source models, details.
     void* sm = *NULL_POINTER_MEMORY_MODEL;
     void* sd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get destination names, abstractions, models, details.
-    get((void*) &dn, p0, (void*) NAMES_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get destination abstractions.
     get((void*) &da, p0, (void*) ABSTRACTIONS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get destination models, details.
     get((void*) &dm, p0, (void*) MODELS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
     get((void*) &dd, p0, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    // Get source names, abstractions, models, details.
-    get((void*) &sn, p1, (void*) NAMES_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &sa, p1, (void*) ABSTRACTIONS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get source models, details.
     get((void*) &sm, p1, (void*) MODELS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
     get((void*) &sd, p1, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-    // The source abstraction data, count.
-    void* sad = *NULL_POINTER_MEMORY_MODEL;
-    void* sac = *NULL_POINTER_MEMORY_MODEL;
+    // The destination abstraction data, count.
+    void* dad = *NULL_POINTER_MEMORY_MODEL;
+    void* dac = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get source abstraction data, count.
-    get((void*) &sad, sa, (void*) DATA_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &sac, sa, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get destination abstraction data, count.
+    get((void*) &dad, da, (void*) DATA_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    get((void*) &dac, da, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
     // The primitive operand abstraction.
     int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
     // Decode primitive abstraction.
-    // CAUTION! The source model's abstraction is used here,
-    // but the destination model's abstraction may be used as well.
-    decode_primitive_abstraction((void*) &a, sad, sac);
+    decode_primitive_abstraction((void*) &a, dad, dac);
 
     // Set source model into destination model.
-    set_item(dn, sn, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, p3);
-    set_item(da, sa, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, p3);
     set_item(dm, sm, (void*) &a, p2, p3);
     set_item(dd, sd, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION, p2, p3);
 }

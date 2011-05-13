@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-05-13  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue "executor/referencer/setter/"
+
 2011-05-08  Christian Heller  <christian.heller@tuxtax.de>
 
         * Clean up old files in "executor/comparator/"
