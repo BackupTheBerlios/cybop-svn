@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-05-26  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct "executor/comparator/", so that not only models, but also details are compared deeply
+        * Continue "executor/referencer/setter/"
+
 2011-05-13  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue "executor/referencer/setter/"

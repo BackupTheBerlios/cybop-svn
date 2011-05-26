@@ -35,6 +35,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/copier/value_setter/character_value_setter.c"
 #include "../../executor/copier/value_setter/double_value_setter.c"
+//?? #include "../../executor/copier/value_setter/fraction_value_setter.c"
 #include "../../executor/copier/value_setter/integer_value_setter.c"
 #include "../../executor/copier/value_setter/pointer_value_setter.c"
 #include "../../executor/copier/value_setter/unsigned_long_value_setter.c"
@@ -83,6 +84,18 @@ void set_value(void* p0, void* p1, void* p2) {
                 set_value_double(p0, p1);
             }
         }
+
+/*??
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            if (*a == *FRACTION_PRIMITIVE_MEMORY_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                set_value_fraction(p0, p1);
+            }
+        }
+*/
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

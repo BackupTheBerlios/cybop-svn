@@ -27,7 +27,6 @@
 #define MODEL_DEALLOCATOR_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../executor/accessor/retriever.c"
 #include "../../../logger/logger.c"
 
 //

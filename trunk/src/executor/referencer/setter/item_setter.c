@@ -125,8 +125,21 @@ void set_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Set source- to destination data.
     set_array_offset(dd, sd, p2, p3, p4);
 
-    // Add source- to destination count.
-    add_integer(dc, sc, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // The new destination count.
+    // CAUTION! Simply adding the source- to the destination count
+    // is not always correct! The source is added to the destination
+    // at position index and not always appended at the end,
+    // i.e. existing elements may be overwritten as well.
+    // Therefore, the source count is added to the destination index
+    // PLUS ONE, because count is always one value greater than index.
+    int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Add destination index to new destination count.
+    add_integer((void*) &c, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Add source count to new destination count.
+    add_integer((void*) &c, sc, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Set result to true only if all comparisons have been true.
+    set_array(dc, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 }
 
 /* ITEM_SETTER_SOURCE */

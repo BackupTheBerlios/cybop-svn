@@ -229,22 +229,6 @@ void compare_model(void* p0, void* p1, void* p2, void* p3) {
     get((void*) &rm, p2, (void*) MODELS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
     get((void*) &rd, p2, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-    // The right abstraction data, count.
-    void* rad = *NULL_POINTER_MEMORY_MODEL;
-    void* rac = *NULL_POINTER_MEMORY_MODEL;
-
-    // Get right abstraction data, count.
-    get((void*) &rad, ra, (void*) DATA_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &rac, ra, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-
-    // The primitive operand abstraction.
-    int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-
-    // Decode primitive abstraction.
-    // CAUTION! The right model's abstraction is used here,
-    // but the left model's abstraction may be used as well.
-    decode_primitive_abstraction((void*) &a, rad, rac);
-
     // The abstractions, models, details comparison results.
     int ar = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int mr = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -256,12 +240,32 @@ void compare_model(void* p0, void* p1, void* p2, void* p3) {
     if (ar != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         // Compare left- with right details.
-        // This function returns "true" in case both details are empty.
-        compare_item((void*) &dr, ld, rd, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION);
+        // CAUTION! This function returns "true" in case both details are empty.
+        compare_model_models((void*) &dr, ld, rd, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION);
 
         if (dr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+            // The right abstraction data, count.
+            void* rad = *NULL_POINTER_MEMORY_MODEL;
+            void* rac = *NULL_POINTER_MEMORY_MODEL;
+
+            // Get right abstraction data, count.
+            get((void*) &rad, ra, (void*) DATA_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            get((void*) &rac, ra, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+            // The primitive operand abstraction.
+            int a = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+
+            // Decode primitive abstraction.
+            // CAUTION! The right model's abstraction is used here,
+            // but the left model's abstraction may be used as well.
+            decode_primitive_abstraction((void*) &a, rad, rac);
+
             // Compare left- with right model.
+            // CAUTION! Both abstractions and both details have to be equal
+            // (see comparisons above), even if the actual models are
+            // compared for something differently, e.g. "smaller than".
+            // Therefore, the models are compared at last here.
             compare_model_models((void*) &mr, lm, rm, p3, (void*) &a);
 
             if (mr != *NUMBER_0_INTEGER_MEMORY_MODEL) {

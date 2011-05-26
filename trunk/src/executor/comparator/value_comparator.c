@@ -34,6 +34,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/comparator/value/character_value_comparator.c"
 #include "../../executor/comparator/value/double_value_comparator.c"
+#include "../../executor/comparator/value/fraction_value_comparator.c"
 #include "../../executor/comparator/value/integer_value_comparator.c"
 #include "../../executor/comparator/value/pointer_value_comparator.c"
 #include "../../executor/comparator/value/unsigned_long_value_comparator.c"
@@ -53,8 +54,9 @@
 // then neither the numerators 4 and 2 nor the denominators 2 and 1
 // would be equal.
 //
-// Therefore, such constructs are static and NOT treated as
-// dynamic containers. The number of their elements is fixed.
+// Therefore, such constructs are static and treated as
+// primitive data types, but NOT as dynamic containers.
+// The number of their elements is fixed.
 // The fraction has two elements: numerator and denominator.
 // It needs a special comparison function that knows how to
 // treat fractions correctly.
@@ -99,6 +101,16 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 compare_value_double(p0, p1, p2, p3);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            if (*a == *FRACTION_PRIMITIVE_MEMORY_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                compare_value_fraction(p0, p1, p2, p3);
             }
         }
 

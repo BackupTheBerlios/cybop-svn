@@ -41,7 +41,6 @@
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/name/command_option/cyboi_command_option_name.c"
-#include "../executor/accessor/retriever.c"
 #include "../executor/comparator/count_array_comparator.c"
 #include "../executor/modifier/replacer/array_replacer.c"
 #include "../executor/memoriser/allocator/model_allocator.c"
@@ -181,9 +180,9 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             void* tc = *NULL_POINTER_MEMORY_MODEL;
             void* ts = *NULL_POINTER_MEMORY_MODEL;
 
-            retrieve((void*) &td, t, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-            retrieve((void*) &tc, t, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-            retrieve((void*) &ts, t, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            get((void*) &td, t, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            get((void*) &tc, t, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            get((void*) &ts, t, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
     fwprintf(stdout, L"TEST optionaliser 2 tc: %i\n", *((int*) tc));
     fwprintf(stdout, L"TEST optionaliser 2 ts: %i\n", *((int*) ts));
