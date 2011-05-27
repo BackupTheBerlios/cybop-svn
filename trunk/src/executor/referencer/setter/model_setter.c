@@ -43,77 +43,65 @@
 /**
  * Sets the source model models to the destination model deep.
  *
- * @param p0 the result (number 1 if true; unchanged otherwise)
- * @param p1 the left model
- * @param p2 the right model
- * @param p3 the operation abstraction
- * @param p4 the count
+ * @param p0 the destination model
+ * @param p1 the source model
+ * @param p2 the count
+ * @param p3 the destination index
+ * @param p4 the source count
  */
-void compare_model_models_deep(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_model_models_deep(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* c = (int*) p4;
+        int* sc = (int*) p4;
 
-        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set model models deep.");
 
-            int* r = (int*) p0;
+        // The loop variable.
+        int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // The destination, source part model.
+        void* dp = *NULL_POINTER_MEMORY_MODEL;
+        void* sp = *NULL_POINTER_MEMORY_MODEL;
+        // The source part model count.
+        void* spc = *NULL_POINTER_MEMORY_MODEL;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare model models deep.");
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-            // The loop variable.
-            int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The left, right part model.
-            void* lp = *NULL_POINTER_MEMORY_MODEL;
-            void* rp = *NULL_POINTER_MEMORY_MODEL;
-            // The model comparison result.
-            int mr = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            if (j >= *sc) {
 
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                if (j >= *c) {
-
-                    // All part models have been compared successfully.
-                    // The comparison of all part model pairs delivered "true".
-                    //
-                    // CAUTION! The part models are expected to be equal,
-                    // even if the count is zero. This is important, because
-                    // many otherwise equal models contain empty parts.
-                    *r = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                    break;
-                }
-
-                // Get left, right part model.
-                get((void*) &lp, p1, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-                get((void*) &rp, p2, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-
-                // Reset model comparison result.
-                mr = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                // CAUTION! This function does not change the result flag, if unequal.
-                // Therefore, the result flag always has to be reset to zero before!
-                compare_model((void*) &mr, lp, rp, p3);
-
-                if (mr == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    // Stop comparison if two part models do not match the
-                    // criteria, i.e. the comparison delivered "false".
-                    // Because then, the comparison of the two part models is "false".
-                    break;
-                }
-
-                j++;
+                break;
             }
 
-        } else {
+            // Get source part model.
+            get((void*) &sp, p1, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare model models deep. The result is null.");
+            if (sp != *NULL_POINTER_MEMORY_MODEL) {
+
+                //?? TODO: Determine count one level deeper (model-item-count)?!
+                // Get source part model count.
+                get((void*) &spc, sp, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+                //?? TODO: Determine source part abstraction.
+                //?? TODO: Create destination name.
+                //?? TODO: Create destination abstraction.
+
+                // Allocate destination part model.
+                allocate((void*) &dp, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, a, ac);
+
+                // Set source- to destination part model.
+                set_model(dp, sp, spc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set model models deep. The source part model is null.");
+            }
+
+            j++;
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare model models deep. The count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set model models deep. The count is null.");
     }
 }
 
@@ -124,72 +112,49 @@ void compare_model_models_deep(void* p0, void* p1, void* p2, void* p3, void* p4)
  * @param p1 the source model
  * @param p2 the operand abstraction
  * @param p3 the count
- * @param p4 the index
+ * @param p4 the destination index
  */
-void compare_model_models(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_model_models(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* a = (int*) p4;
+        int* a = (int*) p2;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare model models.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set model models.");
 
         if (*a != *MODEL_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            // Use shallow comparison for primitive data like:
+            // Use shallow setting for primitive data like:
             // integer array, double array, fraction.
 
-            // Compare left- with right model (shallow).
-            compare_item(p0, p1, p2, p3, p4);
-
-/*??
-            set_item(dm, sm, (void*) &a, p2, p3);
-            set_item(dd, sd, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION, p2, p3);
-*/
+            // Set source- to destination model (shallow).
+            set_item(p0, p1, p2, p3, p4);
 
         } else {
 
-            // Use deep comparison for compound data with abstraction (type) "model".
+            // Use deep setting for compound data with abstraction (type) "model".
             //
-            // CAUTION! Do NOT use shallow comparison here!
-            // It might seem useful to compare the items' counts.
-            // However, since it also compares their data,
-            // false results will occur, because the data is just
-            // a reference (pointer) to the actual compound model.
-            // Instead of comparing these pointers, a comparison
-            // of the compound models' parts (child nodes) is needed.
+            // CAUTION! Do NOT use shallow setting here!
+            // The data is just a reference (pointer) to the actual compound model.
+            // If only the source pointer was set (copied), then the
+            // destination would point to the same model as the source.
+            // But this kind of shallow copy is not wanted here.
+            // The compound models' parts (child nodes) have to be copied, too.
+            // Since they do not exist, they have to be allocated first.
 
-            // CAUTION! The sizes do NOT have to be identical,
-            // since they just represent allocated memory.
-            // For comparison, only the actual number of elements is of interest.
+            // The source count.
+            void* sc = *NULL_POINTER_MEMORY_MODEL;
 
-            // The left, right count.
-            void* lc = *NULL_POINTER_MEMORY_MODEL;
-            void* rc = *NULL_POINTER_MEMORY_MODEL;
+            // Get source count.
+            get((void*) &sc, p1, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-            // Get left, right count.
-            get((void*) &lc, p1, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-            get((void*) &rc, p2, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-
-            // The count comparison result.
-            int cr = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-            // Compare left- with right count.
-            // CAUTION! Use the equal operation to compare both counts.
-            compare_array((void*) &cr, lc, rc, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
-
-            if (cr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                // Compare left- with right model (deep).
-                // CAUTION! The right model's count is used here,
-                // but the left model's count may be used as well.
-                compare_model_models_deep(p0, p1, p2, p3, rc);
-            }
+            // Set source- to destination model (deep).
+            set_model_models_deep(p0, p1, p3, p4, sc);
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare model models. The operand abstraction is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set model models. The operand abstraction is null.");
     }
 }
 
@@ -209,7 +174,7 @@ void compare_model_models(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p0 the destination model
  * @param p1 the source model
  * @param p2 the count
- * @param p3 the index
+ * @param p3 the destination index
  */
 void set_model(void* p0, void* p1, void* p2, void* p3) {
 

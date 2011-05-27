@@ -32,7 +32,6 @@
 static int* COMPLEX_MEMORY_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The compound memory model count. */
-//?? static int* COMPOUND_MEMORY_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 static int* COMPOUND_MEMORY_MODEL_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The datetime memory model count. */
@@ -44,10 +43,16 @@ static int* FRACTION_MEMORY_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 /** The internal memory memory model count. */
 static int* INTERNAL_MEMORY_MEMORY_MODEL_COUNT = NUMBER_1000_INTEGER_MEMORY_MODEL_ARRAY;
 
+/** The item memory model count. */
+static int* ITEM_MEMORY_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+
 /** The model memory model count. */
+//??NEW!! static int* MODEL_MEMORY_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+//?? TODO: Delete this one (below) later!
 static int* MODEL_MEMORY_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The part memory model count. */
+//?? TODO: Delete this one later!
 static int* PART_MEMORY_MODEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The primitive memory model count. */

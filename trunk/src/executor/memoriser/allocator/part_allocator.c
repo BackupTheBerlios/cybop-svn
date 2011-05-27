@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PART_ALLOCATOR_SOURCE
-#define PART_ALLOCATOR_SOURCE
+#ifndef PART_ALLOCATOR_SOURCE_OLD
+#define PART_ALLOCATOR_SOURCE_OLD
 
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/name/memory/part_memory_name.c"
@@ -66,48 +66,5 @@ void allocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     allocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 }
 
-/**
- * Allocates the part.
- *
- * @param p0 the part (Hand over as reference!)
- * @param p1 the part size
- * @param p2 the element abstraction
- * @param p3 the element abstraction count
- */
-void allocate_part_NEW(void* p0, void* p1, void* p2, void* p3) {
-
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-        void** p = (void**) p0;
-
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate part.");
-
-        // Allocate part.
-        allocate(p0, (void*) PART_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-
-        // The name, abstraction, model, details.
-        void* n = *NULL_POINTER_MEMORY_MODEL;
-        void* a = *NULL_POINTER_MEMORY_MODEL;
-        void* m = *NULL_POINTER_MEMORY_MODEL;
-        void* d = *NULL_POINTER_MEMORY_MODEL;
-
-        // Allocate name, abstraction, model, details.
-        allocate_model_NEW((void*) &n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-        allocate_model_NEW((void*) &a, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-        allocate_model_NEW((void*) &m, p1, p2, p3);
-        allocate_model_NEW((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-
-        // Replace name, abstraction, model, details.
-        replace(*p, n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAME_PART_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        replace(*p, a, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTION_PART_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        replace(*p, m, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODEL_PART_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        replace(*p, d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_PART_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate part. The part is null.");
-    }
-}
-
-/* PART_ALLOCATOR_SOURCE */
+/* PART_ALLOCATOR_SOURCE_OLD */
 #endif

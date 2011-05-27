@@ -102,7 +102,7 @@
  * @param p1 the source item
  * @param p2 the operand abstraction
  * @param p3 the count
- * @param p4 the index
+ * @param p4 the destination index
  */
 void set_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
 

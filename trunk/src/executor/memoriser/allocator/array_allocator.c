@@ -40,8 +40,8 @@
  * Allocates the array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the array size
- * @param p2 the primitive abstraction
+ * @param p1 the size
+ * @param p2 the abstraction
  */
 void allocate_array(void* p0, void* p1, void* p2) {
 
