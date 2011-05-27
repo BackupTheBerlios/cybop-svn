@@ -11,6 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Clear up compilation error by commenting or solving errors in "model_allocator.c"
+            --> just include necessary files
+
         * Continue with executor/referencer/setter/model_setter.c (deep setting/copying)
         * Handle get/set equally and call it "copy"?
             They are identical, only that source- and destination parametres are swapped.

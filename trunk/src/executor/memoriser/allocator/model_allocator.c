@@ -116,12 +116,13 @@ void allocate_model_NEW(void* p0, void* p1, void* p2) {
         // The name does NOT have to be initialised, since it may remain empty.
         // The abstraction is set to the value that was handed over as argument.
         // The model and details have been initialised above.
-        set_item((void*) &a, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, abstraction-count, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+//?? TODO: figure out parametre "abstraction-count"!
+//??        set_item((void*) &a, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, abstraction-count, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
         // Set name, abstraction, model, details.
-        set_array(*mo, (void*) &n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAME_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array(*mo, (void*) &a, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTION_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array(*mo, (void*) &m, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODEL_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        set_array(*mo, (void*) &n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAMES_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        set_array(*mo, (void*) &a, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTIONS_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        set_array(*mo, (void*) &m, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODELS_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
         set_array(*mo, (void*) &d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     } else {
