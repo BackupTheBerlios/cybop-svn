@@ -146,7 +146,6 @@ void optionalise_log_level(void* p0, void* p1, void* p2) {
  */
 void optionalise_log_file(void* p0, void* p1, void* p2) {
 
-/*??
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* nc = (int*) p2;
@@ -169,6 +168,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
             // The glibc file stream functions below expect standard (multibyte) character arrays.
             //
 
+/*??
             // Allocate terminated file name as multibyte character array.
 //??            allocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
@@ -251,6 +251,7 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
 //??            deallocate_model((void*) &t, (void*) &tc, (void*) &ts, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
             deallocate_model_NEW((void*) &t, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
     fwprintf(stdout, L"TEST optionaliser 8: %i\n", t);
+*/
 
         } else {
 
@@ -265,7 +266,6 @@ void optionalise_log_file(void* p0, void* p1, void* p2) {
         // The logger will not work before its options are set.
         log_write_terminated_message((void*) stdout, L"Error: Could not optionalise log file. The file name count is null.\n");
     }
-*/
 }
 
 /**

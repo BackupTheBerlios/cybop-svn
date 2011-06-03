@@ -11,13 +11,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Clear up compilation error by commenting or solving errors in "model_allocator.c"
-            --> just include necessary files
-
+        * Continue test function in "memoriser_tester.c" for new model-item-array
         * Continue with executor/referencer/setter/model_setter.c (deep setting/copying)
         * Handle get/set equally and call it "copy"?
             They are identical, only that source- and destination parametres are swapped.
-        * Continue getter, allocator
+        * Test stepwise: allocate, set/get
+
         * Implement in this order: comparator, finder, retriever (getter), replacer, appender
         * Continue then with "part_replacer.c"
         * Provide modifier functions for "part" that expect just one pointer with count and size

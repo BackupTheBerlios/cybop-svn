@@ -28,22 +28,22 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/abstraction/operation/primitive_operation_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/copier/value_setter/character_value_setter.c"
-#include "../../executor/copier/value_setter/double_value_setter.c"
-//?? #include "../../executor/copier/value_setter/fraction_value_setter.c"
-#include "../../executor/copier/value_setter/integer_value_setter.c"
-#include "../../executor/copier/value_setter/pointer_value_setter.c"
-#include "../../executor/copier/value_setter/unsigned_long_value_setter.c"
-#include "../../executor/copier/value_setter/wide_character_value_setter.c"
-#include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/comparator/count_array_comparator.c"
-#include "../../executor/memoriser/size_determiner.c"
-#include "../../logger/logger.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/referencer/setter/value_setter/character_value_setter.c"
+#include "../../../executor/referencer/setter/value_setter/double_value_setter.c"
+//?? #include "../../../executor/referencer/setter/value_setter/fraction_value_setter.c"
+#include "../../../executor/referencer/setter/value_setter/integer_value_setter.c"
+#include "../../../executor/referencer/setter/value_setter/pointer_value_setter.c"
+#include "../../../executor/referencer/setter/value_setter/unsigned_long_value_setter.c"
+#include "../../../executor/referencer/setter/value_setter/wide_character_value_setter.c"
+#include "../../../executor/arithmetiser/integer_multiplier.c"
+#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/memoriser/size_determiner.c"
+#include "../../../logger/logger.c"
 
 /**
  * Sets the value.

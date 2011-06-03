@@ -103,8 +103,9 @@
  * @param p2 the operand abstraction
  * @param p3 the count
  * @param p4 the destination index
+ * @param p5 the source index
  */
-void set_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set item.");
 
@@ -123,7 +124,7 @@ void set_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
     get((void*) &sc, p1, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
     // Set source- to destination data.
-    set_array_offset(dd, sd, p2, p3, p4);
+    set_array_offset(dd, sd, p2, p3, p4, p5);
 
     // The new destination count.
     // CAUTION! Simply adding the source- to the destination count
@@ -138,8 +139,8 @@ void set_item(void* p0, void* p1, void* p2, void* p3, void* p4) {
     add_integer((void*) &c, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Add source count to new destination count.
     add_integer((void*) &c, sc, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Set result to true only if all comparisons have been true.
-    set_array(dc, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    // Set destination count.
+    set_array(dc, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* ITEM_SETTER_SOURCE */

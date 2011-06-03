@@ -59,7 +59,7 @@ void set_model_models_deep(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         // The loop variable.
         int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The destination, source part model.
+        // The destination part, source part model.
         void* dp = *NULL_POINTER_MEMORY_MODEL;
         void* sp = *NULL_POINTER_MEMORY_MODEL;
         // The source part model count.
@@ -101,7 +101,7 @@ void set_model_models_deep(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set model models deep. The count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not set model models deep. The source count is null.");
     }
 }
 
@@ -113,8 +113,9 @@ void set_model_models_deep(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p2 the operand abstraction
  * @param p3 the count
  * @param p4 the destination index
+ * @param p5 the source index
  */
-void set_model_models(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_model_models(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -128,7 +129,7 @@ void set_model_models(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // integer array, double array, fraction.
 
             // Set source- to destination model (shallow).
-            set_item(p0, p1, p2, p3, p4);
+            set_item(p0, p1, p2, p3, p4, p5);
 
         } else {
 
@@ -175,8 +176,9 @@ void set_model_models(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p1 the source model
  * @param p2 the count
  * @param p3 the destination index
+ * @param p4 the source index
  */
-void set_model(void* p0, void* p1, void* p2, void* p3) {
+void set_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set model.");
 
@@ -224,8 +226,8 @@ void set_model(void* p0, void* p1, void* p2, void* p3) {
         decode_primitive_abstraction((void*) &a, dad, dac);
 
         // Set source models, details into destination.
-        set_model_models(dm, sm, (void*) &a, p2, p3);
-        set_model_models(dd, sd, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION, p2, p3);
+        set_model_models(dm, sm, (void*) &a, p2, p3, p4);
+        set_model_models(dd, sd, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION, p2, p3, p4);
 
     } else {
 

@@ -16,6 +16,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-06-03  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue "executor/referencer/setter/"
+        * Add file "executor/converter/encoder/abstraction_encoder.c"
+        * Add function "test_memoriser_allocation"
+        * Add file "offset_adder.c" for factoring out offset functionality
+
 2011-05-27  Christian Heller  <christian.heller@tuxtax.de>
 
         * Implement "model" and "item" in "executor/memoriser/allocator/"

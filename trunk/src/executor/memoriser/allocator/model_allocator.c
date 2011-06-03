@@ -30,8 +30,11 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/name/memory/model_memory_name.c"
 #include "../../../constant/name/memory/primitive_memory_name.c"
+#include "../../../executor/converter/encoder/abstraction_encoder.c"
+#include "../../../executor/memoriser/allocator/item_allocator.c"
 #include "../../../executor/modifier/replacer/array_replacer.c"
 #include "../../../executor/modifier/replacer.c"
+#include "../../../executor/referencer/setter/offset_array_setter.c"
 #include "../../../logger/logger.c"
 
 //
@@ -110,20 +113,18 @@ void allocate_model_NEW(void* p0, void* p1, void* p2) {
         allocate_item((void*) &n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
         allocate_item((void*) &a, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
         allocate_item((void*) &m, p1, p2);
-        allocate_item((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+        allocate_item((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        // Initialise name, abstraction, model, details.
-        // The name does NOT have to be initialised, since it may remain empty.
-        // The abstraction is set to the value that was handed over as argument.
-        // The model and details have been initialised above.
-//?? TODO: figure out parametre "abstraction-count"!
-//??        set_item((void*) &a, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, abstraction-count, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        // Initialise abstraction.
+        // It is set to the value that was handed over as argument.
+        // The name, model, details do NOT have to be initialised and remain empty.
+        encode_abstraction(a, p2);
 
         // Set name, abstraction, model, details.
-        set_array(*mo, (void*) &n, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAMES_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array(*mo, (void*) &a, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTIONS_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array(*mo, (void*) &m, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODELS_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array(*mo, (void*) &d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        set_array_offset(*mo, (void*) &n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAMES_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*mo, (void*) &a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTIONS_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*mo, (void*) &m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODELS_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*mo, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
     } else {
 

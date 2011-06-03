@@ -28,14 +28,14 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/memoriser/size_determiner.c"
-#include "../../executor/referencer/setter/value_setter.c"
-#include "../../logger/logger.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/arithmetiser/integer_multiplier.c"
+#include "../../../executor/memoriser/size_determiner.c"
+#include "../../../executor/referencer/setter/value_setter.c"
+#include "../../../logger/logger.c"
 
 /**
  * Sets the source- to the destination value
@@ -44,20 +44,12 @@
  * @param p0 the destination value
  * @param p1 the source value
  * @param p2 the operand abstraction
- * @param p3 the index
+ * @param p3 the destination index
+ * @param p4 the source index
  */
-void set_value_offset(void* p0, void* p1, void* p2, void* p3) {
+void set_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set value offset.");
-
-    // The offset.
-    int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Determine abstraction (type) size.
-    determine_size((void*) &o, p2);
-
-    // Calculate offset (memory area).
-    multiply_with_integer((void*) &o, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // The destination value, source value.
     // CAUTION! They HAVE TO BE initialised with p0 and p1,
@@ -65,9 +57,9 @@ void set_value_offset(void* p0, void* p1, void* p2, void* p3) {
     void* d = p0;
     void* s = p1;
 
-    // Add offset to destination value, source value.
-    add_integer((void*) &d, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    add_integer((void*) &s, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Add offset.
+    add_offset((void*) &d, p2, p3);
+    add_offset((void*) &s, p2, p4);
 
     // Set source value to destination value.
     set_value(d, s, p2);

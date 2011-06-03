@@ -36,7 +36,7 @@
  */
 void test_array_resizing() {
 
-    log_write_terminated_message((void*) stdout, L"Test array resizing:\n");
+    log_write_terminated_message((void*) stdout, L"Test memoriser array resizing:\n");
 
     // The text.
     wchar_t ta[] = {L't', L'e', L's', L't', L'\n', L'\0'};
@@ -78,6 +78,20 @@ void test_array_resizing() {
 }
 
 /**
+ * Tests the memoriser allocation.
+ */
+void test_memoriser_allocation() {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test memoriser allocation.");
+
+    // The (compound) model.
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+
+    // Allocate (compound) model.
+    allocate_model_NEW((void*) &m, (void*) NUMBER_10_INTEGER_MEMORY_MODEL, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION);
+}
+
+/**
  * Tests the memoriser.
  *
  * Sub test procedure call can be activated/ deactivated here
@@ -88,6 +102,7 @@ void test_memoriser() {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test memoriser.");
 
 //    test_array_resizing();
+    test_memoriser_allocation();
 }
 
 /* MEMORISER_TESTER */

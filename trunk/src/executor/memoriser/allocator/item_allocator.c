@@ -66,13 +66,13 @@ void allocate_item(void* p0, void* p1, void* p2) {
         // The data have been initialised above.
         // The count is set to zero, since the model does not contain any elements yet.
         // The size is set to the value that was handed over as argument.
-        set_array(c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array(s, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        set_array_offset(c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(s, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
         // Set data, count, size.
-        set_array(*i, (void*) &d, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array(*i, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        set_array(*i, (void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIZE_ITEM_MEMORY_NAME, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        set_array_offset(*i, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*i, (void*) &c, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) COUNT_ITEM_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*i, (void*) &s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIZE_ITEM_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
     } else {
 

@@ -68,7 +68,7 @@ void test_variable() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test variable.");
 
-    test_type_sizes();
+//    test_type_sizes();
 }
 
 /* VARIABLE_TESTER */

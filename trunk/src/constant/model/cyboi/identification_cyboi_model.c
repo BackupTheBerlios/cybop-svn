@@ -61,7 +61,7 @@ static int* LICENCE_IDENTIFICATION_CYBOI_MODEL_COUNT = NUMBER_220_INTEGER_MEMORY
 
 /** The help identification cyboi model. */
 static wchar_t HELP_IDENTIFICATION_CYBOI_MODEL_ARRAY[] = {
-    'P', L'a', L'r', L'a', L'm', L'e', L't', L'e', L'r', L's', L' ', L'h', L'a', L'v', L'e', L' ', L't', L'o', L' ', L'b', L'e', L' ', L'g', L'i', L'v', L'e', L'n', L'!', L'\n',
+    'P', L'a', L'r', L'a', L'm', L'e', L't', L'r', L'e', L's', L' ', L'h', L'a', L'v', L'e', L' ', L't', L'o', L' ', L'b', L'e', L' ', L'g', L'i', L'v', L'e', L'n', L'!', L'\n',
     'U', L's', L'a', L'g', L'e', L':', L' ', L'c', L'y', L'b', L'o', L'i', L' ', L'[', L'-', L'-', L'v', L'e', L'r', L's', L'i', L'o', L'n', L']', L' ', L'[', L'-', L'-', L'h', L'e', L'l', L'p', L']', L' ', L'[', L'-', L'-', L't', L'e', L's', L't', L']', L' ', L'[', L'-', L'-', L'k', L'n', L'o', L'w', L'l', L'e', L'd', L'g', L'e', L' ', L'A', L'R', L'G', L']', L' ', L'[', L'-', L'-', L'l', L'o', L'g', L'l', L'e', L'v', L'e', L'l', L' ', L'A', L'R', L'G', L']', L' ', L'[', L'-', L'-', L'l', L'o', L'g', L'f', L'i', L'l', L'e', L' ', L'A', L'R', L'G', L']', L'\n',
     ' ', L' ', L' ', L' ', L'-', L'-', L'v', L'e', L'r', L's', L'i', L'o', L'n', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L'D', L'i', L's', L'p', L'l', L'a', L'y', L's', L' ', L't', L'h', L'e', L' ', L'c', L'u', L'r', L'r', L'e', L'n', L't', L' ', L'v', L'e', L'r', L's', L'i', L'o', L'n', L'.', L'\n',
     ' ', L' ', L' ', L' ', L'-', L'-', L'h', L'e', L'l', L'p', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L' ', L'D', L'i', L's', L'p', L'l', L'a', L'y', L's', L' ', L't', L'h', L'i', L's', L' ', L'h', L'e', L'l', L'p', L' ', L'm', L'e', L's', L's', L'a', L'g', L'e', L'.', L'\n',

@@ -36,6 +36,8 @@
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
 #include "../../../executor/memoriser/size_determiner.c"
+#include "../../../executor/referencer/setter/array_setter.c"
+#include "../../../executor/referencer/setter/offset_adder.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -46,20 +48,12 @@
  * @param p1 the source array
  * @param p2 the operand abstraction
  * @param p3 the count
- * @param p4 the index
+ * @param p4 the destination index
+ * @param p5 the source index
  */
-void set_array_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void set_array_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set array offset.");
-
-    // The offset (memory area).
-    int o = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Determine abstraction (type) size.
-    determine_size((void*) &o, p2);
-
-    // Calculate offset.
-    multiply_with_integer((void*) &o, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // The destination array, source array.
     // CAUTION! They HAVE TO BE initialised with p0 and p1,
@@ -67,9 +61,9 @@ void set_array_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void* d = p0;
     void* s = p1;
 
-    // Add offset to destination array, source array.
-    add_integer((void*) &d, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    add_integer((void*) &s, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Add offset.
+    add_offset((void*) &d, p2, p4);
+    add_offset((void*) &s, p2, p5);
 
     set_array(d, s, p2, p3);
 }
