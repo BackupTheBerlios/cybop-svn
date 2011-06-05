@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_ASSIGNER_SOURCE
-#define INTEGER_ASSIGNER_SOURCE
+#ifndef INTEGER_VALUE_SETTER_SOURCE
+#define INTEGER_VALUE_SETTER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -65,5 +65,5 @@ void set_value_integer(void* p0, void* p1) {
     }
 }
 
-/* INTEGER_ASSIGNER_SOURCE */
+/* INTEGER_VALUE_SETTER_SOURCE */
 #endif

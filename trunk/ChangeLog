@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-06-05  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue implementing and testing memoriser (allocation, deallocation)
+        * Restructure container functionality (allocate, set)
+
 2011-06-03  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue "executor/referencer/setter/"

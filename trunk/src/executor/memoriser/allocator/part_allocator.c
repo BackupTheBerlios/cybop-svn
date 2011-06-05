@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PART_ALLOCATOR_SOURCE_OLD
-#define PART_ALLOCATOR_SOURCE_OLD
+#ifndef PART_ALLOCATOR_SOURCE
+#define PART_ALLOCATOR_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/name/memory/part_memory_name.c"
@@ -66,5 +66,52 @@ void allocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
     allocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 }
 
-/* PART_ALLOCATOR_SOURCE_OLD */
+/**
+ * Allocates the part.
+ *
+ * @param p0 the part (Hand over as reference!)
+ * @param p1 the size
+ * @param p2 the abstraction
+ */
+void allocate_part_NEW(void* p0, void* p1, void* p2) {
+
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** p = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate part.");
+
+        // Allocate part.
+        allocate_array(p0, (void*) PART_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // The name, abstraction, model, details.
+        void* n = *NULL_POINTER_MEMORY_MODEL;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        void* m = *NULL_POINTER_MEMORY_MODEL;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+
+        // Allocate name, abstraction, model, details.
+        allocate_item((void*) &n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        allocate_item((void*) &a, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        allocate_item((void*) &m, p1, p2);
+        allocate_item((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // Initialise abstraction.
+        // It is set to the value that was handed over as argument.
+        // The name, model, details do NOT have to be initialised and remain empty.
+        encode_abstraction(a, p2);
+
+        // Set name, abstraction, model, details.
+        set_array_offset(*p, (void*) &n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAME_PART_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*p, (void*) &a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTION_PART_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*p, (void*) &m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODEL_PART_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*p, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_PART_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The model is null.");
+    }
+}
+
+/* PART_ALLOCATOR_SOURCE */
 #endif

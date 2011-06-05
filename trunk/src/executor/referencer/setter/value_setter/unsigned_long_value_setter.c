@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef UNSIGNED_LONG_ASSIGNER_SOURCE
-#define UNSIGNED_LONG_ASSIGNER_SOURCE
+#ifndef UNSIGNED_LONG_VALUE_SETTER_SOURCE
+#define UNSIGNED_LONG_VALUE_SETTER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -65,5 +65,5 @@ void set_value_unsigned_long(void* p0, void* p1) {
     }
 }
 
-/* UNSIGNED_LONG_ASSIGNER_SOURCE */
+/* UNSIGNED_LONG_VALUE_SETTER_SOURCE */
 #endif

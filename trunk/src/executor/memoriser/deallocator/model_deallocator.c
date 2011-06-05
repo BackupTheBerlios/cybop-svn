@@ -58,49 +58,44 @@ void deallocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
  * Deallocates the model.
  *
  * @param p0 the model (Hand over as reference!)
- * @param p1 the model size
- * @param p2 the element abstraction
- * @param p3 the element abstraction count
+ * @param p1 the size
+ * @param p2 the abstraction
  */
-void deallocate_model_NEW(void* p0, void* p1, void* p2, void* p3) {
+void deallocate_model_NEW(void* p0, void* p1, void* p2) {
 
-/*??
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        void** m = (void**) p0;
+        void** mo = (void**) p0;
 
         log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate model.");
 
-        // The data, count, size.
+        // The name, abstraction, model, details.
+        void* n = *NULL_POINTER_MEMORY_MODEL;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        void* m = *NULL_POINTER_MEMORY_MODEL;
         void* d = *NULL_POINTER_MEMORY_MODEL;
-        void* c = *NULL_POINTER_MEMORY_MODEL;
-        void* s = *NULL_POINTER_MEMORY_MODEL;
 
-        // Retrieve data, count, size.
-    fwprintf(stdout, L"TEST deallocate model 0 d: %i\n", d);
-        retrieve((void*) &d, *m, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    fwprintf(stdout, L"TEST deallocate model 1 d: %i\n", d);
-        retrieve((void*) &c, *m, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    fwprintf(stdout, L"TEST deallocate model 2 d: %i\n", d);
-        retrieve((void*) &s, *m, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+/*??
+        // Get name, abstraction, model, details.
+        get_array_offset(*mo, (void*) &n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAMES_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        get_array_offset(*mo, (void*) &a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTIONS_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        get_array_offset(*mo, (void*) &m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODELS_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        get_array_offset(*mo, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
-        // Deallocate data, count, size.
-    fwprintf(stdout, L"TEST deallocate model 3 d: %i\n", d);
-        deallocate((void*) &d, p1, p2, p3);
-    fwprintf(stdout, L"TEST deallocate model 4 d: %i\n", d);
-        deallocate((void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-    fwprintf(stdout, L"TEST deallocate model 5 d: %i\n", d);
-        deallocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-    fwprintf(stdout, L"TEST deallocate model 6 d: %i\n", d);
+        // Deallocate name, abstraction, model, details.
+        deallocate_item((void*) &n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        deallocate_item((void*) &a, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        deallocate_item((void*) &m, p1, p2);
+        deallocate_item((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // Deallocate model.
-        deallocate(p0, (void*) MODEL_MEMORY_MODEL_COUNT, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        deallocate_array(p0, (void*) MODEL_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+*/
 
     } else {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate model. The model is null.");
     }
-*/
 }
 
 /* MODEL_DEALLOCATOR_SOURCE */

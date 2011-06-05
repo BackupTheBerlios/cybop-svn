@@ -62,10 +62,10 @@ void allocate_item(void* p0, void* p1, void* p2) {
         allocate_array((void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
         allocate_array((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-        // Initialise data, count, size.
-        // The data have been initialised above.
+        // Initialise count, size.
         // The count is set to zero, since the model does not contain any elements yet.
         // The size is set to the value that was handed over as argument.
+        // The data have been initialised above.
         set_array_offset(c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
         set_array_offset(s, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 

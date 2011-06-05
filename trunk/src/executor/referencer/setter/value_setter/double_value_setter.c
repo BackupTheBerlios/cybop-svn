@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_ASSIGNER_SOURCE
-#define DOUBLE_ASSIGNER_SOURCE
+#ifndef DOUBLE_VALUE_SETTER_SOURCE
+#define DOUBLE_VALUE_SETTER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -65,5 +65,5 @@ void set_value_double(void* p0, void* p1) {
     }
 }
 
-/* DOUBLE_ASSIGNER_SOURCE */
+/* DOUBLE_VALUE_SETTER_SOURCE */
 #endif

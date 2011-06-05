@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef MODEL_ALLOCATOR_SOURCE
-#define MODEL_ALLOCATOR_SOURCE
+#ifndef MODEL_ALLOCATOR_SOURCE_OLD
+#define MODEL_ALLOCATOR_SOURCE_OLD
 
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -85,52 +85,5 @@ void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
     }
 }
 
-/**
- * Allocates the model.
- *
- * @param p0 the model (Hand over as reference!)
- * @param p1 the size
- * @param p2 the abstraction
- */
-void allocate_model_NEW(void* p0, void* p1, void* p2) {
-
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-        void** mo = (void**) p0;
-
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate model.");
-
-        // Allocate part.
-        allocate_array(p0, (void*) MODEL_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        // The name, abstraction, model, details.
-        void* n = *NULL_POINTER_MEMORY_MODEL;
-        void* a = *NULL_POINTER_MEMORY_MODEL;
-        void* m = *NULL_POINTER_MEMORY_MODEL;
-        void* d = *NULL_POINTER_MEMORY_MODEL;
-
-        // Allocate name, abstraction, model, details.
-        allocate_item((void*) &n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        allocate_item((void*) &a, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        allocate_item((void*) &m, p1, p2);
-        allocate_item((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        // Initialise abstraction.
-        // It is set to the value that was handed over as argument.
-        // The name, model, details do NOT have to be initialised and remain empty.
-        encode_abstraction(a, p2);
-
-        // Set name, abstraction, model, details.
-        set_array_offset(*mo, (void*) &n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAMES_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-        set_array_offset(*mo, (void*) &a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTIONS_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-        set_array_offset(*mo, (void*) &m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODELS_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-        set_array_offset(*mo, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The model is null.");
-    }
-}
-
-/* MODEL_ALLOCATOR_SOURCE */
+/* MODEL_ALLOCATOR_SOURCE_OLD */
 #endif

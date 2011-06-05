@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef POINTER_ASSIGNER_SOURCE
-#define POINTER_ASSIGNER_SOURCE
+#ifndef POINTER_VALUE_SETTER_SOURCE
+#define POINTER_VALUE_SETTER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -65,5 +65,5 @@ void set_value_pointer(void* p0, void* p1) {
     }
 }
 
-/* POINTER_ASSIGNER_SOURCE */
+/* POINTER_VALUE_SETTER_SOURCE */
 #endif

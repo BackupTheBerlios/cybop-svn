@@ -84,11 +84,24 @@ void test_memoriser_allocation() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test memoriser allocation.");
 
-    // The (compound) model.
-    void* m = *NULL_POINTER_MEMORY_MODEL;
+    // The array.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    // The item.
+    void* i = *NULL_POINTER_MEMORY_MODEL;
+    // The compound.
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    // The part.
+    void* p = *NULL_POINTER_MEMORY_MODEL;
 
-    // Allocate (compound) model.
-    allocate_model_NEW((void*) &m, (void*) NUMBER_10_INTEGER_MEMORY_MODEL, (void*) MODEL_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_array((void*) &a, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_item((void*) &i, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//    allocate_compound_NEW((void*) &c, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
+//    allocate_part((void*) &p, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
+
+//    deallocate_part((void*) &p, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
+//    deallocate_compound_NEW((void*) &c, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
+//    deallocate_item((void*) &i, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &a, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /**

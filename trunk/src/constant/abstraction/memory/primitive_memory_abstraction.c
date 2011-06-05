@@ -85,12 +85,12 @@ static int* WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_6_INTEGER_MEMOR
 //
 
 /**
- * The model primitive memory abstraction.
+ * The compound primitive memory abstraction.
  *
- * Models are compounds that consist of parts, which may be
- * other models or primitive values.
+ * Compounds consist of parts, which may be other models
+ * or primitive values.
  */
-static int* MODEL_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
+static int* COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* PRIMITIVE_MEMORY_ABSTRACTION_SOURCE */
 #endif

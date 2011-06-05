@@ -31,7 +31,8 @@ value
 offset_value
 array
 item = data + count + size (all of type array)
-model = name + abstraction + model + details (all of type item)
+part = name + abstraction + model + details (all of type item)
+compound = names + abstractions + models + details (all of type pointer array)
 
 value
 offset_value
@@ -39,8 +40,8 @@ array
 fraction
 structure
 
-A model contains a model, that is one model may reference another
-model, just like one database table may reference another.
+A part's model may reference primitive data (integer etc.) or another model,
+just like one database table may reference another.
 
 Old CYBOI Names
 _______________

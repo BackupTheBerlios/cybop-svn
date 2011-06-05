@@ -96,5 +96,46 @@ void allocate_compound(void* p0, void* p1) {
     }
 }
 
+/**
+ * Allocates the compound.
+ *
+ * @param p0 the compound (Hand over as reference!)
+ * @param p1 the size
+ */
+void allocate_compound_NEW(void* p0, void* p1) {
+
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** c = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate compound.");
+
+        // Allocate compound.
+        allocate_array(p0, (void*) COMPOUND_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // The names, abstractions, models, details.
+        void* n = *NULL_POINTER_MEMORY_MODEL;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        void* m = *NULL_POINTER_MEMORY_MODEL;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+
+        // Allocate names, abstractions, models, details.
+        allocate_item((void*) &n, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        allocate_item((void*) &a, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        allocate_item((void*) &m, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        allocate_item((void*) &d, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // Set names, abstractions, models, details.
+        set_array_offset(*c, (void*) &n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAMES_COMPOUND_MEMORY_NAME_NEW, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*c, (void*) &a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTIONS_COMPOUND_MEMORY_NAME_NEW, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*c, (void*) &m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODELS_COMPOUND_MEMORY_NAME_NEW, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        set_array_offset(*c, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_COMPOUND_MEMORY_NAME_NEW, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not allocate model. The model is null.");
+    }
+}
+
 /* COMPOUND_ALLOCATOR_SOURCE */
 #endif

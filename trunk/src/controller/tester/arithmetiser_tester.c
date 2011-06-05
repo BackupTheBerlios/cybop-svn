@@ -80,8 +80,8 @@ void test_arithmetiser() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test arithmetiser.");
 
-    test_arithmetiser_integer_adder();
-    test_arithmetiser_multiplicator();
+//    test_arithmetiser_integer_adder();
+//    test_arithmetiser_multiplicator();
 }
 
 /* ARITHMETISER_TESTER */

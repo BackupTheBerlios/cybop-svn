@@ -28,10 +28,19 @@
 
 #include "../../../constant/model/memory/integer_memory_model.c"
 
-//?? Delete this file later!
-//?? The compound is a dynamic memory structure consisting of parts.
-//?? A part consists of: name, abstraction, model, details.
-//?? Each of these four is a model consisting of: pointer, count, size.
+/** The names compound memory name. */
+static int* NAMES_COMPOUND_MEMORY_NAME_NEW = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The abstractions compound memory name. */
+static int* ABSTRACTIONS_COMPOUND_MEMORY_NAME_NEW = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The models compound memory name. */
+static int* MODELS_COMPOUND_MEMORY_NAME_NEW = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
+
+/** The details compound memory name. */
+static int* DETAILS_COMPOUND_MEMORY_NAME_NEW = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+
+//?? --- Delete the constants below later!
 
 /** The names compound memory name. */
 static int* NAMES_COMPOUND_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
