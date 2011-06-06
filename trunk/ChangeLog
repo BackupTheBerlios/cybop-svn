@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-06-06  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Search for solutions for compound-part handling
+        * Decide, that compound should be just a pointer value storing part structures
+
 2011-06-05  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue implementing and testing memoriser (allocation, deallocation)

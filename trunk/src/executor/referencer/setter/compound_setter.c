@@ -43,8 +43,11 @@
 /**
  * Sets the source part to the destination compound at position index.
  *
- * CAUTION! The destination already HAS TO EXIST and has to have a NAME.
- * The source name is NOT copied into the destination name.
+ * CAUTION! The destination already HAS TO EXIST.
+ * All of source name, abstraction, model, details are copied.
+ * Even if the destination and source were identified by name somewhere else,
+ * i.e. both already have a name, the name is set here again anyway.
+ * This function sets the part by index and not by name.
  *
  * CAUTION! The size of the destination model has to be adjusted BEFORE calling
  * this function. The validity of the given index is NOT tested here.

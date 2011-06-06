@@ -11,11 +11,18 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Start again with new functions
         * Split and rename "model" into "compound" and "part"
+        * CAUTION! The compound is not a structure any longer, but just a simple pointer array!
+        * MERGE: get+set as "copy"? (to get a part from a compound, one just has to
+            copy a dereferenced pointer void** which is possible with the current set functions;
+            therefore rename these "set_*" functions into "copy_*"?)
         * DONE: function "set_compound_part" in file "compound_setter.c"
         * CONTINUE: "get_item", "get_compound_part" etc.;
             figure out how to use them correctly and if they are identical and may be called "copy_*"
+            void* part = *NULL_POINTER_MEMORY_MODEL;
+            void* compound = [a given void** pointer array];
+            copy/set_array_offset((void*) &part, compound, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) [given_index]);
+            PROBLEM: part is a reference (void**), but compound is not (void*) --> therefore, assignment *p = c is not possible
         * Implement memoriser (allocator etc.) first for primitive types and compound + part
         * Implement get/set (or unified copy, respectively) for these new types
         * Implement other functions like insert/remove etc.
