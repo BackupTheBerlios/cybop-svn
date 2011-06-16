@@ -29,6 +29,10 @@
 #include <wchar.h>
 
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../executor/memoriser/allocator/array_allocator.c"
+#include "../../executor/memoriser/allocator/item_allocator.c"
+#include "../../executor/memoriser/deallocator/array_deallocator.c"
+//?? #include "../../executor/memoriser/deallocator/item_deallocator.c"
 #include "../../logger/logger.c"
 
 /**
@@ -98,9 +102,11 @@ void test_memoriser_allocation() {
 //    allocate_compound_NEW((void*) &c, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
 //    allocate_part((void*) &p, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
 
+    // set + get (= 2x copy?)
+
 //    deallocate_part((void*) &p, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
 //    deallocate_compound_NEW((void*) &c, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
-//    deallocate_item((void*) &i, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    deallocate_item((void*) &i, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     deallocate_array((void*) &a, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
