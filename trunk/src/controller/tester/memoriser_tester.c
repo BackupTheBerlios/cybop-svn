@@ -33,6 +33,7 @@
 #include "../../executor/memoriser/allocator/item_allocator.c"
 #include "../../executor/memoriser/deallocator/array_deallocator.c"
 //?? #include "../../executor/memoriser/deallocator/item_deallocator.c"
+#include "../../executor/referencer/setter/array_setter.c"
 #include "../../logger/logger.c"
 
 /**
@@ -97,17 +98,23 @@ void test_memoriser_allocation() {
     // The part.
     void* p = *NULL_POINTER_MEMORY_MODEL;
 
-    allocate_array((void*) &a, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-    allocate_item((void*) &i, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_array((void*) &a, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//    allocate_item((void*) &i, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 //    allocate_compound_NEW((void*) &c, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
 //    allocate_part((void*) &p, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    // set + get (= 2x copy?)
+    // set + get array (= 2x copy?)
+    set_array(a, L"Hello, World!", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST array: %ls\n", (wchar_t*) a);
+
+    // set + get item
+
+    // set + get part
 
 //    deallocate_part((void*) &p, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
 //    deallocate_compound_NEW((void*) &c, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
 //??    deallocate_item((void*) &i, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    deallocate_array((void*) &a, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &a, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /**

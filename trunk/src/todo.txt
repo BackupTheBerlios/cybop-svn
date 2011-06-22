@@ -11,11 +11,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE: merge get_array_offset and set_array_offset to "copy_...",
+        * CONTINUE: successful trial to use array in "controller/tester/memoriser_tester.c"
+            with set/get (copy) for item and part;
+            work with "item_setter.c" in referencer/setter/ for now, later possibly rename to "copy";
+            merge get_array_offset and set_array_offset to "copy_..."?,
             and provide TWO versions (?): one for copying a complete container
             and another one for copying a container element;
             distinguish between set/get via an "operation abstraction" parametre;
-            do first trial to implement two versions of "item_setter.c" in referencer/setter/;
             also compare with old "array_replacer.c";
             OR: is one copy version sufficient when just handing over parametres as needed (as reference or not)?
         * CONTINUE: "memoriser_tester.c" and stepwise correct shown errors like in "get_array_offset" etc.
