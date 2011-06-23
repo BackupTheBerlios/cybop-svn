@@ -12,6 +12,8 @@
 #
 
         * CONTINUE: successful trial to use array in "controller/tester/memoriser_tester.c"
+            continue with "memoriser_tester.c" calling "item_setter.c" (reactivate include and function call)
+            and debug "item_setter.c" which uses old array functions etc.;
             with set/get (copy) for item and part;
             work with "item_setter.c" in referencer/setter/ for now, later possibly rename to "copy";
             merge get_array_offset and set_array_offset to "copy_..."?,

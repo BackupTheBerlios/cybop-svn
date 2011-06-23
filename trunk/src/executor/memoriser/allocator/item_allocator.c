@@ -30,8 +30,6 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/name/memory/item_memory_name.c"
 #include "../../../constant/name/memory/primitive_memory_name.c"
-#include "../../../executor/modifier/replacer/array_replacer.c"
-#include "../../../executor/modifier/replacer.c"
 #include "../../../logger/logger.c"
 
 /**
