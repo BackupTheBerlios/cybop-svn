@@ -14,6 +14,9 @@ Cybernetics Oriented Programming (CYBOP)
 Cybernetics Oriented Language (CYBOL)
         * Christian Heller <christian.heller@tuxtax.de> (language definition)
         * Rolf Holzmueller <rolf.holzmueller@gmx.de> (help in creating xsd and ebnf files in 2005)
+        * Patrick Sperl (time output example)
+        * Jens Rudek (time output example)
+        * Andy Röhr <andy_roehr@gmx.de> (if-else example)
 
 Cybernetics Oriented Interpreter (CYBOI)
         * Christian Heller <christian.heller@tuxtax.de> (overall design and implementation of cyboi)
@@ -23,6 +26,7 @@ Cybernetics Oriented Interpreter (CYBOI)
         * Dirk Behrendt <behrendt.dirk@web.de> (backup module in old java version of cyboi)
         * Kumanan Kanagasabapathy <kumanan@uni.de> (internationalisation in old java version of cyboi)
         * Jens Kleinschmidt <jens.kleinschmidt@gmx.de> (corba and soap tutorial with java prototype)
+        * Enrico Gallus <enrico.gallus@googlemail.com> (internet protocol- and service port constants)
 
 CYBOP Project
         * Christian Heller <christian.heller@tuxtax.de> (administration, website, releases, debian packaging)
