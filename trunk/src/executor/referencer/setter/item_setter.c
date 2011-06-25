@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ITEM_SETTER_SOURCE
-#define ITEM_SETTER_SOURCE
+#ifndef ITEM_COPIER_SOURCE
+#define ITEM_COPIER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -92,8 +92,69 @@
 //
 
 /**
- * Sets count source item elements into the destination item
- * at position index.
+ * Adjusts the count.
+ *
+ * CAUTION! Simply adding the source- to the destination count
+ * is not always correct! The source is added to the destination
+ * at position index and not always appended at the end,
+ * i.e. existing elements may be overwritten as well.
+ * Therefore, the COUNT is added to the destination INDEX.
+ *
+ * An extra number one does NOT have to be added!
+ * The index plus count is just right.
+ *
+ * @param p0 the item container count element
+ * @param p1 the count
+ * @param p2 the item container index
+ */
+void copy_item_adjust_count(void* p0, void* p1, void* p2) {
+
+    // The new count.
+    int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Add item container index.
+    add_integer((void*) &c, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Add count (number of elements to be copied) to new destination count.
+    // CAUTION! Do NOT use source count here, since not all of the source has to be copied.
+    add_integer((void*) &c, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Set destination count.
+    set_array(p0, (void*) &c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+}
+
+/**
+ * Copies the array to the item container data element
+ * and adjusts the item container count element.
+ *
+ * @param p0 the item container
+ * @param p1 the array
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the item container index
+ * @param p5 the array index
+ */
+void copy_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element.");
+
+    // The item container data, count element.
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get item container data, count element.
+    set_array_offset((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    set_array_offset((void*) &c, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+
+    // Copy array to item container data element.
+    set_array_offset(d, p1, p2, p3, p4, p5);
+
+    // Adjust item container count element.
+    copy_item_adjust_count(c, p3, p4);
+}
+
+/**
+ * Copies count source item elements into the destination item at position index.
  *
  * CAUTION! The size of the destination has to be adjusted BEFORE calling
  * this function. The validity of the given index is NOT tested here.
@@ -105,43 +166,27 @@
  * @param p4 the destination index
  * @param p5 the source index
  */
-void set_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void copy_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set item.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item.");
 
     // The destination data, count.
     void* dd = *NULL_POINTER_MEMORY_MODEL;
     void* dc = *NULL_POINTER_MEMORY_MODEL;
     // The source data, count.
     void* sd = *NULL_POINTER_MEMORY_MODEL;
-    void* sc = *NULL_POINTER_MEMORY_MODEL;
 
     // Get destination data, count.
-    get((void*) &dd, p0, (void*) DATA_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &dc, p0, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    set_array_offset((void*) &dd, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    set_array_offset((void*) &dc, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
     // Get source data, count.
-    get((void*) &sd, p1, (void*) DATA_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &sc, p1, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    set_array_offset((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // Set source- to destination data.
     set_array_offset(dd, sd, p2, p3, p4, p5);
 
-    // The new destination count.
-    // CAUTION! Simply adding the source- to the destination count
-    // is not always correct! The source is added to the destination
-    // at position index and not always appended at the end,
-    // i.e. existing elements may be overwritten as well.
-    // Therefore, the source count is added to the destination index
-    // PLUS ONE, because count is always one value greater than index.
-    int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Add destination index to new destination count.
-    add_integer((void*) &c, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Add source count to new destination count.
-    add_integer((void*) &c, sc, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Set destination count.
-    set_array(dc, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    copy_item_adjust_count(dc, p3, p4);
 }
 
-/* ITEM_SETTER_SOURCE */
+/* ITEM_COPIER_SOURCE */
 #endif
