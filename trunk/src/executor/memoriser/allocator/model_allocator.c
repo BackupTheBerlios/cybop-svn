@@ -34,7 +34,7 @@
 #include "../../../executor/memoriser/allocator/item_allocator.c"
 #include "../../../executor/modifier/replacer/array_replacer.c"
 #include "../../../executor/modifier/replacer.c"
-#include "../../../executor/referencer/setter/offset_array_setter.c"
+#include "../../../executor/copier/offset_array_copier.c"
 #include "../../../logger/logger.c"
 
 //

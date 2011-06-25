@@ -58,9 +58,9 @@ void deallocate_item(void* p0, void* p1, void* p2) {
         get_array_offset((void*) &c, *i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COUNT_ITEM_MEMORY_NAME);
         get_array_offset((void*) &s, *i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIZE_ITEM_MEMORY_NAME);
 */
-        set_array_offset((void*) &d, *i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) DATA_ITEM_MEMORY_NAME);
-        set_array_offset((void*) &c, *i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COUNT_ITEM_MEMORY_NAME);
-        set_array_offset((void*) &s, *i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIZE_ITEM_MEMORY_NAME);
+        copy_array_offset((void*) &d, *i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) DATA_ITEM_MEMORY_NAME);
+        copy_array_offset((void*) &c, *i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COUNT_ITEM_MEMORY_NAME);
+        copy_array_offset((void*) &s, *i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIZE_ITEM_MEMORY_NAME);
 
         // Deallocate data, count, size.
         deallocate_array((void*) &d, p1, p2);
