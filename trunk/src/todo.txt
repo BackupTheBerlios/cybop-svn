@@ -11,49 +11,17 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE: successful trial to use array in "controller/tester/memoriser_tester.c"
-            continue with "memoriser_tester.c" calling "item_setter.c" (reactivate include and function call)
-            and debug "item_setter.c" which uses old array functions etc.;
-            with set/get (copy) for item and part;
-            work with "item_setter.c" in referencer/setter/ for now, later possibly rename to "copy";
-            merge get_array_offset and set_array_offset to "copy_..."?,
-            and provide TWO versions (?): one for copying a complete container
-            and another one for copying a container element;
-            distinguish between set/get via an "operation abstraction" parametre;
+        * CONTINUE: successful trial to use array and item in "controller/tester/memoriser_tester.c";
+            continue with "memoriser_tester.c" testing "part" and "compound";
+            function "copy_compound_part" in file "compound_copier.c"
             also compare with old "array_replacer.c";
-            OR: is one copy version sufficient when just handing over parametres as needed (as reference or not)?
-        * CONTINUE: "memoriser_tester.c" and stepwise correct shown errors like in "get_array_offset" etc.
         * Split and rename "model" into "compound" and "part"
-        * CAUTION! The compound is not a structure any longer, but just a simple pointer array!
-        * MERGE: get+set as "copy"? (to get a part from a compound, one just has to
-            copy a dereferenced pointer void** which is possible with the current set functions;
-            therefore rename these "set_*" functions into "copy_*"?)
-        * DONE: function "set_compound_part" in file "compound_setter.c"
-        * CONTINUE: "get_item", "get_compound_part" etc.;
-            figure out how to use them correctly and if they are identical and may be called "copy_*"
-            void* part = *NULL_POINTER_MEMORY_MODEL;
-            void* compound = [a given void** pointer array];
-            copy/set_array_offset((void*) &part, compound, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) [given_index]);
-            PROBLEM: part is a reference (void**), but compound is not (void*) --> therefore, assignment *p = c is not possible
-        * Implement memoriser (allocator etc.) first for primitive types and compound + part
-        * Implement get/set (or unified copy, respectively) for these new types
-        * Implement other functions like insert/remove etc.
-
-        * Continue test function in "memoriser_tester.c" for new model-item-array
-        * Continue with executor/referencer/setter/model_setter.c (deep setting/copying)
-        * Handle get/set equally and call it "copy"?
-            They are identical, only that source- and destination parametres are swapped.
-        * Test stepwise: allocate, set/get
-
-        * Implement in this order: comparator, finder, retriever (getter), replacer, appender
-        * Continue then with "part_replacer.c"
+        * Implement functions like insert/remove etc.
+        * Implement in this order: copier, appender, comparator, finder
+        * Implement container functions as described in file "todo_cyboi_java_comparison.txt"
         * Provide modifier functions for "part" that expect just one pointer with count and size
             and not as many parameters as was the case up to now
-        * Replace old functions named "append_part..." with new "append" or "replace"
-        * Replace old functions named "append_compound..." with new "append" or "replace"
-        * CONTINUE WITH: container functions as described in file "todo_cyboi_java_comparison.txt"
-        * Adjust destination's count and size automatically, like a "wrapper" function;
-            examples: "wide_character_vector_accessor.c", "executor/accessor/setter.c", "set_compound_element_by_name"
+
         * Possible Bug? in function "set_compound_element_by_index":
             set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
             --> the "(void*) &p4" does possibly lead to errors, since a reference to the

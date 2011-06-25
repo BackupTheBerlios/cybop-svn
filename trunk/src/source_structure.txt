@@ -32,7 +32,6 @@ offset_value
 array
 item = data + count + size (all of type array)
 part = name + abstraction + model + details (all of type item)
-compound = names + abstractions + models + details (all of type pointer array)
 
 value
 offset_value
@@ -43,8 +42,8 @@ structure
 A part's model may reference primitive data (integer etc.) or another model,
 just like one database table may reference another.
 
-A compound is comparable to a database table with four columns for:
-name, abstraction (type), model, details (meta properties).
+The compound is NOT a structure any longer, but just a simple pointer array!
+It stores parts which contain the necessary meta data (name, abstraction, model, details).
 
 Two solutions were considered for implementing the cyboi knowledge schema:
 1 OLD: The four columns are kept as pointer arrays and have to be handed
@@ -58,6 +57,24 @@ Two solutions were considered for implementing the cyboi knowledge schema:
   Advantage: easy handling, only one part parametre has to be forwarded
   Disadvantage: worse performance when reading and comparing part fields,
   since these cause an additional pointer access for each part.
+
+Set and Get
+___________
+
+There are no set/get functions available, because they are not necessary.
+Setting an element may be achieved via the "copy" function.
+Getting a container element is done via pointer array and
+delivers just a reference to the desired element.
+
+For arrays, just one "copy" function is provided.
+The source and destination array depend on the order of parametres given.
+
+For container structures like:
+- item (data, count, size)
+- part (name, abstraction, model, details),
+TWO versions of a "copy" function are provided:
+- one for copying a complete container
+- another one for copying just one container element.
 
 Old CYBOI Names
 _______________

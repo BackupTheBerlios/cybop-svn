@@ -16,6 +16,15 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-06-25  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename "executor/referencer/" into "executor/copier/",
+            which is used for setting (copying) container elements;
+            getting container elements is done via pointer array,
+            which delivers a reference to the desired element
+        * Adjust destination item's count automatically (similar to a wrapper)
+        * Continue restructuring container functionality (array and item)
+
 2011-06-06  Christian Heller  <christian.heller@tuxtax.de>
 
         * Search for solutions for compound-part handling
