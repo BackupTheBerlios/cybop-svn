@@ -103,7 +103,7 @@
  * An extra number one does NOT have to be added!
  * The index plus count is just right.
  *
- * @param p0 the item container count element
+ * @param p0 the item container
  * @param p1 the count
  * @param p2 the item container index
  */
@@ -120,12 +120,14 @@ void copy_item_adjust_count(void* p0, void* p1, void* p2) {
     add_integer((void*) &c, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Set destination count.
-    copy_array(p0, (void*) &c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+    copy_item_element(p0, (void*) &c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 }
 
 /**
- * Copies the array to the item container data element
- * and adjusts the item container count element.
+ * Copies the array to the item container element.
+ *
+ * If data are set, then the item container count
+ * is adjusted automatically.
  *
  * @param p0 the item container
  * @param p1 the array
@@ -133,24 +135,33 @@ void copy_item_adjust_count(void* p0, void* p1, void* p2) {
  * @param p3 the count
  * @param p4 the item container index
  * @param p5 the array index
+ * @param p6 the item container element index
  */
-void copy_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void copy_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element.");
 
-    // The item container data, count element.
-    void* d = *NULL_POINTER_MEMORY_MODEL;
-    void* c = *NULL_POINTER_MEMORY_MODEL;
+    // The item container element.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get item container data, count element.
-    copy_array_offset((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
-    copy_array_offset((void*) &c, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    // Get item container element.
+    copy_array_offset((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
-    // Copy array to item container data element.
-    copy_array_offset(d, p1, p2, p3, p4, p5);
+    // Set array to item container element.
+    copy_array_offset(e, p1, p2, p3, p4, p5);
 
-    // Adjust item container count element.
-    copy_item_adjust_count(c, p3, p4);
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    compare_array_count((void*) &r, p6, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        // The item container's data element is to be set.
+
+        // Adjust item container count element.
+        copy_item_adjust_count(p0, p3, p4);
+    }
 }
 
 /**

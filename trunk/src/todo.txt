@@ -11,17 +11,18 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE: successful trial to use array and item in "controller/tester/memoriser_tester.c";
-            continue with "memoriser_tester.c" testing "part" and "compound";
-            function "copy_compound_part" in file "compound_copier.c"
-            also compare with old "array_replacer.c";
+        * Is old function "copy_compound_part" in file "compound_copier.c" still needed? Delete!
+        * CONTINUE: with "memoriser_tester.c" testing part copying (shallow and deep)
+            and adding it to a "compound" (pointer array);
+            also compare with old "array_replacer.c"
         * Split and rename "model" into "compound" and "part"
         * Implement functions like insert/remove etc.
         * Implement in this order: copier, appender, comparator, finder
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"
         * Provide modifier functions for "part" that expect just one pointer with count and size
             and not as many parameters as was the case up to now
-
+        * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" functions
+        * Delete "modifier" directory (?) or use it for insert/remove?
         * Possible Bug? in function "set_compound_element_by_index":
             set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
             --> the "(void*) &p4" does possibly lead to errors, since a reference to the

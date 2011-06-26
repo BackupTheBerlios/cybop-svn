@@ -69,11 +69,42 @@ void deallocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
  * Deallocates the part.
  *
  * @param p0 the part (Hand over as reference!)
- * @param p1 the part size
+ * @param p1 the size
+ * @param p2 the abstraction
  */
-void deallocate_part_NEW(void* p0, void* p1) {
+void deallocate_part_NEW(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate part.");
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** p = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Deallocate part.");
+
+        // The name, abstraction, model, details.
+        void* n = *NULL_POINTER_MEMORY_MODEL;
+        void* a = *NULL_POINTER_MEMORY_MODEL;
+        void* m = *NULL_POINTER_MEMORY_MODEL;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
+
+        // Get name, abstraction, model, details.
+        copy_array_offset((void*) &n, *p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+        copy_array_offset((void*) &a, *p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+        copy_array_offset((void*) &m, *p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+        copy_array_offset((void*) &d, *p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
+
+        // Deallocate name, abstraction, model, details.
+        deallocate_item((void*) &n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        deallocate_item((void*) &a, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        deallocate_item((void*) &m, p1, p2);
+        deallocate_item((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // Deallocate part.
+        deallocate_array(p0, (void*) PART_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not deallocate part. The part is null.");
+    }
 }
 
 /* PART_DEALLOCATOR_SOURCE */

@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-06-26  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue restructuring container functionality (part)
+
 2011-06-25  Christian Heller  <christian.heller@tuxtax.de>
 
         * Rename "executor/referencer/" into "executor/copier/",

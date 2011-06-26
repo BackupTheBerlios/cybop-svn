@@ -63,14 +63,14 @@ void allocate_item(void* p0, void* p1, void* p2) {
         // Initialise count, size.
         // The count is set to zero, since the model does not contain any elements yet.
         // The size is set to the value that was handed over as argument.
-        // The data have been initialised above.
-        copy_array_offset(c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-        copy_array_offset(s, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        // The data does NOT have to be initialised and remains empty.
+        copy_array_offset(c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        copy_array_offset(s, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
         // Set data, count, size.
-        copy_array_offset(*i, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-        copy_array_offset(*i, (void*) &c, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) COUNT_ITEM_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-        copy_array_offset(*i, (void*) &s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIZE_ITEM_MEMORY_NAME, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        copy_array_offset(*i, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        copy_array_offset(*i, (void*) &c, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) COUNT_ITEM_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        copy_array_offset(*i, (void*) &s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIZE_ITEM_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
     } else {
 

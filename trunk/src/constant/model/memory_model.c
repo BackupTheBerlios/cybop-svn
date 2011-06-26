@@ -32,7 +32,7 @@
 static int* COMPLEX_MEMORY_MODEL_COUNT = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The compound memory model count. */
-static int* COMPOUND_MEMORY_MODEL_COUNT_NEW = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+//?? TODO: Delete this one (below) later!
 static int* COMPOUND_MEMORY_MODEL_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The datetime memory model count. */
