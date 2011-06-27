@@ -34,7 +34,7 @@
 #include "../../../logger/logger.c"
 
 /**
- * Assigns the unsigned long.
+ * Copies the unsigned long.
  *
  * @param p0 the destination value
  * @param p1 the source value
@@ -49,19 +49,19 @@ void copy_value_unsigned_long(void* p0, void* p1) {
 
             unsigned long* de = (unsigned long*) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Assign unsigned long.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy unsigned long.");
 
             // Assign source- to destination value.
             *de = *se;
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign unsigned long. The destination value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy unsigned long. The destination value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign unsigned long. The source value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy unsigned long. The source value is null.");
     }
 }
 

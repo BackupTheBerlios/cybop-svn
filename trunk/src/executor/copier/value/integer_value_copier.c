@@ -34,7 +34,7 @@
 #include "../../../logger/logger.c"
 
 /**
- * Assigns the integer.
+ * Copies the integer.
  *
  * @param p0 the destination value
  * @param p1 the source value
@@ -49,19 +49,19 @@ void copy_value_integer(void* p0, void* p1) {
 
             int* de = (int*) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Assign integer.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy integer.");
 
             // Assign source- to destination value.
             *de = *se;
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign integer. The destination value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy integer. The destination value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign integer. The source value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy integer. The source value is null.");
     }
 }
 

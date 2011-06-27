@@ -34,7 +34,7 @@
 #include "../../../logger/logger.c"
 
 /**
- * Assigns the double.
+ * Copies the double.
  *
  * @param p0 the destination value
  * @param p1 the source value
@@ -49,19 +49,19 @@ void copy_value_double(void* p0, void* p1) {
 
             double* de = (double*) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Assign double.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy double.");
 
             // Assign source- to destination value.
             *de = *se;
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign double. The destination value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy double. The destination value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign double. The source value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy double. The source value is null.");
     }
 }
 

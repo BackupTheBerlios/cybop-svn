@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-06-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue restructuring container functionality (fraction, compound)
+
 2011-06-26  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue restructuring container functionality (part)

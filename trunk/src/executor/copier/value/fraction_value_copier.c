@@ -23,21 +23,14 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FRACTION_COPIER_SOURCE
-#define FRACTION_COPIER_SOURCE
+#ifndef FRACTION_VALUE_COPIER_SOURCE
+#define FRACTION_VALUE_COPIER_SOURCE
 
-#include "../../constant/abstraction/cybol/number_cybol_abstraction.c"
-#include "../../constant/abstraction/cybol/path_cybol_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/separator_cybol_name.c"
-#include "../../constant/name/memory/fraction_memory_name.c"
-#include "../../executor/comparator/count_array_comparator.c"
-#include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/memory/fraction_memory_name.c"
+#include "../../../logger/logger.c"
 
 /**
  * Copies the fraction.
@@ -45,7 +38,7 @@
  * @param p0 the destination value
  * @param p1 the source value
  */
-void copy_fraction(void* p0, void* p1, void* p2, void* p3) {
+void copy_value_fraction(void* p0, void* p1) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy fraction.");
 
@@ -68,5 +61,5 @@ void copy_fraction(void* p0, void* p1, void* p2, void* p3) {
     copy_array_offset(dd, sd, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 }
 
-/* FRACTION_COPIER_SOURCE */
+/* FRACTION_VALUE_COPIER_SOURCE */
 #endif

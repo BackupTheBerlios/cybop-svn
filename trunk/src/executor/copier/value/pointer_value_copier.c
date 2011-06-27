@@ -34,7 +34,7 @@
 #include "../../../logger/logger.c"
 
 /**
- * Assigns the pointer.
+ * Copies the pointer.
  *
  * @param p0 the destination value
  * @param p1 the source value
@@ -49,19 +49,19 @@ void copy_value_pointer(void* p0, void* p1) {
 
             void** de = (void**) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Assign pointer.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy pointer.");
 
             // Assign source- to destination value.
             *de = *se;
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign pointer. The destination value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy pointer. The destination value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign pointer. The source value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy pointer. The source value is null.");
     }
 }
 

@@ -34,8 +34,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/copier/value/character_value_copier.c"
+#include "../../executor/copier/value/compound_value_copier.c"
 #include "../../executor/copier/value/double_value_copier.c"
-//?? #include "../../executor/copier/value/fraction_value_copier.c"
+#include "../../executor/copier/value/fraction_value_copier.c"
 #include "../../executor/copier/value/integer_value_copier.c"
 #include "../../executor/copier/value/pointer_value_copier.c"
 #include "../../executor/copier/value/unsigned_long_value_copier.c"
@@ -77,6 +78,16 @@ void copy_value(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+            if (*a == *COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+//??                copy_value_compound(p0, p1, COUNT);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
             if (*a == *DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -85,7 +96,6 @@ void copy_value(void* p0, void* p1, void* p2) {
             }
         }
 
-/*??
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             if (*a == *FRACTION_PRIMITIVE_MEMORY_ABSTRACTION) {
@@ -95,7 +105,6 @@ void copy_value(void* p0, void* p1, void* p2) {
                 copy_value_fraction(p0, p1);
             }
         }
-*/
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

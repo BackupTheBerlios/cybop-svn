@@ -34,7 +34,7 @@
 #include "../../../logger/logger.c"
 
 /**
- * Assigns the wide character.
+ * Copies the wide character.
  *
  * @param p0 the destination value
  * @param p1 the source value
@@ -49,19 +49,19 @@ void copy_value_wide_character(void* p0, void* p1) {
 
             wchar_t* de = (wchar_t*) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Assign wide character.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy wide character.");
 
             // Assign source- to destination value.
             *de = *se;
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign wide character. The destination value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy wide character. The destination value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not assign wide character. The source value is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy wide character. The source value is null.");
     }
 }
 

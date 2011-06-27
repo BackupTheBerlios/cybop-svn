@@ -67,122 +67,6 @@ void copy_part_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 }
 
 /**
- * Copies count source part model elements into the destination part at position index.
- *
- * @param p0 the destination part model
- * @param p1 the source part model
- * @param p2 the operand abstraction
- * @param p3 the count
- * @param p4 the destination index
- * @param p5 the source index
- */
-void copy_part_model_deep(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-/*??
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* sc = (int*) p4;
-
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy part model deep.");
-
-        // The loop variable.
-        int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        // The destination part, source part model.
-        void* dp = *NULL_POINTER_MEMORY_MODEL;
-        void* sp = *NULL_POINTER_MEMORY_MODEL;
-        // The source part model count.
-        void* spc = *NULL_POINTER_MEMORY_MODEL;
-
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-            if (j >= *sc) {
-
-                break;
-            }
-
-            // Get source part model.
-            get((void*) &sp, p1, (void*) &j, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-
-            if (sp != *NULL_POINTER_MEMORY_MODEL) {
-
-                //?? TODO: Determine count one level deeper (model-item-count)?!
-                // Get source part model count.
-                get((void*) &spc, sp, (void*) COUNT_ITEM_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-
-                //?? TODO: Determine source part abstraction.
-                //?? TODO: Create destination name.
-                //?? TODO: Create destination abstraction.
-
-                // Allocate destination part model.
-                allocate((void*) &dp, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, a, ac);
-
-                // Set source- to destination part model.
-                set_model(dp, sp, spc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy part model deep. The source part model is null.");
-            }
-
-            j++;
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy part model deep. The source count is null.");
-    }
-*/
-}
-
-/**
- * Copies source part model into the destination part model.
- *
- * @param p0 the destination part model
- * @param p1 the source part model
- * @param p2 the operand abstraction
- * @param p3 the count
- * @param p4 the destination index
- * @param p5 the source index
- */
-void copy_part_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* a = (int*) p2;
-
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy part model.");
-
-        if (*a != *COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION) {
-
-            // Use shallow copying for primitive data like:
-            // integer, double, wide_character, fraction.
-
-            // Set source- to destination model (shallow).
-            copy_item(p0, p1, p2, p3, p4, p5);
-
-        } else {
-
-            // Use deep copying for compound data.
-            //
-            // CAUTION! Do NOT use shallow copying here!
-            // The data is just a reference to the actual compound model.
-            // If only the source pointer was copied, then the
-            // destination would point to the same model as the source.
-            // But this kind of shallow copy is not wanted here.
-            // The compound model's parts (child nodes) have to be copied, too.
-            // Since they do not exist, they have to be allocated first.
-
-            // Set source- to destination model (deep).
-//??            copy_part_model_deep(p0, p1, p3, p4, sc);
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy part model. The operand abstraction is null.");
-    }
-}
-
-/**
  * Copies count source part elements into the destination part at position index.
  *
  * CAUTION! The destination already HAS TO EXIST and has to have a NAME.
@@ -207,6 +91,9 @@ void copy_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy part.");
 
+    //?? TODO: Copy name and abstraction as well, at least for all child nodes,
+    //?? if these are allocated new while copying the source parts.
+
     // The destination model, details.
     void* dm = *NULL_POINTER_MEMORY_MODEL;
     void* dd = *NULL_POINTER_MEMORY_MODEL;
@@ -223,8 +110,9 @@ void copy_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     // Set source- to destination model, details.
     // CAUTION! The name and abstraction are NOT copied.
-    copy_part_model(dm, sm, p2, p3, p4, p5);
-    copy_part_model(dd, sd, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION, p3, p4, p5);
+    copy_item(dm, sm, p2, p3, p4, p5);
+    //?? TODO: Replace p3 with count?
+    copy_item(dd, sd, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 }
 
 /* PART_COPIER_SOURCE */
