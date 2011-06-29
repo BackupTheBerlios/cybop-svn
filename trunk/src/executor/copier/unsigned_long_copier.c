@@ -23,47 +23,47 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef OFFSET_VALUE_COPIER_SOURCE
-#define OFFSET_VALUE_COPIER_SOURCE
+#ifndef UNSIGNED_LONG_COPIER_SOURCE
+#define UNSIGNED_LONG_COPIER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/memoriser/size_determiner.c"
-#include "../../executor/copier/value_copier.c"
 #include "../../logger/logger.c"
 
 /**
- * Copies the source- to the destination value
- * using the given index to calculate an offset.
+ * Copies the unsigned long.
  *
- * @param p0 the destination value
- * @param p1 the source value
- * @param p2 the operand abstraction
- * @param p3 the destination index
- * @param p4 the source index
+ * @param p0 the destination
+ * @param p1 the source
  */
-void copy_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void copy_unsigned_long(void* p0, void* p1) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy value offset.");
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The destination value, source value.
-    // CAUTION! They HAVE TO BE initialised with p0 and p1,
-    // since an offset is added below.
-    void* d = p0;
-    void* s = p1;
+        unsigned long* se = (unsigned long*) p1;
 
-    // Add offset.
-    add_offset((void*) &d, p2, p3);
-    add_offset((void*) &s, p2, p4);
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // Set source value to destination value.
-    copy_value(d, s, p2);
+            unsigned long* de = (unsigned long*) p0;
+
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy unsigned long.");
+
+            // Assign source- to destination.
+            *de = *se;
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy unsigned long. The destination is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy unsigned long. The source is null.");
+    }
 }
 
-/* OFFSET_VALUE_COPIER_SOURCE */
+/* UNSIGNED_LONG_COPIER_SOURCE */
 #endif

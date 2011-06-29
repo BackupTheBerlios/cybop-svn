@@ -34,9 +34,10 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../executor/arithmetiser/integer_adder.c"
 #include "../../executor/arithmetiser/integer_multiplier.c"
+#include "../../executor/copier/offset_adder.c"
+#include "../../executor/copier/value_copier.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../executor/modifier/assigner.c"
-#include "../../executor/copier/offset_value_copier.c"
 #include "../../logger/logger.c"
 
 /**
@@ -89,6 +90,34 @@ void copy_array(void* p0, void* p1, void* p2, void* p3) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array. The count is null.");
     }
+}
+
+/**
+ * Copies count source array elements into the destination array
+ * starting from the given offset.
+ *
+ * @param p0 the destination array
+ * @param p1 the source array
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the destination index
+ * @param p5 the source index
+ */
+void copy_array_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array offset.");
+
+    // The destination array, source array.
+    // CAUTION! They HAVE TO BE initialised with p0 and p1,
+    // since an offset is added below.
+    void* d = p0;
+    void* s = p1;
+
+    // Add offset.
+    add_offset((void*) &d, p2, p4);
+    add_offset((void*) &s, p2, p5);
+
+    copy_array(d, s, p2, p3);
 }
 
 /* ARRAY_COPIER_SOURCE */

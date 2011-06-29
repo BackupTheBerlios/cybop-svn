@@ -34,8 +34,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/separator_cybol_name.c"
-#include "../../constant/name/memory/model_memory_name.c"
+#include "../../constant/name/memory/part_memory_name.c"
 #include "../../executor/comparator/count_array_comparator.c"
+#include "../../executor/copier/item_copier.c"
 #include "../../executor/memoriser/reallocator/compound_reallocator.c"
 #include "../../logger/logger.c"
 #include "../../variable/reallocation_factor.c"
@@ -67,52 +68,62 @@ void copy_part_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 }
 
 /**
- * Copies count source part elements into the destination part at position index.
+ * Copies the part.
  *
- * CAUTION! The destination already HAS TO EXIST and has to have a NAME.
- * The source name is NOT copied into the destination name.
+ * Shallow copying is used for primitive data like:
+ * integer, double, wide_character, fraction.
  *
- * CAUTION! The source abstraction has to be IDENTICAL to the
- * destination abstraction. The equality of both is NOT tested here.
- * The given "operand abstraction" is used for destination and source.
- * The source abstraction is NOT copied into the destination abstraction.
+ * Deep copying is used for compound data consisting of other parts.
+ * A compound model's parts (child nodes) are copied, too.
+ * Since they do not exist, they have to be allocated first.
  *
  * CAUTION! The size of the destination has to be adjusted BEFORE calling
  * this function. The validity of the given index is NOT tested here.
  *
- * @param p0 the destination part
- * @param p1 the source part
- * @param p2 the operand abstraction
- * @param p3 the count
- * @param p4 the destination index
- * @param p5 the source index
+ * @param p0 the destination
+ * @param p1 the source
  */
-void copy_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void copy_part(void* p0, void* p1) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy part.");
 
-    //?? TODO: Copy name and abstraction as well, at least for all child nodes,
-    //?? if these are allocated new while copying the source parts.
-
-    // The destination model, details.
+    // The destination name, abstraction, model, details.
+    void* dn = *NULL_POINTER_MEMORY_MODEL;
+    void* da = *NULL_POINTER_MEMORY_MODEL;
     void* dm = *NULL_POINTER_MEMORY_MODEL;
     void* dd = *NULL_POINTER_MEMORY_MODEL;
-    // The source model, details.
+    // The source name, abstraction, model, details.
+    void* sn = *NULL_POINTER_MEMORY_MODEL;
+    void* sa = *NULL_POINTER_MEMORY_MODEL;
     void* sm = *NULL_POINTER_MEMORY_MODEL;
     void* sd = *NULL_POINTER_MEMORY_MODEL;
+    // The source name count, abstraction count, model count, details count.
+    void* snc = *NULL_POINTER_MEMORY_MODEL;
+    void* sac = *NULL_POINTER_MEMORY_MODEL;
+    void* smc = *NULL_POINTER_MEMORY_MODEL;
+    void* sdc = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get destination model, details.
+    // Get destination name, abstraction, model, details.
+    copy_array_offset((void*) &dn, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+    copy_array_offset((void*) &da, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
     copy_array_offset((void*) &dm, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
     copy_array_offset((void*) &dd, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
-    // Get source model, details.
+    // Get source name, abstraction, model, details.
+    copy_array_offset((void*) &sn, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+    copy_array_offset((void*) &sa, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
     copy_array_offset((void*) &sm, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
     copy_array_offset((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
+    // Get source name count, abstraction count, model count, details count.
+    copy_array_offset((void*) &snc, sn, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_offset((void*) &sac, sa, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_offset((void*) &smc, sm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_offset((void*) &sdc, sd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
-    // Set source- to destination model, details.
-    // CAUTION! The name and abstraction are NOT copied.
-    copy_item(dm, sm, p2, p3, p4, p5);
-    //?? TODO: Replace p3 with count?
-    copy_item(dd, sd, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    // Set source- to destination name, abstraction, model, details.
+    copy_item(dn, sn, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, snc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_item(da, sa, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, sac, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_item(dm, sm, sa, smc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_item(dd, sd, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION, sdc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 }
 
 /* PART_COPIER_SOURCE */

@@ -33,14 +33,15 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/copier/value/character_value_copier.c"
-#include "../../executor/copier/value/compound_value_copier.c"
-#include "../../executor/copier/value/double_value_copier.c"
-#include "../../executor/copier/value/fraction_value_copier.c"
-#include "../../executor/copier/value/integer_value_copier.c"
-#include "../../executor/copier/value/pointer_value_copier.c"
-#include "../../executor/copier/value/unsigned_long_value_copier.c"
-#include "../../executor/copier/value/wide_character_value_copier.c"
+#include "../../executor/copier/character_copier.c"
+#include "../../executor/copier/double_copier.c"
+#include "../../executor/copier/fraction_copier.c"
+#include "../../executor/copier/integer_copier.c"
+#include "../../executor/copier/offset_adder.c"
+#include "../../executor/copier/part_copier.c"
+#include "../../executor/copier/pointer_copier.c"
+#include "../../executor/copier/unsigned_long_copier.c"
+#include "../../executor/copier/wide_character_copier.c"
 #include "../../executor/arithmetiser/integer_multiplier.c"
 #include "../../executor/comparator/count_array_comparator.c"
 #include "../../executor/memoriser/size_determiner.c"
@@ -72,17 +73,7 @@ void copy_value(void* p0, void* p1, void* p2) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                copy_value_character(p0, p1);
-            }
-        }
-
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            if (*a == *COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION) {
-
-                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-//??                copy_value_compound(p0, p1, COUNT);
+                copy_character(p0, p1);
             }
         }
 
@@ -92,7 +83,7 @@ void copy_value(void* p0, void* p1, void* p2) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                copy_value_double(p0, p1);
+                copy_double(p0, p1);
             }
         }
 
@@ -102,7 +93,7 @@ void copy_value(void* p0, void* p1, void* p2) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                copy_value_fraction(p0, p1);
+                copy_fraction(p0, p1);
             }
         }
 
@@ -112,7 +103,17 @@ void copy_value(void* p0, void* p1, void* p2) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                copy_value_integer(p0, p1);
+                copy_integer(p0, p1);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            if (*a == *PART_PRIMITIVE_MEMORY_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                copy_part(p0, p1);
             }
         }
 
@@ -122,7 +123,7 @@ void copy_value(void* p0, void* p1, void* p2) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                copy_value_pointer(p0, p1);
+                copy_pointer(p0, p1);
             }
         }
 
@@ -132,7 +133,7 @@ void copy_value(void* p0, void* p1, void* p2) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                copy_value_unsigned_long(p0, p1);
+                copy_unsigned_long(p0, p1);
             }
         }
 
@@ -142,7 +143,7 @@ void copy_value(void* p0, void* p1, void* p2) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                copy_value_wide_character(p0, p1);
+                copy_wide_character(p0, p1);
             }
         }
 
@@ -155,6 +156,34 @@ void copy_value(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy value. The operand abstraction is null.");
     }
+}
+
+/**
+ * Copies the source- to the destination value
+ * using the given index to calculate an offset.
+ *
+ * @param p0 the destination value
+ * @param p1 the source value
+ * @param p2 the operand abstraction
+ * @param p3 the destination index
+ * @param p4 the source index
+ */
+void copy_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy value offset.");
+
+    // The destination value, source value.
+    // CAUTION! They HAVE TO BE initialised with p0 and p1,
+    // since an offset is added below.
+    void* d = p0;
+    void* s = p1;
+
+    // Add offset.
+    add_offset((void*) &d, p2, p3);
+    add_offset((void*) &s, p2, p4);
+
+    // Set source value to destination value.
+    copy_value(d, s, p2);
 }
 
 /* VALUE_COPIER_SOURCE */
