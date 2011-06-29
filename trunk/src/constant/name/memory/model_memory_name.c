@@ -28,19 +28,7 @@
 
 #include "../../../constant/model/memory/integer_memory_model.c"
 
-/** The names model memory name. */
-static int* NAMES_MODEL_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The abstractions model memory name. */
-static int* ABSTRACTIONS_MODEL_MEMORY_NAME = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The models model memory name. */
-static int* MODELS_MODEL_MEMORY_NAME = NUMBER_2_INTEGER_MEMORY_MODEL_ARRAY;
-
-/** The details model memory name. */
-static int* DETAILS_MODEL_MEMORY_NAME = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
-
-//?? DELETE constants below later!
+//?? DELETE this file later!
 
 /** The data model memory name. */
 static int* DATA_MODEL_MEMORY_NAME = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;

@@ -11,10 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE: with "memoriser_tester.c" testing part copying (shallow and deep)
-            and adding it to a "compound" (pointer array);
-            also compare with old "array_replacer.c"
-        * Split and rename "model" into "compound" and "part"
+        * CONTINUE: part is complete; test part copying in "memoriser_tester.c";
+            set and get it from a "compound" (pointer array);
         * Implement functions like insert/remove etc.
         * Implement in this order: copier, appender, comparator, finder
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"

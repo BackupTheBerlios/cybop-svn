@@ -124,6 +124,7 @@ static int* OPERATION_MEMORY_ABSTRACTION_COUNT = NUMBER_9_INTEGER_MEMORY_MODEL_A
  * Compound models consist of other compound or primitive models.
  * CAUTION! This is also used as knowledge memory abstraction!
  */
+//?? TODO: Delete this one later!
 static wchar_t COMPOUND_MEMORY_ABSTRACTION_ARRAY[] = {L'c', L'o', L'm', L'p', L'o', L'u', L'n', L'd'};
 static wchar_t* COMPOUND_MEMORY_ABSTRACTION = COMPOUND_MEMORY_ABSTRACTION_ARRAY;
 static int* COMPOUND_MEMORY_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;

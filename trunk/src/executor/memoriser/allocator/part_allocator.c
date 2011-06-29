@@ -29,6 +29,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/name/memory/part_memory_name.c"
 #include "../../../logger/logger.c"
+#include "../../../executor/memoriser/allocator/item_allocator.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 
 /**

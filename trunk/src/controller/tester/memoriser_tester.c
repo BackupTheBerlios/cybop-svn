@@ -37,7 +37,7 @@
 #include "../../executor/memoriser/deallocator/part_deallocator.c"
 #include "../../executor/copier/array_copier.c"
 #include "../../executor/copier/item_copier.c"
-#include "../../executor/copier/offset_array_copier.c"
+#include "../../executor/copier/array_copier.c"
 #include "../../executor/copier/part_copier.c"
 #include "../../logger/logger.c"
 

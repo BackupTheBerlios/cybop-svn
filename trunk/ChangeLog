@@ -16,6 +16,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-06-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue restructuring container functionality
+        * Delete compound, use only part instead, since the necessary loop is already in "array_copier.c"
+        * Merge offset container functions into regular files
+        * Move "character_value_copier.c" and others one level up and delete "value" directory
+
 2011-06-27  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue restructuring container functionality (fraction, compound)
