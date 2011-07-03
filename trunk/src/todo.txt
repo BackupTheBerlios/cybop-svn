@@ -11,7 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE: part is complete; test part copying in "memoriser_tester.c";
+        * CONTINUE: test part copying in detail in "memoriser_tester.c";
             set and get it from a "compound" (pointer array);
         * Implement functions like insert/remove etc.
         * Implement in this order: copier, appender, comparator, finder

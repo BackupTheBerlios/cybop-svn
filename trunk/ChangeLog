@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-03  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue restructuring container functionality
+        * Automatically adjust size and count when reallocating an item's data element
+        * Make part copying work
+
 2011-06-29  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue restructuring container functionality

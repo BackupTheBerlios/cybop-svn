@@ -100,7 +100,7 @@ void allocate_part_NEW(void* p0, void* p1, void* p2) {
         // Initialise abstraction.
         // It is set to the value that was handed over as argument.
         // The name, model, details do NOT have to be initialised and remain empty.
-        encode_abstraction(a, p2);
+//        encode_abstraction(a, p2);
 
         // Set name, abstraction, model, details.
         copy_array_offset(*p, (void*) &n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAME_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);

@@ -35,6 +35,7 @@
 #include "../../executor/arithmetiser/integer_adder.c"
 #include "../../executor/arithmetiser/integer_multiplier.c"
 #include "../../executor/copier/array_copier.c"
+#include "../../executor/memoriser/reallocator/item_reallocator.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../executor/modifier/assigner.c"
 #include "../../logger/logger.c"
@@ -93,7 +94,7 @@
 //
 
 /**
- * Adjusts the count.
+ * Adjusts the destination item container.
  *
  * CAUTION! Simply adding the source- to the destination count
  * is not always correct! The source is added to the destination
@@ -105,22 +106,38 @@
  * The index plus count is just right.
  *
  * @param p0 the item container
- * @param p1 the count
- * @param p2 the item container index
+ * @param p1 the operand abstraction
+ * @param p2 the count
+ * @param p3 the item container index
  */
-void copy_item_adjust_count(void* p0, void* p1, void* p2) {
+void copy_item_adjust(void* p0, void* p1, void* p2, void* p3) {
 
     // The new count.
     int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Add item container index.
-    add_integer((void*) &c, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    add_integer((void*) &c, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Add count (number of elements to be copied) to new destination count.
     // CAUTION! Do NOT use source count here, since not all of the source has to be copied.
-    add_integer((void*) &c, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    add_integer((void*) &c, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Reallocate item.
+    reallocate_item(p0, (void*) &c, p1);
 
     // Set destination count.
+    //
+    // CAUTION! Do NOT set the destination size here!
+    // It was already set in the "reallocate_item" function.
+    //
+    // Efficiency:
+    // One might think that performance would be better
+    // if the size would be enlarged in greater blocks,
+    // not one by one.
+    // But this IS done here! If many elements are to be copied,
+    // then their count (number of elements) is added to the size,
+    // so that reallocation is necessary only once,
+    // and not for each single element.
     copy_item_element(p0, (void*) &c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 }
 
@@ -142,15 +159,6 @@ void copy_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element.");
 
-    // The item container element.
-    void* e = *NULL_POINTER_MEMORY_MODEL;
-
-    // Get item container element.
-    copy_array_offset((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
-
-    // Set array to item container element.
-    copy_array_offset(e, p1, p2, p3, p4, p5);
-
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
@@ -158,11 +166,23 @@ void copy_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        // The item container's data element is to be set.
-
-        // Adjust item container count element.
-        copy_item_adjust_count(p0, p3, p4);
+        // Resize the item container's data element.
+        // If a count or size are copied, then the following is NOT needed.
+        copy_item_adjust(p0, p2, p3, p4);
     }
+
+    // The item container element.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get item container element.
+    // CAUTION! Get item container element ONLY AFTER
+    // having reallocated the item above!
+    // Otherwise, a wrong DATA_ITEM pointer will be returned
+    // and cause a "Segmentation fault".
+    copy_array_offset((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+
+    // Set array to item container element.
+    copy_array_offset(e, p1, p2, p3, p4, p5);
 }
 
 /**
@@ -182,22 +202,22 @@ void copy_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item.");
 
-    // The destination data, count.
+    // Resize the item container's data element.
+    // If a count or size are copied, then the following is NOT needed.
+    copy_item_adjust(p0, p2, p3, p4);
+
+    // The destination data.
     void* dd = *NULL_POINTER_MEMORY_MODEL;
-    void* dc = *NULL_POINTER_MEMORY_MODEL;
-    // The source data, count.
+    // The source data.
     void* sd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get destination data, count.
+    // Get destination data.
     copy_array_offset((void*) &dd, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
-    copy_array_offset((void*) &dc, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
-    // Get source data, count.
+    // Get source data.
     copy_array_offset((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // Set source- to destination data.
     copy_array_offset(dd, sd, p2, p3, p4, p5);
-
-    copy_item_adjust_count(dc, p3, p4);
 }
 
 /* ITEM_COPIER_SOURCE */

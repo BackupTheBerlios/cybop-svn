@@ -32,7 +32,6 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/modifier/assigner.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
 #include "../../../executor/memoriser/size_determiner.c"
@@ -41,8 +40,8 @@
 /**
  * Reallocates the item.
  *
- * @param p0 the item (Hand over as reference!)
- * @param p1 the new size
+ * @param p0 the item
+ * @param p1 the size
  * @param p2 the abstraction
  */
 void reallocate_item(void* p0, void* p1, void* p2) {
@@ -55,26 +54,40 @@ void reallocate_item(void* p0, void* p1, void* p2) {
     void* s = *NULL_POINTER_MEMORY_MODEL;
 
     // Get data, count, size.
-    get((void*) &d, p0, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &c, p0, (void*) COUNT_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &s, p0, (void*) SIZE_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_offset((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_offset((void*) &c, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_offset((void*) &s, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
+
+/*??
+fwprintf(stdout, L"TEST reallocate pre d: %i\n", d);
+fwprintf(stdout, L"TEST reallocate pre d: %ls\n", (wchar_t*) d);
+fwprintf(stdout, L"TEST reallocate pre c: %i\n", c);
+fwprintf(stdout, L"TEST reallocate pre c: %i\n", *((int*) c));
+fwprintf(stdout, L"TEST reallocate pre p1: %i\n", p1);
+fwprintf(stdout, L"TEST reallocate pre p1: %i\n", *((int*) p1));
+fwprintf(stdout, L"TEST reallocate pre p2: %i\n", p2);
+fwprintf(stdout, L"TEST reallocate pre p2: %i\n", *((int*) p2));
+*/
 
     // Reallocate data.
+    // The array is enlarged or shrinked to the new size.
     // CAUTION! Handing over the current size is not necessary,
     // since the current element count suffices.
-    // The array is enlarged or shrinked to the new size.
+    // CAUTION! The count and size do NOT have to be reallocated,
+    // since they just keep an integer value.
     reallocate_array((void*) &d, c, p1, p2);
 
     // Set size.
-    // CAUTION! Do NOT set count, since it remained untouched.
-    set(s, p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+    // CAUTION! The count is NOT set, since it remained untouched.
+    // The size is set to the value that was handed over as argument.
+    copy_array_offset(s, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
     // Set data.
     // CAUTION! This IS NECESSARY, because reallocation
     // returns a completely new array (memory area).
     // CAUTION! Do NOT set count and size, since only
     // their references were used above to modify values.
-    set(p0, (void*) &d, (void*) DATA_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_offset(p0, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 }
 
 /* ITEM_REALLOCATOR_SOURCE */

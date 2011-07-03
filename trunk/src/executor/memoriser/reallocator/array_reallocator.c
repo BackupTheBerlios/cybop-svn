@@ -40,19 +40,19 @@
  * Reallocates the array.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the array count
- * @param p2 the array size
- * @param p3 the primitive abstraction
+ * @param p1 the count
+ * @param p2 the size
+ * @param p3 the abstraction
  */
 void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* as = (int*) p2;
+        int* s = (int*) p2;
 
         if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* ac = (int*) p1;
+            int* c = (int*) p1;
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -82,12 +82,21 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
                     //
 
                     // Create a new array with extended size.
+                    //
+                    // Since the space after the end of the block may be in use,
+                    // realloc may find it necessary to copy the block to a
+                    // new address where more free space is available.
+                    // The value of realloc is the new address of the block.
+                    // If the block needs to be moved, realloc copies the old contents.
+                    //
                     // CAUTION! The "ma" variable MAY NOT be casted to "size_t",
                     // because it is NOT a pointer, but an integer value!
                     *a = realloc(*a, ma);
 
-                    if (*as > *ac) {
+                    if (*s > *c) {
 
+                        // CAUTION! If count and size are equal, then nothing
+                        // is to be done.
                         // CAUTION! Do NOT change this value if the size is
                         // smaller than the count, because this will result
                         // in a negative value and cause the new array elements
@@ -98,13 +107,13 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
                         // Calculate extra array size, which is the given array size
                         // reduced by the existing element count.
-                        int eas = *as - *ac;
+                        int es = *s - *c;
 
                         // Determine abstraction (type) size.
                         determine_size((void*) &nma, p3);
 
-                        // Calculate memory area.
-                        multiply_with_integer((void*) &nma, (void*) &eas, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        // Calculate new memory area.
+                        multiply_with_integer((void*) &nma, (void*) &es, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // The new array elements.
                         void* na = *a + (ma - nma);
@@ -126,12 +135,12 @@ void reallocate_array(void* p0, void* p1, void* p2, void* p3) {
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate array. The array count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate array. The count is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate array. The array size is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not reallocate array. The size is null.");
     }
 }
 

@@ -88,43 +88,6 @@ void test_memoriser_array_resizing() {
 }
 
 /**
- * Tests the array, item, compound, part.
- */
-void test_memoriser_all() {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test memoriser all.");
-
-    // The array.
-    void* a = *NULL_POINTER_MEMORY_MODEL;
-    // The item.
-    void* i = *NULL_POINTER_MEMORY_MODEL;
-    // The compound.
-    void* c = *NULL_POINTER_MEMORY_MODEL;
-    // The part.
-    void* p = *NULL_POINTER_MEMORY_MODEL;
-
-//    allocate_array((void*) &a, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    allocate_item((void*) &i, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-//    allocate_compound_NEW((void*) &c, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
-//    allocate_part((void*) &p, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
-
-    // set + get array (= 2x copy?)
-//    copy_array(a, (void*) L"Hello, World!", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL);
-//    copy_array_offset(a, (void*) L"Hello, World!", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-//    fwprintf(stdout, (void*) L"TEST array: %ls\n", (wchar_t*) a);
-
-    // set + get item
-//    copy_item(a, (void*) L"Hello, World!", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-
-    // set + get part
-
-//    deallocate_part((void*) &p, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
-//    deallocate_compound_NEW((void*) &c, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
-    deallocate_item((void*) &i, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-//    deallocate_array((void*) &a, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-}
-
-/**
  * Tests the part.
  */
 void test_memoriser_part() {
@@ -198,7 +161,8 @@ void test_memoriser_item() {
     void* i = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate item container.
-    allocate_item((void*) &i, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//    allocate_item((void*) &i, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_item((void*) &i, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Fill item container.
     copy_item_element(i, (void*) L"Hello, World!", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
@@ -218,7 +182,7 @@ void test_memoriser_item() {
     fwprintf(stdout, L"TEST item size: %i\n", *((int*) s));
 
     // Deallocate item container.
-    deallocate_item((void*) &i, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_item((void*) &i, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -318,7 +282,6 @@ void test_memoriser() {
 
 //    test_memoriser_array_resizing();
 
-//    test_memoriser_all();
     test_memoriser_part();
 //    test_memoriser_item();
 //    test_memoriser_array();
