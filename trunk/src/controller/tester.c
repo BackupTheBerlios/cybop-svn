@@ -33,6 +33,7 @@
 #include "../controller/tester/comparator_tester.c"
 #include "../controller/tester/constant_tester.c"
 #include "../controller/tester/converter_tester.c"
+#include "../controller/tester/copier_tester.c"
 #include "../controller/tester/logger_tester.c"
 #include "../controller/tester/memoriser_tester.c"
 #include "../controller/tester/pointer_tester.c"
@@ -125,6 +126,7 @@ void test() {
     test_communicator();
     test_comparator();
     test_converter();
+    test_copier();
     test_memoriser();
 }
 

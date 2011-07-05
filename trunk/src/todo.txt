@@ -11,19 +11,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * CONTINUE: test part copying in detail in "memoriser_tester.c";
-            set and get it from a "compound" (pointer array);
+        * Test adding part to another compound part in "copier_tester.c";
+        * Test output of knowledge tree in "converter_tester.c" (function "test_converter_model_diagram")
         * Implement functions like insert/remove etc.
         * Implement in this order: copier, appender, comparator, finder
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"
-        * Provide modifier functions for "part" that expect just one pointer with count and size
-            and not as many parameters as was the case up to now
         * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" functions
         * Delete "modifier" directory (?) or use it for insert/remove?
-        * Possible Bug? in function "set_compound_element_by_index":
-            set_array_elements(*n, p3, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) POINTER_ARRAY_MEMORY_ABSTRACTION);
-            --> the "(void*) &p4" does possibly lead to errors, since a reference to the
-                local variable p4 is stored, which gets destroyed as soon as the function is left
 
         * Continue in "executor/arithmetiser/fraction*"
         * Rename "arithmetiser" to "calculator" with function "calculate" and
