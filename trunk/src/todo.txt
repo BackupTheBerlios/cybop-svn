@@ -11,7 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Test adding part to another compound part in "copier_tester.c";
+        * Test adding part to another compound part in "copier_tester.c"
         * Test output of knowledge tree in "converter_tester.c" (function "test_converter_model_diagram")
         * Implement functions like insert/remove etc.
         * Implement in this order: copier, appender, comparator, finder
