@@ -161,7 +161,6 @@ void test_memoriser_item() {
     void* i = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate item container.
-//    allocate_item((void*) &i, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     allocate_item((void*) &i, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Fill item container.

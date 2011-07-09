@@ -11,10 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Test adding part to another compound part in "copier_tester.c"
         * Test output of knowledge tree in "converter_tester.c" (function "test_converter_model_diagram")
         * Implement functions like insert/remove etc.
-        * Implement in this order: copier, appender, comparator, finder
+        * Implement finder using part names
+        * Refactor comparator for part, item, array
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"
         * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" functions
         * Delete "modifier" directory (?) or use it for insert/remove?

@@ -20,6 +20,7 @@
 
         * Continue restructuring container functionality
         * Complete "part_copier.c" and corresponding testing file "copier_tester.c"
+        * Add "append" functionality to part and item copier, for convenience
 
 2011-07-03  Christian Heller  <christian.heller@tuxtax.de>
 

@@ -93,6 +93,37 @@
 // --> resulting d = "Have a nice daydream"
 //
 
+//
+// Forward declarations.
+//
+
+void copy_item_element_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6);
+
+/**
+ * Gets the array from the item container element.
+ *
+ * @param p0 the array
+ * @param p1 the item container
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the array index
+ * @param p5 the item container index
+ * @param p6 the item container element index
+ */
+void copy_item_element_get(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element get.");
+
+    // The item container element.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get item container element.
+    copy_array((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+
+    // Get array from item container element.
+    copy_array(p0, e, p2, p3, p4, p5);
+}
+
 /**
  * Adjusts the destination item container.
  *
@@ -111,6 +142,8 @@
  * @param p3 the item container index
  */
 void copy_item_adjust(void* p0, void* p1, void* p2, void* p3) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item adjust.");
 
     // The new count.
     int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -142,7 +175,7 @@ void copy_item_adjust(void* p0, void* p1, void* p2, void* p3) {
 }
 
 /**
- * Copies (sets) the array to the item container element.
+ * Sets the array to the item container element.
  *
  * If DATA (not count or size) are set, then the item
  * container count is adjusted automatically.
@@ -186,7 +219,7 @@ void copy_item_element_set(void* p0, void* p1, void* p2, void* p3, void* p4, voi
 }
 
 /**
- * Copies (appends) the array to the item container element.
+ * Appends the array to the item container element.
  *
  * @param p0 the item container
  * @param p1 the array
@@ -197,31 +230,15 @@ void copy_item_element_append(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element append.");
 
-}
+    // The count.
+    int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-/**
- * Copies (gets) the array from the item container element.
- *
- * @param p0 the array
- * @param p1 the item container
- * @param p2 the operand abstraction
- * @param p3 the count
- * @param p4 the array index
- * @param p5 the item container index
- * @param p6 the item container element index
- */
-void copy_item_element_get(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+    // Get count.
+    copy_item_element_get((void*) &c, p0, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element get.");
-
-    // The item container element.
-    void* e = *NULL_POINTER_MEMORY_MODEL;
-
-    // Get item container element.
-    copy_array((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
-
-    // Get array from item container element.
-    copy_array(p0, e, p2, p3, p4, p5);
+    // Set array as element at the end of the container.
+    // The current element count c is used as container index.
+    copy_item_element_set(p0, p1, p2, p3, (void*) &c, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 }
 
 /**

@@ -20,13 +20,13 @@ COPIER
 --> if a reference is to be retrieved (get), then the pointer array abstraction
     is used, so that not the actual values, but only a reference to them is returned
 
-- copy_part_element(container, index): element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
-- copy_part: duplicate, copyValueOf, clone
-- copy_item
-- copy_array
-- copy_value: assign, place, replace, copy, overwrite, SQL UPDATE
++ copy_part_element(container, index): element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
++ copy_part: duplicate, copyValueOf, clone
++ copy_item
++ copy_array
++ copy_value: assign, place, replace, copy, overwrite, SQL UPDATE
 
-+ append(container, element): add, push, put, offer, concat, appendAll, putAll
++ append = get_count + copy_set: add, push, put, offer, concat, appendAll, putAll
 
 MODIFIER
 
