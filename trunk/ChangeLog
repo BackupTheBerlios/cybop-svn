@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue restructuring container functionality
+        * Complete "part_copier.c" and corresponding testing file "copier_tester.c"
+
 2011-07-03  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue restructuring container functionality

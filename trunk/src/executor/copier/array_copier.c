@@ -49,7 +49,7 @@
  * @param p2 the operand abstraction
  * @param p3 the count
  */
-void copy_array(void* p0, void* p1, void* p2, void* p3) {
+void copy_array_elements(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -59,7 +59,7 @@ void copy_array(void* p0, void* p1, void* p2, void* p3) {
 
             if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array elements.");
 
                 // The loop variable.
                 int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -78,23 +78,22 @@ void copy_array(void* p0, void* p1, void* p2, void* p3) {
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array. The destination array is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array elements. The destination array is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array. The source array is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array elements. The source array is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array. The count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array elements. The count is null.");
     }
 }
 
 /**
- * Copies count source array elements into the destination array
- * starting from the given offset.
+ * Copies source array into destination array starting from the given offset.
  *
  * @param p0 the destination array
  * @param p1 the source array
@@ -103,9 +102,9 @@ void copy_array(void* p0, void* p1, void* p2, void* p3) {
  * @param p4 the destination index
  * @param p5 the source index
  */
-void copy_array_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void copy_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array offset.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array.");
 
     // The destination array, source array.
     // CAUTION! They HAVE TO BE initialised with p0 and p1,
@@ -117,7 +116,7 @@ void copy_array_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
     add_offset((void*) &d, p2, p4);
     add_offset((void*) &s, p2, p5);
 
-    copy_array(d, s, p2, p3);
+    copy_array_elements(d, s, p2, p3);
 }
 
 /* ARRAY_COPIER_SOURCE */

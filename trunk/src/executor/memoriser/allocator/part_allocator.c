@@ -103,10 +103,10 @@ void allocate_part_NEW(void* p0, void* p1, void* p2) {
 //        encode_abstraction(a, p2);
 
         // Set name, abstraction, model, details.
-        copy_array_offset(*p, (void*) &n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAME_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-        copy_array_offset(*p, (void*) &a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTION_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-        copy_array_offset(*p, (void*) &m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODEL_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-        copy_array_offset(*p, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        copy_array(*p, (void*) &n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAME_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        copy_array(*p, (void*) &a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) ABSTRACTION_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        copy_array(*p, (void*) &m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) MODEL_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        copy_array(*p, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DETAILS_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
     } else {
 

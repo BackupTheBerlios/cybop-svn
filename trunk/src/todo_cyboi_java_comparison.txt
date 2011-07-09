@@ -11,34 +11,22 @@ MEMORISER
 + reallocate: trimToSize
 + deallocate: free, delete, destructor, destroy, DDL DROP TABLE
 
-ACCESSOR (or COPIER?, since get/set are identical in just copying values)
+COPIER
 
 --> cyboi works with references/pointers only
 --> even for primitive values an array with just one element exists
 --> after allocation, only references are passed around using set/get
---> set copies values
---> get returns only a reference
+--> both, "set" and "get" are based on "copy"
+--> if a reference is to be retrieved (get), then the pointer array abstraction
+    is used, so that not the actual values, but only a reference to them is returned
 
-- get_element(container, index): element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
-- get_part_name(container, index)
-- get_part_abstraction(container, index)
-- get_part(container, index)
-- get_part_by_name(container, name)
-- get_part_details(container, index)
-- get_container (fill destination container with elements of source container)
+- copy_part_element(container, index): element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
+- copy_part: duplicate, copyValueOf, clone
+- copy_item
+- copy_array
+- copy_value: assign, place, replace, copy, overwrite, SQL UPDATE
 
-- set_value (assign value to value): assign, place, replace, copy, overwrite, SQL UPDATE
-- set_element (assign element to container)
-- set_container (assign container content to container)
---> set is the same as copy, since it copies values
-- copy_value = allocate + loop + get[pointer](old container, index) + set[pointer](new container, index)
-- copy_container_shallow = allocate + loop + get[pointer](old container, index) + set[pointer](new container, index)
-- copy_container_deep: duplicate, copyValueOf, clone + set = allocate + loop + get(old container, index) + loop + get(child container, index) + set() etc.
---> copy_shallow might not be useful in cyboi
---> copying is the same as 1:1 conversion (decode/encode)
-
-+ append(container, element): add, push, put, offer, concat; = set(container, count as index)
-- append_content(destination container, source container): appendAll, putAll
++ append(container, element): add, push, put, offer, concat, appendAll, putAll
 
 MODIFIER
 

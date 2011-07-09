@@ -138,14 +138,14 @@ void copy_item_adjust(void* p0, void* p1, void* p2, void* p3) {
     // then their count (number of elements) is added to the size,
     // so that reallocation is necessary only once,
     // and not for each single element.
-    copy_item_element(p0, (void*) &c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_item_element_set(p0, (void*) &c, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 }
 
 /**
- * Copies the array to the item container element.
+ * Copies (sets) the array to the item container element.
  *
- * If data are set, then the item container count
- * is adjusted automatically.
+ * If DATA (not count or size) are set, then the item
+ * container count is adjusted automatically.
  *
  * @param p0 the item container
  * @param p1 the array
@@ -155,9 +155,9 @@ void copy_item_adjust(void* p0, void* p1, void* p2, void* p3) {
  * @param p5 the array index
  * @param p6 the item container element index
  */
-void copy_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void copy_item_element_set(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element set.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -179,10 +179,49 @@ void copy_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
     // having reallocated the item above!
     // Otherwise, a wrong DATA_ITEM pointer will be returned
     // and cause a "Segmentation fault".
-    copy_array_offset((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+    copy_array((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
     // Set array to item container element.
-    copy_array_offset(e, p1, p2, p3, p4, p5);
+    copy_array(e, p1, p2, p3, p4, p5);
+}
+
+/**
+ * Copies (appends) the array to the item container element.
+ *
+ * @param p0 the item container
+ * @param p1 the array
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ */
+void copy_item_element_append(void* p0, void* p1, void* p2, void* p3) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element append.");
+
+}
+
+/**
+ * Copies (gets) the array from the item container element.
+ *
+ * @param p0 the array
+ * @param p1 the item container
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the array index
+ * @param p5 the item container index
+ * @param p6 the item container element index
+ */
+void copy_item_element_get(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item element get.");
+
+    // The item container element.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get item container element.
+    copy_array((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+
+    // Get array from item container element.
+    copy_array(p0, e, p2, p3, p4, p5);
 }
 
 /**
@@ -212,12 +251,12 @@ void copy_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     void* sd = *NULL_POINTER_MEMORY_MODEL;
 
     // Get destination data.
-    copy_array_offset((void*) &dd, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array((void*) &dd, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     // Get source data.
-    copy_array_offset((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // Set source- to destination data.
-    copy_array_offset(dd, sd, p2, p3, p4, p5);
+    copy_array(dd, sd, p2, p3, p4, p5);
 }
 
 /* ITEM_COPIER_SOURCE */
