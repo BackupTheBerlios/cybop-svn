@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-10  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt "model_diagram_encoder.c" to new container functions
+
 2011-07-09  Christian Heller  <christian.heller@tuxtax.de>
 
         * Continue restructuring container functionality

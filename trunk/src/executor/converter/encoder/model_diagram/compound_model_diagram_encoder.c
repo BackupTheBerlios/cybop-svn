@@ -144,5 +144,104 @@ void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void*
     }
 }
 
+/**
+ * Encodes the model diagram compound.
+ *
+ * @param p0 the destination model diagram (Hand over as reference!)
+ * @param p1 the destination model diagram count
+ * @param p2 the destination model diagram size
+ * @param p3 the source compound model
+ * @param p4 the source compound model count
+ * @param p5 the tree level
+ * @param p6 the details flag
+ */
+void encode_model_diagram_compound_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* l = (int*) p5;
+
+        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+
+            int* sc = (int*) p4;
+
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram compound.");
+
+            // The loop variable.
+            int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // The part retrieved as reference.
+            void* p = *NULL_POINTER_MEMORY_MODEL;
+            // The part elements retrieved as reference.
+            void* n = *NULL_POINTER_MEMORY_MODEL;
+            void* a = *NULL_POINTER_MEMORY_MODEL;
+            void* m = *NULL_POINTER_MEMORY_MODEL;
+            void* d = *NULL_POINTER_MEMORY_MODEL;
+            // The part elements data, count retrieved as reference.
+            void* nd = *NULL_POINTER_MEMORY_MODEL;
+            void* nc = *NULL_POINTER_MEMORY_MODEL;
+            void* ad = *NULL_POINTER_MEMORY_MODEL;
+            void* ac = *NULL_POINTER_MEMORY_MODEL;
+            void* md = *NULL_POINTER_MEMORY_MODEL;
+            void* mc = *NULL_POINTER_MEMORY_MODEL;
+            void* dd = *NULL_POINTER_MEMORY_MODEL;
+            void* dc = *NULL_POINTER_MEMORY_MODEL;
+
+            // The new tree level.
+            //
+            // It gets initialised with the current tree level incremented by one.
+            //
+            // CAUTION! Do NOT manipulate the original tree level that was handed over as parameter!
+            // Otherwise, it would never be decremented anymore leading to wrong indentation.
+            int nl = *l + *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+                if (j >= *sc) {
+
+                    break;
+                }
+
+                // Get part from source whole at current index.
+                copy_array((void*) &p, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j);
+
+                // Get part elements.
+                copy_array((void*) &n, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+                copy_array((void*) &a, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+                copy_array((void*) &m, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+                copy_array((void*) &d, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
+
+                // Get part elements data, count retrieved as reference.
+                copy_array((void*) &nd, n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+                copy_array((void*) &nc, n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+                copy_array((void*) &ad, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+                copy_array((void*) &ac, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+                copy_array((void*) &md, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+                copy_array((void*) &mc, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+                copy_array((void*) &dd, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+                copy_array((void*) &dc, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+
+                // Add line feed character to destination array.
+                reallocate_array_estimated(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_2_INTEGER_MEMORY_MODEL);
+                copy_array(p0, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+                add_integer(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+                // Encode part.
+                encode_model_diagram_node_NEW(p0, p1, p2, nd, nc, ad, ac, md, mc, dd, dc, (void*) &nl, p6);
+
+                // Increment loop variable.
+                j++;
+            }
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram compound. The source count is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram compound. The tree level is null.");
+    }
+}
+
 /* COMPOUND_MODEL_DIAGRAM_ENCODER_SOURCE */
 #endif

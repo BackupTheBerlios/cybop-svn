@@ -31,6 +31,7 @@
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../executor/memoriser/allocator/part_allocator.c"
 #include "../../executor/memoriser/deallocator/part_deallocator.c"
+#include "../../executor/copier/array_copier.c"
 #include "../../executor/copier/part_copier.c"
 #include "../../logger/logger.c"
 
@@ -119,6 +120,39 @@ void test_copier_part() {
     fwprintf(stdout, L"TEST mc: %i\n", *((int*) mc));
     fwprintf(stdout, L"TEST dd: %i\n", dd);
     fwprintf(stdout, L"TEST dc: %i\n", *((int*) dc));
+
+    //
+    // Encode and output part as model diagram.
+    //
+
+//?? TEST BEGIN
+    // The model diagram.
+    void* mdi = *NULL_POINTER_MEMORY_MODEL;
+    int mdic = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mdis = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate model diagram.
+    allocate((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Encode model into model diagram.
+    encode_model_diagram_NEW((void*) &mdi, (void*) &mdic, (void*) &mdis, w);
+    // The multibyte character stream.
+    void* mb = *NULL_POINTER_MEMORY_MODEL;
+    int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Allocate multibyte character stream.
+    allocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Encode model diagram into multibyte character stream.
+    encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, mdi, (void*) &mdic);
+    // The file name.
+    void* fn = L"TEST_COPIER_TESTER.txt";
+    int fnc = *NUMBER_22_INTEGER_MEMORY_MODEL;
+    int fns = *NUMBER_23_INTEGER_MEMORY_MODEL;
+    // Write multibyte character stream as message to file system.
+    send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+    // Deallocate model diagram.
+    deallocate((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate multibyte character stream.
+    deallocate((void*) &mb, (void*) &mbs, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+//?? TEST END
 
     // Deallocate parts.
     deallocate_part_NEW((void*) &p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
