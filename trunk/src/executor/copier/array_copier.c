@@ -119,5 +119,61 @@ void copy_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     copy_array_elements(d, s, p2, p3);
 }
 
+/**
+ * Copies source- to destination array.
+ *
+ * The destination array count is adjusted automatically.
+ *
+ * @param p0 the destination array
+ * @param p1 the source array
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the destination index
+ * @param p5 the source index
+ * @param p6 the destination array count
+ */
+void copy_array_adjust(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array adjust.");
+
+    copy_array(p0, p1, p2, p3, p4, p5);
+
+    // Adjust destination array count.
+    add_integer(p6, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+}
+
+/**
+ * Appends source- to destination array.
+ *
+ * The destination array is reallocated if necessary and its size adjusted automatically.
+ *
+ * @param p0 the destination array (Hand over as reference!)
+ * @param p1 the source array
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the destination array count
+ * @param p5 the destination array size
+ */
+void copy_array_append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** d = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array append.");
+
+        // Reallocate destination array.
+        // The size is adjusted inside this function.
+        reallocate_array_estimated(p0, p4, p5, p2, p3, (void*) NUMBER_2_INTEGER_MEMORY_MODEL);
+
+        // CAUTION! The destination array count is used as destination index here!
+        copy_array_adjust(*d, p1, p2, p3, p4, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p4);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array append. The destination array is null.");
+    }
+}
+
 /* ARRAY_COPIER_SOURCE */
 #endif

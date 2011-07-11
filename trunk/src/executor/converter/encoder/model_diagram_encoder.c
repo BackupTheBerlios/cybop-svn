@@ -117,6 +117,17 @@ void encode_model_diagram_NEW(void* p0, void* p1, void* p2, void* p3) {
     copy_array((void*) &dd, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array((void*) &dc, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
+/*??
+    fwprintf(stdout, L"TEST nd: %ls\n", (wchar_t*) nd);
+    fwprintf(stdout, L"TEST nc: %i\n", *((int*) nc));
+    fwprintf(stdout, L"TEST ad: %ls\n", (wchar_t*) ad);
+    fwprintf(stdout, L"TEST ac: %i\n", *((int*) ac));
+    fwprintf(stdout, L"TEST md: %ls\n", (wchar_t*) md);
+    fwprintf(stdout, L"TEST mc: %i\n", *((int*) mc));
+    fwprintf(stdout, L"TEST dd: %i\n", dd);
+    fwprintf(stdout, L"TEST dc: %i\n", *((int*) dc));
+*/
+
     // The tree level.
     // CAUTION! Do NOT forward NUMBER_0_INTEGER_MEMORY_MODEL constant directly,
     // since the tree level value gets changed in the following functions!

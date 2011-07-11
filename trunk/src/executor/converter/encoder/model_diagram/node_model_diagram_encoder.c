@@ -217,13 +217,13 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p0 the destination model diagram (Hand over as reference!)
  * @param p1 the destination model diagram count
  * @param p2 the destination model diagram size
- * @param p3 the source name
+ * @param p3 the source name data
  * @param p4 the source name count
- * @param p5 the source abstraction
+ * @param p5 the source abstraction data
  * @param p6 the source abstraction count
- * @param p7 the source model
+ * @param p7 the source model data
  * @param p8 the source model count
- * @param p9 the source details
+ * @param p9 the source details data
  * @param p10 the source details count
  * @param p11 the tree level
  * @param p12 the details flag
@@ -234,116 +234,108 @@ void encode_model_diagram_node_NEW(void* p0, void* p1, void* p2, void* p3, void*
 
         int* mc = (int*) p8;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram node.");
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-        // Add indentation.
-        encode_model_diagram_indentation_NEW(p0, p1, p2, p11, p12);
+            void** d = (void**) p0;
 
-        // Add part name to destination array.
-        reallocate_array_estimated(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) NUMBER_2_INTEGER_MEMORY_MODEL);
-        copy_array(p0, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-        add_integer(p1, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram node.");
 
-        // Add line.
-        encode_model_diagram_line_NEW(p0, p1, p2);
+            // Add indentation.
+            encode_model_diagram_indentation_NEW(p0, p1, p2, p11, p12);
 
-        // Add part abstraction to destination array.
-        reallocate_array_estimated(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, (void*) NUMBER_2_INTEGER_MEMORY_MODEL);
-        copy_array(p0, p5, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-        add_integer(p1, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            // Add part name to destination array.
+            copy_array_append(p0, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, p1, p2);
 
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            // Add line.
+            encode_model_diagram_line_NEW(p0, p1, p2);
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            // Add part abstraction to destination array.
+            copy_array_append(p0, p5, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, p1, p2);
 
-            compare_array_count((void*) &r, p5, p6, (void*) PART_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                if (*mc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                compare_array_count((void*) &r, p5, p6, (void*) PART_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-                    // Only process the following code, if the model compound contains at least one part.
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // Add part model to destination array.
-                    encode_model_diagram_compound_NEW(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+                    if (*mc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        // Only process the following code, if the model compound contains at least one part.
+
+                        // Add part model to destination array.
+                        encode_model_diagram_compound_NEW(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+                    }
                 }
             }
-        }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p5, p6, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_array_count((void*) &r, p5, p6, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                encode_model_diagram_line_NEW(p0, p1, p2);
-                reallocate_array_estimated(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) NUMBER_2_INTEGER_MEMORY_MODEL);
-                copy_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-                add_integer(p1, p8, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    encode_model_diagram_line_NEW(p0, p1, p2);
+                    copy_array_append(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, p2);
+                }
             }
-        }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p5, p6, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_array_count((void*) &r, p5, p6, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                encode_model_diagram_line_NEW(p0, p1, p2);
-                encode_double_vector(p0, p1, p2, p7, p8);
+                    encode_model_diagram_line_NEW(p0, p1, p2);
+                    encode_double_vector(p0, p1, p2, p7, p8);
+                }
             }
-        }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p5, p6, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_array_count((void*) &r, p5, p6, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                encode_model_diagram_line_NEW(p0, p1, p2);
-                encode_integer_vector(p0, p1, p2, p7, p8);
+                    encode_model_diagram_line_NEW(p0, p1, p2);
+                    encode_integer_vector(p0, p1, p2, p7, p8);
+                }
             }
-        }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p5, p6, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_array_count((void*) &r, p5, p6, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                encode_model_diagram_line_NEW(p0, p1, p2);
-                reallocate_array_estimated(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) NUMBER_2_INTEGER_MEMORY_MODEL);
-                copy_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-                add_integer(p1, p8, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    encode_model_diagram_line_NEW(p0, p1, p2);
+                    copy_array_append(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, p2);
+                }
             }
-        }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p5, p6, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_array_count((void*) &r, p5, p6, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                encode_model_diagram_line_NEW(p0, p1, p2);
-                reallocate_array_estimated(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) NUMBER_2_INTEGER_MEMORY_MODEL);
-                copy_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-                add_integer(p1, p8, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    encode_model_diagram_line_NEW(p0, p1, p2);
+                    copy_array_append(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, p2);
+                }
             }
-        }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_array_count((void*) &r, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                encode_model_diagram_line_NEW(p0, p1, p2);
-                reallocate_array_estimated(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) NUMBER_2_INTEGER_MEMORY_MODEL);
-                copy_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-                add_integer(p1, p8, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    encode_model_diagram_line_NEW(p0, p1, p2);
+                    copy_array_append(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, p2);
+                }
             }
-        }
 
 /*??
     //?? TEST BEGIN
@@ -366,23 +358,28 @@ void encode_model_diagram_node_NEW(void* p0, void* p1, void* p2, void* p3, void*
     //?? TEST END
 */
 
-        // CAUTION! Do NOT move this test to the beginning of the function!
-        // Otherwise, a model will not be processed, if the details happen to be null.
-        if (p10 != *NULL_POINTER_MEMORY_MODEL) {
+            // CAUTION! Do NOT move this test to the beginning of the function!
+            // Otherwise, a model will not be processed, if the details happen to be null.
+            if (p10 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* dc = (int*) p10;
+                int* dc = (int*) p10;
 
-            if (*dc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (*dc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // Only process the following code, if the details compound contains at least one part.
+                    // Only process the following code, if the details compound contains at least one part.
 
-                // Add part details to destination array.
-                encode_model_diagram_compound_NEW(p0, p1, p2, p9, p10, p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                    // Add part details to destination array.
+                    encode_model_diagram_compound_NEW(p0, p1, p2, p9, p10, p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                }
+
+            } else {
+
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram node. The details count is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram node. The details count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram node. The model diagram is null.");
         }
 
     } else {

@@ -192,6 +192,9 @@ void reallocate_array_exact(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                     // Reallocate array using new count as size.
                     reallocate_array(p0, p1, (void*) &n, p3);
+
+                    // Set new size.
+                    assign_integer(p2, (void*) &n);
                 }
 
             } else {
@@ -251,22 +254,27 @@ void reallocate_array_estimated(void* p0, void* p1, void* p2, void* p3, void* p4
 
                     int* c = (int*) p1;
 
-                    // The new count.
+                    // The new size.
                     int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    // Add count to new count.
+                    // Add count to new size.
                     add_integer((void*) &n, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-                    // Add additional count to new count.
+                    // Add additional count to new size.
                     add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                    // Multiply new count with factor.
-                    multiply_with_integer((void*) &n, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     if (n > *s) {
 
+                        // Multiply new size with factor.
+                        // CAUTION! This multiplication has to be done AFTER the comparison
+                        // of new size and old size since otherwise, the new size is falsified.
+                        multiply_with_integer((void*) &n, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
                         // Reallocate array using new count as size.
                         reallocate_array(p0, p1, (void*) &n, p3);
+
+                        // Set new size.
+                        assign_integer(p2, (void*) &n);
                     }
 
                 } else {
