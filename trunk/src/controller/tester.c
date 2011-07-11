@@ -36,6 +36,7 @@
 #include "../controller/tester/copier_tester.c"
 #include "../controller/tester/logger_tester.c"
 #include "../controller/tester/memoriser_tester.c"
+#include "../controller/tester/modifier_tester.c"
 #include "../controller/tester/pointer_tester.c"
 #include "../controller/tester/preprocessor_tester.c"
 #include "../controller/tester/variable_tester.c"
@@ -128,6 +129,7 @@ void test() {
     test_converter();
     test_copier();
     test_memoriser();
+    test_modifier();
 }
 
 /* TESTER_SOURCE */

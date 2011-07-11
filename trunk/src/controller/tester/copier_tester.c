@@ -171,7 +171,7 @@ void test_copier() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test copier.");
 
-    test_copier_part();
+//    test_copier_part();
 }
 
 /* COPIER_TESTER */
