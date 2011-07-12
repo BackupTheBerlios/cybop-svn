@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-12  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add "insert" container functionality
+
 2011-07-10  Christian Heller  <christian.heller@tuxtax.de>
 
         * Adapt "model_diagram_encoder.c" to new container functions

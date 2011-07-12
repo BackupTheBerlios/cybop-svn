@@ -35,8 +35,8 @@
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../executor/converter/encoder/integer_vector_encoder.c"
 #include "../../../../executor/converter/encoder/double_vector_encoder.c"
-#include "../../../../executor/copier/array_copier.c"
 #include "../../../../executor/memoriser/reallocator/array_reallocator.c"
+#include "../../../../executor/modifier/inserter/array_inserter.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -72,13 +72,13 @@ void encode_model_diagram_line_NEW(void* p0, void* p1, void* p2) {
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram line.");
 
     // Add space character to destination array.
-    copy_array_append(p0, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, p2);
+    insert_array(p0, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
     // Add pipe character to destination array.
-    copy_array_append(p0, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, p2);
+    insert_array(p0, (void*) VERTICAL_LINE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
     // Add space character to destination array.
-    copy_array_append(p0, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, p2);
+    insert_array(p0, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 }
 
 /* LINE_MODEL_DIAGRAM_ENCODER_SOURCE */

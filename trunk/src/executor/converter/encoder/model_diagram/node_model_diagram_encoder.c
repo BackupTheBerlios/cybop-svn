@@ -39,7 +39,7 @@
 #include "../../../../executor/converter/encoder/model_diagram/line_model_diagram_encoder.c"
 #include "../../../../executor/converter/encoder/integer_vector_encoder.c"
 #include "../../../../executor/converter/encoder/double_vector_encoder.c"
-#include "../../../../executor/copier/array_copier.c"
+#include "../../../../executor/modifier/inserter/array_inserter.c"
 #include "../../../../executor/modifier/appender.c"
 #include "../../../../logger/logger.c"
 
@@ -244,13 +244,13 @@ void encode_model_diagram_node_NEW(void* p0, void* p1, void* p2, void* p3, void*
             encode_model_diagram_indentation_NEW(p0, p1, p2, p11, p12);
 
             // Add part name to destination array.
-            copy_array_append(p0, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, p1, p2);
+            insert_array(p0, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
             // Add line.
             encode_model_diagram_line_NEW(p0, p1, p2);
 
             // Add part abstraction to destination array.
-            copy_array_append(p0, p5, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, p1, p2);
+            insert_array(p0, p5, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
             // The comparison result.
             int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -278,7 +278,7 @@ void encode_model_diagram_node_NEW(void* p0, void* p1, void* p2, void* p3, void*
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     encode_model_diagram_line_NEW(p0, p1, p2);
-                    copy_array_append(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, p2);
+                    insert_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
                 }
             }
 
@@ -311,7 +311,7 @@ void encode_model_diagram_node_NEW(void* p0, void* p1, void* p2, void* p3, void*
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     encode_model_diagram_line_NEW(p0, p1, p2);
-                    copy_array_append(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, p2);
+                    insert_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
                 }
             }
 
@@ -322,7 +322,7 @@ void encode_model_diagram_node_NEW(void* p0, void* p1, void* p2, void* p3, void*
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     encode_model_diagram_line_NEW(p0, p1, p2);
-                    copy_array_append(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, p2);
+                    insert_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
                 }
             }
 
@@ -333,7 +333,7 @@ void encode_model_diagram_node_NEW(void* p0, void* p1, void* p2, void* p3, void*
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                     encode_model_diagram_line_NEW(p0, p1, p2);
-                    copy_array_append(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, p2);
+                    insert_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
                 }
             }
 

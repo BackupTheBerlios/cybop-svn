@@ -47,6 +47,7 @@ void test_modifier_array() {
     int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+/*??
     allocate_array((void*) &w, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Append wide characters.
@@ -56,10 +57,11 @@ void test_modifier_array() {
     fwprintf(stdout, L"TEST s: %i\n", (wchar_t*) w);
 
     // Copy wide characters with different destination- and source index.
-    copy_array(w, (void*) L"xxxxxxxxxxxlloxxxxxxx", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_11_INTEGER_MEMORY_MODEL);
+    copy_array_forward(w, (void*) L"xxxxxxxxxxxlloxxxxxxx", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_11_INTEGER_MEMORY_MODEL);
     fwprintf(stdout, L"TEST w: %ls\n", (wchar_t*) w);
 
     deallocate_array((void*) &w, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+*/
 }
 
 /**

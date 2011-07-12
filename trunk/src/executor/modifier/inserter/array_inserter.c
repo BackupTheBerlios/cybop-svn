@@ -23,35 +23,227 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef APPENDER_SOURCE
-#define APPENDER_SOURCE
+#ifndef ARRAY_INSERTER_SOURCE
+#define ARRAY_INSERTER_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../executor/modifier/replacer.c"
-#include "../../logger/logger.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../executor/comparator/value_comparator.c"
+#include "../../../executor/memoriser/reallocator/array_reallocator.c"
+#include "../../../executor/modifier/replacer.c"
+#include "../../../logger/logger.c"
 
 /**
- * Appends the source to the end of the destination.
+ * Inserts the source- OUTSIDE the destination array.
  *
- * This function is "syntactic sugar" for the programmer.
- * It just calls the "replace_adjust" function with the
- * destination's count as index for appending the source.
+ * None of the existing elements need to be moved in this case.
+ * This is identical to an "append" or "add" function.
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- * @param p5 the abstraction
- * @param p6 the abstraction count
+ * It is also allowed to add elements far behind the end of the original array.
+ * This is similar to random access of an arbitrary byte of a file.
+ *
+ * Example:
+ *
+ * destination array: "Hello, World"
+ * source array: "blubla!!! blubla"
+ * count: 3
+ * destination array index: 20
+ * source array index: 6
+ * destination array count: 12
+ * ==> result: "Hello, World        !!!"
+ *
+ * @param p0 the destination array (Hand over as reference!)
+ * @param p1 the source array
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the destination index
+ * @param p5 the source index
+ * @param p6 the destination array count
+ * @param p7 the destination array size
  */
-void append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void insert_array_outside(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Append.");
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // Use the destination's count as index for appending the source.
-    replace_adjust(p0, p1, p2, p3, p4, p1, p5, p6);
+        void** d = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Insert array outside.");
+
+        // The new size.
+        int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        // Add destination array count.
+        add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // Add count of new elements to be inserted.
+        add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        compare_value((void*) &r, (void*) &n, p7, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // Multiply new size with factor.
+            // CAUTION! This multiplication has to be done AFTER the comparison
+            // of new size and old size since otherwise, the new size is falsified,
+            // which would lead to runtime errors.
+            // multiply_with_integer((void*) &n, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            // Reallocate array using new count as size.
+            reallocate_array(p0, p6, (void*) &n, p2);
+
+            // Set new size.
+            assign_integer(p7, (void*) &n);
+        }
+
+        // Copy source to destination.
+        copy_array_forward(*d, p1, p2, p3, p4, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+
+        // Adjust destination array count.
+        assign_integer(p6, (void*) &n);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not insert array outside. The destination array is null.");
+    }
 }
 
-/* APPENDER_SOURCE */
+/**
+ * Inserts the source- INSIDE the destination array.
+ *
+ * All current elements existing behind the given index in the destination array
+ * are moved towards the end by the number of elements inserted.
+ *
+ * This is done in a backwards order, starting from the last element,
+ * since otherwise, some elements might overlap and get overwritten.
+ *
+ * Example:
+ *
+ * destination array: "HelloWorld"
+ * source array: "blubla, blubla"
+ * count: 2
+ * destination array index: 5
+ * source array index: 6
+ * destination array count: 10
+ * ==> result: "Hello, World"
+ *
+ * @param p0 the destination array (Hand over as reference!)
+ * @param p1 the source array
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the destination index
+ * @param p5 the source index
+ * @param p6 the destination array count
+ * @param p7 the destination array size
+ */
+void insert_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+
+        void** d = (void**) p0;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Insert array inside.");
+
+        // The move destination index.
+        int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        // Add destination index.
+        add_integer((void*) &i, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // Add count.
+        add_integer((void*) &i, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // Move current elements behind given index towards the end of the array.
+        // CAUTION! Move array elements starting from the LAST since otherwise,
+        // overlapping array elements might get overwritten!
+        copy_array_backward(*d, *d, p2, p3, (void*) &i, p4);
+
+        // The new size.
+        int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        // Add destination array count.
+        add_integer((void*) &n, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // Add count of new elements to be inserted.
+        add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        compare_value((void*) &r, (void*) &n, p7, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // Multiply new size with factor.
+            // CAUTION! This multiplication has to be done AFTER the comparison
+            // of new size and old size since otherwise, the new size is falsified,
+            // which would lead to runtime errors.
+            // multiply_with_integer((void*) &n, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+            // Reallocate array using new count as size.
+            reallocate_array(p0, p6, (void*) &n, p2);
+
+            // Set new size.
+            assign_integer(p7, (void*) &n);
+        }
+
+        // Copy source to destination.
+        copy_array_forward(*d, p1, p2, p3, p4, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+
+        // Adjust destination array count.
+        assign_integer(p6, (void*) &n);
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not insert array inside. The destination array is null.");
+    }
+}
+
+/**
+ * Inserts the source- into the destination array,
+ * starting from the given index.
+ *
+ * @param p0 the destination array (Hand over as reference!)
+ * @param p1 the source array
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ * @param p4 the destination index
+ * @param p5 the source index
+ * @param p6 the destination array count
+ * @param p7 the destination array size
+ */
+void insert_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Insert array.");
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_value((void*) &r, p4, p6, (void*) GREATER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            insert_array_outside(p0, p1, p2, p3, p4, p5, p6, p7);
+        }
+    }
+
+    // insert_array_inside();
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        compare_value((void*) &r, p4, p6, (void*) SMALLER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            insert_array_inside(p0, p1, p2, p3, p4, p5, p6, p7);
+        }
+    }
+}
+
+/* ARRAY_INSERTER_SOURCE */
 #endif

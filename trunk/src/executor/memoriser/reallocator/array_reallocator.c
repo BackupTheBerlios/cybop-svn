@@ -220,7 +220,7 @@ void reallocate_array_exact(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * The number of required elements is determined as:
  * (count of currently contained elements + additional count of new elements to be added) * factor
  *
- * If the current size is big enough to also store all new elements,
+ * If the current size IS big enough to also store all new elements,
  * then nothing is done here, i.e. no reallocation will happen.
  *
  * This function is intended to be used when performance matters,

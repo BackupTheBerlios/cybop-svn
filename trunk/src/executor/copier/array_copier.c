@@ -41,59 +41,88 @@
 #include "../../logger/logger.c"
 
 /**
- * Copies count source array elements into the destination array
- * at position index.
+ * Copies count source array elements into the destination array.
+ *
+ * It uses FORWARD copying, i.e. the loop variable is INCREMENTED.
  *
  * @param p0 the destination array
  * @param p1 the source array
  * @param p2 the operand abstraction
  * @param p3 the count
  */
-void copy_array_elements(void* p0, void* p1, void* p2, void* p3) {
+void copy_array_elements_forward(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* c = (int*) p3;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array elements forward.");
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        // The loop variable.
+        int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array elements.");
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-                // The loop variable.
-                int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+            if (j >= *c) {
 
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                    if (j >= *c) {
-
-                        break;
-                    }
-
-                    copy_value_offset(p0, p1, p2, (void*) &j, (void*) &j);
-
-                    j++;
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array elements. The destination array is null.");
+                break;
             }
 
-        } else {
+            copy_value_offset(p0, p1, p2, (void*) &j);
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array elements. The source array is null.");
+            j++;
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array elements. The count is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array elements forward. The count is null.");
+    }
+}
+
+/**
+ * Copies count source array elements into the destination array.
+ *
+ * It uses BACKWARD copying, i.e. the loop variable is DECREMENTED.
+ *
+ * @param p0 the destination array
+ * @param p1 the source array
+ * @param p2 the operand abstraction
+ * @param p3 the count
+ */
+void copy_array_elements_backward(void* p0, void* p1, void* p2, void* p3) {
+
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* c = (int*) p3;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array elements backward.");
+
+        // The loop variable.
+        // CAUTION! Subtract one because this is an index.
+        int j = *c - *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+            if (j < *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                break;
+            }
+
+            copy_value_offset(p0, p1, p2, (void*) &j);
+
+            j--;
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array elements backward. The count is null.");
     }
 }
 
 /**
  * Copies source array into destination array starting from the given offset.
+ *
+ * This is the FORWARD version.
  *
  * @param p0 the destination array
  * @param p1 the source array
@@ -102,9 +131,9 @@ void copy_array_elements(void* p0, void* p1, void* p2, void* p3) {
  * @param p4 the destination index
  * @param p5 the source index
  */
-void copy_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void copy_array_forward(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array forward.");
 
     // The destination array, source array.
     // CAUTION! They HAVE TO BE initialised with p0 and p1,
@@ -116,13 +145,13 @@ void copy_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     add_offset((void*) &d, p2, p4);
     add_offset((void*) &s, p2, p5);
 
-    copy_array_elements(d, s, p2, p3);
+    copy_array_elements_forward(d, s, p2, p3);
 }
 
 /**
- * Copies source- to destination array.
+ * Copies source array into destination array starting from the given offset.
  *
- * The destination array count is adjusted automatically.
+ * This is the BACKWARD version.
  *
  * @param p0 the destination array
  * @param p1 the source array
@@ -130,49 +159,22 @@ void copy_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
  * @param p3 the count
  * @param p4 the destination index
  * @param p5 the source index
- * @param p6 the destination array count
  */
-void copy_array_adjust(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void copy_array_backward(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array adjust.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array backward.");
 
-    copy_array(p0, p1, p2, p3, p4, p5);
+    // The destination array, source array.
+    // CAUTION! They HAVE TO BE initialised with p0 and p1,
+    // since an offset is added below.
+    void* d = p0;
+    void* s = p1;
 
-    // Adjust destination array count.
-    add_integer(p6, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-}
+    // Add offset.
+    add_offset((void*) &d, p2, p4);
+    add_offset((void*) &s, p2, p5);
 
-/**
- * Appends source- to destination array.
- *
- * The destination array is reallocated if necessary and its size adjusted automatically.
- *
- * @param p0 the destination array (Hand over as reference!)
- * @param p1 the source array
- * @param p2 the operand abstraction
- * @param p3 the count
- * @param p4 the destination array count
- * @param p5 the destination array size
- */
-void copy_array_append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
-
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-        void** d = (void**) p0;
-
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array append.");
-
-        // Reallocate destination array.
-        // The size is adjusted inside this function.
-        reallocate_array_estimated(p0, p4, p5, p2, p3, (void*) NUMBER_2_INTEGER_MEMORY_MODEL);
-
-        // CAUTION! The destination array count is used as destination index here!
-        copy_array_adjust(*d, p1, p2, p3, p4, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p4);
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array append. The destination array is null.");
-    }
+    copy_array_elements_backward(d, s, p2, p3);
 }
 
 /* ARRAY_COPIER_SOURCE */

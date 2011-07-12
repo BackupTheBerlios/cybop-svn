@@ -118,10 +118,10 @@ void copy_item_element_get(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     void* e = *NULL_POINTER_MEMORY_MODEL;
 
     // Get item container element.
-    copy_array((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+    copy_array_forward((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
     // Get array from item container element.
-    copy_array(p0, e, p2, p3, p4, p5);
+    copy_array_forward(p0, e, p2, p3, p4, p5);
 }
 
 /**
@@ -212,10 +212,10 @@ void copy_item_element_set(void* p0, void* p1, void* p2, void* p3, void* p4, voi
     // having reallocated the item above!
     // Otherwise, a wrong DATA_ITEM pointer will be returned
     // and cause a "Segmentation fault".
-    copy_array((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+    copy_array_forward((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
     // Set array to item container element.
-    copy_array(e, p1, p2, p3, p4, p5);
+    copy_array_forward(e, p1, p2, p3, p4, p5);
 }
 
 /**
@@ -268,12 +268,12 @@ void copy_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     void* sd = *NULL_POINTER_MEMORY_MODEL;
 
     // Get destination data.
-    copy_array((void*) &dd, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &dd, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     // Get source data.
-    copy_array((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // Set source- to destination data.
-    copy_array(dd, sd, p2, p3, p4, p5);
+    copy_array_forward(dd, sd, p2, p3, p4, p5);
 }
 
 /* ITEM_COPIER_SOURCE */

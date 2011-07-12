@@ -11,9 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Implement functions like insert/remove etc.
+        * Test insert functions
+        * Implement remove in a similar way to insert
+        * Review and adapt comparison files
         * Implement finder using part names
-        * Refactor comparator for part, item, array
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"
         * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" functions
         * Delete "modifier" directory (?) or use it for insert/remove?

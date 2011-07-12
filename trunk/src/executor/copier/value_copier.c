@@ -165,10 +165,9 @@ void copy_value(void* p0, void* p1, void* p2) {
  * @param p0 the destination value
  * @param p1 the source value
  * @param p2 the operand abstraction
- * @param p3 the destination index
- * @param p4 the source index
+ * @param p3 the offset
  */
-void copy_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void copy_value_offset(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy value offset.");
 
@@ -180,7 +179,7 @@ void copy_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Add offset.
     add_offset((void*) &d, p2, p3);
-    add_offset((void*) &s, p2, p4);
+    add_offset((void*) &s, p2, p3);
 
     // Set source value to destination value.
     copy_value(d, s, p2);
