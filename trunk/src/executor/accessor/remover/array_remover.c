@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ARRAY_REMOVER_SOURCE
-#define ARRAY_REMOVER_SOURCE
+#ifndef OLD_ARRAY_REMOVER_SOURCE
+#define OLD_ARRAY_REMOVER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -156,5 +156,5 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* ARRAY_REMOVER_SOURCE */
+/* OLD_ARRAY_REMOVER_SOURCE */
 #endif

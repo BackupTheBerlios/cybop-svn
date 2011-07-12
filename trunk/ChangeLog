@@ -18,7 +18,8 @@
 
 2011-07-12  Christian Heller  <christian.heller@tuxtax.de>
 
-        * Add "insert" container functionality
+        * Continue restructuring container functionality
+        * Add "array_inserter.c" and "array_remover.c"
 
 2011-07-10  Christian Heller  <christian.heller@tuxtax.de>
 

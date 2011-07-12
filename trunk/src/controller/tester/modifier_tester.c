@@ -33,6 +33,8 @@
 #include "../../executor/memoriser/deallocator/part_deallocator.c"
 #include "../../executor/copier/array_copier.c"
 #include "../../executor/copier/part_copier.c"
+#include "../../executor/modifier/inserter/array_inserter.c"
+#include "../../executor/modifier/remover/array_remover.c"
 #include "../../logger/logger.c"
 
 /**
@@ -47,21 +49,43 @@ void test_modifier_array() {
     int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-/*??
     allocate_array((void*) &w, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    // Append wide characters.
-    copy_array_append(w, (void*) L"HelloWorld!", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_11_INTEGER_MEMORY_MODEL, (void*) &c, (void*) &s);
+    // Append "Hello".
+    insert_array((void*) &w, (void*) L"ABCHelloXYZ", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_5_INTEGER_MEMORY_MODEL, (void*) &c, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) &c, (void*) &s);
     fwprintf(stdout, L"TEST w: %ls\n", (wchar_t*) w);
     fwprintf(stdout, L"TEST c: %i\n", c);
-    fwprintf(stdout, L"TEST s: %i\n", (wchar_t*) w);
+    fwprintf(stdout, L"TEST s: %i\n", s);
 
-    // Copy wide characters with different destination- and source index.
-    copy_array_forward(w, (void*) L"xxxxxxxxxxxlloxxxxxxx", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_11_INTEGER_MEMORY_MODEL);
+    // Append "World!".
+    insert_array((void*) &w, (void*) L"World!", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_6_INTEGER_MEMORY_MODEL, (void*) NUMBER_5_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &c, (void*) &s);
     fwprintf(stdout, L"TEST w: %ls\n", (wchar_t*) w);
+    fwprintf(stdout, L"TEST c: %i\n", c);
+    fwprintf(stdout, L"TEST s: %i\n", s);
+
+    // Remove "llo".
+    remove_array((void*) &w, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) &c, (void*) &s);
+    fwprintf(stdout, L"TEST w: %ls\n", (wchar_t*) w);
+    fwprintf(stdout, L"TEST c: %i\n", c);
+    fwprintf(stdout, L"TEST s: %i\n", s);
+
+    // Insert "ho, ".
+    insert_array((void*) &w, (void*) L"ho, ", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &c, (void*) &s);
+    fwprintf(stdout, L"TEST w: %ls\n", (wchar_t*) w);
+    fwprintf(stdout, L"TEST c: %i\n", c);
+    fwprintf(stdout, L"TEST s: %i\n", s);
+
+    // Append "test" outside, leaving two elements empty.
+    // CAUTION! This is NOT shown when printed on screen,
+    // since arrays are initialised with the null
+    // termination character "\0" by default,
+    // so that the "fwprintf" function stops output there.
+    insert_array((void*) &w, (void*) L"test", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) NUMBER_20_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &c, (void*) &s);
+    fwprintf(stdout, L"TEST w: %ls\n", (wchar_t*) w);
+    fwprintf(stdout, L"TEST c: %i\n", c);
+    fwprintf(stdout, L"TEST s: %i\n", s);
 
     deallocate_array((void*) &w, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-*/
 }
 
 /**

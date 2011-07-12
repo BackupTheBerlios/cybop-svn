@@ -76,7 +76,6 @@ void insert_array_outside(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
         // Add destination array count.
         add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
         // Add count of new elements to be inserted.
         add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
@@ -93,7 +92,7 @@ void insert_array_outside(void* p0, void* p1, void* p2, void* p3, void* p4, void
             // which would lead to runtime errors.
             // multiply_with_integer((void*) &n, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            // Reallocate array using new count as size.
+            // Enlarge array using new count as size.
             reallocate_array(p0, p6, (void*) &n, p2);
 
             // Set new size.
@@ -101,9 +100,9 @@ void insert_array_outside(void* p0, void* p1, void* p2, void* p3, void* p4, void
         }
 
         // Copy source to destination.
-        copy_array_forward(*d, p1, p2, p3, p4, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        copy_array_forward(*d, p1, p2, p3, p4, p5);
 
-        // Adjust destination array count.
+        // Set destination array count.
         assign_integer(p6, (void*) &n);
 
     } else {
@@ -123,12 +122,12 @@ void insert_array_outside(void* p0, void* p1, void* p2, void* p3, void* p4, void
  *
  * Example:
  *
- * destination array: "HelloWorld"
+ * destination array: "HelloWorld!"
  * source array: "blubla, blubla"
  * count: 2
- * destination array index: 5
- * source array index: 6
- * destination array count: 10
+ * destination index: 5
+ * source index: 6
+ * destination array count: 11
  * ==> result: "Hello, World"
  *
  * @param p0 the destination array (Hand over as reference!)
@@ -150,24 +149,23 @@ void insert_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         // The move destination index.
         int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-        // Add destination index.
-        add_integer((void*) &i, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        // Add count.
-        add_integer((void*) &i, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        // Move current elements behind given index towards the end of the array.
-        // CAUTION! Move array elements starting from the LAST since otherwise,
-        // overlapping array elements might get overwritten!
-        copy_array_backward(*d, *d, p2, p3, (void*) &i, p4);
-
+        // The move count.
+        int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
         // The new size.
         int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+        // Add destination index.
+        add_integer((void*) &i, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        // Add count.
+        add_integer((void*) &i, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+        // Add destination array count.
+        add_integer((void*) &c, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        // Subtract destination index.
+        subtract_integer((void*) &c, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
         // Add destination array count.
         add_integer((void*) &n, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
         // Add count of new elements to be inserted.
         add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
@@ -184,17 +182,24 @@ void insert_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             // which would lead to runtime errors.
             // multiply_with_integer((void*) &n, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-            // Reallocate array using new count as size.
+            // Enlarge array using new count as size.
             reallocate_array(p0, p6, (void*) &n, p2);
 
             // Set new size.
             assign_integer(p7, (void*) &n);
         }
 
-        // Copy source to destination.
-        copy_array_forward(*d, p1, p2, p3, p4, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        // Move current elements behind given index towards the end of the array.
+        // CAUTION! Move array elements starting from the LAST since otherwise,
+        // overlapping array elements might get overwritten!
+        // CAUTION! Call this function AFTER having resized the array
+        // since otherwise, it might not be big enough and elements be cut.
+        copy_array_backward(*d, *d, p2, (void*) &c, (void*) &i, p4);
 
-        // Adjust destination array count.
+        // Copy source to destination.
+        copy_array_forward(*d, p1, p2, p3, p4, p5);
+
+        // Set destination array count.
         assign_integer(p6, (void*) &n);
 
     } else {
@@ -233,7 +238,6 @@ void insert_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         }
     }
 
-    // insert_array_inside();
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         compare_value((void*) &r, p4, p6, (void*) SMALLER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
