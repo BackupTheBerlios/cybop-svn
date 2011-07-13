@@ -23,28 +23,26 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ITEM_COPIER_SOURCE
-#define ITEM_COPIER_SOURCE
+#ifndef ITEM_OVERWRITER_SOURCE
+#define ITEM_OVERWRITER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_adder.c"
-#include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/copier/array_copier.c"
-#include "../../executor/memoriser/reallocator/item_reallocator.c"
-#include "../../executor/memoriser/size_determiner.c"
-#include "../../executor/modifier/assigner.c"
-#include "../../logger/logger.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/arithmetiser/integer_adder.c"
+#include "../../../executor/arithmetiser/integer_multiplier.c"
+#include "../../../executor/assigner/array_assigner.c"
+#include "../../../executor/memoriser/reallocator/item_reallocator.c"
+#include "../../../executor/memoriser/size_determiner.c"
+#include "../../../logger/logger.c"
 
 /**
- * Copies count source item elements into the destination item at position index.
+ * Overwrites the destination- with the source item.
  *
- * CAUTION! The size of the destination has to be adjusted BEFORE calling
- * this function. The validity of the given index is NOT tested here.
+ * The count and size are adjusted automatically.
  *
  * @param p0 the destination item
  * @param p1 the source item
@@ -53,23 +51,27 @@
  * @param p4 the destination index
  * @param p5 the source index
  */
-void copy_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void overwrite_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy item.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Overwrite item.");
 
-    // The destination data.
+    // The destination data, count, size.
     void* dd = *NULL_POINTER_MEMORY_MODEL;
+    void* dc = *NULL_POINTER_MEMORY_MODEL;
+    void* ds = *NULL_POINTER_MEMORY_MODEL;
     // The source data.
     void* sd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get destination data.
+    // Get destination data, count, size.
     copy_array_forward((void*) &dd, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &dc, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &ds, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
     // Get source data.
     copy_array_forward((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
-    // Set source- to destination data.
-    copy_array_forward(dd, sd, p2, p3, p4, p5);
+    // Overwrite destination- with source data.
+    overwrite_array((void*) &dd, sd, p2, p3, p4, p5, dc, ds);
 }
 
-/* ITEM_COPIER_SOURCE */
+/* ITEM_OVERWRITER_SOURCE */
 #endif

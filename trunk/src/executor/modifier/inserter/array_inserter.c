@@ -32,84 +32,8 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../executor/comparator/value_comparator.c"
 #include "../../../executor/memoriser/reallocator/array_reallocator.c"
-#include "../../../executor/modifier/replacer.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../logger/logger.c"
-
-/**
- * Inserts the source- OUTSIDE the destination array.
- *
- * None of the existing elements need to be moved in this case.
- * This is identical to an "append" or "add" function.
- *
- * It is also allowed to add elements far behind the end of the original array.
- * This is similar to random access of an arbitrary byte of a file.
- *
- * Example:
- *
- * destination array: "Hello, World"
- * source array: "blubla!!! blubla"
- * count: 3
- * destination array index: 20
- * source array index: 6
- * destination array count: 12
- * ==> result: "Hello, World        !!!"
- *
- * @param p0 the destination array (Hand over as reference!)
- * @param p1 the source array
- * @param p2 the operand abstraction
- * @param p3 the count
- * @param p4 the destination index
- * @param p5 the source index
- * @param p6 the destination array count
- * @param p7 the destination array size
- */
-void insert_array_outside(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
-
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-        void** d = (void**) p0;
-
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Insert array outside.");
-
-        // The new size.
-        int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-        // Add destination array count.
-        add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-        // Add count of new elements to be inserted.
-        add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-        compare_value((void*) &r, (void*) &n, p7, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            // Multiply new size with factor.
-            // CAUTION! This multiplication has to be done AFTER the comparison
-            // of new size and old size since otherwise, the new size is falsified,
-            // which would lead to runtime errors.
-            // multiply_with_integer((void*) &n, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-            // Enlarge array using new count as size.
-            reallocate_array(p0, p6, (void*) &n, p2);
-
-            // Set new size.
-            assign_integer(p7, (void*) &n);
-        }
-
-        // Copy source to destination.
-        copy_array_forward(*d, p1, p2, p3, p4, p5);
-
-        // Set destination array count.
-        assign_integer(p6, (void*) &n);
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not insert array outside. The destination array is null.");
-    }
-}
 
 /**
  * Inserts the source- INSIDE the destination array.
@@ -186,7 +110,7 @@ void insert_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             reallocate_array(p0, p6, (void*) &n, p2);
 
             // Set new size.
-            assign_integer(p7, (void*) &n);
+            copy_integer(p7, (void*) &n);
         }
 
         // Move current elements behind given index towards the end of the array.
@@ -200,7 +124,7 @@ void insert_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         copy_array_forward(*d, p1, p2, p3, p4, p5);
 
         // Set destination array count.
-        assign_integer(p6, (void*) &n);
+        copy_integer(p6, (void*) &n);
 
     } else {
 
@@ -234,7 +158,10 @@ void insert_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            insert_array_outside(p0, p1, p2, p3, p4, p5, p6, p7);
+            // Inserting elements outside the current array
+            // boundaries is equivalent to just overwriting
+            // elements, since none have to be moved.
+            overwrite_array(p0, p1, p2, p3, p4, p5, p6, p7);
         }
     }
 

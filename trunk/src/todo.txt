@@ -11,8 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Test insert functions
-        * Implement remove in a similar way to insert
+        * Refactor get/set functions so that count and size are set properly (compare with insert or overwrite)
         * Review and adapt comparison files
         * Implement finder using part names
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"

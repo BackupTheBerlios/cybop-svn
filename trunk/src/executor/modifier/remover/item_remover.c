@@ -23,35 +23,45 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef APPENDER_SOURCE
-#define APPENDER_SOURCE
+#ifndef ITEM_REMOVER_SOURCE
+#define ITEM_REMOVER_SOURCE
 
-#include "../../constant/model/log/message_log_model.c"
-#include "../../executor/modifier/replacer.c"
-#include "../../logger/logger.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/model/memory_model.c"
+#include "../../../constant/name/memory/item_memory_name.c"
+#include "../../../constant/name/memory/primitive_memory_name.c"
+#include "../../../executor/modifier/remover/array_remover.c"
+#include "../../../logger/logger.c"
 
 /**
- * Appends the source to the end of the destination.
+ * Removes count elements from the item.
  *
- * This function is "syntactic sugar" for the programmer.
- * It just calls the "replace_adjust" function with the
- * destination's count as index for appending the source.
+ * The count and size are adjusted automatically.
  *
- * @param p0 the destination (Hand over as reference!)
- * @param p1 the destination count
- * @param p2 the destination size
- * @param p3 the source
- * @param p4 the source count
- * @param p5 the abstraction
- * @param p6 the abstraction count
+ * @param p0 the item
+ * @param p1 the operand abstraction
+ * @param p2 the count
+ * @param p3 the index
  */
-void append(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void remove_item(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Append.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Remove item.");
 
-    // Use the destination's count as index for appending the source.
-    replace_adjust(p0, p1, p2, p3, p4, p1, p5, p6);
+    // The item data, count, size.
+    void* ad = *NULL_POINTER_MEMORY_MODEL;
+    void* ac = *NULL_POINTER_MEMORY_MODEL;
+    void* as = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get item data, count, size.
+    copy_array_forward((void*) &ad, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &ac, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &as, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
+
+    // Remove elements from item data.
+    remove_array((void*) &ad, p1, p2, p3, ac, as);
 }
 
-/* APPENDER_SOURCE */
+/* ITEM_REMOVER_SOURCE */
 #endif

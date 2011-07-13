@@ -13,25 +13,35 @@ MEMORISER
 
 COPIER
 
++ copy: duplicate, copyValueOf, clone
++ copy (value): assign, place, replace, copy, overwrite, SQL UPDATE
++ copy_part_element(container, index): element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
+
+ADJUSTER
+
++ adjust
+
+--> while "copy" does pure copying only, "adjust" sets the count and size automatically
+
+ACCESSOR
+
++ get
++ set
+
 --> cyboi works with references/pointers only
 --> even for primitive values an array with just one element exists
 --> after allocation, only references are passed around using set/get
---> both, "set" and "get" are based on "copy"
+--> both, "get" and "set" are based on "copy"
 --> if a reference is to be retrieved (get), then the pointer array abstraction
     is used, so that not the actual values, but only a reference to them is returned
 
-+ copy_part_element(container, index): element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
-+ copy_part: duplicate, copyValueOf, clone
-+ copy_item
-+ copy_array
-+ copy_value: assign, place, replace, copy, overwrite, SQL UPDATE
-
-+ append = get_count + copy_set: add, push, put, offer, concat, appendAll, putAll
-
 MODIFIER
 
++ insert
++ insert (index outside): set, append, add, push, put, offer, concat, appendAll, putAll
 - insert_element(container, source element, index) = reallocate + set, SQL INSERT, DDL ALTER TABLE
 
++ remove
 - remove_element(index): delete, SQL DELETE, DDL ALTER TABLE
 - remove_element_by_name(name)
 - remove_area(start index, end index)
