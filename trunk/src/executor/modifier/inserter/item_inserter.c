@@ -67,6 +67,13 @@ void insert_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     // Insert source- into destination data.
     insert_array((void*) &dd, sd, p2, p3, p4, p5, dc, ds);
+
+    // Set destination data as item element.
+    // CAUTION! This IS NECESSARY, because reallocation may have happened
+    // above which would return a completely new data array (memory area).
+    // CAUTION! It is NOT necessary to also set count and size,
+    // since only their references were used above to modify values.
+    copy_array_forward(p0, (void*) &dd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 }
 
 /* ITEM_INSERTER_SOURCE */

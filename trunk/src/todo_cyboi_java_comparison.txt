@@ -14,24 +14,21 @@ MEMORISER
 COPIER
 
 + copy: duplicate, copyValueOf, clone
-+ copy (value): assign, place, replace, copy, overwrite, SQL UPDATE
++ copy (value): assign, place, replace, copy, SQL UPDATE
 + copy_part_element(container, index): element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
-
-ADJUSTER
-
-+ adjust
-
---> while "copy" does pure copying only, "adjust" sets the count and size automatically
 
 ACCESSOR
 
 + get
 + set
 
+--> for accessing meta elements:
+    part: name, abstraction, model, details
+    item: data, count, size
 --> cyboi works with references/pointers only
 --> even for primitive values an array with just one element exists
---> after allocation, only references are passed around using set/get
---> both, "get" and "set" are based on "copy"
+--> based on "copy"
+--> adjust count and size automatically
 --> if a reference is to be retrieved (get), then the pointer array abstraction
     is used, so that not the actual values, but only a reference to them is returned
 
@@ -40,6 +37,8 @@ MODIFIER
 + insert
 + insert (index outside): set, append, add, push, put, offer, concat, appendAll, putAll
 - insert_element(container, source element, index) = reallocate + set, SQL INSERT, DDL ALTER TABLE
+
++ overwrite
 
 + remove
 - remove_element(index): delete, SQL DELETE, DDL ALTER TABLE
@@ -50,6 +49,9 @@ MODIFIER
 - sort_parts_by_name(destination container, source container)
 - trim(character array): [delete all spaces preceding and following the string]
 - reverse(character array) [reverse sequence]
+
+--> based on "copy"
+--> adjust count and size automatically
 
 FINDER
 

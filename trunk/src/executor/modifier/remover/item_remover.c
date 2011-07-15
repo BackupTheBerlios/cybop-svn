@@ -50,17 +50,24 @@ void remove_item(void* p0, void* p1, void* p2, void* p3) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Remove item.");
 
     // The item data, count, size.
-    void* ad = *NULL_POINTER_MEMORY_MODEL;
-    void* ac = *NULL_POINTER_MEMORY_MODEL;
-    void* as = *NULL_POINTER_MEMORY_MODEL;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    void* s = *NULL_POINTER_MEMORY_MODEL;
 
     // Get item data, count, size.
-    copy_array_forward((void*) &ad, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
-    copy_array_forward((void*) &ac, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
-    copy_array_forward((void*) &as, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &c, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &s, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
 
     // Remove elements from item data.
-    remove_array((void*) &ad, p1, p2, p3, ac, as);
+    remove_array((void*) &d, p1, p2, p3, c, s);
+
+    // Set data as item element.
+    // CAUTION! This IS NECESSARY, because reallocation may have happened
+    // above which would return a completely new data array (memory area).
+    // CAUTION! It is NOT necessary to also set count and size,
+    // since only their references were used above to modify values.
+    copy_array_forward(p0, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 }
 
 /* ITEM_REMOVER_SOURCE */

@@ -41,83 +41,60 @@
 #include "../../../logger/logger.c"
 
 /**
- * Sets the array to the item container element.
+ * Sets the source array AS META ELEMENT of the destination item container.
  *
- * If DATA (not count or size) are set, then the item
- * container count is adjusted automatically.
- *
- * CAUTION! Simply adding the source- to the destination count
- * is not always correct! The source is added to the destination
- * at position index and not always appended at the end,
- * i.e. existing elements may be overwritten as well.
- * Therefore, the COUNT is added to the destination INDEX.
- *
- * An extra number one does NOT have to be added!
- * The index plus count is just right.
- *
- * @param p0 the item container
- * @param p1 the array
- * @param p2 the operand abstraction
+ * @param p0 the destination item
+ * @param p1 the source array
+ * @param p2 the abstraction
  * @param p3 the count
- * @param p4 the item container index
- * @param p5 the array index
- * @param p6 the item container element index
+ * @param p4 the destination item index
+ * @param p5 the source array index
+ * @param p6 the destination item element index
  */
-void set_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void set_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set item element.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set item.");
+
+    // The destination item element (either of: data, count, size).
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+    // The count and size are only needed if the item element is "data".
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get destination item element.
+    copy_array_forward((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_array_count((void*) &r, p6, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    compare_value((void*) &r, p6, (void*) DATA_ITEM_MEMORY_NAME, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        // Resize the item container's data element.
-        // If a count or size are copied, then the following is NOT executed.
+        // Get destination item element count, size.
+        copy_array_forward((void*) &c, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+        copy_array_forward((void*) &s, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
 
-        // The new count.
-        int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        // Overwrite destination item element with source array.
+        // Since this is a data item element, the count and size are set inside.
+        overwrite_array((void*) &e, p1, p2, p3, p4, p5, c, s);
 
-        // Add item container index.
-        add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        // Set data array as element of the item container.
+        // CAUTION! This IS NECESSARY, because reallocation may have happened
+        // above which would return a completely new data array (memory area).
+        // CAUTION! It is NOT necessary to also set count and size,
+        // since only their references were used above to modify values.
+        copy_array_forward(p0, (void*) &e, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
-        // Add count (number of elements to be copied).
-        // CAUTION! Do NOT use source count here, since not all of the source has to be copied.
-        add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    } else {
 
-        // Reallocate item.
-        reallocate_item(p0, (void*) &n, p2);
-
-        // Set destination count.
-        //
-        // CAUTION! Do NOT set the destination size here!
-        // It was already set in the "reallocate_item" function.
-        //
-        // Efficiency:
-        // One might think that performance would be better
-        // if the size would be enlarged in greater blocks,
-        // not one by one.
-        // But this IS done here! If many elements are to be copied,
-        // then their count (number of elements) is added to the size,
-        // so that reallocation is necessary only once,
-        // and not for each single element.
-        set_item_element(p0, (void*) &n, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+        // Overwrite destination item element with source array.
+        // The item element is either of: count, size.
+        // CAUTION! It never gets reallocated, since count and size
+        // are integer primitives. Setting the count array or size array
+        // as element of the item container is therefore not necessary.
+        overwrite_array((void*) &e, p1, p2, p3, p4, p5, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     }
-
-    // The item container element.
-    void* e = *NULL_POINTER_MEMORY_MODEL;
-
-    // Get item container element.
-    // CAUTION! Get item container element ONLY AFTER
-    // having reallocated the item above!
-    // Otherwise, a wrong DATA_ITEM pointer will be returned
-    // and cause a "Segmentation fault".
-    copy_array_forward((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
-
-    // Copy array to item container element.
-    copy_array_forward(e, p1, p2, p3, p4, p5);
 }
 
 /* ITEM_SETTER_SOURCE */

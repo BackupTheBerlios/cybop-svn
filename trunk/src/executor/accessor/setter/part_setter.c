@@ -42,28 +42,28 @@
 #include "../../../variable/reallocation_factor.c"
 
 /**
- * Sets the array as element of the part container.
+ * Sets the source array AS META ELEMENT of the destination part container.
  *
- * @param p0 the part container
- * @param p1 the array
- * @param p2 the operand abstraction
+ * @param p0 the destination part
+ * @param p1 the source array
+ * @param p2 the abstraction
  * @param p3 the count
- * @param p4 the part container index
- * @param p5 the array index
- * @param p6 the part container element index
+ * @param p4 the destination part index
+ * @param p5 the source array index
+ * @param p6 the destination part element index
  */
-void set_part_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void set_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Set part element.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Set part.");
 
-    // The part container element.
+    // The destination part element (either of: name, abstraction, model, details).
     void* e = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get part container element.
+    // Get destination part element.
     copy_array_forward((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
     // Set item as element of the part container.
-    set_item_element(e, p1, p2, p3, p4, p5, (void*) DATA_ITEM_MEMORY_NAME);
+    set_item(e, p1, p2, p3, p4, p5, (void*) DATA_ITEM_MEMORY_NAME);
 }
 
 /* PART_SETTER_SOURCE */

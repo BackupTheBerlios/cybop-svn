@@ -41,28 +41,49 @@
 #include "../../../logger/logger.c"
 
 /**
- * Gets the array from the item container element.
+ * Gets the destination array AS META ELEMENT of the source item container.
  *
- * @param p0 the array
- * @param p1 the item container
- * @param p2 the operand abstraction
+ * CAUTION! The parametre p0 does NOT have to be a reference!
+ * It points to a memory area to which the source element is copied.
+ * If using a local variable, then the memory area is allocated
+ * automatically by the function, on the stack.
+ *
+ * Example:
+ *
+ * void* part = *NULL_POINTER_MEMORY_MODEL;
+ * get_part_element((void*) &part, whole, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) MODEL_PART_MEMORY_NAME);
+ *
+ * @param p0 the destination array
+ * @param p1 the source item
+ * @param p2 the abstraction
  * @param p3 the count
- * @param p4 the array index
- * @param p5 the item container index
- * @param p6 the item container element index
+ * @param p4 the destination array index
+ * @param p5 the source item index
+ * @param p6 the source item element index
  */
-void get_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void get_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get item element.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get item.");
 
-    // The item container element.
+    // CAUTION! Do NOT simplify the lines below to one line like:
+    // copy_array_forward(p0, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+    // If doing this, the parametres abstraction, count, index etc.
+    // will not be considered.
+
+    // The source item element.
     void* e = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get item container element.
+    // Get source item element.
     copy_array_forward((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
-    // Get array from item container element.
+    // Get destination array as element of source item container.
     copy_array_forward(p0, e, p2, p3, p4, p5);
+
+    // CAUTION! It is NOT necessary to use the "overwrite" function here,
+    // since the destination handed over as parametre is a pointer
+    // with a fixed size of one which does not have to be changed.
+    // Only a simple reference (pointer) of size one is copied here.
+    // Using the "copy_array_forward" function is more efficient.
 }
 
 /* ITEM_GETTER_SOURCE */

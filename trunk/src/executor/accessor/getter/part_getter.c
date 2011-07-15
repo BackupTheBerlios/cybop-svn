@@ -42,29 +42,44 @@
 #include "../../../variable/reallocation_factor.c"
 
 /**
- * Gets the array as element from the part container.
+ * Gets the destination array AS META ELEMENT of the source part container.
  *
- * @param p0 the array
- * @param p1 the part container
- * @param p2 the operand abstraction
+ * CAUTION! The parametre p0 does NOT have to be a reference!
+ * It points to a memory area to which the source element is copied.
+ * If using a local variable, then the memory area is allocated
+ * automatically by the function, on the stack.
+ *
+ * Example:
+ *
+ * void* part = *NULL_POINTER_MEMORY_MODEL;
+ * get_part_element((void*) &part, whole, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) MODEL_PART_MEMORY_NAME);
+ *
+ * @param p0 the destination array
+ * @param p1 the source part
+ * @param p2 the abstraction
  * @param p3 the count
- * @param p4 the array index
- * @param p5 the part container index
- * @param p6 the part container element index
+ * @param p4 the destination array index
+ * @param p5 the source part index
+ * @param p6 the source part element index
  */
-void get_part_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void get_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get part element.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get part.");
 
-    // The part container element.
+    // The source part element.
     void* e = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get part container element.
+    // Get source part element.
     copy_array_forward((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
-    // Get item from part container element.
-    // The count is adjusted automatically.
-    get_item_element(p0, e, p2, p3, p4, p5, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get destination array as element of source part container.
+    get_item(p0, e, p2, p3, p4, p5, (void*) DATA_ITEM_MEMORY_NAME);
+
+    // CAUTION! It is NOT necessary to use the "overwrite" function here,
+    // since the destination handed over as parametre is a pointer
+    // with a fixed size of one which does not have to be changed.
+    // Only a simple reference (pointer) of size one is copied here.
+    // Using the "copy_array_forward" function is more efficient.
 }
 
 /* PART_GETTER_SOURCE */

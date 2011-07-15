@@ -44,6 +44,7 @@
  * @param p1 the size
  * @param p2 the abstraction
  */
+/*??
 void reallocate_item(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Reallocate item.");
@@ -57,17 +58,6 @@ void reallocate_item(void* p0, void* p1, void* p2) {
     copy_array_forward((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &c, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &s, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
-
-/*??
-fwprintf(stdout, L"TEST reallocate pre d: %i\n", d);
-fwprintf(stdout, L"TEST reallocate pre d: %ls\n", (wchar_t*) d);
-fwprintf(stdout, L"TEST reallocate pre c: %i\n", c);
-fwprintf(stdout, L"TEST reallocate pre c: %i\n", *((int*) c));
-fwprintf(stdout, L"TEST reallocate pre p1: %i\n", p1);
-fwprintf(stdout, L"TEST reallocate pre p1: %i\n", *((int*) p1));
-fwprintf(stdout, L"TEST reallocate pre p2: %i\n", p2);
-fwprintf(stdout, L"TEST reallocate pre p2: %i\n", *((int*) p2));
-*/
 
     // Reallocate data.
     // The array is enlarged or shrinked to the new size.
@@ -84,11 +74,12 @@ fwprintf(stdout, L"TEST reallocate pre p2: %i\n", *((int*) p2));
 
     // Set data.
     // CAUTION! This IS NECESSARY, because reallocation
-    // returns a completely new array (memory area).
+    // returns a completely new data array (memory area).
     // CAUTION! Do NOT set count and size, since only
     // their references were used above to modify values.
     copy_array_forward(p0, (void*) &d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 }
+*/
 
 /* ITEM_REALLOCATOR_SOURCE */
 #endif

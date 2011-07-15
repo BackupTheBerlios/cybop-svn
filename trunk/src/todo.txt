@@ -11,12 +11,16 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Refactor get/set functions so that count and size are set properly (compare with insert or overwrite)
+        * Continue testing in file "modifier_tester.c" line:
+//    insert_part(w1, (void*) &p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        * Is it necessary to provide functions like "insert_part_element" and "overwrite_part_element"? .. and the same for item?
+
         * Review and adapt comparison files
         * Implement finder using part names
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"
         * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" functions
         * Delete "modifier" directory (?) or use it for insert/remove?
+        * (Possibly) delete "item_reallocator.c", if needed nowhere
 
         * Continue in "executor/arithmetiser/fraction*"
         * Rename "arithmetiser" to "calculator" with function "calculate" and

@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-15  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Refactor "get" and "set" functions so that count and size are set properly
+        * Extend file "modifier_tester.c" for testing part
+
 2011-07-13  Christian Heller  <christian.heller@tuxtax.de>
 
         * Add functions "insert", "remove", "overwrite" for array, item, part in directory "modifier/"
