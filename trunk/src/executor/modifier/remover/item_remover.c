@@ -41,7 +41,7 @@
  * The count and size are adjusted automatically.
  *
  * @param p0 the item
- * @param p1 the operand abstraction
+ * @param p1 the abstraction
  * @param p2 the count
  * @param p3 the index
  */

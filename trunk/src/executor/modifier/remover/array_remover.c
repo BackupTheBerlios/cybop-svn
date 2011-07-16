@@ -53,7 +53,7 @@
  * ==> result: "Hello, World!"
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the operand abstraction
+ * @param p1 the abstraction
  * @param p2 the count
  * @param p3 the index
  * @param p4 the array count
@@ -124,7 +124,7 @@ void remove_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
  * starting from the given index.
  *
  * @param p0 the array (Hand over as reference!)
- * @param p1 the operand abstraction
+ * @param p1 the abstraction
  * @param p2 the count
  * @param p3 the index
  * @param p4 the array count
