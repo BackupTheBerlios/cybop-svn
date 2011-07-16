@@ -36,6 +36,35 @@
 #include "../../../logger/logger.c"
 
 /**
+ * Inserts the source array into the destination part element
+ * given by the destination part element index.
+ *
+ * The destination part element may be either of:
+ * name, abstraction, model, details.
+ *
+ * @param p0 the destination part
+ * @param p1 the source array
+ * @param p2 the abstraction
+ * @param p3 the count
+ * @param p4 the destination part index
+ * @param p5 the source array index
+ * @param p6 the destination part element index
+ */
+void insert_part_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Insert part element.");
+
+    // The destination part element.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get destination part element.
+    copy_array_forward((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+
+    // Insert item as element of the part container.
+    insert_item_element(e, p1, p2, p3, p4, p5, (void*) DATA_ITEM_MEMORY_NAME);
+}
+
+/**
  * Inserts the source into the destination.
  *
  * The name, abstraction and details of the destination
@@ -45,7 +74,7 @@
  *
  * @param p0 the destination part
  * @param p1 the source part
- * @param p2 the operand abstraction
+ * @param p2 the abstraction
  * @param p3 the count
  * @param p4 the destination index
  * @param p5 the source index
@@ -64,7 +93,7 @@ void insert_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // Get source model.
     copy_array_forward((void*) &sm, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
 
-    // Insert source- into destination model.
+    // Insert source- into destination part model item.
     insert_item(dm, sm, p2, p3, p4, p5);
 }
 

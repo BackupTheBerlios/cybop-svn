@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-16  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Move and rename "set" functions into "overwrite_element" and "insert_element"
+
 2011-07-15  Christian Heller  <christian.heller@tuxtax.de>
 
         * Refactor "get" and "set" functions so that count and size are set properly

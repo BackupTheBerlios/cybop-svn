@@ -34,10 +34,75 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/assigner/array_assigner.c"
 #include "../../../executor/memoriser/reallocator/item_reallocator.c"
 #include "../../../executor/memoriser/size_determiner.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../logger/logger.c"
+
+/**
+ * Overwrites the destination item element given by the
+ * destination item element index with the source array.
+ *
+ * The destination item element may be either of:
+ * data, count, size.
+ *
+ * @param p0 the destination item
+ * @param p1 the source array
+ * @param p2 the abstraction
+ * @param p3 the count
+ * @param p4 the destination item index
+ * @param p5 the source array index
+ * @param p6 the destination item element index
+ */
+void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Overwrite item element.");
+
+    // The destination item element.
+    void* e = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get destination item element.
+    copy_array_forward((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    compare_value((void*) &r, p6, (void*) DATA_ITEM_MEMORY_NAME, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        // This is a data item element.
+
+        // The count and size are only needed if the item element is "data".
+        void* c = *NULL_POINTER_MEMORY_MODEL;
+        void* s = *NULL_POINTER_MEMORY_MODEL;
+
+        // Get destination item element count, size.
+        copy_array_forward((void*) &c, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+        copy_array_forward((void*) &s, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
+
+        // Overwrite array as element of the item container.
+        // Since this is a data item element, the count and size are set inside.
+        overwrite_array((void*) &e, p1, p2, p3, p4, p5, c, s);
+
+        // Set data array as element of the item container.
+        // CAUTION! This IS NECESSARY, because reallocation may have happened
+        // above which would return a completely new data array (memory area).
+        // CAUTION! It is NOT necessary to also set count and size,
+        // since only their references were used above to modify values.
+        copy_array_forward(p0, (void*) &e, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) DATA_ITEM_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+
+    } else {
+
+        // This is a count or size item element.
+
+        // Overwrite array as element of the item container.
+        // CAUTION! It never gets reallocated, since count and size
+        // are integer primitives. Setting the count array or size array
+        // as element of the item container is therefore not necessary.
+        overwrite_array((void*) &e, p1, p2, p3, p4, p5, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    }
+}
 
 /**
  * Overwrites the destination- with the source item.
@@ -46,7 +111,7 @@
  *
  * @param p0 the destination item
  * @param p1 the source item
- * @param p2 the operand abstraction
+ * @param p2 the abstraction
  * @param p3 the count
  * @param p4 the destination index
  * @param p5 the source index
@@ -69,7 +134,7 @@ void overwrite_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
     // Get source data.
     copy_array_forward((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
-    // Overwrite destination- with source data.
+    // Overwrite destination- with source item data array.
     overwrite_array((void*) &dd, sd, p2, p3, p4, p5, dc, ds);
 
     // Set data as item element.
