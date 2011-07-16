@@ -27,14 +27,15 @@
 #define COPIER_TESTER
 
 #include <wchar.h>
-
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../executor/accessor/getter/part_getter.c"
 #include "../../executor/copier/array_copier.c"
 #include "../../executor/copier/part_copier.c"
 #include "../../executor/memoriser/allocator/part_allocator.c"
 #include "../../executor/memoriser/deallocator/part_deallocator.c"
+#include "../../executor/modifier/getter/part_element_getter.c"
+#include "../../executor/modifier/inserter/part_element_inserter.c"
 #include "../../executor/modifier/inserter/part_inserter.c"
+#include "../../executor/modifier/overwriter/part_element_overwriter.c"
 #include "../../executor/modifier/overwriter/part_overwriter.c"
 #include "../../logger/logger.c"
 
@@ -81,7 +82,7 @@ void test_copier_part() {
     void* p = *NULL_POINTER_MEMORY_MODEL;
 
     // Get part from whole.
-    get_part((void*) &p, w, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODEL_PART_MEMORY_NAME);
+    get_part_element((void*) &p, w, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODEL_PART_MEMORY_NAME);
 
     // The part elements retrieved as reference.
     void* n = *NULL_POINTER_MEMORY_MODEL;

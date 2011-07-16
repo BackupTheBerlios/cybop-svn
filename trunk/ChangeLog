@@ -18,7 +18,8 @@
 
 2011-07-16  Christian Heller  <christian.heller@tuxtax.de>
 
-        * Move and rename "set" functions into "overwrite_element" and "insert_element"
+        * Move "set" functions into directory "modifier" and rename into "overwrite_element" and "insert_element"
+        * Move "get" functions into directory "modifier" and rename into "get_element"
 
 2011-07-15  Christian Heller  <christian.heller@tuxtax.de>
 

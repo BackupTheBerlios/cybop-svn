@@ -37,7 +37,6 @@
 #include "../../executor/memoriser/reallocator.c"
 #include "../../executor/modifier/replacer/array_replacer.c"
 #include "../../executor/modifier/replacer/compound_replacer.c"
-#include "../../executor/modifier/replacer/part_replacer.c"
 #include "../../executor/modifier/replacer/signal_memory_replacer.c"
 
 //
@@ -200,7 +199,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                replace_part(*d, p1, p2, p3);
+//??                replace_part(*d, p1, p2, p3);
             }
         }
 
@@ -348,7 +347,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            replace_part(p0, p1, p2, p3);
+//??            replace_part(p0, p1, p2, p3);
         }
     }
 
