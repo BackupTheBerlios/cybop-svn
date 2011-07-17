@@ -11,8 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Create new directory for basic comparison files
-        * Test comparison functions, e.g. compare_subsequence_array etc.
+        * Move "copier" into "modifier" directory
         * Remove "assigner" files
         * Implement finder using part names
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"

@@ -236,7 +236,7 @@ void test_modifier() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test modifier.");
 
-    test_modifier_part();
+//    test_modifier_part();
 //    test_modifier_array();
 }
 

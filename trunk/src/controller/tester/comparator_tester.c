@@ -26,14 +26,18 @@
 #ifndef COMPARATOR_TESTER
 #define COMPARATOR_TESTER
 
+#include "../../executor/comparator/all/array_all_comparator.c"
+#include "../../executor/comparator/prefix/array_prefix_comparator.c"
+#include "../../executor/comparator/subsequence/array_subsequence_comparator.c"
+#include "../../executor/comparator/suffix/array_suffix_comparator.c"
 #include "../../logger/logger.c"
 
 /**
  * Tests the ascii character - wide character equality.
  */
-void test_ascii_character_wide_character_equality() {
+void test_comparator_ascii_character() {
 
-    log_write_terminated_message((void*) stdout, L"Test ascii character - wide character equality:\n");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test comparator ascii character.");
 
     char test = 'a';
 
@@ -48,6 +52,58 @@ void test_ascii_character_wide_character_equality() {
 }
 
 /**
+ * Tests the comparator all comparison.
+ */
+void test_comparator_all() {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test comparator all.");
+
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+/*??
+    // The wide character array.
+    void* w = *NULL_POINTER_MEMORY_MODEL;
+    int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    allocate_array((void*) &w, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_array((void*) &w, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+*/
+
+    // All.
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_all_array((void*) &r, (void*) L"Hello, World!", (void*) L"Hello, World!", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_13_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST all true r: %i\n", r);
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_all_array((void*) &r, (void*) L"Hello, World!", (void*) L"Hello World!", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_12_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST all false r: %i\n", r);
+
+    // Prefix.
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_prefix_array((void*) &r, (void*) L"Hello, World!", (void*) L"Hell", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_4_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST prefix true r: %i\n", r);
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_prefix_array((void*) &r, (void*) L"Hello, World!", (void*) L"ello", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_4_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST prefix false r: %i\n", r);
+
+    // Suffix.
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_suffix_array((void*) &r, (void*) L"Hello, World!", (void*) L"World!", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_6_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST suffix true r: %i\n", r);
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_suffix_array((void*) &r, (void*) L"Hello, World!", (void*) L"World", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_5_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST suffix false r: %i\n", r);
+
+    // Subsequence.
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_subsequence_array((void*) &r, (void*) L"Hello, World!", (void*) L"o, Wor", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_6_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST subsequence true r: %i\n", r);
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_subsequence_array((void*) &r, (void*) L"Hello, World!", (void*) L"blubla", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_6_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST subsequence false r: %i\n", r);
+}
+
+/**
  * Tests the comparator.
  *
  * Sub test procedure call can be activated/ deactivated here
@@ -57,7 +113,8 @@ void test_comparator() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test comparator.");
 
-//    test_ascii_character_wide_character_equality();
+//    test_comparator_ascii_character();
+    test_comparator_all();
 }
 
 /* COMPARATOR_TESTER */
