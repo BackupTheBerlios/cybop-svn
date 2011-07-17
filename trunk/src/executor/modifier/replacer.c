@@ -33,7 +33,7 @@
 #include "../../executor/accessor/getter/array_getter.c"
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/accessor/getter/signal_memory_getter.c"
-#include "../../executor/comparator/count_array_comparator.c"
+#include "../../executor/comparator/all/array_all_comparator.c"
 #include "../../executor/memoriser/reallocator.c"
 #include "../../executor/modifier/replacer/array_replacer.c"
 #include "../../executor/modifier/replacer/compound_replacer.c"
@@ -115,7 +115,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -125,7 +125,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -135,7 +135,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -145,7 +145,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -155,7 +155,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -165,7 +165,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -175,7 +175,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -185,7 +185,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -195,7 +195,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) PART_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) PART_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) PART_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -205,7 +205,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) POINTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -215,7 +215,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -225,7 +225,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -235,7 +235,7 @@ void replace(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p4, p5, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -263,7 +263,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -273,7 +273,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) COMPLEX_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) COMPLEX_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -283,7 +283,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -293,7 +293,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) DATETIME_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) DATETIME_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -303,7 +303,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -313,7 +313,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -323,7 +323,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -333,7 +333,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -343,7 +343,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) PART_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) PART_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) PART_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -353,7 +353,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) POINTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -363,7 +363,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -373,7 +373,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -383,7 +383,7 @@ void replace_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p4, p5, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p5, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

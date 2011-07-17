@@ -35,8 +35,8 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/model/stream_model.c"
-#include "../../../executor/comparator/count_array_comparator.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../executor/converter/encoder/utf_8_unicode_character_encoder.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../executor/memoriser/deallocator/model_deallocator.c"
@@ -205,7 +205,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_array_count((void*) &r, *d, p1, (void*) STANDARD_OUTPUT_STREAM_MODEL, (void*) STANDARD_OUTPUT_STREAM_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_all_array((void*) &r, *d, (void*) STANDARD_OUTPUT_STREAM_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p1, (void*) STANDARD_OUTPUT_STREAM_MODEL_COUNT);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -229,7 +229,7 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_array_count((void*) &r, *d, p1, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_all_array((void*) &r, *d, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p1, (void*) STANDARD_ERROR_OUTPUT_STREAM_MODEL_COUNT);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

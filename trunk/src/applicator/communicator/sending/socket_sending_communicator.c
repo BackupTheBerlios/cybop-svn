@@ -204,7 +204,7 @@ void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p5, p6, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p5, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, (void*) SERVER_COMMUNICATION_MODE_CYBOL_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -214,7 +214,7 @@ void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p5, p6, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p5, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, (void*) CLIENT_COMMUNICATION_MODE_CYBOL_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

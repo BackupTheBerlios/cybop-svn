@@ -36,8 +36,7 @@
 #include "../../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
 #include "../../../executor/arithmetiser/integer_adder/pointer_integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/comparator/count_array_comparator.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
 
@@ -143,7 +142,7 @@ void get_array_elements_index(void* p0, void* p1, void* p2, void* p3, void* p4, 
                         }
 
                         get_array_elements((void*) &e, p1, (void*) &j, p5);
-                        compare_array_count((void*) &r, e, p4, p3, p4, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, p5);
+                        compare_all_array((void*) &r, e, p3, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, p5, p4, p4);
 
                         if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 

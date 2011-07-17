@@ -48,7 +48,7 @@
  *
  * @param p0 the destination item
  * @param p1 the source item
- * @param p2 the operand abstraction
+ * @param p2 the abstraction
  * @param p3 the count
  * @param p4 the destination index
  * @param p5 the source index

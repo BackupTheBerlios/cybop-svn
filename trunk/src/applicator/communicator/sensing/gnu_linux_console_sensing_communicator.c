@@ -42,7 +42,7 @@
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/accessor/getter/signal_memory_getter.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/thread_identification.c"

@@ -41,7 +41,7 @@
 #include "../../../../executor/converter/encoder/html/end_tag_html_encoder.c"
 #include "../../../../executor/converter/encoder/html/structured_tag_content_html_encoder.c"
 #include "../../../../executor/converter/encoder/html/tag_content_html_encoder.c"
-#include "../../../../executor/comparator/count_array_comparator.c"
+#include "../../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -103,7 +103,7 @@ void encode_html_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p3, p4, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p3, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -113,7 +113,7 @@ void encode_html_node(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p3, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -70,26 +70,26 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) GET_REQUEST_METHOD_HTTP_MODEL, (void*) GET_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) GET_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) GET_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2,
                     (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) GET_REQUEST_METHOD_HTTP_MODEL, (void*) GET_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) GET_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) GET_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) POST_REQUEST_METHOD_HTTP_MODEL, (void*) POST_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) POST_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) POST_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) POST_REQUEST_METHOD_HTTP_MODEL, (void*) POST_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) POST_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) POST_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
 
                 // Decode body parameters containing model data.
                 //
@@ -101,157 +101,157 @@ void select_http_request(void* p0, void* p1, void* p2, void* p3, void* p4, void*
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) HEAD_REQUEST_METHOD_HTTP_MODEL, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) HEAD_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) HEAD_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) PUT_REQUEST_METHOD_HTTP_MODEL, (void*) PUT_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) PUT_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) PUT_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) PUT_REQUEST_METHOD_HTTP_MODEL, (void*) PUT_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) PUT_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) PUT_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) DELETE_REQUEST_METHOD_HTTP_MODEL, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) DELETE_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) DELETE_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) TRACE_REQUEST_METHOD_HTTP_MODEL, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) TRACE_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) TRACE_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) OPTIONS_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) CONNECT_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) PROPFIND_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) PROPPATCH_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) MKCOL_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) COPY_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) MOVE_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) LOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p7, p8, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p7, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set request method as action parameter within the compound model.
                 decode_http_request_set_parameter(p0, p1, p2, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METHOD_SENSE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-                    (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
+                    (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, (void*) UNLOCK_WEBDAV_REQUEST_METHOD_HTTP_MODEL_COUNT, p5, p6);
             }
         }
 

@@ -35,7 +35,7 @@
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
 #include "../../../executor/copier/integer_copier.c"
-#include "../../../executor/copier/offset_adder.c"
+#include "../../../executor/memoriser/offset_adder.c"
 #include "../../../executor/copier/value_copier.c"
 #include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
@@ -98,7 +98,7 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        compare_value((void*) &r, (void*) &n, p7, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_integer((void*) &r, (void*) &n, p7, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

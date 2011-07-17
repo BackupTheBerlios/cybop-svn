@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef UNSIGNED_LONG_VALUE_COMPARATOR_SOURCE
-#define UNSIGNED_LONG_VALUE_COMPARATOR_SOURCE
+#ifndef UNSIGNED_LONG_COMPARATOR_SOURCE
+#define UNSIGNED_LONG_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -42,7 +42,7 @@
  * @param p2 the right value
  * @param p3 the operation abstraction
  */
-void compare_value_unsigned_long(void* p0, void* p1, void* p2, void* p3) {
+void compare_unsigned_long(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -60,7 +60,7 @@ void compare_value_unsigned_long(void* p0, void* p1, void* p2, void* p3) {
 
                     int* res = (int*) p0;
 
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value unsigned long.");
+                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare unsigned long.");
 
                     // The comparison result.
                     // CAUTION! It is used instead of if-else statements.
@@ -134,29 +134,29 @@ void compare_value_unsigned_long(void* p0, void* p1, void* p2, void* p3) {
 
                     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare value unsigned long. The operation abstraction is unknown.");
+                        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare unsigned long. The operation abstraction is unknown.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value unsigned long. The result is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare unsigned long. The result is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value unsigned long. The left value is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare unsigned long. The left value is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value unsigned long. The right value is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare unsigned long. The right value is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value unsigned long. The operation abstraction is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare unsigned long. The operation abstraction is null.");
     }
 }
 
-/* UNSIGNED_LONG_VALUE_COMPARATOR_SOURCE */
+/* UNSIGNED_LONG_COMPARATOR_SOURCE */
 #endif

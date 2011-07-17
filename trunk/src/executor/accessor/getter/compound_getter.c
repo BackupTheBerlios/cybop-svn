@@ -36,7 +36,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/compound_memory_name.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/type_size/integral_type_size.c"
@@ -771,7 +771,7 @@ void get_compound_element_index(void* p0, void* p1, void* p2, void* p3, void* p4
 
                             if (*nc1 != *NULL_POINTER_MEMORY_MODEL) {
 
-                                compare_array_count((void*) &r, p2, p3, *n1, *nc1, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                compare_all_array((void*) &r, p2, *n1, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, *nc1);
 
                                 if (r == *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
@@ -1257,7 +1257,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, *a, *ac, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, *a, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *ac, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -1292,7 +1292,7 @@ void get_universal_compound_element_by_name(void* p0, void* p1, void* p2, void* 
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, *a, *ac, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, *a, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *ac, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

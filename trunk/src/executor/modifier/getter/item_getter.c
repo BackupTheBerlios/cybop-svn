@@ -19,30 +19,28 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: compound_accessor.c,v $ $Revision: 1.64 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
+ * @version $RCSfile: array.c,v $ $Revision: 1.23 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PART_ELEMENT_GETTER_SOURCE
-#define PART_ELEMENT_GETTER_SOURCE
+#ifndef ITEM_GETTER_SOURCE
+#define ITEM_GETTER_SOURCE
 
-#include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
-#include "../../../constant/abstraction/cybol/path_cybol_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include <stdlib.h>
+#include <string.h>
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../constant/name/cybol/separator_cybol_name.c"
-#include "../../../constant/name/memory/part_memory_name.c"
-#include "../../../executor/comparator/count_array_comparator.c"
-#include "../../../executor/memoriser/reallocator/compound_reallocator.c"
-#include "../../../executor/modifier/getter/item_element_getter.c"
+#include "../../../executor/arithmetiser/integer_adder.c"
+#include "../../../executor/arithmetiser/integer_multiplier.c"
+#include "../../../executor/copier/array_copier.c"
+#include "../../../executor/memoriser/reallocator/item_reallocator.c"
+#include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
-#include "../../../variable/reallocation_factor.c"
 
 /**
- * Gets the source part element given by the source part element index
+ * Gets the source item element given by the source item element index
  * as reference copied to the destination pointer array.
  *
  * CAUTION! The parametre p0 does NOT have to be a reference!
@@ -52,25 +50,30 @@
  *
  * Example:
  *
- * void* part_reference = *NULL_POINTER_MEMORY_MODEL;
- * get_part_element((void*) &part_reference, whole_part, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) MODEL_PART_MEMORY_NAME);
+ * void* item_reference = *NULL_POINTER_MEMORY_MODEL;
+ * get_item_element((void*) &item_reference, whole_item, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) DATA_ITEM_MEMORY_NAME);
  *
  * @param p0 the destination array
- * @param p1 the source part
+ * @param p1 the source item
  * @param p2 the abstraction
  * @param p3 the count
  * @param p4 the destination array index
- * @param p5 the source part index
- * @param p6 the source part element index
+ * @param p5 the source item index
+ * @param p6 the source item element index
  */
-void get_part_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void get_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get part element.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get item element.");
 
-    // The source part element.
+    // CAUTION! Do NOT simplify the lines below to one line like:
+    // copy_array_forward(p0, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+    // If doing this, the parametres abstraction, count, index etc.
+    // will not be considered.
+
+    // The source item element.
     void* e = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get source part element.
+    // Get source item element.
     //
     // CAUTION! It is NOT necessary to use the "overwrite" function here,
     // since the destination handed over as parametre is a pointer
@@ -79,9 +82,9 @@ void get_part_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Using the "copy_array_forward" function is more efficient.
     copy_array_forward((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
-    // Get destination array from source part element item.
-    get_item_element(p0, e, p2, p3, p4, p5, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get destination array from source item element array.
+    copy_array_forward(p0, e, p2, p3, p4, p5);
 }
 
-/* PART_ELEMENT_GETTER_SOURCE */
+/* ITEM_GETTER_SOURCE */
 #endif

@@ -37,13 +37,12 @@
 #include "../../executor/copier/double_copier.c"
 #include "../../executor/copier/fraction_copier.c"
 #include "../../executor/copier/integer_copier.c"
-#include "../../executor/copier/offset_adder.c"
 #include "../../executor/copier/part_copier.c"
 #include "../../executor/copier/pointer_copier.c"
 #include "../../executor/copier/unsigned_long_copier.c"
 #include "../../executor/copier/wide_character_copier.c"
 #include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/comparator/count_array_comparator.c"
+#include "../../executor/memoriser/offset_adder.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"
 
@@ -52,7 +51,7 @@
  *
  * @param p0 the destination value
  * @param p1 the source value
- * @param p2 the operand abstraction
+ * @param p2 the abstraction
  */
 void copy_value(void* p0, void* p1, void* p2) {
 
@@ -164,8 +163,8 @@ void copy_value(void* p0, void* p1, void* p2) {
  *
  * @param p0 the destination value
  * @param p1 the source value
- * @param p2 the operand abstraction
- * @param p3 the offset
+ * @param p2 the abstraction
+ * @param p3 the index
  */
 void copy_value_offset(void* p0, void* p1, void* p2, void* p3) {
 

@@ -78,7 +78,7 @@ void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p8, p9, (void*) FTP_SCHEME_URI_MODEL, (void*) FTP_SCHEME_URI_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p8, (void*) FTP_SCHEME_URI_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p9, (void*) FTP_SCHEME_URI_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -88,7 +88,7 @@ void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p8, p9, (void*) HTTP_SCHEME_URI_MODEL, (void*) HTTP_SCHEME_URI_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p8, (void*) HTTP_SCHEME_URI_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p9, (void*) HTTP_SCHEME_URI_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -98,7 +98,7 @@ void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p8, p9, (void*) LDAP_SCHEME_URI_MODEL, (void*) LDAP_SCHEME_URI_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p8, (void*) LDAP_SCHEME_URI_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p9, (void*) LDAP_SCHEME_URI_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -108,7 +108,7 @@ void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p8, p9, (void*) MAILTO_SCHEME_URI_MODEL, (void*) MAILTO_SCHEME_URI_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p8, (void*) MAILTO_SCHEME_URI_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p9, (void*) MAILTO_SCHEME_URI_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -118,7 +118,7 @@ void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p8, p9, (void*) NEWS_SCHEME_URI_MODEL, (void*) NEWS_SCHEME_URI_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p8, (void*) NEWS_SCHEME_URI_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p9, (void*) NEWS_SCHEME_URI_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -128,7 +128,7 @@ void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p8, p9, (void*) TEL_SCHEME_URI_MODEL, (void*) TEL_SCHEME_URI_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p8, (void*) TEL_SCHEME_URI_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p9, (void*) TEL_SCHEME_URI_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -138,7 +138,7 @@ void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p8, p9, (void*) TELNET_SCHEME_URI_MODEL, (void*) TELNET_SCHEME_URI_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p8, (void*) TELNET_SCHEME_URI_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p9, (void*) TELNET_SCHEME_URI_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -148,7 +148,7 @@ void select_uri(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p8, p9, (void*) URN_SCHEME_URI_MODEL, (void*) URN_SCHEME_URI_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p8, (void*) URN_SCHEME_URI_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p9, (void*) URN_SCHEME_URI_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

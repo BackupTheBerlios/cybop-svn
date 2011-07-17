@@ -34,7 +34,6 @@
 #include "../../executor/memoriser/allocator/part_allocator.c"
 #include "../../executor/memoriser/deallocator/part_deallocator.c"
 #include "../../executor/modifier/inserter/array_inserter.c"
-#include "../../executor/modifier/overwriter/part_element_overwriter.c"
 #include "../../executor/modifier/overwriter/part_overwriter.c"
 #include "../../executor/modifier/remover/array_remover.c"
 #include "../../logger/logger.c"

@@ -348,7 +348,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
     fwprintf(stdout, L"layout count: %i\n", *((int*) *lmc));
 */
 
-            compare_array_count((void*) &r, *lm, *lmc, (void*) ROOT_LAYOUT_CYBOL_MODEL, (void*) ROOT_LAYOUT_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, *lm, (void*) ROOT_LAYOUT_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *lmc, (void*) ROOT_LAYOUT_CYBOL_MODEL_COUNT);
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -369,7 +369,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // Reset comparison result.
                 r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                compare_array_count((void*) &r, *a, *ac, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                compare_all_array((void*) &r, *a, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *ac, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -617,7 +617,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
             // Reset comparison result.
             r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            compare_array_count((void*) &r, *a, *ac, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, *a, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *ac, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

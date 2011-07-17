@@ -53,7 +53,7 @@
 #include "../../../executor/accessor/getter/array_getter.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/accessor/getter/signal_memory_getter.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../executor/memoriser/allocator.c"
 */
 
@@ -270,7 +270,7 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_array_count((void*) &r, (void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count);
+    compare_all_array((void*) &r, (void*) url_basename, (void*) &url_basename_count, (void*) p_firefox_request, (void*) &firefox_request_count);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

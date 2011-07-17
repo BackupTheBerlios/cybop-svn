@@ -36,7 +36,7 @@
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
 #include "../../../executor/accessor/getter/compound_getter.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../executor/converter/encoder/html/node_html_encoder.c"
 #include "../../../logger/logger.c"
 

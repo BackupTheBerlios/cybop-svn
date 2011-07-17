@@ -36,7 +36,7 @@
 #include "../../controller/handler/operation/lifecycle_operation_handler.c"
 #include "../../controller/handler/operation/memory_operation_handler.c"
 #include "../../controller/handler/operation/run_operation_handler.c"
-#include "../../executor/comparator/count_array_comparator.c"
+#include "../../executor/comparator/all/array_all_comparator.c"
 #include "../../logger/logger.c"
 
 /**

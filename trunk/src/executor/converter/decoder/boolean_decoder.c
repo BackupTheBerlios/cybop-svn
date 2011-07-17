@@ -36,7 +36,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/primitive_memory_name.c"
 #include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -69,7 +69,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_count((void*) &r, p3, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    compare_all_array((void*) &r, p3, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -83,7 +83,7 @@ void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_count((void*) &r, p3, p4, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    compare_all_array((void*) &r, p3, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

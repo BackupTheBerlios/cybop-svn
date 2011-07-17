@@ -28,18 +28,18 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/comparator/value/character_value_comparator.c"
-#include "../../executor/comparator/value/double_value_comparator.c"
-#include "../../executor/comparator/value/fraction_value_comparator.c"
-#include "../../executor/comparator/value/integer_value_comparator.c"
-#include "../../executor/comparator/value/pointer_value_comparator.c"
-#include "../../executor/comparator/value/unsigned_long_value_comparator.c"
-#include "../../executor/comparator/value/wide_character_value_comparator.c"
-#include "../../logger/logger.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/comparator/basic/character_comparator.c"
+#include "../../../executor/comparator/basic/double_comparator.c"
+#include "../../../executor/comparator/basic/fraction_comparator.c"
+#include "../../../executor/comparator/basic/integer_comparator.c"
+#include "../../../executor/comparator/basic/pointer_comparator.c"
+#include "../../../executor/comparator/basic/unsigned_long_comparator.c"
+#include "../../../executor/comparator/basic/wide_character_comparator.c"
+#include "../../../logger/logger.c"
 
 //
 // Models of abstraction "complex" or "fraction" are not
@@ -90,7 +90,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_character(p0, p1, p2, p3);
+                compare_character(p0, p1, p2, p3);
             }
         }
 
@@ -100,7 +100,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_double(p0, p1, p2, p3);
+                compare_double(p0, p1, p2, p3);
             }
         }
 
@@ -110,7 +110,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_fraction(p0, p1, p2, p3);
+                compare_fraction(p0, p1, p2, p3);
             }
         }
 
@@ -120,7 +120,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_integer(p0, p1, p2, p3);
+                compare_integer(p0, p1, p2, p3);
             }
         }
 
@@ -130,7 +130,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_pointer(p0, p1, p2, p3);
+                compare_pointer(p0, p1, p2, p3);
             }
         }
 
@@ -140,7 +140,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_unsigned_long(p0, p1, p2, p3);
+                compare_unsigned_long(p0, p1, p2, p3);
             }
         }
 
@@ -150,7 +150,7 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                compare_value_wide_character(p0, p1, p2, p3);
+                compare_wide_character(p0, p1, p2, p3);
             }
         }
 
@@ -163,6 +163,35 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value. The operand abstraction is null.");
     }
+}
+
+/**
+ * Compares the left- with the right value
+ * using the given index to calculate an offset.
+ *
+ * @param p0 the result (number 1 if true; unchanged otherwise)
+ * @param p1 the left value
+ * @param p2 the right value
+ * @param p3 the operation abstraction
+ * @param p4 the operand abstraction
+ * @param p5 the index
+ */
+void compare_value_offset(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value offset.");
+
+    // The left value, right value.
+    // CAUTION! They HAVE TO BE initialised with p1 and p2,
+    // since an offset is added below.
+    void* l = p1;
+    void* r = p2;
+
+    // Add offset to left value, right value.
+    add_offset((void*) &l, p4, p5);
+    add_offset((void*) &r, p4, p5);
+
+    // Compare left value with right value.
+    compare_value(p0, l, r, p3, p4);
 }
 
 /* VALUE_COMPARATOR_SOURCE */

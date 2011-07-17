@@ -36,7 +36,7 @@
 #include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/type_size/integral_type_size.c"
 
@@ -107,7 +107,7 @@ void compare_equality_suffix(void* p0, void* p1, void* p2,
                         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                         // Compare result parameter abstraction. It must be a boolean.
-                        compare_array_count((void*) &r, p18, p19, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                        compare_all_array((void*) &r, p18, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p19, (void*) BOOLEAN_LOGICVALUE_CYBOL_ABSTRACTION_COUNT);
 
                         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -125,8 +125,8 @@ void compare_equality_suffix(void* p0, void* p1, void* p2,
                             rr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
                             // Compare parameter abstractions.
-                            compare_array_count((void*) &lr, p0, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                            compare_array_count((void*) &rr, p9, p10, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                            compare_all_array((void*) &lr, p0, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                            compare_all_array((void*) &rr, p9, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p10, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                             if ((lr != *NUMBER_0_INTEGER_MEMORY_MODEL) && (rr != *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
@@ -151,7 +151,7 @@ void compare_equality_suffix(void* p0, void* p1, void* p2,
 
                                     // CAUTION! Hand over the right side model count as count
                                     // of both, left side parameter and right side parameter!
-                                    compare_array_count((void*) &r, p, p13, p12, p13, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                    compare_all_array((void*) &r, p, p12, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p13, p13);
 
                                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef MODEL_COMPARATOR_SOURCE
-#define MODEL_COMPARATOR_SOURCE
+#ifndef PART_COMPARATOR_SOURCE
+#define PART_COMPARATOR_SOURCE
 
 #include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
 #include "../../../constant/abstraction/cybol/path_cybol_abstraction.c"
@@ -35,7 +35,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/model_memory_name.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../executor/memoriser/reallocator/compound_reallocator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"
@@ -189,51 +189,56 @@ void compare_model_models(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Compares left- with right model.
+ * Compares left- with right part.
  *
  * A distinction between shallow- and deep comparison does not make sense.
- * If just the pointers to two models are to be compared,
- * then the knowledge path string may be used to achieve this.
- * In all other cases, the user expects the models to be compared in every detail.
+ * If just the pointers of two part models are to be compared, then the
+ * knowledge path strings (two pointer arrays) may be used to achieve this.
+ *
+ * In all other cases, the user expects the parts to be compared in every detail.
  * In other words: A deep comparison is ALWAYS applied here.
  * Note, that deep comparisons are only applicable for models
- * with abstraction "model" (formerly "compound").
+ * with abstraction "part" (formerly "compound").
  *
  * @param p0 the result (number 1 if true; unchanged otherwise)
- * @param p1 the left model
- * @param p2 the right model
+ * @param p1 the left part
+ * @param p2 the right part
  * @param p3 the operation abstraction
+ * @param p4 the operand abstraction
+ * @param p5 the count
+ * @param p6 the left index
+ * @param p7 the right index
  */
-void compare_model(void* p0, void* p1, void* p2, void* p3) {
+void compare_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare model.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare part.");
 
     // CAUTION! The names do NOT have to be compared.
     // They are only used for identification within their corresponding whole model.
+    // CAUTION! The abstractions do NOT have to be compared.
+    // The abstraction to use for comparing is given as parametre.
 
-    // The left abstractions, models, details.
-    void* la = *NULL_POINTER_MEMORY_MODEL;
+    // The left model, details.
     void* lm = *NULL_POINTER_MEMORY_MODEL;
     void* ld = *NULL_POINTER_MEMORY_MODEL;
-    // The right abstractions, models, details.
-    void* ra = *NULL_POINTER_MEMORY_MODEL;
+    // The right model, details.
     void* rm = *NULL_POINTER_MEMORY_MODEL;
     void* rd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get left abstractions, models, details.
-    get((void*) &la, p1, (void*) ABSTRACTIONS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &lm, p1, (void*) MODELS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &ld, p1, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    // Get right abstractions, models, details.
-    get((void*) &ra, p2, (void*) ABSTRACTIONS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &rm, p2, (void*) MODELS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &rd, p2, (void*) DETAILS_MODEL_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get left model, details.
+    copy_array_forward((void*) &lm, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    copy_array_forward((void*) &ld, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
+    // Get right model, details.
+    copy_array_forward((void*) &rm, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    copy_array_forward((void*) &rd, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
 
-    // The abstractions, models, details comparison results.
-    int ar = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The model, details comparison results.
     int mr = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int dr = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+    compare_item((void*) &mr, lm, rm, p3, p4, p5, p6, p7);
+    compare_item((void*) &dr, ld, rd, p3, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION, p5, p6, p7);
+--
     // Compare left- with right abstraction.
     compare_item((void*) &ar, la, ra, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
@@ -271,11 +276,11 @@ void compare_model(void* p0, void* p1, void* p2, void* p3) {
             if (mr != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
                 // Set result to true only if all comparisons have been true.
-                set_array(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+                copy_array_forward(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
             }
         }
     }
 }
 
-/* MODEL_COMPARATOR_SOURCE */
+/* PART_COMPARATOR_SOURCE */
 #endif

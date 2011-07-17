@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FRACTION_VALUE_COMPARATOR_SOURCE
-#define FRACTION_VALUE_COMPARATOR_SOURCE
+#ifndef FRACTION_COMPARATOR_SOURCE
+#define FRACTION_COMPARATOR_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -33,7 +33,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/fraction_memory_name.c"
-#include "../../../executor/comparator/value_comparator.c"
+#include "../../../executor/comparator/basic/value_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -44,9 +44,9 @@
  * @param p2 the right value
  * @param p3 the operation abstraction
  */
-void compare_value_fraction(void* p0, void* p1, void* p2, void* p3) {
+void compare_fraction(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare value fraction.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare fraction.");
 
     // The left numerator, denominator.
     void* ln = *NULL_POINTER_MEMORY_MODEL;
@@ -85,24 +85,24 @@ void compare_value_fraction(void* p0, void* p1, void* p2, void* p3) {
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value fraction. The left numerator is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare fraction. The left numerator is null.");
                 }
 
             } else {
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value fraction. The left denominator is null.");
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare fraction. The left denominator is null.");
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value fraction. The right numerator is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare fraction. The right numerator is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare value fraction. The right denominator is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare fraction. The right denominator is null.");
     }
 }
 
-/* FRACTION_VALUE_COMPARATOR_SOURCE */
+/* FRACTION_COMPARATOR_SOURCE */
 #endif

@@ -32,10 +32,8 @@
 #include "../../executor/copier/part_copier.c"
 #include "../../executor/memoriser/allocator/part_allocator.c"
 #include "../../executor/memoriser/deallocator/part_deallocator.c"
-#include "../../executor/modifier/getter/part_element_getter.c"
-#include "../../executor/modifier/inserter/part_element_inserter.c"
+#include "../../executor/modifier/getter/part_getter.c"
 #include "../../executor/modifier/inserter/part_inserter.c"
-#include "../../executor/modifier/overwriter/part_element_overwriter.c"
 #include "../../executor/modifier/overwriter/part_overwriter.c"
 #include "../../logger/logger.c"
 

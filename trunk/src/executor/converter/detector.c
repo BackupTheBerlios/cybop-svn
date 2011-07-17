@@ -128,7 +128,7 @@ void detect_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
 
                         if (*rem >= *ec) {
 
-                            compare_array_count(p0, *pos, p4, p3, p4, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, p5);
+                            compare_all_array(p0, *pos, p3, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, p5, p4, p4);
 
                             if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -190,7 +190,7 @@ void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p5, p6, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p5, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -200,7 +200,7 @@ void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p5, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p5, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -34,7 +34,7 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/comparator/count_array_comparator.c"
+#include "../../executor/comparator/all/array_all_comparator.c"
 #include "../../logger/logger.c"
 
 /**
@@ -57,7 +57,7 @@ void decode_wide_character_operation_abstraction(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p1, p2, (void*) EQUAL_OPERATION_ABSTRACTION, (void*) EQUAL_OPERATION_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p1, (void*) EQUAL_OPERATION_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) EQUAL_OPERATION_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -67,7 +67,7 @@ void decode_wide_character_operation_abstraction(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p1, p2, (void*) GREATER_OPERATION_ABSTRACTION, (void*) GREATER_OPERATION_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p1, (void*) GREATER_OPERATION_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) GREATER_OPERATION_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -77,7 +77,7 @@ void decode_wide_character_operation_abstraction(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_array_count((void*) &r, p1, p2, (void*) GREATER_OR_EQUAL_OPERATION_ABSTRACTION, (void*) GREATER_OR_EQUAL_OPERATION_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_all_array((void*) &r, p1, (void*) GREATER_OR_EQUAL_OPERATION_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) GREATER_OR_EQUAL_OPERATION_ABSTRACTION_COUNT);
             compare_array_wide_character_equal((void*) &r, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -88,7 +88,7 @@ void decode_wide_character_operation_abstraction(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p1, p2, (void*) SMALLER_OPERATION_ABSTRACTION, (void*) SMALLER_OPERATION_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p1, (void*) SMALLER_OPERATION_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) SMALLER_OPERATION_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -98,7 +98,7 @@ void decode_wide_character_operation_abstraction(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count((void*) &r, p1, p2, (void*) SMALLER_OR_EQUAL_OPERATION_ABSTRACTION, (void*) SMALLER_OR_EQUAL_OPERATION_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array((void*) &r, p1, (void*) SMALLER_OR_EQUAL_OPERATION_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) SMALLER_OR_EQUAL_OPERATION_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

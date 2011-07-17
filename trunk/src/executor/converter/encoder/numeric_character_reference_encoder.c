@@ -70,7 +70,7 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
 /*??
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_array_count((void*) &r, p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    compare_all_array((void*) &r, p3, p4, (void*) SPACE_WIDE_CHARACTER, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

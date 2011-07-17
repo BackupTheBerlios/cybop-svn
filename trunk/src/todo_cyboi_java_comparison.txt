@@ -2,79 +2,77 @@
 CYBOI-Java Comparison
 =====================
 
-Comparison
-__________
-
-MEMORISER
+memoriser
+_________
 
 + allocate: malloc, new, constructor, create, DDL CREATE TABLE
 + reallocate: trimToSize
 + deallocate: free, delete, destructor, destroy, DDL DROP TABLE
 
-COPIER
+copier
+______
 
-+ copy: duplicate, copyValueOf, clone
-+ copy (value): assign, place, replace, copy, SQL UPDATE
-+ copy_part_element(container, index): element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
++ copy: assign, place, copy, duplicate, copyValueOf, clone, SQL UPDATE
 
-MODIFIER
+modifier
+________
+
++ get_element: element, elementAt, charAt, codePointAt, retrieve, getChildAt, firstElement, lastElement, peek, first, lowest, last, highest, SQL SELECT
 
 + insert
-- insert_element: SQL INSERT, DDL ALTER TABLE
++ insert_element: SQL INSERT, DDL ALTER TABLE
 
-+ overwrite: set, append, add, push, put, offer, concat, appendAll, putAll
++ overwrite: set, append, add, push, put, offer, concat, appendAll, putAll, replace
 + overwrite_element: set
 
-+ remove
-- remove_element(index): delete, SQL DELETE, DDL ALTER TABLE
-- remove_element_by_name(name)
-- remove_area(start index, end index)
-- remove_all(container): clear, empty
++ remove: delete, SQL DELETE, DDL ALTER TABLE, clear, empty
 
 - sort_parts_by_name(destination container, source container)
 - trim(character array): [delete all spaces preceding and following the string]
 - reverse(character array) [reverse sequence]
 
 --> based on "copy"
---> adjust count and size automatically
---> meta elements are accessed via overwrite_element and insert_element:
-    part: name, abstraction, model, details
-    item: data, count, size
+--> count and size adjusted automatically
+--> meta elements are accessed via overwrite_element and insert_element
 --> cyboi works with references/pointers only
 --> even for primitive values an array with just one element exists
 --> if a reference is to be retrieved (get), then the pointer array abstraction
     is used, so that not the actual values, but only a reference to them is returned
 
-FINDER
+comparator
+__________
+
++ compare
+
+- compare_all: equals, ceiling, floor, higher, lower, equalsIgnoreCase
+- compare_prefix: startsWith
+- compare_suffix: endsWith
+- compare_contain: containsAll
+
+- ??: compareTo (lexicographically, i.e. position in ASCII/Unicode table)
+
+- compare_ignore_case
+
+finder
+______
 
 - find: links to "find_first" by default, same as "find_part"
-- find_first_index(container, element): indexOf, contains, containsKey, containsValue, find, search
-- find_last_index(container, element): lastIndexOf
+- find_first_index: indexOf, contains, containsKey, containsValue, find, search
+- find_last_index: lastIndexOf
 - find_prefix (find that begins at index 0)
 - find_suffix (find that begins at last index and counts backward)
 
 - filter(regular expression): matches
 
-COMPARATOR
-
-- compare_equality_all(container, array): equals, ceiling, floor, higher, lower
-- compare_equality_all_ignore_case: equalsIgnoreCase
-- compare_equality_prefix: startsWith
-- compare_equality_prefix_ignore_case
-- compare_equality_suffix: endsWith
-- compare_equality_suffix_ignore_case
-- compare_equality_part(destination container, source container): containsAll
-- compare_equality_part_ignore_case
-- ??: compareTo (lexicographically, i.e. position in ASCII/Unicode table)
-
-CONVERTER
+converter
+_________
 
 - decode: valueOf
 - encode: toString
 - encode_capitalisation_lower: toLowerCase
 - encode_capitalisation_upper: toUpperCase
 
-Composition
+COMPOSITION
 ___________
 
 - remove_first_element(element) = find_first_index + remove_element
@@ -90,7 +88,7 @@ ___________
 - move_signals(destination container, source container): drainTo
 - move_parts(destination container, source container): drainTo
 
-Superfluous
+SUPERFLUOUS
 ___________
 
 - hashCode:

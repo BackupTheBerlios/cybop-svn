@@ -11,11 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue testing in file "modifier_tester.c" line:
-//    insert_part(w1, (void*) &p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-        * Is it necessary to provide functions like "insert_part_element" and "overwrite_part_element"? .. and the same for item?
-
-        * Review and adapt comparison files
+        * Create new directory for basic comparison files
+        * Test comparison functions, e.g. compare_subsequence_array etc.
+        * Remove "assigner" files
         * Implement finder using part names
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"
         * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" functions

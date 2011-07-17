@@ -30,7 +30,7 @@
 #include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../executor/comparator/value_comparator.c"
+#include "../../../executor/comparator/basic/value_comparator.c"
 #include "../../../executor/memoriser/reallocator/array_reallocator.c"
 #include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../logger/logger.c"
@@ -96,7 +96,7 @@ void insert_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        compare_value((void*) &r, (void*) &n, p7, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_integer((void*) &r, (void*) &n, p7, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -154,7 +154,7 @@ void insert_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_value((void*) &r, p4, p6, (void*) GREATER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_integer((void*) &r, p4, p6, (void*) GREATER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -167,7 +167,7 @@ void insert_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_value((void*) &r, p4, p6, (void*) SMALLER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_integer((void*) &r, p4, p6, (void*) SMALLER_PRIMITIVE_OPERATION_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

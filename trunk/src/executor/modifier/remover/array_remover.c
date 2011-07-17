@@ -99,7 +99,7 @@ void remove_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        compare_value((void*) &r, (void*) &n, p5, (void*) SMALLER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_integer((void*) &r, (void*) &n, p5, (void*) SMALLER_PRIMITIVE_OPERATION_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -139,7 +139,7 @@ void remove_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_value((void*) &r, p3, p4, (void*) SMALLER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        compare_integer((void*) &r, p3, p4, (void*) SMALLER_PRIMITIVE_OPERATION_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -35,7 +35,7 @@
 #include "../../constant/name/cybol/operation/memory/destroy_memory_operation_cybol_name.c"
 #include "../../executor/accessor/getter/compound_getter.c"
 #include "../../executor/accessor/remover/compound_remover.c"
-#include "../../executor/comparator/count_array_comparator.c"
+#include "../../executor/comparator/all/array_all_comparator.c"
 #include "../../logger/logger.c"
 
 //
@@ -68,7 +68,7 @@ void check_compound_model(void* p0, void* p1, void* p2) {
 
         if (*p != *NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-            compare_array_count(p0, p1, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            compare_all_array(p0, p1, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
         }
     }
 }

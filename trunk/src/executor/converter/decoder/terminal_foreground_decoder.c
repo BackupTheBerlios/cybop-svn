@@ -35,7 +35,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../logger/logger.c"
 #include "../../../executor/accessor/getter.c"
-#include "../../../executor/comparator/count_array_comparator.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
 
 /**
  * Decodes the control sequence code into a terminal foreground colour name.
