@@ -34,6 +34,7 @@
 #include "../controller/tester/constant_tester.c"
 #include "../controller/tester/converter_tester.c"
 #include "../controller/tester/copier_tester.c"
+#include "../controller/tester/finder_tester.c"
 #include "../controller/tester/logger_tester.c"
 #include "../controller/tester/memoriser_tester.c"
 #include "../controller/tester/modifier_tester.c"
@@ -128,6 +129,7 @@ void test() {
     test_comparator();
     test_converter();
     test_copier();
+    test_finder();
     test_memoriser();
     test_modifier();
 }

@@ -31,7 +31,7 @@
 #include "../../../constant/name/memory/item_memory_name.c"
 #include "../../../constant/name/memory/primitive_memory_name.c"
 #include "../../../executor/memoriser/allocator/array_allocator.c"
-#include "../../../executor/copier/array_copier.c"
+#include "../../../executor/modifier/copier/array_copier.c"
 #include "../../../logger/logger.c"
 
 /**

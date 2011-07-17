@@ -36,7 +36,7 @@
 #include "../../../executor/converter/encoder/model_diagram/node_model_diagram_encoder.c"
 #include "../../../executor/converter/encoder/integer_vector_encoder.c"
 #include "../../../executor/converter/encoder/double_vector_encoder.c"
-#include "../../../executor/copier/array_copier.c"
+#include "../../../executor/modifier/copier/array_copier.c"
 #include "../../../logger/logger.c"
 
 /**

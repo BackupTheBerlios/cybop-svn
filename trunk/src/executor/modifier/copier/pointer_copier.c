@@ -23,47 +23,47 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_COPIER_SOURCE
-#define INTEGER_COPIER_SOURCE
+#ifndef POINTER_COPIER_SOURCE
+#define POINTER_COPIER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 /**
- * Copies the integer.
+ * Copies the pointer.
  *
  * @param p0 the destination
  * @param p1 the source
  */
-void copy_integer(void* p0, void* p1) {
+void copy_pointer(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* se = (int*) p1;
+        void** se = (void**) p1;
 
         if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* de = (int*) p0;
+            void** de = (void**) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy integer.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy pointer.");
 
             // Assign source- to destination.
             *de = *se;
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy integer. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy pointer. The destination is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy integer. The source is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy pointer. The source is null.");
     }
 }
 
-/* INTEGER_COPIER_SOURCE */
+/* POINTER_COPIER_SOURCE */
 #endif

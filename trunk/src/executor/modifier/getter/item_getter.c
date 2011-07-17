@@ -34,7 +34,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/copier/array_copier.c"
+#include "../../../executor/modifier/copier/array_copier.c"
 #include "../../../executor/memoriser/reallocator/item_reallocator.c"
 #include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"

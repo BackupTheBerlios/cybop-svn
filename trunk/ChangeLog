@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-17  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Move "copier/" into "modifier/" directory
+        * Implement finder functionality for array, item, part in directory "executor/finder/"
+
 2011-07-16  Christian Heller  <christian.heller@tuxtax.de>
 
         * Move "set" functions into directory "modifier" and rename into "overwrite_element" and "insert_element"

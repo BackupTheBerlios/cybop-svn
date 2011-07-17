@@ -61,15 +61,6 @@ void test_comparator_all() {
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-/*??
-    // The wide character array.
-    void* w = *NULL_POINTER_MEMORY_MODEL;
-    int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    allocate_array((void*) &w, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    deallocate_array((void*) &w, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-*/
-
     // All.
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
     compare_all_array((void*) &r, (void*) L"Hello, World!", (void*) L"Hello, World!", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_13_INTEGER_MEMORY_MODEL);
@@ -96,11 +87,37 @@ void test_comparator_all() {
 
     // Subsequence.
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_subsequence_array((void*) &r, (void*) L"Hello, World!", (void*) L"Hello, World!", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_13_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST subsequence complete word true r: %i\n", r);
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
     compare_subsequence_array((void*) &r, (void*) L"Hello, World!", (void*) L"o, Wor", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_6_INTEGER_MEMORY_MODEL);
-    fwprintf(stdout, L"TEST subsequence true r: %i\n", r);
+    fwprintf(stdout, L"TEST subsequence letters middle true r: %i\n", r);
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_subsequence_array((void*) &r, (void*) L"Hello, World!", (void*) L"o", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST subsequence one letter true r: %i\n", r);
+    // The following is a crash test.
+    // The right array "o" count is too high (100).
+    // But since the counts are compared inside,
+    // the array boundaries are not crossed and errors prevented.
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_subsequence_array((void*) &r, (void*) L"Hello, World!", (void*) L"o", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_100_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST subsequence count false r: %i\n", r);
     r = *NUMBER_0_INTEGER_MEMORY_MODEL;
     compare_subsequence_array((void*) &r, (void*) L"Hello, World!", (void*) L"blubla", (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_13_INTEGER_MEMORY_MODEL, (void*) NUMBER_6_INTEGER_MEMORY_MODEL);
-    fwprintf(stdout, L"TEST subsequence false r: %i\n", r);
+    fwprintf(stdout, L"TEST subsequence different words false r: %i\n", r);
+
+    // Integer equal, smaller or equal, greater.
+    int i1 = *NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
+    int* i2 = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_all_array((void*) &r, (void*) &i1, (void*) i2, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST integer equal false r: %i\n", r);
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_all_array((void*) &r, (void*) &i1, (void*) i2, (void*) SMALLER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST integer smaller or equal true r: %i\n", r);
+    r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    compare_all_array((void*) &r, (void*) &i1, (void*) i2, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+    fwprintf(stdout, L"TEST integer greater false r: %i\n", r);
 }
 
 /**
@@ -114,7 +131,7 @@ void test_comparator() {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test comparator.");
 
 //    test_comparator_ascii_character();
-    test_comparator_all();
+//    test_comparator_all();
 }
 
 /* COMPARATOR_TESTER */

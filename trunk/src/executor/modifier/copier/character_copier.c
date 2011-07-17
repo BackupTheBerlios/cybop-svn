@@ -23,47 +23,47 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DOUBLE_COPIER_SOURCE
-#define DOUBLE_COPIER_SOURCE
+#ifndef CHARACTER_COPIER_SOURCE
+#define CHARACTER_COPIER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 /**
- * Copies the double.
+ * Copies the character.
  *
  * @param p0 the destination
  * @param p1 the source
  */
-void copy_double(void* p0, void* p1) {
+void copy_character(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-        double* se = (double*) p1;
+        char* s = (char*) p1;
 
         if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            double* de = (double*) p0;
+            char* d = (char*) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy double.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy character.");
 
-            // Assign source- to destination.
-            *de = *se;
+            // Set source- to destination.
+            *d = *s;
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy double. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy character. The destination is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy double. The source is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy character. The source is null.");
     }
 }
 
-/* DOUBLE_COPIER_SOURCE */
+/* CHARACTER_COPIER_SOURCE */
 #endif

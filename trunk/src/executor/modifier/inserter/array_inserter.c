@@ -56,7 +56,7 @@
  *
  * @param p0 the destination array (Hand over as reference!)
  * @param p1 the source array
- * @param p2 the operand abstraction
+ * @param p2 the abstraction
  * @param p3 the count
  * @param p4 the destination index
  * @param p5 the source index
@@ -138,7 +138,7 @@ void insert_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
  *
  * @param p0 the destination array (Hand over as reference!)
  * @param p1 the source array
- * @param p2 the operand abstraction
+ * @param p2 the abstraction
  * @param p3 the count
  * @param p4 the destination index
  * @param p5 the source index

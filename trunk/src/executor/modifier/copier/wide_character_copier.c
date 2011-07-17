@@ -23,47 +23,47 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CHARACTER_COPIER_SOURCE
-#define CHARACTER_COPIER_SOURCE
+#ifndef WIDE_CHARACTER_COPIER_SOURCE
+#define WIDE_CHARACTER_COPIER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../logger/logger.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../logger/logger.c"
 
 /**
- * Copies the character.
+ * Copies the wide character.
  *
  * @param p0 the destination
  * @param p1 the source
  */
-void copy_character(void* p0, void* p1) {
+void copy_wide_character(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-        char* s = (char*) p1;
+        wchar_t* se = (wchar_t*) p1;
 
         if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            char* d = (char*) p0;
+            wchar_t* de = (wchar_t*) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy character.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy wide character.");
 
-            // Set source- to destination.
-            *d = *s;
+            // Assign source- to destination.
+            *de = *se;
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy character. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy wide character. The destination is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy character. The source is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy wide character. The source is null.");
     }
 }
 
-/* CHARACTER_COPIER_SOURCE */
+/* WIDE_CHARACTER_COPIER_SOURCE */
 #endif

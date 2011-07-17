@@ -34,9 +34,9 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/copier/integer_copier.c"
+#include "../../../executor/modifier/copier/integer_copier.c"
 #include "../../../executor/memoriser/offset_adder.c"
-#include "../../../executor/copier/value_copier.c"
+#include "../../../executor/modifier/copier/value_copier.c"
 #include "../../../executor/memoriser/size_determiner.c"
 #include "../../../logger/logger.c"
 
@@ -57,15 +57,21 @@ void compare_subsequence_array_elements(void* p0, void* p1, void* p2, void* p3, 
 
     // The loop count.
     int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    // The loop variable.
-    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The loop variable.
+    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Add left array count.
     add_integer((void*) &c, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Subtract right array count.
     subtract_integer((void*) &c, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Add number one.
+    // CAUTION! This IS NECESSARY since otherwise, two arrays with
+    // identical length will never be processed as the count is zero then.
+    // Problems with the loop variable used as investigated array index
+    // will NOT occur, since the loop is left before.
+    add_integer((void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 

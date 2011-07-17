@@ -28,8 +28,8 @@
 
 #include <wchar.h>
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../executor/copier/array_copier.c"
-#include "../../executor/copier/part_copier.c"
+#include "../../executor/modifier/copier/array_copier.c"
+#include "../../executor/modifier/copier/part_copier.c"
 #include "../../executor/memoriser/allocator/part_allocator.c"
 #include "../../executor/memoriser/deallocator/part_deallocator.c"
 #include "../../executor/modifier/getter/part_getter.c"
