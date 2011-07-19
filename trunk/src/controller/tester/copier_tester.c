@@ -79,7 +79,7 @@ void test_copier_part() {
     // The part retrieved as reference.
     void* p = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get part from whole.
+    // Get part with index 1 from whole.
     get_part_element((void*) &p, w, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) MODEL_PART_MEMORY_NAME);
 
     // The part elements retrieved as reference.

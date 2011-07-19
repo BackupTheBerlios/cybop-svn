@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DETECTOR_SOURCE
-#define DETECTOR_SOURCE
+#ifndef OLD_DETECTOR_SOURCE
+#define OLD_DETECTOR_SOURCE
 
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/abstraction/operation/primitive_operation_abstraction.c"
@@ -214,5 +214,5 @@ void detect(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
     // etc.
 }
 
-/* DETECTOR_SOURCE */
+/* OLD_DETECTOR_SOURCE */
 #endif

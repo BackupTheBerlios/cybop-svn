@@ -11,8 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Use new finder to analyse knowledge path names;
-            see file "executor/finder/OLD_finder.c"
+        * Continue in "executor/searcher/"; use new files to analyse knowledge path names,
+            in order to get a part from the knowledge tree; see file "executor/finder/OLD_finder.c"
         * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" functions
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"
         * (Possibly) delete "item_reallocator.c", if needed nowhere
