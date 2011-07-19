@@ -26,18 +26,18 @@
 #ifndef PART_FINDER_SOURCE
 #define PART_FINDER_SOURCE
 
-#include "../../constant/abstraction/cybol/number_cybol_abstraction.c"
-#include "../../constant/abstraction/cybol/path_cybol_abstraction.c"
-#include "../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../constant/name/cybol/separator_cybol_name.c"
-#include "../../constant/name/memory/part_memory_name.c"
-#include "../../executor/modifier/overwriter/item_overwriter.c"
-#include "../../logger/logger.c"
-#include "../../variable/reallocation_factor.c"
+#include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
+#include "../../../constant/abstraction/cybol/path_cybol_abstraction.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/cybol/separator_cybol_name.c"
+#include "../../../constant/name/memory/part_memory_name.c"
+#include "../../../executor/modifier/overwriter/item_overwriter.c"
+#include "../../../logger/logger.c"
+#include "../../../variable/reallocation_factor.c"
 
 /**
  * Tries to find the searched array in the investigated part.

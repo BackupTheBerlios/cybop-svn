@@ -28,17 +28,17 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_adder.c"
-#include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/modifier/copier/integer_copier.c"
-#include "../../executor/memoriser/offset_adder.c"
-#include "../../executor/modifier/copier/value_copier.c"
-#include "../../executor/memoriser/size_determiner.c"
-#include "../../logger/logger.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/arithmetiser/integer_adder.c"
+#include "../../../executor/arithmetiser/integer_multiplier.c"
+#include "../../../executor/modifier/copier/integer_copier.c"
+#include "../../../executor/memoriser/offset_adder.c"
+#include "../../../executor/modifier/copier/value_copier.c"
+#include "../../../executor/memoriser/size_determiner.c"
+#include "../../../logger/logger.c"
 
 /**
  * Tries to find the searched array in the investigated array.

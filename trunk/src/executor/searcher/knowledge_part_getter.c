@@ -26,29 +26,107 @@
 #ifndef KNOWLEDGE_PART_GETTER_SOURCE
 #define KNOWLEDGE_PART_GETTER_SOURCE
 
-#include "../../../../constant/model/log/message_log_model.c"
-#include "../../../../constant/model/memory/integer_memory_model.c"
-#include "../../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../../constant/name/http/cyboi_http_name.c"
-#include "../../../../executor/accessor/appender/part_appender.c"
-#include "../../../../executor/converter/selector/http_request/method_http_request_selector.c"
-#include "../../../../executor/memoriser/allocator/model_allocator.c"
-#include "../../../../executor/memoriser/deallocator/model_deallocator.c"
-#include "../../../../logger/logger.c"
+#include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
+#include "../../constant/model/memory/pointer_memory_model.c"
+#include "../../constant/name/http/cyboi_http_name.c"
+#include "../../executor/accessor/appender/part_appender.c"
+#include "../../executor/converter/selector/http_request/method_http_request_selector.c"
+#include "../../executor/memoriser/allocator/model_allocator.c"
+#include "../../executor/memoriser/deallocator/model_deallocator.c"
+#include "../../logger/logger.c"
+
+/**
+ * Gets the knowledge part by name.
+ *
+ * @param p0 the destination part reference
+ * @param p1 the source part
+ * @param p2 the source part count
+ * @param p3 the part name
+ * @param p4 the part name count
+ */
+void get_knowledge_part_by_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+
+        int* sc = (int*) p2;
+
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get knowledge part by name.");
+
+        // The loop variable.
+        int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+/*??
+        // The part retrieved as reference.
+        void* p = *NULL_POINTER_MEMORY_MODEL;
+        // The part name retrieved as reference.
+        void* n = *NULL_POINTER_MEMORY_MODEL;
+        // The part name data, count retrieved as reference.
+        void* nd = *NULL_POINTER_MEMORY_MODEL;
+        void* nc = *NULL_POINTER_MEMORY_MODEL;
+*/
+        // The comparison result.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+
+            if (j >= *sc) {
+
+                break;
+            }
+
+            // Compare current part's name with given part name.
+            compare_all_part_element((void*) &r, p1, p3, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) NAME_PART_MEMORY_NAME);
+/*??
+            // Get part name.
+            copy_array_forward((void*) &n, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+            // Get part name data, count retrieved as reference.
+            copy_array_forward((void*) &nd, n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+            copy_array_forward((void*) &nc, n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+            // Compare current part name with given part name.
+            compare_all_array((void*) &r, nd, p2, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, nc, p3);
+*/
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                // A part with the given name was found.
+
+                // Get part with index j from source part (whole, compound, pointer array).
+                get_part_element(p0, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) MODEL_PART_MEMORY_NAME);
+
+                break;
+            }
+
+            // Increment loop variable.
+            j++;
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get knowledge part. The remaining count is null.");
+    }
+}
 
 /**
  * Gets the knowledge part.
  *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count
- * @param p2 the destination model size
- * @param p3 the destination details (Hand over as reference!)
- * @param p4 the destination details count
- * @param p5 the destination details size
- * @param p6 the current position (Hand over as reference!)
- * @param p7 the remaining count
+ * CAUTION! The parametre p0 does NOT have to be a reference!
+ * It points to a memory area to which the source element is copied.
+ * If using a local variable, then the memory area is allocated
+ * automatically by the function, on the stack.
+ *
+ * Example:
+ *
+ * void* part_reference = *NULL_POINTER_MEMORY_MODEL;
+ * get_part_element((void*) &part_reference, whole_part, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) MODEL_PART_MEMORY_NAME);
+ *
+ * @param p0 the destination array
+ * @param p1 the source part
+ * @param p2 the abstraction
+ * @param p3 the count
+ * @param p4 the current position (Hand over as reference!)
+ * @param p5 the remaining count
  */
-void get_knowledge_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void get_knowledge_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p7 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -58,7 +136,7 @@ void get_knowledge_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
 
             void** pos = (void**) p6;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get knowledge part.");
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get knowledge part.");
 
             // The element.
             void* e = *pos;
@@ -91,25 +169,7 @@ void get_knowledge_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                     ec++;
                 }
             }
---
-    //?? TEST
-    // The part retrieved as reference.
-    void* p = *NULL_POINTER_MEMORY_MODEL;
-    // Get part with index j from whole.
-    get_part_element((void*) &p, whole, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) MODEL_PART_MEMORY_NAME);
-    // The part name retrieved as reference.
-    void* n = *NULL_POINTER_MEMORY_MODEL;
-    // Get part name.
-    copy_array_forward((void*) &n, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
-    // The part name data, count retrieved as reference.
-    void* nd = *NULL_POINTER_MEMORY_MODEL;
-    void* nc = *NULL_POINTER_MEMORY_MODEL;
-    // Get part name data, count retrieved as reference.
-    copy_array_forward((void*) &nd, n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
-    copy_array_forward((void*) &nc, n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
-    // Compare current part name with given knowledge path part name.
-    compare_all_array((void*) &r, nd, part_name_determined_from_knowledge_path, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, nc, part_name_determined_from_knowledge_path_count);
---
+
         } else {
 
             log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get knowledge part. The current position is null.");

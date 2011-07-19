@@ -20,6 +20,7 @@
 
         * Move "finder/" into "searcher/" directory
         * Add files for knowledge part detection and selection in new "searcher/" directory
+        * Start writing functions for getting a part from a compound/ whole/ knowledge model
 
 2011-07-17  Christian Heller  <christian.heller@tuxtax.de>
 

@@ -27,9 +27,9 @@
 #define FINDER_TESTER
 
 #include "../../constant/model/memory/integer_memory_model.c"
-#include "../../executor/finder/array_finder.c"
-#include "../../executor/finder/item_finder.c"
-#include "../../executor/finder/part_finder.c"
+#include "../../executor/searcher/finder/array_finder.c"
+#include "../../executor/searcher/finder/item_finder.c"
+#include "../../executor/searcher/finder/part_finder.c"
 #include "../../logger/logger.c"
 
 /**

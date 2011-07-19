@@ -26,15 +26,15 @@
 #ifndef KNOWLEDGE_PART_SELECTOR_SOURCE
 #define KNOWLEDGE_PART_SELECTOR_SOURCE
 
-#include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../../constant/model/log/message_log_model.c"
-#include "../../../../constant/model/memory/integer_memory_model.c"
-#include "../../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../../constant/name/http/separator_http_name.c"
-#include "../../../../executor/converter/decoder/http_request/uri_http_request_decoder.c"
-#include "../../../../executor/converter/detector.c"
-#include "../../../../logger/logger.c"
-#include "../../../../variable/type_size/integral_type_size.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../constant/name/http/separator_http_name.c"
+#include "../../../executor/converter/decoder/http_request/uri_http_request_decoder.c"
+#include "../../../executor/converter/detector.c"
+#include "../../../logger/logger.c"
+#include "../../../variable/type_size/integral_type_size.c"
 
 //
 // CAUTION! This comment is valid for all "select" functions below.
