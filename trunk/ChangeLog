@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-20  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Correct testing file "modifier_tester.c", so that part retrieval from a whole works
+        * Test shallow part copying (pointer array)
+        * Complete simple knowledge part getter (not considering hierarchical names yet)
+
 2011-07-19  Christian Heller  <christian.heller@tuxtax.de>
 
         * Move "finder/" into "searcher/" directory

@@ -134,19 +134,33 @@ void copy_array_elements_backward(void* p0, void* p1, void* p2, void* p3) {
  */
 void copy_array_forward(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array forward.");
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The destination array, source array.
-    // CAUTION! They HAVE TO BE initialised with p0 and p1,
-    // since an offset is added below.
-    void* d = p0;
-    void* s = p1;
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // Add offset.
-    add_offset((void*) &d, p2, p4);
-    add_offset((void*) &s, p2, p5);
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array forward.");
 
-    copy_array_elements_forward(d, s, p2, p3);
+            // The destination array, source array.
+            // CAUTION! They HAVE TO BE initialised with p0 and p1,
+            // since an offset is added below.
+            void* d = p0;
+            void* s = p1;
+
+            // Add offset.
+            add_offset((void*) &d, p2, p4);
+            add_offset((void*) &s, p2, p5);
+
+            copy_array_elements_forward(d, s, p2, p3);
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array forward. The destination array is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array forward. The source array is null.");
+    }
 }
 
 /**
@@ -164,19 +178,38 @@ void copy_array_forward(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
  */
 void copy_array_backward(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array backward.");
+    // CAUTION! These null pointer comparisons are IMPORTANT, in order to
+    // avoid a system crash if source- or destination array are null!
+    // All other modifier functions are based on this copier function,
+    // so that checking for null pointer right here suffices.
 
-    // The destination array, source array.
-    // CAUTION! They HAVE TO BE initialised with p0 and p1,
-    // since an offset is added below.
-    void* d = p0;
-    void* s = p1;
+    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // Add offset.
-    add_offset((void*) &d, p2, p4);
-    add_offset((void*) &s, p2, p5);
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-    copy_array_elements_backward(d, s, p2, p3);
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Copy array backward.");
+
+            // The destination array, source array.
+            // CAUTION! They HAVE TO BE initialised with p0 and p1,
+            // since an offset is added below.
+            void* d = p0;
+            void* s = p1;
+
+            // Add offset.
+            add_offset((void*) &d, p2, p4);
+            add_offset((void*) &s, p2, p5);
+
+            copy_array_elements_backward(d, s, p2, p3);
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array backward. The destination array is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not copy array backward. The source array is null.");
+    }
 }
 
 /* ARRAY_COPIER_SOURCE */

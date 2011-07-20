@@ -39,30 +39,229 @@
 #include "../../logger/logger.c"
 
 /**
- * Tests part modification.
+ * Tests part modification on compound part.
  */
-void test_modifier_part() {
+void test_modifier_part_compound() {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test modifier part.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test modifier part compound.");
 
-    // The parts.
+    //
+    // Declare parts.
+    //
+
     void* w1 = *NULL_POINTER_MEMORY_MODEL;
     void* w2 = *NULL_POINTER_MEMORY_MODEL;
+    void* w3 = *NULL_POINTER_MEMORY_MODEL;
+    void* p1 = *NULL_POINTER_MEMORY_MODEL;
+    void* p2 = *NULL_POINTER_MEMORY_MODEL;
+
+    //
+    // Allocate parts.
+    //
+
+    allocate_part_NEW((void*) &w1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_part_NEW((void*) &w2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_part_NEW((void*) &w3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_part_NEW((void*) &p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_part_NEW((void*) &p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    //
+    // Initialise parts.
+    //
+
+    // Fill whole one.
+    overwrite_part_element(w1, (void*) L"source", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_6_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+    overwrite_part_element(w1, (void*) PART_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+    // Fill whole two.
+    overwrite_part_element(w2, (void*) L"shallow", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+    overwrite_part_element(w2, (void*) PART_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+    // Fill whole three.
+    overwrite_part_element(w3, (void*) L"deep", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_4_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+    overwrite_part_element(w3, (void*) PART_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+    // Fill part one.
+    overwrite_part_element(p1, (void*) L"blu", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+    overwrite_part_element(p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+    overwrite_part_element(p1, (void*) L"Hello, ", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Fill part two.
+    overwrite_part_element(p2, (void*) L"bla", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+    overwrite_part_element(p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+    overwrite_part_element(p2, (void*) L"World!", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_6_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+
+    //
+    // Assign parts to whole one.
+    //
+    // CAUTION! Hand over reference of p1, p2!
+    //
+    // CAUTION! Do NOT use the "overwrite_part" or "insert_part" function here,
+    // since (void*) &p1 is treated as pointer ARRAY and thus requires one of
+    // the two functions "overwrite_part_element" or "insert_part_element"!
+    //
+
+    // Set part one at index 0.
+    overwrite_part_element(w1, (void*) &p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Insert part two BEFORE part one, at index 0.
+    insert_part_element(w1, (void*) &p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+
+    //
+    // Add all pointer references of whole one to whole two.
+    //
+    // This is a SHALLOW COPY.
+    // After copying, the elements of whole two should
+    // point to the same parts as whole one.
+    //
+    // CAUTION! This time, the "overwrite_part" and NOT the "overwrite_part_element"
+    // function is used, since a part's content is copied to another part.
+    // No array is given.
+    //
+
+    // Copy all parts of whole one into whole two.
+    // CAUTION! Hand over the correct count of elements!
+    overwrite_part(w2, w1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
+    //
+    // Copy all parts of whole one into whole three.
+    //
+    // This is a DEEP COPY.
+    // Not the pointer references are copied, but a new part
+    // is created for each part read from the source.
+    // This function "dives" into the last node of the knowledge hierarchy.
+    //
+    // The difference to the shallow copy above is that the abstraction
+    // PART_PRIMITIVE_MEMORY_ABSTRACTION is given instead of POINTER_PRIMITIVE_MEMORY_ABSTRACTION.
+    //
+
+    // Copy all parts of whole one into whole two.
+    // CAUTION! Hand over the correct count of elements!
+//    overwrite_part(w3, w1, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
+    //
+    // Output whole one as model diagram.
+    //
+
+    // The model diagram.
+    void* mdi = *NULL_POINTER_MEMORY_MODEL;
+    int mdic = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mdis = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The multibyte character stream.
+    void* mb = *NULL_POINTER_MEMORY_MODEL;
+    int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The file name.
+    void* fn = L"TEST_MODIFIER_TESTER_WHOLE_ONE.txt";
+    int fnc = *NUMBER_34_INTEGER_MEMORY_MODEL;
+    int fns = *NUMBER_35_INTEGER_MEMORY_MODEL;
+
+    // Allocate model diagram.
+    allocate_array((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Allocate multibyte character stream.
+    allocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Encode model into model diagram.
+    encode_model_diagram_NEW((void*) &mdi, (void*) &mdic, (void*) &mdis, w1);
+    // Encode model diagram into multibyte character stream.
+    encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, mdi, (void*) &mdic);
+    // Write multibyte character stream as message to file system.
+    send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+
+    // Deallocate model diagram.
+    deallocate_array((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Deallocate multibyte character stream.
+    deallocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    //
+    // Output whole one as model diagram.
+    //
+
+    // The model diagram.
+    mdi = *NULL_POINTER_MEMORY_MODEL;
+    mdic = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    mdis = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The multibyte character stream.
+    mb = *NULL_POINTER_MEMORY_MODEL;
+    mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The file name.
+    fn = L"TEST_MODIFIER_TESTER_WHOLE_TWO.txt";
+    fnc = *NUMBER_34_INTEGER_MEMORY_MODEL;
+    fns = *NUMBER_35_INTEGER_MEMORY_MODEL;
+
+    // Allocate model diagram.
+    allocate_array((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Allocate multibyte character stream.
+    allocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Encode model into model diagram.
+    encode_model_diagram_NEW((void*) &mdi, (void*) &mdic, (void*) &mdis, w2);
+    // Encode model diagram into multibyte character stream.
+    encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, mdi, (void*) &mdic);
+    // Write multibyte character stream as message to file system.
+    send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+
+    // Deallocate model diagram.
+    deallocate_array((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Deallocate multibyte character stream.
+    deallocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    //
+    // Output whole one as model diagram.
+    //
+
+    // The model diagram.
+    mdi = *NULL_POINTER_MEMORY_MODEL;
+    mdic = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    mdis = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The multibyte character stream.
+    mb = *NULL_POINTER_MEMORY_MODEL;
+    mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The file name.
+    fn = L"TEST_MODIFIER_TESTER_WHOLE_THREE.txt";
+    fnc = *NUMBER_36_INTEGER_MEMORY_MODEL;
+    fns = *NUMBER_37_INTEGER_MEMORY_MODEL;
+
+    // Allocate model diagram.
+    allocate_array((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Allocate multibyte character stream.
+    allocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Encode model into model diagram.
+    encode_model_diagram_NEW((void*) &mdi, (void*) &mdic, (void*) &mdis, w3);
+    // Encode model diagram into multibyte character stream.
+    encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, mdi, (void*) &mdic);
+    // Write multibyte character stream as message to file system.
+    send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
+
+    // Deallocate model diagram.
+    deallocate_array((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Deallocate multibyte character stream.
+    deallocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    //
+    // Deallocate parts.
+    //
+
+    deallocate_part_NEW((void*) &p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_part_NEW((void*) &p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_part_NEW((void*) &w1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_part_NEW((void*) &w2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_part_NEW((void*) &w3, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+}
+
+/**
+ * Tests part modification on wide character array.
+ */
+void test_modifier_part_wide_character() {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test modifier part wide character.");
+
+    // The parts.
     void* p1 = *NULL_POINTER_MEMORY_MODEL;
     void* p2 = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate parts.
-    allocate_part_NEW((void*) &w1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    allocate_part_NEW((void*) &w2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
     allocate_part_NEW((void*) &p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     allocate_part_NEW((void*) &p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    // Fill whole one.
-    overwrite_part_element(w1, (void*) L"test1", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_5_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
-    overwrite_part_element(w1, (void*) PART_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
-    // Fill whole two.
-    overwrite_part_element(w2, (void*) L"test2", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_5_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
-    overwrite_part_element(w2, (void*) PART_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
     // Fill part one.
     overwrite_part_element(p1, (void*) L"blu", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
     overwrite_part_element(p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
@@ -79,18 +278,7 @@ void test_modifier_part() {
     insert_part(p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_3_INTEGER_MEMORY_MODEL);
 
     //
-    // Add two parts to whole one.
-    //
-
-    // CAUTION! Hand over reference of p1!
-//    insert_part(w1, (void*) &p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-//    insert_part(w1, (void*) &p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-    // overwrite_part_element(w1, (void*) &p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
-
-    //
-    // Add (model content of) whole one to whole two.
-    // The whole one are copied, starting from index
-    // as many as given by the count parametre.
+    // Output test results.
     //
 
     // The part elements retrieved as reference.
@@ -134,45 +322,9 @@ void test_modifier_part() {
     fwprintf(stdout, L"TEST dd: %i\n", dd);
     fwprintf(stdout, L"TEST dc: %i\n", *((int*) dc));
 
-    //
-    // Encode and output part as model diagram.
-    //
-
-    // The model diagram.
-    void* mdi = *NULL_POINTER_MEMORY_MODEL;
-    int mdic = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int mdis = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    // The multibyte character stream.
-    void* mb = *NULL_POINTER_MEMORY_MODEL;
-    int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int mbs = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    // The file name.
-    void* fn = L"TEST_MODIFIER_TESTER.txt";
-    int fnc = *NUMBER_24_INTEGER_MEMORY_MODEL;
-    int fns = *NUMBER_25_INTEGER_MEMORY_MODEL;
-
-    // Allocate model diagram.
-    allocate_array((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Allocate multibyte character stream.
-    allocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-    // Encode model into model diagram.
-    encode_model_diagram_NEW((void*) &mdi, (void*) &mdic, (void*) &mdis, w1);
-    // Encode model diagram into multibyte character stream.
-    encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, mdi, (void*) &mdic);
-    // Write multibyte character stream as message to file system.
-    send_file((void*) &fn, (void*) &fnc, (void*) &fns, mb, (void*) &mbc);
-
-    // Deallocate model diagram.
-    deallocate_array((void*) &mdi, (void*) &mdis, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Deallocate multibyte character stream.
-    deallocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
     // Deallocate parts.
     deallocate_part_NEW((void*) &p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     deallocate_part_NEW((void*) &p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    deallocate_part_NEW((void*) &w1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    deallocate_part_NEW((void*) &w2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /**
@@ -236,7 +388,8 @@ void test_modifier() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test modifier.");
 
-//    test_modifier_part();
+//    test_modifier_part_compound();
+//    test_modifier_part_wide_character();
 //    test_modifier_array();
 }
 

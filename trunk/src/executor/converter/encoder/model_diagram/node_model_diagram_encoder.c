@@ -261,13 +261,8 @@ void encode_model_diagram_node_NEW(void* p0, void* p1, void* p2, void* p3, void*
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    if (*mc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Only process the following code, if the model compound contains at least one part.
-
-                        // Add part model to destination array.
-                        encode_model_diagram_compound_NEW(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-                    }
+                    // Add part model to destination array.
+                    encode_model_diagram_compound_NEW(p0, p1, p2, p7, p8, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
                 }
             }
 
@@ -362,15 +357,8 @@ void encode_model_diagram_node_NEW(void* p0, void* p1, void* p2, void* p3, void*
             // Otherwise, a model will not be processed, if the details happen to be null.
             if (p10 != *NULL_POINTER_MEMORY_MODEL) {
 
-                int* dc = (int*) p10;
-
-                if (*dc > *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    // Only process the following code, if the details compound contains at least one part.
-
-                    // Add part details to destination array.
-                    encode_model_diagram_compound_NEW(p0, p1, p2, p9, p10, p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
-                }
+                // Add part details to destination array.
+                encode_model_diagram_compound_NEW(p0, p1, p2, p9, p10, p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
             } else {
 
