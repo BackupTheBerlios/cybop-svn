@@ -132,7 +132,7 @@ void test_modifier_part_compound() {
 
     // Copy all parts of whole one into whole two.
     // CAUTION! Hand over the correct count of elements!
-//    overwrite_part(w3, w1, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+    overwrite_part(w3, w1, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
     //
     // Output whole one as model diagram.
@@ -388,7 +388,7 @@ void test_modifier() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test modifier.");
 
-//    test_modifier_part_compound();
+    test_modifier_part_compound();
 //    test_modifier_part_wide_character();
 //    test_modifier_array();
 }

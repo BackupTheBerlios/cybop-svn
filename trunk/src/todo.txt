@@ -11,8 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue "part_comparator.c" and try deep copying in file "modifier_tester.c"
-        * Test shallow part copying (pointer array)
+        * Continue deep copying in "part_copier.c" as well as
+            "part_comparator.c" and test in file "modifier_tester.c"
+        * Test deep part copying (pointer array elements including their children)
         * Continue in "executor/searcher/"; use new files to analyse knowledge path names,
             in order to get a part from the knowledge tree; see file "executor/finder/OLD_finder.c";
             START WITH file "knowledge_part_getter.c" and "finder_tester.c"

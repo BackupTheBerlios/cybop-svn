@@ -195,7 +195,7 @@ void test_finder() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test finder.");
 
-    test_finder_part_by_name();
+//    test_finder_part_by_name();
 //    test_finder_array();
 }
 

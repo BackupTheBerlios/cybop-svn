@@ -134,6 +134,11 @@ void copy_array_elements_backward(void* p0, void* p1, void* p2, void* p3) {
  */
 void copy_array_forward(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
+    // CAUTION! These null pointer comparisons are IMPORTANT, in order to
+    // avoid a system crash if source- or destination array are null!
+    // All other modifier functions are based on this copier function,
+    // so that checking for null pointer right here suffices.
+
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
         if (p0 != *NULL_POINTER_MEMORY_MODEL) {

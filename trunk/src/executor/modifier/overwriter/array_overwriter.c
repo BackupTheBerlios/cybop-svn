@@ -34,10 +34,10 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
-#include "../../../executor/modifier/copier/integer_copier.c"
 #include "../../../executor/memoriser/offset_adder.c"
-#include "../../../executor/modifier/copier/value_copier.c"
 #include "../../../executor/memoriser/size_determiner.c"
+#include "../../../executor/modifier/copier/integer_copier.c"
+#include "../../../executor/modifier/copier/value_copier.c"
 #include "../../../logger/logger.c"
 
 /**
