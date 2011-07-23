@@ -56,9 +56,13 @@ void add_offset(void* p0, void* p1, void* p2) {
     determine_size((void*) &o, p1);
 
     // Calculate offset.
+    // CAUTION! The POINTER_PRIMITIVE_MEMORY_ABSTRACTION is NOT needed here,
+    // since this is only the offset integer value and not a pointer.
     multiply_with_integer((void*) &o, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Add offset to pointer.
+    // CAUTION! The POINTER_PRIMITIVE_MEMORY_ABSTRACTION IS needed here,
+    // since p0 is a pointer to which the offset is added.
     add_integer(p0, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 

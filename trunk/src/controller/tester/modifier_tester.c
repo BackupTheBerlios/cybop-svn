@@ -44,6 +44,7 @@
 void test_modifier_part_compound() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test modifier part compound.");
+    fwprintf(stdout, L"Output gets written into files with prefix: %ls\n", L"TEST");
 
     //
     // Declare parts.
@@ -100,6 +101,7 @@ void test_modifier_part_compound() {
     // Set part one at index 0.
     overwrite_part_element(w1, (void*) &p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
     // Insert part two BEFORE part one, at index 0.
+    // The part one is moved to index 1 automatically by the "insert_part_element" function.
     insert_part_element(w1, (void*) &p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
 
     //
@@ -388,7 +390,7 @@ void test_modifier() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test modifier.");
 
-    test_modifier_part_compound();
+//    test_modifier_part_compound();
 //    test_modifier_part_wide_character();
 //    test_modifier_array();
 }

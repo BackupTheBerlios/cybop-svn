@@ -36,6 +36,7 @@
 #include "../../../executor/comparator/basic/double_comparator.c"
 #include "../../../executor/comparator/basic/fraction_comparator.c"
 #include "../../../executor/comparator/basic/integer_comparator.c"
+#include "../../../executor/comparator/basic/part_comparator.c"
 #include "../../../executor/comparator/basic/pointer_comparator.c"
 #include "../../../executor/comparator/basic/unsigned_long_comparator.c"
 #include "../../../executor/comparator/basic/wide_character_comparator.c"
@@ -121,6 +122,16 @@ void compare_value(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
                 compare_integer(p0, p1, p2, p3);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            if (*a == *PART_PRIMITIVE_MEMORY_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                compare_part(p0, p1, p2, p3);
             }
         }
 

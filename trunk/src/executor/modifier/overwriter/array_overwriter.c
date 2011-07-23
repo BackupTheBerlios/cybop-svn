@@ -90,7 +90,13 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         // The new size.
         int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        // Add destination array count.
+        // CAUTION! The destination array count is not considered here,
+        // because an element may be added far behind the end of the array.
+        // This is similar to random access of an arbitrary byte of a file.
+        // In such a case, the destination index plus number of elements
+        // to be added will deliver the new size of the destination array.
+
+        // Add destination index.
         add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
         // Add count of new elements to be inserted.
         add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);

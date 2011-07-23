@@ -16,6 +16,15 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-22  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete and test deep part comparison in files "part_comparator.c" and test in file "comparator_tester.c"
+
+2011-07-21  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete and test deep part copying (pointer array elements including their children)
+        * Continue deep comparison in file "part_comparator.c" and test in file "comparator_tester.c"
+
 2011-07-20  Christian Heller  <christian.heller@tuxtax.de>
 
         * Correct testing file "modifier_tester.c", so that part retrieval from a whole works

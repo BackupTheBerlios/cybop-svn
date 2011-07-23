@@ -68,7 +68,7 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 // CAUTION! The arrays are expected to be EQUAL, even if
                 // the count is zero. This is important, because the DETAILS
                 // (meta properties) of many otherwise equal models are empty.
-                copy_array_forward(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+                copy_integer(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                 break;
             }
@@ -113,19 +113,38 @@ void compare_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, vo
  */
 void compare_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Compare array.");
+    // CAUTION! These null pointer comparisons are IMPORTANT, in order to
+    // avoid a system crash if one or both of the two arrays are null!
+    // All other copying functions are based on this copier function,
+    // so that checking for null pointer right here suffices.
 
-    // The left array, right array.
-    // CAUTION! They HAVE TO BE initialised with p1 and p2,
-    // since an offset is added below.
-    void* l = p1;
-    void* r = p2;
+    if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // Add offset.
-    add_offset((void*) &l, p4, p6);
-    add_offset((void*) &r, p4, p7);
+        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
-    compare_array_elements(p0, l, r, p3, p4, p5);
+            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Compare array.");
+
+            // The left array, right array.
+            // CAUTION! They HAVE TO BE initialised with p1 and p2,
+            // since an offset is added below.
+            void* l = p1;
+            void* r = p2;
+
+            // Add offset.
+            add_offset((void*) &l, p4, p6);
+            add_offset((void*) &r, p4, p7);
+
+            compare_array_elements(p0, l, r, p3, p4, p5);
+
+        } else {
+
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array. The left array is null.");
+        }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare array. The right array is null.");
+    }
 }
 
 /* ARRAY_COMPARATOR_SOURCE */

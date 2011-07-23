@@ -26,22 +26,14 @@
 #ifndef WIDE_CHARACTER_ABSTRACTION_DECODER_SOURCE
 #define WIDE_CHARACTER_ABSTRACTION_DECODER_SOURCE
 
-#include <stdlib.h>
-#include <string.h>
-#include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../constant/model/log/message_log_model.c"
-#include "../../constant/model/memory/integer_memory_model.c"
-#include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/modifier/copier/value_setter/character_value_setter.c"
-#include "../../executor/modifier/copier/value_setter/double_value_setter.c"
-#include "../../executor/modifier/copier/value_setter/integer_value_setter.c"
-#include "../../executor/modifier/copier/value_setter/pointer_value_setter.c"
-#include "../../executor/modifier/copier/value_setter/unsigned_long_value_setter.c"
-#include "../../executor/modifier/copier/value_setter/wide_character_value_setter.c"
-#include "../../executor/arithmetiser/integer_multiplier.c"
-#include "../../executor/comparator/all/array_all_comparator.c"
-#include "../../executor/memoriser/size_determiner.c"
-#include "../../logger/logger.c"
+#include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/integer_memory_model.c"
+#include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/comparator/all/array_all_comparator.c"
+#include "../../../logger/logger.c"
 
 /**
  * Decodes the wide character abstraction into an integer abstraction.
@@ -63,61 +55,81 @@ void decode_wide_character_abstraction(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            compare_all_array((void*) &r, p1, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                *d = CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION;
+                copy_integer(p0, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT);
+            compare_all_array((void*) &r, p1, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                *d = DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION;
+                copy_integer(p0, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+            compare_all_array((void*) &r, p1, (void*) FRACTION_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) FRACTION_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                *d = INTEGER_PRIMITIVE_MEMORY_ABSTRACTION;
+                copy_integer(p0, (void*) FRACTION_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            compare_all_array((void*) &r, p1, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                *d = POINTER_PRIMITIVE_MEMORY_ABSTRACTION;
+                copy_integer(p0, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
+            compare_all_array((void*) &r, p1, (void*) PART_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) PART_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                *d = UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION;
+                copy_integer(p0, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_array_wide_character_equal((void*) &r, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            compare_all_array((void*) &r, p1, (void*) POINTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                *d = WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION;
+                copy_integer(p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_all_array((void*) &r, p1, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                copy_integer(p0, (void*) UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            compare_all_array((void*) &r, p1, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                copy_integer(p0, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
 

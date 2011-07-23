@@ -60,9 +60,25 @@ void determine_size(void* p0, void* p1) {
 
             copy_integer(p0, (void*) DOUBLE_REAL_TYPE_SIZE);
 
+        } else if (*a == *FRACTION_PRIMITIVE_MEMORY_ABSTRACTION) {
+
+            // CAUTION! This "fraction" abstraction IS NEEDED,
+            // e.g. when DEEP copying a part. Do NOT delete!
+            // It is actually a pointer array, of which each
+            // pointer references a fraction structure.
+            copy_integer(p0, (void*) POINTER_TYPE_SIZE);
+
         } else if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
             copy_integer(p0, (void*) SIGNED_INTEGER_INTEGRAL_TYPE_SIZE);
+
+        } else if (*a == *PART_PRIMITIVE_MEMORY_ABSTRACTION) {
+
+            // CAUTION! This "part" abstraction IS NEEDED,
+            // e.g. when DEEP copying a part. Do NOT delete!
+            // It is actually a pointer array, of which each
+            // pointer references a part structure.
+            copy_integer(p0, (void*) POINTER_TYPE_SIZE);
 
         } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 

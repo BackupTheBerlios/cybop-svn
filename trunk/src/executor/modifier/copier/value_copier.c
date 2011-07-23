@@ -176,7 +176,7 @@ void copy_value_offset(void* p0, void* p1, void* p2, void* p3) {
     void* d = p0;
     void* s = p1;
 
-    // Add offset.
+    // Add offset to destination value, source value.
     add_offset((void*) &d, p2, p3);
     add_offset((void*) &s, p2, p3);
 

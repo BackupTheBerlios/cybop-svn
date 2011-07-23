@@ -11,14 +11,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue deep copying in "part_copier.c" as well as
-            "part_comparator.c" and test in file "modifier_tester.c"
-        * Test deep part copying (pointer array elements including their children)
         * Continue in "executor/searcher/"; use new files to analyse knowledge path names,
             in order to get a part from the knowledge tree; see file "executor/finder/OLD_finder.c";
             START WITH file "knowledge_part_getter.c" and "finder_tester.c"
         * Complete knowledge part getter considering hierarchical names
-        * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" functions
+        * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" / "overwriter" functions
         * Implement container functions as described in file "todo_cyboi_java_comparison.txt"
         * (Possibly) delete "item_reallocator.c", if needed nowhere
 

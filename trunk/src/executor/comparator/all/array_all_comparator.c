@@ -56,8 +56,8 @@ void compare_all_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        // CAUTION! Both, the left- and the right array count
-        // may be handed over as count parametre, since they are equal.
+        // CAUTION! Both, the left- or the right array count may be
+        // handed over alternatively as count parametre, since they are equal.
         compare_array(p0, p1, p2, p3, p4, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
     } else {
