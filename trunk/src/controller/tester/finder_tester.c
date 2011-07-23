@@ -27,11 +27,22 @@
 #define FINDER_TESTER
 
 #include "../../constant/model/memory/integer_memory_model.c"
+#include "../../executor/modifier/getter/name_part_getter.c"
 #include "../../executor/searcher/finder/array_finder.c"
 #include "../../executor/searcher/finder/item_finder.c"
 #include "../../executor/searcher/finder/part_finder.c"
-#include "../../executor/searcher/knowledge_part_getter.c"
 #include "../../logger/logger.c"
+
+/**
+ * Tests the part by hierarchical name finder.
+ *
+ * Creates a knowledge tree consisting of some parts
+ * and retrieves one of the parts by hierarchical name.
+ */
+void test_finder_part_hierarchical() {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test finder part hierarchical.");
+}
 
 /**
  * Tests the part by name finder.
@@ -99,8 +110,8 @@ void test_finder_part_by_name() {
     // The found part.
     void* f = *NULL_POINTER_MEMORY_MODEL;
 
-    // Find part by name.
-    get_knowledge_part_by_name((void*) &f, w, (void*) L"part_two", (void*) NUMBER_8_INTEGER_MEMORY_MODEL, (void*) NUMBER_3_INTEGER_MEMORY_MODEL);
+    // Find part in whole by name.
+    get_part_name((void*) &f, w, (void*) L"part_two", (void*) NUMBER_8_INTEGER_MEMORY_MODEL, (void*) MODEL_PART_MEMORY_NAME);
 
     //
     // Output test results.
@@ -195,6 +206,7 @@ void test_finder() {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Test finder.");
 
+    test_finder_part_hierarchical();
 //    test_finder_part_by_name();
 //    test_finder_array();
 }

@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-23  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Process hierarchical knowledge path names, in order to get a part from the knowledge tree
+            (directories "executor/searcher/" and "executor/modifier/getter/")
+
 2011-07-22  Christian Heller  <christian.heller@tuxtax.de>
 
         * Complete and test deep part comparison in files "part_comparator.c" and test in file "comparator_tester.c"

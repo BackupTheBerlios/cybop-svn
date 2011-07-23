@@ -283,7 +283,7 @@ void test_comparator() {
 
 //    test_comparator_ascii_character();
 //    test_comparator_array();
-    test_comparator_part();
+//    test_comparator_part();
 }
 
 /* COMPARATOR_TESTER */

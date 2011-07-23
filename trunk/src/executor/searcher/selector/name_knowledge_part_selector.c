@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef KNOWLEDGE_PART_SELECTOR_SOURCE
-#define KNOWLEDGE_PART_SELECTOR_SOURCE
+#ifndef NAME_KNOWLEDGE_PART_SELECTOR_SOURCE
+#define NAME_KNOWLEDGE_PART_SELECTOR_SOURCE
 
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -62,63 +62,51 @@
 /**
  * Selects the knowledge part.
  *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count
- * @param p2 the destination model size
- * @param p3 the destination details (Hand over as reference!)
- * @param p4 the destination details count
- * @param p5 the destination details size
- * @param p6 the break flag
- * @param p7 the current position (Hand over as reference!)
- * @param p8 the remaining count
+ * @param p0 the break flag
+ * @param p1 the current position (Hand over as reference!)
+ * @param p2 the remaining count
+ * @param p3 the part element index
  */
-void select_knowledge_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
+void select_knowledge_part_name(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p6 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select knowledge part name.");
 
-        int* b = (int*) p6;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select knowledge part.");
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        // The comparison result.
-        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        detect_array((void*) &r, p1, p2, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+            // Set break flag.
+            copy_integer(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                get_part_model(p0, p1, p2, p3, p4, p5, p7, p8);
-
-                // Set break flag.
-                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-            }
+            // Set part element index to model.
+            copy_integer(p3, (void*) MODEL_PART_MEMORY_NAME);
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) META_SEPARATOR_CYBOL_NAME, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+        detect_array((void*) &r, p1, p2, (void*) META_SEPARATOR_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
-            if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                get_part_details(p0, p1, p2, p3, p4, p5, p7, p8);
+            // Set break flag.
+            copy_integer(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
-                // Set break flag.
-                *b = *NUMBER_1_INTEGER_MEMORY_MODEL;
-            }
+            // Set part element index to details.
+            copy_integer(p3, (void*) DETAILS_PART_MEMORY_NAME);
         }
+    }
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not select knowledge part. The break flag is null.");
+        move_position(p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
     }
 }
 
-/* KNOWLEDGE_PART_SELECTOR_SOURCE */
+/* NAME_KNOWLEDGE_PART_SELECTOR_SOURCE */
 #endif

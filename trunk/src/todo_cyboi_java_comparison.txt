@@ -43,20 +43,15 @@ comparator
 __________
 
 + compare
-
-- compare_all: equals, ceiling, floor, higher, lower, equalsIgnoreCase
-- compare_prefix: startsWith
-- compare_suffix: endsWith
-- compare_contain: containsAll
-
-- ??: compareTo (lexicographically, i.e. position in ASCII/Unicode table)
-
-- compare_ignore_case
++ compare_all: equals, ceiling, floor, higher, lower, equalsIgnoreCase, compareTo (lexicographically, i.e. position in ASCII/Unicode table)
++ compare_prefix: startsWith
++ compare_suffix: endsWith
++ compare_subsequence: containsAll
 
 finder
 ______
 
-- find: links to "find_first" by default, same as "find_part"
++ find: links to "find_first" by default, same as "find_part"
 - find_first_index: indexOf, contains, containsKey, containsValue, find, search
 - find_last_index: lastIndexOf
 - find_prefix (find that begins at index 0)
