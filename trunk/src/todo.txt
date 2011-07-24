@@ -11,9 +11,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Test part retrieval via hierarchical name in file "finder_tester.c"
+        * Complete and test new version of "knowledge_part_getter.c" (formerly universal retriever)
         * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" / "overwriter" functions
         * (Possibly) delete "item_reallocator.c", if needed nowhere
+
+        * Offer part deallocation shallow and deep
+            (deep is not always wanted, if a child is referenced by many parts)
 
         * Continue in "executor/arithmetiser/fraction*"
         * Rename "arithmetiser" to "calculator" with function "calculate" and

@@ -193,6 +193,8 @@ void encode_model_diagram_compound_NEW(void* p0, void* p1, void* p2, void* p3, v
 
         // Add memory area to current position.
         add_integer((void*) &l, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        // Add memory area to current position.
+        add_integer((void*) &l, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 

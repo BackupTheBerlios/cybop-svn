@@ -23,18 +23,16 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef NAME_KNOWLEDGE_PART_SELECTOR_SOURCE
-#define NAME_KNOWLEDGE_PART_SELECTOR_SOURCE
+#ifndef BRANCH_KNOWLEDGE_SELECTOR_SOURCE
+#define BRANCH_KNOWLEDGE_SELECTOR_SOURCE
 
-#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../constant/name/http/separator_http_name.c"
-#include "../../../executor/converter/decoder/http_request/uri_http_request_decoder.c"
-#include "../../../executor/converter/detector.c"
-#include "../../../logger/logger.c"
-#include "../../../variable/type_size/integral_type_size.c"
+#include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../../constant/model/log/message_log_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
+#include "../../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../../executor/searcher/detector/array_detector.c"
+#include "../../../../executor/searcher/mover/position_mover.c"
+#include "../../../../logger/logger.c"
 
 //
 // CAUTION! This comment is valid for all "select" functions below.
@@ -60,53 +58,54 @@
 //
 
 /**
- * Selects the knowledge part.
+ * Selects the knowledge branch.
  *
- * @param p0 the break flag
+ * @param p0 the part element index
  * @param p1 the current position (Hand over as reference!)
  * @param p2 the remaining count
- * @param p3 the part element index
  */
-void select_knowledge_part_name(void* p0, void* p1, void* p2, void* p3) {
+void select_knowledge_branch(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select knowledge part name.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Select knowledge branch.");
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
+    // The "." indicates that the name specifies a part of a whole's model.
+    // The "#" indicates that the name specifies a meta property of a whole's details.
+
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        // CAUTION! DO MOVE the position (last parametre) here,
+        // since only the actual name is of interest later.
         detect_array((void*) &r, p1, p2, (void*) PART_SEPARATOR_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PART_SEPARATOR_CYBOL_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Set break flag.
-            copy_integer(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
-
             // Set part element index to model.
-            copy_integer(p3, (void*) MODEL_PART_MEMORY_NAME);
+            copy_integer(p0, (void*) MODEL_PART_MEMORY_NAME);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        // CAUTION! DO MOVE the position (last parametre) here,
+        // since only the actual name is of interest later.
         detect_array((void*) &r, p1, p2, (void*) META_SEPARATOR_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) META_SEPARATOR_CYBOL_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            // Set break flag.
-            copy_integer(p0, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
-
             // Set part element index to details.
-            copy_integer(p3, (void*) DETAILS_PART_MEMORY_NAME);
+            copy_integer(p0, (void*) DETAILS_PART_MEMORY_NAME);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+        // Move position by one if nothing was found.
         move_position(p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
     }
 }
 
-/* NAME_KNOWLEDGE_PART_SELECTOR_SOURCE */
+/* BRANCH_KNOWLEDGE_SELECTOR_SOURCE */
 #endif

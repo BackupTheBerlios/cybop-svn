@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-24  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Fix prefix of indentation ("+-" or "#-") for model_diagram (knowledge tree) output
+        * Test part retrieval via hierarchical knowledge path name in file "finder_tester.c"
+
 2011-07-23  Christian Heller  <christian.heller@tuxtax.de>
 
         * Process hierarchical knowledge path names, in order to get a part from the knowledge tree

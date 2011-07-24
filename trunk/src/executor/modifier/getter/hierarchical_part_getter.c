@@ -29,12 +29,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../constant/name/http/cyboi_http_name.c"
-#include "../../../executor/accessor/appender/part_appender.c"
-#include "../../../executor/comparator/all/part_all_comparator.c"
-#include "../../../executor/converter/selector/http_request/method_http_request_selector.c"
-#include "../../../executor/memoriser/allocator/model_allocator.c"
-#include "../../../executor/memoriser/deallocator/model_deallocator.c"
+#include "../../../executor/searcher/selector/knowledge/name_knowledge_selector.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -58,50 +53,90 @@ void get_part_hierarchical(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
             void** pos = (void**) p2;
 
-            log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get part hierarchical.");
+            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            // The element.
-            void* e = *pos;
-            int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The break flag.
-            int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
-            // The child part element index.
-            int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                void** d = (void**) p0;
 
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get part hierarchical.");
 
-                if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                // The element.
+                void* e = *pos;
+                int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                // The break flag.
+                int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get part hierarchical. The remaining count is zero or smaller.");
+                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-                    break;
+                    if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        // CAUTION! The function "select_knowledge_name"
+                        // may have decremented the remaining count,
+                        // if neither "." nor "#" were found.
+                        // But this is regularly the case if a
+                        // part was the last in the hierarchy,
+                        // having no further child nodes.
+                        // In order to also consider such parts, the
+                        // following function calls are necessary here.
+                        //
+                        // In case the remaining count is too small right
+                        // at the beginning, or the name does not exist,
+                        // then the following functions will just return null.
+
+                        // Find part by name in whole model or details
+                        // (depending on part element index p4).
+                        get_part_name(p0, p1, e, (void*) &ec, p4);
+
+                        // Process knowledge hierarchy recursively further down.
+                        //
+                        // CAUTION! The current p0 is the SOURCE AND DESTINATION!
+                        // A part node of the source p1 was assigned to p0 above,
+                        // so that p0 is now the source.
+                        // Its child part will be assigned to the destination again.
+                        //
+                        // CAUTION! Hand over the source as dereferenced parametre!
+                        get_part_branch(p0, *d, p2, p3);
+
+                        break;
+                    }
+
+                    select_knowledge_name((void*) &b, p2, p3);
+
+                    if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                        // CAUTION! Do NOT relate this comparison with the
+                        // remaining count comparison from above in the following way:
+                        // if ((b != *NUMBER_0_INTEGER_MEMORY_MODEL) || (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+                        //
+                        // If they were related using the boolean OR operator,
+                        // then the element count ec would always be ONE TOO SMALL,
+                        // since the last loop would be omitted and ec not incremented (below).
+
+                        // Find part by name in whole model or details
+                        // (depending on part element index p4).
+                        get_part_name(p0, p1, e, (void*) &ec, p4);
+
+                        // Process knowledge hierarchy recursively further down.
+                        //
+                        // CAUTION! The current p0 is the SOURCE AND DESTINATION!
+                        // A part node of the source p1 was assigned to p0 above,
+                        // so that p0 is now the source.
+                        // Its child part will be assigned to the destination again.
+                        //
+                        // CAUTION! Hand over the source as dereferenced parametre!
+                        get_part_branch(p0, *d, p2, p3);
+
+                        break;
+
+                    } else {
+
+                        // Increment request method count.
+                        ec++;
+                    }
                 }
 
-                select_knowledge_part_name((void*) &b, p2, p3, (void*) &i);
+            } else {
 
-                if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    // Find part by name in whole model or details (depending on part element index p4).
-                    get_part_name(p0, p1, e, (void*) &ec, p4);
-
-                    // Call this function recursively, in order to
-                    // process the knowledge hierarchy further down.
-                    //
-                    // CAUTION! The current p0 is the source AND destination!
-                    // A part node of the source will be assigned to the destination.
-                    //
-                    // CAUTION! The child part's element index is necessary
-                    // to distinguish between structural part (retrieved from model)
-                    // and meta property (retrieved from details).
-                    get_part_hierarchical(p0, p0, p2, p3, (void*) &i);
-
-                    break;
-
-                } else {
-
-                    // Increment request method count.
-                    ec++;
-                }
+                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get part hierarchical. The destination part is null.");
             }
 
         } else {

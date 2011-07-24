@@ -58,7 +58,7 @@ void move_position(void* p0, void* p1, void* p2, void* p3) {
     // Add memory area to current position.
     add_integer(p0, (void*) &m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Subtract count from remaining count.
-    add_integer(p1, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    subtract_integer(p1, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* POSITION_MOVER_SOURCE */
