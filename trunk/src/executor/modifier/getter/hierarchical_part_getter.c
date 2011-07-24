@@ -57,7 +57,7 @@ void get_part_hierarchical(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                 void** d = (void**) p0;
 
-                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Get part hierarchical.");
+                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get part hierarchical.");
 
                 // The element.
                 void* e = *pos;
