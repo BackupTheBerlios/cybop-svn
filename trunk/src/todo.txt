@@ -11,8 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Complete and test new version of "knowledge_part_getter.c" (formerly universal retriever)
         * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" / "overwriter" functions
+        * Complete and test new version of "knowledge_part_getter.c" (formerly universal retriever)
         * (Possibly) delete "item_reallocator.c", if needed nowhere
 
         * Offer part deallocation shallow and deep

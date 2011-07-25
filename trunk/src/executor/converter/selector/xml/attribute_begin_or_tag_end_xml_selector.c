@@ -26,12 +26,14 @@
 #ifndef ATTRIBUTE_BEGIN_OR_TAG_END_XML_SELECTOR_SOURCE
 #define ATTRIBUTE_BEGIN_OR_TAG_END_XML_SELECTOR_SOURCE
 
+#include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/cybol/xml_cybol_name.c"
 #include "../../../../constant/name/xml_name.c"
-#include "../../../../executor/converter/detector.c"
+#include "../../../../executor/searcher/detector/array_detector.c"
+#include "../../../../executor/searcher/mover/position_mover.c"
 #include "../../../../logger/logger.c"
 #include "../../../../variable/type_size/integral_type_size.c"
 
@@ -89,7 +91,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect((void*) &r, p3, p4, (void*) EMPTY_TAG_END_XML_NAME, (void*) EMPTY_TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                            detect_array((void*) &r, p3, p4, (void*) EMPTY_TAG_END_XML_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EMPTY_TAG_END_XML_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -101,7 +103,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect((void*) &r, p3, p4, (void*) TAG_END_XML_NAME, (void*) TAG_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                            detect_array((void*) &r, p3, p4, (void*) TAG_END_XML_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) TAG_END_XML_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -113,7 +115,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect((void*) &r, p3, p4, (void*) ATTRIBUTE_BEGIN_XML_NAME, (void*) ATTRIBUTE_BEGIN_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                            detect_array((void*) &r, p3, p4, (void*) ATTRIBUTE_BEGIN_XML_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) ATTRIBUTE_BEGIN_XML_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -125,7 +127,7 @@ void select_xml_attribute_begin_or_tag_end(void* p0, void* p1, void* p2, void* p
 
                         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                            detect_move_position(p3, p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
+                            move_position(p3, p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                         }
 
                     } else {

@@ -26,12 +26,14 @@
 #ifndef DECLARATION_XML_SELECTOR_SOURCE
 #define DECLARATION_XML_SELECTOR_SOURCE
 
+#include "../../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../../constant/model/log/message_log_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/cybol/xml_cybol_name.c"
 #include "../../../../constant/name/xml_name.c"
-#include "../../../../executor/converter/detector.c"
+#include "../../../../executor/searcher/detector/array_detector.c"
+#include "../../../../executor/searcher/mover/position_mover.c"
 #include "../../../../logger/logger.c"
 #include "../../../../variable/type_size/integral_type_size.c"
 
@@ -66,7 +68,7 @@ void select_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
                 if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    detect((void*) &r, p4, p5, (void*) DECLARATION_END_XML_NAME, (void*) DECLARATION_END_XML_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+                    detect_array((void*) &r, p4, p5, (void*) DECLARATION_END_XML_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) DECLARATION_END_XML_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
                     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -80,7 +82,7 @@ void select_xml_declaration(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     // None of the comparisons above delivered a positive (r != 0) result.
                     // Therefore, increment the current position by one (pointer size).
 
-                    detect_move_position(p4, p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
+                    move_position(p4, p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
                 }
 
             } else {

@@ -29,8 +29,15 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/modifier/getter/name_part_getter.c"
 #include "../../../executor/searcher/selector/knowledge/name_knowledge_selector.c"
 #include "../../../logger/logger.c"
+
+//
+// Forward declaration.
+//
+
+void get_part_branch(void* p0, void* p1, void* p2, void* p3);
 
 /**
  * Gets the knowledge part by hierarchical name.

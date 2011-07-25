@@ -32,6 +32,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/converter/encoder/model_diagram_encoder.c"
+#include "../../../executor/searcher/mover/position_mover.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/type_size/integral_type_size.c"
 
@@ -45,10 +46,10 @@
  * - the current position and remaining count are moved automatically
  *
  * Example calls of this function for ascii characters:
- * detect_element(p0, p1, p2, p3, p4, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE, p7);
+ * detect_element(p0, p1, p2, p3, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, p7);
  *
  * Example calls of this function for wide characters:
- * detect((void*) &r, p7, p8, (void*) QUERY_PARAMETER_BEGIN_SEPARATOR_URI_NAME, (void*) QUERY_PARAMETER_BEGIN_SEPARATOR_URI_NAME_COUNT, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+ * detect_array((void*) &r, p7, p8, (void*) QUERY_PARAMETER_BEGIN_SEPARATOR_URI_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) QUERY_PARAMETER_BEGIN_SEPARATOR_URI_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
  *
  * @param p0 the comparison result
  * @param p1 the current position (Hand over as reference!)

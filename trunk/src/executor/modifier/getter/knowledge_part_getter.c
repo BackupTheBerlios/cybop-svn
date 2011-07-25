@@ -65,7 +65,6 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get part knowledge.");
 
-/*??
     // The part.
     void* p = *NULL_POINTER_MEMORY_MODEL;
     // The part abstraction, model.
@@ -84,6 +83,7 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3) {
     void* emd = *NULL_POINTER_MEMORY_MODEL;
     void* emc = *NULL_POINTER_MEMORY_MODEL;
 
+/*??
     // Get part.
     // CAUTION! This IS necessary to find out about the abstraction.
     get_part_branch((void*) &p, p1, p2, p3);

@@ -33,7 +33,8 @@
 #include "../../../../constant/name/http/separator_http_name.c"
 #include "../../../../executor/converter/decoder/http_request/body_http_request_decoder.c"
 //?? #include "../../../../executor/converter/decoder/http_request/header_argument_http_request_decoder.c"
-#include "../../../../executor/converter/detector.c"
+#include "../../../../executor/searcher/detector/array_detector.c"
+#include "../../../../executor/searcher/mover/position_mover.c"
 #include "../../../../logger/logger.c"
 #include "../../../../variable/type_size/integral_type_size.c"
 
@@ -103,7 +104,7 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) BODY_BEGIN_SEPARATOR_HTTP_NAME, (void*) BODY_BEGIN_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+            detect_array((void*) &r, p7, p8, (void*) BODY_BEGIN_SEPARATOR_HTTP_NAME, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) BODY_BEGIN_SEPARATOR_HTTP_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -116,7 +117,7 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+            detect_array((void*) &r, p7, p8, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -129,7 +130,7 @@ void select_http_request_header_value(void* p0, void* p1, void* p2, void* p3, vo
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+            move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {

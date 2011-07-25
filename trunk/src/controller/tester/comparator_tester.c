@@ -27,9 +27,11 @@
 #define COMPARATOR_TESTER
 
 #include "../../executor/comparator/all/array_all_comparator.c"
+#include "../../executor/comparator/all/part_all_comparator.c"
 #include "../../executor/comparator/prefix/array_prefix_comparator.c"
 #include "../../executor/comparator/subsequence/array_subsequence_comparator.c"
 #include "../../executor/comparator/suffix/array_suffix_comparator.c"
+#include "../../executor/modifier/inserter/part_inserter.c"
 #include "../../logger/logger.c"
 
 /**

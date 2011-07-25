@@ -33,6 +33,7 @@
 #include "../../../../constant/model/uri/scheme_uri_model.c"
 #include "../../../../constant/name/http_request_uri/http_request_uri_name.c"
 #include "../../../../executor/converter/decoder/uri/http_uri_decoder.c"
+#include "../../../../executor/searcher/mover/position_mover.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -117,7 +118,7 @@ void select_authority_form_http_request_uri(void* p0, void* p1, void* p2, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) AUTHORITY_FORM_HTTP_REQUEST_URI_NAME, (void*) AUTHORITY_FORM_HTTP_REQUEST_URI_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+            detect_array((void*) &r, p7, p8, (void*) AUTHORITY_FORM_HTTP_REQUEST_URI_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) AUTHORITY_FORM_HTTP_REQUEST_URI_NAME_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -128,7 +129,7 @@ void select_authority_form_http_request_uri(void* p0, void* p1, void* p2, void* 
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
+            move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {

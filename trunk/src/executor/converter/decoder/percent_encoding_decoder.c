@@ -27,8 +27,9 @@
 #define PERCENT_ENCODING_DECODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../executor/converter/detector.c"
 #include "../../../executor/modifier/appender.c"
+#include "../../../executor/searcher/detector/array_detector.c"
+#include "../../../executor/searcher/mover/position_mover.c"
 #include "../../../logger/logger.c"
 
 //
@@ -135,7 +136,7 @@ void decode_percent_encoding(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         append(p0, p1, p2, (void*) &v, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
-        detect_move_position(p3, p4, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
+        move_position(p3, p4, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
 
     } else {
 

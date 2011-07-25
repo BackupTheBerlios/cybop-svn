@@ -32,8 +32,9 @@
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/authority/cyboi_authority_name.c"
 #include "../../../../constant/name/authority/separator_authority_name.c"
-#include "../../../../executor/converter/detector.c"
 #include "../../../../executor/converter/decoder/authority/password_authority_decoder.c"
+#include "../../../../executor/searcher/detector/array_detector.c"
+#include "../../../../executor/searcher/mover/position_mover.c"
 #include "../../../../logger/logger.c"
 #include "../../../../variable/type_size/integral_type_size.c"
 
@@ -67,7 +68,7 @@ void select_authority_username(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect((void*) &r, p7, p8, (void*) PASSWORD_BEGIN_SEPARATOR_AUTHORITY_NAME, (void*) PASSWORD_BEGIN_SEPARATOR_AUTHORITY_NAME_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+            detect_array((void*) &r, p7, p8, (void*) PASSWORD_BEGIN_SEPARATOR_AUTHORITY_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PASSWORD_BEGIN_SEPARATOR_AUTHORITY_NAME_COUNT, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -80,7 +81,7 @@ void select_authority_username(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            detect_move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
+            move_position(p7, p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_INTEGRAL_TYPE_SIZE);
         }
 
     } else {
