@@ -31,7 +31,7 @@
 #include "../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../constant/model/cyboi/identification_cyboi_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../executor/modifier/replacer/array_replacer.c"
+#include "../executor/modifier/overwriter/array_overwriter.c"
 #include "../executor/memoriser/allocator/model_allocator.c"
 #include "../executor/memoriser/deallocator/model_deallocator.c"
 
@@ -44,33 +44,25 @@ void help(void* p0) {
 
     // The message.
     void* m = *NULL_POINTER_MEMORY_MODEL;
-    void* mc = *NULL_POINTER_MEMORY_MODEL;
-    void* ms = *NULL_POINTER_MEMORY_MODEL;
-
+    int mc = *NULL_POINTER_MEMORY_MODEL;
     // The size: message + line feed + termination
-    int s = *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
-    // The index.
-    int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ms = *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
     // Allocate message.
-    allocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Copy message.
-    replace_array(m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Increment index.
-    i = i + *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT;
+    overwrite_array(m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &mc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &mc, (void*) &ms);
     // Copy line feed control wide character.
-    replace_array(m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Increment index.
-    i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
+    overwrite_array(m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &mc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &mc, (void*) &ms);
     // Copy null termination wide character.
-    replace_array(m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    overwrite_array(m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &mc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &mc, (void*) &ms);
 
     // Log message.
     log_write_terminated_message(p0, m);
 
     // Deallocate message.
-    deallocate_model((void*) &m, (void*) &mc, (void*) &ms, (void*) &s, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    deallocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* HELPER_SOURCE */

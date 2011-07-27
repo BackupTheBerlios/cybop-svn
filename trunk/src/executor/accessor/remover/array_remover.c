@@ -32,7 +32,6 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/modifier/assigner.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
 #include "../../../executor/arithmetiser/integer_multiplier.c"
 #include "../../../executor/arithmetiser/integer_subtracter.c"
@@ -131,7 +130,7 @@ void remove_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
                         break;
                     }
 
-                    assign_with_offset(d, s, (void*) &j, p4);
+//??                    assign_with_offset(d, s, (void*) &j, p4);
 
                     j++;
                 }

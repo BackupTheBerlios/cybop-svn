@@ -32,7 +32,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/comparator/all/array_all_comparator.c"
-#include "../../../executor/modifier/replacer/array_replacer.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -88,7 +88,7 @@ void memorise_copying_integer_vector(void* p0, void* p1, void* p2, void* p3, voi
                         reallocate_array(p0, p1, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
                     }
 
-                    replace_array(*d, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    overwrite_array(p0, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
                 } else {
 

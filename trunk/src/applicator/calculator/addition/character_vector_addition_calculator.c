@@ -96,10 +96,8 @@ void calculate_addition_character_vector(void* p0, void* p1, void* p2, void* p3,
                         allocate_model((void*) &summand2, (void*) &summand2c, (void*) &summand2s, p6, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
                         // Set temporary input operand arrays.
-                        replace_array(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        *((int*) summand1c) = *((int*) p4);
-                        replace_array(summand2, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        *((int*) summand2c) = *((int*) p6);
+                        overwrite_array(summand1, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, summand1c, summand1s);
+                        overwrite_array(summand2, p5, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, summand2c, summand2s);
 
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size
@@ -114,10 +112,8 @@ void calculate_addition_character_vector(void* p0, void* p1, void* p2, void* p3,
                         reallocate_array(p0, p1, p2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                         // Set output operand array.
-                        replace_array(*s, summand1, summand1c, (void*) sc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        *sc = *sc + *((int*) summand1c);
-                        replace_array(*s, summand2, summand2c, (void*) sc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        *sc = *sc + *((int*) summand2c);
+                        overwrite_array(*s, summand1, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, summand1c, (void*) sc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
+                        overwrite_array(*s, summand2, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, summand2c, (void*) sc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
 
                         // Deallocate temporary operand arrays.
                         deallocate_model((void*) &summand1, (void*) &summand1c, (void*) &summand1s, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);

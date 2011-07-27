@@ -66,7 +66,7 @@ void memorise_counting_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, 
             // Set result to compound count value.
             // A loop is not needed here, since the compound count already contains
             // the number of parts within that compound.
-            replace(*r, NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
+            overwrite_array(*r, NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &p4, INTEGER_ABSTRACTION, INTEGER_ABSTRACTION_COUNT);
 
     fwprintf(stdout, L"TEST r: %i\n", **r);
     fwprintf(stdout, L"TEST rc: %i\n", *((int*) rc));
@@ -101,8 +101,8 @@ void memorise_counting_suffix(void* p0, void* p1, void* p2, void* p3, void* p4, 
 
             // Set the compare string
             // this is the basisname and the list separat
-            replace_array(compstring, *bnm, *bnmc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            replace_array(compstring, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *bnmc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            overwrite_array(compstring, *bnm, *bnmc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            overwrite_array(compstring, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *bnmc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // The loop count.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;

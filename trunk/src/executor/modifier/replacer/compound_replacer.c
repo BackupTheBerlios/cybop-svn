@@ -163,19 +163,21 @@ void replace_compound_by_index(void* p0, void* p1, void* p2, void* p3,
 
                                                                     if (*i < *cs) {
 
+/*?? TODO!
                                                                         // Set name, abstraction, model, details.
-                                                                        replace_array(*n, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*nc, (void*) &p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*ns, (void*) &p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*a, (void*) &p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*ac, (void*) &p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*as, (void*) &p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*m, (void*) &p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*mc, (void*) &p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*ms, (void*) &p12, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*d, (void*) &p13, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*dc, (void*) &p14, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                                                                        replace_array(*ds, (void*) &p15, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*n, (void*) &p4, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*nc, (void*) &p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*ns, (void*) &p6, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*a, (void*) &p7, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*ac, (void*) &p8, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*as, (void*) &p9, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*m, (void*) &p10, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*mc, (void*) &p11, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*ms, (void*) &p12, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*d, (void*) &p13, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*dc, (void*) &p14, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                                                                        overwrite_array(*ds, (void*) &p15, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+*/
 
                                                                         // Increment count.
                                                                         (*cc)++;

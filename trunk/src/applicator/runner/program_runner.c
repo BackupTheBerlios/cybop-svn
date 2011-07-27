@@ -83,7 +83,7 @@ void run_program(void* p0, void* p1, void* p2, void* p3) {
     allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Append command.
-    append((void*) &arg, (void*) &argc, (void*) &args, *programm, *programmc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    overwrite_array((void*) &arg, *programm, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *programmc, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
 
     // Execute command line in shell.
     run_executing(arg, (void*) &argc);

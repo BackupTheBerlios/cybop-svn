@@ -50,69 +50,36 @@
  */
 void decode_boolean(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode boolean.");
 
-        int* sc = (int*) p4;
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            int* dc = (int*) p1;
+        compare_all_array((void*) &r, p3, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT);
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                int** d = (int**) p0;
-
-                log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode boolean.");
-
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    compare_all_array((void*) &r, p3, (void*) TRUE_BOOLEAN_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Set boolean value to "true", in other words the integer value to "one".
-                        replace_array(*d, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                        // Increment destination count.
-                        *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    compare_all_array((void*) &r, p3, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT);
-
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        // Set boolean value to "false", in other words the integer value to "zero".
-                        replace_array(*d, (void*) FALSE_BOOLEAN_MEMORY_MODEL, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                        // Increment destination count.
-                        *dc = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
-                    }
-                }
-
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                    log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The value cannot be interpreted.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The destination is null.");
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The destination count is null.");
+            // Set boolean value to "true", in other words the integer value to "one".
+            overwrite_array(p0, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
         }
+    }
 
-    } else {
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The source count is null.");
+        compare_all_array((void*) &r, p3, (void*) FALSE_BOOLEAN_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) TRUE_BOOLEAN_CYBOL_MODEL_COUNT);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // Set boolean value to "false", in other words the integer value to "zero".
+            overwrite_array(p0, (void*) FALSE_BOOLEAN_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
+        }
+    }
+
+    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not decode boolean. The value cannot be interpreted.");
     }
 }
 

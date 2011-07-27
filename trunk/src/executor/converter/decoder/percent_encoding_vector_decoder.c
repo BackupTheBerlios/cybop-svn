@@ -29,7 +29,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../executor/converter/decoder/percent_encoding_decoder.c"
 #include "../../../executor/converter/selector/percent_encoding_vector_element_selector.c"
-#include "../../../executor/modifier/appender.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../logger/logger.c"
 
 //
@@ -152,7 +152,7 @@ void decode_percent_encoding_vector_element(void* p0, void* p1, void* p2, void* 
             // Append any unreserved characters found up to here,
             // no matter whether an unreserved character follows
             // or no unreserved character at all was found.
-            append(p0, p1, p2, u, (void*) &uc, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array(p0, u, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) &uc, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
 
             if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

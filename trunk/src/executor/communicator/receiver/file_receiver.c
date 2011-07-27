@@ -54,65 +54,24 @@ void receive_file_stream(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Receive file stream.");
 
-            int* ds = (int*) p2;
+        // Read first character.
+        char c = fgetc(p3);
 
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
 
-                int* dc = (int*) p1;
+            if (c == EOF) {
 
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-                    void** d = (void**) p0;
-
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Receive file stream.");
-
-                    // Read first character.
-                    char c = fgetc(p3);
-
-                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                        if (c == EOF) {
-
-                            break;
-                        }
-
-                        if (*dc >= *ds) {
-
-                            // Increase size.
-                            // CAUTION! Adding one is necessary to avoid a zero size, if the count is zero!
-//??                            *ds = (*ds * *CYBOL_FILE_REALLOCATION_FACTOR) + *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
-                            *ds = *dc + *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                            // Reallocate array.
-                            reallocate_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        }
-
-                        // Set character in destination array.
-                        // The array count serves as index for setting the character.
-                        replace_array(*d, (void*) &c, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                        // Increase array count.
-                        (*dc)++;
-
-                        // Read next character.
-                        c = fgetc(p3);
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive file stream. The destination is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive file stream. The destination count is null.");
+                break;
             }
 
-        } else {
+            // Set character in destination array.
+            // The array count serves as index for setting the character.
+            overwrite_array(p0, (void*) &c, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive file stream. The destination size is null.");
+            // Read next character.
+            c = fgetc(p3);
         }
 
     } else {
@@ -171,17 +130,8 @@ void receive_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // Encode wide character name into multibyte character array.
             encode_utf_8_unicode_character_vector((void*) &tn, tnc, tns, p3, p4);
 
-            if (*((int*) tns) <= *((int*) tnc)) {
-
-                // Increase character array size to have place for the termination character.
-                *((int*) tns) = *((int*) tnc) + *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                // Reallocate terminated file name as multibyte character array.
-                reallocate_array((void*) &tn, tnc, tns, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-            }
-
             // Add null termination character to terminated file name.
-            replace_array(tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tnc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+            overwrite_array((void*) &tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tnc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, tnc, tns);
 
             // Open file.
             // CAUTION! The file name cannot be handed over as is.

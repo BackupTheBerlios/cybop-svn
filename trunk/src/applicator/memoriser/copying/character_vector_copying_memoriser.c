@@ -31,7 +31,7 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/modifier/replacer/array_replacer.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -45,7 +45,7 @@
  */
 void memorise_copying_character_vector(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    replace_adjust(p0, p1, p2, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    overwrite_array(p0, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 }
 
 /* CHARACTER_VECTOR_COPYING_MEMORISER_SOURCE */

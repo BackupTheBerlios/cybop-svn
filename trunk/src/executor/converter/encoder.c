@@ -148,7 +148,7 @@ void encode(void* p0, void* p1, void* p2,
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
         }
     }
 
@@ -218,7 +218,7 @@ void encode(void* p0, void* p1, void* p2,
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
         }
     }
 
@@ -238,7 +238,7 @@ void encode(void* p0, void* p1, void* p2,
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            encode_model_diagram(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+            encode_model_diagram(p0, p1, p2, p3);
         }
     }
 
@@ -248,7 +248,7 @@ void encode(void* p0, void* p1, void* p2,
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
         }
     }
 
@@ -258,7 +258,7 @@ void encode(void* p0, void* p1, void* p2,
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p7, p8, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array(p0, p7, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p8, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
         }
     }
 

@@ -84,7 +84,7 @@ void communicate_sending_shell(void* p0, void* p1, void* p2, void* p3, void* p4,
 
         if (*nl != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append((void*) &s, (void*) &sc, (void*) &ss, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array((void*) &s, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &sc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &sc, (void*) &ss);
         }
     }
 

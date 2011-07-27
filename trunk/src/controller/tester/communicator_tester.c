@@ -207,39 +207,39 @@ void test_wide_character_output() {
     // Set terminated control sequences string by first copying the actual
     // control sequences and then adding the null termination character.
     // (Termination character does not seem to be necessary for wide character strings.)
-    replace_array(ts, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_RIGHT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
-    replace_array(ts, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
 
     wprintf(L"\033[32mgreen colour\033[0mswitched off.");
 
     // \033
     wchar_t wc = 0x001B;
-    replace_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
     // [
     wc = 0x005B;
-    replace_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
     // 3
     wc = 0x0033;
-    replace_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
     // 2
     wc = 0x0032;
-    replace_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
     // m
     wc = 0x006d;
-    replace_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) &wc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
 
-    replace_array(ts, (void*) LATIN_CAPITAL_LETTER_H_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) LATIN_CAPITAL_LETTER_H_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
-    replace_array(ts, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) BOX_DRAWINGS_LIGHT_HORIZONTAL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
-    replace_array(ts, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+//??    overwrite_array(ts, (void*) BOX_DRAWINGS_LIGHT_DOWN_AND_LEFT_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &tsc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
     tsc++;
 
     // Write to terminal.

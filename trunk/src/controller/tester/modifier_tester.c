@@ -159,7 +159,7 @@ void test_modifier_part_compound() {
     allocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Encode model into model diagram.
-    encode_model_diagram_NEW((void*) &mdi, (void*) &mdic, (void*) &mdis, w1);
+    encode_model_diagram((void*) &mdi, (void*) &mdic, (void*) &mdis, w1);
     // Encode model diagram into multibyte character stream.
     encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, mdi, (void*) &mdic);
     // Write multibyte character stream as message to file system.
@@ -193,7 +193,7 @@ void test_modifier_part_compound() {
     allocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Encode model into model diagram.
-    encode_model_diagram_NEW((void*) &mdi, (void*) &mdic, (void*) &mdis, w2);
+    encode_model_diagram((void*) &mdi, (void*) &mdic, (void*) &mdis, w2);
     // Encode model diagram into multibyte character stream.
     encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, mdi, (void*) &mdic);
     // Write multibyte character stream as message to file system.
@@ -227,7 +227,7 @@ void test_modifier_part_compound() {
     allocate_array((void*) &mb, (void*) &mbs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Encode model into model diagram.
-    encode_model_diagram_NEW((void*) &mdi, (void*) &mdic, (void*) &mdis, w3);
+    encode_model_diagram((void*) &mdi, (void*) &mdic, (void*) &mdis, w3);
     // Encode model diagram into multibyte character stream.
     encode_utf_8_unicode_character_vector((void*) &mb, (void*) &mbc, (void*) &mbs, mdi, (void*) &mdic);
     // Write multibyte character stream as message to file system.

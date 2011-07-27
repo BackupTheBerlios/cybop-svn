@@ -66,7 +66,7 @@ void send_file_character(void* p0, void* p1, void* p2, void* p3) {
     if (e == EOF) {
 
         // Set break flag, so that the loop can be left in the next cycle.
-        replace_array(p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        copy_integer(p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
     }
 }
 
@@ -97,7 +97,7 @@ void send_file_wide_character(void* p0, void* p1, void* p2, void* p3) {
     if (e != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
         // Set break flag, so that the loop can be left in the next cycle.
-        replace_array(p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        copy_integer(p3, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
     }
 }
 
@@ -267,17 +267,8 @@ void send_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
                 // Encode wide character option into multibyte character array.
                 encode_utf_8_unicode_character_vector((void*) &tn, tnc, tns, *d, p1);
 
-                if (*((int*) tns) <= *((int*) tnc)) {
-
-                    // Increase character array size to have place for the termination character.
-                    *((int*) tns) = *((int*) tnc) + *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                    // Reallocate terminated file name as multibyte character array.
-                    reallocate_array((void*) &tn, tnc, tns, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                }
-
                 // Add null termination character to terminated file name.
-                replace_array(tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tnc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                overwrite_array((void*) &tn, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tnc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, tnc, tns);
 
                 // Open file.
                 // CAUTION! The file name cannot be handed over as is.

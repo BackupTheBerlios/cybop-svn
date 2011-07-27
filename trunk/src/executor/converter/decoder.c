@@ -167,10 +167,12 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
             allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+/*?? TODO!
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 m, mc, d, dc);
+*/
             // The multibyte character stream.
             void* mb = *NULL_POINTER_MEMORY_MODEL;
             int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -207,10 +209,12 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
             allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+/*?? TODO!
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 *((void**) p0), p1, *((void**) p3), p4);
+*/
             // Reset multibyte character stream.
             mb = *NULL_POINTER_MEMORY_MODEL;
             mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -251,7 +255,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array(p0, p6, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p7, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
         }
     }
 
@@ -301,10 +305,12 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
             allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+/*?? TODO!
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 *((void**) p0), p1, *((void**) p3), p4);
+*/
             // The multibyte character stream.
             void* mb = *NULL_POINTER_MEMORY_MODEL;
             int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -357,10 +363,12 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
             allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+/*?? TODO!
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 m, (void*) &mc, d, (void*) &dc);
+*/
             // The multibyte character stream.
             void* mb = *NULL_POINTER_MEMORY_MODEL;
             int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -396,10 +404,12 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
             allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+/*?? TODO!
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 *((void**) p0), p1, *((void**) p3), p4);
+*/
             // Reset multibyte character stream.
             mb = *NULL_POINTER_MEMORY_MODEL;
             mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -438,7 +448,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array(p0, p6, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p7, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
         }
     }
 
@@ -468,7 +478,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array(p0, p6, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p7, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
         }
     }
 
@@ -478,7 +488,7 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            append(p0, p1, p2, p6, p7, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+            overwrite_array(p0, p6, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p7, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
         }
     }
 
@@ -517,10 +527,12 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             int mds = *NUMBER_0_INTEGER_MEMORY_MODEL;
             // Allocate model diagram.
             allocate((void*) &md, (void*) &mds, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+/*?? TODO!
             // Encode model into model diagram.
             encode_model_diagram((void*) &md, (void*) &mdc, (void*) &mds,
                 *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT,
                 *((void**) p0), p1, *((void**) p3), p4);
+*/
             // The multibyte character stream.
             void* mb = *NULL_POINTER_MEMORY_MODEL;
             int mbc = *NUMBER_0_INTEGER_MEMORY_MODEL;

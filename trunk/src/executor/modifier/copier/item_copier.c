@@ -37,7 +37,6 @@
 #include "../../../executor/modifier/copier/array_copier.c"
 #include "../../../executor/memoriser/reallocator/item_reallocator.c"
 #include "../../../executor/memoriser/size_determiner.c"
-#include "../../../executor/modifier/assigner.c"
 #include "../../../logger/logger.c"
 
 /**

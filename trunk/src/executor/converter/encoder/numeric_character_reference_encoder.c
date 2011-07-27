@@ -87,20 +87,8 @@ void encode_numeric_character_reference(void* p0, void* p1, void* p2, void* p3, 
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    if ((*dc + tc) > *ds) {
-
-                        // Calculate destination size.
-                        *ds = (*ARRAY_REALLOCATION_FACTOR * (*dc)) + tc;
-
-                        // Reallocate destination.
-                        reallocate(p0, p1, p2, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-                    }
-
                     // Add temporary value to destination.
-                    replace(p0, p1, (void*) t, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-
-                    // Increase destination count.
-                    *dc = *dc + tc;
+                    overwrite_array(p0, (void*) t, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) &tc, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
                 }
 
             } else {

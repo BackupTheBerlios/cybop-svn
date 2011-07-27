@@ -32,8 +32,8 @@
 #include "../../../constant/name/memory/primitive_memory_name.c"
 #include "../../../executor/converter/encoder/abstraction_encoder.c"
 #include "../../../executor/memoriser/allocator/item_allocator.c"
-#include "../../../executor/modifier/replacer/array_replacer.c"
-#include "../../../executor/modifier/replacer.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../executor/modifier/copier/array_copier.c"
 #include "../../../logger/logger.c"
 
@@ -69,10 +69,12 @@ void allocate_model(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
             allocate(p1, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
             allocate(p2, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
+/*?? TODO!
             // The count is set to zero, since the model does not contain any elements yet.
-            replace_array(*c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            overwrite_array(*c, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
             // The size is set to the value that was handed over as argument.
-            replace_array(*s, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            overwrite_array(*s, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+*/
 
         } else {
 

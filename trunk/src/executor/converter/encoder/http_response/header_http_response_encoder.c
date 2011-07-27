@@ -34,7 +34,7 @@
 #include "../../../../executor/converter/encoder/http_response/header_entry_http_response_encoder.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
-#include "../../../../executor/modifier/appender.c"
+#include "../../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -58,12 +58,12 @@ void encode_http_response_header_content_length(void* p0, void* p1, void* p2, vo
     // Encode wide character array into multibyte character array.
     encode_integer((void*) &a, ac, as, p3, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
-    append(p0, p1, p2, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
-    append(p0, p1, p2, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    overwrite_array(p0, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) CONTENT_LENGTH_ENTITY_HEADER_HTTP_NAME_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
+    overwrite_array(p0, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) HEADER_ARGUMENT_SEPARATOR_HTTP_NAME_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
     // CAUTION! Use the message count (content length) integer value
     // that was handed over as parameter!
-    select_http_response_header_entry_append(p0, p1, p2, a, ac);
-    append(p0, p1, p2, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    select_http_response_header_entry_overwrite_array(p0, p1, p2, a, ac);
+    overwrite_array(p0, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
     // Deallocate character array.
     deallocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);

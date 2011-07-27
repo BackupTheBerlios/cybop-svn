@@ -148,12 +148,12 @@ void memorise_building(void* p0, void* p1, void* p2, void* p3, void* p4) {
     reallocate_array(resm, *resms, *resms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Set result array.
-    replace_array(*resm, *bnm, *bnmc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    replace_array(*resm, LIST_SEPARATOR_CYBOL_NAME, LIST_SEPARATOR_CYBOL_NAME_COUNT, *bnmc, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    overwrite_array(*resm, *bnm, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *bnmc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, *resmc, *resms);
+    overwrite_array(*resm, (void*) LIST_SEPARATOR_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) LIST_SEPARATOR_CYBOL_NAME_COUNT, *bnmc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, *resmc, *resms);
 
     int temp_index = *((int*) *bnmc) + *LIST_SEPARATOR_CYBOL_NAME_COUNT;
 
-    replace_array(*resm, int_string, &int_string_count, &temp_index, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    overwrite_array(*resm, int_string, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, &int_string_count, &temp_index, (void*) VALUE_PRIMITIVE_MEMORY_NAME, *resmc, *resms);
 
     // Destroy int_string array.
     deallocate_array((void*) &int_string, (void*) &int_string_size, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);

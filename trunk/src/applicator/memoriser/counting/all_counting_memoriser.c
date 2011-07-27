@@ -36,7 +36,7 @@
 #include "../../../executor/comparator/all/array_all_comparator.c"
 #include "../../../executor/converter/decoder.c"
 #include "../../../executor/memoriser/allocator.c"
-#include "../../../executor/modifier/replacer.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -55,7 +55,7 @@ void memorise_counting_all(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Set result to compound count value.
     // A loop is not needed here, since the compound count already contains
     // the number of parts within that compound.
-    replace_adjust(p0, p1, p2, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, INTEGER_NUMBER_CYBOL_ABSTRACTION, INTEGER_NUMBER_CYBOL_ABSTRACTION_COUNT);
+    overwrite_array(p0, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 }
 
 /* ALL_COUNTING_MEMORISER_SOURCE */

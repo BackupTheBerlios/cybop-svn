@@ -37,6 +37,12 @@
 #include "../../../executor/modifier/copier/array_copier.c"
 #include "../../../logger/logger.c"
 
+//
+// Forward declarations.
+//
+
+void compare_all_part_all(void* p0, void* p1, void* p2, void* p3);
+
 /**
  * Compares left- with right part.
  *

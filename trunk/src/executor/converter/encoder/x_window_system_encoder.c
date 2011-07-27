@@ -394,7 +394,7 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                     }
 
                     // Add null termination character to text.
-                    replace_array(text, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, textc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    overwrite_array((void*) &text, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, textc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, textc, texts);
 
                     //?? TODO: Create "text" as 2byte character array,
                     //?? since the xlib C library expects it that way.
@@ -596,9 +596,9 @@ void encode_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, vo
                 }
 
                 // Add null termination character to title.
-                replace_array(tt, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, ttc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                overwrite_array((void*) &tt, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, ttc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, ttc, tts);
                 // Add null termination character to icon name.
-                replace_array(ti, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tic, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                overwrite_array((void*) &ti, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tic, (void*) VALUE_PRIMITIVE_MEMORY_NAME, tic, tis);
 
                 // Set terminated window title.
                 //

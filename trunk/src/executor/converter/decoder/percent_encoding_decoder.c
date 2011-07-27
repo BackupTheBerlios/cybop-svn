@@ -27,7 +27,7 @@
 #define PERCENT_ENCODING_DECODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
-#include "../../../executor/modifier/appender.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../executor/searcher/detector/array_detector.c"
 #include "../../../executor/searcher/mover/position_mover.c"
 #include "../../../logger/logger.c"
@@ -92,10 +92,10 @@ void decode_percent_encoding(void* p0, void* p1, void* p2, void* p3, void* p4) {
         allocate_model((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // Copy original string to temporary null-terminated string.
-        append((void*) &tmp, tmpc, tmps, *pos, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        overwrite_array((void*) &tmp, *pos, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, tmpc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, tmpc, tmps);
         // Add string termination to temporary null-terminated string.
         // The source count is used as index for the termination character.
-        append((void*) &tmp, tmpc, tmps, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        overwrite_array((void*) &tmp, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tmpc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, tmpc, tmps);
 
         // The tail variable is useless here and only needed for the string
         // transformation function. If the whole string array consists of
@@ -134,7 +134,7 @@ void decode_percent_encoding(void* p0, void* p1, void* p2, void* p3, void* p4) {
         //?? --- The code above is temporary and should be moved into an own file!
         //
 
-        append(p0, p1, p2, (void*) &v, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        overwrite_array(p0, (void*) &v, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
 
         move_position(p3, p4, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) SIGNED_CHARACTER_INTEGRAL_TYPE_SIZE);
 

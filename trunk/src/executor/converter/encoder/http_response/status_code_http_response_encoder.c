@@ -35,7 +35,7 @@
 #include "../../../../executor/converter/selector/http_request/protocol_http_request_selector.c"
 #include "../../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../../executor/memoriser/deallocator/model_deallocator.c"
-#include "../../../../executor/modifier/appender.c"
+#include "../../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../../logger/logger.c"
 
 /**
@@ -55,7 +55,7 @@ void encode_http_response_status_code(void* p0, void* p1, void* p2, void* p3, vo
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode http response status code.");
 
-    append(p0, p1, p2, (void*) OK_200_STATUS_CODE_HTTP_MODEL, (void*) OK_200_STATUS_CODE_HTTP_MODEL_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    overwrite_array(p0, (void*) OK_200_STATUS_CODE_HTTP_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) OK_200_STATUS_CODE_HTTP_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 }
 
 /* STATUS_CODE_HTTP_RESPONSE_ENCODER_SOURCE */

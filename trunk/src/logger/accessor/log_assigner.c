@@ -65,11 +65,11 @@ void log_assign(void* p0, void* p1, void* p2, void* p3) {
 
             if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-                log_assign_integer(de, se);
+                log_copy_integer(de, se);
 
             } else if (*a == *WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-                log_assign_wide_character(de, se);
+                log_copy_wide_character(de, se);
 
             } else {
 

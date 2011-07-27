@@ -101,10 +101,8 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
                         allocate_model((void*) &summand2, (void*) &summand2c, (void*) &summand2s, p6, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
 
                         // Set temporary input operand arrays.
-                        replace_array(summand1, p3, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        *((int*) summand1c) = *((int*) p4);
-                        replace_array(summand2, p5, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-                        *((int*) summand2c) = *((int*) p6);
+                        overwrite_array(summand1, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, summand1c, summand1s);
+                        overwrite_array(summand2, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, p6, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, summand2c, summand2s);
 
                         // CAUTION! In order to achieve correct results,
                         // the sum array needs to be resized to the exact size
@@ -149,9 +147,7 @@ void calculate_addition_integer_vector(void* p0, void* p1, void* p2, void* p3, v
                             tmps = *tmps1 + *tmps2;
 
                             // Set output operand array.
-                            replace_array(*s, (void*) &tmps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                            (*sc)++;
+                            overwrite_array(*s, (void*) &tmps, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, p1, p2);
                         }
 
                         // Deallocate temporary operand arrays.

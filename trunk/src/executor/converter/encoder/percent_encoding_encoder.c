@@ -133,7 +133,7 @@ void encode_percent_encoding(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 
     // Set source into destination character vector.
-    replace_array(*d, p3, p4, p1, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    overwrite_array(*d, p3, p4, p1, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Increment destination count.
     *dc = *dc + *sc;

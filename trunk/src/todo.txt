@@ -11,7 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Replace old "assigner" and "replacer" (both in "modifier" directory) with "copier" / "overwriter" functions
+        * Replace functions with new versions named with suffix "_NEW"
+        * Delete outdated directory "executor/accessor/"
+        * Delete outdated directory "executor/modifier/replacer/"
+        * Move files of directory "executor/converter/selector/" into "executor/searcher/selector/"
         * Complete and test new version of "knowledge_part_getter.c" (formerly universal retriever)
         * (Possibly) delete "item_reallocator.c", if needed nowhere
 

@@ -69,8 +69,7 @@ void test_memoriser_array_resizing() {
     allocate_array((void*) &c, (void*) &cs, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Fill original array with text.
-    replace_array(o, (void*) t, (void*) tc, (void*) &oc, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    oc = oc + *tc;
+    overwrite_array(o, (void*) t, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) tc, (void*) &oc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &oc, (void*) &os);
 
     // Print original array content.
     log_write_terminated_message((void*) stdout, t);

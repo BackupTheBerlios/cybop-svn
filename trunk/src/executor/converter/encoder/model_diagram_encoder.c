@@ -48,40 +48,9 @@
  * @param p0 the destination model diagram (Hand over as reference!)
  * @param p1 the destination model diagram count
  * @param p2 the destination model diagram size
- * @param p3 the source name
- * @param p4 the source name count
- * @param p5 the source abstraction
- * @param p6 the source abstraction count
- * @param p7 the source model
- * @param p8 the source model count
- * @param p9 the source details
- * @param p10 the source details count
- */
-void encode_model_diagram(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode model diagram.");
-
-    // The tree level.
-    // CAUTION! Do NOT forward NUMBER_0_INTEGER_MEMORY_MODEL constant directly,
-    // since the tree level value gets changed in the following functions!
-    int l = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Encode model diagram root node.
-    encode_model_diagram_node(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, (void*) &l, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
-}
-
-/**
- * Encodes the knowledge model and creates a model diagram from it.
- *
- * A model diagram in this case is a textual representation of a knowledge model,
- * in form of many line feed-separated lines representing a model part each.
- *
- * @param p0 the destination model diagram (Hand over as reference!)
- * @param p1 the destination model diagram count
- * @param p2 the destination model diagram size
  * @param p3 the source part
  */
-void encode_model_diagram_NEW(void* p0, void* p1, void* p2, void* p3) {
+void encode_model_diagram(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Encode model diagram.");
 
@@ -117,24 +86,13 @@ void encode_model_diagram_NEW(void* p0, void* p1, void* p2, void* p3) {
     copy_array_forward((void*) &dd, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &dc, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
-/*??
-    fwprintf(stdout, L"TEST nd: %ls\n", (wchar_t*) nd);
-    fwprintf(stdout, L"TEST nc: %i\n", *((int*) nc));
-    fwprintf(stdout, L"TEST ad: %ls\n", (wchar_t*) ad);
-    fwprintf(stdout, L"TEST ac: %i\n", *((int*) ac));
-    fwprintf(stdout, L"TEST md: %ls\n", (wchar_t*) md);
-    fwprintf(stdout, L"TEST mc: %i\n", *((int*) mc));
-    fwprintf(stdout, L"TEST dd: %i\n", dd);
-    fwprintf(stdout, L"TEST dc: %i\n", *((int*) dc));
-*/
-
     // The tree level.
     // CAUTION! Do NOT forward NUMBER_0_INTEGER_MEMORY_MODEL constant directly,
     // since the tree level value gets changed in the following functions!
     int l = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Encode model diagram root node.
-    encode_model_diagram_node_NEW(p0, p1, p2, nd, nc, ad, ac, md, mc, dd, dc, (void*) &l, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+    encode_model_diagram_node(p0, p1, p2, nd, nc, ad, ac, md, mc, dd, dc, (void*) &l, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 }
 
 /* MODEL_DIAGRAM_ENCODER_SOURCE */

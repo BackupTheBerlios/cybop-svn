@@ -31,7 +31,7 @@
 #include "../../../executor/converter/encoder/http_response/header_http_response_encoder.c"
 #include "../../../executor/converter/encoder/http_response/protocol_http_response_encoder.c"
 #include "../../../executor/converter/encoder/http_response/status_code_http_response_encoder.c"
-#include "../../../executor/modifier/appender.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -74,10 +74,10 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
     encode_utf_8_unicode_character_vector((void*) &a, ac, as, p5, p6);
 
     encode_http_response_protocol(p0, p1, p2, p9, p10, p11, p12, p13, p14);
-    append(p0, p1, p2, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    overwrite_array(p0, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) REQUEST_RESPONSE_LINE_ELEMENT_END_SEPARATOR_HTTP_NAME_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
     encode_http_response_status_code(p0, p1, p2, p9, p10, p11, p12, p13, p14);
-    append(p0, p1, p2, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    overwrite_array(p0, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
     encode_http_response_header(p0, p1, p2, p9, p10, p11, p12, p13, p14, ac);
 
@@ -91,7 +91,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
     // REQUEST_RESPONSE_LINE_FINAL_ELEMENT_SEPARATOR_HTTP_NAME above.
     // Therefore, ONLY ONE MORE CR + LF is to be added here.
     //
-    append(p0, p1, p2, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    overwrite_array(p0, (void*) HEADER_SEPARATOR_HTTP_NAME, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) HEADER_SEPARATOR_HTTP_NAME_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
     // This function is commented out, since it is not needed for now.
     // Its content was moved directly into here (see above),
@@ -100,7 +100,7 @@ void encode_http_response(void* p0, void* p1, void* p2, void* p3, void* p4, void
 
     // CAUTION! Append body ONLY here and NOT before,
     // since it has to stand at the end of the http message.
-    append(p0, p1, p2, a, ac, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    overwrite_array(p0, a, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, ac, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
     // Deallocate body character array.
     deallocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);

@@ -107,11 +107,11 @@ void remove_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
             reallocate_array(p0, p4, (void*) &n, p1);
 
             // Set new size.
-            assign_integer(p5, (void*) &n);
+            copy_integer(p5, (void*) &n);
         }
 
         // Assign destination array count.
-        assign_integer(p4, (void*) &n);
+        copy_integer(p4, (void*) &n);
 
     } else {
 

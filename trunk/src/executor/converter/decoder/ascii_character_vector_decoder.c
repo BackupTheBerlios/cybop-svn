@@ -57,50 +57,31 @@ void decode_ascii_character_vector(void* p0, void* p1, void* p2, void* p3, void*
 
                 int* dc = (int*) p1;
 
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+                if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    void** d = (void**) p0;
+                    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode ascii character vector.");
 
-                    if (*dc >= *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    // The new destination character vector size.
+                    // (Not exactly the size, but the destination character vector index
+                    // increased by the source array count.)
+                    *ds = *dc + *sc;
 
-                        log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode ascii character vector.");
+                    // Reallocate destination character vector.
+                    reallocate_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-                        // The new destination character vector size.
-                        // (Not exactly the size, but the destination character vector index
-                        // increased by the source array count.)
-                        *ds = *dc + *sc;
+                    if (*dc <= (*ds - *sc)) {
 
-                        // Reallocate destination character vector.
-                        reallocate_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                        if (*dc <= (*ds - *sc)) {
-
-                            // Set source into destination character vector.
-                            replace_array(*d, p3, p4, p1, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-
-                            // Increment count.
-                            // Example:
-                            // d = "helloworld"
-                            // dc (as index) = 5
-                            // s = "universe"
-                            // sc = 8
-                            // d (after set) = "hellouniverse"
-                            // dc = dc + sc = 13
-                            *dc = *dc + *sc;
-
-                        } else {
-
-                            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ascii character vector. The destination count exceeds the size.");
-                        }
+                        // Set source into destination character vector.
+                        overwrite_array(p0, p3, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
                     } else {
 
-                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ascii character vector. The destination count is negative.");
+                        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ascii character vector. The destination count exceeds the size.");
                     }
 
                 } else {
 
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ascii character vector. The destination is null.");
+                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not decode ascii character vector. The destination count is negative.");
                 }
 
             } else {

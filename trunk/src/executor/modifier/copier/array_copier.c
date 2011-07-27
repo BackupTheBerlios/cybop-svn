@@ -37,7 +37,6 @@
 #include "../../../executor/modifier/copier/value_copier.c"
 #include "../../../executor/memoriser/offset_adder.c"
 #include "../../../executor/memoriser/size_determiner.c"
-#include "../../../executor/modifier/assigner.c"
 #include "../../../logger/logger.c"
 
 /**

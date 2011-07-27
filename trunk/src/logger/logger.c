@@ -289,32 +289,32 @@ void log_message(void* p0, void* p1, void* p2) {
                     // See module "log_level_name_constants.c"!
 
                     // Copy log level.
-                    log_replace_array((void*) LOG_MESSAGE, ln, (void*) &lnc, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    log_overwrite_array((void*) LOG_MESSAGE, ln, (void*) &lnc, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                     // Increment index.
                     i = i + lnc;
 
                     // Copy colon.
-                    log_replace_array((void*) LOG_MESSAGE, (void*) COLON_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    log_overwrite_array((void*) LOG_MESSAGE, (void*) COLON_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                     // Increment index.
                     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                     // Copy space.
-                    log_replace_array((void*) LOG_MESSAGE, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    log_overwrite_array((void*) LOG_MESSAGE, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                     // Increment index.
                     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                     // Copy log message.
-                    log_replace_array((void*) LOG_MESSAGE, p1, (void*) &mmc, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    log_overwrite_array((void*) LOG_MESSAGE, p1, (void*) &mmc, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                     // Increment index.
                     i = i + mmc;
 
                     // Copy line feed control wide character.
-                    log_replace_array((void*) LOG_MESSAGE, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    log_overwrite_array((void*) LOG_MESSAGE, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                     // Increment index.
                     i = i + *PRIMITIVE_MEMORY_MODEL_COUNT;
 
                     // Copy null termination wide character.
-                    log_replace_array((void*) LOG_MESSAGE, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    log_overwrite_array((void*) LOG_MESSAGE, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
                     // Log message.
                     log_write_terminated_message((void*) LOG_OUTPUT, (void*) LOG_MESSAGE);

@@ -16,6 +16,14 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Replace outdated "replacer" and "appender" functionality with "overwriter"
+
+2011-07-26  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Replace outdated "assigner" functionality with "copier"
+
 2011-07-25  Christian Heller  <christian.heller@tuxtax.de>
 
         * Replace outdated "detect" function with new "detect_array" function

@@ -43,7 +43,7 @@
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
 #include "../../../executor/memoriser/deallocator/model_deallocator.c"
-#include "../../../executor/modifier/appender.c"
+#include "../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -78,10 +78,10 @@ void decode_integer(void* p0, void* p1, void* p2, void* p3, void* p4) {
         allocate_model((void*) &tmp, (void*) &tmpc, (void*) &tmps, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
         // Copy original string to temporary null-terminated string.
-        append((void*) &tmp, tmpc, tmps, p3, p4, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        overwrite_array((void*) &tmp, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, tmpc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, tmpc, tmps);
         // Add string termination to temporary null-terminated string.
         // The source count is used as index for the termination character.
-        append((void*) &tmp, tmpc, tmps, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        overwrite_array((void*) &tmp, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, tmpc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, tmpc, tmps);
 
         // The tail variable is useless here and only needed for the string
         // transformation function. If the whole string array consists of

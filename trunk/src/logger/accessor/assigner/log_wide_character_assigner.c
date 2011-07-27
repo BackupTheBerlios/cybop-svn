@@ -38,7 +38,7 @@
  * @param p0 the destination value
  * @param p1 the source value
  */
-void log_assign_wide_character(void* p0, void* p1) {
+void log_copy_wide_character(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 

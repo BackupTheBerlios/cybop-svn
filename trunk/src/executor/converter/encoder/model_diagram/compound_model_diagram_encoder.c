@@ -36,7 +36,7 @@
 #include "../../../../executor/converter/encoder/integer_vector_encoder.c"
 #include "../../../../executor/converter/encoder/double_vector_encoder.c"
 #include "../../../../executor/modifier/inserter/array_inserter.c"
-#include "../../../../executor/modifier/appender.c"
+#include "../../../../executor/modifier/overwriter/array_overwriter.c"
 #include "../../../../logger/logger.c"
 
 //
@@ -57,106 +57,6 @@ void encode_model_diagram_node(void* p0, void* p1, void* p2, void* p3, void* p4,
  * @param p6 the details flag
  */
 void encode_model_diagram_compound(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
-
-    if (p5 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* l = (int*) p5;
-
-        if (p4 != *NULL_POINTER_MEMORY_MODEL) {
-
-            int* sc = (int*) p4;
-
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Encode model diagram compound.");
-
-            // The loop variable.
-            int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-            // The part name, abstraction, model, details.
-            void** n = NULL_POINTER_MEMORY_MODEL;
-            void** nc = NULL_POINTER_MEMORY_MODEL;
-            void** ns = NULL_POINTER_MEMORY_MODEL;
-            void** a = NULL_POINTER_MEMORY_MODEL;
-            void** ac = NULL_POINTER_MEMORY_MODEL;
-            void** as = NULL_POINTER_MEMORY_MODEL;
-            void** m = NULL_POINTER_MEMORY_MODEL;
-            void** mc = NULL_POINTER_MEMORY_MODEL;
-            void** ms = NULL_POINTER_MEMORY_MODEL;
-            void** d = NULL_POINTER_MEMORY_MODEL;
-            void** dc = NULL_POINTER_MEMORY_MODEL;
-            void** ds = NULL_POINTER_MEMORY_MODEL;
-
-            // The new tree level.
-            //
-            // It gets initialised with the current tree level incremented by one.
-            //
-            // CAUTION! Do NOT manipulate the original tree level that was handed over as parameter!
-            // Otherwise, it would never be decremented anymore leading to wrong indentation.
-            int nl = *l + *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-                if (j >= *sc) {
-
-                    break;
-                }
-
-                // Get part abstraction, model, details at current index.
-                get_compound_element_by_index(p3, p4, (void*) &j,
-                    (void*) &n, (void*) &nc, (void*) &ns,
-                    (void*) &a, (void*) &ac, (void*) &as,
-                    (void*) &m, (void*) &mc, (void*) &ms,
-                    (void*) &d, (void*) &dc, (void*) &ds);
-
-/*??
-    fwprintf(stdout, L"TEST encode model diagram compound p0: %i\n", p0);
-    fwprintf(stdout, L"TEST encode model diagram compound p1: %i\n", p1);
-    fwprintf(stdout, L"TEST encode model diagram compound p2: %i\n", p2);
-    fwprintf(stdout, L"TEST encode model diagram compound *n: %i\n", *n);
-    fwprintf(stdout, L"TEST encode model diagram compound *nc: %i\n", *nc);
-    fwprintf(stdout, L"TEST encode model diagram compound *a: %i\n", *a);
-    fwprintf(stdout, L"TEST encode model diagram compound *ac: %i\n", *ac);
-    fwprintf(stdout, L"TEST encode model diagram compound *m: %i\n", *m);
-    fwprintf(stdout, L"TEST encode model diagram compound *mc: %i\n", *mc);
-    fwprintf(stdout, L"TEST encode model diagram compound *d: %i\n", *d);
-    fwprintf(stdout, L"TEST encode model diagram compound *dc: %i\n", *dc);
-    fwprintf(stdout, L"TEST encode model diagram compound nl: %i\n", nl);
-    fwprintf(stdout, L"TEST encode model diagram compound &nl: %i\n", &nl);
-    fwprintf(stdout, L"TEST encode model diagram compound p6: %i\n", p6);
-*/
-
-                // Add line feed character to destination array.
-                append(p0, p1, p2, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-
-                // Encode part.
-                encode_model_diagram_node(p0, p1, p2, *n, *nc, *a, *ac, *m, *mc, *d, *dc, (void*) &nl, p6);
-
-                // Increment loop variable.
-                j++;
-            }
-
-        } else {
-
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram compound. The source count is null.");
-        }
-
-    } else {
-
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not encode model diagram compound. The tree level is null.");
-    }
-}
-
-/**
- * Encodes the model diagram compound.
- *
- * @param p0 the destination model diagram (Hand over as reference!)
- * @param p1 the destination model diagram count
- * @param p2 the destination model diagram size
- * @param p3 the source compound model
- * @param p4 the source compound model count
- * @param p5 the tree level
- * @param p6 the details flag
- */
-void encode_model_diagram_compound_NEW(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -223,10 +123,10 @@ void encode_model_diagram_compound_NEW(void* p0, void* p1, void* p2, void* p3, v
             copy_array_forward((void*) &dc, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
             // Add line feed character to destination array.
-            insert_array(p0, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
+            overwrite_array(p0, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
 
             // Encode part.
-            encode_model_diagram_node_NEW(p0, p1, p2, nd, nc, ad, ac, md, mc, dd, dc, (void*) &l, p6);
+            encode_model_diagram_node(p0, p1, p2, nd, nc, ad, ac, md, mc, dd, dc, (void*) &l, p6);
 
             // Increment loop variable.
             j++;
