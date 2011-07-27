@@ -72,8 +72,8 @@ int main(int p0, char** p1) {
     // not harm the operating system, as the memory occupied by the application
     // will be freed automatically on process shutdown.
     //
-    // TODO: YET TO ANSWER: How is that with forgotten threads?
-    // Are they killed automatically when a process is shut down?
+    //?? TODO: YET TO ANSWER: How is that with forgotten threads?
+    //?? Are they killed automatically when a process is shut down?
 
     // Return 1 to indicate an error, by default.
     int r = *NUMBER_1_INTEGER_MEMORY_MODEL;
@@ -89,7 +89,7 @@ int main(int p0, char** p1) {
         //
         // CAUTION! This is important for internationalisation!
         // A stream can be used EITHER for wide operations OR for normal operations.
-        // Once it is decided there is no way back.
+        // Once it is decided there is NO WAY BACK.
         // Only a call to freopen or freopen64 can reset the orientation.
         //
         // The orientation can be decided in three ways:
@@ -149,14 +149,12 @@ int main(int p0, char** p1) {
 
         // The cybol knowledge file path.
         void* k = *NULL_POINTER_MEMORY_MODEL;
-        int kc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        int ks = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Allocate cybol knowledge file path.
-        allocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        allocate_item((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // Optionalise command line argument options.
-        optionalise((void*) &m, (void*) &k, (void*) &kc, (void*) &ks, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
+        optionalise((void*) &m, k, (void*) LOG_LEVEL, (void*) &LOG_OUTPUT, (void*) p1, (void*) &p0);
 
         // Orient log output file stream.
         //
@@ -183,17 +181,8 @@ int main(int p0, char** p1) {
 
         } else if (m == *KNOWLEDGE_OPERATION_MODE_CYBOI_MODEL) {
 
-            if ((k != *NULL_POINTER_MEMORY_MODEL) && (kc >= *NUMBER_0_INTEGER_MEMORY_MODEL)) {
-
-                // Manage system startup and shutdown using the given cybol knowledge file.
-                manage(k, (void*) &kc);
-
-            } else {
-
-                log_write_terminated_message(stdout, L"Error: Could not execute cyboi in knowledge operation mode. A cybol file name needs to be given behind the '--knowledge' command line argument.\n");
-
-                help((void*) stdout);
-            }
+            // Manage system startup and shutdown using the given cybol knowledge file.
+            manage(k);
         }
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Deoptionalise log file yet.");
@@ -209,7 +198,7 @@ int main(int p0, char** p1) {
         deoptionalise((void*) &LOG_OUTPUT);
 
         // Deallocate cybol knowledge file path.
-        deallocate((void*) &k, (void*) &ks, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        deallocate_item((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // Shutdown global variables.
         unglobalise();

@@ -64,10 +64,9 @@
  * - shutdown knowledge memory (statics = state knowledge + logic knowledge)
  * - shutdown internal memory
  *
- * @param p0 the run source
- * @param p1 the run source count
+ * @param p0 the run source item
  */
-void manage(void* p0, void* p1) {
+void manage(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Manage system.");
@@ -329,7 +328,7 @@ void manage(void* p0, void* p1) {
     //
 
     // Initialise system with an initial signal.
-    initialise(s, (void*) sc, (void*) ss, p0, p1, i);
+    initialise(s, (void*) sc, (void*) ss, p0, i);
 
     //
     // System shutdown.

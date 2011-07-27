@@ -48,11 +48,10 @@
  * @param p0 the signal memory
  * @param p1 the signal memory count
  * @param p2 the signal memory size
- * @param p3 the run source
- * @param p4 the run source count
- * @param p5 the internal memory
+ * @param p3 the run source item
+ * @param p4 the internal memory
  */
-void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void initialise(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Initialise system with an initial signal.");
@@ -87,10 +86,12 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     overwrite_array((void*) &a, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ac, (void*) as);
 
     // Receive and decode startup model model and -details.
+    //?? TODO! Get file path item data and item count
+    //?? and replace 2x p3 below.
     communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) &m, mc, ms, (void*) &d, dc, ds,
         *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
+        p3, p3, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
         (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
@@ -110,7 +111,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
     // can be entered, checking for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    check(p5);
+    check(p4);
 
     // Deallocate startup model.
     deallocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,

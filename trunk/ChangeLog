@@ -19,6 +19,8 @@
 2011-07-27  Christian Heller  <christian.heller@tuxtax.de>
 
         * Replace outdated "replacer" and "appender" functionality with "overwriter"
+        * Fix "optionaliser.c", so that log file is usable again
+        * Use item structure for knowledge file path in "cyboi.c" and functions called from there
 
 2011-07-26  Christian Heller  <christian.heller@tuxtax.de>
 
