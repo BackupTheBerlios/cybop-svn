@@ -130,9 +130,11 @@ static wchar_t* COMPOUND_MEMORY_ABSTRACTION = COMPOUND_MEMORY_ABSTRACTION_ARRAY;
 static int* COMPOUND_MEMORY_ABSTRACTION_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The internal_memory memory abstraction. */
+/*?? TODO: Delete this one later!
 static wchar_t INTERNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY[] = {L'i', L'n', L't', L'e', L'r', L'n', L'a', L'l', L'_', L'm', L'e', L'm', L'o', L'r', L'y'};
 static wchar_t* INTERNAL_MEMORY_MEMORY_ABSTRACTION = INTERNAL_MEMORY_MEMORY_ABSTRACTION_ARRAY;
 static int* INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT = NUMBER_15_INTEGER_MEMORY_MODEL_ARRAY;
+*/
 
 /** The model memory abstraction. */
 //?? TODO: Delete this one later!

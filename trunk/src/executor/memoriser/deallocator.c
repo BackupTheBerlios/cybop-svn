@@ -32,12 +32,9 @@
 #include "../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../executor/comparator/all/array_all_comparator.c"
-#include "../../executor/memoriser/deallocator/array_deallocator.c"
 #include "../../executor/memoriser/deallocator/complex_deallocator.c"
-#include "../../executor/memoriser/deallocator/compound_deallocator.c"
 #include "../../executor/memoriser/deallocator/date_time_deallocator.c"
 #include "../../executor/memoriser/deallocator/fraction_deallocator.c"
-#include "../../executor/memoriser/deallocator/internal_memory_deallocator.c"
 #include "../../executor/memoriser/deallocator/signal_memory_deallocator.c"
 #include "../../executor/memoriser/deallocator/x_window_system_deallocator.c"
 
@@ -73,16 +70,6 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             deallocate_complex(p0, p1);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_all_array((void*) &r, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            deallocate_compound(p0, p1);
         }
     }
 
@@ -138,16 +125,6 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p2, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            deallocate_internal_memory(p0, p1);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
         compare_all_array((void*) &r, p2, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -173,16 +150,6 @@ void deallocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             deallocate_array(p0, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_all_array((void*) &r, p2, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            deallocate_signal_memory(p0, p1);
         }
     }
 

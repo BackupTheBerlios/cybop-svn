@@ -95,12 +95,7 @@ void allocate_part_NEW(void* p0, void* p1, void* p2) {
         allocate_item((void*) &n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
         allocate_item((void*) &a, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
         allocate_item((void*) &m, p1, p2);
-        allocate_item((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION);
-
-        // Initialise abstraction.
-        // It is set to the value that was handed over as argument.
-        // The name, model, details do NOT have to be initialised and remain empty.
-//        encode_abstraction(a, p2);
+        allocate_item((void*) &d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // Set name, abstraction, model, details.
         copy_array_forward(*p, (void*) &n, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) NAME_PART_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);

@@ -11,6 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Reactivate "startup_internal_memory" in "manager.c"
         * Replace functions with new versions named with suffix "_NEW"
         * Delete outdated directory "executor/accessor/"
         * Delete outdated directory "executor/modifier/replacer/"

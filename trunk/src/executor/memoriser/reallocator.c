@@ -33,8 +33,6 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../executor/comparator/all/array_all_comparator.c"
 #include "../../executor/memoriser/reallocator/array_reallocator.c"
-#include "../../executor/memoriser/reallocator/compound_reallocator.c"
-#include "../../executor/memoriser/reallocator/signal_memory_reallocator.c"
 
 /**
  * Reallocates the container.
@@ -59,16 +57,6 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             reallocate_array(p0, p1, p2, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_all_array((void*) &r, p3, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            reallocate_compound(p0, p1, p2);
         }
     }
 
@@ -129,16 +117,6 @@ void reallocate(void* p0, void* p1, void* p2, void* p3, void* p4) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             reallocate_array(p0, p1, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_all_array((void*) &r, p3, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            reallocate_signal_memory(p0, p1, p2);
         }
     }
 

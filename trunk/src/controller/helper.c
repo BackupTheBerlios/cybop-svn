@@ -32,8 +32,8 @@
 #include "../constant/model/cyboi/identification_cyboi_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../executor/modifier/overwriter/array_overwriter.c"
-#include "../executor/memoriser/allocator/model_allocator.c"
-#include "../executor/memoriser/deallocator/model_deallocator.c"
+#include "../executor/memoriser/allocator/array_allocator.c"
+#include "../executor/memoriser/deallocator/array_deallocator.c"
 
 /**
  * Writes cyboi help message to given output stream.
@@ -44,19 +44,21 @@ void help(void* p0) {
 
     // The message.
     void* m = *NULL_POINTER_MEMORY_MODEL;
-    int mc = *NULL_POINTER_MEMORY_MODEL;
-    // The size: message + line feed + termination
-    int ms = *HELP_IDENTIFICATION_CYBOI_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT + *PRIMITIVE_MEMORY_MODEL_COUNT;
+    int mc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // Set size to arbitrary big value, so that message does
+    // not have to be reallocated for every character below.
+    // This lets the programme run faster.
+    int ms = *NUMBER_1000_INTEGER_MEMORY_MODEL;
 
     // Allocate message.
     allocate_array((void*) &m, (void*) &ms, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Copy message.
-    overwrite_array(m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &mc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &mc, (void*) &ms);
+    overwrite_array((void*) &m, (void*) HELP_IDENTIFICATION_CYBOI_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) HELP_IDENTIFICATION_CYBOI_MODEL_COUNT, (void*) &mc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &mc, (void*) &ms);
     // Copy line feed control wide character.
-    overwrite_array(m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &mc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &mc, (void*) &ms);
+    overwrite_array((void*) &m, (void*) LINE_FEED_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &mc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &mc, (void*) &ms);
     // Copy null termination wide character.
-    overwrite_array(m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &mc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &mc, (void*) &ms);
+    overwrite_array((void*) &m, (void*) NULL_CONTROL_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &mc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &mc, (void*) &ms);
 
     // Log message.
     log_write_terminated_message(p0, m);

@@ -34,11 +34,8 @@
 #include "../../executor/comparator/all/array_all_comparator.c"
 #include "../../executor/memoriser/allocator/array_allocator.c"
 #include "../../executor/memoriser/allocator/complex_allocator.c"
-#include "../../executor/memoriser/allocator/compound_allocator.c"
 #include "../../executor/memoriser/allocator/date_time_allocator.c"
 #include "../../executor/memoriser/allocator/fraction_allocator.c"
-#include "../../executor/memoriser/allocator/internal_memory_allocator.c"
-#include "../../executor/memoriser/allocator/signal_memory_allocator.c"
 #include "../../executor/memoriser/allocator/x_window_system_allocator.c"
 
 /**
@@ -73,16 +70,6 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             allocate_complex(p0, p1);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_all_array((void*) &r, p2, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            allocate_compound(p0, p1);
         }
     }
 
@@ -138,16 +125,6 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p2, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            allocate_internal_memory(p0, p1);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
         compare_all_array((void*) &r, p2, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
@@ -173,16 +150,6 @@ void allocate(void* p0, void* p1, void* p2, void* p3) {
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             allocate_array(p0, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_all_array((void*) &r, p2, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            allocate_signal_memory(p0, p1);
         }
     }
 

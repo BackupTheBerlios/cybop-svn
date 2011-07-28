@@ -28,6 +28,7 @@
 
 #include <pthread.h>
 #include <signal.h>
+
 #include "../constant/channel/cybol_channel.c"
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/double_memory_model.c"
@@ -54,14 +55,14 @@
  * - shutdown
  *
  * in the following order:
- * - startup internal memory
+ * - startup internal memory (global system parametres, e.g. for input/output)
  * - startup knowledge memory (statics = state knowledge + logic knowledge)
- * - startup signal memory
+ * - startup signal memory (knowledge models to be executed as operations)
  * - create startup signal and add to signal memory
  * - run signal checker loop (dynamics)
  * - destroy startup signal
  * - shutdown signal memory
- * - shutdown knowledge memory (statics = state knowledge + logic knowledge)
+ * - shutdown knowledge memory
  * - shutdown internal memory
  *
  * @param p0 the run source item
@@ -77,29 +78,12 @@ void manage(void* p0) {
 
     // The internal memory.
     void* i = *NULL_POINTER_MEMORY_MODEL;
-    void* ic = *NULL_POINTER_MEMORY_MODEL;
-    void* is = *NULL_POINTER_MEMORY_MODEL;
     // The knowledge memory.
     void* k = *NULL_POINTER_MEMORY_MODEL;
-    void* kc = *NULL_POINTER_MEMORY_MODEL;
-    void* ks = *NULL_POINTER_MEMORY_MODEL;
     // The signal memory.
     void* s = *NULL_POINTER_MEMORY_MODEL;
-    void* sc = *NULL_POINTER_MEMORY_MODEL;
-    void* ss = *NULL_POINTER_MEMORY_MODEL;
-
-    // A meta knowledge memory?
-    // Theoretically, a meta knowledge memory could be created, too, and be
-    // forwarded throughout the system, just like the normal knowledge memory.
-    // In practice, however, it does not make sense to keep meta knowledge
-    // about the knowledge memory root.
-    // And also without that root meta knowledge memory, it is possible for
-    // parts of the standard knowledge memory to keep meta knowledge,
-    // just that for the very root of the knowledge memory it is not.
-    // Example:
-    // .resmedicinae.gui.menubar#background     --> background colour as meta knowledge about menubar
-    // .resmedicinae#name                       --> name as meta knowledge about resmedicinae application
-    // #something                               --> meta knowledge about knowledge root = nonsense
+    int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     //
     // The signal memory interrupt request flag.
@@ -205,13 +189,13 @@ void manage(void* p0) {
     //
 
     // Allocate internal memory.
-    // CAUTION! The internal memory count and size are set to a
-    // pre-defined value given by the constant "INTERNAL_MEMORY_MEMORY_MODEL_COUNT".
-    allocate_model((void*) &i, (void*) &ic, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
+    // CAUTION! The internal memory has a pre-defined count/size,
+    // given by the constant INTERNAL_MEMORY_MEMORY_MODEL_COUNT.
+    allocate_array((void*) &i, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Allocate knowledge memory.
-    allocate_model((void*) &k, (void*) &kc, (void*) &ks, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    allocate_part_NEW((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
     // Allocate signal memory.
-    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
+    allocate_array((void*) &s, (void*) &ss, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Allocate signal memory interrupt request flag.
     signal_memory_irq = (volatile sig_atomic_t*) malloc(*VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE);
@@ -311,6 +295,7 @@ void manage(void* p0) {
     // Therefore, the knowledge memory and signal memory NEED TO BE ADDED
     // to the internal memory, in order to be forwardable to threads.
 
+/*?? TODO!
     startup_internal_memory(i,
         (void*) &k, (void*) &kc, (void*) &ks,
         (void*) &s, (void*) &sc, (void*) &ss,
@@ -319,6 +304,7 @@ void manage(void* p0) {
         (void*) &x_window_system_irq, (void*) &x_window_system_mutex, (void*) &x_window_system_sleep_time,
         (void*) &www_service_irq, (void*) &www_service_mutex, (void*) &www_service_sleep_time,
         (void*) &cyboi_service_irq, (void*) &cyboi_service_mutex, (void*) &cyboi_service_sleep_time);
+*/
 
     // Start up system signal handler.
     startup_system_signal_handler();
@@ -328,7 +314,7 @@ void manage(void* p0) {
     //
 
     // Initialise system with an initial signal.
-    initialise(s, (void*) sc, (void*) ss, p0, i);
+//?? TODO!    initialise(s, (void*) sc, (void*) ss, p0, i);
 
     //
     // System shutdown.
@@ -407,13 +393,11 @@ void manage(void* p0) {
     free((void*) cyboi_service_sleep_time);
 
     // Deallocate signal memory.
-    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION, (void*) SIGNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
+    deallocate_array((void*) &s, (void*) &ss, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Deallocate knowledge memory.
-    deallocate_model((void*) &k, (void*) &kc, (void*) &ks, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    deallocate_part_NEW((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
     // Deallocate internal memory.
-    // CAUTION! The internal memory count and size are set to a
-    // pre-defined value given by the constant "INTERNAL_MEMORY_MEMORY_MODEL_COUNT".
-    deallocate_model((void*) &i, (void*) &ic, (void*) &is, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION, (void*) INTERNAL_MEMORY_MEMORY_ABSTRACTION_COUNT);
+    deallocate_array((void*) &i, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* MANAGER_SOURCE */
