@@ -36,9 +36,10 @@
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/part_memory_name.c"
 #include "../../../executor/comparator/all/item_all_comparator.c"
+#include "../../../executor/converter/decoder/wide_character_abstraction_decoder.c"
 #include "../../../executor/modifier/copier/array_copier.c"
+#include "../../../executor/modifier/copier/integer_copier.c"
 #include "../../../logger/logger.c"
-#include "../../../variable/reallocation_factor.c"
 
 /**
  * Compares all elements of the left part with those of the right array.

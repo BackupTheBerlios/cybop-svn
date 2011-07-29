@@ -32,6 +32,7 @@
 #include "../../executor/comparator/subsequence/array_subsequence_comparator.c"
 #include "../../executor/comparator/suffix/array_suffix_comparator.c"
 #include "../../executor/modifier/inserter/part_inserter.c"
+#include "../../executor/modifier/overwriter/part_overwriter.c"
 #include "../../logger/logger.c"
 
 /**

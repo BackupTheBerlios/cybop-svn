@@ -87,7 +87,7 @@ void insert_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         // Add destination array count.
         add_integer((void*) &c, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
         // Subtract destination index.
-        subtract_integer((void*) &c, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        subtract_integer_from_integer((void*) &c, p4);
 
         // Add destination array count.
         add_integer((void*) &n, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);

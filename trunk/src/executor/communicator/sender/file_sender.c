@@ -116,7 +116,7 @@ void send_file_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         int* w = (int*) p4;
 
-        if (*w == NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*w == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             send_file_character(p0, p1, p2, p3);
 

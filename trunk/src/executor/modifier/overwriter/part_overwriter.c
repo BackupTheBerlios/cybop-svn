@@ -36,6 +36,8 @@
 #include "../../../constant/name/cybol/separator_cybol_name.c"
 #include "../../../constant/name/memory/item_memory_name.c"
 #include "../../../constant/name/memory/part_memory_name.c"
+#include "../../../executor/converter/decoder/wide_character_abstraction_decoder.c"
+#include "../../../executor/memoriser/allocator/part_allocator.c"
 #include "../../../executor/modifier/overwriter/item_overwriter.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/reallocation_factor.c"

@@ -33,8 +33,6 @@
 #include "../../../constant/model/memory_model.c"
 #include "../../../constant/name/memory/part_memory_name.c"
 #include "../../../constant/name/memory/primitive_memory_name.c"
-#include "../../../executor/converter/decoder/wide_character_abstraction_decoder.c"
-#include "../../../executor/modifier/copier/array_copier.c"
 #include "../../../logger/logger.c"
 
 //

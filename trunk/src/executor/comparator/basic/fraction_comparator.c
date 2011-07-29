@@ -33,7 +33,9 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/fraction_memory_name.c"
-#include "../../../executor/comparator/basic/value_comparator.c"
+#include "../../../executor/arithmetiser/integer_multiplier/integer_integer_multiplier.c"
+#include "../../../executor/comparator/basic/integer_comparator.c"
+#include "../../../executor/modifier/copier/array_copier.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -55,12 +57,12 @@ void compare_fraction(void* p0, void* p1, void* p2, void* p3) {
     void* rn = *NULL_POINTER_MEMORY_MODEL;
     void* rd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get left numerator, denominator.
-    get((void*) &ln, p1, (void*) NUMERATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &ld, p1, (void*) DENOMINATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    // Get right numerator, denominator.
-    get((void*) &rn, p2, (void*) NUMERATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &rd, p2, (void*) DENOMINATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get destination numerator, denominator.
+    copy_array_forward((void*) &ln, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMERATOR_FRACTION_MEMORY_NAME);
+    copy_array_forward((void*) &ld, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DENOMINATOR_FRACTION_MEMORY_NAME);
+    // Get source numerator, denominator.
+    copy_array_forward((void*) &rn, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMERATOR_FRACTION_MEMORY_NAME);
+    copy_array_forward((void*) &rd, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DENOMINATOR_FRACTION_MEMORY_NAME);
 
     if (rd != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -78,10 +80,10 @@ void compare_fraction(void* p0, void* p1, void* p2, void* p3) {
 
                     // Calculate expanded left numerator, right numerator.
                     // CAUTION! Multiplicate cross-wise.
-                    multiply_with_integer((void*) &eln, (void*) &rd, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-                    multiply_with_integer((void*) &ern, (void*) &ld, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    multiply_integer_with_integer((void*) &eln, (void*) &rd);
+                    multiply_integer_with_integer((void*) &ern, (void*) &ld);
 
-                    compare_value(p0, (void*) &eln, (void*) &ern, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+                    compare_integer(p0, (void*) &eln, (void*) &ern, p3);
 
                 } else {
 

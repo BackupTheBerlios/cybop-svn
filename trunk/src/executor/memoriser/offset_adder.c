@@ -32,8 +32,8 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_adder.c"
-#include "../../executor/arithmetiser/integer_multiplier.c"
+#include "../../executor/arithmetiser/integer_adder/pointer_integer_adder.c"
+#include "../../executor/arithmetiser/integer_multiplier/integer_integer_multiplier.c"
 #include "../../executor/memoriser/size_determiner.c"
 #include "../../logger/logger.c"
 
@@ -57,12 +57,12 @@ void add_offset(void* p0, void* p1, void* p2) {
     // Calculate offset.
     // CAUTION! The POINTER_PRIMITIVE_MEMORY_ABSTRACTION is NOT needed here,
     // since this is only the offset integer value and not a pointer.
-    multiply_with_integer((void*) &o, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    multiply_integer_with_integer((void*) &o, p2);
 
     // Add offset to pointer.
     // CAUTION! The POINTER_PRIMITIVE_MEMORY_ABSTRACTION IS needed here,
     // since p0 is a pointer to which the offset is added.
-    add_integer(p0, (void*) &o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    add_integer_to_pointer(p0, (void*) &o);
 }
 
 /* OFFSET_ADDER_SOURCE */

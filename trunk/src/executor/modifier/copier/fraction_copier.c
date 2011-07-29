@@ -33,6 +33,12 @@
 #include "../../../constant/name/memory/primitive_memory_name.c"
 #include "../../../logger/logger.c"
 
+//
+// Forward declarations.
+//
+
+void copy_array_forward(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5);
+
 /**
  * Copies the fraction.
  *

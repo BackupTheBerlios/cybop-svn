@@ -33,10 +33,13 @@
 #include "../../../constant/model/memory_model.c"
 #include "../../../constant/name/memory/part_memory_name.c"
 #include "../../../constant/name/memory/primitive_memory_name.c"
-#include "../../../executor/converter/decoder/wide_character_abstraction_decoder.c"
-#include "../../../executor/modifier/copier/array_copier.c"
-#include "../../../executor/modifier/overwriter/part_overwriter.c"
 #include "../../../logger/logger.c"
+
+//
+// Forward declarations.
+//
+
+void overwrite_part_all(void* p0, void* p1);
 
 /**
  * Allocates a new destination part for the given source part.

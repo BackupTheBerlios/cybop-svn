@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-07-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Eliminate warnings by including files or adding forward declarations of functions, respectively
+
 2011-07-28  Christian Heller  <christian.heller@tuxtax.de>
 
         * Make "helper.c" and "informant.c" function again
