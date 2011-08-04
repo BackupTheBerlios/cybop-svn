@@ -161,7 +161,7 @@ void overwrite_part_all(void* p0, void* p1) {
 
             // Allocate destination part.
             // CAUTION! Use source part abstraction for allocation!
-            allocate_part_NEW(p0, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &sap);
+            allocate_part(p0, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &sap);
 
             // Get destination name, abstraction, model, details.
             // CAUTION! These items can only be retrieved AFTER

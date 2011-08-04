@@ -125,7 +125,7 @@ void compare_part(void* p0, void* p1, void* p2, void* p3) {
 
                 // Allocate destination part.
                 // CAUTION! Use source part abstraction for allocation!
-                allocate_part_NEW(p0, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &sap);
+                allocate_part(p0, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &sap);
 
                 // Copy source part name, abstraction, model, details to destination.
                 // The name is always of abstraction "wide_character".

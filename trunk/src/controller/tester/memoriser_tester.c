@@ -98,7 +98,7 @@ void test_memoriser_part() {
     void* p = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate part container.
-    allocate_part_NEW((void*) &p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_part((void*) &p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Fill part container.
     overwrite_part_element(p, (void*) L"test_$0", (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) NUMBER_7_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
@@ -147,7 +147,7 @@ void test_memoriser_part() {
     fwprintf(stdout, L"TEST dc: %i\n", *((int*) dc));
 
     // Deallocate part container.
-    deallocate_part_NEW((void*) &p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_part((void*) &p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /**

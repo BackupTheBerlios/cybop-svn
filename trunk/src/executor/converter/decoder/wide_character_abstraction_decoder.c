@@ -64,6 +64,10 @@ void decode_wide_character_abstraction(void* p0, void* p1, void* p2) {
             }
         }
 
+        // complex
+
+        // datetime
+
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             compare_all_array((void*) &r, p1, (void*) DOUBLE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) DOUBLE_MEMORY_ABSTRACTION_COUNT);
@@ -73,6 +77,8 @@ void decode_wide_character_abstraction(void* p0, void* p1, void* p2) {
                 copy_integer(p0, (void*) DOUBLE_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
+
+        // encapsulated_knowledge_path
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -93,6 +99,10 @@ void decode_wide_character_abstraction(void* p0, void* p1, void* p2) {
                 copy_integer(p0, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
             }
         }
+
+        // knowledge_path
+
+        // operation
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -28,44 +28,9 @@
 
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/name/memory/part_memory_name.c"
-#include "../../../logger/logger.c"
 #include "../../../executor/memoriser/allocator/item_allocator.c"
 #include "../../../executor/memoriser/allocator/model_allocator.c"
-
-/**
- * Allocates the part.
- *
- * @param p0 the model name (Hand over as reference!)
- * @param p1 the model name count (Hand over as reference!)
- * @param p2 the model name size (Hand over as reference!)
- * @param p3 the model abstraction (Hand over as reference!)
- * @param p4 the model abstraction count (Hand over as reference!)
- * @param p5 the model abstraction size (Hand over as reference!)
- * @param p6 the model model (Hand over as reference!)
- * @param p7 the model model count (Hand over as reference!)
- * @param p8 the model model size (Hand over as reference!)
- * @param p9 the model details (Hand over as reference!)
- * @param p10 the model details count (Hand over as reference!)
- * @param p11 the model details size (Hand over as reference!)
- * @param p12 the model size
- * @param p13 the source abstraction
- * @param p14 the source abstraction count
- */
-void allocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
-    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
-
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Allocate part.");
-
-    // Allocate name.
-    allocate_model(p0, p1, p2, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-    // A channel is not allocated, since that is only needed temporarily for model loading.
-    // Allocate abstraction.
-    allocate_model(p3, p4, p5, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-    // Allocate model.
-    allocate_model(p6, p7, p8, p12, p13, p14);
-    // Allocate details.
-    allocate_model(p9, p10, p11, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-}
+#include "../../../logger/logger.c"
 
 /**
  * Allocates the part.
@@ -74,7 +39,7 @@ void allocate_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
  * @param p1 the size
  * @param p2 the abstraction
  */
-void allocate_part_NEW(void* p0, void* p1, void* p2) {
+void allocate_part(void* p0, void* p1, void* p2) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 

@@ -11,15 +11,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Update "flow_operation_handler.c"
-        * Update handlers: all are done, but: "knowledge_handler.c" and "encapsulated_handler.c"
-        * Reactivate "startup_internal_memory" in "manager.c"
-        * Replace functions with new versions named with suffix "_NEW"
-        * Delete outdated directory "executor/accessor/"
-        * Delete outdated directory "executor/modifier/replacer/"
-        * Move files of directory "executor/converter/selector/" into "executor/searcher/selector/"
         * Complete and test new version of "knowledge_part_getter.c" (formerly universal retriever)
-        * (Possibly) delete "item_reallocator.c", if needed nowhere
+        * Adapt function "communicate_receiving_with_parameters" in "initialiser.c"
+        * Adapt handlers: all are done, but: "knowledge_handler.c" and "encapsulated_handler.c"
+        * Adapt "flow_operation_handler.c"
+        * Move files of directory "executor/converter/selector/" into "executor/searcher/selector/"
 
         * Offer part deallocation shallow and deep
             (deep is not always wanted, if a child is referenced by many parts)
@@ -27,6 +23,9 @@
         * Continue in "executor/arithmetiser/fraction*"
         * Rename "arithmetiser" to "calculator" with function "calculate" and
             distinguish operation first (add, subtract etc.) and then primitive types
+
+        * Delete "executor/communicator/receiver.c" and "executor/communicator/sender.c"?
+        * Delete "executor/converter/decoder.c" and "executor/converter/encoder.c"?
 
         * Adapt example applications to new operation cybol mime types and new comparison functions
         * Use MIME types to categorise operations in "abstraction" attribute, e.g.:

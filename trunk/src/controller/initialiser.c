@@ -65,7 +65,7 @@ void initialise(void* p0, void* p1, void* p2) {
     void* s = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate startup signal part.
-    allocate_part_NEW((void*) &s, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_part((void*) &s, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Copy startup signal abstraction, model, details.
     // CAUTION! A name is not necessary, since only
@@ -85,14 +85,8 @@ void initialise(void* p0, void* p1, void* p2) {
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add startup signal to signal memory.");
 
-    // The signal identification.
-    void** id = NULL_POINTER_MEMORY_MODEL;
-
-    // Get new signal identification by incrementing the current maximum signal's one.
-    get_new_signal_identification((void*) &id, p0, p1);
-
-    // Add startup model as signal to signal memory.
-    replace_signal_memory(p0, p1, p2, (void*) &a, (void*) &ac, (void*) &m, (void*) &mc, (void*) &d, (void*) &dc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, (void*) id);
+    // Add part model (signal) to signal memory.
+    append_item_element(p0, (void*) &s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
     // The system is now started up and complete so that a loop
     // can be entered, checking for signals (events/ interrupts)
@@ -101,7 +95,7 @@ void initialise(void* p0, void* p1, void* p2) {
     check(p2);
 
     // Deallocate startup signal part.
-    deallocate_part_NEW((void*) &s, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_part((void*) &s, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* INITIALISER_SOURCE */

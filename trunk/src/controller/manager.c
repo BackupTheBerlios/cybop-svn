@@ -191,7 +191,7 @@ void manage(void* p0) {
     // given by the constant INTERNAL_MEMORY_MEMORY_MODEL_COUNT.
     allocate_array((void*) &i, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Allocate knowledge memory part.
-    allocate_part_NEW((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
+    allocate_part((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
     // Allocate signal memory item.
     allocate_item((void*) &s, (void*) NUMBER_1000_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
@@ -389,7 +389,7 @@ void manage(void* p0) {
     // Deallocate signal memory item.
     deallocate_item((void*) &s, (void*) NUMBER_1000_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
     // Deallocate knowledge memory part.
-    deallocate_part_NEW((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
+    deallocate_part((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
     // Deallocate internal memory array.
     deallocate_array((void*) &i, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }

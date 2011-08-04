@@ -19,7 +19,9 @@
 2011-08-04  Christian Heller  <christian.heller@tuxtax.de>
 
         * Delete outdated source files and -directories
-        * Update files in "controller/" directory to new container infrastructure
+        * Adapt files in "controller/" directory to new container infrastructure
+        * Add directory "executor/modifier/appender/"
+        * Activate new versions of several functions by deleting "_NEW" suffix
 
 2011-07-29  Christian Heller  <christian.heller@tuxtax.de>
 
