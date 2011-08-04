@@ -32,8 +32,8 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../controller/handler/compound_handler.c"
 #include "../../controller/handler/operation_handler.c"
+#include "../../controller/handler/part_handler.c"
 #include "../../executor/comparator/all/array_all_comparator.c"
 #include "../../logger/logger.c"
 

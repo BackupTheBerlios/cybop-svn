@@ -32,7 +32,9 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../executor/accessor/getter.c"
+#include "../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
+#include "../../executor/modifier/copier/array_copier.c"
+#include "../../executor/modifier/copier/integer_copier.c"
 #include "../../logger/logger.c"
 
 /**
