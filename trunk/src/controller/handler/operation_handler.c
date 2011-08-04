@@ -36,84 +36,75 @@
 #include "../../controller/handler/operation/lifecycle_operation_handler.c"
 #include "../../controller/handler/operation/memory_operation_handler.c"
 #include "../../controller/handler/operation/run_operation_handler.c"
-#include "../../executor/comparator/all/array_all_comparator.c"
 #include "../../logger/logger.c"
 
 /**
  * Handles the operation signal.
  *
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the signal memory interrupt request flag
- * @param p9 the signal memory mutex
- * @param p10 the model / signal / operation
- * @param p11 the model / signal / operation count
- * @param p12 the details / parameters
- * @param p13 the details / parameters count
- * @param p14 the signal priority (Hand over as reference!)
- * @param p15 the signal identification (Hand over as reference!)
+ * @param p0 the signal model array (operation)
+ * @param p1 the signal model array (operation) count
+ * @param p2 the signal details array (parametres)
+ * @param p3 the signal details array (parametres) count
+ * @param p4 the direct execution flag
+ * @param p5 the shutdown flag
+ * @param p6 the knowledge memory part
+ * @param p7 the internal memory array
+ * @param p8 the signal memory item
+ * @param p9 the signal memory interrupt request flag
+ * @param p10 the signal memory mutex
  */
-void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15) {
+void handle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) HANDLE_OPERATION_MESSAGE_LOG_MODEL, (void*) HANDLE_OPERATION_MESSAGE_LOG_MODEL_COUNT);
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, p10);
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, p0);
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n");
 
-/*??
-    fwprintf(stdout, L"TEST handle operation count: %i\n", *((int*) p11));
-    fwprintf(stdout, L"TEST handle operation: %ls\n", (wchar_t*) p10);
-*/
+fwprintf(stdout, L"TEST handle operation count: %i\n", *((int*) p1));
+fwprintf(stdout, L"TEST handle operation: %ls\n", (wchar_t*) p0);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        handle_arithmetic_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
+        handle_arithmetic_operation((void*) &r, p0, p1, p2, p3, p6);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        handle_communication_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
+        handle_communication_operation((void*) &r, p0, p1, p2, p3, p5, p6, p7, p8, p9, p10);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        handle_comparison_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
+        handle_comparison_operation((void*) &r, p0, p1, p2, p3, p6);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        handle_file_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
+        handle_file_operation((void*) &r, p0, p1, p2, p3, p6);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        handle_flow_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
+        handle_flow_operation((void*) &r, p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        handle_lifecycle_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
+        handle_lifecycle_operation((void*) &r, p0, p1, p2, p3, p5, p6, p7);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        handle_memory_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
+        handle_memory_operation((void*) &r, p0, p1, p2, p3, p6);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        handle_run_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, (void*) &r);
+        handle_run_operation((void*) &r, p0, p1, p2, p3, p6);
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {

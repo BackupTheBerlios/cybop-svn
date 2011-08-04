@@ -47,13 +47,15 @@
  * It points to a memory area to which the source element is copied.
  * If using a local variable, then the memory area is allocated
  * automatically by the function, on the stack.
+ * Of course, if a pointer is to be retrieved,
+ * then parametre p0 has to be a reference.
  *
  * Example:
  *
  * void* item_reference = *NULL_POINTER_MEMORY_MODEL;
  * get_item_element((void*) &item_reference, whole_item, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) DATA_ITEM_MEMORY_NAME);
  *
- * @param p0 the destination array
+ * @param p0 the destination array (if source index is inside of source count boundary; unchanged otherwise)
  * @param p1 the source item
  * @param p2 the abstraction
  * @param p3 the count
@@ -82,8 +84,52 @@ void get_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5
     // Using the "copy_array_forward" function is more efficient.
     copy_array_forward((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
-    // Get destination array from source item element array.
-    copy_array_forward(p0, e, p2, p3, p4, p5);
+    // The comparison result.
+    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    compare_integer((void*) &r, p6, (void*) DATA_ITEM_MEMORY_NAME, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
+
+    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        // This is a data item element.
+
+        // The count is only needed if the item element is "data".
+        void* c = *NULL_POINTER_MEMORY_MODEL;
+
+        // Get destination item element count.
+        copy_array_forward((void*) &c, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+
+        // Reset comparison result.
+        copy_integer((void*) &r, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
+        // CAUTION! The data item element's count HAS TO BE GREATER
+        // than the given source index. Otherwise, array boundaries
+        // might get crossed and false pointer values returned.
+        // Therefore, this is checked here.
+        compare_integer((void*) &r, c, p5, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION);
+
+        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            // Get destination array as element of the source item container.
+            copy_array_forward(p0, e, p2, p3, p4, p5);
+
+        } else {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not get item element. The source item count is not greater than the given source index.");
+        }
+
+    } else {
+
+        // This is a count or size item element.
+
+        // CAUTION! The count or size do NOT have
+        // a count or size themselves. They are just
+        // primitive data values with a fixed size of one.
+        // Therefore, nothing has to be checked here.
+
+        // Get destination array as element of the source item container.
+        copy_array_forward(p0, e, p2, p3, p4, p5);
+    }
 }
 
 /* ITEM_GETTER_SOURCE */

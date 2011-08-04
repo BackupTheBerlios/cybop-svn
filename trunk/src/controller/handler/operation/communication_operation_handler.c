@@ -40,64 +40,58 @@
 /**
  * Handles the communication operation signal.
  *
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
- * @param p7 the shutdown flag
+ * @param p0 the comparison result
+ * @param p1 the signal model array (operation)
+ * @param p2 the signal model array (operation) count
+ * @param p3 the signal details array (parametres)
+ * @param p4 the signal details array (parametres) count
+ * @param p5 the knowledge memory part
+ * @param p6 the internal memory array
+ * @param p7 the signal memory item
  * @param p8 the signal memory interrupt request flag
  * @param p9 the signal memory mutex
- * @param p10 the model / signal / operation
- * @param p11 the model / signal / operation count
- * @param p12 the details / parameters
- * @param p13 the details / parameters count
- * @param p14 the signal priority (Hand over as reference!)
- * @param p15 the signal identification (Hand over as reference!)
- * @param p16 the comparison result
  */
-void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
+void handle_communication_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle communication operation.");
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The comparison result.
-    int* r = (int*) p16;
+        int* r = (int*) p0;
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle communication operation.");
 
-        compare_all_array(p16, p10, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT);
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            compare_all_array(p0, p1, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) RECEIVE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT);
 
-            communicate_receiving(p12, p13, p0, p1, p2, p3);
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                communicate_receiving(p3, p4, p5, p6);
+            }
         }
-    }
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array(p16, p10, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT);
+            compare_all_array(p0, p1, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) SEND_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT);
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            communicate_sending(p12, p13, p0, p1, p2, p3, p4, p5, p6, p15);
-
-            //?? TEST: For testing reasons, the p15 was replaced with *((int**) p15) here!
-            //?? The signal id serves as client socket to which this cyboi system has to reply.
-//??            send_message(p12, p13, p0, p1, p2, p3, p4, p5, p6, *((int**) p15));
+                communicate_sending(p3, p4, p5, p6, p7, p8, p9);
+            }
         }
-    }
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array(p16, p10, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT);
+            compare_all_array(p0, p1, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) SENSE_COMMUNICATION_OPERATION_CYBOL_MODEL_COUNT);
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            communicate_sensing(p12, p13, p0, p1, p2, p3, p4, p5, p6);
+                communicate_sensing(p3, p4, p5, p6);
+            }
         }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle lifecycle operation. The comparison result is null.");
     }
 }
 

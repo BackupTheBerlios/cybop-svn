@@ -33,72 +33,79 @@
 #include "../constant/model/log/message_log_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
-#include "../controller/handler/compound_handler.c"
 #include "../controller/handler/encapsulated_handler.c"
 #include "../controller/handler/knowledge_handler.c"
 #include "../controller/handler/operation_handler.c"
-#include "../logger/logger.c"
+#include "../controller/handler/part_handler.c"
 #include "../executor/comparator/all/array_all_comparator.c"
+#include "../logger/logger.c"
 
 /**
  * Handles the signal.
  *
- * This procedure identifies the signal abstraction and then calls either
- * the compound signal handler, or the operation signal handler procedure.
+ * This function identifies the signal abstraction and then calls either:
+ * - part (compound) signal handler
+ * - operation signal handler
  *
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the signal memory interrupt request flag
- * @param p9 the signal memory mutex
- * @param p10 the abstraction
- * @param p11 the abstraction count
- * @param p12 the model / signal
- * @param p13 the model / signal count
- * @param p14 the details / parameters
- * @param p15 the details / parameters count
- * @param p16 the priority (Hand over as reference!)
- * @param p17 the signal identification (Hand over as reference!)
- * @param p18 the direct execution flag
+ * @param p0 the signal part
+ * @param p1 the direct execution flag
+ * @param p2 the shutdown flag
+ * @param p3 the knowledge memory part
+ * @param p4 the internal memory array
+ * @param p5 the signal memory item
+ * @param p6 the signal memory interrupt request flag
+ * @param p7 the signal memory mutex
  */
-void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13,  void* p14, void* p15, void* p16, void* p17, void* p18) {
+void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Handle signal.");
+
+    // The signal part abstraction, model, details.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get signal part abstraction, model, details.
+    copy_array_forward((void*) &a, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+    copy_array_forward((void*) &m, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    copy_array_forward((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
+
+    // The signal part elements data, count.
+    void* ad = *NULL_POINTER_MEMORY_MODEL;
+    void* ac = *NULL_POINTER_MEMORY_MODEL;
+    void* md = *NULL_POINTER_MEMORY_MODEL;
+    void* mc = *NULL_POINTER_MEMORY_MODEL;
+    void* dd = *NULL_POINTER_MEMORY_MODEL;
+    void* dc = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get signal part elements data, count.
+    copy_array_forward((void*) &ad, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &ac, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &md, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &mc, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &dd, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &dc, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-/*??
-    fwprintf(stdout, L"TEST handle ac: %i\n", p11);
-    fwprintf(stdout, L"TEST handle *ac: %i\n", *((int*) p11));
-    fwprintf(stdout, L"TEST handle a: %i\n", p10);
-    fwprintf(stdout, L"TEST handle *a: %ls\n", (wchar_t*) p10);
-*/
-
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        // CAUTION! Do NOT remove this section with "COMPOUND_MEMORY_ABSTRACTION"!
+        // CAUTION! Do NOT remove this section with "PART_PRIMITIVE_MEMORY_ABSTRACTION"!
         // It is needed for at least initial startup logic residing in CYBOL
         // files only, before any logic is created and contained as runtime
         // knowledge models in the knowledge memory.
-        compare_all_array((void*) &r, p10, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+        compare_all_array((void*) &r, a, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, ac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            handle_compound(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p16, p17, p18);
+            handle_part(md, mc, dd, dc, p1, p2, p3, p4, p5, p6, p7);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p10, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
+        compare_all_array((void*) &r, a, (void*) ENCAPSULATED_KNOWLEDGE_PATH_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, ac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -108,7 +115,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p10, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
+        compare_all_array((void*) &r, a, (void*) KNOWLEDGE_PATH_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, ac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -118,11 +125,11 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p10, (void*) OPERATION_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) OPERATION_MEMORY_ABSTRACTION_COUNT);
+        compare_all_array((void*) &r, a, (void*) OPERATION_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, ac, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            handle_operation(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p12, p13, p14, p15, p16, p17);
+            handle_operation(md, mc, dd, dc, p1, p2, p3, p4, p5, p6, p7);
         }
     }
 

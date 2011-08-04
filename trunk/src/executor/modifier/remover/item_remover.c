@@ -60,6 +60,7 @@ void remove_item(void* p0, void* p1, void* p2, void* p3) {
     copy_array_forward((void*) &s, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
 
     // Remove elements from item data.
+    // The count and size are adjusted inside.
     remove_array((void*) &d, p1, p2, p3, c, s);
 
     // Set data as item element.

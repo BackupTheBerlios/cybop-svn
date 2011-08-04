@@ -52,14 +52,12 @@
  * - style (optional, only if service is www, cyboi or similar): the namespace of the socket
  * - style (optional, only if service is www, cyboi or similar): the address of hosts communicating with this system via socket
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the knowledge memory
- * @param p3 the knowledge memory count
- * @param p4 the knowledge memory size
- * @param p5 the internal memory
+ * @param p0 the parametres
+ * @param p1 the parametres count
+ * @param p2 the knowledge memory part
+ * @param p3 the internal memory array
  */
-void maintain_starting(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void maintain_starting(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup service.");
 

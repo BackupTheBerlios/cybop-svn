@@ -38,70 +38,64 @@
 /**
  * Handles the arithmetic operation signal.
  *
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the signal memory interrupt request flag
- * @param p9 the signal memory mutex
- * @param p10 the model / signal / operation
- * @param p11 the model / signal / operation count
- * @param p12 the details / parameters
- * @param p13 the details / parameters count
- * @param p14 the signal priority (Hand over as reference!)
- * @param p15 the signal identification (Hand over as reference!)
- * @param p16 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the signal model array (operation)
+ * @param p2 the signal model array (operation) count
+ * @param p3 the signal details array (parametres)
+ * @param p4 the signal details array (parametres) count
+ * @param p5 the knowledge memory part
  */
-void handle_arithmetic_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
+void handle_arithmetic_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle arithmetic operation.");
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The comparison result.
-    int* r = (int*) p16;
+        int* r = (int*) p0;
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle arithmetic operation.");
 
-        compare_all_array(p16, p10, (void*) ADD_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) ADD_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT);
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            compare_all_array(p0, p1, (void*) ADD_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) ADD_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT);
 
-            calculate_addition(p12, p13, p1, p2, p3);
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+                calculate_addition(p3, p4, p5);
+            }
         }
-    }
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array(p16, p10, (void*) DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT);
+            compare_all_array(p0, p1, (void*) DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) DIVIDE_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT);
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            calculate_division(p12, p13, p1, p2, p3);
+                calculate_division(p3, p4, p5);
+            }
         }
-    }
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array(p16, p10, (void*) MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT);
+            compare_all_array(p0, p1, (void*) MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) MULTIPLY_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT);
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            calculate_multiplication(p12, p13, p1, p2, p3);
+                calculate_multiplication(p3, p4, p5);
+            }
         }
-    }
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array(p16, p10, (void*) SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT);
+            compare_all_array(p0, p1, (void*) SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) SUBTRACT_ARITHMETIC_OPERATION_CYBOL_MODEL_COUNT);
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            calculate_subtraction(p12, p13, p1, p2, p3);
+                calculate_subtraction(p3, p4, p5);
+            }
         }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle arithmetic operation. The comparison result is null.");
     }
 }
 

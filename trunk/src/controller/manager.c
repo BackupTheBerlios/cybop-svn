@@ -76,14 +76,12 @@ void manage(void* p0) {
     // Variable declaration.
     //
 
-    // The internal memory.
+    // The internal memory array.
     void* i = *NULL_POINTER_MEMORY_MODEL;
-    // The knowledge memory.
+    // The knowledge memory part.
     void* k = *NULL_POINTER_MEMORY_MODEL;
-    // The signal memory.
+    // The signal memory item.
     void* s = *NULL_POINTER_MEMORY_MODEL;
-    int sc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int ss = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     //
     // The signal memory interrupt request flag.
@@ -188,14 +186,14 @@ void manage(void* p0) {
     // Variable allocation.
     //
 
-    // Allocate internal memory.
+    // Allocate internal memory array.
     // CAUTION! The internal memory has a pre-defined count/size,
     // given by the constant INTERNAL_MEMORY_MEMORY_MODEL_COUNT.
     allocate_array((void*) &i, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Allocate knowledge memory.
+    // Allocate knowledge memory part.
     allocate_part_NEW((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Allocate signal memory.
-    allocate_array((void*) &s, (void*) &ss, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Allocate signal memory item.
+    allocate_item((void*) &s, (void*) NUMBER_1000_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Allocate signal memory interrupt request flag.
     signal_memory_irq = (volatile sig_atomic_t*) malloc(*VOLATILE_ATOMIC_SIGNAL_TYPE_SIZE);
@@ -295,16 +293,12 @@ void manage(void* p0) {
     // Therefore, the knowledge memory and signal memory NEED TO BE ADDED
     // to the internal memory, in order to be forwardable to threads.
 
-/*?? TODO!
-    startup_internal_memory(i,
-        (void*) &k, (void*) &kc, (void*) &ks,
-        (void*) &s, (void*) &sc, (void*) &ss,
+    startup_internal_memory(i, (void*) &k, (void*) &s,
         (void*) &signal_memory_irq, (void*) &signal_memory_mutex, (void*) &signal_memory_sleep_time,
         (void*) &gnu_linux_console_irq, (void*) &gnu_linux_console_mutex, (void*) &gnu_linux_console_sleep_time,
         (void*) &x_window_system_irq, (void*) &x_window_system_mutex, (void*) &x_window_system_sleep_time,
         (void*) &www_service_irq, (void*) &www_service_mutex, (void*) &www_service_sleep_time,
         (void*) &cyboi_service_irq, (void*) &cyboi_service_mutex, (void*) &cyboi_service_sleep_time);
-*/
 
     // Start up system signal handler.
     startup_system_signal_handler();
@@ -314,7 +308,7 @@ void manage(void* p0) {
     //
 
     // Initialise system with an initial signal.
-//?? TODO!    initialise(s, (void*) sc, (void*) ss, p0, i);
+    initialise(s, p0, i);
 
     //
     // System shutdown.
@@ -392,11 +386,11 @@ void manage(void* p0) {
     // Deallocate cyboi service sleep time.
     free((void*) cyboi_service_sleep_time);
 
-    // Deallocate signal memory.
-    deallocate_array((void*) &s, (void*) &ss, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Deallocate knowledge memory.
+    // Deallocate signal memory item.
+    deallocate_item((void*) &s, (void*) NUMBER_1000_INTEGER_MEMORY_MODEL, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
+    // Deallocate knowledge memory part.
     deallocate_part_NEW((void*) &k, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
-    // Deallocate internal memory.
+    // Deallocate internal memory array.
     deallocate_array((void*) &i, (void*) INTERNAL_MEMORY_MEMORY_MODEL_COUNT, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 

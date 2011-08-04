@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-08-04  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Delete outdated source files and -directories
+        * Update files in "controller/" directory to new container infrastructure
+
 2011-07-29  Christian Heller  <christian.heller@tuxtax.de>
 
         * Eliminate warnings by including files or adding forward declarations of functions, respectively

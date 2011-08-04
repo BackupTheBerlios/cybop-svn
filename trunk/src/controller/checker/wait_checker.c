@@ -51,24 +51,26 @@ void check_wait(void* p0, void* p1) {
         int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // The signal memory interrupt request.
-        void** sm = NULL_POINTER_MEMORY_MODEL;
+        void* sm = *NULL_POINTER_MEMORY_MODEL;
         // The gnu/linux console interrupt request.
-        void** lc = NULL_POINTER_MEMORY_MODEL;
+        void* lc = *NULL_POINTER_MEMORY_MODEL;
         // The x window system interrupt request.
-        void** xw = NULL_POINTER_MEMORY_MODEL;
+        void* xw = *NULL_POINTER_MEMORY_MODEL;
         // The www service interrupt request.
-        void** ww = NULL_POINTER_MEMORY_MODEL;
+        void* ww = *NULL_POINTER_MEMORY_MODEL;
         // The cyboi service interrupt request.
-        void** cy = NULL_POINTER_MEMORY_MODEL;
+        void* cy = *NULL_POINTER_MEMORY_MODEL;
 
         // Get interrupt requests.
-        get((void*) &sm, p1, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &lc, p1, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &xw, p1, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &ww, p1, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &cy, p1, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &sm, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &lc, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &xw, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_integer((void*) &i, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+        add_integer_to_integer((void*) &i, (void*) SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &ww, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
+        copy_integer((void*) &i, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+        add_integer_to_integer((void*) &i, (void*) SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &cy, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
 
         //
         // REMARK! The following variable checks and casts are not indented,
@@ -76,15 +78,15 @@ void check_wait(void* p0, void* p1) {
         // so that indentation would lead to unreadable source code here.
         //
 
-        if (*cy != *NULL_POINTER_MEMORY_MODEL) {
+        if (cy != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (*ww != *NULL_POINTER_MEMORY_MODEL) {
+        if (ww != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (*xw != *NULL_POINTER_MEMORY_MODEL) {
+        if (xw != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (*lc != *NULL_POINTER_MEMORY_MODEL) {
+        if (lc != *NULL_POINTER_MEMORY_MODEL) {
 
-        if (*sm != *NULL_POINTER_MEMORY_MODEL) {
+        if (sm != *NULL_POINTER_MEMORY_MODEL) {
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Wait for an interrupt request.");
 
@@ -170,11 +172,11 @@ void check_wait(void* p0, void* p1) {
             // Therefore, the decision fell on the usage of a simple SLEEP
             // procedure, which seems sufficient for the purposes of CYBOI.
             //
-            while ((*((int*) *sm) == *NUMBER_0_INTEGER_MEMORY_MODEL)
-                && (*((int*) *lc) == *NUMBER_0_INTEGER_MEMORY_MODEL)
-                && (*((int*) *xw) == *NUMBER_0_INTEGER_MEMORY_MODEL)
-                && (*((int*) *ww) == *NUMBER_0_INTEGER_MEMORY_MODEL)
-                && (*((int*) *cy) == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+            while ((*((int*) sm) == *NUMBER_0_INTEGER_MEMORY_MODEL)
+                && (*((int*) lc) == *NUMBER_0_INTEGER_MEMORY_MODEL)
+                && (*((int*) xw) == *NUMBER_0_INTEGER_MEMORY_MODEL)
+                && (*((int*) ww) == *NUMBER_0_INTEGER_MEMORY_MODEL)
+                && (*((int*) cy) == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
 
                 sleep(*sl);
             }

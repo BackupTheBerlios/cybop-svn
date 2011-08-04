@@ -45,16 +45,14 @@
 /**
  * Initialises the system with an initial signal.
  *
- * @param p0 the signal memory
- * @param p1 the signal memory count
- * @param p2 the signal memory size
- * @param p3 the run source item
- * @param p4 the internal memory
+ * @param p0 the signal memory item
+ * @param p1 the run source item
+ * @param p2 the internal memory array
  */
-void initialise(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void initialise(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Initialise system with an initial signal.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Initialise system with startup signal.");
 
     // CAUTION! Do NOT use "normal" int as type for startup model counts and sizes below!
     // The reason is that the "set_signal" function below expects int** parameters.
@@ -63,27 +61,16 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // All other models (and their counts and sizes) coming from knowledge memory
     // are allocated in the same way when being read from cybol sources.
 
-    // The startup model name, abstraction, model, details.
-    void* n = *NULL_POINTER_MEMORY_MODEL;
-    void* nc = *NULL_POINTER_MEMORY_MODEL;
-    void* ns = *NULL_POINTER_MEMORY_MODEL;
-    void* a = *NULL_POINTER_MEMORY_MODEL;
-    void* ac = *NULL_POINTER_MEMORY_MODEL;
-    void* as = *NULL_POINTER_MEMORY_MODEL;
-    void* m = *NULL_POINTER_MEMORY_MODEL;
-    void* mc = *NULL_POINTER_MEMORY_MODEL;
-    void* ms = *NULL_POINTER_MEMORY_MODEL;
-    void* d = *NULL_POINTER_MEMORY_MODEL;
-    void* dc = *NULL_POINTER_MEMORY_MODEL;
-    void* ds = *NULL_POINTER_MEMORY_MODEL;
+    // The startup signal part.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
 
-    // Allocate startup model.
-    allocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
-        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    // Allocate startup signal part.
+    allocate_part_NEW((void*) &s, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    // Copy startup model abstraction.
-    overwrite_array((void*) &a, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ac, (void*) as);
+    // Copy startup signal abstraction, model, details.
+    // CAUTION! A name is not necessary, since only
+    // the actual model and details are of interest.
+    overwrite_part_element(s, (void*) PART_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
 
     // Receive and decode startup model model and -details.
     //?? TODO! Get file path item data and item count
@@ -96,7 +83,7 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4) {
         (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n\n");
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add initial signal to signal memory.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add startup signal to signal memory.");
 
     // The signal identification.
     void** id = NULL_POINTER_MEMORY_MODEL;
@@ -111,12 +98,10 @@ void initialise(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // can be entered, checking for signals (events/ interrupts)
     // which are stored/ found in the signal memory.
     // The loop is left as soon as its shutdown flag is set.
-    check(p4);
+    check(p2);
 
-    // Deallocate startup model.
-    deallocate_part((void*) &n, (void*) &nc, (void*) &ns, (void*) &a, (void*) &ac, (void*) &as,
-        (void*) &m, (void*) &mc, (void*) &ms, (void*) &d, (void*) &dc, (void*) &ds,
-        (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate startup signal part.
+    deallocate_part_NEW((void*) &s, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* INITIALISER_SOURCE */

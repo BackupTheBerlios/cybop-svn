@@ -28,8 +28,9 @@
 
 #include <pthread.h>
 #include <signal.h>
-#include "../../constant/model/memory/integer_memory_model.c"
+
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 #include "../../variable/service_interrupt.c"

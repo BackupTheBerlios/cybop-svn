@@ -881,10 +881,10 @@ static wchar_t DESTROY_SIGNAL_MEMORY_MESSAGE_LOG_MODEL_ARRAY[] = {L'D', L'e', L'
 static wchar_t* DESTROY_SIGNAL_MEMORY_MESSAGE_LOG_MODEL = DESTROY_SIGNAL_MEMORY_MESSAGE_LOG_MODEL_ARRAY;
 static int* DESTROY_SIGNAL_MEMORY_MESSAGE_LOG_MODEL_COUNT = NUMBER_22_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The "Handle compound." message log model. */
-static wchar_t HANDLE_COMPOUND_MESSAGE_LOG_MODEL_ARRAY[] = {L'H', L'a', L'n', L'd', L'l', L'e', L' ', L'c', L'o', L'm', L'p', L'o', L'u', L'n', L'd', L'.'};
-static wchar_t* HANDLE_COMPOUND_MESSAGE_LOG_MODEL = HANDLE_COMPOUND_MESSAGE_LOG_MODEL_ARRAY;
-static int* HANDLE_COMPOUND_MESSAGE_LOG_MODEL_COUNT = NUMBER_16_INTEGER_MEMORY_MODEL_ARRAY;
+/** The "Handle part." message log model. */
+static wchar_t HANDLE_PART_MESSAGE_LOG_MODEL_ARRAY[] = {L'H', L'a', L'n', L'd', L'l', L'e', L' ', L'p', L'a', L'r', L't', L'.'};
+static wchar_t* HANDLE_PART_MESSAGE_LOG_MODEL = HANDLE_PART_MESSAGE_LOG_MODEL_ARRAY;
+static int* HANDLE_PART_MESSAGE_LOG_MODEL_COUNT = NUMBER_12_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The "Handle operation." message log model. */
 static wchar_t HANDLE_OPERATION_MESSAGE_LOG_MODEL_ARRAY[] = {L'H', L'a', L'n', L'd', L'l', L'e', L' ', L'o', L'p', L'e', L'r', L'a', L't', L'i', L'o', L'n', L'.'};

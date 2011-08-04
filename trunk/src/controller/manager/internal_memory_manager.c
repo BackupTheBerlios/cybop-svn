@@ -45,10 +45,11 @@
  *
  * Most values are compared against the *NULL_POINTER_MEMORY_MODEL constant
  * to find out whether they are set or not. If now initial values
- * would be arbitrary pointers, the program would follow a wrong path,
+ * would be arbitrary pointers, the programme would follow a wrong path,
  * because it would guess that an instance was properly allocated,
  * while in reality the value was just an arbitrary initial one.
- * Therefore, such values are initialised with the well-defined *NULL_POINTER_MEMORY_MODEL.
+ * Therefore, such values are initialised with the well-defined
+ * *NULL_POINTER_MEMORY_MODEL.
  *
  * CAUTION! ONLY ONE parameter can be handed over to threads!
  * For example, the tcp socket is running in an own thread.
@@ -56,33 +57,28 @@
  * Therefore, the knowledge memory and signal memory NEED TO BE ADDED
  * to the internal memory, in order to be forwardable to threads.
  *
- * @param p0 the internal memory
- * @param p1 the knowledge memory (Hand over as reference!)
- * @param p2 the knowledge memory count (Hand over as reference!)
- * @param p3 the knowledge memory size (Hand over as reference!)
- * @param p4 the signal memory (Hand over as reference!)
- * @param p5 the signal memory count (Hand over as reference!)
- * @param p6 the signal memory size (Hand over as reference!)
- * @param p7 the signal memory interrupt request flag (Hand over as reference!)
- * @param p8 the signal memory mutex (Hand over as reference!)
- * @param p9 the signal memory sleep time (Hand over as reference!)
- * @param p10 the gnu/linux console interrupt request flag (Hand over as reference!)
- * @param p11 the gnu/linux console mutex (Hand over as reference!)
- * @param p12 the gnu/linux console sleep time (Hand over as reference!)
- * @param p13 the x window system interrupt request flag (Hand over as reference!)
- * @param p14 the x window system mutex (Hand over as reference!)
- * @param p15 the x window system sleep time (Hand over as reference!)
- * @param p16 the www service interrupt request flag (Hand over as reference!)
- * @param p17 the www service mutex (Hand over as reference!)
- * @param p18 the www service sleep time (Hand over as reference!)
- * @param p19 the cyboi service interrupt request flag (Hand over as reference!)
- * @param p20 the cyboi service mutex (Hand over as reference!)
- * @param p21 the cyboi service sleep time (Hand over as reference!)
+ * @param p0 the internal memory array
+ * @param p1 the knowledge memory part (Hand over as reference!)
+ * @param p2 the signal memory item (Hand over as reference!)
+ * @param p3 the signal memory interrupt request flag (Hand over as reference!)
+ * @param p4 the signal memory mutex (Hand over as reference!)
+ * @param p5 the signal memory sleep time (Hand over as reference!)
+ * @param p6 the gnu/linux console interrupt request flag (Hand over as reference!)
+ * @param p7 the gnu/linux console mutex (Hand over as reference!)
+ * @param p8 the gnu/linux console sleep time (Hand over as reference!)
+ * @param p9 the x window system interrupt request flag (Hand over as reference!)
+ * @param p10 the x window system mutex (Hand over as reference!)
+ * @param p11 the x window system sleep time (Hand over as reference!)
+ * @param p12 the www service interrupt request flag (Hand over as reference!)
+ * @param p13 the www service mutex (Hand over as reference!)
+ * @param p14 the www service sleep time (Hand over as reference!)
+ * @param p15 the cyboi service interrupt request flag (Hand over as reference!)
+ * @param p16 the cyboi service mutex (Hand over as reference!)
+ * @param p17 the cyboi service sleep time (Hand over as reference!)
  */
-void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12,
-    void* p13, void* p14, void* p15, void* p16, void* p17, void* p18,
-    void* p19, void* p20, void* p21) {
+void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup internal memory.");
@@ -121,54 +117,55 @@ void startup_internal_memory(void* p0, void* p1, void* p2, void* p3, void* p4, v
 
     // Set knowledge memory internals.
     copy_array_forward(p0, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) KNOWLEDGE_MEMORY_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-    copy_array_forward(p0, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) KNOWLEDGE_MEMORY_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-    copy_array_forward(p0, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) KNOWLEDGE_MEMORY_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-
     // Set signal memory internals.
-    copy_array_forward(p0, p4, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-    copy_array_forward(p0, p5, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-    copy_array_forward(p0, p6, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_SIZE_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
     // Set signal memory interrupt request flag.
-    copy_array_forward(p0, p7, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set signal memory mutex.
-    copy_array_forward(p0, p8, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p4, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set signal memory sleep time.
-    copy_array_forward(p0, p9, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p5, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) SIGNAL_MEMORY_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
     // Set gnu/linux console interrupt request flag.
-    copy_array_forward(p0, p10, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p6, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set gnu/linux console mutex.
-    copy_array_forward(p0, p11, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p7, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set gnu/linux console sleep time.
-    copy_array_forward(p0, p12, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p8, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
     // Set x window system interrupt request flag.
-    copy_array_forward(p0, p13, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p9, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set x window system mutex.
-    copy_array_forward(p0, p14, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p10, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set x window system sleep time.
-    copy_array_forward(p0, p15, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_array_forward(p0, p11, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
     // Set www service interrupt request flag.
-    i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-    copy_array_forward(p0, p16, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_integer((void*) &i, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    add_integer_to_integer((void*) &i, (void*) SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
+    copy_array_forward(p0, p12, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set www service mutex.
-    i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
-    copy_array_forward(p0, p17, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_integer((void*) &i, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    add_integer_to_integer((void*) &i, (void*) SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME);
+    copy_array_forward(p0, p13, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set www service sleep time.
-    i = *WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME;
-    copy_array_forward(p0, p18, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_integer((void*) &i, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    add_integer_to_integer((void*) &i, (void*) SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME);
+    copy_array_forward(p0, p14, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
     // Set cyboi service interrupt request flag.
-    i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-    copy_array_forward(p0, p19, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_integer((void*) &i, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    add_integer_to_integer((void*) &i, (void*) SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
+    copy_array_forward(p0, p15, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set cyboi service mutex.
-    i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
-    copy_array_forward(p0, p20, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_integer((void*) &i, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    add_integer_to_integer((void*) &i, (void*) SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME);
+    copy_array_forward(p0, p16, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
     // Set cyboi service sleep time.
-    i = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME + *SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME;
-    copy_array_forward(p0, p21, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+    copy_integer((void*) &i, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    add_integer_to_integer((void*) &i, (void*) SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME);
+    copy_array_forward(p0, p17, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 }
 
 /* INTERNAL_MEMORY_MANAGER_SOURCE */

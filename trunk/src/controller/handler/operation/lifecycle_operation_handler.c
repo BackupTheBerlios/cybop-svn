@@ -40,73 +40,68 @@
 /**
  * Handles the lifecycle operation signal.
  *
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
- * @param p7 the shutdown flag
- * @param p8 the signal memory interrupt request flag
- * @param p9 the signal memory mutex
- * @param p10 the model / signal / operation
- * @param p11 the model / signal / operation count
- * @param p12 the details / parameters
- * @param p13 the details / parameters count
- * @param p14 the signal priority (Hand over as reference!)
- * @param p15 the signal identification (Hand over as reference!)
- * @param p16 the comparison result
+ * @param p0 the comparison result
+ * @param p1 the signal model array (operation)
+ * @param p2 the signal model array (operation) count
+ * @param p3 the signal details array (parametres)
+ * @param p4 the signal details array (parametres) count
+ * @param p5 the shutdown flag
+ * @param p6 the knowledge memory part
+ * @param p7 the internal memory array
  */
-void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
+void handle_lifecycle_operation(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle lifecycle operation.");
+    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-    // The comparison result.
-    int* r = (int*) p16;
+        int* r = (int*) p0;
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Handle lifecycle operation.");
 
-        compare_all_array(p16, p10, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT);
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            compare_all_array(p0, p1, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) EXIT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT);
 
-            log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE_LOG_MODEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE_LOG_MODEL_COUNT);
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            int* f = (int*) p7;
-            *f = *NUMBER_1_INTEGER_MEMORY_MODEL;
+                log_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE_LOG_MODEL, (void*) SET_SHUTDOWN_FLAG_MESSAGE_LOG_MODEL_COUNT);
+
+                copy_integer(p5, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+            }
         }
-    }
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array(p16, p10, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT);
+            compare_all_array(p0, p1, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) INTERRUPT_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT);
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_interrupting(p12, p13, p1, p2, p3);
+                maintain_interrupting(p3, p4, p6);
+            }
         }
-    }
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array(p16, p10, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT);
+            compare_all_array(p0, p1, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) SHUTDOWN_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT);
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_shutting(p12, p13, p1, p2, p3, p0);
+                maintain_shutting(p3, p4, p6, p7);
+            }
         }
-    }
 
-    if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (*r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array(p16, p10, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p11, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT);
+            compare_all_array(p0, p1, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) STARTUP_LIFECYCLE_OPERATION_CYBOL_MODEL_COUNT);
 
-        if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (*r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_starting(p12, p13, p1, p2, p3, p0);
+                maintain_starting(p3, p4, p6, p7);
+            }
         }
+
+    } else {
+
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not handle lifecycle operation. The comparison result is null.");
     }
 }
 

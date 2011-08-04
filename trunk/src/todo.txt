@@ -11,6 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Update "flow_operation_handler.c"
+        * Update handlers: all are done, but: "knowledge_handler.c" and "encapsulated_handler.c"
         * Reactivate "startup_internal_memory" in "manager.c"
         * Replace functions with new versions named with suffix "_NEW"
         * Delete outdated directory "executor/accessor/"
