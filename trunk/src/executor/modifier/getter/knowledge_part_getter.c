@@ -60,8 +60,9 @@
  * @param p1 the source whole part
  * @param p2 the hierarchical part name current position (Hand over as reference!)
  * @param p3 the hierarchical part name remaining count
+ * @param p4 the knowledge memory part
  */
-void get_part_knowledge(void* p0, void* p1, void* p2, void* p3) {
+void get_part_knowledge(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get part knowledge.");
 
@@ -83,15 +84,18 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3) {
     void* emd = *NULL_POINTER_MEMORY_MODEL;
     void* emc = *NULL_POINTER_MEMORY_MODEL;
 
-/*??
     // Get part.
     // CAUTION! This IS necessary to find out about the abstraction.
     get_part_branch((void*) &p, p1, p2, p3);
-    // Get part abstraction item.
+
+    // Get part abstraction, model item.
     copy_array_forward((void*) &a, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
-    // Get part abstraction data, count array.
+    copy_array_forward((void*) &m, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get part abstraction, model data, count array.
     copy_array_forward((void*) &ad, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &ac, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &md, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &mc, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -105,7 +109,7 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, ad, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, ac, (void*) ENCAPSULATED_KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
+        compare_integer((void*) &r, ad, (void*) ENCAPSULATED_KNOWLEDGE_PATH_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -122,14 +126,21 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3) {
             // model="application.record.name"
             //
 
-            get_part_branch((void*) &ep, p1, md, mc);
-            get_part_branch((void*) &p, p1, emd, emc);
+            get_part_branch((void*) &ep, p4, md, mc);
+
+            // Get encapsulated part model item.
+            copy_array_forward((void*) &em, ep, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+            // Get encapsulated part model data, count array.
+            copy_array_forward((void*) &emd, em, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+            copy_array_forward((void*) &emc, em, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+
+            get_part_branch(p0, p4, emd, emc);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, ad, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, ac, (void*) KNOWLEDGE_PATH_MEMORY_ABSTRACTION_COUNT);
+        compare_integer((void*) &r, ad, (void*) KNOWLEDGE_PATH_PRIMITIVE_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -146,7 +157,7 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3) {
             // model="application.communication.partners.hostname"
             //
 
-            get_part_branch((void*) &p, p1, md, mc);
+            get_part_branch(p0, p4, md, mc);
         }
     }
 
@@ -155,18 +166,16 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3) {
         //
         // Get part as direct model (inline).
         //
-        // It would actually be possible to remember the values of
-        // the first call to "get_part_branch" above,
-        // and assign these to the parameters here, which might lead to
-        // some optimisation and better performance.
-        // For reasons of clearity of code, however, the introduction and
-        // usage of those many additional local variables was avoided
-        // and the "get_part_branch" procedure
-        // is called here a second time instead.
+        // The part was already retrieved above.
+        // Therefore, the pointer to it is just copied here.
         //
-        get_part_branch((void*) &p, p1, p2, p3);
+        // Another possibility would be to retrieve it again:
+        // get_part_branch((void*) &p, p1, p2, p3);
+        // But this would waste performance.
+        //
+
+        copy_pointer(p0, (void*) &p);
     }
-*/
 }
 
 /* KNOWLEDGE_PART_GETTER_SOURCE */

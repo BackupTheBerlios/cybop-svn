@@ -11,10 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Complete and test new version of "knowledge_part_getter.c" (formerly universal retriever)
+        * Hand over copied local variable as reference everywhere "get_part_branch" is called
         * Adapt function "communicate_receiving_with_parameters" in "initialiser.c"
-        * Adapt handlers: all are done, but: "knowledge_handler.c" and "encapsulated_handler.c"
         * Adapt "flow_operation_handler.c"
+        * Adapt files in directory "applicator/"
         * Move files of directory "executor/converter/selector/" into "executor/searcher/selector/"
 
         * Offer part deallocation shallow and deep

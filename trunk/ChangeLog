@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-08-05  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Complete new version of "knowledge_part_getter.c" (formerly "get_universal_compound_element_by_name")
+        * Adapt "handler.c" and delete "knowledge_handler.c" and "encapsulated_handler.c"
+
 2011-08-04  Christian Heller  <christian.heller@tuxtax.de>
 
         * Delete outdated source files and -directories
