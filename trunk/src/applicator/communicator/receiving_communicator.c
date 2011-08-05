@@ -41,7 +41,7 @@
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/communication/receive_communication_operation_cybol_name.c"
 #include "../../constant/name/memory/internal_memory_memory_name.c"
-#include "../../executor/accessor/getter/compound_getter.c"
+#include "../../executor/modifier/getter/knowledge_part_getter.c"
 #include "../../logger/logger.c"
 #include "../../variable/thread_identification.c"
 
@@ -284,219 +284,55 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
  * - DELETE LATER (reception is always non-blocking in cyboi; if wished, the service may be interrupted):
  *   blocking (optional, only if channel is www, cyboi or similar): the flag indicating whether the receive process should be blocking
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the internal memory
- * @param p3 the knowledge memory
- * @param p4 the knowledge memory count
- * @param p5 the knowledge memory size
+ * @param p0 the parametres
+ * @param p1 the parametres count
+ * @param p2 the knowledge memory part
+ * @param p3 the internal memory array
  */
-void communicate_receiving(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message.");
 
-    // The channel name, abstraction, model, details.
-    void** cn = NULL_POINTER_MEMORY_MODEL;
-    void** cnc = NULL_POINTER_MEMORY_MODEL;
-    void** cns = NULL_POINTER_MEMORY_MODEL;
-    void** ca = NULL_POINTER_MEMORY_MODEL;
-    void** cac = NULL_POINTER_MEMORY_MODEL;
-    void** cas = NULL_POINTER_MEMORY_MODEL;
-    void** cm = NULL_POINTER_MEMORY_MODEL;
-    void** cmc = NULL_POINTER_MEMORY_MODEL;
-    void** cms = NULL_POINTER_MEMORY_MODEL;
-    void** cd = NULL_POINTER_MEMORY_MODEL;
-    void** cdc = NULL_POINTER_MEMORY_MODEL;
-    void** cds = NULL_POINTER_MEMORY_MODEL;
-    // The language name, abstraction, model, details.
-    void** ln = NULL_POINTER_MEMORY_MODEL;
-    void** lnc = NULL_POINTER_MEMORY_MODEL;
-    void** lns = NULL_POINTER_MEMORY_MODEL;
-    void** la = NULL_POINTER_MEMORY_MODEL;
-    void** lac = NULL_POINTER_MEMORY_MODEL;
-    void** las = NULL_POINTER_MEMORY_MODEL;
-    void** lm = NULL_POINTER_MEMORY_MODEL;
-    void** lmc = NULL_POINTER_MEMORY_MODEL;
-    void** lms = NULL_POINTER_MEMORY_MODEL;
-    void** ld = NULL_POINTER_MEMORY_MODEL;
-    void** ldc = NULL_POINTER_MEMORY_MODEL;
-    void** lds = NULL_POINTER_MEMORY_MODEL;
-    // The message name, abstraction, model, details.
-    void** mn = NULL_POINTER_MEMORY_MODEL;
-    void** mnc = NULL_POINTER_MEMORY_MODEL;
-    void** mns = NULL_POINTER_MEMORY_MODEL;
-    void** ma = NULL_POINTER_MEMORY_MODEL;
-    void** mac = NULL_POINTER_MEMORY_MODEL;
-    void** mas = NULL_POINTER_MEMORY_MODEL;
-    void** mm = NULL_POINTER_MEMORY_MODEL;
-    void** mmc = NULL_POINTER_MEMORY_MODEL;
-    void** mms = NULL_POINTER_MEMORY_MODEL;
-    void** md = NULL_POINTER_MEMORY_MODEL;
-    void** mdc = NULL_POINTER_MEMORY_MODEL;
-    void** mds = NULL_POINTER_MEMORY_MODEL;
-    // The meta message name, abstraction, model, details.
-    void** men = NULL_POINTER_MEMORY_MODEL;
-    void** menc = NULL_POINTER_MEMORY_MODEL;
-    void** mens = NULL_POINTER_MEMORY_MODEL;
-    void** mea = NULL_POINTER_MEMORY_MODEL;
-    void** meac = NULL_POINTER_MEMORY_MODEL;
-    void** meas = NULL_POINTER_MEMORY_MODEL;
-    void** mem = NULL_POINTER_MEMORY_MODEL;
-    void** memc = NULL_POINTER_MEMORY_MODEL;
-    void** mems = NULL_POINTER_MEMORY_MODEL;
-    void** med = NULL_POINTER_MEMORY_MODEL;
-    void** medc = NULL_POINTER_MEMORY_MODEL;
-    void** meds = NULL_POINTER_MEMORY_MODEL;
-    // The model name, abstraction, model, details.
-    void** mon = NULL_POINTER_MEMORY_MODEL;
-    void** monc = NULL_POINTER_MEMORY_MODEL;
-    void** mons = NULL_POINTER_MEMORY_MODEL;
-    void** moa = NULL_POINTER_MEMORY_MODEL;
-    void** moac = NULL_POINTER_MEMORY_MODEL;
-    void** moas = NULL_POINTER_MEMORY_MODEL;
-    void** mom = NULL_POINTER_MEMORY_MODEL;
-    void** momc = NULL_POINTER_MEMORY_MODEL;
-    void** moms = NULL_POINTER_MEMORY_MODEL;
-    void** mod = NULL_POINTER_MEMORY_MODEL;
-    void** modc = NULL_POINTER_MEMORY_MODEL;
-    void** mods = NULL_POINTER_MEMORY_MODEL;
-    // The root name, abstraction, model, details.
-    void** rn = NULL_POINTER_MEMORY_MODEL;
-    void** rnc = NULL_POINTER_MEMORY_MODEL;
-    void** rns = NULL_POINTER_MEMORY_MODEL;
-    void** ra = NULL_POINTER_MEMORY_MODEL;
-    void** rac = NULL_POINTER_MEMORY_MODEL;
-    void** ras = NULL_POINTER_MEMORY_MODEL;
-    void** rm = NULL_POINTER_MEMORY_MODEL;
-    void** rmc = NULL_POINTER_MEMORY_MODEL;
-    void** rms = NULL_POINTER_MEMORY_MODEL;
-    void** rd = NULL_POINTER_MEMORY_MODEL;
-    void** rdc = NULL_POINTER_MEMORY_MODEL;
-    void** rds = NULL_POINTER_MEMORY_MODEL;
-    // The socket communication style name, abstraction, model, details.
-    void** stn = NULL_POINTER_MEMORY_MODEL;
-    void** stnc = NULL_POINTER_MEMORY_MODEL;
-    void** stns = NULL_POINTER_MEMORY_MODEL;
-    void** sta = NULL_POINTER_MEMORY_MODEL;
-    void** stac = NULL_POINTER_MEMORY_MODEL;
-    void** stas = NULL_POINTER_MEMORY_MODEL;
-    void** stm = NULL_POINTER_MEMORY_MODEL;
-    void** stmc = NULL_POINTER_MEMORY_MODEL;
-    void** stms = NULL_POINTER_MEMORY_MODEL;
-    void** std = NULL_POINTER_MEMORY_MODEL;
-    void** stdc = NULL_POINTER_MEMORY_MODEL;
-    void** stds = NULL_POINTER_MEMORY_MODEL;
-    // The commands name, abstraction, model, details.
-    void** con = NULL_POINTER_MEMORY_MODEL;
-    void** conc = NULL_POINTER_MEMORY_MODEL;
-    void** cons = NULL_POINTER_MEMORY_MODEL;
-    void** coa = NULL_POINTER_MEMORY_MODEL;
-    void** coac = NULL_POINTER_MEMORY_MODEL;
-    void** coas = NULL_POINTER_MEMORY_MODEL;
-    void** com = NULL_POINTER_MEMORY_MODEL;
-    void** comc = NULL_POINTER_MEMORY_MODEL;
-    void** coms = NULL_POINTER_MEMORY_MODEL;
-    void** cod = NULL_POINTER_MEMORY_MODEL;
-    void** codc = NULL_POINTER_MEMORY_MODEL;
-    void** cods = NULL_POINTER_MEMORY_MODEL;
+    // The channel part.
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    // The language part.
+    void* l = *NULL_POINTER_MEMORY_MODEL;
+    // The message part.
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    // The meta message part.
+    void* me = *NULL_POINTER_MEMORY_MODEL;
+    // The model part.
+    void* mo = *NULL_POINTER_MEMORY_MODEL;
+    // The root part.
+    void* r = *NULL_POINTER_MEMORY_MODEL;
+    // The socket communication style part.
+    void* st = *NULL_POINTER_MEMORY_MODEL;
+    // The commands part.
+    void* co = *NULL_POINTER_MEMORY_MODEL;
 /*??
-    // The blocking name, abstraction, model, details.
-    void** bn = NULL_POINTER_MEMORY_MODEL;
-    void** bnc = NULL_POINTER_MEMORY_MODEL;
-    void** bns = NULL_POINTER_MEMORY_MODEL;
-    void** ba = NULL_POINTER_MEMORY_MODEL;
-    void** bac = NULL_POINTER_MEMORY_MODEL;
-    void** bas = NULL_POINTER_MEMORY_MODEL;
-    void** bm = NULL_POINTER_MEMORY_MODEL;
-    void** bmc = NULL_POINTER_MEMORY_MODEL;
-    void** bms = NULL_POINTER_MEMORY_MODEL;
-    void** bd = NULL_POINTER_MEMORY_MODEL;
-    void** bdc = NULL_POINTER_MEMORY_MODEL;
-    void** bds = NULL_POINTER_MEMORY_MODEL;
+    // The blocking part.
+    void* b = *NULL_POINTER_MEMORY_MODEL;
 */
 
-    // Get channel.
-    get_universal_compound_element_by_name(
-        (void*) &cn, (void*) &cnc, (void*) &cns,
-        (void*) &ca, (void*) &cac, (void*) &cas,
-        (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds,
-        p0, p1,
-        (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-    // Get language.
-    get_universal_compound_element_by_name(
-        (void*) &ln, (void*) &lnc, (void*) &lns,
-        (void*) &la, (void*) &lac, (void*) &las,
-        (void*) &lm, (void*) &lmc, (void*) &lms,
-        (void*) &ld, (void*) &ldc, (void*) &lds,
-        p0, p1,
-        (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-    // Get message.
-    get_universal_compound_element_by_name(
-        (void*) &mn, (void*) &mnc, (void*) &mns,
-        (void*) &ma, (void*) &mac, (void*) &mas,
-        (void*) &mm, (void*) &mmc, (void*) &mms,
-        (void*) &md, (void*) &mdc, (void*) &mds,
-        p0, p1,
-        (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-    // Get meta message.
-    get_universal_compound_element_by_name(
-        (void*) &men, (void*) &menc, (void*) &mens,
-        (void*) &mea, (void*) &meac, (void*) &meas,
-        (void*) &mem, (void*) &memc, (void*) &mems,
-        (void*) &med, (void*) &medc, (void*) &meds,
-        p0, p1,
-        (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-    // Get model.
-    get_universal_compound_element_by_name(
-        (void*) &mon, (void*) &monc, (void*) &mons,
-        (void*) &moa, (void*) &moac, (void*) &moas,
-        (void*) &mom, (void*) &momc, (void*) &moms,
-        (void*) &mod, (void*) &modc, (void*) &mods,
-        p0, p1,
-        (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-    // Get root.
-    get_universal_compound_element_by_name(
-        (void*) &rn, (void*) &rnc, (void*) &rns,
-        (void*) &ra, (void*) &rac, (void*) &ras,
-        (void*) &rm, (void*) &rmc, (void*) &rms,
-        (void*) &rd, (void*) &rdc, (void*) &rds,
-        p0, p1,
-        (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-    // Get socket communication style.
-    get_universal_compound_element_by_name(
-        (void*) &stn, (void*) &stnc, (void*) &stns,
-        (void*) &sta, (void*) &stac, (void*) &stas,
-        (void*) &stm, (void*) &stmc, (void*) &stms,
-        (void*) &std, (void*) &stdc, (void*) &stds,
-        p0, p1,
-        (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-    // Get commands.
-    get_universal_compound_element_by_name(
-        (void*) &con, (void*) &conc, (void*) &cons,
-        (void*) &coa, (void*) &coac, (void*) &coas,
-        (void*) &com, (void*) &comc, (void*) &coms,
-        (void*) &cod, (void*) &codc, (void*) &cods,
-        p0, p1,
-        (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
+    // Get channel part.
+    get_part_knowledge((void*) &c, p0, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
+    // Get language part.
+    get_part_knowledge((void*) &l, p0, (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
+    // Get message part.
+    get_part_knowledge((void*) &m, p0, (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
+    // Get meta message part.
+    get_part_knowledge((void*) &me, p0, (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
+    // Get model part.
+    get_part_knowledge((void*) &mo, p0, (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
+    // Get root part.
+    get_part_knowledge((void*) &r, p0, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
+    // Get socket communication style part.
+    get_part_knowledge((void*) &st, p0, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
+    // Get commands part.
+    get_part_knowledge((void*) &co, p0, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
 /*??
-    // Get blocking.
-    get_universal_compound_element_by_name(
-        (void*) &bn, (void*) &bnc, (void*) &bns,
-        (void*) &ba, (void*) &bac, (void*) &bas,
-        (void*) &bm, (void*) &bmc, (void*) &bms,
-        (void*) &bd, (void*) &bdc, (void*) &bds,
-        p0, p1,
-        (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
+    // Get blocking part.
+    get_part_knowledge((void*) &b, p0, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
 */
 
     // Receive data using the parameters determined above.

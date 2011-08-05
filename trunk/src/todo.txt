@@ -11,6 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Adapt "receiving_communicator.c"
         * Adapt function "communicate_receiving_with_parameters" in "initialiser.c"
         * Adapt "flow_operation_handler.c"
         * Adapt files in directory "applicator/"
