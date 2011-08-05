@@ -118,7 +118,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Get encapsulated signal part.
-            get_part_branch((void*) &ep, p3, md, mc);
+            // CAUTION! Hand over name as reference!
+            get_part_branch((void*) &ep, p3, (void*) &md, mc);
 
             // Get encapsulated signal part model item.
             copy_array_forward((void*) &em, ep, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
@@ -127,7 +128,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
             copy_array_forward((void*) &emc, em, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
             // Get double-encapsulated signal part.
-            get_part_branch((void*) &p, p3, emd, emc);
+            // CAUTION! Hand over name as reference!
+            get_part_branch((void*) &p, p3, (void*) &emd, emc);
 
             // Handle signal.
             handle(p, p1, p2, p3, p4, p5, p6, p7);
@@ -141,7 +143,8 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
             // Get signal part referenced by a knowledge path.
-            get_part_branch((void*) &p, p3, md, mc);
+            // CAUTION! Hand over name as reference!
+            get_part_branch((void*) &p, p3, (void*) &md, mc);
 
             // Handle signal.
             handle(p, p1, p2, p3, p4, p5, p6, p7);

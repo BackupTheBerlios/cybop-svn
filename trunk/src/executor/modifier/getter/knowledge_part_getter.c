@@ -58,8 +58,8 @@
  *
  * @param p0 the destination part (Hand over as reference!)
  * @param p1 the source whole part
- * @param p2 the hierarchical part name current position (Hand over as reference!)
- * @param p3 the hierarchical part name remaining count
+ * @param p2 the hierarchical part name
+ * @param p3 the hierarchical part name count
  * @param p4 the knowledge memory part
  */
 void get_part_knowledge(void* p0, void* p1, void* p2, void* p3, void* p4) {
@@ -85,8 +85,13 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3, void* p4) {
     void* emc = *NULL_POINTER_MEMORY_MODEL;
 
     // Get part.
-    // CAUTION! This IS necessary to find out about the abstraction.
-    get_part_branch((void*) &p, p1, p2, p3);
+    //
+    // CAUTION! It is necessary to find out about the abstraction and model.
+    // The abstraction may be "encapsulated", "knowledge", or some other.
+    // The model may contain a knowledge path or encapsulated knowledge path.
+    //
+    // CAUTION! Hand over name as reference!
+    get_part_branch((void*) &p, p1, (void*) &p2, p3);
 
     // Get part abstraction, model item.
     copy_array_forward((void*) &a, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
@@ -126,7 +131,8 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // model="application.record.name"
             //
 
-            get_part_branch((void*) &ep, p4, md, mc);
+            // CAUTION! Hand over name as reference!
+            get_part_branch((void*) &ep, p4, (void*) &md, mc);
 
             // Get encapsulated part model item.
             copy_array_forward((void*) &em, ep, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
@@ -134,7 +140,8 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3, void* p4) {
             copy_array_forward((void*) &emd, em, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
             copy_array_forward((void*) &emc, em, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
-            get_part_branch(p0, p4, emd, emc);
+            // CAUTION! Hand over name as reference!
+            get_part_branch(p0, p4, (void*) &emd, emc);
         }
     }
 
@@ -157,7 +164,8 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3, void* p4) {
             // model="application.communication.partners.hostname"
             //
 
-            get_part_branch(p0, p4, md, mc);
+            // CAUTION! Hand over name as reference!
+            get_part_branch(p0, p4, (void*) &md, mc);
         }
     }
 
@@ -170,7 +178,7 @@ void get_part_knowledge(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // Therefore, the pointer to it is just copied here.
         //
         // Another possibility would be to retrieve it again:
-        // get_part_branch((void*) &p, p1, p2, p3);
+        // get_part_branch((void*) &p, p1, (void*) &p2, p3);
         // But this would waste performance.
         //
 

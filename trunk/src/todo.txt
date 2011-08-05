@@ -11,7 +11,6 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Hand over copied local variable as reference everywhere "get_part_branch" is called
         * Adapt function "communicate_receiving_with_parameters" in "initialiser.c"
         * Adapt "flow_operation_handler.c"
         * Adapt files in directory "applicator/"

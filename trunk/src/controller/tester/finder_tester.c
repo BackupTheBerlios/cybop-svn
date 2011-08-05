@@ -210,6 +210,10 @@ void test_finder_part_hierarchical() {
     wchar_t* n6 = L"#colour";
     int n6c = *NUMBER_7_INTEGER_MEMORY_MODEL;
 
+    //
+    // CAUTION! Below, hand over names as reference!
+    //
+
     // Get part on first hierarchy level.
     get_part_branch((void*) &p1, application, (void*) &n1, (void*) &n1c);
     // Get part on second hierarchy level.

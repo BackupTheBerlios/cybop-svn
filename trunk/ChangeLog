@@ -20,6 +20,7 @@
 
         * Complete new version of "knowledge_part_getter.c" (formerly "get_universal_compound_element_by_name")
         * Adapt "handler.c" and delete "knowledge_handler.c" and "encapsulated_handler.c"
+        * Hand over name as reference wherever "get_part_branch" is called
 
 2011-08-04  Christian Heller  <christian.heller@tuxtax.de>
 
