@@ -67,7 +67,7 @@ void get_part_name(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Get part element.
     copy_array_forward((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p4);
-    // Get part element count retrieved as reference.
+    // Get part element item count retrieved as reference.
     copy_array_forward((void*) &ec, e, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
     while (*NUMBER_1_INTEGER_MEMORY_MODEL) {

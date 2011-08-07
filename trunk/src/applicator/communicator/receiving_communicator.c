@@ -281,10 +281,11 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
  * - DELETE LATER (commands are now added directly as signal to signal memory):
  *   commands (optional, only if a user interface thread is to react to certain commands):
  *   the knowledge model containing the commands that the user interface should react to
- * - DELETE LATER (reception is always non-blocking in cyboi; if wished, the service may be interrupted):
+ * - DELETE LATER (sensing is always NON-blocking in cyboi, running in an own thread;
+ *   if wished, the sensing service may be interrupted; reception IS BLOCKING, once data are sensed):
  *   blocking (optional, only if channel is www, cyboi or similar): the flag indicating whether the receive process should be blocking
  *
- * @param p0 the parametres
+ * @param p0 the parametres (signal/ operation part details)
  * @param p1 the parametres count
  * @param p2 the knowledge memory part
  * @param p3 the internal memory array
@@ -314,6 +315,7 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
     void* b = *NULL_POINTER_MEMORY_MODEL;
 */
 
+    find_part_element((void*) &i, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT);
     // Get channel part.
     get_part_knowledge((void*) &c, p0, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
     // Get language part.
