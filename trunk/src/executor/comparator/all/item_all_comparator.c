@@ -28,6 +28,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -81,7 +82,7 @@ void compare_all_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, 
         // This is a count or size item element.
 
         // Compare all elements of the right array with those of the left item data array.
-        compare_all_array(p0, e, p2, p3, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) PRIMITIVE_MEMORY_MODEL_COUNT);
+        compare_all_array(p0, e, p2, p3, p4, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p5);
     }
 }
 
