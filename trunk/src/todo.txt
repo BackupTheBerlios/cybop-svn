@@ -11,6 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+TEST
+
         * Create file like "name_element_part_finder.c", whereby only "MODEL" and "DETAILS"
             are allowed as elements (specified by the last parametre handed over)
         * Simplify some funtionality of "name_part_getter.c" with new
