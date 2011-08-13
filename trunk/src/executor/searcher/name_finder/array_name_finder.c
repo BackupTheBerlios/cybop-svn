@@ -42,19 +42,19 @@
 #include "../../../logger/logger.c"
 
 /**
- * Tries to find a part with the given name in the investigated array.
+ * Finds a part with the given name in the investigated array.
  *
  * @param p0 the index (if found; unchanged otherwise)
  * @param p1 the investigated array (each element pointing to a part)
- * @param p2 the name array
- * @param p3 the investigated array count
- * @param p4 the name array count
+ * @param p2 the searched name array
+ * @param p3 the searched name array count
+ * @param p4 the investigated array count
  */
 void find_name_array(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p4 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* c = (int*) p3;
+        int* c = (int*) p4;
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Find name array.");
 
@@ -78,9 +78,9 @@ void find_name_array(void* p0, void* p1, void* p2, void* p3, void* p4) {
             }
 
             // Get part j from investigated pointer array p1.
-            copy_array_forward((void*) &p, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) j);
+            copy_array_forward((void*) &p, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j);
             // Compare part p name item with given name p2.
-            compare_all_part_element((void*) &r, p, p2, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, (void*) NAME_PART_MEMORY_NAME);
+            compare_all_part_element((void*) &r, p, p2, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) NAME_PART_MEMORY_NAME);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

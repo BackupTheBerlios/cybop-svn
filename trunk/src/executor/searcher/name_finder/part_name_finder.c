@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef NAME_PART_FINDER_SOURCE
-#define NAME_PART_FINDER_SOURCE
+#ifndef PART_NAME_FINDER_SOURCE
+#define PART_NAME_FINDER_SOURCE
 
 #include "../../../constant/abstraction/cybol/number_cybol_abstraction.c"
 #include "../../../constant/abstraction/cybol/path_cybol_abstraction.c"
@@ -40,30 +40,51 @@
 #include "../../../variable/reallocation_factor.c"
 
 /**
- * Tries to find the searched part in the investigated part.
+ * Finds a part with the searched name array in the investigated part.
  *
  * @param p0 the index (if found; unchanged otherwise)
- * @param p1 the investigated part
- * @param p2 the name array
- * @param p3 the name array count
+ * @param p1 the investigated part (each element pointing to a part)
+ * @param p2 the searched name array
+ * @param p3 the searched name array count
  */
-void find_part_name(void* p0, void* p1, void* p2, void* p3) {
+void find_name_part_element(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Find part name.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Find name part element.");
 
-    // The investigated model.
-    void* im = *NULL_POINTER_MEMORY_MODEL;
-    // The searched model.
-    void* sm = *NULL_POINTER_MEMORY_MODEL;
+    // The investigated part.
+    void* i = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get investigated model.
-    copy_array_forward((void*) &im, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
-    // Get searched model.
-    copy_array_forward((void*) &sm, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get investigated part.
+    copy_array_forward((void*) &i, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
 
     // Find the searched item in the investigated item.
-    find_item(p0, im, sm, p3);
+    find_name_item_element(p0, i, p2, p3);
 }
 
-/* NAME_PART_FINDER_SOURCE */
+/**
+ * Finds a part with the searched name part in the investigated part.
+ *
+ * @param p0 the index (if found; unchanged otherwise)
+ * @param p1 the investigated part (each element pointing to a part)
+ * @param p2 the searched name part
+ */
+void find_name_part(void* p0, void* p1, void* p2) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Find name part.");
+
+    // The investigated part.
+    void* i = *NULL_POINTER_MEMORY_MODEL;
+    // The searched name part name.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get investigated part.
+    copy_array_forward((void*) &i, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get searched name part name.
+    copy_array_forward((void*) &s, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+
+    // Find the searched name item in the investigated item.
+    find_name_item(p0, i, s);
+}
+
+/* PART_NAME_FINDER_SOURCE */
 #endif

@@ -11,19 +11,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-TEST
-
-        * Create file like "name_element_part_finder.c", whereby only "MODEL" and "DETAILS"
-            are allowed as elements (specified by the last parametre handed over)
-        * Simplify some funtionality of "name_part_getter.c" with new
-            "name_element_part_finder.c" from above;
-            first indentify the index of a searched part and only afterwards, get that part
-        * How to use the details (parametres) array handed to function "communicate_receiving"?
-            -- use finder functionality?
         * Adapt "receiving_communicator.c"
-        * Adapt function "communicate_receiving_with_parameters" in "initialiser.c"
-        * Adapt "flow_operation_handler.c"
+        * Adapt function "communicate_receiving(??OLD??_with_parameters)" in "initialiser.c"
         * Adapt files in directory "applicator/"
+        * Adapt "flow_operation_handler.c"
         * Move all operation handlers one directory up
         * Move files of directory "executor/converter/selector/" into "executor/searcher/selector/"
 

@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ITEM_FINDER_SOURCE
-#define ITEM_FINDER_SOURCE
+#ifndef ITEM_NAME_FINDER_SOURCE
+#define ITEM_NAME_FINDER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -41,72 +41,57 @@
 #include "../../../logger/logger.c"
 
 /**
- * Tries to find a part with the given name in the investigated item.
+ * Finds a part with the searched name array in the investigated item.
  *
  * @param p0 the index (if found; unchanged otherwise)
  * @param p1 the investigated item (each element pointing to a part)
- * @param p2 the name array
- * @param p3 the name array count
+ * @param p2 the searched name array
+ * @param p3 the searched name array count
  */
 void find_name_item_element(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Find name item element.");
 
-    // The investigated item element.
-    void* e = *NULL_POINTER_MEMORY_MODEL;
-
-    // Get investigated item element.
-    copy_array_forward((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p5);
-
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    compare_integer((void*) &r, p5, (void*) DATA_ITEM_MEMORY_NAME, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
-
-    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        // This is a data item element.
-
-    // The investigated item count.
-    // CAUTION! It is only needed because this is a data item element.
+    // The investigated item data, count.
+    void* d = *NULL_POINTER_MEMORY_MODEL;
     void* c = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get investigated item count.
+    // Get investigated item data, count.
+    copy_array_forward((void*) &d, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &c, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
-    // Find the searched array in the investigated item data array.
-    find_array(p0, e, p2, p3, c, p4);
+    // Find the searched name array in the investigated item data array.
+    find_name_array(p0, d, p2, c, p3);
 }
 
 /**
- * Tries to find the searched item in the investigated item.
+ * Finds a part with the searched name item in the investigated item.
  *
  * @param p0 the index (if found; unchanged otherwise)
- * @param p1 the investigated item
- * @param p2 the searched item
- * @param p3 the abstraction
+ * @param p1 the investigated item (each element pointing to a part)
+ * @param p2 the searched name item
  */
-void find_item(void* p0, void* p1, void* p2, void* p3) {
+void find_name_item(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Find item.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Find name item.");
 
-    // The investigated data, count.
+    // The investigated item data, count.
     void* id = *NULL_POINTER_MEMORY_MODEL;
     void* ic = *NULL_POINTER_MEMORY_MODEL;
-    // The searched data, count.
+    // The searched name item data, count.
     void* sd = *NULL_POINTER_MEMORY_MODEL;
     void* sc = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get investigated data, count.
+    // Get investigated item data, count.
     copy_array_forward((void*) &id, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &ic, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
-    // Get searched data, count.
+    // Get searched name item data, count.
     copy_array_forward((void*) &sd, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &sc, p2, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
-    // Find the searched item data array in the investigated item data array.
-    find_array(p0, id, sd, p3, ic, sc);
+    // Find the searched name item data array in the investigated item data array.
+    find_name_array(p0, id, sd, ic, sc);
 }
 
-/* ITEM_FINDER_SOURCE */
+/* ITEM_NAME_FINDER_SOURCE */
 #endif

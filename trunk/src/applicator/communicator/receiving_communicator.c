@@ -48,36 +48,127 @@
 /**
  * Receives a message via the given channel.
  *
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the model (Hand over as reference!)
- * @param p4 the model count
- * @param p5 the model size
- * @param p6 the details (Hand over as reference!)
- * @param p7 the details count
- * @param p8 the details size
- * @param p9 the root
- * @param p10 the root count
- * @param p11 the root size
- * @param p12 the commands
- * @param p13 the commands count
- * @param p14 the message
- * @param p15 the message count
- * @param p16 the meta message
- * @param p17 the meta message count
- * @param p18 the language
- * @param p19 the language count
- * @param p20 the socket communication style
- * @param p21 the socket communication style count
- * @param p22 the channel
- * @param p23 the channel count
+ * CAUTION! Do NOT rename this procedure to "receive",
+ * as that name is already used by low-level socket functionality.
+ *
+ * The persistent message gets converted into a transient model, residing in memory.
+ *
+ * persistent:
+ * - stored permanently
+ * - outside CYBOI
+ * - longer than CYBOI lives
+ *
+ * transient:
+ * - stored in computer memory (RAM)
+ * - only accessible from within CYBOI
+ * - created and destroyed by CYBOI
+ * - not available anymore after CYBOI has been destroyed
+ *
+ * CAUTION! Some file formats (like the German xDT format for medical data exchange)
+ * contain both, the model AND the details, in one file. To cover these cases,
+ * the model and details are received TOGETHER, in just one operation.
+ *
+ * Some receive functions do not just read a persistent message, but first wait for
+ * an external signal. In order to catch signals of various devices, special mechanisms
+ * for signal reception have to be started. To the mechanisms belong:
+ * - gnu/linux console
+ * - x window system
+ * - socket
+ *
+ * These have their own internal signal/ action/ event/ interrupt waiting loops
+ * which get activated here, running as parallel services in separate threads.
+ * Whenever an event occurs in one of these threads, it gets transformed into a
+ * cyboi-internal signal and is finally placed in cyboi's signal memory.
+ * The cyboi signal waiting loop only catches cyboi-internal signals.
+ *
+ * Expected parameters:
+ * - channel (required): the channel via which to receive the message (gnu_linux_console, www, x_window_system etc.)
+ * - language (required): the language (abstraction, type, structure) of the data received (http_request, xdt, boolean, character etc.)
+ * - message (required): the source (knowledge template) from where to receive data
+ * - meta message (optional): the source (knowledge template) from where to receive meta data (details)
+ * - model (required): the compound model to be filled with the data received
+ * - details (required): the compound details to be filled with the data received
+ * - root (required): the knowledge model that will serve as the root
+ * - style (optional, only if channel is www, cyboi or similar): the style of socket communication
+ * - DELETE LATER (commands are now added directly as signal to signal memory):
+ *   commands (optional, only if a user interface thread is to react to certain commands):
+ *   the knowledge model containing the commands that the user interface should react to
+ * - DELETE LATER (sensing is always NON-blocking in cyboi, running in an own thread;
+ *   if wished, the sensing service may be interrupted; reception IS BLOCKING, once data are sensed):
+ *   blocking (optional, only if channel is www, cyboi or similar): the flag indicating whether the receive process should be blocking
+ *
+ * @param p0 the parametres pointer array referencing parts (signal/ operation part details)
+ * @param p1 the parametres pointer array referencing parts count
+ * @param p2 the knowledge memory part
+ * @param p3 the internal memory array
  */
-void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
-    void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23) {
+void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Receive message with given parameters.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message.");
+
+    // The channel part.
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    // The language part.
+    void* l = *NULL_POINTER_MEMORY_MODEL;
+    // The message part.
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    // The meta message part.
+    void* me = *NULL_POINTER_MEMORY_MODEL;
+    // The model part.
+    void* mo = *NULL_POINTER_MEMORY_MODEL;
+    // The root part.
+    void* r = *NULL_POINTER_MEMORY_MODEL;
+    // The socket communication style part.
+    void* st = *NULL_POINTER_MEMORY_MODEL;
+    // The commands part.
+    void* co = *NULL_POINTER_MEMORY_MODEL;
+/*??
+    // The blocking part.
+    void* b = *NULL_POINTER_MEMORY_MODEL;
+*/
+
+    // The channel part.
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    // The language part.
+    void* l = *NULL_POINTER_MEMORY_MODEL;
+    // The message part.
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    // The meta message part.
+    void* me = *NULL_POINTER_MEMORY_MODEL;
+    // The model part.
+    void* mo = *NULL_POINTER_MEMORY_MODEL;
+    // The root part.
+    void* r = *NULL_POINTER_MEMORY_MODEL;
+    // The socket communication style part.
+    void* st = *NULL_POINTER_MEMORY_MODEL;
+    // The commands part.
+    void* co = *NULL_POINTER_MEMORY_MODEL;
+/*??
+    // The blocking part.
+    void* b = *NULL_POINTER_MEMORY_MODEL;
+*/
+
+    // Get channel part.
+    get_name_array((void*) &c, p0, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get language part.
+    get_name_array((void*) &l, p0, (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get message part.
+    get_name_array((void*) &m, p0, (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get meta message part.
+    get_name_array((void*) &me, p0, (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get model part.
+    get_name_array((void*) &mo, p0, (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get root part.
+    get_name_array((void*) &r, p0, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get socket communication style part.
+    get_name_array((void*) &st, p0, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get commands part.
+    get_name_array((void*) &co, p0, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+/*??
+    // Get blocking part.
+    get_name_array((void*) &b, p0, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+*/
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -231,115 +322,6 @@ void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p
 
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not receive message with given parameters. The channel model is unknown.");
     }
-}
-
-/**
- * Receives a message via the given channel.
- *
- * CAUTION! Do NOT rename this procedure to "receive",
- * as that name is already used by low-level socket functionality.
- *
- * The persistent message gets converted into a transient model, residing in memory.
- *
- * persistent:
- * - stored permanently
- * - outside CYBOI
- * - longer than CYBOI lives
- *
- * transient:
- * - stored in computer memory (RAM)
- * - only accessible from within CYBOI
- * - created and destroyed by CYBOI
- * - not available anymore after CYBOI has been destroyed
- *
- * CAUTION! Some file formats (like the German xDT format for medical data exchange)
- * contain both, the model AND the details, in one file. To cover these cases,
- * the model and details are received TOGETHER, in just one operation.
- *
- * Some receive functions do not just read a persistent message, but first wait for
- * an external signal. In order to catch signals of various devices, special mechanisms
- * for signal reception have to be started. To the mechanisms belong:
- * - gnu/linux console
- * - x window system
- * - socket
- *
- * These have their own internal signal/ action/ event/ interrupt waiting loops
- * which get activated here, running as parallel services in separate threads.
- * Whenever an event occurs in one of these threads, it gets transformed into a
- * cyboi-internal signal and is finally placed in cyboi's signal memory.
- * The cyboi signal waiting loop only catches cyboi-internal signals.
- *
- * Expected parameters:
- * - channel (required): the channel via which to receive the message (gnu_linux_console, www, x_window_system etc.)
- * - language (required): the language (abstraction, type, structure) of the data received (http_request, xdt, boolean, character etc.)
- * - message (required): the source (knowledge template) from where to receive data
- * - meta message (optional): the source (knowledge template) from where to receive meta data (details)
- * - model (required): the compound model to be filled with the data received
- * - details (required): the compound details to be filled with the data received
- * - root (required): the knowledge model that will serve as the root
- * - style (optional, only if channel is www, cyboi or similar): the style of socket communication
- * - DELETE LATER (commands are now added directly as signal to signal memory):
- *   commands (optional, only if a user interface thread is to react to certain commands):
- *   the knowledge model containing the commands that the user interface should react to
- * - DELETE LATER (sensing is always NON-blocking in cyboi, running in an own thread;
- *   if wished, the sensing service may be interrupted; reception IS BLOCKING, once data are sensed):
- *   blocking (optional, only if channel is www, cyboi or similar): the flag indicating whether the receive process should be blocking
- *
- * @param p0 the parametres (signal/ operation part details)
- * @param p1 the parametres count
- * @param p2 the knowledge memory part
- * @param p3 the internal memory array
- */
-void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
-
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message.");
-
-    // The channel part.
-    void* c = *NULL_POINTER_MEMORY_MODEL;
-    // The language part.
-    void* l = *NULL_POINTER_MEMORY_MODEL;
-    // The message part.
-    void* m = *NULL_POINTER_MEMORY_MODEL;
-    // The meta message part.
-    void* me = *NULL_POINTER_MEMORY_MODEL;
-    // The model part.
-    void* mo = *NULL_POINTER_MEMORY_MODEL;
-    // The root part.
-    void* r = *NULL_POINTER_MEMORY_MODEL;
-    // The socket communication style part.
-    void* st = *NULL_POINTER_MEMORY_MODEL;
-    // The commands part.
-    void* co = *NULL_POINTER_MEMORY_MODEL;
-/*??
-    // The blocking part.
-    void* b = *NULL_POINTER_MEMORY_MODEL;
-*/
-
-    find_part_element((void*) &i, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT);
-    // Get channel part.
-    get_part_knowledge((void*) &c, p0, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
-    // Get language part.
-    get_part_knowledge((void*) &l, p0, (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
-    // Get message part.
-    get_part_knowledge((void*) &m, p0, (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
-    // Get meta message part.
-    get_part_knowledge((void*) &me, p0, (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) META_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
-    // Get model part.
-    get_part_knowledge((void*) &mo, p0, (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
-    // Get root part.
-    get_part_knowledge((void*) &r, p0, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
-    // Get socket communication style part.
-    get_part_knowledge((void*) &st, p0, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
-    // Get commands part.
-    get_part_knowledge((void*) &co, p0, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
-/*??
-    // Get blocking part.
-    get_part_knowledge((void*) &b, p0, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p2);
-*/
-
-    // Receive data using the parameters determined above.
-    communicate_receiving_with_parameters(p2, p3, p4, (void*) mom, *momc, *moms, (void*) mod, *modc, *mods,
-        *rm, *rmc, *rms, *com, *comc, *mm, *mmc, *mem, *memc, *lm, *lmc, *stm, *stmc, *cm, *cmc);
 
 /*??
 //?? TEST BEGIN

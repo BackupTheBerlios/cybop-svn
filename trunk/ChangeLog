@@ -16,6 +16,15 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-08-13  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Add new directory "executor/searcher/name_finder/" for finding
+            a part with the given name in an investigated array/item/part
+        * Simplify funtionality of "name_part_getter.c" with "part_name_finder.c"
+            (first indentify the index of a searched part and only afterwards, get that part)
+        * Add new directory "executor/modifier/name_getter/" for getting
+            a part with the given name in an investigated array/item/part
+
 2011-08-05  Christian Heller  <christian.heller@tuxtax.de>
 
         * Complete new version of "knowledge_part_getter.c" (formerly "get_universal_compound_element_by_name")

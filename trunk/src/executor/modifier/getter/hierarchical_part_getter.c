@@ -91,7 +91,7 @@ void get_part_hierarchical(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         // Find part by name in whole model or details
                         // (depending on part element index p4).
-                        get_part_name(p0, p1, e, (void*) &ec, p4);
+                        get_name_part(p0, p1, e, (void*) &ec, p4);
 
                         // Process knowledge hierarchy recursively further down.
                         //
@@ -120,7 +120,7 @@ void get_part_hierarchical(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
                         // Find part by name in whole model or details
                         // (depending on part element index p4).
-                        get_part_name(p0, p1, e, (void*) &ec, p4);
+                        get_name_part(p0, p1, e, (void*) &ec, p4);
 
                         // Process knowledge hierarchy recursively further down.
                         //

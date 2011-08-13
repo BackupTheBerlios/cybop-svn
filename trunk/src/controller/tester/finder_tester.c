@@ -349,7 +349,7 @@ void test_finder_part_by_name() {
     void* f = *NULL_POINTER_MEMORY_MODEL;
 
     // Find part in whole by name.
-    get_part_name((void*) &f, w, (void*) L"part_two", (void*) NUMBER_8_INTEGER_MEMORY_MODEL, (void*) MODEL_PART_MEMORY_NAME);
+    get_name_part((void*) &f, w, (void*) L"part_two", (void*) NUMBER_8_INTEGER_MEMORY_MODEL, (void*) MODEL_PART_MEMORY_NAME);
 
     //
     // Output test results.
