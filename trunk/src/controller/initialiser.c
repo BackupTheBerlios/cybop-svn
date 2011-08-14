@@ -54,33 +54,51 @@ void initialise(void* p0, void* p1, void* p2) {
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Initialise system with startup signal.");
 
-    // CAUTION! Do NOT use "normal" int as type for startup model counts and sizes below!
-    // The reason is that the "set_signal" function below expects int** parameters.
-    // If, for example, the variable mac was an int, then &ac would deliver only int*
-    // (but not int**) as parameter to be handed over to the "set_signal" function.
-    // All other models (and their counts and sizes) coming from knowledge memory
-    // are allocated in the same way when being read from cybol sources.
+    // The message (run source, file name) item data, count.
+    void* md = *NULL_POINTER_MEMORY_MODEL;
+    void* mc = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get message item data, count.
+    copy_array_forward((void*) &md, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &mc, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
     // The startup signal part.
     void* s = *NULL_POINTER_MEMORY_MODEL;
+    // The startup signal part model, details.
+    void* sm = *NULL_POINTER_MEMORY_MODEL;
+    void* sd = *NULL_POINTER_MEMORY_MODEL;
+    // The startup signal part model data, count, size.
+    void* smd = *NULL_POINTER_MEMORY_MODEL;
+    void* smc = *NULL_POINTER_MEMORY_MODEL;
+    void* sms = *NULL_POINTER_MEMORY_MODEL;
+    // The startup signal part details data, count, size.
+    void* sdd = *NULL_POINTER_MEMORY_MODEL;
+    void* sdc = *NULL_POINTER_MEMORY_MODEL;
+    void* sds = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate startup signal part.
     allocate_part((void*) &s, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) PART_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    // Copy startup signal abstraction, model, details.
+    // Copy startup signal part abstraction.
     // CAUTION! A name is not necessary, since only
     // the actual model and details are of interest.
+    // CAUTION! The model and details are received below.
     overwrite_part_element(s, (void*) PART_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PART_MEMORY_ABSTRACTION_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
 
-    // Receive and decode startup model model and -details.
-    //?? TODO! Get file path item data and item count
-    //?? and replace 2x p3 below.
-    communicate_receiving_with_parameters(*NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        (void*) &m, mc, ms, (void*) &d, dc, ds,
-        *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        p3, p3, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL,
-        (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+    // Get startup signal part model, details.
+    copy_array_forward((void*) &sm, s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    copy_array_forward((void*) &sd, s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
+    // Get startup signal part model data, count.
+    copy_array_forward((void*) &smd, sm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &smc, sm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &sms, sm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
+    // Get startup signal part details data, count.
+    copy_array_forward((void*) &sdd, sd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &sdc, sd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &sds, sd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
+
+    // Receive startup signal model, details.
+    apply_receive_file_system((void*) &smd, smc, sms, (void*) &sdd, sdc, sds, md, mc, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION, (void*) CYBOL_TEXT_CYBOL_ABSTRACTION_COUNT);
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"\n\n");
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add startup signal to signal memory.");

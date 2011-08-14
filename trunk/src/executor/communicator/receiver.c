@@ -86,7 +86,7 @@ void receive_data(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p9, (void*) FILE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p10, (void*) FILE_CYBOL_CHANNEL_COUNT);
+        compare_all_array((void*) &r, p9, (void*) FILE_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p10, (void*) FILE_SYSTEM_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -92,7 +92,7 @@ void communicate_sending_file_system(void* p0, void* p1, void* p2, void* p3, voi
     deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
     // Write encoded array into file.
-    send_data((void*) &p15, p16, *NULL_POINTER_MEMORY_MODEL, e, ec, (void*) FILE_CYBOL_CHANNEL, (void*) FILE_CYBOL_CHANNEL_COUNT);
+    send_data((void*) &p15, p16, *NULL_POINTER_MEMORY_MODEL, e, ec, (void*) FILE_SYSTEM_CYBOL_CHANNEL, (void*) FILE_SYSTEM_CYBOL_CHANNEL_COUNT);
 
     // Deallocate encoded character array.
     deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);

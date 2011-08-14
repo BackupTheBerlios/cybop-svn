@@ -11,8 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Adapt "receiving_communicator.c"
-        * Adapt function "communicate_receiving(??OLD??_with_parameters)" in "initialiser.c"
+        * Correct "hierarchical_part_getter.c" which still uses old version of "get_name_part"
         * Adapt files in directory "applicator/"
         * Adapt "flow_operation_handler.c"
         * Move all operation handlers one directory up

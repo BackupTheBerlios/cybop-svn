@@ -27,6 +27,7 @@
 #define INLINE_RECEIVER_SOURCE
 
 #include <stdio.h>
+
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"

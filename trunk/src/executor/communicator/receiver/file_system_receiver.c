@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FILE_RECEIVER_SOURCE
-#define FILE_RECEIVER_SOURCE
+#ifndef FILE_SYSTEM_RECEIVER_SOURCE
+#define FILE_SYSTEM_RECEIVER_SOURCE
 
 #include <stdio.h>
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
@@ -163,5 +163,5 @@ void receive_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
     }
 }
 
-/* FILE_RECEIVER_SOURCE */
+/* FILE_SYSTEM_RECEIVER_SOURCE */
 #endif

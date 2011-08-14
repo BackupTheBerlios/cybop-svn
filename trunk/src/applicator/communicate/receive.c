@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RECEIVING_COMMUNICATOR_SOURCE
-#define RECEIVING_COMMUNICATOR_SOURCE
+#ifndef RECEIVE_SOURCE
+#define RECEIVE_SOURCE
 
 #include "../../applicator/communicator/receiving/file_system_receiving_communicator.c"
 #include "../../applicator/communicator/receiving/gnu_linux_console_receiving_communicator.c"
@@ -66,20 +66,7 @@
  *
  * CAUTION! Some file formats (like the German xDT format for medical data exchange)
  * contain both, the model AND the details, in one file. To cover these cases,
- * the model and details are received TOGETHER, in just one operation.
- *
- * Some receive functions do not just read a persistent message, but first wait for
- * an external signal. In order to catch signals of various devices, special mechanisms
- * for signal reception have to be started. To the mechanisms belong:
- * - gnu/linux console
- * - x window system
- * - socket
- *
- * These have their own internal signal/ action/ event/ interrupt waiting loops
- * which get activated here, running as parallel services in separate threads.
- * Whenever an event occurs in one of these threads, it gets transformed into a
- * cyboi-internal signal and is finally placed in cyboi's signal memory.
- * The cyboi signal waiting loop only catches cyboi-internal signals.
+ * the model AND details are received TOGETHER, in just one operation.
  *
  * Expected parameters:
  * - channel (required): the channel via which to receive the message (gnu_linux_console, www, x_window_system etc.)
@@ -90,21 +77,15 @@
  * - details (required): the compound details to be filled with the data received
  * - root (required): the knowledge model that will serve as the root
  * - style (optional, only if channel is www, cyboi or similar): the style of socket communication
- * - DELETE LATER (commands are now added directly as signal to signal memory):
- *   commands (optional, only if a user interface thread is to react to certain commands):
- *   the knowledge model containing the commands that the user interface should react to
- * - DELETE LATER (sensing is always NON-blocking in cyboi, running in an own thread;
- *   if wished, the sensing service may be interrupted; reception IS BLOCKING, once data are sensed):
- *   blocking (optional, only if channel is www, cyboi or similar): the flag indicating whether the receive process should be blocking
  *
- * @param p0 the parametres pointer array referencing parts (signal/ operation part details)
- * @param p1 the parametres pointer array referencing parts count
+ * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
+ * @param p1 the parametres array count
  * @param p2 the knowledge memory part
  * @param p3 the internal memory array
  */
-void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
+void apply_receive(void* p0, void* p1, void* p2, void* p3) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply receive.");
 
     // The channel part.
     void* c = *NULL_POINTER_MEMORY_MODEL;
@@ -120,34 +101,47 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
     void* r = *NULL_POINTER_MEMORY_MODEL;
     // The socket communication style part.
     void* st = *NULL_POINTER_MEMORY_MODEL;
-    // The commands part.
-    void* co = *NULL_POINTER_MEMORY_MODEL;
-/*??
-    // The blocking part.
-    void* b = *NULL_POINTER_MEMORY_MODEL;
-*/
 
-    // The channel part.
-    void* c = *NULL_POINTER_MEMORY_MODEL;
-    void* c = *NULL_POINTER_MEMORY_MODEL;
-    // The language part.
-    void* l = *NULL_POINTER_MEMORY_MODEL;
-    // The message part.
-    void* m = *NULL_POINTER_MEMORY_MODEL;
-    // The meta message part.
-    void* me = *NULL_POINTER_MEMORY_MODEL;
-    // The model part.
-    void* mo = *NULL_POINTER_MEMORY_MODEL;
-    // The root part.
-    void* r = *NULL_POINTER_MEMORY_MODEL;
-    // The socket communication style part.
-    void* st = *NULL_POINTER_MEMORY_MODEL;
-    // The commands part.
-    void* co = *NULL_POINTER_MEMORY_MODEL;
-/*??
-    // The blocking part.
-    void* b = *NULL_POINTER_MEMORY_MODEL;
-*/
+    // The channel part model.
+    void* cm = *NULL_POINTER_MEMORY_MODEL;
+    // The language part model.
+    void* lm = *NULL_POINTER_MEMORY_MODEL;
+    // The message part model.
+    void* mm = *NULL_POINTER_MEMORY_MODEL;
+    // The meta message part model.
+    void* mem = *NULL_POINTER_MEMORY_MODEL;
+    // The model part model, details.
+    void* mom = *NULL_POINTER_MEMORY_MODEL;
+    void* mod = *NULL_POINTER_MEMORY_MODEL;
+    // The root part model.
+    void* rm = *NULL_POINTER_MEMORY_MODEL;
+    // The socket communication style part model.
+    void* stm = *NULL_POINTER_MEMORY_MODEL;
+
+    // The channel part model data, count.
+    void* cmd = *NULL_POINTER_MEMORY_MODEL;
+    void* cmc = *NULL_POINTER_MEMORY_MODEL;
+    // The language part model data, count.
+    void* lmd = *NULL_POINTER_MEMORY_MODEL;
+    void* lmc = *NULL_POINTER_MEMORY_MODEL;
+    // The message part model data, count.
+    void* mmd = *NULL_POINTER_MEMORY_MODEL;
+    void* mmc = *NULL_POINTER_MEMORY_MODEL;
+    // The meta message part model data, count.
+    void* memd = *NULL_POINTER_MEMORY_MODEL;
+    void* memc = *NULL_POINTER_MEMORY_MODEL;
+    // The model part model data, count.
+    void* momd = *NULL_POINTER_MEMORY_MODEL;
+    void* momc = *NULL_POINTER_MEMORY_MODEL;
+    // The model part details data, count.
+    void* modd = *NULL_POINTER_MEMORY_MODEL;
+    void* modc = *NULL_POINTER_MEMORY_MODEL;
+    // The root part model data, count.
+    void* rmd = *NULL_POINTER_MEMORY_MODEL;
+    void* rmc = *NULL_POINTER_MEMORY_MODEL;
+    // The socket communication style part model data, count.
+    void* stmd = *NULL_POINTER_MEMORY_MODEL;
+    void* stmc = *NULL_POINTER_MEMORY_MODEL;
 
     // Get channel part.
     get_name_array((void*) &c, p0, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
@@ -163,22 +157,58 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
     get_name_array((void*) &r, p0, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) ROOT_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
     // Get socket communication style part.
     get_name_array((void*) &st, p0, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get commands part.
-    get_name_array((void*) &co, p0, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) COMMANDS_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
-/*??
-    // Get blocking part.
-    get_name_array((void*) &b, p0, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) BLOCKING_RECEIVE_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
-*/
+
+    // Get channel part model.
+    copy_array_forward((void*) &cm, c, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get language part model.
+    copy_array_forward((void*) &lm, l, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get message part model.
+    copy_array_forward((void*) &mm, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get meta message part model.
+    copy_array_forward((void*) &mem, me, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get model part model, details.
+    copy_array_forward((void*) &mom, mo, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    copy_array_forward((void*) &mod, mo, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
+    // Get root part model.
+    copy_array_forward((void*) &rm, r, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get socket communication style part model.
+    copy_array_forward((void*) &stm, st, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+
+    // Get channel part model data, count.
+    copy_array_forward((void*) &cmd, cm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &cmc, cm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    // Get language part model data, count.
+    copy_array_forward((void*) &lmd, lm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &lmc, lm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    // Get message part model data, count.
+    copy_array_forward((void*) &mmd, mm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &mmc, mm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    // Get meta message part model data, count.
+    copy_array_forward((void*) &memd, mem, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &memc, mem, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    // Get model part model data, count.
+    copy_array_forward((void*) &momd, mom, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &momc, mom, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    // Get model part details data, count.
+    copy_array_forward((void*) &modd, mod, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &modc, mod, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    // Get root part model data, count.
+    copy_array_forward((void*) &rmd, rm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &rmc, rm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    // Get socket communication style part model data, count.
+    copy_array_forward((void*) &stmd, stm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &stmc, stm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p22, (void*) CYBOI_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p23, (void*) CYBOI_CYBOL_CHANNEL_COUNT);
+        compare_all_array((void*) &r, cmd, (void*) CYBOI_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) CYBOI_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+/*??
             // The base internal.
             int base = *CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME;
             // The internal memory index.
@@ -196,22 +226,23 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-            communicate_receiving_socket(p3, p4, p5, p6, p7, p8, *ps, p20, p21, p18, p19, p1, p2);
+            apply_receive_socket((void*) &momd, momc, moms, (void*) &modd, modc, mods, *ps, p20, p21, p18, p19, p1, p2);
+*/
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p22, (void*) FILE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p23, (void*) FILE_CYBOL_CHANNEL_COUNT);
+        compare_all_array((void*) &r, cmd, (void*) FILE_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) FILE_SYSTEM_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
+        
             // Receive model by reading message data.
             //
             // CAUTION! The details are handed over as well, since sometimes,
             // they are read from the message together with the model, for
             // example when converting from a file in xdt format.
-            communicate_receiving_file_system(p3, p4, p5, p6, p7, p8, p14, p15, p18, p19);
+            apply_receive_file_system((void*) &momd, momc, moms, (void*) &modd, modc, mods, mmd, mmc, lmd, lmc);
 
             // Receive details by reading meta message data.
             //
@@ -226,7 +257,7 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
             //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
             //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
             // </part>
-//??            communicate_receiving_file_system(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p16, p17, p18, p19);
+//??            apply_receive_file_system((void*) &modd, modc, mods, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, mmd, mmc, lmd, lmc);
 
             //?? CAUTION! The function call above was commented out ON PURPOSE, since it caused a runtime error!
             //?? TODO: Figure out what happens inside, before uncommenting it again!
@@ -238,10 +269,11 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p22, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p23, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
+        compare_all_array((void*) &r, cmd, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
+/*??
             // The gnu/linux console mutex.
             void** mt = NULL_POINTER_MEMORY_MODEL;
             // The gnu/linux console input stream.
@@ -252,15 +284,14 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
             // Get gnu/linux console input stream.
             get((void*) &is, p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-            communicate_receiving_gnu_linux_console(NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL,
-                NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL, NULL_POINTER_MEMORY_MODEL,
-                p3, p4, p5, p6, p7, p8, *is, p12, p13, p1, p2, *mt);
+            apply_receive_gnu_linux_console((void*) &momd, momc, moms, (void*) &modd, modc, mods, *is, p12, p13, p1, p2, *mt);
+*/
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p22, (void*) INLINE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p23, (void*) INLINE_CYBOL_CHANNEL_COUNT);
+        compare_all_array((void*) &r, cmd, (void*) INLINE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) INLINE_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -269,7 +300,7 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
             // CAUTION! The details are handed over as well, since sometimes,
             // they are read from the message together with the model, for
             // example when converting from a file in xdt format.
-            communicate_receiving_inline(p3, p4, p5, p6, p7, p8, p14, p15, p18, p19);
+            apply_receive_inline((void*) &momd, momc, moms, (void*) &modd, modc, mods, mmd, mmc, lmd, lmc);
 
             // CAUTION! Do NOT try to receive meta data here!
             // When calling the following function:
@@ -286,41 +317,41 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p22, (void*) LATEX_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p23, (void*) LATEX_CYBOL_CHANNEL_COUNT);
+        compare_all_array((void*) &r, cmd, (void*) LATEX_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) LATEX_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            communicate_receiving_latex(p0, p13, p14);
+//??            apply_receive_latex((void*) &momd, momc, moms, (void*) &modd, modc, mods, p13, p14);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p22, (void*) WWW_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p23, (void*) WWW_CYBOL_CHANNEL_COUNT);
+        compare_all_array((void*) &r, cmd, (void*) WWW_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) WWW_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
+        
             // Receive model by reading http request or response.
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-//??            communicate_receiving_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+//??            apply_receive_socket((void*) &momd, momc, moms, (void*) &modd, modc, mods, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, p22, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p23, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT);
+        compare_all_array((void*) &r, cmd, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-//??            communicate_receiving_x_window_system(p0, p7, p8, p9, p10, p11, p12);
+//??            apply_receive_x_window_system((void*) &p0, p7, p8, p9, p10, p11, p12);
         }
     }
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not receive message with given parameters. The channel model is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not apply receive. The channel model is unknown.");
     }
 
 /*??
@@ -357,5 +388,5 @@ void communicate_receiving(void* p0, void* p1, void* p2, void* p3) {
 */
 }
 
-/* RECEIVING_COMMUNICATOR_SOURCE */
+/* RECEIVE_SOURCE */
 #endif

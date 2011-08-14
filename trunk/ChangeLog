@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-08-14  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Move some files from "executor/modifier/getter/" into "executor/modifier/knowledge_getter/"
+        * Adapt reception of signal model from file in "initialiser.c"
+        * Adapt old files of "applicator/communicator/" and move into new directory "applicator/communicate/"
+
 2011-08-13  Christian Heller  <christian.heller@tuxtax.de>
 
         * Add new directory "executor/searcher/name_finder/" for finding

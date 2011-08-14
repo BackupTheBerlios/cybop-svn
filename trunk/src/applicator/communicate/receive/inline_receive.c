@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INLINE_RECEIVING_COMMUNICATOR_SOURCE
-#define INLINE_RECEIVING_COMMUNICATOR_SOURCE
+#ifndef INLINE_RECEIVE_SOURCE
+#define INLINE_RECEIVE_SOURCE
 
 #include "../../../constant/channel/cybol_channel.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -34,7 +34,7 @@
 #include "../../../logger/logger.c"
 
 /**
- * Receives a message from inline, that is from a string of characters.
+ * Applies the receive inline operation.
  *
  * @param p0 the model (Hand over as reference!)
  * @param p1 the model count
@@ -47,20 +47,20 @@
  * @param p8 the language
  * @param p9 the language count
  */
-void communicate_receiving_inline(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void apply_receive_inline(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive inline message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply receive inline.");
 
-    // The read model.
-    void* rm = *NULL_POINTER_MEMORY_MODEL;
-    void* rmc = *NULL_POINTER_MEMORY_MODEL;
-    void* rms = *NULL_POINTER_MEMORY_MODEL;
+    // The data array, count, size.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    // Allocate read model.
-    allocate_model((void*) &rm, (void*) &rmc, (void*) &rms, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Allocate data array.
+    allocate_array((void*) &a, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    // Read persistent byte stream over channel.
-    receive_data((void*) &rm, rmc, rms, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) INLINE_CYBOL_CHANNEL, (void*) INLINE_CYBOL_CHANNEL_COUNT);
+    // Receive data array, count, size.
+    receive_inline((void*) &a, (void*) &c, (void*) &s, p6, p7);
 
     // CAUTION! Do NOT try to decode from UTF-8 or other formats here!
     // In other words, do NOT call a function such as this:
@@ -71,12 +71,12 @@ void communicate_receiving_inline(void* p0, void* p1, void* p2, void* p3, void* 
     // Therefore, data do NOT have to be decoded once more when being
     // evaluated as inline wide character array.
 
-    // Decode byte stream according to given document type.
-    decode(p0, p1, p2, p3, p4, p5, rm, rmc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+    // Decode data array according to given document type.
+    decode(p0, p1, p2, p3, p4, p5, a, (void*) &c, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
 
-    // Deallocate read model.
-    deallocate_model((void*) &rm, (void*) &rmc, (void*) &rms, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    // Deallocate data array.
+    deallocate_array((void*) &a, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
-/* INLINE_RECEIVING_COMMUNICATOR_SOURCE */
+/* INLINE_RECEIVE_SOURCE */
 #endif

@@ -34,10 +34,10 @@ static wchar_t CYBOI_CYBOL_CHANNEL_ARRAY[] = {L'c', L'y', L'b', L'o', L'i'};
 static wchar_t* CYBOI_CYBOL_CHANNEL = CYBOI_CYBOL_CHANNEL_ARRAY;
 static int* CYBOI_CYBOL_CHANNEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The file cybol channel. */
-static wchar_t FILE_CYBOL_CHANNEL_ARRAY[] = {L'f', L'i', L'l', L'e'};
-static wchar_t* FILE_CYBOL_CHANNEL = FILE_CYBOL_CHANNEL_ARRAY;
-static int* FILE_CYBOL_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
+/** The file system cybol channel. */
+static wchar_t FILE_SYSTEM_CYBOL_CHANNEL_ARRAY[] = {L'f', L'i', L'l', L'e'};
+static wchar_t* FILE_SYSTEM_CYBOL_CHANNEL = FILE_SYSTEM_CYBOL_CHANNEL_ARRAY;
+static int* FILE_SYSTEM_CYBOL_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The file transfer protocol (ftp) cybol channel. */
 static wchar_t FTP_CYBOL_CHANNEL_ARRAY[] = {L'f', L't', L'p'};
