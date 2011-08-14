@@ -44,8 +44,9 @@
  * @param p1 the source whole part
  * @param p2 the part name array
  * @param p3 the part name array count
+ * @param p4 the destination part element index
  */
-void get_name_part_element(void* p0, void* p1, void* p2, void* p3) {
+void get_name_part_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get name part element.");
 
@@ -53,7 +54,7 @@ void get_name_part_element(void* p0, void* p1, void* p2, void* p3) {
     void* s = *NULL_POINTER_MEMORY_MODEL;
 
     // Get source whole item.
-    copy_array_forward((void*) &s, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    copy_array_forward((void*) &s, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p4);
 
     // Get destination part with given name from source whole data item.
     get_name_item_element(p0, s, p2, p3);

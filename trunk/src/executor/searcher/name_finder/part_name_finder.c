@@ -46,8 +46,9 @@
  * @param p1 the investigated part (each element pointing to a part)
  * @param p2 the searched name array
  * @param p3 the searched name array count
+ * @param p4 the investigated part element index
  */
-void find_name_part_element(void* p0, void* p1, void* p2, void* p3) {
+void find_name_part_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Find name part element.");
 
@@ -55,7 +56,7 @@ void find_name_part_element(void* p0, void* p1, void* p2, void* p3) {
     void* i = *NULL_POINTER_MEMORY_MODEL;
 
     // Get investigated part.
-    copy_array_forward((void*) &i, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    copy_array_forward((void*) &i, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p4);
 
     // Find the searched item in the investigated item.
     find_name_item_element(p0, i, p2, p3);

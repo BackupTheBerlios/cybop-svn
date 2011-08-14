@@ -21,6 +21,8 @@
         * Move some files from "executor/modifier/getter/" into "executor/modifier/knowledge_getter/"
         * Adapt reception of signal model from file in "initialiser.c"
         * Adapt old files of "applicator/communicator/" and move into new directory "applicator/communicate/"
+        * Correct "hierarchical_part_getter.c" which still used old version of "get_name_part"
+            and adapt "part_name_finder.c" as well as "part_name_getter.c" to accept an element index
 
 2011-08-13  Christian Heller  <christian.heller@tuxtax.de>
 
