@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_SENDING_COMMUNICATOR_SOURCE
-#define SOCKET_SENDING_COMMUNICATOR_SOURCE
+#ifndef SOCKET_SEND_SOURCE
+#define SOCKET_SEND_SOURCE
 
 //?? TEST for test file; DELETE later!
 #include <sys/stat.h>
@@ -33,6 +33,7 @@
 
 #include <netinet/in.h>
 #include <sys/socket.h>
+
 #include "../../../applicator/maintainer/starting/socket_starting_maintainer.c"
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -59,7 +60,7 @@
  * @param p1 the internal memory
  * @param p2 the base internal
  */
-void communicate_sending_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
+void apply_send_socket_get_socket_server_mode(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -102,7 +103,7 @@ void communicate_sending_socket_get_socket_server_mode(void* p0, void* p1, void*
  * @param p1 the socket namespace
  * @param p2 the communication style
  */
-void communicate_sending_socket_get_socket_client_mode(void* p0, void* p1, void* p2) {
+void apply_send_socket_get_socket_client_mode(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -195,7 +196,7 @@ void communicate_sending_socket_get_socket_client_mode(void* p0, void* p1, void*
  * @param p5 the communication mode
  * @param p6 the communication mode count
  */
-void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void apply_send_socket_get_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Get socket.");
 
@@ -208,7 +209,7 @@ void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            communicate_sending_socket_get_socket_server_mode(p0, p1, p2);
+            apply_send_socket_get_socket_server_mode(p0, p1, p2);
         }
     }
 
@@ -218,7 +219,7 @@ void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            communicate_sending_socket_get_socket_client_mode(p0, p3, p4);
+            apply_send_socket_get_socket_client_mode(p0, p3, p4);
         }
     }
 }
@@ -228,7 +229,7 @@ void communicate_sending_socket_get_socket(void* p0, void* p1, void* p2, void* p
  *
  * @param p0 the socket
  */
-void communicate_sending_socket_set_nonblocking_mode(void* p0) {
+void apply_send_socket_set_nonblocking_mode(void* p0) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -279,7 +280,7 @@ void communicate_sending_socket_set_nonblocking_mode(void* p0) {
  * @param p0 the host address (Hand over as reference!)
  * @param p1 the address namespace
  */
-void communicate_sending_socket_allocate_host_address(void* p0, void* p1) {
+void apply_send_socket_allocate_host_address(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -321,7 +322,7 @@ void communicate_sending_socket_allocate_host_address(void* p0, void* p1) {
  * @param p1 the socket address size (Hand over as reference!)
  * @param p2 the address namespace
  */
-void communicate_sending_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
+void apply_send_socket_allocate_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -405,7 +406,7 @@ void communicate_sending_socket_allocate_socket_address(void* p0, void* p1, void
  * @param p4 the port model
  * @param p5 the address namespace
  */
-void communicate_sending_socket_initialise_socket_address(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void apply_send_socket_initialise_socket_address(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
 
     if (p5 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -477,7 +478,7 @@ void communicate_sending_socket_initialise_socket_address(void* p0, void* p1, vo
  * @param p19 the language
  * @param p20 the language count
  */
-void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
+void apply_send_socket(void* p0, void* p1, void* p2, void* p3,
     void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10,
     void* p11, void* p12, void* p13, void* p14, void* p15, void* p16, void* p17, void* p18, void* p19, void* p20) {
 
@@ -543,25 +544,25 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     maintain_starting_socket_get_style((void*) &st, p7, p8);
     fwprintf(stdout, L"TEST: send socket st: %i \n", st);
     // Get communication partner socket.
-    communicate_sending_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
+    apply_send_socket_get_socket((void*) &s, p0, p1, (void*) &sn, (void*) &st, p9, p10);
     fwprintf(stdout, L"TEST: send socket s: %i \n", **s);
 
     // Set non-blocking mode for socket.
-    communicate_sending_socket_set_nonblocking_mode((void*) *s);
+    apply_send_socket_set_nonblocking_mode((void*) *s);
     fwprintf(stdout, L"TEST: send socket s non-blocking: %i \n", **s);
 
     // Allocate host address.
-    communicate_sending_socket_allocate_host_address((void*) &ha, (void*) &an);
+    apply_send_socket_allocate_host_address((void*) &ha, (void*) &an);
     fwprintf(stdout, L"TEST: send socket ha: %i \n", ha);
     // Allocate socket address.
-    communicate_sending_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
+    apply_send_socket_allocate_socket_address((void*) &sa, (void*) &sas, (void*) &an);
     fwprintf(stdout, L"TEST: send socket sa: %i \n", sa);
 
     // Initialise host address.
     maintain_starting_socket_get_host_address(ha, p2, p3, (void*) &an);
     fwprintf(stdout, L"TEST: send socket ha init: %i \n", ha);
     // Initialise socket address.
-    communicate_sending_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
+    apply_send_socket_initialise_socket_address((void*) &sa, p2, p3, ha, p4, (void*) &an);
     fwprintf(stdout, L"TEST: send socket sa init: %i \n", sa);
 
     // One might think that a deadlock may occur if this system
@@ -595,5 +596,5 @@ void communicate_sending_socket(void* p0, void* p1, void* p2, void* p3,
     free(ha);
 }
 
-/* SOCKET_SENDING_COMMUNICATOR_SOURCE */
+/* SOCKET_SEND_SOURCE */
 #endif

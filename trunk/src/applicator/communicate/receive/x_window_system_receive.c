@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_RECEIVING_COMMUNICATOR_SOURCE
-#define X_WINDOW_SYSTEM_RECEIVING_COMMUNICATOR_SOURCE
+#ifndef X_WINDOW_SYSTEM_RECEIVE_SOURCE
+#define X_WINDOW_SYSTEM_RECEIVE_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -32,15 +32,6 @@
 //?? #include <X11/Xutil.h>
 #include "../../../constant/model/log/level_log_model.c"
 #include "../../../logger/logger.c"
-/*??
-#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/accessor/getter.c"
-#include "../../../executor/memoriser/allocator.c"
-*/
 
 /**
  * Receives an x window system message.
@@ -53,9 +44,9 @@
  * @param p5 the temporary user interface commands count internal
  * @param p6 the temporary user interface commands size internal
  */
-void communicate_receiving_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void apply_receive_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive x window system message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply receive x window system.");
 
     //?? receive_x_window_system();
 }
@@ -63,5 +54,5 @@ void communicate_receiving_x_window_system(void* p0, void* p1, void* p2, void* p
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* X_WINDOW_SYSTEM_RECEIVING_COMMUNICATOR_SOURCE */
+/* X_WINDOW_SYSTEM_RECEIVE_SOURCE */
 #endif

@@ -23,11 +23,12 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_SENDING_COMMUNICATOR_SOURCE
-#define X_WINDOW_SYSTEM_SENDING_COMMUNICATOR_SOURCE
+#ifndef X_WINDOW_SYSTEM_SEND_SOURCE
+#define X_WINDOW_SYSTEM_SEND_SOURCE
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
@@ -48,9 +49,9 @@
  * @param p3 the knowledge memory
  * @param p4 the knowledge memory count
  */
-void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void apply_send_x_window_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send x window system message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply send x window system.");
 
     // The x window system mutex.
     pthread_mutex_t** xmt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
@@ -84,5 +85,5 @@ void communicate_sending_x_window_system(void* p0, void* p1, void* p2, void* p3,
     // TODO?? Destroy here ALL other things that were created in encode_x_window_system!!
 }
 
-/* X_WINDOW_SYSTEM_SENDING_COMMUNICATOR_SOURCE */
+/* X_WINDOW_SYSTEM_SEND_SOURCE */
 #endif

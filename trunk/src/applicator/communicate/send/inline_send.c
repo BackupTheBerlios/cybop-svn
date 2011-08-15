@@ -23,10 +23,11 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INLINE_SENDING_COMMUNICATOR_SOURCE
-#define INLINE_SENDING_COMMUNICATOR_SOURCE
+#ifndef INLINE_SEND_SOURCE
+#define INLINE_SEND_SOURCE
 
 #include <stdio.h>
+
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -58,10 +59,10 @@
  * @param p15 the language
  * @param p16 the language count
  */
-void communicate_sending_inline(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+void apply_send_inline(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send inline message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply send inline message.");
 
     // The converted array.
     void* a = *NULL_POINTER_MEMORY_MODEL;
@@ -94,5 +95,5 @@ void communicate_sending_inline(void* p0, void* p1, void* p2, void* p3, void* p4
     deallocate_model((void*) &a, (void*) &ac, (void*) &as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
-/* INLINE_SENDING_COMMUNICATOR_SOURCE */
+/* INLINE_SEND_SOURCE */
 #endif

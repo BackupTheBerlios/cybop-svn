@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_SENSING_COMMUNICATOR_SOURCE
-#define X_WINDOW_SYSTEM_SENSING_COMMUNICATOR_SOURCE
+#ifndef X_WINDOW_SYSTEM_SENSE_SOURCE
+#define X_WINDOW_SYSTEM_SENSE_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -32,6 +32,7 @@
 //?? #include <X11/Xutil.h>
 #include <pthread.h>
 #include <signal.h>
+
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -55,7 +56,7 @@
  * @param mt the mutex
  * @param d the display
  */
-int communicate_sensing_x_window_system_check_events(pthread_mutex_t* mt, struct _XDisplay* d) {
+int apply_sense_x_window_system_check_events(pthread_mutex_t* mt, struct _XDisplay* d) {
 
     // The number of events.
     int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -103,7 +104,7 @@ int communicate_sensing_x_window_system_check_events(pthread_mutex_t* mt, struct
  * @param p2 the sleep time
  * @param p3 the display
  */
-void communicate_sensing_x_window_system_message(void* p0, void* p1, void* p2, void* p3) {
+void apply_sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -145,12 +146,12 @@ void communicate_sensing_x_window_system_message(void* p0, void* p1, void* p2, v
                     // since the x mutex is set before XNextEvent and denies access to X
                     // (which is necessary to avoid "Xlib: unexpected async reply" errors).
                     // Note that send_x_window_system runs in CYBOI's main thread,
-                    // while communicate_sensing_x_window_system runs in its own thread!
+                    // while apply_sense_x_window_system runs in its own thread!
                     //
                     // CAUTION! A global variable MAY be used to set the sleep time,
                     // because it is only read but not written, and thus thread-safe.
                     // The global variable should only be manipulated in cyboi's main thread.
-                    while (!communicate_sensing_x_window_system_check_events(p1, p3)) {
+                    while (!apply_sense_x_window_system_check_events(p1, p3)) {
 
                         sleep(*st);
                     }
@@ -216,13 +217,13 @@ void communicate_sensing_x_window_system_message(void* p0, void* p1, void* p2, v
  *
  * @param p0 the internal memory
  */
-void communicate_sensing_x_window_system(void* p0) {
+void apply_sense_x_window_system(void* p0) {
 
     // CAUTION! DO NOT log this function call!
     // This function is executed within a thread, but the
     // logging is not guaranteed to be thread-safe and might
     // cause unpredictable programme behaviour.
-    // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense x window system.");
+    // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sense x window system.");
 
     // The interrupt.
     void** irq = NULL_POINTER_MEMORY_MODEL;
@@ -253,7 +254,7 @@ void communicate_sensing_x_window_system(void* p0) {
         // and processed in the system signal handler procedure
         // (situated in the controller/checker.c module).
 
-        communicate_sensing_x_window_system_message(*irq, *mt, *st, *d);
+        apply_sense_x_window_system_message(*irq, *mt, *st, *d);
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -267,5 +268,5 @@ void communicate_sensing_x_window_system(void* p0) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* X_WINDOW_SYSTEM_SENSING_COMMUNICATOR_SOURCE */
+/* X_WINDOW_SYSTEM_SENSE_SOURCE */
 #endif

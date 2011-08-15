@@ -23,10 +23,11 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FILE_SYSTEM_SENDING_COMMUNICATOR_SOURCE
-#define FILE_SYSTEM_SENDING_COMMUNICATOR_SOURCE
+#ifndef FILE_SYSTEM_SEND_SOURCE
+#define FILE_SYSTEM_SEND_SOURCE
 
 #include <stdio.h>
+
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -58,10 +59,10 @@
  * @param p15 the file name
  * @param p16 the file name count
  */
-void communicate_sending_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
+void apply_send_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8,
     void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send file system message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply send file system.");
 
     // The serialised wide character array.
     void* s = *NULL_POINTER_MEMORY_MODEL;
@@ -98,5 +99,5 @@ void communicate_sending_file_system(void* p0, void* p1, void* p2, void* p3, voi
     deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
-/* FILE_SYSTEM_SENDING_COMMUNICATOR_SOURCE */
+/* FILE_SYSTEM_SEND_SOURCE */
 #endif

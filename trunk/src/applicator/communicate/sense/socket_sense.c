@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_SENSING_COMMUNICATOR_SOURCE
-#define SOCKET_SENSING_COMMUNICATOR_SOURCE
+#ifndef SOCKET_SENSE_SOURCE
+#define SOCKET_SENSE_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -37,6 +37,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
+
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
@@ -99,7 +100,7 @@
  * @param p5 the communication partner-connected socket address size
  * @param p6 the original socket of this system
  */
-void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void apply_sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -126,7 +127,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
                         // logging is not guaranteed to be thread-safe and might
                         // cause unpredictable programme behaviour.
                         // Also, this function runs in an endless loop and would produce huge log files.
-                        // log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense socket message.");
+                        // log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Apply sense socket.");
 
     fwprintf(stdout, L"TEST: sense (stream) socket server socket: %i \n", *os);
 
@@ -296,7 +297,7 @@ void communicate_sensing_socket_message(void* p0, void* p1, void* p2, void* p3, 
  * @param p0 the internal memory
  * @param p1 the base internal
  */
-void communicate_sensing_socket(void* p0, void* p1) {
+void apply_sense_socket(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -306,7 +307,7 @@ void communicate_sensing_socket(void* p0, void* p1) {
         // This function is executed within a thread, but the
         // logging is not guaranteed to be thread-safe and might
         // cause unpredictable programme behaviour.
-        // log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Sense socket.");
+        // log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Apply sense socket.");
 
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
@@ -360,7 +361,7 @@ void communicate_sensing_socket(void* p0, void* p1) {
 
     fwprintf(stdout, L"TEST: sensing socket pre os: %i \n", *((int*) *os));
     fwprintf(stdout, L"TEST: sensing socket pre ps: %i \n", *((int*) *ps));
-            communicate_sensing_socket_message(*irq, *mt, *st, *ps, *pa, *pas, *os);
+            apply_sense_socket_message(*irq, *mt, *st, *ps, *pa, *pas, *os);
     fwprintf(stdout, L"TEST: sensing socket post os: %i \n", *((int*) *os));
     fwprintf(stdout, L"TEST: sensing socket post ps: %i \n", *((int*) *ps));
         }
@@ -387,15 +388,15 @@ void communicate_sensing_socket(void* p0, void* p1) {
  *
  * @param p0 the internal memory
  */
-void communicate_sensing_www_socket(void* p0) {
+void apply_sense_www_socket(void* p0) {
 
     // CAUTION! DO NOT log this function call!
     // This function is executed within a thread, but the
     // logging is not guaranteed to be thread-safe and might
     // cause unpredictable programme behaviour.
-    // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense www socket.");
+    // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sense www socket.");
 
-    communicate_sensing_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    apply_sense_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }
 
 /**
@@ -403,19 +404,19 @@ void communicate_sensing_www_socket(void* p0) {
  *
  * @param p0 the internal memory
  */
-void communicate_sensing_cyboi_socket(void* p0) {
+void apply_sense_cyboi_socket(void* p0) {
 
     // CAUTION! DO NOT log this function call!
     // This function is executed within a thread, but the
     // logging is not guaranteed to be thread-safe and might
     // cause unpredictable programme behaviour.
-    // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sense cyboi socket.");
+    // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sense cyboi socket.");
 
-    communicate_sensing_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    apply_sense_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_SENSING_COMMUNICATOR_SOURCE */
+/* SOCKET_SENSE_SOURCE */
 #endif

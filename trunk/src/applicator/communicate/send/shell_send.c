@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SHELL_SENDING_COMMUNICATOR_SOURCE
-#define SHELL_SENDING_COMMUNICATOR_SOURCE
+#ifndef SHELL_SEND_SOURCE
+#define SHELL_SEND_SOURCE
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/channel/cybol_channel.c"
@@ -60,9 +60,9 @@
  * @param p13 the source new line flag
  * @param p14 the source new line flag count
  */
-void communicate_sending_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
+void apply_send_shell(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send shell message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply send shell message.");
 
     // The serialised wide character array.
     void* s = *NULL_POINTER_MEMORY_MODEL;
@@ -109,5 +109,5 @@ void communicate_sending_shell(void* p0, void* p1, void* p2, void* p3, void* p4,
     deallocate((void*) &e, (void*) &es, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
-/* SHELL_SENDING_COMMUNICATOR_SOURCE */
+/* SHELL_SEND_SOURCE */
 #endif

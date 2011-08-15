@@ -23,10 +23,11 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef CYBOI_SYSTEM_SENDING_COMMUNICATOR_SOURCE
-#define CYBOI_SYSTEM_SENDING_COMMUNICATOR_SOURCE
+#ifndef CYBOI_SYSTEM_SEND_SOURCE
+#define CYBOI_SYSTEM_SEND_SOURCE
 
 #include <signal.h>
+
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -52,9 +53,9 @@
  * @param p10 the signal priority (Hand over as reference!)
  * @param p11 the signal identification (Hand over as reference!)
  */
-void communicate_sending_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+void apply_send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send message to cyboi system.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply send cyboi system.");
 
     // The signal memory mutex.
     pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
@@ -79,5 +80,5 @@ void communicate_sending_cyboi_system(void* p0, void* p1, void* p2, void* p3, vo
     pthread_mutex_unlock(*mt);
 }
 
-/* CYBOI_SYSTEM_SENDING_COMMUNICATOR_SOURCE */
+/* CYBOI_SYSTEM_SEND_SOURCE */
 #endif

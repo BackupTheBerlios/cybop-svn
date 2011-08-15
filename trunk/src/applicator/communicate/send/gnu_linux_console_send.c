@@ -23,11 +23,12 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GNU_LINUX_CONSOLE_SENDING_COMMUNICATOR_SOURCE
-#define GNU_LINUX_CONSOLE_SENDING_COMMUNICATOR_SOURCE
+#ifndef GNU_LINUX_CONSOLE_SEND_SOURCE
+#define GNU_LINUX_CONSOLE_SEND_SOURCE
 
 #include <stdio.h>
 #include <unistd.h>
+
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -64,10 +65,10 @@
  * @param p11 the knowledge memory
  * @param p12 the knowledge memory count
  */
-void communicate_sending_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
+void apply_send_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Send gnu/linux console message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply send gnu/linux console.");
 
     // The serialised wide character array.
     void* s = *NULL_POINTER_MEMORY_MODEL;
@@ -122,5 +123,5 @@ void communicate_sending_gnu_linux_console(void* p0, void* p1, void* p2, void* p
     deallocate_model((void*) &e, (void*) &ec, (void*) &es, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 }
 
-/* GNU_LINUX_CONSOLE_SENDING_COMMUNICATOR_SOURCE */
+/* GNU_LINUX_CONSOLE_SEND_SOURCE */
 #endif

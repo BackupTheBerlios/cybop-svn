@@ -23,16 +23,11 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_RECEIVING_COMMUNICATOR_SOURCE
-#define SOCKET_RECEIVING_COMMUNICATOR_SOURCE
+#ifndef SOCKET_RECEIVE_SOURCE
+#define SOCKET_RECEIVE_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
-#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
-#include "../../../constant/model/log/level_log_model.c"
-#include "../../../constant/model/log/message_log_model.c"
-#include "../../../executor/communicator/receiver/stream_socket_receiver.c"
-#include "../../../logger/logger.c"
 /*??
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -43,41 +38,34 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
-#include "../../../constant/abstraction/memory/memory_abstraction.c"
-#include "../../../constant/channel/cybol_channel.c"
-#include "../../../constant/model/cybol/http_request_cybol_model.c"
-#include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
-#include "../../../executor/accessor/getter/array_getter.c"
-#include "../../../executor/accessor/getter/compound_getter.c"
-#include "../../../executor/accessor/getter/signal_memory_getter.c"
-#include "../../../executor/comparator/all/array_all_comparator.c"
-#include "../../../executor/memoriser/allocator.c"
 */
+
+#include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../../constant/model/log/level_log_model.c"
+#include "../../../constant/model/log/message_log_model.c"
+#include "../../../executor/communicator/receiver/stream_socket_receiver.c"
+#include "../../../logger/logger.c"
 
 /**
  * Receives message via socket.
  *
- * @param p0 the destination message model (Hand over as reference!)
- * @param p1 the destination message model count
- * @param p2 the destination message model size
- * @param p3 the destination message details (Hand over as reference!)
- * @param p4 the destination message details count
- * @param p5 the destination message details size
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
  * @param p6 the source communication partner-connected socket of this system
  * @param p7 the socket communication style model
  * @param p8 the socket communication style model count
- * @param p9 the language model
- * @param p10 the language model count
+ * @param p9 the language
+ * @param p10 the language count
  * @param p11 the knowledge memory
  * @param p12 the knowledge memory count
  */
-void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7,
-    void* p8, void* p9, void* p10, void* p11, void* p12) {
+void apply_receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11, void* p12) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive socket message.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply receive socket.");
 
 /*??
     fwprintf(stdout, L"TEST 1 l: %s \n", (wchar_t*) p9);
@@ -296,5 +284,5 @@ void communicate_receiving_socket(void* p0, void* p1, void* p2, void* p3, void* 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_RECEIVING_COMMUNICATOR_SOURCE */
+/* SOCKET_RECEIVE_SOURCE */
 #endif
