@@ -29,6 +29,7 @@
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/boolean_memory_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/memory/compound_memory_name.c"
@@ -139,7 +140,7 @@ void handle_part(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, voi
 
 fwprintf(stdout, L"TEST handle part *mc: %i\n", *mc);
 
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
             if (j >= *mc) {
 

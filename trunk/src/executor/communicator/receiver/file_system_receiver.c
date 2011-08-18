@@ -27,11 +27,13 @@
 #define FILE_SYSTEM_RECEIVER_SOURCE
 
 #include <stdio.h>
+
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../../constant/model/character_code/ascii/ascii_character_code_model.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/model/stream_model.c"
@@ -59,7 +61,7 @@ void receive_file_stream(void* p0, void* p1, void* p2, void* p3) {
         // Read first character.
         char c = fgetc(p3);
 
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
             if (c == EOF) {
 

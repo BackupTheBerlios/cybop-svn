@@ -28,10 +28,17 @@
 
 #include <stdlib.h>
 #include <string.h>
+
 #include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../executor/comparator/basic/integer/equal_integer_comparator.c"
+#include "../../../executor/comparator/basic/integer/greater_integer_comparator.c"
+#include "../../../executor/comparator/basic/integer/greater_or_equal_integer_comparator.c"
+#include "../../../executor/comparator/basic/integer/smaller_integer_comparator.c"
+#include "../../../executor/comparator/basic/integer/smaller_or_equal_integer_comparator.c"
+#include "../../../executor/comparator/basic/integer/unequal_integer_comparator.c"
 #include "../../../logger/logger.c"
 
 /**
@@ -48,108 +55,76 @@ void compare_integer(void* p0, void* p1, void* p2, void* p3) {
 
         int* a = (int*) p3;
 
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare integer.");
 
-            int* rv = (int*) p2;
+        // The comparison result.
+        // CAUTION! It is used instead of if-else statements.
+        // May be one day, this is useful when using assembler or implementing cyboi as hardware chip.
+        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                int* lv = (int*) p1;
+            if (*a == *EQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
 
-                if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                    int* res = (int*) p0;
-
-                    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare integer.");
-
-                    // The comparison result.
-                    // CAUTION! It is used instead of if-else statements.
-                    // May be one day, this is useful when using assembler or implementing cyboi as hardware chip.
-                    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        if (*a == *EQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
-
-                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                            if (*lv == *rv) {
-
-                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                            }
-                        }
-                    }
-
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        if (*a == *SMALLER_PRIMITIVE_OPERATION_ABSTRACTION) {
-
-                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                            if (*lv < *rv) {
-
-                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                            }
-                        }
-                    }
-
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        if (*a == *GREATER_PRIMITIVE_OPERATION_ABSTRACTION) {
-
-                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                            if (*lv > *rv) {
-
-                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                            }
-                        }
-                    }
-
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        if (*a == *SMALLER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
-
-                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                            if (*lv <= *rv) {
-
-                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                            }
-                        }
-                    }
-
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        if (*a == *GREATER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
-
-                            r = *NUMBER_1_INTEGER_MEMORY_MODEL;
-
-                            if (*lv >= *rv) {
-
-                                *res = *NUMBER_1_INTEGER_MEMORY_MODEL;
-                            }
-                        }
-                    }
-
-                    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-                        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare integer. The operation abstraction is unknown.");
-                    }
-
-                } else {
-
-                    log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integer. The result is null.");
-                }
-
-            } else {
-
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integer. The left value is null.");
+                compare_integer_equal(p0, p1, p2);
             }
+        }
 
-        } else {
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not compare integer. The right value is null.");
+            if (*a == *GREATER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                compare_integer_greater_or_equal(p0, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            if (*a == *GREATER_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                compare_integer_greater(p0, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            if (*a == *SMALLER_OR_EQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                compare_integer_smaller_or_equal(p0, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            if (*a == *SMALLER_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                compare_integer_smaller(p0, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            if (*a == *UNEQUAL_PRIMITIVE_OPERATION_ABSTRACTION) {
+
+                r = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+                compare_integer_unequal(p0, p1, p2);
+            }
+        }
+
+        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare integer. The operation abstraction is unknown.");
         }
 
     } else {

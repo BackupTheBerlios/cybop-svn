@@ -29,6 +29,7 @@
 #include "../constant/abstraction/memory/memory_abstraction.c"
 #include "../constant/model/log/level_log_model.c"
 #include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/boolean_memory_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/name/memory/internal_memory_memory_name.c"
@@ -75,7 +76,7 @@ void check(void* p0) {
     int f = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Run endless loop checking signal memory for signals.
-    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
         if (f != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -16,6 +16,17 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-08-18  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt old files of "applicator/guider/" and move into new directory "applicator/flow/"
+        * Add integer comparison files in directory "executor/comparator/basic/integer/",
+            which is useful not only for clearer code, but also for using the function
+            "compare_integer_unequal" as loop break flag condition with less parametres and overhead
+            than "compare_integer" which has to find the right comparison operator first what costs runtime
+        * Adapt some loops to use the new function "compare_integer_unequal" for their break flag
+        * Adapt source code to use "FALSE_BOOLEAN_MEMORY_MODEL" and "TRUE_BOOLEAN_MEMORY_MODEL" for flags,
+            instead of "NUMBER_0_INTEGER_MEMORY_MODEL" and "NUMBER_1_INTEGER_MEMORY_MODEL", respectively
+
 2011-08-14  Christian Heller  <christian.heller@tuxtax.de>
 
         * Move some files from "executor/modifier/getter/" into "executor/modifier/knowledge_getter/"

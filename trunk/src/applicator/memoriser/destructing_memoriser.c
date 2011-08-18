@@ -30,6 +30,7 @@
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/boolean_memory_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/memory/destroy_memory_operation_cybol_name.c"
@@ -124,7 +125,7 @@ void destroy_compound_model(void** model, void* model_count, void* model_size,
     void** edc = NULL_POINTER_MEMORY_MODEL;
     void** eds = NULL_POINTER_MEMORY_MODEL;
 
-    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
         if (compound_counter >= *((int*) model_count)) {
 

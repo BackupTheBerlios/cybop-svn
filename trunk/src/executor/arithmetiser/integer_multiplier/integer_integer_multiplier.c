@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
@@ -66,7 +67,7 @@ void multiply_integer_with_integer(void* p0, void* p1) {
             // The loop variable.
             int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+            while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                 if (j >= *s) {
 

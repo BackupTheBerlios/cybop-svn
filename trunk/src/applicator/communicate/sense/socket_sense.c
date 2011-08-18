@@ -45,6 +45,7 @@
 #include "../../../constant/model/cybol/http_request_cybol_model.c"
 #include "../../../constant/model/log/level_log_model.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
@@ -348,7 +349,7 @@ void apply_sense_socket(void* p0, void* p1) {
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
         get((void*) &os, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
             // A break condition does not exist here because the loop
             // is running neverendingly while sensing messages.

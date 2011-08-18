@@ -36,6 +36,7 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/log/level_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
@@ -158,7 +159,7 @@ void apply_sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p
                     // Unlock gnu/linux console mutex.
                     pthread_mutex_unlock(mt);
 
-                    while (*irq != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                    while (*irq != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
                         // Sleep as long as the gnu/linux console interrupt is not handled and reset yet.
                         //
@@ -239,7 +240,7 @@ void apply_sense_gnu_linux_console(void* p0) {
     // Get input stream.
     get((void*) &is, p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
         // A break condition does not exist here because the loop
         // is running neverendingly while sensing messages.

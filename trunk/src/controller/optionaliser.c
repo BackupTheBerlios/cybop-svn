@@ -39,6 +39,7 @@
 #include "../constant/model/command_argument/cyboi/log_level_cyboi_command_argument_model.c"
 #include "../constant/model/cyboi/operation_mode_cyboi_model.c"
 #include "../constant/model/log/level_log_model.c"
+#include "../constant/model/memory/boolean_memory_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"
 #include "../constant/name/command_option/cyboi_command_option_name.c"
@@ -561,7 +562,7 @@ void optionalise(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
         // argument is the command itself, and not an option!
         int j = *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
             if (j >= *ac) {
 

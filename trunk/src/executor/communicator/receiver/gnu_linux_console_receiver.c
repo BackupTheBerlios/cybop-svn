@@ -28,12 +28,14 @@
 
 #include <errno.h>
 #include <wchar.h>
+
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/character_code/ascii/ascii_character_code_model.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/communicator/receiver/gnu_linux_console_receiver.c"
@@ -236,7 +238,7 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4)
     // The escape control sequence mode.
     int csi = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
         if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

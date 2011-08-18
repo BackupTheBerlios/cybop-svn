@@ -35,6 +35,7 @@
 
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/cybol/web_user_interface/tag_web_user_interface_cybol_name.c"
@@ -167,7 +168,7 @@ void apply_sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3)
                     // Unlock x window system mutex.
                     pthread_mutex_unlock(mt);
 
-                    while (*irq == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+                    while (*irq != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
                         // Sleep as long as the x window system interrupt is not handled and reset yet.
                         // This is to give the central processing unit (cpu) some
@@ -243,7 +244,7 @@ void apply_sense_x_window_system(void* p0) {
     // Get display.
     get((void*) &d, p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
         // A break condition does not exist here because the loop
         // is running neverendingly while sensing messages.

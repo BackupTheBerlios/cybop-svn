@@ -27,6 +27,7 @@
 #define SCHEME_URI_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
+#include "../../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/uri/cyboi_uri_name.c"
@@ -68,7 +69,7 @@ void decode_uri_scheme(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+            while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

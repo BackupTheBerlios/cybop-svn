@@ -33,6 +33,7 @@
 
 #include <stdio.h>
 #include <wchar.h>
+
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -442,21 +443,21 @@ void encode_gnu_linux_console_rectangle(void* p0, void* p1, void* p2, void* p3, 
                             // The character.
                             void* c = (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL;
 
-                            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                            while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                                 if (z >= zl) {
 
                                     break;
                                 }
 
-                                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                                while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                                     if (y >= yl) {
 
                                         break;
                                     }
 
-                                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                                    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                                         if (x >= xl) {
 
@@ -1719,7 +1720,7 @@ void encode_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, 
                 int* sc = (int*) p6;
 
                 // Iterate through compound parts.
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                     if (j >= *sc) {
 

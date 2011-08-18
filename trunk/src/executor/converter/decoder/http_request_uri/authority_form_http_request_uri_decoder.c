@@ -27,6 +27,7 @@
 #define AUTHORITY_FORM_HTTP_REQUEST_URI_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
+#include "../../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../executor/converter/selector/http_request_uri/authority_form_http_request_uri_selector.c"
@@ -57,7 +58,7 @@ void decode_authority_form_http_request_uri(void* p0, void* p1, void* p2, void* 
 
             log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode authority form http request uri.");
 
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+            while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

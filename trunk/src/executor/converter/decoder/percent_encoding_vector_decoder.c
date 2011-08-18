@@ -27,6 +27,7 @@
 #define PERCENT_ENCODING_VECTOR_DECODER_SOURCE
 
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../executor/converter/decoder/percent_encoding_decoder.c"
 #include "../../../executor/converter/selector/percent_encoding_vector_element_selector.c"
 #include "../../../executor/modifier/overwriter/array_overwriter.c"
@@ -129,7 +130,7 @@ void decode_percent_encoding_vector_element(void* p0, void* p1, void* p2, void* 
             // The break flag.
             int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+            while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                 if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

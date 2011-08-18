@@ -28,7 +28,9 @@
 
 #include <stdio.h>
 #include <wchar.h>
+
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
+#include "../../constant/model/memory/boolean_memory_model.c"
 #include "../../logger/logger.c"
 
 /**
@@ -170,7 +172,7 @@ void test_character_array_single_element() {
     int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
     wchar_t* catest = (wchar_t*) *NULL_POINTER_MEMORY_MODEL;
 
-    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
         if (i >= cs) {
 

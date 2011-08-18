@@ -29,6 +29,7 @@
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/character_code/unicode/unicode_character_code_model.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/xdt/field_xdt_name.c"
@@ -298,7 +299,7 @@ void decode_xdt_next_field(void* p0, void* p1, void* p2) {
                 // The loop variable.
                 int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                     if (j >= *ac) {
 
@@ -404,7 +405,7 @@ void decode_xdt_record(void* p0, void* p1, void* p2, void* p3, void* p4, void* p
                         //     record, which demarcates the end of this record
                         int m = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                             if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -628,7 +629,7 @@ void decode_xdt_package(void* p0, void* p1, void* p2, void* p3, void* p4, void* 
                                         // The loop variable.
                                         int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                                        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                                        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                                             if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -4284,7 +4285,7 @@ void decode_xdt_process_record(void* p0, void* p1, void* p2, void* p3, void* p4)
             // The next field count.
             int nc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+            while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                 if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -4681,7 +4682,7 @@ void decode_xdt_process_package(void* p0, void* p1, void* p2, void* p3, void* p4
             void* rc = *NULL_POINTER_MEMORY_MODEL;
             int rcc = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-            while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+            while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                 if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -4876,7 +4877,7 @@ void decode_xdt(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
                     fwprintf(stdout, L"TEST xdt file source count: %i\n\n", *sc);
 */
 
-                    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+                    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
                         if (rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

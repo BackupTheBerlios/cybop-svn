@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SEQUENCE_GUIDER_SOURCE
-#define SEQUENCE_GUIDER_SOURCE
+#ifndef SEQUENCE_SOURCE
+#define SEQUENCE_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -41,60 +41,33 @@
 // Forward declarations.
 //
 
-void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11,
-    void* p12, void* p13,  void* p14, void* p15, void* p16, void* p17, void* p18);
+void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
 
 /**
- * Executes the given model as sequence.
+ * Executes the given programme flow as sequence.
  *
  * Expected parameters:
  * - model (required): the knowledge model to be executed as sequence
  *
- * @param p0 the internal memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
- * @param p4 the signal memory
- * @param p5 the signal memory count
- * @param p6 the signal memory size
+ * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
+ * @param p1 the parametres array count
+ * @param p2 the knowledge memory part
+ * @param p3 the internal memory array
+ * @param p4 the signal memory item
+ * @param p5 the signal memory interrupt request flag
+ * @param p6 the signal memory mutex
  * @param p7 the shutdown flag
- * @param p8 the signal memory interrupt request flag
- * @param p9 the signal memory mutex
- * @param p10 the parameters
- * @param p11 the parameters count
- * @param p12 the priority (Hand over as reference!)
- * @param p13 the signal identification (Hand over as reference!)
  */
-void guide_sequence(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13) {
+void apply_sequence(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"\n\n");
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Sequence program flow.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sequence.");
 
-    // The model name, abstraction, model, details.
-    void** mn = NULL_POINTER_MEMORY_MODEL;
-    void** mnc = NULL_POINTER_MEMORY_MODEL;
-    void** mns = NULL_POINTER_MEMORY_MODEL;
-    void** ma = NULL_POINTER_MEMORY_MODEL;
-    void** mac = NULL_POINTER_MEMORY_MODEL;
-    void** mas = NULL_POINTER_MEMORY_MODEL;
-    void** mm = NULL_POINTER_MEMORY_MODEL;
-    void** mmc = NULL_POINTER_MEMORY_MODEL;
-    void** mms = NULL_POINTER_MEMORY_MODEL;
-    void** md = NULL_POINTER_MEMORY_MODEL;
-    void** mdc = NULL_POINTER_MEMORY_MODEL;
-    void** mds = NULL_POINTER_MEMORY_MODEL;
+    // The model part.
+    void* m = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get model.
-    get_universal_compound_element_by_name(
-        (void*) &mn, (void*) &mnc, (void*) &mns,
-        (void*) &ma, (void*) &mac, (void*) &mas,
-        (void*) &mm, (void*) &mmc, (void*) &mms,
-        (void*) &md, (void*) &mdc, (void*) &mds,
-        p10, p11,
-        (void*) MODEL_SEQUENCE_FLOW_OPERATION_CYBOL_NAME, (void*) MODEL_SEQUENCE_FLOW_OPERATION_CYBOL_NAME_COUNT,
-        p1, p2);
+    // Get model part.
+    get_name_array((void*) &m, p0, (void*) MODEL_SEQUENCE_FLOW_OPERATION_CYBOL_NAME, (void*) MODEL_SEQUENCE_FLOW_OPERATION_CYBOL_NAME_COUNT, p1);
 
     // The direct execution flag.
     // CAUTION! The flag has to be set to true, because otherwise,
@@ -108,10 +81,9 @@ void guide_sequence(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
     // cyboi signal sending operation may be used instead.
     int x = *TRUE_BOOLEAN_MEMORY_MODEL;
 
-    // Send the loop model as new signal,
-    // as long as the break flag is false (not set).
-    handle(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, *ma, *mac, *mm, *mmc, *md, *mdc, p12, p13, (void*) &x);
+    // Handle the model as new operation.
+    handle(m, (void*) &x, p7, p2, p3, p4, p5, p6);
 }
 
-/* SEQUENCE_GUIDER_SOURCE */
+/* SEQUENCE_SOURCE */
 #endif

@@ -27,6 +27,7 @@
 #define COMMENT_XML_DECODER_SOURCE
 
 #include "../../../../constant/model/log/message_log_model.c"
+#include "../../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../../constant/model/memory/integer_memory_model.c"
 #include "../../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../../constant/name/cybol/xml_cybol_name.c"
@@ -53,7 +54,7 @@ void decode_xml_comment(void* p0, void* p1) {
         // The break flag.
         int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
             if (*rem <= *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

@@ -27,6 +27,7 @@
 #define FRACTION_REDUCER_SOURCE
 
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/boolean_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
 
@@ -72,7 +73,7 @@ void reduce_fraction(void* p0) {
         // Search numerator and denominator having a common factor
         // delivering an integral number as result (no remainder).
         // Start at the largest of both.
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
             if (i <= *NUMBER_1_INTEGER_MEMORY_MODEL) {
 

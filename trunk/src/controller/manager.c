@@ -31,6 +31,7 @@
 
 #include "../constant/channel/cybol_channel.c"
 #include "../constant/model/log/message_log_model.c"
+#include "../constant/model/memory/boolean_memory_model.c"
 #include "../constant/model/memory/double_memory_model.c"
 #include "../constant/model/memory/integer_memory_model.c"
 #include "../constant/model/memory/pointer_memory_model.c"

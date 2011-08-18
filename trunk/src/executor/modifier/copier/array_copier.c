@@ -26,10 +26,9 @@
 #ifndef ARRAY_COPIER_SOURCE
 #define ARRAY_COPIER_SOURCE
 
-#include <stdlib.h>
-#include <string.h>
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
@@ -59,7 +58,7 @@ void copy_array_elements_forward(void* p0, void* p1, void* p2, void* p3) {
         // The loop variable.
         int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
             if (j >= *c) {
 
@@ -99,7 +98,7 @@ void copy_array_elements_backward(void* p0, void* p1, void* p2, void* p3) {
         // CAUTION! Subtract one because this is an index.
         int j = *c - *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-        while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+        while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
             if (j < *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

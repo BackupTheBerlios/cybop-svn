@@ -26,10 +26,9 @@
 #ifndef ARRAY_FINDER_SOURCE
 #define ARRAY_FINDER_SOURCE
 
-#include <stdlib.h>
-#include <string.h>
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
+#include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/arithmetiser/integer_adder.c"
@@ -72,7 +71,7 @@ void find_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     // will NOT occur, since the loop is left before.
     add_integer((void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
-    while (*NUMBER_1_INTEGER_MEMORY_MODEL) {
+    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
         if (j >= c) {
 

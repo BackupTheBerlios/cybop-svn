@@ -30,6 +30,7 @@
 #include <signal.h>
 
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/boolean_memory_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../logger/logger.c"
@@ -198,7 +199,7 @@ void startup_system_signal_handler() {
     // for example, job control signals. If the process is woken up
     // by a signal that doesn't set INTERRUPT_REQUEST, it just suspends
     // itself again until the "right" kind of signal eventually arrives.
-    while (*INTERRUPT_REQUEST == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    while (*INTERRUPT_REQUEST == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
         // This function replaces the process's signal set (mask) with
         // the old set and then suspends the process until a signal is

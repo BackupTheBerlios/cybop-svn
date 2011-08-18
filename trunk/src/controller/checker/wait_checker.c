@@ -29,6 +29,7 @@
 #include "../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../constant/model/log/level_log_model.c"
 #include "../../constant/model/log/message_log_model.c"
+#include "../../constant/model/memory/boolean_memory_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/memory/internal_memory_memory_name.c"
@@ -174,11 +175,11 @@ void check_wait(void* p0, void* p1) {
             // Therefore, the decision fell on the usage of a simple SLEEP
             // procedure, which seems sufficient for the purposes of CYBOI.
             //
-            while ((*((int*) sm) == *NUMBER_0_INTEGER_MEMORY_MODEL)
-                && (*((int*) lc) == *NUMBER_0_INTEGER_MEMORY_MODEL)
-                && (*((int*) xw) == *NUMBER_0_INTEGER_MEMORY_MODEL)
-                && (*((int*) ww) == *NUMBER_0_INTEGER_MEMORY_MODEL)
-                && (*((int*) cy) == *NUMBER_0_INTEGER_MEMORY_MODEL)) {
+            while ((*((int*) sm) == *FALSE_BOOLEAN_MEMORY_MODEL)
+                && (*((int*) lc) == *FALSE_BOOLEAN_MEMORY_MODEL)
+                && (*((int*) xw) == *FALSE_BOOLEAN_MEMORY_MODEL)
+                && (*((int*) ww) == *FALSE_BOOLEAN_MEMORY_MODEL)
+                && (*((int*) cy) == *FALSE_BOOLEAN_MEMORY_MODEL)) {
 
                 sleep(*sl);
             }

@@ -236,7 +236,7 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
         compare_all_array((void*) &r, cmd, (void*) FILE_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) FILE_SYSTEM_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-        
+
             // Receive model by reading message data.
             //
             // CAUTION! The details are handed over as well, since sometimes,
@@ -320,7 +320,7 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
         compare_all_array((void*) &r, cmd, (void*) WWW_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) WWW_CYBOL_CHANNEL_COUNT);
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-        
+
             // Receive model by reading http request or response.
             //
             // CAUTION! The details are handed over as well,
