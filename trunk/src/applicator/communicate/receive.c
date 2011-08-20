@@ -68,7 +68,7 @@
  * contain both, the model AND the details, in one file. To cover these cases,
  * the model AND details are received TOGETHER, in just one operation.
  *
- * Expected parameters:
+ * Expected parametres:
  * - channel (required): the channel via which to receive the message (gnu_linux_console, www, x_window_system etc.)
  * - language (required): the language (abstraction, type, structure) of the data received (http_request, xdt, boolean, character etc.)
  * - message (required): the source (knowledge template) from where to receive data

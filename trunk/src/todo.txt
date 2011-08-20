@@ -11,6 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * CONTINUE in file "applicator/compare/compare.c"
+            - Which parametre to evaluate first?
+            - Should these comparisons be moved into "executor/comparator/"?
         * Adapt files in directory "applicator/"
         * Adapt "flow_operation_handler.c"
         * Move all operation handlers one directory up
