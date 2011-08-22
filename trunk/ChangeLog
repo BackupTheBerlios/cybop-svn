@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-08-22  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt old files of "applicator/comparator/" and move into new directory "applicator/compare/"
+
 2011-08-18  Christian Heller  <christian.heller@tuxtax.de>
 
         * Adapt old files of "applicator/guider/" and move into new directory "applicator/flow/"

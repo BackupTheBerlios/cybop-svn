@@ -45,19 +45,13 @@
 // Therefore, the type "int*" is used for the constants defined here.
 //
 
-//
-// Count.
-//
-// This count is valid for ALL primitive memory abstractions below,
-// as they are just integer numbers.
-//
-
-/** The primitive memory abstraction count. */
+/**
+ * The primitive memory abstraction count.
+ *
+ * This count is valid for ALL primitive memory abstractions below,
+ * as they are just integer numbers.
+ */
 static int* PRIMITIVE_MEMORY_ABSTRACTION_COUNT = NUMBER_1_INTEGER_MEMORY_MODEL_ARRAY;
-
-//
-// Primitive.
-//
 
 /** The character primitive memory abstraction. */
 static int* CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_0_INTEGER_MEMORY_MODEL_ARRAY;
@@ -82,19 +76,6 @@ static int* UNSIGNED_LONG_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_6_INTEGER_MEMORY
 
 /** The wide character primitive memory abstraction. */
 static int* WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
-
-//
-// Knowledge.
-//
-
-/**
- * The compound primitive memory abstraction.
- *
- * Compounds consist of parts, which may be other models
- * or primitive values.
- */
-//?? TODO: Delete the line below later!
-static int* COMPOUND_PRIMITIVE_MEMORY_ABSTRACTION = NUMBER_10_INTEGER_MEMORY_MODEL_ARRAY;
 
 /* PRIMITIVE_MEMORY_ABSTRACTION_SOURCE */
 #endif

@@ -102,6 +102,9 @@ void compare_all_part(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * Anything else would not make sense and be pointless.
  * ONLY the actual model is compared using the given operation abstraction.
  *
+ * This comparison function is only called when comparing
+ * two parts including their parts etc. (deep comparison).
+ *
  * @param p0 the result (number 1 if true; unchanged otherwise)
  * @param p1 the left part
  * @param p2 the right part

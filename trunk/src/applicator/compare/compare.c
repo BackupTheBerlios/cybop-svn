@@ -48,11 +48,18 @@
  * Compares left and right parametre.
  *
  * Expected parametres:
- * - operator (required): the kind of comparison (equal, greater, greater_or_equal, smaller, smaller_or_equal, unequal)
  * - result (required): the knowledge model in which the comparison result is stored
  * - left (required): the left operand of the comparison
  * - right (required): the right operand of the comparison
- * - selection (optional, for models of abstraction "character"): the part of two string values to be compared (all, prefix, suffix, subsequence)
+ * - operation (required): the kind of comparison (equal, greater, greater_or_equal, smaller, smaller_or_equal, unequal)
+ * - abstraction (required): the operand abstraction
+ * - selection (required): the part of two text strings to be compared (all, prefix, suffix, subsequence)
+ *
+ * The "selection" parametre is actually only needed
+ * for comparing models of abstraction "character".
+ * However, this function relies on it, also if numbers are
+ * to be compared, for finding the right comparison function to call.
+ * Therefore, that parametre is required.
  *
  * The result parametre's abstraction has to be BOOLEAN.
  * The left- and right parametres' abstractions have to be equal.
@@ -65,99 +72,114 @@ void apply_compare(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply compare.");
 
-    // The operator.
-    void* o = *NULL_POINTER_MEMORY_MODEL;
     // The result.
     void* res = *NULL_POINTER_MEMORY_MODEL;
     // The left operand.
-    void* l = *NULL_POINTER_MEMORY_MODEL;
+    void* lo = *NULL_POINTER_MEMORY_MODEL;
     // The right operand.
-    void* r = *NULL_POINTER_MEMORY_MODEL;
+    void* ro = *NULL_POINTER_MEMORY_MODEL;
+    // The operation.
+    void* o = *NULL_POINTER_MEMORY_MODEL;
+    // The operand abstraction.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
     // The selection.
     void* s = *NULL_POINTER_MEMORY_MODEL;
 
-    // The operator part model.
+    // The result part model.
+    void* resm = *NULL_POINTER_MEMORY_MODEL;
+    // The operation part model.
     void* om = *NULL_POINTER_MEMORY_MODEL;
+    // The operand abstraction part model.
+    void* am = *NULL_POINTER_MEMORY_MODEL;
+    // The selection part model.
+    void* sm = *NULL_POINTER_MEMORY_MODEL;
 
-    // The operator part model data, count.
+    // The result part model data, count.
+    void* resmd = *NULL_POINTER_MEMORY_MODEL;
+    // The operation part model data, count.
     void* omd = *NULL_POINTER_MEMORY_MODEL;
-    void* omc = *NULL_POINTER_MEMORY_MODEL;
+    // The operand abstraction part model data, count.
+    void* amd = *NULL_POINTER_MEMORY_MODEL;
+    // The selection part model data, count.
+    void* smd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get operator.
-    get_name_array((void*) &o, p0, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
     // Get result.
     get_name_array((void*) &res, p0, (void*) RESULT_COMPARE_OPERATION_CYBOL_NAME, (void*) RESULT_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
     // Get left operand.
-    get_name_array((void*) &l, p0, (void*) LEFT_OPERAND_COMPARE_OPERATION_CYBOL_NAME, (void*) LEFT_OPERAND_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
+    get_name_array((void*) &lo, p0, (void*) LEFT_OPERAND_COMPARE_OPERATION_CYBOL_NAME, (void*) LEFT_OPERAND_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
     // Get right operand.
-    get_name_array((void*) &r, p0, (void*) RIGHT_OPERAND_COMPARE_OPERATION_CYBOL_NAME, (void*) RIGHT_OPERAND_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
+    get_name_array((void*) &ro, p0, (void*) RIGHT_OPERAND_COMPARE_OPERATION_CYBOL_NAME, (void*) RIGHT_OPERAND_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get operation.
+    get_name_array((void*) &o, p0, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get operand abstraction.
+    get_name_array((void*) &a, p0, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
     // Get selection.
     get_name_array((void*) &s, p0, (void*) SELECTION_COMPARE_OPERATION_CYBOL_NAME, (void*) SELECTION_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
 
-    // Get operator part model.
+    // Get result part model.
+    copy_array_forward((void*) &resm, res, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get operation part model.
     copy_array_forward((void*) &om, o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get operand abstraction part model.
+    copy_array_forward((void*) &am, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get selection part model.
+    copy_array_forward((void*) &sm, s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
 
-    // Get operator part model data, count.
+    // Get result part model data, count.
+    copy_array_forward((void*) &resmd, resm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get operation part model data, count.
     copy_array_forward((void*) &omd, om, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
-    copy_array_forward((void*) &omc, om, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
-
-    //?? CONTINUE HERE! Which parametre to evaluate first?
-    //?? Should these comparisons be moved into "executor/comparator/"?
+    // Get operand abstraction part model data, count.
+    copy_array_forward((void*) &amd, am, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get selection part model data, count.
+    copy_array_forward((void*) &smd, sm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // The comparison result.
     int r = *FALSE_BOOLEAN_MEMORY_MODEL;
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *sm, (void*) ALL_COMPARISON_SELECTION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *smc, (void*) ALL_COMPARISON_SELECTION_CYBOL_MODEL_COUNT);
+        compare_integer((void*) &r, smd, (void*) ALL_COMPARISON_SELECTION_CYBOL_MODEL);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            compare_equality_all(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
-                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
+            compare_all_part(resmd, lo, ro, omd, amd);
         }
     }
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *sm, (void*) PREFIX_COMPARISON_SELECTION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *smc, (void*) PREFIX_COMPARISON_SELECTION_CYBOL_MODEL_COUNT);
+        compare_integer((void*) &r, smd, (void*) PREFIX_COMPARISON_SELECTION_CYBOL_MODEL);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            compare_equality_prefix(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
-                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
+            compare_prefix_part(resmd, lo, ro, omd, amd);
         }
     }
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *sm, (void*) SUFFIX_COMPARISON_SELECTION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *smc, (void*) SUFFIX_COMPARISON_SELECTION_CYBOL_MODEL_COUNT);
+        compare_integer((void*) &r, smd, (void*) SUFFIX_COMPARISON_SELECTION_CYBOL_MODEL);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            compare_equality_suffix(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
-                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
+            compare_suffix_part(resmd, lo, ro, omd, amd);
         }
     }
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *sm, (void*) PART_COMPARISON_SELECTION_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *smc, (void*) PART_COMPARISON_SELECTION_CYBOL_MODEL_COUNT);
+        compare_integer((void*) &r, smd, (void*) SUBSEQUENCE_COMPARISON_SELECTION_CYBOL_MODEL);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            compare_equality_part(*lsa, *lsac, *lsas, *lsm, *lsmc, *lsms, *lsd, *lsdc, *lsds,
-                *rsa, *rsac, *rsas, *rsm, *rsmc, *rsms, *rsd, *rsdc, *rsds,
-                *ra, *rac, *ras, *rm, *rmc, *rms, *rd, *rdc, *rds);
+            compare_subsequence_part(resmd, lo, ro, omd, amd);
         }
     }
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not compare if left parameter is equal to right parameter. The selection parameter model is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not apply compare. The selection parametre model is unknown.");
     }
 }
 

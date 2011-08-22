@@ -11,6 +11,14 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * cybol operand abstraction given as parametre (model) may be
+            converted into integer by creating a special mime type,
+            for faster processing within cyboi
+        * replace old abstractions with primitive abstractions
+            OR (better) just rename constants
+        * also convert ALL other standard models which are defined as constants
+            into simple integer values for faster processing inside cyboi
+
         * CONTINUE in file "applicator/compare/compare.c"
             - Which parametre to evaluate first?
             - Should these comparisons be moved into "executor/comparator/"?
