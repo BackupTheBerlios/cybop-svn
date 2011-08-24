@@ -18,10 +18,9 @@
             OR (better) just rename constants
         * also convert ALL other standard models which are defined as constants
             into simple integer values for faster processing inside cyboi
+        * create new mime types for this, e.g. comparison/greater-or-equal etc.,
+            once for cybol and once more for memory, and put these into constant/model/
 
-        * CONTINUE in file "applicator/compare/compare.c"
-            - Which parametre to evaluate first?
-            - Should these comparisons be moved into "executor/comparator/"?
         * Adapt files in directory "applicator/"
         * Adapt "flow_operation_handler.c"
         * Move all operation handlers one directory up

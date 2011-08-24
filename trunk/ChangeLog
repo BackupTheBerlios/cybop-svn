@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-08-24  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt old files of "applicator/maintainer/" and move into new directory "applicator/maintain/"
+        * Move "sense.c" from "applicator/communicate/" into directory "applicator/live/"
+        * Move "interrupt.c" from "applicator/maintainer/" into directory "applicator/live/"
+
 2011-08-22  Christian Heller  <christian.heller@tuxtax.de>
 
         * Adapt old files of "applicator/comparator/" and move into new directory "applicator/compare/"
