@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef DESTRUCTING_MEMORISER_SOURCE
-#define DESTRUCTING_MEMORISER_SOURCE
+#ifndef DESTROY_SOURCE
+#define DESTROY_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -256,5 +256,5 @@ void memorise_destructing(void* p0, void* p1, void* p2, void* p3, void* p4) {
     remove_compound_element_by_name(p2, p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) *nm, (void*) *nmc);
 }
 
-/* DESTRUCTING_MEMORISER_SOURCE */
+/* DESTROY_SOURCE */
 #endif

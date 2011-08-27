@@ -151,15 +151,8 @@ void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_all_array((void*) &r, *am, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *amc, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            calculate_addition_character_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
-        }
-    }
+    // Do NOT use the "add" operation for characters!
+    // They may be concatenated by using the "append" operation.
 
     if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

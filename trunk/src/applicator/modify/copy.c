@@ -167,6 +167,21 @@ void memorise_copying(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not copy primitive model. The abstraction model is unknown.");
     }
+
+    // CAUTION! The destination array needs to be resized not only
+    // if the source array is greater, but also if it is smaller!
+    // If this is not done, false results may occur.
+    // Example: A colour gets copied from source to destination.
+    // The source colour is "red" with a count of 3.
+    // The destination colour is "green" with a count of 5.
+    // If the source colour gets copied to the destination,
+    // the resulting destination array is "reden" with a count of 5.
+    // This colour value does not exist and will cause errors!
+    // Therefore, the destination array count and size ALWAYS
+    // have to be adapted to the source array count and size.
+    // If this had been done in the example, the resulting
+    // destination array would have been "red" with a count of 3,
+    // which is correct.
 }
 
 /* COPYING_MEMORISER_SOURCE */

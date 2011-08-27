@@ -48,6 +48,11 @@ void run_executing(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Execute command/ program as process.");
 
+    //?? TODO: Figure out if assembling a shell command line is necessary at all!
+    //?? The "system" function call further below does search programmes internally
+    //?? and by default uses the "sh" to execute commands.
+    //?? Therefore, the prefix "sh" and the rest assembled below may be superfluous.
+
     // The shell command line.
     void* cl = *NULL_POINTER_MEMORY_MODEL;
     int clc = *NUMBER_0_INTEGER_MEMORY_MODEL;

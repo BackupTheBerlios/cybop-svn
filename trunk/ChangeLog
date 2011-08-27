@@ -16,6 +16,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-08-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt old files of "applicator/memoriser/" and move into new directories "applicator/memorise/" and "applicator/modify/"
+        * Adapt old files of "applicator/calculator/" and move into new directory "applicator/calculate/"
+        * Adapt old files of "applicator/filer/" and move into new directory "applicator/file/"
+        * Adapt old files of "applicator/runner/" and move into new directory "applicator/run/"
+
 2011-08-24  Christian Heller  <christian.heller@tuxtax.de>
 
         * Adapt old files of "applicator/maintainer/" and move into new directory "applicator/maintain/"
