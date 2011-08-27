@@ -122,7 +122,7 @@ void apply_sense_message(void* p0, void* p1, void* p2) {
  * - socket
  *
  * All of them have their own internal signal/ action/ event/ interrupt waiting loops
- * which get activated here, running as parallel services in separate threads.
+ * which get (re-)activated here, running as parallel services in separate threads.
  * Whenever an event occurs in one of these threads, it gets transformed into a
  * cyboi-internal interrupt request by setting the corresponding flag.
  * The cyboi signal checker loop then senses the interrupt and receives the
@@ -140,7 +140,7 @@ void apply_sense_message(void* p0, void* p1, void* p2) {
  */
 void apply_sense(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sense interrupt request.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sense.");
 
     // The channel part.
     void* c = *NULL_POINTER_MEMORY_MODEL;

@@ -23,13 +23,14 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef EXECUTING_RUNNER_SOURCE
-#define EXECUTING_RUNNER_SOURCE
+#ifndef EXECUTE_SOURCE
+#define EXECUTE_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+
 #include "../../constant/model/command/unix_command_model.c"
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
@@ -39,14 +40,14 @@
 #include "../../logger/logger.c"
 
 /**
- * Execute command/ program as process.
+ * Executes the command as process.
  *
- * @param p0 the user command
- * @param p1 the user command count
+ * @param p0 the command array
+ * @param p1 the command array count
  */
-void run_executing(void* p0, void* p1) {
+void apply_execute(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Execute command/ program as process.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply execute.");
 
     //?? TODO: Figure out if assembling a shell command line is necessary at all!
     //?? The "system" function call further below does search programmes internally
@@ -85,7 +86,7 @@ void run_executing(void* p0, void* p1) {
     int ecls = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate encoded shell command line.
-    allocate((void*) &ecl, (void*) &ecls, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &ecl, (void*) &ecls, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Encode encoded shell command line.
     encode_utf_8_unicode_character_vector((void*) &ecl, (void*) &eclc, (void*) &ecls, cl, (void*) &clc);
@@ -141,7 +142,7 @@ void run_executing(void* p0, void* p1) {
     }
 
     // Deallocate encoded shell command line.
-    deallocate((void*) &ecl, (void*) &ecls, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &ecl, (void*) &ecls, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
 /*??
     //?? The following block implements the same three primitive functions
@@ -419,5 +420,5 @@ void run_executing(void* p0, void* p1) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* EXECUTING_RUNNER_SOURCE */
+/* EXECUTE_SOURCE */
 #endif

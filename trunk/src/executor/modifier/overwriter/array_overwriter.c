@@ -98,9 +98,27 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         // In such a case, the destination index plus number of elements
         // to be added will deliver the new size of the destination array.
 
+        // CAUTION! The destination array needs to be resized not only
+        // if the source array is greater, but also if it is smaller!
+        // If this is not done, false results may occur.
+        // Example: A colour gets copied from source to destination.
+        // The source colour is "red" with a count of 3.
+        // The destination colour is "green" with a count of 5.
+        // If the source colour gets copied to the destination,
+        // the resulting destination array is "reden" with a count of 5.
+        // This colour value does not exist and will cause errors!
+        // Therefore, the destination array count and size ALWAYS
+        // have to be adapted to the source array count and size.
+        // If this had been done in the example, the resulting
+        // destination array would have been "red" with a count of 3,
+        // which is correct.
+        //
+        // If it is NOT wanted to enlarge or shrink the destination array,
+        // then the pure "copy" function should be used instead.
+
         // Add destination index.
         add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
-        // Add count of new elements to be inserted.
+        // Add count of new elements to be written over old elements.
         add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // The comparison result.

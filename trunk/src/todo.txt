@@ -11,8 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue with "create.c" and see "overwrite_part_all" for how to
-            copy a part's elements
+        * Continue in "applicator/modify/" with overwrite, insert, remove, copy, get
 
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,

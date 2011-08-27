@@ -23,10 +23,11 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef PROGRAM_RUNNER_SOURCE
-#define PROGRAM_RUNNER_SOURCE
+#ifndef RUN_SOURCE
+#define RUN_SOURCE
 
 #include <unistd.h>
+
 #include "../../applicator/runner/executing_runner.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -41,56 +42,33 @@
 /**
  * Runs a program.
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the knowledge memory
- * @param p3 the knowledge memory count
+ * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
+ * @param p1 the parametres array count
+ * @param p2 the knowledge memory part
  */
-void run_program(void* p0, void* p1, void* p2, void* p3) {
+void apply_run(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Run program command.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply run.");
 
-    // The program name, abstraction, model, details.
-    void** programn = NULL_POINTER_MEMORY_MODEL;
-    void** programnc = NULL_POINTER_MEMORY_MODEL;
-    void** programns = NULL_POINTER_MEMORY_MODEL;
-    void** programa = NULL_POINTER_MEMORY_MODEL;
-    void** programac = NULL_POINTER_MEMORY_MODEL;
-    void** programas = NULL_POINTER_MEMORY_MODEL;
-    void** programm = NULL_POINTER_MEMORY_MODEL;
-    void** programmc = NULL_POINTER_MEMORY_MODEL;
-    void** programms = NULL_POINTER_MEMORY_MODEL;
-    void** programd = NULL_POINTER_MEMORY_MODEL;
-    void** programdc = NULL_POINTER_MEMORY_MODEL;
-    void** programds = NULL_POINTER_MEMORY_MODEL;
+    // The programme part.
+    void* p = *NULL_POINTER_MEMORY_MODEL;
+    // The programme part model.
+    void* pm = *NULL_POINTER_MEMORY_MODEL;
+    // The programme part model data, count.
+    void* pmd = *NULL_POINTER_MEMORY_MODEL;
+    void* pmc = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get program option.
-    get_universal_compound_element_by_name(
-        (void*) &programn, (void*) &programnc, (void*) &programns,
-        (void*) &programa, (void*) &programac, (void*) &programas,
-        (void*) &programm, (void*) &programmc, (void*) &programms,
-        (void*) &programd, (void*) &programdc, (void*) &programds,
-        p0, p1,
-        (void*) PROGRAM_RUN_OPERATION_CYBOL_NAME, (void*) PROGRAM_RUN_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
-
-    // The arguments vector.
-    void* arg = *NULL_POINTER_MEMORY_MODEL;
-    int argc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Allocate arguments vector.
-    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-
-    // Append command.
-    overwrite_array((void*) &arg, *programm, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *programmc, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
+    // Get programme part.
+    get_name_array((void*) &p, p0, (void*) PROGRAMME_RUN_OPERATION_CYBOL_NAME, (void*) PROGRAMME_RUN_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get programme part model.
+    copy_array_forward((void*) &pm, c, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get programme part model data, count.
+    copy_array_forward((void*) &pmd, pm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &pmc, pm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
     // Execute command line in shell.
-    run_executing(arg, (void*) &argc);
-
-    // Deallocate arguments vector.
-    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    apply_execute(pmd, pmc);
 }
 
-/* PROGRAM_RUNNER_SOURCE */
+/* RUN_SOURCE */
 #endif
