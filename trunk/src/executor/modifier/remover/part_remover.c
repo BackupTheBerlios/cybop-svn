@@ -38,8 +38,8 @@
 /**
  * Removes count elements from the part.
  *
- * The name, abstraction and details of the part
- * remain unchanged. Only the model gets removed.
+ * The name, abstraction and details of the part remain unchanged.
+ * Only the model gets touched by removing the given number of elements.
  *
  * The count and size are adjusted automatically.
  *

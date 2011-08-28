@@ -50,7 +50,7 @@
  * - source (required): the source part
  * - abstraction (required): the type of data
  * - count (optional; if null, the source part model count will be used instead):
- *   the number of elements to be copied
+ *   the number of elements to be appended
  * - index (optional; if null, an index of zero will be used instead):
  *   the source index from which to start copying elements from
  *

@@ -50,7 +50,7 @@
  * - source (required): the source part
  * - abstraction (required): the type of data
  * - count (optional; if null, the source part model count will be used instead):
- *   the number of elements to be copied
+ *   the number of elements to be overwritten
  * - destination_index (optional; if null, an index of zero will be used instead):
  *   the destination index from which to start copying elements to
  * - source_index (optional; if null, an index of zero will be used instead):
