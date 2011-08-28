@@ -45,9 +45,8 @@
 /**
  * Removes count elements from the part.
  *
- * Expected parameters:
+ * Expected parametres:
  * - part (required): the part
- * - abstraction (required): the type of data
  * - count (optional; if null, ALL elements will be removed):
  *   the number of elements to be removed
  * - index (optional; if null, the index of the LAST element will be used instead):
@@ -63,26 +62,22 @@ void apply_remove(void* p0, int* p1, void* p2) {
 
     // The part.
     void* p = *NULL_POINTER_MEMORY_MODEL;
-    // The abstraction part.
-    void* a = *NULL_POINTER_MEMORY_MODEL;
     // The count part.
     void* c = *NULL_POINTER_MEMORY_MODEL;
     // The index part.
     void* i = *NULL_POINTER_MEMORY_MODEL;
 
-    // The part model.
+    // The part abstraction, model.
+    void* pa = *NULL_POINTER_MEMORY_MODEL;
     void* pm = *NULL_POINTER_MEMORY_MODEL;
-    // The abstraction part model.
-    void* am = *NULL_POINTER_MEMORY_MODEL;
     // The count part model.
     void* cm = *NULL_POINTER_MEMORY_MODEL;
     // The index part model.
     void* im = *NULL_POINTER_MEMORY_MODEL;
 
-    // The part model count.
+    // The part abstraction data, model count.
+    void* pad = *NULL_POINTER_MEMORY_MODEL;
     void* pmc = *NULL_POINTER_MEMORY_MODEL;
-    // The abstraction part model data.
-    void* amd = *NULL_POINTER_MEMORY_MODEL;
     // The count part model data.
     void* cmd = *NULL_POINTER_MEMORY_MODEL;
     // The index part model data.
@@ -90,26 +85,22 @@ void apply_remove(void* p0, int* p1, void* p2) {
 
     // Get part.
     get_name_array((void*) &p, p0, (void*) PART_REMOVE_OPERATION_CYBOL_NAME, (void*) PART_REMOVE_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get abstraction part.
-    get_name_array((void*) &a, p0, (void*) ABSTRACTION_REMOVE_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_REMOVE_OPERATION_CYBOL_NAME_COUNT, p1);
     // Get count part.
     get_name_array((void*) &c, p0, (void*) COUNT_REMOVE_OPERATION_CYBOL_NAME, (void*) COUNT_REMOVE_OPERATION_CYBOL_NAME_COUNT, p1);
     // Get index part.
     get_name_array((void*) &i, p0, (void*) INDEX_REMOVE_OPERATION_CYBOL_NAME, (void*) INDEX_REMOVE_OPERATION_CYBOL_NAME_COUNT, p1);
 
-    // Get part model.
-    copy_array_forward((void*) &pm, s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
-    // Get abstraction part model.
-    copy_array_forward((void*) &am, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get part abstraction, model.
+    copy_array_forward((void*) &pa, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+    copy_array_forward((void*) &pm, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
     // Get count part model.
     copy_array_forward((void*) &cm, c, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
     // Get index part model.
-    copy_array_forward((void*) &im, di, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    copy_array_forward((void*) &im, i, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
 
-    // Get part model count.
+    // Get part abstraction data, model count.
+    copy_array_forward((void*) &pad, pa, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &pmc, pm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
-    // Get abstraction part model data.
-    copy_array_forward((void*) &amd, am, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     // Get count part model data.
     copy_array_forward((void*) &cmd, cm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     // Get index part model data.
@@ -124,15 +115,18 @@ void apply_remove(void* p0, int* p1, void* p2) {
     // This is tested inside the "copy_integer" function.
     // Otherwise, the destination value remains as is.
 
-    // Use the source part model count by default.
-    copy_integer((void*) &count, smc);
+    // Use the part model count (all elements), by default.
+    copy_integer((void*) &count, pmc);
     // Use the explicit count that was given as parametre.
     copy_integer((void*) &count, cmd);
+    // Use the part model's last element index (count - 1), by default.
+    copy_integer((void*) &index, pmc);
+    subtract_integer_from_integer((void*) &index, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
     // Use the explicit index that was given as parametre.
-    copy_integer((void*) &index, dimd);
+    copy_integer((void*) &index, imd);
 
     // Remove elements from part.
-    remove_part(p, amd, (void*) &count, (void*) &index);
+    remove_part(p, pad, (void*) &count, (void*) &index);
 }
 
 /* REMOVE_SOURCE */

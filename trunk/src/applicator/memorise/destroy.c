@@ -39,221 +39,38 @@
 #include "../../executor/comparator/all/array_all_comparator.c"
 #include "../../logger/logger.c"
 
-//
-// Forward declarations.
-//
-
-/**
- * Destroys a transient destination model.
- *
- * @param p0 the model
- * @param p1 the model count
- * @param p2 the model size
- * @param p3 the model abstraction
- * @param p4 the model abstraction count
- */
-void destroy_model(void** model, void* model_count, void* model_size, void* model_abstr, void* model_abstr_count);
-
-/**
- * Checks for a compound model.
- *
- * @param p0 the primitive flag (1 if primitive; unchanged otherwise)
- * @param p1 the abstraction
- * @param p2 the abstraction count
- */
-void check_compound_model(void* p0, void* p1, void* p2) {
-
-    if (p0 != *NULL_POINTER_MEMORY_MODEL) {
-
-        int* p = (int*) p0;
-
-        if (*p != *NUMBER_1_INTEGER_MEMORY_MODEL) {
-
-            compare_all_array(p0, p1, (void*) COMPOUND_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) COMPOUND_MEMORY_ABSTRACTION_COUNT);
-        }
-    }
-}
-
-/**
- * Destroys a primitive model.
- *
- * @param p0 the model
- * @param p1 the model count
- * @param p2 the model size
- * @param p3 the model abstraction
- * @param p4 the model abstraction count
- */
-void destroy_primitive_model(void** model, void* model_count, void* model_size,
-    void* model_abstr, void* model_abstr_count) {
-
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Destroy primitive model.");
-
-    // Destroy model of type given as abstraction.
-    deallocate(model, model_size, model_abstr, model_abstr_count);
-}
-
-/**
- * Destroys a compound model.
- *
- * @param p0 the model
- * @param p1 the model count
- * @param p2 the model size
- * @param p3 the model abstraction
- * @param p4 the model abstraction count
- */
-void destroy_compound_model(void** model, void* model_count, void* model_size,
-    void* model_abstr, void* model_abstr_count) {
-
-    // das gesamte Compound durchgehen und f?r jedes Element im Compound wieder destroy model aufrufen
-
-    int compound_counter = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // The element name.
-    void** en = NULL_POINTER_MEMORY_MODEL;
-    void** enc = NULL_POINTER_MEMORY_MODEL;
-    void** ens = NULL_POINTER_MEMORY_MODEL;
-    // The element abstraction.
-    void** ea = NULL_POINTER_MEMORY_MODEL;
-    void** eac = NULL_POINTER_MEMORY_MODEL;
-    void** eas = NULL_POINTER_MEMORY_MODEL;
-    // The element model.
-    void** em = NULL_POINTER_MEMORY_MODEL;
-    void** emc = NULL_POINTER_MEMORY_MODEL;
-    void** ems = NULL_POINTER_MEMORY_MODEL;
-    // The element details.
-    void** ed = NULL_POINTER_MEMORY_MODEL;
-    void** edc = NULL_POINTER_MEMORY_MODEL;
-    void** eds = NULL_POINTER_MEMORY_MODEL;
-
-    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
-
-        if (compound_counter >= *((int*) model_count)) {
-
-            break;
-        }
-
-        // Get element.
-        get_compound_element_by_index(*model, model_count, (void*) &compound_counter,
-            (void*) &en, (void*) &enc, (void*) &ens,
-            (void*) &ea, (void*) &eac, (void*) &eas,
-            (void*) &em, (void*) &emc, (void*) &ems,
-            (void*) &ed, (void*) &edc, (void*) &eds);
-
-        destroy_model(em, *emc, *ems, *ea, *eac);
-
-        compound_counter = compound_counter + *NUMBER_1_INTEGER_MEMORY_MODEL;
-    }
-}
-
-/**
- * Destroys a transient destination model.
- *
- * @param p0 the model
- * @param p1 the model count
- * @param p2 the model size
- * @param p3 the model abstraction
- * @param p4 the model abstraction count
- */
-void destroy_model(void** model, void* model_count, void* model_size, void* model_abstr, void* model_abstr_count) {
-
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // Check for compound (later better for primitive!!) model.
-    check_compound_model((void*) &r, model_abstr, model_abstr_count);
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        destroy_primitive_model(model, model_count, model_size, model_abstr, model_abstr_count);
-
-    } else {
-
-        destroy_compound_model(model, model_count, model_size, model_abstr, model_abstr_count);
-    }
-}
-
 /**
  * Destroys a part and removes it from the knowledge model.
  *
  * Primitive models need a different creation than compound models.
  *
- * persistent:
- * - stored permanently
- * - outside CYBOI
- * - longer than CYBOI lives
- *
- * transient:
- * - stored in computer memory (RAM)
- * - only accessible from within CYBOI
- * - created and destroyed by CYBOI
- * - not available anymore after CYBOI has been destroyed
- *
  * Expected parameters:
- * - model (required): the knowledge model to be destroyed
+ * - part (required): the part to be destroyed
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the knowledge
- * @param p3 the knowledge count
- * @param p4 the knowledge size
+ * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
+ * @param p1 the parametres array count
+ * @param p2 the knowledge memory part
  */
-void memorise_destructing(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void apply_destroy(void* p0, void* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Destroy knowledge model.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply destroy.");
 
-    // The knowledge model name name, abstraction, model, details.
-    void** nn = NULL_POINTER_MEMORY_MODEL;
-    void** nnc = NULL_POINTER_MEMORY_MODEL;
-    void** nns = NULL_POINTER_MEMORY_MODEL;
-    void** na = NULL_POINTER_MEMORY_MODEL;
-    void** nac = NULL_POINTER_MEMORY_MODEL;
-    void** nas = NULL_POINTER_MEMORY_MODEL;
-    void** nm = NULL_POINTER_MEMORY_MODEL;
-    void** nmc = NULL_POINTER_MEMORY_MODEL;
-    void** nms = NULL_POINTER_MEMORY_MODEL;
-    void** nd = NULL_POINTER_MEMORY_MODEL;
-    void** ndc = NULL_POINTER_MEMORY_MODEL;
-    void** nds = NULL_POINTER_MEMORY_MODEL;
+    // The part.
+    void* p = *NULL_POINTER_MEMORY_MODEL;
+    // The part abstraction.
+    void* pa = *NULL_POINTER_MEMORY_MODEL;
+    // The part abstraction data.
+    void* pad = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get knowledge model name.
-    get_universal_compound_element_by_name(
-        (void*) &nn, (void*) &nnc, (void*) &nns,
-        (void*) &na, (void*) &nac, (void*) &nas,
-        (void*) &nm, (void*) &nmc, (void*) &nms,
-        (void*) &nd, (void*) &ndc, (void*) &nds,
-        p0, p1,
-        (void*) MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME, (void*) MODEL_DESTROY_MEMORY_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
+    // Get part.
+    get_name_array((void*) &p, p0, (void*) PART_DESTROY_OPERATION_CYBOL_NAME, (void*) PART_DESTROY_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get part abstraction.
+    copy_array_forward((void*) &pa, p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+    // Get part abstraction data.
+    copy_array_forward((void*) &pad, pa, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
-    // The knowledge model name, abstraction, model, details.
-    void** en = NULL_POINTER_MEMORY_MODEL;
-    void** enc = NULL_POINTER_MEMORY_MODEL;
-    void** ens = NULL_POINTER_MEMORY_MODEL;
-    void** ea = NULL_POINTER_MEMORY_MODEL;
-    void** eac = NULL_POINTER_MEMORY_MODEL;
-    void** eas = NULL_POINTER_MEMORY_MODEL;
-    void** em = NULL_POINTER_MEMORY_MODEL;
-    void** emc = NULL_POINTER_MEMORY_MODEL;
-    void** ems = NULL_POINTER_MEMORY_MODEL;
-    void** ed = NULL_POINTER_MEMORY_MODEL;
-    void** edc = NULL_POINTER_MEMORY_MODEL;
-    void** eds = NULL_POINTER_MEMORY_MODEL;
-
-    // Get knowledge model.
-    get_universal_compound_element_by_name(
-        (void*) &en, (void*) &enc, (void*) &ens,
-        (void*) &ea, (void*) &eac, (void*) &eas,
-        (void*) &em, (void*) &emc, (void*) &ems,
-        (void*) &ed, (void*) &edc, (void*) &eds,
-        p2, p3,
-        (void*) *nm, (void*) *nmc,
-        p2, p3);
-
-    // Destroy knowledge model.
-    destroy_model(em, *emc, *ems , *ea, *eac);
-
-    // Remove knowledge model from given whole model.
-    remove_compound_element_by_name(p2, p3, p4, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) *nm, (void*) *nmc);
+    // Deallocate part.
+    deallocate_part((void*) &p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, pad);
 }
 
 /* DESTROY_SOURCE */

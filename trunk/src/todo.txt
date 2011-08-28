@@ -11,9 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue in "applicator/modify/" with overwrite, insert, remove, copy, get
-        * Adjust getting of parts from parametres in applicator functions
-            (up to now, only the elements are retrieved, but not actual parts by name yet)
+        * Adapt files in directory "executor/maintainer/"
+        * Continue: Adapt files in directory "applicator/maintain/"
+            and the other sub directories of "applicator/" upwards to the top
 
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,
@@ -26,10 +26,11 @@
             once for cybol and once more for memory, and put these into constant/model/
 
         * Adapt files in directory "applicator/"
-        * Adapt "flow_operation_handler.c"
+        * Adapt "*_operation_handler.c"
         * Move all operation handlers one directory up
         * Move files of directory "executor/converter/selector/" into "executor/searcher/selector/"
         * Rename "executor/arithmetiser/" into "executor/calculator/"
+        * Remove "size" parametre from all "deallocate" functions
 
         * Offer part deallocation shallow and deep
             (deep is not always wanted, if a child is referenced by many parts)

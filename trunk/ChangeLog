@@ -18,8 +18,9 @@
 
 2011-08-28  Christian Heller  <christian.heller@tuxtax.de>
 
-        * Adapt files of "applicator/modify/"
+        * Adapt files of "applicator/modify/" and other directories
         * Introduce "shrink" flag for adjusting destination count when using "overwrite" operation
+        * Move sub directories of "applicator/maintain/" to new directory "executor/maintainer/"
 
 2011-08-27  Christian Heller  <christian.heller@tuxtax.de>
 
