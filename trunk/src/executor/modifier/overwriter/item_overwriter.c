@@ -26,8 +26,6 @@
 #ifndef ITEM_OVERWRITER_SOURCE
 #define ITEM_OVERWRITER_SOURCE
 
-#include <stdlib.h>
-#include <string.h>
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -53,9 +51,10 @@
  * @param p3 the count
  * @param p4 the destination item index
  * @param p5 the source array index
- * @param p6 the destination item element index
+ * @param p6 the shrink flag
+ * @param p7 the destination item element index
  */
-void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Overwrite item element.");
 
@@ -63,12 +62,12 @@ void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, vo
     void* e = *NULL_POINTER_MEMORY_MODEL;
 
     // Get destination item element.
-    copy_array_forward((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
+    copy_array_forward((void*) &e, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p7);
 
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_integer((void*) &r, p6, (void*) DATA_ITEM_MEMORY_NAME, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
+    compare_integer((void*) &r, p7, (void*) DATA_ITEM_MEMORY_NAME, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -84,7 +83,7 @@ void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, vo
 
         // Overwrite array as element of the item container.
         // Since this is a data item element, the count and size are set inside.
-        overwrite_array((void*) &e, p1, p2, p3, p4, p5, c, s);
+        overwrite_array((void*) &e, p1, p2, p3, p4, p5, c, s, p6);
 
         // Set data array as element of the item container.
         // CAUTION! This IS NECESSARY, because reallocation may have happened
@@ -101,7 +100,7 @@ void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, vo
         // CAUTION! It never gets reallocated, since count and size
         // are integer primitives. Setting the count array or size array
         // as element of the item container is therefore not necessary.
-        overwrite_array((void*) &e, p1, p2, p3, p4, p5, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
+        overwrite_array((void*) &e, p1, p2, p3, p4, p5, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
     }
 }
 
@@ -116,8 +115,9 @@ void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, vo
  * @param p3 the count
  * @param p4 the destination index
  * @param p5 the source index
+ * @param p6 the shrink flag
  */
-void overwrite_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+void overwrite_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Overwrite item.");
 
@@ -136,7 +136,7 @@ void overwrite_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) 
     copy_array_forward((void*) &sd, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // Overwrite destination- with source item data array.
-    overwrite_array((void*) &dd, sd, p2, p3, p4, p5, dc, ds);
+    overwrite_array((void*) &dd, sd, p2, p3, p4, p5, dc, ds, p6);
 
     // Set data as item element.
     // CAUTION! This IS NECESSARY, because reallocation may have happened

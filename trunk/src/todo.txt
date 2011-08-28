@@ -12,6 +12,8 @@
 #
 
         * Continue in "applicator/modify/" with overwrite, insert, remove, copy, get
+        * Adjust getting of parts from parametres in applicator functions
+            (up to now, only the elements are retrieved, but not actual parts by name yet)
 
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,
@@ -27,6 +29,7 @@
         * Adapt "flow_operation_handler.c"
         * Move all operation handlers one directory up
         * Move files of directory "executor/converter/selector/" into "executor/searcher/selector/"
+        * Rename "executor/arithmetiser/" into "executor/calculator/"
 
         * Offer part deallocation shallow and deep
             (deep is not always wanted, if a child is referenced by many parts)

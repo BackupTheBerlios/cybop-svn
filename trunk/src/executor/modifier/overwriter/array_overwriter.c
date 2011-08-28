@@ -26,8 +26,6 @@
 #ifndef ARRAY_OVERWRITER_SOURCE
 #define ARRAY_OVERWRITER_SOURCE
 
-#include <stdlib.h>
-#include <string.h>
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -80,8 +78,9 @@
  * @param p5 the source index
  * @param p6 the destination array count
  * @param p7 the destination array size
+ * @param p8 the shrink flag
  */
-void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -92,29 +91,11 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         // The new size.
         int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        // CAUTION! The destination array count is not considered here,
+        // CAUTION! The destination array count is NOT considered here,
         // because an element may be added far behind the end of the array.
         // This is similar to random access of an arbitrary byte of a file.
         // In such a case, the destination index plus number of elements
         // to be added will deliver the new size of the destination array.
-
-        // CAUTION! The destination array needs to be resized not only
-        // if the source array is greater, but also if it is smaller!
-        // If this is not done, false results may occur.
-        // Example: A colour gets copied from source to destination.
-        // The source colour is "red" with a count of 3.
-        // The destination colour is "green" with a count of 5.
-        // If the source colour gets copied to the destination,
-        // the resulting destination array is "reden" with a count of 5.
-        // This colour value does not exist and will cause errors!
-        // Therefore, the destination array count and size ALWAYS
-        // have to be adapted to the source array count and size.
-        // If this had been done in the example, the resulting
-        // destination array would have been "red" with a count of 3,
-        // which is correct.
-        //
-        // If it is NOT wanted to enlarge or shrink the destination array,
-        // then the pure "copy" function should be used instead.
 
         // Add destination index.
         add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
@@ -122,17 +103,19 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
         // The comparison result.
-        int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+        int r = *FALSE_BOOLEAN_MEMORY_MODEL;
 
-        compare_integer((void*) &r, (void*) &n, p7, (void*) GREATER_PRIMITIVE_OPERATION_ABSTRACTION);
+        compare_integer_greater((void*) &r, (void*) &n, p7);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
+
+            // The new destination size is greater than the old.
 
             // Multiply new size with factor.
             // CAUTION! This multiplication has to be done AFTER the comparison
             // of new size and old size since otherwise, the new size is falsified,
             // which would lead to runtime errors.
-            // multiply_with_integer((void*) &n, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+            multiply_with_integer((void*) &n, (void*) NUMBER_2_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
 
             // Enlarge array using new count as size.
             reallocate_array(p0, p6, (void*) &n, p2);
@@ -144,8 +127,70 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         // Copy source to destination.
         copy_array_forward(*d, p1, p2, p3, p4, p5);
 
-        // Adjust destination array count.
-        copy_integer(p6, (void*) &n);
+        // Reset comparison result.
+        r = *FALSE_BOOLEAN_MEMORY_MODEL;
+
+        compare_integer_unequal((void*) &r, p8, (void*) FALSE_BOOLEAN_MEMORY_MODEL);
+
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
+
+            //
+            // Adjust destination array COUNT only if "shrink" flag was set.
+            //
+            // The destination size does not really matter here.
+            // It got extended above, if necessary.
+            // For the destination count, there are two possibilities:
+            //
+            // 1 The shrink flag is FALSE:
+            //
+            // In this case, the original destination count REMAINS AS IS.
+            //
+            // Example:
+            //
+            // - destination array: "Today is a rainy day."
+            // - source array: "sunny"
+            // - abstraction: (wide_character given as special integer constant)
+            // - count: 5
+            // - destination index: 11
+            // - source index: 0
+            // - destination array count: 21
+            // - destination array size: 21 (or greater, does not matter)
+            // - shrink flag: 0
+            //
+            // --> destination array: "Today is a sunny day."
+            // --> destination array count: 21
+            //
+            // 2 The shrink flag is TRUE:
+            //
+            // In this case, the original destination count GETS ADJUSTED.
+            //
+            // Example:
+            //
+            // - destination array: "green"
+            // - source array: "red"
+            // - abstraction: (wide_character given as special integer constant)
+            // - count: 3
+            // - destination index: 0
+            // - source index: 0
+            // - destination array count: 5
+            // - destination array size: 5 (or greater, does not matter)
+            // - shrink flag: 1
+            //
+            // --> destination array: "red"
+            // --> destination array count: 3
+            //
+            // If the destination count hadn't been adjusted, the result would have been:
+            // --> destination array: "reden"
+            // --> destination array count: 5
+            // ... which is clearly wrong, since this colour value does not exist.
+            //
+            // Therefore, the destination array count has to get adjusted
+            // not only if the number of elements increases (extension),
+            // but also if the number of elements decreases (shrinking).
+            // If this was not done, false results would occur.
+            //
+            copy_integer(p6, (void*) &n);
+        }
 
     } else {
 

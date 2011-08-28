@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-08-28  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt files of "applicator/modify/"
+        * Introduce "shrink" flag for adjusting destination count when using "overwrite" operation
+
 2011-08-27  Christian Heller  <christian.heller@tuxtax.de>
 
         * Move old files of "applicator/memoriser/" into new directories "applicator/memorise/" and "applicator/modify/"
