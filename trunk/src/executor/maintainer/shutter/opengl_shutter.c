@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef OPENGL_SHUTTING_MAINTAINER_SOURCE
-#define OPENGL_SHUTTING_MAINTAINER_SOURCE
+#ifndef OPENGL_SHUTTER_SOURCE
+#define OPENGL_SHUTTER_SOURCE
 
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
@@ -41,7 +41,7 @@
  * @param p2 the knowledge count
  * @param p3 the knowledge size
  */
-void maintain_shutting_opengl(void* p0, void* p1, void* p2, void* p3) {
+void shutdown_opengl(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Shutdown opengl.");
 
@@ -49,11 +49,11 @@ void maintain_shutting_opengl(void* p0, void* p1, void* p2, void* p3) {
 
     // Shutdown x window system AT LAST.
     // The opengl environment needed its windows to have something to paint on.
-    maintain_shutting_x_window_system(p0, p1, p2, p3);
+    shutdown_x_window_system(p0, p1, p2, p3);
 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 }
 
-/* OPENGL_SHUTTING_MAINTAINER_SOURCE */
+/* OPENGL_SHUTTER_SOURCE */
 #endif

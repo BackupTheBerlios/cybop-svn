@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_STARTING_MAINTAINER_SOURCE
-#define SOCKET_STARTING_MAINTAINER_SOURCE
+#ifndef SOCKET_STARTER_SOURCE
+#define SOCKET_STARTER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -36,6 +36,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
+
 #include "../../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -62,7 +63,7 @@
  * @param p2 the namespace model
  * @param p3 the namespace model count
  */
-void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, void* p2, void* p3) {
+void startup_socket_memorise_getting_namespace(void* p0, void* p1, void* p2, void* p3) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -133,7 +134,7 @@ void maintain_starting_socket_memorise_getting_namespace(void* p0, void* p1, voi
  * @param p1 the communication style model
  * @param p2 the communication style model count
  */
-void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
+void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
     if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -193,7 +194,7 @@ void maintain_starting_socket_get_style(void* p0, void* p1, void* p2) {
  * @param p2 the address model count
  * @param p3 the address namespace
  */
-void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
+void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -315,7 +316,7 @@ void maintain_starting_socket_get_host_address(void* p0, void* p1, void* p2, voi
  * @param p1 the file name
  * @param p2 the file name count
  */
-void maintain_starting_socket_initialise_local_socket_address(void* p0, void* p1, void* p2) {
+void startup_socket_initialise_local_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -414,7 +415,7 @@ void maintain_starting_socket_initialise_local_socket_address(void* p0, void* p1
  * @param p1 the host address (in network byte order)
  * @param p2 the socket port (in host byte order)
  */
-void maintain_starting_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2) {
+void startup_socket_initialise_ipv4_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -476,7 +477,7 @@ void maintain_starting_socket_initialise_ipv4_socket_address(void* p0, void* p1,
  * @param p1 the host address (in network byte order)
  * @param p2 the socket port (in host byte order)
  */
-void maintain_starting_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2) {
+void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -553,7 +554,7 @@ void maintain_starting_socket_initialise_ipv6_socket_address(void* p0, void* p1,
  * @param p10 the knowledge memory count
  * @param p11 the knowledge memory size
  */
-void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
+void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
     void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
 
     if (p8 != *NULL_POINTER_MEMORY_MODEL) {
@@ -611,18 +612,18 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int r = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get socket- and address namespace.
-        maintain_starting_socket_memorise_getting_namespace((void*) &sn, (void*) &an, p1, p2);
+        startup_socket_memorise_getting_namespace((void*) &sn, (void*) &an, p1, p2);
         // Get socket communication style.
-        maintain_starting_socket_get_style((void*) &st, p3, p4);
+        startup_socket_get_style((void*) &st, p3, p4);
 
         // Get host address constant.
         if (an == AF_INET) {
 
-            maintain_starting_socket_get_host_address((void*) &ha4, p5, p6, (void*) &an);
+            startup_socket_get_host_address((void*) &ha4, p5, p6, (void*) &an);
 
         } else if (an == AF_INET6) {
 
-            maintain_starting_socket_get_host_address((void*) &ha6, p5, p6, (void*) &an);
+            startup_socket_get_host_address((void*) &ha6, p5, p6, (void*) &an);
         }
 
         // Allocate socket address size of this system.
@@ -697,15 +698,15 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         // It gets initialised only before sending, or at reception of a message.
         if (an == AF_LOCAL) {
 
-            maintain_starting_socket_initialise_local_socket_address((void*) &la, p5, p6);
+            startup_socket_initialise_local_socket_address((void*) &la, p5, p6);
 
         } else if (an == AF_INET) {
 
-            maintain_starting_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
+            startup_socket_initialise_ipv4_socket_address((void*) &ia4, (void*) &ha4, p7);
 
         } else if (an == AF_INET6) {
 
-            maintain_starting_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
+            startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
         }
 
 /*??
@@ -978,5 +979,5 @@ void maintain_starting_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_STARTING_MAINTAINER_SOURCE */
+/* SOCKET_STARTER_SOURCE */
 #endif

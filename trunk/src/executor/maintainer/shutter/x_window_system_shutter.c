@@ -23,12 +23,13 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_SHUTTING_MAINTAINER_SOURCE
-#define X_WINDOW_SYSTEM_SHUTTING_MAINTAINER_SOURCE
+#ifndef X_WINDOW_SYSTEM_SHUTTER_SOURCE
+#define X_WINDOW_SYSTEM_SHUTTER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <X11/Xlib.h>
+
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/internal_memory_memory_name.c"
@@ -53,7 +54,7 @@
  * @param p1 the socket service thread
  * @param p2 the socket service thread interrupt
  */
-void maintain_shutting_x_window_system(void* p0, void* p1, void* p2) {
+void shutdown_x_window_system(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Shutdown x window system.");
 
@@ -170,5 +171,5 @@ void maintain_shutting_x_window_system(void* p0, void* p1, void* p2) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* X_WINDOW_SYSTEM_SHUTTING_MAINTAINER_SOURCE */
+/* X_WINDOW_SYSTEM_SHUTTER_SOURCE */
 #endif

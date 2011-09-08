@@ -23,12 +23,13 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GNU_LINUX_CONSOLE_SHUTTING_MAINTAINER_SOURCE
-#define GNU_LINUX_CONSOLE_SHUTTING_MAINTAINER_SOURCE
+#ifndef GNU_LINUX_CONSOLE_SHUTTER_SOURCE
+#define GNU_LINUX_CONSOLE_SHUTTER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <termios.h>
+
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -48,7 +49,7 @@
  * @param p1 the socket service thread
  * @param p2 the socket service thread interrupt
  */
-void maintain_shutting_gnu_linux_console(void* p0, void* p1, void* p2) {
+void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Shutdown gnu/linux console.");
 
@@ -123,5 +124,5 @@ void maintain_shutting_gnu_linux_console(void* p0, void* p1, void* p2) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* GNU_LINUX_CONSOLE_SHUTTING_MAINTAINER_SOURCE */
+/* GNU_LINUX_CONSOLE_SHUTTER_SOURCE */
 #endif

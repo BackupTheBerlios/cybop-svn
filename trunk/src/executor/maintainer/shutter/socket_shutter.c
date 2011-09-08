@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_SHUTTING_MAINTAINER_SOURCE
-#define SOCKET_SHUTTING_MAINTAINER_SOURCE
+#ifndef SOCKET_SHUTTER_SOURCE
+#define SOCKET_SHUTTER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -46,7 +46,7 @@
  * @param p2 the socket service thread
  * @param p3 the socket service thread interrupt
  */
-void maintain_shutting_socket(void* p0, void* p1, void* p2, void* p3) {
+void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -165,5 +165,5 @@ void maintain_shutting_socket(void* p0, void* p1, void* p2, void* p3) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_SHUTTING_MAINTAINER_SOURCE */
+/* SOCKET_SHUTTER_SOURCE */
 #endif

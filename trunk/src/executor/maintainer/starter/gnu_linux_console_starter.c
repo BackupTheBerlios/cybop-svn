@@ -23,13 +23,14 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GNU_LINUX_CONSOLE_STARTING_MAINTAINER_SOURCE
-#define GNU_LINUX_CONSOLE_STARTING_MAINTAINER_SOURCE
+#ifndef GNU_LINUX_CONSOLE_STARTER_SOURCE
+#define GNU_LINUX_CONSOLE_STARTER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <stdio.h>
 #include <termios.h>
+
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -49,7 +50,7 @@
  * @param p2 the knowledge memory count
  * @param p3 the knowledge memory size
  */
-void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
+void startup_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup gnu/linux console.");
 
@@ -201,5 +202,5 @@ void maintain_starting_gnu_linux_console(void* p0, void* p1, void* p2, void* p3)
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* GNU_LINUX_CONSOLE_STARTING_MAINTAINER_SOURCE */
+/* GNU_LINUX_CONSOLE_STARTER_SOURCE */
 #endif

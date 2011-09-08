@@ -23,13 +23,14 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_STARTING_MAINTAINER_SOURCE
-#define X_WINDOW_SYSTEM_STARTING_MAINTAINER_SOURCE
+#ifndef X_WINDOW_SYSTEM_STARTER_SOURCE
+#define X_WINDOW_SYSTEM_STARTER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
@@ -57,7 +58,7 @@
  * @param p2 the knowledge count
  * @param p3 the knowledge size
  */
-void maintain_starting_x_window_system(void* p0, void* p1, void* p2, void* p3) {
+void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup x window system.");
 
@@ -237,5 +238,5 @@ void maintain_starting_x_window_system(void* p0, void* p1, void* p2, void* p3) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* X_WINDOW_SYSTEM_STARTING_MAINTAINER_SOURCE */
+/* X_WINDOW_SYSTEM_STARTER_SOURCE */
 #endif
