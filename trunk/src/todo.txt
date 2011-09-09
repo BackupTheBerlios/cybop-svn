@@ -11,7 +11,7 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Adapt files in directory "executor/maintainer/"
+        * Adapt files in directory "executor/live/"
         * Continue: Adapt files in directory "applicator/maintain/"
             and the other sub directories of "applicator/" upwards to the top
 

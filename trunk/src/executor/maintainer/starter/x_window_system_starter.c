@@ -53,23 +53,21 @@
 /**
  * Starts up the x window system.
  *
- * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
+ * @param p0 the internal memory array
  */
-void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
+void startup_x_window_system(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup x window system.");
 
-    // The display internal.
-    struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER_MEMORY_MODEL;
+    // The display.
+    // It is a subsumption of xserver, screens, hardware (input devices etc.).
+    struct _XDisplay* d = (struct _XDisplay*) *NULL_POINTER_MEMORY_MODEL;
 
-    // Get display internal.
-    get((void*) &di, p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get display.
+    copy_array_forward((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME);
 
     // Only create display if not existent.
-    if (*di == *NULL_POINTER_MEMORY_MODEL) {
+    if (d == *NULL_POINTER_MEMORY_MODEL) {
 
         // The display name.
         // An example identifying the second screen of the first
@@ -78,9 +76,6 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         //?? TODO: This has to be built dynamically, later on!
         //?? For now, it is just an empty string.
         char* dn = (char*) *NULL_POINTER_MEMORY_MODEL;
-        // The display, which is a subsumption of
-        // xserver, screens, hardware (input devices etc.).
-        struct _XDisplay* d = (struct _XDisplay*) *NULL_POINTER_MEMORY_MODEL;
         // The screen number.
         int* sn = (int*) *NULL_POINTER_MEMORY_MODEL;
         // The screen.
@@ -133,13 +128,13 @@ void startup_x_window_system(void* p0, void* p1, void* p2, void* p3) {
         struct _XGC* gc = (struct _XGC*) *NULL_POINTER_MEMORY_MODEL;
 
         // Allocate x window system internals.
-        allocate((void*) &sn, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &bg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &fg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &w, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &vm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &sn, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        allocate((void*) &cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        allocate((void*) &bg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION);
+        allocate((void*) &fg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION);
+        allocate((void*) &r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        allocate((void*) &w, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        allocate((void*) &vm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION);
 //??        v = (struct XGCValues*) malloc(*XGC_VALUES_X_WINDOW_SYSTEM_TYPE_SIZE);
 
         // Initialise x window system internals.

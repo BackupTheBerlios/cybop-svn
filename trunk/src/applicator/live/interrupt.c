@@ -46,7 +46,7 @@
  * @param p0 the service thread
  * @param p1 the service thread interrupt
  */
-void maintain_interrupting_thread(void* p0, void* p1) {
+void interrupt_thread(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -117,9 +117,9 @@ void maintain_interrupting_thread(void* p0, void* p1) {
  * @param p3 the knowledge memory count
  * @param p4 the knowledge memory size
  */
-void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void apply_interrupt(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Interrupt service.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply interrupt.");
 
     // The service name, abstraction, model, details.
     void** sn = NULL_POINTER_MEMORY_MODEL;
@@ -154,7 +154,7 @@ void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_interrupting_thread((void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
+            interrupt_thread((void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
         }
     }
 
@@ -164,7 +164,7 @@ void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_interrupting_thread((void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
+            interrupt_thread((void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
         }
     }
 
@@ -174,7 +174,7 @@ void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_interrupting_thread((void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
+            interrupt_thread((void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
         }
     }
 
@@ -184,7 +184,7 @@ void maintain_interrupting(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            maintain_interrupting_thread((void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
+            interrupt_thread((void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
         }
     }
 

@@ -36,10 +36,9 @@
  *
  * This is done in the reverse order that the opengl system was started up.
  *
- * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
+ * @param p0 the internal memory array
+ * @param p1 the service thread
+ * @param p2 the service thread interrupt
  */
 void shutdown_opengl(void* p0, void* p1, void* p2, void* p3) {
 
@@ -49,7 +48,7 @@ void shutdown_opengl(void* p0, void* p1, void* p2, void* p3) {
 
     // Shutdown x window system AT LAST.
     // The opengl environment needed its windows to have something to paint on.
-    shutdown_x_window_system(p0, p1, p2, p3);
+    shutdown_x_window_system(p0, p1, p2);
 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif

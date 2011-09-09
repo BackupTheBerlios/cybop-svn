@@ -80,7 +80,7 @@ void apply_shutdown(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_gnu_linux_console(p5, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
+            shutdown_gnu_linux_console(p3, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
         }
     }
 
@@ -90,7 +90,7 @@ void apply_shutdown(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_x_window_system(p5, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
+            shutdown_x_window_system(p3, (void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
         }
     }
 
@@ -100,7 +100,7 @@ void apply_shutdown(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_socket(p5, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
+            shutdown_socket(p3, (void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
         }
     }
 
@@ -110,7 +110,7 @@ void apply_shutdown(void* p0, void* p1, void* p2, void* p3) {
 
         if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            shutdown_socket(p5, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
+            shutdown_socket(p3, (void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
         }
     }
 

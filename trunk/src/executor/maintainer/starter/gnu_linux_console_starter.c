@@ -45,30 +45,24 @@
 /**
  * Starts up the gnu/linux console.
  *
- * @param p0 the internals memory
- * @param p1 the knowledge memory
- * @param p2 the knowledge memory count
- * @param p3 the knowledge memory size
+ * @param p0 the internal memory array
  */
-void startup_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
+void startup_gnu_linux_console(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup gnu/linux console.");
 
-    // The gnu/linux console input- and output stream internal.
-    FILE** ipi = (FILE**) NULL_POINTER_MEMORY_MODEL;
-    FILE** opi = (FILE**) NULL_POINTER_MEMORY_MODEL;
+    // The gnu/linux console input- and output stream.
+    FILE* ip = (FILE*) *NULL_POINTER_MEMORY_MODEL;
+    FILE* op = (FILE*) *NULL_POINTER_MEMORY_MODEL;
 
-    // Get gnu/linux console internals.
-    get((void*) &ipi, p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &opi, p0, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get gnu/linux console input- and output stream.
+    copy_array_forward((void*) &ip, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME);
+    copy_array_forward((void*) &op, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME);
 
     // Only create new gnu/linux console resources if both,
     // input- AND output stream internal are null.
-    if ((*ipi == *NULL_POINTER_MEMORY_MODEL) && (*opi == *NULL_POINTER_MEMORY_MODEL)) {
+    if ((ip == *NULL_POINTER_MEMORY_MODEL) && (op == *NULL_POINTER_MEMORY_MODEL)) {
 
-        // The gnu/linux console input- and output stream.
-        FILE* ip = (FILE*) *NULL_POINTER_MEMORY_MODEL;
-        FILE* op = (FILE*) *NULL_POINTER_MEMORY_MODEL;
         // The old termios settings.
         struct termios* to = (struct termios*) *NULL_POINTER_MEMORY_MODEL;
         // The new termios settings.
@@ -80,19 +74,29 @@ void startup_gnu_linux_console(void* p0, void* p1, void* p2, void* p3) {
 
 /*??
         // Allocate input- and output stream.
-        allocate((void*) &ip, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &op, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        //
+        // CAUTION! An allocation is NOT necessary, as long as
+        // the standard input- and output streams are used below.
+        allocate((void*) &ip, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        allocate((void*) &op, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 */
         // Allocate termios settings.
         to = (struct termios*) malloc(*INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE);
         tn = (struct termios*) malloc(*INPUT_OUTPUT_SYSTEM_TERMINAL_TYPE_SIZE);
+        // Allocate character buffer count, size.
+        allocate_model((void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        allocate_model((void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
-        // Allocate character buffer.
+        // Initialise character buffer count, size.
         //
         // CAUTION! Its size is initialised with three,
         // because longer escape sequences are not known.
         // Example: An up arrow delivers 'ESC' + '[' + 'A'
-        allocate_model((void*) &b, (void*) &bc, (void*) &bs, (void*) NUMBER_3_INTEGER_MEMORY_MODEL, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        copy_integer(bc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        copy_integer(bs, (void*) NUMBER_3_INTEGER_MEMORY_MODEL);
+
+        // Allocate character buffer.
+        allocate_model((void*) &b, (void*) bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         // Initialise gnu/linux console internals.
         //

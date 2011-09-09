@@ -50,25 +50,26 @@
  *
  * This is done in the reverse order the service was started up.
  *
- * @param p0 the internals memory
- * @param p1 the socket service thread
- * @param p2 the socket service thread interrupt
+ * @param p0 the internal memory array
+ * @param p1 the service thread
+ * @param p2 the service thread interrupt
  */
 void shutdown_x_window_system(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Shutdown x window system.");
 
-    // The display internal.
-    struct _XDisplay** di = (struct _XDisplay**) NULL_POINTER_MEMORY_MODEL;
+    // The display.
+    // It is a subsumption of xserver, screens, hardware (input devices etc.).
+    struct _XDisplay* d = (struct _XDisplay*) *NULL_POINTER_MEMORY_MODEL;
 
-    // Get display internal.
-    get((void*) &di, p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get display.
+    copy_array_forward((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME);
 
     // Only destroy display if existent.
-    if (*di != *NULL_POINTER_MEMORY_MODEL) {
+    if (d != *NULL_POINTER_MEMORY_MODEL) {
 
         // Interrupt x window system service thread.
-        maintain_interrupting_thread(p1, p2);
+        interrupt_thread(p1, p2);
 
         // The display name.
         // An example identifying the second screen of the first
@@ -76,91 +77,85 @@ void shutdown_x_window_system(void* p0, void* p1, void* p2) {
         // char* dn = "earth.cybop.net:0.1"
         //?? TODO: This has to be built dynamically, later on!
         //?? For now, it is just an empty string.
-        char** dn = (char**) NULL_POINTER_MEMORY_MODEL;
-        // The display, which is a subsumption of
-        // xserver, screens, hardware (input devices etc.).
-        struct _XDisplay** d = (struct _XDisplay**) NULL_POINTER_MEMORY_MODEL;
+        char* dn = (char*) *NULL_POINTER_MEMORY_MODEL;
         // The screen number.
-        int** sn = (int**) NULL_POINTER_MEMORY_MODEL;
+        int* sn = (int*) *NULL_POINTER_MEMORY_MODEL;
         // The screen.
-//??        Screen** s = (Screen**) NULL_POINTER_MEMORY_MODEL;
+//??        Screen* s = (Screen*) *NULL_POINTER_MEMORY_MODEL;
         // The default colourmap id for allocation on the specified screen.
         // Most routine allocations of colour should be made out of this colormap.
-        int** cm = (int**) NULL_POINTER_MEMORY_MODEL;
+        int* cm = (int*) *NULL_POINTER_MEMORY_MODEL;
         // The background pixel values.
-        unsigned long** bg = (unsigned long**) NULL_POINTER_MEMORY_MODEL;
+        unsigned long* bg = (unsigned long*) *NULL_POINTER_MEMORY_MODEL;
         // The foreground pixel values.
-        unsigned long** fg = (unsigned long**) NULL_POINTER_MEMORY_MODEL;
+        unsigned long* fg = (unsigned long*) *NULL_POINTER_MEMORY_MODEL;
         // The top-level root window for the given display and screen.
         // This is sometimes called the root window of the window manager.
         // Remember, CYBOI itself IS the window manager.
-        int** r = (int**) NULL_POINTER_MEMORY_MODEL;
+        int* r = (int*) *NULL_POINTER_MEMORY_MODEL;
         // The menu border bottom graphic context.
-        struct _XGC** gc_menu_border_bottom = (struct _XGC**) NULL_POINTER_MEMORY_MODEL;
+        struct _XGC* gc_menu_border_bottom = (struct _XGC*) *NULL_POINTER_MEMORY_MODEL;
         // The window.
-        int** w = (int**) NULL_POINTER_MEMORY_MODEL;
+        int* w = (int*) *NULL_POINTER_MEMORY_MODEL;
         // The value mask for the graphic context.
         // It specifies which components in the graphic context are to be set
         // using the information in the specified values structure.
         // This argument is the bitwise inclusive OR of zero or more of the
         // valid graphic context component mask bits.
-        unsigned long** vm = (unsigned long**) NULL_POINTER_MEMORY_MODEL;
+        unsigned long* vm = (unsigned long*) *NULL_POINTER_MEMORY_MODEL;
         // The values as specified by the value mask.
-        XGCValues** v = (XGCValues**) NULL_POINTER_MEMORY_MODEL;
+        XGCValues* v = (XGCValues*) *NULL_POINTER_MEMORY_MODEL;
         // The graphic context. Each graphic element needs one.
         // It can be used with any destination drawable (window or pixmap)
         // having the same root and depth as the specified drawable.
         // Use with other drawables results in a BadMatch error.
-        struct _XGC** gc = (struct _XGC**) NULL_POINTER_MEMORY_MODEL;
+        struct _XGC* gc = (struct _XGC*) *NULL_POINTER_MEMORY_MODEL;
         // The interrupt flag.
         int* ir = (int*) *NULL_POINTER_MEMORY_MODEL;
 
         // Get x window system internals.
-        get((void*) &dn, p0, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &d, p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &sn, p0, (void*) X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-//??        get((void*) &s, p0, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &cm, p0, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &bg, p0, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &fg, p0, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &r, p0, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &gc_menu_border_bottom, p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_MENU_BORDER_BOTTOM_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &w, p0, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &vm, p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &v, p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-        get((void*) &gc, p0, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-//??        get((void*) &ir, p0, (void*) X_WINDOW_SYSTEM_INTERRUPT_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &dn, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_DISPLAY_NAME_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &sn, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_SCREEN_NUMBER_INTERNAL_MEMORY_MEMORY_NAME);
+//??        copy_array_forward((void*) &s, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_SCREEN_INTERNAL);
+        copy_array_forward((void*) &cm, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_COLOUR_MAP_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &bg, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_BACKGROUND_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &fg, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_FOREGROUND_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &r, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_ROOT_WINDOW_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &gc_menu_border_bottom, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_MENU_BORDER_BOTTOM_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &w, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_WINDOW_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &vm, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUE_MASK_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &v, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_VALUES_INTERNAL_MEMORY_MEMORY_NAME);
+        copy_array_forward((void*) &gc, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_GRAPHIC_CONTEXT_INTERNAL_MEMORY_MEMORY_NAME);
+//??        copy_array_forward((void*) &ir, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_INTERRUPT_INTERNAL);
 
 /*??
-    XFreeGC(*d, *gc_menu_font);
-    XFreeGC(*d, *gc_menu_border_bottom);
-    XFreeGC(*d, *gc_menu_border_top);
-    XFreeGC(*d, *gc_menu);
+    XFreeGC(d, gc_menu_font);
+    XFreeGC(d, gc_menu_border_bottom);
+    XFreeGC(d, gc_menu_border_top);
+    XFreeGC(d, gc_menu);
 */
 
         // Free x window system internals.
-//??        XFreeGC(*d, *gc);
+//??        XFreeGC(d, gc);
 
-//??        XDestroyWindow(*d, **w);
+//??        XDestroyWindow(d, *w);
 
-//??        XCloseDisplay(*d);
+//??        XCloseDisplay(d);
 
         // Destroy x window system internals.
-        // CAUTION! Do NOT use references &, because variables are **
-        // and *&variable equals the variable alone.
         // CAUTION! Use descending order!
         // Example: The values (v) are destroyed BEFORE the value mask (vm)
         // attributes, since v might still reference vm internally.
-        deallocate((void*) ir, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-//??        free(*v);
-        deallocate((void*) vm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
-        deallocate((void*) w, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-//??        deallocate((void*) f, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        deallocate((void*) r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        deallocate((void*) fg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
-        deallocate((void*) bg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION_COUNT);
-        deallocate((void*) cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        deallocate((void*) sn, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        deallocate((void*) &ir, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+//??        free(v);
+        deallocate((void*) &vm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION);
+        deallocate((void*) &w, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+//??        deallocate((void*) &f, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        deallocate((void*) &r, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        deallocate((void*) &fg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION);
+        deallocate((void*) &bg, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) UNSIGNED_LONG_MEMORY_ABSTRACTION);
+        deallocate((void*) &cm, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        deallocate((void*) &sn, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
     } else {
 

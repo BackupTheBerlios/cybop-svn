@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-09-09  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Adapt files in directories "executor/maintainer/" and "applicator/maintain/"
+
 2011-08-28  Christian Heller  <christian.heller@tuxtax.de>
 
         * Adapt files of "applicator/modify/" and other directories

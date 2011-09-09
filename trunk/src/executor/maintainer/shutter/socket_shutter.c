@@ -41,115 +41,92 @@
  *
  * This is done in the reverse order the service was started up.
  *
- * @param p0 the internals memory
- * @param p1 the base internal
- * @param p2 the socket service thread
- * @param p3 the socket service thread interrupt
+ * @param p0 the internal memory array
+ * @param p1 the service thread
+ * @param p2 the service thread interrupt
+ * @param p3 the base internal
  */
 void shutdown_socket(void* p0, void* p1, void* p2, void* p3) {
 
-    if (p1 != *NULL_POINTER_MEMORY_MODEL) {
+    if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
-        int* base = (int*) p1;
+        int* base = (int*) p3;
 
         log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Shutdown socket.");
 
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
-        // The socket internal of this system.
-        int** si = (int**) NULL_POINTER_MEMORY_MODEL;
+        // The socket of this system.
+        int* s = (int*) *NULL_POINTER_MEMORY_MODEL;
 
-        // Get socket internal of this system.
+        // Get socket of this system.
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &si, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &s, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
 
-        if (*si != *NULL_POINTER_MEMORY_MODEL) {
+        if (s != *NULL_POINTER_MEMORY_MODEL) {
 
             // Interrupt ALL socket service threads of this system.
-            maintain_interrupting_thread(p2, p3);
+            interrupt_thread(p1, p2);
 
             // The socket address (local, ipv4, ipv6) of this system.
-            void** a = NULL_POINTER_MEMORY_MODEL;
+            void* a = *NULL_POINTER_MEMORY_MODEL;
             // The communication partner socket address (local, ipv4, ipv6).
-            void** pa = NULL_POINTER_MEMORY_MODEL;
+            void* pa = *NULL_POINTER_MEMORY_MODEL;
             // The socket address size of this system.
-            void** as = NULL_POINTER_MEMORY_MODEL;
+            void* as = *NULL_POINTER_MEMORY_MODEL;
             // The communication partner socket address size.
-            void** pas = NULL_POINTER_MEMORY_MODEL;
-            // The socket of this system.
-            int** s = (int**) NULL_POINTER_MEMORY_MODEL;
+            void* pas = *NULL_POINTER_MEMORY_MODEL;
             // The communication partner socket.
-            int** ps = (int**) NULL_POINTER_MEMORY_MODEL;
-/*??
-            // The signal ids.
-            void** id = NULL_POINTER_MEMORY_MODEL;
-            void** idc = NULL_POINTER_MEMORY_MODEL;
-            void** ids = NULL_POINTER_MEMORY_MODEL;
-*/
+            int* ps = (int*) *NULL_POINTER_MEMORY_MODEL;
             // The character buffer being used in the thread procedure receiving messages via socket.
-            void** b = NULL_POINTER_MEMORY_MODEL;
-            void** bc = NULL_POINTER_MEMORY_MODEL;
-            void** bs = NULL_POINTER_MEMORY_MODEL;
+            void* b = *NULL_POINTER_MEMORY_MODEL;
+            void* bc = *NULL_POINTER_MEMORY_MODEL;
+            void* bs = *NULL_POINTER_MEMORY_MODEL;
 
             // Get socket address of this system.
             i = *base + *SOCKET_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &a, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            copy_array_forward((void*) &a, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             // Get communication partner socket address.
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &pa, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            copy_array_forward((void*) &pa, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             // Get socket address size of this system.
             i = *base + *SOCKET_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &as, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            copy_array_forward((void*) &as, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             // Get communication partner socket address size.
             i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &pas, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-            // Get socket of this system.
-            i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &s, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            copy_array_forward((void*) &pas, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             // Get communication partner socket.
             i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &ps, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            copy_array_forward((void*) &ps, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             // Get character buffer.
             i = *base + *SOCKET_CHARACTER_BUFFER_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &b, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            copy_array_forward((void*) &b, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             i = *base + *SOCKET_CHARACTER_BUFFER_COUNT_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &bc, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+            copy_array_forward((void*) &bc, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-            get((void*) &bs, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-/*??
-            // Get signal ids.
-            get((void*) &id, p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-            get((void*) &idc, p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-            get((void*) &ids, p0, (void*) SERVER_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-*/
+            copy_array_forward((void*) &bs, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
 
             // Close socket of this system.
-            close(**s);
+            close(*s);
             // Close communication partner socket.
-//??            close(**ps);
+//??            close(*ps);
 
-/*??
-            // Destroy signal ids.
-            deallocate((void*) id, (void*) ids, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-            deallocate(idc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-            deallocate(ids, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-*/
             // Deallocate character buffer.
-            deallocate((void*) b, *bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
-            deallocate((void*) bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-            deallocate((void*) bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &b, bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
+            deallocate((void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+            deallocate((void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
             // Deallocate socket of this system.
-            deallocate((void*) s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
             // Deallocate communication partner socket.
-            deallocate((void*) ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
             // Deallocate socket address of this system.
-            free(*a);
+            free(a);
             // Deallocate communication partner socket address.
-            free(*pa);
+            free(pa);
             // Deallocate socket address size of this system.
-            deallocate((void*) as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
             // Deallocate communication partner socket address size.
-            deallocate((void*) pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+            deallocate((void*) &pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         } else {
 

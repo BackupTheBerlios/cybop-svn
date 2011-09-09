@@ -36,12 +36,9 @@
 /**
  * Starts up the opengl system.
  *
- * @param p0 the internals memory
- * @param p1 the knowledge
- * @param p2 the knowledge count
- * @param p3 the knowledge size
+ * @param p0 the internal memory array
  */
-void startup_opengl(void* p0, void* p1, void* p2, void* p3) {
+void startup_opengl(void* p0) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Startup opengl.");
 
@@ -49,7 +46,7 @@ void startup_opengl(void* p0, void* p1, void* p2, void* p3) {
 
     // Startup x window system AT FIRST.
     // The opengl environment needs its windows to have something to paint on.
-    startup_x_window_system(p0, p1, p2, p3);
+    startup_x_window_system(p0);
 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif

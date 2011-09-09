@@ -63,7 +63,7 @@
  * @param p2 the namespace model
  * @param p3 the namespace model count
  */
-void startup_socket_memorise_getting_namespace(void* p0, void* p1, void* p2, void* p3) {
+void startup_socket_get_namespace(void* p0, void* p1, void* p2, void* p3) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -80,7 +80,7 @@ void startup_socket_memorise_getting_namespace(void* p0, void* p1, void* p2, voi
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_all_array((void*) &r, p2, (void*) LOCAL_NAMESPACE_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) LOCAL_NAMESPACE_CYBOL_MODEL_COUNT);
+                compare_integer_equal((void*) &r, p2, (void*) LOCAL_NAMESPACE_CYBOL_MODEL);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -91,7 +91,7 @@ void startup_socket_memorise_getting_namespace(void* p0, void* p1, void* p2, voi
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_all_array((void*) &r, p2, (void*) INET_NAMESPACE_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) INET_NAMESPACE_CYBOL_MODEL_COUNT);
+                compare_integer_equal((void*) &r, p2, (void*) INET_NAMESPACE_CYBOL_MODEL);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -102,7 +102,7 @@ void startup_socket_memorise_getting_namespace(void* p0, void* p1, void* p2, voi
 
             if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                compare_all_array((void*) &r, p2, (void*) INET6_NAMESPACE_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p3, (void*) INET6_NAMESPACE_CYBOL_MODEL_COUNT);
+                compare_integer_equal((void*) &r, p2, (void*) INET6_NAMESPACE_CYBOL_MODEL);
 
                 if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -147,7 +147,7 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_all_array((void*) &r, p1, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT);
+            compare_integer_equal((void*) &r, p1, (void*) STREAM_COMMUNICATION_STYLE_CYBOL_MODEL);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -157,7 +157,7 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_all_array((void*) &r, p1, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT);
+            compare_integer_equal((void*) &r, p1, (void*) DATAGRAM_COMMUNICATION_STYLE_CYBOL_MODEL);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -167,7 +167,7 @@ void startup_socket_get_style(void* p0, void* p1, void* p2) {
 
         if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-            compare_all_array((void*) &r, p1, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL_COUNT);
+            compare_integer_equal((void*) &r, p1, (void*) RAW_COMMUNICATION_STYLE_CYBOL_MODEL);
 
             if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
@@ -200,107 +200,98 @@ void startup_socket_get_host_address(void* p0, void* p1, void* p2, void* p3) {
 
         int* an = (int*) p3;
 
-        if (p2 != *NULL_POINTER_MEMORY_MODEL) {
+        if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* amc = (int*) p2;
+            struct in_addr* a4 = (struct in_addr*) *NULL_POINTER_MEMORY_MODEL;
+            struct in6_addr* a6 = (struct in6_addr*) *NULL_POINTER_MEMORY_MODEL;
 
-            if (p0 != *NULL_POINTER_MEMORY_MODEL) {
+            if (*an == AF_INET) {
 
-                struct in_addr* a4 = (struct in_addr*) *NULL_POINTER_MEMORY_MODEL;
-                struct in6_addr* a6 = (struct in6_addr*) *NULL_POINTER_MEMORY_MODEL;
+                a4 = (struct in_addr*) p0;
 
-                if (*an == AF_INET) {
+            } else if (*an == AF_INET6) {
 
-                    a4 = (struct in_addr*) p0;
+                a6 = (struct in6_addr*) p0;
+            }
 
-                } else if (*an == AF_INET6) {
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Startup socket get host address.");
 
-                    a6 = (struct in6_addr*) p0;
-                }
+            // The comparison result.
+            int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-                log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Startup socket get host address.");
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                // The comparison result.
-                int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                compare_integer_equal((void*) &r, p1, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL);
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_all_array((void*) &r, p1, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) LOOPBACK_ADDRESS_CYBOL_MODEL_COUNT);
+                    if (*an == AF_INET) {
 
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                        (*a4).s_addr = INADDR_LOOPBACK;
 
-                        if (*an == AF_INET) {
+                    } else if (*an == AF_INET6) {
 
-                            (*a4).s_addr = INADDR_LOOPBACK;
-
-                        } else if (*an == AF_INET6) {
-
-                            *a6 = in6addr_loopback;
-                        }
+                        *a6 = in6addr_loopback;
                     }
                 }
+            }
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    compare_all_array((void*) &r, p1, (void*) ANY_ADDRESS_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p2, (void*) ANY_ADDRESS_CYBOL_MODEL_COUNT);
+                compare_integer_equal((void*) &r, p1, (void*) ANY_ADDRESS_CYBOL_MODEL);
 
-                    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+                if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                        if (*an == AF_INET) {
+                    if (*an == AF_INET) {
 
-                            (*a4).s_addr = INADDR_ANY;
+                        (*a4).s_addr = INADDR_ANY;
 
-                        } else if (*an == AF_INET6) {
+                    } else if (*an == AF_INET6) {
 
-                            *a6 = in6addr_any;
-                        }
+                        *a6 = in6addr_any;
                     }
                 }
+            }
 
-                if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+            if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-                    // If none of the above address models was found, then the given
-                    // address is supposed to be the host address directly.
+                // If none of the above address models was found, then the given
+                // address is supposed to be the host address directly.
 
-                    // The terminated address model.
-                    void* s = *NULL_POINTER_MEMORY_MODEL;
-                    void* sc = *NULL_POINTER_MEMORY_MODEL;
-                    void* ss = *NULL_POINTER_MEMORY_MODEL;
+                // The terminated address model.
+                void* s = *NULL_POINTER_MEMORY_MODEL;
+                void* sc = *NULL_POINTER_MEMORY_MODEL;
+                void* ss = *NULL_POINTER_MEMORY_MODEL;
 
-                    // Allocate terminated address model.
-                    allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                // Allocate terminated address model.
+                allocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
 
-                    // Encode wide character name into multibyte character array.
-                    encode_utf_8_unicode_character_vector((void*) &s, sc, ss, p1, p2);
+                // Encode wide character name into multibyte character array.
+                encode_utf_8_unicode_character_vector((void*) &s, sc, ss, p1, p2);
 
-                    if (*((int*) ss) <= *((int*) sc)) {
+                if (*((int*) ss) <= *((int*) sc)) {
 
-                        // Increase character array size to have place for the termination character.
-                        *((int*) ss) = *((int*) sc) + *NUMBER_1_INTEGER_MEMORY_MODEL;
+                    // Increase character array size to have place for the termination character.
+                    *((int*) ss) = *((int*) sc) + *NUMBER_1_INTEGER_MEMORY_MODEL;
 
-                        // Reallocate terminated file name as multibyte character array.
-                        reallocate_array((void*) &s, sc, ss, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
-                    }
-
-                    // Add null termination character to terminated file name.
-                    overwrite_array((void*) &s, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, sc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, sc, ss);
-
-                    // Convert uint16_t integer hostshort from host byte order
-                    // to network byte order.
-                    inet_pton(*an, (char*) s, p0);
-
-                    // Deallocate terminated address model.
-                    deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
+                    // Reallocate terminated file name as multibyte character array.
+                    reallocate_array((void*) &s, sc, ss, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
                 }
 
-            } else {
+                // Add null termination character to terminated file name.
+                overwrite_array((void*) &s, (void*) NULL_CONTROL_ASCII_CHARACTER_CODE_MODEL, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, sc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, sc, ss);
 
-                log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get startup socket host address. The host address is null.");
+                // Convert uint16_t integer hostshort from host byte order
+                // to network byte order.
+                inet_pton(*an, (char*) s, p0);
+
+                // Deallocate terminated address model.
+                deallocate_model((void*) &s, (void*) &sc, (void*) &ss, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) CHARACTER_MEMORY_ABSTRACTION, (void*) CHARACTER_MEMORY_ABSTRACTION_COUNT);
             }
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get startup socket host address. The address model count is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not get startup socket host address. The host address is null.");
         }
 
     } else {
@@ -539,23 +530,19 @@ void startup_socket_initialise_ipv6_socket_address(void* p0, void* p1, void* p2)
 }
 
 /**
- * Starts up socket.
+ * Starts up the socket.
  *
- * @param p0 the internal memory
+ * @param p0 the internal memory array
  * @param p1 the namespace model
  * @param p2 the namespace model count
  * @param p3 the style model
  * @param p4 the style model count
- * @param p5 the socket file name or host address model, depending on the socket type (local, ipv4, ipv6)
+ * @param p5 the socket file name or host address model (depending on the socket type: local, ipv4, ipv6)
  * @param p6 the socket file name or host address model count
  * @param p7 the port model
  * @param p8 the base internal
- * @param p9 the knowledge memory
- * @param p10 the knowledge memory count
- * @param p11 the knowledge memory size
  */
-void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
-    void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
     if (p8 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -573,9 +560,11 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         struct in_addr ha4;
         // The ipv6 host address of this system.
         struct in6_addr ha6;
+        //
         // CAUTION! Do use pointers for the addresses declared below,
         // and not only the structure as type, so that the different
         // socket addresses can be processed uniformly below!
+        //
         // The local socket address of this system.
         struct sockaddr_un* la = (struct sockaddr_un*) *NULL_POINTER_MEMORY_MODEL;
         // The ipv4 internet socket address of this system.
@@ -596,12 +585,6 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int* s = (int*) *NULL_POINTER_MEMORY_MODEL;
         // The communication partner socket.
         int* ps = (int*) *NULL_POINTER_MEMORY_MODEL;
-/*??
-        // The signal ids.
-        void* id = *NULL_POINTER_MEMORY_MODEL;
-        int* idc = (int*) *NULL_POINTER_MEMORY_MODEL;
-        int* ids = (int*) *NULL_POINTER_MEMORY_MODEL;
-*/
         // The character buffer being used in the thread procedure receiving messages via socket.
         void* b = *NULL_POINTER_MEMORY_MODEL;
         int* bc = (int*) *NULL_POINTER_MEMORY_MODEL;
@@ -612,7 +595,7 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         int r = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
         // Get socket- and address namespace.
-        startup_socket_memorise_getting_namespace((void*) &sn, (void*) &an, p1, p2);
+        startup_socket_get_namespace((void*) &sn, (void*) &an, p1, p2);
         // Get socket communication style.
         startup_socket_get_style((void*) &st, p3, p4);
 
@@ -627,22 +610,19 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         }
 
         // Allocate socket address size of this system.
-        allocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &as, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
         // Allocate communication partner socket address size.
-        allocate((void*) &pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &pas, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
         // Allocate socket of this system.
-        allocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &s, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
         // Allocate communication partner socket.
-        allocate((void*) &ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-/*??
-        // Allocate signal ids.
-        allocate((void*) &idc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &ids, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &id, (void*) ids, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-*/
+        allocate((void*) &ps, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         // Initialise socket address size of this system.
+        copy_integer(as, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
         // Initialise communication partner socket address size.
+        copy_integer(pas, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
         if (an == AF_LOCAL) {
 
             // CAUTION! The following line CANNOT be used:
@@ -661,18 +641,20 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             // With the known type "short int" of the "sun_family" field and
             // a fixed size "108" of the "sun_path" field, the overall size of
             // the "sockaddr_un" structure can be calculated as sum.
-            *as = *SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE + *NUMBER_108_INTEGER_MEMORY_MODEL;
-            *pas = *SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE + *NUMBER_108_INTEGER_MEMORY_MODEL;
+            add_integer_to_integer(as, (void*) SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
+            add_integer_to_integer(as, (void*) NUMBER_108_INTEGER_MEMORY_MODEL);
+            add_integer_to_integer(pas, (void*) SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
+            add_integer_to_integer(pas, (void*) NUMBER_108_INTEGER_MEMORY_MODEL);
 
         } else if (an == AF_INET) {
 
-            *as = *INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
-            *pas = *INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
+            add_integer_to_integer(as, (void*) INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+            add_integer_to_integer(pas, (void*) INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
 
         } else if (an == AF_INET6) {
 
-            *as = *INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
-            *pas = *INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE;
+            add_integer_to_integer(as, (void*) INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+            add_integer_to_integer(pas, (void*) INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
         }
 
         // Allocate socket address of this system.
@@ -709,28 +691,22 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
             startup_socket_initialise_ipv6_socket_address((void*) &ia6, (void*) &ha6, p7);
         }
 
-/*??
-        // Initialise signal ids.
-        *idc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        *ids = *NUMBER_0_INTEGER_MEMORY_MODEL;
-*/
-
         // Allocate character buffer count and size.
-        allocate((void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-        allocate((void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &bc, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
+        allocate((void*) &bs, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) INTEGER_MEMORY_ABSTRACTION);
 
         // Initialise character buffer count, size.
         // A possible initial size is 2048, which should
         // suffice for transferring standard data over tcp/ip.
         // Another possible size could be 8192.
-        *bc = *NUMBER_0_INTEGER_MEMORY_MODEL;
-        *bs = *NUMBER_8192_INTEGER_MEMORY_MODEL;
+        copy_integer(bc, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+        copy_integer(bs, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
         // Allocate character buffer.
         //
         // CAUTION! Allocate character buffer only AFTER
         // the buffer size has been initialised above!
-        allocate((void*) &b, (void*) bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+        allocate((void*) &b, (void*) bs, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
         // Set socket address of this system.
         // Set communication partner socket address.
@@ -775,13 +751,6 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4,
         copy_array_forward(p0, (void*) &bc, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
         i = *base + *SOCKET_CHARACTER_BUFFER_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
         copy_array_forward(p0, (void*) &bs, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
-
-/*??
-        // Set signal ids.
-        overwrite_array(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_INTERNAL, (void*) &id, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        overwrite_array(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_COUNT_INTERNAL, (void*) &idc, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-        overwrite_array(p0, (void*) TCP_CLIENT_SOCKET_SIGNAL_IDS_SIZE_INTERNAL, (void*) &ids, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION);
-*/
 
         // Initialise error number.
         // It is a global variable/ function and other operations
