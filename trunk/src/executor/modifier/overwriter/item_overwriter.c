@@ -51,7 +51,7 @@
  * @param p3 the count
  * @param p4 the destination item index
  * @param p5 the source array index
- * @param p6 the shrink flag
+ * @param p6 the adjust flag
  * @param p7 the destination item element index
  */
 void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
@@ -115,7 +115,7 @@ void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, vo
  * @param p3 the count
  * @param p4 the destination index
  * @param p5 the source index
- * @param p6 the shrink flag
+ * @param p6 the adjust flag
  */
 void overwrite_item(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 

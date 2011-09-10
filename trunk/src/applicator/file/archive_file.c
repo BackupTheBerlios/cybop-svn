@@ -23,10 +23,11 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ARCHIVING_FILER_SOURCE
-#define ARCHIVING_FILER_SOURCE
+#ifndef ARCHIVE_FILE_SOURCE
+#define ARCHIVE_FILE_SOURCE
 
 #include <unistd.h>
+
 #include "../../applicator/runner/executing_runner.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -42,84 +43,59 @@
 /**
  * Archives the given data into a file.
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the knowledge memory
- * @param p3 the knowledge memory count
+ * Expected parametres:
+ * - result (required): the knowledge model in which the comparison result is stored
+ * - left (required): the left operand of the comparison
+ * - right (required): the right operand of the comparison
+ *
+ * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
+ * @param p1 the parametres array count
  */
-void file_archiving(void* p0, void* p1, void* p2, void* p3) {
+void apply_archive_file(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Archive data into a file.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply archive file.");
 
-    // The create name, abstraction, model, details.
-    void** createn = NULL_POINTER_MEMORY_MODEL;
-    void** createnc = NULL_POINTER_MEMORY_MODEL;
-    void** createns = NULL_POINTER_MEMORY_MODEL;
-    void** createa = NULL_POINTER_MEMORY_MODEL;
-    void** createac = NULL_POINTER_MEMORY_MODEL;
-    void** createas = NULL_POINTER_MEMORY_MODEL;
-    int** createm = (int**) NULL_POINTER_MEMORY_MODEL;
-    void** createmc = NULL_POINTER_MEMORY_MODEL;
-    void** createms = NULL_POINTER_MEMORY_MODEL;
-    void** created = NULL_POINTER_MEMORY_MODEL;
-    void** createdc = NULL_POINTER_MEMORY_MODEL;
-    void** createds = NULL_POINTER_MEMORY_MODEL;
-    // The update name, abstraction, model, details.
-    void** updaten = NULL_POINTER_MEMORY_MODEL;
-    void** updatenc = NULL_POINTER_MEMORY_MODEL;
-    void** updatens = NULL_POINTER_MEMORY_MODEL;
-    void** updatea = NULL_POINTER_MEMORY_MODEL;
-    void** updateac = NULL_POINTER_MEMORY_MODEL;
-    void** updateas = NULL_POINTER_MEMORY_MODEL;
-    int** updatem = (int**) NULL_POINTER_MEMORY_MODEL;
-    void** updatemc = NULL_POINTER_MEMORY_MODEL;
-    void** updatems = NULL_POINTER_MEMORY_MODEL;
-    void** updated = NULL_POINTER_MEMORY_MODEL;
-    void** updatedc = NULL_POINTER_MEMORY_MODEL;
-    void** updateds = NULL_POINTER_MEMORY_MODEL;
-    // The bzip2 name, abstraction, model, details.
-    void** bzip2n = NULL_POINTER_MEMORY_MODEL;
-    void** bzip2nc = NULL_POINTER_MEMORY_MODEL;
-    void** bzip2ns = NULL_POINTER_MEMORY_MODEL;
-    void** bzip2a = NULL_POINTER_MEMORY_MODEL;
-    void** bzip2ac = NULL_POINTER_MEMORY_MODEL;
-    void** bzip2as = NULL_POINTER_MEMORY_MODEL;
-    int** bzip2m = (int**) NULL_POINTER_MEMORY_MODEL;
-    void** bzip2mc = NULL_POINTER_MEMORY_MODEL;
-    void** bzip2ms = NULL_POINTER_MEMORY_MODEL;
-    void** bzip2d = NULL_POINTER_MEMORY_MODEL;
-    void** bzip2dc = NULL_POINTER_MEMORY_MODEL;
-    void** bzip2ds = NULL_POINTER_MEMORY_MODEL;
+    // The create part.
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    // The update part.
+    void* u = *NULL_POINTER_MEMORY_MODEL;
+    // The bzip2 part.
+    void* b = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get create option.
-    get_universal_compound_element_by_name(
-        (void*) &createn, (void*) &createnc, (void*) &createns,
-        (void*) &createa, (void*) &createac, (void*) &createas,
-        (void*) &createm, (void*) &createmc, (void*) &createms,
-        (void*) &created, (void*) &createdc, (void*) &createds,
-        p0, p1,
-        (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
+    // The create part model.
+    void* cm = *NULL_POINTER_MEMORY_MODEL;
+    // The update part model.
+    void* um = *NULL_POINTER_MEMORY_MODEL;
+    // The bzip2 part model.
+    void* bm = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get update option.
-    get_universal_compound_element_by_name(
-        (void*) &updaten, (void*) &updatenc, (void*) &updatens,
-        (void*) &updatea, (void*) &updateac, (void*) &updateas,
-        (void*) &updatem, (void*) &updatemc, (void*) &updatems,
-        (void*) &updated, (void*) &updatedc, (void*) &updateds,
-        p0, p1,
-        (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
+    // The create part model data.
+    void* cmd = *NULL_POINTER_MEMORY_MODEL;
+    // The update part model data.
+    void* umd = *NULL_POINTER_MEMORY_MODEL;
+    // The bzip2 part model data.
+    void* bmd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get bzip2 option.
-    get_universal_compound_element_by_name(
-        (void*) &bzip2n, (void*) &bzip2nc, (void*) &bzip2ns,
-        (void*) &bzip2a, (void*) &bzip2ac, (void*) &bzip2as,
-        (void*) &bzip2m, (void*) &bzip2mc, (void*) &bzip2ms,
-        (void*) &bzip2d, (void*) &bzip2dc, (void*) &bzip2ds,
-        p0, p1,
-        (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
+    // Get create part.
+    get_name_array((void*) &c, p0, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get update part.
+    get_name_array((void*) &u, p0, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get bzip2 part.
+    get_name_array((void*) &b, p0, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, p1);
+
+    // Get create part model.
+    copy_array_forward((void*) &cm, c, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get update part model.
+    copy_array_forward((void*) &um, u, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get bzip2 part model.
+    copy_array_forward((void*) &bm, b, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+
+    // Get create part model data.
+    copy_array_forward((void*) &cmd, cm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get update part model data.
+    copy_array_forward((void*) &umd, um, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get bzip2 part model data.
+    copy_array_forward((void*) &bmd, bm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // The arguments vector.
     void* arg = *NULL_POINTER_MEMORY_MODEL;
@@ -127,38 +103,47 @@ void file_archiving(void* p0, void* p1, void* p2, void* p3) {
     int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate arguments vector.
-    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Append command.
-    overwrite_array((void*) &arg, (void*) ARCHIVE_UNIX_COMMAND_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) ARCHIVE_UNIX_COMMAND_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
+    overwrite_array((void*) &arg, (void*) ARCHIVE_UNIX_COMMAND_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) ARCHIVE_UNIX_COMMAND_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
 
-    if (*createm != *NULL_POINTER_MEMORY_MODEL) {
+    // The comparison result.
+    int r = *FALSE_BOOLEAN_MEMORY_MODEL;
 
-        if (**createm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
+
+        compare_integer_unequal((void*) &r, (void*) *cmd, (void*) FALSE_BOOLEAN_MEMORY_MODEL);
+
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Append create option.
-            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
-            overwrite_array((void*) &arg, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
+            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
+            overwrite_array((void*) &arg, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) CREATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
         }
     }
 
-    if (*updatem != *NULL_POINTER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        if (**updatem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+        compare_integer_unequal((void*) &r, (void*) *umd, (void*) FALSE_BOOLEAN_MEMORY_MODEL);
+
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Append update option.
-            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
-            overwrite_array((void*) &arg, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
+            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
+            overwrite_array((void*) &arg, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) UPDATE_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
         }
     }
 
-    if (*bzip2m != *NULL_POINTER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        if (**bzip2m == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+        compare_integer_unequal((void*) &r, (void*) *bmd, (void*) FALSE_BOOLEAN_MEMORY_MODEL);
+
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Append bzip2 option.
-            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
-            overwrite_array((void*) &arg, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
+            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
+            overwrite_array((void*) &arg, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) BZIP2_ARCHIVE_FILE_OPERATION_CYBOL_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
         }
     }
 
@@ -166,8 +151,8 @@ void file_archiving(void* p0, void* p1, void* p2, void* p3) {
     run_executing(arg, (void*) &argc);
 
     // Deallocate arguments vector.
-    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
-/* ARCHIVING_FILER_SOURCE */
+/* ARCHIVE_FILE_SOURCE */
 #endif

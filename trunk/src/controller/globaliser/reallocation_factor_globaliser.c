@@ -35,6 +35,9 @@
  */
 void globalise_reallocation_factor() {
 
+    //?? TODO: The following comment and variables are NOT up-to-date anymore!
+    //?? Reallocation handling might change in the future.
+
     //
     // If a source model is to be copied to a destination model, the size of
     // the destination has to be large enough to take on the source's elements.

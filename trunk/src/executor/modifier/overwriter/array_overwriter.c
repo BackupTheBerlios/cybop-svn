@@ -78,7 +78,7 @@
  * @param p5 the source index
  * @param p6 the destination array count
  * @param p7 the destination array size
- * @param p8 the shrink flag
+ * @param p8 the adjust flag
  */
 void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8) {
 
@@ -135,13 +135,13 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             //
-            // Adjust destination array COUNT only if "shrink" flag was set.
+            // Adjust destination array COUNT only if "adjust" flag was set.
             //
             // The destination size does not really matter here.
             // It got extended above, if necessary.
             // For the destination count, there are two possibilities:
             //
-            // 1 The shrink flag is FALSE:
+            // 1 The adjust flag is FALSE:
             //
             // In this case, the original destination count REMAINS AS IS.
             //
@@ -155,12 +155,12 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
             // - source index: 0
             // - destination array count: 21
             // - destination array size: 21 (or greater, does not matter)
-            // - shrink flag: 0
+            // - adjust flag: 0
             //
             // --> destination array: "Today is a sunny day."
             // --> destination array count: 21
             //
-            // 2 The shrink flag is TRUE:
+            // 2 The adjust flag is TRUE:
             //
             // In this case, the original destination count GETS ADJUSTED.
             //
@@ -174,7 +174,7 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
             // - source index: 0
             // - destination array count: 5
             // - destination array size: 5 (or greater, does not matter)
-            // - shrink flag: 1
+            // - adjust flag: 1
             //
             // --> destination array: "red"
             // --> destination array count: 3

@@ -11,8 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue: Adapt files in directory "applicator/file/"
-            and the other sub directories of "applicator/" upwards to the top
+        * Continue: Adapt files in directory "applicator/calculate/"
+        * Adapt files in directory "applicator/communicate/"
+        (ALL other "applicator" files are basically finished and only need fine tuning)
 
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,

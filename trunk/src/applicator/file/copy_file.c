@@ -23,10 +23,11 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef COPYING_FILER_SOURCE
-#define COPYING_FILER_SOURCE
+#ifndef COPY_FILE_SOURCE
+#define COPY_FILE_SOURCE
 
 #include <unistd.h>
+
 #include "../../applicator/runner/executing_runner.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/memory_abstraction.c"
@@ -43,84 +44,54 @@
 /**
  * Copies the file resource.
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the knowledge memory
- * @param p3 the knowledge memory count
+ * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
+ * @param p1 the parametres array count
  */
-void file_copying(void* p0, void* p1, void* p2, void* p3) {
+void apply_copy_file(void* p0, void* p1) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Copy file resource.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply copy file.");
 
-    // The recursive name, abstraction, model, details.
-    void** recursiven = NULL_POINTER_MEMORY_MODEL;
-    void** recursivenc = NULL_POINTER_MEMORY_MODEL;
-    void** recursivens = NULL_POINTER_MEMORY_MODEL;
-    void** recursivea = NULL_POINTER_MEMORY_MODEL;
-    void** recursiveac = NULL_POINTER_MEMORY_MODEL;
-    void** recursiveas = NULL_POINTER_MEMORY_MODEL;
-    int** recursivem = (int**) NULL_POINTER_MEMORY_MODEL;
-    void** recursivemc = NULL_POINTER_MEMORY_MODEL;
-    void** recursivems = NULL_POINTER_MEMORY_MODEL;
-    void** recursived = NULL_POINTER_MEMORY_MODEL;
-    void** recursivedc = NULL_POINTER_MEMORY_MODEL;
-    void** recursiveds = NULL_POINTER_MEMORY_MODEL;
-    // The source name, abstraction, model, details.
-    void** sourcen = NULL_POINTER_MEMORY_MODEL;
-    void** sourcenc = NULL_POINTER_MEMORY_MODEL;
-    void** sourcens = NULL_POINTER_MEMORY_MODEL;
-    void** sourcea = NULL_POINTER_MEMORY_MODEL;
-    void** sourceac = NULL_POINTER_MEMORY_MODEL;
-    void** sourceas = NULL_POINTER_MEMORY_MODEL;
-    int** sourcem = (int**) NULL_POINTER_MEMORY_MODEL;
-    void** sourcemc = NULL_POINTER_MEMORY_MODEL;
-    void** sourcems = NULL_POINTER_MEMORY_MODEL;
-    void** sourced = NULL_POINTER_MEMORY_MODEL;
-    void** sourcedc = NULL_POINTER_MEMORY_MODEL;
-    void** sourceds = NULL_POINTER_MEMORY_MODEL;
-    // The destination name, abstraction, model, details.
-    void** destinationn = NULL_POINTER_MEMORY_MODEL;
-    void** destinationnc = NULL_POINTER_MEMORY_MODEL;
-    void** destinationns = NULL_POINTER_MEMORY_MODEL;
-    void** destinationa = NULL_POINTER_MEMORY_MODEL;
-    void** destinationac = NULL_POINTER_MEMORY_MODEL;
-    void** destinationas = NULL_POINTER_MEMORY_MODEL;
-    int** destinationm = (int**) NULL_POINTER_MEMORY_MODEL;
-    void** destinationmc = NULL_POINTER_MEMORY_MODEL;
-    void** destinationms = NULL_POINTER_MEMORY_MODEL;
-    void** destinationd = NULL_POINTER_MEMORY_MODEL;
-    void** destinationdc = NULL_POINTER_MEMORY_MODEL;
-    void** destinationds = NULL_POINTER_MEMORY_MODEL;
+    // The recursive part.
+    void* r = *NULL_POINTER_MEMORY_MODEL;
+    // The source part.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    // The destination part.
+    void* d = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get recursive option.
-    get_universal_compound_element_by_name(
-        (void*) &recursiven, (void*) &recursivenc, (void*) &recursivens,
-        (void*) &recursivea, (void*) &recursiveac, (void*) &recursiveas,
-        (void*) &recursivem, (void*) &recursivemc, (void*) &recursivems,
-        (void*) &recursived, (void*) &recursivedc, (void*) &recursiveds,
-        p0, p1,
-        (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
+    // The recursive part model.
+    void* rm = *NULL_POINTER_MEMORY_MODEL;
+    // The source part model.
+    void* sm = *NULL_POINTER_MEMORY_MODEL;
+    // The destination part model.
+    void* dm = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get source option.
-    get_universal_compound_element_by_name(
-        (void*) &sourcen, (void*) &sourcenc, (void*) &sourcens,
-        (void*) &sourcea, (void*) &sourceac, (void*) &sourceas,
-        (void*) &sourcem, (void*) &sourcemc, (void*) &sourcems,
-        (void*) &sourced, (void*) &sourcedc, (void*) &sourceds,
-        p0, p1,
-        (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
+    // The recursive part model data.
+    void* rmd = *NULL_POINTER_MEMORY_MODEL;
+    // The source part model data.
+    void* smd = *NULL_POINTER_MEMORY_MODEL;
+    // The destination part model data.
+    void* dmd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get destination option.
-    get_universal_compound_element_by_name(
-        (void*) &destinationn, (void*) &destinationnc, (void*) &destinationns,
-        (void*) &destinationa, (void*) &destinationac, (void*) &destinationas,
-        (void*) &destinationm, (void*) &destinationmc, (void*) &destinationms,
-        (void*) &destinationd, (void*) &destinationdc, (void*) &destinationds,
-        p0, p1,
-        (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME, (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
+    // Get recursive part.
+    get_name_array((void*) &r, p0, (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) RECURSIVE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get source part.
+    get_name_array((void*) &s, p0, (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME, (void*) SOURCE_COPY_FILE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get destination part.
+    get_name_array((void*) &d, p0, (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME, (void*) DESTINATION_COPY_FILE_OPERATION_CYBOL_NAME_COUNT, p1);
+
+    // Get recursive part model.
+    copy_array_forward((void*) &rm, r, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get source part model.
+    copy_array_forward((void*) &sm, s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get destination part model.
+    copy_array_forward((void*) &dm, d, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+
+    // Get recursive part model data.
+    copy_array_forward((void*) &rmd, rm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get source part model data.
+    copy_array_forward((void*) &smd, sm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get destination part model data.
+    copy_array_forward((void*) &dmd, dm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // The arguments vector.
     void* arg = *NULL_POINTER_MEMORY_MODEL;
@@ -128,38 +99,47 @@ void file_copying(void* p0, void* p1, void* p2, void* p3) {
     int args = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Allocate arguments vector.
-    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    allocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 
     // Append command.
-    overwrite_array((void*) &arg, (void*) COPY_UNIX_COMMAND_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) COPY_UNIX_COMMAND_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
+    overwrite_array((void*) &arg, (void*) COPY_UNIX_COMMAND_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) COPY_UNIX_COMMAND_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
 
-    if (*recursivem != *NULL_POINTER_MEMORY_MODEL) {
+    // The comparison result.
+    int r = *FALSE_BOOLEAN_MEMORY_MODEL;
 
-        if (**recursivem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
+
+        compare_integer_unequal((void*) &r, (void*) *rmd, (void*) FALSE_BOOLEAN_MEMORY_MODEL);
+
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Append recursive option.
-            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
-            overwrite_array((void*) &arg, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
+            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
+            overwrite_array((void*) &arg, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) RECURSIVE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
         }
     }
 
-    if (*sourcem != *NULL_POINTER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        if (**sourcem == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+        compare_integer_unequal((void*) &r, (void*) *smd, (void*) FALSE_BOOLEAN_MEMORY_MODEL);
+
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Append source option.
-            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
-            overwrite_array((void*) &arg, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
+            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
+            overwrite_array((void*) &arg, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) SOURCE_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
         }
     }
 
-    if (*destinationm != *NULL_POINTER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        if (**destinationm == *NUMBER_1_INTEGER_MEMORY_MODEL) {
+        compare_integer_unequal((void*) &r, (void*) *dmd, (void*) FALSE_BOOLEAN_MEMORY_MODEL);
+
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Append source option.
-            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
-            overwrite_array((void*) &arg, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args);
+            overwrite_array((void*) &arg, (void*) SPACE_UNICODE_CHARACTER_CODE_MODEL, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
+            overwrite_array((void*) &arg, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) DESTINATION_COPY_UNIX_COMMAND_OPTION_NAME_COUNT, (void*) &argc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &argc, (void*) &args, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
         }
     }
 
@@ -167,8 +147,8 @@ void file_copying(void* p0, void* p1, void* p2, void* p3) {
     run_executing(arg, (void*) &argc);
 
     // Deallocate arguments vector.
-    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+    deallocate((void*) &arg, (void*) &args, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION);
 }
 
-/* COPYING_FILER_SOURCE */
+/* COPY_FILE_SOURCE */
 #endif
