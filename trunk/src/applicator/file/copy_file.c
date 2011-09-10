@@ -44,6 +44,11 @@
 /**
  * Copies the file resource.
  *
+ * Expected parametres:
+ * - recursive (optional): the option indicating that all sub directories should be copied as well
+ * - source (required): the source to be copied
+ * - destination (required): the destination to copy to
+ *
  * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
  * @param p1 the parametres array count
  */

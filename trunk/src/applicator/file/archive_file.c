@@ -44,9 +44,9 @@
  * Archives the given data into a file.
  *
  * Expected parametres:
- * - result (required): the knowledge model in which the comparison result is stored
- * - left (required): the left operand of the comparison
- * - right (required): the right operand of the comparison
+ * - create (optional): the option for creating an archive
+ * - update (optional): the option for updating an archive
+ * - bzip2 (optional): the option for using the bzip2 compression algorithm
  *
  * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
  * @param p1 the parametres array count
