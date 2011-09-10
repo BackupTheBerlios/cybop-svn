@@ -11,11 +11,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Delete "applicator/calculate/add/integer_add.c"
         * Provide new structure in "executor/calculator/" similar to "executor/comparator/",
             so that operands are processed as vectors
             and all types and operations considered
         * Adapt files in directory "applicator/calculate/"
+        * Delete "applicator/calculate/add/integer_add.c"
 
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,
@@ -28,22 +28,15 @@
         * create new mime types for this, e.g. comparison/greater-or-equal etc.,
             once for cybol and once more for memory, and put these into constant/model/
 
-        * Adapt files in directory "applicator/"
+        * Move all operation handlers one directory up??
         * Adapt "*_operation_handler.c"
-        * Move all operation handlers one directory up
-        * Move files of directory "executor/converter/selector/" into "executor/searcher/selector/"
-        * Rename "executor/arithmetiser/" into "executor/calculator/"
-        * Remove "size" parametre from all "deallocate" functions
 
+        * Move files of directory "executor/converter/selector/" into "executor/searcher/selector/"
+        * Delete "executor/converter/decoder.c" and "executor/converter/encoder.c"??
+
+        * Remove "size" parametre from all "deallocate" functions
         * Offer part deallocation shallow and deep
             (deep is not always wanted, if a child is referenced by many parts)
-
-        * Continue in "executor/arithmetiser/fraction*"
-        * Rename "arithmetiser" to "calculator" with function "calculate" and
-            distinguish operation first (add, subtract etc.) and then primitive types
-
-        * Delete "executor/communicator/receiver.c" and "executor/communicator/sender.c"?
-        * Delete "executor/converter/decoder.c" and "executor/converter/encoder.c"?
 
         * Adapt example applications to new operation cybol mime types and new comparison functions
         * Use MIME types to categorise operations in "abstraction" attribute, e.g.:
