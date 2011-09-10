@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_RECEIVE_SOURCE
-#define SOCKET_RECEIVE_SOURCE
+#ifndef SOCKET_RECEIVER_SOURCE
+#define SOCKET_RECEIVER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -284,5 +284,5 @@ void apply_receive_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_RECEIVE_SOURCE */
+/* SOCKET_RECEIVER_SOURCE */
 #endif

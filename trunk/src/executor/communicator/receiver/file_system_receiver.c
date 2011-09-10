@@ -26,6 +26,8 @@
 #ifndef FILE_SYSTEM_RECEIVER_SOURCE
 #define FILE_SYSTEM_RECEIVER_SOURCE
 
+#ifdef GNU_LINUX_OPERATING_SYSTEM
+
 #include <stdio.h>
 
 #include "../../../constant/abstraction/memory/memory_abstraction.c"
@@ -164,6 +166,63 @@ void receive_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
         log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not receive file. The source count is null.");
     }
 }
+
+/**
+ * Applies the receive file system operation.
+ *
+ * @param p0 the destination model (Hand over as reference!)
+ * @param p1 the destination model count
+ * @param p2 the destination model size
+ * @param p3 the destination details (Hand over as reference!)
+ * @param p4 the destination details count
+ * @param p5 the destination details size
+ * @param p6 the message (file name)
+ * @param p7 the message (file name) count
+ * @param p8 the language
+ * @param p9 the language count
+ */
+void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive file system.");
+
+    // The encoded array, count, size.
+    void* ea = *NULL_POINTER_MEMORY_MODEL;
+    int ec = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int es = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate encoded array.
+    allocate_array((void*) &ea, (void*) &es, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Write file into encoded array.
+    receive_data((void*) &ea, (void*) &ec, (void*) &es, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_SYSTEM_CYBOL_CHANNEL, (void*) FILE_SYSTEM_CYBOL_CHANNEL_COUNT);
+
+//??fwprintf(stdout, L"TEST char: %s\n", (char*) ea);
+
+    // The decoded array, count, size.
+    void* da = *NULL_POINTER_MEMORY_MODEL;
+    int dc = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int ds = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate decoded array.
+    allocate_array((void*) &da, (void*) &ds, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Decode encoded character array into decoded wide character array.
+    decode_utf_8_unicode_character_vector((void*) &da, (void*) &dc, (void*) &ds, ea, (void*) ec);
+
+//??fwprintf(stdout, L"TEST w_char: %ls\n", (wchar_t*) da);
+
+    // Deallocate encoded array.
+    deallocate_array((void*) &ea, (void*) &es, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Deserialise serialised wide character array into destination knowledge model.
+    decode(p0, p1, p2, p3, p4, p5, da, (void*) &dc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+
+    // Deallocate decoded array.
+    deallocate_array((void*) &da, (void*) &ds, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+}
+
+/* GNU_LINUX_OPERATING_SYSTEM */
+#endif
 
 /* FILE_SYSTEM_RECEIVER_SOURCE */
 #endif

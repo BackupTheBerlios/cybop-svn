@@ -17,8 +17,6 @@
             and all types and operations considered
         * Adapt files in directory "applicator/calculate/"
 
-        * Delete "executor/communicator/receiver.c" and "executor/communicator/sender.c"
-
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,
             for faster processing within cyboi

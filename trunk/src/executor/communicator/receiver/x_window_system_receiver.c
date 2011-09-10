@@ -26,7 +26,10 @@
 #ifndef X_WINDOW_SYSTEM_RECEIVER_SOURCE
 #define X_WINDOW_SYSTEM_RECEIVER_SOURCE
 
+#ifdef GNU_LINUX_OPERATING_SYSTEM
+
 #include <X11/Xlib.h>
+//?? #include <X11/Xutil.h>
 #include <pthread.h>
 #include <signal.h>
 

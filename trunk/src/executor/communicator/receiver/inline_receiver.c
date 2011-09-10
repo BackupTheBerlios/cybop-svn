@@ -39,17 +39,46 @@
 /**
  * Receives an inline stream and writes it into an array.
  *
- * @param p0 the destination wide character array (Hand over as reference!)
- * @param p1 the destination wide character array count
- * @param p2 the destination wide character array size
- * @param p3 the source wide character array
- * @param p4 the source wide character array count
+ * @param p0 the model (Hand over as reference!)
+ * @param p1 the model count
+ * @param p2 the model size
+ * @param p3 the details (Hand over as reference!)
+ * @param p4 the details count
+ * @param p5 the details size
+ * @param p6 the message
+ * @param p7 the message count
+ * @param p8 the language
+ * @param p9 the language count
  */
-void receive_inline(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void receive_inline(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive inline.");
 
-    overwrite_array(p0, p3, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p4, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2);
+    // The data array, count, size.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    int c = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int s = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate data array.
+    allocate_array((void*) &a, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    // Receive data array, count, size.
+    overwrite_array((void*) &a, p6, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, p7, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &c, (void*) &s);
+
+    // CAUTION! Do NOT try to decode from UTF-8 or other formats here!
+    // In other words, do NOT call a function such as this:
+    // decode_utf_8_unicode_character_vector((void*) &wm, (void*) &wmc, (void*) &wms, rm, (void*) &rmc);
+    //
+    // The reason is that each cybol file is already decoded from a multibyte
+    // character array into a wide character array at once when being read.
+    // Therefore, data do NOT have to be decoded once more when being
+    // evaluated as inline wide character array.
+
+    // Decode data array according to given document type.
+    decode(p0, p1, p2, p3, p4, p5, a, (void*) &c, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+
+    // Deallocate data array.
+    deallocate_array((void*) &a, (void*) &s, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 }
 
 /* INLINE_RECEIVER_SOURCE */

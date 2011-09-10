@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_SEND_SOURCE
-#define SOCKET_SEND_SOURCE
+#ifndef SOCKET_SENDER_SOURCE
+#define SOCKET_SENDER_SOURCE
 
 //?? TEST for test file; DELETE later!
 #include <sys/stat.h>
@@ -596,5 +596,5 @@ void apply_send_socket(void* p0, void* p1, void* p2, void* p3,
     free(ha);
 }
 
-/* SOCKET_SEND_SOURCE */
+/* SOCKET_SENDER_SOURCE */
 #endif

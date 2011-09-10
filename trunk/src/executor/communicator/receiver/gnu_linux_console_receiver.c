@@ -26,6 +26,8 @@
 #ifndef GNU_LINUX_CONSOLE_RECEIVER_SOURCE
 #define GNU_LINUX_CONSOLE_RECEIVER_SOURCE
 
+#ifdef GNU_LINUX_OPERATING_SYSTEM
+
 #include <errno.h>
 #include <wchar.h>
 
@@ -248,6 +250,58 @@ void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4)
         receive_gnu_linux_console_character(p0, p1, p2, (void*) &b, (void*) &c, (void*) &esc, (void*) &csi, p3, p4);
     }
 }
+
+/**
+ * Receives textual user interface (tui) message via gnu/linux console.
+ *
+ * @param p0 the command name (Hand over as reference!)
+ * @param p1 the command name count (Hand over as reference!)
+ * @param p2 the command name size (Hand over as reference!)
+ * @param p3 the command abstraction (Hand over as reference!)
+ * @param p4 the command abstraction count (Hand over as reference!)
+ * @param p5 the command abstraction size (Hand over as reference!)
+ * @param p6 the command model (Hand over as reference!)
+ * @param p7 the command model count (Hand over as reference!)
+ * @param p8 the command model size (Hand over as reference!)
+ * @param p9 the command details (Hand over as reference!)
+ * @param p10 the command details count (Hand over as reference!)
+ * @param p11 the command details size (Hand over as reference!)
+ * @param p12 the gnu/linux console input stream
+ * @param p13 the commands
+ * @param p14 the commands count
+ * @param p15 the knowledge memory
+ * @param p16 the knowledge memory count
+ * @param p17 the mutex
+ */
+void receive_gnu_linux_console(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
+    void* p6, void* p7, void* p8, void* p9, void* p10, void* p11,
+    void* p12, void* p13, void* p14, void* p15, void* p16, void* p17) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply receive gnu/linux console.");
+
+    // The character array read from the gnu/linux console.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    int ac = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int as = *NUMBER_0_INTEGER_MEMORY_MODEL;
+
+    // Allocate character array.
+    allocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+
+    // Read pressed keyboard keys as message from gnu/linux console.
+    receive_gnu_linux_console((void*) &a, (void*) &ac, (void*) &as, p12, p17);
+
+    // CAUTION! The multibyte- is converted to a wide character internally (in glibc function "fgetwc").
+    // Function calls to "decode_utf_8_unicode_character_vector" are therefore NOT necessary here!
+
+    // Decode character array into command.
+    decode(p6, p7, p8, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, a, (void*) &ac, p15, p16, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
+
+    // Deallocate character array.
+    deallocate((void*) &a, (void*) &as, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION, (void*) WIDE_CHARACTER_MEMORY_ABSTRACTION_COUNT);
+}
+
+/* GNU_LINUX_OPERATING_SYSTEM */
+#endif
 
 /* GNU_LINUX_CONSOLE_RECEIVER_SOURCE */
 #endif

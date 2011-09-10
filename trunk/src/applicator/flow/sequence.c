@@ -44,6 +44,51 @@
 void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7);
 
 /**
+ * Sends a message to the cyboi system (this system itself).
+ *
+ * @param p0 the internal memory
+ * @param p1 the signal memory
+ * @param p2 the signal memory count
+ * @param p3 the signal memory size
+ * @param p4 the message abstraction (Hand over as reference!)
+ * @param p5 the message abstraction count (Hand over as reference!)
+ * @param p6 the message model (Hand over as reference!)
+ * @param p7 the message model count (Hand over as reference!)
+ * @param p8 the message details (Hand over as reference!)
+ * @param p9 the message details count (Hand over as reference!)
+ * @param p10 the signal priority (Hand over as reference!)
+ * @param p11 the signal identification (Hand over as reference!)
+ */
+/*??
+void apply_send_cyboi_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11) {
+
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply send cyboi system.");
+
+    // The signal memory mutex.
+    pthread_mutex_t** mt = (pthread_mutex_t**) NULL_POINTER_MEMORY_MODEL;
+    // The interrupt request flag.
+    sig_atomic_t** irq = (sig_atomic_t**) NULL_POINTER_MEMORY_MODEL;
+
+    // Get signal memory mutex.
+    get((void*) &mt, p0, (void*) SIGNAL_MEMORY_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    // Get interrupt request internal.
+    get((void*) &irq, p0, (void*) SIGNAL_MEMORY_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+
+    // Lock signal memory mutex.
+    pthread_mutex_lock(*mt);
+
+    replace_signal_memory(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11);
+
+    // Set interrupt request flag, in order to notify the signal checker
+    // that a new signal has been placed in the signal memory.
+    **irq = *NUMBER_1_INTEGER_MEMORY_MODEL;
+
+    // Unlock signal memory mutex.
+    pthread_mutex_unlock(*mt);
+}
+*/
+
+/**
  * Executes the given programme flow as sequence.
  *
  * Expected parametres:
