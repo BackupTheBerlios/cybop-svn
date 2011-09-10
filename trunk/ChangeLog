@@ -22,6 +22,8 @@
         * Move files from "applicator/live/sense/" to "executor/lifeguard/sensor/"
         * Adapt files in directories "executor/lifeguard/" and "applicator/live/"
         * Adapt files in directory "applicator/file/"
+        * Adapt files in directory "applicator/communicate/"
+        * Adapt files in directory "applicator/calculate/"
 
 2011-09-09  Christian Heller  <christian.heller@tuxtax.de>
 

@@ -45,7 +45,7 @@
 /**
  * Overwrites the destination- with the source part.
  *
- * Expected parameters:
+ * Expected parametres:
  * - destination (required): the destination part
  * - source (required): the source part
  * - abstraction (required): the type of data

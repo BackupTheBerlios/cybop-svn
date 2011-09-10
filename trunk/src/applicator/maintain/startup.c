@@ -46,7 +46,7 @@
 /**
  * Starts up a service.
  *
- * Expected parameters:
+ * Expected parametres:
  * - service (required): the service to be started up (gnu_linux_console, tcp_socket, unix_socket, x_window_system, ...)
  * - namespace (optional, only if service is www, cyboi or similar): the namespace of the socket
  * - style (optional, only if service is www, cyboi or similar): the namespace of the socket

@@ -53,7 +53,7 @@
  * - whole model's meta hierarchy
  * - knowledge memory's root directly, if no whole element is given
  *
- * Expected parameters:
+ * Expected parametres:
  * - name (required): the name of the part to be created
  * - abstraction (required): the abstraction (type) of the part to be created
  * - element (optional; if null, the new part will be added to the whole- or knowledge memory MODEL and NOT details):

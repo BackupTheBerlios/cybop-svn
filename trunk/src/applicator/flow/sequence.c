@@ -46,7 +46,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 /**
  * Executes the given programme flow as sequence.
  *
- * Expected parameters:
+ * Expected parametres:
  * - model (required): the knowledge model to be executed as sequence
  *
  * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)

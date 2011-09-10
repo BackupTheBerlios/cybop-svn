@@ -42,7 +42,7 @@
 /**
  * Builds a list name.
  *
- * Expected parameters:
+ * Expected parametres:
  * - ?? (required): ?? (description)
  *
  * @param p0 the parameters

@@ -11,9 +11,13 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue: Adapt files in directory "applicator/calculate/"
-        * Adapt files in directory "applicator/communicate/"
-        (ALL other "applicator" files are basically finished and only need fine tuning)
+        * Delete "applicator/calculate/add/integer_add.c"
+        * Provide new structure in "executor/calculator/" similar to "executor/comparator/",
+            so that operands are processed as vectors
+            and all types and operations considered
+        * Adapt files in directory "applicator/calculate/"
+
+        * Delete "executor/communicator/receiver.c" and "executor/communicator/sender.c"
 
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,

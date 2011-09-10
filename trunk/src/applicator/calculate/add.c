@@ -23,11 +23,9 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ADDITION_CALCULATOR_SOURCE
-#define ADDITION_CALCULATOR_SOURCE
+#ifndef ADD_SOURCE
+#define ADD_SOURCE
 
-#include "../../applicator/calculator/addition/character_vector_addition_calculator.c"
-#include "../../applicator/calculator/addition/integer_vector_addition_calculator.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/abstraction/operation/primitive_operation_abstraction.c"
@@ -35,140 +33,66 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
 #include "../../constant/name/cybol/operation/arithmetic/addition_arithmetic_operation_cybol_name.c"
-#include "../../executor/accessor/getter/compound_getter.c"
-#include "../../executor/comparator/all/array_all_comparator.c"
+#include "../../executor/calculator/fraction_adder/fraction_fraction_adder.c"
+#include "../../executor/calculator/integer_adder/integer_integer_adder.c"
+#include "../../executor/comparator/basic/integer/equal_integer_comparator.c"
 #include "../../logger/logger.c"
 
 /**
- * Adds two primitive summands resulting in the sum.
+ * Adds two summands resulting in the sum.
  *
- * Expected parameters:
+ * Expected parametres:
  * - abstraction (required): the abstraction of the summand 1, summand 2 and sum parameters
  * - summand_1 (required): the first summand for the addition
  * - summand_2 (required): the second summand for the addition
  * - sum (required): the sum resulting from the addition
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the knowledge memory
- * @param p3 the knowledge memory count
- * @param p4 the knowledge memory size
+ * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
+ * @param p1 the parametres array count
+ * @param p2 the knowledge memory part
  */
-void calculate_addition(void* p0, int* p1, void* p2, void* p3, void* p4) {
+void apply_add(void* p0, int* p1, void* p2, void* p3, void* p4) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Add two primitive summands resulting in the sum.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply add.");
 
-    // The abstraction name, abstraction, model, details.
-    void** an = NULL_POINTER_MEMORY_MODEL;
-    void** anc = NULL_POINTER_MEMORY_MODEL;
-    void** ans = NULL_POINTER_MEMORY_MODEL;
-    void** aa = NULL_POINTER_MEMORY_MODEL;
-    void** aac = NULL_POINTER_MEMORY_MODEL;
-    void** aas = NULL_POINTER_MEMORY_MODEL;
-    void** am = NULL_POINTER_MEMORY_MODEL;
-    void** amc = NULL_POINTER_MEMORY_MODEL;
-    void** ams = NULL_POINTER_MEMORY_MODEL;
-    void** ad = NULL_POINTER_MEMORY_MODEL;
-    void** adc = NULL_POINTER_MEMORY_MODEL;
-    void** ads = NULL_POINTER_MEMORY_MODEL;
-    // The summand 1 name, abstraction, model, details.
-    void** s1n = NULL_POINTER_MEMORY_MODEL;
-    void** s1nc = NULL_POINTER_MEMORY_MODEL;
-    void** s1ns = NULL_POINTER_MEMORY_MODEL;
-    void** s1a = NULL_POINTER_MEMORY_MODEL;
-    void** s1ac = NULL_POINTER_MEMORY_MODEL;
-    void** s1as = NULL_POINTER_MEMORY_MODEL;
-    void** s1m = NULL_POINTER_MEMORY_MODEL;
-    void** s1mc = NULL_POINTER_MEMORY_MODEL;
-    void** s1ms = NULL_POINTER_MEMORY_MODEL;
-    void** s1d = NULL_POINTER_MEMORY_MODEL;
-    void** s1dc = NULL_POINTER_MEMORY_MODEL;
-    void** s1ds = NULL_POINTER_MEMORY_MODEL;
-    // The summand 2 name, abstraction, model, details.
-    void** s2n = NULL_POINTER_MEMORY_MODEL;
-    void** s2nc = NULL_POINTER_MEMORY_MODEL;
-    void** s2ns = NULL_POINTER_MEMORY_MODEL;
-    void** s2a = NULL_POINTER_MEMORY_MODEL;
-    void** s2ac = NULL_POINTER_MEMORY_MODEL;
-    void** s2as = NULL_POINTER_MEMORY_MODEL;
-    void** s2m = NULL_POINTER_MEMORY_MODEL;
-    void** s2mc = NULL_POINTER_MEMORY_MODEL;
-    void** s2ms = NULL_POINTER_MEMORY_MODEL;
-    void** s2d = NULL_POINTER_MEMORY_MODEL;
-    void** s2dc = NULL_POINTER_MEMORY_MODEL;
-    void** s2ds = NULL_POINTER_MEMORY_MODEL;
-    // The sum name, abstraction, model, details.
-    void** sn = NULL_POINTER_MEMORY_MODEL;
-    void** snc = NULL_POINTER_MEMORY_MODEL;
-    void** sns = NULL_POINTER_MEMORY_MODEL;
-    void** sa = NULL_POINTER_MEMORY_MODEL;
-    void** sac = NULL_POINTER_MEMORY_MODEL;
-    void** sas = NULL_POINTER_MEMORY_MODEL;
-    void** sm = NULL_POINTER_MEMORY_MODEL;
-    void** smc = NULL_POINTER_MEMORY_MODEL;
-    void** sms = NULL_POINTER_MEMORY_MODEL;
-    void** sd = NULL_POINTER_MEMORY_MODEL;
-    void** sdc = NULL_POINTER_MEMORY_MODEL;
-    void** sds = NULL_POINTER_MEMORY_MODEL;
+    // The abstraction part.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    // The summand 1 part.
+    void* s1 = *NULL_POINTER_MEMORY_MODEL;
+    // The summand 2 part.
+    void* s2 = *NULL_POINTER_MEMORY_MODEL;
+    // The sum part.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get abstraction.
-    get_universal_compound_element_by_name(
-        (void*) &an, (void*) &anc, (void*) &ans,
-        (void*) &aa, (void*) &aac, (void*) &aas,
-        (void*) &am, (void*) &amc, (void*) &ams,
-        (void*) &ad, (void*) &adc, (void*) &ads,
-        p0, p1,
-        (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
-    // Get summand 1.
-    get_universal_compound_element_by_name(
-        (void*) &s1n, (void*) &s1nc, (void*) &s1ns,
-        (void*) &s1a, (void*) &s1ac, (void*) &s1as,
-        (void*) &s1m, (void*) &s1mc, (void*) &s1ms,
-        (void*) &s1d, (void*) &s1dc, (void*) &s1ds,
-        p0, p1,
-        (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
-    // Get summand 2.
-    get_universal_compound_element_by_name(
-        (void*) &s2n, (void*) &s2nc, (void*) &s2ns,
-        (void*) &s2a, (void*) &s2ac, (void*) &s2as,
-        (void*) &s2m, (void*) &s2mc, (void*) &s2ms,
-        (void*) &s2d, (void*) &s2dc, (void*) &s2ds,
-        p0, p1,
-        (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
-    // Get sum.
-    get_universal_compound_element_by_name(
-        (void*) &sn, (void*) &snc, (void*) &sns,
-        (void*) &sa, (void*) &sac, (void*) &sas,
-        (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds,
-        p0, p1,
-        (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
+    // The abstraction part model.
+    void* am = *NULL_POINTER_MEMORY_MODEL;
 
-    // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The abstraction part model data.
+    void* amd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Do NOT use the "add" operation for characters!
+    // Get abstraction part.
+    get_name_array((void*) &a, p0, (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get summand 1 part.
+    get_name_array((void*) &s1, p0, (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get summand 2 part.
+    get_name_array((void*) &s2, p0, (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get sum part.
+    get_name_array((void*) &s, p0, (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT, p1);
+
+    // Get abstraction part model.
+    copy_array_forward((void*) &am, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+
+    // Get abstraction part model data.
+    copy_array_forward((void*) &amd, am, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+
+    // CAUTION! Do NOT use the "add" operation for characters!
     // They may be concatenated by using the "append" operation.
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        compare_all_array((void*) &r, *am, (void*) INTEGER_MEMORY_ABSTRACTION, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *amc, (void*) INTEGER_MEMORY_ABSTRACTION_COUNT);
-
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-            calculate_addition_integer_vector(sm, *smc, *sms, *s1m, *s1mc, *s2m, *s2mc);
-        }
-    }
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
-
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not add two primitive summands. The abstraction is unknown.");
-    }
+    // Add first summand to sum.
+    add_integer(s, s1, amd);
+    // Add second summand to sum.
+    add_integer(s, s2, amd);
 }
 
-/* ADDITION_CALCULATOR_SOURCE */
+/* ADD_SOURCE */
 #endif

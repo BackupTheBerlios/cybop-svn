@@ -47,7 +47,7 @@
 /**
  * Counts compound parts.
  *
- * Expected parameters:
+ * Expected parametres:
  * - compound (required): the compound whose parts are to be counted
  * - selection (required): the kind of filter to be applied for counting the compound's parts
  * - filter (required): the filter to compare the compound parts' names with;

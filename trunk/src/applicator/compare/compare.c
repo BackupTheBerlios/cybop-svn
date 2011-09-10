@@ -59,7 +59,7 @@
  * for comparing models of abstraction "character".
  * However, this function relies on it, also if numbers are
  * to be compared, for finding the right comparison function to call.
- * Therefore, that parametre is required.
+ * Therefore, that parametre is REQUIRED.
  *
  * The result parametre's abstraction has to be BOOLEAN.
  * The left- and right parametres' abstractions have to be equal.
@@ -72,17 +72,17 @@ void apply_compare(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply compare.");
 
-    // The result.
+    // The result part.
     void* res = *NULL_POINTER_MEMORY_MODEL;
-    // The left operand.
+    // The left operand part.
     void* lo = *NULL_POINTER_MEMORY_MODEL;
-    // The right operand.
+    // The right operand part.
     void* ro = *NULL_POINTER_MEMORY_MODEL;
-    // The operation.
+    // The operation part.
     void* o = *NULL_POINTER_MEMORY_MODEL;
-    // The operand abstraction.
+    // The operand abstraction part.
     void* a = *NULL_POINTER_MEMORY_MODEL;
-    // The selection.
+    // The selection part.
     void* s = *NULL_POINTER_MEMORY_MODEL;
 
     // The result part model.
@@ -103,17 +103,17 @@ void apply_compare(void* p0, void* p1, void* p2) {
     // The selection part model data, count.
     void* smd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get result.
+    // Get result part.
     get_name_array((void*) &res, p0, (void*) RESULT_COMPARE_OPERATION_CYBOL_NAME, (void*) RESULT_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get left operand.
+    // Get left operand part.
     get_name_array((void*) &lo, p0, (void*) LEFT_OPERAND_COMPARE_OPERATION_CYBOL_NAME, (void*) LEFT_OPERAND_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get right operand.
+    // Get right operand part.
     get_name_array((void*) &ro, p0, (void*) RIGHT_OPERAND_COMPARE_OPERATION_CYBOL_NAME, (void*) RIGHT_OPERAND_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get operation.
+    // Get operation part.
     get_name_array((void*) &o, p0, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get operand abstraction.
+    // Get operand abstraction part.
     get_name_array((void*) &a, p0, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get selection.
+    // Get selection part.
     get_name_array((void*) &s, p0, (void*) SELECTION_COMPARE_OPERATION_CYBOL_NAME, (void*) SELECTION_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
 
     // Get result part model.

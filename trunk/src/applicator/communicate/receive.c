@@ -51,19 +51,6 @@
  * CAUTION! Do NOT rename this procedure to "receive",
  * as that name is already used by low-level socket functionality.
  *
- * The persistent message gets converted into a transient model, residing in memory.
- *
- * persistent:
- * - stored permanently
- * - outside CYBOI
- * - longer than CYBOI lives
- *
- * transient:
- * - stored in computer memory (RAM)
- * - only accessible from within CYBOI
- * - created and destroyed by CYBOI
- * - not available anymore after CYBOI has been destroyed
- *
  * CAUTION! Some file formats (like the German xDT format for medical data exchange)
  * contain both, the model AND the details, in one file. To cover these cases,
  * the model AND details are received TOGETHER, in just one operation.
@@ -118,9 +105,8 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
     // The socket communication style part model.
     void* stm = *NULL_POINTER_MEMORY_MODEL;
 
-    // The channel part model data, count.
+    // The channel part model data.
     void* cmd = *NULL_POINTER_MEMORY_MODEL;
-    void* cmc = *NULL_POINTER_MEMORY_MODEL;
     // The language part model data, count.
     void* lmd = *NULL_POINTER_MEMORY_MODEL;
     void* lmc = *NULL_POINTER_MEMORY_MODEL;
@@ -176,7 +162,6 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
 
     // Get channel part model data, count.
     copy_array_forward((void*) &cmd, cm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
-    copy_array_forward((void*) &cmc, cm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
     // Get language part model data, count.
     copy_array_forward((void*) &lmd, lm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &lmc, lm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
@@ -200,13 +185,13 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
     copy_array_forward((void*) &stmc, stm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int r = *FALSE_BOOLEAN_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) CYBOI_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) CYBOI_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) CYBOI_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
 /*??
             // The base internal.
@@ -226,23 +211,23 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-            apply_receive_socket((void*) &momd, momc, moms, (void*) &modd, modc, mods, *ps, p20, p21, p18, p19, p1, p2);
+            receive_socket((void*) &momd, momc, moms, (void*) &modd, modc, mods, *ps, p20, p21, p18, p19, p1, p2);
 */
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) FILE_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) FILE_SYSTEM_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) FILE_SYSTEM_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Receive model by reading message data.
             //
             // CAUTION! The details are handed over as well, since sometimes,
             // they are read from the message together with the model, for
             // example when converting from a file in xdt format.
-            apply_receive_file_system((void*) &momd, momc, moms, (void*) &modd, modc, mods, mmd, mmc, lmd, lmc);
+            receive_file_system((void*) &momd, momc, moms, (void*) &modd, modc, mods, mmd, mmc, lmd, lmc);
 
             // Receive details by reading meta message data.
             //
@@ -257,7 +242,7 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
             //     <property name="meta" channel="inline" abstraction="character" model="residenz/wui/address_table_row_properties.cybol"/>
             //     <property name="model" channel="inline" abstraction="encapsulated" model=".residenz.temporary.translation.translate_record_to_wui.wui_patient_row"/>
             // </part>
-//??            apply_receive_file_system((void*) &modd, modc, mods, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, mmd, mmc, lmd, lmc);
+//??            receive_file_system((void*) &modd, modc, mods, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, mmd, mmc, lmd, lmc);
 
             //?? CAUTION! The function call above was commented out ON PURPOSE, since it caused a runtime error!
             //?? TODO: Figure out what happens inside, before uncommenting it again!
@@ -267,11 +252,11 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
 /*??
             // The gnu/linux console mutex.
@@ -284,23 +269,23 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
             // Get gnu/linux console input stream.
             get((void*) &is, p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
 
-            apply_receive_gnu_linux_console((void*) &momd, momc, moms, (void*) &modd, modc, mods, *is, p12, p13, p1, p2, *mt);
+            receive_gnu_linux_console((void*) &momd, momc, moms, (void*) &modd, modc, mods, *is, p12, p13, p1, p2, *mt);
 */
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) INLINE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) INLINE_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) INLINE_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Receive model by reading message data.
             //
             // CAUTION! The details are handed over as well, since sometimes,
             // they are read from the message together with the model, for
             // example when converting from a file in xdt format.
-            apply_receive_inline((void*) &momd, momc, moms, (void*) &modd, modc, mods, mmd, mmc, lmd, lmc);
+            receive_inline((void*) &momd, momc, moms, (void*) &modd, modc, mods, mmd, mmc, lmd, lmc);
 
             // CAUTION! Do NOT try to receive meta data here!
             // When calling the following function:
@@ -315,31 +300,31 @@ void apply_receive(void* p0, void* p1, void* p2, void* p3) {
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) WWW_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) WWW_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) WWW_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // Receive model by reading http request or response.
             //
             // CAUTION! The details are handed over as well,
             // since they will store http headers as meta data.
-//??            apply_receive_socket((void*) &momd, momc, moms, (void*) &modd, modc, mods, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
+//??            receive_socket((void*) &momd, momc, moms, (void*) &modd, modc, mods, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, (void*) WWW_SERVICE_THREAD, (void*) &receive_socket_www, p1, p2, p3, p4, p5, p6, p10, p11, p17, p18, p19, p20);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-//??            apply_receive_x_window_system((void*) &p0, p7, p8, p9, p10, p11, p12);
+//??            receive_x_window_system((void*) &p0, p7, p8, p9, p10, p11, p12);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not apply receive. The channel model is unknown.");
     }

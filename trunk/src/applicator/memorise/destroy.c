@@ -44,7 +44,7 @@
  *
  * Primitive models need a different creation than compound models.
  *
- * Expected parameters:
+ * Expected parametres:
  * - part (required): the part to be destroyed
  *
  * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)

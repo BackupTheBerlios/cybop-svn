@@ -49,7 +49,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 /**
  * Branches the programme flow, depending on a flag.
  *
- * Expected parameters:
+ * Expected parametres:
  * - criterion (required): the flag specifying which of the two models to execute
  * - true (required): the logic knowledge model to be executed if the condition is true
  * - false (required): the logic knowledge model to be executed if the condition is false

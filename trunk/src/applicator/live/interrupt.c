@@ -108,7 +108,7 @@ void apply_interrupt_thread(void* p0, void* p1) {
 /**
  * Interrupts a service.
  *
- * Expected parameters:
+ * Expected parametres:
  * - service (required): the service to be interrupted (gnu_linux_console, www, x_window_system etc.)
  *
  * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)

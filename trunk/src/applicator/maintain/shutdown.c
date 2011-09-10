@@ -45,7 +45,7 @@
 /**
  * Shuts down a service.
  *
- * Expected parameters:
+ * Expected parametres:
  * - service (required): the service to be shut down (gnu_linux_console, www, x_window_system, ...)
  *
  * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)

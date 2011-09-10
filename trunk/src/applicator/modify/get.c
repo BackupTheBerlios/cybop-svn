@@ -43,7 +43,7 @@
 /**
  * Gets a description (meta information) of the part at the given index.
  *
- * Expected parameters:
+ * Expected parametres:
  * - compound (required): the compound whose element is to be retrieved
  * - index (required): the index of the element to be retrieved, within the compound
  * - description (required): the kind of data (name, abstraction) to retrieve from the compound's part

@@ -56,7 +56,7 @@
  * CAUTION! Do NOT rename this procedure to "send",
  * as that name is already used by socket functionality.
  *
- * Expected parameters:
+ * Expected parametres:
  * - channel (required): the channel via which to send the message (e.g. http)
  * - language (required): the language into which to encode the message before sending it (e.g. html)
  * - mode (optional, only if channel is http): the mode of communication
@@ -68,357 +68,132 @@
  * - clean (optional, only if language is tui): the flag indicating whether or not to clear the screen before painting a user interface
  * - new_line (optional, only if channel is standard_output/ shell): the flag indicating whether or not to add a new line after having printed the message on screen
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the internal memory
- * @param p3 the knowledge memory
- * @param p4 the knowledge memory count
- * @param p5 the knowledge memory size
- * @param p6 the signal memory
- * @param p7 the signal memory count
- * @param p8 the signal memory size
- * @param p9 the signal identification (Hand over as reference!)
+ * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
+ * @param p1 the parametres array count
+ * @param p2 the knowledge memory part
+ * @param p3 the internal memory array
  */
-void apply_send(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void apply_send(void* p0, void* p1, void* p2, void* p3) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply send.");
 
-    // The channel name, abstraction, model, details.
-    void** cn = NULL_POINTER_MEMORY_MODEL;
-    void** cnc = NULL_POINTER_MEMORY_MODEL;
-    void** cns = NULL_POINTER_MEMORY_MODEL;
-    void** ca = NULL_POINTER_MEMORY_MODEL;
-    void** cac = NULL_POINTER_MEMORY_MODEL;
-    void** cas = NULL_POINTER_MEMORY_MODEL;
-    void** cm = NULL_POINTER_MEMORY_MODEL;
-    void** cmc = NULL_POINTER_MEMORY_MODEL;
-    void** cms = NULL_POINTER_MEMORY_MODEL;
-    void** cd = NULL_POINTER_MEMORY_MODEL;
-    void** cdc = NULL_POINTER_MEMORY_MODEL;
-    void** cds = NULL_POINTER_MEMORY_MODEL;
-    // The language name, abstraction, model, details.
-    void** ln = NULL_POINTER_MEMORY_MODEL;
-    void** lnc = NULL_POINTER_MEMORY_MODEL;
-    void** lns = NULL_POINTER_MEMORY_MODEL;
-    void** la = NULL_POINTER_MEMORY_MODEL;
-    void** lac = NULL_POINTER_MEMORY_MODEL;
-    void** las = NULL_POINTER_MEMORY_MODEL;
-    void** lm = NULL_POINTER_MEMORY_MODEL;
-    void** lmc = NULL_POINTER_MEMORY_MODEL;
-    void** lms = NULL_POINTER_MEMORY_MODEL;
-    void** ld = NULL_POINTER_MEMORY_MODEL;
-    void** ldc = NULL_POINTER_MEMORY_MODEL;
-    void** lds = NULL_POINTER_MEMORY_MODEL;
-    // The communication mode name, abstraction, model, details.
-    void** mon = NULL_POINTER_MEMORY_MODEL;
-    void** monc = NULL_POINTER_MEMORY_MODEL;
-    void** mons = NULL_POINTER_MEMORY_MODEL;
-    void** moa = NULL_POINTER_MEMORY_MODEL;
-    void** moac = NULL_POINTER_MEMORY_MODEL;
-    void** moas = NULL_POINTER_MEMORY_MODEL;
-    void** mom = NULL_POINTER_MEMORY_MODEL;
-    void** momc = NULL_POINTER_MEMORY_MODEL;
-    void** moms = NULL_POINTER_MEMORY_MODEL;
-    void** mod = NULL_POINTER_MEMORY_MODEL;
-    void** modc = NULL_POINTER_MEMORY_MODEL;
-    void** mods = NULL_POINTER_MEMORY_MODEL;
-    // The socket namespace name, abstraction, model, details.
-    void** nn = NULL_POINTER_MEMORY_MODEL;
-    void** nnc = NULL_POINTER_MEMORY_MODEL;
-    void** nns = NULL_POINTER_MEMORY_MODEL;
-    void** na = NULL_POINTER_MEMORY_MODEL;
-    void** nac = NULL_POINTER_MEMORY_MODEL;
-    void** nas = NULL_POINTER_MEMORY_MODEL;
-    void** nm = NULL_POINTER_MEMORY_MODEL;
-    void** nmc = NULL_POINTER_MEMORY_MODEL;
-    void** nms = NULL_POINTER_MEMORY_MODEL;
-    void** nd = NULL_POINTER_MEMORY_MODEL;
-    void** ndc = NULL_POINTER_MEMORY_MODEL;
-    void** nds = NULL_POINTER_MEMORY_MODEL;
-    // The communication style name, abstraction, model, details.
-    void** stn = NULL_POINTER_MEMORY_MODEL;
-    void** stnc = NULL_POINTER_MEMORY_MODEL;
-    void** stns = NULL_POINTER_MEMORY_MODEL;
-    void** sta = NULL_POINTER_MEMORY_MODEL;
-    void** stac = NULL_POINTER_MEMORY_MODEL;
-    void** stas = NULL_POINTER_MEMORY_MODEL;
-    void** stm = NULL_POINTER_MEMORY_MODEL;
-    void** stmc = NULL_POINTER_MEMORY_MODEL;
-    void** stms = NULL_POINTER_MEMORY_MODEL;
-    void** std = NULL_POINTER_MEMORY_MODEL;
-    void** stdc = NULL_POINTER_MEMORY_MODEL;
-    void** stds = NULL_POINTER_MEMORY_MODEL;
-    // The sender name, abstraction, model, details.
-    void** sn = NULL_POINTER_MEMORY_MODEL;
-    void** snc = NULL_POINTER_MEMORY_MODEL;
-    void** sns = NULL_POINTER_MEMORY_MODEL;
-    void** sa = NULL_POINTER_MEMORY_MODEL;
-    void** sac = NULL_POINTER_MEMORY_MODEL;
-    void** sas = NULL_POINTER_MEMORY_MODEL;
-    void** sm = NULL_POINTER_MEMORY_MODEL;
-    void** smc = NULL_POINTER_MEMORY_MODEL;
-    void** sms = NULL_POINTER_MEMORY_MODEL;
-    void** sd = NULL_POINTER_MEMORY_MODEL;
-    void** sdc = NULL_POINTER_MEMORY_MODEL;
-    void** sds = NULL_POINTER_MEMORY_MODEL;
-    // The receiver name, abstraction, model, details.
-    void** rn = NULL_POINTER_MEMORY_MODEL;
-    void** rnc = NULL_POINTER_MEMORY_MODEL;
-    void** rns = NULL_POINTER_MEMORY_MODEL;
-    void** ra = NULL_POINTER_MEMORY_MODEL;
-    void** rac = NULL_POINTER_MEMORY_MODEL;
-    void** ras = NULL_POINTER_MEMORY_MODEL;
-    void** rm = NULL_POINTER_MEMORY_MODEL;
-    void** rmc = NULL_POINTER_MEMORY_MODEL;
-    void** rms = NULL_POINTER_MEMORY_MODEL;
-    void** rd = NULL_POINTER_MEMORY_MODEL;
-    void** rdc = NULL_POINTER_MEMORY_MODEL;
-    void** rds = NULL_POINTER_MEMORY_MODEL;
-    // The message name, abstraction, model, details.
-    void** mn = NULL_POINTER_MEMORY_MODEL;
-    void** mnc = NULL_POINTER_MEMORY_MODEL;
-    void** mns = NULL_POINTER_MEMORY_MODEL;
-    void** ma = NULL_POINTER_MEMORY_MODEL;
-    void** mac = NULL_POINTER_MEMORY_MODEL;
-    void** mas = NULL_POINTER_MEMORY_MODEL;
-    void** mm = NULL_POINTER_MEMORY_MODEL;
-    void** mmc = NULL_POINTER_MEMORY_MODEL;
-    void** mms = NULL_POINTER_MEMORY_MODEL;
-    void** md = NULL_POINTER_MEMORY_MODEL;
-    void** mdc = NULL_POINTER_MEMORY_MODEL;
-    void** mds = NULL_POINTER_MEMORY_MODEL;
-    // The metadata name, abstraction, model, details.
-    void** mdn = NULL_POINTER_MEMORY_MODEL;
-    void** mdnc = NULL_POINTER_MEMORY_MODEL;
-    void** mdns = NULL_POINTER_MEMORY_MODEL;
-    void** mda = NULL_POINTER_MEMORY_MODEL;
-    void** mdac = NULL_POINTER_MEMORY_MODEL;
-    void** mdas = NULL_POINTER_MEMORY_MODEL;
-    void** mdm = NULL_POINTER_MEMORY_MODEL;
-    void** mdmc = NULL_POINTER_MEMORY_MODEL;
-    void** mdms = NULL_POINTER_MEMORY_MODEL;
-    void** mdd = NULL_POINTER_MEMORY_MODEL;
-    void** mddc = NULL_POINTER_MEMORY_MODEL;
-    void** mdds = NULL_POINTER_MEMORY_MODEL;
-    // The area name, abstraction, model, details.
-    void** an = NULL_POINTER_MEMORY_MODEL;
-    void** anc = NULL_POINTER_MEMORY_MODEL;
-    void** ans = NULL_POINTER_MEMORY_MODEL;
-    void** aa = NULL_POINTER_MEMORY_MODEL;
-    void** aac = NULL_POINTER_MEMORY_MODEL;
-    void** aas = NULL_POINTER_MEMORY_MODEL;
-    void** am = NULL_POINTER_MEMORY_MODEL;
-    void** amc = NULL_POINTER_MEMORY_MODEL;
-    void** ams = NULL_POINTER_MEMORY_MODEL;
-    void** ad = NULL_POINTER_MEMORY_MODEL;
-    void** adc = NULL_POINTER_MEMORY_MODEL;
-    void** ads = NULL_POINTER_MEMORY_MODEL;
-    // The clean name, abstraction, model, details.
-    void** cln = NULL_POINTER_MEMORY_MODEL;
-    void** clnc = NULL_POINTER_MEMORY_MODEL;
-    void** clns = NULL_POINTER_MEMORY_MODEL;
-    void** cla = NULL_POINTER_MEMORY_MODEL;
-    void** clac = NULL_POINTER_MEMORY_MODEL;
-    void** clas = NULL_POINTER_MEMORY_MODEL;
-    void** clm = NULL_POINTER_MEMORY_MODEL;
-    void** clmc = NULL_POINTER_MEMORY_MODEL;
-    void** clms = NULL_POINTER_MEMORY_MODEL;
-    void** cld = NULL_POINTER_MEMORY_MODEL;
-    void** cldc = NULL_POINTER_MEMORY_MODEL;
-    void** clds = NULL_POINTER_MEMORY_MODEL;
-    // The new line name, abstraction, model, details.
-    void** nln = NULL_POINTER_MEMORY_MODEL;
-    void** nlnc = NULL_POINTER_MEMORY_MODEL;
-    void** nlns = NULL_POINTER_MEMORY_MODEL;
-    void** nla = NULL_POINTER_MEMORY_MODEL;
-    void** nlac = NULL_POINTER_MEMORY_MODEL;
-    void** nlas = NULL_POINTER_MEMORY_MODEL;
-    void** nlm = NULL_POINTER_MEMORY_MODEL;
-    void** nlmc = NULL_POINTER_MEMORY_MODEL;
-    void** nlms = NULL_POINTER_MEMORY_MODEL;
-    void** nld = NULL_POINTER_MEMORY_MODEL;
-    void** nldc = NULL_POINTER_MEMORY_MODEL;
-    void** nlds = NULL_POINTER_MEMORY_MODEL;
+    // The channel part.
+    void* c = *NULL_POINTER_MEMORY_MODEL;
+    // The language part.
+    void* l = *NULL_POINTER_MEMORY_MODEL;
+    // The communication mode part.
+    void* mo = *NULL_POINTER_MEMORY_MODEL;
+    // The socket namespace part.
+    void* n = *NULL_POINTER_MEMORY_MODEL;
+    // The socket communication style part.
+    void* st = *NULL_POINTER_MEMORY_MODEL;
+    // The receiver part.
+    void* r = *NULL_POINTER_MEMORY_MODEL;
+    // The message part.
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    // The metadata part.
+    void* me = *NULL_POINTER_MEMORY_MODEL;
+    // The area part.
+    void* a = *NULL_POINTER_MEMORY_MODEL;
+    // The clean part.
+    void* cl = *NULL_POINTER_MEMORY_MODEL;
+    // The new line part.
+    void* nl = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get channel.
-    get_universal_compound_element_by_name(
-        (void*) &cn, (void*) &cnc, (void*) &cns,
-        (void*) &ca, (void*) &cac, (void*) &cas,
-        (void*) &cm, (void*) &cmc, (void*) &cms,
-        (void*) &cd, (void*) &cdc, (void*) &cds,
-        p0, p1,
-        (void*) CHANNEL_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
+    // The channel part model.
+    void* cm = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get language.
-    get_universal_compound_element_by_name(
-        (void*) &ln, (void*) &lnc, (void*) &lns,
-        (void*) &la, (void*) &lac, (void*) &las,
-        (void*) &lm, (void*) &lmc, (void*) &lms,
-        (void*) &ld, (void*) &ldc, (void*) &lds,
-        p0, p1,
-        (void*) LANGUAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
+    // The channel part model data.
+    void* cmd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get communication mode.
-    get_universal_compound_element_by_name(
-        (void*) &mon, (void*) &monc, (void*) &mons,
-        (void*) &moa, (void*) &moac, (void*) &moas,
-        (void*) &mom, (void*) &momc, (void*) &moms,
-        (void*) &mod, (void*) &modc, (void*) &mods,
-        p0, p1,
-        (void*) MODE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
+    // Get channel part.
+    get_name_array((void*) &c, p0, (void*) CHANNEL_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CHANNEL_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get language part.
+    get_name_array((void*) &l, p0, (void*) LANGUAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) LANGUAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get communication mode part.
+    get_name_array((void*) &mo, p0, (void*) MODE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MODE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get socket namespace part.
+    get_name_array((void*) &n, p0, (void*) NAMESPACE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) NAMESPACE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get socket communication style part.
+    get_name_array((void*) &st, p0, (void*) STYLE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get receiver part.
+    get_name_array((void*) &r, p0, (void*) RECEIVER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) RECEIVER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get message part.
+    get_name_array((void*) &m, p0, (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get metadata part.
+    get_name_array((void*) &me, p0, (void*) METADATA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METADATA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get area part.
+    get_name_array((void*) &a, p0, (void*) AREA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) AREA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get clean flag part.
+    get_name_array((void*) &cl, p0, (void*) CLEAN_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CLEAN_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get new line part.
+    get_name_array((void*) &nl, p0, (void*) NEW_LINE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) NEW_LINE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT, p1);
 
-    // Get socket namespace.
-    get_universal_compound_element_by_name(
-        (void*) &nn, (void*) &nnc, (void*) &nns,
-        (void*) &na, (void*) &nac, (void*) &nas,
-        (void*) &nm, (void*) &nmc, (void*) &nms,
-        (void*) &nd, (void*) &ndc, (void*) &nds,
-        p0, p1,
-        (void*) NAMESPACE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) NAMESPACE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
+    // Get channel part model.
+    copy_array_forward((void*) &cm, c, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
 
-    // Get communication style.
-    get_universal_compound_element_by_name(
-        (void*) &stn, (void*) &stnc, (void*) &stns,
-        (void*) &sta, (void*) &stac, (void*) &stas,
-        (void*) &stm, (void*) &stmc, (void*) &stms,
-        (void*) &std, (void*) &stdc, (void*) &stds,
-        p0, p1,
-        (void*) STYLE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) STYLE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-
-    // Get sender.
-    get_universal_compound_element_by_name(
-        (void*) &sn, (void*) &snc, (void*) &sns,
-        (void*) &sa, (void*) &sac, (void*) &sas,
-        (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds,
-        p0, p1,
-        (void*) SENDER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) SENDER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-
-    // Get receiver.
-    get_universal_compound_element_by_name(
-        (void*) &rn, (void*) &rnc, (void*) &rns,
-        (void*) &ra, (void*) &rac, (void*) &ras,
-        (void*) &rm, (void*) &rmc, (void*) &rms,
-        (void*) &rd, (void*) &rdc, (void*) &rds,
-        p0, p1,
-        (void*) RECEIVER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) RECEIVER_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-
-    // Get message.
-    get_universal_compound_element_by_name(
-        (void*) &mn, (void*) &mnc, (void*) &mns,
-        (void*) &ma, (void*) &mac, (void*) &mas,
-        (void*) &mm, (void*) &mmc, (void*) &mms,
-        (void*) &md, (void*) &mdc, (void*) &mds,
-        p0, p1,
-        (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) MESSAGE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-
-    // Get metadata.
-    get_universal_compound_element_by_name(
-        (void*) &mdn, (void*) &mdnc, (void*) &mdns,
-        (void*) &mda, (void*) &mdac, (void*) &mdas,
-        (void*) &mdm, (void*) &mdmc, (void*) &mdms,
-        (void*) &mdd, (void*) &mddc, (void*) &mdds,
-        p0, p1,
-        (void*) METADATA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) METADATA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-
-    // Get area.
-    get_universal_compound_element_by_name(
-        (void*) &an, (void*) &anc, (void*) &ans,
-        (void*) &aa, (void*) &aac, (void*) &aas,
-        (void*) &am, (void*) &amc, (void*) &ams,
-        (void*) &ad, (void*) &adc, (void*) &ads,
-        p0, p1,
-        (void*) AREA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) AREA_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-
-    // Get clean flag.
-    get_universal_compound_element_by_name(
-        (void*) &cln, (void*) &clnc, (void*) &clns,
-        (void*) &cla, (void*) &clac, (void*) &clas,
-        (void*) &clm, (void*) &clmc, (void*) &clms,
-        (void*) &cld, (void*) &cldc, (void*) &clds,
-        p0, p1,
-        (void*) CLEAN_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) CLEAN_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
-
-    // Get new line flag.
-    get_universal_compound_element_by_name(
-        (void*) &nln, (void*) &nlnc, (void*) &nlns,
-        (void*) &nla, (void*) &nlac, (void*) &nlas,
-        (void*) &nlm, (void*) &nlmc, (void*) &nlms,
-        (void*) &nld, (void*) &nldc, (void*) &nlds,
-        p0, p1,
-        (void*) NEW_LINE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME, (void*) NEW_LINE_SEND_COMMUNICATION_OPERATION_CYBOL_NAME_COUNT,
-        p3, p4);
+    // Get channel part model data.
+    copy_array_forward((void*) &cmd, cm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int r = *FALSE_BOOLEAN_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *cm, (void*) CYBOI_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *cmc, (void*) CYBOI_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) CYBOI_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            apply_send_socket(p2, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) TCP_CYBOI_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+            send_socket(p2, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) TCP_CYBOI_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *cm, (void*) FILE_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *cmc, (void*) FILE_SYSTEM_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) FILE_SYSTEM_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            apply_send_file_system(p2, *mn, *mnc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *rm, *rmc);
+            send_file_system(p2, *mn, *mnc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *rm, *rmc);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *cm, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *cmc, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            apply_send_gnu_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
+            send_gnu_linux_console(p2, *ma, *mac, *mm, *mmc, *md, *mdc, *am, *amc, *clm, *clmc, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *cm, (void*) INLINE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *cmc, (void*) INLINE_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) INLINE_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // CAUTION! Hand over first parameter as reference!
-            apply_send_inline(rm, *rmc, *rms, *ma, *mac, *mm, *mmc, *md, *mdc, *mda, *mdac, *mdm, *mdmc, *mdd, *mddc, *lm, *lmc);
+            send_inline(rm, *rmc, *rms, *ma, *mac, *mm, *mmc, *md, *mdc, *mda, *mdac, *mdm, *mdmc, *mdd, *mddc, *lm, *lmc);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *cm, (void*) LATEX_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *cmc, (void*) LATEX_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) LATEX_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            apply_send_latex(p2, *mm, *mmc, p3, p4);
+            send_latex(p2, *mm, *mmc, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *cm, (void*) SHELL_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *cmc, (void*) SHELL_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) SHELL_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
 /*??
     fwprintf(stdout, L"TEST sending mmc: %i\n", *mmc);
@@ -426,41 +201,41 @@ void apply_send(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void
     fwprintf(stdout, L"TEST sending mm: %ls\n", (wchar_t*) *mm);
 */
 
-            apply_send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *nlm, *nlmc);
+            send_shell(p2, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc, *clm, *clmc, *nlm, *nlmc);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *cm, (void*) SIGNAL_SERVICE_CYBOL_MODEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *cmc, (void*) SIGNAL_SERVICE_CYBOL_MODEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) SIGNAL_SERVICE_CYBOL_MODEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            apply_send_cyboi_system(p2, p6, p7, p8, ma, mac, mm, mmc, md, mdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, p9);
+            send_cyboi_system(p2, p6, p7, p8, ma, mac, mm, mmc, md, mdc, (void*) &NORMAL_SIGNAL_PRIORITY_MODEL, p9);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *cm, (void*) WWW_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *cmc, (void*) WWW_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) WWW_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            apply_send_socket(p2, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) TCP_WWW_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
+            send_socket(p2, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME, *rm, *rmc, (void*) TCP_WWW_SERVICE_PORT_MODEL, *nm, *nmc, *stm, *stmc, *mom, *momc, *ma, *mac, *mm, *mmc, *md, *mdc, p3, p4, *lm, *lmc);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, *cm, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, *cmc, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            apply_send_x_window_system(p2, *mm, *mmc, p3, p4);
+            send_x_window_system(p2, *mm, *mmc, p3, p4);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not apply send. The channel model is unknown.");
     }

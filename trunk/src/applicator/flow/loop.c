@@ -46,7 +46,7 @@ void handle(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
 /**
  * Loops the programme flow endlessly, until the break flag is set.
  *
- * Expected parameters:
+ * Expected parametres:
  * - model (required): the knowledge model to be executed repeatedly by the loop
  * - break (required): the break flag; once set, the loop will be left (exited)
  *

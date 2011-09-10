@@ -128,7 +128,7 @@ void apply_sense_message(void* p0, void* p1, void* p2) {
  * The cyboi signal checker loop then senses the interrupt and receives the
  * corresponding message via the channel the interrupt belongs to.
  *
- * Expected parameters:
+ * Expected parametres:
  * - channel (required): the channel via which to receive the message (gnu_linux_console, www, x_window_system etc.)
  * - handler (optional): the handler (usually a receive operation) that parses an input and filters out a command that the system is to react to
  *
@@ -152,9 +152,8 @@ void apply_sense(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // The handler part model.
     void* hm = *NULL_POINTER_MEMORY_MODEL;
 
-    // The channel part model data, count.
+    // The channel part model data.
     void* cmd = *NULL_POINTER_MEMORY_MODEL;
-    void* cmc = *NULL_POINTER_MEMORY_MODEL;
     // The handler part model data, count.
     void* hmd = *NULL_POINTER_MEMORY_MODEL;
     void* hmc = *NULL_POINTER_MEMORY_MODEL;
@@ -169,9 +168,8 @@ void apply_sense(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get handler part model.
     copy_array_forward((void*) &hm, h, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
 
-    // Get channel part model data, count.
+    // Get channel part model data.
     copy_array_forward((void*) &cmd, cm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
-    copy_array_forward((void*) &cmc, cm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
     // Get handler part model data, count.
     copy_array_forward((void*) &hmd, hm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &hmc, hm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
