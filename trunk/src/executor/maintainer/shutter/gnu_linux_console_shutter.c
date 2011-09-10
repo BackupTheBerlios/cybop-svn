@@ -53,11 +53,11 @@ void shutdown_gnu_linux_console(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Shutdown gnu/linux console.");
 
-    // The gnu/linux console input- and output stream internal.
+    // The gnu/linux console input- and output stream.
     FILE* ip = (FILE*) *NULL_POINTER_MEMORY_MODEL;
     FILE* op = (FILE*) *NULL_POINTER_MEMORY_MODEL;
 
-    // Get gnu/linux console input- and output stream internal.
+    // Get gnu/linux console input- and output stream.
     copy_array_forward((void*) &ip, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME);
     copy_array_forward((void*) &op, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) GNU_LINUX_CONSOLE_OUTPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME);
 

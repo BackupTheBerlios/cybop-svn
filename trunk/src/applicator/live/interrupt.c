@@ -46,7 +46,7 @@
  * @param p0 the service thread
  * @param p1 the service thread interrupt
  */
-void interrupt_thread(void* p0, void* p1) {
+void apply_interrupt_thread(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -87,7 +87,7 @@ void interrupt_thread(void* p0, void* p1) {
                 *t = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
 
                 // Reset thread interrupt flag for signal handler.
-                *i = *NUMBER_0_INTEGER_MEMORY_MODEL;
+                *i = *FALSE_BOOLEAN_MEMORY_MODEL;
 
             } else {
 
@@ -111,86 +111,73 @@ void interrupt_thread(void* p0, void* p1) {
  * Expected parameters:
  * - service (required): the service to be interrupted (gnu_linux_console, www, x_window_system etc.)
  *
- * @param p0 the parameters
- * @param p1 the parameters count
- * @param p2 the knowledge memory
- * @param p3 the knowledge memory count
- * @param p4 the knowledge memory size
+ * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
+ * @param p1 the parametres array count
  */
-void apply_interrupt(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void apply_interrupt(void* p0, void* p1) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply interrupt.");
 
-    // The service name, abstraction, model, details.
-    void** sn = NULL_POINTER_MEMORY_MODEL;
-    void** snc = NULL_POINTER_MEMORY_MODEL;
-    void** sns = NULL_POINTER_MEMORY_MODEL;
-    void** sa = NULL_POINTER_MEMORY_MODEL;
-    void** sac = NULL_POINTER_MEMORY_MODEL;
-    void** sas = NULL_POINTER_MEMORY_MODEL;
-    void** sm = NULL_POINTER_MEMORY_MODEL;
-    void** smc = NULL_POINTER_MEMORY_MODEL;
-    void** sms = NULL_POINTER_MEMORY_MODEL;
-    void** sd = NULL_POINTER_MEMORY_MODEL;
-    void** sdc = NULL_POINTER_MEMORY_MODEL;
-    void** sds = NULL_POINTER_MEMORY_MODEL;
+    // The service part.
+    void* s = *NULL_POINTER_MEMORY_MODEL;
+    // The service part model.
+    void* sm = *NULL_POINTER_MEMORY_MODEL;
+    // The service part model data.
+    void* smd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get service.
-    get_universal_compound_element_by_name(
-        (void*) &sn, (void*) &snc, (void*) &sns,
-        (void*) &sa, (void*) &sac, (void*) &sas,
-        (void*) &sm, (void*) &smc, (void*) &sms,
-        (void*) &sd, (void*) &sdc, (void*) &sds,
-        p0, p1,
-        (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT,
-        p2, p3);
+    // Get service part.
+    get_name_array((void*) &s, p0, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME, (void*) SERVICE_LIFECYCLE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get service part model.
+    copy_array_forward((void*) &sm, s, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get service part model data.
+    copy_array_forward((void*) &smd, sm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int r = *FALSE_BOOLEAN_MEMORY_MODEL;
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, (void*) *sm, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) *smc, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, (void*) *smd, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            interrupt_thread((void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
+            apply_interrupt_thread((void*) GNU_LINUX_CONSOLE_THREAD, (void*) GNU_LINUX_CONSOLE_EXIT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, (void*) *sm, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) *smc, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, (void*) *smd, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            interrupt_thread((void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
+            apply_interrupt_thread((void*) X_WINDOW_SYSTEM_THREAD, (void*) X_WINDOW_SYSTEM_EXIT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, (void*) *sm, (void*) WWW_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) *smc, (void*) WWW_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, (void*) *smd, (void*) WWW_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            interrupt_thread((void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
+            apply_interrupt_thread((void*) WWW_SERVICE_THREAD, (void*) WWW_SERVICE_EXIT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, (void*) *sm, (void*) CYBOI_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) *smc, (void*) CYBOI_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, (void*) *smd, (void*) CYBOI_CYBOL_CHANNEL);
 
-        if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-            interrupt_thread((void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
+            apply_interrupt_thread((void*) CYBOI_SERVICE_THREAD, (void*) CYBOI_SERVICE_EXIT);
         }
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not interrupt service. The service model is unknown.");
+        log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not apply interrupt. The service is unknown.");
     }
 }
 

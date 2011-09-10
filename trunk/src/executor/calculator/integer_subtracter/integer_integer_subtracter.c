@@ -32,8 +32,8 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
-#include "../../../executor/arithmetiser/negator/integer_negator.c"
+#include "../../../executor/calculator/integer_adder/integer_integer_adder.c"
+#include "../../../executor/calculator/negator/integer_negator.c"
 #include "../../../logger/logger.c"
 
 /**

@@ -30,7 +30,7 @@
 #include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../executor/arithmetiser/integer_subtracter.c"
+#include "../../../executor/calculator/integer_subtracter.c"
 #include "../../../executor/memoriser/reallocator/array_reallocator.c"
 #include "../../../logger/logger.c"
 

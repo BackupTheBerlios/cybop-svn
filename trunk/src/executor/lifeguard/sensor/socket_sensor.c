@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef SOCKET_SENSE_SOURCE
-#define SOCKET_SENSE_SOURCE
+#ifndef SOCKET_SENSER_SOURCE
+#define SOCKET_SENSER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -101,7 +101,7 @@
  * @param p5 the communication partner-connected socket address size
  * @param p6 the original socket of this system
  */
-void apply_sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
     if (p6 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -295,10 +295,10 @@ void apply_sense_socket_message(void* p0, void* p1, void* p2, void* p3, void* p4
 /**
  * Senses socket messages.
  *
- * @param p0 the internal memory
+ * @param p0 the internal memory array
  * @param p1 the base internal
  */
-void apply_sense_socket(void* p0, void* p1) {
+void sense_socket(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -313,41 +313,41 @@ void apply_sense_socket(void* p0, void* p1) {
         // The internal memory index.
         int i = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
         // The interrupt.
-        void** irq = NULL_POINTER_MEMORY_MODEL;
+        void* irq = *NULL_POINTER_MEMORY_MODEL;
         // The mutex.
-        void** mt = NULL_POINTER_MEMORY_MODEL;
+        void* mt = *NULL_POINTER_MEMORY_MODEL;
         // The sleep time.
-        void** st = NULL_POINTER_MEMORY_MODEL;
+        void* st = *NULL_POINTER_MEMORY_MODEL;
         // The display.
-        void** d = NULL_POINTER_MEMORY_MODEL;
+        void* d = *NULL_POINTER_MEMORY_MODEL;
         // The communication partner-connected socket of this system.
-        void** ps = NULL_POINTER_MEMORY_MODEL;
+        void* ps = *NULL_POINTER_MEMORY_MODEL;
         // The communication partner-connected socket address of this system.
-        void** pa = NULL_POINTER_MEMORY_MODEL;
-        void** pas = NULL_POINTER_MEMORY_MODEL;
+        void* pa = *NULL_POINTER_MEMORY_MODEL;
+        void* pas = *NULL_POINTER_MEMORY_MODEL;
         // The original socket of this system.
-        void** os = NULL_POINTER_MEMORY_MODEL;
+        void* os = *NULL_POINTER_MEMORY_MODEL;
 
         // Get interrupt.
         i = *base + *SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &irq, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &irq, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
         // Get mutex.
         i = *base + *SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &mt, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &mt, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
         // Get sleep time.
         i = *base + *SOCKET_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &st, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &st, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
         // Get communication partner-connected socket of this system.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &ps, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &ps, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
         // Get communication partner socket address.
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &pa, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &pa, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
         i = *base + *SOCKET_COMMUNICATION_PARTNER_ADDRESS_SIZE_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &pas, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &pas, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
         // Get original socket of this system.
         i = *base + *SOCKET_INTERNAL_MEMORY_MEMORY_NAME;
-        get((void*) &os, p0, (void*) &i, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+        copy_array_forward((void*) &os, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
 
         while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
@@ -360,11 +360,11 @@ void apply_sense_socket(void* p0, void* p1) {
             // and processed in the system signal handler procedure
             // (situated in the controller/checker.c module).
 
-    fwprintf(stdout, L"TEST: sensing socket pre os: %i \n", *((int*) *os));
-    fwprintf(stdout, L"TEST: sensing socket pre ps: %i \n", *((int*) *ps));
-            apply_sense_socket_message(*irq, *mt, *st, *ps, *pa, *pas, *os);
-    fwprintf(stdout, L"TEST: sensing socket post os: %i \n", *((int*) *os));
-    fwprintf(stdout, L"TEST: sensing socket post ps: %i \n", *((int*) *ps));
+    fwprintf(stdout, L"TEST: sensing socket pre os: %i \n", *((int*) os));
+    fwprintf(stdout, L"TEST: sensing socket pre ps: %i \n", *((int*) ps));
+            sense_socket_message(irq, mt, st, ps, pa, pas, os);
+    fwprintf(stdout, L"TEST: sensing socket post os: %i \n", *((int*) os));
+    fwprintf(stdout, L"TEST: sensing socket post ps: %i \n", *((int*) ps));
         }
 
     } else {
@@ -389,7 +389,7 @@ void apply_sense_socket(void* p0, void* p1) {
  *
  * @param p0 the internal memory
  */
-void apply_sense_www_socket(void* p0) {
+void sense_www_socket(void* p0) {
 
     // CAUTION! DO NOT log this function call!
     // This function is executed within a thread, but the
@@ -397,7 +397,7 @@ void apply_sense_www_socket(void* p0) {
     // cause unpredictable programme behaviour.
     // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sense www socket.");
 
-    apply_sense_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    sense_socket(p0, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }
 
 /**
@@ -405,7 +405,7 @@ void apply_sense_www_socket(void* p0) {
  *
  * @param p0 the internal memory
  */
-void apply_sense_cyboi_socket(void* p0) {
+void sense_cyboi_socket(void* p0) {
 
     // CAUTION! DO NOT log this function call!
     // This function is executed within a thread, but the
@@ -413,11 +413,11 @@ void apply_sense_cyboi_socket(void* p0) {
     // cause unpredictable programme behaviour.
     // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sense cyboi socket.");
 
-    apply_sense_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
+    sense_socket(p0, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
 }
 
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* SOCKET_SENSE_SOURCE */
+/* SOCKET_SENSER_SOURCE */
 #endif

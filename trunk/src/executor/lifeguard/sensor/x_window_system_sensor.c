@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef X_WINDOW_SYSTEM_SENSE_SOURCE
-#define X_WINDOW_SYSTEM_SENSE_SOURCE
+#ifndef X_WINDOW_SYSTEM_SENSER_SOURCE
+#define X_WINDOW_SYSTEM_SENSER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -57,7 +57,7 @@
  * @param mt the mutex
  * @param d the display
  */
-int apply_sense_x_window_system_check_events(pthread_mutex_t* mt, struct _XDisplay* d) {
+int sense_x_window_system_check_events(pthread_mutex_t* mt, struct _XDisplay* d) {
 
     // The number of events.
     int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
@@ -105,7 +105,7 @@ int apply_sense_x_window_system_check_events(pthread_mutex_t* mt, struct _XDispl
  * @param p2 the sleep time
  * @param p3 the display
  */
-void apply_sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3) {
+void sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -147,12 +147,12 @@ void apply_sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3)
                     // since the x mutex is set before XNextEvent and denies access to X
                     // (which is necessary to avoid "Xlib: unexpected async reply" errors).
                     // Note that send_x_window_system runs in CYBOI's main thread,
-                    // while apply_sense_x_window_system runs in its own thread!
+                    // while sense_x_window_system runs in its own thread!
                     //
                     // CAUTION! A global variable MAY be used to set the sleep time,
                     // because it is only read but not written, and thus thread-safe.
                     // The global variable should only be manipulated in cyboi's main thread.
-                    while (!apply_sense_x_window_system_check_events(p1, p3)) {
+                    while (!sense_x_window_system_check_events(p1, p3)) {
 
                         sleep(*st);
                     }
@@ -216,9 +216,9 @@ void apply_sense_x_window_system_message(void* p0, void* p1, void* p2, void* p3)
 /**
  * Senses x window system messages.
  *
- * @param p0 the internal memory
+ * @param p0 the internal memory array
  */
-void apply_sense_x_window_system(void* p0) {
+void sense_x_window_system(void* p0) {
 
     // CAUTION! DO NOT log this function call!
     // This function is executed within a thread, but the
@@ -227,22 +227,22 @@ void apply_sense_x_window_system(void* p0) {
     // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sense x window system.");
 
     // The interrupt.
-    void** irq = NULL_POINTER_MEMORY_MODEL;
+    void* irq = *NULL_POINTER_MEMORY_MODEL;
     // The mutex.
-    void** mt = NULL_POINTER_MEMORY_MODEL;
+    void* mt = *NULL_POINTER_MEMORY_MODEL;
     // The sleep time.
-    void** st = NULL_POINTER_MEMORY_MODEL;
+    void* st = *NULL_POINTER_MEMORY_MODEL;
     // The display.
-    void** d = NULL_POINTER_MEMORY_MODEL;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
 
     // Get interrupt.
-    get((void*) &irq, p0, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_forward((void*) &irq, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
     // Get mutex.
-    get((void*) &mt, p0, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_forward((void*) &mt, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_MUTEX_INTERNAL_MEMORY_MEMORY_NAME);
     // Get sleep time.
-    get((void*) &st, p0, (void*) X_WINDOW_SYSTEM_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_forward((void*) &st, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME);
     // Get display.
-    get((void*) &d, p0, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_forward((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) X_WINDOW_SYSTEM_DISPLAY_INTERNAL_MEMORY_MEMORY_NAME);
 
     while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
@@ -255,7 +255,7 @@ void apply_sense_x_window_system(void* p0) {
         // and processed in the system signal handler procedure
         // (situated in the controller/checker.c module).
 
-        apply_sense_x_window_system_message(*irq, *mt, *st, *d);
+        sense_x_window_system_message(irq, mt, st, d);
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -269,5 +269,5 @@ void apply_sense_x_window_system(void* p0) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* X_WINDOW_SYSTEM_SENSE_SOURCE */
+/* X_WINDOW_SYSTEM_SENSER_SOURCE */
 #endif

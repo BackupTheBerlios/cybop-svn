@@ -26,9 +26,6 @@
 #ifndef SENSE_SOURCE
 #define SENSE_SOURCE
 
-#include "../../applicator/communicator/sensing/gnu_linux_console_sensing_communicator.c"
-#include "../../applicator/communicator/sensing/socket_sensing_communicator.c"
-#include "../../applicator/communicator/sensing/x_window_system_sensing_communicator.c"
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../constant/abstraction/operation/primitive_operation_abstraction.c"
@@ -39,6 +36,9 @@
 #include "../../constant/name/cybol/operation/communication/sense_communication_operation_cybol_name.c"
 #include "../../constant/name/memory/internal_memory_memory_name.c"
 #include "../../executor/accessor/getter/compound_getter.c"
+#include "../../executor/lifeguard/sensor/gnu_linux_console_sensor.c"
+#include "../../executor/lifeguard/sensor/socket_sensor.c"
+#include "../../executor/lifeguard/sensor/x_window_system_sensor.c"
 #include "../../logger/logger.c"
 #include "../../variable/thread_identification.c"
 
@@ -48,22 +48,22 @@
 // The following functions HAVE TO BE declared here since
 // otherwise, the compiler will report errors like:
 //
-// error: 'apply_sense_gnu_linux_console' undeclared
+// error: 'sense_gnu_linux_console' undeclared
 //
 // The reason is (probably) that the functions are forwarded
 // as reference (function pointer), for example:
 //
-// &apply_sense_gnu_linux_console
+// &sense_gnu_linux_console
 //
 // The compiler does not seem to be able to recognise them
 // as functions that way. Therefore, the following explicit
 // declarations of the functions are necessary.
 //
 
-void apply_sense_gnu_linux_console(void* p0);
-void apply_sense_cyboi_socket(void* p0);
-void apply_sense_www_socket(void* p0);
-void apply_sense_x_window_system(void* p0);
+void sense_gnu_linux_console(void* p0);
+void sense_cyboi_socket(void* p0);
+void sense_www_socket(void* p0);
+void sense_x_window_system(void* p0);
 
 /**
  * Senses message.
@@ -183,7 +183,7 @@ void apply_sense(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) CYBOI_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) CYBOI_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) CYBOI_CYBOL_CHANNEL);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
@@ -205,13 +205,13 @@ void apply_sense(void* p0, void* p1, void* p2, void* p3, void* p4) {
             copy_array_forward(p2, (void*) hdc, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
             // Sense incoming message (http request or response).
-            apply_sense_message(p2, (void*) CYBOI_SERVICE_THREAD, (void*) &apply_sense_cyboi_socket);
+            apply_sense_message(p2, (void*) CYBOI_SERVICE_THREAD, (void*) &sense_cyboi_socket);
         }
     }
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) GNU_LINUX_CONSOLE_CYBOL_CHANNEL);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
@@ -224,13 +224,13 @@ void apply_sense(void* p0, void* p1, void* p2, void* p3, void* p4) {
             copy_array_forward(p2, (void*) hdc, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) GNU_LINUX_CONSOLE_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
             // Sense incoming message.
-            apply_sense_message(p2, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) &apply_sense_gnu_linux_console);
+            apply_sense_message(p2, (void*) GNU_LINUX_CONSOLE_THREAD, (void*) &sense_gnu_linux_console);
         }
     }
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) WWW_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) WWW_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) WWW_CYBOL_CHANNEL);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
@@ -249,13 +249,13 @@ void apply_sense(void* p0, void* p1, void* p2, void* p3, void* p4) {
             copy_array_forward(p2, (void*) hdc, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) &i, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
             // Sense incoming message (http request or response).
-            apply_sense_message(p2, (void*) WWW_SERVICE_THREAD, (void*) &apply_sense_www_socket);
+            apply_sense_message(p2, (void*) WWW_SERVICE_THREAD, (void*) &sense_www_socket);
         }
     }
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-        compare_all_array((void*) &r, cmd, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, cmc, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL_COUNT);
+        compare_integer_equal((void*) &r, cmd, (void*) X_WINDOW_SYSTEM_CYBOL_CHANNEL);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
@@ -268,7 +268,7 @@ void apply_sense(void* p0, void* p1, void* p2, void* p3, void* p4) {
             copy_array_forward(p2, (void*) hdc, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) X_WINDOW_SYSTEM_HANDLER_DETAILS_COUNT_INTERNAL_MEMORY_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME);
 
             // Sense incoming message.
-            apply_sense_message(p2, (void*) X_WINDOW_SYSTEM_THREAD, (void*) &apply_sense_x_window_system);
+            apply_sense_message(p2, (void*) X_WINDOW_SYSTEM_THREAD, (void*) &sense_x_window_system);
         }
     }
 

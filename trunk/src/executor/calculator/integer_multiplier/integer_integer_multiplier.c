@@ -32,7 +32,7 @@
 #include "../../../constant/model/memory/boolean_memory_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/arithmetiser/integer_adder/integer_integer_adder.c"
+#include "../../../executor/calculator/integer_adder/integer_integer_adder.c"
 #include "../../../logger/logger.c"
 
 /**

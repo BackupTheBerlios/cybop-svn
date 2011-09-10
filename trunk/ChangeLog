@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-09-10  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Rename directory "executor/arithmetiser/" into "executor/calculator/"
+        * Move files from "applicator/live/sense/" to "executor/lifeguard/sensor/"
+        * Adapt files in directories "executor/lifeguard/" and "applicator/live/"
+
 2011-09-09  Christian Heller  <christian.heller@tuxtax.de>
 
         * Adapt files in directories "executor/maintainer/" and "applicator/maintain/"

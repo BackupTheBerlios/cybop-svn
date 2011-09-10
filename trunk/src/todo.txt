@@ -11,17 +11,17 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Adapt files in directory "executor/live/"
-        * Continue: Adapt files in directory "applicator/maintain/"
+        * Continue: Adapt files in directory "applicator/file/"
             and the other sub directories of "applicator/" upwards to the top
 
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,
             for faster processing within cyboi
-        * replace old abstractions with primitive abstractions
-            OR (better) just rename constants
-        * also convert ALL other standard models which are defined as constants
-            into simple integer values for faster processing inside cyboi
+        * replace old abstractions with primitive abstractions OR (better) just rename constants
+        * add primitive integer constants as counterpart to ALL cybol model constants,
+            for faster processing inside cyboi; think through categories first
+        * adapt function "startup_socket_get_host_address", variable "terminated address model"
+            in file "socket_starter.c" to new model constants
         * create new mime types for this, e.g. comparison/greater-or-equal etc.,
             once for cybol and once more for memory, and put these into constant/model/
 

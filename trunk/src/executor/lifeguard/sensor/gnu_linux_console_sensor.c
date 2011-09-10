@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef GNU_LINUX_CONSOLE_SENSE_SOURCE
-#define GNU_LINUX_CONSOLE_SENSE_SOURCE
+#ifndef GNU_LINUX_CONSOLE_SENSER_SOURCE
+#define GNU_LINUX_CONSOLE_SENSER_SOURCE
 
 #ifdef GNU_LINUX_OPERATING_SYSTEM
 
@@ -57,7 +57,7 @@
  * @param p2 the sleep time
  * @param p3 the input stream
  */
-void apply_sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
+void sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p3) {
 
     if (p3 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -212,9 +212,9 @@ void apply_sense_gnu_linux_console_message(void* p0, void* p1, void* p2, void* p
 /**
  * Senses gnu/linux console messages.
  *
- * @param p0 the internal memory
+ * @param p0 the internal memory array
  */
-void apply_sense_gnu_linux_console(void* p0) {
+void sense_gnu_linux_console(void* p0) {
 
     // CAUTION! DO NOT log this function call!
     // This function is executed within a thread, but the
@@ -223,22 +223,22 @@ void apply_sense_gnu_linux_console(void* p0) {
     // log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply sense gnu/linux console.");
 
     // The interrupt.
-    void** irq = NULL_POINTER_MEMORY_MODEL;
+    void* irq = *NULL_POINTER_MEMORY_MODEL;
     // The mutex.
-    void** mt = NULL_POINTER_MEMORY_MODEL;
+    void* mt = *NULL_POINTER_MEMORY_MODEL;
     // The sleep time.
-    void** st = NULL_POINTER_MEMORY_MODEL;
+    void* st = *NULL_POINTER_MEMORY_MODEL;
     // The input stream.
-    void** is = NULL_POINTER_MEMORY_MODEL;
+    void* is = *NULL_POINTER_MEMORY_MODEL;
 
     // Get interrupt.
-    get((void*) &irq, p0, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_forward((void*) &irq, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) GNU_LINUX_CONSOLE_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
     // Get mutex.
-    get((void*) &mt, p0, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_forward((void*) &mt, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) GNU_LINUX_CONSOLE_MUTEX_INTERNAL_MEMORY_MEMORY_NAME);
     // Get sleep time.
-    get((void*) &st, p0, (void*) GNU_LINUX_CONSOLE_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_forward((void*) &st, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) GNU_LINUX_CONSOLE_SLEEP_TIME_INTERNAL_MEMORY_MEMORY_NAME);
     // Get input stream.
-    get((void*) &is, p0, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_forward((void*) &is, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) GNU_LINUX_CONSOLE_INPUT_FILE_DESCRIPTOR_INTERNAL_MEMORY_MEMORY_NAME);
 
     while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
@@ -251,7 +251,7 @@ void apply_sense_gnu_linux_console(void* p0) {
         // and processed in the system signal handler procedure
         // (situated in the controller/checker.c module).
 
-        apply_sense_gnu_linux_console_message(*irq, *mt, *st, *is);
+        sense_gnu_linux_console_message(irq, mt, st, is);
     }
 
     // An implicit call to pthread_exit() is made when this thread
@@ -265,5 +265,5 @@ void apply_sense_gnu_linux_console(void* p0) {
 /* GNU_LINUX_OPERATING_SYSTEM */
 #endif
 
-/* GNU_LINUX_CONSOLE_SENSE_SOURCE */
+/* GNU_LINUX_CONSOLE_SENSER_SOURCE */
 #endif

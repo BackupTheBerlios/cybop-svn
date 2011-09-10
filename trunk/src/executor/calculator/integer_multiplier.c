@@ -19,12 +19,12 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: subtracter.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
+ * @version $RCSfile: multiplier.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_SUBTRACTER_SOURCE
-#define INTEGER_SUBTRACTER_SOURCE
+#ifndef INTEGER_MULTIPLIER_SOURCE
+#define INTEGER_MULTIPLIER_SOURCE
 
 #include <stdlib.h>
 #include <string.h>
@@ -32,43 +32,43 @@
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/integer_memory_model.c"
 #include "../../constant/model/memory/pointer_memory_model.c"
-#include "../../executor/arithmetiser/integer_subtracter/integer_integer_subtracter.c"
-//?? #include "../../executor/arithmetiser/integer_subtracter/pointer_integer_subtracter.c"
+#include "../../executor/calculator/integer_multiplier/integer_integer_multiplier.c"
+//?? #include "../../executor/calculator/integer_multiplier/pointer_integer_multiplier.c"
 #include "../../logger/logger.c"
 
 /**
- * Subtracts the source integer from the destination of the given abstraction.
+ * Multiplies the destination of the given abstraction with the source integer.
  *
  * @param p0 the destination (If of type "pointer", then hand over as reference!)
  * @param p1 the source integer
  * @param p2 the abstraction
  */
-void subtract_integer(void* p0, void* p1, void* p2) {
+void multiply_with_integer(void* p0, void* p1, void* p2) {
 
     if (p2 != *NULL_POINTER_MEMORY_MODEL) {
 
         int* a = (int*) p2;
 
-        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Subtract integer.");
+        log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Multiply with integer.");
 
         if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            subtract_integer_from_integer(p0, p1);
+            multiply_integer_with_integer(p0, p1);
 
         } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-//??            subtract_integer_from_pointer(p0, p1);
+//??            multiply_pointer_with_integer(p0, p1);
 
         } else {
 
-            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not subtract integer. The abstraction is unknown.");
+            log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not multiply with integer. The abstraction is unknown.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not subtract integer. The abstraction is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not multiply with integer. The abstraction is null.");
     }
 }
 
-/* INTEGER_SUBTRACTER_SOURCE */
+/* INTEGER_MULTIPLIER_SOURCE */
 #endif
