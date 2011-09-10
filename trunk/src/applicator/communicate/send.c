@@ -53,8 +53,11 @@
 /**
  * Sends a message in a special language.
  *
- * CAUTION! Do NOT rename this procedure to "send",
- * as that name is already used by socket functionality.
+ * CAUTION! Do NOT rename this function to "send",
+ * as that name is already used by low-level socket functionality.
+ *
+ * CAUTION! Do NOT rename this function to "write",
+ * as that name is already used for glibc library's output.
  *
  * Expected parametres:
  * - channel (required): the channel via which to send the message (e.g. http)

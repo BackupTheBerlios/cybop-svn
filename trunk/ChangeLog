@@ -26,6 +26,7 @@
         * Adapt files in directory "applicator/communicate/"
         * Move functionality of "applicator/communicate/send/" and "applicator/communicate/receive/"
             to "executor/communicator/sender/" and "executor/communicator/receiver/"
+        * Delete "executor/communicator/sender.c" and "executor/communicator/receiver.c"
 
 2011-09-09  Christian Heller  <christian.heller@tuxtax.de>
 

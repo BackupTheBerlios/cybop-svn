@@ -48,8 +48,11 @@
 /**
  * Receives a message via the given channel.
  *
- * CAUTION! Do NOT rename this procedure to "receive",
+ * CAUTION! Do NOT rename this function to "receive",
  * as that name is already used by low-level socket functionality.
+ *
+ * CAUTION! Do NOT rename this function to "read",
+ * as that name is already used for glibc library's input.
  *
  * CAUTION! Some file formats (like the German xDT format for medical data exchange)
  * contain both, the model AND the details, in one file. To cover these cases,
