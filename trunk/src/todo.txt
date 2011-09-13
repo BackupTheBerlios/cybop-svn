@@ -13,6 +13,7 @@
 
         * Continue files in "executor/calculator/", similar to "executor/comparator/",
             so that operands are processed as vectors and all types and operations considered
+        * Delete outdated files from "executor/calculator/"
         * Adapt files in directory "applicator/calculate/"
         * Delete "applicator/calculate/add/integer_add.c"
 
