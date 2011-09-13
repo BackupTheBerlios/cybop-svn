@@ -11,9 +11,8 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Provide new structure in "executor/calculator/" similar to "executor/comparator/",
-            so that operands are processed as vectors
-            and all types and operations considered
+        * Continue files in "executor/calculator/", similar to "executor/comparator/",
+            so that operands are processed as vectors and all types and operations considered
         * Adapt files in directory "applicator/calculate/"
         * Delete "applicator/calculate/add/integer_add.c"
 
