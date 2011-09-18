@@ -30,7 +30,7 @@
 #include "../../../constant/abstraction/operation/primitive_operation_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
-#include "../../../executor/calculator/integer_subtracter/integer_integer_subtracter.c"
+#include "../../../executor/calculator/integer/subtract_integer_calculator.c"
 #include "../../../executor/comparator/basic/value_comparator.c"
 #include "../../../executor/memoriser/reallocator/array_reallocator.c"
 #include "../../../executor/modifier/overwriter/array_overwriter.c"
@@ -80,19 +80,19 @@ void insert_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Add destination index.
-        add_integer((void*) &i, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &i, p4);
         // Add count.
-        add_integer((void*) &i, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &i, p3);
 
         // Add destination array count.
-        add_integer((void*) &c, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &c, p6);
         // Subtract destination index.
-        subtract_integer_from_integer((void*) &c, p4);
+        calculate_integer_subtract((void*) &c, p4);
 
         // Add destination array count.
-        add_integer((void*) &n, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &n, p6);
         // Add count of new elements to be inserted.
-        add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &n, p3);
 
         // The comparison result.
         int r = *NUMBER_0_INTEGER_MEMORY_MODEL;

@@ -13,9 +13,7 @@
 
         * Continue files in "executor/calculator/", similar to "executor/comparator/",
             so that operands are processed as vectors and all types and operations considered
-        * Delete outdated files from "executor/calculator/"
-        * Adapt files in directory "applicator/calculate/"
-        * Delete "applicator/calculate/add/integer_add.c"
+        * Rename file "add.c" into "calculate.c" in directory "applicator/calculate/"
 
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,

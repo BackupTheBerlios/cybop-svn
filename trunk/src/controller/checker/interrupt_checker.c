@@ -142,15 +142,15 @@ void check_interrupt(void* p0, void* p1, void* p2, void* p3) {
 
             // Get www service interrupt request.
             copy_integer((void*) &i, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
-            add_integer_to_integer((void*) &i, (void*) SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
+            calculate_integer_add((void*) &i, (void*) SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
             copy_array_forward(p0, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             // Get www service mutex.
             copy_integer((void*) &i, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
-            add_integer_to_integer((void*) &i, (void*) SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME);
+            calculate_integer_add((void*) &i, (void*) SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME);
             copy_array_forward(p1, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             // Get www service handler.
             copy_integer((void*) &i, (void*) WWW_BASE_INTERNAL_MEMORY_MEMORY_NAME);
-            add_integer_to_integer((void*) &i, (void*) SOCKET_HANDLER_INTERNAL_MEMORY_MEMORY_NAME);
+            calculate_integer_add((void*) &i, (void*) SOCKET_HANDLER_INTERNAL_MEMORY_MEMORY_NAME);
             copy_array_forward(p2, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
 
 //??    fwprintf(stdout, L"TEST detected www service irq: %i\n", *((int*) *irq));
@@ -170,15 +170,15 @@ void check_interrupt(void* p0, void* p1, void* p2, void* p3) {
 
             // Get cyboi service interrupt request.
             copy_integer((void*) &i, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
-            add_integer_to_integer((void*) &i, (void*) SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
+            calculate_integer_add((void*) &i, (void*) SOCKET_INTERRUPT_REQUEST_INTERNAL_MEMORY_MEMORY_NAME);
             copy_array_forward(p0, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             // Get cyboi service mutex.
             copy_integer((void*) &i, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
-            add_integer_to_integer((void*) &i, (void*) SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME);
+            calculate_integer_add((void*) &i, (void*) SOCKET_MUTEX_INTERNAL_MEMORY_MEMORY_NAME);
             copy_array_forward(p1, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
             // Get cyboi service handler.
             copy_integer((void*) &i, (void*) CYBOI_BASE_INTERNAL_MEMORY_MEMORY_NAME);
-            add_integer_to_integer((void*) &i, (void*) SOCKET_HANDLER_INTERNAL_MEMORY_MEMORY_NAME);
+            calculate_integer_add((void*) &i, (void*) SOCKET_HANDLER_INTERNAL_MEMORY_MEMORY_NAME);
             copy_array_forward(p2, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &i);
 
 fwprintf(stdout, L"TEST detected cyboi service irq: %i\n", *((int*) *irq));

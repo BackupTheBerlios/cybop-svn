@@ -16,6 +16,11 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-09-18  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Delete file "applicator/calculate/add/integer_add.c"
+        * Delete outdated files from "executor/calculator/"
+
 2011-09-13  Christian Heller  <christian.heller@tuxtax.de>
 
         * Create new structure for files in "executor/calculator/", similar to "executor/comparator/",

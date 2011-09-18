@@ -75,19 +75,19 @@ void remove_array_inside(void* p0, void* p1, void* p2, void* p3, void* p4, void*
         int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Add index.
-        add_integer((void*) &i, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &i, p3);
         // Add count.
-        add_integer((void*) &i, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &i, p2);
 
         // Add array count.
-        add_integer((void*) &c, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &c, p4);
         // Subtract move source index.
-        subtract_integer((void*) &c, (void*) &i, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_subtract((void*) &c, (void*) &i);
 
         // Add array count.
-        add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &n, p4);
         // Subtract count of elements to be removed.
-        subtract_integer((void*) &n, p2, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_subtract((void*) &n, p2);
 
         // Move current elements behind area to be removed towards the beginning of the array.
         // CAUTION! Move array elements starting from the FIRST since otherwise,

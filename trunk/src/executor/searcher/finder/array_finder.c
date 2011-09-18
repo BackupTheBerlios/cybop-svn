@@ -61,15 +61,15 @@ void find_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Add investigated array count.
-    add_integer((void*) &c, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    calculate_integer_add((void*) &c, p4);
     // Subtract searched array count.
-    subtract_integer((void*) &c, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    calculate_integer_subtract((void*) &c, p5);
     // Add number one.
     // CAUTION! This IS NECESSARY since otherwise, two arrays with
     // identical length will never be processed as the count is zero then.
     // Problems with the loop variable used as investigated array index
     // will NOT occur, since the loop is left before.
-    add_integer((void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+    calculate_integer_add((void*) &c, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
 
     while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 

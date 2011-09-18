@@ -641,20 +641,20 @@ void startup_socket(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, 
             // With the known type "short int" of the "sun_family" field and
             // a fixed size "108" of the "sun_path" field, the overall size of
             // the "sockaddr_un" structure can be calculated as sum.
-            add_integer_to_integer(as, (void*) SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
-            add_integer_to_integer(as, (void*) NUMBER_108_INTEGER_MEMORY_MODEL);
-            add_integer_to_integer(pas, (void*) SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
-            add_integer_to_integer(pas, (void*) NUMBER_108_INTEGER_MEMORY_MODEL);
+            calculate_integer_add(as, (void*) SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
+            calculate_integer_add(as, (void*) NUMBER_108_INTEGER_MEMORY_MODEL);
+            calculate_integer_add(pas, (void*) SIGNED_SHORT_INTEGER_INTEGRAL_TYPE_SIZE);
+            calculate_integer_add(pas, (void*) NUMBER_108_INTEGER_MEMORY_MODEL);
 
         } else if (an == AF_INET) {
 
-            add_integer_to_integer(as, (void*) INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
-            add_integer_to_integer(pas, (void*) INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+            calculate_integer_add(as, (void*) INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+            calculate_integer_add(pas, (void*) INTERNET_PROTOCOL_4_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
 
         } else if (an == AF_INET6) {
 
-            add_integer_to_integer(as, (void*) INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
-            add_integer_to_integer(pas, (void*) INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+            calculate_integer_add(as, (void*) INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
+            calculate_integer_add(pas, (void*) INTERNET_PROTOCOL_6_SOCKET_ADDRESS_SOCKET_TYPE_SIZE);
         }
 
         // Allocate socket address of this system.

@@ -32,8 +32,8 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../executor/calculator/integer_adder/pointer_integer_adder.c"
-#include "../../../executor/calculator/integer_multiplier/integer_integer_multiplier.c"
-#include "../../../executor/calculator/integer_subtracter/integer_integer_subtracter.c"
+#include "../../../executor/calculator/integer/multiply_integer_calculator.c"
+#include "../../../executor/calculator/integer/subtract_integer_calculator.c"
 #include "../../../logger/logger.c"
 #include "../../../variable/type_size/integral_type_size.c"
 
@@ -56,11 +56,11 @@ void move_position(void* p0, void* p1, void* p2, void* p3) {
     // Determine abstraction (type) size.
     determine_size((void*) &m, p2);
     // Calculate memory area.
-    multiply_integer_with_integer((void*) &m, p3);
+    calculate_integer_multiply((void*) &m, p3);
     // Add memory area to current position.
-    add_integer_to_pointer(p0, (void*) &m);
+    calculate_pointer_add(p0, (void*) &m);
     // Subtract count from remaining count.
-    subtract_integer_from_integer(p1, p3);
+    calculate_integer_subtract(p1, p3);
 }
 
 /* POSITION_MOVER_SOURCE */

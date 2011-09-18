@@ -121,7 +121,7 @@ void apply_remove(void* p0, int* p1, void* p2) {
     copy_integer((void*) &count, cmd);
     // Use the part model's last element index (count - 1), by default.
     copy_integer((void*) &index, pmc);
-    subtract_integer_from_integer((void*) &index, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
+    calculate_integer_subtract((void*) &index, (void*) NUMBER_1_INTEGER_MEMORY_MODEL);
     // Use the explicit index that was given as parametre.
     copy_integer((void*) &index, imd);
 

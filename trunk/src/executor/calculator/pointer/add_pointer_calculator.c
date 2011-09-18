@@ -19,24 +19,25 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: integer_adder.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
+ * @version $RCSfile: assigner.c,v $ $Revision: 1.1 $ $Date: 2009-10-06 21:25:26 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef INTEGER_INTEGER_ADDER_SOURCE
-#define INTEGER_INTEGER_ADDER_SOURCE
+#ifndef ADD_POINTER_CALCULATOR_SOURCE
+#define ADD_POINTER_CALCULATOR_SOURCE
 
-#include "../../../constant/model/log/message_log_model.c"
-#include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../logger/logger.c"
+#include "../../../../constant/model/log/message_log_model.c"
+#include "../../../../constant/model/memory/integer_memory_model.c"
+#include "../../../../constant/model/memory/pointer_memory_model.c"
+#include "../../../../logger/logger.c"
 
 /**
- * Adds the source integer to the destination integer.
+ * Adds the summand to the sum pointer.
  *
- * @param p0 the destination
- * @param p1 the source
+ * @param p0 the sum, which is the first summand BEFORE the operation
+ * @param p1 the summand
  */
-void add_integer_to_integer(void* p0, void* p1) {
+void calculate_pointer_add(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
@@ -44,22 +45,22 @@ void add_integer_to_integer(void* p0, void* p1) {
 
         if (p0 != *NULL_POINTER_MEMORY_MODEL) {
 
-            int* d = (int*) p0;
+            void** sum = (void**) p0;
 
-            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Add integer to integer.");
+            log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Calculate pointer add.");
 
-            *d = *d + *s;
+            *sum = *sum + *s;
 
         } else {
 
-            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add integer to integer. The destination is null.");
+            log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not calculate pointer add. The sum is null.");
         }
 
     } else {
 
-        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not add integer to integer. The source is null.");
+        log_terminated_message((void*) ERROR_LEVEL_LOG_MODEL, (void*) L"Could not calculate pointer add. The summand is null.");
     }
 }
 
-/* INTEGER_INTEGER_ADDER_SOURCE */
+/* ADD_POINTER_CALCULATOR_SOURCE */
 #endif

@@ -33,7 +33,7 @@
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
 #include "../../../constant/name/memory/fraction_memory_name.c"
-#include "../../../executor/calculator/integer_multiplier/integer_integer_multiplier.c"
+#include "../../../executor/calculator/integer/multiply_integer_calculator.c"
 #include "../../../executor/comparator/basic/integer_comparator.c"
 #include "../../../executor/modifier/copier/array_copier.c"
 #include "../../../logger/logger.c"
@@ -80,8 +80,8 @@ void compare_fraction(void* p0, void* p1, void* p2, void* p3) {
 
                     // Calculate expanded left numerator, right numerator.
                     // CAUTION! Multiplicate cross-wise.
-                    multiply_integer_with_integer((void*) &eln, (void*) &rd);
-                    multiply_integer_with_integer((void*) &ern, (void*) &ld);
+                    calculate_integer_multiply((void*) &eln, (void*) &rd);
+                    calculate_integer_multiply((void*) &ern, (void*) &ld);
 
                     compare_integer(p0, (void*) &eln, (void*) &ern, p3);
 

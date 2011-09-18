@@ -30,8 +30,6 @@
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/calculator/integer_adder.c"
-#include "../../../executor/calculator/integer_multiplier.c"
 #include "../../../executor/comparator/basic/integer_comparator.c"
 #include "../../../executor/memoriser/reallocator/array_reallocator.c"
 #include "../../../executor/memoriser/offset_adder.c"
@@ -98,9 +96,9 @@ void overwrite_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5,
         // to be added will deliver the new size of the destination array.
 
         // Add destination index.
-        add_integer((void*) &n, p4, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &n, p4);
         // Add count of new elements to be written over old elements.
-        add_integer((void*) &n, p3, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &n, p3);
 
         // The comparison result.
         int r = *FALSE_BOOLEAN_MEMORY_MODEL;

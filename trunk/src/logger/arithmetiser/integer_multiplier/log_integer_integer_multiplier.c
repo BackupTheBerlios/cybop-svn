@@ -39,7 +39,7 @@
  * @param p0 the destination integer
  * @param p1 the source integer
  */
-void log_multiply_integer_with_integer(void* p0, void* p1) {
+void log_calculate_integer_multiply(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 

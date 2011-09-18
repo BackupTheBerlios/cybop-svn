@@ -53,7 +53,7 @@ void log_add_integer(void* p0, void* p1, void* p2) {
 
         if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            log_add_integer_to_integer(p0, p1);
+            log_calculate_integer_add(p0, p1);
 
         } else if (*a == *POINTER_PRIMITIVE_MEMORY_ABSTRACTION) {
 

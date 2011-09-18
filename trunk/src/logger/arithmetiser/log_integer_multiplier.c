@@ -52,7 +52,7 @@ void log_multiply_with_integer(void* p0, void* p1, void* p2) {
 
         if (*a == *INTEGER_PRIMITIVE_MEMORY_ABSTRACTION) {
 
-            log_multiply_integer_with_integer(p0, p1);
+            log_calculate_integer_multiply(p0, p1);
 
         } else {
 

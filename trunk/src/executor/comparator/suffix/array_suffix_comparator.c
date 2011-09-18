@@ -28,12 +28,11 @@
 
 #include <stdlib.h>
 #include <string.h>
+
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
 #include "../../../constant/model/memory/pointer_memory_model.c"
-#include "../../../executor/calculator/integer_adder.c"
-#include "../../../executor/calculator/integer_multiplier.c"
 #include "../../../executor/modifier/copier/integer_copier.c"
 #include "../../../executor/memoriser/offset_adder.c"
 #include "../../../executor/modifier/copier/value_copier.c"
@@ -66,9 +65,9 @@ void compare_suffix_array(void* p0, void* p1, void* p2, void* p3, void* p4, void
         int i = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
         // Add left array count.
-        add_integer((void*) &i, p5, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_add((void*) &i, p5);
         // Subtract right array count.
-        subtract_integer((void*) &i, p6, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION);
+        calculate_integer_subtract((void*) &i, p6);
 
         // CAUTION! Hand over RIGHT array count as count,
         // since it is shorter or equal to that of the left array.

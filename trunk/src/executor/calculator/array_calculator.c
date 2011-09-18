@@ -81,7 +81,7 @@ void calculate_array_elements(void* p0, void* p1, void* p2, void* p3, void* p4) 
  * @param p2 the operation abstraction
  * @param p3 the operand abstraction
  * @param p4 the count
- * @param p5 the result (operand before operation) index
+ * @param p5 the result index
  * @param p6 the operand index
  */
 void calculate_array(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {

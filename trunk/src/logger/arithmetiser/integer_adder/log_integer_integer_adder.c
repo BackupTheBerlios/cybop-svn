@@ -35,7 +35,7 @@
  * @param p0 the destination
  * @param p1 the source
  */
-void log_add_integer_to_integer(void* p0, void* p1) {
+void log_calculate_integer_add(void* p0, void* p1) {
 
     if (p1 != *NULL_POINTER_MEMORY_MODEL) {
 
