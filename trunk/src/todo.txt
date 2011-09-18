@@ -26,6 +26,11 @@
         * create new mime types for this, e.g. comparison/greater-or-equal etc.,
             once for cybol and once more for memory, and put these into constant/model/
 
+        * Change year from 2011 to 2012 in comment block of all source code files
+        * Delete comment line " * @version $RCSfile: ..." at beginning of all source code files,
+            since "$" tags are specific to CVS but SVN is used since two years
+            and does not replace them automatically
+
         * Move all operation handlers one directory up??
         * Adapt "*_operation_handler.c"
 

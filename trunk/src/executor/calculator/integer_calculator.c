@@ -52,6 +52,16 @@ void calculate_integer(void* p0, void* p1, void* p2) {
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
+        compare_integer_equal((void*) &r, p2, (void*) ABSOLUTE_OPERATION_ABSTRACTION);
+
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
+
+            calculate_integer_absolute(p0, p1);
+        }
+    }
+
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
+
         compare_integer_equal((void*) &r, p2, (void*) ADD_OPERATION_ABSTRACTION);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
@@ -82,6 +92,16 @@ void calculate_integer(void* p0, void* p1, void* p2) {
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
+        compare_integer_equal((void*) &r, p2, (void*) NEGATE_OPERATION_ABSTRACTION);
+
+        if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
+
+            calculate_integer_negate(p0, p1);
+        }
+    }
+
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
+
         compare_integer_equal((void*) &r, p2, (void*) SUBTRACT_OPERATION_ABSTRACTION);
 
         if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
@@ -94,7 +114,7 @@ void calculate_integer(void* p0, void* p1, void* p2) {
 
         log_terminated_message((void*) WARNING_LEVEL_LOG_MODEL, (void*) L"Could not calculate integer. The operation abstraction is unknown.");
     }
-
+}
 
 /* INTEGER_CALCULATOR_SOURCE */
 #endif

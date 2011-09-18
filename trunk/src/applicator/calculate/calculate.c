@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef ADD_SOURCE
-#define ADD_SOURCE
+#ifndef CALCULATE_SOURCE
+#define CALCULATE_SOURCE
 
 #include "../../constant/abstraction/cybol/text_cybol_abstraction.c"
 #include "../../constant/abstraction/memory/primitive_memory_abstraction.c"
@@ -141,5 +141,5 @@ void apply_add(void* p0, int* p1, void* p2, void* p3, void* p4) {
     calculate_integer_add(s, s2);
 }
 
-/* ADD_SOURCE */
+/* CALCULATE_SOURCE */
 #endif

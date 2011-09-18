@@ -23,8 +23,8 @@
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef FRACTION_REDUCER_SOURCE
-#define FRACTION_REDUCER_SOURCE
+#ifndef REDUCE_FRACTION_CALCULATOR_SOURCE
+#define REDUCE_FRACTION_CALCULATOR_SOURCE
 
 #include "../../constant/model/log/message_log_model.c"
 #include "../../constant/model/memory/boolean_memory_model.c"
@@ -36,25 +36,25 @@
  *
  * @param p0 the fraction
  */
-void reduce_fraction(void* p0) {
+void calculate_fraction_reduce(void* p0) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Reduce fraction.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Calculate fraction reduce.");
 
     // The numerator and denominator.
-    int n = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    int d = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    void* n = *NULL_POINTER_MEMORY_MODEL;
+    void* d = *NULL_POINTER_MEMORY_MODEL;
 
     // Get numerator and denominator.
-    get((void*) &n, p1, (void*) NUMERATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
-    get((void*) &d, p1, (void*) DENOMINATOR_FRACTION_MEMORY_NAME, (void*) POINTER_MEMORY_ABSTRACTION, (void*) POINTER_MEMORY_ABSTRACTION_COUNT);
+    copy_array_forward((void*) &n, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NUMERATOR_FRACTION_MEMORY_NAME);
+    copy_array_forward((void*) &d, p0, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DENOMINATOR_FRACTION_MEMORY_NAME);
 
     // The result numerator and denominator.
     int rn = *NUMBER_0_INTEGER_MEMORY_MODEL;
     int rd = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
     // Determine absolute values.
-    int rn = abs(n);
-    int rd = abs(d);
+    calculate_integer_absolute((void*) &rn, n);
+    calculate_integer_absolute((void*) &rd, d);
 
     if ((rn > *NUMBER_1_INTEGER_MEMORY_MODEL) && (rd > *NUMBER_1_INTEGER_MEMORY_MODEL)) {
 
@@ -104,20 +104,31 @@ void reduce_fraction(void* p0) {
         }
     }
 
+    // Copy result numerator and denominator to fraction.
+    copy_integer(n, (void*) &rn);
+    copy_integer(d, (void*) &rd);
+
     //
     // Correct sign by setting it back to the original value + or -.
     //
 
-    if (n < *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    // The comparison results.
+    int r1 = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int r2 = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-        rn = rn * *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+    compare_integer_smaller((void*) &r1, n, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+    compare_integer_smaller((void*) &r2, d, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
+
+    if (r1 != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+
+        calculate_integer_negate((void*) &rn, (void*) &rn);
     }
 
-    if (d < *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r2 != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 
-        rd = rd * *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+        calculate_integer_negate((void*) &rd, (void*) &rd);
     }
 }
 
-/* FRACTION_REDUCER_SOURCE */
+/* REDUCE_FRACTION_CALCULATOR_SOURCE */
 #endif

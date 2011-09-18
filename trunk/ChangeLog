@@ -19,7 +19,10 @@
 2011-09-18  Christian Heller  <christian.heller@tuxtax.de>
 
         * Delete file "applicator/calculate/add/integer_add.c"
+        * Rename file "applicator/calculate/add.c" into "applicator/calculate/calculate.c"
         * Delete outdated files from "executor/calculator/"
+        * Add functions "calculate_fraction_reduce", "calculate_integer_absolute", "calculate_integer_negate"
+        * Fill new files in directory "executor/calculator/"
 
 2011-09-13  Christian Heller  <christian.heller@tuxtax.de>
 
