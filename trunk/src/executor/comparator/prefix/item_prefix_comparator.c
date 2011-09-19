@@ -26,8 +26,6 @@
 #ifndef ITEM_PREFIX_COMPARATOR_SOURCE
 #define ITEM_PREFIX_COMPARATOR_SOURCE
 
-#include <stdlib.h>
-#include <string.h>
 #include "../../../constant/abstraction/memory/primitive_memory_abstraction.c"
 #include "../../../constant/model/log/message_log_model.c"
 #include "../../../constant/model/memory/integer_memory_model.c"
@@ -61,11 +59,11 @@ void compare_prefix_item_element(void* p0, void* p1, void* p2, void* p3, void* p
     copy_array_forward((void*) &e, p1, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p6);
 
     // The comparison result.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int r = *FALSE_BOOLEAN_MEMORY_MODEL;
 
-    compare_integer((void*) &r, p6, (void*) DATA_ITEM_MEMORY_NAME, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
+    compare_integer_equal((void*) &r, p6, (void*) DATA_ITEM_MEMORY_NAME);
 
-    if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
         // This is a data item element.
 

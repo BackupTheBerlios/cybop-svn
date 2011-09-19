@@ -55,6 +55,8 @@ void compare_all_part_all(void* p0, void* p1, void* p2, void* p3);
  */
 void compare_part(void* p0, void* p1, void* p2, void* p3) {
 
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Compare part.");
+
     //
     // Recursively call a comparison function, which in turn
     // may call this comparison function and so forth.

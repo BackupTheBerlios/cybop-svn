@@ -48,21 +48,18 @@
  * Compares left and right parametre.
  *
  * Expected parametres:
- * - result (required): the knowledge model in which the comparison result is stored
- * - left (required): the left operand of the comparison
- * - right (required): the right operand of the comparison
+ * - result (required): the knowledge model, in which the result is stored (of abstraction boolean)
+ * - left (required): the left operand
+ * - right (required): the right operand
  * - operation (required): the kind of comparison (equal, greater, greater_or_equal, smaller, smaller_or_equal, unequal)
- * - abstraction (required): the operand abstraction
+ * - abstraction (required): the operand abstraction (left- and right parametre have to have the same abstraction)
  * - selection (required): the part of two text strings to be compared (all, prefix, suffix, subsequence)
  *
  * The "selection" parametre is actually only needed
  * for comparing models of abstraction "character".
  * However, this function relies on it, also if numbers are
  * to be compared, for finding the right comparison function to call.
- * Therefore, that parametre is REQUIRED.
- *
- * The result parametre's abstraction has to be BOOLEAN.
- * The left- and right parametres' abstractions have to be equal.
+ * Therefore, that parametre IS REQUIRED.
  *
  * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
  * @param p1 the parametres array count

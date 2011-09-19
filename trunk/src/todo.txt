@@ -11,10 +11,6 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Continue files in "executor/calculator/", similar to "executor/comparator/",
-            so that operands are processed as vectors and all types and operations considered
-        * Rename file "add.c" into "calculate.c" in directory "applicator/calculate/"
-
         * cybol operand abstraction given as parametre (model) may be
             converted into integer by creating a special mime type,
             for faster processing within cyboi

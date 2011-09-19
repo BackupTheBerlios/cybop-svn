@@ -39,16 +39,14 @@
 #include "../../logger/logger.c"
 
 /**
- * Adds two summands resulting in the sum.
- *
- * The summand_1 is added to the sum first and only
- * afterwards, the summand_2 is added to the sum.
+ * Calculates a result by applying the given operation to the given operands.
  *
  * Expected parametres:
- * - abstraction (required): the abstraction of the summand 1, summand 2 and sum parameters
- * - summand_1 (required): the first summand for the addition
- * - summand_2 (required): the second summand for the addition
- * - sum (required): the sum resulting from the addition
+ * - result (required): the knowledge model, in which the result is stored (of abstraction boolean)
+ * - left (required): the left operand
+ * - right (required): the right operand
+ * - operation (required): the kind of calculation (equal, greater, greater_or_equal, smaller, smaller_or_equal, unequal)
+ * - abstraction (required): the operand abstraction (left- and right parametre have to have the same abstraction)
  *
  * CAUTION! Do NOT use the "add" operation for characters!
  * They may be concatenated by using the "append" operation.
@@ -98,47 +96,62 @@
  * @param p1 the parametres array count
  * @param p2 the knowledge memory part
  */
-void apply_add(void* p0, int* p1, void* p2, void* p3, void* p4) {
+void apply_calculate(void* p0, int* p1, void* p2) {
 
-    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply add.");
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Apply calculate.");
 
-    // The abstraction part.
+    // The result part.
+    void* res = *NULL_POINTER_MEMORY_MODEL;
+    // The left operand part.
+    void* lo = *NULL_POINTER_MEMORY_MODEL;
+    // The right operand part.
+    void* ro = *NULL_POINTER_MEMORY_MODEL;
+    // The operation part.
+    void* o = *NULL_POINTER_MEMORY_MODEL;
+    // The operand abstraction part.
     void* a = *NULL_POINTER_MEMORY_MODEL;
-    // The summand 1 part.
-    void* s1 = *NULL_POINTER_MEMORY_MODEL;
-    // The summand 2 part.
-    void* s2 = *NULL_POINTER_MEMORY_MODEL;
-    // The sum part.
-    void* s = *NULL_POINTER_MEMORY_MODEL;
 
-    // The abstraction part model.
+    // The result part model.
+    void* resm = *NULL_POINTER_MEMORY_MODEL;
+    // The operation part model.
+    void* om = *NULL_POINTER_MEMORY_MODEL;
+    // The operand abstraction part model.
     void* am = *NULL_POINTER_MEMORY_MODEL;
 
-    // The abstraction part model data.
+    // The result part model data, count.
+    void* resmd = *NULL_POINTER_MEMORY_MODEL;
+    // The operation part model data, count.
+    void* omd = *NULL_POINTER_MEMORY_MODEL;
+    // The operand abstraction part model data, count.
     void* amd = *NULL_POINTER_MEMORY_MODEL;
 
-    // Get abstraction part.
-    get_name_array((void*) &a, p0, (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get summand 1 part.
-    get_name_array((void*) &s1, p0, (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_1_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get summand 2 part.
-    get_name_array((void*) &s2, p0, (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUMMAND_2_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT, p1);
-    // Get sum part.
-    get_name_array((void*) &s, p0, (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME, (void*) SUM_ADDITION_ARITHMETIC_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get result part.
+    get_name_array((void*) &res, p0, (void*) RESULT_COMPARE_OPERATION_CYBOL_NAME, (void*) RESULT_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get left operand part.
+    get_name_array((void*) &lo, p0, (void*) LEFT_OPERAND_COMPARE_OPERATION_CYBOL_NAME, (void*) LEFT_OPERAND_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get right operand part.
+    get_name_array((void*) &ro, p0, (void*) RIGHT_OPERAND_COMPARE_OPERATION_CYBOL_NAME, (void*) RIGHT_OPERAND_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get operation part.
+    get_name_array((void*) &o, p0, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
+    // Get operand abstraction part.
+    get_name_array((void*) &a, p0, (void*) OPERATOR_COMPARE_OPERATION_CYBOL_NAME, (void*) ABSTRACTION_COMPARE_OPERATION_CYBOL_NAME_COUNT, p1);
 
-    // Get abstraction part model.
+    // Get result part model.
+    copy_array_forward((void*) &resm, res, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get operation part model.
+    copy_array_forward((void*) &om, o, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    // Get operand abstraction part model.
     copy_array_forward((void*) &am, a, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
 
-    // Get abstraction part model data.
+    // Get result part model data, count.
+    copy_array_forward((void*) &resmd, resm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get operation part model data, count.
+    copy_array_forward((void*) &omd, om, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    // Get operand abstraction part model data, count.
     copy_array_forward((void*) &amd, am, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
 
-    //?? TODO: Distinguish operand abstraction here (integer, fraction etc.)!
-    if (amd == ...)
-
-    // Add first summand to sum.
-    calculate_integer_add(s, s1);
-    // Add second summand to sum.
-    calculate_integer_add(s, s2);
+    // Calculate result by applying operation to operands.
+    calculate_all_part(resmd, lo, ro, omd, amd);
 }
 
 /* CALCULATE_SOURCE */

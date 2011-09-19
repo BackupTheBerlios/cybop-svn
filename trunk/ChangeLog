@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-09-19  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Move files from "executor/calculator/" into "executor/calculator/basic/"
+        * Add directory "executor/calculator/all/", similar to directory "executor/comparator/all/"
+        * Update file "applicator/calculate/calculate.c"
+
 2011-09-18  Christian Heller  <christian.heller@tuxtax.de>
 
         * Delete file "applicator/calculate/add/integer_add.c"

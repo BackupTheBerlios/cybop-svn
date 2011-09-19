@@ -37,15 +37,29 @@
 #include "../../../logger/logger.c"
 
 /**
- * Calculates the part using the given operation.
+ * Calculates left- with right part.
  *
- * @param p0 the result
- * @param p1 the operand
- * @param p2 the operation abstraction
+ * Calculates only the parts' models.
+ * Does NOT consider both parts' name, abstraction, details.
+ *
+ * This is DEEP CALCULATION, i.e. all child nodes will be calculated as well.
+ *
+ * @param p0 the result (left unchanged in case of an error)
+ * @param p1 the left value
+ * @param p2 the right value
+ * @param p3 the operation abstraction
  */
 void calculate_part(void* p0, void* p1, void* p2) {
 
     log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Calculate part.");
+
+    //
+    // Recursively call a calculation function, which in turn
+    // may call this calculation function and so forth.
+    // This is necessary when processing knowledge tree hierarchies.
+    //
+
+    calculate_all_part_model(p0, p1, p2, p3);
 }
 
 /* PART_CALCULATOR_SOURCE */
