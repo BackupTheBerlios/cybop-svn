@@ -42,6 +42,9 @@
 /**
  * Runs a program.
  *
+ * Expected parametres:
+ * - programme: the programme to be run
+ *
  * @param p0 the parametres array (signal/ operation part details with pointers referencing parts)
  * @param p1 the parametres array count
  * @param p2 the knowledge memory part

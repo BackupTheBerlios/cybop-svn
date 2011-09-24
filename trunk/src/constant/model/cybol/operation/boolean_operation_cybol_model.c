@@ -27,22 +27,23 @@
 #define BOOLEAN_OPERATION_CYBOL_MODEL_SOURCE
 
 #include <stddef.h>
+
 #include "../../../../constant/model/memory/integer_memory_model.c"
 
-/** The not boolean operation cybol model. This is the ones complement (all bits negated). */
-static wchar_t NOT_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'n', L'o', L't'};
-static wchar_t* NOT_BOOLEAN_OPERATION_CYBOL_MODEL = NOT_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY;
-static int* NOT_BOOLEAN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+/** The and boolean operation cybol model. */
+static wchar_t AND_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'a', L'n', L'd'};
+static wchar_t* AND_BOOLEAN_OPERATION_CYBOL_MODEL = AND_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY;
+static int* AND_BOOLEAN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The neg boolean operation cybol model. This is the two's complement (all bits negated and added one). */
 static wchar_t NEG_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'n', L'e', L'g'};
 static wchar_t* NEG_BOOLEAN_OPERATION_CYBOL_MODEL = NEG_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY;
 static int* NEG_BOOLEAN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
-/** The and boolean operation cybol model. */
-static wchar_t AND_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'a', L'n', L'd'};
-static wchar_t* AND_BOOLEAN_OPERATION_CYBOL_MODEL = AND_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY;
-static int* AND_BOOLEAN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+/** The not boolean operation cybol model. This is the ones complement (all bits negated). */
+static wchar_t NOT_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'n', L'o', L't'};
+static wchar_t* NOT_BOOLEAN_OPERATION_CYBOL_MODEL = NOT_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY;
+static int* NOT_BOOLEAN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The or boolean operation cybol model. */
 static wchar_t OR_BOOLEAN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'o', L'r'};

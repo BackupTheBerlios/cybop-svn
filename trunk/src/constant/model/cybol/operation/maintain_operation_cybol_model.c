@@ -19,21 +19,26 @@
  * Cybernetics Oriented Programming (CYBOP) <http://www.cybop.org>
  * Christian Heller <christian.heller@tuxtax.de>
  *
- * @version $RCSfile: run_operation_cybol_model.c,v $ $Revision: 1.6 $ $Date: 2009-01-31 16:06:30 $ $Author: christian $
+ * @version $RCSfile: memory_operation_cybol_model.c,v $ $Revision: 1.5 $ $Date: 2009-01-31 16:06:30 $ $Author: christian $
  * @author Christian Heller <christian.heller@tuxtax.de>
  */
 
-#ifndef RUN_OPERATION_CYBOL_MODEL_SOURCE
-#define RUN_OPERATION_CYBOL_MODEL_SOURCE
+#ifndef MAINTAIN_OPERATION_CYBOL_MODEL_SOURCE
+#define MAINTAIN_OPERATION_CYBOL_MODEL_SOURCE
 
 #include <stddef.h>
 
 #include "../../../../constant/model/memory/integer_memory_model.c"
 
-/** The run operation cybol model. */
-static wchar_t RUN_OPERATION_CYBOL_MODEL_ARRAY[] = {L'r', L'u', L'n'};
-static wchar_t* RUN_OPERATION_CYBOL_MODEL = RUN_OPERATION_CYBOL_MODEL_ARRAY;
-static int* RUN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
+/** The shutdown maintain operation cybol model. */
+static wchar_t SHUTDOWN_MAINTAIN_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L'h', L'u', L't', L'd', L'o', L'w', L'n'};
+static wchar_t* SHUTDOWN_MAINTAIN_OPERATION_CYBOL_MODEL = SHUTDOWN_MAINTAIN_OPERATION_CYBOL_MODEL_ARRAY;
+static int* SHUTDOWN_MAINTAIN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_8_INTEGER_MEMORY_MODEL_ARRAY;
 
-/* RUN_OPERATION_CYBOL_MODEL_SOURCE */
+/** The startup maintain operation cybol model. */
+static wchar_t STARTUP_MAINTAIN_OPERATION_CYBOL_MODEL_ARRAY[] = {L's', L't', L'a', L'r', L't', L'u', L'p'};
+static wchar_t* STARTUP_MAINTAIN_OPERATION_CYBOL_MODEL = STARTUP_MAINTAIN_OPERATION_CYBOL_MODEL_ARRAY;
+static int* STARTUP_MAINTAIN_OPERATION_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
+
+/* MAINTAIN_OPERATION_CYBOL_MODEL_SOURCE */
 #endif

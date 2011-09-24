@@ -27,6 +27,7 @@
 #define FILE_OPERATION_CYBOL_MODEL_SOURCE
 
 #include <stddef.h>
+
 #include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The archive file operation cybol model. */
@@ -35,7 +36,7 @@ static wchar_t* ARCHIVE_FILE_OPERATION_CYBOL_MODEL = ARCHIVE_FILE_OPERATION_CYBO
 static int* ARCHIVE_FILE_OPERATION_CYBOL_MODEL_COUNT = NUMBER_7_INTEGER_MEMORY_MODEL_ARRAY;
 
 /**
- * The copy file operation cybol model.
+ * The copy_file operation cybol model.
  *
  * CAUTION! Its name must not be just "copy", because that is already used as memory operation!
  */

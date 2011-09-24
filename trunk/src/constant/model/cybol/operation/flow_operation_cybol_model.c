@@ -27,6 +27,7 @@
 #define FLOW_OPERATION_CYBOL_MODEL_SOURCE
 
 #include <stddef.h>
+
 #include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The branch flow operation cybol model. */

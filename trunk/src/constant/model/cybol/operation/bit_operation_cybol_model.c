@@ -27,6 +27,7 @@
 #define BIT_OPERATION_CYBOL_MODEL_SOURCE
 
 #include <stddef.h>
+
 #include "../../../../constant/model/memory/integer_memory_model.c"
 
 /** The shift left bit operation cybol model. It corresponds to "SHL" assembler command. */
