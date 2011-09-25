@@ -1,7 +1,7 @@
 <model>
     <part name="create_counter" channel="inline" abstraction="operation/plain" model="create">
         <property name="name" channel="inline" abstraction="text/plain" model="counter"/>
-        <property name="abstraction" channel="inline" abstraction="text/plain" model="compound"/>
+        <property name="abstraction" channel="inline" abstraction="text/abstraction" model="memory/compound"/>
         <property name="element" channel="inline" abstraction="text/plain" model="part"/>
     </part>
     <part name="create_break" channel="inline" abstraction="operation/plain" model="create">
@@ -29,9 +29,9 @@
         <property name="whole" channel="inline" abstraction="path/knowledge" model=".counter"/>
     </part>
     <part name="initialise_break" channel="inline" abstraction="operation/plain" model="copy">
-        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
-        <property name="source" channel="inline" abstraction="number/integer" model="0"/>
         <property name="destination" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
+        <property name="source" channel="inline" abstraction="number/integer" model="0"/>
+        <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>
     </part>
     <part name="initialise_count" channel="inline" abstraction="operation/plain" model="copy">
         <property name="abstraction" channel="inline" abstraction="text/plain" model="integer"/>

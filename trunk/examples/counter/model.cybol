@@ -1,8 +1,11 @@
 <model>
-    <part name="compare_count" channel="inline" abstraction="operation/plain" model="greater_or_equal">
+    <part name="compare_count" channel="inline" abstraction="operation/plain" model="compare">
+        <property name="result" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
         <property name="left" channel="inline" abstraction="path/knowledge" model=".counter.count"/>
         <property name="right" channel="inline" abstraction="path/knowledge" model=".counter.maximum"/>
-        <property name="result" channel="inline" abstraction="path/knowledge" model=".counter.break"/>
+        <property name="operation" channel="inline" abstraction="text/plain" model="greater_or_equal"/>
+        <property name="abstraction" channel="inline" abstraction="text/abstraction" model="number/integer"/>
+        <property name="selection" channel="inline" abstraction="path/knowledge" model="all"/>
     </part>
     <part name="print_number" channel="inline" abstraction="operation/plain" model="send">
         <property name="channel" channel="inline" abstraction="text/plain" model="shell"/>

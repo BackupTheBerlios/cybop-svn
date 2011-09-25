@@ -11,6 +11,18 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+        * Check why in "executor/converter/decoder/cybol_decoder.c",
+            "decode_cybol" is called once with "p0, p1, p2" and another time with "d, dc, ds"
+            --> how to hand over d as part and not array?
+        * Prepare "executor/converter/decoder/cybol_decoder.c" for converting
+            ALL abstractions and CERTAIN models from wchar_t into int
+        * Merge (?) "memory_abstraction.c" and "primitive_memory_abstraction.c"
+        * See "examples/counter/run.cybol"
+            <property name="abstraction" channel="inline" abstraction="text/abstraction" model="memory/compound"/>
+        * Is it possible to use primitives as abstraction inside cyboi? Rather yes.
+            The abstractions themselves have to be converted when decoding cybol files.
+            An abstraction "text/abstraction" may be used for that.
+
         * Provide operation integer constants in "constant/model/memory/",
             similar to those in "constant/model/cybol/operation/"
         * Convert cybol operand abstraction given as parametre (model) into integer,
