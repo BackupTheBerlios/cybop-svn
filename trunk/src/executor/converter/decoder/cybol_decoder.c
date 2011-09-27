@@ -87,15 +87,17 @@ void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6
  * | +-node_$1 | compound
  * ...
  *
- * @param p0 the destination whole
- * @param p1 the source part model data
- * @param p2 the source part model count
- * @param p3 the source part details data (an array with pointers referencing parts)
- * @param p4 the source part details count
+ * @param p0 the destination whole data (Hand over as reference!)
+ * @param p1 the destination whole count
+ * @param p2 the destination whole size
+ * @param p3 the source part model data
+ * @param p4 the source part model count
+ * @param p5 the source part details data
+ * @param p6 the source part details count
  */
-void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
+void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol node model.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
 
     // The source name, channel, abstraction, model part.
     void* sn = *NULL_POINTER_MEMORY_MODEL;
@@ -141,6 +143,19 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
     copy_array_forward((void*) &smmd, smm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &smmc, smm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
+    // The root node flag.
+    int r = *FALSE_BOOLEAN_MEMORY_MODEL;
+
+    // This is a root node if its details (name, channel, abstraction, model) are null.
+    // CAUTION! The details container itself DOES ALWAYS EXIST,
+    // so that it cannot be used for comparison here!
+    if ((sn == *NULL_POINTER_MEMORY_MODEL) && (sc == *NULL_POINTER_MEMORY_MODEL)
+        && (sa == *NULL_POINTER_MEMORY_MODEL) && (sm == *NULL_POINTER_MEMORY_MODEL)) {
+
+        // Set root node flag.
+        copy_integer((void*) &r, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
+    }
+
     // The source cyboi runtime abstraction.
     // CAUTION! It is needed to retrieve the abstraction of the part to be created.
     // Otherwise, it would not be known which part model to create.
@@ -156,21 +171,18 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Therefore, the abstraction has to be converted here.
     decode_abstraction((void*) &sra, samd, samc);
 
-/*??
-    fwprintf(stdout, L"TEST sra*: %i\n", sra);
-    fwprintf(stdout, L"TEST sra: %i\n", *((int*) sra));
-*/
-
     // The part.
     void* p = *NULL_POINTER_MEMORY_MODEL;
     // The part model, details.
     void* pm = *NULL_POINTER_MEMORY_MODEL;
     void* pd = *NULL_POINTER_MEMORY_MODEL;
-    // The part model, details data, count.
+    // The part model, details data, count, size.
     void* pmd = *NULL_POINTER_MEMORY_MODEL;
     void* pmc = *NULL_POINTER_MEMORY_MODEL;
+    void* pms = *NULL_POINTER_MEMORY_MODEL;
     void* pdd = *NULL_POINTER_MEMORY_MODEL;
     void* pdc = *NULL_POINTER_MEMORY_MODEL;
+    void* pds = *NULL_POINTER_MEMORY_MODEL;
 
     // Allocate part.
     allocate_part((void*) &p, (void*) NUMBER_0_INTEGER_MEMORY_MODEL, (void*) &sra);
@@ -180,18 +192,12 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // Get part model, details data, count.
     copy_array_forward((void*) &pmd, pm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &pmc, pm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &pms, pm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &pdd, pd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &pdc, pd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &pds, pd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
 
-    // The root node flag.
-    int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
-
-    // This is a root node if its name, channel, abstraction, model are null.
-    detect_cybol_root_node((void*) &r, *sn, *snc, *sc, *scc, *sa, *sac, *sm, *smc);
-
-//??    fwprintf(stdout, L"TEST r: %i\n", r);
-
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
         // This is NOT the root node.
         // Therefore, the node's details are processed.
@@ -201,7 +207,7 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
         // CAUTION! Use the cyboi RUNTIME abstraction as source here!
         overwrite_part_element(p, (void*) &sra, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
         // Receive and decode source model, details into part model, details.
-        receive_file_system((void*) &pmd, pmc, pms, (void*) &pdd, pdc, mods, smmd, smmc, scmd, scmc);
+        receive_file_system((void*) &pmd, pmc, pms, (void*) &pdd, pdc, pds, smmd, smmc, scmd, scmc);
     }
 
     // The source meta part.
@@ -218,18 +224,18 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
     // The loop variable.
     int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
     // The break flag.
-    int b = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    int b = *FALSE_BOOLEAN_MEMORY_MODEL;
 
     while (*TRUE_BOOLEAN_MEMORY_MODEL) {
 
         compare_integer_greater_or_equal((void*) &b, (void*) &j, p4);
 
-        if (b != *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (b != *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             break;
         }
 
-        // Get source meta part with index j from source part details.
+        // Get source meta part with index j from source part model.
         get_part_element((void*) &m, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) MODEL_PART_MEMORY_NAME);
         // Get source meta part model, details.
         copy_array_forward((void*) &mm, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
@@ -240,19 +246,19 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
         copy_array_forward((void*) &mdd, md, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
         copy_array_forward((void*) &mdc, md, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
-        if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+        if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
             // This is a standard part node and NOT the root node.
 
             // Decode the node's meta information (details),
             // by recursively calling this function itself.
-            decode_cybol((void*) &d, dc, ds, mmd, mmc, mdd, mdc);
+            decode_cybol((void*) &pdd, pdc, pds, mmd, mmc, mdd, mdc);
 
         } else {
 
             // This IS the root node.
             // Add the meta node model and details directly to the
-            // destination whole node (root).
+            // destination whole (root).
 
             // Decode the node's meta information (details),
             // by recursively calling this function itself.
@@ -263,13 +269,12 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4) {
         j++;
     }
 
-    if (r == *NUMBER_0_INTEGER_MEMORY_MODEL) {
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
         // This is NOT the root node.
 
         // Add part to whole (compound) model.
-        //?? OLD: append_compound_element_by_name(*dd, p1, p2, (void*) &n, nc, ns, a, ac, as, m, mc, ms, d, dc, ds);
-        append_part_element(p0, (void*) &p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+        overwrite_array(p0, (void*) &p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
     }
 }
 

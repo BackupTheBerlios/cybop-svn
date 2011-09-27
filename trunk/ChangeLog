@@ -16,6 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-09-27  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Continue "executor/converter/decoder/cybol_decoder.c"
+
 2011-09-24  Christian Heller  <christian.heller@tuxtax.de>
 
         * Adapt constants in "constant/model/cybol/operation/"

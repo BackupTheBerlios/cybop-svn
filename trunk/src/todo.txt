@@ -11,9 +11,9 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-        * Check why in "executor/converter/decoder/cybol_decoder.c",
-            "decode_cybol" is called once with "p0, p1, p2" and another time with "d, dc, ds"
-            --> how to hand over d as part and not array?
+        * Continue in "executor/converter/decoder/cybol_decoder.c":
+            convert model into runtime (integer) model;
+            factor out loop into an own function
         * Prepare "executor/converter/decoder/cybol_decoder.c" for converting
             ALL abstractions and CERTAIN models from wchar_t into int
         * Merge (?) "memory_abstraction.c" and "primitive_memory_abstraction.c"
