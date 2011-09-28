@@ -16,9 +16,10 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
-2011-09-27  Christian Heller  <christian.heller@tuxtax.de>
+2011-09-28  Christian Heller  <christian.heller@tuxtax.de>
 
-        * Continue "executor/converter/decoder/cybol_decoder.c"
+        * Structure code "executor/converter/decoder/cybol_decoder.c" into several functions
+        * Prepare conversion of cybol model into cyboi-internal runtime integer model constant
 
 2011-09-24  Christian Heller  <christian.heller@tuxtax.de>
 

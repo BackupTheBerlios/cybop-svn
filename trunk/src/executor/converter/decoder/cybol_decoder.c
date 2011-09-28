@@ -47,27 +47,6 @@
 void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6);
 
 /**
- * Decodes the cybol details.
- *
- * They represent the new part's model (part) hierarchy.
- *
- * CAUTION! What is the details in a parsed xml/cybol file
- * becomes the model in the cyboi-internal knowledge tree;
- * what is the model hierarchy in a parsed xml/cybol file
- * becomes the details (meta data) in the cyboi-internal knowledge tree.
- *
- * @param p0 the destination whole data (Hand over as reference!)
- * @param p1 the destination whole count
- * @param p2 the destination whole size
- * @param p3 the source part model data
- * @param p4 the source part model count
- * @param p5 the source part details data
- * @param p6 the source part details count
- */
-void decode_cybol_details(void* p0, void* p1, void* p2) {
-}
-
-/**
  * Decodes the cybol model elements.
  *
  * It represents the new part's details (meta) hierarchy.
@@ -150,41 +129,7 @@ void decode_cybol_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
 }
 
 /**
- * Decodes the cybol node.
- *
- * The source details handed over contain one node each for
- * name, channel, abstraction, model.
- *
- * Example:
- *
- *  | compound [The root node has no name.]
- * +-node_$0 | compound
- * | +-node_$0 | compound
- * | | +-node_$0 | compound
- * | | | #- | wide_character | property [This is the xml tag name.]
- * | | | #-name | wide_character | left
- * | | | #-channel | wide_character | inline
- * | | | #-abstraction | wide_character | path/knowledge
- * | | | #-model | wide_character | .counter.count
- * | | +-node_$1 | compound
- * | | | #- | wide_character | property [This is the xml tag name.]
- * | | | #-name | wide_character | right
- * | | | #-channel | wide_character | inline
- * | | | #-abstraction | wide_character | path/knowledge
- * | | | #-model | wide_character | .counter.maximum
- * | | +-node_$2 | compound
- * | | | #- | wide_character | property [This is the xml tag name.]
- * | | | #-name | wide_character | result
- * | | | #-channel | wide_character | inline
- * | | | #-abstraction | wide_character | path/knowledge
- * | | | #-model | wide_character | .counter.break
- * | | #- | wide_character | part [This is the xml tag name.]
- * | | #-name | wide_character | compare_count
- * | | #-channel | wide_character | inline
- * | | #-abstraction | wide_character | operation/plain
- * | | #-model | wide_character | greater_or_equal
- * | +-node_$1 | compound
- * ...
+ * Decodes the cybol standard node.
  *
  * @param p0 the destination whole data (Hand over as reference!)
  * @param p1 the destination whole count
@@ -194,9 +139,13 @@ void decode_cybol_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
  * @param p5 the source part details data
  * @param p6 the source part details count
  */
-void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
+void decode_cybol_node_standard(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol node standard.");
+
+    //
+    // Identify source part details parametres.
+    //
 
     // The source name, channel, abstraction, model part.
     void* sn = *NULL_POINTER_MEMORY_MODEL;
@@ -242,19 +191,6 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     copy_array_forward((void*) &smmd, smm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &smmc, smm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
 
-    // The root node flag.
-    int r = *FALSE_BOOLEAN_MEMORY_MODEL;
-
-    // This is a root node if its details (name, channel, abstraction, model) are null.
-    // CAUTION! The details container itself DOES ALWAYS EXIST,
-    // so that it cannot be used for comparison here!
-    if ((sn == *NULL_POINTER_MEMORY_MODEL) && (sc == *NULL_POINTER_MEMORY_MODEL)
-        && (sa == *NULL_POINTER_MEMORY_MODEL) && (sm == *NULL_POINTER_MEMORY_MODEL)) {
-
-        // Set root node flag.
-        copy_integer((void*) &r, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
-    }
-
     // The source cyboi runtime abstraction.
     // CAUTION! It is needed to retrieve the abstraction of the part to be created.
     // Otherwise, it would not be known which part model to create.
@@ -262,13 +198,27 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     // because the part model has not been allocated yet when reading the abstraction
     // for the first time.
     int sra = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+/*??
+    // The source cyboi runtime model.
+    // CAUTION! Certain operations expect well-defined parametres,
+    // which are defined as constant inside cyboi.
+    int srm = *NUMBER_MINUS_1_INTEGER_MEMORY_MODEL;
+*/
 
-    // Decode cybol source abstraction into cyboi runtime abstraction.
-    // (1) A cybol abstraction is of type "wchar_t"; a cyboi abstraction of type "int".
+    // Decode cybol source abstraction into cyboi runtime abstraction constant.
+    // (1) A cybol abstraction is of type "wchar_t";
+    //     a cyboi-internal abstraction of type "int".
     // (2) Both are not always equal in their meaning.
     // For example, an "xdt" file is converted into a "part".
     // Therefore, the abstraction has to be converted here.
     decode_abstraction((void*) &sra, samd, samc);
+
+    //
+    // Create new part.
+    //
+    // CAUTION! This may only be done AFTER having retrieved the source
+    // abstraction, since that is needed for allocating the new part.
+    //
 
     // The part.
     void* p = *NULL_POINTER_MEMORY_MODEL;
@@ -296,45 +246,184 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
     copy_array_forward((void*) &pdc, pd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
     copy_array_forward((void*) &pds, pd, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) SIZE_ITEM_MEMORY_NAME);
 
-    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
+    //
+    // Process source part details.
+    //
+    // CAUTION! What is the details in a parsed xml/cybol file,
+    // becomes the model in the cyboi-internal knowledge tree.
+    //
 
-        // This is NOT the root node.
-        // Therefore, the node's details are processed.
+    // Fill part name.
+    overwrite_part_element(p, snmd, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, snmc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
+    // Fill part abstraction.
+    // CAUTION! Use the cyboi RUNTIME abstraction constant as source here!
+    overwrite_part_element(p, (void*) &sra, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
 
-        // Fill part.
-        overwrite_part_element(p, snmd, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION, snmc, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) NAME_PART_MEMORY_NAME);
-        // CAUTION! Use the cyboi RUNTIME abstraction as source here!
-        overwrite_part_element(p, (void*) &sra, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) ABSTRACTION_PART_MEMORY_NAME);
+/*??
+    // The cyboi model flag.
+    // It indicates whether or not the given model
+    // is a cyboi-internal constant.
+    int f = *FALSE_BOOLEAN_MEMORY_MODEL;
+
+    compare_integer_equal((void*) &f, (void*) &sra, (void*) CYBOI_MODEL_PRIMITIVE_MEMORY_ABSTRACTION);
+
+    if (f != *FALSE_BOOLEAN_MEMORY_MODEL) {
+
+        // Decode cybol source model into cyboi runtime model constant.
+        decode_model((void*) &srm, smmd, smmc);
+
+        // Fill part model.
+        // CAUTION! Use the cyboi RUNTIME model constant as source here!
+        overwrite_part_element(p, (void*) &srm, (void*) INTEGER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+
+    } else {
+*/
+
+        // Fill part model and details.
         // Receive and decode source model, details into part model, details.
         receive_file_system((void*) &pmd, pmc, pms, (void*) &pdd, pdc, pds, smmd, smmc, scmd, scmc);
-    }
+/*??
+}
+*/
+
+    //
+    // Process source part model.
+    //
+    // CAUTION! What is the model hierarchy in a parsed xml/cybol file,
+    // becomes the details (meta data) in the cyboi-internal knowledge tree.
+    //
+
+    // Fill part details.
+    // Decode the new part's meta information,
+    // by recursively calling this function itself.
+    decode_cybol_model((void*) &pdd, pdc, pds, p3, p4);
+
+    //
+    // Add part to whole (compound) model.
+    //
+
+    overwrite_array(p0, (void*) &p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
+}
+
+/**
+ * Decodes the cybol root node.
+ *
+ * @param p0 the destination whole data (Hand over as reference!)
+ * @param p1 the destination whole count
+ * @param p2 the destination whole size
+ * @param p3 the source part model data
+ * @param p4 the source part model count
+ * @param p5 the source part model tree root node flag
+ */
+void decode_cybol_node_root(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol node root.");
+
+    // Reset root node flag, so that
+    // child nodes are processed normally.
+    copy_integer(p5, (void*) FALSE_BOOLEAN_MEMORY_MODEL);
+
+    //
+    // Process source part model.
+    //
+
+    // Decode the new part's meta information,
+    // by recursively calling this function itself.
+    decode_cybol_model(p0, p1, p2, p3, p4);
+}
+
+/**
+ * Decodes the cybol element.
+ *
+ * @param p0 the destination whole data (Hand over as reference!)
+ * @param p1 the destination whole count
+ * @param p2 the destination whole size
+ * @param p3 the source part model data
+ * @param p4 the source part model count
+ * @param p5 the source part details data
+ * @param p6 the source part details count
+ * @param p7 the source part model tree root node flag
+ */
+void decode_cybol_element(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7) {
+
+    log_terminated_message((void*) DEBUG_LEVEL_LOG_MODEL, (void*) L"Decode cybol element.");
+
+    // The root node flag.
+    int r = *FALSE_BOOLEAN_MEMORY_MODEL;
+
+    compare_integer_unequal((void*) &r, p7, (void*) NUMBER_0_INTEGER_MEMORY_MODEL);
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
         // This is a standard part node and NOT the root node.
 
-        // Decode the node's meta information (details),
-        // by recursively calling this function itself.
-        decode_cybol_model((void*) &pdd, pdc, pds, p3, p4);
+        decode_cybol_node_standard(p0, p1, p2, p3, p4, p5, p6);
 
     } else {
 
         // This IS the root node.
-        // Add the meta node model and details directly to the
-        // destination whole (root).
 
-        // Decode the node's meta information (details),
-        // by recursively calling this function itself.
-        decode_cybol_model(p0, p1, p2, p3, p4);
+        // Add the meta node model and details directly
+        // to destination whole (root).
+        decode_cybol_node_root(p0, p1, p2, p3, p4, p7);
     }
+}
 
-    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
+/**
+ * Decodes the cybol knowledge model.
+ *
+ * The source details handed over contain one node each for
+ * name, channel, abstraction, model.
+ *
+ * Example:
+ *
+ *  | compound [The root node has no name.]
+ * +-node_$0 | compound
+ * | +-node_$0 | compound
+ * | | +-node_$0 | compound
+ * | | | #- | wide_character | property [This is the xml tag name.]
+ * | | | #-name | wide_character | left
+ * | | | #-channel | wide_character | inline
+ * | | | #-abstraction | wide_character | path/knowledge
+ * | | | #-model | wide_character | .counter.count
+ * | | +-node_$1 | compound
+ * | | | #- | wide_character | property [This is the xml tag name.]
+ * | | | #-name | wide_character | right
+ * | | | #-channel | wide_character | inline
+ * | | | #-abstraction | wide_character | path/knowledge
+ * | | | #-model | wide_character | .counter.maximum
+ * | | +-node_$2 | compound
+ * | | | #- | wide_character | property [This is the xml tag name.]
+ * | | | #-name | wide_character | result
+ * | | | #-channel | wide_character | inline
+ * | | | #-abstraction | wide_character | path/knowledge
+ * | | | #-model | wide_character | .counter.break
+ * | | #- | wide_character | part [This is the xml tag name.]
+ * | | #-name | wide_character | compare_count
+ * | | #-channel | wide_character | inline
+ * | | #-abstraction | wide_character | operation/plain
+ * | | #-model | wide_character | greater_or_equal
+ * | +-node_$1 | compound
+ * ...
+ * | #- | wide_character | model [This is the xml tag name.]
+ *
+ * @param p0 the destination whole data (Hand over as reference!)
+ * @param p1 the destination whole count
+ * @param p2 the destination whole size
+ * @param p3 the source part model data
+ * @param p4 the source part model count
+ * @param p5 the source part details data
+ * @param p6 the source part details count
+ */
+void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6) {
 
-        // This is NOT the root node.
+    log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Decode cybol.");
 
-        // Add part to whole (compound) model.
-        overwrite_array(p0, (void*) &p, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, p1, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p1, p2, (void*) TRUE_BOOLEAN_MEMORY_MODEL);
-    }
+    // The source part model tree root node flag.
+    // CAUTION! It is necessary to identify the root node.
+    int f = *TRUE_BOOLEAN_MEMORY_MODEL;
+
+    decode_cybol_element(p0, p1, p2, p3, p4, p5, p6, (void*) &f);
 }
 
 /* CYBOL_DECODER_SOURCE */
