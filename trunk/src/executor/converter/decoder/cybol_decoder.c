@@ -44,11 +44,110 @@
 // Forward declarations.
 //
 
-void communicate_receiving_with_parameters(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6,
-    void* p7, void* p8, void* p9, void* p10, void* p11, void* p12, void* p13, void* p14, void* p15, void* p16,
-    void* p17, void* p18, void* p19, void* p20, void* p21, void* p22, void* p23);
+void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6);
 
-void decode(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9, void* p10, void* p11);
+/**
+ * Decodes the cybol details.
+ *
+ * They represent the new part's model (part) hierarchy.
+ *
+ * CAUTION! What is the details in a parsed xml/cybol file
+ * becomes the model in the cyboi-internal knowledge tree;
+ * what is the model hierarchy in a parsed xml/cybol file
+ * becomes the details (meta data) in the cyboi-internal knowledge tree.
+ *
+ * @param p0 the destination whole data (Hand over as reference!)
+ * @param p1 the destination whole count
+ * @param p2 the destination whole size
+ * @param p3 the source part model data
+ * @param p4 the source part model count
+ * @param p5 the source part details data
+ * @param p6 the source part details count
+ */
+void decode_cybol_details(void* p0, void* p1, void* p2) {
+}
+
+/**
+ * Decodes the cybol model elements.
+ *
+ * It represents the new part's details (meta) hierarchy.
+ *
+ * CAUTION! What is the details in a parsed xml/cybol file
+ * becomes the model in the cyboi-internal knowledge tree;
+ * what is the model hierarchy in a parsed xml/cybol file
+ * becomes the details (meta data) in the cyboi-internal knowledge tree.
+ *
+ * @param p0 the destination data (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source data
+ * @param p4 the source index
+ */
+void decode_cybol_model_elements(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    // The source meta part.
+    void* m = *NULL_POINTER_MEMORY_MODEL;
+    // The source meta part model, details.
+    void* mm = *NULL_POINTER_MEMORY_MODEL;
+    void* md = *NULL_POINTER_MEMORY_MODEL;
+    // The source meta part model, details data, count.
+    void* mmd = *NULL_POINTER_MEMORY_MODEL;
+    void* mmc = *NULL_POINTER_MEMORY_MODEL;
+    void* mdd = *NULL_POINTER_MEMORY_MODEL;
+    void* mdc = *NULL_POINTER_MEMORY_MODEL;
+
+    // Get source meta part with given index from source part model.
+    get_part_element((void*) &m, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, p4, (void*) MODEL_PART_MEMORY_NAME);
+    // Get source meta part model, details.
+    copy_array_forward((void*) &mm, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
+    copy_array_forward((void*) &md, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
+    // Get source meta part model, details data, count.
+    copy_array_forward((void*) &mmd, mm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &mmc, mm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &mdd, md, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
+    copy_array_forward((void*) &mdc, md, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
+
+    decode_cybol(p0, p1, p2, mmd, mmc, mdd, mdc);
+}
+
+/**
+ * Decodes the cybol model.
+ *
+ * It represents the new part's details (meta) hierarchy.
+ *
+ * CAUTION! What is the details in a parsed xml/cybol file
+ * becomes the model in the cyboi-internal knowledge tree;
+ * what is the model hierarchy in a parsed xml/cybol file
+ * becomes the details (meta data) in the cyboi-internal knowledge tree.
+ *
+ * @param p0 the destination data (Hand over as reference!)
+ * @param p1 the destination count
+ * @param p2 the destination size
+ * @param p3 the source data
+ * @param p4 the source count
+ */
+void decode_cybol_model(void* p0, void* p1, void* p2, void* p3, void* p4) {
+
+    // The loop variable.
+    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
+    // The break flag.
+    int b = *FALSE_BOOLEAN_MEMORY_MODEL;
+
+    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
+
+        compare_integer_greater_or_equal((void*) &b, (void*) &j, p4);
+
+        if (b != *FALSE_BOOLEAN_MEMORY_MODEL) {
+
+            break;
+        }
+
+        decode_cybol_model_elements(p0, p1, p2, p3, (void*) &j);
+
+        // Increment loop variable.
+        j++;
+    }
+}
 
 /**
  * Decodes the cybol node.
@@ -210,63 +309,23 @@ void decode_cybol(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, vo
         receive_file_system((void*) &pmd, pmc, pms, (void*) &pdd, pdc, pds, smmd, smmc, scmd, scmc);
     }
 
-    // The source meta part.
-    void* m = *NULL_POINTER_MEMORY_MODEL;
-    // The source meta part model, details.
-    void* mm = *NULL_POINTER_MEMORY_MODEL;
-    void* md = *NULL_POINTER_MEMORY_MODEL;
-    // The source meta part model, details data, count.
-    void* mmd = *NULL_POINTER_MEMORY_MODEL;
-    void* mmc = *NULL_POINTER_MEMORY_MODEL;
-    void* mdd = *NULL_POINTER_MEMORY_MODEL;
-    void* mdc = *NULL_POINTER_MEMORY_MODEL;
+    if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
 
-    // The loop variable.
-    int j = *NUMBER_0_INTEGER_MEMORY_MODEL;
-    // The break flag.
-    int b = *FALSE_BOOLEAN_MEMORY_MODEL;
+        // This is a standard part node and NOT the root node.
 
-    while (*TRUE_BOOLEAN_MEMORY_MODEL) {
+        // Decode the node's meta information (details),
+        // by recursively calling this function itself.
+        decode_cybol_model((void*) &pdd, pdc, pds, p3, p4);
 
-        compare_integer_greater_or_equal((void*) &b, (void*) &j, p4);
+    } else {
 
-        if (b != *FALSE_BOOLEAN_MEMORY_MODEL) {
+        // This IS the root node.
+        // Add the meta node model and details directly to the
+        // destination whole (root).
 
-            break;
-        }
-
-        // Get source meta part with index j from source part model.
-        get_part_element((void*) &m, p3, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) &j, (void*) MODEL_PART_MEMORY_NAME);
-        // Get source meta part model, details.
-        copy_array_forward((void*) &mm, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) MODEL_PART_MEMORY_NAME);
-        copy_array_forward((void*) &md, m, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DETAILS_PART_MEMORY_NAME);
-        // Get source meta part model, details data, count.
-        copy_array_forward((void*) &mmd, mm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
-        copy_array_forward((void*) &mmc, mm, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
-        copy_array_forward((void*) &mdd, md, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) DATA_ITEM_MEMORY_NAME);
-        copy_array_forward((void*) &mdc, md, (void*) POINTER_PRIMITIVE_MEMORY_ABSTRACTION, (void*) PRIMITIVE_MEMORY_MODEL_COUNT, (void*) VALUE_PRIMITIVE_MEMORY_NAME, (void*) COUNT_ITEM_MEMORY_NAME);
-
-        if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {
-
-            // This is a standard part node and NOT the root node.
-
-            // Decode the node's meta information (details),
-            // by recursively calling this function itself.
-            decode_cybol((void*) &pdd, pdc, pds, mmd, mmc, mdd, mdc);
-
-        } else {
-
-            // This IS the root node.
-            // Add the meta node model and details directly to the
-            // destination whole (root).
-
-            // Decode the node's meta information (details),
-            // by recursively calling this function itself.
-            decode_cybol(p0, p1, p2, mmd, mmc, mdd, mdc);
-        }
-
-        // Increment loop variable.
-        j++;
+        // Decode the node's meta information (details),
+        // by recursively calling this function itself.
+        decode_cybol_model(p0, p1, p2, p3, p4);
     }
 
     if (r == *FALSE_BOOLEAN_MEMORY_MODEL) {

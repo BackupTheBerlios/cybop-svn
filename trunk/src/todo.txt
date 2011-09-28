@@ -13,7 +13,8 @@
 
         * Continue in "executor/converter/decoder/cybol_decoder.c":
             convert model into runtime (integer) model;
-            factor out loop into an own function
+            factor out "decode_cybol_details" into an own function
+            (as done with "model" loop before)
         * Prepare "executor/converter/decoder/cybol_decoder.c" for converting
             ALL abstractions and CERTAIN models from wchar_t into int
         * Merge (?) "memory_abstraction.c" and "primitive_memory_abstraction.c"
