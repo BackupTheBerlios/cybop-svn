@@ -170,18 +170,13 @@ void receive_file(void* p0, void* p1, void* p2, void* p3, void* p4) {
 /**
  * Applies the receive file system operation.
  *
- * @param p0 the destination model (Hand over as reference!)
- * @param p1 the destination model count
- * @param p2 the destination model size
- * @param p3 the destination details (Hand over as reference!)
- * @param p4 the destination details count
- * @param p5 the destination details size
- * @param p6 the message (file name)
- * @param p7 the message (file name) count
- * @param p8 the language
- * @param p9 the language count
+ * @param p0 the destination model item (Hand over as item, since size may change!)
+ * @param p1 the destination details item (Hand over as item, since size may change!)
+ * @param p2 the source data (file name)
+ * @param p3 the source count
+ * @param p4 the abstraction
  */
-void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void* p5, void* p6, void* p7, void* p8, void* p9) {
+void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     log_terminated_message((void*) INFORMATION_LEVEL_LOG_MODEL, (void*) L"Receive file system.");
 
@@ -194,7 +189,7 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     allocate_array((void*) &ea, (void*) &es, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Write file into encoded array.
-    receive_data((void*) &ea, (void*) &ec, (void*) &es, p6, p7, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, (void*) FILE_SYSTEM_CYBOL_CHANNEL, (void*) FILE_SYSTEM_CYBOL_CHANNEL_COUNT);
+    receive_file((void*) &ea, (void*) &ec, (void*) &es, p6, p7);
 
 //??fwprintf(stdout, L"TEST char: %s\n", (char*) ea);
 
@@ -215,7 +210,7 @@ void receive_file_system(void* p0, void* p1, void* p2, void* p3, void* p4, void*
     deallocate_array((void*) &ea, (void*) &es, (void*) CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);
 
     // Deserialise serialised wide character array into destination knowledge model.
-    decode(p0, p1, p2, p3, p4, p5, da, (void*) &dc, *NULL_POINTER_MEMORY_MODEL, *NULL_POINTER_MEMORY_MODEL, p8, p9);
+    decode(p0, p1, da, (void*) &dc, p4);
 
     // Deallocate decoded array.
     deallocate_array((void*) &da, (void*) &ds, (void*) WIDE_CHARACTER_PRIMITIVE_MEMORY_ABSTRACTION);

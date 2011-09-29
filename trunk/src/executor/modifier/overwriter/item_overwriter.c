@@ -67,7 +67,7 @@ void overwrite_item_element(void* p0, void* p1, void* p2, void* p3, void* p4, vo
     // The comparison result.
     int r = *NUMBER_0_INTEGER_MEMORY_MODEL;
 
-    compare_integer((void*) &r, p7, (void*) DATA_ITEM_MEMORY_NAME, (void*) EQUAL_PRIMITIVE_OPERATION_ABSTRACTION);
+    compare_integer_equal((void*) &r, p7, (void*) DATA_ITEM_MEMORY_NAME);
 
     if (r != *NUMBER_0_INTEGER_MEMORY_MODEL) {
 

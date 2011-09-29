@@ -67,7 +67,8 @@ void append_item_element(void* p0, void* p1, void* p2, void* p3, void* p4) {
 
     // Append source array to destination item data array.
     // CAUTION! Use destination item count as destination index.
-    overwrite_item_element(p0, p1, p2, p3, c, p4, (void*) DATA_ITEM_MEMORY_NAME);
+    // CAUTION! Set adjust flag since destination gets extended by append.
+    overwrite_item_element(p0, p1, p2, p3, c, p4, (void*) TRUE_BOOLEAN_MEMORY_MODEL, (void*) DATA_ITEM_MEMORY_NAME);
 }
 
 /**

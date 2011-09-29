@@ -30,6 +30,7 @@
 #include "../../constant/model/memory/integer_memory_model.c"
 
 /** The cyboi cybol channel. */
+/*??
 static wchar_t CYBOI_CYBOL_CHANNEL_ARRAY[] = {L'c', L'y', L'b', L'o', L'i'};
 static wchar_t* CYBOI_CYBOL_CHANNEL = CYBOI_CYBOL_CHANNEL_ARRAY;
 static int* CYBOI_CYBOL_CHANNEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
@@ -40,6 +41,7 @@ static wchar_t* FILE_SYSTEM_CYBOL_CHANNEL = FILE_SYSTEM_CYBOL_CHANNEL_ARRAY;
 static int* FILE_SYSTEM_CYBOL_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The file transfer protocol (ftp) cybol channel. */
+/*??
 static wchar_t FTP_CYBOL_CHANNEL_ARRAY[] = {L'f', L't', L'p'};
 static wchar_t* FTP_CYBOL_CHANNEL = FTP_CYBOL_CHANNEL_ARRAY;
 static int* FTP_CYBOL_CHANNEL_COUNT = NUMBER_3_INTEGER_MEMORY_MODEL_ARRAY;
@@ -50,6 +52,7 @@ static wchar_t* GNU_LINUX_CONSOLE_CYBOL_CHANNEL = GNU_LINUX_CONSOLE_CYBOL_CHANNE
 static int* GNU_LINUX_CONSOLE_CYBOL_CHANNEL_COUNT = NUMBER_17_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The hypertext transfer protocol (http) location. */
+/*??
 static wchar_t HTTP_CYBOL_CHANNEL_ARRAY[] = {L'h', L't', L't', L'p'};
 static wchar_t* HTTP_CYBOL_CHANNEL = HTTP_CYBOL_CHANNEL_ARRAY;
 static int* HTTP_CYBOL_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;
@@ -60,11 +63,13 @@ static wchar_t* INLINE_CYBOL_CHANNEL = INLINE_CYBOL_CHANNEL_ARRAY;
 static int* INLINE_CYBOL_CHANNEL_COUNT = NUMBER_6_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The lamport tex (latex) cybol channel. */
+/*??
 static wchar_t LATEX_CYBOL_CHANNEL_ARRAY[] = {L'l', L'a', L't', L'e', L'x'};
 static wchar_t* LATEX_CYBOL_CHANNEL = LATEX_CYBOL_CHANNEL_ARRAY;
 static int* LATEX_CYBOL_CHANNEL_COUNT = NUMBER_5_INTEGER_MEMORY_MODEL_ARRAY;
 
 /** The secure file transfer protocol (sftp) cybol channel. */
+/*??
 static wchar_t SFTP_CYBOL_CHANNEL_ARRAY[] = {L's', L'f', L't', L'p'};
 static wchar_t* SFTP_CYBOL_CHANNEL = SFTP_CYBOL_CHANNEL_ARRAY;
 static int* SFTP_CYBOL_CHANNEL_COUNT = NUMBER_4_INTEGER_MEMORY_MODEL_ARRAY;

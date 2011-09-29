@@ -16,6 +16,12 @@
 # @author Christian Heller <christian.heller@tuxtax.de>
 #
 
+2011-09-29  Christian Heller  <christian.heller@tuxtax.de>
+
+        * Optimise "executor/converter/decoder/cybol_decoder.c", e.g. root node handling,
+            item overwriting, channel and abstraction conversion into runtime integer values
+        * Add new files for runtime channel handling
+
 2011-09-28  Christian Heller  <christian.heller@tuxtax.de>
 
         * Structure code "executor/converter/decoder/cybol_decoder.c" into several functions
